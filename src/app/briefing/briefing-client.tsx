@@ -70,7 +70,7 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
   return (
     <main>
       {/* Hero */}
-      <section className="border-b border-zinc-200 py-16 dark:border-zinc-800/50 md:py-20">
+      <section className="border-b border-black/[0.07] py-16 dark:border-white/[0.06] md:py-20">
         <div className="mx-auto max-w-3xl px-6">
           <div className="flex flex-wrap items-center gap-3 text-sm">
             <time dateTime={scan.date} className="text-zinc-500">
@@ -85,10 +85,10 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
           </div>
 
           <div className="mt-10">
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#c8922a]">
               Your Briefing
             </p>
-            <h1 className="mt-4 text-3xl font-light italic leading-snug text-zinc-800 dark:text-zinc-100 md:text-4xl">
+            <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-light italic leading-snug text-[#0f0f0f] dark:text-[#f0efec] md:text-4xl">
               {filtered.length} signal{filtered.length !== 1 ? "s" : ""} today
             </h1>
             <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-500">
@@ -98,12 +98,12 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
 
           {/* Pattern of the Day — always shown */}
           {scan.patternOfDay && (
-            <div className="mt-10 rounded-lg border border-zinc-200 p-6 dark:border-zinc-800/50">
-              <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
+            <div className="mt-10 rounded-2xl border border-black/[0.07] bg-white p-6 dark:border-white/[0.07] dark:bg-white/[0.03]">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#c8922a]">
                 Pattern of the Day
               </p>
               {scan.patternOfDay.title && (
-                <p className="mt-3 text-lg font-light italic leading-relaxed text-zinc-700 dark:text-zinc-200">
+                <p className="mt-3 font-[family-name:var(--font-playfair)] text-lg font-semibold italic leading-relaxed text-[#0f0f0f] dark:text-[#f0efec]">
                   {scan.patternOfDay.title}
                 </p>
               )}

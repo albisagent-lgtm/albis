@@ -12,7 +12,6 @@ export function NavAuth() {
     setLoggedIn(!!getLocalUser());
     setMounted(true);
 
-    // Listen for storage changes (login/logout in another tab)
     function onStorage() {
       setLoggedIn(!!getLocalUser());
     }
@@ -21,7 +20,6 @@ export function NavAuth() {
   }, []);
 
   if (!mounted) {
-    // Render placeholder to avoid layout shift
     return <div className="flex items-center gap-3 w-[140px]" />;
   }
 
@@ -30,24 +28,24 @@ export function NavAuth() {
       <div className="flex items-center gap-3">
         <Link
           href="/briefing"
-          className="text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
+          className="text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
         >
           Briefing
         </Link>
         <Link
           href="/framing-watch"
-          className="hidden text-sm text-zinc-400 transition-colors hover:text-zinc-600 sm:inline dark:hover:text-zinc-300"
+          className="hidden text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] sm:inline dark:text-zinc-400 dark:hover:text-[#f0efec]"
         >
           Framing
         </Link>
         <Link
           href="/settings"
-          className="flex h-9 w-9 items-center justify-center rounded-full text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+          className="flex h-9 w-9 items-center justify-center rounded-full text-zinc-400 transition-colors hover:bg-black/[0.06] hover:text-[#0f0f0f] dark:hover:bg-white/[0.06] dark:hover:text-[#f0efec]"
           aria-label="Settings"
         >
           <svg
-            width="18"
-            height="18"
+            width="17"
+            height="17"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -67,15 +65,15 @@ export function NavAuth() {
     <div className="flex items-center gap-3">
       <Link
         href="/login"
-        className="text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
+        className="text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
       >
         Log in
       </Link>
       <Link
         href="/signup"
-        className="rounded-full bg-zinc-900 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+        className="rounded-full bg-[#1a3a5c] px-4 py-1.5 text-sm font-medium text-white shadow-[0_2px_8px_rgb(26,58,92,0.3)] transition-all hover:bg-[#243f66] hover:shadow-[0_3px_10px_rgb(26,58,92,0.4)] dark:shadow-[0_2px_8px_rgb(26,58,92,0.4)]"
       >
-        Sign up
+        Start free
       </Link>
     </div>
   );
@@ -98,7 +96,6 @@ export function NavLinks() {
 
   if (!mounted) return null;
 
-  // Logged-in users see Briefing in the right-side auth area, not in the left nav links
   if (loggedIn) {
     return null;
   }
@@ -107,21 +104,27 @@ export function NavLinks() {
     <div className="hidden items-center gap-6 sm:flex">
       <Link
         href="/briefing"
-        className="text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
+        className="text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
       >
         Briefing
       </Link>
       <Link
         href="/framing-watch"
-        className="text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
+        className="text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
       >
         Framing Watch
       </Link>
       <Link
         href="/pricing"
-        className="text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
+        className="text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
       >
         Pricing
+      </Link>
+      <Link
+        href="/about"
+        className="text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
+      >
+        About
       </Link>
     </div>
   );

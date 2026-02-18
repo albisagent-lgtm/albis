@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import Link from "next/link";
 import { ThemeToggle } from "./components/theme-toggle";
 import { NavAuth, NavLinks } from "./components/nav-auth";
@@ -16,15 +16,23 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const playfairDisplay = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700", "900"],
+  display: "swap",
+});
+
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://albis.news";
 
 export const metadata: Metadata = {
   title: {
-    default: "Albis — Your Personal News Agent",
+    default: "Albis — The news, understood.",
     template: "%s | Albis",
   },
   description:
-    "Pattern-aware news intelligence. Albis scans the globe daily and surfaces the patterns that matter — without the noise, doom-scrolling, or spin.",
+    "News intelligence, not noise. Albis gives you the full picture — every source, zero spin, one calm reading experience built for the curious mind.",
   keywords: [
     "news intelligence",
     "pattern detection",
@@ -32,6 +40,7 @@ export const metadata: Metadata = {
     "global news",
     "personalised briefing",
     "media literacy",
+    "anti-doomscroll",
   ],
   authors: [{ name: "Albis" }],
   metadataBase: new URL(siteUrl),
@@ -40,36 +49,30 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Albis",
-    title: "Albis — Your Personal News Agent",
+    title: "Albis — The news, understood.",
     description:
-      "Pattern-aware news intelligence. Scans the globe daily and surfaces the patterns that matter — without the noise.",
+      "News intelligence, not noise. The full picture, every story, zero spin.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Albis — Pattern-aware news intelligence",
+        alt: "Albis — News intelligence",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Albis — Your Personal News Agent",
-    description:
-      "Pattern-aware news intelligence. Scans the globe daily and surfaces the patterns that matter — without the noise.",
+    title: "Albis — The news, understood.",
+    description: "News intelligence, not noise.",
     images: ["/og-image.png"],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
@@ -80,17 +83,18 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-stone-50 font-[family-name:var(--font-geist-sans)] text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} min-h-screen bg-[#f8f7f4] font-[family-name:var(--font-geist-sans)] text-[#0f0f0f] antialiased dark:bg-[#0f0f0f] dark:text-[#f0efec]`}
       >
         {/* Navigation */}
-        <nav className="sticky top-0 z-50 border-b border-zinc-200 bg-stone-50/80 backdrop-blur-xl dark:border-zinc-800/50 dark:bg-zinc-950/80">
-          <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
+        <nav className="sticky top-0 z-50 border-b border-black/[0.07] bg-[#f8f7f4]/90 backdrop-blur-xl dark:border-white/[0.06] dark:bg-[#0f0f0f]/90">
+          <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
             <div className="flex items-center gap-8">
+              {/* Logo — editorial serif italic */}
               <Link
                 href="/"
-                className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100"
+                className="font-[family-name:var(--font-playfair)] text-xl italic font-semibold tracking-tight text-[#0f0f0f] hover:opacity-80 dark:text-[#f0efec]"
               >
-                albis
+                Albis
               </Link>
               <NavLinks />
             </div>

@@ -8,298 +8,481 @@ import {
 
 export const dynamic = "force-dynamic";
 
-// ---------------------------------------------------------------------------
-// Page
-// ---------------------------------------------------------------------------
-
+// ── Page ─────────────────────────────────────────────────────────
 export default function Home() {
   const scan = getTodayScan();
 
   return (
-    <main>
-      {/* ── Hero ────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden border-b border-zinc-200 dark:border-zinc-800/50">
-        {/* Subtle gradient accent */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-amber-50/40 via-transparent to-transparent dark:from-amber-950/10 dark:via-transparent" />
+    <main className="overflow-hidden">
 
-        <div className="relative mx-auto max-w-3xl px-6 py-24 md:py-36">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
-            News intelligence, not noise
-          </p>
-          <h1 className="mt-6 text-4xl font-light leading-[1.15] tracking-tight text-zinc-800 dark:text-zinc-100 md:text-5xl lg:text-6xl">
-            Your own personal
-            <br />
-            <span className="italic">news agent</span>
+      {/* ── HERO ─────────────────────────────────────────────── */}
+      <section className="relative min-h-[90vh] md:min-h-[85vh] flex items-center justify-center bg-[#f8f7f4] dark:bg-[#0f0f0f]">
+        {/* Decorative amber gradient wash */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-amber-50/60 via-transparent to-transparent dark:from-amber-950/15 dark:via-transparent" />
+        {/* Decorative bottom fade */}
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#f8f7f4] to-transparent dark:from-[#0f0f0f]" />
+        {/* Top accent line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/30 to-transparent" />
+
+        <div className="relative mx-auto max-w-4xl px-6 py-24 md:py-36 text-center">
+
+          {/* Eyebrow pill */}
+          <div className="animate-fade-in inline-flex items-center gap-2 rounded-full border border-[#c8922a]/25 bg-[#c8922a]/8 px-4 py-1.5 dark:border-[#c8922a]/20 dark:bg-[#c8922a]/10">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#c8922a] animate-pulse-dot" />
+            <span className="text-xs font-medium tracking-[0.18em] uppercase text-[#c8922a]">
+              News intelligence · Not noise
+            </span>
+          </div>
+
+          {/* Main headline — editorial serif */}
+          <h1 className="animate-fade-in-up delay-100 mt-8 font-[family-name:var(--font-playfair)] leading-[1.08] tracking-tight">
+            <span className="block text-5xl font-light italic text-[#0f0f0f]/70 md:text-6xl lg:text-7xl dark:text-white/50">
+              The news,
+            </span>
+            <span className="block text-5xl font-bold text-[#0f0f0f] md:text-6xl lg:text-8xl dark:text-[#f0efec]">
+              understood.
+            </span>
           </h1>
-          <p className="mt-6 max-w-lg text-lg leading-relaxed text-zinc-500 dark:text-zinc-400">
-            Albis scans the globe every day and surfaces the patterns that
-            matter to you — without the doom-scrolling, outrage bait, or
-            algorithmic spin.
+
+          {/* Subheadline */}
+          <p className="animate-fade-in-up delay-200 mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zinc-500 md:text-xl dark:text-zinc-400">
+            Albis gives you the full picture — every source, zero spin, one
+            calm reading experience built for the curious mind.
           </p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+
+          {/* CTA group */}
+          <div className="animate-fade-in-up delay-300 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="/signup"
-              className="inline-flex h-12 items-center justify-center rounded-full bg-zinc-900 px-8 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+              className="group inline-flex h-14 items-center gap-2.5 rounded-full bg-[#1a3a5c] px-10 text-base font-medium text-white shadow-[0_4px_20px_rgb(26,58,92,0.35)] hover:bg-[#243f66] hover:shadow-[0_6px_28px_rgb(26,58,92,0.45)] dark:shadow-[0_4px_20px_rgb(26,58,92,0.5)]"
             >
-              Start free
+              Start reading free
+              <ArrowRight />
             </Link>
             <Link
               href="/pricing"
-              className="inline-flex h-12 items-center justify-center rounded-full border border-zinc-300 px-8 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+              className="inline-flex h-14 items-center gap-2 rounded-full border border-zinc-300/80 px-8 text-sm font-medium text-zinc-600 hover:border-zinc-400 hover:bg-zinc-100/50 dark:border-zinc-700/80 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:bg-zinc-800/40"
             >
               View pricing
             </Link>
           </div>
-          <p className="mt-4 text-xs text-zinc-400 dark:text-zinc-600">
-            Free tier &middot; 2 topics, 1 region &middot; No credit card
+
+          {/* Anxiety reducer */}
+          <p className="animate-fade-in-up delay-400 mt-5 text-sm text-zinc-400 dark:text-zinc-500">
+            Free forever · No credit card · Unsubscribe anytime
           </p>
+
+          {/* Social proof avatars */}
+          <div className="animate-fade-in-up delay-500 mt-10 flex items-center justify-center gap-3">
+            <div className="flex -space-x-2">
+              {[
+                { bg: "#1a3a5c", initials: "AR" },
+                { bg: "#c8922a", initials: "SK" },
+                { bg: "#4a7b9d", initials: "LM" },
+                { bg: "#2d5a8e", initials: "JT" },
+                { bg: "#8a5a1c", initials: "PE" },
+              ].map(({ bg, initials }) => (
+                <div
+                  key={initials}
+                  className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#f8f7f4] text-[10px] font-semibold text-white dark:border-[#0f0f0f]"
+                  style={{ backgroundColor: bg }}
+                >
+                  {initials}
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-zinc-400 dark:text-zinc-500">
+              Joined by curious readers worldwide
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* ── Live Demo — Today's Scan ────────────────────────────────── */}
-      {scan && (
-        <section className="border-b border-zinc-200 py-16 dark:border-zinc-800/50 md:py-24">
-          <div className="mx-auto max-w-3xl px-6">
-            <div className="flex flex-wrap items-center gap-3 text-sm">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-                Live
-              </span>
-              <time
-                dateTime={scan.date}
-                className="text-zinc-500 dark:text-zinc-500"
+      {/* ── PROBLEM STATEMENT ─────────────────────────────────── */}
+      <section className="relative bg-[#0f0f0f] py-24 md:py-32 dark:bg-[#080808]">
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <p className="animate-fade-in text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]/70">
+            The problem
+          </p>
+          <h2 className="animate-fade-in-up delay-100 mt-5 font-[family-name:var(--font-playfair)] text-3xl font-light italic leading-snug text-white/90 md:text-4xl lg:text-5xl">
+            News was designed to inform you.
+            <br />
+            <span className="text-white font-semibold not-italic">
+              Somewhere, it started enraging you instead.
+            </span>
+          </h2>
+          <p className="animate-fade-in-up delay-200 mx-auto mt-6 max-w-2xl text-base leading-relaxed text-zinc-400 md:text-lg">
+            Algorithms optimise for outrage. Headlines strip context.
+            Regional coverage tells wildly different stories. You're left
+            informed of nothing, anxious about everything.
+          </p>
+
+          {/* Problem trio */}
+          <div className="animate-fade-in-up delay-300 mt-16 grid gap-6 md:grid-cols-3">
+            {[
+              {
+                icon: "⚡",
+                title: "Engineered for outrage",
+                body: "Your feed is built to make you angry. That's what drives clicks. Albis is built differently.",
+              },
+              {
+                icon: "🌐",
+                title: "Filtered by region",
+                body: "The BBC, Al Jazeera and Fox cover the same event differently. You only see one version.",
+              },
+              {
+                icon: "📉",
+                title: "More headlines, less understanding",
+                body: "150 articles a day. You're busy, not informed. Volume isn't intelligence.",
+              },
+            ].map((p) => (
+              <div
+                key={p.title}
+                className="rounded-2xl border border-white/[0.07] bg-white/[0.04] p-6 text-left"
               >
+                <span className="text-2xl">{p.icon}</span>
+                <h3 className="mt-3 text-sm font-semibold text-white/90">
+                  {p.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-500">
+                  {p.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FEATURES / SOLUTION ───────────────────────────────── */}
+      <section className="bg-[#f8f7f4] py-24 dark:bg-[#0f0f0f] md:py-32">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="text-center">
+            <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
+              How Albis is different
+            </p>
+            <h2 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-semibold leading-tight text-[#0f0f0f] md:text-4xl dark:text-[#f0efec]">
+              Intelligence, not information overload.
+            </h2>
+            <p className="mx-auto mt-4 max-w-lg text-base text-zinc-500 dark:text-zinc-400">
+              Most news tells you what happened. Albis tells you what it
+              means — and what you&apos;re not being told.
+            </p>
+          </div>
+
+          {/* Feature bento grid */}
+          <div className="mt-16 grid gap-5 md:grid-cols-3">
+
+            {/* Card 1 — Every Angle */}
+            <div className="feature-card group relative overflow-hidden rounded-2xl border border-black/[0.07] bg-white p-7 dark:border-white/[0.07] dark:bg-white/[0.03]">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#1a3a5c]/10 dark:bg-[#1a3a5c]/20">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="dark:stroke-[#4a7baa]">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <h3 className="mt-5 font-[family-name:var(--font-playfair)] text-xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                Every Angle
+              </h3>
+              <p className="mt-2.5 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+                7 regions, 12 categories — scanned daily. See how the same
+                story reads in Washington, Beijing, Lagos and London. Side by
+                side, without the spin.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-1.5">
+                {["Americas", "Europe", "East Asia", "Africa", "Middle East"].map((r) => (
+                  <span key={r} className="rounded-full bg-[#1a3a5c]/8 px-2.5 py-0.5 text-[10px] font-medium text-[#1a3a5c] dark:bg-[#1a3a5c]/20 dark:text-[#7ab0d8]">
+                    {r}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Card 2 — Intelligence Layer (featured) */}
+            <div className="feature-card group relative overflow-hidden rounded-2xl bg-[#1a3a5c] p-7 shadow-[0_8px_32px_rgb(26,58,92,0.25)] dark:shadow-[0_8px_32px_rgb(26,58,92,0.4)]">
+              {/* Subtle top shine */}
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/15">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+              </div>
+              <div className="absolute -right-3 -top-3 rounded-full bg-[#c8922a] px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white shadow-lg">
+                Popular
+              </div>
+              <h3 className="mt-5 font-[family-name:var(--font-playfair)] text-xl font-semibold text-white">
+                Intelligence Layer
+              </h3>
+              <p className="mt-2.5 text-sm leading-relaxed text-white/70">
+                Pattern detection across domains. Cross-story connections
+                that single-source reporting misses. Summaries, context, and
+                what you&apos;re <em className="text-white/90">not</em> being told.
+              </p>
+              <div className="mt-5 space-y-2">
+                {[
+                  "Cross-domain pattern detection",
+                  "Coverage gap analysis",
+                  "AI-powered story summaries",
+                ].map((f) => (
+                  <div key={f} className="flex items-center gap-2 text-sm text-white/80">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#c8922a] flex-shrink-0">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {f}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Card 3 — Calm by Design */}
+            <div className="feature-card group relative overflow-hidden rounded-2xl border border-black/[0.07] bg-white p-7 dark:border-white/[0.07] dark:bg-white/[0.03]">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-950/30">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="dark:stroke-emerald-400">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <h3 className="mt-5 font-[family-name:var(--font-playfair)] text-xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                Calm by Design
+              </h3>
+              <p className="mt-2.5 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+                No infinite scroll. No red alerts. No algorithmic feed. Your
+                daily briefing is designed to leave you more informed — and
+                less anxious — than when you started.
+              </p>
+              <div className="mt-5 space-y-2">
+                {[
+                  "No infinite scroll",
+                  "No outrage-engineered feed",
+                  "Typography-first reading",
+                ].map((f) => (
+                  <div key={f} className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-500 flex-shrink-0">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {f}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Secondary features row */}
+          <div className="mt-5 grid gap-5 md:grid-cols-2">
+            <div className="feature-card flex gap-5 rounded-2xl border border-black/[0.07] bg-white p-6 dark:border-white/[0.07] dark:bg-white/[0.03]">
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-amber-50 dark:bg-amber-950/30">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8922a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                  Framing Watch
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+                  The same event, radically different stories. Framing Watch reveals what gets emphasized, what gets omitted, and why — across every region simultaneously.
+                </p>
+              </div>
+            </div>
+            <div className="feature-card flex gap-5 rounded-2xl border border-black/[0.07] bg-white p-6 dark:border-white/[0.07] dark:bg-white/[0.03]">
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-violet-50 dark:bg-violet-950/30">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="dark:stroke-violet-400">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                  Personalised Briefings
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+                  Choose your topics and regions. Your briefing surfaces only what matters to you — not what the algorithm thinks will keep you scrolling.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── LIVE SCAN (product showcase) ─────────────────────── */}
+      {scan && (
+        <section className="relative bg-[#f2f0eb] py-24 dark:bg-[#111111] md:py-28">
+          {/* Decorative top border */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
+
+          <div className="mx-auto max-w-4xl px-6">
+            {/* Section label */}
+            <div className="flex flex-wrap items-center gap-3 text-sm">
+              <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400">
+                <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-emerald-500" />
+                Live intelligence
+              </span>
+              <time dateTime={scan.date} className="text-zinc-400 dark:text-zinc-500 text-sm">
                 {scan.displayDate}
               </time>
               {scan.mood && (
                 <>
-                  <span className="text-zinc-300 dark:text-zinc-700">
-                    &middot;
-                  </span>
+                  <span className="text-zinc-300 dark:text-zinc-700">·</span>
                   <MoodBadge mood={scan.mood} />
                 </>
               )}
             </div>
 
-            {/* Pattern of the Day */}
-            {scan.patternOfDay && (
-              <div className="mt-8">
-                <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
-                  Pattern of the Day
-                </p>
-                {scan.patternOfDay.title && (
-                  <h2 className="mt-4 text-2xl font-light italic leading-snug text-zinc-800 dark:text-zinc-100 md:text-3xl">
-                    {scan.patternOfDay.title}
-                  </h2>
-                )}
-                <p className="mt-4 text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
-                  {scan.patternOfDay.body}
-                </p>
-              </div>
-            )}
+            {/* Scan card */}
+            <div className="mt-6 overflow-hidden rounded-2xl border border-black/[0.07] bg-white shadow-[0_4px_24px_rgb(0,0,0,0.06)] dark:border-white/[0.07] dark:bg-white/[0.03] dark:shadow-none">
 
-            {/* Top Stories Preview */}
-            {scan.items.filter((i) => i.significance === "high").length > 0 && (
-              <div className="mt-10">
-                <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
-                  Top Stories
-                </p>
-                <div className="mt-4 space-y-1">
-                  {scan.items
-                    .filter((i) => i.significance === "high")
-                    .slice(0, 5)
-                    .map((item, i) => (
-                      <StoryCard key={i} item={item} />
-                    ))}
-                </div>
-                {scan.items.filter((i) => i.significance === "high").length >
-                  5 && (
-                  <p className="mt-4 text-center text-sm text-zinc-400 dark:text-zinc-500">
-                    +{" "}
-                    {scan.items.filter((i) => i.significance === "high")
-                      .length - 5}{" "}
-                    more high-significance stories today
+              {/* Pattern of the day */}
+              {scan.patternOfDay && (
+                <div className="border-b border-black/[0.06] p-7 dark:border-white/[0.06]">
+                  <p className="text-xs font-medium tracking-[0.18em] uppercase text-[#c8922a]">
+                    Pattern of the Day
                   </p>
+                  {scan.patternOfDay.title && (
+                    <h2 className="mt-3 font-[family-name:var(--font-playfair)] text-xl font-semibold italic leading-snug text-[#0f0f0f] md:text-2xl dark:text-[#f0efec]">
+                      {scan.patternOfDay.title}
+                    </h2>
+                  )}
+                  <p className="mt-3 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 line-clamp-3">
+                    {scan.patternOfDay.body}
+                  </p>
+                </div>
+              )}
+
+              {/* Top stories */}
+              {scan.items.filter((i) => i.significance === "high").length > 0 && (
+                <div className="p-5">
+                  <p className="px-2 text-[10px] font-semibold tracking-[0.2em] uppercase text-zinc-400 dark:text-zinc-500">
+                    Top Stories Today
+                  </p>
+                  <div className="mt-3 space-y-1">
+                    {scan.items
+                      .filter((i) => i.significance === "high")
+                      .slice(0, 4)
+                      .map((item, i) => (
+                        <StoryCard key={i} item={item} />
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Stats strip */}
+              <div className="flex flex-wrap gap-8 border-t border-black/[0.06] px-7 py-5 dark:border-white/[0.06]">
+                <Stat label="Stories scanned" value={String(scan.items.length)} />
+                <Stat label="Categories" value={String(new Set(scan.items.map((i) => i.category)).size)} />
+                <Stat label="Regions" value={String(new Set(scan.items.flatMap((i) => i.regions)).size)} />
+                {scan.items.some((i) => hasFramingWatch(i)) && (
+                  <Stat
+                    label="Framing alerts"
+                    value={String(scan.items.filter((i) => hasFramingWatch(i)).length)}
+                    accent
+                  />
                 )}
               </div>
-            )}
+            </div>
 
-            {/* Scan stats */}
-            <div className="mt-8 flex flex-wrap gap-6 border-t border-zinc-200 pt-6 dark:border-zinc-800/50">
-              <Stat
-                label="Stories scanned"
-                value={String(scan.items.length)}
-              />
-              <Stat
-                label="Categories"
-                value={String(
-                  new Set(scan.items.map((i) => i.category)).size
-                )}
-              />
-              <Stat
-                label="Regions"
-                value={String(
-                  new Set(scan.items.flatMap((i) => i.regions)).size
-                )}
-              />
-              {scan.items.some((i) => hasFramingWatch(i)) && (
-                <Stat
-                  label="Framing alerts"
-                  value={String(
-                    scan.items.filter((i) => hasFramingWatch(i)).length
-                  )}
-                />
-              )}
+            {/* CTA within section */}
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+              <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                This is a live preview — sign up for the full intelligence layer.
+              </p>
+              <Link
+                href="/signup"
+                className="inline-flex h-10 items-center gap-2 rounded-full bg-[#1a3a5c] px-6 text-sm font-medium text-white shadow-[0_2px_12px_rgb(26,58,92,0.3)] hover:bg-[#243f66]"
+              >
+                Get full access <ArrowRight size={14} />
+              </Link>
             </div>
           </div>
         </section>
       )}
 
-      {/* ── Value Propositions ──────────────────────────────────────── */}
-      <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-4xl px-6">
-          <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
-            How it works
-          </p>
-          <h2 className="mt-4 text-center text-3xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-100 md:text-4xl">
-            Intelligence, not information overload
-          </h2>
-          <p className="mx-auto mt-4 max-w-lg text-center text-zinc-500 dark:text-zinc-400">
-            Most news tells you what happened. Albis tells you what it means —
-            and what you are not being told.
-          </p>
-
-          <div className="mt-16 grid gap-10 md:grid-cols-2">
-            <ValueProp
-              icon={
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M2 12h20" />
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                </svg>
-              }
-              title="Global scanning"
-              description="Every day, Albis scans 7 regions across 12 topic categories. South Asia, East Asia, the Middle East, Africa, Europe, the Americas, and the West — all in one place."
-            />
-            <ValueProp
-              icon={
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                </svg>
-              }
-              title="Pattern detection"
-              description="We do not just list headlines. Albis identifies cross-domain patterns, recurring themes, and structural connections that single-source reporting misses."
-            />
-            <ValueProp
-              icon={
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-              }
-              title="Framing analysis"
-              description="Same event, different story. Framing Watch compares how regions cover the same event — revealing what gets emphasised, what gets omitted, and why."
-            />
-            <ValueProp
-              icon={
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-              }
-              title="Personalised briefings"
-              description="Choose your topics and regions. Your daily briefing surfaces only the patterns that matter to you — no noise, no endless scroll, no outrage engine."
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ── Social Proof ─────────────────────────────────────────── */}
-      <section className="border-y border-zinc-200 py-16 dark:border-zinc-800/50 md:py-20">
+      {/* ── SOCIAL PROOF ──────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-[#f8f7f4] py-24 dark:bg-[#0f0f0f] md:py-28">
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
-            Early access
+          {/* Quote mark */}
+          <div className="font-[family-name:var(--font-playfair)] text-7xl font-bold leading-none text-[#c8922a]/20 dark:text-[#c8922a]/15">
+            &ldquo;
+          </div>
+          <p className="mt-2 font-[family-name:var(--font-playfair)] text-xl font-light italic leading-relaxed text-[#0f0f0f]/80 md:text-2xl lg:text-3xl dark:text-white/75">
+            The anti-doomscroll. I finally understand what&apos;s actually
+            happening in the world without feeling worse about it.
           </p>
-          <p className="mt-6 text-xl font-light italic leading-relaxed text-zinc-600 dark:text-zinc-300 md:text-2xl">
-            &ldquo;The anti-doomscroll. I finally understand what is actually
-            happening in the world without feeling worse about it.&rdquo;
-          </p>
-          <p className="mt-4 text-sm text-zinc-400 dark:text-zinc-500">
+          <p className="mt-5 text-sm font-medium text-[#c8922a]">
             — Early beta tester
           </p>
+
+          {/* Trust indicators */}
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-zinc-400 dark:text-zinc-500">
+            <div className="flex items-center gap-2">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              No data selling
+            </div>
+            <div className="flex items-center gap-2">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              No algorithmic manipulation
+            </div>
+            <div className="flex items-center gap-2">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Cancel any time
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────── */}
-      <section>
-        <div className="mx-auto max-w-3xl px-6 py-24 text-center md:py-32">
-          <h2 className="text-3xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-100 md:text-4xl">
-            Get your personalised briefing
-          </h2>
-          <p className="mx-auto mt-4 max-w-md text-zinc-500 dark:text-zinc-400">
-            Choose your topics and regions. We&apos;ll surface the patterns that
-            matter to you — daily, without the noise.
+      {/* ── FINAL CTA ─────────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-[#1a3a5c] py-28 md:py-36">
+        {/* Background texture */}
+        <div className="pointer-events-none absolute inset-0 bg-subtle-grid opacity-30" />
+        {/* Glow */}
+        <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-96 -translate-x-1/2 rounded-full bg-[#c8922a]/10 blur-3xl" />
+
+        <div className="relative mx-auto max-w-3xl px-6 text-center">
+          <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]/70">
+            Join the readers
           </p>
-          <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+          <h2 className="mt-5 font-[family-name:var(--font-playfair)] text-3xl font-semibold leading-tight text-white md:text-4xl lg:text-5xl">
+            Understand the world.
+            <br />
+            <span className="font-light italic text-white/75">Without the noise.</span>
+          </h2>
+          <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-white/60">
+            Start free. Get your personalised daily briefing — the patterns
+            that matter, across every region, without the anxiety.
+          </p>
+
+          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="/signup"
-              className="inline-flex h-12 items-center rounded-full bg-zinc-900 px-8 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+              className="inline-flex h-14 items-center gap-2.5 rounded-full bg-white px-10 text-base font-semibold text-[#1a3a5c] shadow-[0_4px_20px_rgb(0,0,0,0.2)] hover:bg-[#f0efec] hover:shadow-[0_6px_28px_rgb(0,0,0,0.25)]"
             >
-              Sign up free
+              Start reading free
+              <ArrowRight stroke="#1a3a5c" />
             </Link>
             <Link
-              href="/pricing"
-              className="inline-flex h-12 items-center rounded-full border border-zinc-300 px-8 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+              href="/about"
+              className="inline-flex h-14 items-center rounded-full border border-white/20 px-8 text-sm font-medium text-white/80 hover:border-white/40 hover:text-white"
             >
-              View pricing
+              Learn more
             </Link>
           </div>
-          <p className="mt-4 text-xs text-zinc-400 dark:text-zinc-600">
-            Free tier: 2 topics, 1 region, daily Pattern of the Day
+
+          <p className="mt-5 text-sm text-white/40">
+            Free tier · 2 topics · 1 region · No credit card
           </p>
         </div>
       </section>
 
       {/* Scan metadata */}
       {scan?.scanMeta && (
-        <div className="border-t border-zinc-200 py-4 dark:border-zinc-800/50">
-          <p className="text-center font-[family-name:var(--font-geist-mono)] text-xs text-zinc-300 dark:text-zinc-700">
+        <div className="border-t border-zinc-200/50 bg-[#f8f7f4] py-3 dark:border-zinc-800/30 dark:bg-[#0f0f0f]">
+          <p className="text-center font-[family-name:var(--font-geist-mono)] text-[10px] text-zinc-300 dark:text-zinc-700">
             {scan.scanMeta}
           </p>
         </div>
@@ -308,102 +491,91 @@ export default function Home() {
   );
 }
 
-// ---------------------------------------------------------------------------
-// Components
-// ---------------------------------------------------------------------------
+// ── Arrow icon ──────────────────────────────────────────────────
+function ArrowRight({ size = 16, stroke }: { size?: number; stroke?: string }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={stroke || "currentColor"}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M5 12h14M12 5l7 7-7 7" />
+    </svg>
+  );
+}
 
+// ── Mood badge ──────────────────────────────────────────────────
 function MoodBadge({ mood }: { mood: string }) {
   const lower = mood.toLowerCase();
-  let colorClasses =
-    "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400";
-
+  let cls = "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400";
   if (lower.includes("urgent") || lower.includes("critical")) {
-    colorClasses =
-      "bg-red-50 text-red-700 dark:bg-red-950/50 dark:text-red-400";
-  } else if (
-    lower.includes("brittle") ||
-    lower.includes("tense") ||
-    lower.includes("fragment")
-  ) {
-    colorClasses =
-      "bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400";
+    cls = "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400";
+  } else if (lower.includes("brittle") || lower.includes("tense") || lower.includes("fragment")) {
+    cls = "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400";
   } else if (lower.includes("calm") || lower.includes("stable")) {
-    colorClasses =
-      "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400";
+    cls = "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400";
   }
-
   return (
-    <span
-      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${colorClasses}`}
-    >
+    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${cls}`}>
       {mood}
     </span>
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+// ── Stat ────────────────────────────────────────────────────────
+function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
     <div>
-      <p className="text-2xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+      <p className={`text-xl font-semibold tracking-tight ${accent ? "text-[#c8922a]" : "text-[#0f0f0f] dark:text-[#f0efec]"}`}>
         {value}
       </p>
-      <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">
-        {label}
-      </p>
+      <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">{label}</p>
     </div>
   );
 }
 
+// ── Story card ──────────────────────────────────────────────────
 function StoryCard({ item }: { item: ScanItem }) {
   const framing = hasFramingWatch(item);
-
   return (
-    <article className="group rounded-lg px-4 py-3 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900/50">
+    <article className="group rounded-xl px-3 py-3 transition-colors hover:bg-zinc-50 dark:hover:bg-white/[0.03]">
       <div className="flex gap-3">
         <SignificanceDot significance={item.significance} />
         <div className="min-w-0 flex-1">
-          <h3 className="text-base font-medium leading-snug text-zinc-800 dark:text-zinc-100">
+          <h3 className="text-sm font-medium leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
             {item.headline}
           </h3>
           <div className="mt-2 flex flex-wrap gap-1.5">
-            {item.regions.map((r) => (
+            {item.regions.slice(0, 3).map((r) => (
               <RegionTag key={r} region={r} />
             ))}
-            {item.patterns.map((p) => (
+            {item.patterns.slice(0, 2).map((p) => (
               <PatternTag key={p} pattern={p} />
             ))}
-            {framing && <FramingWatchBadge />}
+            {framing && <FramingBadge />}
           </div>
-          <div className="mt-2">
-            {framing ? (
-              <div className="relative">
-                <p className="select-none text-sm leading-relaxed text-zinc-500 blur-[3px]">
-                  {item.connection}
-                </p>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="rounded-full border border-zinc-200 bg-white/90 px-4 py-1.5 text-xs font-medium text-zinc-600 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/90 dark:text-zinc-400">
-                    <svg
-                      className="mr-1.5 inline h-3 w-3"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                    </svg>
-                    Unlock with Premium
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <p className="text-sm leading-relaxed text-zinc-500 dark:text-zinc-500">
+          {item.connection && !framing && (
+            <p className="mt-2 text-xs leading-relaxed text-zinc-400 dark:text-zinc-500 line-clamp-2">
+              {item.connection}
+            </p>
+          )}
+          {framing && (
+            <div className="relative mt-2">
+              <p className="select-none text-xs leading-relaxed text-zinc-400 blur-[3px] line-clamp-2">
                 {item.connection}
               </p>
-            )}
-          </div>
+              <div className="absolute inset-0 flex items-center">
+                <span className="rounded-full border border-zinc-200 bg-white/90 px-3 py-1 text-[10px] font-medium text-zinc-500 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/90 dark:text-zinc-400">
+                  🔒 Premium · Unlock Framing Watch
+                </span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </article>
@@ -412,14 +584,13 @@ function StoryCard({ item }: { item: ScanItem }) {
 
 function SignificanceDot({ significance }: { significance: string }) {
   const colors: Record<string, string> = {
-    high: "bg-amber-500",
-    medium: "bg-blue-400 dark:bg-blue-500",
+    high: "bg-[#c8922a]",
+    medium: "bg-[#1a3a5c] dark:bg-[#4a7baa]",
     low: "bg-zinc-300 dark:bg-zinc-600",
   };
-
   return (
     <span
-      className={`mt-2 block h-1.5 w-1.5 flex-shrink-0 rounded-full ${colors[significance] || colors.medium}`}
+      className={`mt-1.5 block h-2 w-2 flex-shrink-0 rounded-full ${colors[significance] || colors.medium}`}
       title={`${significance} significance`}
     />
   );
@@ -428,72 +599,28 @@ function SignificanceDot({ significance }: { significance: string }) {
 function RegionTag({ region }: { region: string }) {
   const label = REGION_LABELS[region] || region;
   return (
-    <span className="inline-flex rounded bg-zinc-100 px-1.5 py-0.5 text-[10px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-500">
+    <span className="inline-flex rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-500 dark:bg-white/[0.06] dark:text-zinc-400">
       {label}
     </span>
   );
 }
 
 function PatternTag({ pattern }: { pattern: string }) {
-  const isFraming = pattern === "framing";
-  const label = pattern.replace(/-/g, " ");
-
   return (
-    <span
-      className={`inline-flex rounded px-1.5 py-0.5 text-[10px] font-medium ${
-        isFraming
-          ? "bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400/80"
-          : "bg-violet-50 text-violet-600 dark:bg-violet-950/30 dark:text-violet-400/70"
-      }`}
-    >
-      {label}
+    <span className="inline-flex rounded-full bg-violet-50 px-2 py-0.5 text-[10px] font-medium text-violet-600 dark:bg-violet-950/30 dark:text-violet-400/80">
+      {pattern.replace(/-/g, " ")}
     </span>
   );
 }
 
-function FramingWatchBadge() {
+function FramingBadge() {
   return (
-    <span className="inline-flex items-center gap-1 rounded bg-amber-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-700 dark:bg-amber-950/50 dark:text-amber-400">
-      <svg
-        width="10"
-        height="10"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-        <circle cx="12" cy="12" r="3" />
+    <span className="inline-flex items-center gap-1 rounded-full bg-[#c8922a]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#c8922a] dark:bg-[#c8922a]/15">
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+        <circle cx="12" cy="12" r="3"/>
       </svg>
       Framing Watch
     </span>
-  );
-}
-
-function ValueProp({
-  icon,
-  title,
-  description,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="flex gap-5">
-      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-zinc-100 text-zinc-600 dark:bg-zinc-800/80 dark:text-zinc-400">
-        {icon}
-      </div>
-      <div>
-        <h3 className="text-base font-semibold text-zinc-800 dark:text-zinc-100">
-          {title}
-        </h3>
-        <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
-          {description}
-        </p>
-      </div>
-    </div>
   );
 }
