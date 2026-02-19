@@ -1,6 +1,8 @@
 import Link from "next/link";
 import {
   getTodayScan,
+  hasFramingWatch,
+  hasBlindspot,
   REGION_LABELS,
   type ScanItem,
 } from "@/lib/scan-parser";
@@ -59,7 +61,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── PROBLEM HOOK ────────────────────────────────────── */}
+      {/* ── SECTION 2: PROBLEM HOOK ──────────────────────────── */}
       <section className="relative bg-[#0f0f0f] py-16 md:py-20">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
         <div className="mx-auto max-w-2xl px-6 text-center">
@@ -74,7 +76,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SECTION 2: LIVE PERSPECTIVE EXAMPLE ──────────────── */}
+      {/* ── SECTION 3: PERSPECTIVE DEMO ──────────────────────── */}
       <section className="relative bg-[#f2f0eb] py-20 dark:bg-[#111111] md:py-28">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
 
@@ -95,181 +97,86 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SECTION 3: HOW IT WORKS ──────────────────────────── */}
-      <section className="bg-[#f8f7f4] py-20 dark:bg-[#0f0f0f] md:py-28">
-        <div className="mx-auto max-w-3xl px-6">
-          <div className="text-center">
-            <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
-              How it works
-            </p>
-            <h2 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-semibold leading-tight text-[#0f0f0f] md:text-4xl dark:text-[#f0efec]">
-              Three steps to clarity.
-            </h2>
-          </div>
+      {/* ── SECTION 4: LIVE SCAN ─────────────────────────────── */}
+      {scan && (
+        <section className="relative bg-[#f8f7f4] py-20 dark:bg-[#0f0f0f] md:py-28">
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
 
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
-            {[
-              {
-                icon: (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#1a3a5c] dark:text-[#7ab0d8]">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M2 12h20" />
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                  </svg>
-                ),
-                title: "We scan",
-                body: "50,000+ sources across 7 regions, every day. News, analysis, and local reporting — all in one pass.",
-              },
-              {
-                icon: (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#1a3a5c] dark:text-[#7ab0d8]">
-                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-                  </svg>
-                ),
-                title: "We compare",
-                body: "Same story, different regions. We detect framing differences, coverage gaps, and what you're not being told.",
-              },
-              {
-                icon: (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#1a3a5c] dark:text-[#7ab0d8]">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                  </svg>
-                ),
-                title: "You understand",
-                body: "One calm briefing with every angle. No doomscrolling, no algorithm. Read it and move on with your day.",
-              },
-            ].map((s) => (
-              <div key={s.title} className="text-center md:text-left">
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#1a3a5c]/8 md:mx-0 dark:bg-[#1a3a5c]/20">
-                  {s.icon}
+          <div className="mx-auto max-w-4xl px-6">
+            {/* Section label */}
+            <div className="flex flex-wrap items-center gap-3 text-sm">
+              <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400">
+                <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-emerald-500" />
+                Live intelligence
+              </span>
+              <time dateTime={scan.date} className="text-zinc-400 dark:text-zinc-500 text-sm">
+                {scan.displayDate}
+              </time>
+              {scan.mood && (
+                <>
+                  <span className="text-zinc-300 dark:text-zinc-700">&middot;</span>
+                  <MoodBadge mood={scan.mood} />
+                </>
+              )}
+            </div>
+
+            {/* Scan card */}
+            <div className="mt-6 overflow-hidden rounded-2xl border border-black/[0.07] bg-white shadow-[0_4px_24px_rgb(0,0,0,0.06)] dark:border-white/[0.07] dark:bg-white/[0.03] dark:shadow-none">
+
+              {/* Pattern of the day */}
+              {scan.patternOfDay && (
+                <div className="border-b border-black/[0.06] p-7 dark:border-white/[0.06]">
+                  <p className="text-xs font-medium tracking-[0.18em] uppercase text-[#c8922a]">
+                    Pattern of the Day
+                  </p>
+                  {scan.patternOfDay.title && (
+                    <h2 className="mt-3 font-[family-name:var(--font-playfair)] text-xl font-semibold italic leading-snug text-[#0f0f0f] md:text-2xl dark:text-[#f0efec]">
+                      {scan.patternOfDay.title}
+                    </h2>
+                  )}
+                  <p className="mt-3 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 line-clamp-3">
+                    {scan.patternOfDay.body}
+                  </p>
                 </div>
-                <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-                  {s.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-500 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
-                  {s.body}
-                </p>
+              )}
+
+              {/* Top stories */}
+              <LiveStories items={scan.items} />
+
+              {/* Stats strip */}
+              <div className="flex flex-wrap gap-8 border-t border-black/[0.06] px-7 py-5 dark:border-white/[0.06]">
+                <Stat label="Stories scanned" value={String(scan.items.length)} />
+                <Stat label="Categories" value={String(new Set(scan.items.map((i) => i.category)).size)} />
+                <Stat label="Regions" value={String(new Set(scan.items.flatMap((i) => i.regions)).size)} />
+                {scan.items.some((i) => hasFramingWatch(i)) && (
+                  <Stat
+                    label="Framing alerts"
+                    value={String(scan.items.filter((i) => hasFramingWatch(i)).length)}
+                    accent
+                  />
+                )}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
 
-      {/* ── SECTION 4: FREE vs PREMIUM ───────────────────────── */}
-      <section className="relative bg-[#f2f0eb] py-20 dark:bg-[#111111] md:py-28">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
-
-        <div className="mx-auto max-w-3xl px-6">
-          <div className="text-center">
-            <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
-              Choose your lens
-            </p>
-            <h2 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-semibold leading-tight text-[#0f0f0f] md:text-4xl dark:text-[#f0efec]">
-              Free vs Premium
-            </h2>
-          </div>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {/* Free tier */}
-            <div className="rounded-2xl border border-black/[0.07] bg-white p-7 dark:border-white/[0.07] dark:bg-white/[0.03]">
-              <p className="text-xs font-semibold tracking-[0.15em] uppercase text-zinc-400 dark:text-zinc-500">
-                Free
+            {/* CTA within section */}
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+              <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                This is a live preview &mdash; sign up for the full intelligence layer.
               </p>
-              <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-                The Window
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
-                Your daily window into what matters.
-              </p>
-              <div className="my-6 h-px bg-black/[0.06] dark:bg-white/[0.06]" />
-              <ul className="space-y-3">
-                {[
-                  "Daily briefing",
-                  "Top stories",
-                  "Pattern of the Day",
-                  "2 topics, 1 region",
-                ].map((f) => (
-                  <li key={f} className="flex items-center gap-3 text-sm text-zinc-600 dark:text-zinc-400">
-                    <CheckIcon className="text-emerald-500" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
               <Link
                 href="/signup"
-                className="mt-7 inline-flex h-11 w-full items-center justify-center rounded-full border border-black/[0.1] text-sm font-medium text-zinc-600 hover:bg-zinc-100/80 dark:border-white/[0.1] dark:text-zinc-400 dark:hover:bg-white/[0.05]"
+                className="inline-flex h-10 items-center gap-2 rounded-full bg-[#1a3a5c] px-6 text-sm font-medium text-white shadow-[0_2px_12px_rgb(26,58,92,0.3)] hover:bg-[#243f66]"
               >
-                Get started free
-              </Link>
-            </div>
-
-            {/* Premium tier */}
-            <div className="relative rounded-2xl bg-[#1a3a5c] p-7 shadow-[0_8px_40px_rgb(26,58,92,0.25)] dark:shadow-[0_8px_40px_rgb(26,58,92,0.4)]">
-              <div className="absolute inset-x-0 top-0 h-px rounded-t-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#c8922a] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-white shadow-[0_2px_8px_rgb(200,146,42,0.5)]">
-                  <span className="h-1 w-1 rounded-full bg-white/60" />
-                  Full Picture
-                </span>
-              </div>
-              <p className="text-xs font-semibold tracking-[0.15em] uppercase text-white/60">
-                Premium
-              </p>
-              <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-white">
-                The Full Picture
-              </h3>
-              <div className="mt-3 flex items-baseline gap-1.5">
-                <span className="font-[family-name:var(--font-playfair)] text-3xl font-bold text-white">
-                  $9
-                </span>
-                <span className="text-sm text-white/60">/mo</span>
-              </div>
-              <div className="my-6 h-px bg-white/10" />
-              <ul className="space-y-3">
-                {[
-                  { text: "Everything in Free", highlight: false },
-                  { text: "Perspective breakdowns", highlight: true },
-                  { text: "Blindspot alerts", highlight: true },
-                  { text: "What you're not being told", highlight: true },
-                  { text: "All topics & regions", highlight: false },
-                  { text: "Personalised email digest", highlight: false },
-                ].map((f) => (
-                  <li key={f.text} className={`flex items-center gap-3 text-sm ${f.highlight ? "font-medium text-white" : "text-white/80"}`}>
-                    <CheckIcon className={f.highlight ? "text-[#c8922a]" : "text-white/60"} />
-                    {f.text}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/pricing"
-                className="mt-7 inline-flex h-11 w-full items-center justify-center rounded-full bg-white text-sm font-semibold text-[#1a3a5c] shadow-sm hover:bg-[#f0efec]"
-              >
-                Start 14-day trial
+                Get full access <ArrowRight size={14} />
               </Link>
             </div>
           </div>
+        </section>
+      )}
 
-          {/* Blurred perspective teaser */}
-          <div className="relative mt-8 overflow-hidden rounded-2xl border border-black/[0.07] bg-white p-6 dark:border-white/[0.07] dark:bg-white/[0.03]">
-            <div className="select-none blur-[4px]">
-              <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#c8922a]">
-                Perspective Breakdown
-              </p>
-              <p className="mt-3 text-sm text-zinc-600 dark:text-zinc-400">
-                Western media frames this as a diplomatic victory, while Middle Eastern coverage emphasises the humanitarian costs still unresolved. African outlets focus on the economic implications for commodity markets...
-              </p>
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center bg-white/30 dark:bg-[#111111]/30">
-              <span className="rounded-full border border-zinc-200 bg-white/95 px-5 py-2 text-sm font-medium text-zinc-600 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/95 dark:text-zinc-400">
-                <LockIcon /> Premium perspective breakdown
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── SOCIAL PROOF STRIP ──────────────────────────────── */}
-      <section className="bg-[#f8f7f4] py-10 dark:bg-[#0f0f0f] md:py-14">
+      {/* ── SECTION 5: SOCIAL PROOF STRIP ────────────────────── */}
+      <section className="bg-[#f2f0eb] py-10 dark:bg-[#111111] md:py-14">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
         <div className="mx-auto max-w-4xl px-6">
           {/* Stats line */}
           <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:justify-center sm:gap-10">
@@ -315,7 +222,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SECTION 5: CTA + EMAIL CAPTURE ───────────────────── */}
+      {/* ── SECTION 6: CTA + EMAIL CAPTURE ───────────────────── */}
       <section className="relative overflow-hidden bg-[#1a3a5c] py-24 md:py-32">
         <div className="pointer-events-none absolute inset-0 bg-subtle-grid opacity-30" />
         <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-96 -translate-x-1/2 rounded-full bg-[#c8922a]/10 blur-3xl" />
@@ -352,9 +259,124 @@ export default function Home() {
   );
 }
 
+// ── Live Stories ─────────────────────────────────────────────────
+function LiveStories({ items }: { items: ScanItem[] }) {
+  const highSig = items.filter((i) => i.significance === "high");
+  if (highSig.length === 0) return null;
+
+  // Identify which stories get the blurred premium treatment:
+  // stories with framing patterns or blindspot flags
+  const premiumIndices = new Set<number>();
+  highSig.forEach((item, idx) => {
+    if (hasFramingWatch(item) || hasBlindspot(item)) {
+      premiumIndices.add(idx);
+    }
+  });
+
+  // If no natural premium candidates, blur the last 1-2 stories
+  if (premiumIndices.size === 0 && highSig.length > 2) {
+    premiumIndices.add(highSig.length - 1);
+    if (highSig.length > 3) premiumIndices.add(highSig.length - 2);
+  }
+
+  return (
+    <div className="p-5">
+      <p className="px-2 text-[10px] font-semibold tracking-[0.2em] uppercase text-zinc-400 dark:text-zinc-500">
+        Top Stories Today
+      </p>
+      <div className="mt-3 space-y-1">
+        {highSig.slice(0, 5).map((item, i) => (
+          premiumIndices.has(i)
+            ? <BlurredStoryCard key={i} item={item} />
+            : <StoryCard key={i} item={item} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Blurred Premium Story Card ──────────────────────────────────
+function BlurredStoryCard({ item }: { item: ScanItem }) {
+  return (
+    <article className="group relative overflow-hidden rounded-xl px-3 py-3">
+      <div className="flex gap-3">
+        <SignificanceDot significance={item.significance} />
+        <div className="min-w-0 flex-1">
+          <h3 className="text-sm font-medium leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+            {item.headline}
+          </h3>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {item.regions.slice(0, 3).map((r) => (
+              <RegionTag key={r} region={r} />
+            ))}
+            {item.patterns.slice(0, 2).map((p) => (
+              <PatternTag key={p} pattern={p} />
+            ))}
+            {hasFramingWatch(item) && <FramingBadge />}
+            {hasBlindspot(item) && <BlindspotBadge />}
+          </div>
+          {/* Blurred connection — the premium teaser */}
+          {item.connection && (
+            <div className="relative mt-2.5 overflow-hidden rounded-lg">
+              <p className="select-none text-xs leading-relaxed text-zinc-500 blur-[4px] line-clamp-3">
+                {item.connection}
+              </p>
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-white/60 via-white/80 to-white/60 dark:from-[#0f0f0f]/60 dark:via-[#0f0f0f]/80 dark:to-[#0f0f0f]/60">
+                <Link
+                  href="/pricing"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-[#c8922a]/30 bg-white/95 px-4 py-1.5 text-[11px] font-semibold text-[#c8922a] shadow-[0_2px_8px_rgb(200,146,42,0.15)] transition-all hover:border-[#c8922a]/60 hover:shadow-[0_4px_16px_rgb(200,146,42,0.25)] dark:border-[#c8922a]/20 dark:bg-zinc-900/95 dark:hover:border-[#c8922a]/50"
+                >
+                  <LockIcon />
+                  See all perspectives &mdash; Premium
+                </Link>
+              </div>
+            </div>
+          )}
+          {/* Reading time estimate */}
+          <p className="mt-1.5 text-[10px] text-zinc-300 dark:text-zinc-600">
+            {estimateReadingTime(item)} min read
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// ── Story Card (free / visible) ─────────────────────────────────
+function StoryCard({ item }: { item: ScanItem }) {
+  return (
+    <article className="group rounded-xl px-3 py-3 transition-colors hover:bg-zinc-50 dark:hover:bg-white/[0.03]">
+      <div className="flex gap-3">
+        <SignificanceDot significance={item.significance} />
+        <div className="min-w-0 flex-1">
+          <h3 className="text-sm font-medium leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+            {item.headline}
+          </h3>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {item.regions.slice(0, 3).map((r) => (
+              <RegionTag key={r} region={r} />
+            ))}
+            {item.patterns.slice(0, 2).map((p) => (
+              <PatternTag key={p} pattern={p} />
+            ))}
+            {hasFramingWatch(item) && <FramingBadge />}
+          </div>
+          {item.connection && (
+            <p className="mt-2 text-xs leading-relaxed text-zinc-400 dark:text-zinc-500 line-clamp-2">
+              {item.connection}
+            </p>
+          )}
+          <p className="mt-1.5 text-[10px] text-zinc-300 dark:text-zinc-600">
+            {estimateReadingTime(item)} min read
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 // ── Perspective Demo ────────────────────────────────────────────
 function PerspectiveDemo({ story, scan }: { story: ScanItem | null; scan: ReturnType<typeof getTodayScan> }) {
-  // Static fallback if no real data
   const fallback = {
     headline: "Global trade negotiations stall as tariff tensions rise",
     regions: [
@@ -380,7 +402,7 @@ function PerspectiveDemo({ story, scan }: { story: ScanItem | null; scan: Return
     );
   }
 
-  // Build perspective cards from real scan data
+  const connectionParts = story.connection ? splitConnectionByRegion(story.connection, story.regions) : [];
   const regionCards = story.regions
     .filter((r) => r !== "global")
     .slice(0, 4)
@@ -388,10 +410,6 @@ function PerspectiveDemo({ story, scan }: { story: ScanItem | null; scan: Return
       region: REGION_LABELS[regionKey] || regionKey,
       text: story.connection,
     }));
-
-  // If the story has a connection text, we split it for different regions
-  // or use framing patterns from the scan
-  const connectionParts = story.connection ? splitConnectionByRegion(story.connection, story.regions) : [];
 
   return (
     <div className="mt-6">
@@ -429,11 +447,9 @@ function splitConnectionByRegion(connection: string, regions: string[]): { regio
   const filteredRegions = regions.filter((r) => r !== "global").slice(0, 4);
   if (filteredRegions.length === 0) return [];
 
-  // Try to split the connection text into meaningful parts for each region
   const sentences = connection.split(/(?<=[.!?])\s+/).filter(Boolean);
 
   if (sentences.length >= filteredRegions.length) {
-    // Distribute sentences across regions
     const perRegion = Math.ceil(sentences.length / filteredRegions.length);
     return filteredRegions.map((regionKey, i) => {
       const start = i * perRegion;
@@ -445,7 +461,6 @@ function splitConnectionByRegion(connection: string, regions: string[]): { regio
     });
   }
 
-  // Fallback: show full connection for each region
   return filteredRegions.map((regionKey) => ({
     region: REGION_LABELS[regionKey] || regionKey,
     text: connection,
@@ -480,6 +495,97 @@ function PerspectiveCard({ region, text }: { region: string; text: string }) {
   );
 }
 
+// ── Small components ────────────────────────────────────────────
+
+function MoodBadge({ mood }: { mood: string }) {
+  const lower = mood.toLowerCase();
+  let cls = "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400";
+  if (lower.includes("urgent") || lower.includes("critical")) {
+    cls = "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400";
+  } else if (lower.includes("brittle") || lower.includes("tense") || lower.includes("fragment")) {
+    cls = "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400";
+  } else if (lower.includes("calm") || lower.includes("stable")) {
+    cls = "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400";
+  }
+  return (
+    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${cls}`}>
+      {mood}
+    </span>
+  );
+}
+
+function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
+  return (
+    <div>
+      <p className={`text-xl font-semibold tracking-tight ${accent ? "text-[#c8922a]" : "text-[#0f0f0f] dark:text-[#f0efec]"}`}>
+        {value}
+      </p>
+      <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">{label}</p>
+    </div>
+  );
+}
+
+function SignificanceDot({ significance }: { significance: string }) {
+  const colors: Record<string, string> = {
+    high: "bg-[#c8922a]",
+    medium: "bg-[#1a3a5c] dark:bg-[#4a7baa]",
+    low: "bg-zinc-300 dark:bg-zinc-600",
+  };
+  return (
+    <span
+      className={`mt-1.5 block h-2 w-2 flex-shrink-0 rounded-full ${colors[significance] || colors.medium}`}
+      title={`${significance} significance`}
+    />
+  );
+}
+
+function RegionTag({ region }: { region: string }) {
+  const label = REGION_LABELS[region] || region;
+  return (
+    <span className="inline-flex rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-500 dark:bg-white/[0.06] dark:text-zinc-400">
+      {label}
+    </span>
+  );
+}
+
+function PatternTag({ pattern }: { pattern: string }) {
+  return (
+    <span className="inline-flex rounded-full bg-violet-50 px-2 py-0.5 text-[10px] font-medium text-violet-600 dark:bg-violet-950/30 dark:text-violet-400/80">
+      {pattern.replace(/-/g, " ")}
+    </span>
+  );
+}
+
+function FramingBadge() {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full bg-[#c8922a]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#c8922a] dark:bg-[#c8922a]/15">
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+      Framing Watch
+    </span>
+  );
+}
+
+function BlindspotBadge() {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full bg-rose-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-rose-600 dark:bg-rose-950/30 dark:text-rose-400">
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M4.93 4.93l14.14 14.14"/>
+      </svg>
+      Blindspot
+    </span>
+  );
+}
+
+function estimateReadingTime(item: ScanItem): number {
+  const words = (item.headline + " " + item.connection).split(/\s+/).length;
+  const regions = item.regions.length;
+  return Math.max(1, Math.ceil((words + regions * 30) / 200));
+}
+
 // ── Icons ────────────────────────────────────────────────────────
 function ArrowRight({ size = 16, stroke }: { size?: number; stroke?: string }) {
   return (
@@ -489,17 +595,9 @@ function ArrowRight({ size = 16, stroke }: { size?: number; stroke?: string }) {
   );
 }
 
-function CheckIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`flex-shrink-0 ${className}`}>
-      <polyline points="20 6 9 17 4 12" />
-    </svg>
-  );
-}
-
 function LockIcon() {
   return (
-    <svg className="mr-1.5 inline h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg className="mr-1 inline h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
       <path d="M7 11V7a5 5 0 0 1 10 0v4" />
     </svg>
