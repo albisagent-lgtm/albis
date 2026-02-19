@@ -65,9 +65,12 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Albis" }],
   metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: siteUrl,
+  },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "en_NZ",
     url: siteUrl,
     siteName: "Albis",
     title: "Albis — The news, understood.",
@@ -75,20 +78,31 @@ export const metadata: Metadata = {
       "News intelligence, not noise. The full picture, every story, zero spin.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "Albis — News intelligence",
+        alt: "Albis — News intelligence, not noise",
+        type: "image/svg+xml",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Albis — The news, understood.",
-    description: "News intelligence, not noise.",
-    images: ["/og-image.png"],
+    description: "News intelligence, not noise. See the world clearly.",
+    images: ["/og-image.svg"],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   manifest: "/manifest.json",
   other: {
     "apple-mobile-web-app-capable": "yes",
@@ -106,6 +120,26 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `try{const t=localStorage.getItem("albis-theme");if(t==="light"){document.documentElement.classList.remove("dark")}else{document.documentElement.classList.add("dark")}}catch(e){}`,
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Albis",
+              url: "https://albis.news",
+              logo: "https://albis.news/og-image.svg",
+              description:
+                "News intelligence, not noise. Albis gives you the full picture — every source, zero spin, one calm reading experience.",
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "hello@albis.news",
+                contactType: "customer support",
+              },
+              sameAs: ["https://t.me/albisdaily"],
+            }),
           }}
         />
       </head>

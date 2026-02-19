@@ -66,12 +66,12 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Albis. All rights reserved.
           </p>
           <div className="flex gap-5">
-            <a href="#" className="text-xs text-zinc-300 hover:text-zinc-500 dark:text-zinc-700 dark:hover:text-zinc-500">
+            <Link href="/privacy" className="text-xs text-zinc-300 hover:text-zinc-500 dark:text-zinc-700 dark:hover:text-zinc-500">
               Privacy
-            </a>
-            <a href="#" className="text-xs text-zinc-300 hover:text-zinc-500 dark:text-zinc-700 dark:hover:text-zinc-500">
+            </Link>
+            <Link href="/terms" className="text-xs text-zinc-300 hover:text-zinc-500 dark:text-zinc-700 dark:hover:text-zinc-500">
               Terms
-            </a>
+            </Link>
           </div>
         </div>
       </div>

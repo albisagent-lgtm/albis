@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin
+Disallow: /api
+Disallow: /settings
+
+Sitemap: https://albis.news/sitemap.xml

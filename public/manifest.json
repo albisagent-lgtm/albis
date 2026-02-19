@@ -1,10 +1,10 @@
 {
-  "name": "Albis — The news, understood.",
+  "name": "Albis",
   "short_name": "Albis",
-  "description": "News intelligence, not noise. The full picture, every story, zero spin.",
+  "description": "See the world clearly. News intelligence, not noise.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f8f7f4",
+  "background_color": "#0f0f0f",
   "theme_color": "#1a3a5c",
   "orientation": "portrait-primary",
   "icons": [
@@ -12,6 +12,12 @@
       "src": "/favicon.ico",
       "sizes": "48x48",
       "type": "image/x-icon"
+    },
+    {
+      "src": "/og-image.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ],
   "categories": ["news", "education"],
