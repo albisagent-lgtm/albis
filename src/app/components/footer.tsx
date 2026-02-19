@@ -3,7 +3,7 @@ import Link from "next/link";
 export function Footer() {
   return (
     <footer className="border-t border-black/[0.07] bg-[#f8f7f4] dark:border-white/[0.05] dark:bg-[#0f0f0f]">
-      <div className="mx-auto max-w-5xl px-6 py-14 md:py-16">
+      <div className="mx-auto max-w-4xl px-6 py-14 md:py-16">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           {/* Brand */}
           <div className="max-w-xs">
@@ -14,43 +14,27 @@ export function Footer() {
               Albis
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-zinc-400 dark:text-zinc-500">
-              Not news. Clarity.
-              <br />
-              See the world clearly, without the noise.
+              See the world clearly.
             </p>
-            {/* Philosophy line */}
             <p className="mt-4 text-xs text-[#c8922a]/70 font-medium italic font-[family-name:var(--font-playfair)]">
               The app designed to let you go.
             </p>
-
-            {/* Social proof */}
             <p className="mt-4 text-xs text-zinc-400 dark:text-zinc-500">
-              Scanning 50,000+ sources across 7 regions, 3x daily
+              Scanning 50,000+ sources across 7 regions daily
             </p>
           </div>
 
-          {/* Links */}
+          {/* Links + Telegram */}
           <div className="flex gap-14">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
-                Product
+                Navigate
               </p>
               <ul className="mt-4 space-y-2.5">
                 <FooterLink href="/">Home</FooterLink>
                 <FooterLink href="/briefing">Briefing</FooterLink>
-                <FooterLink href="/framing-watch">Framing Watch</FooterLink>
-                <FooterLink href="/digest">Daily Email Digest</FooterLink>
                 <FooterLink href="/pricing">Pricing</FooterLink>
-              </ul>
-            </div>
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
-                Company
-              </p>
-              <ul className="mt-4 space-y-2.5">
                 <FooterLink href="/about">About</FooterLink>
-                <FooterLink href="/login">Sign in</FooterLink>
-                <FooterLink href="/signup">Sign up</FooterLink>
               </ul>
             </div>
             <div>
@@ -68,33 +52,12 @@ export function Footer() {
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0">
                       <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                     </svg>
-                    Telegram
+                    Join @albisdaily
                   </a>
                 </li>
               </ul>
             </div>
           </div>
-        </div>
-
-        {/* Join the community */}
-        <div className="mt-10 rounded-xl border border-black/[0.06] bg-white/50 p-5 text-center dark:border-white/[0.06] dark:bg-white/[0.02]">
-          <p className="text-sm font-medium text-[#0f0f0f] dark:text-[#f0efec]">
-            Join the community
-          </p>
-          <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
-            Daily intelligence updates, feature previews, and conversations with curious readers.
-          </p>
-          <a
-            href="https://t.me/albisdaily"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-flex h-9 min-w-[44px] items-center gap-2 rounded-full bg-[#1a3a5c] px-5 text-xs font-medium text-white hover:bg-[#243f66]"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-            </svg>
-            Join @albisdaily on Telegram
-          </a>
         </div>
 
         {/* Bottom bar */}

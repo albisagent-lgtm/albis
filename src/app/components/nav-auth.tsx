@@ -20,24 +20,12 @@ export function NavAuth() {
   }, []);
 
   if (!mounted) {
-    return <div className="flex items-center gap-3 w-[140px]" />;
+    return <div className="flex items-center gap-3 w-[100px]" />;
   }
 
   if (loggedIn) {
     return (
       <div className="flex items-center gap-3">
-        <Link
-          href="/briefing"
-          className="text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
-        >
-          Briefing
-        </Link>
-        <Link
-          href="/framing-watch"
-          className="hidden text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] sm:inline dark:text-zinc-400 dark:hover:text-[#f0efec]"
-        >
-          Framing
-        </Link>
         <Link
           href="/settings"
           className="flex h-9 w-9 items-center justify-center rounded-full text-zinc-400 transition-colors hover:bg-black/[0.06] hover:text-[#0f0f0f] dark:hover:bg-white/[0.06] dark:hover:text-[#f0efec]"
@@ -67,7 +55,7 @@ export function NavAuth() {
         href="/login"
         className="text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
       >
-        Log in
+        Sign in
       </Link>
       <Link
         href="/signup"
@@ -80,26 +68,6 @@ export function NavAuth() {
 }
 
 export function NavLinks() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setLoggedIn(!!getLocalUser());
-    setMounted(true);
-
-    function onStorage() {
-      setLoggedIn(!!getLocalUser());
-    }
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
-  }, []);
-
-  if (!mounted) return null;
-
-  if (loggedIn) {
-    return null;
-  }
-
   return (
     <div className="hidden items-center gap-6 sm:flex">
       <Link
@@ -109,22 +77,10 @@ export function NavLinks() {
         Briefing
       </Link>
       <Link
-        href="/framing-watch"
-        className="text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
-      >
-        Framing Watch
-      </Link>
-      <Link
         href="/pricing"
         className="text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
       >
         Pricing
-      </Link>
-      <Link
-        href="/about"
-        className="text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
-      >
-        About
       </Link>
     </div>
   );
