@@ -82,6 +82,12 @@ export function NavLinks() {
       >
         Pricing
       </Link>
+      <Link
+        href="/about"
+        className="text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
+      >
+        About
+      </Link>
     </div>
   );
 }

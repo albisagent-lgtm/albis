@@ -59,14 +59,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── PROBLEM HOOK ────────────────────────────────────── */}
+      <section className="relative bg-[#0f0f0f] py-16 md:py-20">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
+        <div className="mx-auto max-w-2xl px-6 text-center">
+          <p className="font-[family-name:var(--font-playfair)] text-xl leading-relaxed text-white/80 md:text-2xl">
+            Every source shows you one angle.
+            <br className="hidden sm:block" />{" "}
+            Algorithms choose what you see.
+          </p>
+          <p className="mt-4 font-[family-name:var(--font-playfair)] text-xl font-semibold text-[#c8922a] md:text-2xl">
+            You deserve the full picture.
+          </p>
+        </div>
+      </section>
+
       {/* ── SECTION 2: LIVE PERSPECTIVE EXAMPLE ──────────────── */}
       <section className="relative bg-[#f2f0eb] py-20 dark:bg-[#111111] md:py-28">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
 
         <div className="mx-auto max-w-4xl px-6">
           <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
-            Live from today&apos;s scan
+            Live from today&apos;s scan &mdash; updated 3x daily
           </p>
+
+          <h2 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-semibold leading-tight text-[#0f0f0f] md:text-4xl dark:text-[#f0efec]">
+            Same story. Different worlds.
+          </h2>
 
           <PerspectiveDemo story={perspectiveStory} scan={scan} />
 
@@ -249,6 +268,53 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── SOCIAL PROOF STRIP ──────────────────────────────── */}
+      <section className="bg-[#f8f7f4] py-10 dark:bg-[#0f0f0f] md:py-14">
+        <div className="mx-auto max-w-4xl px-6">
+          {/* Stats line */}
+          <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:justify-center sm:gap-10">
+            <p className="text-sm text-zinc-500 dark:text-zinc-400">
+              <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">50,000+</span> sources across <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">7 regions</span> scanned daily
+            </p>
+            <span className="hidden h-4 w-px bg-zinc-300 dark:bg-zinc-700 sm:block" />
+            <a
+              href="https://t.me/albisdaily"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm text-zinc-500 transition-colors hover:text-[#1a3a5c] dark:text-zinc-400 dark:hover:text-[#7ab0d8]"
+            >
+              Join curious readers on{" "}
+              <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">@albisdaily</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0 ml-0.5">
+                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+              </svg>
+            </a>
+          </div>
+
+          {/* Trust icons */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-6 text-xs text-zinc-400 dark:text-zinc-500">
+            <span className="inline-flex items-center gap-1.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-500">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              No data selling
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-500">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+              No algorithmic manipulation
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-500">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Cancel anytime
+            </span>
+          </div>
+        </div>
+      </section>
+
       {/* ── SECTION 5: CTA + EMAIL CAPTURE ───────────────────── */}
       <section className="relative overflow-hidden bg-[#1a3a5c] py-24 md:py-32">
         <div className="pointer-events-none absolute inset-0 bg-subtle-grid opacity-30" />
@@ -386,25 +452,28 @@ function splitConnectionByRegion(connection: string, regions: string[]): { regio
   }));
 }
 
-const REGION_CARD_COLORS: Record<string, string> = {
-  "West": "border-l-blue-500",
-  "South Asia": "border-l-violet-500",
-  "Middle East": "border-l-amber-500",
-  "E. Europe": "border-l-red-500",
-  "Africa": "border-l-emerald-500",
-  "East & SE Asia": "border-l-pink-500",
-  "Latin America": "border-l-cyan-500",
-  "Global": "border-l-zinc-400",
+const REGION_CARD_COLORS: Record<string, { border: string; text: string; bg: string }> = {
+  "West": { border: "border-l-blue-500", text: "text-blue-600 dark:text-blue-400", bg: "bg-blue-500" },
+  "South Asia": { border: "border-l-violet-500", text: "text-violet-600 dark:text-violet-400", bg: "bg-violet-500" },
+  "Middle East": { border: "border-l-amber-500", text: "text-amber-600 dark:text-amber-400", bg: "bg-amber-500" },
+  "E. Europe": { border: "border-l-red-500", text: "text-red-600 dark:text-red-400", bg: "bg-red-500" },
+  "Africa": { border: "border-l-emerald-500", text: "text-emerald-600 dark:text-emerald-400", bg: "bg-emerald-500" },
+  "East & SE Asia": { border: "border-l-pink-500", text: "text-pink-600 dark:text-pink-400", bg: "bg-pink-500" },
+  "Latin America": { border: "border-l-cyan-500", text: "text-cyan-600 dark:text-cyan-400", bg: "bg-cyan-500" },
+  "Global": { border: "border-l-zinc-400", text: "text-zinc-500 dark:text-zinc-400", bg: "bg-zinc-400" },
 };
 
 function PerspectiveCard({ region, text }: { region: string; text: string }) {
-  const borderColor = REGION_CARD_COLORS[region] || "border-l-zinc-400";
+  const colors = REGION_CARD_COLORS[region] || REGION_CARD_COLORS["Global"];
   return (
-    <div className={`rounded-xl border border-black/[0.07] border-l-[3px] ${borderColor} bg-white p-5 dark:border-white/[0.07] dark:bg-white/[0.03]`}>
-      <p className="text-xs font-semibold tracking-[0.15em] uppercase text-zinc-400 dark:text-zinc-500">
-        {region}
-      </p>
-      <p className="mt-2 text-sm leading-relaxed text-zinc-600 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
+    <div className={`rounded-xl border border-black/[0.07] border-l-4 ${colors.border} bg-white p-5 dark:border-white/[0.07] dark:bg-white/[0.03]`}>
+      <div className="flex items-center gap-2">
+        <span className={`inline-block h-2 w-2 rounded-full ${colors.bg}`} />
+        <p className={`text-xs font-bold tracking-[0.12em] uppercase ${colors.text}`}>
+          {region}
+        </p>
+      </div>
+      <p className="mt-3 text-sm leading-relaxed text-zinc-600 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
         {text}
       </p>
     </div>
