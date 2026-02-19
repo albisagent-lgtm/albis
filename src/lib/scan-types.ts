@@ -2,6 +2,12 @@
 // Shared types and display constants — safe for client AND server
 // ---------------------------------------------------------------------------
 
+export interface BlindspotData {
+  isBlindspot: boolean;
+  coveredBy: string[];
+  missingFrom: string[];
+}
+
 export interface ScanItem {
   headline: string;
   category: string;
@@ -10,6 +16,7 @@ export interface ScanItem {
   patterns: string[];
   significance: "high" | "medium" | "low";
   connection: string;
+  blindspot?: BlindspotData;
 }
 
 export interface PatternOfDay {
@@ -60,6 +67,76 @@ export const FRAMING_PATTERNS = new Set(["framing"]);
 
 export function hasFramingWatch(item: ScanItem): boolean {
   return item.patterns.some((p) => FRAMING_PATTERNS.has(p));
+}
+
+export function hasBlindspot(item: ScanItem): boolean {
+  return item.blindspot?.isBlindspot === true;
+}
+
+// Region areas for blindspot detection — groups of related regions
+const REGION_AREAS: Record<string, string[]> = {
+  "Western": ["western-world"],
+  "Eastern Europe": ["eastern-europe"],
+  "Asia": ["south-asia", "east-se-asia"],
+  "Middle East": ["middle-east"],
+  "Africa": ["africa"],
+  "Latin America": ["latin-americas"],
+};
+
+const ALL_REGION_KEYS = Object.keys(REGION_LABELS).filter((r) => r !== "global");
+
+/**
+ * Detects blindspots: stories heavily covered by some regions but missing from others.
+ * A story is a blindspot if:
+ * - It has 3+ regions from one area but 0 coverage from other major areas, OR
+ * - It has only 1 region tagged (potential blindspot)
+ */
+export function detectBlindspots(items: ScanItem[]): ScanItem[] {
+  return items.map((item) => {
+    const coveredBy = item.regions.filter((r) => r !== "global");
+    const missingFrom = ALL_REGION_KEYS.filter(
+      (r) => !item.regions.includes(r)
+    );
+
+    // Check if only 1 region tagged — potential blindspot
+    if (coveredBy.length === 1) {
+      return {
+        ...item,
+        blindspot: { isBlindspot: true, coveredBy, missingFrom },
+      };
+    }
+
+    // Check if 3+ regions from one area but missing entire other areas
+    if (coveredBy.length >= 3) {
+      const coveredAreas = new Set<string>();
+      const missingAreas: string[] = [];
+
+      for (const [area, areaRegions] of Object.entries(REGION_AREAS)) {
+        if (areaRegions.some((r) => coveredBy.includes(r))) {
+          coveredAreas.add(area);
+        }
+      }
+
+      for (const area of Object.keys(REGION_AREAS)) {
+        if (!coveredAreas.has(area)) {
+          missingAreas.push(area);
+        }
+      }
+
+      // Blindspot if covered areas are concentrated and missing areas are many
+      if (missingAreas.length >= 3) {
+        return {
+          ...item,
+          blindspot: { isBlindspot: true, coveredBy, missingFrom },
+        };
+      }
+    }
+
+    return {
+      ...item,
+      blindspot: { isBlindspot: false, coveredBy, missingFrom },
+    };
+  });
 }
 
 export function groupByCategory(items: ScanItem[]): Map<string, ScanItem[]> {

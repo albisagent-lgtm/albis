@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Playfair_Display,
+  Source_Serif_4,
+  Inter,
+} from "next/font/google";
 import Link from "next/link";
 import { ThemeToggle } from "./components/theme-toggle";
 import { NavAuth, NavLinks } from "./components/nav-auth";
+import { MobileNav } from "./components/mobile-nav";
 import { Footer } from "./components/footer";
 import "./globals.css";
 
@@ -21,6 +28,20 @@ const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
   style: ["normal", "italic"],
   weight: ["400", "500", "600", "700", "900"],
+  display: "swap",
+});
+
+const sourceSerif4 = Source_Serif_4({
+  variable: "--font-source-serif",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -68,6 +89,12 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
+  manifest: "/manifest.json",
+  other: {
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "apple-mobile-web-app-title": "Albis",
+  },
 };
 
 export default function RootLayout({
@@ -83,10 +110,10 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} min-h-screen bg-[#f8f7f4] font-[family-name:var(--font-geist-sans)] text-[#0f0f0f] antialiased dark:bg-[#0f0f0f] dark:text-[#f0efec]`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${sourceSerif4.variable} ${inter.variable} min-h-screen bg-[#f8f7f4] font-[family-name:var(--font-inter)] text-[#0f0f0f] antialiased dark:bg-[#0f0f0f] dark:text-[#f0efec]`}
       >
-        {/* Navigation */}
-        <nav className="sticky top-0 z-50 border-b border-black/[0.07] bg-[#f8f7f4]/90 backdrop-blur-xl dark:border-white/[0.06] dark:bg-[#0f0f0f]/90">
+        {/* Navigation — hides on scroll down, shows on scroll up (mobile) */}
+        <nav className="nav-auto-hide sticky top-0 z-50 border-b border-black/[0.07] bg-[#f8f7f4]/90 backdrop-blur-xl dark:border-white/[0.06] dark:bg-[#0f0f0f]/90">
           <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
             <div className="flex items-center gap-8">
               {/* Logo — editorial serif italic */}
@@ -105,11 +132,16 @@ export default function RootLayout({
           </div>
         </nav>
 
-        {/* Main content */}
-        {children}
+        {/* Main content with page transition */}
+        <div className="page-transition">
+          {children}
+        </div>
 
         {/* Footer */}
         <Footer />
+
+        {/* Mobile bottom navigation */}
+        <MobileNav />
       </body>
     </html>
   );

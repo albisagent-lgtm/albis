@@ -14,7 +14,10 @@ import {
   CATEGORY_META,
   REGION_LABELS,
   hasFramingWatch,
+  hasBlindspot,
 } from "@/lib/scan-types";
+import { estimateItemReadingTime } from "@/lib/reading-time";
+import { PerspectiveBar } from "@/app/components/perspective-bar";
 
 // ---------------------------------------------------------------------------
 // Client wrapper — reads preferences from localStorage, filters scan
@@ -107,7 +110,7 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
                   {scan.patternOfDay.title}
                 </p>
               )}
-              <p className="mt-3 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+              <p className="mt-3 text-sm leading-relaxed text-zinc-500 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
                 {scan.patternOfDay.body}
               </p>
             </div>
@@ -149,6 +152,40 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
         </section>
       )}
 
+      {/* Blindspots */}
+      {filtered.filter((i) => hasBlindspot(i)).length > 0 && (
+        <section className="border-b border-zinc-200 py-12 dark:border-zinc-800/50 md:py-16">
+          <div className="mx-auto max-w-3xl px-6">
+            <div className="flex items-center gap-2">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-50 dark:bg-amber-950/30">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-amber-600 dark:text-amber-400">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              </div>
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400">
+                Blindspots
+              </p>
+              <span className="text-xs text-zinc-400 dark:text-zinc-600">
+                {filtered.filter((i) => hasBlindspot(i)).length}
+              </span>
+            </div>
+            <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
+              Stories with limited regional coverage — perspectives you may be missing.
+            </p>
+            <div className="mt-6 space-y-1">
+              {filtered
+                .filter((i) => hasBlindspot(i))
+                .slice(0, 5)
+                .map((item, i) => (
+                  <StoryCard key={`bs-${i}`} item={item} />
+                ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* By Category */}
       {categories.size > 0 && (
         <section className="py-12 md:py-16">
@@ -165,18 +202,98 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
         </section>
       )}
 
+      {/* "You're all caught up" completion state */}
+      {filtered.length > 0 && (
+        <section className="border-t border-zinc-200 dark:border-zinc-800/50">
+          <div className="mx-auto max-w-3xl px-6 py-16 text-center">
+            <CaughtUpState
+              date={scan.displayDate}
+              storyCount={filtered.length}
+              perspectiveCount={new Set(filtered.flatMap((i) => i.regions)).size}
+            />
+          </div>
+        </section>
+      )}
+
       {/* Settings link */}
       <section className="border-t border-zinc-200 dark:border-zinc-800/50">
         <div className="mx-auto max-w-3xl px-6 py-12 text-center">
           <Link
             href="/settings"
-            className="text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
+            className="text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300 min-h-[44px] inline-flex items-center"
           >
             Edit your topics and regions &rarr;
           </Link>
         </div>
       </section>
     </main>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// "You're all caught up" with sparkle animation
+// ---------------------------------------------------------------------------
+
+function CaughtUpState({
+  date,
+  storyCount,
+  perspectiveCount,
+}: {
+  date: string;
+  storyCount: number;
+  perspectiveCount: number;
+}) {
+  const [showSparkles, setShowSparkles] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSparkles(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="relative rounded-2xl border border-black/[0.06] bg-white/50 p-10 dark:border-white/[0.06] dark:bg-white/[0.02]">
+      {/* Sparkle particles */}
+      {showSparkles && (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span
+              key={i}
+              className="absolute animate-sparkle text-[#c8922a]"
+              style={{
+                left: `${20 + (i * 37) % 60}%`,
+                top: `${10 + (i * 23) % 60}%`,
+                animationDelay: `${i * 0.2}s`,
+                fontSize: `${8 + (i % 3) * 4}px`,
+              }}
+            >
+              ✦
+            </span>
+          ))}
+        </div>
+      )}
+
+      <div className="animate-fade-in-up">
+        <p className="text-3xl">✨</p>
+        <h3 className="mt-4 font-[family-name:var(--font-playfair)] text-2xl font-semibold italic text-[#0f0f0f] dark:text-[#f0efec]">
+          You are all caught up
+        </h3>
+        <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
+          You have covered {storyCount} {storyCount === 1 ? "story" : "stories"} across {perspectiveCount} perspectives today.
+        </p>
+        <p className="mt-2 text-sm text-zinc-400 dark:text-zinc-500">
+          {date}
+        </p>
+        <p className="mt-4 text-xs text-zinc-300 dark:text-zinc-600">
+          Next briefing at 7:00 AM tomorrow
+        </p>
+        <Link
+          href="/pricing"
+          className="mt-5 inline-flex h-9 items-center gap-2 rounded-full border border-[#c8922a]/30 bg-[#c8922a]/5 px-5 text-xs font-medium text-[#c8922a] hover:bg-[#c8922a]/10 dark:border-[#c8922a]/20"
+        >
+          Share your perspective score
+        </Link>
+      </div>
+    </div>
   );
 }
 
@@ -255,6 +372,9 @@ function FramingWatchBadge() {
 
 function StoryCard({ item }: { item: ScanItem }) {
   const framing = hasFramingWatch(item);
+  const blindspot = hasBlindspot(item);
+  const readTime = estimateItemReadingTime(item.headline, item.connection);
+  const isPremiumContent = framing || blindspot;
   return (
     <article className="group rounded-lg px-4 py-4 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900/50">
       <div className="flex gap-3">
@@ -263,7 +383,7 @@ function StoryCard({ item }: { item: ScanItem }) {
           <h3 className="text-base font-medium leading-snug text-zinc-800 dark:text-zinc-100">
             {item.headline}
           </h3>
-          <div className="mt-2.5 flex flex-wrap gap-1.5">
+          <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
             {item.regions.map((r) => (
               <RegionTag key={r} region={r} />
             ))}
@@ -271,9 +391,14 @@ function StoryCard({ item }: { item: ScanItem }) {
               <PatternTag key={p} pattern={p} />
             ))}
             {framing && <FramingWatchBadge />}
+            {blindspot && <BlindspotBadge />}
+            <span className="ml-auto text-[10px] text-zinc-400 dark:text-zinc-500">
+              {readTime}
+            </span>
           </div>
+          <PerspectiveBar item={item} />
           <div className="mt-3">
-            {framing ? (
+            {isPremiumContent ? (
               <div className="relative">
                 <p className="select-none text-sm leading-relaxed text-zinc-500 blur-[3px]">
                   {item.connection}
@@ -284,12 +409,12 @@ function StoryCard({ item }: { item: ScanItem }) {
                       <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                       <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                     </svg>
-                    Unlock with Premium
+                    {framing ? "Unlock Framing Watch" : "Unlock Blindspot Analysis"}
                   </span>
                 </div>
               </div>
             ) : (
-              <p className="text-sm leading-relaxed text-zinc-500 dark:text-zinc-500">
+              <p className="text-sm leading-relaxed text-zinc-500 font-[family-name:var(--font-source-serif)] dark:text-zinc-500">
                 {item.connection}
               </p>
             )}
@@ -297,6 +422,19 @@ function StoryCard({ item }: { item: ScanItem }) {
         </div>
       </div>
     </article>
+  );
+}
+
+function BlindspotBadge() {
+  return (
+    <span className="inline-flex items-center gap-1 rounded bg-amber-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-700 dark:bg-amber-950/50 dark:text-amber-400">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+        <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+        <line x1="1" y1="1" x2="23" y2="23"/>
+      </svg>
+      Blindspot
+    </span>
   );
 }
 
@@ -335,7 +473,7 @@ function NeedsOnboarding() {
         <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
           Welcome to Albis
         </p>
-        <h1 className="mt-4 text-3xl font-light italic leading-snug text-zinc-800 dark:text-zinc-100">
+        <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-light italic leading-snug text-zinc-800 dark:text-zinc-100">
           Set up your briefing
         </h1>
         <p className="mt-4 text-zinc-500 dark:text-zinc-400">
@@ -343,7 +481,7 @@ function NeedsOnboarding() {
         </p>
         <Link
           href="/onboarding"
-          className="mt-8 inline-flex h-11 items-center rounded-full bg-zinc-900 px-8 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+          className="mt-8 inline-flex h-11 min-w-[44px] items-center rounded-full bg-zinc-900 px-8 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
         >
           Get started
         </Link>

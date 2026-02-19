@@ -37,7 +37,7 @@ const DASH = (
 const tiers = [
   {
     id: "reader",
-    name: "Reader",
+    name: "Free",
     tagline: "Free, forever.",
     priceMonthly: 0,
     priceAnnual: 0,
@@ -59,8 +59,8 @@ const tiers = [
     ],
   },
   {
-    id: "intelligent",
-    name: "Intelligent",
+    id: "standard",
+    name: "Standard",
     tagline: "Most popular.",
     priceMonthly: 9,
     priceAnnual: 72,
@@ -70,7 +70,7 @@ const tiers = [
     ctaHref: "/signup",
     featured: true,
     features: [
-      { text: "Everything in Reader", included: true },
+      { text: "Everything in Free", included: true },
       { text: "Framing Watch", included: true, highlight: true },
       { text: "Deep Dive AI analysis", included: true, highlight: true },
       { text: "Full scan history & archive", included: true },
@@ -81,18 +81,18 @@ const tiers = [
     ],
   },
   {
-    id: "scholar",
-    name: "Scholar",
+    id: "premium",
+    name: "Premium",
     tagline: "For serious readers.",
     priceMonthly: 19,
     priceAnnual: 152,
     description:
-      "Everything in Intelligent, plus export, API access, and early features for power users.",
+      "Everything in Standard, plus export, API access, and early features for power users.",
     cta: "Start 14-day trial",
     ctaHref: "/signup",
     featured: false,
     features: [
-      { text: "Everything in Intelligent", included: true },
+      { text: "Everything in Standard", included: true },
       { text: "Export & API access", included: true, highlight: true },
       { text: "Team sharing (up to 5)", included: true, highlight: true },
       { text: "Custom topic alerts", included: true },
@@ -108,7 +108,7 @@ const faqs = [
     a: "A daily personalised briefing with the Pattern of the Day, top stories, and categorised intelligence across your chosen topics and region. It's genuinely useful on its own.",
   },
   {
-    q: "What makes Intelligent worth it?",
+    q: "What makes Standard worth it?",
     a: "Framing Watch shows you when the same story is told differently across regions. Deep Dive gives you AI-powered analysis of what's said, omitted, and why. History lets you browse past scans. Ask Albis lets you interrogate any story directly.",
   },
   {
@@ -121,15 +121,27 @@ const faqs = [
   },
   {
     q: "How does the annual plan work?",
-    a: "Annual plans are billed once per year. You save roughly 33% compared to monthly billing — and you can still cancel for a prorated refund.",
+    a: "Annual plans are billed once per year — like a Costco membership. You save roughly 33% compared to monthly billing, and you can still cancel for a prorated refund.",
   },
+];
+
+const comparisonFeatures = [
+  { feature: "Daily briefing", albis: true, ground: true, fourteen40: true, traditional: true },
+  { feature: "Multi-region coverage", albis: true, ground: true, fourteen40: false, traditional: false },
+  { feature: "Framing analysis", albis: true, ground: true, fourteen40: false, traditional: false },
+  { feature: "Coverage gap detection", albis: true, ground: false, fourteen40: false, traditional: false },
+  { feature: "Pattern recognition", albis: true, ground: false, fourteen40: false, traditional: false },
+  { feature: "AI deep dive analysis", albis: true, ground: false, fourteen40: false, traditional: false },
+  { feature: "Calm, anti-doomscroll UX", albis: true, ground: false, fourteen40: true, traditional: false },
+  { feature: "No algorithmic manipulation", albis: true, ground: true, fourteen40: true, traditional: false },
+  { feature: "Free tier", albis: true, ground: true, fourteen40: true, traditional: false },
 ];
 
 export default function PricingClient() {
   const [mounted, setMounted] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [premium, setIsPremium] = useState(false);
-  const [annual, setAnnual] = useState(false);
+  const [annual, setAnnual] = useState(true);
 
   useEffect(() => {
     setLoggedIn(!!getLocalUser());
@@ -152,18 +164,18 @@ export default function PricingClient() {
             Pricing
           </p>
           <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-4xl font-semibold leading-tight text-[#0f0f0f] md:text-5xl dark:text-[#f0efec]">
-            Simple, honest pricing.
+            Simple, <span className="text-gradient-amber">honest</span> pricing.
           </h1>
-          <p className="mx-auto mt-4 max-w-lg text-lg text-zinc-500 dark:text-zinc-400">
+          <p className="mx-auto mt-4 max-w-lg text-lg text-zinc-500 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
             Start free. Upgrade when you want deeper intelligence.
             No dark patterns, no lock-in.
           </p>
 
-          {/* Annual toggle */}
+          {/* Annual toggle — Costco-inspired commitment */}
           <div className="mt-8 inline-flex items-center gap-4 rounded-full border border-black/[0.08] bg-white p-1 dark:border-white/[0.08] dark:bg-white/[0.04]">
             <button
               onClick={() => setAnnual(false)}
-              className={`h-9 rounded-full px-5 text-sm font-medium transition-all ${
+              className={`h-9 min-w-[44px] rounded-full px-5 text-sm font-medium transition-all ${
                 !annual
                   ? "bg-[#1a3a5c] text-white shadow-sm"
                   : "text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
@@ -173,7 +185,7 @@ export default function PricingClient() {
             </button>
             <button
               onClick={() => setAnnual(true)}
-              className={`flex h-9 items-center gap-2 rounded-full px-5 text-sm font-medium transition-all ${
+              className={`flex h-9 min-w-[44px] items-center gap-2 rounded-full px-5 text-sm font-medium transition-all ${
                 annual
                   ? "bg-[#1a3a5c] text-white shadow-sm"
                   : "text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
@@ -199,7 +211,7 @@ export default function PricingClient() {
               : tier.priceMonthly;
             const isCurrentPlan =
               premium &&
-              tier.id === "intelligent";
+              tier.id === "standard";
 
             return (
               <div
@@ -258,7 +270,7 @@ export default function PricingClient() {
                         tier.featured ? "text-white/60" : "text-zinc-400 dark:text-zinc-500"
                       }`}
                     >
-                      /month
+                      /mo
                     </span>
                   )}
                 </div>
@@ -268,7 +280,16 @@ export default function PricingClient() {
                       tier.featured ? "text-white/50" : "text-zinc-400 dark:text-zinc-500"
                     }`}
                   >
-                    ${tier.priceAnnual} billed annually
+                    ${tier.priceAnnual}/year billed annually
+                  </p>
+                )}
+                {price > 0 && !annual && (
+                  <p
+                    className={`mt-1 text-xs ${
+                      tier.featured ? "text-white/50" : "text-zinc-400 dark:text-zinc-500"
+                    }`}
+                  >
+                    ${tier.priceMonthly}/month billed monthly
                   </p>
                 )}
 
@@ -308,32 +329,32 @@ export default function PricingClient() {
                     loggedIn ? (
                       <Link
                         href="/briefing"
-                        className="inline-flex h-11 w-full items-center justify-center rounded-full border border-black/[0.1] text-sm font-medium text-zinc-600 hover:bg-zinc-100/80 dark:border-white/[0.1] dark:text-zinc-400 dark:hover:bg-white/[0.05]"
+                        className="inline-flex h-11 min-w-[44px] w-full items-center justify-center rounded-full border border-black/[0.1] text-sm font-medium text-zinc-600 hover:bg-zinc-100/80 dark:border-white/[0.1] dark:text-zinc-400 dark:hover:bg-white/[0.05]"
                       >
                         Go to briefing
                       </Link>
                     ) : (
                       <Link
                         href="/signup"
-                        className="inline-flex h-11 w-full items-center justify-center rounded-full border border-black/[0.1] text-sm font-medium text-zinc-600 hover:bg-zinc-100/80 dark:border-white/[0.1] dark:text-zinc-400 dark:hover:bg-white/[0.05]"
+                        className="inline-flex h-11 min-w-[44px] w-full items-center justify-center rounded-full border border-black/[0.1] text-sm font-medium text-zinc-600 hover:bg-zinc-100/80 dark:border-white/[0.1] dark:text-zinc-400 dark:hover:bg-white/[0.05]"
                       >
                         Get started free
                       </Link>
                     )
-                  ) : tier.id === "intelligent" ? (
+                  ) : tier.id === "standard" ? (
                     <button
                       onClick={() => {
                         setPremium(true);
                         setIsPremium(true);
                       }}
-                      className="inline-flex h-11 w-full items-center justify-center rounded-full bg-white text-sm font-semibold text-[#1a3a5c] shadow-sm hover:bg-[#f0efec]"
+                      className="inline-flex h-11 min-w-[44px] w-full items-center justify-center rounded-full bg-white text-sm font-semibold text-[#1a3a5c] shadow-sm hover:bg-[#f0efec]"
                     >
                       {tier.cta}
                     </button>
                   ) : (
                     <Link
                       href={tier.ctaHref}
-                      className="inline-flex h-11 w-full items-center justify-center rounded-full border border-black/[0.1] text-sm font-medium text-zinc-600 hover:bg-zinc-100/80 dark:border-white/[0.1] dark:text-zinc-400 dark:hover:bg-white/[0.05]"
+                      className="inline-flex h-11 min-w-[44px] w-full items-center justify-center rounded-full border border-black/[0.1] text-sm font-medium text-zinc-600 hover:bg-zinc-100/80 dark:border-white/[0.1] dark:text-zinc-400 dark:hover:bg-white/[0.05]"
                     >
                       {tier.cta}
                     </Link>
@@ -410,6 +431,23 @@ export default function PricingClient() {
         </div>
       </section>
 
+      {/* ── Value Calculator ─────────────────────────────────── */}
+      <section className="bg-[#f8f7f4] py-12 dark:bg-[#0f0f0f]">
+        <div className="mx-auto max-w-2xl px-6">
+          <div className="rounded-2xl border border-[#c8922a]/20 bg-[#c8922a]/5 p-8 text-center dark:border-[#c8922a]/15 dark:bg-[#c8922a]/5">
+            <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
+              Value Calculator
+            </p>
+            <p className="mt-4 font-[family-name:var(--font-playfair)] text-xl font-semibold leading-snug text-[#0f0f0f] md:text-2xl dark:text-[#f0efec]">
+              If you read news for 20 min/day, Albis Standard costs less than $0.20/day for complete perspective coverage.
+            </p>
+            <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
+              That&apos;s less than a single article behind most paywalls — and you get every angle, every region, every day.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ── Trust strip ────────────────────────────────────────── */}
       <section className="bg-[#f8f7f4] pb-16 dark:bg-[#0f0f0f]">
         <div className="mx-auto max-w-3xl px-6">
@@ -429,8 +467,69 @@ export default function PricingClient() {
         </div>
       </section>
 
-      {/* ── FAQ ────────────────────────────────────────────────── */}
+      {/* ── Comparison Table ─────────────────────────────────── */}
       <section className="bg-[#f2f0eb] py-20 dark:bg-[#111111] md:py-24">
+        <div className="mx-auto max-w-4xl px-6">
+          <h2 className="text-center font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+            How Albis compares
+          </h2>
+          <p className="mt-2 text-center text-sm text-zinc-500 dark:text-zinc-400">
+            We built what we wished existed.
+          </p>
+
+          <div className="mt-10 overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-black/[0.1] dark:border-white/[0.1]">
+                  <th className="pb-3 text-left text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Feature</th>
+                  <th className="pb-3 text-center text-xs font-semibold uppercase tracking-wider text-[#c8922a]">Albis</th>
+                  <th className="pb-3 text-center text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Ground News</th>
+                  <th className="pb-3 text-center text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">1440</th>
+                  <th className="pb-3 text-center text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Traditional</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonFeatures.map((row) => (
+                  <tr key={row.feature} className="border-b border-black/[0.05] dark:border-white/[0.05]">
+                    <td className="py-3 text-zinc-600 dark:text-zinc-400">{row.feature}</td>
+                    <td className="py-3 text-center">
+                      {row.albis ? (
+                        <span className="text-emerald-500">{CHECK}</span>
+                      ) : (
+                        <span className="text-zinc-300 dark:text-zinc-700">{DASH}</span>
+                      )}
+                    </td>
+                    <td className="py-3 text-center">
+                      {row.ground ? (
+                        <span className="text-zinc-400">{CHECK}</span>
+                      ) : (
+                        <span className="text-zinc-300 dark:text-zinc-700">{DASH}</span>
+                      )}
+                    </td>
+                    <td className="py-3 text-center">
+                      {row.fourteen40 ? (
+                        <span className="text-zinc-400">{CHECK}</span>
+                      ) : (
+                        <span className="text-zinc-300 dark:text-zinc-700">{DASH}</span>
+                      )}
+                    </td>
+                    <td className="py-3 text-center">
+                      {row.traditional ? (
+                        <span className="text-zinc-400">{CHECK}</span>
+                      ) : (
+                        <span className="text-zinc-300 dark:text-zinc-700">{DASH}</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ────────────────────────────────────────────────── */}
+      <section className="bg-[#f8f7f4] py-20 dark:bg-[#0f0f0f] md:py-24">
         <div className="mx-auto max-w-2xl px-6">
           <h2 className="text-center font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
             Honest answers
@@ -447,7 +546,7 @@ export default function PricingClient() {
                 <h3 className="text-sm font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
                   {faq.q}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+                <p className="mt-2 text-sm leading-relaxed text-zinc-500 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
                   {faq.a}
                 </p>
               </div>
@@ -457,18 +556,18 @@ export default function PricingClient() {
       </section>
 
       {/* ── Bottom CTA ─────────────────────────────────────────── */}
-      <section className="bg-[#1a3a5c] py-20 md:py-24">
-        <div className="mx-auto max-w-xl px-6 text-center">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <section className="relative bg-[#1a3a5c] py-20 md:py-24">
+        <div className="pointer-events-none absolute inset-0 bg-subtle-grid opacity-20" />
+        <div className="relative mx-auto max-w-xl px-6 text-center">
           <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold text-white md:text-3xl">
             Start for free today.
           </h2>
-          <p className="mt-3 text-base text-white/60">
+          <p className="mt-3 text-base text-white/60 font-[family-name:var(--font-source-serif)]">
             No credit card. No lock-in. Just clearer news.
           </p>
           <Link
             href="/signup"
-            className="mt-8 inline-flex h-13 items-center gap-2 rounded-full bg-white px-9 py-3.5 text-sm font-semibold text-[#1a3a5c] shadow-[0_4px_16px_rgb(0,0,0,0.2)] hover:bg-[#f0efec]"
+            className="mt-8 inline-flex h-13 min-w-[44px] items-center gap-2 rounded-full bg-white px-9 py-3.5 text-sm font-semibold text-[#1a3a5c] shadow-[0_4px_16px_rgb(0,0,0,0.2)] hover:bg-[#f0efec]"
           >
             Create free account →
           </Link>

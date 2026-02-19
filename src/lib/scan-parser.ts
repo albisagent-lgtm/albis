@@ -6,14 +6,18 @@ export {
   type ScanItem,
   type PatternOfDay,
   type ParsedScan,
+  type BlindspotData,
   CATEGORY_META,
   REGION_LABELS,
   FRAMING_PATTERNS,
   hasFramingWatch,
+  hasBlindspot,
+  detectBlindspots,
   groupByCategory,
 } from "./scan-types";
 
 import type { ScanItem, PatternOfDay, ParsedScan } from "./scan-types";
+import { detectBlindspots } from "./scan-types";
 
 const SCANS_DIR =
   process.env.SCANS_DIR ||
@@ -153,7 +157,7 @@ function parseScanFile(filePath: string): ParsedScan | null {
     flowsSummary: extractSection(content, "Flows"),
     framingNote: extractSection(content, "Framing"),
     notableItems: parseNotableItems(content),
-    items: extractJsonItems(content),
+    items: detectBlindspots(extractJsonItems(content)),
     scanMeta: extractScanMeta(content),
   };
 }
