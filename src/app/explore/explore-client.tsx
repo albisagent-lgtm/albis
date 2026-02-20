@@ -73,32 +73,74 @@ const sigLabels: Record<string, string> = {
   low: "Low",
 };
 
+const ITEMS_PER_PAGE = 24;
+
+const EMPTY_MESSAGES: Record<string, string> = {
+  all: "No stories match your current filters. Try adjusting your date range or region.",
+  politics: "No political stories in this period. Try expanding your date range.",
+  security: "No security & defence stories found. Try a different date range.",
+  economy: "No economic stories in this scan period. Try expanding your date range.",
+  technology: "No technology stories found. Try widening your filters.",
+  health: "No health stories in this scan period. Try expanding your date range.",
+  environment: "No environment & climate stories found. Try a broader date range.",
+  society: "No society & culture stories in this period. Try adjusting your filters.",
+  science: "No science stories found. Try expanding your date range.",
+  energy: "No energy stories in this scan period. Try a different date range.",
+  diplomacy: "No diplomacy stories found. Try widening your date range.",
+  trade: "No trade & economics stories in this period. Try adjusting filters.",
+  migration: "No migration stories found. Try expanding your date range.",
+};
+
 function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: Props) {
   const [activeTab, setActiveTab] = useState<string>("all");
   const [selectedRegion, setSelectedRegion] = useState<string>("all");
-  const [dateRange, setDateRange] = useState<{ start: string; end: string } | null>(null);
+  const [dateFilter, setDateFilter] = useState<string>("all");
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
   // Get all available categories from the metadata
   const categories = Object.keys(categoryMeta);
   const tabs = ["all", ...categories];
 
+  // Compute date range from dateFilter
+  const dateRange = useMemo(() => {
+    if (dateFilter === "all" || availableDates.length === 0) return null;
+
+    const sorted = [...availableDates].sort((a, b) => b.localeCompare(a));
+    const latest = sorted[0];
+
+    if (dateFilter === "today") {
+      return { start: latest, end: latest };
+    }
+    if (dateFilter === "7days") {
+      const d = new Date(latest);
+      d.setDate(d.getDate() - 7);
+      const start = d.toISOString().slice(0, 10);
+      return { start, end: latest };
+    }
+    if (dateFilter === "30days") {
+      const d = new Date(latest);
+      d.setDate(d.getDate() - 30);
+      const start = d.toISOString().slice(0, 10);
+      return { start, end: latest };
+    }
+    // Individual date selected
+    return { start: dateFilter, end: dateFilter };
+  }, [dateFilter, availableDates]);
+
   // Filter items based on current selections
   const filteredItems = useMemo(() => {
     let filtered = items;
 
-    // Filter by category/tab
     if (activeTab !== "all") {
       filtered = filtered.filter(item => item.category === activeTab);
     }
 
-    // Filter by region
     if (selectedRegion !== "all") {
       filtered = filtered.filter(item => item.regions.includes(selectedRegion));
     }
 
-    // Filter by date range
     if (dateRange) {
-      filtered = filtered.filter(item => 
+      filtered = filtered.filter(item =>
         item.date >= dateRange.start && item.date <= dateRange.end
       );
     }
@@ -106,15 +148,25 @@ function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: P
     return filtered;
   }, [items, activeTab, selectedRegion, dateRange]);
 
+  // Reset visible count when filters change
+  const visibleItems = filteredItems.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredItems.length;
+
   // Get stats for the current filter
   const stats = useMemo(() => {
     const total = filteredItems.length;
     const highCount = filteredItems.filter(item => item.significance === "high").length;
     const framingCount = filteredItems.filter(item => hasFramingWatch(item)).length;
     const blindspotCount = filteredItems.filter(item => hasBlindspot(item)).length;
-    
+
     return { total, highCount, framingCount, blindspotCount };
   }, [filteredItems]);
+
+  // Reset pagination when filters change
+  useMemo(() => {
+    setVisibleCount(ITEMS_PER_PAGE);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab, selectedRegion, dateFilter]);
 
   if (items.length === 0) {
     return (
@@ -132,23 +184,26 @@ function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: P
   }
 
   return (
-    <main>
+    <main className="overflow-hidden">
       {/* Header */}
-      <section className="border-b border-zinc-200 py-16 dark:border-zinc-800/50 md:py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
+      <section className="relative bg-[#f8f7f4] py-20 dark:bg-[#0f0f0f] md:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-subtle-grid opacity-60" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-amber-50/60 via-transparent to-transparent dark:from-amber-950/15 dark:via-transparent" />
+
+        <div className="relative mx-auto max-w-3xl px-6 text-center">
+          <p className="text-xs font-medium tracking-[0.18em] uppercase text-[#c8922a]/70 font-[family-name:var(--font-playfair)] italic">
             Archive
           </p>
-          <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-light leading-snug text-zinc-800 dark:text-zinc-100 md:text-4xl">
+          <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-4xl font-semibold leading-tight tracking-tight text-[#0f0f0f] md:text-5xl dark:text-[#f0efec]">
             Explore Intelligence
           </h1>
-          <p className="mt-3 text-zinc-500 dark:text-zinc-400">
-            Browse {items.length.toLocaleString()} stories across {availableDates.length} scan{availableDates.length !== 1 ? "s" : ""}. 
+          <p className="mt-4 mx-auto max-w-lg text-lg text-zinc-500 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
+            Browse {items.length.toLocaleString()} stories across {availableDates.length} scan{availableDates.length !== 1 ? "s" : ""}.
             Organize by topic, region, and time period.
           </p>
-          
+
           {/* Current filter stats */}
-          <div className="mt-6 flex flex-wrap items-center gap-4 text-sm">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm">
             <span className="font-medium text-zinc-700 dark:text-zinc-300">
               {stats.total.toLocaleString()} item{stats.total !== 1 ? "s" : ""}
             </span>
@@ -160,16 +215,7 @@ function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: P
             )}
             {stats.framingCount > 0 && (
               <span className="inline-flex items-center gap-1 text-amber-600 dark:text-amber-400">
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                   <circle cx="12" cy="12" r="3" />
                 </svg>
@@ -178,16 +224,7 @@ function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: P
             )}
             {stats.blindspotCount > 0 && (
               <span className="inline-flex items-center gap-1 text-orange-600 dark:text-orange-400">
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10" />
                   <line x1="12" y1="16" x2="12" y2="12" />
                   <line x1="12" y1="8" x2="12.01" y2="8" />
@@ -199,8 +236,11 @@ function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: P
         </div>
       </section>
 
-      {/* Filters */}
-      <section className="border-b border-zinc-200 py-8 dark:border-zinc-800/50">
+      {/* Gold divider */}
+      <div className="h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
+
+      {/* Sticky Tabs + Filters */}
+      <section className="sticky top-0 z-30 border-b border-zinc-200 bg-white/95 backdrop-blur-sm py-4 dark:border-zinc-800/50 dark:bg-[#0f0f0f]/95">
         <div className="mx-auto max-w-6xl px-6">
           {/* Topic Tabs */}
           <div className="overflow-x-auto">
@@ -208,8 +248,8 @@ function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: P
               {tabs.map((tab) => {
                 const isActive = activeTab === tab;
                 const label = tab === "all" ? "All Topics" : (categoryMeta[tab]?.label || tab);
-                const count = tab === "all" 
-                  ? items.length 
+                const count = tab === "all"
+                  ? items.length
                   : items.filter(item => item.category === tab).length;
 
                 return (
@@ -242,7 +282,7 @@ function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: P
               <select
                 value={selectedRegion}
                 onChange={(e) => setSelectedRegion(e.target.value)}
-                className="rounded-md border border-zinc-300 bg-white px-3 py-1 text-sm text-zinc-700 focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:focus:border-zinc-400"
+                className="rounded-md border border-zinc-300 bg-white px-3 py-1.5 text-sm text-zinc-700 focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:focus:border-zinc-400"
               >
                 <option value="all">All Regions</option>
                 {ALL_REGIONS.map((region) => (
@@ -253,25 +293,33 @@ function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: P
               </select>
             </div>
 
-            {/* Date Range Display */}
+            {/* Date Filter */}
             <div className="flex items-center gap-2">
               <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-                Dates:
+                Date:
               </label>
-              <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                {dateRange 
-                  ? `${dateRange.start} to ${dateRange.end}` 
-                  : `All dates (${availableDates.length} scans)`
-                }
-              </span>
-              {dateRange && (
-                <button
-                  onClick={() => setDateRange(null)}
-                  className="ml-1 text-xs text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
-                >
-                  ✕ Clear
-                </button>
-              )}
+              <select
+                value={dateFilter}
+                onChange={(e) => setDateFilter(e.target.value)}
+                className="rounded-md border border-zinc-300 bg-white px-3 py-1.5 text-sm text-zinc-700 focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:focus:border-zinc-400"
+              >
+                <option value="all">All dates ({availableDates.length} scans)</option>
+                <option value="today">Latest scan</option>
+                <option value="7days">Last 7 days</option>
+                <option value="30days">Last 30 days</option>
+                <optgroup label="Individual dates">
+                  {[...availableDates].sort((a, b) => b.localeCompare(a)).map((date) => (
+                    <option key={date} value={date}>
+                      {new Date(date + "T12:00:00").toLocaleDateString("en-NZ", {
+                        weekday: "short",
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </option>
+                  ))}
+                </optgroup>
+              </select>
             </div>
           </div>
         </div>
@@ -283,25 +331,53 @@ function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: P
           {filteredItems.length === 0 ? (
             <div className="flex min-h-[40vh] items-center justify-center">
               <div className="text-center">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-zinc-400">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.35-4.35" />
+                  </svg>
+                </div>
                 <h3 className="text-lg font-medium text-zinc-800 dark:text-zinc-200">
-                  No items found
+                  No stories found
                 </h3>
-                <p className="mt-2 text-zinc-500 dark:text-zinc-400">
-                  Try adjusting your filters to see more results.
+                <p className="mt-2 max-w-sm mx-auto text-sm text-zinc-500 dark:text-zinc-400">
+                  {EMPTY_MESSAGES[activeTab] || "No stories match your current filters. Try adjusting your date range or region."}
                 </p>
               </div>
             </div>
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {filteredItems.map((item, index) => (
-                <ExploreItemCard
-                  key={`${item.date}-${index}`}
-                  item={item}
-                  categoryMeta={categoryMeta}
-                  regionLabels={regionLabels}
-                />
-              ))}
-            </div>
+            <>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {visibleItems.map((item, index) => (
+                  <ExploreItemCard
+                    key={`${item.date}-${index}`}
+                    item={item}
+                    categoryMeta={categoryMeta}
+                    regionLabels={regionLabels}
+                  />
+                ))}
+              </div>
+
+              {/* Load More */}
+              {hasMore && (
+                <div className="mt-10 flex justify-center">
+                  <button
+                    onClick={() => setVisibleCount(prev => prev + ITEMS_PER_PAGE)}
+                    className="group inline-flex items-center gap-2 rounded-lg border border-zinc-300 bg-white px-6 py-3 text-sm font-medium text-zinc-700 transition-all hover:border-zinc-400 hover:shadow-sm dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:border-zinc-600"
+                  >
+                    Load more
+                    <span className="text-xs text-zinc-400 dark:text-zinc-500">
+                      {filteredItems.length - visibleCount} remaining
+                    </span>
+                  </button>
+                </div>
+              )}
+
+              {/* Shown count */}
+              <p className="mt-4 text-center text-xs text-zinc-400 dark:text-zinc-500">
+                Showing {visibleItems.length} of {filteredItems.length.toLocaleString()}
+              </p>
+            </>
           )}
         </div>
       </section>
@@ -323,7 +399,7 @@ function ExploreItemCard({
   const isBlindspot = hasBlindspot(item);
 
   return (
-    <div className="group rounded-xl border border-zinc-200 bg-white p-6 transition-all hover:border-zinc-300 hover:shadow-md dark:border-zinc-800/50 dark:bg-zinc-900/50 dark:hover:border-zinc-700">
+    <div className="group rounded-xl border border-black/[0.07] bg-white p-6 transition-all hover:border-zinc-300 hover:shadow-md dark:border-white/[0.07] dark:bg-white/[0.03] dark:hover:border-zinc-700">
       <div className="space-y-4">
         {/* Header: Date and Significance */}
         <div className="flex items-center justify-between">
@@ -333,14 +409,7 @@ function ExploreItemCard({
           <div className="flex items-center gap-2">
             {isBlindspot && (
               <div className="flex items-center gap-1 rounded bg-orange-50 px-2 py-1 text-xs font-medium text-orange-700 dark:bg-orange-950/50 dark:text-orange-400">
-                <svg
-                  width="10"
-                  height="10"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <circle cx="12" cy="12" r="10" />
                   <line x1="12" y1="16" x2="12" y2="12" />
                   <line x1="12" y1="8" x2="12.01" y2="8" />
@@ -349,8 +418,8 @@ function ExploreItemCard({
               </div>
             )}
             <div className={`flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${
-              item.significance === "high" 
-                ? "bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400" 
+              item.significance === "high"
+                ? "bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400"
                 : item.significance === "medium"
                 ? "bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-400"
                 : "bg-zinc-50 text-zinc-600 dark:bg-zinc-900 dark:text-zinc-400"
@@ -368,13 +437,11 @@ function ExploreItemCard({
 
         {/* Tags Row */}
         <div className="flex flex-wrap gap-2">
-          {/* Category */}
           <span className="inline-flex items-center gap-1.5 rounded bg-zinc-100 px-2 py-1 text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
             <span className={`h-2 w-2 rounded-full ${colorDot[meta.color] || "bg-zinc-500"}`} />
             {meta.label}
           </span>
 
-          {/* Regions */}
           {item.regions.slice(0, 2).map((region) => (
             <span
               key={region}
@@ -383,14 +450,13 @@ function ExploreItemCard({
               {regionLabels[region] || region}
             </span>
           ))}
-          
+
           {item.regions.length > 2 && (
             <span className="rounded bg-zinc-100 px-2 py-1 text-xs text-zinc-400 dark:bg-zinc-800 dark:text-zinc-500">
               +{item.regions.length - 2} more
             </span>
           )}
 
-          {/* Pattern Tags */}
           {item.patterns.map((pattern) => (
             <span
               key={pattern}
@@ -400,17 +466,9 @@ function ExploreItemCard({
             </span>
           ))}
 
-          {/* Framing Indicator */}
           {isFraming && (
             <span className="inline-flex items-center gap-1 rounded bg-amber-50 px-2 py-1 text-xs font-medium text-amber-700 dark:bg-amber-950/50 dark:text-amber-400">
-              <svg
-                width="10"
-                height="10"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-              >
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                 <circle cx="12" cy="12" r="3" />
               </svg>
