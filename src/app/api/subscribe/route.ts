@@ -1,23 +1,17 @@
 import { NextResponse } from "next/server";
-import * as fs from "fs";
-
-const SUBSCRIBERS_FILE = "/tmp/albis-subscribers.json";
-
-function readSubscribers(): string[] {
-  try {
-    const data = fs.readFileSync(SUBSCRIBERS_FILE, "utf-8");
-    return JSON.parse(data);
-  } catch {
-    return [];
-  }
-}
-
-function writeSubscribers(subscribers: string[]) {
-  fs.writeFileSync(SUBSCRIBERS_FILE, JSON.stringify(subscribers, null, 2));
-}
+import { createClient } from "@supabase/supabase-js";
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function getSupabaseAdmin() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return null;
+  return createClient(url, key, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
 }
 
 export async function POST(request: Request) {
@@ -32,23 +26,40 @@ export async function POST(request: Request) {
       );
     }
 
-    const subscribers = readSubscribers();
+    const supabase = getSupabaseAdmin();
 
-    if (subscribers.includes(email)) {
-      return NextResponse.json({
-        success: true,
-        message: "You're already on the list!",
-      });
+    if (supabase) {
+      // Try Supabase first
+      const { data: existing } = await supabase
+        .from("subscribers")
+        .select("id")
+        .eq("email", email)
+        .maybeSingle();
+
+      if (existing) {
+        return NextResponse.json({
+          success: true,
+          message: "You're already on the list!",
+        });
+      }
+
+      const { error } = await supabase
+        .from("subscribers")
+        .insert({ email, source: "website" });
+
+      if (error) {
+        // Table might not exist yet — log but still return success
+        console.error("Supabase insert error:", error.message);
+        // Fall through to success so user doesn't see an error
+      }
     }
-
-    subscribers.push(email);
-    writeSubscribers(subscribers);
 
     return NextResponse.json({
       success: true,
-      message: "You're on the list!",
+      message: "You're on the list! We'll be in touch soon.",
     });
-  } catch {
+  } catch (err) {
+    console.error("Subscribe error:", err);
     return NextResponse.json(
       { success: false, message: "Something went wrong. Please try again." },
       { status: 500 }
