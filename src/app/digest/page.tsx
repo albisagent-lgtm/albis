@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     "Your daily intelligence briefing from Albis — top stories, blindspot alerts, and pattern detection across 7 regions.",
 };
 
-export default function DigestPage() {
-  const scan = getTodayScan();
+export default async function DigestPage() {
+  const scan = await getTodayScan();
 
   const topStories = scan?.items.filter((i) => i.significance === "high").slice(0, 8) || [];
   const blindspotItem = scan?.items.find((i) => hasBlindspot(i));

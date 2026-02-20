@@ -9,9 +9,9 @@ export const metadata: Metadata = {
   description: "Same event, different story. See how regional coverage diverges — what gets emphasised, what gets omitted, and why.",
 };
 
-export default function FramingWatchPage() {
-  const items = getFramingItems();
-  const notes = getFramingNotes();
+export default async function FramingWatchPage() {
+  const items = await getFramingItems();
+  const notes = await getFramingNotes();
 
   return (
     <FramingWatchClient

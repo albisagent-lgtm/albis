@@ -33,12 +33,12 @@ export interface ScanSummary {
   items: ScanItem[];
 }
 
-export default function HistoryPage() {
-  const dates = getAvailableDates();
+export default async function HistoryPage() {
+  const dates = await getAvailableDates();
   const summaries: ScanSummary[] = [];
 
   for (const date of dates) {
-    const scan = getScanByDate(date);
+    const scan = await getScanByDate(date);
     if (!scan) continue;
 
     summaries.push({

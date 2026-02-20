@@ -154,7 +154,7 @@ async function getSupabaseScan(date: string, scanTime?: string): Promise<ParsedS
       query = query.eq('scan_time', scanTime);
     }
 
-    const { data, error } = await query.order('scan_time', { ascending: false }).limit(1);
+    const { data, error } = await query.order('scan_time', { ascending: false });
 
     if (error) {
       console.error('Supabase query error:', error);
@@ -163,20 +163,31 @@ async function getSupabaseScan(date: string, scanTime?: string): Promise<ParsedS
 
     if (!data || data.length === 0) return null;
 
-    const scan = data[0];
+    // Use the latest scan's metadata but combine items from all scans for the day
+    const latest = data[0];
+    const allItems: any[] = [];
+    for (const scan of data) {
+      if (scan.items && Array.isArray(scan.items)) {
+        allItems.push(...scan.items);
+      }
+    }
+
+    // Extract framing note from framing_watch jsonb
+    const framingWatch = latest.framing_watch;
+    const framingNote = framingWatch?.note || null;
     
     return {
-      date: scan.scan_date,
-      displayDate: formatDisplayDate(scan.scan_date),
-      topTheme: scan.top_theme,
-      mood: scan.mood,
-      patternOfDay: scan.pattern_of_day || null,
-      weatherSummary: null, // Not stored in simplified schema
-      flowsSummary: null,   // Not stored in simplified schema
-      framingNote: null,    // Not stored in simplified schema
-      notableItems: [],     // Not stored in simplified schema
-      items: detectBlindspots(scan.items || []),
-      scanMeta: null,       // Not stored in simplified schema
+      date: latest.scan_date,
+      displayDate: formatDisplayDate(latest.scan_date),
+      topTheme: latest.top_theme,
+      mood: latest.mood,
+      patternOfDay: latest.pattern_of_day || null,
+      weatherSummary: null,
+      flowsSummary: null,
+      framingNote,
+      notableItems: [],
+      items: detectBlindspots(allItems),
+      scanMeta: null,
     };
   } catch (error) {
     console.error('Error fetching scan from Supabase:', error);
