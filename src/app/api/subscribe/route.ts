@@ -1,5 +1,38 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { headers } from "next/headers";
+
+// --- Rate Limiting (in-memory) ---
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT_WINDOW = 60_000; // 60 seconds
+const RATE_LIMIT_MAX = 5;
+
+// Cleanup old entries every 60s
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, entry] of rateLimitMap) {
+    if (now > entry.resetAt) rateLimitMap.delete(ip);
+  }
+}, 60_000);
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
+    return true;
+  }
+  entry.count++;
+  return entry.count <= RATE_LIMIT_MAX;
+}
+
+// --- Disposable Email Blocklist ---
+const DISPOSABLE_DOMAINS = new Set([
+  "mailinator.com", "tempmail.com", "throwaway.email", "guerrillamail.com",
+  "10minutemail.com", "yopmail.com", "trashmail.com", "fakeinbox.com",
+  "sharklasers.com", "guerrillamailblock.com", "grr.la", "dispostable.com",
+  "maildrop.cc", "temp-mail.org",
+]);
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -14,9 +47,36 @@ function getSupabaseAdmin() {
   });
 }
 
+const FAKE_SUCCESS = NextResponse.json({
+  success: true,
+  message: "You're on the list! We'll be in touch soon.",
+});
+
 export async function POST(request: Request) {
   try {
+    // Rate limiting
+    const headerList = await headers();
+    const ip = headerList.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    if (!checkRateLimit(ip)) {
+      return NextResponse.json(
+        { success: false, message: "Too many requests. Please try again in a minute." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
+
+    // Honeypot check — stealth reject
+    if (body.website) {
+      return FAKE_SUCCESS;
+    }
+
+    // Timing check — stealth reject if submitted < 2s after mount
+    const mountTime = body._t;
+    if (mountTime && Date.now() - mountTime < 2000) {
+      return FAKE_SUCCESS;
+    }
+
     const email = body.email?.trim()?.toLowerCase();
 
     if (!email || !isValidEmail(email)) {
@@ -26,10 +86,18 @@ export async function POST(request: Request) {
       );
     }
 
+    // Disposable email check
+    const domain = email.split("@")[1];
+    if (DISPOSABLE_DOMAINS.has(domain)) {
+      return NextResponse.json(
+        { success: false, message: "Please use a permanent email address." },
+        { status: 400 }
+      );
+    }
+
     const supabase = getSupabaseAdmin();
 
     if (supabase) {
-      // Try Supabase first
       const { data: existing } = await supabase
         .from("subscribers")
         .select("id")
@@ -48,9 +116,7 @@ export async function POST(request: Request) {
         .insert({ email, source: "website" });
 
       if (error) {
-        // Table might not exist yet — log but still return success
         console.error("Supabase insert error:", error.message);
-        // Fall through to success so user doesn't see an error
       }
     }
 

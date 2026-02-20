@@ -1,11 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export function EmailCapture({ variant = "default" }: { variant?: "default" | "hero" }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const mountTimeRef = useRef<number>(0);
+
+  useEffect(() => {
+    mountTimeRef.current = Date.now();
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -16,7 +21,11 @@ export function EmailCapture({ variant = "default" }: { variant?: "default" | "h
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim() }),
+        body: JSON.stringify({
+          email: email.trim(),
+          website: (document.querySelector('input[name="website"]') as HTMLInputElement)?.value || "",
+          _t: mountTimeRef.current,
+        }),
       });
       const data = await res.json();
       if (res.ok) {
@@ -44,10 +53,25 @@ export function EmailCapture({ variant = "default" }: { variant?: "default" | "h
     );
   }
 
+  const honeypotStyle: React.CSSProperties = {
+    position: "absolute",
+    left: "-9999px",
+    opacity: 0,
+    height: 0,
+  };
+
   if (variant === "hero") {
     return (
       <div className="mx-auto max-w-lg">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
+        <form onSubmit={handleSubmit} className="relative flex flex-col gap-3 sm:flex-row">
+          <input
+            type="text"
+            name="website"
+            autoComplete="off"
+            tabIndex={-1}
+            aria-hidden="true"
+            style={honeypotStyle}
+          />
           <input
             type="email"
             value={email}
@@ -83,7 +107,15 @@ export function EmailCapture({ variant = "default" }: { variant?: "default" | "h
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mx-auto flex max-w-md flex-col gap-3 sm:flex-row">
+    <form onSubmit={handleSubmit} className="relative mx-auto flex max-w-md flex-col gap-3 sm:flex-row">
+      <input
+        type="text"
+        name="website"
+        autoComplete="off"
+        tabIndex={-1}
+        aria-hidden="true"
+        style={honeypotStyle}
+      />
       <input
         type="email"
         value={email}
