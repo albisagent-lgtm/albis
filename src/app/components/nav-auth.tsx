@@ -77,6 +77,12 @@ export function NavLinks() {
         Briefing
       </Link>
       <Link
+        href="/compare"
+        className="text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
+      >
+        Compare
+      </Link>
+      <Link
         href="/pricing"
         className="text-sm text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
       >
