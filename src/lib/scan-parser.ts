@@ -210,8 +210,9 @@ async function getSupabaseAvailableDates(): Promise<string[]> {
     }
 
     // Remove duplicates and return dates
-    const dates = Array.from(new Set(data.map((row: any) => String(row.scan_date))));
-    return dates;
+    const dateSet = new Set<string>();
+    for (const row of data) { dateSet.add(String((row as any).scan_date)); }
+    return Array.from(dateSet);
   } catch (error) {
     console.error('Error fetching dates from Supabase:', error);
     return [];
