@@ -300,6 +300,7 @@ function parseScanFile(filePath: string): ParsedScan | null {
     notableItems: parseNotableItems(content),
     items: detectBlindspots(extractJsonItems(content)),
     scanMeta: extractScanMeta(content),
+    rawMarkdown: content,
   };
 }
 

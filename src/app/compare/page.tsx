@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTodayScan, REGION_LABELS } from "@/lib/scan-parser";
+import { hasBlindspot } from "@/lib/scan-types";
 import { EmailCapture } from "../components/email-capture";
 
 export const dynamic = "force-dynamic";
@@ -73,62 +74,93 @@ function parseFramingWatch(rawMarkdown: string): {
   absent?: string;
   observation?: string;
 } | null {
-  // Look for Framing Watch section
-  const fwMatch = rawMarkdown.match(
-    /\*\*Framing Watch[^*]*\*\*\s*([\s\S]*?)(?=\n\*\*(?:Mood|Pattern)|$)/i
-  );
-  if (!fwMatch) return null;
+  // Try multiple section header formats:
+  // 1. ## 🔍 Framing Watch: Topic
+  // 2. **Framing Watch: Topic**
+  const headerPatterns = [
+    /##\s*🔍?\s*Framing Watch[:\s—–-]*([^\n]+)\n([\s\S]*?)(?=\n---|\n##[^#]|$)/i,
+    /\*\*Framing Watch[^*]*\*\*\s*([\s\S]*?)(?=\n\*\*(?:Mood|Pattern)|$)/i,
+  ];
 
-  const block = fwMatch[0];
+  let block: string | null = null;
+  let topic = "Today's Story";
 
-  // Extract topic from the header
-  const topicMatch = block.match(/Framing Watch[:\s—–-]*([^*\n]+)/i);
-  const topic = topicMatch ? topicMatch[1].trim() : "Today's Story";
+  for (const pattern of headerPatterns) {
+    const m = rawMarkdown.match(pattern);
+    if (m) {
+      if (pattern.source.startsWith('##')) {
+        topic = m[1].trim();
+        block = m[2];
+      } else {
+        const topicMatch = m[0].match(/Framing Watch[:\s—–-]*([^*\n]+)/i);
+        if (topicMatch) topic = topicMatch[1].trim();
+        block = m[0];
+      }
+      break;
+    }
+  }
 
-  // Extract perspective lines (- Region: "quote" — description)
+  if (!block) return null;
+
   const perspectives: FramingPerspective[] = [];
-  const lineRegex = /^-\s*(.+?):\s*(.+)/gm;
-  let match;
   let absent: string | undefined;
+  let observation: string | undefined;
+
+  // Extract perspective lines: - **Region (description):** "quote" — analysis
+  // Also handles: - Region: "quote"
+  const lineRegex = /^-\s*\*?\*?([^*\n]+?)\*?\*?:\s*(.+)/gm;
+  let match;
 
   while ((match = lineRegex.exec(block)) !== null) {
-    const label = match[1].trim();
+    const label = match[1].trim().replace(/\*+/g, '');
     const content = match[2].trim();
 
-    // Skip "absent from" or "mechanism" lines
     if (label.toLowerCase().startsWith("absent")) {
       absent = content;
       continue;
     }
-    if (label.toLowerCase().startsWith("mechanism")) continue;
+    if (label.toLowerCase().startsWith("mechanism")) {
+      observation = content;
+      continue;
+    }
 
-    // Determine flag
+    // Determine flag from label
     let flag = "🌐";
     const labelLower = label.toLowerCase();
     if (labelLower.includes("uk") || labelLower.includes("british") || labelLower.includes("britain")) flag = "🇬🇧";
-    else if (labelLower.includes("us ") || labelLower.includes("american") || labelLower.includes("us framing")) flag = "🇺🇸";
-    else if (labelLower.includes("europe")) flag = "🇪🇺";
+    else if (labelLower.includes("us") || labelLower.includes("american")) flag = "🇺🇸";
+    else if (labelLower.includes("europe") || labelLower.includes("eu ")) flag = "🇪🇺";
     else if (labelLower.includes("china") || labelLower.includes("chinese")) flag = "🇨🇳";
     else if (labelLower.includes("russia")) flag = "🇷🇺";
-    else if (labelLower.includes("india")) flag = "🇮🇳";
+    else if (labelLower.includes("india") || labelLower.includes("modi")) flag = "🇮🇳";
     else if (labelLower.includes("middle east")) flag = "🕌";
     else if (labelLower.includes("africa")) flag = "🌍";
     else if (labelLower.includes("asia")) flag = "🌏";
     else if (labelLower.includes("latin") || labelLower.includes("south america")) flag = "🌎";
     else if (labelLower.includes("iran")) flag = "🇮🇷";
+    else if (labelLower.includes("japan")) flag = "🇯🇵";
+
+    // Clean up region name: extract just the name part from "US (American media)" → "US"
+    const regionClean = label.replace(/\s*\(.*\)\s*$/, '').trim();
 
     perspectives.push({
-      region: label,
+      region: regionClean,
       flag,
       reported: content,
     });
   }
 
-  if (perspectives.length < 2) return null;
+  // Also check for non-list "Absent from:" and "Mechanism:" lines
+  if (!absent) {
+    const absentMatch = block.match(/\*\*Absent from:?\*\*\s*(.+)/i);
+    if (absentMatch) absent = absentMatch[1].trim();
+  }
+  if (!observation) {
+    const mechMatch = block.match(/\*\*Mechanism:?\*\*\s*(.+)/i);
+    if (mechMatch) observation = mechMatch[1].trim();
+  }
 
-  // Extract mechanism/observation line
-  const mechMatch = block.match(/[-–]\s*Mechanism:\s*(.+)/i);
-  const observation = mechMatch ? mechMatch[1].trim() : undefined;
+  if (perspectives.length < 2) return null;
 
   return { topic, perspectives, absent, observation };
 }
@@ -169,6 +201,8 @@ export default async function ComparePage() {
     absent = FALLBACK.absent;
     observation = FALLBACK.observation;
   }
+
+  const blindspotCount = scan?.items.filter(i => hasBlindspot(i)).length ?? 0;
 
   return (
     <main className="overflow-hidden">
@@ -249,6 +283,20 @@ export default async function ComparePage() {
               </p>
               <p className="mt-2 text-sm leading-relaxed text-zinc-600 font-[family-name:var(--font-source-serif)] italic dark:text-zinc-400">
                 {observation}
+              </p>
+            </div>
+          )}
+
+          {/* Blindspot badge */}
+          {blindspotCount > 0 && (
+            <div className="mt-6 flex items-center gap-2 rounded-lg border border-amber-200/50 bg-amber-50/40 px-4 py-3 dark:border-amber-800/30 dark:bg-amber-950/20">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-amber-600 dark:text-amber-400">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+              <p className="text-sm text-amber-700 dark:text-amber-400">
+                <span className="font-medium">{blindspotCount} blindspot{blindspotCount !== 1 ? "s" : ""}</span> detected in today&apos;s scan
               </p>
             </div>
           )}
