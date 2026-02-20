@@ -18,6 +18,7 @@ import {
 } from "@/lib/scan-types";
 import { estimateItemReadingTime } from "@/lib/reading-time";
 import { PerspectiveBar } from "@/app/components/perspective-bar";
+import { PerspectiveScore } from "@/app/components/perspective-score";
 
 // ---------------------------------------------------------------------------
 // Client wrapper — reads preferences from localStorage, filters scan
@@ -174,12 +175,26 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
             <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
               Stories with limited regional coverage — perspectives you may be missing.
             </p>
-            <div className="mt-6 space-y-1">
+            <div className="mt-6 space-y-3">
               {filtered
                 .filter((i) => hasBlindspot(i))
                 .slice(0, 5)
                 .map((item, i) => (
-                  <StoryCard key={`bs-${i}`} item={item} />
+                  <div key={`bs-${i}`} className="rounded-lg border border-dashed border-amber-300/50 bg-amber-50/30 dark:border-amber-700/30 dark:bg-amber-950/10">
+                    <StoryCard item={item} />
+                    {item.blindspot && (
+                      <div className="px-4 pb-4 pl-[2.25rem] flex flex-wrap gap-x-4 gap-y-1 text-xs">
+                        <span>
+                          <span className="font-medium text-emerald-600 dark:text-emerald-400">Covered by: </span>
+                          {item.blindspot.coveredBy.map(r => REGION_LABELS[r] || r).join(", ")}
+                        </span>
+                        <span>
+                          <span className="font-medium text-orange-600 dark:text-orange-400">Missing from: </span>
+                          {item.blindspot.missingFrom.map(r => REGION_LABELS[r] || r).join(", ")}
+                        </span>
+                      </div>
+                    )}
+                  </div>
                 ))}
             </div>
           </div>
@@ -397,6 +412,9 @@ function StoryCard({ item }: { item: ScanItem }) {
             </span>
           </div>
           <PerspectiveBar item={item} />
+          <div className="mt-1.5">
+            <PerspectiveScore regions={item.regions} />
+          </div>
           <div className="mt-3">
             {isPremiumContent ? (
               <div className="relative">

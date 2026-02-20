@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { PremiumGate } from "@/app/components/premium-gate";
+import { PerspectiveScore } from "@/app/components/perspective-score";
 import { hasFramingWatch, hasBlindspot } from "@/lib/scan-types";
 import type { ExploreItem } from "./page";
 
@@ -95,6 +96,7 @@ function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: P
   const [activeTab, setActiveTab] = useState<string>("all");
   const [selectedRegion, setSelectedRegion] = useState<string>("all");
   const [dateFilter, setDateFilter] = useState<string>("all");
+  const [blindspotsOnly, setBlindspotsOnly] = useState(false);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
   // Get all available categories from the metadata
@@ -145,8 +147,12 @@ function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: P
       );
     }
 
+    if (blindspotsOnly) {
+      filtered = filtered.filter(item => hasBlindspot(item));
+    }
+
     return filtered;
-  }, [items, activeTab, selectedRegion, dateRange]);
+  }, [items, activeTab, selectedRegion, dateRange, blindspotsOnly]);
 
   // Reset visible count when filters change
   const visibleItems = filteredItems.slice(0, visibleCount);
@@ -166,7 +172,7 @@ function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: P
   useMemo(() => {
     setVisibleCount(ITEMS_PER_PAGE);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab, selectedRegion, dateFilter]);
+  }, [activeTab, selectedRegion, dateFilter, blindspotsOnly]);
 
   if (items.length === 0) {
     return (
@@ -273,7 +279,29 @@ function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: P
           </div>
 
           {/* Secondary Filters */}
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 items-center">
+            {/* Blindspots Toggle */}
+            <button
+              onClick={() => setBlindspotsOnly(prev => !prev)}
+              className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+                blindspotsOnly
+                  ? "bg-amber-100 text-amber-800 dark:bg-amber-950/50 dark:text-amber-400"
+                  : "text-zinc-500 hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800"
+              }`}
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+              Blindspots Only
+              {stats.blindspotCount > 0 && (
+                <span className="rounded-full bg-amber-200/60 px-1.5 text-xs dark:bg-amber-900/40">
+                  {stats.blindspotCount}
+                </span>
+              )}
+            </button>
+
             {/* Region Filter */}
             <div className="flex items-center gap-2">
               <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
@@ -476,6 +504,9 @@ function ExploreItemCard({
             </span>
           )}
         </div>
+
+        {/* Perspective Score */}
+        <PerspectiveScore regions={item.regions} />
 
         {/* Connection/Context */}
         {item.connection && (
