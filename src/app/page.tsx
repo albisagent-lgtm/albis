@@ -40,22 +40,27 @@ export default async function Home() {
 
           {/* Headline */}
           <h1 className="animate-fade-in-up delay-100 mt-6 font-[family-name:var(--font-playfair)] text-5xl font-semibold leading-tight tracking-tight text-[#0f0f0f] md:text-6xl lg:text-7xl dark:text-[#f0efec]">
-            See the world clearly.
+            Same story. Different worlds.
           </h1>
 
           {/* Subline */}
           <p className="animate-fade-in-up delay-200 mx-auto mt-6 max-w-lg text-lg leading-relaxed text-zinc-500 font-[family-name:var(--font-source-serif)] md:text-xl dark:text-zinc-400">
-            Albis scans 7 regions daily and shows you how the same story is told differently around the world. One calm briefing. Zero spin.
+            Albis scans 7 regions daily and shows you how the same story is told around the world. One calm briefing. Zero spin.
           </p>
 
-          {/* Single CTA */}
+          {/* Email capture + Telegram CTA */}
           <div className="animate-fade-in-up delay-300 mt-10">
+            <EmailCapture variant="hero" />
+          </div>
+
+          {/* Secondary CTA */}
+          <div className="animate-fade-in-up delay-300 mt-6">
             <Link
               href="/signup"
-              className="group inline-flex h-14 min-w-[44px] items-center gap-2.5 rounded-full bg-[#1a3a5c] px-10 text-base font-medium text-white shadow-[0_4px_20px_rgb(26,58,92,0.35)] hover:bg-[#243f66] hover:shadow-[0_6px_28px_rgb(26,58,92,0.45)] dark:shadow-[0_4px_20px_rgb(26,58,92,0.5)]"
+              className="group inline-flex h-12 min-w-[44px] items-center gap-2 rounded-full border border-black/10 px-8 text-sm font-medium text-[#0f0f0f] transition-colors hover:bg-black/5 dark:border-white/10 dark:text-[#f0efec] dark:hover:bg-white/5"
             >
               Start free
-              <ArrowRight />
+              <ArrowRight size={14} />
             </Link>
           </div>
         </div>
@@ -66,9 +71,9 @@ export default async function Home() {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
         <div className="mx-auto max-w-2xl px-6 text-center">
           <p className="font-[family-name:var(--font-playfair)] text-xl leading-relaxed text-white/80 md:text-2xl">
-            Every source shows you one angle.
+            CNN, Al Jazeera, and CCTV covered the same story yesterday.
             <br className="hidden sm:block" />{" "}
-            Algorithms choose what you see.
+            Three completely different stories.
           </p>
           <p className="mt-4 font-[family-name:var(--font-playfair)] text-xl font-semibold text-[#c8922a] md:text-2xl">
             You deserve the full picture.
@@ -86,7 +91,7 @@ export default async function Home() {
           </p>
 
           <h2 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-semibold leading-tight text-[#0f0f0f] md:text-4xl dark:text-[#f0efec]">
-            Same story. Different worlds.
+            See it in action
           </h2>
 
           <PerspectiveDemo story={perspectiveStory} scan={scan} />
@@ -217,6 +222,15 @@ export default async function Home() {
                 <polyline points="20 6 9 17 4 12" />
               </svg>
               Cancel anytime
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-[#c8922a]">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+              Built by a 2-person team
             </span>
           </div>
         </div>
