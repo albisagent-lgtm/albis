@@ -10,6 +10,14 @@ export function EmailCapture({ variant = "default" }: { variant?: "default" | "h
 
   useEffect(() => {
     mountTimeRef.current = Date.now();
+    // Persist referral code from URL
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const ref = params.get("ref");
+      if (ref) {
+        localStorage.setItem("albis_ref", ref);
+      }
+    }
   }, []);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -25,6 +33,7 @@ export function EmailCapture({ variant = "default" }: { variant?: "default" | "h
           email: email.trim(),
           website: (document.querySelector('input[name="website"]') as HTMLInputElement)?.value || "",
           _t: mountTimeRef.current,
+          ref: typeof window !== "undefined" ? localStorage.getItem("albis_ref") || "" : "",
         }),
       });
       const data = await res.json();

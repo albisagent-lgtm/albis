@@ -1,0 +1,2 @@
+ALTER TABLE subscribers ADD COLUMN IF NOT EXISTS referral_code TEXT UNIQUE;
+ALTER TABLE subscribers ADD COLUMN IF NOT EXISTS referred_by TEXT;

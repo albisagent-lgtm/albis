@@ -11,6 +11,8 @@ import {
   type RegionId,
   savePreferences,
 } from "@/lib/preferences";
+import { BubbleReport } from "@/app/components/bubble-report";
+import { type ScanItem } from "@/lib/scan-types";
 
 // ---------------------------------------------------------------------------
 // Color maps for topic chips
@@ -70,8 +72,8 @@ const COLOR_CLASSES: Record<string, { idle: string; active: string }> = {
 const REGION_IDLE = "border-zinc-700/50 text-zinc-400 hover:border-zinc-600";
 const REGION_ACTIVE = "border-zinc-400 bg-zinc-800 text-zinc-200 ring-1 ring-zinc-500/30";
 
-type Step = "intent" | "topics" | "regions" | "preview";
-const STEPS: Step[] = ["intent", "topics", "regions", "preview"];
+type Step = "intent" | "topics" | "regions" | "bubble" | "preview";
+const STEPS: Step[] = ["intent", "topics", "regions", "bubble", "preview"];
 
 const INTENTS = [
   { id: "informed", label: "Stay informed daily", icon: "📰", description: "A calm daily briefing, no noise" },
@@ -127,6 +129,8 @@ export default function OnboardingPage() {
     } else if (step === "topics") {
       setStep("regions");
     } else if (step === "regions") {
+      setStep("bubble");
+    } else if (step === "bubble") {
       setStep("preview");
     } else {
       savePreferences({
@@ -169,7 +173,7 @@ export default function OnboardingPage() {
         {step === "intent" && (
           <div className="animate-step-fade-in mt-12">
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
-              Step 1 of 4
+              Step 1 of 5
             </p>
             <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-light italic leading-snug text-zinc-800 dark:text-zinc-100 md:text-4xl">
               What do you want from Albis?
@@ -224,7 +228,7 @@ export default function OnboardingPage() {
         {step === "topics" && (
           <div className="animate-step-fade-in mt-12">
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
-              Step 2 of 4
+              Step 2 of 5
             </p>
             <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-light italic leading-snug text-zinc-800 dark:text-zinc-100 md:text-4xl">
               What do you want to track?
@@ -282,7 +286,7 @@ export default function OnboardingPage() {
         {step === "regions" && (
           <div className="animate-step-fade-in mt-12">
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
-              Step 3 of 4
+              Step 3 of 5
             </p>
             <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-light italic leading-snug text-zinc-800 dark:text-zinc-100 md:text-4xl">
               Where in the world?
@@ -339,7 +343,7 @@ export default function OnboardingPage() {
         {step === "preview" && (
           <div className="animate-step-fade-in mt-12">
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
-              Step 4 of 4
+              Step 5 of 5
             </p>
             <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-light italic leading-snug text-zinc-800 dark:text-zinc-100 md:text-4xl">
               Here&apos;s a taste of your briefing

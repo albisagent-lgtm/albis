@@ -111,9 +111,15 @@ export async function POST(request: Request) {
         });
       }
 
+      const insertData: Record<string, string> = { email, source: "website" };
+      const ref = body.ref?.trim();
+      if (ref && typeof ref === "string" && ref.length <= 32) {
+        insertData.referred_by = ref;
+      }
+
       const { error } = await supabase
         .from("subscribers")
-        .insert({ email, source: "website" });
+        .insert(insertData);
 
       if (error) {
         console.error("Supabase insert error:", error.message);

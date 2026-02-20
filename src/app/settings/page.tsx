@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { ReferralCard } from "@/app/components/referral-card";
 import {
   TOPICS,
   REGIONS,
@@ -270,6 +271,13 @@ export default function SettingsPage() {
             Back to briefing
           </Link>
         </div>
+
+        {/* Referral Program */}
+        {email && (
+          <div className="mt-10">
+            <ReferralCard email={email} />
+          </div>
+        )}
 
         {/* Danger zone */}
         <div className="mt-16 border-t border-zinc-200 pt-10 dark:border-zinc-800/50">
