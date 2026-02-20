@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "Your personalised daily news briefing — filtered by topics and regions that matter to you.",
 };
 
-export default function BriefingPage() {
-  const scan = getTodayScan();
+export default async function BriefingPage() {
+  const scan = await getTodayScan();
   return <BriefingClient scan={scan} />;
 }

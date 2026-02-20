@@ -11,8 +11,8 @@ import { EmailCapture } from "./components/email-capture";
 export const dynamic = "force-dynamic";
 
 // ── Page ─────────────────────────────────────────────────────────
-export default function Home() {
-  const scan = getTodayScan();
+export default async function Home() {
+  const scan = await getTodayScan();
 
   // Find the highest-significance story with multi-region coverage for the perspective demo
   const perspectiveStory = scan?.items

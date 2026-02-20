@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
+import { createClient } from "@supabase/supabase-js";
 
 // Re-export shared types and constants so existing imports still work
 export {
@@ -22,6 +23,19 @@ import { detectBlindspots } from "./scan-types";
 const SCANS_DIR =
   process.env.SCANS_DIR ||
   "/Users/treelight/.openclaw/workspace/memory/scans";
+
+// Check if we're running on Vercel or in a production environment
+const isVercel = process.env.VERCEL === '1' || process.env.NODE_ENV === 'production';
+const isLocal = typeof window === 'undefined' && fs.existsSync && fs.existsSync(SCANS_DIR);
+
+// Initialize Supabase client for server-side usage
+let supabase: any = null;
+if ((isVercel || !isLocal) && process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+  supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -124,6 +138,116 @@ function extractScanMeta(md: string): string | null {
 }
 
 // ---------------------------------------------------------------------------
+// Supabase data fetching (for Vercel/production)
+// ---------------------------------------------------------------------------
+
+async function getSupabaseScan(date: string, scanTime?: string): Promise<ParsedScan | null> {
+  if (!supabase) return null;
+
+  try {
+    let query = supabase
+      .from('scans')
+      .select('*')
+      .eq('scan_date', date);
+
+    if (scanTime) {
+      query = query.eq('scan_time', scanTime);
+    }
+
+    const { data, error } = await query.order('scan_time', { ascending: false }).limit(1);
+
+    if (error) {
+      console.error('Supabase query error:', error);
+      return null;
+    }
+
+    if (!data || data.length === 0) return null;
+
+    const scan = data[0];
+    
+    return {
+      date: scan.scan_date,
+      displayDate: formatDisplayDate(scan.scan_date),
+      topTheme: scan.top_theme,
+      mood: scan.mood,
+      patternOfDay: scan.pattern_of_day || null,
+      weatherSummary: null, // Not stored in simplified schema
+      flowsSummary: null,   // Not stored in simplified schema
+      framingNote: null,    // Not stored in simplified schema
+      notableItems: [],     // Not stored in simplified schema
+      items: detectBlindspots(scan.items || []),
+      scanMeta: null,       // Not stored in simplified schema
+    };
+  } catch (error) {
+    console.error('Error fetching scan from Supabase:', error);
+    return null;
+  }
+}
+
+async function getSupabaseAvailableDates(): Promise<string[]> {
+  if (!supabase) return [];
+
+  try {
+    const { data, error } = await supabase
+      .from('scans')
+      .select('scan_date')
+      .order('scan_date', { ascending: false });
+
+    if (error) {
+      console.error('Supabase query error:', error);
+      return [];
+    }
+
+    // Remove duplicates and return dates
+    const dates = [...new Set(data.map((row: any) => row.scan_date))];
+    return dates;
+  } catch (error) {
+    console.error('Error fetching dates from Supabase:', error);
+    return [];
+  }
+}
+
+async function getSupabaseFramingItems(): Promise<any[]> {
+  if (!supabase) return [];
+
+  try {
+    const { data, error } = await supabase
+      .from('scans')
+      .select('scan_date, items')
+      .order('scan_date', { ascending: false });
+
+    if (error) {
+      console.error('Supabase query error:', error);
+      return [];
+    }
+
+    const framingItems: any[] = [];
+    
+    for (const scan of data) {
+      const items = scan.items || [];
+      for (const item of items) {
+        if (item.patterns?.includes('framing') || item.patterns?.includes('omission')) {
+          framingItems.push({
+            headline: item.headline,
+            regions: item.regions,
+            connection: item.connection,
+            category: item.category,
+            significance: item.significance,
+            scanDate: scan.scan_date,
+            displayDate: formatDisplayDate(scan.scan_date),
+          });
+        }
+      }
+    }
+
+    return framingItems;
+  } catch (error) {
+    console.error('Error fetching framing items from Supabase:', error);
+    return [];
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Main parser
 // ---------------------------------------------------------------------------
 
@@ -166,19 +290,37 @@ function parseScanFile(filePath: string): ParsedScan | null {
 // Public API
 // ---------------------------------------------------------------------------
 
-export function getTodayScan(): ParsedScan | null {
+export async function getTodayScan(): Promise<ParsedScan | null> {
   const today = new Date().toISOString().split("T")[0];
-  const filePath = path.join(SCANS_DIR, `${today}.md`);
-
-  if (fs.existsSync(filePath)) {
-    return parseScanFile(filePath);
+  
+  // Try Supabase first if we're on Vercel or local files don't exist
+  if (supabase && (isVercel || !isLocal)) {
+    return await getSupabaseScan(today);
+  }
+  
+  // Fallback to local filesystem
+  if (isLocal) {
+    const filePath = path.join(SCANS_DIR, `${today}.md`);
+    if (fs.existsSync(filePath)) {
+      return parseScanFile(filePath);
+    }
   }
 
-  return getLatestScan();
+  return await getLatestScan();
 }
 
-export function getLatestScan(): ParsedScan | null {
-  if (!fs.existsSync(SCANS_DIR)) return null;
+export async function getLatestScan(): Promise<ParsedScan | null> {
+  // Try Supabase first if available
+  if (supabase && (isVercel || !isLocal)) {
+    const dates = await getSupabaseAvailableDates();
+    if (dates.length > 0) {
+      return await getSupabaseScan(dates[0]);
+    }
+    return null;
+  }
+
+  // Fallback to local filesystem
+  if (!isLocal || !fs.existsSync(SCANS_DIR)) return null;
 
   const files = fs
     .readdirSync(SCANS_DIR)
@@ -191,7 +333,15 @@ export function getLatestScan(): ParsedScan | null {
   return parseScanFile(path.join(SCANS_DIR, files[0]));
 }
 
-export function getScanByDate(date: string): ParsedScan | null {
+export async function getScanByDate(date: string): Promise<ParsedScan | null> {
+  // Try Supabase first if available
+  if (supabase && (isVercel || !isLocal)) {
+    return await getSupabaseScan(date);
+  }
+
+  // Fallback to local filesystem
+  if (!isLocal) return null;
+  
   const filePath = path.join(SCANS_DIR, `${date}.md`);
   if (!fs.existsSync(filePath)) return null;
   return parseScanFile(filePath);
@@ -200,8 +350,14 @@ export function getScanByDate(date: string): ParsedScan | null {
 /**
  * Returns all available scan dates (YYYY-MM-DD), newest first.
  */
-export function getAvailableDates(): string[] {
-  if (!fs.existsSync(SCANS_DIR)) return [];
+export async function getAvailableDates(): Promise<string[]> {
+  // Try Supabase first if available
+  if (supabase && (isVercel || !isLocal)) {
+    return await getSupabaseAvailableDates();
+  }
+
+  // Fallback to local filesystem
+  if (!isLocal || !fs.existsSync(SCANS_DIR)) return [];
 
   return fs
     .readdirSync(SCANS_DIR)
@@ -224,12 +380,18 @@ export interface FramingComparison {
 /**
  * Collects items with a "framing" pattern across all scans.
  */
-export function getFramingItems(): FramingComparison[] {
-  const dates = getAvailableDates();
+export async function getFramingItems(): Promise<FramingComparison[]> {
+  // Try Supabase first if available
+  if (supabase && (isVercel || !isLocal)) {
+    return await getSupabaseFramingItems();
+  }
+
+  // Fallback to local filesystem
+  const dates = await getAvailableDates();
   const items: FramingComparison[] = [];
 
   for (const date of dates) {
-    const scan = getScanByDate(date);
+    const scan = await getScanByDate(date);
     if (!scan) continue;
 
     for (const item of scan.items) {
@@ -253,12 +415,12 @@ export function getFramingItems(): FramingComparison[] {
 /**
  * Returns framing notes from all scans, newest first.
  */
-export function getFramingNotes(): { date: string; displayDate: string; note: string }[] {
-  const dates = getAvailableDates();
+export async function getFramingNotes(): Promise<{ date: string; displayDate: string; note: string }[]> {
+  const dates = await getAvailableDates();
   const notes: { date: string; displayDate: string; note: string }[] = [];
 
   for (const date of dates) {
-    const scan = getScanByDate(date);
+    const scan = await getScanByDate(date);
     if (!scan || !scan.framingNote) continue;
     notes.push({
       date: scan.date,
