@@ -16,6 +16,19 @@ import {
   type RegionId,
   type UserPreferences,
 } from "@/lib/preferences";
+import { BubbleReport } from "@/app/components/bubble-report";
+import { type ScanItem } from "@/lib/scan-types";
+
+// Mock items for bubble report in settings
+const MOCK_ITEMS: ScanItem[] = [
+  { headline: "India's semiconductor push reshapes South Asian trade corridors", category: "current-events", regions: ["south-asia"], tags: [], patterns: [], significance: "high", connection: "" },
+  { headline: "ASEAN nations draft unified AI governance framework", category: "tech-ai", regions: ["east-se-asia"], tags: [], patterns: [], significance: "high", connection: "" },
+  { headline: "Gulf states accelerate post-oil economic diversification", category: "economic-flows", regions: ["middle-east"], tags: [], patterns: [], significance: "high", connection: "" },
+  { headline: "African Union launches continent-wide digital identity initiative", category: "current-events", regions: ["africa"], tags: [], patterns: [], significance: "high", connection: "" },
+  { headline: "Eastern European energy grid undergoes rapid transformation", category: "climate-energy", regions: ["eastern-europe"], tags: [], patterns: [], significance: "medium", connection: "" },
+  { headline: "EU and US diverge sharply on tech platform regulation", category: "tech-ai", regions: ["western-world"], tags: [], patterns: [], significance: "high", connection: "" },
+  { headline: "Latin American lithium triangle becomes geopolitical flashpoint", category: "economic-flows", regions: ["latin-americas"], tags: [], patterns: [], significance: "high", connection: "" },
+];
 
 // ---------------------------------------------------------------------------
 // Color maps (same as onboarding)
@@ -250,6 +263,20 @@ export default function SettingsPage() {
             />
           )}
         </div>
+
+        {/* Bubble Report */}
+        {selectedRegions.length > 0 && (
+          <div className="mt-10">
+            <p className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
+              Your Perspective Bubble
+            </p>
+            <BubbleReport
+              selectedRegions={selectedRegions}
+              recentItems={MOCK_ITEMS}
+              compact
+            />
+          </div>
+        )}
 
         {/* Save */}
         <div className="mt-12 flex items-center gap-4">

@@ -75,6 +75,17 @@ const REGION_ACTIVE = "border-zinc-400 bg-zinc-800 text-zinc-200 ring-1 ring-zin
 type Step = "intent" | "topics" | "regions" | "bubble" | "preview";
 const STEPS: Step[] = ["intent", "topics", "regions", "bubble", "preview"];
 
+// Mock items for the bubble report — one per region so blind spots always have examples
+const MOCK_BLIND_SPOT_ITEMS: ScanItem[] = [
+  { headline: "India's semiconductor push reshapes South Asian trade corridors", category: "current-events", regions: ["south-asia"], tags: [], patterns: [], significance: "high", connection: "" },
+  { headline: "ASEAN nations draft unified AI governance framework", category: "tech-ai", regions: ["east-se-asia"], tags: [], patterns: [], significance: "high", connection: "" },
+  { headline: "Gulf states accelerate post-oil economic diversification", category: "economic-flows", regions: ["middle-east"], tags: [], patterns: [], significance: "high", connection: "" },
+  { headline: "African Union launches continent-wide digital identity initiative", category: "current-events", regions: ["africa"], tags: [], patterns: [], significance: "high", connection: "" },
+  { headline: "Eastern European energy grid undergoes rapid transformation", category: "climate-energy", regions: ["eastern-europe"], tags: [], patterns: [], significance: "medium", connection: "" },
+  { headline: "EU and US diverge sharply on tech platform regulation", category: "tech-ai", regions: ["western-world"], tags: [], patterns: [], significance: "high", connection: "" },
+  { headline: "Latin American lithium triangle becomes geopolitical flashpoint", category: "economic-flows", regions: ["latin-americas"], tags: [], patterns: [], significance: "high", connection: "" },
+];
+
 const INTENTS = [
   { id: "informed", label: "Stay informed daily", icon: "📰", description: "A calm daily briefing, no noise" },
   { id: "multiple-sides", label: "Understand multiple sides", icon: "🔄", description: "See how stories differ across regions" },
@@ -334,6 +345,43 @@ export default function OnboardingPage() {
                 className="inline-flex h-11 min-w-[44px] items-center rounded-full bg-zinc-900 px-8 text-sm font-medium text-white transition-colors hover:bg-zinc-800 disabled:opacity-30 disabled:cursor-not-allowed dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
               >
                 Preview my briefing
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Step: Bubble Report */}
+        {step === "bubble" && (
+          <div className="animate-step-fade-in mt-12">
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
+              Step 4 of 5
+            </p>
+            <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-light italic leading-snug text-zinc-800 dark:text-zinc-100 md:text-4xl">
+              Your perspective coverage
+            </h1>
+            <p className="mt-4 text-zinc-500 dark:text-zinc-400">
+              Based on your selections, here&apos;s what your world looks like.
+            </p>
+
+            <div className="mt-8">
+              <BubbleReport
+                selectedRegions={selectedRegions}
+                recentItems={MOCK_BLIND_SPOT_ITEMS}
+              />
+            </div>
+
+            <div className="mt-10 flex items-center justify-between">
+              <button
+                onClick={handleBack}
+                className="text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300 min-h-[44px] inline-flex items-center"
+              >
+                Back
+              </button>
+              <button
+                onClick={handleContinue}
+                className="inline-flex h-11 min-w-[44px] items-center rounded-full bg-zinc-900 px-8 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+              >
+                Continue
               </button>
             </div>
           </div>
