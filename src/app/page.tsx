@@ -376,7 +376,7 @@ function StoryCard({ item }: { item: ScanItem }) {
 }
 
 // ── Perspective Demo ────────────────────────────────────────────
-function PerspectiveDemo({ story, scan }: { story: ScanItem | null; scan: ReturnType<typeof getTodayScan> }) {
+function PerspectiveDemo({ story, scan }: { story: ScanItem | null; scan: Awaited<ReturnType<typeof getTodayScan>> }) {
   const fallback = {
     headline: "Global trade negotiations stall as tariff tensions rise",
     regions: [
