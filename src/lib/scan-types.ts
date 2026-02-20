@@ -36,6 +36,8 @@ export interface ParsedScan {
   notableItems: string[];
   items: ScanItem[];
   scanMeta: string | null;
+  rawMarkdown?: string;
+  framingWatchRaw?: string;
 }
 
 export const CATEGORY_META: Record<string, { label: string; color: string }> = {

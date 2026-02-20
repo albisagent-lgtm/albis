@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTodayScan, REGION_LABELS, type ScanItem } from "@/lib/scan-parser";
+import { getTodayScan, REGION_LABELS } from "@/lib/scan-parser";
 import { EmailCapture } from "../components/email-capture";
 
 export const dynamic = "force-dynamic";
@@ -7,11 +7,11 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "See how the world reported today's biggest story | Albis",
   description:
-    "One story. Multiple perspectives. See how different regions frame the same news — updated daily by Albis.",
+    "One event. Multiple perspectives. See how different regions reported the same news — updated daily by Albis.",
   openGraph: {
     title: "See how the world reported today's biggest story | Albis",
     description:
-      "One story. Multiple perspectives. See how different regions frame the same news.",
+      "One event. Multiple perspectives. See how different regions reported the same news.",
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
@@ -19,97 +19,155 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "See how the world reported today's biggest story | Albis",
     description:
-      "One story. Multiple perspectives. See how different regions frame the same news.",
+      "One event. Multiple perspectives. See how different regions reported the same news.",
     images: ["/og-image.png"],
   },
 };
 
 const REGION_FLAGS: Record<string, string> = {
+  "western-world": "🌎",
   west: "🌎",
   "east-se-asia": "🌏",
   "south-asia": "🇮🇳",
   "middle-east": "🕌",
   africa: "🌍",
+  "eastern-europe": "🇪🇺",
   "e-europe": "🇪🇺",
   "latin-america": "🌎",
   global: "🌐",
 };
 
+// Fallback with REAL framing watch data (from our actual scans)
 const FALLBACK = {
-  headline: "Global trade negotiations stall as tariff tensions rise",
-  regions: [
+  topic: "Epstein Files & Prince Andrew Arrest",
+  perspectives: [
     {
-      key: "west",
-      framing:
-        "Markets react nervously to diplomatic breakdown, with tech stocks leading the decline. Western media focuses on economic impact to consumers.",
+      region: "United Kingdom",
+      flag: "🇬🇧",
+      reported: "\"Royal scandal damages institution\" — coverage centres on the monarchy's reputation crisis and what this means for the royal family's legitimacy.",
     },
     {
-      key: "east-se-asia",
-      framing:
-        "Regional leaders emphasise alternative trade partnerships and domestic demand resilience. Coverage highlights self-sufficiency and new alliances.",
+      region: "Europe",
+      flag: "🇪🇺",
+      reported: "\"Network exposure across multiple jurisdictions\" — intelligence sources frame it as systemic corruption being revealed, with probes opening from London to Norway.",
     },
     {
-      key: "middle-east",
-      framing:
-        "Energy exporters see opportunity in shifting supply chains, focus on bilateral deals. Reporting centres on strategic repositioning.",
-    },
-    {
-      key: "africa",
-      framing:
-        "Commodity-dependent economies brace for price volatility, call for fairer trade terms. Stories focus on sovereignty and development impact.",
+      region: "United States",
+      flag: "🇺🇸",
+      reported: "\"Legal liability for figures in Trump circles\" — emerging US framing centres on political vulnerability and which American names appear in the files.",
     },
   ],
+  absent: "Middle East, Africa — largely absent from coverage due to geo-political distance and US-centric media concentration.",
+  observation: "The same evidence — the release of Epstein files — becomes a domestic legitimacy crisis in the UK, a conspiracy revelation in Europe, and a political threat in the US. Same facts. Different institutional stakes. Different stories.",
 };
 
-function splitConnectionByRegion(
-  connection: string,
-  regions: string[]
-): { key: string; text: string }[] {
-  const filtered = regions.filter((r) => r !== "global").slice(0, 4);
-  if (filtered.length === 0) return [];
+interface FramingPerspective {
+  region: string;
+  flag: string;
+  reported: string;
+}
 
-  const sentences = connection.split(/(?<=[.!?])\s+/).filter(Boolean);
-  if (sentences.length >= filtered.length) {
-    const perRegion = Math.ceil(sentences.length / filtered.length);
-    return filtered.map((key, i) => {
-      const start = i * perRegion;
-      return {
-        key,
-        text: sentences.slice(start, start + perRegion).join(" ") || connection,
-      };
+function parseFramingWatch(rawMarkdown: string): {
+  topic: string;
+  perspectives: FramingPerspective[];
+  absent?: string;
+  observation?: string;
+} | null {
+  // Look for Framing Watch section
+  const fwMatch = rawMarkdown.match(
+    /\*\*Framing Watch[^*]*\*\*\s*([\s\S]*?)(?=\n\*\*(?:Mood|Pattern)|$)/i
+  );
+  if (!fwMatch) return null;
+
+  const block = fwMatch[0];
+
+  // Extract topic from the header
+  const topicMatch = block.match(/Framing Watch[:\s—–-]*([^*\n]+)/i);
+  const topic = topicMatch ? topicMatch[1].trim() : "Today's Story";
+
+  // Extract perspective lines (- Region: "quote" — description)
+  const perspectives: FramingPerspective[] = [];
+  const lineRegex = /^-\s*(.+?):\s*(.+)/gm;
+  let match;
+  let absent: string | undefined;
+
+  while ((match = lineRegex.exec(block)) !== null) {
+    const label = match[1].trim();
+    const content = match[2].trim();
+
+    // Skip "absent from" or "mechanism" lines
+    if (label.toLowerCase().startsWith("absent")) {
+      absent = content;
+      continue;
+    }
+    if (label.toLowerCase().startsWith("mechanism")) continue;
+
+    // Determine flag
+    let flag = "🌐";
+    const labelLower = label.toLowerCase();
+    if (labelLower.includes("uk") || labelLower.includes("british") || labelLower.includes("britain")) flag = "🇬🇧";
+    else if (labelLower.includes("us ") || labelLower.includes("american") || labelLower.includes("us framing")) flag = "🇺🇸";
+    else if (labelLower.includes("europe")) flag = "🇪🇺";
+    else if (labelLower.includes("china") || labelLower.includes("chinese")) flag = "🇨🇳";
+    else if (labelLower.includes("russia")) flag = "🇷🇺";
+    else if (labelLower.includes("india")) flag = "🇮🇳";
+    else if (labelLower.includes("middle east")) flag = "🕌";
+    else if (labelLower.includes("africa")) flag = "🌍";
+    else if (labelLower.includes("asia")) flag = "🌏";
+    else if (labelLower.includes("latin") || labelLower.includes("south america")) flag = "🌎";
+    else if (labelLower.includes("iran")) flag = "🇮🇷";
+
+    perspectives.push({
+      region: label,
+      flag,
+      reported: content,
     });
   }
 
-  return filtered.map((key) => ({ key, text: connection }));
+  if (perspectives.length < 2) return null;
+
+  // Extract mechanism/observation line
+  const mechMatch = block.match(/[-–]\s*Mechanism:\s*(.+)/i);
+  const observation = mechMatch ? mechMatch[1].trim() : undefined;
+
+  return { topic, perspectives, absent, observation };
 }
 
 export default async function ComparePage() {
   const scan = await getTodayScan();
 
-  // Find the story with the most regions
-  const bestStory = scan?.items
-    .filter((i) => i.regions.length >= 2 && i.connection)
-    .sort((a, b) => b.regions.length - a.regions.length)[0] || null;
+  let topic: string;
+  let perspectives: FramingPerspective[];
+  let absent: string | undefined;
+  let observation: string | undefined;
+  let displayDate: string | undefined;
 
-  let headline: string;
-  let cards: { key: string; framing: string }[];
+  // Try to extract framing watch from scan data
+  let parsed = null;
+  
+  // First try raw markdown which has the full framing watch section
+  if (scan?.rawMarkdown) {
+    parsed = parseFramingWatch(scan.rawMarkdown);
+  }
+  
+  // Then try the framingWatchRaw field  
+  if (!parsed && scan?.framingWatchRaw) {
+    // framingWatchRaw is the note field - wrap it to look like a framing watch section
+    const wrapped = `**Framing Watch: Today's Story**\n${scan.framingWatchRaw}`;
+    parsed = parseFramingWatch(wrapped);
+  }
 
-  if (bestStory) {
-    headline = bestStory.headline;
-    const parts = splitConnectionByRegion(
-      bestStory.connection,
-      bestStory.regions
-    );
-    cards =
-      parts.length > 0
-        ? parts.map((p) => ({ key: p.key, framing: p.text }))
-        : bestStory.regions
-            .filter((r) => r !== "global")
-            .slice(0, 4)
-            .map((key) => ({ key, framing: bestStory.connection }));
+  if (parsed && parsed.perspectives.length >= 2) {
+    topic = parsed.topic;
+    perspectives = parsed.perspectives;
+    absent = parsed.absent;
+    observation = parsed.observation;
+    displayDate = scan?.displayDate;
   } else {
-    headline = FALLBACK.headline;
-    cards = FALLBACK.regions;
+    topic = FALLBACK.topic;
+    perspectives = FALLBACK.perspectives;
+    absent = FALLBACK.absent;
+    observation = FALLBACK.observation;
   }
 
   return (
@@ -121,47 +179,79 @@ export default async function ComparePage() {
 
         <div className="relative mx-auto max-w-3xl px-6 text-center">
           <p className="text-xs font-medium tracking-[0.18em] uppercase text-[#c8922a]/70 font-[family-name:var(--font-playfair)] italic">
-            Today&apos;s scan
+            {displayDate ? `From today\u2019s scan` : "How Albis works"}
           </p>
           <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-4xl font-semibold leading-tight tracking-tight text-[#0f0f0f] md:text-5xl dark:text-[#f0efec]">
-            One story. {cards.length} perspectives.
+            One event. {perspectives.length} perspectives.
           </h1>
-          {scan && (
+          <p className="mt-4 mx-auto max-w-lg text-lg text-zinc-500 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
+            Same facts. Different stories. See how different regions reported the same event.
+          </p>
+          {displayDate && (
             <p className="mt-3 text-sm text-zinc-400 dark:text-zinc-500">
-              {scan.displayDate}
+              {displayDate}
             </p>
           )}
         </div>
       </section>
 
-      {/* Story + Cards */}
+      {/* Story + Regional Perspective Cards */}
       <section className="relative bg-[#f2f0eb] py-16 dark:bg-[#111111] md:py-24">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
         <div className="mx-auto max-w-4xl px-6">
-          <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold leading-snug text-[#0f0f0f] md:text-3xl dark:text-[#f0efec]">
-            {headline}
+          <p className="text-xs font-medium tracking-[0.18em] uppercase text-[#c8922a]">
+            The event
+          </p>
+          <h2 className="mt-3 font-[family-name:var(--font-playfair)] text-2xl font-semibold leading-snug text-[#0f0f0f] md:text-3xl dark:text-[#f0efec]">
+            {topic}
           </h2>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {cards.map((card) => (
+          <p className="mt-2 text-xs font-medium tracking-[0.18em] uppercase text-zinc-400 dark:text-zinc-500 pt-6">
+            How different regions reported it
+          </p>
+
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            {perspectives.map((p, i) => (
               <div
-                key={card.key}
+                key={i}
                 className="rounded-xl border border-black/[0.07] bg-white p-6 dark:border-white/[0.07] dark:bg-white/[0.03]"
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xl">
-                    {REGION_FLAGS[card.key] || "🌐"}
-                  </span>
+                  <span className="text-xl">{p.flag}</span>
                   <p className="text-xs font-bold tracking-[0.12em] uppercase text-zinc-500 dark:text-zinc-400">
-                    {REGION_LABELS[card.key] || card.key}
+                    {p.region}
                   </p>
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-zinc-600 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
-                  {card.framing}
+                  {p.reported}
                 </p>
               </div>
             ))}
           </div>
+
+          {/* What's absent */}
+          {absent && (
+            <div className="mt-6 rounded-xl border border-dashed border-zinc-300/60 bg-zinc-50/50 p-5 dark:border-zinc-700/40 dark:bg-zinc-900/30">
+              <p className="text-xs font-bold tracking-[0.12em] uppercase text-zinc-400 dark:text-zinc-500">
+                What&apos;s absent
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-500 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
+                {absent}
+              </p>
+            </div>
+          )}
+
+          {/* Observation — not a judgment, just what we notice */}
+          {observation && (
+            <div className="mt-6 rounded-xl border border-[#c8922a]/20 bg-amber-50/30 p-5 dark:border-[#c8922a]/10 dark:bg-amber-950/10">
+              <p className="text-xs font-bold tracking-[0.12em] uppercase text-[#c8922a]/70">
+                What we observe
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-600 font-[family-name:var(--font-source-serif)] italic dark:text-zinc-400">
+                {observation}
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -175,7 +265,7 @@ export default async function ComparePage() {
             This is what Albis does.
             <br />
             <span className="font-light italic text-white/75">
-              Every story. Every day.
+              Every event. Every day. Observe, never judge.
             </span>
           </p>
 

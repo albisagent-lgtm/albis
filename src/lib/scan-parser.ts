@@ -175,6 +175,9 @@ async function getSupabaseScan(date: string, scanTime?: string): Promise<ParsedS
     // Extract framing note from framing_watch jsonb
     const framingWatch = latest.framing_watch;
     const framingNote = framingWatch?.note || null;
+
+    // Combine raw markdown from all scans
+    const rawMarkdown = data.map((s: any) => s.raw_markdown || '').filter(Boolean).join('\n\n---\n\n');
     
     return {
       date: latest.scan_date,
@@ -188,6 +191,8 @@ async function getSupabaseScan(date: string, scanTime?: string): Promise<ParsedS
       notableItems: [],
       items: detectBlindspots(allItems),
       scanMeta: null,
+      rawMarkdown,
+      framingWatchRaw: framingNote,
     };
   } catch (error) {
     console.error('Error fetching scan from Supabase:', error);
