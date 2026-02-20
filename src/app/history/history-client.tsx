@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { PremiumGate } from "@/app/components/premium-gate";
 import type { ScanSummary } from "./page";
 import type { ScanItem } from "@/lib/scan-types";
@@ -297,6 +298,14 @@ function HistoryContent({ summaries, categoryMeta, regionLabels }: Props) {
                           )}
                         </div>
                       )}
+
+                      {/* View Full Scan link */}
+                      <Link
+                        href={`/scan/${s.date}`}
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-[#c8922a]/30 bg-[#c8922a]/5 px-4 py-2 text-xs font-medium text-[#c8922a] transition-colors hover:bg-[#c8922a]/10"
+                      >
+                        View Full Scan &rarr;
+                      </Link>
                     </div>
                   )}
                 </div>

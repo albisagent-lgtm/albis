@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import { PremiumGate } from "@/app/components/premium-gate";
 import { PerspectiveScore } from "@/app/components/perspective-score";
 import { hasFramingWatch, hasBlindspot } from "@/lib/scan-types";
@@ -514,6 +515,14 @@ function ExploreItemCard({
             {item.connection}
           </p>
         )}
+
+        {/* View Full Scan link */}
+        <Link
+          href={`/scan/${item.date}`}
+          className="inline-flex items-center gap-1 text-xs font-medium text-[#c8922a] transition-colors hover:text-[#a87820]"
+        >
+          View Full Scan &rarr;
+        </Link>
       </div>
     </div>
   );
