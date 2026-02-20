@@ -14,7 +14,7 @@ export default function PrivacyPage() {
           Privacy Policy
         </h1>
         <p className="mt-3 text-sm text-zinc-400 dark:text-zinc-500">
-          Last updated: 19 February 2025
+          Last updated: 19 February 2026
         </p>
       </header>
 

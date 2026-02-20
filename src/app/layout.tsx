@@ -78,11 +78,11 @@ export const metadata: Metadata = {
       "News intelligence, not noise. The full picture, every story, zero spin.",
     images: [
       {
-        url: "/og-image.svg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Albis — News intelligence, not noise",
-        type: "image/svg+xml",
+        type: "image/png",
       },
     ],
   },
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Albis — The news, understood.",
     description: "News intelligence, not noise. See the world clearly.",
-    images: ["/og-image.svg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -130,7 +130,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "Albis",
               url: "https://albis.news",
-              logo: "https://albis.news/og-image.svg",
+              logo: "https://albis.news/icon-512.png",
               description:
                 "News intelligence, not noise. Albis gives you the full picture — every source, zero spin, one calm reading experience.",
               contactPoint: {

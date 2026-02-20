@@ -175,7 +175,7 @@ export default function Home() {
       )}
 
       {/* ── SECTION 5: SOCIAL PROOF STRIP ────────────────────── */}
-      <section className="bg-[#f2f0eb] py-10 dark:bg-[#111111] md:py-14">
+      <section className="relative bg-[#f2f0eb] py-10 dark:bg-[#111111] md:py-14">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
         <div className="mx-auto max-w-4xl px-6">
           {/* Stats line */}

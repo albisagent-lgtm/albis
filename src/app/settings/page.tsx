@@ -265,7 +265,7 @@ export default function SettingsPage() {
           </button>
           <Link
             href="/briefing"
-            className="text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
+            className="inline-flex min-h-[44px] items-center text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
           >
             Back to briefing
           </Link>
@@ -278,7 +278,7 @@ export default function SettingsPage() {
           </p>
           <button
             onClick={handleLogout}
-            className="mt-4 text-sm text-zinc-400 transition-colors hover:text-red-400"
+            className="mt-4 inline-flex min-h-[44px] items-center text-sm text-zinc-400 transition-colors hover:text-red-400"
           >
             Log out
           </button>
@@ -310,13 +310,13 @@ function UpgradePrompt({
       <div className="flex items-center gap-2">
         <Link
           href="/pricing"
-          className="inline-flex h-8 items-center rounded-full bg-amber-500/20 px-4 text-xs font-medium text-amber-300 transition-colors hover:bg-amber-500/30"
+          className="inline-flex h-11 min-w-[44px] items-center rounded-full bg-amber-500/20 px-4 text-xs font-medium text-amber-300 transition-colors hover:bg-amber-500/30"
         >
           Upgrade
         </Link>
         <button
           onClick={onDismiss}
-          className="flex h-8 w-8 items-center justify-center rounded-full text-amber-400/40 transition-colors hover:text-amber-400/80"
+          className="flex h-11 w-11 items-center justify-center rounded-full text-amber-400/40 transition-colors hover:text-amber-400/80"
           aria-label="Dismiss"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
