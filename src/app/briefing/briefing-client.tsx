@@ -69,7 +69,16 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
     .join(", ");
 
   const highItems = filtered.filter((i) => i.significance === "high");
+  const framingItems = filtered.filter((i) => i.patterns.includes("framing")).slice(0, 3);
   const categories = groupByCategory(filtered);
+
+  // Build narrative data
+  const topStories = [...filtered]
+    .sort((a, b) => {
+      const sigOrder: Record<string, number> = { high: 0, medium: 1, low: 2 };
+      return (sigOrder[a.significance] ?? 1) - (sigOrder[b.significance] ?? 1);
+    })
+    .slice(0, 5);
 
   return (
     <main>
@@ -118,6 +127,110 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
           )}
         </div>
       </section>
+
+      {/* Narrative Briefing — "Your Morning Brief" */}
+      {filtered.length > 0 && (
+        <section className="border-b border-[#c8922a]/20 bg-[#faf8f4] dark:bg-[#141210]">
+          <div className="mx-auto max-w-3xl px-6 py-14 md:py-20">
+            <p className="font-[family-name:var(--font-playfair)] text-xs font-medium uppercase tracking-[0.2em] text-[#c8922a]">
+              Your Morning Brief
+            </p>
+
+            <div className="mt-8 space-y-5 font-[family-name:var(--font-source-serif)] text-base leading-relaxed text-zinc-700 dark:text-zinc-300 md:text-lg md:leading-relaxed">
+              {/* Opening — mood + top theme */}
+              <p>
+                {scan.mood ? (
+                  <>The world feels <em className="text-zinc-900 dark:text-zinc-100">{scan.mood.toLowerCase()}</em> this morning. </>
+                ) : (
+                  <>Good morning. </>
+                )}
+                {scan.topTheme ? (
+                  <>The dominant thread today is <strong className="font-semibold text-zinc-900 dark:text-zinc-100">{scan.topTheme}</strong>.</>
+                ) : (
+                  <>Here&rsquo;s what matters from your world today.</>
+                )}
+              </p>
+
+              {/* Top story highlights */}
+              {topStories.length > 0 && (
+                <ul className="space-y-2.5 pl-0">
+                  {topStories.map((item, i) => (
+                    <li key={i} className="flex gap-3">
+                      <span className="mt-1 flex-shrink-0 text-[#c8922a]/60">▸</span>
+                      <span>
+                        <strong className="font-semibold text-zinc-900 dark:text-zinc-100">{item.headline}</strong>
+                        {item.connection && (
+                          <span className="text-zinc-500 dark:text-zinc-400"> — {item.connection.length > 120 ? item.connection.slice(0, 120) + "…" : item.connection}</span>
+                        )}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {/* Pattern of the day */}
+              {scan.patternOfDay && (
+                <p>
+                  <span className="font-semibold text-zinc-900 dark:text-zinc-100">Pattern to watch:</span>{" "}
+                  {scan.patternOfDay.title ? <>{scan.patternOfDay.title} — </> : null}
+                  {scan.patternOfDay.body}
+                </p>
+              )}
+
+              {/* Framing highlight */}
+              {scan.framingNote && (
+                <p className="border-l-2 border-[#c8922a]/30 pl-4 italic text-zinc-600 dark:text-zinc-400">
+                  {scan.framingNote}
+                </p>
+              )}
+
+              {/* Closing */}
+              <p className="text-zinc-500 dark:text-zinc-500">
+                That&rsquo;s your world this morning. Go live it.
+              </p>
+            </div>
+          </div>
+
+          {/* Gold accent divider */}
+          <div className="h-px bg-gradient-to-r from-transparent via-[#c8922a]/30 to-transparent" />
+        </section>
+      )}
+
+      {/* How It Was Framed — framing breakdown cards */}
+      {framingItems.length > 0 && (
+        <section className="border-b border-zinc-200 py-12 dark:border-zinc-800/50 md:py-16">
+          <div className="mx-auto max-w-3xl px-6">
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#c8922a]">
+              How It Was Framed
+            </p>
+            <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
+              Same story, different lenses — see how regions reported it differently.
+            </p>
+
+            <div className="mt-8 space-y-6">
+              {framingItems.map((item, idx) => (
+                <div key={idx} className="rounded-xl border border-black/[0.07] bg-white p-6 dark:border-white/[0.07] dark:bg-white/[0.03]">
+                  <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+                    {item.headline}
+                  </h3>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                    {item.regions.map((region) => (
+                      <div key={region} className="rounded-lg border border-zinc-100 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/30">
+                        <p className="text-xs font-bold uppercase tracking-[0.12em] text-zinc-400 dark:text-zinc-500">
+                          {REGION_LABELS[region] || region}
+                        </p>
+                        <p className="mt-2 text-sm leading-relaxed text-zinc-600 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
+                          {item.connection}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* No matching items */}
       {filtered.length === 0 && (
