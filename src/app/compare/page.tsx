@@ -2,28 +2,45 @@ import type { Metadata } from "next";
 import { getTodayScan, REGION_LABELS } from "@/lib/scan-parser";
 import { hasBlindspot } from "@/lib/scan-types";
 import { EmailCapture } from "../components/email-capture";
+import { ShareButtons } from "../components/share-buttons";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "See how the world reported today's biggest story | Albis",
-  description:
-    "One event. Multiple perspectives. See how different regions reported the same news — updated daily by Albis.",
-  openGraph: {
-    title: "See how the world reported today's biggest story | Albis",
+export async function generateMetadata(): Promise<Metadata> {
+  const scan = await getTodayScan();
+  
+  let topic = "Today's biggest story";
+  let regions = "western-world,east-se-asia,middle-east";
+  let date = "";
+  
+  if (scan?.rawMarkdown) {
+    const m = scan.rawMarkdown.match(/##\s*🔍?\s*Framing Watch[:\s—–-]*([^\n]+)/i);
+    if (m) topic = m[1].trim();
+  }
+  if (scan?.displayDate) date = scan.displayDate;
+
+  const ogUrl = `/api/og?title=${encodeURIComponent(topic)}&regions=${encodeURIComponent(regions)}&date=${encodeURIComponent(date)}`;
+
+  return {
+    title: `${topic} — See how the world reported it | Albis`,
     description:
-      "One event. Multiple perspectives. See how different regions reported the same news.",
-    type: "website",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "See how the world reported today's biggest story | Albis",
-    description:
-      "One event. Multiple perspectives. See how different regions reported the same news.",
-    images: ["/og-image.png"],
-  },
-};
+      "One event. Multiple perspectives. See how different regions reported the same news — updated daily by Albis.",
+    openGraph: {
+      title: `${topic} — See how the world reported it | Albis`,
+      description:
+        "One event. Multiple perspectives. See how different regions reported the same news.",
+      type: "website",
+      images: [{ url: ogUrl, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${topic} — See how the world reported it | Albis`,
+      description:
+        "One event. Multiple perspectives. See how different regions reported the same news.",
+      images: [ogUrl],
+    },
+  };
+}
 
 const REGION_FLAGS: Record<string, string> = {
   "western-world": "🌎",
@@ -300,6 +317,9 @@ export default async function ComparePage() {
               </p>
             </div>
           )}
+
+          {/* Share buttons */}
+          <ShareButtons topic={topic} />
         </div>
       </section>
 

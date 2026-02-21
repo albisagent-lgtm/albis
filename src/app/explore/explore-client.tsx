@@ -1,9 +1,12 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { PremiumGate } from "@/app/components/premium-gate";
 import { PerspectiveScore } from "@/app/components/perspective-score";
+import { ShareIcon } from "@/app/components/share-buttons";
+import { SearchBar } from "@/app/components/search-bar";
 import { hasFramingWatch, hasBlindspot } from "@/lib/scan-types";
 import type { ExploreItem } from "./page";
 
@@ -249,6 +252,10 @@ function ExploreContent({ items, availableDates, categoryMeta, regionLabels }: P
       {/* Sticky Tabs + Filters */}
       <section className="sticky top-0 z-30 border-b border-zinc-200 bg-white/95 backdrop-blur-sm py-4 dark:border-zinc-800/50 dark:bg-[#0f0f0f]/95">
         <div className="mx-auto max-w-6xl px-6">
+          {/* Search */}
+          <div className="pb-4">
+            <SearchBar autoFocus={typeof window !== "undefined" && new URLSearchParams(window.location.search).has("search")} />
+          </div>
           {/* Topic Tabs */}
           <div className="overflow-x-auto">
             <div className="flex gap-1 pb-4">
@@ -430,11 +437,14 @@ function ExploreItemCard({
   return (
     <div className="group rounded-xl border border-black/[0.07] bg-white p-6 transition-all hover:border-zinc-300 hover:shadow-md dark:border-white/[0.07] dark:bg-white/[0.03] dark:hover:border-zinc-700">
       <div className="space-y-4">
-        {/* Header: Date and Significance */}
+        {/* Header: Date, Share, and Significance */}
         <div className="flex items-center justify-between">
-          <time className="text-xs text-zinc-400 dark:text-zinc-500">
-            {item.displayDate}
-          </time>
+          <div className="flex items-center gap-1">
+            <time className="text-xs text-zinc-400 dark:text-zinc-500">
+              {item.displayDate}
+            </time>
+            <ShareIcon headline={item.headline} />
+          </div>
           <div className="flex items-center gap-2">
             {isBlindspot && (
               <div className="flex items-center gap-1 rounded bg-orange-50 px-2 py-1 text-xs font-medium text-orange-700 dark:bg-orange-950/50 dark:text-orange-400">
