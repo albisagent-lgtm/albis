@@ -120,23 +120,33 @@ export default async function Home() {
             Our Mission
           </p>
           <h2 className="mb-8 text-3xl font-bold tracking-tight text-[#1a1a1a] dark:text-white md:text-4xl">
-            We don&apos;t tell you what to think.<br className="hidden sm:block" />
-            We show you what everyone else sees.
+            What if you could see<br className="hidden sm:block" />
+            what everyone else sees?
           </h2>
           <div className="mx-auto max-w-2xl space-y-5 text-base leading-relaxed text-[#555] dark:text-zinc-400 md:text-lg">
             <p>
-              Every story you read has already been shaped — by who wrote it, where it was published, 
-              and what was left out. Most of the time, you never see the other versions.
+              A farmer in Kenya reads about a trade deal and sees survival. A banker in London 
+              reads the same story and sees opportunity. A mother in São Paulo reads it and sees 
+              her children&apos;s future.
             </p>
             <p>
-              Albis exists because we believe you deserve the full picture. Not spin. Not takes. 
-              Not algorithms deciding which reality you live in. Just the same story, told from 
-              every perspective — so you can draw your own conclusions.
+              Same event. Same day. Three completely different worlds.
             </p>
             <p>
-              We <span className="font-semibold text-[#1a1a1a] dark:text-white">observe</span>, never judge. 
-              We show contrasts, not verdicts. We believe understanding grows when you see through 
-              more windows — not fewer.
+              That&apos;s not a problem. That&apos;s just reality — one we rarely get to see. Because 
+              the news you&apos;re shown has already been filtered. An algorithm chose it. An editor 
+              framed it. And the perspectives that didn&apos;t match? They disappeared before they 
+              reached you.
+            </p>
+            <p>
+              Albis brings them back. We show you the same story from seven regions around the 
+              world — not to overwhelm you, but to complete the picture. No judgement. No sides. 
+              Just clarity.
+            </p>
+            <p>
+              We believe the world makes more sense when you can see all of it. And that 
+              understanding — real understanding — is where 
+              <span className="font-semibold text-[#1a1a1a] dark:text-white"> peace begins</span>.
             </p>
           </div>
 
@@ -150,7 +160,7 @@ export default async function Home() {
                 Every Perspective
               </h3>
               <p className="text-sm leading-relaxed text-[#666] dark:text-zinc-500">
-                Same story from 7 regions. See how framing changes meaning — then decide for yourself.
+                One story, seven regions, the full picture.
               </p>
             </div>
             <div className="group">
@@ -158,10 +168,10 @@ export default async function Home() {
                 ✨
               </div>
               <h3 className="mb-2 text-sm font-bold uppercase tracking-wider text-[#1a1a1a] dark:text-white">
-                Light, Not Heat
+                No Agenda
               </h3>
               <p className="text-sm leading-relaxed text-[#666] dark:text-zinc-500">
-                No outrage. No sides. Stories that leave you more aware, not more anxious.
+                We observe, never judge, and trust you to think for yourself.
               </p>
             </div>
             <div className="group">
@@ -169,10 +179,10 @@ export default async function Home() {
                 🌍
               </div>
               <h3 className="mb-2 text-sm font-bold uppercase tracking-wider text-[#1a1a1a] dark:text-white">
-                Truly Global
+                More Light
               </h3>
               <p className="text-sm leading-relaxed text-[#666] dark:text-zinc-500">
-                Not left vs right. Not US-centric. 60+ countries, 7 regions, every scan.
+                Not more outrage, not more fear — just a clearer view of the world we share.
               </p>
             </div>
           </div>
