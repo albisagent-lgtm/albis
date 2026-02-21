@@ -120,7 +120,7 @@ export default async function Home() {
             Our Mission
           </p>
           <h2 className="mb-8 text-3xl font-bold tracking-tight text-[#1a1a1a] dark:text-white md:text-4xl">
-            What if you could see<br className="hidden sm:block" />
+            What if you could see<br className="hidden sm:block" />{" "}
             what everyone else sees?
           </h2>
           <div className="mx-auto max-w-2xl space-y-5 text-base leading-relaxed text-[#555] dark:text-zinc-400 md:text-lg">
@@ -179,7 +179,7 @@ export default async function Home() {
                 🌍
               </div>
               <h3 className="mb-2 text-sm font-bold uppercase tracking-wider text-[#1a1a1a] dark:text-white">
-                More Light
+                Clarity &amp; Light
               </h3>
               <p className="text-sm leading-relaxed text-[#666] dark:text-zinc-500">
                 Not more outrage, not more fear — just a clearer view of the world we share.
