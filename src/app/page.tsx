@@ -209,7 +209,7 @@ export default async function Home() {
             <HowItWorksStep
               icon="🔍"
               title="We scan"
-              description="AI reads 50,000+ sources across 60 countries, three times daily."
+              description="AI reads 50,000+ sources across 60 countries, every day."
             />
             <HowItWorksStep
               icon="📊"
