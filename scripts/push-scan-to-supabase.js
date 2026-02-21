@@ -121,13 +121,22 @@ async function upsertScan(scanDate, scanTime, data) {
     raw_markdown: data.rawMarkdown || null,
   };
 
+  // First try DELETE if exists, then INSERT
+  await fetch(`${SUPABASE_URL}/rest/v1/scans?scan_date=eq.${scanDate}&scan_time=eq.${scanTime}`, {
+    method: 'DELETE',
+    headers: {
+      'apikey': SERVICE_KEY,
+      'Authorization': `Bearer ${SERVICE_KEY}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
   const res = await fetch(`${SUPABASE_URL}/rest/v1/scans`, {
     method: 'POST',
     headers: {
       'apikey': SERVICE_KEY,
       'Authorization': `Bearer ${SERVICE_KEY}`,
       'Content-Type': 'application/json',
-      'Prefer': 'resolution=merge-duplicates',
     },
     body: JSON.stringify(body),
   });

@@ -112,6 +112,73 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* ── OUR MISSION ────────────────────────────────────── */}
+      <section className="relative bg-[#f8f7f4] py-20 dark:bg-[#0f0f0f] md:py-28">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-[#c8922a]">
+            Our Mission
+          </p>
+          <h2 className="mb-8 text-3xl font-bold tracking-tight text-[#1a1a1a] dark:text-white md:text-4xl">
+            We don&apos;t tell you what to think.<br className="hidden sm:block" />
+            We show you what everyone else sees.
+          </h2>
+          <div className="mx-auto max-w-2xl space-y-5 text-base leading-relaxed text-[#555] dark:text-zinc-400 md:text-lg">
+            <p>
+              Every story you read has already been shaped — by who wrote it, where it was published, 
+              and what was left out. Most of the time, you never see the other versions.
+            </p>
+            <p>
+              Albis exists because we believe you deserve the full picture. Not spin. Not takes. 
+              Not algorithms deciding which reality you live in. Just the same story, told from 
+              every perspective — so you can draw your own conclusions.
+            </p>
+            <p>
+              We <span className="font-semibold text-[#1a1a1a] dark:text-white">observe</span>, never judge. 
+              We show contrasts, not verdicts. We believe understanding grows when you see through 
+              more windows — not fewer.
+            </p>
+          </div>
+
+          {/* Values */}
+          <div className="mt-14 grid gap-8 sm:grid-cols-3">
+            <div className="group">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#c8922a]/10 text-2xl transition-transform group-hover:scale-110">
+                🪟
+              </div>
+              <h3 className="mb-2 text-sm font-bold uppercase tracking-wider text-[#1a1a1a] dark:text-white">
+                Every Perspective
+              </h3>
+              <p className="text-sm leading-relaxed text-[#666] dark:text-zinc-500">
+                Same story from 7 regions. See how framing changes meaning — then decide for yourself.
+              </p>
+            </div>
+            <div className="group">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#c8922a]/10 text-2xl transition-transform group-hover:scale-110">
+                ✨
+              </div>
+              <h3 className="mb-2 text-sm font-bold uppercase tracking-wider text-[#1a1a1a] dark:text-white">
+                Light, Not Heat
+              </h3>
+              <p className="text-sm leading-relaxed text-[#666] dark:text-zinc-500">
+                No outrage. No sides. Stories that leave you more aware, not more anxious.
+              </p>
+            </div>
+            <div className="group">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#c8922a]/10 text-2xl transition-transform group-hover:scale-110">
+                🌍
+              </div>
+              <h3 className="mb-2 text-sm font-bold uppercase tracking-wider text-[#1a1a1a] dark:text-white">
+                Truly Global
+              </h3>
+              <p className="text-sm leading-relaxed text-[#666] dark:text-zinc-500">
+                Not left vs right. Not US-centric. 60+ countries, 7 regions, every scan.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── HOW IT WORKS ─────────────────────────────────────── */}
       <section className="relative bg-[#f2f0eb] py-20 dark:bg-[#111111] md:py-28">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
