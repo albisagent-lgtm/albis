@@ -87,12 +87,12 @@ export function EmailCapture({ variant = "default" }: { variant?: "default" | "h
             onChange={(e) => { setEmail(e.target.value); setStatus("idle"); }}
             placeholder="you@example.com"
             required
-            className="h-13 flex-1 rounded-full border border-black/10 bg-white px-5 text-sm text-[#0f0f0f] placeholder-zinc-400 outline-none focus:border-[#1a3a5c]/30 focus:ring-1 focus:ring-[#1a3a5c]/20 dark:border-white/15 dark:bg-white/10 dark:text-white dark:placeholder-white/40 dark:focus:border-white/30 dark:focus:ring-white/20"
+            className="h-14 flex-1 rounded-full border border-black/10 bg-white px-6 text-sm text-[#0f0f0f] placeholder-zinc-400 outline-none focus:border-[#1a3a5c]/30 focus:ring-1 focus:ring-[#1a3a5c]/20 dark:border-white/15 dark:bg-white/10 dark:text-white dark:placeholder-white/40 dark:focus:border-white/30 dark:focus:ring-white/20"
           />
           <button
             type="submit"
             disabled={status === "loading"}
-            className="h-13 min-w-[44px] rounded-full bg-[#1a3a5c] px-8 text-sm font-semibold text-white shadow-[0_4px_16px_rgb(26,58,92,0.3)] hover:bg-[#243f66] disabled:opacity-70 dark:shadow-[0_4px_16px_rgb(26,58,92,0.5)]"
+            className="h-14 min-w-[44px] rounded-full bg-[#1a3a5c] px-10 text-sm font-semibold text-white shadow-[0_4px_16px_rgb(26,58,92,0.3)] hover:bg-[#243f66] disabled:opacity-70 dark:shadow-[0_4px_16px_rgb(26,58,92,0.5)]"
           >
             {status === "loading" ? "..." : "Get the free briefing"}
           </button>

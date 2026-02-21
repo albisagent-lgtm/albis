@@ -52,12 +52,12 @@ export default async function Home() {
         <div className="relative mx-auto w-full max-w-4xl px-6 py-20 md:py-28">
           {/* Headline block */}
           <div className="text-center">
-            <h1 className="animate-fade-in-up font-[family-name:var(--font-playfair)] text-5xl font-semibold leading-tight tracking-tight text-[#0f0f0f] md:text-6xl lg:text-7xl dark:text-[#f0efec]">
+            <h1 className="animate-fade-in-up font-[family-name:var(--font-playfair)] text-6xl font-semibold leading-tight tracking-tight text-[#0f0f0f] md:text-7xl lg:text-8xl dark:text-[#f0efec]">
               Same story. Every perspective.
             </h1>
 
             <p className="animate-fade-in-up delay-100 mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zinc-500 font-[family-name:var(--font-source-serif)] md:text-xl dark:text-zinc-400">
-              See how the same news is reported across the US, China, Europe, India, Africa, and more. Compare perspectives side by side. Form your own view.
+              One story. Seven regions. Every perspective — side by side.
             </p>
 
             {/* Email capture */}
@@ -65,11 +65,16 @@ export default async function Home() {
               <EmailCapture variant="hero" />
             </div>
 
+            {/* Trust signal */}
+            <p className="animate-fade-in-up delay-250 mt-4 text-center text-xs text-zinc-500 opacity-70 dark:text-zinc-500">
+              Tracking 50,000+ sources across 60 countries · Updated 3× daily
+            </p>
+
             {/* Secondary CTA */}
-            <div className="animate-fade-in-up delay-200 mt-4">
+            <div className="animate-fade-in-up delay-300 mt-4">
               <Link
                 href="/compare"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-[#c8922a] hover:text-[#b07f22] transition-colors"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-400 opacity-60 hover:text-[#c8922a] hover:opacity-100 transition-all"
               >
                 See today&apos;s comparison
                 <ArrowRight size={14} />
@@ -102,7 +107,7 @@ export default async function Home() {
             </span>
             <span className="hidden sm:inline text-zinc-700">·</span>
             <span>
-              <span className="font-semibold text-white">6</span> categories
+              <span className="font-semibold text-white">12</span> categories
             </span>
             <span className="hidden sm:inline text-zinc-700">·</span>
             <span>
@@ -786,11 +791,11 @@ function SignificanceDot({ significance }: { significance: string }) {
 }
 
 function RegionTag({ region }: { region: string }) {
-  return <span className="inline-flex rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-500 dark:bg-white/[0.06] dark:text-zinc-400">{REGION_LABELS[region] || region}</span>;
+  return <span className="inline-flex rounded-full border border-white/[0.1] bg-white/[0.06] px-2 py-0.5 text-[10px] font-medium text-zinc-400 dark:border-white/[0.1] dark:bg-white/[0.06] dark:text-zinc-400">{REGION_LABELS[region] || region}</span>;
 }
 
 function PatternTag({ pattern }: { pattern: string }) {
-  return <span className="inline-flex rounded-full bg-violet-50 px-2 py-0.5 text-[10px] font-medium text-violet-600 dark:bg-violet-950/30 dark:text-violet-400/80">{pattern.replace(/-/g, " ")}</span>;
+  return <span className="inline-flex rounded-full border border-violet-200/30 bg-violet-50/50 px-2 py-0.5 text-[10px] font-medium text-violet-600/80 dark:border-violet-400/10 dark:bg-violet-950/20 dark:text-violet-400/60">{pattern.replace(/-/g, " ")}</span>;
 }
 
 function FramingBadge() {
