@@ -309,7 +309,10 @@ function parseScanFile(filePath: string): ParsedScan | null {
 // ---------------------------------------------------------------------------
 
 export async function getTodayScan(): Promise<ParsedScan | null> {
-  const today = new Date().toISOString().split("T")[0];
+  // Use NZST (UTC+13) date since scans are generated in NZ timezone
+  const now = new Date();
+  const nzDate = new Date(now.getTime() + 13 * 60 * 60 * 1000);
+  const today = nzDate.toISOString().split("T")[0];
   
   // Try Supabase first if we're on Vercel or local files don't exist
   if (supabase && (isVercel || !isLocal)) {

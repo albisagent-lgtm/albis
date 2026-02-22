@@ -171,46 +171,48 @@ async function main() {
   // Get all items from all JSON blocks
   const allItems = extractJsonItems(md);
   
-  // Check if there's an AM/PM split
-  const hasAMPM = md.includes('## AM Data') || md.includes('## AM Scan');
-  const hasPM = md.includes('## PM Data') || md.includes('## PM Scan');
+  // Split into AM / Midday / PM sections
+  // Find section boundaries using ## headers
+  const sectionRegex = /^## (AM|Midday|PM)\b[^\n]*/gm;
+  const sectionStarts = [];
+  let m;
+  while ((m = sectionRegex.exec(md)) !== null) {
+    sectionStarts.push({ time: m[1], index: m.index });
+  }
   
-  if (hasAMPM && hasPM) {
-    // Split items: items before PM section are AM, after are PM
-    const pmStart = md.indexOf('## PM');
-    const amMd = md.substring(0, pmStart);
-    const pmMd = md.substring(pmStart);
-    
-    const amItems = extractJsonItems(amMd);
-    const pmItems = extractJsonItems(pmMd);
-    
-    // PM has its own theme/mood/pattern
-    const pmTopTheme = extractSection(pmMd, 'Top theme') || extractSection(pmMd, 'Top Theme');
-    const pmMood = extractSection(pmMd, 'Mood');
-    const pmPatternRaw = extractSection(pmMd, 'Pattern') || extractSection(pmMd, 'Patterns');
-    const pmPatternOfDay = parsePatternOfDay(pmPatternRaw);
-    const pmFramingNote = extractSection(pmMd, 'Framing');
-    const pmFramingWatch = extractFramingWatch(pmMd);
-    
-    await upsertScan(dateArg, 'AM', {
-      topTheme,
-      mood,
-      patternOfDay,
-      framingWatch: framingNote,
-      items: amItems,
-      rawMarkdown: amMd,
-    });
-    
-    await upsertScan(dateArg, 'PM', {
-      topTheme: pmTopTheme || topTheme,
-      mood: pmMood || mood,
-      patternOfDay: pmPatternOfDay || patternOfDay,
-      framingWatch: pmFramingWatch || pmFramingNote,
-      items: pmItems,
-      rawMarkdown: pmMd,
-    });
+  if (sectionStarts.length > 0) {
+    for (let i = 0; i < sectionStarts.length; i++) {
+      const start = sectionStarts[i].index;
+      const end = i + 1 < sectionStarts.length ? sectionStarts[i + 1].index : md.length;
+      const scanTime = sectionStarts[i].time === 'Midday' ? 'Midday' : sectionStarts[i].time;
+      const sectionMd = md.substring(start, end);
+      
+      // Also grab any matching Data section that may be separate
+      // e.g., "## AM Data", "## Midday Data", "## PM Data"
+      const dataLabel = scanTime === 'Midday' ? 'Midday' : scanTime;
+      const dataRegex = new RegExp(`## ${dataLabel} Data[\\s\\S]*?(?=\\n## |$)`);
+      const dataMatch = md.match(dataRegex);
+      const fullSection = dataMatch ? sectionMd + '\n' + dataMatch[0] : sectionMd;
+      
+      const sItems = extractJsonItems(fullSection);
+      const sTopTheme = extractSection(sectionMd, 'Top theme') || extractSection(sectionMd, 'Top Theme');
+      const sMood = extractSection(sectionMd, 'Mood');
+      const sPatternRaw = extractSection(sectionMd, 'Pattern') || extractSection(sectionMd, 'Patterns');
+      const sPatternOfDay = parsePatternOfDay(sPatternRaw);
+      const sFramingNote = extractSection(sectionMd, 'Framing');
+      const sFramingWatch = extractFramingWatch(sectionMd);
+      
+      await upsertScan(dateArg, scanTime, {
+        topTheme: sTopTheme || topTheme,
+        mood: sMood || mood,
+        patternOfDay: sPatternOfDay || patternOfDay,
+        framingWatch: sFramingWatch || sFramingNote || framingNote,
+        items: sItems,
+        rawMarkdown: fullSection,
+      });
+    }
   } else {
-    // Single scan for the day
+    // Single scan for the day (no AM/Midday/PM headers)
     await upsertScan(dateArg, 'AM', {
       topTheme,
       mood,
