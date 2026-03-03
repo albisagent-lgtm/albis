@@ -116,6 +116,11 @@ export async function POST(request: Request) {
       if (ref && typeof ref === "string" && ref.length <= 32) {
         insertData.referred_by = ref;
       }
+      // Capture timezone from client
+      const tz = body.timezone?.trim();
+      if (tz && typeof tz === "string" && tz.length <= 64) {
+        insertData.timezone = tz;
+      }
 
       const { error } = await supabase
         .from("subscribers")

@@ -52,7 +52,7 @@ const STORAGE_KEY = "albis-preferences";
 const AUTH_KEY = "albis-auth";
 
 // ---------------------------------------------------------------------------
-// Auth helpers (localStorage placeholder — swap to Supabase later)
+// Auth helpers (Supabase + localStorage fallback)
 // ---------------------------------------------------------------------------
 
 export interface LocalUser {
@@ -60,6 +60,7 @@ export interface LocalUser {
   createdAt: string;
 }
 
+// Legacy localStorage user (kept for compatibility during migration)
 export function getLocalUser(): LocalUser | null {
   if (typeof window === "undefined") return null;
   try {
@@ -80,6 +81,20 @@ export function clearLocalUser(): void {
   localStorage.removeItem(AUTH_KEY);
   localStorage.removeItem(STORAGE_KEY);
   localStorage.removeItem("albis-premium");
+}
+
+// Get Supabase user session (client-side only)
+export async function getSupabaseUser() {
+  if (typeof window === "undefined") return null;
+  
+  try {
+    const { createClient } = await import("@/lib/supabase/client");
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    return user;
+  } catch {
+    return null;
+  }
 }
 
 // ---------------------------------------------------------------------------

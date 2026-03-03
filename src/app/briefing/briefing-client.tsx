@@ -18,7 +18,219 @@ import {
 } from "@/lib/scan-types";
 import { estimateItemReadingTime } from "@/lib/reading-time";
 import { PerspectiveBar } from "@/app/components/perspective-bar";
+import { createClient } from "@/lib/supabase/client";
+
+/**
+ * Clean raw scan analysis text for public display.
+ * Strips markdown artifacts, collapses excessive detail, and caps length.
+ */
+function cleanScanText(raw: string, maxLen = 400): string {
+  let text = raw
+    // Remove markdown bold/italic markers
+    .replace(/\*{1,3}([^*]+)\*{1,3}/g, "$1")
+    // Remove markdown bullet prefixes
+    .replace(/^[\s]*[-•▸]\s*/gm, "")
+    // Collapse --- dividers
+    .replace(/^-{3,}$/gm, "")
+    // Collapse multiple newlines into space
+    .replace(/\n{2,}/g, " ")
+    // Collapse single newlines into space
+    .replace(/\n/g, " ")
+    // Clean up double spaces
+    .replace(/\s{2,}/g, " ")
+    .trim();
+  if (text.length > maxLen) {
+    // Cut at sentence boundary
+    const cut = text.lastIndexOf(".", maxLen);
+    text = cut > maxLen * 0.5 ? text.slice(0, cut + 1) : text.slice(0, maxLen) + "…";
+  }
+  return text;
+}
 import { PerspectiveScore } from "@/app/components/perspective-score";
+
+// ---------------------------------------------------------------------------
+// Briefing Preferences Types
+// ---------------------------------------------------------------------------
+
+interface BriefingPreferences {
+  categories: string[];
+  regions: string[];
+}
+
+const BRIEFING_CATEGORIES = [
+  "Current Events",
+  "Tech & AI",
+  "Health",
+  "Climate & Energy",
+  "Economic",
+  "Natural World",
+  "Culture",
+  "Psychology",
+  "Grassroots",
+  "Weather",
+];
+
+const BRIEFING_REGIONS = [
+  "South Asia",
+  "East & SE Asia",
+  "Middle East",
+  "Africa",
+  "Eastern Europe",
+  "Western World",
+  "Latin Americas",
+];
+
+// Map display names to scan category/region keys
+const CATEGORY_MAP: Record<string, string> = {
+  "Current Events": "current-events",
+  "Tech & AI": "tech-ai",
+  "Health": "health",
+  "Climate & Energy": "climate-energy",
+  "Economic": "economic-flows",
+  "Natural World": "natural-world",
+  "Culture": "culture",
+  "Psychology": "psychology-persuasion",
+  "Grassroots": "grassroots",
+  "Weather": "weather-climate",
+};
+
+const REGION_MAP: Record<string, string> = {
+  "South Asia": "south-asia",
+  "East & SE Asia": "east-se-asia",
+  "Middle East": "middle-east",
+  "Africa": "africa",
+  "Eastern Europe": "eastern-europe",
+  "Western World": "western-world",
+  "Latin Americas": "latin-americas",
+};
+
+// ---------------------------------------------------------------------------
+// Preference Bar Component
+// ---------------------------------------------------------------------------
+
+function PreferenceBar({
+  preferences,
+  onSave,
+}: {
+  preferences: BriefingPreferences;
+  onSave: (prefs: BriefingPreferences) => void;
+}) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [localPrefs, setLocalPrefs] = useState(preferences);
+
+  const toggleCategory = (category: string) => {
+    const newCategories = localPrefs.categories.includes(category)
+      ? localPrefs.categories.filter((c) => c !== category)
+      : [...localPrefs.categories, category];
+    const newPrefs = { ...localPrefs, categories: newCategories };
+    setLocalPrefs(newPrefs);
+    onSave(newPrefs);
+  };
+
+  const toggleRegion = (region: string) => {
+    const newRegions = localPrefs.regions.includes(region)
+      ? localPrefs.regions.filter((r) => r !== region)
+      : [...localPrefs.regions, region];
+    const newPrefs = { ...localPrefs, regions: newRegions };
+    setLocalPrefs(newPrefs);
+    onSave(newPrefs);
+  };
+
+  const allCategoriesSelected =
+    localPrefs.categories.length === 0 || localPrefs.categories.length === BRIEFING_CATEGORIES.length;
+  const allRegionsSelected =
+    localPrefs.regions.length === 0 || localPrefs.regions.length === BRIEFING_REGIONS.length;
+
+  return (
+    <div className="border-b border-zinc-200 dark:border-zinc-800/50">
+      <div className="mx-auto max-w-3xl px-6 py-4">
+        {/* Toggle button */}
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="flex w-full items-center justify-between text-left transition-colors hover:opacity-80"
+        >
+          <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+            Personalise your News Wall
+          </span>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={`text-zinc-400 transition-transform ${isExpanded ? "rotate-180" : ""}`}
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+
+        {/* Preference controls */}
+        {isExpanded && (
+          <div className="mt-6 space-y-6 pb-2">
+            {/* Categories */}
+            <div>
+              <label className="mb-3 block text-xs font-medium uppercase tracking-[0.12em] text-zinc-500 dark:text-zinc-400">
+                Categories
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {BRIEFING_CATEGORIES.map((category) => {
+                  const isActive =
+                    allCategoriesSelected || localPrefs.categories.includes(category);
+                  return (
+                    <button
+                      key={category}
+                      onClick={() => toggleCategory(category)}
+                      className={`rounded-full px-3 py-1.5 text-xs font-medium transition-all ${
+                        isActive
+                          ? "bg-[#c8922a] text-white shadow-sm"
+                          : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-700"
+                      }`}
+                    >
+                      {category}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Regions */}
+            <div>
+              <label className="mb-3 block text-xs font-medium uppercase tracking-[0.12em] text-zinc-500 dark:text-zinc-400">
+                Regions
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {BRIEFING_REGIONS.map((region) => {
+                  const isActive = allRegionsSelected || localPrefs.regions.includes(region);
+                  return (
+                    <button
+                      key={region}
+                      onClick={() => toggleRegion(region)}
+                      className={`rounded-full px-3 py-1.5 text-xs font-medium transition-all ${
+                        isActive
+                          ? "bg-[#c8922a] text-white shadow-sm"
+                          : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-700"
+                      }`}
+                    >
+                      {region}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Auto-save indicator */}
+            <p className="text-xs text-zinc-400 dark:text-zinc-500">
+              Preferences save automatically
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Client wrapper — reads preferences from localStorage, filters scan
@@ -27,11 +239,91 @@ import { PerspectiveScore } from "@/app/components/perspective-score";
 export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
   const [prefs, setPrefs] = useState<UserPreferences | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [isPremium, setIsPremium] = useState(false);
+  const [briefingPrefs, setBriefingPrefs] = useState<BriefingPreferences>({
+    categories: [],
+    regions: [],
+  });
 
+  // Load preferences from localStorage and Supabase
   useEffect(() => {
     setPrefs(getPreferences());
     setMounted(true);
+
+    async function loadBriefingPreferences() {
+      // Try localStorage first
+      const stored = localStorage.getItem("albis-briefing-prefs");
+      let localPrefs: BriefingPreferences = { categories: [], regions: [] };
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          localPrefs = {
+            categories: Array.isArray(parsed?.categories) ? parsed.categories : [],
+            regions: Array.isArray(parsed?.regions) ? parsed.regions : [],
+          };
+        } catch {
+          // Invalid JSON, ignore
+        }
+      }
+
+      // Check if user is logged in and load from Supabase
+      try {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        if (user) {
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("subscription_status, subscription_tier, briefing_preferences")
+            .eq("id", user.id)
+            .single();
+
+          if (profile?.subscription_status === "active" && profile?.subscription_tier) {
+            setIsPremium(true);
+          }
+
+          // Prefer Supabase preferences if available
+          if (profile?.briefing_preferences) {
+            const sp = profile.briefing_preferences as any;
+            setBriefingPrefs({
+              categories: Array.isArray(sp?.categories) ? sp.categories : [],
+              regions: Array.isArray(sp?.regions) ? sp.regions : [],
+            });
+            return;
+          }
+        }
+      } catch {
+        // Not logged in or no profile — use localStorage
+      }
+
+      setBriefingPrefs(localPrefs);
+    }
+
+    loadBriefingPreferences();
   }, []);
+
+  // Save preferences to localStorage and Supabase
+  const saveBriefingPreferences = async (newPrefs: BriefingPreferences) => {
+    setBriefingPrefs(newPrefs);
+
+    // Save to localStorage
+    localStorage.setItem("albis-briefing-prefs", JSON.stringify(newPrefs));
+
+    // Try to save to Supabase if logged in
+    try {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        await supabase
+          .from("profiles")
+          .update({ briefing_preferences: newPrefs })
+          .eq("id", user.id);
+      }
+    } catch {
+      // Not logged in or update failed — localStorage is enough
+    }
+  };
 
   if (!mounted) {
     return (
@@ -41,39 +333,84 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
     );
   }
 
-  // Not onboarded yet
-  if (!prefs?.onboardingComplete) {
-    return <NeedsOnboarding />;
-  }
+  // Onboarding gate removed — everyone sees everything unfiltered.
+  // Personalisation filters are available via the preference bar.
 
   // No scan data
   if (!scan) {
     return <NoScanData />;
   }
 
-  // Filter items by user preferences
-  const filtered = scan.items.filter((item) => {
-    const topicMatch =
-      prefs.topics.length === 0 || prefs.topics.includes(item.category as never);
-    const regionMatch =
-      prefs.regions.length === 0 ||
-      item.regions.some((r) => prefs.regions.includes(r as never));
-    return topicMatch && regionMatch;
+  // Deduplicate items by headline
+  const seen = new Set<string>();
+  const deduped = scan.items.filter((item) => {
+    const key = item.headline.toLowerCase().trim();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
   });
 
-  const topicLabels = prefs.topics
+  // Check if user has preferences set
+  const hasPreferences =
+    briefingPrefs.categories.length > 0 || briefingPrefs.regions.length > 0;
+
+  // Split items into "Your picks" and "Everything else"
+  let yourPicks: ScanItem[] = [];
+  let everythingElse: ScanItem[] = [];
+
+  if (hasPreferences) {
+    // Map selected categories and regions to scan keys
+    const selectedCategoryKeys = briefingPrefs.categories.map((c) => CATEGORY_MAP[c] || c);
+    const selectedRegionKeys = briefingPrefs.regions.map((r) => REGION_MAP[r] || r);
+
+    yourPicks = deduped.filter((item) => {
+      const categoryMatch =
+        selectedCategoryKeys.length === 0 || selectedCategoryKeys.includes(item.category);
+      const regionMatch =
+        selectedRegionKeys.length === 0 ||
+        item.regions.some((r) => selectedRegionKeys.includes(r));
+      return categoryMatch && regionMatch;
+    });
+
+    everythingElse = deduped.filter((item) => !yourPicks.includes(item));
+  } else {
+    // No preferences set — show everything normally
+    yourPicks = deduped;
+  }
+
+  const topicLabels = (prefs?.topics || [])
     .map((t) => TOPICS.find((x) => x.id === t)?.label || t)
     .join(", ");
-  const regionLabels = prefs.regions
+  const regionLabels = (prefs?.regions || [])
     .map((r) => REGIONS.find((x) => x.id === r)?.label || r)
     .join(", ");
 
-  const highItems = filtered.filter((i) => i.significance === "high");
-  const framingItems = filtered.filter((i) => i.patterns.includes("framing")).slice(0, 3);
-  const categories = groupByCategory(filtered);
+  const highItems = yourPicks.filter((i) => i.significance === "high");
+  const framingItems = yourPicks.filter((i) => i.patterns.includes("framing")).slice(0, 3);
+
+  // Track which headlines have been shown to avoid repetition across sections
+  const shownHeadlines = new Set<string>();
+  
+  // Top stories get first pick
+  highItems.forEach((i) => shownHeadlines.add(i.headline.toLowerCase().trim()));
+
+  // Blindspots exclude anything already in top stories
+  const blindspotItems = yourPicks
+    .filter((i) => hasBlindspot(i) && !shownHeadlines.has(i.headline.toLowerCase().trim()))
+    .slice(0, 5);
+  blindspotItems.forEach((i) => shownHeadlines.add(i.headline.toLowerCase().trim()));
+
+  // Category intelligence excludes anything already shown
+  const remainingForCategories = yourPicks.filter(
+    (i) => !shownHeadlines.has(i.headline.toLowerCase().trim())
+  );
+  const yourPicksCategories = groupByCategory(remainingForCategories);
+
+  // "Everything else" categories
+  const everythingElseCategories = groupByCategory(everythingElse);
 
   // Build narrative data
-  const topStories = [...filtered]
+  const topStories = [...yourPicks]
     .sort((a, b) => {
       const sigOrder: Record<string, number> = { high: 0, medium: 1, low: 2 };
       return (sigOrder[a.significance] ?? 1) - (sigOrder[b.significance] ?? 1);
@@ -99,14 +436,16 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
 
           <div className="mt-10">
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#c8922a]">
-              Your Briefing
+              News Wall
             </p>
             <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-light italic leading-snug text-[#0f0f0f] dark:text-[#f0efec] md:text-4xl">
-              {filtered.length} signal{filtered.length !== 1 ? "s" : ""} today
+              {yourPicks.length} signal{yourPicks.length !== 1 ? "s" : ""} today
             </h1>
-            <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-500">
-              Tracking {topicLabels} &middot; {regionLabels}
-            </p>
+            {!hasPreferences && (
+              <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-500">
+                Tracking {topicLabels} &middot; {regionLabels}
+              </p>
+            )}
           </div>
 
           {/* Pattern of the Day — always shown */}
@@ -121,34 +460,33 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
                 </p>
               )}
               <p className="mt-3 text-sm leading-relaxed text-zinc-500 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
-                {scan.patternOfDay.body}
+                {cleanScanText(scan.patternOfDay.body, 500)}
               </p>
             </div>
           )}
         </div>
       </section>
 
+      {/* Preference Bar */}
+      <PreferenceBar preferences={briefingPrefs} onSave={saveBriefingPreferences} />
+
       {/* Narrative Briefing — "Your Morning Brief" */}
-      {filtered.length > 0 && (
+      {yourPicks.length > 0 && (
         <section className="border-b border-[#c8922a]/20 bg-[#faf8f4] dark:bg-[#141210]">
           <div className="mx-auto max-w-3xl px-6 py-14 md:py-20">
             <p className="font-[family-name:var(--font-playfair)] text-xs font-medium uppercase tracking-[0.2em] text-[#c8922a]">
-              Your Morning Brief
+              {hasPreferences ? "Your Morning Brief" : "Morning Brief"}
             </p>
 
             <div className="mt-8 space-y-5 font-[family-name:var(--font-source-serif)] text-base leading-relaxed text-zinc-700 dark:text-zinc-300 md:text-lg md:leading-relaxed">
-              {/* Opening — mood + top theme */}
+              {/* Opening */}
               <p>
                 {scan.mood ? (
-                  <>The world feels <em className="text-zinc-900 dark:text-zinc-100">{scan.mood.toLowerCase()}</em> this morning. </>
+                  <>The world feels <em className="text-zinc-900 dark:text-zinc-100">{cleanScanText(scan.mood, 30).toLowerCase()}</em> this morning. </>
                 ) : (
                   <>Good morning. </>
                 )}
-                {scan.topTheme ? (
-                  <>The dominant thread today is <strong className="font-semibold text-zinc-900 dark:text-zinc-100">{scan.topTheme}</strong>.</>
-                ) : (
-                  <>Here&rsquo;s what matters from your world today.</>
-                )}
+                Here&rsquo;s what matters from your world today.
               </p>
 
               {/* Top story highlights */}
@@ -160,7 +498,7 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
                       <span>
                         <strong className="font-semibold text-zinc-900 dark:text-zinc-100">{item.headline}</strong>
                         {item.connection && (
-                          <span className="text-zinc-500 dark:text-zinc-400"> — {item.connection.length > 120 ? item.connection.slice(0, 120) + "…" : item.connection}</span>
+                          <span className="text-zinc-500 dark:text-zinc-400"> — {cleanScanText(item.connection, 120)}</span>
                         )}
                       </span>
                     </li>
@@ -170,23 +508,20 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
 
               {/* Pattern of the day */}
               {scan.patternOfDay && (
-                <p>
-                  <span className="font-semibold text-zinc-900 dark:text-zinc-100">Pattern to watch:</span>{" "}
-                  {scan.patternOfDay.title ? <>{scan.patternOfDay.title} — </> : null}
-                  {scan.patternOfDay.body}
-                </p>
-              )}
-
-              {/* Framing highlight */}
-              {scan.framingNote && (
-                <p className="border-l-2 border-[#c8922a]/30 pl-4 italic text-zinc-600 dark:text-zinc-400">
-                  {scan.framingNote}
+                <p className="border-l-2 border-[#c8922a]/30 pl-4 text-zinc-600 dark:text-zinc-400">
+                  <span className="font-semibold text-zinc-900 dark:text-zinc-100">Pattern of the day: </span>
+                  {cleanScanText(
+                    scan.patternOfDay.title
+                      ? scan.patternOfDay.title
+                      : scan.patternOfDay.body,
+                    200
+                  )}
                 </p>
               )}
 
               {/* Closing */}
               <p className="text-zinc-500 dark:text-zinc-500">
-                That&rsquo;s your world this morning. Go live it.
+                That&rsquo;s your world this morning. Observe. Never judge.
               </p>
             </div>
           </div>
@@ -196,51 +531,17 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
         </section>
       )}
 
-      {/* How It Was Framed — framing breakdown cards */}
-      {framingItems.length > 0 && (
-        <section className="border-b border-zinc-200 py-12 dark:border-zinc-800/50 md:py-16">
-          <div className="mx-auto max-w-3xl px-6">
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#c8922a]">
-              How It Was Framed
-            </p>
-            <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
-              Same story, different lenses — see how regions reported it differently.
-            </p>
-
-            <div className="mt-8 space-y-6">
-              {framingItems.map((item, idx) => (
-                <div key={idx} className="rounded-xl border border-black/[0.07] bg-white p-6 dark:border-white/[0.07] dark:bg-white/[0.03]">
-                  <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
-                    {item.headline}
-                  </h3>
-                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                    {item.regions.map((region) => (
-                      <div key={region} className="rounded-lg border border-zinc-100 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/30">
-                        <p className="text-xs font-bold uppercase tracking-[0.12em] text-zinc-400 dark:text-zinc-500">
-                          {REGION_LABELS[region] || region}
-                        </p>
-                        <p className="mt-2 text-sm leading-relaxed text-zinc-600 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
-                          {item.connection}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* How It Was Framed — removed */}
 
       {/* No matching items */}
-      {filtered.length === 0 && (
+      {yourPicks.length === 0 && (
         <section className="py-16">
           <div className="mx-auto max-w-3xl px-6 text-center">
             <p className="text-zinc-500 dark:text-zinc-400">
               No signals match your current filters today.
             </p>
             <p className="mt-2 text-sm text-zinc-400 dark:text-zinc-500">
-              Try adjusting your{" "}
+              Try adjusting your preferences above or your{" "}
               <Link href="/settings" className="underline underline-offset-4 hover:text-zinc-300">
                 topics and regions
               </Link>
@@ -250,8 +551,24 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
         </section>
       )}
 
-      {/* Top Stories */}
-      {highItems.length > 0 && (
+      {/* Your Picks - Top Stories */}
+      {hasPreferences && highItems.length > 0 && (
+        <section className="border-b border-zinc-200 py-12 dark:border-zinc-800/50 md:py-16">
+          <div className="mx-auto max-w-3xl px-6">
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#c8922a]">
+              Your Picks — Top Stories
+            </p>
+            <div className="mt-6 space-y-1">
+              {highItems.map((item, i) => (
+                <StoryCard key={i} item={item} userIsPremium={isPremium} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Top Stories (no preferences) */}
+      {!hasPreferences && highItems.length > 0 && (
         <section className="border-b border-zinc-200 py-12 dark:border-zinc-800/50 md:py-16">
           <div className="mx-auto max-w-3xl px-6">
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
@@ -259,7 +576,7 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
             </p>
             <div className="mt-6 space-y-1">
               {highItems.map((item, i) => (
-                <StoryCard key={i} item={item} />
+                <StoryCard key={i} item={item} userIsPremium={isPremium} />
               ))}
             </div>
           </div>
@@ -267,7 +584,7 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
       )}
 
       {/* Blindspots */}
-      {filtered.filter((i) => hasBlindspot(i)).length > 0 && (
+      {blindspotItems.length > 0 && (
         <section className="border-b border-zinc-200 py-12 dark:border-zinc-800/50 md:py-16">
           <div className="mx-auto max-w-3xl px-6">
             <div className="flex items-center gap-2">
@@ -282,19 +599,16 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
                 Blindspots
               </p>
               <span className="text-xs text-zinc-400 dark:text-zinc-600">
-                {filtered.filter((i) => hasBlindspot(i)).length}
+                {blindspotItems.length}
               </span>
             </div>
             <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
               Stories with limited regional coverage — perspectives you may be missing.
             </p>
             <div className="mt-6 space-y-3">
-              {filtered
-                .filter((i) => hasBlindspot(i))
-                .slice(0, 5)
-                .map((item, i) => (
+              {blindspotItems.map((item, i) => (
                   <div key={`bs-${i}`} className="rounded-lg border border-dashed border-amber-300/50 bg-amber-50/30 dark:border-amber-700/30 dark:bg-amber-950/10">
-                    <StoryCard item={item} />
+                    <StoryCard item={item} userIsPremium={isPremium} />
                     {item.blindspot && (
                       <div className="px-4 pb-4 pl-[2.25rem] flex flex-wrap gap-x-4 gap-y-1 text-xs">
                         <span>
@@ -314,16 +628,48 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
         </section>
       )}
 
-      {/* By Category */}
-      {categories.size > 0 && (
+      {/* Your Picks - By Category */}
+      {hasPreferences && yourPicksCategories.size > 0 && (
+        <section className="border-b border-zinc-200 py-12 dark:border-zinc-800/50 md:py-16">
+          <div className="mx-auto max-w-3xl px-6">
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#c8922a]">
+              Your Picks — Intelligence
+            </p>
+            <div className="mt-8 space-y-12">
+              {Array.from(yourPicksCategories).map(([cat, items]) => (
+                <CategorySection key={cat} category={cat} items={items} userIsPremium={isPremium} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Everything Else - By Category */}
+      {hasPreferences && everythingElseCategories.size > 0 && (
+        <section className="py-12 md:py-16">
+          <div className="mx-auto max-w-3xl px-6">
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
+              Everything Else
+            </p>
+            <div className="mt-8 space-y-12">
+              {Array.from(everythingElseCategories).map(([cat, items]) => (
+                <CategorySection key={cat} category={cat} items={items} userIsPremium={isPremium} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* By Category (no preferences) */}
+      {!hasPreferences && yourPicksCategories.size > 0 && (
         <section className="py-12 md:py-16">
           <div className="mx-auto max-w-3xl px-6">
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
               Your Intelligence
             </p>
             <div className="mt-8 space-y-12">
-              {Array.from(categories).map(([cat, items]) => (
-                <CategorySection key={cat} category={cat} items={items} />
+              {Array.from(yourPicksCategories).map(([cat, items]) => (
+                <CategorySection key={cat} category={cat} items={items} userIsPremium={isPremium} />
               ))}
             </div>
           </div>
@@ -331,13 +677,13 @@ export function BriefingClient({ scan }: { scan: ParsedScan | null }) {
       )}
 
       {/* "You're all caught up" completion state */}
-      {filtered.length > 0 && (
+      {yourPicks.length > 0 && (
         <section className="border-t border-zinc-200 dark:border-zinc-800/50">
           <div className="mx-auto max-w-3xl px-6 py-16 text-center">
             <CaughtUpState
               date={scan.displayDate}
-              storyCount={filtered.length}
-              perspectiveCount={new Set(filtered.flatMap((i) => i.regions)).size}
+              storyCount={yourPicks.length}
+              perspectiveCount={new Set(yourPicks.flatMap((i) => i.regions)).size}
             />
           </div>
         </section>
@@ -401,7 +747,7 @@ function CaughtUpState({
       )}
 
       <div className="animate-fade-in-up">
-        <p className="text-3xl">✨</p>
+        <p className="text-3xl text-[#c8922a]">—</p>
         <h3 className="mt-4 font-[family-name:var(--font-playfair)] text-2xl font-semibold italic text-[#0f0f0f] dark:text-[#f0efec]">
           You are all caught up
         </h3>
@@ -415,10 +761,10 @@ function CaughtUpState({
           Next briefing at 7:00 AM tomorrow
         </p>
         <Link
-          href="/pricing"
+          href="/signup"
           className="mt-5 inline-flex h-9 items-center gap-2 rounded-full border border-[#c8922a]/30 bg-[#c8922a]/5 px-5 text-xs font-medium text-[#c8922a] hover:bg-[#c8922a]/10 dark:border-[#c8922a]/20"
         >
-          Share your perspective score
+          Get the daily briefing free
         </Link>
       </div>
     </div>
@@ -498,11 +844,10 @@ function FramingWatchBadge() {
   );
 }
 
-function StoryCard({ item }: { item: ScanItem }) {
+function StoryCard({ item, userIsPremium = false }: { item: ScanItem; userIsPremium?: boolean }) {
   const framing = hasFramingWatch(item);
   const blindspot = hasBlindspot(item);
   const readTime = estimateItemReadingTime(item.headline, item.connection);
-  const isPremiumContent = framing || blindspot;
   return (
     <article className="group rounded-lg px-4 py-4 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900/50">
       <div className="flex gap-3">
@@ -529,26 +874,9 @@ function StoryCard({ item }: { item: ScanItem }) {
             <PerspectiveScore regions={item.regions} />
           </div>
           <div className="mt-3">
-            {isPremiumContent ? (
-              <div className="relative">
-                <p className="select-none text-sm leading-relaxed text-zinc-500 blur-[3px]">
-                  {item.connection}
-                </p>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="rounded-full border border-zinc-200 bg-white/90 px-4 py-1.5 text-xs font-medium text-zinc-600 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/90 dark:text-zinc-400">
-                    <svg className="mr-1.5 inline h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                    </svg>
-                    🔒 Unlock with Premium
-                  </span>
-                </div>
-              </div>
-            ) : (
               <p className="text-sm leading-relaxed text-zinc-500 font-[family-name:var(--font-source-serif)] dark:text-zinc-500">
                 {item.connection}
               </p>
-            )}
           </div>
         </div>
       </div>
@@ -569,7 +897,7 @@ function BlindspotBadge() {
   );
 }
 
-function CategorySection({ category, items }: { category: string; items: ScanItem[] }) {
+function CategorySection({ category, items, userIsPremium = false }: { category: string; items: ScanItem[]; userIsPremium?: boolean }) {
   const meta = CATEGORY_META[category] || { label: category, color: "zinc" };
   const colorDot: Record<string, string> = {
     blue: "bg-blue-500", violet: "bg-violet-500", cyan: "bg-cyan-500",
@@ -586,7 +914,7 @@ function CategorySection({ category, items }: { category: string; items: ScanIte
       </div>
       <div className="mt-3 space-y-1">
         {items.map((item, i) => (
-          <StoryCard key={i} item={item} />
+          <StoryCard key={i} item={item} userIsPremium={userIsPremium} />
         ))}
       </div>
     </div>
@@ -597,36 +925,12 @@ function CategorySection({ category, items }: { category: string; items: ScanIte
 // Fallback states
 // ---------------------------------------------------------------------------
 
-function NeedsOnboarding() {
-  return (
-    <main className="flex min-h-[60vh] items-center justify-center">
-      <div className="mx-auto max-w-md px-6 text-center">
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
-          Welcome to Albis
-        </p>
-        <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-light italic leading-snug text-zinc-800 dark:text-zinc-100">
-          Set up your briefing
-        </h1>
-        <p className="mt-4 text-zinc-500 dark:text-zinc-400">
-          Choose the topics and regions you want to track. Takes 30 seconds.
-        </p>
-        <Link
-          href="/onboarding"
-          className="mt-8 inline-flex h-11 min-w-[44px] items-center rounded-full bg-zinc-900 px-8 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
-        >
-          Get started
-        </Link>
-      </div>
-    </main>
-  );
-}
-
 function NoScanData() {
   return (
     <main className="flex min-h-[60vh] items-center justify-center">
       <div className="px-6 text-center">
         <h1 className="text-2xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-          Your Briefing
+          News Wall
         </h1>
         <p className="mt-3 text-zinc-500 dark:text-zinc-400">
           No scan data available yet. Your next briefing will appear here automatically.
@@ -657,3 +961,5 @@ function groupByCategory(items: ScanItem[]): Map<string, ScanItem[]> {
   }
   return sorted;
 }
+
+// (getRegionFlag removed — was unused)

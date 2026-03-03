@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { EmailCapture } from "./email-capture";
 
 export function Footer() {
   return (
@@ -14,13 +15,10 @@ export function Footer() {
               Albis
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-zinc-400 dark:text-zinc-500">
-              See the world clearly.
-            </p>
-            <p className="mt-4 text-xs text-[#c8922a]/70 font-medium italic font-[family-name:var(--font-playfair)]">
-              The app designed to let you go.
+              News from 7 regions. All perspectives. 5 minutes.
             </p>
             <p className="mt-4 text-xs text-zinc-400 dark:text-zinc-500">
-              Scanning 50,000+ sources across 7 regions daily
+              Free daily briefing · Zero bias · Unsubscribe anytime
             </p>
           </div>
 
@@ -32,9 +30,10 @@ export function Footer() {
               </p>
               <ul className="mt-4 space-y-2.5">
                 <FooterLink href="/">Home</FooterLink>
-                <FooterLink href="/briefing">Briefing</FooterLink>
-                <FooterLink href="/pricing">Pricing</FooterLink>
+                <FooterLink href="/archive">Briefings</FooterLink>
+                <FooterLink href="/perspectives">Perspectives</FooterLink>
                 <FooterLink href="/about">About</FooterLink>
+                <FooterLink href="/lens">The Lens</FooterLink>
               </ul>
             </div>
             <div>
@@ -56,6 +55,17 @@ export function Footer() {
                   </a>
                 </li>
               </ul>
+            </div>
+            <div className="max-w-xs">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
+                Newsletter
+              </p>
+              <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
+                Daily briefing, free forever.
+              </p>
+              <div className="mt-3">
+                <EmailCapture variant="default" />
+              </div>
             </div>
           </div>
         </div>

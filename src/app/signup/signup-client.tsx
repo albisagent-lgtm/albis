@@ -1,143 +1,185 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { setLocalUser } from "@/lib/preferences";
 
-export default function SignupClient() {
-  const router = useRouter();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+export default function SignupClient({
+  subscriberCount,
+}: {
+  subscriberCount: number;
+}) {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [message, setMessage] = useState("");
+  const mountTimeRef = useRef<number>(0);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-
-    const form = new FormData(e.currentTarget);
-    const email = form.get("email") as string;
-    const password = form.get("password") as string;
-
-    if (!email || !password || password.length < 8) {
-      setError("Please enter a valid email and a password of at least 8 characters.");
-      setLoading(false);
-      return;
+  useEffect(() => {
+    mountTimeRef.current = Date.now();
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const ref = params.get("ref");
+      if (ref) {
+        localStorage.setItem("albis_ref", ref);
+      }
     }
+  }, []);
 
-    setLocalUser({ email, createdAt: new Date().toISOString() });
-    router.push("/onboarding");
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email.trim()) return;
+
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email.trim(),
+          website:
+            (
+              document.querySelector(
+                'input[name="website"]'
+              ) as HTMLInputElement
+            )?.value || "",
+          _t: mountTimeRef.current,
+          ref:
+            typeof window !== "undefined"
+              ? localStorage.getItem("albis_ref") || ""
+              : "",
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setStatus("success");
+        setMessage(data.message || "You're on the list!");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setMessage(data.message || "Something went wrong.");
+      }
+    } catch {
+      setStatus("error");
+      setMessage("Connection failed. Please try again.");
+    }
   }
 
-  return (
-    <div className="relative flex min-h-[90vh] items-center justify-center bg-[#f8f7f4] dark:bg-[#0f0f0f]">
-      {/* Background gradient */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-amber-50/40 via-transparent to-transparent dark:from-amber-950/10" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/25 to-transparent" />
+  const honeypotStyle: React.CSSProperties = {
+    position: "absolute",
+    left: "-9999px",
+    opacity: 0,
+    height: 0,
+  };
 
-      <div className="animate-fade-in-up relative w-full max-w-sm px-6">
-        {/* Logo mark */}
-        <div className="mb-10 text-center">
+  const readerText =
+    subscriberCount > 0
+      ? `Join ${subscriberCount.toLocaleString()} readers`
+      : "Join our readers";
+
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#f8f7f4] px-space-6 py-space-16 dark:bg-[#0f0f0f]">
+      <div className="w-full max-w-lg">
+        {/* Back link */}
+        <div className="mb-8 text-center">
           <Link
             href="/"
-            className="font-[family-name:var(--font-playfair)] text-2xl italic font-semibold text-[#0f0f0f] dark:text-[#f0efec]"
+            className="text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
           >
-            Albis
+            ← Back to Albis
           </Link>
-          <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
-            News intelligence, not noise.
-          </p>
         </div>
 
-        {/* Card */}
-        <div className="rounded-2xl border border-black/[0.07] bg-white p-8 shadow-[0_4px_24px_rgb(0,0,0,0.06)] dark:border-white/[0.07] dark:bg-white/[0.04] dark:shadow-none">
-          <h1 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-            Start reading free
-          </h1>
-          <p className="mt-1.5 text-sm text-zinc-500 dark:text-zinc-400">
-            No credit card. No lock-in. Cancel anytime.
-          </p>
+        {/* Logo */}
+        <h1 className="text-center font-[family-name:var(--font-playfair)] text-3xl font-bold tracking-tight text-[#0f0f0f] dark:text-[#f0efec]">
+          ALBIS
+        </h1>
 
-          <form onSubmit={handleSubmit} className="mt-7 flex flex-col gap-4">
-            {/* Email */}
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
-                Email address
-              </label>
+        {status === "success" ? (
+          /* Success state */
+          <div className="mt-12 text-center">
+            <p className="font-[family-name:var(--font-source-serif)] text-3xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+              You&apos;re in. ✓
+            </p>
+            <p className="mt-3 text-lg text-zinc-500 dark:text-zinc-400">
+              Check your inbox for tomorrow&apos;s briefing.
+            </p>
+            <Link
+              href="/"
+              className="mt-space-8 inline-block text-sm font-medium text-[#1a3a5c] hover:underline dark:text-[#7ab0d8]"
+            >
+              ← Explore Albis
+            </Link>
+          </div>
+        ) : (
+          /* Form state */
+          <>
+            {/* Headline */}
+            <p className="mt-space-8 text-center font-[family-name:var(--font-source-serif)] text-2xl leading-snug text-[#0f0f0f] md:text-3xl dark:text-[#f0efec]">
+              The daily briefing that shows you how the world tells its stories.
+            </p>
+
+            {/* Subline */}
+            <p className="mt-3 text-center text-lg text-zinc-500 dark:text-zinc-400">
+              Free. Every morning. No spin.
+            </p>
+
+            {/* Email form */}
+            <form
+              onSubmit={handleSubmit}
+              className="relative mt-space-8 flex flex-col gap-space-3 sm:flex-row"
+            >
               <input
-                name="email"
+                type="text"
+                name="website"
+                autoComplete="off"
+                tabIndex={-1}
+                aria-hidden="true"
+                style={honeypotStyle}
+              />
+              <input
                 type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setStatus("idle");
+                }}
+                placeholder="your@email.com"
                 required
-                autoComplete="email"
-                placeholder="you@example.com"
-                className="h-11 rounded-xl border border-black/[0.1] bg-[#f8f7f4] px-3.5 text-sm text-[#0f0f0f] placeholder:text-zinc-400 focus:border-[#1a3a5c] focus:outline-none focus:ring-2 focus:ring-[#1a3a5c]/15 dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-[#f0efec] dark:placeholder:text-zinc-600 dark:focus:border-[#4a7baa] dark:focus:ring-[#4a7baa]/15"
+                className="w-full flex-1 rounded-lg border border-black/10 bg-white px-4 py-3 text-[15px] text-[#0f0f0f] placeholder-zinc-400 outline-none focus:ring-2 focus:ring-[#c8922a]/30 dark:border-white/10 dark:bg-zinc-900 dark:text-[#f0efec] dark:placeholder-zinc-500"
               />
-            </div>
-
-            {/* Password */}
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
-                Password
-              </label>
-              <input
-                name="password"
-                type="password"
-                required
-                minLength={8}
-                autoComplete="new-password"
-                placeholder="At least 8 characters"
-                className="h-11 rounded-xl border border-black/[0.1] bg-[#f8f7f4] px-3.5 text-sm text-[#0f0f0f] placeholder:text-zinc-400 focus:border-[#1a3a5c] focus:outline-none focus:ring-2 focus:ring-[#1a3a5c]/15 dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-[#f0efec] dark:placeholder:text-zinc-600 dark:focus:border-[#4a7baa] dark:focus:ring-[#4a7baa]/15"
-              />
-            </div>
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="rounded-lg bg-[#1a3a5c] px-6 py-3 font-medium text-white transition-colors hover:bg-[#1a3a5c]/90 disabled:opacity-60"
+              >
+                {status === "loading" ? "..." : "Subscribe →"}
+              </button>
+            </form>
 
             {/* Error */}
-            {error && (
-              <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-700 dark:border-amber-900/50 dark:bg-amber-950/30 dark:text-amber-400">
-                {error}
-              </div>
+            {status === "error" && (
+              <p className="mt-2 text-center text-sm text-red-500 dark:text-red-400">
+                {message}
+              </p>
             )}
 
-            {/* Submit */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="mt-2 flex h-12 items-center justify-center rounded-xl bg-[#1a3a5c] text-sm font-semibold text-white shadow-[0_2px_12px_rgb(26,58,92,0.3)] transition-all hover:bg-[#243f66] hover:shadow-[0_4px_16px_rgb(26,58,92,0.4)] disabled:opacity-50"
-            >
-              {loading ? (
-                <span className="flex items-center gap-2">
-                  <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                  </svg>
-                  Creating account…
-                </span>
-              ) : (
-                "Create free account"
-              )}
-            </button>
-          </form>
-
-          {/* Privacy note */}
-          <p className="mt-5 text-center text-[11px] text-zinc-400 dark:text-zinc-600">
-            By signing up you agree to our{" "}
-            <a href="#" className="underline">terms</a> and{" "}
-            <a href="#" className="underline">privacy policy</a>.
-            <br />
-            We never sell your data.
-          </p>
-        </div>
-
-        {/* Switch */}
-        <p className="mt-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
-          Already have an account?{" "}
-          <Link
-            href="/login"
-            className="font-medium text-[#1a3a5c] hover:underline dark:text-[#7ab0d8]"
-          >
-            Sign in
-          </Link>
-        </p>
+            {/* Social proof */}
+            <p className="mt-4 text-center text-sm text-zinc-400 dark:text-zinc-500">
+              {readerText} · No spam · Unsubscribe anytime
+            </p>
+          </>
+        )}
       </div>
+
+      {/* Minimal footer */}
+      <p className="mt-16 text-center text-xs text-zinc-400 dark:text-zinc-500">
+        © 2026 Albis ·{" "}
+        <Link href="/privacy" className="hover:underline">
+          Privacy
+        </Link>
+      </p>
     </div>
   );
 }

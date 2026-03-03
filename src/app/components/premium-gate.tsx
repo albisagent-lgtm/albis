@@ -55,26 +55,25 @@ function UpgradePrompt({ loggedIn }: { loggedIn: boolean }) {
         </div>
 
         <h1 className="mt-6 text-2xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-          Premium Feature
+          Coming Soon
         </h1>
         <p className="mt-3 text-zinc-500 dark:text-zinc-400">
-          This feature is available with Albis Premium. Unlock deeper analysis,
-          historical archives, framing comparisons, and more.
+          This feature is in development. While you wait, sign up for our daily briefing — completely free.
         </p>
 
         <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <Link
-            href="/pricing"
+            href="/signup"
             className="inline-flex h-11 items-center rounded-full bg-zinc-900 px-8 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
           >
-            View pricing
+            Get the daily briefing free
           </Link>
           {!loggedIn && (
             <Link
-              href="/signup"
+              href="/briefing"
               className="inline-flex h-11 items-center rounded-full border border-zinc-300 px-8 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
             >
-              Sign up free
+              See what you get
             </Link>
           )}
         </div>

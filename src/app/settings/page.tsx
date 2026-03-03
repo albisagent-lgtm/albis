@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ReferralCard } from "@/app/components/referral-card";
+import { createClient } from "@/lib/supabase/client";
 import {
   TOPICS,
   REGIONS,
@@ -150,8 +151,10 @@ export default function SettingsPage() {
     setTimeout(() => setSaved(false), 2000);
   }
 
-  function handleLogout() {
-    clearLocalUser();
+  async function handleLogout() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    clearLocalUser(); // Also clear localStorage for preferences
     router.push("/");
     router.refresh();
   }
@@ -339,16 +342,13 @@ function UpgradePrompt({
       <div className="flex-1">
         <p className="text-sm font-medium text-amber-300">{message}</p>
         <p className="mt-1 text-xs text-amber-400/60">
-          Upgrade to Premium for unlimited topics and regions.
+          More features coming soon — for now, enjoy Albis free.
         </p>
       </div>
       <div className="flex items-center gap-2">
-        <Link
-          href="/pricing"
-          className="inline-flex h-11 min-w-[44px] items-center rounded-full bg-amber-500/20 px-4 text-xs font-medium text-amber-300 transition-colors hover:bg-amber-500/30"
-        >
-          Upgrade
-        </Link>
+        <span className="inline-flex h-11 min-w-[44px] items-center rounded-full bg-amber-500/20 px-4 text-xs font-medium text-amber-300">
+          Free
+        </span>
         <button
           onClick={onDismiss}
           className="flex h-11 w-11 items-center justify-center rounded-full text-amber-400/40 transition-colors hover:text-amber-400/80"

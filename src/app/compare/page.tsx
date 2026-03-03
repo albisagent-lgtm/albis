@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getTodayScan, REGION_LABELS } from "@/lib/scan-parser";
 import { hasBlindspot } from "@/lib/scan-types";
 import { EmailCapture } from "../components/email-capture";
@@ -42,42 +43,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const REGION_FLAGS: Record<string, string> = {
-  "western-world": "🌎",
-  west: "🌎",
-  "east-se-asia": "🌏",
-  "south-asia": "🇮🇳",
-  "middle-east": "🕌",
-  africa: "🌍",
-  "eastern-europe": "🇪🇺",
-  "e-europe": "🇪🇺",
-  "latin-america": "🌎",
-  global: "🌐",
-};
-
-// Fallback with REAL framing watch data (from our actual scans)
-const FALLBACK = {
-  topic: "Epstein Files & Prince Andrew Arrest",
-  perspectives: [
-    {
-      region: "United Kingdom",
-      flag: "🇬🇧",
-      reported: "\"Royal scandal damages institution\" — coverage centres on the monarchy's reputation crisis and what this means for the royal family's legitimacy.",
-    },
-    {
-      region: "Europe",
-      flag: "🇪🇺",
-      reported: "\"Network exposure across multiple jurisdictions\" — intelligence sources frame it as systemic corruption being revealed, with probes opening from London to Norway.",
-    },
-    {
-      region: "United States",
-      flag: "🇺🇸",
-      reported: "\"Legal liability for figures in Trump circles\" — emerging US framing centres on political vulnerability and which American names appear in the files.",
-    },
-  ],
-  absent: "Middle East, Africa — largely absent from coverage due to geo-political distance and US-centric media concentration.",
-  observation: "The same evidence — the release of Epstein files — becomes a domestic legitimacy crisis in the UK, a conspiracy revelation in Europe, and a political threat in the US. Same facts. Different institutional stakes. Different stories.",
-};
+// Region flags removed - no emojis on website
 
 interface FramingPerspective {
   region: string;
@@ -141,21 +107,8 @@ function parseFramingWatch(rawMarkdown: string): {
       continue;
     }
 
-    // Determine flag from label
-    let flag = "🌐";
-    const labelLower = label.toLowerCase();
-    if (labelLower.includes("uk") || labelLower.includes("british") || labelLower.includes("britain")) flag = "🇬🇧";
-    else if (labelLower.includes("us") || labelLower.includes("american")) flag = "🇺🇸";
-    else if (labelLower.includes("europe") || labelLower.includes("eu ")) flag = "🇪🇺";
-    else if (labelLower.includes("china") || labelLower.includes("chinese")) flag = "🇨🇳";
-    else if (labelLower.includes("russia")) flag = "🇷🇺";
-    else if (labelLower.includes("india") || labelLower.includes("modi")) flag = "🇮🇳";
-    else if (labelLower.includes("middle east")) flag = "🕌";
-    else if (labelLower.includes("africa")) flag = "🌍";
-    else if (labelLower.includes("asia")) flag = "🌏";
-    else if (labelLower.includes("latin") || labelLower.includes("south america")) flag = "🌎";
-    else if (labelLower.includes("iran")) flag = "🇮🇷";
-    else if (labelLower.includes("japan")) flag = "🇯🇵";
+    // No flag emojis on website
+    const flag = "";
 
     // Clean up region name: extract just the name part from "US (American media)" → "US"
     const regionClean = label.replace(/\s*\(.*\)\s*$/, '').trim();
@@ -185,12 +138,6 @@ function parseFramingWatch(rawMarkdown: string): {
 export default async function ComparePage() {
   const scan = await getTodayScan();
 
-  let topic: string;
-  let perspectives: FramingPerspective[];
-  let absent: string | undefined;
-  let observation: string | undefined;
-  let displayDate: string | undefined;
-
   // Try to extract framing watch from scan data
   let parsed = null;
   
@@ -206,19 +153,16 @@ export default async function ComparePage() {
     parsed = parseFramingWatch(wrapped);
   }
 
-  if (parsed && parsed.perspectives.length >= 2) {
-    topic = parsed.topic;
-    perspectives = parsed.perspectives;
-    absent = parsed.absent;
-    observation = parsed.observation;
-    displayDate = scan?.displayDate;
-  } else {
-    topic = FALLBACK.topic;
-    perspectives = FALLBACK.perspectives;
-    absent = FALLBACK.absent;
-    observation = FALLBACK.observation;
+  // If no framing watch data, show empty state
+  if (!parsed || parsed.perspectives.length < 2) {
+    return <NoComparisonState />;
   }
 
+  const topic = parsed.topic;
+  const perspectives = parsed.perspectives;
+  const absent = parsed.absent;
+  const observation = parsed.observation;
+  const displayDate = scan?.displayDate;
   const blindspotCount = scan?.items.filter(i => hasBlindspot(i)).length ?? 0;
 
   return (
@@ -268,7 +212,6 @@ export default async function ComparePage() {
                 className="rounded-xl border border-black/[0.07] bg-white p-6 dark:border-white/[0.07] dark:bg-white/[0.03]"
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xl">{p.flag}</span>
                   <p className="text-xs font-bold tracking-[0.12em] uppercase text-zinc-500 dark:text-zinc-400">
                     {p.region}
                   </p>
@@ -355,6 +298,68 @@ export default async function ComparePage() {
 
           <p className="mt-4 text-xs text-white/30">
             Free forever. No credit card. Unsubscribe anytime.
+          </p>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function NoComparisonState() {
+  return (
+    <main className="overflow-hidden">
+      {/* Hero */}
+      <section className="relative bg-[#f8f7f4] py-20 dark:bg-[#0f0f0f] md:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-subtle-grid opacity-60" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-amber-50/60 via-transparent to-transparent dark:from-amber-950/15 dark:via-transparent" />
+
+        <div className="relative mx-auto max-w-3xl px-6 text-center">
+          <p className="text-xs font-medium tracking-[0.18em] uppercase text-[#c8922a]/70 font-[family-name:var(--font-playfair)] italic">
+            Compare
+          </p>
+          <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-4xl font-semibold leading-tight tracking-tight text-[#0f0f0f] md:text-5xl dark:text-[#f0efec]">
+            No comparison available today
+          </h1>
+          <p className="mt-4 mx-auto max-w-lg text-lg text-zinc-500 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
+            Check back after the next scan — comparisons update 3× daily.
+          </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link
+              href="/briefing"
+              className="inline-flex h-11 min-w-[44px] items-center rounded-full bg-zinc-900 px-8 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+            >
+              View Today&apos;s Briefing
+            </Link>
+            <a
+              href="https://t.me/albisdaily"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-11 min-w-[44px] items-center gap-2 rounded-full border border-zinc-300 bg-white px-8 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.781-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.008-1.252-.241-1.865-.44-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.14.121.099.155.232.171.326.016.093.036.306.02.472z"/>
+              </svg>
+              Join on Telegram
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Info Section */}
+      <section className="relative bg-[#f2f0eb] py-16 dark:bg-[#111111] md:py-24">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/20 to-transparent" />
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold leading-snug text-[#0f0f0f] md:text-3xl dark:text-[#f0efec]">
+            How comparisons work
+          </h2>
+          <p className="mt-4 text-base text-zinc-600 font-[family-name:var(--font-source-serif)] dark:text-zinc-400 max-w-2xl mx-auto">
+            When significant global events occur, Albis tracks how different regions frame the same story. 
+            You&apos;ll see side-by-side comparisons showing how Western, Asian, Middle Eastern, and other 
+            media outlets report the same facts through different cultural and political lenses.
+          </p>
+          <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-500">
+            Scans run 3× daily. Comparisons appear when major stories generate distinct regional framings.
           </p>
         </div>
       </section>

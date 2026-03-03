@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 
 const REWARD_TIERS = [
-  { count: 3, label: "1 month Premium free", emoji: "🥉" },
-  { count: 10, label: "3 months Premium free", emoji: "🥈" },
-  { count: 25, label: "Lifetime Premium", emoji: "🥇" },
+  { count: 3, label: "Early access to new features", emoji: "3" },
+  { count: 10, label: "Priority feature requests", emoji: "10" },
+  { count: 25, label: "Lifetime supporter status", emoji: "25" },
 ];
 
 export function ReferralCard({ email }: { email: string }) {
@@ -69,7 +69,7 @@ export function ReferralCard({ email }: { email: string }) {
         Referral Program
       </p>
       <h3 className="mt-3 font-[family-name:var(--font-playfair)] text-xl font-semibold text-zinc-800 dark:text-zinc-100">
-        Share Albis, earn Premium
+        Share Albis, earn rewards
       </h3>
       <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400 font-[family-name:var(--font-source-serif)]">
         Share your unique link with friends. When they sign up, you earn rewards.
@@ -113,7 +113,7 @@ export function ReferralCard({ email }: { email: string }) {
 
       {maxReached && (
         <p className="mt-3 text-sm font-medium text-amber-600 dark:text-amber-400">
-          🎉 You&apos;ve unlocked Lifetime Premium!
+          You&apos;ve unlocked Lifetime supporter status!
         </p>
       )}
 

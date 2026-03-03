@@ -168,7 +168,20 @@ async function getSupabaseScan(date: string, scanTime?: string): Promise<ParsedS
     const allItems: any[] = [];
     for (const scan of data) {
       if (scan.items && Array.isArray(scan.items)) {
-        allItems.push(...scan.items);
+        for (const item of scan.items) {
+          if (item && item.headline && item.category) {
+            allItems.push({
+              headline: item.headline,
+              category: item.category,
+              regions: Array.isArray(item.regions) ? item.regions : [],
+              tags: Array.isArray(item.tags) ? item.tags : [],
+              patterns: Array.isArray(item.patterns) ? item.patterns : [],
+              significance: item.significance || "medium",
+              connection: item.connection || "",
+              blindspot: item.blindspot || undefined,
+            });
+          }
+        }
       }
     }
 
@@ -386,6 +399,68 @@ export async function getAvailableDates(): Promise<string[]> {
     .map((f) => f.replace(".md", ""))
     .sort()
     .reverse();
+}
+
+/**
+ * Returns all scan items from recent scans (last 30 days), with scan dates attached.
+ */
+export async function getRecentScanItems(days: number = 30): Promise<{ items: (ScanItem & { scanDate: string; displayDate: string })[] }> {
+  // Calculate cutoff date
+  const now = new Date();
+  const nzDate = new Date(now.getTime() + 13 * 60 * 60 * 1000);
+  const cutoff = new Date(nzDate);
+  cutoff.setDate(cutoff.getDate() - days);
+  const cutoffStr = cutoff.toISOString().split("T")[0];
+
+  if (supabase && (isVercel || !isLocal)) {
+    try {
+      const { data, error } = await supabase
+        .from('scans')
+        .select('scan_date, items')
+        .gte('scan_date', cutoffStr)
+        .order('scan_date', { ascending: false });
+
+      if (error || !data) return { items: [] };
+
+      const allItems: (ScanItem & { scanDate: string; displayDate: string })[] = [];
+      for (const scan of data) {
+        const scanItems = scan.items || [];
+        for (const item of scanItems) {
+          if (item.headline && item.category) {
+            allItems.push({
+              headline: item.headline,
+              category: item.category,
+              regions: item.regions || [],
+              tags: item.tags || [],
+              patterns: item.patterns || [],
+              significance: item.significance || "medium",
+              connection: item.connection || "",
+              scanDate: scan.scan_date,
+              displayDate: formatDisplayDate(scan.scan_date),
+            });
+          }
+        }
+      }
+      return { items: allItems };
+    } catch {
+      return { items: [] };
+    }
+  }
+
+  // Fallback to local filesystem
+  const dates = await getAvailableDates();
+  const recentDates = dates.filter(d => d >= cutoffStr);
+  const allItems: (ScanItem & { scanDate: string; displayDate: string })[] = [];
+
+  for (const date of recentDates) {
+    const scan = await getScanByDate(date);
+    if (!scan) continue;
+    for (const item of scan.items) {
+      allItems.push({ ...item, scanDate: scan.date, displayDate: scan.displayDate });
+    }
+  }
+
+  return { items: allItems };
 }
 
 export interface FramingComparison {

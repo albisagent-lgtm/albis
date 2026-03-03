@@ -1,0 +1,211 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { getAllSlugs, getPostBySlug } from "@/lib/blog";
+import { markdownToHtml } from "@/lib/markdown";
+import { EmailCapture } from "@/app/components/email-capture";
+import { StickyCTA } from "@/app/components/sticky-cta";
+import { getRelatedPosts, getRelatedPages } from "@/lib/internal-links";
+
+interface Props {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  return getAllSlugs().map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+  if (!post) return {};
+  const url = `https://albis.news/lens/${slug}`;
+  return {
+    title: post.title,
+    description: post.description,
+    authors: [{ name: post.author }],
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url,
+      type: "article",
+      publishedTime: post.date,
+      authors: [post.author],
+      images: [{ url: post.image, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: [post.image],
+    },
+    alternates: { canonical: url },
+  };
+}
+
+export default async function LensArticlePage({ params }: Props) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+  if (!post) notFound();
+
+  const html = markdownToHtml(post.content);
+  const url = `https://albis.news/lens/${slug}`;
+
+  const relatedPosts = getRelatedPosts(post.tags, slug, 3);
+  const relatedPages = getRelatedPages(post.tags);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: post.title,
+    description: post.description,
+    image: post.image.startsWith("http") ? post.image : `https://www.albis.news${post.image}`,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: { "@type": "Person", name: post.author },
+    publisher: {
+      "@type": "Organization",
+      name: "Albis",
+      url: "https://www.albis.news",
+      logo: { "@type": "ImageObject", url: "https://www.albis.news/icon-512.png" },
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <article className="mx-auto max-w-2xl px-6 py-16 md:py-24">
+        {/* Header */}
+        <header className="mb-12">
+          <div className="flex items-center gap-3 text-sm text-zinc-400 dark:text-zinc-500">
+            <Link href="/lens" className="hover:text-zinc-600 dark:hover:text-zinc-300">
+              &larr; The Lens
+            </Link>
+            <span>&middot;</span>
+            <time>
+              {new Date(post.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </time>
+            <span>&middot;</span>
+            <span>{post.readingTime} min read</span>
+          </div>
+          <h1 className="mt-6 font-[family-name:var(--font-playfair)] text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-[2.75rem]">
+            {post.title}
+          </h1>
+          <p className="mt-4 text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">
+            {post.description}
+          </p>
+          <div className="mt-4 flex items-center gap-2 text-sm text-zinc-400 dark:text-zinc-500">
+            <span>By {post.author || "Albis Intelligence Desk"}</span>
+          </div>
+        </header>
+
+        {/* Body */}
+        <div
+          className="blog-prose font-[family-name:var(--font-source-serif)] text-[1.0625rem] leading-[1.8] text-[#1a1a1a] dark:text-[#d4d3d0]"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+
+        {/* Quiz CTA */}
+        <div className="mt-12 rounded-xl border border-[#1a3a5c]/20 bg-[#1a3a5c]/5 p-5 dark:border-[#7ab0d8]/20 dark:bg-[#7ab0d8]/5">
+          <Link href="/quiz" className="flex items-center justify-between group">
+            <div>
+              <p className="font-medium text-[#1a3a5c] dark:text-[#7ab0d8]">Think you know today&apos;s news?</p>
+              <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Take the daily quiz — 5 questions, 60 seconds</p>
+            </div>
+            <span className="text-[#1a3a5c] dark:text-[#7ab0d8] group-hover:translate-x-1 transition-transform text-lg">&rarr;</span>
+          </Link>
+        </div>
+
+        {/* Related Articles */}
+        {relatedPosts.length > 0 && (
+          <section className="mt-12">
+            <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold">
+              Keep Reading
+            </h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedPosts.map((rp) => (
+                <Link
+                  key={rp.slug}
+                  href={`/lens/${rp.slug}`}
+                  className="group block rounded-xl border border-black/[0.07] p-5 transition-all hover:border-[#c8922a]/30 hover:shadow-sm dark:border-white/[0.06] dark:hover:border-[#c8922a]/30"
+                >
+                  <div className="mb-3 flex items-center gap-2 text-xs text-zinc-400 dark:text-zinc-500">
+                    <time>
+                      {new Date(rp.date).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </time>
+                    <span>&middot;</span>
+                    <span>3 min</span>
+                  </div>
+                  <h3 className="font-medium leading-snug text-[#0f0f0f] group-hover:text-[#c8922a] dark:text-[#f0efec] dark:group-hover:text-[#c8922a]">{rp.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 line-clamp-2">{rp.description}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Explore Perspectives */}
+        {relatedPages.length > 0 && (
+          <section className="mt-12">
+            <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold">
+              Explore Perspectives
+            </h2>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {relatedPages.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="flex items-center gap-1 rounded-lg border border-black/[0.07] px-3 py-2 text-sm transition-colors hover:border-black/[0.15] dark:border-white/[0.06] dark:hover:border-white/[0.12]"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* CTA */}
+        <div className="mt-16 rounded-2xl border border-[#c8922a]/20 bg-[#f8f7f4] p-8 text-center dark:border-[#c8922a]/20 dark:bg-white/[0.03]">
+          <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#c8922a]">
+            Get this delivered free every morning
+          </h3>
+          <p className="mx-auto mt-3 max-w-md text-zinc-600 dark:text-zinc-400">
+            The daily briefing with perspectives from 7 regions — straight to your inbox.
+          </p>
+          <div className="mt-6">
+            <Link
+              href="/signup"
+              className="inline-flex items-center justify-center rounded-lg bg-[#c8922a] px-6 py-3 font-medium text-white transition-colors hover:bg-[#b17f24]"
+            >
+              Get the daily briefing free
+            </Link>
+          </div>
+        </div>
+
+        {/* Back link */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/lens"
+            className="text-sm font-medium text-[#1a3a5c] hover:underline dark:text-[#7ab0d8]"
+          >
+            &larr; All articles
+          </Link>
+        </div>
+      </article>
+
+      <StickyCTA />
+    </>
+  );
+}

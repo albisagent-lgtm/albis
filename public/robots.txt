@@ -4,5 +4,30 @@ Allow: /
 Disallow: /admin
 Disallow: /api
 Disallow: /settings
+Disallow: /auth
+Disallow: /account
 
-Sitemap: https://albis.news/sitemap.xml
+# AI Crawlers Welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.albis.news/sitemap.xml
+
+# RSS Feed
+# https://www.albis.news/feed.xml

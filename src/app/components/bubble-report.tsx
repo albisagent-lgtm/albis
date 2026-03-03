@@ -125,13 +125,13 @@ export function BubbleReport({
             Want the full picture?
           </p>
           <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-            Albis Premium covers all 7 regions — no blind spots.
+            Albis covers all 7 regions — no blind spots. Sign up free.
           </p>
           <Link
-            href="/pricing"
+            href="/signup"
             className="mt-4 inline-flex h-11 items-center rounded-full bg-[#1a3a5c] px-8 text-sm font-medium text-white transition-colors hover:bg-[#243f66] shadow-[0_2px_12px_rgb(26,58,92,0.3)]"
           >
-            Explore Premium
+            Get the daily briefing free
           </Link>
         </div>
       )}

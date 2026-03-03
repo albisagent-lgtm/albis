@@ -43,7 +43,7 @@ export function PerspectiveScore({ regions }: PerspectiveScoreProps) {
       {/* Badge */}
       {count >= 5 && (
         <span className="text-[10px] font-medium text-amber-600 dark:text-amber-400">
-          🌐 Global
+          Global
         </span>
       )}
       {count <= 2 && count > 0 && (

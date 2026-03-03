@@ -150,7 +150,10 @@ async function upsertScan(scanDate, scanTime, data) {
 }
 
 async function main() {
-  const dateArg = process.argv[2] || new Date().toISOString().split('T')[0];
+  // Default to NZST date (UTC+13) since scans use NZ timezone
+  const now = new Date();
+  const nzDate = new Date(now.getTime() + 13 * 60 * 60 * 1000);
+  const dateArg = process.argv[2] || nzDate.toISOString().split('T')[0];
   const filePath = path.join(SCANS_DIR, `${dateArg}.md`);
   
   if (!fs.existsSync(filePath)) {

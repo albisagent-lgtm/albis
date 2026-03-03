@@ -3,7 +3,7 @@ import { createAdminClient } from "./supabase/admin";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_ADDRESS = "Albis <onboarding@resend.dev>";
+const FROM_ADDRESS = "Albis Daily <harry@albis.news>";
 
 export async function sendEmail({
   to,
@@ -43,6 +43,49 @@ export async function getSubscriberEmails(): Promise<string[]> {
   }
 
   return (data || []).map((s: { email: string }) => s.email);
+}
+
+/**
+ * Get subscribers whose local time is currently within a target hour window.
+ * Used for timezone-aware daily digest delivery.
+ * E.g., targetHour=7 returns subscribers where it's currently 7:00-7:59am local time.
+ */
+export async function getSubscriberEmailsByLocalHour(targetHour: number): Promise<string[]> {
+  const supabase = createAdminClient();
+  
+  // Get all subscribers with their timezones
+  const { data, error } = await supabase
+    .from("subscribers")
+    .select("email, timezone");
+
+  if (error) {
+    console.error("Failed to fetch subscribers:", error.message);
+    return [];
+  }
+
+  if (!data || data.length === 0) return [];
+
+  const now = new Date();
+  
+  return data
+    .filter((sub: { email: string; timezone: string | null }) => {
+      const tz = sub.timezone || "UTC";
+      try {
+        // Get the current hour in the subscriber's timezone
+        const localHour = parseInt(
+          new Intl.DateTimeFormat("en-US", {
+            hour: "numeric",
+            hour12: false,
+            timeZone: tz,
+          }).format(now)
+        );
+        return localHour === targetHour;
+      } catch {
+        // Invalid timezone, skip
+        return false;
+      }
+    })
+    .map((sub: { email: string }) => sub.email);
 }
 
 export async function sendBulkEmail({

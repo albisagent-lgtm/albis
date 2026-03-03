@@ -11,6 +11,7 @@ import { ThemeToggle } from "./components/theme-toggle";
 import { NavAuth, NavLinks } from "./components/nav-auth";
 import { MobileNav } from "./components/mobile-nav";
 import { Footer } from "./components/footer";
+import { BreakingNewsBanner } from "./components/breaking-news-banner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -105,7 +106,7 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   other: {
-    "apple-mobile-web-app-capable": "yes",
+    "mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "default",
     "apple-mobile-web-app-title": "Albis",
   },
@@ -115,11 +116,18 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" className="" suppressHydrationWarning>
       <head>
+        <link rel="alternate" type="application/rss+xml" title="Albis — The Lens" href="https://www.albis.news/feed.xml" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-49B2PLPBJP" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{const t=localStorage.getItem("albis-theme");if(t==="light"){document.documentElement.classList.remove("dark")}else{document.documentElement.classList.add("dark")}}catch(e){}`,
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-49B2PLPBJP');`,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{const t=localStorage.getItem("albis-theme");if(t==="dark"){document.documentElement.classList.add("dark")}else{document.documentElement.classList.remove("dark")}}catch(e){}`,
           }}
         />
         <script
@@ -146,9 +154,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${sourceSerif4.variable} ${inter.variable} min-h-screen bg-[#f8f7f4] font-[family-name:var(--font-inter)] text-[#0f0f0f] antialiased dark:bg-[#0f0f0f] dark:text-[#f0efec]`}
       >
+        {/* Breaking News Banner — above everything */}
+        <BreakingNewsBanner />
+
         {/* Navigation — hides on scroll down, shows on scroll up (mobile) */}
         <nav className="nav-auto-hide sticky top-0 z-50 border-b border-black/[0.07] bg-[#f8f7f4]/90 backdrop-blur-xl dark:border-white/[0.06] dark:bg-[#0f0f0f]/90">
-          <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+          <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
             <div className="flex items-center gap-8">
               {/* Logo — editorial serif italic */}
               <Link

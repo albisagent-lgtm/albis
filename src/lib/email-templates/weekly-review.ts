@@ -1,7 +1,7 @@
 import type { ParsedScan } from "../scan-types";
 import { hasFramingWatch, hasBlindspot, CATEGORY_META, REGION_LABELS } from "../scan-types";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://albis-app.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.albis.news";
 
 export function generateWeeklyReviewHtml(scans: ParsedScan[]): string {
   if (scans.length === 0) return "<p>No scans available for this week.</p>";

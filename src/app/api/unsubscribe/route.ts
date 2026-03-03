@@ -42,6 +42,6 @@ export async function GET(request: Request) {
   }
 
   // Always redirect to the unsubscribe page
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://albis-app.vercel.app";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.albis.news";
   return NextResponse.redirect(`${baseUrl}/unsubscribe`);
 }

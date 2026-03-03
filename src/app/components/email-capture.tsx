@@ -34,6 +34,7 @@ export function EmailCapture({ variant = "default" }: { variant?: "default" | "h
           website: (document.querySelector('input[name="website"]') as HTMLInputElement)?.value || "",
           _t: mountTimeRef.current,
           ref: typeof window !== "undefined" ? localStorage.getItem("albis_ref") || "" : "",
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         }),
       });
       const data = await res.json();
@@ -53,9 +54,9 @@ export function EmailCapture({ variant = "default" }: { variant?: "default" | "h
 
   if (status === "success") {
     return (
-      <div className="animate-fade-in-up rounded-2xl border border-white/10 bg-white/5 px-6 py-8">
+      <div className="animate-fade-in-up rounded-2xl border border-white/10 bg-white/5 px-space-6 py-space-8">
         <p className={`text-lg font-medium ${variant === "hero" ? "text-[#0f0f0f] dark:text-white" : "text-white"}`}>You&apos;re on the list.</p>
-        <p className={`mt-2 text-sm ${variant === "hero" ? "text-zinc-500 dark:text-white/60" : "text-white/60"}`}>
+        <p className={`mt-space-2 text-sm ${variant === "hero" ? "text-zinc-500 dark:text-white/60" : "text-white/60"}`}>
           We&apos;ll send you your first briefing soon.
         </p>
       </div>
@@ -72,7 +73,7 @@ export function EmailCapture({ variant = "default" }: { variant?: "default" | "h
   if (variant === "hero") {
     return (
       <div className="mx-auto max-w-lg">
-        <form onSubmit={handleSubmit} className="relative flex flex-col gap-3 sm:flex-row">
+        <form onSubmit={handleSubmit} className="relative flex flex-col gap-space-3 sm:flex-row">
           <input
             type="text"
             name="website"
@@ -87,7 +88,7 @@ export function EmailCapture({ variant = "default" }: { variant?: "default" | "h
             onChange={(e) => { setEmail(e.target.value); setStatus("idle"); }}
             placeholder="you@example.com"
             required
-            className="h-14 flex-1 rounded-full border border-black/10 bg-white px-6 text-sm text-[#0f0f0f] placeholder-zinc-400 outline-none focus:border-[#1a3a5c]/30 focus:ring-1 focus:ring-[#1a3a5c]/20 dark:border-white/15 dark:bg-white/10 dark:text-white dark:placeholder-white/40 dark:focus:border-white/30 dark:focus:ring-white/20"
+            className="h-14 flex-1 rounded-full border border-black/10 bg-white px-space-6 text-sm text-[#0f0f0f] placeholder-zinc-400 outline-none focus:border-[#1a3a5c]/30 focus:ring-1 focus:ring-[#1a3a5c]/20 dark:border-white/15 dark:bg-white/10 dark:text-white dark:placeholder-white/40 dark:focus:border-white/30 dark:focus:ring-white/20"
           />
           <button
             type="submit"
@@ -98,9 +99,9 @@ export function EmailCapture({ variant = "default" }: { variant?: "default" | "h
           </button>
         </form>
         {status === "error" && (
-          <p className="mt-2 text-xs text-red-500 dark:text-red-400">{message}</p>
+          <p className="mt-space-2 text-xs text-red-500 dark:text-red-400">{message}</p>
         )}
-        <p className="mt-3 text-sm text-zinc-400 dark:text-zinc-500">
+        <p className="mt-space-3 text-sm text-zinc-400 dark:text-zinc-500">
           Or{" "}
           <a
             href="https://t.me/albisdaily"
@@ -116,7 +117,7 @@ export function EmailCapture({ variant = "default" }: { variant?: "default" | "h
   }
 
   return (
-    <form onSubmit={handleSubmit} className="relative mx-auto flex max-w-md flex-col gap-3 sm:flex-row">
+    <form onSubmit={handleSubmit} className="relative mx-auto flex max-w-md flex-col gap-space-3 sm:flex-row">
       <input
         type="text"
         name="website"

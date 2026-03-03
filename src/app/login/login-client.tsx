@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { setLocalUser, getPreferences } from "@/lib/preferences";
+import { createClient } from "@/lib/supabase/client";
+import { getPreferences } from "@/lib/preferences";
 
 export default function LoginClient() {
   const router = useRouter();
@@ -25,9 +26,34 @@ export default function LoginClient() {
       return;
     }
 
-    setLocalUser({ email, createdAt: new Date().toISOString() });
-    const prefs = getPreferences();
-    router.push(prefs.onboardingComplete ? "/briefing" : "/onboarding");
+    try {
+      const supabase = createClient();
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (signInError) {
+        setError(signInError.message);
+        setLoading(false);
+        return;
+      }
+
+      // Success - check for redirect parameter, otherwise use onboarding status
+      const params = new URLSearchParams(window.location.search);
+      const redirect = params.get("redirect");
+      
+      if (redirect) {
+        router.push(redirect);
+      } else {
+        const prefs = getPreferences();
+        router.push(prefs.onboardingComplete ? "/briefing" : "/onboarding");
+      }
+      router.refresh();
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
+      setLoading(false);
+    }
   }
 
   return (
@@ -81,12 +107,12 @@ export default function LoginClient() {
                 <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
                   Password
                 </label>
-                <a
-                  href="#"
+                <Link
+                  href="/reset-password"
                   className="text-xs text-[#c8922a] hover:underline"
                 >
                   Forgot?
-                </a>
+                </Link>
               </div>
               <input
                 name="password"

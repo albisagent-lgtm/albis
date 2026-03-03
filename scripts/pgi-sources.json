@@ -1,0 +1,12 @@
+{
+  "us": ["reuters.com", "apnews.com", "cnn.com", "nytimes.com", "washingtonpost.com"],
+  "eu": ["bbc.com", "theguardian.com", "dw.com", "france24.com", "politico.eu"],
+  "china": ["globaltimes.cn", "scmp.com", "chinadaily.com.cn", "xinhuanet.com"],
+  "india": ["timesofindia.indiatimes.com", "ndtv.com", "thehindu.com", "hindustantimes.com"],
+  "middle_east": ["aljazeera.com", "arabnews.com", "tehrantimes.com", "haaretz.com"],
+  "africa": ["nation.africa", "dailymaverick.co.za", "punchng.com", "allafrica.com"],
+  "latam": ["reuters.com", "buenosairestimes.com", "batimes.com.ar", "brazilgovnews.gov.br"],
+  "south_asia": ["dawn.com", "thedailystar.net", "dailymirror.lk"],
+  "east_se_asia": ["straitstimes.com", "japantimes.co.jp", "koreaherald.com", "bangkokpost.com"],
+  "eastern_europe": ["ukrinform.net", "tvpworld.com", "tass.com"]
+}

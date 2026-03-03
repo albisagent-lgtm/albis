@@ -5,8 +5,8 @@ import { BriefingClient } from "./briefing-client";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Your Briefing",
-  description: "Your personalised daily news briefing — filtered by topics and regions that matter to you.",
+  title: "News Wall",
+  description: "Today's news from around the world — filtered by topics and regions that matter to you.",
 };
 
 export default async function BriefingPage() {

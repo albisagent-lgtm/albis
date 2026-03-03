@@ -3,20 +3,7 @@ import { NextRequest } from "next/server";
 
 export const runtime = "edge";
 
-const REGION_FLAGS: Record<string, string> = {
-  "western-world": "🌎",
-  "east-se-asia": "🌏",
-  "south-asia": "🇮🇳",
-  "middle-east": "🕌",
-  africa: "🌍",
-  "eastern-europe": "🇪🇺",
-  "latin-americas": "🌎",
-  us: "🇺🇸",
-  uk: "🇬🇧",
-  china: "🇨🇳",
-  russia: "🇷🇺",
-  europe: "🇪🇺",
-};
+// Region flags removed - no emojis on website
 
 const REGION_LABELS: Record<string, string> = {
   "western-world": "Western World",
@@ -81,7 +68,7 @@ export async function GET(req: NextRequest) {
               letterSpacing: "0.1em",
             }}
           >
-            ALBIS ✨
+            ALBIS
           </div>
           <div
             style={{
@@ -141,9 +128,6 @@ export async function GET(req: NextRequest) {
                 padding: "14px 20px",
               }}
             >
-              <span style={{ fontSize: "24px" }}>
-                {REGION_FLAGS[region] || "🌐"}
-              </span>
               <span
                 style={{
                   fontSize: "14px",

@@ -16,6 +16,7 @@ export interface ScanItem {
   patterns: string[];
   significance: "high" | "medium" | "low";
   connection: string;
+  perception_gap?: number | null;
   blindspot?: BlindspotData;
 }
 
