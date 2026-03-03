@@ -6,6 +6,7 @@ import { COUNTRIES, type Country } from "./countries";
 import { EmailCapture } from "@/app/components/email-capture";
 import { Search } from "lucide-react";
 import { InTodaysNewsSection } from "./components/in-todays-news";
+import { Breadcrumbs } from "@/app/components/breadcrumbs";
 
 // Reorganize countries into the 6 major regions from the design spec
 interface RegionalGroup {
@@ -134,6 +135,14 @@ export default function PerspectivesIndex() {
 
   return (
     <main className="mx-auto max-w-5xl px-space-6 py-space-16 md:py-space-24">
+      {/* Breadcrumbs */}
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Perspectives" },
+        ]}
+      />
+
       {/* Page Header */}
       <header className="mb-space-16 max-w-2xl">
         <p className="text-xs font-medium tracking-[0.15em] uppercase text-zinc-400">

@@ -6,6 +6,7 @@ import { getBlogPostsForTopic } from "@/lib/internal-links";
 import { EmailCapture } from "@/app/components/email-capture";
 import { REGION_LABELS } from "@/lib/scan-types";
 import { TopicDataSection } from "./topic-client";
+import { Breadcrumbs } from "@/app/components/breadcrumbs";
 
 interface Props {
   params: Promise<{ topic: string }>;
@@ -70,14 +71,14 @@ export default async function TopicPage({ params }: Props) {
       />
 
       <main className="mx-auto max-w-3xl px-6 py-16 md:py-24">
-        {/* Breadcrumb */}
-        <div className="mb-8 flex items-center gap-2 text-sm text-zinc-400 dark:text-zinc-500">
-          <Link href="/topics" className="hover:text-zinc-600 dark:hover:text-zinc-300">
-            Topics
-          </Link>
-          <span>/</span>
-          <span className="text-zinc-600 dark:text-zinc-300">{topic.name}</span>
-        </div>
+        {/* Breadcrumbs */}
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Topics", href: "/topics" },
+            { label: topic.name },
+          ]}
+        />
 
         {/* Hero */}
         <header className="mb-12">

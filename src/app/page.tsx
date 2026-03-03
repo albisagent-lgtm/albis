@@ -406,6 +406,129 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* ── REGIONAL STORY GRID ─────────────────────────────── */}
+      {(() => {
+        // Region flag mapping
+        const REGION_FLAGS: Record<string, string> = {
+          "south-asia": "🇮🇳",
+          "western-world": "🇺🇸",
+          "middle-east": "🕌",
+          "eastern-europe": "🇪🇺",
+          "africa": "🌍",
+          "east-se-asia": "🌏",
+          "latin-americas": "🌎",
+        };
+
+        // Extract one story per region
+        if (!scan || !scan.items || scan.items.length === 0) return null;
+
+        // Group stories by region
+        const regionStories: Array<{
+          region: string;
+          label: string;
+          flag: string;
+          story: ScanItem;
+        }> = [];
+
+        const significanceOrder = { high: 0, medium: 1, low: 2 };
+
+        // For each region (excluding 'global'), find the best story
+        for (const [regionKey, regionLabel] of Object.entries(REGION_LABELS)) {
+          if (regionKey === "global") continue;
+
+          // Find all stories that include this region
+          const storiesForRegion = scan.items.filter((item) =>
+            item.regions.includes(regionKey)
+          );
+
+          if (storiesForRegion.length === 0) continue;
+
+          // Sort by significance (high > medium > low), then by order in scan (assuming most recent first)
+          const bestStory = storiesForRegion.sort((a, b) => {
+            const sigDiff = (significanceOrder[a.significance] ?? 1) - (significanceOrder[b.significance] ?? 1);
+            return sigDiff;
+          })[0];
+
+          regionStories.push({
+            region: regionKey,
+            label: regionLabel,
+            flag: REGION_FLAGS[regionKey] || "🌐",
+            story: bestStory,
+          });
+        }
+
+        if (regionStories.length === 0) return null;
+
+        return (
+          <section className="relative bg-[#f8f7f4] py-space-16 dark:bg-[#0f0f0f] md:py-space-24 border-t border-black/5 dark:border-white/5">
+            <div className="mx-auto max-w-5xl px-space-6">
+              <p className="text-center text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
+                Around the World
+              </p>
+              <h2 className="mt-space-4 text-center font-[family-name:var(--font-playfair)] text-3xl font-semibold leading-tight text-[#0f0f0f] md:text-4xl dark:text-[#f0efec]">
+                Today from each region
+              </h2>
+
+              <div className="mt-space-12 grid gap-space-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {regionStories.map(({ region, label, flag, story }) => {
+                  const slug = findArticleSlug(story);
+                  const CardContent = (
+                    <>
+                      <div className="flex items-center gap-space-2 mb-space-3">
+                        <span className="text-lg">{flag}</span>
+                        <span className="text-xs font-medium tracking-[0.1em] uppercase text-zinc-400 dark:text-zinc-500">
+                          {label}
+                        </span>
+                      </div>
+                      <h3 className="font-[family-name:var(--font-playfair)] text-base font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+                        {story.headline}
+                      </h3>
+                      {story.connection && (
+                        <p className="mt-space-2 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400 line-clamp-2">
+                          {story.connection}
+                        </p>
+                      )}
+                      {story.category && (
+                        <span className="mt-space-3 inline-block text-[10px] font-medium tracking-[0.15em] uppercase text-[#c8922a]">
+                          {story.category}
+                        </span>
+                      )}
+                    </>
+                  );
+
+                  return slug ? (
+                    <Link
+                      key={region}
+                      href={`/lens/${slug}`}
+                      className="group rounded-xl border border-black/[0.07] p-space-5 transition-all hover:border-[#c8922a]/30 hover:shadow-sm dark:border-white/[0.06] dark:hover:border-[#c8922a]/30"
+                    >
+                      {CardContent}
+                    </Link>
+                  ) : (
+                    <article
+                      key={region}
+                      className="group rounded-xl border border-black/[0.07] p-space-5 transition-all hover:border-[#c8922a]/30 hover:shadow-sm dark:border-white/[0.06] dark:hover:border-[#c8922a]/30"
+                    >
+                      {CardContent}
+                    </article>
+                  );
+                })}
+              </div>
+
+              {/* Link to perspectives */}
+              <div className="mt-space-8 text-center">
+                <Link
+                  href="/perspectives"
+                  className="text-sm font-medium text-[#c8922a] hover:text-[#c8922a]/80 transition-colors"
+                >
+                  Explore all 195 country perspectives →
+                </Link>
+              </div>
+            </div>
+          </section>
+        );
+      })()}
+
       {/* ── LATEST FROM THE LENS (Tabbed) ─────────────────────── */}
       {(() => {
         const posts = getAllPosts().slice(0, 30);

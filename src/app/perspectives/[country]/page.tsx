@@ -6,6 +6,7 @@ import { EmailCapture } from "@/app/components/email-capture";
 import { TOPICS } from "@/lib/topics";
 import { getRecentScanItems, getTodayScan } from "@/lib/scan-parser";
 import { CountryPerspectiveClient } from "./country-client";
+import { Breadcrumbs } from "@/app/components/breadcrumbs";
 
 export const dynamic = "force-dynamic";
 
@@ -73,13 +74,15 @@ export default async function CountryPerspectivePage({ params }: Props) {
       />
 
       <main className="mx-auto max-w-3xl px-space-6 py-space-16 md:py-space-24">
-        {/* Back Navigation */}
-        <Link 
-          href="/perspectives" 
-          className="inline-flex items-center text-sm text-zinc-500 hover:text-[#c8922a] transition-colors mb-space-8"
-        >
-          <span className="mr-1">←</span> Perspectives
-        </Link>
+        {/* Breadcrumbs */}
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Perspectives", href: "/perspectives" },
+            { label: country.region },
+            { label: country.name },
+          ]}
+        />
 
         {/* Header */}
         <header className="mb-12">

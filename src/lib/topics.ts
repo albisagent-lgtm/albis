@@ -49,3 +49,15 @@ export function matchTopicToScanItem(topic: Topic, tags: string[], category: str
       lowerCategory.includes(kw)
   );
 }
+
+/**
+ * Match a tag string to a topic, returning the topic slug and name if found.
+ * Used for rendering clickable tag links in blog articles.
+ */
+export function matchTagToTopic(tag: string): { slug: string; name: string } | null {
+  const lower = tag.toLowerCase();
+  const topic = TOPICS.find(t => 
+    t.keywords.some(kw => lower.includes(kw) || kw.includes(lower))
+  );
+  return topic ? { slug: topic.slug, name: topic.name } : null;
+}

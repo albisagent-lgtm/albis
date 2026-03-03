@@ -6,6 +6,9 @@ import { markdownToHtml } from "@/lib/markdown";
 import { EmailCapture } from "@/app/components/email-capture";
 import { StickyCTA } from "@/app/components/sticky-cta";
 import { getRelatedPosts, getRelatedPages } from "@/lib/internal-links";
+import { matchTagToTopic } from "@/lib/topics";
+import { Breadcrumbs } from "@/app/components/breadcrumbs";
+import { CATEGORIES } from "@/lib/categories";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -82,11 +85,15 @@ export default async function LensArticlePage({ params }: Props) {
       <article className="mx-auto max-w-2xl px-6 py-16 md:py-24">
         {/* Header */}
         <header className="mb-12">
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "The Lens", href: "/lens" },
+              { label: CATEGORIES[post.category as keyof typeof CATEGORIES] || "Analysis", href: `/lens?category=${post.category}` },
+              { label: post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title },
+            ]}
+          />
           <div className="flex items-center gap-3 text-sm text-zinc-400 dark:text-zinc-500">
-            <Link href="/lens" className="hover:text-zinc-600 dark:hover:text-zinc-300">
-              &larr; The Lens
-            </Link>
-            <span>&middot;</span>
             <time>
               {new Date(post.date).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -106,6 +113,38 @@ export default async function LensArticlePage({ params }: Props) {
           <div className="mt-4 flex items-center gap-2 text-sm text-zinc-400 dark:text-zinc-500">
             <span>By {post.author || "Albis Intelligence Desk"}</span>
           </div>
+          {/* Tags */}
+          {post.tags.length > 0 && (
+            <div className="mt-space-4 flex flex-wrap gap-2">
+              {post.tags.slice(0, 5).map((tag) => {
+                const match = matchTagToTopic(tag);
+                if (match) {
+                  return (
+                    <Link
+                      key={tag}
+                      href={`/topics/${match.slug}`}
+                      className="inline-flex items-center rounded-full border border-black/[0.07] px-2.5 py-1 text-xs font-medium text-zinc-600 hover:border-[#c8922a]/30 hover:text-[#c8922a] transition-colors dark:border-white/[0.06] dark:text-zinc-400 dark:hover:border-[#c8922a]/30 dark:hover:text-[#c8922a]"
+                    >
+                      {tag}
+                    </Link>
+                  );
+                }
+                return (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center rounded-full border border-black/[0.07] px-2.5 py-1 text-xs font-medium text-zinc-600 dark:border-white/[0.06] dark:text-zinc-400"
+                  >
+                    {tag}
+                  </span>
+                );
+              })}
+              {post.tags.length > 5 && (
+                <span className="inline-flex items-center rounded-full border border-black/[0.07] px-2.5 py-1 text-xs font-medium text-zinc-500 dark:border-white/[0.06] dark:text-zinc-500">
+                  +{post.tags.length - 5} more
+                </span>
+              )}
+            </div>
+          )}
         </header>
 
         {/* Body */}

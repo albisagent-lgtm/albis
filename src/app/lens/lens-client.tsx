@@ -57,6 +57,23 @@ function getSectionTag(tags: string[]) {
   return tagMap[firstTag] || firstTag.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
 }
 
+function TagPills({ tags, maxTags = 3 }: { tags: string[]; maxTags?: number }) {
+  const displayTags = tags.slice(0, maxTags);
+  
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {displayTags.map((tag) => (
+        <span
+          key={tag}
+          className="inline-flex items-center rounded-full border border-black/[0.07] px-2 py-0.5 text-xs font-medium text-zinc-500 dark:border-white/[0.06] dark:text-zinc-400"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function matchesFilter(post: Post, filter: string): boolean {
   if (filter === "all") return true;
   if (filter === "deep-dive") return post.readingTime >= 8;
@@ -106,6 +123,11 @@ function ArticleCard({ post, featured = false }: { post: Post; featured?: boolea
             <span>·</span>
             <time>{formatDate(post.date)}</time>
           </div>
+          {post.tags.length > 0 && (
+            <div className="mt-4">
+              <TagPills tags={post.tags} maxTags={3} />
+            </div>
+          )}
         </Link>
       </section>
     );
@@ -141,6 +163,11 @@ function ArticleCard({ post, featured = false }: { post: Post; featured?: boolea
           <span>·</span>
           <time>{formatDate(post.date)}</time>
         </div>
+        {post.tags.length > 0 && (
+          <div className="mt-3">
+            <TagPills tags={post.tags} maxTags={3} />
+          </div>
+        )}
       </Link>
     </article>
   );
@@ -222,6 +249,11 @@ export default function LensClient({ posts }: { posts: Post[] }) {
                           {post.title}
                         </h3>
                         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{post.author}</p>
+                        {post.tags.length > 0 && (
+                          <div className="mt-2">
+                            <TagPills tags={post.tags} maxTags={2} />
+                          </div>
+                        )}
                       </Link>
                     </article>
                   );

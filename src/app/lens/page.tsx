@@ -4,6 +4,7 @@ import { getAllPosts } from "@/lib/blog";
 import { getTodayScan } from "@/lib/scan-parser";
 import LensClient from "./lens-client";
 import { LensTabs } from "./lens-tabs";
+import { Breadcrumbs } from "@/app/components/breadcrumbs";
 
 export const dynamic = "force-dynamic";
 
@@ -51,6 +52,14 @@ export default async function LensPage() {
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      {/* Breadcrumbs */}
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "The Lens" },
+        ]}
+      />
+
       {/* Header */}
       <header className="mb-12 text-center">
         <h1 className="font-[family-name:var(--font-playfair)] text-5xl font-bold tracking-tight md:text-6xl">
