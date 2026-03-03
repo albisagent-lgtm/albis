@@ -79,7 +79,6 @@ export default async function CountryPerspectivePage({ params }: Props) {
           items={[
             { label: "Home", href: "/" },
             { label: "Perspectives", href: "/perspectives" },
-            { label: country.region },
             { label: country.name },
           ]}
         />
