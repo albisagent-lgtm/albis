@@ -57,8 +57,8 @@ export function getPostBySlug(slug: string): BlogPost | null {
   return {
     slug,
     title: data.title || slug,
-    description: data.description || "",
-    date: data.date || "",
+    description: data.description || data.excerpt || "",
+    date: data.date || data.publishDate || data.publishedAt || "",
     updatedDate: data.updatedDate || undefined,
     author: data.author || "Albis",
     image: data.image || "/og-image.png",
