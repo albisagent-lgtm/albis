@@ -8,6 +8,7 @@ import { StickyCTA } from "@/app/components/sticky-cta";
 import { getRelatedPosts, getRelatedPages } from "@/lib/internal-links";
 import { matchTagToTopic } from "@/lib/topics";
 import { Breadcrumbs } from "@/app/components/breadcrumbs";
+import { SourceTransparency } from "@/app/components/source-transparency";
 import { CATEGORIES } from "@/lib/categories";
 
 interface Props {
@@ -73,6 +74,13 @@ export default async function LensArticlePage({ params }: Props) {
       logo: { "@type": "ImageObject", url: "https://www.albis.news/icon-512.png" },
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    ...(post.sources.length > 0 ? {
+      citation: post.sources.filter(s => s.url).map(s => ({
+        "@type": "WebPage",
+        name: s.name,
+        url: s.url,
+      })),
+    } : {}),
   };
 
   return (
@@ -152,6 +160,9 @@ export default async function LensArticlePage({ params }: Props) {
           className="blog-prose font-[family-name:var(--font-source-serif)] text-[1.0625rem] leading-[1.8] text-[#1a1a1a] dark:text-[#d4d3d0]"
           dangerouslySetInnerHTML={{ __html: html }}
         />
+
+        {/* Source Transparency */}
+        <SourceTransparency sources={post.sources} confidence={post.confidence} />
 
         {/* Quiz CTA */}
         <div className="mt-12 rounded-xl border border-[#1a3a5c]/20 bg-[#1a3a5c]/5 p-5 dark:border-[#7ab0d8]/20 dark:bg-[#7ab0d8]/5">

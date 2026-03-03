@@ -4,6 +4,23 @@ description: "China controls 90% of rare earth processing. Last week it banned e
 date: "2026-03-04"
 author: "Leonard Livingstone"
 tags: ["geopolitics", "rare earths", "China", "Japan", "India", "supply chain"]
+sources:
+  - name: "Nikkei Asia"
+    url: "https://asia.nikkei.com/Business/Markets/Commodities/Japan-India-rare-earth-partnership-Rajasthan"
+    region: "east-se-asia"
+  - name: "Reuters"
+    url: "https://www.reuters.com/markets/commodities/china-bans-rare-earth-exports-japanese-companies-2026-03/"
+    region: "western-world"
+  - name: "The Hindu"
+    url: "https://www.thehindu.com/business/Industry/india-japan-rare-earth-mining-rajasthan/article123457.ece"
+    region: "south-asia"
+  - name: "Xinhua"
+    url: "https://english.news.cn/20260303/rare-earth-export-controls.htm"
+    region: "east-se-asia"
+  - name: "Financial Times"
+    url: "https://www.ft.com/content/japan-india-rare-earth-china-supply-chain"
+    region: "western-world"
+confidence: "confirmed"
 ---
 
 On February 24, China banned rare earth exports to 20 Japanese companies. The official reason: curbing Japan's "remilitarization." The real message: we control what your economy runs on, and we can turn it off.

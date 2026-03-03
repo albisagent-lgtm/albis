@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json();
-    const { date, title, summary, content_md, mood, pgi_score, story_count, top_stories } = body;
+    let { date, title, summary, content_md, mood, pgi_score, story_count, top_stories } = body;
 
     if (!date || !title || !content_md) {
       return NextResponse.json(
@@ -66,7 +66,55 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Clean title: strip date suffix, truncate to ~80 chars
+    title = title.replace(/\s*—\s*\d{4}-\d{2}-\d{2}\s*$/, "");
+    if (title.length > 80) {
+      title = title.substring(0, 77).replace(/\s+\S*$/, "") + "…";
+    }
+
+    // Clean mood: single word/short phrase only
+    if (mood && mood.length > 20) {
+      mood = mood.split(/[\s,;:—–-]/)[0] || mood;
+    }
+
+    // Reject raw JSON content
+    if (content_md.includes("```json") || content_md.includes("[object Object]")) {
+      return NextResponse.json(
+        { error: "content_md must be clean markdown, not raw JSON dumps" },
+        { status: 400 }
+      );
+    }
+
     const supabase = getAdminClient();
+
+    // If no pgi_score provided, try to pull from pgi_daily
+    if (!pgi_score) {
+      const { data: pgiData } = await supabase
+        .from("pgi_daily")
+        .select("daily_pgi")
+        .eq("date", date)
+        .single();
+      if (pgiData) pgi_score = pgiData.daily_pgi;
+    }
+
+    // If no story_count provided, count from scans
+    if (!story_count) {
+      const { data: scans } = await supabase
+        .from("scans")
+        .select("items")
+        .eq("scan_date", date);
+      if (scans) {
+        const seen = new Set<string>();
+        for (const scan of scans) {
+          if (scan.items && Array.isArray(scan.items)) {
+            for (const item of scan.items) {
+              if (item.headline) seen.add(item.headline);
+            }
+          }
+        }
+        if (seen.size > 0) story_count = seen.size;
+      }
+    }
 
     const { data, error } = await supabase
       .from("briefings")

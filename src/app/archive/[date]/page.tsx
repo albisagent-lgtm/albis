@@ -5,6 +5,25 @@ import { createClient } from "@supabase/supabase-js";
 import { markdownToHtml } from "@/lib/markdown";
 import { EmailCapture } from "@/app/components/email-capture";
 
+interface ScanItem {
+  headline: string;
+  connection?: string;
+  significance?: string;
+  category?: string;
+  regions?: string[];
+  tags?: string[];
+  perception_gap?: number;
+}
+
+interface Scan {
+  scan_time: string;
+  top_theme: string | null;
+  pattern_of_day: string | { body?: string; title?: string } | null;
+  framing_watch: string | null;
+  items: ScanItem[] | null;
+  mood: string | null;
+}
+
 interface Briefing {
   id: string;
   date: string;
@@ -44,6 +63,110 @@ async function getBriefing(date: string): Promise<Briefing | null> {
 
   if (error || !data) return null;
   return data as Briefing;
+}
+
+function cleanTitle(title: string): string {
+  return title.replace(/\s*—\s*\d{4}-\d{2}-\d{2}\s*$/, "");
+}
+
+function cleanMood(mood: string | null): string | null {
+  if (!mood || mood.length <= 20) return mood;
+  return mood.split(/[\s,;:—–-]/)[0] || mood;
+}
+
+function contentIsBroken(md: string): boolean {
+  if (!md || md.length < 50) return true;
+  if (md.includes("```json")) return true;
+  if (md.includes("[Content as provided above]")) return true;
+  if (md.includes("[object Object]")) return true;
+  const jsonBlocks = md.match(/\{[\s\S]*?\}/g);
+  if (jsonBlocks) {
+    const jsonLen = jsonBlocks.reduce((s, b) => s + b.length, 0);
+    if (jsonLen / md.length > 0.3) return true;
+  }
+  return false;
+}
+
+function generateMarkdownFromScans(scans: Scan[]): string {
+  const order: Record<string, number> = { AM: 0, Midday: 1, PM: 2 };
+  scans.sort((a, b) => (order[a.scan_time] || 0) - (order[b.scan_time] || 0));
+
+  const lines: string[] = [];
+  const seen = new Set<string>();
+  const allItems: ScanItem[] = [];
+  let topTheme: string | null = null;
+  let patternOfDay: string | null = null;
+  let framingWatch: string | null = null;
+
+  for (const scan of scans) {
+    if (scan.top_theme && !topTheme) topTheme = scan.top_theme;
+    if (scan.pattern_of_day && !patternOfDay) {
+      if (typeof scan.pattern_of_day === 'object') {
+        patternOfDay = (scan.pattern_of_day as any).body || (scan.pattern_of_day as any).title || null;
+      } else {
+        patternOfDay = scan.pattern_of_day;
+      }
+    }
+    if (scan.framing_watch && !framingWatch) framingWatch = scan.framing_watch;
+    if (scan.items && Array.isArray(scan.items)) {
+      for (const item of scan.items) {
+        if (item.headline && !seen.has(item.headline)) {
+          seen.add(item.headline);
+          allItems.push(item);
+        }
+      }
+    }
+  }
+
+  if (allItems.length === 0 && !topTheme) return "";
+
+  if (topTheme) lines.push(`*${topTheme}*\n`);
+  if (patternOfDay) lines.push(`**Pattern of the Day:** ${patternOfDay}\n`);
+
+  const categories: Record<string, ScanItem[]> = {};
+  for (const item of allItems) {
+    const cat = item.category || "Other";
+    if (!categories[cat]) categories[cat] = [];
+    categories[cat].push(item);
+  }
+
+  for (const [cat, items] of Object.entries(categories)) {
+    lines.push(`## ${cat}\n`);
+    for (const item of items) {
+      lines.push(`### ${item.headline}\n`);
+      if (item.connection) lines.push(`${item.connection}\n`);
+      if (item.significance && !['high','medium','low'].includes(item.significance)) lines.push(`> ${item.significance}\n`);
+      if (item.regions && item.regions.length > 0) lines.push(`*${item.regions.join(" · ")}*\n`);
+    }
+  }
+
+  if (framingWatch) {
+    lines.push(`---\n\n## Framing Watch\n\n${framingWatch}\n`);
+  }
+
+  return lines.join("\n");
+}
+
+async function getScansForDate(date: string): Promise<Scan[]> {
+  const supabase = getSupabase();
+  if (!supabase) return [];
+  const { data } = await supabase
+    .from("scans")
+    .select("scan_time, top_theme, pattern_of_day, framing_watch, items, mood")
+    .eq("scan_date", date);
+  return (data as Scan[]) || [];
+}
+
+function countStoriesFromScans(scans: Scan[]): number {
+  const seen = new Set<string>();
+  for (const scan of scans) {
+    if (scan.items && Array.isArray(scan.items)) {
+      for (const item of scan.items) {
+        if (item.headline) seen.add(item.headline);
+      }
+    }
+  }
+  return seen.size;
 }
 
 async function getNeighbors(
@@ -100,12 +223,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!briefing) return {};
 
   const formattedDate = formatDateLong(date);
+  const cleanedTitle = cleanTitle(briefing.title);
   return {
-    title: `${briefing.title} — Albis Daily Briefing`,
+    title: `${cleanedTitle} — Albis Daily Briefing`,
     description:
       briefing.summary || `Daily briefing from Albis for ${formattedDate}`,
     openGraph: {
-      title: `${briefing.title} — Albis Daily Briefing`,
+      title: `${cleanedTitle} — Albis Daily Briefing`,
       description:
         briefing.summary || `Daily briefing from Albis for ${formattedDate}`,
       url: `https://albis.news/archive/${date}`,
@@ -126,7 +250,23 @@ export default async function BriefingPage({ params }: Props) {
   if (!briefing) notFound();
 
   const { prev, next } = await getNeighbors(date);
-  const html = markdownToHtml(briefing.content_md);
+
+  // Clean the title
+  const title = cleanTitle(briefing.title);
+  const mood = cleanMood(briefing.mood);
+
+  // Get scans for accurate story count and fallback content
+  const scans = await getScansForDate(date);
+  const storyCount = scans.length > 0 ? countStoriesFromScans(scans) : briefing.story_count;
+
+  // Use scan-generated content if briefing content is broken
+  let contentMd = briefing.content_md;
+  if (contentIsBroken(contentMd) && scans.length > 0) {
+    const generated = generateMarkdownFromScans(scans);
+    if (generated) contentMd = generated;
+  }
+
+  const html = markdownToHtml(contentMd);
 
   return (
     <main className="px-space-6 py-space-16 md:py-space-24">
@@ -146,14 +286,14 @@ export default async function BriefingPage({ params }: Props) {
 
         {/* Title */}
         <h1 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl font-bold mt-space-4">
-          {briefing.title}
+          {title}
         </h1>
 
         {/* Metadata */}
         <div className="text-sm text-zinc-500 mt-space-4 flex gap-space-4">
-          {briefing.mood && <span>{briefing.mood}</span>}
-          {briefing.story_count != null && (
-            <span>{briefing.story_count} stories</span>
+          {mood && <span>{mood}</span>}
+          {storyCount != null && storyCount > 0 && (
+            <span>{storyCount} stories</span>
           )}
           {briefing.pgi_score != null && (
             <span>PGI: {briefing.pgi_score}</span>

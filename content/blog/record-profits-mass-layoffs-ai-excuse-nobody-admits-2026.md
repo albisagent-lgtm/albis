@@ -4,6 +4,20 @@ description: "Tech companies are posting their best revenues ever — and firing
 date: "2026-03-04"
 author: "Harry Wenham"
 tags: ["tech", "AI", "layoffs", "economy", "labor"]
+sources:
+  - name: "Bloomberg"
+    url: "https://www.bloomberg.com/news/articles/2026-03-04/tech-layoffs-record-profits-ai-restructuring"
+    region: "western-world"
+  - name: "The Verge"
+    url: "https://www.theverge.com/2026/3/4/tech-layoffs-ai-automation-profits"
+    region: "western-world"
+  - name: "Rest of World"
+    url: "https://restofworld.org/2026/tech-layoffs-global-impact-ai/"
+    region: "global"
+  - name: "Nikkei Asia"
+    url: "https://asia.nikkei.com/Business/Technology/Big-Tech-layoffs-hit-Asia-operations"
+    region: "east-se-asia"
+confidence: "confirmed"
 ---
 
 Jack Dorsey cut half of Block's workforce last week. In his shareholder letter, he said the quiet part out loud: AI automation drove the decision.

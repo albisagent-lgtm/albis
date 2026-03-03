@@ -12,6 +12,14 @@ export interface FAQ {
   a: string;
 }
 
+export interface Source {
+  name: string;
+  url?: string;
+  region?: string;
+}
+
+export type ConfidenceLevel = 'confirmed' | 'developing' | 'disputed' | 'unverifiable';
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -23,6 +31,8 @@ export interface BlogPost {
   tags: string[];
   category: CategorySlug;
   faqs?: FAQ[];
+  sources: Source[];
+  confidence: ConfidenceLevel;
   readingTime: number;
   content: string;
 }
@@ -55,6 +65,8 @@ export function getPostBySlug(slug: string): BlogPost | null {
     tags: data.tags || [],
     category: (data.category as CategorySlug) || 'analysis',
     faqs: data.faqs || undefined,
+    sources: (data.sources as Source[]) || [],
+    confidence: (data.confidence as ConfidenceLevel) || 'developing',
     readingTime: estimateReadingTime(content),
     content,
   };

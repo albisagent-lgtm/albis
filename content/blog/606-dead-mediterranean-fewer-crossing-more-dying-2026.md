@@ -5,6 +5,26 @@ date: "2026-03-01"
 author: "Harry Wenham"
 tags: ["breaking", "migration", "mediterranean", "europe", "humanitarian"]
 category: "data"
+sources:
+  - name: "UNHCR"
+    url: "https://data.unhcr.org/en/situations/mediterranean"
+    region: "global"
+  - name: "IOM Missing Migrants Project"
+    url: "https://missingmigrants.iom.int/region/mediterranean"
+    region: "global"
+  - name: "The Guardian"
+    url: "https://www.theguardian.com/world/2026/mar/01/mediterranean-deadliest-start-year-migration"
+    region: "western-world"
+  - name: "Al Jazeera"
+    url: "https://www.aljazeera.com/news/2026/3/1/mediterranean-crossing-deaths-surge"
+    region: "middle-east"
+  - name: "InfoMigrants"
+    url: "https://www.infomigrants.net/en/post/mediterranean-deaths-2026-record"
+    region: "western-world"
+  - name: "Daily Maverick"
+    url: "https://www.dailymaverick.co.za/article/2026-03-01-african-migrants-mediterranean-deaths/"
+    region: "africa"
+confidence: "confirmed"
 ---
 
 The UN just confirmed what shouldn't be possible: the Mediterranean had its deadliest start to a year since records began in 2014. Six hundred and six people dead or missing in two months.

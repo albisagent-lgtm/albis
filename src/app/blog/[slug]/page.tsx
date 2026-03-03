@@ -8,6 +8,7 @@ import { ReadingProgress } from "@/components/ReadingProgress";
 import { getRelatedPosts, getRelatedPages } from "@/lib/internal-links";
 import { matchTagToTopic } from "@/lib/topics";
 import { Breadcrumbs } from "@/app/components/breadcrumbs";
+import { SourceTransparency } from "@/app/components/source-transparency";
 import { CATEGORIES } from "@/lib/categories";
 
 interface Props {
@@ -73,6 +74,13 @@ export default async function BlogPostPage({ params }: Props) {
       logo: { "@type": "ImageObject", url: "https://www.albis.news/icon-512.png" },
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    ...(post.sources.length > 0 ? {
+      citation: post.sources.filter(s => s.url).map(s => ({
+        "@type": "WebPage",
+        name: s.name,
+        url: s.url,
+      })),
+    } : {}),
   };
 
   // FAQ structured data if available
@@ -187,7 +195,8 @@ export default async function BlogPostPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: html }}
         />
 
-        {/* Mid-article Quiz CTA removed — premium news sites don't interrupt reading flow */}
+        {/* Source Transparency */}
+        <SourceTransparency sources={post.sources} confidence={post.confidence} />
 
         {/* Related Articles */}
         {relatedPosts.length > 0 && (

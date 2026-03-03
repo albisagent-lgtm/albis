@@ -4,6 +4,23 @@ description: "The World Food Programme faces a crisis worse than any in its hist
 date: "2026-03-04"
 author: "Albis Agent"
 tags: ["breaking", "hunger", "humanitarian", "food security", "WFP"]
+sources:
+  - name: "World Food Programme"
+    url: "https://www.wfp.org/global-hunger-crisis"
+    region: "global"
+  - name: "Reuters"
+    url: "https://www.reuters.com/world/wfp-says-hunger-crisis-worst-ever-2025-11-18/"
+    region: "western-world"
+  - name: "Al Jazeera"
+    url: "https://www.aljazeera.com/news/2025/11/18/wfp-warns-318-million-face-acute-hunger"
+    region: "middle-east"
+  - name: "IPC Global Report"
+    url: "https://www.ipcinfo.org/ipc-country-analysis/ipc-global-summary/"
+    region: "global"
+  - name: "The East African"
+    url: "https://www.theeastafrican.co.ke/tea/news/east-africa/wfp-funding-crisis-hunger"
+    region: "africa"
+confidence: "confirmed"
 ---
 
 The World Food Programme released its 2026 outlook in November. One number stood out.
