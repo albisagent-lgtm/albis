@@ -41,30 +41,68 @@ export interface ParsedScan {
   framingWatchRaw?: string;
 }
 
-export const CATEGORY_META: Record<string, { label: string; color: string }> = {
-  "current-events": { label: "World", color: "blue" },
-  "tech-ai": { label: "Tech & AI", color: "violet" },
-  "weather-climate": { label: "Weather & Climate", color: "cyan" },
-  "natural-world": { label: "Natural World", color: "emerald" },
-  "economic-flows": { label: "Economic Flows", color: "amber" },
-  "health": { label: "Health", color: "rose" },
-  "grassroots": { label: "Grassroots", color: "lime" },
-  "psychology-persuasion": { label: "Psych & Persuasion", color: "fuchsia" },
-  "culture": { label: "Culture", color: "orange" },
-  "influential-people": { label: "People", color: "sky" },
-  "climate-energy": { label: "Climate & Energy", color: "teal" },
+export const CATEGORY_META: Record<string, { label: string; color: string; accent: string }> = {
+  "current-events": { label: "World", color: "blue", accent: "#3b82f6" },
+  "geopolitics": { label: "Geopolitics", color: "indigo", accent: "#1a3a5c" },
+  "tech-ai": { label: "Tech & AI", color: "violet", accent: "#7c3aed" },
+  "weather-climate": { label: "Weather & Climate", color: "cyan", accent: "#06b6d4" },
+  "natural-world": { label: "Natural World", color: "emerald", accent: "#10b981" },
+  "economic-flows": { label: "Economic Flows", color: "amber", accent: "#d97706" },
+  "health": { label: "Health", color: "rose", accent: "#e11d48" },
+  "grassroots": { label: "Grassroots", color: "lime", accent: "#65a30d" },
+  "psychology-persuasion": { label: "Psych & Persuasion", color: "fuchsia", accent: "#c026d3" },
+  "culture": { label: "Culture", color: "orange", accent: "#ea580c" },
+  "influential-people": { label: "People", color: "sky", accent: "#0ea5e9" },
+  "climate-energy": { label: "Climate & Energy", color: "teal", accent: "#14b8a6" },
+  "cyber-info-warfare": { label: "Cyber & Info War", color: "red", accent: "#dc2626" },
+  "food-agriculture": { label: "Food & Agriculture", color: "lime", accent: "#84cc16" },
+  "migration-demographics": { label: "Migration", color: "slate", accent: "#64748b" },
+  "science-space": { label: "Science & Space", color: "purple", accent: "#9333ea" },
+  "conflict": { label: "Conflict", color: "red", accent: "#b91c1c" },
+  "energy": { label: "Energy", color: "yellow", accent: "#ca8a04" },
+  "governance": { label: "Governance", color: "blue", accent: "#2563eb" },
 };
 
 export const REGION_LABELS: Record<string, string> = {
   "south-asia": "South Asia",
+  "south_asia": "South Asia",
   "western-world": "West",
+  "us": "West",
   "middle-east": "Middle East",
+  "middle_east": "Middle East",
   "eastern-europe": "E. Europe",
+  "eu": "Europe",
   "africa": "Africa",
   "east-se-asia": "East & SE Asia",
+  "asia_pacific": "East & SE Asia",
   "latin-americas": "Latin America",
+  "latam": "Latin America",
   "global": "Global",
 };
+
+// Normalise any region key to the canonical display key
+const REGION_ALIAS: Record<string, string> = {
+  "south_asia": "south-asia",
+  "us": "western-world",
+  "middle_east": "middle-east",
+  "eu": "eastern-europe",
+  "asia_pacific": "east-se-asia",
+  "latam": "latin-americas",
+};
+export function normalizeRegion(r: string): string {
+  return REGION_ALIAS[r] || r;
+}
+
+// Canonical display regions (excluding global)
+export const DISPLAY_REGIONS = [
+  "south-asia",
+  "western-world",
+  "middle-east",
+  "eastern-europe",
+  "africa",
+  "east-se-asia",
+  "latin-americas",
+] as const;
 
 export const FRAMING_PATTERNS = new Set(["framing"]);
 

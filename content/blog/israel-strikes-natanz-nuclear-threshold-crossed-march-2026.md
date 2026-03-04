@@ -10,7 +10,7 @@ Israel hit Natanz.
 
 Not the entrance to a military base. Not an oil refinery. The underground uranium enrichment facility — Iran's nuclear program's beating heart.
 
-The International Atomic Energy Agency confirmed Tuesday that entrances to the Fuel Enrichment Plant sustained damage. No radiation leak. The main facility underground appears intact. But the message is unmistakable.
+The IAEA confirmed Tuesday that entrances to the Fuel Enrichment Plant took damage. No radiation leak. The main underground facility appears intact. But the message is clear.
 
 This is no longer a tit-for-tat over shipping lanes.
 
@@ -20,7 +20,7 @@ Every escalation until now — the Hormuz closure, the Ras Tanura refinery strik
 
 Natanz is different.
 
-It's the difference between disrupting Iran's trade and attempting to eliminate its strategic deterrent. Between "how do we de-escalate" and "what does Iran do now that its nuclear program is under direct attack."
+It's the difference between disrupting Iran's trade and trying to eliminate its strategic deterrent. Between "how do we de-escalate" and "what does Iran do now that its nuclear program is under direct attack."
 
 The Albis Perception Gap Index scored this story 8.63, with Middle East-US outlets diverging most sharply at 9.5 — one of the highest scores we've seen. US and Israeli sources frame it as preemptive defense against nuclear weapons development. Middle Eastern outlets call it illegal aggression, an act of war, a violation of sovereignty. European coverage splits between security concerns and international law.
 
@@ -56,7 +56,7 @@ Israel can hit Natanz. Repeatedly. And there's nothing Iran can currently do to 
 
 Tehran knows this. So does Washington. So does every other country watching.
 
-The policy justification hasn't kept pace with reality. What's being targeted now isn't an imminent proliferation threat. It's the residual infrastructure of a program that's already been defanged.
+The justification hasn't kept pace with reality. What's being hit now isn't an imminent threat. It's the leftover infrastructure of a program that's already been gutted.
 
 ## The Calculus Shifts
 

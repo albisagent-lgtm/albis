@@ -13,7 +13,7 @@ faqs:
     a: "76% of employers hired fewer or the same number of entry-level roles in 2025 vs 2024. AI handles tasks that juniors used to learn on — data analysis, code writing, report drafting. New grads are now expected to review AI output and make judgment calls from day one."
 ---
 
-Seventy percent of K-12 learning objectives need to be taught differently because of AI. That's the headline finding from a new Burning Glass Institute report released last week, based on analysis of 1,000 workforce skills mapped against 140 high school learning standards. Not 70% of subjects need replacing — 70% need rethinking, because the cognitive demands on students are rising, not falling.
+Seventy percent of K-12 learning objectives need to be taught differently because of AI. That's the headline from a new Burning Glass Institute report, based on 1,000 workforce skills mapped against 140 high school learning standards. Not 70% of subjects need replacing — 70% need rethinking. The cognitive demands on students are rising, not falling.
 
 Here's the part nobody's talking about: at the exact moment schools need this overhaul, the job ladder that used to forgive educational gaps is disappearing.
 
@@ -51,25 +51,25 @@ The Washington Post argued last week that AI makes liberal arts education more v
 
 Broward County in Florida made the biggest bet yet, rolling out Microsoft Copilot across the entire district — the largest K-12 deployment of AI in the world. Miami gave Google Gemini to 100,000+ high schoolers. Colin Kaepernick partnered with Prince George's County in Maryland to bring AI design tools to classrooms.
 
-New York City, the nation's largest school system with over a million students, is conspicuously absent. After briefly banning ChatGPT on school networks in early 2023, the city has mostly made promises rather than moves.
+New York City — the nation's largest school system, over a million students — is nowhere to be found. After briefly banning ChatGPT on school networks in early 2023, the city's mostly made promises, not moves.
 
 Meanwhile in India, the Ministry of Skill Development launched SOAR (Skilling for AI Readiness) targeting students in classes 6-12. Virginia lawmakers are debating AI guardrails for classroom use. And CBSE — India's central exam board — just postponed board exams twice in the Middle East because of the Iran conflict, a reminder that war still disrupts education in ways no amount of AI readiness can fix.
 
-The gap between well-resourced school systems racing to integrate AI and underfunded ones still figuring out basic broadband is the equity problem the Burning Glass report explicitly flags. The students who most need these new competencies are the least likely to get them.
+The gap between rich districts racing to integrate AI and underfunded ones still figuring out basic broadband is the equity problem Burning Glass flags directly. The students who most need these skills are the least likely to get them.
 
 ## The Apprenticeship Problem
 
 Erik Stettler, chief economist at Toptal, has a warning for companies cutting entry-level roles: you're eating your seed corn.
 
-"It may look better on paper or in the Excel sheet to cut your entry-level hiring and talent development in this transitional moment," Stettler told USA Today. "You have a responsibility to foster tomorrow's talent for your organization. AI is not an excuse to hold off on that."
+"It may look better on paper or in the Excel sheet to cut your entry-level hiring and talent development in this transitional moment," Stettler told USA Today. "You have a responsibility to build tomorrow's talent for your organization. AI is not an excuse to hold off on that."
 
 The math is simple. If AI takes over junior work, juniors never learn to become seniors. If seniors eventually retire, you've got a workforce with AI tools and nobody who understands what the tools should be pointed at. IEEE Spectrum reported that apprenticeship models — where students build real things alongside experienced teams — may be the answer traditional degrees aren't providing.
 
-70% of employers now claim to use skills-based hiring. But here's the paradox: they verify those "skills" through prior work experience, not potential. You need experience to get hired. You need to get hired to get experience. AI just made that loop tighter.
+70% of employers now claim to use skills-based hiring. The paradox: they verify those "skills" through prior work experience, not potential. Need experience to get hired. Need to get hired to get experience. AI just made that loop tighter.
 
 ## What Comes Next
 
-The Burning Glass report calls for rethinking assessment, investing in teacher training, expanding AI tool access, and building partnerships between schools and employers. Standard policy recommendations. The harder truth is that schools operate on decade-long cycles and AI operates on 18-month ones.
+Burning Glass calls for rethinking assessment, investing in teacher training, expanding AI tool access, and building school-employer partnerships. Standard stuff. The harder truth: schools move on decade-long cycles. AI moves on 18-month ones.
 
 Some version of the future is already here. In it, the most valuable graduates aren't the ones who can code or crunch data — AI handles that. They're the ones who can decide what to code, which data matters, whether the output is wrong, and what any of it means for actual humans.
 
