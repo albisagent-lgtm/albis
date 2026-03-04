@@ -9,6 +9,7 @@ import { RelativeTime, BriefingTime } from "./components/relative-time";
 import { NextBriefingCountdown } from "./components/next-briefing-countdown";
 import { ExitIntentModal } from "./components/exit-intent-modal";
 import { PgiBar } from "./components/pgi-bar";
+import { Testimonials } from "./components/testimonials";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
@@ -562,6 +563,16 @@ export default async function Home() {
           </div>
         </section>
       )}
+
+      {/* ── TESTIMONIALS ─────────────────────────────────── */}
+      <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f] border-t border-black/5 dark:border-white/5">
+        <div className="mx-auto max-w-3xl px-6 py-10 md:py-14">
+          <p className="text-center text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
+            What readers say
+          </p>
+          <Testimonials />
+        </div>
+      </section>
 
       {/* ── FINAL CTA — Navy section ──────────────────────── */}
       <section className="relative overflow-hidden bg-[#1a3a5c] py-12 md:py-16">

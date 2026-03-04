@@ -52,7 +52,7 @@ export default async function LensPage() {
   }));
 
   return (
-    <main className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+    <main className="mx-auto max-w-6xl px-6 py-10 md:py-14">
       {/* Breadcrumbs */}
       <Breadcrumbs
         items={[
@@ -62,11 +62,11 @@ export default async function LensPage() {
       />
 
       {/* Header */}
-      <header className="mb-12 text-center">
-        <h1 className="font-[family-name:var(--font-playfair)] text-5xl font-bold tracking-tight md:text-6xl">
+      <header className="mb-8 text-center">
+        <h1 className="font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-5xl">
           THE LENS
         </h1>
-        <p className="mt-4 text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">
+        <p className="mt-3 text-base text-zinc-500 dark:text-zinc-400 leading-relaxed">
           Today&apos;s headlines and in-depth analysis from around the world.
         </p>
       </header>

@@ -120,10 +120,10 @@ function ArticleCard({ post, featured = false }: { post: Post; featured?: boolea
   
   if (featured) {
     return (
-      <section className="mb-20">
+      <section className="mb-10">
         <Link
           href={`/lens/${post.slug}`}
-          className="group block rounded-2xl border border-black/[0.07] bg-white/30 p-8 transition-all hover:border-black/[0.12] hover:shadow-lg dark:border-white/[0.07] dark:bg-white/[0.02] dark:hover:border-white/[0.12] md:p-12"
+          className="group block rounded-2xl border border-black/[0.07] bg-white/30 p-6 transition-all hover:border-black/[0.12] hover:shadow-lg dark:border-white/[0.07] dark:bg-white/[0.02] dark:hover:border-white/[0.12] md:p-10"
         >
           <div className="flex flex-wrap items-center gap-3 text-sm">
             <span className="rounded-full border border-[#c8922a]/30 bg-[#c8922a]/10 px-3 py-1 font-medium text-[#c8922a] dark:border-[#c8922a]/40 dark:bg-[#c8922a]/20">
@@ -213,7 +213,7 @@ export default function LensClient({ posts }: { posts: Post[] }) {
       {featuredPost && <ArticleCard post={featuredPost} featured />}
 
       {/* Filter Bar */}
-      <div className="mb-10 flex flex-wrap gap-2">
+      <div className="mb-8 flex flex-wrap gap-2">
         {FILTERS.map(f => (
           <button
             key={f.value}
@@ -235,8 +235,8 @@ export default function LensClient({ posts }: { posts: Post[] }) {
         <>
           {/* Grid */}
           {gridPosts.length > 0 && (
-            <section className="mb-20">
-              <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
+            <section className="mb-12">
+              <div className="grid gap-4 md:grid-cols-2 lg:gap-6">
                 {gridPosts.map(post => (
                   <ArticleCard key={post.slug} post={post} />
                 ))}
