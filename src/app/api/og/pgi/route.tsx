@@ -93,14 +93,13 @@ export async function GET(req: NextRequest) {
             <div style={{
               position: "absolute" as const,
               top: "-5px",
-              left: `${position}%`,
+              left: `calc(${position}% - 10px)`,
               width: "20px",
               height: "20px",
               borderRadius: "50%",
               backgroundColor: tier.color,
               border: "3px solid #0f0f0f",
               boxShadow: "0 0 8px rgba(0,0,0,0.5)",
-              transform: "translateX(-50%)",
             }} />
           </div>
         </div>

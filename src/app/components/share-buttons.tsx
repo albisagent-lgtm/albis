@@ -124,6 +124,13 @@ export function EmbedCode({ src, width = 400, height = 200 }: EmbedCodeProps) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
+      // Fallback
+      const ta = document.createElement("textarea");
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }

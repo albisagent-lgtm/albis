@@ -50,18 +50,13 @@ export default async function EmbedPgiPage() {
   });
 
   return (
-    <html>
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>{`
-          * { margin: 0; padding: 0; box-sizing: border-box; }
-          body { font-family: system-ui, -apple-system, sans-serif; background: #fafaf9; }
-          a { text-decoration: none; color: inherit; }
-        `}</style>
-      </head>
-      <body>
-        <a
+    <>
+      <style>{`
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: #fafaf9; }
+        a { text-decoration: none; color: inherit; }
+      `}</style>
+      <a
           href={`https://www.albis.news/indexes/pgi`}
           target="_blank"
           rel="noopener noreferrer"
@@ -134,7 +129,6 @@ export default async function EmbedPgiPage() {
             </span>
           </div>
         </a>
-      </body>
-    </html>
+    </>
   );
 }

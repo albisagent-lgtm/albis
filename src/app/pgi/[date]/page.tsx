@@ -149,9 +149,14 @@ export default async function PgiDatePage({ params }: PageProps) {
               ← Prev
             </Link>
           )}
-          <Link href={`/pgi/${nextDateStr}`} className="rounded-lg border border-black/[0.06] px-3 py-1.5 text-zinc-500 hover:border-[#c8922a]/30 hover:text-[#c8922a] transition-colors dark:border-white/[0.06] dark:text-zinc-400">
-            Next →
-          </Link>
+          {(() => {
+            const today = new Date().toISOString().split("T")[0];
+            return nextDateStr <= today ? (
+              <Link href={`/pgi/${nextDateStr}`} className="rounded-lg border border-black/[0.06] px-3 py-1.5 text-zinc-500 hover:border-[#c8922a]/30 hover:text-[#c8922a] transition-colors dark:border-white/[0.06] dark:text-zinc-400">
+                Next →
+              </Link>
+            ) : null;
+          })()}
         </div>
       </div>
 

@@ -51,7 +51,7 @@ export function PgiShareBar({ latestDate, latestPgi, dates }: PgiShareBarProps) 
               href={`/pgi/${latestDate}`}
               className="text-xs font-medium text-[#c8922a] hover:text-[#c8922a]/80 transition-colors"
             >
-              Today&apos;s report →
+              Latest report →
             </Link>
           )}
         </div>

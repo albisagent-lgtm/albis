@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getTodayScan, type ScanItem } from "@/lib/scan-parser";
-import { CATEGORY_META, REGION_LABELS, normalizeRegion, DISPLAY_REGIONS } from "@/lib/scan-types";
+import { CATEGORY_META, REGION_LABELS, normalizeRegion, DISPLAY_REGIONS, detectBlindspots } from "@/lib/scan-types";
 import { getAllPosts } from "@/lib/blog";
 import { EmailCapture } from "./components/email-capture";
 import { DateLine } from "./components/date-line";
@@ -431,6 +431,56 @@ export default async function Home() {
           </div>
         </section>
       )}
+
+      {/* ── UNDER THE RADAR TEASER ──────────────────────── */}
+      {(() => {
+        if (!scan?.items) return null;
+        const withBlindspots = detectBlindspots(scan.items);
+        const blindspots = withBlindspots
+          .filter((item) => item.blindspot?.isBlindspot === true)
+          .slice(0, 2);
+        if (blindspots.length === 0) return null;
+
+        return (
+          <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f] border-t border-black/5 dark:border-white/5">
+            <div className="mx-auto max-w-3xl px-6 py-10 md:py-14">
+              <div className="flex items-center justify-between mb-5">
+                <div>
+                  <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
+                    Under the Radar
+                  </p>
+                  <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+                    Stories the rest of the world isn&apos;t seeing
+                  </p>
+                </div>
+                <Link href="/under-the-radar" className="text-xs font-medium text-[#c8922a] hover:text-[#c8922a]/80 transition-colors">
+                  See all →
+                </Link>
+              </div>
+              <div className="space-y-3">
+                {blindspots.map((item, i) => {
+                  const coveredBy = item.blindspot?.coveredBy || [];
+                  return (
+                    <div key={i} className="rounded-lg border border-black/[0.06] p-4 dark:border-white/[0.06]">
+                      <p className="text-sm font-medium leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+                        {item.headline}
+                      </p>
+                      <div className="mt-2 flex items-center gap-2 text-[10px] text-zinc-400 dark:text-zinc-500">
+                        <span className="font-medium uppercase tracking-wider">Only seen by:</span>
+                        {coveredBy.map((r) => (
+                          <span key={r} className="rounded-full bg-amber-50 px-2 py-0.5 font-medium text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
+                            {REGION_LABELS[r] || REGION_LABELS[normalizeRegion(r)] || r}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* ── LATEST FROM THE LENS (Featured + Grid) ────────── */}
       {featuredPost && (
