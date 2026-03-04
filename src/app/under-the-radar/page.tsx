@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getTodayScan, getRecentScanItems } from "@/lib/scan-parser";
-import { REGION_LABELS, normalizeRegion, detectBlindspots } from "@/lib/scan-types";
+import { REGION_LABELS, CATEGORY_META, normalizeRegion, detectBlindspots } from "@/lib/scan-types";
 import type { ScanItem } from "@/lib/scan-types";
 import { ShareButtons } from "../components/share-buttons";
 
@@ -175,7 +175,7 @@ function BlindspotCard({ item }: { item: ScanItem }) {
           <div className="flex flex-wrap items-center gap-2 mb-1.5">
             {item.category && (
               <span className="text-[11px] font-medium tracking-[0.15em] uppercase text-[#c8922a]">
-                {item.category}
+                {CATEGORY_META[item.category]?.label || item.category}
               </span>
             )}
             {item.significance === "high" && (

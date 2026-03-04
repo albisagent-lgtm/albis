@@ -115,32 +115,44 @@ export function hasBlindspot(item: ScanItem): boolean {
   return item.blindspot?.isBlindspot === true;
 }
 
-// Region areas for blindspot detection — groups of related regions
+// Region areas for blindspot detection — uses CANONICAL keys only
 const REGION_AREAS: Record<string, string[]> = {
   "Western": ["western-world"],
-  "Eastern Europe": ["eastern-europe"],
+  "Europe": ["europe"],
   "Asia": ["south-asia", "east-se-asia"],
   "Middle East": ["middle-east"],
   "Africa": ["africa"],
   "Latin America": ["latin-americas"],
 };
 
-const ALL_REGION_KEYS = Object.keys(REGION_LABELS).filter((r) => r !== "global");
+// Canonical region keys (no aliases) for blindspot detection
+const CANONICAL_REGION_KEYS = [
+  "western-world", "europe", "middle-east", "south-asia",
+  "east-se-asia", "africa", "latin-americas",
+];
 
 /**
  * Detects blindspots: stories heavily covered by some regions but missing from others.
+ * All region keys are normalised before comparison.
  * A story is a blindspot if:
- * - It has 3+ regions from one area but 0 coverage from other major areas, OR
- * - It has only 1 region tagged (potential blindspot)
+ * - It has only 1 normalised region (potential blindspot), OR
+ * - It has 3+ regions from one area but 0 coverage from 3+ other areas
  */
 export function detectBlindspots(items: ScanItem[]): ScanItem[] {
   return items.map((item) => {
-    const coveredBy = item.regions.filter((r) => r !== "global");
-    const missingFrom = ALL_REGION_KEYS.filter(
-      (r) => !item.regions.includes(r)
+    // Normalise and deduplicate region keys
+    const normalised = [...new Set(
+      item.regions
+        .filter((r) => r !== "global")
+        .map((r) => normalizeRegion(r))
+    )];
+
+    const coveredBy = normalised;
+    const missingFrom = CANONICAL_REGION_KEYS.filter(
+      (r) => !normalised.includes(r)
     );
 
-    // Check if only 1 region tagged — potential blindspot
+    // Check if only 1 normalised region tagged — potential blindspot
     if (coveredBy.length === 1) {
       return {
         ...item,
@@ -148,10 +160,9 @@ export function detectBlindspots(items: ScanItem[]): ScanItem[] {
       };
     }
 
-    // Check if 3+ regions from one area but missing entire other areas
-    if (coveredBy.length >= 3) {
+    // Check if regions are concentrated in few areas but missing from many
+    if (coveredBy.length >= 2) {
       const coveredAreas = new Set<string>();
-      const missingAreas: string[] = [];
 
       for (const [area, areaRegions] of Object.entries(REGION_AREAS)) {
         if (areaRegions.some((r) => coveredBy.includes(r))) {
@@ -159,11 +170,9 @@ export function detectBlindspots(items: ScanItem[]): ScanItem[] {
         }
       }
 
-      for (const area of Object.keys(REGION_AREAS)) {
-        if (!coveredAreas.has(area)) {
-          missingAreas.push(area);
-        }
-      }
+      const missingAreas = Object.keys(REGION_AREAS).filter(
+        (area) => !coveredAreas.has(area)
+      );
 
       // Blindspot if covered areas are concentrated and missing areas are many
       if (missingAreas.length >= 3) {
