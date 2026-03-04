@@ -64,7 +64,7 @@ export function Footer() {
                 Daily briefing, free forever.
               </p>
               <div className="mt-3">
-                <EmailCapture variant="default" />
+                <EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} />
               </div>
             </div>
           </div>

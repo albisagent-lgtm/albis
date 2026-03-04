@@ -238,11 +238,8 @@ export default async function Home() {
               Get the full picture without the bias. Free, daily, in your inbox.
             </p>
             <div className="mt-space-12">
-              <EmailCapture variant="hero" />
+              <EmailCapture variant="hero" showSocialProof={true} showYesterdayLink={true} />
             </div>
-            <p className="mt-space-4 text-center text-xs text-zinc-400 dark:text-zinc-500">
-              100% free · No spam · Unsubscribe anytime
-            </p>
           </div>
         </section>
       )}
@@ -252,14 +249,11 @@ export default async function Home() {
         <section className="relative bg-[#f8f7f4] dark:bg-[#0f0f0f] py-space-16 border-y border-black/5 dark:border-white/5">
           <div className="mx-auto max-w-3xl px-space-6 text-center">
             <p className="text-base text-zinc-500 font-[family-name:var(--font-source-serif)] dark:text-zinc-400 mb-space-6">
-              Every morning. 7 regions. All perspectives. Free.
+              Get this delivered free every morning.
             </p>
             <div className="max-w-lg mx-auto">
-              <EmailCapture variant="hero" />
+              <EmailCapture variant="hero" showSocialProof={true} />
             </div>
-            <p className="mt-space-3 text-xs text-zinc-400 dark:text-zinc-500">
-              Free · Daily · Unsubscribe anytime
-            </p>
           </div>
         </section>
       )}
@@ -398,7 +392,7 @@ export default async function Home() {
                   Get it in your inbox — free, every morning.
                 </p>
                 <div className="mt-space-6 max-w-sm mx-auto">
-                  <EmailCapture variant="hero" />
+                  <EmailCapture variant="hero" showYesterdayLink={true} />
                 </div>
               </div>
             )}
@@ -560,14 +554,11 @@ export default async function Home() {
       <section className="relative bg-[#f8f7f4] dark:bg-[#0f0f0f] py-space-12 border-t border-black/5 dark:border-white/5">
         <div className="mx-auto max-w-2xl px-space-6 text-center">
           <p className="text-sm text-zinc-500 dark:text-zinc-400 font-[family-name:var(--font-source-serif)]">
-            Like what you see? Get this in your inbox every morning.
+            Stay informed. Subscribe free.
           </p>
           <div className="mt-space-4 max-w-sm mx-auto">
-            <EmailCapture variant="hero" />
+            <EmailCapture variant="hero" showSocialProof={true} showYesterdayLink={false} />
           </div>
-          <p className="mt-space-3 text-xs text-zinc-400 dark:text-zinc-500">
-            Free · Daily · Unsubscribe anytime
-          </p>
         </div>
       </section>
 
@@ -581,24 +572,11 @@ export default async function Home() {
             News from 7 regions. Zero bias.
           </h2>
           <p className="mt-space-4 text-base text-white/60 font-[family-name:var(--font-source-serif)]">
-            Join thousands of readers who start their day with clarity.
+            Start your day with clarity, not noise.
           </p>
 
           <div className="mt-space-8">
-            <EmailCapture />
-          </div>
-
-          <p className="mt-space-4 text-sm text-white/40">
-            100% free · No spam · Unsubscribe anytime
-          </p>
-
-          <div className="mt-space-6">
-            <Link
-              href="/archive"
-              className="text-sm text-white/50 hover:text-white/70 transition-colors"
-            >
-              See yesterday&apos;s briefing →
-            </Link>
+            <EmailCapture showSocialProof={true} showYesterdayLink={true} />
           </div>
         </div>
       </section>
