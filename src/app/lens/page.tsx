@@ -5,6 +5,7 @@ import { getTodayScan } from "@/lib/scan-parser";
 import LensClient from "./lens-client";
 import { LensTabs } from "./lens-tabs";
 import { Breadcrumbs } from "@/app/components/breadcrumbs";
+import { ExitIntentModal } from "@/app/components/exit-intent-modal";
 
 export const dynamic = "force-dynamic";
 
@@ -77,6 +78,16 @@ export default async function LensPage() {
           <LensClient posts={allPosts} />
         )}
       </LensTabs>
+
+      <ExitIntentModal
+        articles={getAllPosts().slice(0, 10).map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          description: p.description || "",
+          readingTime: p.readingTime,
+          category: p.category || "analysis",
+        }))}
+      />
     </main>
   );
 }

@@ -8,6 +8,7 @@ import { TabbedArticles } from "./components/tabbed-articles";
 import { CrisisHero } from "./components/crisis-hero";
 import { RelativeTime, BriefingTime } from "./components/relative-time";
 import { NextBriefingCountdown } from "./components/next-briefing-countdown";
+import { ExitIntentModal } from "./components/exit-intent-modal";
 import { createClient } from "@supabase/supabase-js";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -597,6 +598,15 @@ export default async function Home() {
           )}
         </div>
       )}
+      <ExitIntentModal
+        articles={allPosts.slice(0, 10).map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          description: p.description || "",
+          readingTime: p.readingTime,
+          category: p.category || "analysis",
+        }))}
+      />
     </main>
   );
 }

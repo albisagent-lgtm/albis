@@ -11,6 +11,8 @@ import { Breadcrumbs } from "@/app/components/breadcrumbs";
 import { SourceTransparency } from "@/app/components/source-transparency";
 import { RelativeTime } from "@/app/components/relative-time";
 import { CATEGORIES } from "@/lib/categories";
+import { getAllPosts } from "@/lib/blog";
+import { ExitIntentModal } from "@/app/components/exit-intent-modal";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -276,6 +278,17 @@ export default async function BlogPostPage({ params }: Props) {
       </article>
 
       <ReadingProgress />
+      <ExitIntentModal
+        articles={getAllPosts().slice(0, 10).map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          description: p.description || "",
+          readingTime: p.readingTime,
+          category: p.category || "analysis",
+        }))}
+        currentSlug={slug}
+        currentCategory={post.category}
+      />
     </>
   );
 }
