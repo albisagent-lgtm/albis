@@ -71,6 +71,7 @@ export const REGION_LABELS: Record<string, string> = {
   "middle-east": "Middle East",
   "middle_east": "Middle East",
   "eastern-europe": "E. Europe",
+  "europe": "Europe",
   "eu": "Europe",
   "africa": "Africa",
   "east-se-asia": "East & SE Asia",
@@ -85,7 +86,7 @@ const REGION_ALIAS: Record<string, string> = {
   "south_asia": "south-asia",
   "us": "western-world",
   "middle_east": "middle-east",
-  "eu": "eastern-europe",
+  "eu": "europe",
   "asia_pacific": "east-se-asia",
   "latam": "latin-americas",
 };
@@ -95,12 +96,12 @@ export function normalizeRegion(r: string): string {
 
 // Canonical display regions (excluding global)
 export const DISPLAY_REGIONS = [
-  "south-asia",
   "western-world",
+  "europe",
   "middle-east",
-  "eastern-europe",
-  "africa",
+  "south-asia",
   "east-se-asia",
+  "africa",
   "latin-americas",
 ] as const;
 

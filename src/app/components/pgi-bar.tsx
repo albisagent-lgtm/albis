@@ -21,11 +21,12 @@ export function PgiBar({ pgi, delta, date }: PgiBarProps) {
   return (
     <Link
       href="/indexes"
+      aria-label={`Perception Gap Index: ${pgi.toFixed(1)} — ${tier.name}. View details.`}
       className="group flex items-center gap-4 rounded-xl border border-black/[0.06] bg-white/80 px-5 py-3.5 transition-all hover:border-[#c8922a]/30 hover:shadow-sm dark:border-white/[0.06] dark:bg-white/[0.03]"
     >
       {/* PGI number */}
       <div className="flex items-center gap-2.5 shrink-0">
-        <span className={`h-2.5 w-2.5 rounded-full ${tier.color}`} />
+        <span className={`h-2.5 w-2.5 rounded-full ${tier.color}`} aria-hidden="true" />
         <span className="font-[family-name:var(--font-playfair)] text-2xl font-bold tracking-tight text-[#0f0f0f] dark:text-[#f0efec]">
           {pgi.toFixed(1)}
         </span>
@@ -46,16 +47,23 @@ export function PgiBar({ pgi, delta, date }: PgiBarProps) {
             )}
           </span>
         </div>
-        <div className="relative h-1.5 w-full rounded-full bg-gradient-to-r from-emerald-200 via-amber-200 via-orange-200 to-red-200 dark:from-emerald-900 dark:via-amber-900 dark:via-orange-900 dark:to-red-900">
+        {/* 4-stop gradient via inline style (Tailwind only supports one via-) */}
+        <div
+          className="relative h-1.5 w-full rounded-full"
+          style={{
+            background: "linear-gradient(to right, #6ee7b7, #fcd34d, #fdba74, #fca5a5)",
+          }}
+          aria-hidden="true"
+        >
           <div
-            className={`absolute top-1/2 -translate-y-1/2 h-3.5 w-3.5 rounded-full ${tier.color} ring-2 ring-white dark:ring-[#0f0f0f] shadow-sm transition-all`}
-            style={{ left: `${position}%`, marginLeft: "-7px" }}
+            className={`absolute top-1/2 h-3.5 w-3.5 rounded-full ${tier.color} ring-2 ring-white dark:ring-[#0f0f0f] shadow-sm transition-all`}
+            style={{ left: `${position}%`, transform: "translate(-50%, -50%)" }}
           />
         </div>
       </div>
 
       {/* Arrow */}
-      <span className="text-zinc-300 dark:text-zinc-600 group-hover:text-[#c8922a] transition-colors shrink-0">
+      <span className="text-zinc-300 dark:text-zinc-600 group-hover:text-[#c8922a] transition-colors shrink-0" aria-hidden="true">
         →
       </span>
     </Link>

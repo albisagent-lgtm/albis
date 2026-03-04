@@ -9,7 +9,6 @@ import { RelativeTime, BriefingTime } from "./components/relative-time";
 import { NextBriefingCountdown } from "./components/next-briefing-countdown";
 import { ExitIntentModal } from "./components/exit-intent-modal";
 import { PgiBar } from "./components/pgi-bar";
-import { createClient } from "@supabase/supabase-js";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
@@ -40,10 +39,7 @@ async function getLatestPGI() {
 // Fetch active breaking news
 async function getBreakingNews() {
   try {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-    const supabase = createClient(supabaseUrl, supabaseKey);
-
+    const supabase = createAdminClient();
     const now = new Date();
     const sixHoursAgo = new Date(now.getTime() - 6 * 60 * 60 * 1000).toISOString();
 
@@ -111,12 +107,12 @@ export default async function Home() {
   }> = [];
 
   const REGION_FLAGS: Record<string, string> = {
-    "south-asia": "🇮🇳",
     "western-world": "🇺🇸",
+    "europe": "🇪🇺",
     "middle-east": "🕌",
-    "eastern-europe": "🇪🇺",
-    "africa": "🌍",
+    "south-asia": "🇮🇳",
     "east-se-asia": "🌏",
+    "africa": "🌍",
     "latin-americas": "🌎",
   };
 
@@ -208,8 +204,11 @@ export default async function Home() {
                   </span>
                 )}
                 <span className="text-xs text-zinc-400 dark:text-zinc-500">
-                  {leadStory.regions.filter((r) => r !== "global").length || "Global"}{" "}
-                  {leadStory.regions.filter((r) => r !== "global").length === 1 ? "region" : "regions"}
+                  {(() => {
+                    const count = leadStory.regions.filter((r) => r !== "global").length;
+                    if (count === 0) return "Global";
+                    return `${count} region${count === 1 ? "" : "s"}`;
+                  })()}
                 </span>
               </div>
 
@@ -288,9 +287,9 @@ export default async function Home() {
         <div className="mx-auto max-w-3xl px-6 py-10 md:py-14">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
+              <h3 className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
                 Today&apos;s Briefing
-              </p>
+              </h3>
               {scan?.date && (
                 <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-500">
                   <BriefingTime date={scan.date} fallback={scan.displayDate} />
@@ -315,9 +314,9 @@ export default async function Home() {
                       style={{ backgroundColor: getCategoryAccent(item.category) }}
                     />
                     <div className="min-w-0">
-                      <h4 className="text-sm font-medium leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+                      <p className="text-sm font-medium leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
                         {item.headline}
-                      </h4>
+                      </p>
                       {item.connection && (
                         <p className="mt-0.5 text-xs leading-relaxed text-zinc-400 dark:text-zinc-500 line-clamp-1">
                           {item.connection}
@@ -334,9 +333,9 @@ export default async function Home() {
                     Pattern of the Day
                   </p>
                   {scan.patternOfDay.title && (
-                    <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-lg font-semibold italic leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+                    <h4 className="mt-2 font-[family-name:var(--font-playfair)] text-lg font-semibold italic leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
                       {scan.patternOfDay.title}
-                    </h3>
+                    </h4>
                   )}
                   <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 line-clamp-2">
                     {scan.patternOfDay.body}
