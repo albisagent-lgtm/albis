@@ -9,6 +9,7 @@ import { getRelatedPosts, getRelatedPages } from "@/lib/internal-links";
 import { matchTagToTopic } from "@/lib/topics";
 import { Breadcrumbs } from "@/app/components/breadcrumbs";
 import { SourceTransparency } from "@/app/components/source-transparency";
+import { RelativeTime } from "@/app/components/relative-time";
 import { CATEGORIES } from "@/lib/categories";
 
 interface Props {
@@ -121,7 +122,7 @@ export default async function BlogPostPage({ params }: Props) {
               { label: post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title },
             ]}
           />
-          <div className="flex items-center gap-3 text-sm text-zinc-400 dark:text-zinc-500">
+          <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-400 dark:text-zinc-500">
             <time>
               {new Date(post.date).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -129,6 +130,7 @@ export default async function BlogPostPage({ params }: Props) {
                 day: "numeric",
               })}
             </time>
+            <RelativeTime date={post.date} prefix="· " className="text-sm text-zinc-400 dark:text-zinc-500" />
             <span>&middot;</span>
             <span>{post.readingTime} min read</span>
           </div>
@@ -147,12 +149,7 @@ export default async function BlogPostPage({ params }: Props) {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
-              })} · {new Date(post.updatedDate).toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-                timeZone: "UTC",
-                timeZoneName: "short"
-              })}
+              })} · <RelativeTime date={post.updatedDate} className="text-sm text-emerald-600 dark:text-emerald-400" />
             </div>
           )}
           {/* Tags */}

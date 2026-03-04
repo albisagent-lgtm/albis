@@ -6,6 +6,8 @@ import { EmailCapture } from "./components/email-capture";
 import { DateLine } from "./components/date-line";
 import { TabbedArticles } from "./components/tabbed-articles";
 import { CrisisHero } from "./components/crisis-hero";
+import { RelativeTime, BriefingTime } from "./components/relative-time";
+import { NextBriefingCountdown } from "./components/next-briefing-countdown";
 import { createClient } from "@supabase/supabase-js";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -301,7 +303,7 @@ export default async function Home() {
                       What is this? →
                     </Link>
                     <span className="text-xs text-zinc-300 dark:text-zinc-600">
-                      Updated {formatPgiDate(pgiData.date)}
+                      <RelativeTime date={pgiData.date} prefix="Updated " fallback={`Updated ${formatPgiDate(pgiData.date)}`} />
                     </span>
                   </div>
                 </>
@@ -330,7 +332,7 @@ export default async function Home() {
                     Live
                   </span>
                   <time dateTime={scan.date} className="text-zinc-400 dark:text-zinc-500 text-sm">
-                    {scan.displayDate}
+                    <BriefingTime date={scan.date} fallback={scan.displayDate} />
                   </time>
                 </div>
 
@@ -382,6 +384,7 @@ export default async function Home() {
                     Browse all briefings →
                   </Link>
                 </div>
+                <NextBriefingCountdown />
               </>
             ) : (
               <div className="py-space-6 text-center">
@@ -587,6 +590,11 @@ export default async function Home() {
           <p className="text-center font-[family-name:var(--font-geist-mono)] text-[10px] text-zinc-300 dark:text-zinc-700">
             {scan.scanMeta}
           </p>
+          {scan.date && (
+            <p className="text-center text-[10px] text-zinc-300 dark:text-zinc-700 mt-0.5">
+              <RelativeTime date={scan.date} prefix="Last scanned " />
+            </p>
+          )}
         </div>
       )}
     </main>

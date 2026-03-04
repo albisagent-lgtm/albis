@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 interface Post {
@@ -35,6 +35,32 @@ function getContentDepthBadge(readingTime: number) {
 
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+}
+
+function FreshDate({ dateString }: { dateString: string }) {
+  const [label, setLabel] = useState(formatDate(dateString));
+
+  useEffect(() => {
+    const now = new Date();
+    const then = new Date(dateString);
+    const diffMs = now.getTime() - then.getTime();
+    const diffHrs = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffDays === 0 && diffHrs < 24) {
+      if (diffHrs < 1) {
+        const mins = Math.floor(diffMs / 60000);
+        setLabel(`${mins}m ago`);
+      } else {
+        setLabel(`${diffHrs}h ago`);
+      }
+    } else if (diffDays === 1) {
+      setLabel("Yesterday");
+    }
+    // else keep static date
+  }, [dateString]);
+
+  return <>{label}</>;
 }
 
 function getSectionTag(tags: string[]) {
@@ -121,7 +147,7 @@ function ArticleCard({ post, featured = false }: { post: Post; featured?: boolea
           <div className="mt-6 flex items-center gap-3 text-sm text-zinc-400 dark:text-zinc-500">
             <span>By {post.author}</span>
             <span>·</span>
-            <time>{formatDate(post.date)}</time>
+            <time><FreshDate dateString={post.date} /></time>
           </div>
           {post.tags.length > 0 && (
             <div className="mt-4">
@@ -161,7 +187,7 @@ function ArticleCard({ post, featured = false }: { post: Post; featured?: boolea
         <div className="mt-4 flex items-center gap-2 text-xs text-zinc-400 dark:text-zinc-500">
           <span>{post.author}</span>
           <span>·</span>
-          <time>{formatDate(post.date)}</time>
+          <time><FreshDate dateString={post.date} /></time>
         </div>
         {post.tags.length > 0 && (
           <div className="mt-3">
@@ -243,7 +269,7 @@ export default function LensClient({ posts }: { posts: Post[] }) {
                             </>
                           )}
                           <span className="text-zinc-400">·</span>
-                          <time className="text-zinc-500">{formatDate(post.date)}</time>
+                          <time className="text-zinc-500"><FreshDate dateString={post.date} /></time>
                         </div>
                         <h3 className="mt-2 text-lg font-semibold group-hover:text-[#1a3a5c] dark:group-hover:text-[#7ab0d8]">
                           {post.title}
