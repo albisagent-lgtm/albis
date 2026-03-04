@@ -2,53 +2,7 @@
 
 import { useState } from "react";
 
-export function ShareButtons({ topic }: { topic: string }) {
-  const [copied, setCopied] = useState(false);
-
-  const shareUrl = typeof window !== "undefined" ? window.location.href : "https://albis.news/compare";
-  const tweetText = `${topic}\n\nSame event. Different perspectives. See how the world reported it:\n`;
-  const twitterUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(shareUrl)}`;
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(shareUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // fallback
-    }
-  };
-
-  return (
-    <div className="mt-8 flex flex-wrap items-center gap-3">
-      <span className="text-xs font-medium tracking-[0.12em] uppercase text-zinc-400 dark:text-zinc-500">
-        Share this comparison
-      </span>
-      <button
-        onClick={handleCopy}
-        className="inline-flex items-center gap-2 rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition-all hover:border-zinc-400 hover:shadow-sm dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:border-zinc-600"
-      >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-        </svg>
-        {copied ? "Copied!" : "Copy link"}
-      </button>
-      <a
-        href={twitterUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition-all hover:border-zinc-400 hover:shadow-sm dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:border-zinc-600"
-      >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-        </svg>
-        Share on X
-      </a>
-    </div>
-  );
-}
-
+// Legacy ShareIcon used by explore-client
 export function ShareIcon({ headline }: { headline: string }) {
   const [copied, setCopied] = useState(false);
 
@@ -86,5 +40,109 @@ export function ShareIcon({ headline }: { headline: string }) {
         </svg>
       )}
     </button>
+  );
+}
+
+interface ShareButtonsProps {
+  url: string;
+  title: string;
+  description?: string;
+  compact?: boolean;
+}
+
+export function ShareButtons({ url, title, description, compact = false }: ShareButtonsProps) {
+  const [copied, setCopied] = useState(false);
+
+  const encodedUrl = encodeURIComponent(url);
+  const encodedTitle = encodeURIComponent(title);
+  const encodedDesc = encodeURIComponent(description || "");
+
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`;
+  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+  const redditUrl = `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`;
+  const whatsappUrl = `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
+
+  async function copyLink() {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Fallback
+      const input = document.createElement("input");
+      input.value = url;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("copy");
+      document.body.removeChild(input);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }
+
+  const btnClass = compact
+    ? "inline-flex items-center justify-center h-8 w-8 rounded-lg border border-black/[0.06] text-xs transition-colors hover:border-[#c8922a]/30 hover:text-[#c8922a] dark:border-white/[0.06]"
+    : "inline-flex items-center gap-2 rounded-lg border border-black/[0.06] px-3 py-2 text-xs font-medium text-zinc-600 transition-colors hover:border-[#c8922a]/30 hover:text-[#c8922a] dark:border-white/[0.06] dark:text-zinc-400";
+
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      {!compact && (
+        <span className="text-xs font-medium text-zinc-400 dark:text-zinc-500 mr-1">Share:</span>
+      )}
+      <a href={twitterUrl} target="_blank" rel="noopener noreferrer" className={btnClass} aria-label="Share on X/Twitter">
+        {compact ? "𝕏" : "𝕏 Post"}
+      </a>
+      <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" className={btnClass} aria-label="Share on LinkedIn">
+        {compact ? "in" : "LinkedIn"}
+      </a>
+      <a href={redditUrl} target="_blank" rel="noopener noreferrer" className={btnClass} aria-label="Share on Reddit">
+        {compact ? "↗" : "Reddit"}
+      </a>
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className={btnClass} aria-label="Share on WhatsApp">
+        {compact ? "💬" : "WhatsApp"}
+      </a>
+      <button onClick={copyLink} className={btnClass} aria-label="Copy link">
+        {copied ? (compact ? "✓" : "Copied!") : (compact ? "🔗" : "Copy link")}
+      </button>
+    </div>
+  );
+}
+
+interface EmbedCodeProps {
+  src: string;
+  width?: number;
+  height?: number;
+}
+
+export function EmbedCode({ src, width = 400, height = 200 }: EmbedCodeProps) {
+  const [copied, setCopied] = useState(false);
+  const code = `<iframe src="${src}" width="${width}" height="${height}" style="border:none;border-radius:12px;" loading="lazy"></iframe>`;
+
+  async function copyEmbed() {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }
+
+  return (
+    <div className="rounded-lg border border-black/[0.06] bg-zinc-50 p-4 dark:border-white/[0.06] dark:bg-white/[0.02]">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">Embed this widget</span>
+        <button
+          onClick={copyEmbed}
+          className="text-xs font-medium text-[#c8922a] hover:text-[#c8922a]/80 transition-colors"
+        >
+          {copied ? "Copied!" : "Copy code"}
+        </button>
+      </div>
+      <pre className="text-[11px] text-zinc-400 dark:text-zinc-500 overflow-x-auto whitespace-pre-wrap break-all leading-relaxed">
+        {code}
+      </pre>
+    </div>
   );
 }

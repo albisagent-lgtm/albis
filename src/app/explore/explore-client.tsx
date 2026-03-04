@@ -5,7 +5,6 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { PremiumGate } from "@/app/components/premium-gate";
 import { PerspectiveScore } from "@/app/components/perspective-score";
-import { ShareIcon } from "@/app/components/share-buttons";
 import { SearchBar } from "@/app/components/search-bar";
 import { hasFramingWatch, hasBlindspot } from "@/lib/scan-types";
 import type { ExploreItem } from "./page";
@@ -443,7 +442,6 @@ function ExploreItemCard({
             <time className="text-xs text-zinc-400 dark:text-zinc-500">
               {item.displayDate}
             </time>
-            <ShareIcon headline={item.headline} />
           </div>
           <div className="flex items-center gap-2">
             {isBlindspot && (

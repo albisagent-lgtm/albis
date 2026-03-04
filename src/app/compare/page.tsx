@@ -262,7 +262,11 @@ export default async function ComparePage() {
           )}
 
           {/* Share buttons */}
-          <ShareButtons topic={topic} />
+          <ShareButtons 
+            url="https://www.albis.news/compare" 
+            title={`${topic} — See how the world reported it`}
+            description="One event. Multiple perspectives. See how different regions reported the same news."
+          />
         </div>
       </section>
 
