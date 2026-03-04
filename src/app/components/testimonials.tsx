@@ -45,7 +45,7 @@ export function Testimonials() {
   return (
     <div className="mx-auto max-w-xl text-center">
       <div className="min-h-[120px] flex items-center justify-center">
-        <blockquote className="transition-opacity duration-500" key={active}>
+        <blockquote className="animate-fade-in" key={active}>
           <p className="text-base sm:text-lg font-[family-name:var(--font-source-serif)] italic leading-relaxed text-[#0f0f0f] dark:text-[#f0efec]">
             &ldquo;{t.quote}&rdquo;
           </p>
