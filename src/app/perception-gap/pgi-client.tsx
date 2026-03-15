@@ -22,6 +22,7 @@ interface SignaturePiece {
   avg_d3_framing: number | null;
   avg_d4_emotional: number | null;
   avg_d5_actor: number | null;
+  avg_d6_cui_bono: number | null;
   story_count: number | null;
   region_count: number | null;
   top_stories: string[];
@@ -41,6 +42,7 @@ interface StoryScore {
   d3_framing: number;
   d4_emotional: number;
   d5_actor_context: number;
+  d6_cui_bono: number;
   story_pgi: number;
   significance: number;
   scoring_rationale: string | null;
@@ -103,6 +105,7 @@ const DIMENSION_LABELS = [
   { key: "d3_framing", short: "Framing", full: "Framing & Emphasis", sigKey: "avg_d3_framing" },
   { key: "d4_emotional", short: "Emotional", full: "Emotional Tone", sigKey: "avg_d4_emotional" },
   { key: "d5_actor_context", short: "Actor", full: "Actor Portrayal", sigKey: "avg_d5_actor" },
+  { key: "d6_cui_bono", short: "Cui Bono", full: "Who Benefits", sigKey: "avg_d6_cui_bono" },
 ];
 
 function renderMarkdown(md: string) {
@@ -687,7 +690,7 @@ export function PGIClient() {
         <div className="grid gap-space-8 md:grid-cols-2">
           <div>
             <h3 className="mb-3 text-sm font-semibold uppercase tracking-widest text-zinc-400">
-              Five Dimensions
+              Six Dimensions
             </h3>
             <ul className="space-y-2 text-sm text-zinc-600 dark:text-zinc-300">
               <li><strong>Factual Divergence</strong> — Do regions report different core facts?</li>
@@ -695,6 +698,7 @@ export function PGIClient() {
               <li><strong>Framing &amp; Emphasis</strong> — What angle dominates the coverage?</li>
               <li><strong>Emotional Tone</strong> — How charged is the language?</li>
               <li><strong>Actor &amp; Context Portrayal</strong> — How are key actors and context presented?</li>
+              <li><strong>Cui Bono</strong> — Whose interests does the framing serve?</li>
             </ul>
           </div>
           <div>
@@ -729,8 +733,8 @@ export function PGIClient() {
               </li>
             </ul>
             <p className="mt-6 text-xs text-zinc-400">
-              Methodology grounded in Entman&apos;s framing theory (1993). Updated 3× daily from
-              scans of 60+ sources across 10 regions.
+              Methodology grounded in Entman&apos;s framing theory (1993), extended with cui bono analysis. Updated 3× daily from
+              scans of 60+ sources across 7 regions.
             </p>
           </div>
         </div>

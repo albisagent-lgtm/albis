@@ -23,12 +23,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: page.title,
       description: page.description,
-      url: `https://albis.news/perspectives/reactions/${page.slug}`,
+      url: `https://www.albis.news/perspectives/reactions/${page.slug}`,
       type: "article",
       images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     },
     alternates: {
-      canonical: `https://albis.news/perspectives/reactions/${page.slug}`,
+      canonical: `https://www.albis.news/perspectives/reactions/${page.slug}`,
     },
   };
 }
@@ -46,15 +46,15 @@ export default async function ReactionPage({ params }: Props) {
     "@type": "NewsArticle",
     headline: page.title,
     description: page.description,
-    url: `https://albis.news/perspectives/reactions/${page.slug}`,
+    url: `https://www.albis.news/perspectives/reactions/${page.slug}`,
     publisher: {
       "@type": "Organization",
       name: "Albis",
-      url: "https://albis.news",
+      url: "https://www.albis.news",
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://albis.news/perspectives/reactions/${page.slug}`,
+      "@id": `https://www.albis.news/perspectives/reactions/${page.slug}`,
     },
   };
 

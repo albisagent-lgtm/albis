@@ -13,8 +13,9 @@ const BORDER = "#e5e7eb";
 const BLIND_SPOT_BG = "#fffbeb";
 const WHITE = "#ffffff";
 
-function esc(s: string): string {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+function esc(s: string | undefined | null): string {
+  if (!s) return "";
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 function categoryLabel(cat: string): string {

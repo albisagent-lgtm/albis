@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { topic: slug } = await params;
   const topic = getTopicBySlug(slug);
   if (!topic) return {};
-  const url = `https://albis.news/topics/${slug}`;
+  const url = `https://www.albis.news/topics/${slug}`;
   return {
     title: `How the World Reports on ${topic.name} | Albis`,
     description: `See how different regions cover ${topic.name}. Compare framing, coverage gaps, and perspectives across 7 world regions with Albis.`,
@@ -47,7 +47,7 @@ export default async function TopicPage({ params }: Props) {
     "@type": "CollectionPage",
     name: `How the World Reports on ${topic.name}`,
     description: `See how different regions cover ${topic.name}. Compare framing, coverage gaps, and perspectives.`,
-    url: `https://albis.news/topics/${slug}`,
+    url: `https://www.albis.news/topics/${slug}`,
     publisher: {
       "@type": "Organization",
       name: "Albis",

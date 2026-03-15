@@ -46,7 +46,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://albis.news";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.albis.news";
 
 export const metadata: Metadata = {
   title: {
@@ -137,8 +137,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Albis",
-              url: "https://albis.news",
-              logo: "https://albis.news/icon-512.png",
+              url: "https://www.albis.news",
+              logo: "https://www.albis.news/icon-512.png",
               description:
                 "News intelligence, not noise. Albis gives you the full picture — every source, zero spin, one calm reading experience.",
               contactPoint: {

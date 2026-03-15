@@ -344,7 +344,7 @@ export function QuizClient() {
               </a>
               <button
                 onClick={() => {
-                  navigator.clipboard?.writeText("https://albis.news/quiz");
+                  navigator.clipboard?.writeText("https://www.albis.news/quiz");
                   // Could add a toast notification here
                 }}
                 className="rounded-xl border border-[#C9A35F]/30 bg-[#C9A35F]/5 px-5 py-2.5 text-sm font-medium text-[#C9A35F] transition hover:border-[#C9A35F]/50 hover:bg-[#C9A35F]/10 dark:border-[#C9A35F]/40 dark:bg-[#C9A35F]/10 dark:hover:border-[#C9A35F]/60"

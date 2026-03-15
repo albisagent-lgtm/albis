@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { PGIClient } from "../../perception-gap/pgi-client";
 import { PgiShareBar } from "./share-bar";
+import { SeriesArticleFeed } from "@/components/SeriesArticleFeed";
+import { getArticlesByTag } from "@/lib/blog/tagged";
 
 export const dynamic = "force-dynamic";
 
@@ -44,6 +46,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function PGIPage() {
   const latest = await getLatestPgi();
+  const dividedArticles = getArticlesByTag("divided", 5);
 
   // Fetch available dates for archive
   const supabase = createAdminClient();
@@ -61,6 +64,15 @@ export default async function PGIPage() {
         dates={(dates || []).map((d: any) => ({ date: d.date, pgi: Number(d.daily_pgi) }))}
       />
       <PGIClient />
+      <div className="mx-auto max-w-6xl px-6">
+        <SeriesArticleFeed
+          tag="divided"
+          title="Divided: Same Story, Different Realities"
+          subtitle="Full articles showing how the same event looks completely different depending on where you live. Published 3× daily."
+          accentColor="#4f46e5"
+          articles={dividedArticles}
+        />
+      </div>
     </>
   );
 }

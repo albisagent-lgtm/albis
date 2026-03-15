@@ -77,6 +77,76 @@ function findMatchingArticle(headline: string, connection: string | undefined, a
   return bestMatch;
 }
 
+// ── PGI Badge Component ───────────────────────────────────────────
+
+function PGIBadge({ score }: { score: number }) {
+  const getColorClasses = (score: number) => {
+    if (score <= 3) {
+      return "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400";
+    } else if (score <= 6) {
+      return "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400";
+    } else {
+      return "bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400";
+    }
+  };
+
+  return (
+    <span className={`inline-block rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${getColorClasses(score)}`}>
+      PGI {score.toFixed(1)}
+    </span>
+  );
+}
+
+// ── Information Pulse Card ────────────────────────────────────────
+
+interface InformationPulseProps {
+  items: ScanItem[];
+}
+
+function InformationPulseCard({ items }: InformationPulseProps) {
+  const itemsWithPGI = items.filter(item => item.perception_gap != null && item.perception_gap > 0);
+  
+  if (itemsWithPGI.length === 0) return null;
+
+  const avgPGI = itemsWithPGI.reduce((sum, item) => sum + (item.perception_gap || 0), 0) / itemsWithPGI.length;
+  const highestPGI = itemsWithPGI.reduce((highest, item) => 
+    (item.perception_gap || 0) > (highest.perception_gap || 0) ? item : highest
+  );
+  
+  const regionSet = new Set(items.flatMap(item => item.regions.filter(r => r !== "global")));
+  const regionCount = regionSet.size;
+
+  return (
+    <div className="rounded-2xl border border-black/[0.07] bg-white/50 p-6 dark:border-white/[0.06] dark:bg-white/[0.02]">
+      <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#c8922a]">
+        Today's Information Pulse
+      </p>
+      <div className="mt-4 grid gap-4 md:grid-cols-3">
+        <div>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">Average PGI</p>
+          <p className="text-2xl font-[family-name:var(--font-playfair)] font-semibold text-zinc-900 dark:text-zinc-100">
+            {avgPGI.toFixed(1)}
+          </p>
+        </div>
+        <div>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">Highest Gap</p>
+          <p className="text-sm font-[family-name:var(--font-source-serif)] font-medium text-zinc-700 dark:text-zinc-300 line-clamp-2">
+            {highestPGI.headline}
+          </p>
+          <p className="text-xs text-[#c8922a] font-semibold">PGI {(highestPGI.perception_gap || 0).toFixed(1)}</p>
+        </div>
+        <div>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">Coverage</p>
+          <p className="text-lg font-[family-name:var(--font-playfair)] font-semibold text-zinc-900 dark:text-zinc-100">
+            {items.length} stories
+          </p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">{regionCount} regions</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Headlines View ────────────────────────────────────────────────
 
 interface HeadlinesViewProps {
@@ -108,6 +178,9 @@ function HeadlinesView({ items, articles, patternOfDay, framingNote, displayDate
           <span className="text-sm text-zinc-400 dark:text-zinc-500">{displayDate}</span>
         )}
       </div>
+
+      {/* Information Pulse Card */}
+      <InformationPulseCard items={items} />
 
       {/* Pattern of the Day */}
       {patternOfDay && (
@@ -169,6 +242,9 @@ function HeadlinesView({ items, articles, patternOfDay, framingNote, displayDate
                   <span className="rounded-full bg-rose-50 px-2.5 py-0.5 text-[10px] font-medium text-rose-500 dark:bg-rose-950/30 dark:text-rose-400">
                     Framing
                   </span>
+                )}
+                {item.perception_gap != null && item.perception_gap > 0 && (
+                  <PGIBadge score={item.perception_gap} />
                 )}
                 {match && (
                   <span className="ml-auto text-xs text-zinc-300 group-hover:text-[#c8922a] dark:text-zinc-600 dark:group-hover:text-[#c8922a] transition-colors">

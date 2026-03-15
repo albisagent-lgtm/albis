@@ -8,11 +8,11 @@ export const metadata: Metadata = {
     title: "Global News Perspectives by Country | Albis",
     description:
       "Explore how 195 countries report world news differently. See media framing and regional perspectives from every corner of the globe.",
-    url: "https://albis.news/perspectives",
+    url: "https://www.albis.news/perspectives",
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
-  alternates: { canonical: "https://albis.news/perspectives" },
+  alternates: { canonical: "https://www.albis.news/perspectives" },
 };
 
 export default function PerspectivesLayout({

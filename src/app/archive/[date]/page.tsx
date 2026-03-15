@@ -232,10 +232,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${cleanedTitle} — Albis Daily Briefing`,
       description:
         briefing.summary || `Daily briefing from Albis for ${formattedDate}`,
-      url: `https://albis.news/archive/${date}`,
+      url: `https://www.albis.news/archive/${date}`,
       type: "article",
     },
-    alternates: { canonical: `https://albis.news/archive/${date}` },
+    alternates: { canonical: `https://www.albis.news/archive/${date}` },
   };
 }
 

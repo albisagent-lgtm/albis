@@ -1,8 +1,22 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo, Suspense } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
+import { SeriesArticleFeed, type TaggedArticle } from "@/components/SeriesArticleFeed";
+import {
+  AreaChart,
+  Area,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  ReferenceArea,
+} from "recharts";
 
 // ── Types ──────────────────────────────────────────────────────────
 
@@ -23,14 +37,13 @@ interface GAIStoryScore {
   scan_date: string;
   story_headline: string;
   category: string;
-  regions_covering: string[];
-  regions_missing: string[];
-  region_count: number;
-  total_regions: number;
+  regions_found: string[];
+  regions_absent: string[];
+  coverage_breadth: number;
   d1_coverage_breadth: number;
-  d2_placement_prominence: number;
-  d3_source_diversity: number;
-  d4_temporal_persistence: number;
+  d2_prominence_disparity: number;
+  d3_population_exposure: number;
+  d4_significance_severity: number;
   story_gai: number;
 }
 
@@ -64,13 +77,53 @@ const TRIBUTARIES = [
   { code: "CL", name: "Climate", key: "gai_cl" },
 ];
 
+// ── Blind Spots ────────────────────────────────────────────────────
+
+const REGIONS = [
+  { id: "us", label: "US", emoji: "🇺🇸", pop: 0.34 },
+  { id: "eu", label: "EU", emoji: "🇪🇺", pop: 0.45 },
+  { id: "middle-east", label: "Middle East", emoji: "🌍", pop: 0.41 },
+  { id: "asia-pacific", label: "Asia-Pacific", emoji: "🌏", pop: 2.3 },
+  { id: "south-asia", label: "South Asia", emoji: "🇮🇳", pop: 1.9 },
+  { id: "africa", label: "Africa", emoji: "🌍", pop: 1.46 },
+  { id: "latin-america", label: "Latin America", emoji: "🌎", pop: 0.66 },
+] as const;
+
+// Map slug → possible region_absent values
+function regionIdToAbsentNames(id: string): string[] {
+  const map: Record<string, string[]> = {
+    "us": ["US", "United States"],
+    "eu": ["EU", "Europe"],
+    "middle-east": ["Middle East"],
+    "asia-pacific": ["Asia-Pacific", "Asia Pacific"],
+    "south-asia": ["South Asia"],
+    "africa": ["Africa"],
+    "latin-america": ["Latin America"],
+  };
+  return map[id] || [id];
+}
+
 // ── Main Component ─────────────────────────────────────────────────
 
 export default function GAIPage() {
+  return (
+    <Suspense>
+      <GAIPageInner />
+    </Suspense>
+  );
+}
+
+function GAIPageInner() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const regionParam = searchParams.get("region");
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(regionParam);
   const [daily, setDaily] = useState<GAIDaily | null>(null);
   const [stories, setStories] = useState<GAIStoryScore[]>([]);
   const [loading, setLoading] = useState(true);
   const [hasData, setHasData] = useState(false);
+  const [unseenArticles, setUnseenArticles] = useState<TaggedArticle[]>([]);
+  const [gaiHistory, setGaiHistory] = useState<GAIDaily[]>([]);
 
   const fetchData = useCallback(async () => {
     const supabase = createClient();
@@ -88,21 +141,60 @@ export default function GAIPage() {
       setHasData(true);
     }
 
-    // Try fetching today's story scores
+    // Try fetching latest story scores (today first, then fall back to most recent date)
     const today = new Date().toISOString().slice(0, 10);
-    const { data: storiesData } = await supabase
+    let { data: storiesData } = await supabase
       .from("gai_story_scores")
       .select("*")
       .eq("scan_date", today)
       .order("story_gai", { ascending: false })
-      .limit(10);
+      .limit(20);
+
+    // If no stories today, get the most recent date that has data
+    if (!storiesData || storiesData.length === 0) {
+      const { data: latestStories } = await supabase
+        .from("gai_story_scores")
+        .select("*")
+        .order("scan_date", { ascending: false })
+        .order("story_gai", { ascending: false })
+        .limit(20);
+      storiesData = latestStories;
+    }
 
     if (storiesData && storiesData.length > 0) {
       setStories(storiesData);
       setHasData(true);
+
+      // If no daily record, calculate live GAI from stories
+      if (!dailyData) {
+        const sum = storiesData.reduce((acc, s) => acc + (Number(s.story_gai) || 0), 0);
+        const liveGai = Number((sum / storiesData.length).toFixed(2));
+        setDaily({
+          date: storiesData[0].scan_date,
+          daily_gai: liveGai,
+          gai_gp: null, gai_iw: null, gai_wr: null,
+          gai_ec: null, gai_te: null, gai_he: null, gai_cl: null,
+        });
+      }
+    }
+
+    // Fetch historical GAI data for charts
+    const { data: historyData } = await supabase
+      .from("gai_daily")
+      .select("*")
+      .order("date", { ascending: true })
+      .limit(30);
+    if (historyData && historyData.length > 0) {
+      setGaiHistory(historyData);
     }
 
     setLoading(false);
+
+    // Fetch unseen articles
+    fetch("/api/articles/tagged?tag=unseen&limit=5")
+      .then((r) => r.json())
+      .then((d) => setUnseenArticles(d.articles || []))
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -117,8 +209,8 @@ export default function GAIPage() {
     if (stories.length === 0) return [];
     const counts: Record<string, number> = {};
     for (const s of stories) {
-      if (s.regions_missing) {
-        for (const r of s.regions_missing) {
+      if (s.regions_absent) {
+        for (const r of s.regions_absent) {
           counts[r] = (counts[r] || 0) + 1;
         }
       }
@@ -127,6 +219,25 @@ export default function GAIPage() {
       .map(([region, count]) => ({ region, count }))
       .sort((a, b) => b.count - a.count);
   })();
+
+  const handleRegionSelect = (id: string) => {
+    const next = selectedRegion === id ? null : id;
+    setSelectedRegion(next);
+    const url = next ? `/indexes/gai?region=${next}` : "/indexes/gai";
+    router.replace(url, { scroll: false });
+  };
+
+  const blindSpotStories = selectedRegion
+    ? stories.filter((s) =>
+        s.regions_absent?.some((r) =>
+          regionIdToAbsentNames(selectedRegion).some(
+            (name) => r.toLowerCase() === name.toLowerCase()
+          )
+        )
+      ).sort((a, b) => Number(b.story_gai) - Number(a.story_gai))
+    : [];
+
+  const selectedRegionInfo = REGIONS.find((r) => r.id === selectedRegion);
 
   if (loading) {
     return (
@@ -182,6 +293,119 @@ export default function GAIPage() {
           </div>
         )}
       </section>
+
+      {/* ── Your Blind Spots ── */}
+      {stories.length > 0 && (
+        <section className="mb-16">
+          <h2 className="mb-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold">
+            Your Blind Spots
+          </h2>
+          <p className="mb-6 text-sm text-zinc-500 dark:text-zinc-400">
+            Pick your region to discover what your media isn&apos;t showing you.
+          </p>
+
+          {/* Region selector */}
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
+            {REGIONS.map((r) => (
+              <button
+                key={r.id}
+                onClick={() => handleRegionSelect(r.id)}
+                className={`rounded-2xl border p-4 text-center transition-all cursor-pointer ${
+                  selectedRegion === r.id
+                    ? "border-[#d97706] bg-[#d97706]/10 dark:bg-[#d97706]/5"
+                    : "border-black/[0.07] bg-white/50 hover:border-zinc-300 dark:border-white/[0.06] dark:bg-white/[0.02] dark:hover:border-white/[0.12]"
+                }`}
+              >
+                <div className="text-2xl">{r.emoji}</div>
+                <div className={`mt-1 text-xs font-medium ${
+                  selectedRegion === r.id ? "text-[#d97706]" : "text-zinc-500 dark:text-zinc-400"
+                }`}>
+                  {r.label}
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* Results */}
+          {selectedRegion && selectedRegionInfo && (
+            <div className="mt-8">
+              <h3 className="mb-4 text-lg font-semibold text-zinc-700 dark:text-zinc-200">
+                If you read {selectedRegionInfo.label} media, you&apos;re probably missing{" "}
+                <span className="text-[#d97706]">{blindSpotStories.length} stories</span> today
+              </h3>
+
+              {blindSpotStories.length === 0 ? (
+                <div className="rounded-2xl border border-black/[0.07] bg-white/50 p-6 text-center dark:border-white/[0.06] dark:bg-white/[0.02]">
+                  <p className="text-sm text-zinc-500">No blind spots detected for {selectedRegionInfo.label} today — good coverage!</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {blindSpotStories.map((story) => {
+                    const t = getGAITier(Number(story.story_gai));
+                    return (
+                      <div
+                        key={story.id}
+                        className="rounded-2xl border border-black/[0.07] bg-white/50 p-5 dark:border-white/[0.06] dark:bg-white/[0.02]"
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1 min-w-0">
+                            <h4 className="text-base font-semibold leading-snug">
+                              {story.story_headline}
+                            </h4>
+                            {story.regions_found && story.regions_found.length > 0 && (
+                              <div className="mt-2">
+                                <span className="text-[10px] uppercase tracking-wider text-zinc-400">
+                                  Covered by:
+                                </span>
+                                <div className="mt-1 flex flex-wrap gap-1">
+                                  {story.regions_found.map((r) => (
+                                    <span
+                                      key={r}
+                                      className="rounded bg-emerald-50 px-1.5 py-0.5 text-[10px] text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400"
+                                    >
+                                      {r}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                            <p className="mt-2 text-xs text-zinc-400">
+                              {selectedRegionInfo.pop.toFixed(2)}B people in your region don&apos;t know about this
+                            </p>
+                          </div>
+                          <div className="text-right shrink-0">
+                            <div
+                              className="text-3xl font-bold tabular-nums"
+                              style={{ color: t.color }}
+                            >
+                              {Number(story.story_gai).toFixed(1)}
+                            </div>
+                            <div className="flex items-center gap-1 text-xs text-zinc-400">
+                              <span
+                                className="inline-block h-2.5 w-2.5 rounded-full"
+                                style={{ backgroundColor: t.color }}
+                              />
+                              {t.name}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+
+          {!selectedRegion && (
+            <div className="mt-6 rounded-2xl border border-dashed border-zinc-300 bg-white/30 p-8 text-center dark:border-zinc-700 dark:bg-white/[0.01]">
+              <p className="text-sm text-zinc-400">
+                👆 Pick your region to discover your blind spots
+              </p>
+            </div>
+          )}
+        </section>
+      )}
 
       {/* ── River System: Tributaries ── */}
       <section className="mb-16">
@@ -292,19 +516,19 @@ export default function GAIPage() {
                           {story.category}
                         </span>
                         <span>
-                          {story.region_count} of {story.total_regions} regions covering
+                          {story.coverage_breadth} of 7 regions covering
                         </span>
                       </div>
                       <h3 className="text-base font-semibold leading-snug">
                         {story.story_headline}
                       </h3>
-                      {story.regions_missing && story.regions_missing.length > 0 && (
+                      {story.regions_absent && story.regions_absent.length > 0 && (
                         <div className="mt-2">
                           <span className="text-[10px] uppercase tracking-wider text-zinc-400">
                             Missing from:
                           </span>
                           <div className="mt-1 flex flex-wrap gap-1">
-                            {story.regions_missing.map((r) => (
+                            {story.regions_absent.map((r) => (
                               <span
                                 key={r}
                                 className="rounded bg-red-50 px-1.5 py-0.5 text-[10px] text-red-600 dark:bg-red-900/20 dark:text-red-400"
@@ -339,16 +563,174 @@ export default function GAIPage() {
         </section>
       )}
 
-      {/* ── Historical Chart Placeholder ── */}
+      {/* ── Unseen Article Feed ── */}
+      <SeriesArticleFeed
+        tag="unseen"
+        title="Unseen: Stories the World Missed"
+        subtitle="Full articles investigating the stories most of the world never sees. Published 3× daily."
+        accentColor="#d97706"
+        articles={unseenArticles}
+      />
+
+      {/* ── Daily Trend Chart ── */}
       <section className="mb-16">
         <h2 className="mb-6 font-[family-name:var(--font-playfair)] text-2xl font-semibold">
           Daily Trend
         </h2>
-        <div className="rounded-2xl border border-black/[0.07] bg-white/50 p-8 dark:border-white/[0.06] dark:bg-white/[0.02] flex items-center justify-center min-h-[200px]">
-          <p className="text-sm text-zinc-400">
-            Historical trend chart will appear here once enough data has been collected.
-          </p>
-        </div>
+        {gaiHistory.length >= 2 ? (
+          <>
+            <div className="rounded-2xl border border-black/[0.07] bg-white/50 p-6 dark:border-white/[0.06] dark:bg-white/[0.02]">
+              <div className="h-72 w-full md:h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={gaiHistory} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="gaiTrendGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#d97706" stopOpacity={0.15} />
+                        <stop offset="100%" stopColor="#d97706" stopOpacity={0.01} />
+                      </linearGradient>
+                    </defs>
+                    {[
+                      { y1: 0, y2: 2, fill: "#22c55e" },
+                      { y1: 2, y2: 4, fill: "#eab308" },
+                      { y1: 4, y2: 6, fill: "#f97316" },
+                      { y1: 6, y2: 8, fill: "#ef4444" },
+                      { y1: 8, y2: 10, fill: "#71717a" },
+                    ].map((b) => (
+                      <ReferenceArea key={b.y1} y1={b.y1} y2={b.y2} fill={b.fill} fillOpacity={0.04} ifOverflow="extendDomain" />
+                    ))}
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="text-zinc-100 dark:text-zinc-800" />
+                    <XAxis
+                      dataKey="date"
+                      tickFormatter={(d: string) => {
+                        const dt = new Date(d + "T00:00:00");
+                        return dt.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+                      }}
+                      tick={{ fontSize: 11, fill: "#a1a1aa" }}
+                      axisLine={false}
+                      tickLine={false}
+                      interval={gaiHistory.length <= 10 ? 0 : Math.floor(gaiHistory.length / 8)}
+                    />
+                    <YAxis domain={[0, 10]} tick={{ fontSize: 11, fill: "#a1a1aa" }} axisLine={false} tickLine={false} ticks={[0, 2, 4, 6, 8, 10]} width={32} />
+                    <Tooltip
+                      content={({ active, payload, label }: { active?: boolean; payload?: readonly { value: number }[]; label?: string | number }) => {
+                        if (!active || !payload?.[0] || !label) return null;
+                        const score = payload[0].value;
+                        const t = getGAITier(score);
+                        const dt = new Date(String(label) + "T00:00:00");
+                        return (
+                          <div className="rounded-lg border border-zinc-200 bg-white px-4 py-3 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
+                            <p className="text-xs text-zinc-500">{dt.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "long", year: "numeric" })}</p>
+                            <p className="mt-1 text-2xl font-bold" style={{ color: "#d97706" }}>{score.toFixed(2)}</p>
+                            <p className="text-xs font-medium" style={{ color: t.color }}>{t.name}</p>
+                          </div>
+                        );
+                      }}
+                    />
+                    <Area type="monotone" dataKey="daily_gai" stroke="#d97706" strokeWidth={2} fill="url(#gaiTrendGrad)" dot={false} activeDot={{ r: 4, strokeWidth: 2, fill: "#fff", stroke: "#d97706" }} />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            {/* ── Tributary Sparklines ── */}
+            <h3 className="mt-8 mb-4 font-[family-name:var(--font-playfair)] text-lg font-semibold">
+              Tributary Trends
+            </h3>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+              {TRIBUTARIES.map((t) => {
+                const latestVal = gaiHistory.length > 0
+                  ? Number((gaiHistory[gaiHistory.length - 1] as unknown as Record<string, unknown>)[t.key] ?? 0)
+                  : 0;
+                const tierInfo = latestVal > 0 ? getGAITier(latestVal) : null;
+                const hasAnyData = gaiHistory.some(
+                  (d) => Number((d as unknown as Record<string, unknown>)[t.key] ?? 0) > 0
+                );
+                return (
+                  <div
+                    key={t.code}
+                    className="rounded-2xl border border-black/[0.07] bg-white/50 p-4 dark:border-white/[0.06] dark:bg-white/[0.02]"
+                  >
+                    <div className="flex items-baseline justify-between">
+                      <p className="text-xs font-medium text-zinc-400">GAI-{t.code}</p>
+                      {tierInfo && latestVal > 0 ? (
+                        <span className="text-lg font-bold tabular-nums" style={{ color: tierInfo.color }}>
+                          {latestVal.toFixed(1)}
+                        </span>
+                      ) : (
+                        <span className="text-lg font-bold text-zinc-300 dark:text-zinc-600">--</span>
+                      )}
+                    </div>
+                    <p className="text-[11px] text-zinc-500 mb-2">{t.name}</p>
+                    {hasAnyData ? (
+                      <div className="h-12 w-full">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <LineChart data={gaiHistory} margin={{ top: 2, right: 2, left: 2, bottom: 2 }}>
+                            <Line
+                              type="monotone"
+                              dataKey={t.key}
+                              stroke={tierInfo ? tierInfo.color : "#a1a1aa"}
+                              strokeWidth={1.5}
+                              dot={false}
+                              connectNulls
+                            />
+                          </LineChart>
+                        </ResponsiveContainer>
+                      </div>
+                    ) : (
+                      <div className="flex h-12 items-center justify-center">
+                        <p className="text-[10px] text-zinc-300 dark:text-zinc-600">No data yet</p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* ── Region Blindness Trend ── */}
+            {(() => {
+              // Check if we have multi-date story data
+              const uniqueDates = new Set(stories.map((s) => s.scan_date));
+              if (uniqueDates.size < 2) {
+                return (
+                  <div className="mt-8 rounded-2xl border border-black/[0.07] bg-white/50 p-6 text-center dark:border-white/[0.06] dark:bg-white/[0.02]">
+                    <p className="text-sm text-zinc-400">
+                      📊 Region blindness trends — more data coming soon
+                    </p>
+                  </div>
+                );
+              }
+              // Find most-blind region across all days
+              const counts: Record<string, number> = {};
+              for (const s of stories) {
+                if (s.regions_absent) {
+                  for (const r of s.regions_absent) {
+                    counts[r] = (counts[r] || 0) + 1;
+                  }
+                }
+              }
+              const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+              if (sorted.length === 0) return null;
+              const [blindest] = sorted[0];
+              const totalDays = uniqueDates.size;
+              return (
+                <div className="mt-8 rounded-2xl border border-black/[0.07] bg-white/50 p-6 dark:border-white/[0.06] dark:bg-white/[0.02]">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-300">
+                    <span className="font-semibold text-[#d97706]">{blindest}</span> has been the
+                    blindest region over the last{" "}
+                    <span className="font-semibold">{totalDays} days</span> of data,
+                    missing the most stories consistently.
+                  </p>
+                </div>
+              );
+            })()}
+          </>
+        ) : (
+          <div className="rounded-2xl border border-black/[0.07] bg-white/50 p-8 dark:border-white/[0.06] dark:bg-white/[0.02] flex items-center justify-center min-h-[200px]">
+            <p className="text-sm text-zinc-400">
+              Historical trend chart will appear here once enough data has been collected.
+            </p>
+          </div>
+        )}
       </section>
 
       {/* ── Methodology ── */}

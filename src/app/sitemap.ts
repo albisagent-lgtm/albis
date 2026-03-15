@@ -4,7 +4,7 @@ import { TOPICS } from "@/lib/topics";
 import { COUNTRIES } from "@/app/perspectives/countries";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://albis.news";
+  const base = "https://www.albis.news";
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: base, lastModified: new Date(), changeFrequency: "daily" as const, priority: 1 },

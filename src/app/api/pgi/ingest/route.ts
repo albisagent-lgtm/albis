@@ -56,6 +56,10 @@ export async function POST(req: NextRequest) {
           story.dimensions?.d5_actor_context ??
           story.dimensions?.d5_actor_portrayal ??
           null,
+        d6_cui_bono:
+          story.d6_cui_bono ??
+          story.dimensions?.d6_cui_bono ??
+          null,
         significance: story.significance,
         scoring_rationale: story.scoring_rationale,
         scan_date,

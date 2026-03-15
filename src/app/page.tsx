@@ -1,7 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getTodayScan, type ScanItem } from "@/lib/scan-parser";
 import { CATEGORY_META, REGION_LABELS, normalizeRegion, DISPLAY_REGIONS, detectBlindspots } from "@/lib/scan-types";
 import { getAllPosts } from "@/lib/blog";
+import { getAllClustersWithArticles } from "@/lib/stories";
 import { EmailCapture } from "./components/email-capture";
 import { DateLine } from "./components/date-line";
 import { CrisisHero } from "./components/crisis-hero";
@@ -433,6 +435,58 @@ export default async function Home() {
         </section>
       )}
 
+      {/* ── DEVELOPING STORIES ─────────────────────────── */}
+      {(() => {
+        const clusters = getAllClustersWithArticles()
+          .filter((c) => c.status === "active" || c.status === "developing")
+          .slice(0, 3);
+        if (clusters.length === 0) return null;
+        return (
+          <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f] border-t border-black/5 dark:border-white/5">
+            <div className="mx-auto max-w-3xl px-6 py-10 md:py-14">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
+                    Developing Stories
+                  </p>
+                  <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+                    Follow evolving stories as they unfold
+                  </p>
+                </div>
+                <Link href="/stories" className="text-xs font-medium text-[#c8922a] hover:text-[#c8922a]/80 transition-colors">
+                  All stories →
+                </Link>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {clusters.map((c) => (
+                  <Link
+                    key={c.slug}
+                    href={`/stories/${c.slug}`}
+                    className="group rounded-lg border border-black/[0.06] p-4 transition-all hover:border-[#c8922a]/30 hover:shadow-sm dark:border-white/[0.06]"
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className={`h-2 w-2 rounded-full ${c.status === "active" ? "bg-red-500" : "bg-amber-500"}`} />
+                      <span className="text-[10px] font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                        {c.status}
+                      </span>
+                    </div>
+                    <h3 className="font-[family-name:var(--font-playfair)] text-sm font-semibold leading-snug text-[#0f0f0f] group-hover:text-[#c8922a] dark:text-[#f0efec] dark:group-hover:text-[#c8922a] transition-colors">
+                      {c.title}
+                    </h3>
+                    <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">
+                      {c.description}
+                    </p>
+                    <p className="mt-2 text-[10px] text-zinc-400 dark:text-zinc-500">
+                      {c.articleCount} articles
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })()}
+
       {/* ── UNDER THE RADAR TEASER ──────────────────────── */}
       {(() => {
         if (!scan?.items) return null;
@@ -499,8 +553,21 @@ export default async function Home() {
             {/* Featured article — full width */}
             <Link
               href={`/lens/${featuredPost.slug}`}
-              className="group block rounded-xl border border-black/[0.06] p-6 md:p-8 mb-4 transition-all hover:border-[#c8922a]/30 hover:shadow-sm dark:border-white/[0.06]"
+              className="group block overflow-hidden rounded-xl border border-black/[0.06] mb-4 transition-all hover:border-[#c8922a]/30 hover:shadow-sm dark:border-white/[0.06]"
             >
+              {featuredPost.image && featuredPost.image !== "/og-image.png" && (
+                <div className="relative aspect-[21/9] w-full overflow-hidden">
+                  <Image
+                    src={featuredPost.image}
+                    alt=""
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 960px"
+                    unoptimized
+                  />
+                </div>
+              )}
+              <div className="p-6 md:p-8">
               <div className="flex flex-wrap items-center gap-2 mb-3">
                 {featuredPost.category && (
                   <span
@@ -522,6 +589,7 @@ export default async function Home() {
                   {featuredPost.description}
                 </p>
               )}
+              </div>
             </Link>
 
             {/* Grid articles */}

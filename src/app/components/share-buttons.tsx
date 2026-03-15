@@ -10,7 +10,7 @@ export function ShareIcon({ headline }: { headline: string }) {
     e.preventDefault();
     e.stopPropagation();
     const slug = headline.toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 80);
-    const url = `${typeof window !== "undefined" ? window.location.origin : "https://albis.news"}/compare?story=${slug}`;
+    const url = `${typeof window !== "undefined" ? window.location.origin : "https://www.albis.news"}/compare?story=${slug}`;
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);

@@ -4,6 +4,9 @@ import matter from "gray-matter";
 export { CATEGORIES } from "./categories";
 export type { CategorySlug } from "./categories";
 import type { CategorySlug } from "./categories";
+export { PILLARS } from "./pillars";
+export type { PillarSlug } from "./pillars";
+import type { PillarSlug } from "./pillars";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 
@@ -30,6 +33,7 @@ export interface BlogPost {
   image: string;
   tags: string[];
   category: CategorySlug;
+  pillars?: PillarSlug[];
   faqs?: FAQ[];
   sources: Source[];
   confidence: ConfidenceLevel;
@@ -64,6 +68,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
     image: data.image || "/og-image.png",
     tags: data.tags || [],
     category: (data.category as CategorySlug) || 'analysis',
+    pillars: data.pillars ? (Array.isArray(data.pillars) ? data.pillars : [data.pillars]) : undefined,
     faqs: data.faqs || undefined,
     sources: (data.sources as Source[]) || [],
     confidence: (data.confidence as ConfidenceLevel) || 'developing',
@@ -76,6 +81,11 @@ export function getPostsByCategory(category: string): BlogPost[] {
   const posts = getAllPosts();
   if (category === 'all') return posts;
   return posts.filter((post) => post.category === category);
+}
+
+export function getPostsByPillar(pillar: PillarSlug): BlogPost[] {
+  const posts = getAllPosts();
+  return posts.filter((post) => post.pillars?.includes(pillar));
 }
 
 export function getAllSlugs(): string[] {

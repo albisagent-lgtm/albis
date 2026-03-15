@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Subscribe to Albis",
     description:
       "The daily briefing that shows you how the world tells its stories. Free, every morning.",
-    url: "https://albis.news/signup",
+    url: "https://www.albis.news/signup",
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },

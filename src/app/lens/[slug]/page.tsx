@@ -13,6 +13,7 @@ import { RelativeTime } from "@/app/components/relative-time";
 import { CATEGORIES } from "@/lib/categories";
 import { getAllPosts } from "@/lib/blog";
 import { ExitIntentModal } from "@/app/components/exit-intent-modal";
+import Image from "next/image";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return {};
-  const url = `https://albis.news/lens/${slug}`;
+  const url = `https://www.albis.news/lens/${slug}`;
   return {
     title: post.title,
     description: post.description,
@@ -56,7 +57,7 @@ export default async function LensArticlePage({ params }: Props) {
   if (!post) notFound();
 
   const html = markdownToHtml(post.content);
-  const url = `https://albis.news/lens/${slug}`;
+  const url = `https://www.albis.news/lens/${slug}`;
 
   const relatedPosts = getRelatedPosts(post.tags, slug, 3);
   const relatedPages = getRelatedPages(post.tags);
@@ -125,6 +126,19 @@ export default async function LensArticlePage({ params }: Props) {
           <div className="mt-4 flex items-center gap-2 text-sm text-zinc-400 dark:text-zinc-500">
             <span>By {post.author || "Albis Intelligence Desk"}</span>
           </div>
+          {post.image && post.image !== "/og-image.png" && (
+            <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden rounded-xl">
+              <Image
+                src={post.image}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 672px"
+                unoptimized
+                priority
+              />
+            </div>
+          )}
           {/* Tags */}
           {post.tags.length > 0 && (
             <div className="mt-space-4 flex flex-wrap gap-2">

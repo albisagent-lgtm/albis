@@ -10,11 +10,11 @@ export const metadata: Metadata = {
     title: "The Lens — Albis",
     description:
       "Insights on media literacy, news bias, and how to see the world more clearly.",
-    url: "https://albis.news/blog",
+    url: "https://www.albis.news/blog",
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
-  alternates: { canonical: "https://albis.news/blog" },
+  alternates: { canonical: "https://www.albis.news/blog" },
 };
 
 export default function BlogIndex() {

@@ -108,7 +108,7 @@ export function NavAuth() {
         href="/signup"
         className="rounded-full bg-[#1a3a5c] px-4 py-1.5 text-sm font-medium text-white shadow-[0_2px_8px_rgb(26,58,92,0.3)] transition-all hover:bg-[#243f66] hover:shadow-[0_3px_10px_rgb(26,58,92,0.4)] dark:shadow-[0_2px_8px_rgb(26,58,92,0.4)]"
       >
-        Start free
+        Subscribe
       </Link>
     </div>
   );
@@ -139,7 +139,7 @@ export function NavLinks() {
         href="/indexes"
         className="text-[13px] font-medium tracking-wide text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
       >
-        Press Indexes
+        Indexes
       </Link>
       <Link
         href="/about"

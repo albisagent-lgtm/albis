@@ -13,6 +13,7 @@ import { RelativeTime } from "@/app/components/relative-time";
 import { CATEGORIES } from "@/lib/categories";
 import { getAllPosts } from "@/lib/blog";
 import { ExitIntentModal } from "@/app/components/exit-intent-modal";
+import { getClustersForArticle } from "@/lib/stories";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return {};
-  const url = `https://albis.news/blog/${slug}`;
+  const url = `https://www.albis.news/blog/${slug}`;
   return {
     title: post.title,
     description: post.description,
@@ -56,7 +57,7 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   const html = markdownToHtml(post.content);
-  const url = `https://albis.news/blog/${slug}`;
+  const url = `https://www.albis.news/blog/${slug}`;
 
   const relatedPosts = getRelatedPosts(post.tags, slug, 3);
   const relatedPages = getRelatedPages(post.tags);
@@ -187,6 +188,30 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           )}
         </header>
+
+        {/* Story Cluster Banner */}
+        {(() => {
+          const clusters = getClustersForArticle(post);
+          if (clusters.length === 0) return null;
+          return (
+            <div className="mb-space-8 rounded-lg border border-[#c8922a]/20 bg-[#c8922a]/5 p-4">
+              {clusters.map((c) => (
+                <Link
+                  key={c.slug}
+                  href={`/stories/${c.slug}`}
+                  className="flex items-center justify-between gap-3 text-sm group"
+                >
+                  <span className="text-zinc-600 dark:text-zinc-300">
+                    Part of the <span className="font-semibold text-[#c8922a] group-hover:underline">{c.title}</span> story
+                  </span>
+                  <span className="text-[#c8922a] font-medium whitespace-nowrap">
+                    Follow timeline →
+                  </span>
+                </Link>
+              ))}
+            </div>
+          );
+        })()}
 
         {/* Body */}
         <div

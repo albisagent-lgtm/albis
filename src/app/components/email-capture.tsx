@@ -172,7 +172,7 @@ export function EmailCapture({ variant = "default", showSocialProof = true, show
           disabled={status === "loading"}
           className="h-13 min-w-[44px] rounded-full bg-white px-8 text-sm font-semibold text-[#1a3a5c] shadow-[0_4px_16px_rgb(0,0,0,0.2)] hover:bg-[#f0efec] disabled:opacity-70"
         >
-          {status === "loading" ? "..." : "Start free"}
+          {status === "loading" ? "..." : "Subscribe"}
         </button>
         {status === "error" && (
           <p className="text-xs text-red-300 sm:absolute sm:mt-16">{message}</p>

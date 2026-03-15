@@ -81,7 +81,7 @@ export default function PricingClient() {
             Simple, <span className="text-gradient-amber">honest</span> pricing.
           </h1>
           <p className="mx-auto mt-4 max-w-lg text-lg text-zinc-500 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
-            Start free. Go Pro when you want more.
+            Subscribe — it's free.
           </p>
 
           {/* Billing toggle */}

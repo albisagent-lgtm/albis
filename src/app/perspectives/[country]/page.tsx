@@ -7,6 +7,7 @@ import { TOPICS } from "@/lib/topics";
 import { getRecentScanItems, getTodayScan } from "@/lib/scan-parser";
 import { CountryPerspectiveClient } from "./country-client";
 import { Breadcrumbs } from "@/app/components/breadcrumbs";
+import { SimilarCountries } from "@/app/components/similar-countries";
 
 export const dynamic = "force-dynamic";
 
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { country: slug } = await params;
   const country = getCountryBySlug(slug);
   if (!country) return {};
-  const url = `https://albis.news/perspectives/${slug}`;
+  const url = `https://www.albis.news/perspectives/${slug}`;
   return {
     title: `${country.name} News Perspectives — How ${country.name} Reports World News | Albis`,
     description: `Discover how ${country.name} media frames world events differently. Compare ${country.name} news coverage with perspectives from other regions using Albis.`,
@@ -58,11 +59,11 @@ export default async function CountryPerspectivePage({ params }: Props) {
     "@type": "WebPage",
     name: `${country.name} News Perspectives`,
     description: `How ${country.name} media frames world events differently compared to other regions.`,
-    url: `https://albis.news/perspectives/${slug}`,
+    url: `https://www.albis.news/perspectives/${slug}`,
     publisher: {
       "@type": "Organization",
       name: "Albis",
-      url: "https://albis.news",
+      url: "https://www.albis.news",
     },
   };
 
@@ -130,6 +131,9 @@ export default async function CountryPerspectivePage({ params }: Props) {
             <EmailCapture variant="hero" />
           </div>
         </div>
+
+        {/* Similar Countries */}
+        <SimilarCountries countrySlug={slug} />
 
         {/* What to Expect */}
         <section className="mt-12">

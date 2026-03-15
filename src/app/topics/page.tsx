@@ -10,11 +10,11 @@ export const metadata: Metadata = {
     title: "Topics — How the World Reports on What Matters | Albis",
     description:
       "Explore how different regions cover the world's biggest topics.",
-    url: "https://albis.news/topics",
+    url: "https://www.albis.news/topics",
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
-  alternates: { canonical: "https://albis.news/topics" },
+  alternates: { canonical: "https://www.albis.news/topics" },
 };
 
 export default function TopicsIndex() {

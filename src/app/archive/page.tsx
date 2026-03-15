@@ -11,11 +11,11 @@ export const metadata: Metadata = {
     title: "Daily Briefings Archive — Albis",
     description:
       "Browse past daily briefings. See how the world's news was reported every day.",
-    url: "https://albis.news/archive",
+    url: "https://www.albis.news/archive",
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
-  alternates: { canonical: "https://albis.news/archive" },
+  alternates: { canonical: "https://www.albis.news/archive" },
 };
 
 interface Briefing {

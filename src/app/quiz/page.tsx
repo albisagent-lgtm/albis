@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: "How Healthy Is Your News Diet? Take the Free Quiz — Albis",
     description:
       "Find out if you're stuck in a filter bubble. This 2-minute quiz reveals how balanced your information diet really is. Free, instant results.",
-    url: "https://albis.news/quiz",
+    url: "https://www.albis.news/quiz",
     images: [
       {
         url: "/og-image.png",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: "https://albis.news/quiz",
+    canonical: "https://www.albis.news/quiz",
   },
 };
 
