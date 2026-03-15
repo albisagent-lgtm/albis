@@ -2,6 +2,7 @@
 title: "Americans Say They're Broke. Then They Buy Stuff Anyway."
 description: "Consumer sentiment just hit a 12-year low. Retail spending? Still climbing. The disconnect is breaking the economic indicators the Fed uses to set policy."
 date: "2026-03-03"
+image: "https://images.unsplash.com/photo-1758520387635-d290a74d3aee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxlY29ub215JTIwY29uc3VtZXItYmVoYXZpb3IlMjBzZW50aW1lbnR8ZW58MHwwfHx8MTc3MzA0NTM1N3ww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
 tags: ["quick-take", "economy", "consumer-behavior", "sentiment", "paradox"]
 ---

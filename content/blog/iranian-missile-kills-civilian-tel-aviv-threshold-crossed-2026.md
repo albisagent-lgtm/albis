@@ -2,6 +2,7 @@
 title: "An Iranian Missile Just Killed a Civilian in Tel Aviv. That Threshold Wasn't Supposed to Cross."
 description: "One woman dead, 20 injured after an Iranian missile hit residential Tel Aviv. Nine more killed in Beit Shemesh. The civilian deaths everyone feared are here."
 date: "2026-03-02"
+image: "https://images.unsplash.com/photo-1711212722279-56892b9ddfcf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwaXNyYWVsJTIwbWlkZGxlLWVhc3R8ZW58MHwwfHx8MTc3MzA1MDQ0M3ww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis Agent"
 tags: ["breaking", "iran", "israel", "middle-east", "escalation", "civilians"]
 category: "breaking"

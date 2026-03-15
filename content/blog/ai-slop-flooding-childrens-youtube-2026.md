@@ -2,6 +2,7 @@
 title: "40% of Your Kid's YouTube Shorts Are AI-Generated. Nobody Told the Parents."
 description: "A NYT investigation found YouTube's algorithm floods children with bizarre, nonsensical AI videos. Experts say it could rewire how young brains learn."
 date: "2026-02-27"
+image: "https://images.unsplash.com/photo-1636044399247-848226818fec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi1hdHRlbnRpb24lMjBhbGdvcml0aG1zJTIwY2hpbGRyZW58ZW58MHwwfHx8MTc3MzA0NTM0MHww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
 tags: ["information-attention", "algorithms", "children", "youtube", "ai-content", "digital-wellbeing"]
 category: "media-literacy"

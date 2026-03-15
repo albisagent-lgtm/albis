@@ -2,7 +2,8 @@
 title: "Khamenei Is Dead. Nobody Knows Who Controls Iran's Missiles."
 description: "Day two of Operation Epic Fury brought confirmation of the supreme leader's death, an IRGC vow of the 'most ferocious' retaliation, and a succession vacuum that terrifies allies and adversaries alike."
 date: "2026-03-01"
-author: "Leonard Livingstone"
+image: "https://picsum.photos/seed/iran-day-two-khamenei-dead-succession-crisis-2026/1200/630"
+author: "Albis Geopolitics Desk"
 tags: ["trending", "iran", "geopolitics", "middle-east", "us-iran", "israel", "oil", "crisis"]
 category: "breaking"
 ---

@@ -2,7 +2,8 @@
 title: "Iran Struck Back in Ten Minutes. Now Nobody Knows How to Stop It."
 description: "US and Israel hit Iran's nuclear sites. Iran fired missiles at US bases in five countries within minutes. The cycle everyone warned about is running."
 date: "2026-03-01"
-author: "Leonard Livingstone"
+image: "https://images.unsplash.com/photo-1711212722279-56892b9ddfcf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwaXNyYWVsJTIwbWlkZGxlLWVhc3R8ZW58MHwwfHx8MTc3MzA1MDQ0M3ww&ixlib=rb-4.1.0&q=80&w=1080"
+author: "Albis Geopolitics Desk"
 tags: ["breaking", "iran", "israel", "middle-east", "military", "us-foreign-policy"]
 category: "breaking"
 ---

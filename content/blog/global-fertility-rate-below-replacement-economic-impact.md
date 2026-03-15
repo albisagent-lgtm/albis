@@ -2,7 +2,8 @@
 title: "The World Just Dropped Below 2.1. That Number Decides Everything."
 description: "Fertility rates are falling faster than expected across every continent. The US hit 1.6, China's at its lowest since 1738, and by 2100 only six countries will be above replacement level."
 date: "2026-02-26"
-author: "Leonard Livingstone"
+image: "https://images.unsplash.com/photo-1573358695783-005699a7fc94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxkZW1vZ3JhcGhpY3MlMjBlY29ub21pY3MlMjBwb3B1bGF0aW9ufGVufDB8MHx8fDE3NzMwNDY5Mjl8MA&ixlib=rb-4.1.0&q=80&w=1080"
+author: "Albis Geopolitics Desk"
 tags: ["breaking", "demographics", "economics", "population"]
 category: "data"
 ---

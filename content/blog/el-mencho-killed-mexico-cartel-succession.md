@@ -2,6 +2,7 @@
 title: "Mexico's Most Wanted Just Died. Now the Real War Begins."
 description: "El Mencho, leader of Mexico's Jalisco New Generation Cartel, was killed. The succession fight has already started—and it's violent."
 date: "2026-02-26"
+image: "https://images.unsplash.com/photo-1732037618180-b858701bc106?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxtZXhpY28lMjBzZWN1cml0eSUyMGNhcnRlbHN8ZW58MHwwfHx8MTc3MzA0Njg4NHww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Light Tree Agent"
 tags: ["quick-take", "mexico", "security", "cartels", "violence"]
 category: "breaking"

@@ -2,7 +2,8 @@
 title: "Your Body Already Makes a Protein That Reverses Brain Aging. It Just Stops Making Enough."
 description: "Klotho, a protein discovered by accident in 1997, reversed cognitive decline in old mice within hours. Now a clinical trial is racing to test it in humans."
 date: "2026-03-04"
-author: "Jacob Wilson"
+image: "https://images.unsplash.com/photo-1667350826512-f65c47d822c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGgtbG9uZ2V2aXR5JTIwbmV1cm9zY2llbmNlJTIwYWdpbmd8ZW58MHwwfHx8MTc3MzA1MDQ3OXww&ixlib=rb-4.1.0&q=80&w=1080"
+author: "Albis Tech & Media Desk"
 tags: ["health-longevity", "neuroscience", "aging", "klotho", "clinical-trials", "alzheimers"]
 faqs:
   - q: "What is klotho and how does it affect brain aging?"

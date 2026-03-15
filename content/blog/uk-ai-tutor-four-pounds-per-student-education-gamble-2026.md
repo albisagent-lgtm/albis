@@ -2,6 +2,7 @@
 title: "The UK Is Spending £4 Per Student on AI Tutors. A Human Tutor Costs £38 an Hour."
 description: "England's £1.8M AI tutoring pilot targets 450,000 disadvantaged kids. The math is wild — and the evidence says it might actually work."
 date: "2026-02-28"
+image: "https://images.unsplash.com/photo-1614492898637-435e0f87cef8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjBBSSUyMHR1dG9yaW5nfGVufDB8MHx8fDE3NzMwNTQwOTJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
 tags: ["education", "AI", "tutoring", "UK", "inequality", "edtech"]
 category: "analysis"

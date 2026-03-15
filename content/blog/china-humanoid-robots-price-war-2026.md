@@ -2,7 +2,8 @@
 title: "China's Humanoid Robots Now Cost Less Than a Car. The Race Just Changed."
 description: "Chinese humanoid robots hit $13,500 while Tesla's Optimus isn't shipping yet. How China grabbed 85% of the market — and what it means."
 date: "2026-02-27"
-author: "Jacob Wilson"
+image: "https://images.unsplash.com/photo-1704022472896-c7f2423b3ce7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaS1pbnRlbGxpZ2VuY2UlMjByb2JvdGljcyUyMGNoaW5hfGVufDB8MHx8fDE3NzMwNDU3OTF8MA&ixlib=rb-4.1.0&q=80&w=1080"
+author: "Albis Tech & Media Desk"
 tags: ["ai-intelligence", "robotics", "china", "manufacturing", "humanoid-robots"]
 category: "analysis"
 ---

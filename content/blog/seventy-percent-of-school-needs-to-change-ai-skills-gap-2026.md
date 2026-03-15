@@ -2,6 +2,7 @@
 title: "70% of What Schools Teach Needs to Change. The Entry-Level Job Ladder Is Already Gone."
 description: "New research says AI is reshaping 70% of K-12 learning objectives. Meanwhile, CS grads have higher unemployment than fine arts majors."
 date: "2026-03-04"
+image: "https://picsum.photos/seed/seventy-percent-of-school-needs-to-change-ai-skills-gap-2026/1200/630"
 author: "Harry Wenham"
 tags: ["education", "AI", "skills", "jobs", "reskilling", "entry-level"]
 faqs:

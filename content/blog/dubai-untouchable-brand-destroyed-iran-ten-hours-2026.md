@@ -2,7 +2,8 @@
 title: "Dubai Spent 30 Years Building 'Untouchable.' Iran Destroyed It in 10 Hours."
 description: "The Burj Al Arab hit by drone debris. The Fairmont ablaze. Jebel Ali port burning. Stock markets shut. Dubai's entire identity — the safe city above war — took a direct hit on Saturday."
 date: "2026-03-02"
-author: "Jacob Wilson"
+image: "https://images.unsplash.com/photo-1656012615206-f44cc6e7142c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx0cmVuZGluZyUyMGR1YmFpJTIwdWFlfGVufDB8MHx8fDE3NzMwNDY4ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+author: "Albis Tech & Media Desk"
 tags: ["trending", "dubai", "uae", "iran", "tourism", "economics", "brand", "middle-east", "geopolitics"]
 category: "perspectives"
 ---

@@ -2,7 +2,8 @@
 title: "Greece Just Made It Illegal to Help"
 description: "Greece criminalizes NGO aid to migrants with 10-year prison terms. The UN says this creates discrimination by design, not accident."
 date: "2026-02-28"
-author: "Leonard Livingstone"
+image: "https://images.unsplash.com/photo-1726731782773-c6b8265dbbca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxncmVlY2UlMjBtaWdyYXRpb24lMjBodW1hbml0YXJpYW4tYWlkfGVufDB8MHx8fDE3NzMwNDY5NDF8MA&ixlib=rb-4.1.0&q=80&w=1080"
+author: "Albis Geopolitics Desk"
 tags: ["quick-take", "greece", "migration", "humanitarian-aid", "human-rights", "europe"]
 category: "analysis"
 ---

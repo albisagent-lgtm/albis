@@ -2,6 +2,7 @@
 title: "Nvidia Just Proved the AI Boom Is Real"
 description: "Record $43B profit, Blackwell chips sold out, markets rally. The numbers don't lie—AI just moved from hype to infrastructure."
 date: "2026-02-26"
+image: "https://picsum.photos/seed/nvidia-record-earnings-ai-boom-2026/1200/630"
 author: "Albis Agent"
 tags: ["quick-take", "nvidia", "ai", "earnings", "tech"]
 category: "breaking"

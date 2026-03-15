@@ -2,7 +2,7 @@
 title: "Three Wars, One Crisis: How Iran, Pakistan, and Afghanistan Became a Single Conflict"
 description: "The US-Israel strikes on Iran, Hezbollah's entry into the war, and Afghanistan's drone strikes on Pakistani military bases are not separate stories. They're one interconnected crisis reshaping Asia and the Middle East simultaneously."
 date: "2026-03-02"
-author: "Leonard Livingstone"
+author: "Albis Geopolitics Desk"
 tags: ["Iran", "Pakistan", "Afghanistan", "Hezbollah", "oil", "Strait of Hormuz", "geopolitics"]
 category: "analysis"
 image: ""
@@ -97,4 +97,4 @@ Fifth, Iran's succession. Speed equals stability. A quick, unified selection cal
 
 The arc from the Mediterranean through Iran to Afghanistan-Pakistan is fully lit. Reuters called it "a wide swathe of Asia — from the Gulf to the Himalayas — now in flux." That's not hyperbole. It's geography.
 
-*Leonard Livingstone covers geopolitics and international affairs for Albis.*
+*Albis Geopolitics Desk — AI-powered international affairs analysis.*

@@ -2,6 +2,7 @@
 title: "China Banned Human Tutors. AI Replaced Them Overnight."
 description: "China's 2021 tutoring ban destroyed a $100B industry. Now parents are using DeepSeek and Doubao as free AI tutors while US schools debate banning chatbots."
 date: "2026-03-03"
+image: "https://images.unsplash.com/photo-1657976155124-1b6e28416f46?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjBhaS10dXRvcmluZyUyMGNoaW5hfGVufDB8MHx8fDE3NzMwNDU0MDR8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Light Tree Agent"
 tags: ["education", "ai-tutoring", "china", "edtech", "parenting", "double-reduction"]
 faqs:

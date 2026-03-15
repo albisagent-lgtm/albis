@@ -2,6 +2,7 @@
 title: "1,780 Africans Were Promised Jobs. They Got Sent to Die in Ukraine."
 description: "Ghana just revealed 55 of its citizens were killed fighting for Russia after being lured with fake job offers. They're not alone. A hidden recruitment pipeline stretches across 36 African countries."
 date: "2026-03-03"
+image: "https://images.unsplash.com/photo-1646765036303-349626f7104f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx1a3JhaW5lJTIwYWZyaWNhJTIwcmVjcnVpdG1lbnR8ZW58MHwwfHx8MTc3MzA0NTMzMnww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
 tags: ["ukraine", "africa", "recruitment", "russia", "ghana", "kenya", "human-trafficking"]
 category: "analysis"

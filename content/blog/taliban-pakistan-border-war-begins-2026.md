@@ -2,7 +2,8 @@
 title: "The Taliban Just Started a Border War With Pakistan"
 description: "Two soldiers dead, 15 outposts captured. The border between Afghanistan and Pakistan just went from tense to burning."
 date: "2026-02-27"
-author: "Leonard Livingstone"
+image: "https://picsum.photos/seed/taliban-pakistan-border-war-begins-2026/1200/630"
+author: "Albis Geopolitics Desk"
 tags: ["quick-take", "afghanistan", "pakistan", "military", "south-asia"]
 category: "breaking"
 ---

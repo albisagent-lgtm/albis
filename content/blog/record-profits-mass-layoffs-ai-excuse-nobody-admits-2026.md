@@ -2,6 +2,7 @@
 title: "Record Profits, Mass Layoffs: The AI Excuse Nobody Will Admit To"
 description: "Tech companies are posting their best revenues ever — and firing tens of thousands. They say it's restructuring. Workers say it's AI. The truth is messier."
 date: "2026-03-04"
+image: "https://picsum.photos/seed/record-profits-mass-layoffs-ai-excuse-nobody-admits-2026/1200/630"
 author: "Harry Wenham"
 tags: ["tech", "AI", "layoffs", "economy", "labor"]
 sources:

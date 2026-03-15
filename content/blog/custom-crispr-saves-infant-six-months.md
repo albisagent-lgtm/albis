@@ -2,6 +2,7 @@
 title: "They Designed a Gene Therapy in Six Months and Saved a Baby's Life"
 description: "The first custom CRISPR treatment just saved an infant. Doctors built a one-of-a-kind gene therapy in half a year. Personalized medicine isn't coming—it's here."
 date: "2026-02-27"
+image: "https://picsum.photos/seed/custom-crispr-saves-infant-six-months/1200/630"
 author: "Harry Wenham"
 tags: ["quick-take", "health", "crispr", "gene-therapy", "medical-breakthrough"]
 category: "analysis"

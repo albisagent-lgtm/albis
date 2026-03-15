@@ -2,7 +2,8 @@
 title: "The Media Literacy Vaccine That Backfires"
 description: "UNESCO research shows deepfake exposure increases gullibility, not skepticism. Every 'spot the fake' quiz might be making the problem worse."
 date: "2026-03-01"
-author: "Jacob Wilson"
+image: "https://images.unsplash.com/photo-1695370993552-3fb199fb35f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxkZWVwZmFrZXMlMjBtaXNpbmZvcm1hdGlvbiUyMHBzeWNob2xvZ3l8ZW58MHwwfHx8MTc3MzA0Njg3NHww&ixlib=rb-4.1.0&q=80&w=1080"
+author: "Albis Tech & Media Desk"
 tags: ["quick-take", "deepfakes", "misinformation", "media-literacy", "psychology"]
 category: "media-literacy"
 ---

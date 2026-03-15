@@ -2,10 +2,10 @@
 title: "Deepfakes Just Broke Identity Verification"
 description: "Deepfakes can now fool the systems banks and apps use to verify you're real. The tools built to catch fake videos are failing."
 date: "2026-03-03"
-author: "Jacob Wilson"
+author: "Albis Tech & Media Desk"
 category: "information-warfare"
 tags: ["information-warfare", "deepfakes", "identity-verification", "propaganda", "disinformation", "cyber-warfare"]
-image: "/og-image.png"
+image: "https://images.unsplash.com/photo-1695370993552-3fb199fb35f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwZGVlcGZha2VzJTIwaWRlbnRpdHktdmVyaWZpY2F0aW9ufGVufDB8MHx8fDE3NzMwNDY4NzJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
 faqs:
   - q: "How accurate are deepfake detection systems in 2026?"
     a: "AI detection hits 97% accuracy on deepfake images, but that means 3% still get through. Humans outperform AI at detecting deepfake videos by catching behavioral cues machines miss. Neither is perfect at scale."

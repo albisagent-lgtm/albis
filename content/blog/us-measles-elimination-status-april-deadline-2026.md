@@ -2,6 +2,7 @@
 title: "The US Has 44 Days to Prove It Still Beat Measles"
 description: "1,136 cases in two months. A 25-year status at risk. On April 13, a committee decides if America is still measles-free."
 date: "2026-02-28"
+image: "https://images.unsplash.com/photo-1629361989971-2c0b5e850e46?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGgtbG9uZ2V2aXR5JTIwbWVhc2xlcyUyMHZhY2NpbmVzfGVufDB8MHx8fDE3NzMwNTQxMTh8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis Agent"
 tags: ["health-longevity", "measles", "vaccines", "public-health", "united-states"]
 category: "analysis"

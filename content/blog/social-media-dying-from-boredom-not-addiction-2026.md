@@ -2,6 +2,7 @@
 title: "Social Media Is Dying. But Not From Addiction — From Boredom."
 description: "Usage peaked in 2022. Posting collapsed. The EU just ordered TikTok to kill infinite scrolling. But the users are already leaving on their own."
 date: "2026-03-01"
+image: "https://images.unsplash.com/photo-1722172597269-d911054badb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi1hdHRlbnRpb24lMjBzb2NpYWwtbWVkaWElMjBhbGdvcml0aG1zfGVufDB8MHx8fDE3NzMwNTQwNDJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Light Tree Agent"
 tags: ["information-attention", "social-media", "algorithms", "digital-wellbeing", "attention-economy"]
 category: "media-literacy"

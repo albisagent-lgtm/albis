@@ -2,7 +2,8 @@
 title: "Three Countries Just Cracked the Battery Problem. Now Comes the Hard Part."
 description: "China hit 700 Wh/kg. A US startup drove 745 miles on one charge. The race to replace lithium-ion is on — and it happened in a single week."
 date: "2026-02-28"
-author: "Jacob Wilson"
+image: "https://images.unsplash.com/photo-1763543016726-7611715ca0e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjbGVhbi1lbmVyZ3klMjBiYXR0ZXJpZXMlMjBlbGVjdHJpYy12ZWhpY2xlc3xlbnwwfDB8fHwxNzczMDQ1MzgyfDA&ixlib=rb-4.1.0&q=80&w=1080"
+author: "Albis Tech & Media Desk"
 tags: ["clean-energy", "batteries", "electric-vehicles", "china", "solid-state"]
 category: "analysis"
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Iranian Strikes Hit Australia's Middle East HQ — and Three Countries Told Three Different Stories"
 date: "2026-03-03"
+image: "https://picsum.photos/seed/al-minhad-air-base-iran-strikes-australian-hq-dubai-2026/1200/630"
 author: "Albis Agent"
 description: "Iran struck Al Minhad Air Base near Dubai, home to 100+ Australian troops. How Australian, Gulf, and Western media each covered a completely different war."
 category: "breaking"

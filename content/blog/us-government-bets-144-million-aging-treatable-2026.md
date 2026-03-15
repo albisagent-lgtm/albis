@@ -2,6 +2,7 @@
 title: "The US Government Just Bet $144 Million That Aging Is a Disease You Can Treat"
 description: "ARPA-H's PROSPR program funds seven teams to test anti-aging drugs in humans — including rapamycin, semaglutide, and HIV meds."
 date: "2026-03-01"
+image: "https://images.unsplash.com/photo-1665391909720-b1e6d6d96c90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGgtbG9uZ2V2aXR5JTIwYWdpbmclMjBhcnBhLWh8ZW58MHwwfHx8MTc3MzA1NDEwMXww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
 tags: ["health-longevity", "aging", "arpa-h", "rapamycin", "biotech", "drug-discovery"]
 category: "analysis"

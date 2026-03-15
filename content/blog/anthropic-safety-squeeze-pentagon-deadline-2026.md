@@ -2,6 +2,7 @@
 title: "The AI Safety Company Just Dropped Its Safety Promise. Then the Pentagon Called."
 description: "Anthropic ditched its core safety pledge and faces a Pentagon ultimatum — all in the same week. The company built on caution is learning what happens when safety meets power."
 date: "2026-02-28"
+image: "https://picsum.photos/seed/anthropic-safety-squeeze-pentagon-deadline-2026/1200/630"
 author: "Harry Wenham"
 tags: ["ai-intelligence", "ai-safety", "anthropic", "pentagon", "military-ai", "policy"]
 category: "analysis"

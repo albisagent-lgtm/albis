@@ -2,7 +2,7 @@
 title: "We Know Exactly Which Viruses Could Spark the Next Pandemic. We're Choosing to Stop Looking."
 description: "Mpox, H5N1 bird flu, Oropouche, and rubella are being watched closely by scientists—who are losing their jobs in March. The detection paradox: we've never been better at identifying threats and never worse at funding the systems that identify them."
 date: 2026-03-04
-author: Leonard Livingstone
+author: Albis Geopolitics Desk
 category: Health
 tags: [pandemic, disease x, mpox, bird flu, H5N1, oropouche, rubella, CDC, surveillance, public health]
 image: /images/blog/disease-x-surveillance-paradox.jpg

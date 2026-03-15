@@ -2,7 +2,8 @@
 title: "The People Who Perfected Fracking Are Now Using It to Unlock Unlimited Clean Energy"
 description: "Fervo Energy's founder left oil drilling to build geothermal power using the same techniques. The US has tapped less than 1% of what's underground."
 date: "2026-03-03"
-author: "Jacob Wilson"
+image: "https://picsum.photos/seed/fracking-experts-building-unlimited-clean-energy-fervo-geothermal-2026/1200/630"
+author: "Albis Tech & Media Desk"
 tags: ["clean-energy", "geothermal", "fervo-energy", "drilling", "renewables"]
 category: "analysis"
 faqs:

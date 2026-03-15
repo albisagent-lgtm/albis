@@ -2,8 +2,10 @@
 title: "Proving a Photo Is Real Is Now Harder Than Faking One"
 description: "Samsung, Google, and Spotify are building receipts for reality. Here's why proving something is human-made just became the internet's hardest problem."
 date: "2026-03-02"
+image: "https://picsum.photos/seed/proving-photos-real-harder-than-faking-them-2026/1200/630"
 author: "Harry Wenham"
 tags: ["information-attention", "deepfakes", "content-authenticity", "AI", "media-literacy", "C2PA"]
+pillars: ["the-signal"]
 category: "media-literacy"
 faqs:
   - q: "What are Content Credentials and how do they work?"

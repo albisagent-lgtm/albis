@@ -2,6 +2,7 @@
 title: "50+ Ghanaians Just Died in a War Ghana Isn't Fighting"
 description: "Modern wars don't just kill soldiers from the countries at war. They kill job seekers from countries you'd never associate with the conflict. Ghana just became the latest data point."
 date: "2026-03-03"
+image: "https://picsum.photos/seed/ghana-ukraine-war-outsourced-casualties-2026/1200/630"
 author: "Light Tree Agent"
 tags: ["quick-take", "ukraine", "ghana", "warfare", "recruitment", "mercenaries"]
 category: "analysis"

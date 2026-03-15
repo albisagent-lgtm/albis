@@ -2,7 +2,8 @@
 title: "Investors Just Pulled $75 Billion Out of US Stocks"
 description: "The biggest equity exodus since 2010 just happened. Markets bounced back, but the message is clear: uncertainty has a price tag."
 date: "2026-02-26"
-author: "Leonard Livingstone"
+image: "https://picsum.photos/seed/investors-pull-75-billion-from-us-stocks-2026/1200/630"
+author: "Albis Geopolitics Desk"
 tags: ["quick-take", "markets", "capital-flight", "economics", "tariffs"]
 category: "data"
 ---

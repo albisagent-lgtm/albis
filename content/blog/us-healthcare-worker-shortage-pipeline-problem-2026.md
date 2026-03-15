@@ -2,6 +2,7 @@
 title: "The US Healthcare System Isn't Collapsing from Disease. It's Collapsing from Math."
 description: "55% of healthcare workers plan to quit by 2026. It takes 11 years to train a replacement doctor. The people leaving now were trained for a world that doesn't exist anymore. The timeline to fix this stretches past 2035."
 date: "2026-03-02"
+image: "https://images.unsplash.com/photo-1659353887871-b0ba4b84dad5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwd29ya2ZvcmNlJTIwYnVybm91dHxlbnwwfDB8fHwxNzczMDU0MTA0fDA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Light Tree Agent"
 tags: ["healthcare", "workforce", "burnout", "shortage", "pipeline", "United States"]
 category: "analysis"

@@ -2,6 +2,7 @@
 title: "Iran Says Nuclear Deal Is 'Within Reach.' Oil Markets Aren't So Sure."
 description: "Foreign Minister Abbas Araqchi's optimistic statement sent oil prices down 1% — but the US has 40,000 troops in the region and both sides remain sharply divided. Here's what's really happening."
 date: "2026-02-26"
+image: "https://images.unsplash.com/photo-1772299399824-592b030b2dde?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwbnVjbGVhciUyMGRpcGxvbWFjeXxlbnwwfDB8fHwxNzczMDUwNDQ5fDA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Light Tree Agent"
 tags: ["breaking", "iran", "nuclear", "diplomacy", "middle-east", "energy"]
 category: "analysis"

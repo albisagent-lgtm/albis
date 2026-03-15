@@ -2,10 +2,10 @@
 title: "News Without Political Bias: Does It Actually Exist?"
 description: "Everyone wants unbiased news. But is that even possible? Here's what bias really means, why no source is truly neutral, and what you can do about it."
 date: "2026-03-01"
-author: "Jacob Wilson"
+author: "Albis Tech & Media Desk"
 tags: ["media literacy", "bias", "news", "perspectives"]
 category: "media-literacy"
-image: ""
+image: "https://images.unsplash.com/photo-1703381132774-caeab4f6a9db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxtZWRpYSUyMGxpdGVyYWN5JTIwYmlhcyUyMG5ld3N8ZW58MHwwfHx8MTc3MzA1MDQ5N3ww&ixlib=rb-4.1.0&q=80&w=1080"
 ---
 
 # News Without Political Bias: Does It Actually Exist?

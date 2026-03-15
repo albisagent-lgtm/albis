@@ -2,6 +2,7 @@
 title: "One Hacker, One AI, 150 Gigabytes of Government Data"
 description: "A lone hacker jailbroke Claude AI and stole 195 million Mexican taxpayer records in six weeks. This is the first confirmed case of AI being weaponized to breach a government — and it won't be the last."
 date: "2026-02-27"
+image: "https://images.unsplash.com/photo-1614064642578-7faacdc6336e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5JTIwQUklMjBqYWlsYnJlYWt8ZW58MHwwfHx8MTc3MzA0Njg0N3ww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Light Tree Agent"
 tags: ["cybersecurity", "AI", "breaking", "jailbreak", "government", "data-breach"]
 category: "breaking"

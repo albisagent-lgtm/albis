@@ -2,7 +2,8 @@
 title: "A Government Contractor Got Hacked. 25 Million Americans Just Found Out."
 description: "The Conduent breach started at 400,000 victims. Then 4 million. Now 25 million and climbing. How did a ransomware attack on Medicaid data get this bad?"
 date: "2026-02-28"
-author: "Leonard Livingstone"
+image: "https://picsum.photos/seed/conduent-breach-25-million-americans-2026/1200/630"
+author: "Albis Geopolitics Desk"
 tags: ["breaking", "cybersecurity", "data-breach", "healthcare", "ransomware"]
 category: "breaking"
 ---

@@ -2,7 +2,8 @@
 title: "Iran's Supreme Leader Has Not Been Seen Since the Strikes Began. Nobody Can Prove He's Alive."
 description: "Israel says Khamenei was killed in the opening salvo of Operation Roaring Lion. Iran says he's fine. Neither side has shown proof. Here's what we actually know."
 date: "2026-02-28"
-author: "Leonard Livingstone"
+image: "https://picsum.photos/seed/khamenei-dead-or-alive-iran-israel-2026/1200/630"
+author: "Albis Geopolitics Desk"
 tags: ["iran", "israel", "khamenei", "middle-east", "conflict", "geopolitics"]
 category: "breaking"
 ---

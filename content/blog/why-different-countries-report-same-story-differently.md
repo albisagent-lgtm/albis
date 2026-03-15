@@ -3,7 +3,7 @@ title: "Why Different Countries Report the Same Story Differently"
 description: "The same event, seven headlines. Here's why media in different countries frames the same story in wildly different ways — and what it reveals about how we all see the world."
 date: "2026-02-22"
 author: "Albis"
-image: "/og-image.png"
+image: "https://picsum.photos/seed/why-different-countries-report-same-story-differently/1200/630"
 tags: ["media literacy", "framing", "global news", "perspective"]
 category: "perspectives"
 ---

@@ -2,7 +2,8 @@
 title: "Day Four in Kabul: Anti-Aircraft Fire Lights Up the Sky as Pakistan's Two-Front Nightmare Deepens"
 slug: "afpak-day-four-kabul-blasts-two-front-squeeze"
 date: "2026-03-01"
-author: "Leonard Livingstone"
+image: "https://picsum.photos/seed/afpak-day-four-kabul-blasts-two-front-squeeze/1200/630"
+author: "Albis Geopolitics Desk"
 tags: ["Afghanistan", "Pakistan", "Taliban", "TTP", "Iran", "South Asia", "conflict"]
 category: "analysis"
 excerpt: "Blasts shook Kabul before dawn on Sunday as fighting between Afghanistan and Pakistan entered its fourth day. With Iran in flames next door, Islamabad faces a strategic squeeze with no easy exit."

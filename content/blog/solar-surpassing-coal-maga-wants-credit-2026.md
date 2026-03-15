@@ -2,6 +2,7 @@
 title: "The US Spent a Year Blocking Solar. Solar Is About to Surpass Coal Anyway."
 description: "Solar will pass coal in US installed capacity by year's end. Now the same people who blocked it want credit."
 date: "2026-03-02"
+image: "https://images.unsplash.com/photo-1497440001374-f26997328c1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjbGVhbi1lbmVyZ3klMjBzb2xhciUyMHBvbGl0aWNzfGVufDB8MHx8fDE3NzMwNTQwNTN8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
 tags: ["clean-energy", "solar", "politics", "coal", "renewable-energy"]
 category: "analysis"

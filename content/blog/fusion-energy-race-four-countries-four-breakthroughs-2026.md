@@ -2,8 +2,8 @@
 title: "The Fusion Race Is Real Now: Four Countries, Four Breakthroughs, One Year"
 description: "China broke a plasma limit. France held fusion for 22 minutes. The US is building a reactor. South Korea wants 300 seconds. 2026 is the year fusion stopped being a joke."
 date: "2026-03-02"
-author: "Leonard Livingstone"
-image: "/og-image.png"
+author: "Albis Geopolitics Desk"
+image: "https://picsum.photos/seed/fusion-energy-race-four-countries-four-breakthroughs-2026/1200/630"
 tags: ["fusion energy", "clean energy", "China", "SPARC", "KSTAR", "science"]
 category: "analysis"
 ---

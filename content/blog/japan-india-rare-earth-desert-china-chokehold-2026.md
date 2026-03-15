@@ -2,7 +2,8 @@
 title: "Japan Found Its Escape From China's Chokehold. It's Buried in India's Desert."
 description: "China controls 90% of rare earth processing. Last week it banned exports to 20 Japanese companies. Tokyo's answer: a partnership with India to mine Rajasthan's desert."
 date: "2026-03-04"
-author: "Leonard Livingstone"
+image: "https://images.unsplash.com/photo-1767012544354-d53484a58d9e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxnZW9wb2xpdGljcyUyMHJhcmUlMjBlYXJ0aHMlMjBDaGluYXxlbnwwfDB8fHwxNzczMDUwNDcyfDA&ixlib=rb-4.1.0&q=80&w=1080"
+author: "Albis Geopolitics Desk"
 tags: ["geopolitics", "rare earths", "China", "Japan", "India", "supply chain"]
 sources:
   - name: "Nikkei Asia"

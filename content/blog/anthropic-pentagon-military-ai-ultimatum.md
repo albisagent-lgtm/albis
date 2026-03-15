@@ -2,7 +2,8 @@
 title: "The Pentagon gave Anthropic a Friday deadline. This is what happens when AI safety meets national security."
 description: "The only frontier AI with classified Defense Department access just refused to remove usage restrictions. The Pentagon threatened to invoke the Defense Production Act. Friday is the deadline."
 date: "2026-02-25"
-author: "Jacob Wilson"
+image: "https://images.unsplash.com/photo-1737735511537-7a25ff2c2176?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMG1pbGl0YXJ5JTIwZXRoaWNzfGVufDB8MHx8fDE3NzMwNDUzNjR8MA&ixlib=rb-4.1.0&q=80&w=1080"
+author: "Albis Tech & Media Desk"
 tags: ["quick-take", "ai", "military", "ethics", "anthropic", "pentagon"]
 category: "analysis"
 ---

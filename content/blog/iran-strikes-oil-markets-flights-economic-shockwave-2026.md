@@ -2,6 +2,7 @@
 title: "One Fifth of the World's Oil Just Became a War Zone"
 description: "The Strait of Hormuz carries 20% of global oil. Now it's between two countries shooting at each other."
 date: "2026-03-01"
+image: "https://images.unsplash.com/photo-1757916315213-b7254eea4f9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx0cmVuZGluZyUyMG9pbCUyMGlyYW58ZW58MHwwfHx8MTc3MzA1MDQ0NXww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
 tags: ["trending", "oil", "iran", "markets", "energy", "strait-of-hormuz", "flights", "economics"]
 category: "breaking"

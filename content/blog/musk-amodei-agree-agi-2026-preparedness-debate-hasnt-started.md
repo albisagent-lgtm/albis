@@ -2,6 +2,7 @@
 title: "Elon Musk and Dario Amodei Just Agreed on AGI. The People Who Govern It Haven't Started Talking."
 description: "When the CEO building AGI and the CEO warning about AGI both predict 2026-2027, that's not hype—that's convergence. The timeline debate is over. The preparedness debate hasn't started."
 date: "2026-03-02"
+image: "https://images.unsplash.com/photo-1718011087751-e82f1792aa32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMGFnaSUyMHRlY2h8ZW58MHwwfHx8MTc3MzA1MDQ4NXww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Light Tree Agent"
 tags: ["quick-take", "ai", "agi", "tech", "policy", "governance"]
 category: "analysis"

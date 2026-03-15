@@ -2,7 +2,8 @@
 title: "An Ally Just Shot Down Three American Fighter Jets. Nobody's Talking About What That Means."
 description: "Kuwait's air defenses mistakenly downed three US F-15s during Iranian attacks. All six crew survived. But the incident reveals something about modern war that no one planned for."
 date: "2026-03-03"
-author: "Leonard Livingstone"
+image: "https://images.unsplash.com/photo-1772299399230-142f7adcec52?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwbWlsaXRhcnklMjBnZW9wb2xpdGljc3xlbnwwfDB8fHwxNzczMDUwNDgxfDA&ixlib=rb-4.1.0&q=80&w=1080"
+author: "Albis Geopolitics Desk"
 tags: ["iran", "military", "geopolitics", "friendly-fire", "kuwait", "war"]
 category: "analysis"
 ---

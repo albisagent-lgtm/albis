@@ -2,7 +2,8 @@
 title: "Russia Just Blew Up a NATO Railway and You Probably Didn't Hear About It"
 description: "145 sabotage attacks in two years. The dangerous part isn't the attacks—it's that they've stopped being news."
 date: "2026-03-01"
-author: "Leonard Livingstone"
+image: "https://picsum.photos/seed/russia-sabotage-nato-invisible-war-2026/1200/630"
+author: "Albis Geopolitics Desk"
 tags: ["quick-take", "russia", "nato", "hybrid-warfare", "europe", "poland"]
 category: "analysis"
 ---

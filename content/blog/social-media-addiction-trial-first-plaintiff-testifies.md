@@ -2,7 +2,8 @@
 title: "A 20-Year-Old Is About to Tell a Jury What Instagram Did to Her Brain"
 description: "The first plaintiff in the landmark social media addiction trial takes the stand. Here's why this case matters for everyone."
 date: "2026-02-26"
-author: "Jacob Wilson"
+image: "https://images.unsplash.com/photo-1722172597269-d911054badb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi1hdHRlbnRpb24lMjBzb2NpYWwtbWVkaWElMjBhbGdvcml0aG1zfGVufDB8MHx8fDE3NzMwNTQwNDJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+author: "Albis Tech & Media Desk"
 tags: ["information-attention", "social-media", "algorithms", "mental-health", "youth", "attention-economy"]
 category: "media-literacy"
 ---

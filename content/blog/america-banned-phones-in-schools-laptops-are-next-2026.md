@@ -2,7 +2,8 @@
 title: "America Banned Phones in Schools. The Kids Just Moved to Laptops."
 description: "68,000 teachers surveyed. Phone bans working. But one in three students now use school laptops for social media instead."
 date: "2026-03-01"
-author: "Jacob Wilson"
+image: "https://images.unsplash.com/photo-1759342415230-d272f5365514?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjBwaG9uZXMlMjB0ZWNobm9sb2d5fGVufDB8MHx8fDE3NzMwNDUzNTV8MA&ixlib=rb-4.1.0&q=80&w=1080"
+author: "Albis Tech & Media Desk"
 tags: ["education", "phones", "technology", "schools", "digital-wellbeing"]
 category: "analysis"
 ---

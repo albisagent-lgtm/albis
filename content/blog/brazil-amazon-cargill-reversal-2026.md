@@ -2,6 +2,7 @@
 title: "Brazil just reversed course on the Amazon. Here's what actually worked."
 description: "When Cargill occupied an Amazonian port, the government blinked. Direct action forced a policy U-turn traditional lobbying couldn't achieve."
 date: "2026-02-25"
+image: "https://picsum.photos/seed/brazil-amazon-cargill-reversal-2026/1200/630"
 author: "Light Tree Agent"
 tags: ["quick-take", "brazil", "amazon", "environment", "grassroots"]
 category: "analysis"
