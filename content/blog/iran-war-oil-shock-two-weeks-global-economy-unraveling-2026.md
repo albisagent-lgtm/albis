@@ -37,41 +37,41 @@ faqs:
     a: "Yes. Russia earned an estimated 6 billion euros from fossil fuel sales in the war's first two weeks. Oil prices jumped 27% from pre-war levels, and Trump lifted Russian oil sanctions to ease the crisis — drawing sharp criticism from European allies."
 ---
 
-The Iran war has removed roughly 20% of global oil supply from the market, pushed Brent crude past $100 a barrel, and forced countries from Bangladesh to Australia into emergency fuel rationing. Two weeks in, this isn't just a Middle Eastern conflict. It's an economic crisis hitting every continent.
+The Iran war has knocked roughly 20% of global oil supply offline, pushed Brent crude past $100, and forced countries from Bangladesh to Australia into emergency fuel rationing. Two weeks in, this isn't a Middle Eastern conflict. It's an economic crisis on every continent.
 
-The Albis Perception Gap Index scored the US-Iran war coverage 8 out of 10, with Western media emphasising military objectives and oil impacts while Middle Eastern and Asian outlets frame the conflict as US aggression threatening their energy lifelines.
+The Albis PGI scored US-Iran war coverage 8/10. Western media leads with military objectives and oil prices. Middle Eastern and Asian outlets frame it as US aggression threatening their energy lifelines.
 
 ## The Strait That Broke Everything
 
-The Strait of Hormuz carried about 20 million barrels of oil per day before the war. Now it's effectively closed. Iran's mines, drone attacks on tankers, and the refusal of insurance companies to cover transit have choked it shut — not with a single dramatic act but through cumulative risk.
+Hormuz carried about 20 million barrels a day before the war. Now it's shut. Iran's mines, drone strikes on tankers, and insurers refusing to cover transit choked it closed — not in one dramatic act but through stacking risk.
 
-The US Navy [admitted it can't provide escorts](https://www.reuters.com/world/middle-east/us-navy-tells-shipping-industry-hormuz-escorts-not-possible-now-2026-03-10/) through the strait yet. UBS analyst Paul Donovan put it bluntly: "In the absence of a coherent US strategy to reopen the Strait of Hormuz, investors are likely to focus on Iranian actions as the market driver."
+The US Navy [admitted it can't escort ships](https://www.reuters.com/world/middle-east/us-navy-tells-shipping-industry-hormuz-escorts-not-possible-now-2026-03-10/) through the strait yet. UBS analyst Paul Donovan: "In the absence of a coherent US strategy to reopen the Strait of Hormuz, investors are likely to focus on Iranian actions as the market driver."
 
-Brent crude hit $119 on March 9. It's been trading around $100 since, despite the largest emergency oil release in history — 400 million barrels from IEA member states, with the US contributing 172 million from its Strategic Petroleum Reserve. The oil kept coming, but the price didn't budge.
+Brent hit $119 on March 9. It's traded around $100 since, despite the largest emergency oil release in history — 400 million barrels from IEA members, 172 million from the US Strategic Petroleum Reserve. The oil kept coming. The price didn't move.
 
-Some analysts think it could go much higher. KPMG chief economist Diane Swonk warned the conflict could drag on six more months, pushing oil north of $130. If Iran's Kharg Island oil infrastructure gets hit — Trump struck military targets there on March 13 but left the oil facilities standing — prices could approach the 2008 record of $147.50.
+It could go higher. KPMG chief economist Diane Swonk warned the conflict could last six more months, pushing oil past $130. If Iran's Kharg Island oil infrastructure gets hit — Trump struck military targets there on March 13 but left the oil facilities standing — prices could approach the 2008 record of $147.50.
 
 ## The Oilfields Are Shutting Down
 
-The damage goes beyond tanker routes. Gulf producers can't export, so they're turning off the taps.
+The damage goes beyond tanker routes. Gulf producers can't export, so they're shutting wells.
 
-Saudi Arabia cut output by 2 million barrels per day, dropping to around 8 million bpd. The kingdom's massive Safaniya offshore field — the world's largest — shut down entirely this week. Kuwait declared force majeure. Iraq and Qatar had already reduced production.
+Saudi Arabia cut output by 2 million barrels per day, dropping to 8 million bpd. The Safaniya offshore field — the world's largest — went dark this week. Kuwait declared force majeure. Iraq and Qatar already cut production.
 
-The IEA estimates these shutdowns, combined with infrastructure damage, have removed about 10 million barrels per day from global supply. That's roughly 10% of world production, gone.
+The IEA estimates shutdowns and infrastructure damage have removed about 10 million barrels per day from global supply. That's 10% of world production, gone.
 
-And here's what makes recovery slow: you can't just flip oilfields back on. Restarting shut-in wells takes weeks to months. Even if the Strait reopened tomorrow, the supply gap would persist well into summer.
+Recovery will be slow. You can't flip oilfields back on. Restarting shut-in wells takes weeks to months. Even if Hormuz reopened tomorrow, the supply gap would last into summer.
 
 ## Asia Is Taking the Hardest Hit
 
-More than 80% of the oil that flowed through Hormuz was bound for [Asia](/perspectives/asia). Japan sources over 90% of its crude from the Gulf. South Korea, 70%. India, China, and the rest of the region are scrambling.
+Over 80% of the oil that flowed through Hormuz was bound for [Asia](/perspectives/asia). Japan gets over 90% of its crude from the Gulf. South Korea, 70%. India, China, and the rest of the region are scrambling.
 
-The responses range from measured to desperate.
+Responses range from measured to desperate.
 
-Japan is releasing 80 million barrels from its strategic reserve — the largest drawdown since the system was created after the 1973 oil crisis. China, which met 50% of its energy needs with coal and has been rapidly expanding renewables, is better cushioned but still the world's largest crude importer.
+Japan is releasing 80 million barrels from its strategic reserve — the largest drawdown since the system was built after the 1973 oil crisis. China, which meets 50% of its energy needs with coal and has rapidly expanded renewables, is better cushioned. It's still the world's largest crude importer.
 
-The countries with fewer buffers are improvising. The Philippines, Thailand, and Vietnam imposed four-day work weeks and work-from-home mandates. Bangkok told bureaucrats to take the stairs instead of lifts. Bangladesh brought forward the Eid holiday to close universities early and started fuel rationing after panic buying hit cities. Pakistan closed schools and moved [universities online](/topics/iran).
+Countries with fewer buffers are improvising. The Philippines, Thailand, and Vietnam imposed four-day work weeks and work-from-home mandates. Bangkok told bureaucrats to take the stairs. Bangladesh moved the Eid holiday forward to close universities early and started fuel rationing after panic buying hit cities. Pakistan closed schools and shifted [universities online](/topics/iran).
 
-In India, cooking gas shortages forced restaurants to shutter. Lines formed outside LPG distributors in cities across the country. Some restaurants cut menu items that need long cooking times.
+In India, cooking gas shortages shuttered restaurants. Lines formed outside LPG distributors across the country.
 
 Myanmar is rationing fuel outright.
 
@@ -79,30 +79,30 @@ Myanmar is rationing fuel outright.
 
 Oil doesn't just move cars. It moves food.
 
-Fertiliser prices jumped 77% between mid-December and early March, according to CSIS. Palm oil rose 9% in a single week. These aren't abstract commodities — they're the inputs that determine whether rice paddies get planted and whether bread stays affordable in Cairo.
+Fertiliser prices jumped 77% between mid-December and early March, per CSIS. Palm oil rose 9% in a single week. These aren't abstract commodities. They decide whether rice paddies get planted and bread stays affordable in Cairo.
 
-The Strait of Hormuz didn't just carry crude. It carried LPG for cooking, LNG for power generation, and the petrochemical feedstocks that become fertiliser. All of that is now stuck.
+Hormuz didn't just carry crude. It carried LPG for cooking, LNG for power, and the petrochemical feedstocks that become fertiliser. All stuck.
 
-The timing is brutal. Northern hemisphere spring planting is underway. US farmers need fertiliser now. African nations already dealing with food insecurity from drought and conflict face another input price spike they can't absorb.
+The timing is brutal. Northern hemisphere spring planting is underway. US farmers need fertiliser now. African nations already hit by drought and conflict face another input price spike they can't absorb.
 
-This pattern — [energy shock cascading into food shock](/topics/climate) — is exactly what happened when Russia invaded Ukraine in 2022. The mechanisms are identical. The scale might be larger.
+This pattern — [energy shock cascading into food shock](/topics/climate) — is exactly what happened when Russia invaded Ukraine in 2022. Same mechanisms. Possibly larger scale.
 
 ## Russia Wins Again
 
-In one of the war's stranger ironies, Russia is cashing in.
+One of the war's stranger ironies: Russia is cashing in.
 
-Moscow earned an estimated 6 billion euros from fossil fuel sales in the conflict's first two weeks. Oil prices rose 27% from pre-war levels. Russian crude, which had been selling at a $10-13 discount to Brent because of Western sanctions, now commands a $4-5 premium to Indian buyers.
+Moscow earned an estimated 6 billion euros from fossil fuel sales in the first two weeks. Oil prices rose 27% from pre-war levels. Russian crude, which sold at a $10-13 discount to Brent under Western sanctions, now commands a $4-5 premium to Indian buyers.
 
-Then Trump made it official. The administration temporarily lifted sanctions on Russian oil shipments to "calm markets." Europe was furious. French President Macron said the Hormuz crisis "in no way" justified easing Russia sanctions. German Chancellor Merz called it a betrayal of European security.
+Then Trump made it official. He temporarily lifted sanctions on Russian oil to "calm markets." Europe was furious. Macron said the Hormuz crisis "in no way" justified easing Russia sanctions. Merz called it a betrayal of European security.
 
-The [Albis Perception Gap Index scored this story 9 out of 10](/indexes/pgi) — the widest framing gap of the week. US media presented the sanctions relief as pragmatic crisis management. European outlets called it appeasement. Russian state media treated it as vindication.
+The [Albis PGI scored this story 9/10](/indexes/pgi) — the widest framing gap of the week. US media called the sanctions relief pragmatic crisis management. European outlets called it appeasement. Russian state media called it vindication.
 
 ## What Happens Next
 
-Trump struck Kharg Island on March 13, demolishing military targets but leaving oil infrastructure intact. He told NBC he might "hit it a few more times just for fun." Iran's new supreme leader, Mojtaba Khamenei, vowed to keep Hormuz closed.
+Trump struck Kharg Island on March 13, hitting military targets but leaving oil infrastructure intact. He told NBC he might "hit it a few more times just for fun." Iran's new supreme leader, Mojtaba Khamenei, vowed to keep Hormuz closed.
 
 Neither side has an exit ramp.
 
-The oil market is pricing in a long conflict. Strategic reserves buy time — months, not years. Gulf oilfield shutdowns compound the damage every day they persist. And the food price shock hasn't fully arrived yet. Fertiliser takes weeks to flow through to grocery bills.
+Markets are pricing in a long conflict. Strategic reserves buy months, not years. Gulf shutdowns compound the damage daily. The food price shock hasn't fully hit yet — fertiliser takes weeks to reach grocery bills.
 
-Two weeks into this war, the question isn't whether the economic damage will be severe. It's how far it spreads before someone finds a way to stop it.
+Two weeks in, the question isn't whether the economic damage will be severe. It's how far it spreads before someone finds a way to stop it.

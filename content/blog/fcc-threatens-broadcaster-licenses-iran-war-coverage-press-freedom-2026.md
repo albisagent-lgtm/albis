@@ -29,19 +29,19 @@ sources:
 confidence: "confirmed"
 ---
 
-On Saturday, March 14, FCC Chairman Brendan Carr posted something that would have been unthinkable a decade ago. Sharing a screenshot of President Trump's attack on the New York Times, Wall Street Journal, and "other lowlife 'papers' and media" for their Iran war coverage, Carr issued a warning: broadcasters who air "fake news" must "correct course before their license renewals come up."
+On Saturday, FCC Chairman Brendan Carr shared a screenshot of President Trump attacking the New York Times, Wall Street Journal, and "other lowlife 'papers' and media" for their Iran war coverage. Then he added his own warning: broadcasters who air "fake news" must "correct course before their license renewals come up."
 
 "Broadcasters must operate in the public interest," he wrote on X, "and they will lose their licenses if they do not."
 
-This wasn't an offhand remark. It was the head of America's telecommunications regulator explicitly threatening the broadcasting licenses of outlets whose wartime coverage the president dislikes. And depending on where you read this story, it means very different things.
+This wasn't offhand. America's top telecom regulator threatened broadcasting licenses over wartime coverage the president dislikes. Depending on where you read this story, it means very different things.
 
 ## What Actually Happened
 
-The sequence matters. On Friday, the Wall Street Journal [reported](https://www.wsj.com/livecoverage/us-israel-iran-war-news-2026/) that five U.S. Air Force refueling planes had been struck by Iranian missiles at a base in Saudi Arabia. Trump called the headline "intentionally misleading" and accused the media of wanting the United States to lose the war.
+The sequence matters. On Friday, the Wall Street Journal [reported](https://www.wsj.com/livecoverage/us-israel-iran-war-news-2026/) that five US Air Force refuelling planes had been hit by Iranian missiles at a base in Saudi Arabia. Trump called the headline "intentionally misleading" and accused the media of wanting America to lose the war.
 
-Hours later, Defense Secretary Pete Hegseth used a Pentagon press conference to attack CNN's reporting on the Strait of Hormuz, calling it "fundamentally unserious" and adding, "The sooner David Ellison takes over that network, the better" — a reference to the Paramount Skydance CEO whose company is set to acquire CNN's parent company. At the same briefing, a journalist reported being denied entry alongside print photographers because previous photos of Hegseth had been deemed "unflattering."
+Hours later, Defence Secretary Pete Hegseth attacked CNN's Hormuz reporting at a Pentagon briefing, calling it "fundamentally unserious." He added: "The sooner David Ellison takes over that network, the better" — referencing the Paramount Skydance CEO set to acquire CNN's parent company. At the same briefing, a journalist was turned away alongside print photographers because previous photos of Hegseth had been deemed "unflattering."
 
-Then came Carr's post. Not a policy announcement. Not a formal FCC proceeding. A social media threat, timed to amplify the president's grievance.
+Then Carr posted. Not a policy announcement. Not a formal FCC proceeding. A social media threat, timed to amplify the president's grievance.
 
 ## The Legal Reality
 

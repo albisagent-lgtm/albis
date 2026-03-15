@@ -30,40 +30,40 @@ sources:
 confidence: "confirmed"
 ---
 
-Ten people died at a US consulate on March 1. Depending on where you live, the Marines who killed them are either heroes who defended American soil or killers who massacred protesters.
+Ten people died at a US consulate on March 1. The Marines who killed them are either heroes or murderers, depending on where you live.
 
-Here's what both sides agree happened: thousands gathered outside the US consulate in Karachi after US-Israeli strikes killed Iran's Supreme Leader Ayatollah Ali Khamenei. Protesters breached the outer wall. Marines opened fire. At least 10 died, over 70 were wounded.
+Thousands gathered outside the Karachi consulate after US-Israeli strikes killed Iran's Supreme Leader Ayatollah Ali Khamenei. Protesters breached the outer wall. Marines opened fire. Ten dead, over 70 wounded.
 
-Everything else — who fired first, whether protesters were armed, whether this was self-defense or murder — splits along the same fault line that's cracking Pakistan in half.
+Who fired first, whether protesters carried weapons, whether this was self-defence or slaughter — it splits along the same fault line cracking Pakistan in half.
 
-## The Albis Perception Gap Index scored this story 7.73.
+## PGI score: 7.73
 
-Western outlets emphasize security threats and Marines defending the compound. South Asian and Middle Eastern coverage frames it as a massacre of unarmed civilians. The framing gap isn't about facts. It's about whose version of self-defense you believe.
+Western outlets lead with security threats and Marines defending the compound. South Asian and Middle Eastern coverage calls it a massacre. The gap isn't about facts. It's about whose definition of self-defence you accept.
 
-## This wasn't random. This is where Pakistan's internal balance becomes a casualty of the Iran war.
+## Pakistan's internal balance just became a casualty of the Iran war.
 
-Pakistan is home to 20 to 30 million Shia Muslims — the world's third-largest Shia population. For them, Iran isn't just a neighboring country. It's the spiritual center of their faith. When Khamenei died, Pakistan's Shia community didn't see a geopolitical event. They saw an attack on their religious leader.
+Pakistan has 20 to 30 million Shia Muslims — the world's third-largest Shia population. Iran isn't just a neighbour. It's the spiritual centre of their faith. When Khamenei died, Pakistan's Shia didn't see a geopolitical event. They saw an attack on their religious leader.
 
-Karachi isn't random either. It's Pakistan's largest city and home to a significant Shia population with deep cultural and religious ties to Iran. The protest that ended in gunfire was organized by Shia groups mourning Khamenei's death.
+Karachi is Pakistan's largest city, with deep Shia ties to Iran. The protest that ended in gunfire was organised by Shia groups mourning Khamenei's death.
 
-Pakistan's government has spent decades walking a tightrope between its Sunni majority (75-85% of the population), its powerful Shia minority, its alliance with the United States, and its proximity to Iran. That balance just snapped.
+Pakistan's government has spent decades balancing its Sunni majority (75-85%), its powerful Shia minority, its US alliance, and its border with Iran. That balance just snapped.
 
-## The "who fired first" question has two incompatible answers.
+## "Who fired first?" has two incompatible answers.
 
-US officials confirmed Marines fired on the crowd. They say protesters stormed the compound, threw stones, vandalized the building, and set vehicles on fire. Video appears to show at least one protester firing toward the consulate.
+US officials say protesters stormed the compound, threw stones, torched vehicles, and set fires. Video shows at least one protester firing a weapon toward the consulate. Marines returned fire.
 
-Pakistani police confirmed shots came from inside the consulate premises. Local media interviewed witnesses who say the crowd was peaceful until Marines opened fire without warning.
+Pakistani police say shots came from inside the consulate first. Witnesses told local media the crowd was peaceful until Marines opened fire without warning.
 
-Both can't be true. But both are being reported as fact.
+Both can't be true. Both are being reported as fact.
 
-This is what perception gaps look like when they turn deadly. The same event becomes proof of two opposite realities: American self-defense or American aggression. Iranian-inspired violence or justified resistance. A security threat or a massacre.
+This is what perception gaps look like when they kill people. The same event becomes proof of opposite realities: American self-defence or American aggression. A security threat or a massacre.
 
-## Pakistan now faces a choice it can't make.
+## Pakistan faces a choice it can't make.
 
-If it backs the US version, it alienates 20 million Shia citizens who see this as an attack on their community. If it backs the protesters, it risks its relationship with Washington and fuels sectarian tensions with its Sunni majority.
+Back the US version, and you alienate 20 million Shia citizens. Back the protesters, and you torch the Washington relationship while inflaming Sunni-Shia tensions.
 
-The government's response so far: silence. No official statement on who fired first. No investigation announced. Just ten bodies and two incompatible stories.
+The government's response: silence. No official statement on who fired first. No investigation announced. Just ten bodies and two stories that can't both be true.
 
-The Iran war didn't stay in Iran. It followed the sectarian fault lines that run through Pakistan, Lebanon, Yemen, Iraq, Bahrain — anywhere Shia and Sunni populations live side by side with competing geopolitical loyalties.
+The Iran war didn't stay in Iran. It followed sectarian fault lines through Pakistan, Lebanon, Yemen, Iraq, Bahrain — anywhere Shia and Sunni populations live beside competing geopolitical loyalties.
 
-Karachi proved those lines can turn into kill zones.
+Karachi proved those lines can become kill zones.
