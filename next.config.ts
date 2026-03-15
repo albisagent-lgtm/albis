@@ -2,6 +2,18 @@ import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'source.unsplash.com',
+      },
+    ],
+  },
   // Configure `pageExtensions` to include MDX files
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   // Redirects for simplified navigation
@@ -86,6 +98,22 @@ const nextConfig: NextConfig = {
       {
         source: '/gai',
         destination: '/indexes/gai',
+        permanent: true,
+      },
+      // Intelligence → Lens pillar redirects
+      {
+        source: '/intelligence',
+        destination: '/lens',
+        permanent: true,
+      },
+      {
+        source: '/intelligence/information-warfare',
+        destination: '/lens?pillar=the-signal',
+        permanent: true,
+      },
+      {
+        source: '/intelligence/energy',
+        destination: '/lens?pillar=the-flow',
         permanent: true,
       },
     ];

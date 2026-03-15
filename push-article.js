@@ -6,85 +6,151 @@ const supabase = createClient(
 );
 
 const article = {
-  title: "No Country Achieves Full Workplace Equality for Women, World Bank Finds",
-  slug: "no-country-achieves-full-workplace-equality-world-bank-2026",
-  content: `Full workplace equality for women does not exist anywhere in the world. Only 4% of women live in economies that come close to legal equality. The World Bank released these findings in its Women, Business and the Law 2026 report on February 25, drawing on data from 190 economies.
+  title: "Your Social Media Feed Is Now a War Zone",
+  content: `Social media platforms aren't just hosting conversations about the Iran war. They're battlefields where state actors fight for narrative control.
 
-Legal protections for women's economic participation average 67.9 out of 100 globally. More critically, the report found that laws designed to ensure equal economic opportunities are only half-enforced. Nearly 70 countries approved around 100 reforms between 2023 and 2025 to ease restrictions on women entering certain fields, institute equal pay, and allow parental leave. Implementation lags far behind.
+Multiple governments are now actively spreading propaganda through the same platforms you use to check your friends' updates. The goal isn't subtle persuasion. It's flooding the information space until truth becomes impossible to identify.
 
-## Afghanistan Sets Lighter Penalty for Domestic Violence Than Animal Mistreatment
+## The Mechanics of Digital Battlespace
 
-Afghanistan's Taliban government issued a new penal code by decree in late February that prescribes 15 days in prison for a husband who beats his wife with a stick and causes a wound or bruise. Mistreating a camel or forcing animals to fight carries up to five months imprisonment.
+The Atlantic Council's Digital Forensic Research Lab put it bluntly: "Social media platforms are now frontlines in war."
 
-Article 32 of the code states that only if a woman can prove before a judge that her husband struck her and caused a serious injury will he face the 15-day sentence. The code recognizes only "excessive" beating as domestic violence, leaving survivors of other forms of abuse with no legal protection or pathways to justice.
+What does that look like in practice?
 
-UN Special Rapporteur on Afghanistan Richard Bennett condemned the provisions. Human Rights Watch called for accountability for what it termed gender persecution. The international response has otherwise been muted, according to observers. Taliban officials have dismissed critics as infidels and warned that opposition to Taliban law itself constitutes a crime.
+State actors create fake videos showing military victories that didn't happen. They spread AI-generated images designed to trigger emotional responses. They amplify certain narratives while suppressing others through coordinated account networks.
 
-## EU Opens Existing Funds for Cross-Border Abortion Access
+The Iran conflict has exposed this machinery at scale. Researchers tracking visual misinformation report that state-linked propaganda campaigns are behind much of the fabricated content. It's not individuals sharing conspiracy theories. It's organized information operations.
 
-The European Commission announced on February 26 that member states may use the European Social Fund Plus (ESF+) to provide free abortion access for women traveling from EU countries with restrictive laws. The decision came in response to the "My Voice, My Choice" European Citizens' Initiative, which gathered nearly 1.2 million verified signatures.
+## When Governments Become Content Creators
 
-The Commission clarified it would not create a new specific fund for cross-border abortion. Instead, governments may choose to deploy existing ESF+ allocations to support reproductive healthcare access where national law permits. Poland and Malta have near-total abortion bans. Women from these countries can now potentially receive financial support to access services in nations like France, Spain, or the Netherlands.
+Here's where it gets stranger.
 
-Critics noted the Commission's restraint in not allocating new EU funding. Supporters emphasized that the green light for existing funds removes a significant barrier for women in restrictive countries.
+The White House and Pentagon now post what they call "hype videos" on TikTok and X. These mix real Iran war footage with clips from movies and video games.
 
-## Abortion Restrictions Linked to Ob-Gyn Shortage in US States
+It's propaganda, but it's presented as entertainment. The format is designed for virality, not accuracy.
 
-States that passed new abortion restrictions saw a measurable drop in practicing obstetrician-gynecologists. A study published in late February found that new legal restrictions on abortion were tied to two fewer ob-gyns per 100,000 women of reproductive age. No increase in other care providers filled the gap.
+Meanwhile, Russian propaganda networks just got caught spreading AI-generated images about Ukrainian security guards in Hungary. Hungarian fact-checkers exposed the campaign, but only after the images circulated widely.
 
-The findings suggest abortion restrictions reduce access to all forms of reproductive healthcare, not just abortion services. Ob-gyns provide prenatal care, cancer screenings, contraception, and treatment for gynecological conditions. Forty-three US states currently prohibit some abortions after a certain point in pregnancy, using either fetus viability or gestational weeks as the cutoff.
+Iran runs its own sophisticated system. The National Information Network can shut down public internet access while keeping government services running. It's an architecture built specifically for information control during conflict.
 
-## Russia Restricts Abortion Access Under "Traditional Values" Push
+## The Detection Problem
 
-Russian authorities are increasingly restricting access to safe abortion care and limiting information about reproductive choices, according to a February 23 report from human rights organizations. The measures are justified under a government push for "traditional values" and higher birth rates.
+You'd think deepfakes would be easy to spot by now.
 
-Abortion remains technically legal in Russia up to the 12th week of pregnancy, up to 22 weeks in cases of rape, and at any point if the pregnancy threatens the mother's life. Russia legalized abortion for any reason in 1920. Recent restrictions focus on limiting facility access and controlling information distribution rather than changing the law itself.
+They're not.
 
-The policies contravene Russia's obligations under the International Covenant on Economic, Social and Cultural Rights and the Convention on the Elimination of All Forms of Discrimination Against Women. Human rights groups say denying access to abortion care and restricting reproductive information violates rights to health, life, privacy, bodily autonomy, and freedom from cruel, inhuman, or degrading treatment.
+Humans correctly identify high-quality deepfake videos only 24.5 percent of the time. That's barely above random guessing.
 
-## Cuba Activists Demand Femicide Law After Santa Clara Killing
+Professional detection systems struggle too. The technology creating fake content is advancing faster than the technology detecting it.
 
-A Cuban woman died after her ex-partner attacked her in the street in Santa Clara in late February. Activists renewed calls for a comprehensive law against gender-based violence, establishment of shelters for at-risk women, effective protection protocols, and transparent official data. They requested the government declare a state of emergency due to gender-based violence.
+Indian Express noted that effective detection now requires "specialized forensic tools, machine-learning classifiers, high-quality reference data, and often platform-side signals that ordinary users and most researchers cannot see."
 
-Femicide is not classified as a specific crime in the Cuban Penal Code. Official media rarely report these cases or use the term femicide, despite the government's stated "zero tolerance" policy toward violence against women. The lack of legal classification makes tracking and addressing femicide difficult.
+Translation: if you're scrolling social media, you probably can't tell what's real.
 
-Worldwide, approximately 51,000 women lost their lives to femicide in 2023. A spouse or partner is responsible for almost 40% of femicides globally. In the United States, FBI data shows 74.5% of victims in domestic-relationship violent crimes are female. More than one in four violent crimes now involve a domestic relationship.
+## Why This Matters Beyond War
 
-## Gender Pay Gap Remains Entrenched in Europe
+The infrastructure being built during wartime doesn't disappear when fighting stops.
 
-Women in the United Kingdom effectively worked for free until late February 2026, according to analysis by the Trades Union Congress. The gender pay gap costs the average British woman £2,548 per year. At the current rate of change, the gap will not close until 2056.
+State actors are learning which techniques work. They're refining their methods for manipulating platform algorithms. They're discovering how to trigger emotional responses at scale.
 
-Germany's gender pay gap stood at 16% in 2025, unchanged from the previous year, according to the Federal Statistical Office. A recent study of MBA graduates found no pay gap at the start of women's careers. Men and women earned basically the same amount initially. The gap emerges and widens over time.
+These capabilities will be applied to other contexts. Elections. Policy debates. Social movements. Any situation where controlling the narrative provides strategic advantage.
 
-The World Economic Forum estimates that closing the gender gap in economic participation and opportunity will take 169 years at present rates. The European Institute for Gender Equality projects that improving gender equality in the EU could result in a 9.6% rise in EU GDP per capita—€3.15 trillion—and an additional 10.5 million jobs by 2050.
+The Atlantic Council's Emerson Brooking warns users directly: "If you're in these spaces, just understand that this is an extension of the physical battle space. There are actors on all sides of the conflict that are actively trying to spread propaganda and disinformation to convince you that certain things are true that aren't."
 
-## Political Representation Varies Widely
+## The Platforms' Position
 
-Israel dropped from 48th to 104th place in the World Economic Forum's Global Gender Gap Index for political empowerment. Currently, not a single woman serves as director general of a government ministry in Israel. Only 14% of deputy directors general in government ministries are women.
+Social media companies are stuck in a difficult spot.
 
-India's Trinamool Congress nominated lawyer Menaka Guruswamy to the Rajya Sabha in late February, marking historic queer representation in the upper house of parliament. Guruswamy has been associated with several constitutional cases involving gender equality, privacy, and civil liberties. Their courtroom interventions have shaped feminist jurisprudence in India.
+They host billions of users across dozens of countries with conflicting interests. What's propaganda in one place is legitimate political speech in another. What's misinformation to some is truth to others.
 
-Globally, women held 40% of single or lower parliamentary seats for the first time in 2023, up from 11% in 1995 and 26% in 2023. Countries including Norway, Sweden, and Denmark pioneered party quotas. Norway's Labour Party mandated in 1983 that both sexes must be represented by at least 40% in all elections and nominations. Sweden's Social Democratic Workers' Party instituted a "zipper quota" in 1994, alternating male and female candidates on party lists.
+Platforms have tried various approaches. Content moderation teams. Fact-checking partnerships. AI detection tools. None of them scale effectively against coordinated state operations.
 
-The UK Labour Party abandoned all-women shortlists in March 2022 after being warned the practice would become unlawful under the Equality Act because the majority of their MPs were female.`,
-  excerpt: "Full workplace equality for women does not exist anywhere in the world. Only 4% of women live in economies that come close to legal equality. The World Bank released these findings in its Women, Business and the Law 2026 report on February 25.",
-  author: "Leonard Livingstone",
-  category: "womens-rights",
-  tags: ["womens-rights", "gender-equality", "workplace-equality", "reproductive-rights", "domestic-violence"],
+The FBI is now investigating "suspicious cyber activity" on a system holding sensitive surveillance information. This suggests information warfare is expanding beyond social platforms into critical infrastructure.
+
+## What You're Actually Seeing
+
+When you open a social media app during a major conflict, you're not getting a neutral view of events.
+
+You're seeing what multiple governments want you to see. What platform algorithms decided you'd engage with. What propaganda networks successfully amplified. What detection systems failed to catch.
+
+Some of it's real. Some of it's fabricated. Some of it mixes both.
+
+The platforms themselves often can't tell the difference fast enough to matter. By the time fact-checkers verify something, it's already been seen millions of times.
+
+## The Information Asymmetry
+
+State actors have resources individual users don't.
+
+They can coordinate thousands of accounts. They can access advanced AI tools before they're publicly available. They can study platform algorithms to maximize reach. They can operate across time zones and languages simultaneously.
+
+They're playing a different game with different rules.
+
+NewsGuard's recent coverage noted that Iran appears to be winning the disinformation battle around the current conflict. Not because their claims are true, but because their information operations are more effective.
+
+## Where This Leads
+
+The next phase probably won't involve better detection.
+
+It'll involve information environments where verification becomes functionally impossible. Where the volume of synthetic content exceeds human capacity to evaluate it. Where trust in any digital source collapses entirely.
+
+We're already seeing early signs. People increasingly assume everything they see might be fake. That creates its own problems, because it makes genuine evidence easier to dismiss.
+
+The information warfare playbook is being written in real-time. Every technique that works gets copied and refined. Every platform vulnerability gets exploited.
+
+Your feed isn't just showing you the world. It's showing you someone's version of the world, designed to make you think, feel, or act a certain way.
+
+The question isn't whether you're seeing propaganda. It's whose propaganda you're seeing, and whether you notice.`,
+  slug: "social-media-war-zone-propaganda",
+  author: "Jacob Wilson",
+  category: "information-warfare",
+  tags: ["information-warfare", "propaganda", "social-media", "deepfakes", "iran-conflict", "disinformation"],
+  published_at: new Date().toISOString(),
   status: "published",
-  published_at: "2026-03-02T16:00:00Z",
+  confidence: "confirmed",
+  sources: [
+    {
+      name: "Associated Press",
+      url: "https://apnews.com/article/iran-war-images-misinformation-russia-israel-9e495017dc5c4bf24a0b6152863dbfb1",
+      region: "North America",
+      quote: "Social media platforms are now frontlines in war, and users should be aware of their potential to be used by state actors"
+    },
+    {
+      name: "ABC News",
+      url: "https://abcnews.com/Politics/white-house-posts-called-hype-videos-combining-real/story?id=130825574",
+      region: "North America",
+      quote: "White House and Pentagon accounts have leaned into the 'hype video' strategy on platforms like X and TikTok"
+    },
+    {
+      name: "Medium (Activated Thinker)",
+      url: "https://medium.com/activated-thinker/deepfakes-are-now-impossible-to-detect-26544d1c0a7d",
+      region: "International",
+      quote: "Human beings correctly identify high quality deepfake videos only about 24.5 percent of the time"
+    },
+    {
+      name: "Ukrainska Pravda",
+      url: "https://www.pravda.com.ua/eng/news/2026/03/07/8024377/",
+      region: "Europe",
+      quote: "Hungarian factcheckers have exposed a campaign using fake AI-generated images about the Ukrainian cash-in-transit guards"
+    },
+    {
+      name: "Bizzbuzz News",
+      url: "https://www.bizzbuzz.news/international/irans-wartime-internet-blackout-is-putting-civilians-at-risk-1386824",
+      region: "International",
+      quote: "The Iranian regime has developed an advanced architecture for internet shutdowns centred on a system known as the National Information Network"
+    }
+  ],
   faqs: [
     {
-      q: "Does any country have full workplace equality for women?",
-      a: "No. According to the World Bank's 2026 report analyzing 190 economies, full workplace equality does not exist anywhere in the world. Only 4% of women live in economies that come close to legal equality, and laws designed to ensure equal economic opportunities are only half-enforced globally."
+      q: "How can I tell if a video about the Iran war is real?",
+      a: "You probably can't. Humans identify high-quality deepfakes correctly only 24.5% of the time—barely above guessing. Professional detection requires specialized tools most people don't have access to. Your best bet is to check multiple trusted sources before believing any dramatic footage."
     },
     {
-      q: "What is the current global gender pay gap?",
-      a: "The gap varies significantly by country. In the UK, it costs the average woman £2,548 per year and won't close until 2056 at current rates. Germany's gap is 16%, unchanged in 2025. The World Economic Forum estimates it will take 169 years to close the gender gap in economic participation globally at present advancement rates."
+      q: "Are governments really posting fake content on social media?",
+      a: "Yes. Multiple state actors are running coordinated propaganda campaigns during the Iran conflict. Some governments mix real war footage with movie clips and game footage. Others create entirely fabricated content using AI. The Atlantic Council confirms that platforms have become extensions of physical battlespace."
     },
     {
-      q: "How does Afghanistan's new penal code treat domestic violence?",
-      a: "Afghanistan's penal code, issued by decree in February 2026, sets 15 days in prison for a husband who beats his wife with a stick and causes a wound or bruise—lighter than the up to five months for mistreating animals. The code recognizes only 'excessive' beating as domestic violence, leaving other abuse survivors with no legal protection."
+      q: "What is Iran's National Information Network?",
+      a: "It's a system that allows Iran's government to shut down public internet access while keeping government services operational. It prevents access to Google and global platforms but maintains local banking and approved national sites. It's designed specifically for information control during conflicts."
     }
   ]
 };
@@ -93,13 +159,13 @@ async function pushArticle() {
   const { data, error } = await supabase
     .from('blog_posts')
     .insert(article);
-
+  
   if (error) {
-    console.error('Error pushing article:', error);
+    console.error('Error:', error);
     process.exit(1);
   }
-
-  console.log('Article pushed successfully:', data);
+  
+  console.log('Success:', data);
 }
 
 pushArticle();
