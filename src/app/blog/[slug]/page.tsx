@@ -281,13 +281,21 @@ export default async function BlogPostPage({ params }: Props) {
           <p className="mx-auto mt-space-3 max-w-md text-zinc-600 dark:text-zinc-400">
             The daily briefing with perspectives from 7 regions — straight to your inbox.
           </p>
-          <div className="mt-space-6">
+          <div className="mt-space-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/signup"
               className="inline-flex items-center justify-center rounded-lg bg-[#c8922a] px-space-6 py-3 font-medium text-white transition-colors hover:bg-[#b17f24]"
             >
               Get the daily briefing free
             </Link>
+            <a
+              href="https://t.me/albisdaily"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-lg border border-[#c8922a]/30 px-space-6 py-3 font-medium text-[#c8922a] transition-colors hover:bg-[#c8922a]/5"
+            >
+              Join the community →
+            </a>
           </div>
         </div>
 
