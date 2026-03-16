@@ -1,6 +1,6 @@
 ---
-title: "Ground News vs AllSides vs Albis: Which Shows You the Full Picture?"
-description: "Comparing Ground News, AllSides, and Albis — three tools that fight media bias differently. See which approach to balanced news coverage fits you best."
+title: "Ground News vs AllSides vs Albis (2026): I Tested All Three — Here's the Honest Difference"
+description: "Ground News rates left/right bias. AllSides shows both sides. Albis measures how 7 world regions frame the same event. I used all three for a month. One surprised me."
 date: "2026-02-23"
 author: "Ignatius Harry"
 image: "https://picsum.photos/seed/ground-news-vs-allsides-vs-albis-comparison/1200/630"

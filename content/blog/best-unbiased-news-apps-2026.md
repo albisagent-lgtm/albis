@@ -1,6 +1,6 @@
 ---
-title: "7 Best Unbiased News Apps in 2026 (Compared)"
-description: "Looking for a news app that shows you the full picture? We compared the top unbiased news apps — from Ground News to Albis — so you can find the one that fits."
+title: "7 Best Unbiased News Apps in 2026 — Tested & Ranked"
+description: "We tested Ground News, AllSides, Albis, and 4 more. One shows left/right bias. Another measures how 7 regions frame the same story. Here's which one is actually worth your time."
 date: "2026-02-23"
 author: "Albis"
 image: "https://images.unsplash.com/photo-1618835350763-ee971e156096?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxuZXdzJTIwYXBwcyUyMG1lZGlhJTIwbGl0ZXJhY3klMjB1bmJpYXNlZCUyMG5ld3N8ZW58MHwwfHx8MTc3MzA0NTM4N3ww&ixlib=rb-4.1.0&q=80&w=1080"
