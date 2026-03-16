@@ -2,28 +2,38 @@ import type { Metadata } from "next";
 import { QuizClient } from "./quiz-client";
 
 export const metadata: Metadata = {
-  title: "How Healthy Is Your News Diet? Take the Free Quiz — Albis",
+  title: "Perspective Check — Can You Tell Where a Headline Comes From?",
   description:
-    "Find out if you're stuck in a filter bubble. This 2-minute quiz reveals how balanced your information diet really is. Free, instant results.",
+    "Same story, different headline. Test your media awareness by guessing which world region wrote each headline. 5 rounds, 7 regions — how well do you really read the news?",
   keywords: [
-    "information diet quiz",
+    "perspective check quiz",
+    "headline quiz",
+    "media framing quiz",
     "news bias quiz",
-    "filter bubble test",
-    "media literacy quiz",
-    "how biased is my news",
+    "media literacy",
+    "regional news framing",
+    "albis news quiz",
   ],
   openGraph: {
-    title: "How Healthy Is Your News Diet? Take the Free Quiz — Albis",
+    title: "I took the Perspective Check — can you beat my score?",
     description:
-      "Find out if you're stuck in a filter bubble. This 2-minute quiz reveals how balanced your information diet really is. Free, instant results.",
+      "Same story, different headline. Test your media awareness by guessing which world region wrote each headline.",
     url: "https://www.albis.news/quiz",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-quiz.png",
         width: 1200,
         height: 630,
+        alt: "Albis Perspective Check — Can you tell where a headline comes from?",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Perspective Check — Can You Spot Regional News Framing?",
+    description:
+      "Same story, different headline. 5 rounds, 7 regions. Test your media awareness.",
+    images: ["/og-quiz.png"],
   },
   alternates: {
     canonical: "https://www.albis.news/quiz",

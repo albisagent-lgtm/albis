@@ -12,9 +12,9 @@ export async function GET() {
 
   const { data, error } = await supabase
     .from("pgi_story_scores")
-    .select("story_id, story_title, story_pgi, d1_factual, d2_causal, d3_framing, d4_emotional, d5_actor, d6_cui_bono, scored_at")
+    .select("story_slug, story_headline, story_pgi, d1_factual, d2_causal, d3_framing, d4_emotional, d5_actor_context, d6_cui_bono, scan_date")
     .gte("story_pgi", 7.0)
-    .gte("scored_at", oneDayAgo)
+    .gte("scan_date", oneDayAgo.split("T")[0])
     .order("story_pgi", { ascending: false })
     .limit(10);
 

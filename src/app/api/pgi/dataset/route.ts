@@ -17,9 +17,9 @@ export async function GET(request: Request) {
 
   const { data, error } = await supabase
     .from("pgi_story_scores")
-    .select("story_id, story_title, story_pgi, d1_factual, d2_causal, d3_framing, d4_emotional, d5_actor, d6_cui_bono, scored_at")
-    .gte("scored_at", since)
-    .order("scored_at", { ascending: false })
+    .select("story_slug, story_headline, story_pgi, d1_factual, d2_causal, d3_framing, d4_emotional, d5_actor_context, d6_cui_bono, scan_date")
+    .gte("scan_date", since.split("T")[0])
+    .order("scan_date", { ascending: false })
     .limit(1000);
 
   if (error) {
@@ -27,9 +27,9 @@ export async function GET(request: Request) {
   }
 
   if (format === "csv") {
-    const headers = "story_id,story_title,story_pgi,d1_factual,d2_causal,d3_framing,d4_emotional,d5_actor,d6_cui_bono,scored_at";
+    const headers = "story_slug,story_headline,story_pgi,d1_factual,d2_causal,d3_framing,d4_emotional,d5_actor_context,d6_cui_bono,scan_date";
     const rows = (data || []).map(r =>
-      `"${r.story_id}","${(r.story_title || "").replace(/"/g, '""')}",${r.story_pgi},${r.d1_factual},${r.d2_causal},${r.d3_framing},${r.d4_emotional},${r.d5_actor},${r.d6_cui_bono},"${r.scored_at}"`
+      `"${r.story_slug}","${(r.story_headline || "").replace(/"/g, '""')}",${r.story_pgi},${r.d1_factual},${r.d2_causal},${r.d3_framing},${r.d4_emotional},${r.d5_actor_context},${r.d6_cui_bono},"${r.scan_date}"`
     );
     const csv = [headers, ...rows].join("\n");
 
@@ -37,6 +37,7 @@ export async function GET(request: Request) {
       headers: {
         "Content-Type": "text/csv",
         "Content-Disposition": `attachment; filename="albis-pgi-dataset-${days}d.csv"`,
+        "Cache-Control": "public, max-age=3600",
         "Access-Control-Allow-Origin": "*",
       },
     });

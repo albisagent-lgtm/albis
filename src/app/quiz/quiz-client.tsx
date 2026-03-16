@@ -1,81 +1,210 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
-import Link from "next/link";
+import { useState, useCallback, useRef, useEffect } from "react";
 
 /* ------------------------------------------------------------------ */
-/*  Data                                                               */
+/*  Types                                                              */
 /* ------------------------------------------------------------------ */
 
-const questions = [
+type Region =
+  | "North America"
+  | "Europe"
+  | "Middle East"
+  | "South Asia"
+  | "East Asia"
+  | "Africa"
+  | "Latin America";
+
+interface QuizQuestion {
+  headline: string;
+  region: Region;
+  why: string;
+}
+
+interface QuizSet {
+  topic: string;
+  questions: QuizQuestion[];
+}
+
+/* ------------------------------------------------------------------ */
+/*  Quiz Data — 3 sets of 5 questions each                            */
+/*  Each set covers ONE news topic with headlines from different       */
+/*  regions showing regional framing differences                      */
+/* ------------------------------------------------------------------ */
+
+const QUIZ_SETS: QuizSet[] = [
   {
-    q: "How many countries' news sources do you read regularly?",
-    a: ["0–1", "2–3", "4–6", "7+"],
+    topic: "Global Trade & Tariffs",
+    questions: [
+      {
+        headline:
+          "US Slaps Historic Tariffs on Chinese Goods to Protect American Jobs",
+        region: "North America",
+        why: "Frames tariffs as protecting domestic workers — a common US editorial angle that centers American economic interests.",
+      },
+      {
+        headline:
+          "Beijing Vows Retaliation as Washington Escalates Trade War",
+        region: "East Asia",
+        why: "Positions China as responding to aggression — East Asian media often frames trade disputes from Beijing's defensive posture.",
+      },
+      {
+        headline:
+          "Trade War Fallout Threatens Global Supply Chains, EU Caught in Crossfire",
+        region: "Europe",
+        why: "European outlets frequently frame US-China disputes through the lens of collateral damage to European economies.",
+      },
+      {
+        headline:
+          "Rising Tariffs Could Devastate Developing Nations' Export Markets",
+        region: "Africa",
+        why: "African media highlights how great-power trade wars disproportionately harm smaller economies that depend on exports.",
+      },
+      {
+        headline:
+          "India Sees Opening as US-China Trade Rift Deepens",
+        region: "South Asia",
+        why: "South Asian coverage often explores strategic opportunities for India and regional economies amid superpower rivalry.",
+      },
+    ],
   },
   {
-    q: "When you see a headline, how often do you check how other countries covered it?",
-    a: ["Never", "Rarely", "Sometimes", "Always"],
+    topic: "AI Regulation & Safety",
+    questions: [
+      {
+        headline:
+          "EU Passes World's Most Comprehensive AI Safety Law",
+        region: "Europe",
+        why: "European media celebrates the EU's regulatory leadership — framing strict rules as a global standard-setting achievement.",
+      },
+      {
+        headline:
+          "Overregulation Risks Killing America's AI Advantage, Industry Leaders Warn",
+        region: "North America",
+        why: "US coverage often centers the innovation-vs-regulation debate, amplifying Silicon Valley's concerns about competitive disadvantage.",
+      },
+      {
+        headline:
+          "AI Surveillance Tools Spread Across Middle East Without Oversight",
+        region: "Middle East",
+        why: "Regional outlets focus on how AI is deployed for surveillance — a pressing concern in the Middle East's political landscape.",
+      },
+      {
+        headline:
+          "China Unveils National AI Standards to Shape Global Norms",
+        region: "East Asia",
+        why: "East Asian coverage frames China's AI governance as strategic norm-setting, positioning it as a global technology leader.",
+      },
+      {
+        headline:
+          "AI-Powered Misinformation Campaigns Target Elections Across Latin America",
+        region: "Latin America",
+        why: "Latin American media highlights how AI threatens already-fragile democratic institutions in the region.",
+      },
+    ],
   },
   {
-    q: "How many different news apps or sites do you check daily?",
-    a: ["1", "2–3", "4–5", "6+"],
-  },
-  {
-    q: "Can you name a news source from outside your continent?",
-    a: ["No", "Maybe one", "A few", "Several"],
-  },
-  {
-    q: "When a major event happens, do you notice the words different outlets use to describe it?",
-    a: ["Never", "Sometimes", "Often", "Always"],
-  },
-  {
-    q: "How often do you read news in a language other than your primary one (or translated from another region)?",
-    a: ["Never", "Rarely", "Monthly", "Weekly+"],
-  },
-  {
-    q: "Do you know what stories are trending in countries other than your own right now?",
-    a: ["No idea", "Vaguely", "Some", "Yes, several"],
-  },
-  {
-    q: "When you disagree with a news take, do you seek out the opposing perspective?",
-    a: ["Never", "Rarely", "Sometimes", "Always"],
-  },
-  {
-    q: "How aware are you of how algorithms shape what news you see?",
-    a: ["Not at all", "Somewhat", "Very", "I actively counteract it"],
-  },
-  {
-    q: "How would you describe your current news consumption?",
-    a: [
-      "Mostly one source",
-      "A few similar sources",
-      "Diverse domestic sources",
-      "Truly global mix",
+    topic: "Climate Change & Energy",
+    questions: [
+      {
+        headline:
+          "Small Island Nations Issue Desperate Plea as Sea Levels Hit Record High",
+        region: "Africa",
+        why: "African and island-nation media foregrounds existential climate threats — covering it as an urgent survival story, not a policy debate.",
+      },
+      {
+        headline:
+          "Gas Prices Surge as Green Transition Policies Squeeze Energy Supplies",
+        region: "North America",
+        why: "North American outlets often frame climate policy through consumer cost impact — gas prices are a perennial political flashpoint.",
+      },
+      {
+        headline:
+          "Gulf States Pivot to Renewables While Defending Oil Export Revenue",
+        region: "Middle East",
+        why: "Middle Eastern coverage navigates the tension between petro-state economies and the global push toward clean energy.",
+      },
+      {
+        headline:
+          "India's Coal Dependency Clashes with Climate Pledges at COP Summit",
+        region: "South Asia",
+        why: "South Asian media highlights the development-vs-climate dilemma — framing it as an equity issue for growing economies.",
+      },
+      {
+        headline:
+          "Amazon Deforestation Hits New Low After Landmark Enforcement Push",
+        region: "Latin America",
+        why: "Latin American coverage centers local environmental enforcement and the Amazon — the region's defining climate story.",
+      },
     ],
   },
 ];
 
-const SCORES = [0, 3, 7, 10] as const;
+const REGIONS: Region[] = [
+  "North America",
+  "Europe",
+  "Middle East",
+  "South Asia",
+  "East Asia",
+  "Africa",
+  "Latin America",
+];
 
-function getBracket(score: number) {
-  if (score <= 25)
+const REGION_EMOJI: Record<Region, string> = {
+  "North America": "\u{1F1FA}\u{1F1F8}",
+  Europe: "\u{1F1EA}\u{1F1FA}",
+  "Middle East": "\u{1F1F8}\u{1F1E6}",
+  "South Asia": "\u{1F1EE}\u{1F1F3}",
+  "East Asia": "\u{1F1E8}\u{1F1F3}",
+  Africa: "\u{1F1F3}\u{1F1EC}",
+  "Latin America": "\u{1F1E7}\u{1F1F7}",
+};
+
+/* ------------------------------------------------------------------ */
+/*  Helpers                                                            */
+/* ------------------------------------------------------------------ */
+
+function shuffleArray<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function getRandomSet(): QuizQuestion[] {
+  const set = QUIZ_SETS[Math.floor(Math.random() * QUIZ_SETS.length)];
+  return shuffleArray(set.questions);
+}
+
+function getScoreMessage(score: number): {
+  title: string;
+  desc: string;
+} {
+  if (score <= 1)
     return {
-      name: "Echo Chamber",
-      desc: "You're seeing one slice of reality. Most of us start here — the good news is, small changes make a big difference.",
+      title: "Media Rookie",
+      desc: "Headlines tricked you — but that's the whole point. You now know how easily framing shapes perception.",
     };
-  if (score <= 50)
+  if (score <= 2)
     return {
-      name: "Domestic Lens",
-      desc: "You're informed, but through one country's perspective. Adding even one international source would shift what you see.",
+      title: "Getting Warmer",
+      desc: "You caught some regional cues, but media framing is subtle. Keep reading globally to sharpen your instincts.",
     };
-  if (score <= 75)
+  if (score <= 3)
     return {
-      name: "Expanding View",
-      desc: "You're ahead of most people. Keep going — the patterns between sources is where the real insight lives.",
+      title: "Perspective Spotter",
+      desc: "Solid instincts. You're picking up on how different regions frame the same events differently.",
+    };
+  if (score <= 4)
+    return {
+      title: "Global Reader",
+      desc: "Impressive. You can read between the headlines and spot where a story comes from. Most people can't.",
     };
   return {
-    name: "Global Thinker",
-    desc: "You see what most people miss. Your information diet gives you a genuine edge in understanding the world.",
+    title: "Framing Expert",
+    desc: "Perfect score. You understand how media framing works across regions — a rare and valuable skill.",
   };
 }
 
@@ -83,331 +212,547 @@ function getBracket(score: number) {
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
-type Phase = "quiz" | "email" | "result";
+type Phase = "intro" | "quiz" | "result";
 
 export function QuizClient() {
-  const [answers, setAnswers] = useState<number[]>([]);
-  const [phase, setPhase] = useState<Phase>("quiz");
-  const [email, setEmail] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-  const [emailError, setEmailError] = useState("");
-  const [mountTime] = useState(Date.now);
+  const [phase, setPhase] = useState<Phase>("intro");
+  const [questions, setQuestions] = useState<QuizQuestion[]>([]);
+  const [currentQ, setCurrentQ] = useState(0);
+  const [score, setScore] = useState(0);
+  const [answers, setAnswers] = useState<
+    { selected: Region; correct: Region; isCorrect: boolean }[]
+  >([]);
+  const [selectedRegion, setSelectedRegion] = useState<Region | null>(null);
+  const [showResult, setShowResult] = useState(false);
+  const [transitioning, setTransitioning] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [shareImageUrl, setShareImageUrl] = useState<string | null>(null);
+  const [startTime] = useState(() => Date.now());
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const currentQ = answers.length;
-  const totalScore = answers.reduce((s, i) => s + SCORES[i], 0);
+  const startQuiz = useCallback(() => {
+    setQuestions(getRandomSet());
+    setCurrentQ(0);
+    setScore(0);
+    setAnswers([]);
+    setSelectedRegion(null);
+    setShowResult(false);
+    setTransitioning(false);
+    setCopied(false);
+    setShareImageUrl(null);
+    setPhase("quiz");
+  }, []);
 
-  const pickAnswer = useCallback(
-    (idx: number) => {
-      const next = [...answers, idx];
-      setAnswers(next);
-      if (next.length === questions.length) {
-        setPhase("email");
-      }
+  const handleRegionClick = useCallback(
+    (region: Region) => {
+      if (selectedRegion || transitioning) return;
+      const correct = questions[currentQ].region;
+      const isCorrect = region === correct;
+      setSelectedRegion(region);
+      setShowResult(true);
+      if (isCorrect) setScore((s) => s + 1);
+      setAnswers((a) => [...a, { selected: region, correct, isCorrect }]);
     },
-    [answers],
+    [selectedRegion, transitioning, questions, currentQ],
   );
 
-  const submitEmail = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setEmailError("");
-    if (!email.trim()) {
-      setEmailError("Please enter your email.");
+  const nextQuestion = useCallback(() => {
+    if (currentQ >= 4) {
+      setPhase("result");
+      // Submit quiz data for analytics
+      try {
+        fetch("/api/quiz/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            score,
+            total: 5,
+            answers: answers.map((a, i) => ({
+              question_id: i,
+              guessed_region: a.selected,
+              correct_region: a.correct,
+              correct: a.isCorrect,
+            })),
+            time_seconds: Math.round((Date.now() - startTime) / 1000),
+            referrer: typeof document !== "undefined" ? document.referrer : null,
+            shared: false,
+          }),
+        }).catch(() => {});
+      } catch {}
       return;
     }
-    setSubmitting(true);
-    try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email.trim(),
-          source: "quiz",
-          _t: mountTime,
-          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok && data.message) {
-        setEmailError(data.message);
-        setSubmitting(false);
-        return;
-      }
-    } catch {
-      // still show results even if subscribe fails
-    }
-    setSubmitting(false);
-    setPhase("result");
-  };
+    setTransitioning(true);
+    setTimeout(() => {
+      setCurrentQ((q) => q + 1);
+      setSelectedRegion(null);
+      setShowResult(false);
+      setTransitioning(false);
+    }, 300);
+  }, [currentQ]);
 
-  const skipEmail = () => setPhase("result");
-
-  const getShareText = () => {
-    if (totalScore <= 25) {
-      return "I'm living in an echo chamber. 🫣 How healthy is YOUR news diet? albis.news/quiz";
-    } else if (totalScore <= 50) {
-      return `My news diet needs work. Only scored ${totalScore}/100. Think you'd do better? albis.news/quiz`;
-    } else if (totalScore <= 75) {
-      return `Scored ${totalScore}/100 on my information diet — not bad but room to grow. Can you beat me? albis.news/quiz`;
-    }
-    return `Scored ${totalScore}/100 — my news diet is healthier than most. 💪 How's yours? albis.news/quiz`;
-  };
-
-  const shareText = getShareText();
-
-  const restart = () => {
-    setAnswers([]);
-    setPhase("quiz");
-    setEmail("");
-    setEmailError("");
-  };
-
-  // Save quiz results when shown
+  // Generate share card on result phase
   useEffect(() => {
-    if (phase === "result") {
-      const bracket = getBracket(totalScore);
-      fetch("/api/quiz-results", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          score: totalScore,
-          bracket: bracket.name,
-          answers,
-          email: email || null,
-        }),
-      }).catch(() => {
-        // Fail silently if endpoint doesn't exist yet
-      });
+    if (phase !== "result" || !canvasRef.current) return;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const w = 1200;
+    const h = 630;
+    canvas.width = w;
+    canvas.height = h;
+
+    // Background
+    ctx.fillStyle = "#0f0f0f";
+    ctx.fillRect(0, 0, w, h);
+
+    // Accent bar at top
+    const grad = ctx.createLinearGradient(0, 0, w, 0);
+    grad.addColorStop(0, "#c8922a");
+    grad.addColorStop(1, "#e6b35a");
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, 6);
+
+    // Score circle
+    const cx = w / 2;
+    const cy = 230;
+    const r = 90;
+
+    // Circle background
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = "rgba(255,255,255,0.1)";
+    ctx.lineWidth = 8;
+    ctx.stroke();
+
+    // Circle progress
+    const finalScore = score;
+    const progress = finalScore / 5;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * progress);
+    ctx.strokeStyle = "#c8922a";
+    ctx.lineWidth = 8;
+    ctx.lineCap = "round";
+    ctx.stroke();
+
+    // Score text
+    ctx.fillStyle = "#f0efec";
+    ctx.font = "bold 72px system-ui, -apple-system, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(`${finalScore}/5`, cx, cy);
+
+    // Title
+    ctx.fillStyle = "#f0efec";
+    ctx.font = "bold 36px system-ui, -apple-system, sans-serif";
+    ctx.fillText("Albis Perspective Check", cx, 380);
+
+    // Subtitle
+    ctx.fillStyle = "rgba(240,239,236,0.6)";
+    ctx.font = "22px system-ui, -apple-system, sans-serif";
+    ctx.fillText(
+      "Can you tell where a headline comes from?",
+      cx,
+      425,
+    );
+
+    // URL
+    ctx.fillStyle = "#c8922a";
+    ctx.font = "bold 20px system-ui, -apple-system, sans-serif";
+    ctx.fillText("albis.news/quiz", cx, 560);
+
+    // Logo text
+    ctx.fillStyle = "rgba(240,239,236,0.3)";
+    ctx.font = "italic 18px Georgia, serif";
+    ctx.fillText("Albis", cx, 595);
+
+    try {
+      setShareImageUrl(canvas.toDataURL("image/png"));
+    } catch {
+      // Canvas tainted or not supported
     }
-  }, [phase, totalScore, answers, email]);
+  }, [phase, score]);
+
+  const shareText = `I scored ${score}/5 on the Albis Perspective Check \u{1F30D} Can you tell where a headline comes from? albis.news/quiz`;
+
+  const handleCopyLink = () => {
+    navigator.clipboard?.writeText("https://www.albis.news/quiz");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleDownloadImage = () => {
+    if (!shareImageUrl) return;
+    const a = document.createElement("a");
+    a.href = shareImageUrl;
+    a.download = "albis-perspective-check.png";
+    a.click();
+  };
 
   /* ---- Render ---------------------------------------------------- */
 
   return (
-    <main className="mx-auto max-w-2xl px-6 py-12 sm:py-20">
-      {/* Progress bar */}
-      {phase === "quiz" && (
-        <div className="mb-10">
-          <div className="mb-2 flex items-center justify-between text-xs tracking-wide text-[#0f0f0f]/50 dark:text-[#f0efec]/40">
-            <span>Question {currentQ + 1} of {questions.length}</span>
-            <span>{Math.round((currentQ / questions.length) * 100)}%</span>
+    <main className="mx-auto max-w-2xl px-6 py-12 sm:py-20 pb-28 md:pb-12">
+      {/* ---- Intro ---- */}
+      {phase === "intro" && (
+        <div className="animate-fade-in-up text-center">
+          {/* Badge */}
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#c8922a]/30 bg-[#c8922a]/5 px-4 py-1.5 text-xs font-medium tracking-wide text-[#c8922a]">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#c8922a] animate-pulse-dot" />
+            Interactive Quiz
           </div>
-          <div className="h-1 w-full overflow-hidden rounded-full bg-black/[0.06] dark:bg-white/[0.06]">
-            <div
-              className="h-full rounded-full bg-[#0f0f0f] transition-all duration-500 ease-out dark:bg-[#f0efec]"
-              style={{ width: `${(currentQ / questions.length) * 100}%` }}
-            />
+
+          <h1 className="mb-4 font-[family-name:var(--font-playfair)] text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+            Perspective Check
+          </h1>
+
+          <p className="mx-auto mb-3 max-w-lg font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-[#0f0f0f]/70 dark:text-[#f0efec]/60">
+            The same news story reads completely differently depending on where
+            you are in the world. Can you tell where a headline comes from?
+          </p>
+
+          <p className="mx-auto mb-10 max-w-md text-sm text-[#0f0f0f]/50 dark:text-[#f0efec]/40">
+            5 real headlines. 7 regions. Test your media awareness.
+          </p>
+
+          {/* Region preview */}
+          <div className="mb-10 flex flex-wrap justify-center gap-2">
+            {REGIONS.map((r) => (
+              <span
+                key={r}
+                className="rounded-full border border-black/[0.07] bg-white/50 px-3 py-1 text-xs font-medium text-[#0f0f0f]/60 dark:border-white/[0.07] dark:bg-white/[0.03] dark:text-[#f0efec]/50"
+              >
+                {REGION_EMOJI[r]} {r}
+              </span>
+            ))}
           </div>
+
+          <button
+            onClick={startQuiz}
+            className="group relative inline-flex items-center gap-2 rounded-xl bg-[#0f0f0f] px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:bg-[#1a1a1a] hover:shadow-xl active:scale-[0.98] dark:bg-[#f0efec] dark:text-[#0f0f0f] dark:hover:bg-[#e5e4e0]"
+          >
+            Start the quiz
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="transition-transform group-hover:translate-x-0.5"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <p className="mt-6 text-xs text-[#0f0f0f]/35 dark:text-[#f0efec]/25">
+            Takes about 2 minutes
+          </p>
         </div>
       )}
 
       {/* ---- Quiz phase ---- */}
-      {phase === "quiz" && (
-        <div key={currentQ} className="animate-fade-in">
-          <h2 className="mb-8 font-[family-name:var(--font-source-serif)] text-2xl font-medium leading-snug sm:text-3xl">
-            {questions[currentQ].q}
-          </h2>
-          <div className="grid gap-3">
-            {questions[currentQ].a.map((label, idx) => (
-              <button
-                key={idx}
-                onClick={() => pickAnswer(idx)}
-                className="group w-full rounded-xl border border-black/[0.08] bg-white px-6 py-4 text-left text-base font-medium transition-all hover:border-black/20 hover:shadow-sm active:scale-[0.98] dark:border-white/[0.08] dark:bg-white/[0.03] dark:hover:border-white/20 sm:text-lg"
-              >
-                <span className="mr-3 inline-block w-6 text-center text-sm text-[#0f0f0f]/30 dark:text-[#f0efec]/30">
-                  {String.fromCharCode(65 + idx)}
-                </span>
-                {label}
-              </button>
-            ))}
+      {phase === "quiz" && questions.length > 0 && (
+        <div
+          className={`transition-opacity duration-300 ${transitioning ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"}`}
+        >
+          {/* Progress */}
+          <div className="mb-8">
+            <div className="mb-2 flex items-center justify-between text-xs tracking-wide text-[#0f0f0f]/50 dark:text-[#f0efec]/40">
+              <span>
+                Question {currentQ + 1} of 5
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="font-medium text-[#c8922a]">{score}</span>
+                <span>correct</span>
+              </span>
+            </div>
+            <div className="h-1 w-full overflow-hidden rounded-full bg-black/[0.06] dark:bg-white/[0.06]">
+              <div
+                className="h-full rounded-full bg-[#c8922a] transition-all duration-500 ease-out"
+                style={{ width: `${((currentQ + 1) / 5) * 100}%` }}
+              />
+            </div>
           </div>
-        </div>
-      )}
 
-      {/* ---- Email phase ---- */}
-      {phase === "email" && (
-        <div className="animate-fade-in text-center">
-          <h2 className="mb-3 font-[family-name:var(--font-source-serif)] text-2xl font-medium sm:text-3xl">
-            Your score is ready
-          </h2>
-          <p className="mb-8 text-[#0f0f0f]/60 dark:text-[#f0efec]/50">
-            Enter your email to get your detailed results and personalised tips.
-          </p>
-          <form onSubmit={submitEmail} className="mx-auto max-w-sm">
-            {/* honeypot */}
-            <input
-              type="text"
-              name="website"
-              className="absolute -left-[9999px] opacity-0"
-              tabIndex={-1}
-              autoComplete="off"
-            />
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              className="w-full rounded-xl border border-black/[0.1] bg-white px-5 py-3.5 text-base outline-none transition focus:border-black/30 dark:border-white/[0.1] dark:bg-white/[0.04] dark:focus:border-white/30"
-            />
-            {emailError && (
-              <p className="mt-2 text-sm text-red-600 dark:text-red-400">
-                {emailError}
-              </p>
-            )}
-            <button
-              type="submit"
-              disabled={submitting}
-              className="mt-4 w-full rounded-xl bg-[#0f0f0f] px-6 py-3.5 text-base font-medium text-white transition hover:bg-[#0f0f0f]/85 disabled:opacity-50 dark:bg-[#f0efec] dark:text-[#0f0f0f] dark:hover:bg-[#f0efec]/85"
-            >
-              {submitting ? "Submitting..." : "See my results"}
-            </button>
-          </form>
-          <button
-            onClick={skipEmail}
-            className="mt-4 text-sm text-[#0f0f0f]/40 underline-offset-2 hover:underline dark:text-[#f0efec]/30"
-          >
-            Skip, just show my score
-          </button>
+          {/* Headline card */}
+          <div className="mb-8 rounded-2xl border border-black/[0.07] bg-white/60 p-6 shadow-sm dark:border-white/[0.06] dark:bg-white/[0.02] sm:p-8">
+            <p className="mb-3 text-xs font-medium uppercase tracking-widest text-[#0f0f0f]/40 dark:text-[#f0efec]/30">
+              Which region wrote this headline?
+            </p>
+            <h2 className="font-[family-name:var(--font-playfair)] text-xl font-semibold leading-snug sm:text-2xl md:text-[1.65rem]">
+              &ldquo;{questions[currentQ].headline}&rdquo;
+            </h2>
+          </div>
+
+          {/* Region buttons */}
+          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:gap-3">
+            {REGIONS.map((region) => {
+              const isSelected = selectedRegion === region;
+              const isCorrect = region === questions[currentQ].region;
+              const isRevealed = showResult;
+
+              let btnClass =
+                "relative w-full rounded-xl border px-4 py-3.5 text-left text-sm font-medium transition-all sm:text-base ";
+
+              if (!isRevealed) {
+                btnClass +=
+                  "border-black/[0.08] bg-white hover:border-black/20 hover:shadow-sm active:scale-[0.97] dark:border-white/[0.08] dark:bg-white/[0.03] dark:hover:border-white/20 cursor-pointer";
+              } else if (isCorrect) {
+                btnClass +=
+                  "border-emerald-500/40 bg-emerald-50 text-emerald-800 dark:border-emerald-400/30 dark:bg-emerald-500/10 dark:text-emerald-300";
+              } else if (isSelected && !isCorrect) {
+                btnClass +=
+                  "border-red-400/40 bg-red-50 text-red-700 dark:border-red-400/30 dark:bg-red-500/10 dark:text-red-300";
+              } else {
+                btnClass +=
+                  "border-black/[0.05] bg-white/50 opacity-50 dark:border-white/[0.04] dark:bg-white/[0.01]";
+              }
+
+              return (
+                <button
+                  key={region}
+                  onClick={() => handleRegionClick(region)}
+                  disabled={!!selectedRegion}
+                  className={btnClass}
+                >
+                  <span className="mr-1.5">{REGION_EMOJI[region]}</span>
+                  {region}
+                  {isRevealed && isCorrect && (
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                    </span>
+                  )}
+                  {isRevealed && isSelected && !isCorrect && (
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-red-400">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                      </svg>
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Reveal explanation */}
+          {showResult && (
+            <div className="mt-6 animate-fade-in-up">
+              <div
+                className={`rounded-xl border p-5 ${
+                  selectedRegion === questions[currentQ].region
+                    ? "border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-400/10 dark:bg-emerald-500/5"
+                    : "border-red-400/20 bg-red-50/50 dark:border-red-400/10 dark:bg-red-500/5"
+                }`}
+              >
+                <p className="mb-1 text-sm font-semibold">
+                  {selectedRegion === questions[currentQ].region
+                    ? "Correct!"
+                    : `Not quite \u2014 this was ${questions[currentQ].region}`}
+                </p>
+                <p className="text-sm leading-relaxed text-[#0f0f0f]/70 dark:text-[#f0efec]/60">
+                  {questions[currentQ].why}
+                </p>
+              </div>
+
+              <button
+                onClick={nextQuestion}
+                className="mt-5 w-full rounded-xl bg-[#0f0f0f] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#1a1a1a] active:scale-[0.98] dark:bg-[#f0efec] dark:text-[#0f0f0f] dark:hover:bg-[#e5e4e0]"
+              >
+                {currentQ >= 4 ? "See my results" : "Next headline"}
+              </button>
+            </div>
+          )}
         </div>
       )}
 
       {/* ---- Result phase ---- */}
       {phase === "result" && (
-        <div className="animate-fade-in text-center">
-          {/* Score card with circular progress */}
+        <div className="animate-fade-in-up text-center">
+          {/* Score card */}
           <div className="mx-auto mb-8 max-w-md rounded-2xl border border-black/[0.08] bg-white p-8 shadow-sm dark:border-white/[0.08] dark:bg-white/[0.03]">
-            <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[#0f0f0f]/40 dark:text-[#f0efec]/35">
-              Your Information Diet Score
+            <p className="mb-4 text-xs font-medium uppercase tracking-widest text-[#0f0f0f]/40 dark:text-[#f0efec]/35">
+              Your Perspective Score
             </p>
-            
-            {/* Circular score indicator */}
-            <div className="relative mx-auto mb-6 h-32 w-32">
+
+            {/* Circular score */}
+            <div className="relative mx-auto mb-6 h-36 w-36">
               <svg className="h-full w-full -rotate-90 transform">
-                {/* Background circle */}
                 <circle
-                  cx="64"
-                  cy="64"
-                  r="56"
+                  cx="72"
+                  cy="72"
+                  r="62"
                   stroke="currentColor"
-                  strokeWidth="8"
+                  strokeWidth="7"
                   fill="none"
-                  className="text-black/[0.08] dark:text-white/[0.08]"
+                  className="text-black/[0.06] dark:text-white/[0.06]"
                 />
-                {/* Progress circle */}
                 <circle
-                  cx="64"
-                  cy="64"
-                  r="56"
+                  cx="72"
+                  cy="72"
+                  r="62"
                   stroke="currentColor"
-                  strokeWidth="8"
+                  strokeWidth="7"
                   fill="none"
-                  strokeDasharray={`${(totalScore / 100) * 351.86} 351.86`}
-                  className="text-[#C9A35F] transition-all duration-1000 ease-out"
+                  strokeDasharray={`${(score / 5) * 389.56} 389.56`}
+                  className="text-[#c8922a] transition-all duration-1000 ease-out"
                   strokeLinecap="round"
                 />
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
-                <p className="font-[family-name:var(--font-playfair)] text-4xl font-bold tabular-nums">
-                  {totalScore}
+                <p className="font-[family-name:var(--font-playfair)] text-5xl font-bold tabular-nums">
+                  {score}
+                  <span className="text-2xl text-[#0f0f0f]/30 dark:text-[#f0efec]/25">
+                    /5
+                  </span>
                 </p>
               </div>
             </div>
 
-            <p className="mb-3 font-[family-name:var(--font-source-serif)] text-2xl font-semibold italic">
-              {getBracket(totalScore).name}
+            <p className="mb-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold italic">
+              {getScoreMessage(score).title}
             </p>
-            <p className="text-base leading-relaxed text-[#0f0f0f]/70 dark:text-[#f0efec]/60">
-              {getBracket(totalScore).desc}
+            <p className="text-sm leading-relaxed text-[#0f0f0f]/65 dark:text-[#f0efec]/55">
+              {getScoreMessage(score).desc}
             </p>
           </div>
 
-          {/* Share buttons */}
-          <div className="mb-10">
-            <p className="mb-4 text-sm font-medium text-[#0f0f0f]/50 dark:text-[#f0efec]/40">
-              Share your result
+          {/* Answer recap */}
+          <div className="mx-auto mb-8 max-w-md space-y-2 text-left">
+            <p className="mb-3 text-xs font-medium uppercase tracking-widest text-[#0f0f0f]/40 dark:text-[#f0efec]/35">
+              Your answers
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
+            {answers.map((a, i) => (
+              <div
+                key={i}
+                className={`flex items-start gap-3 rounded-xl border p-3.5 text-sm ${
+                  a.isCorrect
+                    ? "border-emerald-500/20 bg-emerald-50/30 dark:border-emerald-400/10 dark:bg-emerald-500/5"
+                    : "border-red-400/20 bg-red-50/30 dark:border-red-400/10 dark:bg-red-500/5"
+                }`}
+                style={{ animationDelay: `${i * 80}ms` }}
+              >
+                <span className="mt-0.5 flex-shrink-0 text-base">
+                  {a.isCorrect ? (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                  ) : (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                  )}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium leading-snug line-clamp-2">
+                    &ldquo;{questions[i].headline}&rdquo;
+                  </p>
+                  <p className="mt-1 text-xs text-[#0f0f0f]/50 dark:text-[#f0efec]/40">
+                    {a.isCorrect
+                      ? `${REGION_EMOJI[a.correct]} ${a.correct}`
+                      : `You said ${REGION_EMOJI[a.selected]} ${a.selected} \u2014 it was ${REGION_EMOJI[a.correct]} ${a.correct}`}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Share section */}
+          <div className="mb-8">
+            <p className="mb-4 text-xs font-medium uppercase tracking-widest text-[#0f0f0f]/40 dark:text-[#f0efec]/35">
+              Challenge your friends
+            </p>
+            <div className="flex flex-wrap justify-center gap-2.5">
+              {/* Share on X */}
               <a
                 href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-xl border border-[#C9A35F]/30 bg-[#C9A35F]/5 px-5 py-2.5 text-sm font-medium text-[#C9A35F] transition hover:border-[#C9A35F]/50 hover:bg-[#C9A35F]/10 dark:border-[#C9A35F]/40 dark:bg-[#C9A35F]/10 dark:hover:border-[#C9A35F]/60"
+                onClick={() => { fetch("/api/quiz/submit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ score, total: 5, shared: true, share_platform: "x" }) }).catch(() => {}); }}
+                className="inline-flex items-center gap-2 rounded-xl border border-[#c8922a]/30 bg-[#c8922a]/5 px-5 py-2.5 text-sm font-medium text-[#c8922a] transition hover:border-[#c8922a]/50 hover:bg-[#c8922a]/10 dark:border-[#c8922a]/40 dark:bg-[#c8922a]/10"
               >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
                 Share on X
               </a>
-              <a
-                href={`https://wa.me/?text=${encodeURIComponent(shareText)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-xl border border-[#C9A35F]/30 bg-[#C9A35F]/5 px-5 py-2.5 text-sm font-medium text-[#C9A35F] transition hover:border-[#C9A35F]/50 hover:bg-[#C9A35F]/10 dark:border-[#C9A35F]/40 dark:bg-[#C9A35F]/10 dark:hover:border-[#C9A35F]/60"
-              >
-                Share on WhatsApp
-              </a>
+
+              {/* Copy link */}
               <button
-                onClick={() => {
-                  navigator.clipboard?.writeText("https://www.albis.news/quiz");
-                  // Could add a toast notification here
-                }}
-                className="rounded-xl border border-[#C9A35F]/30 bg-[#C9A35F]/5 px-5 py-2.5 text-sm font-medium text-[#C9A35F] transition hover:border-[#C9A35F]/50 hover:bg-[#C9A35F]/10 dark:border-[#C9A35F]/40 dark:bg-[#C9A35F]/10 dark:hover:border-[#C9A35F]/60"
+                onClick={handleCopyLink}
+                className="inline-flex items-center gap-2 rounded-xl border border-[#c8922a]/30 bg-[#c8922a]/5 px-5 py-2.5 text-sm font-medium text-[#c8922a] transition hover:border-[#c8922a]/50 hover:bg-[#c8922a]/10 dark:border-[#c8922a]/40 dark:bg-[#c8922a]/10"
               >
-                Copy link
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+                {copied ? "Copied!" : "Copy link"}
               </button>
+
+              {/* Download image */}
+              {shareImageUrl && (
+                <button
+                  onClick={handleDownloadImage}
+                  className="inline-flex items-center gap-2 rounded-xl border border-[#c8922a]/30 bg-[#c8922a]/5 px-5 py-2.5 text-sm font-medium text-[#c8922a] transition hover:border-[#c8922a]/50 hover:bg-[#c8922a]/10 dark:border-[#c8922a]/40 dark:bg-[#c8922a]/10"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Save image
+                </button>
+              )}
             </div>
           </div>
 
-          {/* Want to improve? */}
-          {totalScore < 76 && (
-            <div className="mx-auto mb-8 max-w-md rounded-xl border border-[#C9A35F]/20 bg-gradient-to-br from-[#C9A35F]/5 to-[#C9A35F]/10 p-6 dark:from-[#C9A35F]/10 dark:to-[#C9A35F]/15">
-              <h3 className="mb-2 font-[family-name:var(--font-source-serif)] text-lg font-semibold">
-                Want to improve your score?
-              </h3>
-              <p className="mb-4 text-sm leading-relaxed text-[#0f0f0f]/70 dark:text-[#f0efec]/60">
-                Get the daily briefing and watch your information diet transform. Every morning, see how the world's media covers the same stories differently.
-              </p>
-              <Link
-                href="/briefing"
-                className="inline-block rounded-xl bg-[#C9A35F] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#C9A35F]/90 dark:text-[#0f0f0f]"
-              >
-                Try the briefing
-              </Link>
+          {/* Share card preview */}
+          {shareImageUrl && (
+            <div className="mx-auto mb-8 max-w-md overflow-hidden rounded-xl border border-black/[0.08] shadow-sm dark:border-white/[0.08]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={shareImageUrl}
+                alt="Your Perspective Check result"
+                className="w-full"
+              />
             </div>
           )}
 
-          {/* High score CTA */}
-          {totalScore >= 76 && (
-            <div className="mx-auto mb-8 max-w-md rounded-xl border border-black/[0.08] bg-[#0f0f0f]/[0.02] p-6 dark:border-white/[0.08] dark:bg-white/[0.02]">
-              <h3 className="mb-2 font-[family-name:var(--font-source-serif)] text-lg font-semibold">
-                You're ahead of the curve
-              </h3>
-              <p className="mb-4 text-sm leading-relaxed text-[#0f0f0f]/70 dark:text-[#f0efec]/60">
-                Keep that edge sharp. The Albis briefing delivers the global perspectives you're already seeking — in one clean email every morning.
-              </p>
-              <Link
-                href="/briefing"
-                className="inline-block rounded-xl bg-[#0f0f0f] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#0f0f0f]/85 dark:bg-[#f0efec] dark:text-[#0f0f0f] dark:hover:bg-[#f0efec]/85"
-              >
-                Try the briefing
-              </Link>
-            </div>
-          )}
+          {/* CTA */}
+          <div className="mx-auto mb-6 max-w-md rounded-xl border border-[#c8922a]/20 bg-gradient-to-br from-[#c8922a]/5 to-[#c8922a]/10 p-6 dark:from-[#c8922a]/10 dark:to-[#c8922a]/15">
+            <h3 className="mb-2 font-[family-name:var(--font-source-serif)] text-lg font-semibold">
+              See how framing shapes the news every day
+            </h3>
+            <p className="mb-4 text-sm leading-relaxed text-[#0f0f0f]/65 dark:text-[#f0efec]/55">
+              Albis shows you how 7 world regions cover the same story differently. No spin, no algorithm — just the full picture.
+            </p>
+            <a
+              href="/briefing"
+              className="inline-block rounded-xl bg-[#c8922a] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#b8842a] dark:text-[#0f0f0f]"
+            >
+              Try the daily briefing
+            </a>
+          </div>
 
           <button
-            onClick={restart}
-            className="mt-6 text-sm text-[#0f0f0f]/40 underline-offset-2 hover:underline dark:text-[#f0efec]/30"
+            onClick={startQuiz}
+            className="mt-2 text-sm text-[#0f0f0f]/40 underline-offset-2 hover:underline dark:text-[#f0efec]/30"
           >
-            Take the quiz again
+            Play again
           </button>
         </div>
       )}
 
-      <style jsx global>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(8px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-          animation: fadeIn 0.4s ease-out;
-        }
-      `}</style>
+      {/* Hidden canvas for share card generation */}
+      <canvas
+        ref={canvasRef}
+        className="fixed -left-[9999px] -top-[9999px]"
+        aria-hidden="true"
+      />
     </main>
   );
 }

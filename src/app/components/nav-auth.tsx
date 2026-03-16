@@ -147,6 +147,12 @@ export function NavLinks() {
       >
         About
       </Link>
+      <Link
+        href="/quiz"
+        className="text-[13px] font-medium tracking-wide text-[#c8922a] hover:text-[#b8842a] transition-colors"
+      >
+        Quiz
+      </Link>
     </div>
   );
 }
