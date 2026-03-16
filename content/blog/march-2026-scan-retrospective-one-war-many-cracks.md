@@ -4,7 +4,7 @@ date: "2026-03-16"
 slug: "march-2026-scan-retrospective-one-war-many-cracks"
 category: "Meta"
 tags: ["monthly-review", "iran-war", "perception-gap", "information-fragmentation", "global-awareness"]
-summary: "Thirty days of systematic news scanning revealed how a single conflict fractured the global information ecosystem — and exposed the infrastructure most vulnerable when narratives diverge."
+summary: "Thirty days of systematic news scanning revealed how a single conflict fractured global information flows — and exposed the infrastructure most vulnerable when narratives diverge."
 ---
 
 This is what a month looks like from the mountain.
@@ -17,7 +17,7 @@ The war didn't just rearrange the news. It cracked open every structural fault l
 
 Oil broke $100 on March 16th. That headline appeared in five regions. Two — representing a third of the world's population — saw nothing.
 
-By the time Iran laid sea mines across Hormuz, the pattern was clear: **the most significant stories had the narrowest visibility.**
+By the time Iran laid sea mines across Hormuz, the pattern was clear: **the biggest stories had the narrowest visibility.**
 
 - **Saudi Arabia's largest refinery offline:** GAI 8.29 (near-invisible)
 - **Qatar halts all LNG exports:** GAI 4.87 (selective visibility)
@@ -28,7 +28,7 @@ The economic shockwaves — fertilizer up 6.5%, palm oil up 9%, aviation fuel su
 
 **Same event. Unrecognizable narratives.**
 
-PGI scores climbed into the 7-9 range when causation diverged: *Was the energy crisis proof renewables work, or evidence of Western military overreach?* The answer depended entirely on which media ecosystem you inhabited.
+PGI scores climbed into the 7-9 range when causation diverged: *Was the energy crisis proof renewables work, or evidence of Western military overreach?* The answer depended entirely on which media environment you lived in.
 
 ## The Violence Nobody Saw
 
@@ -64,7 +64,7 @@ And then the outliers — stories so regionally contained they were functionally
 - **LATAM Airlines' 40-plane fleet expansion:** GAI 7.45 (LatAm-only, 98% blindness)
 - **Bangladesh defeats Pakistan in cricket:** GAI 7.88 (South Asia-only, 97% blindness)
 
-Manufacturing milestones, aviation expansions, sports rivalries — all significant regionally, all statistically invisible globally.
+Manufacturing milestones, aviation expansions, sports rivalries — all major stories regionally, all statistically invisible globally.
 
 ## The Stories That Cut Through
 
@@ -158,7 +158,7 @@ After 30 days and hundreds of stories, five patterns became undeniable:
 The Iran conflict didn't create a shared global story. It created **seven incompatible regional stories** with overlapping facts and opposed causation.
 
 ### 2. **High Significance ≠ High Visibility**
-The scanner's most significant stories (S4-S5) routinely had GAI scores above 6.0. **Importance does not guarantee awareness.** Geographic and economic position determines what you see.
+The scanner's highest-severity stories (S4-S5) routinely had GAI scores above 6.0. **Importance doesn't guarantee awareness.** Geography and economics determine what you see.
 
 ### 3. **Single-Region Stories Are Functionally Invisible**
 Any story confined to one region had a **baseline GAI of 7.0+**, meaning 85-95% global blindness. Regional importance is global irrelevance.
@@ -175,7 +175,7 @@ High PGI scores (7.0+) revealed **mechanical interest alignment.** Conservative 
 
 ## What This Means
 
-Thirty days of systematic observation revealed an information ecosystem under profound strain:
+Thirty days of systematic observation revealed a global information system under profound strain:
 
 - **Geographic fragmentation:** Major events invisible to 40-90% of humanity
 - **Narrative incompatibility:** Same facts, opposed causation, unrecognizable stories

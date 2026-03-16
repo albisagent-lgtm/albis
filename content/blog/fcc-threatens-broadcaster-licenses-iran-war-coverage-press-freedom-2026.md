@@ -33,58 +33,58 @@ On Saturday, FCC Chairman Brendan Carr shared a screenshot of President Trump at
 
 "Broadcasters must operate in the public interest," he wrote on X, "and they will lose their licenses if they do not."
 
-This wasn't offhand. America's top telecom regulator threatened broadcasting licenses over wartime coverage the president dislikes. Depending on where you read this story, it means very different things.
+This wasn't offhand. America's top telecom regulator threatened broadcasting licences over wartime coverage the president dislikes. Where you read this story determines what it means.
 
 ## What Actually Happened
 
-The sequence matters. On Friday, the Wall Street Journal [reported](https://www.wsj.com/livecoverage/us-israel-iran-war-news-2026/) that five US Air Force refuelling planes had been hit by Iranian missiles at a base in Saudi Arabia. Trump called the headline "intentionally misleading" and accused the media of wanting America to lose the war.
+The sequence matters. On Friday, the Wall Street Journal [reported](https://www.wsj.com/livecoverage/us-israel-iran-war-news-2026/) that five US Air Force refuelling planes had been hit by Iranian missiles at a base in Saudi Arabia. Trump called the headline "intentionally misleading" and accused the media of wanting America to lose.
 
-Hours later, Defence Secretary Pete Hegseth attacked CNN's Hormuz reporting at a Pentagon briefing, calling it "fundamentally unserious." He added: "The sooner David Ellison takes over that network, the better" — referencing the Paramount Skydance CEO set to acquire CNN's parent company. At the same briefing, a journalist was turned away alongside print photographers because previous photos of Hegseth had been deemed "unflattering."
+Hours later, Defence Secretary Pete Hegseth attacked CNN's Hormuz reporting at a Pentagon briefing. "Fundamentally unserious." He added: "The sooner David Ellison takes over that network, the better" — referencing the Paramount Skydance CEO set to buy CNN's parent company. At the same briefing, a journalist and all print photographers were turned away because previous photos of Hegseth had been deemed "unflattering."
 
-Then Carr posted. Not a policy announcement. Not a formal FCC proceeding. A social media threat, timed to amplify the president's grievance.
+Then Carr posted. Not a policy announcement. Not a formal proceeding. A social media threat, timed to amplify the president's grievance.
 
 ## The Legal Reality
 
-Here's what makes Carr's threat unusual: his own agency's rules don't support it.
+Carr's own agency doesn't support the threat.
 
-The FCC's own website states plainly that it "is barred by law from trying to prevent the broadcast of any point of view." Section 326 of the Communications Act prohibits the Commission from censoring broadcast material or interfering with freedom of expression. A September 2025 analysis by Yale Journal on Regulation concluded that "the Communications Act does not grant the FCC the power to ban controversial speech," and that Congress specifically amended the Act to limit the grounds for license cancellation.
+The FCC's website states it "is barred by law from trying to prevent the broadcast of any point of view." Section 326 of the Communications Act bars the Commission from censoring broadcast material. Yale Journal on Regulation concluded in September 2025 that "the Communications Act does not grant the FCC the power to ban controversial speech," and that Congress specifically limited grounds for licence cancellation.
 
-There's another wrinkle. The FCC regulates individual broadcast station licenses — local TV and radio affiliates — not national networks or print outlets. The New York Times and Wall Street Journal, the specific publications Trump attacked, aren't even under FCC jurisdiction. They're print and digital publications. Carr's threat, legally speaking, doesn't apply to the outlets that triggered it.
+There's another wrinkle. The FCC regulates individual broadcast station licences — local TV and radio affiliates — not national networks or print outlets. The Times and the Journal, the publications Trump attacked, aren't under FCC jurisdiction. They're print and digital. Carr's threat doesn't legally apply to the outlets that triggered it.
 
-Democratic lawmakers and several Republicans have criticized this pressure campaign. But legal impotence hasn't stopped the threat from having its intended effect: creating an atmosphere where editors second-guess coverage decisions during wartime.
+Lawmakers from both parties have criticised the pressure campaign. But legal impotence hasn't stopped the intended effect: editors second-guessing wartime coverage decisions.
 
 ## How Different Outlets Cover the Same Threat
 
 This is where the story gets interesting from a [media framing](/blog/what-is-media-framing-vs-bias) perspective.
 
-American outlets reported the threat with varying degrees of alarm. NBC News ran a straightforward account, noting that Carr "for the first time extended his own criticisms to wartime coverage." CNN framed it as a threat that "rings hollow" given Carr's limited authority. Fox News focused on Hegseth's criticism of CNN, treating the press freedom angle as secondary.
+American outlets reported it with varying alarm levels. NBC ran a straightforward account, noting Carr "for the first time extended his own criticisms to wartime coverage." CNN called the threat hollow given Carr's limited authority. Fox focused on Hegseth's criticism of CNN, treating press freedom as secondary.
 
-Reuters, as an international wire service, led with the factual sequence but noted the broader pattern: Carr "renewed his criticism and threats against broadcasters over their content." The framing is neutral but the word "renewed" signals this is an escalation, not an isolated incident.
+Reuters led with the factual sequence but flagged the pattern: Carr "renewed his criticism and threats against broadcasters over their content." Neutral framing, but "renewed" signals escalation — not an isolated incident.
 
-The Guardian's coverage was more pointed, connecting Carr's threat to Hegseth's attacks and Trump's broader pattern of calling unfavorable coverage "fake news." European outlets generally treated the story as part of an alarming trend in American democratic backsliding.
+The Guardian connected Carr's threat to Hegseth's attacks and Trump's pattern of calling unfavourable coverage "fake news." European outlets treated it as part of a broader trend in American democratic erosion.
 
-The Freedom of the Press Foundation went furthest, arguing that "an unprecedented censorship infrastructure" is forming around Iran war coverage and calling for journalists to tell audiences "not only what they know but what they were prevented from finding out."
+The Freedom of the Press Foundation went furthest, arguing that a new censorship apparatus is forming around Iran war coverage and calling for journalists to tell audiences "not only what they know but what they were prevented from finding out."
 
-Each of these framings is defensible. Each emphasizes different facts. And each shapes what readers believe about the health of American press freedom during wartime.
+Each framing is defensible. Each emphasises different facts. Each shapes what readers believe about American press freedom during wartime.
 
 ## The Historical Pattern
 
-Governments have always tried to control wartime narratives. During World War II, the U.S. Office of Censorship issued voluntary codes for journalists, and reporters who embedded with troops accepted advance review of their dispatches. During Vietnam, the gap between official optimism and battlefield reality created a "credibility gap" that permanently damaged public trust in government communication.
+Governments have always tried to control wartime narratives. In World War II, the US Office of Censorship issued voluntary codes. Reporters who embedded with troops accepted advance review. In Vietnam, the gap between official optimism and battlefield reality created a "credibility gap" that permanently damaged trust.
 
-What's different now isn't the impulse — it's the mechanism. In past conflicts, censorship operated through formal channels: military review boards, classification of documents, restrictions on embedded journalists. The current approach uses regulatory threats, social media amplification, and ownership pressure. Hegseth didn't ask CNN to submit stories for review. He suggested the network would be better off under a Trump-allied owner.
+What's different isn't the impulse — it's the mechanism. Past censorship ran through formal channels: military review boards, classified documents, restrictions on embeds. The current approach uses regulatory threats, social media amplification, and ownership pressure. Hegseth didn't ask CNN to submit stories for review. He suggested the network would be better under a Trump-allied owner.
 
-This is what press freedom scholars call a "chilling effect" — the idea that you don't need to actually revoke a license to change coverage. You just need editors to believe you might. When the head of the FCC publicly warns that licenses are at stake, assignment desks take notice, even if the legal authority doesn't exist.
+Press freedom scholars call this a "chilling effect." You don't need to revoke a licence to change coverage. You just need editors to believe you might. When the FCC chair warns licences are at stake, assignment desks notice — even if the legal authority doesn't exist.
 
 ## What the Albis Scanner Shows
 
-Across our global scan, coverage of this story splits along familiar lines. American conservative outlets treated Carr's statement as reasonable enforcement of public interest obligations. American liberal outlets called it an attack on the First Amendment. European outlets treated it as a press freedom crisis. Middle Eastern outlets — many of which face far harsher state media controls — noted the irony of the U.S. threatening its own broadcasters while claiming to fight for freedom abroad.
+Our global scan shows the usual split. American conservative outlets treated Carr's statement as reasonable public interest enforcement. American liberal outlets called it a First Amendment attack. European outlets saw a press freedom crisis. Middle Eastern outlets — many facing far harsher state media controls — noted the irony of the US threatening its own broadcasters while claiming to fight for freedom abroad.
 
-The story that [the world reports differently](/blog/why-different-countries-report-same-story-differently) about American press freedom is itself a story about press freedom. When the U.S. government pressures its media during a war it initiated, the global coverage reveals competing narratives about what kind of country America is becoming.
+The story about [how different countries report differently](/blog/why-different-countries-report-same-story-differently) on American press freedom is itself a press freedom story. When the US government pressures its media during a war it started, global coverage reveals competing narratives about what kind of country America's becoming.
 
 ## What Matters Now
 
-Three weeks into the Iran war, the information environment is fracturing. Official casualty figures are disputed. The Wall Street Journal story about damaged refueling planes — the one that triggered this entire cycle — has not been retracted or corrected. The Pentagon hasn't denied it. Instead, the response was to attack the outlet that published it.
+Three weeks into the Iran war, the information environment is fracturing. Casualty figures are disputed. The Wall Street Journal story about damaged refuelling planes — the one that triggered this cycle — hasn't been retracted. The Pentagon hasn't denied it. The response was to attack the outlet that published it.
 
-That pattern — not disputing facts but attacking the institutions that report them — is the real story here. Whether the FCC can actually revoke licenses is almost beside the point. What matters is whether the threat changes what Americans see and read about a war being fought in their name.
+That pattern — not disputing facts but attacking the institutions that report them — is the real story. Whether the FCC can actually revoke licences is almost beside the point. What matters is whether the threat changes what Americans see about a war fought in their name.
 
-The Communications Act was written to prevent exactly this kind of government pressure on broadcasters. Whether it still can is a question that this war is testing in real time.
+The Communications Act was written to prevent exactly this. Whether it still can is a question this war is testing in real time.
