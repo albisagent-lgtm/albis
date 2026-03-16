@@ -1,134 +1,61 @@
-import { createAdminClient } from "@/lib/supabase/admin";
+import type { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
+export const metadata: Metadata = {
+  title: "Embed the PGI | Albis",
+  description: "Add the live Perception Gap Index to your website. Free, auto-updating, one line of code.",
+};
 
-function getTier(pgi: number) {
-  if (pgi <= 2.0) return { name: "Global Consensus", color: "#22c55e" };
-  if (pgi <= 4.0) return { name: "Different Lenses", color: "#f59e0b" };
-  if (pgi <= 6.0) return { name: "Diverging Narratives", color: "#f97316" };
-  if (pgi <= 8.0) return { name: "Competing Realities", color: "#ef4444" };
-  return { name: "Parallel Universes", color: "#71717a" };
-}
-
-async function getLatestPGI() {
-  try {
-    const supabase = createAdminClient();
-    const { data } = await supabase
-      .from("pgi_daily")
-      .select("date, daily_pgi")
-      .order("date", { ascending: false })
-      .limit(2);
-
-    if (!data || data.length === 0) return null;
-    const latest = { date: data[0].date, pgi: Number(data[0].daily_pgi) };
-    const previous = data.length > 1 ? Number(data[1].daily_pgi) : null;
-    const delta = previous !== null ? latest.pgi - previous : null;
-    return { ...latest, delta };
-  } catch {
-    return null;
-  }
-}
-
-export default async function EmbedPgiPage() {
-  const pgiData = await getLatestPGI();
-
-  if (!pgiData) {
-    return (
-      <div style={{ padding: "20px", fontFamily: "system-ui, sans-serif", color: "#71717a" }}>
-        PGI data unavailable
-      </div>
-    );
-  }
-
-  const tier = getTier(pgiData.pgi);
-  const position = Math.min(Math.max((pgiData.pgi / 10) * 100, 5), 95);
-
-  const formattedDate = new Date(pgiData.date + "T00:00:00").toLocaleDateString("en-NZ", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
+export default function EmbedPGIPage() {
+  const snippet = `<div id="albis-pgi"></div>
+<script>
+fetch("https://www.albis.news/api/embed/pgi")
+  .then(r=>r.json())
+  .then(d=>{
+    document.getElementById("albis-pgi").innerHTML=
+      '<a href="'+d.url+'" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:12px;border:1px solid '+d.color+'33;font-family:system-ui;text-decoration:none;color:inherit">'
+      +'<span style="width:10px;height:10px;border-radius:50%;background:'+d.color+'"></span>'
+      +'<span style="font-size:24px;font-weight:700;color:'+d.color+'">'+d.pgi+'</span>'
+      +'<span style="font-size:12px;opacity:0.6">Perception Gap Index<br>'+d.tier+'</span>'
+      +'</a>';
   });
+</script>`;
 
   return (
-    <>
-      <style>{`
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, -apple-system, sans-serif; background: #fafaf9; }
-        a { text-decoration: none; color: inherit; }
-      `}</style>
-      <a
-          href={`https://www.albis.news/indexes/pgi`}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "block",
-            padding: "20px 24px",
-            borderRadius: "12px",
-            border: "1px solid rgba(0,0,0,0.06)",
-            background: "white",
-            maxWidth: "400px",
-          }}
-        >
-          {/* Header */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
-            <span style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase" as const, color: "#c8922a" }}>
-              Perception Gap Index
-            </span>
-            <span style={{ fontSize: "11px", color: "#a1a1aa" }}>
-              {formattedDate}
-            </span>
-          </div>
+    <main className="mx-auto max-w-3xl px-6 py-16">
+      <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#c8922a]">
+        Free Widget
+      </p>
+      <h1 className="mt-3 font-[family-name:var(--font-playfair)] text-3xl font-bold md:text-4xl">
+        Embed the PGI on your site
+      </h1>
+      <p className="mt-4 text-zinc-500 dark:text-zinc-400">
+        Show today&apos;s Perception Gap Index on your website. Auto-updates 3x daily. One snippet, zero dependencies.
+      </p>
 
-          {/* Score */}
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "8px" }}>
-            <div style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: tier.color }} />
-            <span style={{ fontSize: "36px", fontWeight: 800, color: "#0f0f0f", letterSpacing: "-0.02em", lineHeight: 1 }}>
-              {pgiData.pgi.toFixed(1)}
-            </span>
-            <div>
-              <div style={{ fontSize: "13px", fontWeight: 600, color: tier.color }}>
-                {tier.name}
-              </div>
-              {pgiData.delta !== null && (
-                <div style={{ fontSize: "11px", color: "#a1a1aa" }}>
-                  {pgiData.delta >= 0 ? "▲" : "▼"} {Math.abs(pgiData.delta).toFixed(1)} from yesterday
-                </div>
-              )}
-            </div>
-          </div>
+      <div className="mt-8 rounded-xl border border-black/[0.07] bg-zinc-50 p-6 dark:border-white/[0.06] dark:bg-white/[0.02]">
+        <p className="text-sm font-semibold mb-3">Copy and paste this into your HTML:</p>
+        <pre className="overflow-x-auto rounded-lg bg-zinc-900 p-4 text-sm text-green-400">
+          <code>{snippet}</code>
+        </pre>
+      </div>
 
-          {/* Gauge */}
-          <div style={{
-            position: "relative" as const,
-            height: "6px",
-            borderRadius: "3px",
-            background: "linear-gradient(to right, #86efac, #fcd34d, #fdba74, #fca5a5)",
-            marginBottom: "12px",
-          }}>
-            <div style={{
-              position: "absolute" as const,
-              top: "50%",
-              left: `${position}%`,
-              width: "14px",
-              height: "14px",
-              borderRadius: "50%",
-              backgroundColor: tier.color,
-              border: "2px solid white",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
-              transform: "translate(-50%, -50%)",
-            }} />
-          </div>
+      <div className="mt-8">
+        <h2 className="text-lg font-semibold">API Endpoint</h2>
+        <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+          GET <code className="rounded bg-zinc-100 px-2 py-0.5 dark:bg-white/[0.06]">https://www.albis.news/api/embed/pgi</code>
+        </p>
+        <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+          Returns JSON with today&apos;s PGI score, tier, color, and links. CORS-enabled. Cache: 30 minutes.
+        </p>
+      </div>
 
-          {/* Footer */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <span style={{ fontSize: "10px", color: "#c8922a", fontWeight: 500 }}>
-              Powered by Albis
-            </span>
-            <span style={{ fontSize: "10px", color: "#d4d4d8" }}>
-              albis.news
-            </span>
-          </div>
-        </a>
-    </>
+      <div className="mt-8">
+        <h2 className="text-lg font-semibold">For Researchers</h2>
+        <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+          Need historical data or bulk access? The PGI is open data for academic use.
+          Email <a href="mailto:harry@albis.news" className="text-[#c8922a] hover:underline">harry@albis.news</a> for API access.
+        </p>
+      </div>
+    </main>
   );
 }
