@@ -142,16 +142,16 @@ export function NavLinks() {
         Indexes
       </Link>
       <Link
-        href="/about"
-        className="text-[13px] font-medium tracking-wide text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-      >
-        About
-      </Link>
-      <Link
         href="/quiz"
         className="text-[13px] font-medium tracking-wide text-[#c8922a] hover:text-[#b8842a] transition-colors"
       >
         Quiz
+      </Link>
+      <Link
+        href="/about"
+        className="text-[13px] font-medium tracking-wide text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+      >
+        About
       </Link>
     </div>
   );

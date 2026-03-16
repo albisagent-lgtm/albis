@@ -1,3 +1,158 @@
+import { TOPICS } from "@/lib/topics";
+import { COUNTRIES } from "@/app/perspectives/countries";
+import { getAllPosts } from "@/lib/blog";
+
+interface LinkCandidate {
+  term: string;
+  href: string;
+  // Longer terms get matched first to avoid partial matches
+  termLength: number;
+}
+
+/**
+ * Build a list of terms to auto-link, sorted longest-first.
+ * Only includes topic names (not keywords) and country names to avoid
+ * over-linking on generic words.
+ */
+function buildLinkCandidates(): LinkCandidate[] {
+  const candidates: LinkCandidate[] = [];
+
+  for (const topic of TOPICS) {
+    candidates.push({
+      term: topic.name,
+      href: `/topics/${topic.slug}`,
+      termLength: topic.name.length,
+    });
+  }
+
+  // Only link country names that are 4+ chars to avoid matching "Chad", "Mali" etc. inside words
+  for (const country of COUNTRIES) {
+    if (country.name.length >= 4) {
+      candidates.push({
+        term: country.name,
+        href: `/perspectives/${country.slug}`,
+        termLength: country.name.length,
+      });
+    }
+  }
+
+  // Recent article titles (only long-enough titles to avoid false matches)
+  try {
+    const posts = getAllPosts().slice(0, 50);
+    for (const post of posts) {
+      if (post.title.length >= 20) {
+        candidates.push({
+          term: post.title,
+          href: `/blog/${post.slug}`,
+          termLength: post.title.length,
+        });
+      }
+    }
+  } catch {
+    // getAllPosts may fail during build for non-blog pages; ignore
+  }
+
+  // Sort longest first so we match "South Korea" before "Korea", etc.
+  candidates.sort((a, b) => b.termLength - a.termLength);
+
+  return candidates;
+}
+
+/**
+ * Inject auto-links into HTML text.
+ * Rules:
+ *  - Max 5 links per article
+ *  - Only first occurrence of each term
+ *  - Never duplicate destinations
+ *  - Never link inside <h1>-<h6>, <a>, <pre>, <code> tags
+ *  - Case-insensitive matching but must be a whole word
+ */
+function injectAutoLinks(html: string): string {
+  const candidates = buildLinkCandidates();
+  const usedHrefs = new Set<string>();
+  let linkCount = 0;
+  const MAX_LINKS = 5;
+
+  // Collect all existing hrefs so we don't duplicate
+  const existingHrefs = html.matchAll(/href="([^"]+)"/g);
+  for (const m of existingHrefs) {
+    usedHrefs.add(m[1]);
+  }
+
+  for (const candidate of candidates) {
+    if (linkCount >= MAX_LINKS) break;
+    if (usedHrefs.has(candidate.href)) continue;
+
+    // Escape special regex chars in the term
+    const escaped = candidate.term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    // Word-boundary match, case-insensitive
+    const regex = new RegExp(`\\b(${escaped})\\b`, "i");
+
+    // We need to only replace inside "safe" text nodes — not inside tags
+    // or protected elements. Strategy: split by protected regions, only
+    // process the safe parts.
+    const result = replaceInSafeRegions(
+      html,
+      regex,
+      (match) => `<a href="${candidate.href}" class="auto-link">${match}</a>`
+    );
+
+    if (result !== html) {
+      html = result;
+      usedHrefs.add(candidate.href);
+      linkCount++;
+    }
+  }
+
+  return html;
+}
+
+/**
+ * Replace the first regex match in HTML, but only within text that is NOT
+ * inside <a>, <h1>-<h6>, <pre>, <code> tags.
+ *
+ * Works by splitting the HTML into segments: "protected" (inside forbidden
+ * tags) and "safe" (everything else), then only doing replacement in safe
+ * segments.
+ */
+function replaceInSafeRegions(
+  html: string,
+  regex: RegExp,
+  replacer: (match: string) => string
+): string {
+  // Pattern matches opening+content+closing of protected elements
+  // We protect: a, h1-h6, pre, code
+  const protectedPattern =
+    /(<(?:a |a>|h[1-6][ >]|pre[ >]|code[ >])[\s\S]*?<\/(?:a|h[1-6]|pre|code)>)/gi;
+
+  const parts = html.split(protectedPattern);
+  let replaced = false;
+
+  for (let i = 0; i < parts.length; i++) {
+    if (replaced) break;
+
+    // Check if this part is a protected region
+    if (protectedPattern.test(parts[i])) {
+      // Reset lastIndex since we use .test which advances it
+      protectedPattern.lastIndex = 0;
+      continue;
+    }
+
+    // Reset regex lastIndex
+    protectedPattern.lastIndex = 0;
+
+    // Try to replace in this safe segment (first occurrence only)
+    const newPart = parts[i].replace(regex, (m) => {
+      if (replaced) return m;
+      replaced = true;
+      return replacer(m);
+    });
+    parts[i] = newPart;
+  }
+
+  return parts.join("");
+}
+
 // Simple markdown to HTML converter (no heavy deps)
 export function markdownToHtml(md: string): string {
   let html = md;
@@ -47,6 +202,9 @@ export function markdownToHtml(md: string): string {
 
   // Clean up empty paragraphs
   html = html.replace(/<p><\/p>/g, '');
+
+  // Auto-inject contextual internal links
+  html = injectAutoLinks(html);
 
   return html;
 }

@@ -13,8 +13,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/perspectives`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
     { url: `${base}/topics`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
     { url: `${base}/briefing`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 },
-    { url: `${base}/quiz`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.6 },
+    { url: `${base}/quiz`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
     { url: `${base}/archive`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.7 },
+    { url: `${base}/blind-spots`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
+    { url: `${base}/perception-gap`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 },
+    { url: `${base}/perception-gap/about`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${base}/indexes/pgi`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.7 },
+    { url: `${base}/feed.xml`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.3 },
   ];
 
   const allPosts = getAllPosts();

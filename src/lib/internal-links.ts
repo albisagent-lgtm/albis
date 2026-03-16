@@ -21,17 +21,22 @@ export interface RelatedLink {
 export function getRelatedPosts(
   tags: string[],
   currentSlug?: string,
-  limit = 3
+  limit = 5
 ): RelatedPost[] {
   const allPosts = getAllPosts();
   const lowerTags = tags.map((t) => t.toLowerCase());
+  const now = Date.now();
+  const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
+  const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
 
   const scored = allPosts
     .filter((p) => p.slug !== currentSlug)
     .map((post) => {
       const postTags = post.tags.map((t) => t.toLowerCase());
       const overlap = lowerTags.filter((t) => postTags.includes(t)).length;
-      return { post, score: overlap };
+      const age = now - new Date(post.date).getTime();
+      const recencyBonus = age <= SEVEN_DAYS ? 2 : age <= THIRTY_DAYS ? 1 : 0;
+      return { post, score: overlap * 2 + recencyBonus };
     })
     .filter((s) => s.score > 0)
     .sort((a, b) => b.score - a.score)

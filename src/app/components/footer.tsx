@@ -38,6 +38,25 @@ export function Footer() {
             </div>
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
+                Explore
+              </p>
+              <ul className="mt-4 space-y-2.5">
+                <FooterLink href="/quiz">Perspective Check</FooterLink>
+                <FooterLink href="/blind-spots">Blind Spot Map</FooterLink>
+                <FooterLink href="/perception-gap">Perception Gap Index</FooterLink>
+                <FooterLink href="/topics">Topics</FooterLink>
+                <li>
+                  <a
+                    href="/feed.xml"
+                    className="text-sm text-zinc-500 transition-colors hover:text-[#1a3a5c] dark:text-zinc-400 dark:hover:text-[#7ab0d8]"
+                  >
+                    RSS Feed
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
                 Community
               </p>
               <ul className="mt-4 space-y-2.5">

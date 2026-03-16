@@ -59,7 +59,7 @@ export default async function BlogPostPage({ params }: Props) {
   const html = markdownToHtml(post.content);
   const url = `https://www.albis.news/blog/${slug}`;
 
-  const relatedPosts = getRelatedPosts(post.tags, slug, 3);
+  const relatedPosts = getRelatedPosts(post.tags, slug, 5);
   const relatedPages = getRelatedPages(post.tags);
 
   const jsonLd = {
