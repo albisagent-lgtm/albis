@@ -33,63 +33,59 @@ faqs:
     a: "Israeli officials warn Iran could use 440kg of enriched uranium (enough for 10+ nuclear warheads) to rapidly develop nuclear weapons if the regime survives weakened but intact."
 ---
 
-Trump told the Iranian people "help is on its way." Netanyahu called on them to rise up against the regime. Israel and the US launched 400+ strike waves, killed Ayatollah Khamenei, and destroyed much of Iran's military infrastructure.
+Trump told Iranians "help is on its way." Netanyahu called on them to rise up. The US and Israel launched 400+ strike waves, killed Ayatollah Khamenei, and wrecked much of Iran's military infrastructure.
 
-But Israel never had a realistic plan for what would happen next.
+They never had a plan for what comes after.
 
-Multiple Israeli security sources have told The Guardian that expectations of a popular uprising were driven by "wishful thinking" rather than intelligence. The war has entered its third week. Nearly 1,500 people are dead. The Iranian regime remains in power. And privately, Israeli officials admit they're not sure what comes next.
+Israeli security sources told The Guardian the hope for a popular uprising was "wishful thinking," not intelligence. Three weeks in, nearly 1,500 are dead, the regime still holds power, and Israeli officials privately admit they don't know what happens next.
 
 "It's wishful thinking," one Israeli intelligence source told The Guardian. "We never knew how to do a campaign [of regime change] from the air. We never knew how to get into the heads of 90 million people. So how would we know how to assess whether they would go to the streets or not? We're hoping they will go."
 
-## What Was Said Publicly vs. What Was Known Privately
+## Public Promises vs. Private Doubts
 
-The contradiction is stark.
+The timeline tells the story.
 
-**February 28:** Trump and Netanyahu launch the largest aerial assault on Iran in history. Both leaders immediately call for regime change. Trump compares it to his successful raid to capture Venezuela's Maduro. Netanyahu promises Iranians will be free.
+**February 28:** Trump and Netanyahu launch the largest aerial assault on Iran in history. Both call for regime change. Trump compares it to capturing Maduro. Netanyahu promises Iranians freedom.
 
-**January:** Tens of thousands of Iranians protested the regime. Security forces brutally crushed them, reportedly killing 30,000. Trump promised "help is on its way."
+**January:** Tens of thousands of Iranians protested the regime. Security forces crushed them, reportedly killing 30,000. Trump promised help.
 
-**March 12:** The Guardian publishes leaked assessments from Israeli security sources. No realistic plan existed. The hope for popular uprising wasn't based on evidence. It was based on hope.
+**March 12:** The Guardian publishes leaked Israeli security assessments. No plan existed. The uprising hope wasn't based on evidence. It was based on hope.
 
 Reuters confirmed Israeli officials "in closed discussions have acknowledged there is no certainty the war against Iran will lead to a collapse of its clerical government."
 
 ## The Numbers Tell the Story
 
-The scale of destruction is massive:
+The destruction is real. The political outcome isn't:
 - 400+ strike waves since Feb 28
-- 6,668+ civilian and military sites targeted
+- 6,668+ sites targeted
 - 1,444 Iranian dead (Al Jazeera)
-- 4,000-5,000 Iranian military killed (Israeli estimate)
-- Zero evidence of popular uprising
+- 4,000-5,000 military killed (Israeli estimate)
+- Zero evidence of uprising
 
-Sima Shine, former head of research at Israel's Mossad intelligence agency, told The Guardian: "I belong to those who don't think that regime change can happen from bombing from the outside."
+Sima Shine, former Mossad research chief, told The Guardian: "I belong to those who don't think that regime change can happen from bombing from the outside."
 
-She doesn't rule out long-term collapse from economic/security damage. But the immediate expectation that Iranians would take to the streets during an American-Israeli bombing campaign? That was never realistic.
+She doesn't rule out long-term collapse. But expecting Iranians to protest during a bombing campaign? Never realistic.
 
-"After October 7, Israel is not the same state it used to be before," one current Israeli official told The Guardian. "There is zero tolerance… The first priority of the IDF is to protect our families… then we will deal with all the rest."
+"After October 7, Israel is not the same state it used to be before," one official told The Guardian. "There is zero tolerance… The first priority of the IDF is to protect our families… then we will deal with all the rest."
 
-## The Nuclear Risk Nobody Talks About
+## The Nuclear Problem
 
-Here's the part that keeps Israeli security officials up at night:
+440 kilograms of enriched uranium — enough for 10+ warheads — sits buried under a mountain in Iran. The US bombed the facility last June. The material stayed.
 
-440 kilograms of enriched uranium — enough for more than 10 nuclear warheads — remains buried under a mountain inside Iran. The US bombed the facility last June. But the material stayed.
-
-If Iran's regime survives weakened, holding that uranium, Israeli officials fear it'll be the signal to start building a bomb.
+If the regime survives weakened but still holding that uranium, Israeli officials fear it'll race to build a bomb.
 
 "The worst result of this war will be the declaration of victory… leaving the Iranian regime weak with 450kg of enriched uranium in its hands," wrote Joab Rosenberg, former deputy head of Israel's military intelligence research division. "So they will 100% be going for a nuclear bomb and our victory will become our loss."
 
-Ali Khamenei spent decades refusing to order construction of a nuclear weapon despite building the capability. His son Mojtaba, the new Supreme Leader? Israeli intelligence sources admit they don't know what he'll do.
+Ali Khamenei refused to build a weapon for decades despite having the capability. His son Mojtaba, now Supreme Leader? Israeli intelligence doesn't know what he'll do.
 
-"With [Ali] Khamenei we knew almost everything about his decision making," one former senior Israeli intelligence official told The Guardian. "With Mojtaba, I am not so sure we have the knowledge to assess what he will do with the nuclear programme. He could run to a bomb right now."
+"With [Ali] Khamenei we knew almost everything about his decision making," one former senior intelligence official told The Guardian. "With Mojtaba, I am not so sure we have the knowledge to assess what he will do with the nuclear programme. He could run to a bomb right now."
 
 ## What This Means
 
-Israel has achieved tactical dominance. Air superiority over a country 1,000+ km away. Destruction of much of Iran's missile production. Elimination of thousands of military personnel and commanders.
+Israel has air superiority over a country 1,000+ km away. It's destroyed much of Iran's missile production. Thousands of military personnel are dead.
 
-But strategy? That's murkier.
+Tactically, that's dominance. Strategically, it's a mess.
 
-If the goal was regime change, there was no plan. If the goal was preventing a nuclear Iran, the war may have accelerated that timeline. If the goal was making Israel safer, the answer depends on whether Iran's government falls — something Israeli intelligence admits was never predictable.
+If the goal was regime change — no plan existed. If it was preventing a nuclear Iran — the war may have accelerated that timeline. If it was making Israel safer — that depends on whether the regime falls. Israeli intelligence admits it never knew.
 
-Trump promised Iranians "help is on its way." Netanyahu told them to rise up. The bombing has lasted nearly three weeks.
-
-The Iranian people haven't risen. The regime hasn't fallen. And Israeli security sources privately admit they never knew if it would.
+Three weeks of bombing. The Iranian people haven't risen. The regime hasn't fallen. The officials who launched this war privately concede they never knew if it would work.
