@@ -1,14 +1,23 @@
 ---
 title: "Khamenei Is Dead. Nobody Knows Who Controls Iran's Missiles."
-description: "Day two of Operation Epic Fury brought confirmation of the supreme leader's death, an IRGC vow of the 'most ferocious' retaliation, and a succession vacuum that terrifies allies and adversaries alike."
+description: "The 2026 Iran war entered day two with Khamenei's death confirmed, IRGC vowing retaliation, and a succession vacuum. No one knows who's in charge."
 date: "2026-03-01"
 image: "https://picsum.photos/seed/iran-day-two-khamenei-dead-succession-crisis-2026/1200/630"
 author: "Albis Geopolitics Desk"
 tags: ["trending", "iran", "geopolitics", "middle-east", "us-iran", "israel", "oil", "crisis"]
 category: "breaking"
+faqs:
+  - question: "What happened in the 2026 Iran war?"
+    answer: "The 2026 Iran conflict began when US and Israeli forces launched Operation Epic Fury, killing Supreme Leader Ayatollah Ali Khamenei and striking Iran's nuclear facilities, missile arrays, and defense infrastructure across nine cities. Iran retaliated with hypersonic missiles targeting Tel Aviv, Haifa, and US bases in seven countries."
+  - question: "Who is leading Iran after Khamenei's death?"
+    answer: "As of day two of the 2026 Iran conflict, no clear successor has emerged. The Islamic Revolutionary Guard Corps (IRGC) issued retaliation orders, suggesting hardline military elements may be filling the leadership vacuum. The Assembly of Experts has formal authority to choose a successor but hasn't announced one."
+  - question: "Is the 2026 Iran war still happening?"
+    answer: "Yes. As of March 2026, the conflict continues with ongoing US-Israeli strikes on Iranian military targets and Iranian missile attacks on Israeli cities and US bases across the Gulf region. The Strait of Hormuz remains under Iranian closure orders."
+  - question: "How did the 2026 Iran conflict start?"
+    answer: "The war began after failed nuclear negotiations in Vienna. The US and Israel launched coordinated strikes on Iran's nuclear program and leadership, killing Supreme Leader Khamenei. Iran responded with ballistic missile attacks on Israeli cities and US military installations."
 ---
 
-At 86, Ayatollah Ali Khamenei had survived assassination plots, a war with Iraq, decades of sanctions, and three American presidents who wanted him gone. On Saturday, a joint US-Israeli strike on his office in Tehran killed him. Iranian state media confirmed it Sunday morning. Forty days of public mourning began immediately.
+The 2026 Iran war entered its second day with confirmation of a death that changed everything. At 86, Ayatollah Ali Khamenei had survived assassination plots, a war with Iraq, decades of sanctions, and three American presidents who wanted him gone. On Saturday, a joint US-Israeli strike on his office in Tehran killed him. Iranian state media confirmed it Sunday morning. Forty days of public mourning began immediately.
 
 The question that now keeps defence officials awake from Washington to Riyadh isn't about grief. It's about command. Who controls Iran's missile arsenal? Who decides when retaliation stops? As of Sunday evening, nobody has a clear answer.
 

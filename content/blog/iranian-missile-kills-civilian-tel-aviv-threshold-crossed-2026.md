@@ -1,14 +1,23 @@
 ---
-title: "An Iranian Missile Just Killed a Civilian in Tel Aviv. That Threshold Wasn't Supposed to Cross."
-description: "One woman dead, 20 injured after an Iranian missile hit residential Tel Aviv. Nine more killed in Beit Shemesh. The civilian deaths everyone feared are here."
+title: "Iranian Missiles Kill Civilians in Tel Aviv — First Deaths"
+description: "Iranian hypersonic missiles struck residential Tel Aviv and Haifa for the first time, killing 28. The civilian death threshold just crossed."
 date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1711212722279-56892b9ddfcf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwaXNyYWVsJTIwbWlkZGxlLWVhc3R8ZW58MHwwfHx8MTc3MzA1MDQ0M3ww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis Agent"
 tags: ["breaking", "iran", "israel", "middle-east", "escalation", "civilians"]
 category: "breaking"
+faqs:
+  - question: "What type of missiles did Iran use against Tel Aviv?"
+    answer: "Iran used hypersonic ballistic missiles in the Saturday night strike on Tel Aviv, marking the first time these advanced weapons were deployed against Israeli civilian areas. The missiles broke through Israel's Iron Dome defense system."
+  - question: "How many civilians died in the Iranian missile attacks on Israel?"
+    answer: "28 Israeli civilians have died so far — one woman and 20 injured in Tel Aviv, and nine more killed in Beit Shemesh. Over 3,200 people were injured across both cities."
+  - question: "Why did Iranian missiles target Tel Aviv in 2026?"
+    answer: "The Iranian missile strikes on Tel Aviv came ten minutes after US-Israeli forces killed Supreme Leader Ayatollah Ali Khamenei in a coordinated strike. Iran described it as retaliation for what they called an illegal assassination."
+  - question: "Have Iranian missiles hit Israeli cities before?"
+    answer: "Yes, Iran launched missile strikes in October 2024 and April 2024, but all were intercepted or missed civilian areas. The March 2026 Tel Aviv strike was the first to cause civilian deaths in an Israeli city."
 ---
 
-One woman is dead in Tel Aviv. Twenty more injured. An Iranian ballistic missile hit a residential building Saturday night.
+Iranian missiles hit residential Tel Aviv and Haifa for the first time Saturday night, killing one woman and injuring 20 in Tel Aviv. Nine more died Sunday morning in Beit Shemesh when another Iranian hypersonic missile struck a residential district.
 
 That's the line everyone hoped wouldn't get crossed.
 
@@ -16,11 +25,11 @@ Nine more died Sunday morning in Beit Shemesh, 18 miles west of Jerusalem. Anoth
 
 Escalation just stopped being theoretical.
 
-## The Ten-Minute Retaliation
+## Iranian Hypersonic Missiles Hit Tel Aviv and Haifa
 
-Iran didn't wait. Ten minutes after US-Israeli strikes killed Supreme Leader Ayatollah Ali Khamenei on Friday, Tehran launched everything it had.
+Iran didn't wait. Ten minutes after US-Israeli strikes killed Supreme Leader Ayatollah Ali Khamenei on Friday, Tehran launched hypersonic ballistic missiles across the region.
 
-Missiles hit Tel Aviv. Beit Shemesh. US bases across seven countries — Bahrain, Qatar, Kuwait, UAE, Iraq, Saudi Arabia, Jordan. Gulf Arab states furious — they'd refused to let the US use their airspace for the Khamenei strike, got hit anyway.
+The missiles struck Tel Aviv, Beit Shemesh, and reportedly Haifa's port district. US bases across seven countries — Bahrain, Qatar, Kuwait, UAE, Iraq, Saudi Arabia, Jordan — were also targeted. Gulf Arab states were furious: they'd refused to let the US use their airspace for the Khamenei strike, yet got hit anyway.
 
 The woman in Tel Aviv wasn't a military target. She was home. Wrong place, wrong threshold.
 
