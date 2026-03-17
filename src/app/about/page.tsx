@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About Albis",
   description:
-    "Albis is a global news service that shows how the same events are reported differently around the world. One founder, AI-powered, radically transparent.",
+    "Albis is a global news and intelligence service scanning 60 countries in 9 languages. We measure how the same events are reported differently worldwide, track cascading economic effects, and research solutions.",
 };
 
 export default function AboutPage() {
@@ -23,7 +23,7 @@ export default function AboutPage() {
           </p>
 
           <p>
-            Albis is a global news service that shows how the same events are reported differently around the world. We scan sources across seven regions three times daily and surface the patterns most outlets miss — not by telling you what to think, but by showing you how others already do.
+            Albis is a global news and intelligence service. We scan sources across seven regions in nine languages three times daily — reading Iranian media in Farsi, Chinese outlets in Mandarin, Arabic sources in Arabic, and more. We surface the patterns most outlets miss — not by telling you what to think, but by showing you how others already do.
           </p>
         </div>
 
@@ -44,7 +44,7 @@ export default function AboutPage() {
           </h2>
           <div className="space-y-space-4 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
             <p>
-              News is the entry point, but the real product is a living map of how information shapes global perception. We're building instruments — the Perception Gap Index, Global Awareness Index, Information Warfare tracking, the Connections Engine — that reveal the information architecture most people never see.
+              News is the entry point, but the real product is a living map of how information shapes global perception. We&apos;re building instruments — the Perception Gap Index, Global Awareness Index, cascade analysis, native-language scanning, and the Connections Engine — that reveal the information architecture most people never see.
             </p>
             <p>
               Nobody else combines unbiased global news with information psychology, measuring not just <em>what happened</em>, but how it's framed, what's invisible, and who's shaping the narrative. This isn't just a news site — it's an awareness system.
@@ -62,13 +62,19 @@ export default function AboutPage() {
           </h2>
           <div className="space-y-space-4 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
             <p>
-              <strong className="text-zinc-900 dark:text-zinc-100">3 daily scans</strong> across <strong className="text-zinc-900 dark:text-zinc-100">7 world regions</strong> and <strong className="text-zinc-900 dark:text-zinc-100">19 categories</strong> — every major story, tracked in near real-time.
+              <strong className="text-zinc-900 dark:text-zinc-100">3 daily scans</strong> across <strong className="text-zinc-900 dark:text-zinc-100">7 world regions</strong>, <strong className="text-zinc-900 dark:text-zinc-100">19 categories</strong>, and <strong className="text-zinc-900 dark:text-zinc-100">9 languages</strong> — every major story, tracked in near real-time.
+            </p>
+            <p>
+              <strong className="text-zinc-900 dark:text-zinc-100">Native-language scanning</strong> — we don&apos;t just read English-language coverage of other countries. We read Iranian media in Farsi, Chinese media in Mandarin, Arabic outlets in Arabic, Russian sources in Russian, and more. The domestic narrative is often fundamentally different from what English-language media reports. We capture both.
             </p>
             <p>
               <strong className="text-zinc-900 dark:text-zinc-100">Perception Gap Index (PGI)</strong> — measures how differently regions frame the same story. A high PGI means the world is seeing two different realities.
             </p>
             <p>
               <strong className="text-zinc-900 dark:text-zinc-100">Global Awareness Index (GAI)</strong> — measures what stories are invisible to most of the world. Important events that only one or two regions are covering.
+            </p>
+            <p>
+              <strong className="text-zinc-900 dark:text-zinc-100">Cascade analysis</strong> — we track how shocks in one system (energy, food, finance, migration, information, climate) propagate through interconnected systems. When a shipping lane closes and fertilizer prices spike, we trace the chain from the port to the plate — often before anyone else connects the links.
             </p>
             <p>
               <Link href="/indexes" className="text-[#c8922a] hover:underline">
@@ -88,7 +94,7 @@ export default function AboutPage() {
               A product that exposes how information shapes perception should be completely honest about how it works. So here it is:
             </p>
             <p>
-              Albis is built by <strong className="text-zinc-900 dark:text-zinc-100">one person</strong> and <strong className="text-zinc-900 dark:text-zinc-100">AI</strong>. Most of the articles you read here are AI-generated — researched, written, and published by AI agents that scan global news sources, detect framing patterns, and produce analysis. A human (Harry) sets the direction, reviews the systems, and writes select pieces. The AI does the heavy lifting.
+              Albis is built by <strong className="text-zinc-900 dark:text-zinc-100">one person</strong> and <strong className="text-zinc-900 dark:text-zinc-100">AI</strong>. Most of the articles you read here are AI-generated — researched, written, and published by AI agents that scan global news sources in 9 languages, detect framing patterns, trace cascading effects across systems, and produce analysis. A human (Harry) sets the direction, reviews the systems, and writes select pieces. The AI does the heavy lifting.
             </p>
             <p>
               We think that&apos;s worth being upfront about. If Albis exists to help people see information clearly, the least we can do is be clear about our own.
@@ -139,6 +145,54 @@ export default function AboutPage() {
             </p>
             <p>
               Albis started as a personal question: how does the same event become completely different stories depending on where you read about it? That question became a tool. The tool became a daily practice. Now it scans the world three times a day, and anyone can see the patterns for themselves.
+            </p>
+          </div>
+        </div>
+
+        {/* Languages We Read */}
+        <div className="mt-space-16 border-t border-black/5 pt-space-16 dark:border-white/5">
+          <h2 className="text-xs font-medium tracking-[0.15em] uppercase text-zinc-400 mb-space-6">
+            Languages We Read
+          </h2>
+          <p className="mb-space-6 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
+            Most global news platforms read the world in English. We read it in the languages people actually speak. Every scan includes native-language searches to capture domestic framing that English-language media misses entirely.
+          </p>
+          <div className="grid grid-cols-3 gap-3 font-[family-name:var(--font-source-serif)] text-base text-zinc-700 dark:text-zinc-300">
+            {[
+              ["English", "Global"],
+              ["فارسی", "Iran"],
+              ["العربية", "Middle East & North Africa"],
+              ["中文", "China"],
+              ["Русский", "Russia"],
+              ["हिन्दी", "India"],
+              ["Español", "Latin America"],
+              ["Français", "West Africa & France"],
+              ["Türkçe", "Turkey"],
+              ["Português", "Brazil"],
+            ].map(([lang, region]) => (
+              <div key={lang} className="rounded-lg border border-black/[0.05] p-3 dark:border-white/[0.05]">
+                <span className="font-semibold text-zinc-900 dark:text-zinc-100">{lang}</span>
+                <br />
+                <span className="text-sm text-zinc-500 dark:text-zinc-400">{region}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Cascade Economics Research */}
+        <div className="mt-space-16 border-t border-black/5 pt-space-16 dark:border-white/5">
+          <h2 className="text-xs font-medium tracking-[0.15em] uppercase text-zinc-400 mb-space-6">
+            Cascade Economics Research
+          </h2>
+          <div className="space-y-space-4 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
+            <p>
+              Alongside our daily news coverage, we run an ongoing research project studying <strong className="text-zinc-900 dark:text-zinc-100">cascade economics</strong> — how economic shocks propagate through interconnected global systems, and what can be done to break the chain.
+            </p>
+            <p>
+              When a shipping lane closes, fertilizer prices spike. When fertilizer prices spike, farmers can&apos;t plant. When farmers can&apos;t plant, harvests fail. When harvests fail, food prices rise. When food prices rise, people go hungry. One event, six systems, millions of lives. Most coverage treats each link as a separate story. We trace the whole chain.
+            </p>
+            <p>
+              This isn&apos;t just analysis — we research solutions. Where can chains be broken? What&apos;s worked before? How do we build systems that resist cascades? The goal is to help the world economy work more smoothly for everyone.
             </p>
           </div>
         </div>
