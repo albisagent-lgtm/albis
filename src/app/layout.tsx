@@ -146,7 +146,28 @@ export default function RootLayout({
                 email: "hello@albis.news",
                 contactType: "customer support",
               },
-              sameAs: ["https://t.me/albisdaily"],
+              sameAs: [
+                "https://t.me/albisdaily",
+                "https://twitter.com/AlbisDaily",
+                "https://www.instagram.com/albisnews",
+                "https://www.tiktok.com/@albis181",
+              ],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Albis",
+              url: "https://www.albis.news",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://www.albis.news/search?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
             }),
           }}
         />

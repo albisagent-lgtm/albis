@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 
+Disallow: /_next/static/
+Disallow: /_next/image
 Disallow: /admin
 Disallow: /api
 Disallow: /settings

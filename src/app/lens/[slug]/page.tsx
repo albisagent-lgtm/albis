@@ -39,6 +39,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       publishedTime: post.date,
       authors: [post.author],
+      section: CATEGORIES[post.category as keyof typeof CATEGORIES] || "Analysis",
+      tags: post.tags,
       images: [{ url: post.image, width: 1200, height: 630 }],
     },
     twitter: {
@@ -70,7 +72,7 @@ export default async function LensArticlePage({ params }: Props) {
     image: post.image.startsWith("http") ? post.image : `https://www.albis.news${post.image}`,
     datePublished: post.date,
     dateModified: post.date,
-    author: { "@type": "Person", name: post.author },
+    author: { "@type": "Person", name: post.author, url: "https://www.albis.news/about", jobTitle: "Correspondent" },
     publisher: {
       "@type": "Organization",
       name: "Albis",
