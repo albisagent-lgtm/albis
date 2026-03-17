@@ -1,20 +1,27 @@
 ---
-title: "A Fake War Got 70 Million Views. The Real One's Hard Enough to Follow."
-description: "AI-generated battle footage, video game clips shared as combat, and doctored satellite images are flooding social media during the Iran conflict. A Texas governor fell for it. So did millions of others."
+title: "2026 Iran Conflict: AI Deepfakes Got 70M Views, Real War Harder to Track"
+description: "The 2026 Iran conflict unleashed a flood of AI-generated combat footage. 70 million people watched fake missile strikes. Even a governor fell for it."
 date: "2026-03-05T08:30:00+13:00"
 author: "Albis Tech & Media Desk"
 tags: ["AI", "deepfakes", "misinformation", "Iran", "media literacy", "information warfare"]
 image: "https://images.unsplash.com/photo-1695370993552-3fb199fb35f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxBSSUyMGRlZXBmYWtlcyUyMG1pc2luZm9ybWF0aW9ufGVufDB8MHx8fDE3NzMwNDY4ODl8MA&ixlib=rb-4.1.0&q=80&w=1080"
 featured: false
+faqs:
+  - question: "What is the 2026 Iran conflict?"
+    answer: "The 2026 Iran conflict began on February 28, 2026, when US and Israeli forces launched coordinated strikes on Iran's nuclear facilities and leadership. Iran retaliated with missile strikes on Israeli cities and US bases. The conflict triggered a parallel information war with widespread AI-generated fake footage flooding social media."
+  - question: "How much fake footage spread during the 2026 Iran war?"
+    answer: "Within 24 hours of the strikes, hundreds of fake videos and images spread across social media. The most viral fake — a video game clip showing an Iranian missile hitting a US jet — received 70 million views. Verification teams documented AI-generated combat footage, relabeled old clips, and doctored satellite images shared as real combat footage."
+  - question: "How can I identify fake war footage from the Iran conflict?"
+    answer: "Check the source account's creation date and history. Use reverse image search on dramatic photos. Be suspicious of 'perfect' combat footage that shows exactly what one side wants you to see. Cross-reference with verified news sources. AI-generated images often have inconsistencies in lighting, shadows, or physics that experts can spot."
 ---
 
-A video of an Iranian missile chasing down and destroying a US fighter jet racked up 70 million views on X last weekend.
+A video of an Iranian missile chasing down and destroying a US fighter jet racked up 70 million views on X last weekend during the 2026 Iran conflict.
 
 It wasn't real.
 
 BBC Verify traced the clip to a video game. The jet, the missile trail, the explosion — all rendered in a military simulator. Seventy million people watched it anyway.
 
-This is what war looks like in 2026. Not just bombs and diplomacy. A second front, fought entirely in pixels, where anyone with a laptop can manufacture a battle scene and broadcast it to millions before a single fact-checker wakes up.
+This is what the 2026 Iran war looks like. Not just bombs and diplomacy. A second front, fought entirely in pixels, where anyone with a laptop can manufacture a battle scene and broadcast it to millions before a single fact-checker wakes up.
 
 ## The Flood
 

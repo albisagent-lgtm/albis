@@ -1,6 +1,6 @@
 ---
-title: "Khamenei Is Dead. Nobody Knows Who Controls Iran's Missiles."
-description: "The 2026 Iran war entered day two with Khamenei's death confirmed, IRGC vowing retaliation, and a succession vacuum. No one knows who's in charge."
+title: "Iranian Missiles Hit Tel Aviv. Nobody Knows Who's In Charge."
+description: "Iranian hypersonic missiles struck Tel Aviv and Haifa after Khamenei's death. The IRGC controls the arsenal, but no clear successor has emerged."
 date: "2026-03-01"
 image: "https://picsum.photos/seed/iran-day-two-khamenei-dead-succession-crisis-2026/1200/630"
 author: "Albis Geopolitics Desk"
@@ -17,9 +17,9 @@ faqs:
     answer: "The war began after failed nuclear negotiations in Vienna. The US and Israel launched coordinated strikes on Iran's nuclear program and leadership, killing Supreme Leader Khamenei. Iran responded with ballistic missile attacks on Israeli cities and US military installations."
 ---
 
-The 2026 Iran war entered its second day with confirmation of a death that changed everything. At 86, Ayatollah Ali Khamenei had survived assassination plots, a war with Iraq, decades of sanctions, and three American presidents who wanted him gone. On Saturday, a joint US-Israeli strike on his office in Tehran killed him. Iranian state media confirmed it Sunday morning. Forty days of public mourning began immediately.
+Iranian hypersonic missiles struck Tel Aviv and Haifa on March 1, 2026, hours after Supreme Leader Ayatollah Ali Khamenei was killed in a US-Israeli airstrike. At 86, Khamenei had survived assassination plots, a war with Iraq, decades of sanctions, and three American presidents who wanted him gone. On Saturday, a joint US-Israeli strike on his office in Tehran killed him. Iranian state media confirmed it Sunday morning. Forty days of public mourning began immediately.
 
-The question that now keeps defence officials awake from Washington to Riyadh isn't about grief. It's about command. Who controls Iran's missile arsenal? Who decides when retaliation stops? As of Sunday evening, nobody has a clear answer.
+The Iranian missiles that hit Tel Aviv were launched by the Islamic Revolutionary Guard Corps — but nobody knows who authorized the strike. The question that now keeps defence officials awake from Washington to Riyadh isn't about grief. It's about command. Who controls Iran's missile arsenal? Who decides when retaliation stops? As of Sunday evening, nobody has a clear answer.
 
 ## The IRGC fills the vacuum
 
@@ -39,9 +39,9 @@ At least nine Iranian cities have been hit since Saturday. Confirmed targets in 
 
 Trump described the campaign as "massive and ongoing." CNN's analysis was blunt: "These are not limited strikes." The Atlantic went further, noting that while Trump called on the Iranian people to rise up, "no serious armed rebel force exists in Iran, no coalition assembling to march into Tehran."
 
-## Iran hits back wide
+## Iranian Missiles Strike Tel Aviv, Haifa, and Seven Countries
 
-Tehran's retaliation didn't stay bilateral. Missiles and drones targeted Israel and four Gulf Arab states hosting US military bases: Bahrain, Kuwait, Qatar, and the UAE. Missile debris killed at least four civilians in Suwayda, Jordan. One civilian died in the UAE.
+Tehran's retaliation didn't stay bilateral. Iranian hypersonic missiles targeted Tel Aviv and Haifa, with additional strikes hitting US military bases in four Gulf Arab states: Bahrain, Kuwait, Qatar, and the UAE. The Tel Aviv strike killed at least seven civilians. Missile debris from the Iranian missiles killed at least four more in Suwayda, Jordan. One civilian died in the UAE.
 
 US officials reported no American casualties and minimal damage. But the geographic spread changed the conflict's character overnight. Qatar told companies to send staff home. Eight countries shut their airspace. Over 444 flights were grounded. Air India and IndiGo suspended or rerouted services — eight million Indian workers in the Gulf now face direct danger.
 

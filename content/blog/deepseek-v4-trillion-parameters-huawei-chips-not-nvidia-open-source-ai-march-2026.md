@@ -1,6 +1,6 @@
 ---
-title: "DeepSeek's Trillion-Parameter AI Doesn't Need Nvidia. That's the Real Story."
-description: "DeepSeek V4 is the first trillion-parameter model built for Chinese chips. It costs 1/20th of GPT-5. And OpenAI just lost 24% market share in 12 months."
+title: "DeepSeek V4 Released: Trillion Parameters, No Nvidia Chips Required"
+description: "DeepSeek V4 launched March 2026 with a trillion parameters, optimized for Chinese chips. It costs 1/20th of GPT-5 and matches frontier performance."
 date: "2026-03-10"
 image: "https://picsum.photos/seed/deepseek-v4-trillion-parameters-huawei-chips-not-nvidia-open-source-ai-march-2026/1200/630"
 author: "Albis Tech & Media Desk"
@@ -36,9 +36,13 @@ sources:
 confidence: "confirmed"
 ---
 
-DeepSeek V4 is the first trillion-parameter AI model built to run on Chinese chips, not Nvidia's. It launched in early March 2026, it's open-source, and its API costs about $0.14 per million input tokens. GPT-5 charges $2.50 for the same thing. That's an 18x price gap for models that, on several benchmarks, perform within spitting distance of each other.
+DeepSeek V4 was released in early March 2026 as the first trillion-parameter AI model built to run on Chinese chips, not Nvidia's. The DeepSeek V4 release marked a turning point in the AI chip war: it's open-source, and its API costs about $0.14 per million input tokens. GPT-5 charges $2.50 for the same thing. That's an 18x price gap for models that, on several benchmarks, perform within spitting distance of each other.
 
-The US spent three years trying to stop China from building frontier AI without American chips. DeepSeek just showed it doesn't need them.
+The US spent three years trying to stop China from building frontier AI without American chips. The DeepSeek V4 release proved it doesn't need them.
+
+## When Was DeepSeek V4 Released?
+
+DeepSeek V4 launched in early March 2026, roughly three months after V3. The release happened without fanfare — no press conference, no hype cycle. The model just appeared on the company's API and Hugging Face with full documentation and weights.
 
 ## The Numbers Nobody Expected
 
