@@ -4,22 +4,23 @@ description: "A fertilizer ship sits idle in the Persian Gulf. Within weeks, 318
 slug: "cascade-economics-how-one-shock-breaks-everything"
 date: "2026-03-17"
 author: "Harry Wenham"
-tags: ["cascade economics", "Strait of Hormuz", "global systems", "food crisis", "supply chain", "economic theory", "geopolitics", "fertilizer crisis", "systemic risk", "Iran war"]
+category: "research"
+tags: ["cascade-economics", "Strait of Hormuz", "global systems", "food crisis", "supply-chain", "economic theory", "geopolitics", "fertilizer crisis", "systemic-risk", "Iran war"]
 image: "https://images.pexels.com/photos/12969405/pexels-photo-12969405.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 imageCaption: "Photo by Atlantic Ambience / Pexels"
 readingTime: "18 min read"
 type: "research"
 faqs:
-  - question: "What is cascade economics?"
-    answer: "Cascade economics describes how a shock in one economic system propagates through interconnected systems — energy, food, finance, migration, politics — with each link amplifying the damage. It's the mechanism underneath financial contagion, supply chain disruption, and polycrisis."
-  - question: "How is cascade economics different from supply chain disruption?"
-    answer: "Supply chain disruption tracks a shock within one system. Cascade economics tracks the moment a shock jumps between systems — from energy to food, from economic to political, from local to global — with compounding, non-linear effects at each link."
-  - question: "What is the 2026 Hormuz cascade?"
-    answer: "The closure of the Strait of Hormuz due to the Iran war has blocked fertilizer shipments, spiked oil prices, threatened spring planting windows across South and Southeast Asia, and pushed emerging markets toward debt distress — a cascade spanning energy, agriculture, finance, and humanitarian systems simultaneously."
-  - question: "Why are economic cascades accelerating?"
-    answer: "Three factors: systems are more interconnected than ever (globalisation, just-in-time supply chains), information and capital move faster (digital markets, algorithmic trading), and resilience buffers are thinner (low inventory, high sovereign debt, fragmented political consensus)."
-  - question: "What are the biggest cascade risks for the 21st century?"
-    answer: "Three mega-cascades will define the coming decades: the climate cascade (temperature rise driving water scarcity, migration, and conflict), the AI cascade (automation displacing workers and eroding tax bases), and the demographic cascade (aging populations straining pensions and healthcare). All three will interact and compound."
+  - q: "What is cascade economics?"
+    a: "Cascade economics describes how a shock in one economic system propagates through interconnected systems — energy, food, finance, migration, politics — with each link amplifying the damage. It's the mechanism underneath financial contagion, supply chain disruption, and polycrisis."
+  - q: "How is cascade economics different from supply chain disruption?"
+    a: "Supply chain disruption tracks a shock within one system. Cascade economics tracks the moment a shock jumps between systems — from energy to food, from economic to political, from local to global — with compounding, non-linear effects at each link."
+  - q: "What is the 2026 Hormuz cascade?"
+    a: "The closure of the Strait of Hormuz due to the Iran war has blocked fertilizer shipments, spiked oil prices, threatened spring planting windows across South and Southeast Asia, and pushed emerging markets toward debt distress — a cascade spanning energy, agriculture, finance, and humanitarian systems simultaneously."
+  - q: "Why are economic cascades accelerating?"
+    a: "Three factors: systems are more interconnected than ever (globalisation, just-in-time supply chains), information and capital move faster (digital markets, algorithmic trading), and resilience buffers are thinner (low inventory, high sovereign debt, fragmented political consensus)."
+  - q: "What are the biggest cascade risks for the 21st century?"
+    a: "Three mega-cascades will define the coming decades: the climate cascade (temperature rise driving water scarcity, migration, and conflict), the AI cascade (automation displacing workers and eroding tax bases), and the demographic cascade (aging populations straining pensions and healthcare). All three will interact and compound."
 ---
 
 Somewhere in the Persian Gulf, a bulk carrier loaded with 55,000 tonnes of granular urea sits at anchor. It's been there for eleven days. The crew can see the Iranian coastline. The cargo was bound for Bangladesh, where rice farmers need it in the ground by mid-April or they don't plant. The ship isn't moving because the Strait of Hormuz isn't open. The Strait isn't open because the United States and Israel are [at war with Iran](/blog/oil-100-iran-closes-strait-largest-disruption-history).
