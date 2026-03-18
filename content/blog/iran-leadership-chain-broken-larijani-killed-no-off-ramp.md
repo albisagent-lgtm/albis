@@ -40,9 +40,9 @@ faqs:
 
 Israel killed Ali Larijani, the man running Iran's war, on Tuesday. Hours earlier, it killed Gholamreza Soleimani, commander of the Basij paramilitary force. Iran confirmed both deaths. These are the latest in a systematic elimination of [Iran's leadership](/perspectives/iran) that has left no one with clear authority to negotiate, fight, or surrender.
 
-The chain of command now reads like a casualty list. Supreme Leader Khamenei: killed February 28, day one of the war. Chief of Staff Mousavi: killed March 1. Larijani, who'd been running the country as head of the Supreme National Security Council: killed March 17. His successor as Supreme Leader, Mojtaba Khamenei, hasn't appeared publicly since his appointment on March 8. Pentagon officials say he's "likely disfigured." Kuwaiti media reports he was flown to Moscow for emergency surgery.
+The chain of command reads like a casualty list. Supreme Leader Khamenei: killed February 28, day one. Chief of Staff Mousavi: killed March 1. Larijani, who'd been running the country as SNSC chief: killed March 17. His successor as Supreme Leader, Mojtaba Khamenei, hasn't appeared publicly since his March 8 appointment. Pentagon officials say he's "likely disfigured." Kuwaiti media reports he was flown to Moscow for emergency surgery.
 
-That leaves the IRGC -- Iran's Islamic Revolutionary Guard Corps -- as the last functioning institution. Army chief Amir Hatami has vowed "decisive and regrettable" retaliation for Larijani's killing. But the IRGC has also explicitly rejected all ceasefire talks. Iran's war machine is running on institutional muscle memory, not command authority.
+That leaves the IRGC as the last functioning institution. Army chief Amir Hatami has vowed "decisive and regrettable" retaliation. But the IRGC has also rejected all ceasefire talks. Iran's war machine runs on institutional muscle memory, not command authority.
 
 ## The Timing Wasn't Coincidental
 
@@ -50,41 +50,41 @@ Larijani and the Basij commander were killed on the eve of [Chaharshanbe Suri](/
 
 Video footage from across Iran showed dancing and singing around bonfires on Tuesday night. Exiled Crown Prince Reza Pahlavi warned security forces to "leave the streets from 6pm." Netanyahu urged Iranians to celebrate. The regime texted citizens warning of "Israeli saboteurs" exploiting the festivities.
 
-The convergence is hard to overstate. External bombardment, an internal leadership vacuum, the dismantling of the domestic repression apparatus, and a cultural moment that puts millions of people on the streets -- all on the same night.
+External bombardment, a leadership vacuum, the domestic repression apparatus decapitated, and a cultural moment that puts millions on the streets — all on the same night.
 
 ## The First Crack Inside Washington
 
 The same day brought the most consequential domestic dissent yet. Joe Kent, director of the National Counterterrorism Center, resigned and published his letter on X. "Iran posed no imminent threat to our nation," he wrote, "and it is clear that we started this war due to pressure from Israel and its powerful American lobby."
 
-Kent isn't a career bureaucrat. He's a decorated Special Forces combat veteran and Trump appointee. CNN and the NYT confirmed he met with Vice President Vance before resigning -- and Vance's own anti-interventionist record is now under scrutiny.
+Kent isn't a career bureaucrat. He's a decorated Special Forces veteran and Trump appointee. CNN and the NYT confirmed he met with Vice President Vance before resigning. Vance's anti-interventionist record is now under scrutiny.
 
-DNI Tulsi Gabbard responded publicly, defending Trump's authority to determine imminent threats, but didn't address Kent by name. The careful distance says more than the words.
+DNI Tulsi Gabbard defended Trump's authority to determine imminent threats but didn't mention Kent by name. The careful distance says more than the words.
 
-Kent's letter gives anti-war voices in both parties a credible standard-bearer. Whether anyone follows him depends on what happens next -- and what it costs.
+Kent gives anti-war voices in both parties a credible standard-bearer. Whether anyone follows him depends on what happens next — and what it costs.
 
 ## 408 Dead in Kabul, and No One's Watching
 
-While the world tracked Larijani's killing, the death toll from Pakistan's airstrike on Kabul's Omid Addiction Treatment Hospital reached 408. Reuters and CNN confirmed the figure. The BBC independently verified at least 100 dead. Patients burned in beds. Walls collapsed onto immobile people during Ramadan.
+While the world tracked Larijani's killing, the death toll from Pakistan's airstrike on Kabul's Omid Addiction Treatment Hospital hit 408. Reuters and CNN confirmed the number. The BBC independently verified at least 100. Patients burned in beds. Walls collapsed onto immobile people during Ramadan.
 
-India condemned the strike at the UN as "cowardly, unconscionable." Taliban spokesman Zabihullah Mujahid declared: "No more diplomacy or talks."
+India called the strike "cowardly, unconscionable" at the UN. Taliban spokesman Zabihullah Mujahid declared: "No more diplomacy or talks."
 
-Pakistan continues to deny targeting the hospital, calling its operations "precise military strikes." But the framing gap between Islamabad and the rest of the world is widening fast. This is the [deadliest single incident](/topics/pakistan) in the four-week conflict, and it happened on the same day both wars slammed their diplomatic doors shut.
+Pakistan calls its operations "precise military strikes." The gap between that framing and everyone else's is widening fast. This is the [deadliest single incident](/topics/pakistan) in the four-week conflict — and it happened the same day both wars shut their diplomatic doors.
 
 ## Two Wars, Zero Off-Ramps
 
-Here's the connection most coverage misses. These aren't two separate crises that happen to overlap on the calendar. They're structurally linked.
+Most coverage treats these as separate crises that happen to share a calendar date. They're structurally linked.
 
-Iran's Hormuz blockade has pushed oil above $103 a barrel -- up roughly 50% since February. That price spike is transmitted directly into [Pakistan's economy](/perspectives/pakistan): fuel prices already up 20%, a projected PKR 321 per litre by month's end, and an IMF programme hanging by a thread. Pakistan is paying for a war it isn't fighting (Iran) while fighting a war it can't afford (Afghanistan).
+Iran's Hormuz blockade pushed oil above $103 — up roughly 50% since February. That price spike hits [Pakistan's economy](/perspectives/pakistan) directly: fuel prices up 20%, projected PKR 321 per litre by month's end, an IMF programme on life support. Pakistan's paying for a war it isn't fighting (Iran) while fighting one it can't afford (Afghanistan).
 
-Iran's collapse has also eliminated it as a mediator. Before the strikes began, Iran's foreign minister Araghchi was actively brokering Pakistan-Afghanistan dialogue. That channel is dead. China's attempted mediation hasn't gained traction. Turkey, Saudi Arabia, and Qatar -- all potential brokers -- are consumed by their own Iran-related crises.
+Iran's collapse also killed its role as mediator. Before the strikes, Foreign Minister Araghchi was brokering Pakistan-Afghanistan dialogue. That channel's dead. China's mediation attempt hasn't gained traction. Turkey, Saudi Arabia, and Qatar are consumed by their own Iran spillover.
 
-On March 17, both conflicts independently declared "no more negotiations." Iran's IRGC says it "will not accept any ceasefire." The Taliban says diplomacy "has reached its limit." The diplomatic vacuum across the entire arc from the Persian Gulf to Central Asia is now complete.
+On March 17, both conflicts independently declared "no more negotiations." The IRGC "will not accept any ceasefire." The Taliban says diplomacy "has reached its limit." The diplomatic vacuum from the Persian Gulf to Central Asia is complete.
 
 ## Lebanon: The War That Keeps Growing
 
-As if three fronts weren't enough, Israel deployed its 36th Division to southern Lebanon on Tuesday. Ground operations that began March 16 are expanding. The IDF calls them "limited and targeted." Axios reports plans to seize the entire area south of the Litani River. Far-right coalition members are publicly comparing plans to the destruction of Khan Younis in Gaza.
+Israel deployed its 36th Division to southern Lebanon on Tuesday. Ground operations that began March 16 are expanding. The IDF calls them "limited and targeted." Axios reports plans to seize everything south of the Litani River. Far-right coalition members are comparing plans to the destruction of Khan Younis in Gaza.
 
-One million Lebanese have been displaced since March 2. Over 130,000 are in shelters. A French peace plan is the only diplomatic track in any of these four active conflicts -- but a ground invasion doesn't suggest Israel is in a hurry to negotiate.
+One million Lebanese have been displaced since March 2. Over 130,000 are in shelters. A French peace plan is the only diplomatic track in any of these four active conflicts — but a ground invasion doesn't look like a rush to negotiate.
 
 ## What to Watch
 

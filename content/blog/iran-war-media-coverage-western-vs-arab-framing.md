@@ -37,71 +37,69 @@ faqs:
     a: "When voters in one country see precision strikes while another region sees 1,348 civilian deaths, informed consent becomes impossible. You can't have democratic accountability for a war if the public voting on it sees a completely different conflict than the one actually happening."
 ---
 
-The Iran war has been running for 18 days. The UN confirms 1,348 civilian deaths. UNESCO is calling for protection of World Heritage Sites after strikes hit Isfahan's 400-year-old historic center. Iran's internet has been offline for the entire conflict, leaving 90 million people cut off from outside information.
+Eighteen days. 1,348 confirmed civilian deaths. Isfahan's 400-year-old historic center hit by airstrikes. Ninety million Iranians cut off from the internet since day one.
 
-But if you live in North America or Europe, those facts might be footnotes — if they appear at all. Your media is showing precision military strikes, Pentagon briefings on tactical success, and strategic analysis about deterrence. The war looks surgical, contained, focused on eliminating nuclear threats.
+If you live in the West, those facts are footnotes — if they appear at all. Your media shows precision strikes, Pentagon briefings, and deterrence strategy. The war looks surgical.
 
-If you live in the Middle East or North Africa, you're seeing something completely different. Your media leads with civilian death tolls, destroyed homes, heritage destruction, and US-Israeli aggression with no UN mandate and no regional consultation. The war looks like a humanitarian catastrophe.
+If you live in the Middle East, you're watching a different war. Civilian death tolls lead every broadcast. No UN mandate. No regional consultation. The war looks like a humanitarian catastrophe.
 
-The Albis Perception Gap Index scored this story 7.05 — the highest score in today's scan. That means 6.24 billion people are experiencing maximum information asymmetry. Three narratives, one war, zero overlap.
+The Albis Perception Gap Index scored this story 7.05 — today's highest. That means 6.24 billion people are seeing maximum information asymmetry. Three narratives, one war, zero overlap.
 
 ## Western Framing: The Strategic Lens
 
-Pull up Reuters, Associated Press, BBC, or The New York Times. The Iran war is told through a strategic lens.
+Open Reuters, AP, BBC, or the NYT. The Iran war reads as strategy.
 
-Headlines emphasize military targets: ballistic missile production facilities, nuclear enrichment sites, IRGC command centers. Defense Secretary Pete Hegseth announces that US-Israeli strikes have "functionally defeated" Iran's missile production capacity. Trump declares Kharg Island's military infrastructure "totally obliterated."
+Headlines lead with military targets: missile production sites, nuclear enrichment facilities, IRGC command posts. Defense Secretary Hegseth says US-Israeli strikes have "functionally defeated" Iran's missile capacity. Trump declares Kharg Island's military infrastructure "totally obliterated."
 
-Civilian casualties appear in these stories — but they're carefully attributed ("Iran claims 1,348 dead," "Tehran says thousands of buildings damaged") and rarely lead the coverage. The framing invites you to see this as a military operation with clear objectives: deterrence, regime change, denuclearization.
+Civilian casualties appear — but hedged. "Iran claims 1,348 dead." "Tehran says thousands of buildings damaged." They rarely lead. The framing presents a military operation with clear objectives: deterrence, regime change, denuclearization.
 
-The Pentagon held daily briefings for the first week. Journalists received detailed tactical updates. The US military even unveiled "the first precision strike missiles ever used in combat" during a press conference.
-
-This is warfare as a technical problem. A contest between states, not a human catastrophe.
+The Pentagon held daily briefings for the first week. It unveiled "the first precision strike missiles ever used in combat" at a press conference. Warfare as a technical problem, not a human catastrophe.
 
 ## Iranian and Arab Framing: Suffering and Aggression
 
-Switch to Al Jazeera, Press TV, or Al Arabiya. The same explosions tell a completely different story.
+Switch to Al Jazeera, Press TV, or Al Arabiya. Same explosions, different story.
 
-Iranian state media shows rescue teams pulling children from rubble. The Red Crescent reports over 6,668 civilian structures targeted — including homes, schools, and clinics. Isfahan's 400-year-old mosques are burning. Hospitals are overwhelmed.
+Iranian state media shows rescue workers pulling children from rubble. The Red Crescent reports 6,668 civilian structures hit — homes, schools, clinics. Isfahan's 400-year-old mosques burn. Hospitals are overwhelmed.
 
-Arab outlets frame the war as US-Israeli aggression. There was no UN Security Council resolution. No regional consultation. No imminent Iranian threat that justified preemptive strikes. The Pentagon itself told Congress there was "no sign that Iran was going to attack US first" — directly contradicting the White House's public justification.
+Arab outlets frame it as aggression. No UN Security Council resolution. No regional consultation. The Pentagon itself told Congress there was "no sign that Iran was going to attack US first" — contradicting the White House's stated justification.
 
-Germany's Chancellor Merz made this explicit when NATO refused Trump's demand for warships: "We were not consulted before this war. This has nothing to do with NATO."
+Germany's Chancellor Merz put it plainly when NATO refused Trump's demand for warships: "We were not consulted before this war. This has nothing to do with NATO."
 
-The narrative here isn't about precision or deterrence. It's about victims and injustice. A sovereign nation bombed without legal mandate, with civilians bearing the cost.
+This narrative isn't about precision or deterrence. It's about victims. A sovereign nation bombed without legal mandate, civilians bearing the cost.
 
-Munaeem's blog captured the divide perfectly: "Turn on Western television and you hear about strategic strikes and military deterrence. Watch Iranian channels and the same explosions become scenes of destroyed homes and grieving families."
+"Turn on Western television and you hear about strategic strikes and military deterrence," wrote blogger Munaeem. "Watch Iranian channels and the same explosions become scenes of destroyed homes and grieving families."
 
 ## The Invisible Third Story: Regional Chaos
 
-There's a third framing that both Western and Iranian media miss.
+Both Western and Iranian media miss a third framing.
 
-Arab networks focus on regional stability. The real question isn't military success or civilian suffering — it's whether this war spreads. Will the Strait of Hormuz stay closed? How long can Gulf states sustain $700 million-per-day losses from blocked oil exports? What happens if Lebanon becomes a full war zone?
+Arab networks care about stability. Not who's winning — whether this war spreads. Will Hormuz stay closed? Can Gulf states absorb $700 million a day in blocked oil exports? Does Lebanon become a full war zone?
 
-This narrative treats the Iran war as an economic and stability crisis. Oil prices swung $23 in 24 hours. Sri Lanka cut to a four-day work week because of fuel shortages. Bangladesh closed universities. Qatar's Prime Minister called Iran's attacks on Gulf infrastructure "a big sense of betrayal."
+Oil swung $23 in 24 hours. Sri Lanka cut to a four-day work week. Bangladesh closed universities. Qatar's PM called Iran's attacks on Gulf infrastructure "a big sense of betrayal."
 
-For audiences in Dubai, Riyadh, and Cairo, the war isn't about Tehran vs. Washington. It's about whether their economies survive the spillover.
+For audiences in Dubai, Riyadh, and Cairo, this war isn't Tehran vs. Washington. It's whether their economies survive the spillover.
 
-## Why This Matters: Democratic Accountability Dies in the Gap
+## Democratic Accountability Dies in the Gap
 
-These aren't just editorial differences. This is a fundamental problem for democracy.
+These aren't editorial differences. They're a structural problem for democracy.
 
-When voters in one country see precision strikes and voters in another country see 1,348 civilian deaths, how do you have democratic accountability? You can't. Informed consent for a war becomes impossible if the public voting on it sees a completely different conflict than the one actually happening.
+Voters in one country see precision strikes. Voters in another see 1,348 dead civilians. You can't have informed consent for a war if the public voting on it sees a different conflict than the one happening.
 
-Research on information asymmetry and war shows that "most of the great wars of the modern era resulted from leaders miscalculating their prospects for victory" — often because of distorted information flows. When media coverage diverges this sharply, leaders and publics operate in separate realities.
+Research on information asymmetry and war shows "most of the great wars of the modern era resulted from leaders miscalculating their prospects for victory" — often because of distorted information flows. When coverage diverges this sharply, leaders and publics operate in separate realities.
 
-The Iran war's PGI score of 7.05 is a red flag. When 6.24 billion people see fundamentally different versions of the same war, the "information battlefield" has already fractured beyond repair. There's no shared reality left to debate.
+A PGI score of 7.05 is a red flag. When 6.24 billion people see different versions of the same war, there's no shared reality left to debate.
 
 ## Three Wars, One Conflict
 
-Day 18 of the Iran war. Same explosions. Same cities. Same Strait of Hormuz closure.
+Day 18. Same explosions. Same cities. Same blockaded strait.
 
-But depending on where you live, you're seeing:
-- **Strategy:** Precision strikes, military deterrence, nuclear threat elimination
-- **Suffering:** 1,348 dead, heritage destruction, aggression without mandate  
+Depending on where you live:
+- **Strategy:** Precision strikes, deterrence, nuclear threat elimination
+- **Suffering:** 1,348 dead, heritage burning, aggression without mandate
 - **Chaos:** Regional economic collapse, Hormuz crisis, spillover risk
 
-Each framing highlights real facts. Each leaves out other real facts. And each creates a worldview so different that people watching the same war can't agree on what the war actually *is*.
+Each framing highlights real facts. Each omits others. Each creates a worldview so different that people watching the same war can't agree on what it *is*.
 
-Wars end. Narratives outlast them. The story we tell about the Iran war — who started it, why it happened, what it cost — will shape Middle East geopolitics for decades.
+Wars end. Narratives outlast them. The story told about this war — who started it, why, what it cost — will shape Middle East geopolitics for decades.
 
-Right now, we don't even have one story. We have three. And 6.24 billion people have no idea the other two exist.
+Right now there isn't one story. There are three. And 6.24 billion people have no idea the other two exist.

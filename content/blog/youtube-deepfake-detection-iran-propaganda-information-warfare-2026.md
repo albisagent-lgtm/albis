@@ -36,70 +36,64 @@ faqs:
     a: "Detection is improving through layered methods like spotting pixel-level markings, noise pattern inconsistencies, and tracking distribution via bot networks. The EU AI Act mandates labeling from August 2026, but detection struggles to keep pace with generation speed."
 ---
 
-YouTube's rolling out deepfake detection for politicians and journalists. Iran's Revolutionary Guard is running 62 fake accounts across X, Instagram and Bluesky. Deepfakes reached a new threshold in 2026 — they're now nearly indistinguishable from reality.
+YouTube's expanding deepfake detection to politicians and journalists. Iran's Revolutionary Guard runs 62 fake accounts across X, Instagram, and Bluesky. Deepfakes in 2026 are nearly indistinguishable from reality.
 
-These three developments aren't separate stories. They're snapshots of [information warfare](/topics/information-warfare) as it exists right now.
+These aren't separate stories. They're snapshots of [information warfare](/topics/information-warfare) right now.
 
-## Detection Tech Reaches New Territory
+## Detection Tech Goes Political
 
-YouTube announced March 10 that it's expanding its likeness detection technology to government officials, political candidates, and journalists. The tech identifies AI-generated faces and lets people request removal if content violates policy.
+YouTube announced March 10 it's extending likeness detection to government officials, candidates, and journalists. The tech spots AI-generated faces and lets targets request removal.
 
-It launched last year for 4 million creators in the YouTube Partner Program. Now it's going political.
+It launched last year for 4 million YouTube Partner creators. Now it covers the civic space.
 
-"This expansion is really about the integrity of the public conversation," said Leslie Miller, YouTube's VP of Government Affairs. "The risks of AI impersonation are particularly high for those in the civic space."
+"The risks of AI impersonation are particularly high for those in the civic space," said Leslie Miller, YouTube's VP of Government Affairs.
 
-The tool requires users to verify identity with a selfie and government ID. They create a profile, view matches, request removal. Not every match gets removed. YouTube evaluates under its privacy policy to separate parody from harm.
+Users verify identity with a selfie and government ID, then review matches and flag violations. Not every match gets pulled — YouTube weighs parody vs. harm. The company won't say which politicians are testing it. Creator removals have been "very small" so far.
 
-The company won't say which politicians are testing it. Removals by creators have been "very small" so far. Politicians might see different numbers.
+## Iran's Troll Farm Pivots to War
 
-## Iran's Troll Farm Pivots to War Content
+Clemson University's Media Forensics Hub found 62 fake accounts tied to Iran's Revolutionary Guard. The personas: Scottish independence supporters, Irish nationalists, Latina women from Texas and California.
 
-Clemson University's Media Forensics Hub identified 62 fake accounts linked to Iran's Islamic Revolutionary Guard Corps. They posed as Scottish independence supporters, Irish nationalists, and Latina women from Texas and California.
+They built credibility on local issues first. Scottish accounts pushed independence. Irish accounts wanted reunification. Latina accounts attacked ICE and backed Maduro.
 
-The accounts built credibility posting local issues. Scottish accounts pushed independence. Irish accounts wanted reunification. Latina accounts railed against ICE and backed Venezuela's Maduro.
+Then the US and Israel struck [Iran](/perspectives/iran) on February 28. Every account pivoted overnight.
 
-Then the U.S. and Israel struck [Iran](/perspectives/iran) on February 28. Every account pivoted to war.
+One fake user, "Ana Rodri" from California, posted ICE protest images in early February. After the strikes: anti-war protests outside Trump Tower, anti-American cartoons, footage of a downed American pilot.
 
-One fake user, "Ana Rodri" from California, posted ICE protest images in early February. After the strikes, she posted anti-war protests outside Trump Tower, anti-American cartoons, footage of a downed American pilot.
+"Iran redirected its resources toward propaganda around the war, trying to make the war more painful for the United States," said Darren Linvill, co-lead of the Media Forensics Hub. "Clearly with the hope of shortening it."
 
-"Iran redirected its resources toward propaganda around the war, trying to make the war more painful for the United States," said Darren Linvill, who co-leads the Media Forensics Hub. "Clearly with the hope of shortening it."
-
-The posts reached tens of millions. Individual engagement was modest — dozens of views, few comments — but researchers believe the network's larger than what they've found.
-
-Most American-facing accounts on X got suspended by March 9. European accounts stayed live. Instagram and Bluesky took them down after Clemson's report.
+The posts reached tens of millions. Individual engagement was modest — dozens of views, few comments — but researchers think the network's bigger than what they've uncovered. X suspended most American-facing accounts by March 9. European accounts stayed live until Clemson published its report.
 
 ## Cognitive Manipulation at Scale
 
-The World Economic Forum's Global Risks Report 2026 placed mis- and disinformation among the top short-term global risks. It's one of few risks severe over both two-year and ten-year horizons.
+The WEF's Global Risks Report 2026 ranks misinformation and disinformation among the top short-term global risks — one of few threats rated severe over both two and ten-year horizons.
 
-Deepfakes crossed a threshold in 2026. Earlier glitches disappeared. Anyone with a smartphone can make them.
+Deepfakes crossed a threshold this year. The glitches are gone. Anyone with a smartphone can make one.
 
-Ireland's 2025 presidential election saw a deepfake video falsely showing the winner withdrawing. Fake footage of broadcasters "confirming" the news dropped days before polling. The Netherlands saw 400 AI-generated images attacking political candidates.
+Ireland's 2025 presidential election saw a deepfake of the winner withdrawing. Fake broadcaster footage "confirming" it dropped days before polling. The Netherlands saw 400 AI-generated images attacking candidates.
 
-"Just knowing deepfakes exist can make us doubt things we read and see — even the truth," according to research cited in the WEF report.
+"Just knowing deepfakes exist can make us doubt things we read and see — even the truth," the WEF report notes.
 
-Micro-targeting identifies people susceptible to emotional manipulation using self-reported online data. Once identified, targeted messaging is selected because it resonates emotionally and will likely be shared. This amplifies polarization and expands disinformation reach.
+Micro-targeting makes it worse. Platforms identify people susceptible to emotional triggers using their own data, then serve content designed to resonate and spread. Polarization amplifies. Disinformation travels further.
 
-## The Three-Layer Defense
+## Three Layers of Defense
 
-Finland teaches grade school children to spot manipulative information. The curriculum asks six questions: who's communicating with me, how did they find me, what do they gain, can I verify their message, am I at risk if I embrace it, can I harm others if I share it.
+Finland teaches grade schoolers to spot manipulative content. Six questions: Who's talking to me? How'd they find me? What do they gain? Can I verify it? Am I at risk? Could sharing it hurt someone?
 
-Deepfake detection is improving through layered methods. Inconsistencies show up: mismatched noise patterns, color shifts, lip-sync errors. Pixel-level markings remain even in latest-generation fakes.
+Detection tech is layered too. Mismatched noise patterns, color shifts, lip-sync errors — inconsistencies persist even in latest-gen fakes. Pixel-level markings survive.
 
-Distribution patterns help. Malicious deepfakes spread via bot networks. Account metadata reveals creation dates and posting rhythms.
+Distribution gives fakes away. They spread through bot networks. Account metadata shows creation dates and posting patterns that don't match real users.
 
-The EU AI Act reflects this shift. Article 50 requires labeling of AI-generated content and disclosure of synthetic interactions. It's enforceable from August 2026 with fines up to 6% of global revenue.
+The EU AI Act adds a legal layer. Article 50 requires labeling AI-generated content and disclosing synthetic interactions. Enforcement starts August 2026. Fines: up to 6% of global revenue.
 
-## What's Happening Here
+## What's Actually Happening
 
-YouTube's expanding detection to protect public figures. Iran's running fake accounts to shape war perception. The EU's mandating AI content labels.
+YouTube's expanding detection. Iran's running fake accounts. The EU's mandating labels. These aren't solutions. They're responses to a system already running at scale.
 
-These aren't solutions. They're responses to a mechanism that's already operating at scale.
+Information warfare doesn't need explosives. It needs emotional triggers, the right audiences, and networks built to look real.
 
-Information warfare doesn't require explosives or soldiers. It requires understanding which emotional triggers move which audiences, then deploying content through networks designed to look authentic.
+The damage isn't measured by how many people believe one fake video. It's cumulative doubt — whether anyone trusts what they see, whether verification keeps pace, whether truth becomes too expensive to find.
 
-The effectiveness isn't measured in how many people believe a single deepfake. It's measured in cumulative doubt — whether people can trust anything they see, whether verification systems can keep pace, whether the cost of determining truth becomes too high.
+"The year 2026 will test whether institutions, societies, and platforms can adapt fast enough," the WEF report warns.
 
-"The cognitive impact of disinformation will define how societies evolve in the coming years," the WEF report states. "The year 2026 will test whether institutions, societies, and platforms can adapt fast enough."
-
-Detection tech, fake account takedowns, and AI labeling requirements are the current defense layer. The question isn't whether they work. It's whether they scale faster than the manipulation methods they're trying to contain.
+The real question isn't whether detection, takedowns, and labeling laws work. It's whether they scale faster than the manipulation they're chasing.
