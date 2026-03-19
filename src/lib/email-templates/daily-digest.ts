@@ -60,6 +60,11 @@ function sectionHeader(_emoji: string, title: string): string {
 }
 
 export function generateDailyDigestHtml(data: NewsletterData): string {
+  return generateSimpleDigestHtml(data);
+}
+
+export function generateSimpleDigestHtml(data: NewsletterData): string {
+  const SITE = "https://www.albis.news";
   const {
     greeting,
     pulseItems,
