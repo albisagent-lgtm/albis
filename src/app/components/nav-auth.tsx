@@ -124,6 +124,13 @@ export function NavLinks() {
         The Lens
       </Link>
       <Link
+        href="/live"
+        className="text-[13px] font-medium tracking-wide text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors flex items-center gap-1"
+      >
+        <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+        Live
+      </Link>
+      <Link
         href="/archive"
         className="text-[13px] font-medium tracking-wide text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
       >

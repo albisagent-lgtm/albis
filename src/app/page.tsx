@@ -11,7 +11,9 @@ import { RelativeTime, BriefingTime } from "./components/relative-time";
 import { NextBriefingCountdown } from "./components/next-briefing-countdown";
 import { ExitIntentModal } from "./components/exit-intent-modal";
 import { PgiBar } from "./components/pgi-bar";
+import { PgiHero } from "./components/pgi-hero";
 import { Testimonials } from "./components/testimonials";
+import { ScanPulse } from "./components/scan-pulse";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
@@ -159,6 +161,10 @@ export default async function Home() {
           mode="breaking"
         />
       )}
+
+      <ScanPulse />
+
+      <PgiHero pgi={pgiData?.pgi ?? null} delta={pgiData?.delta ?? null} date={pgiData?.date ?? null} />
 
       {/* ════════════════════════════════════════════════════════
           ABOVE THE FOLD — Conversion-focused hero

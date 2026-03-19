@@ -44,7 +44,9 @@ export function Footer() {
                 <FooterLink href="/quiz">Perspective Check</FooterLink>
                 <FooterLink href="/blind-spots">Blind Spot Map</FooterLink>
                 <FooterLink href="/perception-gap">Perception Gap Index</FooterLink>
+                <FooterLink href="/methodology">Methodology</FooterLink>
                 <FooterLink href="/topics">Topics</FooterLink>
+                <FooterLink href="/framing-lab">Framing Lab</FooterLink>
                 <li>
                   <a
                     href="/feed.xml"
