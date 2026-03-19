@@ -1,41 +1,18 @@
 import type { NewsletterData } from "./types";
-import { CATEGORY_EMOJI, REGION_FLAGS, REGION_NAMES } from "./types";
+import { REGION_FLAGS, REGION_NAMES } from "./types";
 
 const SITE = "https://www.albis.news";
-
-// Design tokens
-const AMBER = "#d97706";
 const NAVY = "#1a1a2e";
-const BODY_COLOR = "#333333";
+const AMBER = "#c8922a";
 const GRAY = "#6b7280";
-const LIGHT_GRAY = "#f3f4f6";
+const LIGHT_GRAY = "#f9fafb";
 const BORDER = "#e5e7eb";
-const BLIND_SPOT_BG = "#fffbeb";
+const BODY = "#374151";
 const WHITE = "#ffffff";
 
 function esc(s: string | undefined | null): string {
   if (!s) return "";
   return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-
-function categoryLabel(cat: string): string {
-  const names: Record<string, string> = {
-    "current-events": "World",
-    cybersecurity: "Cyber",
-    "tech-ai": "Tech",
-    "ai-intelligence": "AI",
-    "weather-climate": "Climate",
-    "economic-flows": "Business",
-    health: "Health",
-    "health-longevity": "Science",
-    "climate-energy": "Energy",
-    culture: "Culture",
-    "natural-world": "Nature",
-    grassroots: "Society",
-    "psychology-persuasion": "Mind",
-    "influential-people": "People",
-  };
-  return names[cat] || cat.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 function regionName(r: string): string {
@@ -46,25 +23,15 @@ function regionFlag(r: string): string {
   return REGION_FLAGS[r] || "🌐";
 }
 
-/** Section header — amber, uppercase */
-function sectionHeader(_emoji: string, title: string): string {
-  return `<tr><td style="padding:0 28px;">
-    <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">
-      <tr><td style="padding:32px 0 0 0;">
-        <div style="border-top:1px solid ${BORDER};padding-top:20px;">
-          <span style="font-size:11px;font-weight:700;color:${AMBER};text-transform:uppercase;letter-spacing:1.5px;">${esc(title)}</span>
-        </div>
-      </td></tr>
-    </table>
-  </td></tr>`;
+function sectionLabel(title: string): string {
+  return `<div style="font-size:10px;color:${AMBER};text-transform:uppercase;letter-spacing:2px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-weight:700;margin-bottom:14px;">${esc(title)}</div>`;
+}
+
+function divider(): string {
+  return `<div style="height:1px;background:${BORDER};margin:28px 0;"></div>`;
 }
 
 export function generateDailyDigestHtml(data: NewsletterData): string {
-  return generateSimpleDigestHtml(data);
-}
-
-export function generateSimpleDigestHtml(data: NewsletterData): string {
-  const SITE = "https://www.albis.news";
   const {
     greeting,
     pulseItems,
@@ -77,212 +44,181 @@ export function generateSimpleDigestHtml(data: NewsletterData): string {
     displayDate,
   } = data;
 
-  // --- 📊 THE PULSE ---
+  // --- PULSE ---
   const pulseHtml = pulseItems.length > 0
-    ? pulseItems
-        .map(
-          (p) =>
-            `<td style="padding:8px 12px 8px 0;vertical-align:top;">
-              <div style="font-size:11px;color:${GRAY};text-transform:uppercase;letter-spacing:0.5px;font-weight:600;">${esc(p.label)}</div>
-              <div style="font-size:16px;color:${NAVY};font-weight:700;margin-top:2px;">${esc(p.value)}</div>
-              ${p.change ? `<div style="font-size:12px;color:${p.change.startsWith("↓") ? "#dc2626" : "#16a34a"};margin-top:1px;">${esc(p.change)}</div>` : ""}
-            </td>`
-        )
-        .join("")
+    ? pulseItems.map((p) =>
+        `<td style="text-align:center;padding:0 20px;border-right:1px solid ${BORDER};">
+          <div style="font-size:10px;color:${GRAY};text-transform:uppercase;letter-spacing:1px;font-family:-apple-system,sans-serif;font-weight:600;">${esc(p.label)}</div>
+          <div style="font-size:20px;font-weight:900;color:${NAVY};margin:4px 0 2px;font-family:Georgia,serif;">${esc(p.value)}</div>
+          ${p.change ? `<div style="font-size:11px;color:${p.change.startsWith("↓") ? "#dc2626" : "#dc2626"};font-family:-apple-system,sans-serif;">${esc(p.change)}</div>` : ""}
+        </td>`
+      ).join("")
     : "";
 
-  // --- 🔍 THE FULL PICTURE ---
+  // Always add the scanned metric
+  const scannedCell = `<td style="text-align:center;padding:0 0 0 20px;">
+    <div style="font-size:10px;color:${GRAY};text-transform:uppercase;letter-spacing:1px;font-family:-apple-system,sans-serif;font-weight:600;">Scanned</div>
+    <div style="font-size:20px;font-weight:900;color:${NAVY};margin:4px 0 2px;font-family:Georgia,serif;">60</div>
+    <div style="font-size:11px;color:${GRAY};font-family:-apple-system,sans-serif;">countries · 9 languages</div>
+  </td>`;
+
+  // --- PERSPECTIVES ---
   const perspectivesHtml = bigStoryAnalysis.perspectives
-    .map(
-      (p) =>
-        `<div style="margin-bottom:10px;">
-          <span style="font-size:13px;font-weight:700;color:${AMBER};">${esc(p.region)}:</span>
-          <span style="font-size:15px;color:${BODY_COLOR};line-height:1.6;"> ${esc(p.view)}</span>
-        </div>`
-    )
-    .join("");
+    .map((p) =>
+      `<p style="font-size:15px;color:${BODY};line-height:1.65;margin:0 0 8px;font-family:-apple-system,sans-serif;">
+        <strong>${esc(p.region)}:</strong> ${esc(p.view)}
+      </p>`
+    ).join("");
 
-  // --- ⚡ WORLD AT A GLANCE ---
+  // --- GLANCE ITEMS ---
   const glanceHtml = glanceItems
-    .map(
-      (item, i) => {
-        const fontSize = i === 0 ? "15px" : i <= 2 ? "14.5px" : "14px"; // taper
-        return `<tr><td style="padding:0;">
-          <div style="padding:14px 0;${i < glanceItems.length - 1 ? `border-bottom:1px solid ${BORDER};` : ""}">
-            <div style="border-left:3px solid ${AMBER};padding-left:14px;">
-              <div style="font-size:11px;font-weight:700;color:${AMBER};text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">${categoryLabel(item.category)}</div>
-              <div style="font-size:${fontSize};color:${NAVY};font-weight:600;line-height:1.4;margin-bottom:4px;">${esc(item.headline)}</div>
-              <div style="font-size:14px;color:${BODY_COLOR};line-height:1.55;">${esc(item.connection)}</div>
-            </div>
-          </div>
-        </td></tr>`;
-      }
-    )
-    .join("");
+    .map((item) =>
+      `<p style="font-size:15px;color:${BODY};line-height:1.65;margin:0 0 14px;font-family:-apple-system,sans-serif;">
+        <strong style="color:${NAVY};">${esc(item.headline)}.</strong> ${esc(item.connection)}
+      </p>`
+    ).join("");
 
-  // --- 🌍 THE BLIND SPOT ---
+  // --- BLIND SPOT ---
   let blindSpotHtml = "";
   if (blindSpot) {
-    const covered = blindSpot.coveredIn.map((r) => `${regionFlag(r)} ${regionName(r)}`).join(", ");
-    const missing = blindSpot.missingFrom.map((r) => `${regionFlag(r)} ${regionName(r)}`).join(", ");
+    const covered = blindSpot.coveredIn.map((r) => `${regionFlag(r)} ${regionName(r)}`).join(" · ");
+    const missing = blindSpot.missingFrom.map((r) => `${regionFlag(r)} ${regionName(r)}`).join(" · ");
     blindSpotHtml = `
-    ${sectionHeader("", "The Blind Spot")}
-    <tr><td style="padding:0 28px;">
-      <div style="background:${BLIND_SPOT_BG};border-radius:8px;padding:20px 22px;margin-top:14px;">
-        <div style="font-size:16px;color:${NAVY};font-weight:600;line-height:1.4;margin-bottom:10px;">${esc(blindSpot.headline)}</div>
-        <div style="font-size:14px;color:${BODY_COLOR};line-height:1.6;margin-bottom:12px;">${esc(blindSpot.connection)}</div>
-        <div style="font-size:13px;color:${GRAY};line-height:1.5;">
-          <strong style="color:${NAVY};">Covered in:</strong> ${covered}<br>
-          <strong style="color:${NAVY};">Missing from:</strong> ${missing}
-        </div>
-      </div>
-    </td></tr>`;
+      ${divider()}
+      ${sectionLabel("The Blind Spot")}
+      <p style="font-size:15px;color:${BODY};line-height:1.65;margin:0 0 8px;font-family:-apple-system,sans-serif;">
+        <strong style="color:${NAVY};">${esc(blindSpot.headline)}.</strong> ${esc(blindSpot.connection)}
+      </p>
+      <p style="font-size:12px;color:${GRAY};margin:0;font-family:-apple-system,sans-serif;">
+        <strong style="color:${NAVY};">Covered in:</strong> ${covered}<br>
+        <strong style="color:${NAVY};">Missing from:</strong> ${missing}
+      </p>`;
   }
 
-  // --- 📚 WORTH READING ---
-  let blogHtml = "";
+  // --- WORTH READING ---
+  let worthReadingHtml = "";
   if (blogPosts.length > 0) {
-    const links = blogPosts
-      .slice(0, 4)
-      .map(
-        (p) =>
-          `<div style="padding:5px 0;">
-            <span style="color:${AMBER};font-weight:700;">—</span>
-            <a href="${SITE}/blog/${p.slug}" style="color:${NAVY};font-weight:600;text-decoration:none;font-size:14px;">${esc(p.title)}</a>
-            <span style="font-size:13px;color:${GRAY};"> — ${esc(p.description)}</span>
-          </div>`
-      )
-      .join("");
-    blogHtml = `
-    ${sectionHeader("", "Worth Reading")}
-    <tr><td style="padding:6px 28px 0 28px;">${links}</td></tr>`;
+    const links = blogPosts.slice(0, 4).map((p) =>
+      `<p style="font-size:14px;margin:0 0 10px;font-family:-apple-system,sans-serif;">
+        — <a href="${SITE}/blog/${p.slug}" style="color:${NAVY};font-weight:600;text-decoration:none;">${esc(p.title)}</a>
+        ${p.description ? `<span style="color:${GRAY};"> — ${esc(p.description)}</span>` : ""}
+      </p>`
+    ).join("");
+    worthReadingHtml = `
+      ${divider()}
+      ${sectionLabel("Worth Reading")}
+      ${links}`;
   }
 
-  // --- BUILD EMAIL ---
   return `<!DOCTYPE html>
-<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <meta name="color-scheme" content="light">
-  <meta name="supported-color-schemes" content="light">
   <title>Albis Daily — ${esc(displayDate)}</title>
-  <!--[if mso]><noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript><![endif]-->
   <style>
-    body,table,td{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;}
-    a{color:${AMBER};text-decoration:none;}
+    body,table,td{font-family:Georgia,'Times New Roman',serif;}
+    a{color:${NAVY};text-decoration:none;}
     a:hover{text-decoration:underline;}
-    @media only screen and (max-width:620px){
-      .outer{width:100%!important;}
-      .inner{padding:20px 20px!important;}
-      .masthead{padding:28px 20px 24px!important;}
-      .section-pad{padding-left:20px!important;padding-right:20px!important;}
+    @media only screen and (max-width:600px){
+      .wrap{padding:24px 20px!important;}
+      .masthead{padding:28px 20px 20px!important;}
+      .pulse td{display:block!important;text-align:left!important;border-right:none!important;border-bottom:1px solid ${BORDER};padding:10px 0!important;}
     }
   </style>
 </head>
-<body style="margin:0;padding:0;background:${LIGHT_GRAY};-webkit-font-smoothing:antialiased;">
+<body style="margin:0;padding:0;background:${WHITE};-webkit-font-smoothing:antialiased;">
+
   <!-- Preheader -->
-  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;">${esc(bigStory.headline)} &mdash; Today's full picture plus ${glanceItems.length} more stories you need to see.</div>
+  <div style="display:none;max-height:0;overflow:hidden;">${esc(bigStory.headline)} — ${esc(displayDate)}</div>
 
-  <center>
-  <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;background:${LIGHT_GRAY};">
-    <tr><td align="center" style="padding:24px 16px;">
+  <table cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;margin:0 auto;background:${WHITE};">
 
-      <!-- Main Container -->
-      <table role="presentation" cellpadding="0" cellspacing="0" class="outer" style="width:100%;max-width:560px;background:${WHITE};border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+    <!-- MASTHEAD -->
+    <tr><td class="masthead" style="padding:40px 40px 0;text-align:center;border-bottom:3px solid ${NAVY};">
+      <div style="font-size:38px;font-weight:900;color:${NAVY};letter-spacing:4px;text-transform:uppercase;">ALBIS</div>
+      <div style="font-size:11px;color:${GRAY};letter-spacing:2px;margin:4px 0 18px;font-family:-apple-system,sans-serif;text-transform:uppercase;">Daily Briefing · ${esc(displayDate)}</div>
+    </td></tr>
 
-        <!-- ═══════════ MASTHEAD ═══════════ -->
-        <tr><td class="masthead" style="padding:36px 28px 28px;text-align:center;">
-          <div style="font-size:28px;font-weight:800;color:${NAVY};letter-spacing:-0.5px;font-family:Georgia,'Times New Roman',serif;">ALBIS</div>
-          <div style="font-size:11px;color:${GRAY};text-transform:uppercase;letter-spacing:3px;margin-top:4px;">Daily Briefing</div>
-          <div style="font-size:13px;color:${GRAY};margin-top:8px;">${esc(displayDate)}</div>
-          <div style="margin-top:10px;"><a href="${SITE}/archive/${data.date}" style="font-size:12px;color:${AMBER};text-decoration:underline;">View in browser</a></div>
-          <div style="width:40px;height:2px;background:${AMBER};margin:16px auto 0;"></div>
-        </td></tr>
+    <!-- GREETING -->
+    <tr><td class="wrap" style="padding:24px 40px;border-bottom:1px solid ${BORDER};">
+      <div style="font-size:15px;color:${GRAY};line-height:1.65;font-style:italic;font-family:-apple-system,sans-serif;">${esc(greeting)}</div>
+    </td></tr>
 
-        <!-- ═══════════ 🌅 GOOD MORNING ═══════════ -->
-        <tr><td class="section-pad" style="padding:0 28px 24px;">
-          <div style="font-size:16px;color:${BODY_COLOR};line-height:1.65;">${esc(greeting)}</div>
-        </td></tr>
-
-        <!-- ═══════════ 📊 THE PULSE ═══════════ -->
-        ${pulseItems.length > 0 ? `
-        ${sectionHeader("", "The Pulse")}
-        <tr><td class="section-pad" style="padding:12px 28px 0;">
-          <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;">
-            <tr>${pulseHtml}</tr>
-          </table>
-        </td></tr>` : ""}
-
-        <!-- ═══════════ 🔍 THE FULL PICTURE ═══════════ -->
-        ${sectionHeader("", "The Full Picture")}
-        <tr><td class="section-pad" style="padding:14px 28px 0;">
-          <div style="font-size:22px;font-weight:700;color:${NAVY};line-height:1.3;font-family:Georgia,'Times New Roman',serif;margin-bottom:16px;">${esc(bigStory.headline)}</div>
-
-          <!-- What happened -->
-          <div style="font-size:16px;color:${BODY_COLOR};line-height:1.65;margin-bottom:18px;">${esc(bigStoryAnalysis.whatHappened)}</div>
-
-          <!-- How the world sees it -->
-          <div style="font-size:11px;font-weight:700;color:${AMBER};text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">How the world sees it</div>
-          <div style="margin-bottom:18px;">${perspectivesHtml}</div>
-
-          <!-- What everyone misses -->
-          <div style="background:${BLIND_SPOT_BG};border-left:3px solid ${AMBER};padding:14px 16px;border-radius:0 6px 6px 0;margin-bottom:18px;">
-            <div style="font-size:11px;font-weight:700;color:${AMBER};text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">What everyone misses</div>
-            <div style="font-size:15px;color:${BODY_COLOR};line-height:1.6;">${esc(bigStoryAnalysis.whatEveryoneMisses)}</div>
-          </div>
-
-          <!-- Zoom Out -->
-          <div style="font-size:11px;font-weight:700;color:${AMBER};text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Zoom out</div>
-          <div style="font-size:15px;color:${BODY_COLOR};line-height:1.6;margin-bottom:4px;">${esc(bigStoryAnalysis.zoomOut)}</div>
-        </td></tr>
-
-        <!-- ═══════════ ⚡ WORLD AT A GLANCE ═══════════ -->
-        ${sectionHeader("", "World at a Glance")}
-        <tr><td class="section-pad" style="padding:10px 28px 0;">
-          <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">
-            ${glanceHtml}
-          </table>
-        </td></tr>
-
-        <!-- ═══════════ 🌍 THE BLIND SPOT ═══════════ -->
-        ${blindSpotHtml}
-
-        <!-- ═══════════ 📚 WORTH READING ═══════════ -->
-        ${blogHtml}
-
-        <!-- ═══════════ 💬 ONE THING ═══════════ -->
-        ${sectionHeader("", "One Thing")}
-        <tr><td style="padding:14px 28px 32px;text-align:center;">
-          <div style="font-size:17px;color:${NAVY};line-height:1.6;font-style:italic;font-family:Georgia,'Times New Roman',serif;max-width:460px;margin:0 auto;">&ldquo;${esc(closingThought)}&rdquo;</div>
-          <div style="font-size:14px;color:${GRAY};margin-top:18px;">See clearly. — Albis</div>
-        </td></tr>
-
-        <!-- ═══════════ CTA ═══════════ -->
-        <tr><td style="padding:0 28px 36px;text-align:center;">
-          <a href="${SITE}" style="display:inline-block;padding:14px 36px;background:${NAVY};color:${WHITE};text-decoration:none;border-radius:6px;font-size:14px;font-weight:700;">Explore today's stories</a>
-        </td></tr>
-
+    <!-- PULSE -->
+    ${pulseItems.length > 0 ? `
+    <tr><td style="padding:20px 40px;border-bottom:1px solid ${BORDER};">
+      <table class="pulse" cellpadding="0" cellspacing="0" style="width:100%;">
+        <tr>
+          ${pulseHtml}
+          ${scannedCell}
+        </tr>
       </table>
-
-      <!-- ═══════════ FOOTER ═══════════ -->
-      <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;max-width:560px;">
-        <tr><td style="padding:24px 28px;text-align:center;">
-          <div style="font-size:12px;color:#9ca3af;line-height:1.6;">
-            You're receiving this because you signed up at <a href="${SITE}" style="color:#9ca3af;text-decoration:underline;">albis.news</a>
-          </div>
-          <div style="margin-top:8px;">
-            <a href="${SITE}/api/unsubscribe?email={{EMAIL}}" style="font-size:12px;color:#9ca3af;text-decoration:underline;">Unsubscribe</a>
-            &nbsp;&nbsp;·&nbsp;&nbsp;
-            <a href="${SITE}/archive/${data.date}" style="font-size:12px;color:#9ca3af;text-decoration:underline;">View on web</a>
-          </div>
-          <div style="margin-top:16px;font-size:11px;color:#d1d5db;">Observe. Never judge.</div>
-        </td></tr>
+    </td></tr>` : `
+    <tr><td style="padding:20px 40px;border-bottom:1px solid ${BORDER};">
+      <table class="pulse" cellpadding="0" cellspacing="0" style="width:100%;">
+        <tr>${scannedCell}</tr>
       </table>
+    </td></tr>`}
+
+    <!-- MAIN CONTENT -->
+    <tr><td class="wrap" style="padding:32px 40px 40px;">
+
+      <!-- The Full Picture -->
+      ${sectionLabel("The Full Picture")}
+      <div style="font-size:26px;font-weight:900;color:${NAVY};line-height:1.25;margin-bottom:18px;">${esc(bigStory.headline)}</div>
+      <p style="font-size:16px;color:${BODY};line-height:1.7;margin:0 0 20px;font-family:-apple-system,sans-serif;">${esc(bigStoryAnalysis.whatHappened)}</p>
+
+      <div style="font-size:10px;color:${AMBER};text-transform:uppercase;letter-spacing:2px;font-family:-apple-system,sans-serif;font-weight:700;margin-bottom:10px;">How the world sees it</div>
+      ${perspectivesHtml}
+
+      <p style="font-size:15px;color:${BODY};line-height:1.65;margin:16px 0 8px;font-family:-apple-system,sans-serif;">
+        <strong style="color:${NAVY};">What everyone misses:</strong> ${esc(bigStoryAnalysis.whatEveryoneMisses)}
+      </p>
+      <p style="font-size:15px;color:${BODY};line-height:1.65;margin:0 0 0;font-family:-apple-system,sans-serif;">
+        <strong style="color:${NAVY};">Zoom out:</strong> ${esc(bigStoryAnalysis.zoomOut)}
+      </p>
+
+      ${divider()}
+
+      <!-- World at a Glance -->
+      ${sectionLabel("World at a Glance")}
+      ${glanceHtml}
+
+      <!-- Blind Spot -->
+      ${blindSpotHtml}
+
+      <!-- Worth Reading -->
+      ${worthReadingHtml}
+
+      ${divider()}
+
+      <!-- One Thing -->
+      <div style="text-align:center;padding:8px 0 24px;">
+        <div style="font-size:18px;color:${NAVY};line-height:1.6;font-style:italic;margin-bottom:12px;">&ldquo;${esc(closingThought)}&rdquo;</div>
+        <div style="font-size:13px;color:${GRAY};font-family:-apple-system,sans-serif;">See clearly. — Albis</div>
+      </div>
+
+      <!-- CTA -->
+      <div style="text-align:center;margin-bottom:8px;">
+        <a href="${SITE}" style="display:inline-block;padding:13px 36px;background:${NAVY};color:${WHITE};text-decoration:none;font-family:-apple-system,sans-serif;font-size:14px;font-weight:700;letter-spacing:0.5px;">Explore today's stories</a>
+      </div>
 
     </td></tr>
+
+    <!-- FOOTER -->
+    <tr><td style="padding:20px 40px 32px;text-align:center;border-top:3px solid ${NAVY};">
+      <div style="font-size:11px;color:#9ca3af;line-height:1.7;font-family:-apple-system,sans-serif;">
+        You're receiving this because you signed up at <a href="${SITE}" style="color:#9ca3af;text-decoration:underline;">albis.news</a><br>
+        <a href="${SITE}/api/unsubscribe?email={{EMAIL}}" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a>
+        &nbsp;·&nbsp;
+        <a href="${SITE}/archive/${data.date}" style="color:#9ca3af;text-decoration:underline;">View on web</a>
+        &nbsp;·&nbsp; Observe. Never judge.
+      </div>
+    </td></tr>
+
   </table>
-  </center>
+
 </body>
 </html>`;
 }
