@@ -40,46 +40,46 @@ sources:
     quote: "Efforts to halt these changes were brought forward by the US, which argued that the provisions included controversial and ideological issues"
 ---
 
-The United States cast the only opposing vote when the UN Commission on the Status of Women adopted its 70th-session outcome document on March 9 — ending a seven-decade tradition of consensus and leaving the US diplomatically isolated on women's rights at the multilateral level. The final tally was 37 in favor, 1 against, 6 abstentions.
+The United States cast the only opposing vote when the UN Commission on the Status of Women adopted its 70th-session outcome on March 9 — ending a seven-decade tradition of consensus. The final tally: 37 in favor, 1 against, 6 abstentions.
 
-Before the vote, the US delegation proposed eight amendments, including one that would have formally restricted the definition of gender to biological sex. The package was rejected 26 to 1, with 14 abstentions. Countries abstaining on the final document included Cote d'Ivoire, the Democratic Republic of the Congo, Egypt, Mali, Mauritania, and Saudi Arabia.
+Before the vote, the US proposed eight amendments, including one that would have formally restricted gender's definition to biological sex. The package was rejected 26 to 1, with 14 abstentions. Countries abstaining on the final document included Cote d'Ivoire, the DRC, Egypt, Mali, Mauritania, and Saudi Arabia.
 
 ## What Drove the Split
 
-The US delegation objected to language it characterized as promoting "gender ideology" and to commitments on sexual and reproductive health it said could be interpreted as endorsing abortion. The Agreed Conclusions — which carry no binding legal force but shape national legislation and international funding frameworks — also addressed digital governance and artificial intelligence, provisions the US delegation described as outside the commission's scope.
+The US objected to language it said promoted "gender ideology" and to reproductive health commitments it said could be read as endorsing abortion. The Agreed Conclusions — which carry no binding legal force but shape national legislation and funding frameworks — also covered digital governance and AI, which the US called outside the commission's scope.
 
-The backdrop: data cited during opening proceedings showed women hold roughly 64% of the legal rights available to men globally. Around 70% of countries report greater barriers for women accessing justice. Some 54% of countries lack consent-based rape laws. Conflict-related sexual violence increased 87% in recent years.
+The data presented at opening proceedings: women hold roughly 64% of the legal rights available to men globally. About 70% of countries report greater barriers for women accessing justice. Some 54% lack consent-based rape laws. Conflict-related sexual violence has risen 87% in recent years.
 
 ## Afghanistan and the Gender Apartheid Convention Window
 
-Writing in The Diplomat this week, analysts pointed to a closing window for action on Afghanistan. The Taliban prohibits girls from attending school beyond age 12, bans women from most forms of employment, and has issued judicial decrees that effectively sanction domestic abuse. The systematic exclusion is unique globally.
+The Taliban bars girls from school beyond age 12, bans women from most employment, and has issued decrees that effectively sanction domestic abuse. No other government does this on the same scale.
 
-Advocates are pressing UN member states to explicitly include "gender apartheid" in a draft Convention on Crimes Against Humanity. The deadline is April 30, when a UN General Assembly committee must finalize the convention text. Supporters argue codifying the crime would create a legal mechanism to prosecute state-level gender-based exclusion — in Afghanistan and in potential future cases. As of March 20, no government has publicly committed to supporting the clause.
+Advocates are pressing UN member states to include "gender apartheid" in a draft Convention on Crimes Against Humanity. The deadline is April 30, when a General Assembly committee finalizes the convention text. Supporters say codifying the crime would create a legal mechanism to prosecute state-level gender-based exclusion — in Afghanistan and elsewhere. As of March 20, no government has publicly committed to supporting the clause.
 
 ## SAVE Act Advances in Senate
 
-In Washington, the SAVE America Act cleared a procedural vote on March 17 by 51 to 48, moving to full Senate debate. The bill would require documentary proof of citizenship to register to vote in federal elections. Senator Lisa Murkowski of Alaska was the sole Republican to vote against proceeding, joining all 47 Democrats.
+The SAVE America Act cleared a procedural vote on March 17 by 51 to 48 and moved to full Senate debate. The bill would require documentary proof of citizenship to vote in federal elections. Senator Lisa Murkowski was the sole Republican to vote against, joining all 47 Democrats.
 
-Voting rights groups say the requirement disproportionately burdens married women who have changed their legal names, as well as naturalized citizens and low-income voters who may lack current documentation. Black Voters Matter co-founder LaTosha Brown told the 19th News the threat is functioning as an organizing tool, saying it "activates and motivates the mobilizers."
+Voting rights groups say the requirement disproportionately burdens married women who've changed their legal names, along with naturalized citizens and low-income voters. Black Voters Matter co-founder LaTosha Brown told the 19th News the threat is functioning as an organizing tool: it "activates and motivates the mobilizers."
 
-President Trump threatened on Truth Social to withhold his signature from other legislation unless the SAVE Act passes. Senate debate was continuing as of March 19.
+Trump threatened on Truth Social to withhold his signature from other legislation unless the SAVE Act passes. Senate debate was continuing as of March 19.
 
 ## Canada: 30 Femicides in 80 Days
 
-The Canadian Femicide Observatory for Justice and Accountability published data on March 15 showing 30 women and girls were violently killed in Canada in the first 80 days of 2026. The observatory's count since 2018 stands at 1,500 — a figure its researchers called "the tip of the iceberg" given chronic underreporting in intimate partner and family violence cases.
+The Canadian Femicide Observatory published data on March 15: 30 women and girls violently killed in Canada in the first 80 days of 2026. Its cumulative count since 2018 stands at 1,500 — what researchers called "the tip of the iceberg," given chronic underreporting in intimate partner and family violence cases.
 
-The Canadian data coincides with renewed international calls, surfaced at CSW70, for stronger mechanisms to track and prosecute gender-based violence in conflict zones, where accountability gaps are largest.
+The figure arrived alongside renewed calls at CSW70 for stronger mechanisms to track and prosecute gender-based violence in conflict zones, where accountability gaps are largest.
 
 ## US Reproductive Rights Ballot Race Taking Shape
 
-Several US states are positioning abortion rights constitutional amendments for November 2026. Virginia Governor Abigail Spanberger signed legislation on February 6 placing a Right to Reproductive Freedom Amendment before voters, completing a two-session legislative process required under Virginia's constitution.
+Several states are positioning abortion rights amendments for November 2026. Virginia Governor Abigail Spanberger signed legislation on February 6 placing a Right to Reproductive Freedom Amendment before voters — completing a two-session process required under Virginia's constitution.
 
-In Missouri, where voters approved a reproductive rights measure in 2024 despite voting for Donald Trump by 18 points and electing a Republican supermajority, Slate reported this week that anti-abortion groups are circulating ballot language designed to be confusing. Opponents of the measures say the approach exploits voter unfamiliarity with legislative text.
+In Missouri, where voters approved a reproductive rights measure in 2024 despite voting for Trump by 18 points, Slate reported that anti-abortion groups are circulating ballot language designed to confuse. The approach, opponents say, exploits voter unfamiliarity with legislative text.
 
 ## Regional Patterns
 
-The vote at CSW70 crystallized divisions that span several policy axes. Nordic and Western European delegations pushed for stronger commitments on reproductive health and gender identity protections. African and Middle Eastern abstentions reflected heterogeneous domestic political pressures rather than unified opposition.
+The CSW70 vote crystallized divisions across several policy axes. Nordic and Western European delegations pushed for stronger reproductive health and gender identity protections. African and Middle Eastern abstentions reflected diverse domestic pressures, not unified opposition.
 
-UN Women data cited during the session showed 44% of countries lack legislation requiring equal pay for equal work — a gap that spans every region. Women's access to formal land ownership documentation remains a persistent barrier in sub-Saharan Africa and parts of South Asia, where legal title records disproportionately exclude women.
+UN Women data from the session: 44% of countries lack equal pay legislation — a gap that spans every region. Formal land ownership documentation remains a persistent barrier for women in sub-Saharan Africa and parts of South Asia, where legal title records disproportionately exclude them.
 
-The [women's rights topic hub](/topics/womens-rights) covers ongoing developments. The [Global Attention Index](/indexes/gai) tracks where coverage of gender-based violence falls short of the scale of reported incidents.
+The [women's rights topic hub](/topics/womens-rights) covers ongoing developments. The [Global Attention Index](/indexes/gai) tracks where coverage of gender-based violence falls short of reported incidents.
