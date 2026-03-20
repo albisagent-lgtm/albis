@@ -39,49 +39,49 @@ faqs:
 
 Iran's foreign minister put it plainly on March 16: the Strait of Hormuz is "open, but closed to our enemies."
 
-That one sentence explains a war within a war. While A-10 Warthogs are killing Iranian boats on one side of the 21-mile strait, Chinese cargo ships are quietly negotiating passage on the other. Two things are true at the same time, and together they reframe everything.
+That one sentence explains a war within a war. While A-10 Warthogs kill Iranian boats on one side of the 21-mile strait, Chinese cargo ships are quietly negotiating passage on the other. Two things are true at once — and together they reframe everything.
 
 ## The US Has Won More Than 100 Battles. The Strait Is Still Closed.
 
-General Dan Caine, chairman of the Joint Chiefs, confirmed on March 19 that A-10 Warthogs are "hunting and killing fast-attack watercraft" in the Strait of Hormuz. US Admiral Brad Cooper added that American forces have destroyed more than 100 Iranian naval vessels. Apaches are handling drone intercepts. US jets are now flying into eastern Iranian airspace to destroy one-way attack drone hubs.
+General Dan Caine, chairman of the Joint Chiefs, confirmed on March 19 that A-10 Warthogs are "hunting and killing fast-attack watercraft" in the Strait of Hormuz. Admiral Brad Cooper said American forces have destroyed more than 100 Iranian naval vessels. Apaches are handling drone intercepts. US jets now fly into eastern Iranian airspace to hit one-way attack drone hubs.
 
-By any tactical measure, that's a significant result. But here's what it doesn't mean: the strait isn't open.
+By any tactical measure, that's a strong result. But the strait isn't open.
 
-Traffic has dropped 95% since the war began February 28. Just 21 tankers have transited in three weeks — compared to more than 100 ships every single day before the conflict. The Albis Perception Gap Index scored this story 7.4, reflecting three fundamentally incompatible framings of the same military operation.
+Traffic has dropped 95% since the war began February 28. Just 21 tankers transited in three weeks — versus more than 100 ships daily before the conflict. The Albis Perception Gap Index scored this story 7.4, reflecting three fundamentally incompatible framings of the same military operation.
 
 ## Iran Built a Loyalty Test Inside the World's Busiest Waterway
 
-While US forces shoot boats, Iran is building something more durable: a selective access system administered by the IRGC.
+While US forces shoot boats, Iran is building something more durable: a selective access system run by the IRGC.
 
-According to Lloyd's List, Iran is now developing a formal vetting and registration process. Ships that want to pass through must disclose ownership details and cargo destinations in advance — communicated through "Iran-affiliated individuals operating outside of Iran." India, China, Pakistan, Iraq, and Malaysia are all in direct talks with Tehran to secure passage for their vessels.
+According to Lloyd's List, Iran is developing a formal vetting and registration process. Ships wanting to pass through must disclose ownership details and cargo destinations in advance — communicated through "Iran-affiliated individuals operating outside of Iran." India, China, Pakistan, Iraq, and Malaysia are all in direct talks with Tehran to secure passage.
 
-The system already works, informally. The ships that have managed to transit since the war began are mainly flagged to China, India, and Pakistan. Some have reportedly disabled tracking systems or broadcast alternative credentials to avoid detection.
+The system already works, informally. Ships that have managed to transit since the war began are mainly flagged to China, India, and Pakistan. Some have reportedly disabled tracking systems or broadcast alternative credentials to avoid detection.
 
 This isn't chaos. It's Iran applying geopolitical sorting at sea level.
 
 ## China's Ships Are Through. China Didn't Fire a Shot.
 
-Chinese state media framed this with characteristic directness: "Only Chinese ships and Iranian ships can pass Hormuz." That headline runs in Guancha as a point of national pride, not alarm.
+Chinese state media framed this with characteristic directness: "Only Chinese ships and Iranian ships can pass Hormuz." That headline ran in Guancha as a point of national pride, not alarm.
 
-China has been in talks with Iran to allow crude oil carriers and Qatari LNG tankers through since March 5. While NATO allies refused Trump's request for warships, China secured access by negotiation. Beijing is now purchasing discounted Iranian crude — oil that Western sanctions have made cheap — while Western-linked shipping remains locked out of the strait.
+China has been in talks with Iran over crude oil carriers and Qatari LNG tankers since March 5. While NATO allies refused Trump's request for warships, China secured access by negotiation. Beijing is now buying discounted Iranian crude — oil that Western sanctions have made cheap — while Western-linked shipping stays locked out.
 
-The Xinhua analysis put it another way: the US "has the heart but not the strength." That framing serves Chinese domestic narratives about multipolarity, but it points at something real. Kinetic success — 100+ Iranian boats destroyed — hasn't translated into restored shipping access. The A-10s are winning engagements. The strait hasn't reopened.
+Xinhua put it another way: the US "has the heart but not the strength." That framing serves Chinese domestic narratives, but it points at something real. Killing 100+ Iranian boats hasn't reopened the strait. The A-10s are winning engagements. The strait hasn't moved.
 
 ## The Vetting System Changes What the War Is About
 
-Before this shift, Hormuz looked like a binary: open or closed. Now it's a graduated access system controlled by Iran's IRGC. Countries that stayed neutral or friendly during the war can negotiate through. Countries aligned with the US-Israel operation can't.
+Before this shift, Hormuz looked like a binary: open or closed. Now it's a graduated access system controlled by the IRGC. Countries that stayed neutral can negotiate through. Countries aligned with the US-Israel operation can't.
 
 Iran is building diplomatic infrastructure in a body of water.
 
-This matters beyond oil prices. If the vetting system formalizes, Iran will have established a precedent: that it can control who uses a waterway handling 21% of global oil and 20% of global LNG — not by keeping it shut, but by deciding who gets a key.
+This matters beyond oil prices. If the vetting system formalizes, Iran will have established a precedent: it can control who uses a waterway handling 21% of global oil and 20% of global LNG — not by keeping it shut, but by deciding who gets a key.
 
-[China has publicly endorsed this framing](/perspectives/china). [India is diplomatically navigating both sides](/perspectives/india) — buying Russian oil with OFAC blessing, negotiating Hormuz access with Tehran, and framing the entire conflict as a supply chain problem to be solved. Neither country's domestic media covers the NATO fracture; both are too busy securing their energy corridors.
+[China has publicly endorsed this framing](/perspectives/china). [India is navigating both sides diplomatically](/perspectives/india) — buying Russian oil with OFAC blessing, negotiating Hormuz access with Tehran, and treating the conflict as a supply chain problem. Neither country's domestic media covers the NATO fracture; both are too busy securing their energy corridors.
 
 The [Albis Perception Gap Index](/indexes/pgi) tracks how differently populations experience the same event. At 7.4, the Hormuz story is one of the highest-scored in this conflict — because American, Chinese, Arab, and South Asian audiences are watching four separate operations in the same 21-mile stretch of water.
 
 ## What's Next
 
-The US position is a tactical contradiction: successfully destroying Iranian military assets while the strategic goal — reopening the strait to Western shipping — remains unmet. Adm. Cooper says the US will "continue to rapidly deplete Iran's ability to threaten freedom of navigation." But Iran's selective vetting system doesn't require fast-attack boats to function. It runs through back channels, diplomatic contacts, and disclosed cargo manifests.
+The US has a tactical contradiction: it's destroying Iranian military assets while the strategic goal — reopening the strait to Western shipping — remains unmet. Adm. Cooper says the US will "continue to rapidly deplete Iran's ability to threaten freedom of navigation." But Iran's vetting system doesn't need fast-attack boats. It runs through back channels, diplomatic contacts, and cargo manifests.
 
 If Iran's system formalizes before the US can reopen the strait by force, the war ends with something stranger than victory or defeat: a new geopolitical fee structure at the throat of the world economy — with China holding the express lane.
 
