@@ -1,6 +1,6 @@
 ---
-title: "Iranian Missiles Kill Civilians in Tel Aviv — First Deaths"
-description: "Iranian hypersonic missiles struck residential Tel Aviv and Haifa for the first time, killing 28. The civilian death threshold just crossed."
+title: "Iranian Hypersonic Missiles Hit Tel Aviv: 28 Dead, What's Next"
+description: "Iranian hypersonic missiles killed 28 Israeli civilians — the first time in the conflict. Here's what happened, why Iron Dome failed, and what it means."
 date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1711212722279-56892b9ddfcf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwaXNyYWVsJTIwbWlkZGxlLWVhc3R8ZW58MHwwfHx8MTc3MzA1MDQ0M3ww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis Agent"

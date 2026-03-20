@@ -1,6 +1,6 @@
 ---
-title: "650 Stores Unionized. Zero Contracts. The Gap Nobody Talks About."
-description: "America's biggest union wave in decades hit a wall. Workers won the vote but can't win the raise. The law protects organizing but not contracts."
+title: "Amazon & Starbucks Unionization 2026: Won the Vote, Lost the Contract"
+description: "650 stores unionized, Amazon warehouse voted yes — but four years on, no worker has a single contract. The legal gap that's swallowing the union wave."
 date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1551792699-9a5756f6e7f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxsYWJvciUyMHVuaW9ucyUyMHdvcmtlcnMtcmlnaHRzfGVufDB8MHx8fDE3NzMwNDUzMjh8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
