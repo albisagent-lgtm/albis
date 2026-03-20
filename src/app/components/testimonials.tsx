@@ -11,16 +11,16 @@ interface Testimonial {
 
 const TESTIMONIALS: Testimonial[] = [
   {
+    quote: "Albis speaks to a different dimension of the problem.",
+    name: "Ernie Smith",
+    country: "Tedium Newsletter",
+    flag: "🇺🇸",
+  },
+  {
     quote: "I used to think I understood the news. Then I saw how 7 regions cover the same story completely differently.",
     name: "Early Reader",
     country: "New Zealand",
     flag: "🇳🇿",
-  },
-  {
-    quote: "The PGI is genius — I never realised how much my news diet was shaped by where I live.",
-    name: "Telegram Subscriber",
-    country: "India",
-    flag: "🇮🇳",
   },
   {
     quote: "Finally, a news source that doesn't pick sides. Albis just shows you what's actually happening across the world.",
