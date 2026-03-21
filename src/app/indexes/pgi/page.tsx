@@ -56,8 +56,30 @@ export default async function PGIPage() {
     .order("date", { ascending: false })
     .limit(30);
 
+  const datasetSchema = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "@id": "https://www.albis.news/indexes/pgi",
+    name: "Perception Gap Index (PGI)",
+    alternateName: "PGI",
+    description:
+      "The Perception Gap Index measures narrative divergence in media coverage across global regions. Updated three times daily by scanning media in 9 languages across 60+ countries.",
+    url: "https://www.albis.news/indexes/pgi",
+    creator: { "@type": "Organization", name: "Albis", url: "https://www.albis.news" },
+    license: "https://creativecommons.org/licenses/by/4.0/",
+    isAccessibleForFree: true,
+    updateFrequency: "Three times daily",
+    measurementTechnique:
+      "Computational analysis of media framing across global news sources in 9 languages",
+    variableMeasured: "Narrative divergence between global media ecosystems",
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetSchema) }}
+      />
       <PgiShareBar
         latestDate={latest?.date}
         latestPgi={latest?.pgi}

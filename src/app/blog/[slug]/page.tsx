@@ -67,16 +67,19 @@ export default async function BlogPostPage({ params }: Props) {
     "@type": "NewsArticle",
     headline: post.title,
     description: post.description,
+    url,
     image: post.image.startsWith("http") ? post.image : `https://www.albis.news${post.image}`,
     datePublished: post.date,
     dateModified: post.updatedDate || post.date,
-    author: { "@type": "Person", name: post.author },
+    author: { "@type": "Organization", name: "Albis", url: "https://www.albis.news" },
     publisher: {
       "@type": "Organization",
       name: "Albis",
       url: "https://www.albis.news",
-      logo: { "@type": "ImageObject", url: "https://www.albis.news/icon-512.png" },
+      logo: { "@type": "ImageObject", url: "https://www.albis.news/icon-512.png", width: 512, height: 512 },
     },
+    keywords: post.tags.join(", "),
+    isAccessibleForFree: true,
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     ...(post.sources.length > 0 ? {
       citation: post.sources.filter(s => s.url).map(s => ({

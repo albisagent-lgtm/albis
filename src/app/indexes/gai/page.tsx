@@ -250,8 +250,30 @@ function GAIPageInner() {
     );
   }
 
+  const gaiDatasetSchema = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "@id": "https://www.albis.news/indexes/gai",
+    name: "Global Attention Index (GAI)",
+    alternateName: "GAI",
+    description:
+      "The Global Attention Index measures whether stories are covered at all across regions, revealing information gaps and selective attention patterns worldwide. Updated three times daily.",
+    url: "https://www.albis.news/indexes/gai",
+    creator: { "@type": "Organization", name: "Albis", url: "https://www.albis.news" },
+    license: "https://creativecommons.org/licenses/by/4.0/",
+    isAccessibleForFree: true,
+    updateFrequency: "Three times daily",
+    measurementTechnique:
+      "Real-time analysis of article volume, prominence, and coverage breadth across geographic media clusters in 9 languages",
+    variableMeasured: "Information visibility asymmetry across global media ecosystems",
+  };
+
   return (
     <main className="mx-auto max-w-6xl px-6 py-12 pb-28 md:pb-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(gaiDatasetSchema) }}
+      />
       {/* ── Hero ── */}
       <section className="mb-16 text-center">
         <h1 className="font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-5xl">

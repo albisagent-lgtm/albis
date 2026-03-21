@@ -135,23 +135,39 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
+              "@type": "NewsMediaOrganization",
+              "@id": "https://www.albis.news/#organization",
               name: "Albis",
+              alternateName: "Albis News Intelligence",
               url: "https://www.albis.news",
-              logo: "https://www.albis.news/icon-512.png",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://www.albis.news/icon-512.png",
+                width: 512,
+                height: 512,
+              },
               description:
-                "News intelligence, not noise. Albis gives you the full picture — every source, zero spin, one calm reading experience.",
+                "Albis is a global news intelligence platform that scans media in 9 languages across 60 countries three times daily, measuring narrative divergence using the Perception Gap Index (PGI) and Global Attention Index (GAI).",
+              foundingDate: "2026",
+              sameAs: [
+                "https://twitter.com/AlbisDaily",
+                "https://t.me/albisdaily",
+              ],
+              knowsAbout: [
+                "Media framing",
+                "News bias",
+                "Information warfare",
+                "Geopolitics",
+                "Media literacy",
+                "Perception gap",
+              ],
               contactPoint: {
                 "@type": "ContactPoint",
+                contactType: "editorial",
                 email: "hello@albis.news",
-                contactType: "customer support",
               },
-              sameAs: [
-                "https://t.me/albisdaily",
-                "https://twitter.com/AlbisDaily",
-                "https://www.instagram.com/albisnews",
-                "https://www.tiktok.com/@albis181",
-              ],
+              publishingPrinciples: "https://www.albis.news/methodology",
+              ethicsPolicy: "https://www.albis.news/methodology",
             }),
           }}
         />
