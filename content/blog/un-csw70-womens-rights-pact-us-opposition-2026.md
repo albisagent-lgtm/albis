@@ -38,50 +38,50 @@ faqs:
     a: "In 2025, 147 women and girls were killed in Canada, according to the Canadian Femicide Observatory. By mid-March 2026, 30 had already been killed that year. The observatory has recorded 1,500 femicides since beginning data collection in 2018."
 ---
 
-The United Nations Commission on the Status of Women adopted its 70th session Agreed Conclusions on March 19, 2026, with the United States casting the sole dissenting vote — breaking a near seven-decade tradition of consensus decision-making. The document, focused on strengthening access to justice for women and girls, passed 37 votes to one, with six abstentions.
+The United Nations Commission on the Status of Women adopted its 70th-session Agreed Conclusions on March 19, 2026, with the United States casting the sole dissenting vote — breaking a near seven-decade tradition of consensus. The document, focused on access to justice for women and girls, passed 37 to one, with six abstentions.
 
-The US delegation objected to language on abortion rights, gender identity, and artificial intelligence regulation. Washington had proposed amendments that were rejected, and the European Union moved a procedural "no action" motion to block a US draft text that sought to redefine "gender" at the commission.
+The US objected to language on abortion rights, gender identity, and AI regulation. Washington proposed amendments that were rejected. The EU then moved a procedural "no action" motion to block a US draft text that sought to redefine "gender" at the commission.
 
 ## US Isolation at CSW70
 
-The CSW70 conference, held March 9–19 at UN headquarters in New York, drew delegations from member states, UN agencies, and civil society groups. Its theme was ensuring access to justice for women and girls by eliminating discriminatory laws, protecting against violence, and addressing structural barriers.
+The CSW70 conference ran March 9–19 at UN headquarters in New York. Its theme: ensuring access to justice for women and girls by eliminating discriminatory laws, protecting against violence, and addressing structural barriers.
 
-The Agreed Conclusions call for reviewing and amending discriminatory laws covering child marriage, family law, and property rights. They also mandate stronger protections against violence online and offline, and address the specific vulnerabilities of climate refugees.
+The Agreed Conclusions call for reviewing and amending discriminatory laws covering child marriage, family law, and property rights. They mandate stronger protections against violence online and offline, and address vulnerabilities facing climate refugees.
 
-UN Women Executive Director Sima Bahous, closing the session, said: "Without women's equal, meaningful participation, without their equal access to justice, to economic opportunity, to a life free from violence, without their leadership in governments, the private sector, in peace negotiations — our nations will not progress."
+UN Women Executive Director Sima Bahous closed the session: "Without women's equal, meaningful participation, without their equal access to justice, to economic opportunity, to a life free from violence — our nations will not progress."
 
-Several nations including Côte d'Ivoire, the Democratic Republic of Congo, Egypt, Mali, Mauritania, and Saudi Arabia had abstained in an initial vote on March 9 citing objections to specific provisions. All six ultimately voted in favor of adoption, stating support for the broader cause of justice for women and girls globally.
+Several nations — Côte d'Ivoire, the DRC, Egypt, Mali, Mauritania, and Saudi Arabia — abstained in an initial March 9 vote over specific provisions. All six voted for adoption at the final session, citing support for the broader goal.
 
-For [perspectives on how different regions frame gender rights](/perspectives/united-states), the divergence between Washington and its traditional allies at the UN was striking — and unambiguous in the vote tally.
+For [perspectives on how different regions frame gender rights](/perspectives/united-states), the divergence between Washington and its traditional allies was unambiguous in the vote tally.
 
 ## Abortion and Reproductive Rights
 
-Wyoming Governor Mark Gordon signed the Human Heartbeat Act (HB0126) into law on March 9, 2026, banning abortions after approximately six weeks of pregnancy when fetal cardiac activity is detectable. Wyoming becomes the sixth US state to implement such a restriction.
+Wyoming Governor Mark Gordon signed the Human Heartbeat Act (HB0126) on March 9, 2026, banning abortions after roughly six weeks of pregnancy. Wyoming became the sixth US state with such a restriction.
 
-Gordon acknowledged the law faces legal risk, calling it a "fragile legal effort with significant risk" of being struck down. The signing followed a January 2026 Wyoming Supreme Court ruling that invalidated broader abortion prohibitions in the state. A coalition of abortion-rights groups, including Wellspring Health Access — Wyoming's only abortion clinic — filed a motion the day after signing to add the new law to an ongoing legal challenge.
+Gordon called it a "fragile legal effort with significant risk" of being struck down — an acknowledgment that the law faces a live legal challenge. The signing followed a January 2026 Wyoming Supreme Court ruling that invalidated broader abortion prohibitions in the state. Wellspring Health Access, Wyoming's only abortion clinic, filed a motion the following day to add the new law to an ongoing challenge.
 
-Separately, multiple Republican-controlled states including Wyoming, Oklahoma, and Kansas advanced model legislation to shield crisis pregnancy centers from requirements to inform patients about abortion services or contraception options. The bills would prohibit local governments from mandating that such centers provide abortion referrals or disclose information about contraception.
+Wyoming, Oklahoma, and Kansas also advanced model legislation to shield crisis pregnancy centers from requirements to inform patients about abortion services or contraception. The bills would bar local governments from mandating abortion referrals or contraception disclosures at such centers.
 
-## Femicide Data Signals Persistent Crisis
+## Femicide Data
 
-In Canada, 30 women and girls were violently killed in the first ten weeks of 2026, according to the Canadian Femicide Observatory for Justice and Accountability. In 2025, 147 women and girls were killed — a first decrease since 2019 — yet the observatory says the 2026 rate shows no sign of sustained decline.
+In Canada, 30 women and girls were violently killed in the first ten weeks of 2026, according to the Canadian Femicide Observatory. In 2025, 147 were killed — a first decrease since 2019 — but the 2026 rate shows no sign of sustained decline.
 
-"Since we started collecting data in 2018, it's 1,500 women," said Myrna Dawson, founder and director of the observatory. "That is the tip of the iceberg."
+"Since we started collecting data in 2018, it's 1,500 women," said Myrna Dawson, observatory founder. "That is the tip of the iceberg."
 
-For context: Italy, with a population of 60 million, recorded 10 femicides in the same period. Canada, with 40 million people, recorded 30 — a rate approximately seven times higher.
+For scale: Italy, with 60 million people, recorded 10 femicides in the same period. Canada, with 40 million, recorded 30 — roughly seven times the rate.
 
-In Northern Ireland, UK Minister for Tackling Violence Against Women and Girls Jess Phillips stated on March 18 that femicide rates in the region are higher "than quite a lot of the world." Phillips called violence against women and girls a "national emergency and an epidemic." Stormont's Executive launched its Ending Violence Against Women and Girls Strategy in 2024, though the strategy primarily applies to England and Wales.
+In Northern Ireland, UK Minister for Tackling Violence Against Women and Girls Jess Phillips called the situation on March 18 a "national emergency and an epidemic." She said femicide rates in the region are higher "than quite a lot of the world." Stormont launched its Violence Against Women and Girls strategy in 2024, though it applies mainly to England and Wales.
 
 ## The Legal Equality Gap
 
-The World Bank's Women, Business and the Law 2026 report found that only 4 percent of women worldwide live in economies close to full legal equality. Global legal protections for women's economic participation average 67.9 out of 100, but no economy among the 190 surveyed has achieved equal economic participation in practice.
+The World Bank's Women, Business and the Law 2026 report found just 4% of women live in economies close to full legal equality. Global legal protections for women's economic participation average 67.9 out of 100. No economy among the 190 surveyed has achieved equal economic participation in practice.
 
-The report identifies childcare deficits and safety gaps as key structural blockers to women's economic participation, alongside discriminatory laws that remain formally on the books across dozens of countries. The gap between laws on paper and enforcement in reality is the central finding.
+Childcare deficits and safety gaps are the main blockers. Discriminatory laws remain on the books across dozens of countries. The gap between paper protections and real enforcement is the report's central finding.
 
 ## Regional Divergence
 
-The distance between legal frameworks and lived outcomes varies sharply by region. Western Europe and parts of Latin America have advanced legislative protections, but enforcement lags. Across Sub-Saharan Africa and parts of South and Southeast Asia, discriminatory family and property laws remain codified.
+The distance between legal frameworks and lived outcomes varies sharply by region. Western Europe and parts of Latin America have strong legislative protections, but enforcement lags. Across Sub-Saharan Africa and parts of South and Southeast Asia, discriminatory family and property laws remain codified.
 
-The [gender equality topic hub](/topics/gender-equality) tracks how these regional divides evolve across legal, economic, and social dimensions. Within conflict-affected regions, delegates at CSW70 specifically called for greater attention to climate refugee women and girls, who face compounded legal and physical vulnerabilities.
+The [gender equality topic hub](/topics/gender-equality) tracks how these divides evolve. At CSW70, delegates specifically called for greater attention to climate refugee women and girls, who face layered legal and physical vulnerabilities.
 
-In the United States, the policy direction at the federal level under the Trump administration diverges sharply from European Union positions on reproductive rights and gender-inclusive language — a divide that surfaced publicly and formally at the CSW70 vote.
+At the federal level, the Trump administration's positions on reproductive rights and gender-inclusive language diverge sharply from the EU's — a split that became formal and public in the CSW70 vote.
