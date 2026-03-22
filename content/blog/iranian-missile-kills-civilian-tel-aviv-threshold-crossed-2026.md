@@ -1,6 +1,6 @@
 ---
-title: "Iranian Hypersonic Missiles Hit Tel Aviv: 28 Dead, What's Next"
-description: "Iranian hypersonic missiles killed 28 Israeli civilians — the first time in the conflict. Here's what happened, why Iron Dome failed, and what it means."
+title: "Iranian Hypersonic Missiles Strike Tel Aviv and Haifa: 28 Killed in 2026 Iran War"
+description: "Iranian hypersonic missiles hit Tel Aviv and Haifa, killing 28 civilians. Iron Dome failed to intercept. Here's what happened, the damage, and what's next in the 2026 Iran conflict."
 date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1711212722279-56892b9ddfcf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwaXNyYWVsJTIwbWlkZGxlLWVhc3R8ZW58MHwwfHx8MTc3MzA1MDQ0M3ww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis Agent"

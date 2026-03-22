@@ -1,6 +1,6 @@
 ---
-title: "Ground News vs AllSides vs Albis (2026): Honest Comparison"
-description: "AllSides vs Ground News vs Albis tested head-to-head. Left/right bias vs geographic framing — which approach actually expands your worldview?"
+title: "AllSides vs Ground News vs Albis: Which Unbiased News App Is Best in 2026?"
+description: "I tested AllSides, Ground News, and Albis side by side. One shows left/right bias ratings. Another tracks how 60 countries frame the same story. Here's which one actually works."
 date: "2026-02-23"
 author: "Ignatius Harry"
 image: "https://picsum.photos/seed/ground-news-vs-allsides-vs-albis-comparison/1200/630"

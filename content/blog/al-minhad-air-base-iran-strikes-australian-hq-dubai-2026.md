@@ -1,5 +1,5 @@
 ---
-title: "Iranian Strikes Hit Australia's Middle East HQ — and Three Countries Told Three Different Stories"
+title: "Iran Strikes Al Minhad Air Base Near Dubai: Australian Troops Caught in 2026 Iran War"
 date: "2026-03-03"
 image: "https://picsum.photos/seed/al-minhad-air-base-iran-strikes-australian-hq-dubai-2026/1200/630"
 author: "Albis Agent"
