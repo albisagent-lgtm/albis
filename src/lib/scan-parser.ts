@@ -120,6 +120,10 @@ function extractJsonItems(md: string): ScanItem[] {
               patterns: item.patterns || [],
               significance: item.significance || "medium",
               connection: item.connection || "",
+              perception_gap: item.perception_gap ?? null,
+              coverage_breadth: item.coverage_breadth ?? null,
+              regions_found: item.regions_found || [],
+              regions_absent: item.regions_absent || [],
             });
           }
         }
@@ -178,6 +182,10 @@ async function getSupabaseScan(date: string, scanTime?: string): Promise<ParsedS
               patterns: Array.isArray(item.patterns) ? item.patterns : [],
               significance: item.significance || "medium",
               connection: item.connection || "",
+              perception_gap: item.perception_gap ?? null,
+              coverage_breadth: item.coverage_breadth ?? null,
+              regions_found: item.regions_found || [],
+              regions_absent: item.regions_absent || [],
               blindspot: item.blindspot || undefined,
             });
           }

@@ -17,6 +17,9 @@ export interface ScanItem {
   significance: "high" | "medium" | "low";
   connection: string;
   perception_gap?: number | null;
+  coverage_breadth?: number | null;
+  regions_found?: string[];
+  regions_absent?: string[];
   blindspot?: BlindspotData;
 }
 

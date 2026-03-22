@@ -14,6 +14,8 @@ import { CATEGORIES } from "@/lib/categories";
 import { getAllPosts } from "@/lib/blog";
 import { ExitIntentModal } from "@/app/components/exit-intent-modal";
 import Image from "next/image";
+import { PerceptionGapVisual } from "@/app/components/perception-gap-visual";
+import { CoverageGapVisual } from "@/app/components/coverage-gap-visual";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -173,6 +175,33 @@ export default async function LensArticlePage({ params }: Props) {
               )}
             </div>
           )}
+          {/* Perception Gap Visuals — graceful when data unavailable */}
+          {(() => {
+            // These fields may be added to frontmatter later; safe access via cast
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const p = post as any;
+            const pgScore = typeof p.perception_gap === "number" ? p.perception_gap : null;
+            const found = Array.isArray(p.regions_found) ? (p.regions_found as string[]) : null;
+            const absent = Array.isArray(p.regions_absent) ? (p.regions_absent as string[]) : [];
+            const significance = p.region_significance as Record<string, number> | undefined;
+
+            if (pgScore == null || !found) return null;
+
+            return (
+              <div className="mt-8 space-y-3">
+                <PerceptionGapVisual
+                  pgi={pgScore}
+                  regionsFound={found}
+                  regionsAbsent={absent}
+                  regionSignificance={significance}
+                />
+                <CoverageGapVisual
+                  regionsFound={found}
+                  regionsAbsent={absent}
+                />
+              </div>
+            );
+          })()}
         </header>
 
         {/* Body */}

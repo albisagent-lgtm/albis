@@ -12,6 +12,7 @@ import { NextBriefingCountdown } from "./components/next-briefing-countdown";
 import { ExitIntentModal } from "./components/exit-intent-modal";
 import { PgiBar } from "./components/pgi-bar";
 import { PgiHero } from "./components/pgi-hero";
+import { PgiGaiQuadrant, type QuadrantStory } from "./components/pgi-gai-quadrant";
 import { Testimonials } from "./components/testimonials";
 import { ScanPulse } from "./components/scan-pulse";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -88,6 +89,33 @@ export default async function Home() {
 
   const leadStory = topStories[0];
   const secondaryStories = topStories.slice(1, 4);
+
+  // Build quadrant stories from scan data
+  const quadrantStories: QuadrantStory[] = topStories
+    .filter((item) => {
+      const pgi = item.perception_gap;
+      const breadth = item.coverage_breadth;
+      return pgi != null && pgi > 0 && breadth != null && breadth > 0;
+    })
+    .map((item) => {
+      const pgi = item.perception_gap!;
+      // GAI: coverage_breadth 7 = GAI ~1, 1 = GAI ~8.7
+      const gai = 10 - ((item.coverage_breadth! / 7) * 9);
+      // Build a slug from the headline
+      const slug = item.tags?.[0] || item.headline
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "")
+        .slice(0, 60);
+      return {
+        headline: item.headline,
+        slug,
+        pgi,
+        gai: Math.round(gai * 10) / 10,
+        category: item.category,
+      };
+    })
+    .slice(0, 15);
 
   // Get 5 briefing headlines (high-significance first)
   const briefingHeadlines = topStories.slice(0, 5);
@@ -278,6 +306,26 @@ export default async function Home() {
                 })}
               </div>
             )}
+          </div>
+        </section>
+      )}
+
+      {/* ── PGI × GAI QUADRANT ─────────────────────────────── */}
+      {quadrantStories.length >= 3 && (
+        <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f] border-t border-black/5 dark:border-white/5">
+          <div className="mx-auto max-w-3xl px-6 py-10 md:py-14">
+            <div className="text-center mb-8">
+              <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
+                Information Landscape
+              </p>
+              <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl md:text-3xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                Today&apos;s Information Landscape
+              </h2>
+            </div>
+            <PgiGaiQuadrant
+              stories={quadrantStories}
+              date={scan?.displayDate}
+            />
           </div>
         </section>
       )}

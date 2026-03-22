@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { PGIClient } from "../../perception-gap/pgi-client";
 import { PgiShareBar } from "./share-bar";
+import { PgiTimeline } from "@/app/components/pgi-timeline";
 import { SeriesArticleFeed } from "@/components/SeriesArticleFeed";
 import { getArticlesByTag } from "@/lib/blog/tagged";
 
@@ -44,8 +46,27 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+async function getLast14Days() {
+  try {
+    const supabase = createAdminClient();
+    const fourteenDaysAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .split("T")[0];
+    const { data } = await supabase
+      .from("pgi_daily")
+      .select("date, daily_pgi")
+      .gte("date", fourteenDaysAgo)
+      .order("date", { ascending: true });
+    if (!data) return [];
+    return data.map((d: any) => ({ date: d.date, pgi: Number(d.daily_pgi) }));
+  } catch {
+    return [];
+  }
+}
+
 export default async function PGIPage() {
   const latest = await getLatestPgi();
+  const timelineData = await getLast14Days();
   const dividedArticles = getArticlesByTag("divided", 5);
 
   // Fetch available dates for archive
