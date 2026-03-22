@@ -50,7 +50,26 @@ export default async function Home() {
 
   const leadStory = topStories[0];
   const secondaryStories = topStories.slice(1, 5);
-  const latestPosts = allPosts.slice(0, 3);
+  // Pick 6 articles from different categories for variety
+  const lensPosts: typeof allPosts = [];
+  const usedCategories = new Set<string>();
+  for (const post of allPosts) {
+    if (lensPosts.length >= 6) break;
+    const cat = post.category || "uncategorised";
+    if (!usedCategories.has(cat)) {
+      lensPosts.push(post);
+      usedCategories.add(cat);
+    }
+  }
+  // If we don't have 6 unique categories, fill with latest
+  if (lensPosts.length < 6) {
+    for (const post of allPosts) {
+      if (lensPosts.length >= 6) break;
+      if (!lensPosts.includes(post)) {
+        lensPosts.push(post);
+      }
+    }
+  }
 
   // Build a slug-to-post lookup for images
   const postBySlug: Record<string, (typeof allPosts)[0]> = {};
@@ -217,161 +236,119 @@ export default async function Home() {
       </section>
 
       {/* ════════════════════════════════════════════════════════
-          SECTION 1.5: TODAY'S BRIEFING PREVIEW
+          SECTION 1.5: TODAY'S BRIEFING — Full Preview
           ════════════════════════════════════════════════════════ */}
       {topStories.length > 0 && (
-        <section className="border-t border-black/[0.05] bg-[#f8f7f4] dark:border-white/[0.05] dark:bg-[#0f0f0f]">
-          <div className="mx-auto max-w-3xl px-6 py-12 md:py-16">
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
-                  Today&apos;s Briefing
-                </p>
-                <p className="mt-1 text-sm text-zinc-400 dark:text-zinc-500">
-                  Your 2-minute global scan
-                </p>
-              </div>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-                Live
-              </span>
-            </div>
+        <section className="border-t border-black/[0.05] bg-white dark:border-white/[0.05] dark:bg-[#141414]">
+          <div className="mx-auto max-w-2xl px-6 py-12 md:py-16">
 
-            <div className="space-y-0">
-              {topStories.slice(0, 6).map((item, i) => {
-                const slug = findArticleSlug(item);
-                const regionCount = item.regions.filter((r) => r !== "global").length;
-
-                const briefingItem = (
-                  <div className={`flex gap-4 py-4 ${i < Math.min(topStories.length, 6) - 1 ? "border-b border-black/[0.05] dark:border-white/[0.05]" : ""}`}>
-                    <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-zinc-100 text-[11px] font-semibold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
-                      {i + 1}
-                    </span>
-                    <div className="min-w-0">
-                      <h3 className="font-[family-name:var(--font-playfair)] text-base md:text-lg font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
-                        {item.headline}
-                      </h3>
-                      {item.connection && (
-                        <p className="mt-1.5 font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 line-clamp-2">
-                          {item.connection}
-                        </p>
-                      )}
-                      <div className="mt-2 flex items-center gap-3 text-[10px] text-zinc-400 dark:text-zinc-500">
-                        {item.category && (
-                          <span
-                            className="font-medium tracking-[0.1em] uppercase"
-                            style={{ color: getCategoryAccent(item.category) }}
-                          >
-                            {CATEGORY_META[item.category]?.label || item.category}
-                          </span>
-                        )}
-                        {regionCount > 0 && (
-                          <span>{regionCount} region{regionCount !== 1 ? "s" : ""}</span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-
-                return slug ? (
-                  <Link key={i} href={`/lens/${slug}`} className="block transition-opacity hover:opacity-75">
-                    {briefingItem}
-                  </Link>
-                ) : (
-                  <div key={i}>{briefingItem}</div>
-                );
-              })}
-            </div>
-
-            <div className="mt-8 text-center">
-              <p className="font-[family-name:var(--font-source-serif)] text-sm text-zinc-500 dark:text-zinc-400">
-                This is what your inbox looks like every morning.
+            {/* Briefing header — like an email */}
+            <div className="text-center mb-10">
+              <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
+                Today&apos;s Briefing
               </p>
-              <div className="mt-4">
-                <EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} />
-              </div>
+              <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl md:text-3xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                {dateString}
+              </h2>
+              <p className="mt-2 text-sm text-zinc-400 dark:text-zinc-500">
+                {topStories.length} stories · {topStories.filter(s => s.regions.some(r => r !== "global")).length > 0 ? "7 regions" : "Global"} · 2 min read
+              </p>
             </div>
-          </div>
-        </section>
-      )}
 
-      {/* ════════════════════════════════════════════════════════
-          SECTION 2: TODAY'S STORIES
-          ════════════════════════════════════════════════════════ */}
-      {secondaryStories.length > 0 && (
-        <section className="border-t border-black/[0.05] bg-[#f8f7f4] dark:border-white/[0.05] dark:bg-[#0f0f0f]">
-          <div className="mx-auto max-w-3xl px-6 py-12 md:py-16">
-            <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
-              Today&apos;s Stories
-            </p>
+            {/* Top story — the big one */}
+            {leadStory && (
+              <div className="mb-8 pb-8 border-b border-black/[0.08] dark:border-white/[0.08]">
+                <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-red-600 dark:text-red-400 mb-2">
+                  Top Story
+                </p>
+                <h3 className="font-[family-name:var(--font-playfair)] text-xl md:text-2xl font-bold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+                  {leadStory.headline}
+                </h3>
+                {leadStory.connection && (
+                  <p className="mt-3 font-[family-name:var(--font-source-serif)] text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-400">
+                    {leadStory.connection}
+                  </p>
+                )}
+                {(() => {
+                  const slug = findArticleSlug(leadStory);
+                  return slug ? (
+                    <Link href={`/lens/${slug}`} className="mt-3 inline-block text-sm font-medium text-[#c8922a] hover:underline">
+                      Read more →
+                    </Link>
+                  ) : null;
+                })()}
+              </div>
+            )}
 
-            <div className="mt-8 space-y-0">
-              {secondaryStories.map((item, i) => {
-                const slug = findArticleSlug(item);
-                const storyImage = findArticleImage(item);
-                const storyContent = (
-                  <div className="group flex gap-5 py-6">
-                    {/* Image (if article exists with image) */}
-                    {storyImage && (
-                      <div className="relative hidden sm:block w-28 h-20 md:w-36 md:h-24 flex-shrink-0 overflow-hidden rounded-lg">
-                        <Image
-                          src={storyImage}
-                          alt=""
-                          fill
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
-                          sizes="144px"
-                          unoptimized
-                        />
-                      </div>
-                    )}
-                    {/* Text */}
-                    <div className="min-w-0">
-                      {item.category && (
-                        <span
-                          className="text-[11px] font-medium tracking-[0.15em] uppercase"
-                          style={{ color: getCategoryAccent(item.category) }}
-                        >
-                          {CATEGORY_META[item.category]?.label || item.category}
+            {/* Quick Hits — the scannable section */}
+            {secondaryStories.length > 0 && (
+              <div className="mb-8">
+                <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#c8922a] mb-4">
+                  Quick Hits
+                </p>
+                <div className="space-y-4">
+                  {secondaryStories.slice(0, 5).map((item, i) => {
+                    const slug = findArticleSlug(item);
+                    const content = (
+                      <div className="flex gap-3">
+                        <span className="mt-0.5 text-lg leading-none text-zinc-300 dark:text-zinc-600 font-[family-name:var(--font-playfair)]">
+                          ▸
                         </span>
-                      )}
-                      <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-xl md:text-2xl font-semibold leading-snug tracking-tight text-[#0f0f0f] dark:text-[#f0efec]">
-                        {item.headline}
-                      </h3>
-                      {item.connection && (
-                        <p className="mt-2 font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
-                          {item.connection}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                );
+                        <div>
+                          <p className="font-[family-name:var(--font-source-serif)] text-[15px] leading-relaxed text-[#0f0f0f] dark:text-[#f0efec]">
+                            <span className="font-semibold">{item.headline}.</span>
+                            {item.connection && (
+                              <span className="text-zinc-500 dark:text-zinc-400"> {item.connection}</span>
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    );
 
-                return (
-                  <div
-                    key={i}
-                    className={i < secondaryStories.length - 1 ? "border-b border-black/[0.05] dark:border-white/[0.05]" : ""}
-                  >
-                    {slug ? (
-                      <Link href={`/lens/${slug}`} className="block transition-opacity hover:opacity-80">
-                        {storyContent}
+                    return slug ? (
+                      <Link key={i} href={`/lens/${slug}`} className="block hover:opacity-75 transition-opacity">
+                        {content}
                       </Link>
                     ) : (
-                      storyContent
-                    )}
-                  </div>
-                );
-              })}
+                      <div key={i}>{content}</div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Scan metadata — the framing insight */}
+            {scan?.framingNote && (
+              <div className="mb-8 pb-8 border-t border-b border-black/[0.08] dark:border-white/[0.08] py-6">
+                <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#c8922a] mb-3">
+                  How The World Sees It
+                </p>
+                <p className="font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-zinc-600 dark:text-zinc-400 italic">
+                  {scan.framingNote}
+                </p>
+              </div>
+            )}
+
+            {/* The sell */}
+            <div className="text-center pt-4">
+              <p className="font-[family-name:var(--font-source-serif)] text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                That&apos;s your 2-minute scan.<br />
+                <span className="text-[#0f0f0f] dark:text-[#f0efec] font-medium">Get it in your inbox every morning.</span>
+              </p>
+              <div className="mt-6">
+                <EmailCapture variant="hero" showSocialProof={true} showYesterdayLink={false} />
+              </div>
             </div>
           </div>
         </section>
       )}
 
       {/* ════════════════════════════════════════════════════════
-          SECTION 3: FROM THE LENS — Latest Analysis
+          SECTION 2: FROM THE LENS — Latest Analysis
           ════════════════════════════════════════════════════════ */}
-      {latestPosts.length > 0 && (
+      {lensPosts.length > 0 && (
         <section className="border-t border-black/[0.05] bg-[#f8f7f4] dark:border-white/[0.05] dark:bg-[#0f0f0f]">
-          <div className="mx-auto max-w-3xl px-6 py-12 md:py-16">
+          <div className="mx-auto max-w-4xl px-6 py-12 md:py-16">
             <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
               Latest Analysis
             </p>
@@ -379,45 +356,42 @@ export default async function Home() {
               From The Lens
             </h2>
 
-            <div className="mt-8 space-y-0">
-              {latestPosts.map((post, i) => (
-                <div
+            <div className="mt-8 grid gap-5 sm:grid-cols-2">
+              {lensPosts.map((post) => (
+                <Link
                   key={post.slug}
-                  className={i < latestPosts.length - 1 ? "border-b border-black/[0.05] dark:border-white/[0.05]" : ""}
+                  href={`/lens/${post.slug}`}
+                  className="group block overflow-hidden rounded-lg border border-black/[0.06] transition-all hover:border-[#c8922a]/30 hover:shadow-sm dark:border-white/[0.06]"
                 >
-                  <Link
-                    href={`/lens/${post.slug}`}
-                    className="group flex gap-5 py-6 transition-opacity hover:opacity-80"
-                  >
-                    {/* Image */}
-                    {post.image && post.image !== "/og-image.png" && (
-                      <div className="relative hidden sm:block w-28 h-20 md:w-36 md:h-24 flex-shrink-0 overflow-hidden rounded-lg">
-                        <Image
-                          src={post.image}
-                          alt=""
-                          fill
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
-                          sizes="144px"
-                          unoptimized
-                        />
-                      </div>
-                    )}
-                    {/* Text */}
-                    <div className="min-w-0">
-                      <h3 className="font-[family-name:var(--font-playfair)] text-lg md:text-xl font-semibold leading-snug tracking-tight text-[#0f0f0f] dark:text-[#f0efec]">
-                        {post.title}
-                      </h3>
-                      {post.description && (
-                        <p className="mt-2 font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 line-clamp-2">
-                          {post.description}
-                        </p>
-                      )}
-                      <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
-                        <RelativeTime date={post.date} />
-                      </p>
+                  {post.image && post.image !== "/og-image.png" && (
+                    <div className="relative aspect-[16/9] w-full overflow-hidden">
+                      <Image
+                        src={post.image}
+                        alt=""
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, 384px"
+                        unoptimized
+                      />
                     </div>
-                  </Link>
-                </div>
+                  )}
+                  <div className="p-4">
+                    {post.category && (
+                      <span
+                        className="text-[10px] font-medium tracking-[0.15em] uppercase"
+                        style={{ color: getCategoryAccent(post.category) }}
+                      >
+                        {CATEGORY_META[post.category]?.label || post.category}
+                      </span>
+                    )}
+                    <h3 className="mt-1.5 font-[family-name:var(--font-playfair)] text-base font-semibold leading-snug tracking-tight text-[#0f0f0f] dark:text-[#f0efec] line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
+                      <RelativeTime date={post.date} />
+                    </p>
+                  </div>
+                </Link>
               ))}
             </div>
 
