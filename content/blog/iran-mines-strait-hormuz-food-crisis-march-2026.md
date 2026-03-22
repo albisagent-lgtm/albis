@@ -2,7 +2,7 @@
 title: "Iran Just Mined the World's Most Important Shipping Lane. Your Food Supply Is at Stake."
 description: "A 21-mile-wide waterway between Iran and Oman carries one-fifth of global oil and one-third of all fertilizer. Iran laid mines there last week. Spring planting season starts now."
 publishedAt: 2026-03-13
-author: Albis Geopolitics Desk
+author: "Albis"
 category: Current Events
 image: https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 tags: ["Iran", "Strait of Hormuz", "food security", "fertilizer", "supply chain", "oil", "conflict"]

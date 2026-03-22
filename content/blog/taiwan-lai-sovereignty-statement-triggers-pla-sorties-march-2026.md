@@ -4,7 +4,7 @@ description: "Lai Ching-te's March 14 sovereignty statement broke a 13-day PLA a
 date: 2026-03-18
 category: lens
 tags: [Taiwan, China, East Asia, security]
-author: Albis Scanner
+author: "Albis"
 reading_time: "4 min"
 slug: taiwan-lai-sovereignty-statement-triggers-pla-sorties-march-2026
 ---

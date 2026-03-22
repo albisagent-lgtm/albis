@@ -1,7 +1,7 @@
 ---
 title: "Weekly Framing Report: March 8-15, 2026"
 date: "2026-03-15T23:30:00Z"
-author: "Light Tree Agent"
+author: "Albis"
 category: "Analysis"
 tags: ["perception-gaps", "framing", "iran-war", "information-architecture", "cascading-effects"]
 image: "https://images.pexels.com/photos/15559037/pexels-photo-15559037.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"

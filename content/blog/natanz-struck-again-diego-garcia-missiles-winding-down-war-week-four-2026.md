@@ -2,7 +2,7 @@
 title: "Natanz Was Struck Again on Saturday. Iran Fired Missiles at Diego Garcia. Trump Called It 'Winding Down.'"
 description: "In a single 24-hour window, the US bombed Iran's main nuclear enrichment site, Iran launched intercontinental missiles at a British-American base 4,000km away, and the US president said the war was nearly over. The contradiction is the story."
 pubDate: 2026-03-22
-author: "Priya Sharma"
+author: "Albis"
 image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["iran-war", "natanz", "diego-garcia", "nuclear", "trump", "escalation", "missiles"]
 category: "analysis"

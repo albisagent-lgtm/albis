@@ -3,7 +3,7 @@ title: "Gulf Desalination Plants Attacked in Iran War 2026: 100 Million People's
 description: "Desalination plants in Iran and Bahrain have already been struck. With 99% of Qatar's drinking water and 90% of Kuwait's coming from these facilities, the Iran war's least-covered escalation could threaten 100 million people's access to clean water."
 pubDate: 2026-03-22
 date: 2026-03-22
-author: "Marco Reyes"
+author: "Albis"
 category: "unseen"
 image: "https://images.pexels.com/photos/4852755/pexels-photo-4852755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["unseen", "gai", "desalination", "water-crisis", "iran-war", "gulf-states", "infrastructure", "humanitarian"]

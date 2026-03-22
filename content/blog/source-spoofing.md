@@ -3,7 +3,7 @@ title: "Source Spoofing: How Fake News Sites Steal Real Outlets' Identities"
 description: "Source spoofing creates fake news sites that mimic legitimate outlets. Cloned websites, fake experts, and typosquatting explained."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1644718195302-cb82d9dfb366?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwbWVjaGFuaXNtLWxpYnJhcnklMjBzb3VyY2Utc3Bvb2Zpbmd8ZW58MHwwfHx8MTc3MzA1NDA1NXww&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["information-warfare", "mechanism-library", "media-literacy", "source-spoofing"]
 faqs:
   - q: "What is source spoofing?"

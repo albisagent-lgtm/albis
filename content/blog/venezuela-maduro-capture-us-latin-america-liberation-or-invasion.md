@@ -2,7 +2,7 @@
 title: "The US Captured Venezuela's President. Ten Weeks Later, Two Continents Still Can't Agree on What Happened"
 description: "The US captured Nicolás Maduro on January 3, 2026. Washington calls it liberation. Latin America's left calls it illegal invasion. Ten weeks on, the framing gap is wider than ever."
 date: 2026-03-15
-author: "Rafael Montoya"
+author: "Albis"
 tags: ["divided", "pgi", "venezuela", "maduro", "us-intervention", "latin-america", "geopolitics"]
 image: "https://images.pexels.com/photos/35524224/pexels-photo-35524224.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "US capture Maduro Venezuela liberation or invasion 2026"

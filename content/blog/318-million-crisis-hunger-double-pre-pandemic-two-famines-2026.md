@@ -3,7 +3,7 @@ title: "318 Million People Face Crisis Hunger. That's Double What It Was Before 
 description: "Two confirmed famines, 318 million people in crisis, and hunger levels doubling since 2019. The WFP's 2026 outlook shows a global food catastrophe unfolding while the world watches wars."
 date: "2026-03-06"
 image: "https://images.unsplash.com/photo-1625481710487-b93a4142d0a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxodW5nZXIlMjBmb29kLXNlY3VyaXR5JTIwd2ZwfGVufDB8MHx8fDE3NzMwNDUzMTl8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Agent"
+author: "Albis"
 tags: ["breaking", "hunger", "food-security", "wfp", "famine", "gaza", "sudan"]
 pillars: ["the-human-cost"]
 ---

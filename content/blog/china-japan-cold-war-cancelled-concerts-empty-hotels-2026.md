@@ -3,7 +3,7 @@ title: "China's Pressure Campaign Against Japan Isn't Firing Missiles. It's Canc
 description: "When two countries are too economically intertwined to shoot at each other, modern conflict looks like cancelled anime exhibitions, empty hotel rooms, and banned pop stars. China's running a full-spectrum squeeze on Japan."
 date: "2026-03-03"
 image: "https://picsum.photos/seed/china-japan-cold-war-cancelled-concerts-empty-hotels-2026/1200/630"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["explainer", "china", "japan", "taiwan", "geopolitics", "economic-coercion"]
 category: "perspectives"
 faqs: [

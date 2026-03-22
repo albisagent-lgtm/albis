@@ -2,7 +2,7 @@
 title: "Taliban Drones Reached Islamabad. Pakistan Is Now Fighting a War It Can't Afford."
 description: "Taliban-linked drones were intercepted near Islamabad on March 14 as Pakistan fights Afghanistan, defends Saudi Arabia, and faces an oil-driven economic crisis during Ramadan."
 date: "2026-03-14"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "Geopolitics"
 tags: ["pakistan", "afghanistan", "taliban", "iran-war", "oil-crisis", "south-asia"]
 image: "https://picsum.photos/seed/pakistan-taliban-drones-islamabad-two-front-crisis-march-14/1200/630"

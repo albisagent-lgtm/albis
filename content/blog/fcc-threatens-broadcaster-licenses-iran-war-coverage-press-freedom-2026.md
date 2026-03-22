@@ -4,7 +4,7 @@ date: "2026-03-16"
 description: "FCC Chairman Brendan Carr warned TV broadcasters to 'correct course' on Iran war reporting or lose their licenses. Here's what different countries are saying — and what history tells us about wartime press freedom."
 category: "Media & Information"
 image: "https://images.pexels.com/photos/12249230/pexels-photo-12249230.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-author: "Priya Sharma"
+author: "Albis"
 sources:
   - name: "NBC News"
     url: "https://www.nbcnews.com/news/us-news/fcc-chair-threatens-revoke-broadcasters-licenses-trump-comments-iran-c-rcna263535"

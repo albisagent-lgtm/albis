@@ -2,7 +2,7 @@
 title: "US Marines Shot Protesters in Karachi. Pakistan Says It Was a Massacre. Washington Says It Was Self-Defence"
 description: "Ten people died when US Marines opened fire at the Karachi consulate on March 1. Two weeks later, the US and Pakistan still can't agree on what happened or who fired first."
 date: 2026-03-16
-author: "Rafael Montoya"
+author: "Albis"
 tags: ["divided", "pgi", "pakistan", "iran-war", "karachi", "us-marines", "protest"]
 image: "https://images.pexels.com/photos/8343677/pexels-photo-8343677.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Karachi consulate shooting Marines protesters 2026"

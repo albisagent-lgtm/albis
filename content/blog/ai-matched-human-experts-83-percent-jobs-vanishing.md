@@ -2,7 +2,7 @@
 title: "AI Just Matched Human Experts 83% of the Time. Then 4,000 People Lost Their Jobs."
 description: "GPT-5.4 scored 83% on professional work benchmarks across 44 occupations. Days later, Block fired half its workforce. The AI job crisis isn't theoretical anymore."
 date: "2026-03-15"
-author: "Albis Technology Desk"
+author: "Albis"
 tags: ["ai-intelligence", "jobs", "gpt-5", "morgan-stanley", "automation"]
 image: https://images.pexels.com/photos/30547606/pexels-photo-30547606.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 seoKeyword: "AI replaces human experts GPT-5.4 jobs crisis 2026"

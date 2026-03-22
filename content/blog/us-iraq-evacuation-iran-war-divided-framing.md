@@ -2,7 +2,7 @@
 title: "The US Told Americans to Leave Iraq. The Two Sides Can't Agree on Why"
 description: "The US Embassy told Americans to leave Iraq 'now' as Iran-backed militia attacks mount. Washington calls it a safety measure. The Middle East sees escalation."
 date: 2026-03-15
-author: "Anika Patel"
+author: "Albis"
 tags: ["divided", "pgi", "iran-war", "iraq", "evacuation", "middle-east", "us-foreign-policy"]
 image: "https://images.pexels.com/photos/34817070/pexels-photo-34817070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "US Iraq evacuation Iran war 2026"

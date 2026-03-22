@@ -3,7 +3,7 @@ title: "Germany Just Proposed a VIP Lane for Europe's Biggest Countries. 21 Nati
 description: "Germany wants a two-speed EU where six major economies decide first, smaller countries follow later. It's either reform or fracture."
 date: "2026-03-08"
 image: "https://picsum.photos/seed/germany-two-speed-europe-big-six-vip-lane-march-2026/1200/630"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["quick-take", "eu-politics", "germany", "france", "poland", "spain", "italy", "netherlands", "eu-reform", "sovereignty"]
 sources:
   - name: "Reuters"

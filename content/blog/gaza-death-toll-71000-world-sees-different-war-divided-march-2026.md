@@ -2,7 +2,7 @@
 title: "71,000 Dead in Gaza — But Which War Are You Watching?"
 description: "Gaza's death toll hit 71,439 and the world can't agree on what's happening. The US, Europe, and the Middle East tell three completely different stories about the same conflict."
 date: "2026-03-14"
-author: "Lena Petrova"
+author: "Albis"
 tags: ["divided", "pgi", "gaza", "palestine", "israel", "perception-gap", "middle-east", "humanitarian"]
 image: https://images.pexels.com/photos/6896961/pexels-photo-6896961.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 seoKeyword: "Gaza death toll 71000 different perspectives 2026"

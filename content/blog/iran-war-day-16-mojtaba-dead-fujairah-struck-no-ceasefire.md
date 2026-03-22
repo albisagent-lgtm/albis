@@ -2,7 +2,7 @@
 title: "Iran War Day 16: Trump Says Mojtaba Khamenei May Be Dead as Both Sides Reject Ceasefire"
 description: "Trump claims Iran's new Supreme Leader may not be alive. Fujairah oil port struck. IRGC rejects all diplomacy. Brent crude hits $103. Here's what changed on day 16."
 date: "2026-03-15"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "geopolitics"
 tags: ["iran-war", "mojtaba-khamenei", "strait-of-hormuz", "fujairah", "oil-crisis", "ceasefire", "us-iran"]
 image: "https://picsum.photos/seed/iran-war-day-16-mojtaba-dead-fujairah-struck-no-ceasefire/1200/630"

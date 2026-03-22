@@ -1,7 +1,7 @@
 ---
 title: "Global Justice Systems Fail Women as Discriminatory Laws Persist in 70% of Countries"
 publishedAt: "2026-03-10T03:00:00Z"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "femicide", "reproductive-rights", "workplace-equality"]
 excerpt: "Women worldwide have only 64 percent of the legal rights that men possess. No country has achieved full legal equality between women and men. These are the findings of a UN Women report released March 4."

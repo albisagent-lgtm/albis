@@ -2,7 +2,7 @@
 title: "The President's Tweets Are Now Evidence Against Him"
 description: "A federal judge just used Trump's own Truth Social posts to block a criminal probe of Fed Chair Powell — proving presidential social media is now a legal weapon."
 date: "2026-03-15"
-author: "Albis Global Desk"
+author: "Albis"
 tags: ["quick-take", "us-politics", "federal-reserve", "trump", "courts"]
 image: "https://picsum.photos/seed/trump-truth-social-posts-evidence-powell-probe-blocked/1200/630"
 sources:

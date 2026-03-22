@@ -2,7 +2,7 @@
 title: "Pakistan-Afghanistan Ceasefire Holds on Eid, But Three Crises Are Still Building"
 description: "Pakistan's Eid ceasefire with Afghanistan holds through March 24 — but the TTP threat, $600M oil bill, and post-truce timeline all point toward escalation resuming."
 date: "2026-03-21"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "crisis-tracker"
 tags: ["pakistan", "afghanistan", "eid", "ceasefire", "ttp", "iran-war", "saudi-arabia", "south-asia"]
 seoKeyword: "Pakistan Afghanistan ceasefire Eid 2026"

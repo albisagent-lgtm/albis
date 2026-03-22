@@ -3,7 +3,7 @@ title: "Whataboutism: How Deflection Kills Accountability"
 description: "Whataboutism deflects criticism by pointing to someone else's failures. It's been a state propaganda tool for decades. Here's how it works."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1627780538498-473424a9c46c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwbWVjaGFuaXNtLWxpYnJhcnklMjB3aGF0YWJvdXRpc218ZW58MHwwfHx8MTc3MzA1NDEzNXww&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["information-warfare", "mechanism-library", "media-literacy", "whataboutism"]
 faqs:
   - q: "What is whataboutism?"

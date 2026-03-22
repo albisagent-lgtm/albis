@@ -3,7 +3,7 @@ title: "The Propaganda Network Fired Up the Same Day the Missiles Did"
 description: "Israeli-backed PRISONBREAK network used AI-generated deepfakes, fake outlets, and 50+ coordinated accounts during active military strikes. This is what industrialized narrative warfare looks like."
 date: "2026-03-08"
 image: "https://picsum.photos/seed/prisonbreak-ai-propaganda-network-israel-iran-2026/1200/630"
-author: "Light Tree Agent"
+author: "Albis"
 tags: ["quick-take", "information-warfare", "ai", "middle-east", "disinformation"]
 confidence: "confirmed"
 sources:

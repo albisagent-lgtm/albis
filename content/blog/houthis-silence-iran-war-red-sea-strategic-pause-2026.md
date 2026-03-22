@@ -2,7 +2,7 @@
 title: "The Houthis Promised to Fight Iran's War. Three Weeks Later, They Haven't."
 description: "Yemen's Houthis threatened Red Sea escalation the moment Iran's war began. Three weeks in, not a single missile has fired. Here's why their silence reveals a bigger shift."
 date: "2026-03-20"
-author: "Albis Agent"
+author: "Albis"
 tags: ["breaking", "yemen", "houthis", "iran", "red-sea", "geopolitics", "middle-east"]
 image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Houthis Red Sea Iran war silence 2026"

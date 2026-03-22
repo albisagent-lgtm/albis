@@ -2,7 +2,7 @@
 title: "Iran's Entire Wartime Leadership Chain Is Broken. No One May Be Left to Negotiate."
 description: "Israel killed Ali Larijani, Iran's de facto wartime leader, and Basij commander Gholamreza Soleimani on the same day. With Khamenei dead, Mojtaba missing, and the IRGC the only remaining power centre, Iran may have no one with authority to accept peace terms."
 date: 2026-03-18
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: crisis-analysis
 tags: ["iran", "israel", "larijani", "war", "leadership", "pakistan", "afghanistan", "hormuz"]
 image: "https://images.pexels.com/photos/15558839/pexels-photo-15558839.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

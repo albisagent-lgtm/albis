@@ -2,7 +2,7 @@
 title: "To Fight the Attention Economy, You First Have to Capture Attention"
 description: "A new documentary premiering at SXSW exposes the attention economy — but 25+ advocacy groups had to coordinate a viral trailer launch to make anyone care."
 date: "2026-03-14"
-author: "Albis Technology Desk"
+author: "Albis"
 tags: ["information-attention", "documentary", "social-media", "attention-economy", "digital-wellbeing", "sxsw"]
 seoKeyword: "attention economy documentary social media 2026"
 image: "https://images.pexels.com/photos/2228555/pexels-photo-2228555.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

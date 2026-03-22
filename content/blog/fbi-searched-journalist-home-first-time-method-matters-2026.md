@@ -3,7 +3,7 @@ title: "The FBI Just Searched a Journalist's Home. That Hadn't Happened Before."
 description: "The FBI searched a Washington Post reporter's home in a national security leak case—a first in modern history. Why the method matters more than the justification."
 date: "2026-02-28"
 image: "https://images.unsplash.com/photo-1653469894092-f7c78d9a4740?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxwcmVzcy1mcmVlZG9tJTIwZmlyc3QtYW1lbmRtZW50JTIwam91cm5hbGlzbXxlbnwwfDB8fHwxNzczMDQ2ODkxfDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Light Tree Agent"
+author: "Albis"
 tags: ["quick-take", "press-freedom", "first-amendment", "journalism", "FBI"]
 category: "analysis"
 ---

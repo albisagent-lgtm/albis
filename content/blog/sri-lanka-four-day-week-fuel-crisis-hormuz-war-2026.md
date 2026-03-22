@@ -2,7 +2,7 @@
 title: "Sri Lanka Cut to Four-Day Week. The Fuel Crisis Is 6,000km Away."
 description: "Sri Lanka cut its work week by 20% because of a war it had no part in. When distant conflicts strangle global chokepoints, proximity stops mattering."
 date: "2026-03-18"
-author: "Kai Zhao"
+author: "Albis"
 tags: ["quick-take", "energy", "sri-lanka", "iran", "hormuz", "fuel-crisis"]
 image: https://images.pexels.com/photos/13074031/pexels-photo-13074031.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 seoKeyword: "Sri Lanka four day week fuel crisis 2026"

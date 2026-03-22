@@ -2,7 +2,7 @@
 title: "Iran Mines World's Oil Artery, Demands Ceasefire Guarantee"
 subtitle: "One-third of global fertilizer, 20% of oil stuck as Strait of Hormuz becomes battlefield"
 description: "Iran's mining of the Strait of Hormuz isn't just an oil crisis. It's a food crisis. One-third of global fertilizer flows through this chokepoint. Meanwhile, the UN condemned Iran's strikes but stayed silent on US-Israel attacks that started it."
-author: "Albis Geopolitics Desk"
+author: "Albis"
 date: "2026-03-13"
 categories: ["geopolitics", "middle-east", "global-economy"]
 tags: ["iran", "us", "israel", "strait-of-hormuz", "ceasefire", "fertilizer", "food-security"]

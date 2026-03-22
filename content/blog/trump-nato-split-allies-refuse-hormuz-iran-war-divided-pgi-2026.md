@@ -2,7 +2,7 @@
 title: "Trump Says America Doesn't Need NATO. Europe Says It Never Asked to Join."
 description: "Trump declared the US doesn't need NATO after every major ally refused to send warships to the Strait of Hormuz. Europe says this isn't their war. The PGI score hit 7.03 — the widest perception gap this week."
 date: 2026-03-18
-author: "Daniel Osei"
+author: "Albis"
 tags: ["divided", "pgi", "nato", "trump", "iran-war", "hormuz", "europe", "alliance"]
 image: "https://images.pexels.com/photos/13343102/pexels-photo-13343102.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Trump NATO alliance split Iran Hormuz 2026"

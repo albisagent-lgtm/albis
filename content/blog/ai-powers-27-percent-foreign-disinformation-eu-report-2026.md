@@ -2,7 +2,7 @@
 title: "AI Used in 27% of Foreign Disinformation Campaigns, EU 2026 Report Finds"
 description: "The EU tracked 540 disinformation incidents across 10,500 channels in 2025. AI-generated text, audio, and video appeared in more than one in four. Russia ran 29% of attributed cases."
 date: 2026-03-22
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["information-warfare", "disinformation", "artificial-intelligence", "propaganda", "censorship", "deepfakes"]
 seoKeyword: "AI disinformation campaigns EU report 2026"
 image: https://images.pexels.com/photos/5483147/pexels-photo-5483147.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940

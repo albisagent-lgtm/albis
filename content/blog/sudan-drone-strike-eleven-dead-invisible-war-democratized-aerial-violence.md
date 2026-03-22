@@ -2,7 +2,7 @@
 title: "Drones Are Hitting Markets and Schools in Sudan. The World Has Already Forgotten."
 description: "Sudan's civil war killed more civilians in one week than the first month of the Iran war. Drones cost $2,000 and kill daily. Half the world isn't watching."
 date: "2026-03-16"
-author: "Daniel Osei"
+author: "Albis"
 tags: ["quick-take", "sudan", "drone-warfare", "conflict", "africa", "invisible-crisis"]
 image: "https://picsum.photos/seed/sudan-drone-strike-eleven-dead-invisible-war-democratized-aerial-violence/1200/630"
 sources:

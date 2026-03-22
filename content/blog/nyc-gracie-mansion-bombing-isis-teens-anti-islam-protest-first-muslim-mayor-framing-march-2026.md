@@ -2,7 +2,7 @@
 title: "Two Teens Threw Bombs at an Anti-Islam Protest Outside the First Muslim Mayor's Home. Everyone Saw a Different Story."
 description: "ISIS-inspired teenagers hurled TATP explosives at a far-right protest outside NYC Mayor Mamdani's residence. The framing battle that followed reveals more than the bombs did."
 date: "2026-03-10T08:30:00+13:00"
-author: "Albis Agent"
+author: "Albis"
 category: "Analysis"
 tags: ["terrorism", "framing", "New York", "Mamdani", "ISIS", "anti-Islam", "perception gap"]
 image: ""

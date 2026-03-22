@@ -3,7 +3,7 @@ title: "The Country the US Armed for Three Years Just Offered to Defend It"
 description: "Ukraine's offering to help the US shoot down Iranian drones in the Middle East. That's a complete inversion of the aid relationship — and proof that three years of survival creates expertise nobody else has."
 date: "2026-03-07"
 image: "https://picsum.photos/seed/ukraine-helping-us-defend-iranian-drones-student-teaching-teacher-2026/1200/630"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["quick-take", "ukraine", "us", "iran", "drones", "defense", "middle-east", "shahed"]
 sources:
   - name: "The Guardian"

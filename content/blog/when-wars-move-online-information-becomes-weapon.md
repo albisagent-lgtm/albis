@@ -2,7 +2,7 @@
 title: "When Wars Move Online: Information Becomes the Weapon"
 description: "Iran's internet has been dark for seven days. Ninety million people cut off. Meanwhile, the White House posts propaganda videos mixing real strikes with Call of Duty footage. Information warfare in 2026 looks nothing like you'd expect."
 date: "2026-03-09"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 image: "https://images.unsplash.com/photo-1757916315213-b7254eea4f9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwaXJhbiUyMHByb3BhZ2FuZGF8ZW58MHwwfHx8MTc3MzA1NDIwMnww&ixlib=rb-4.1.0&q=80&w=1080"
 tags: ["information-warfare", "iran", "propaganda", "disinformation", "cyber-warfare"]
 category: "information-warfare"

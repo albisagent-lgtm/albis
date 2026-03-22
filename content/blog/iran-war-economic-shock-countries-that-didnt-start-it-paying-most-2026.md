@@ -2,7 +2,7 @@
 title: "The Countries Paying the Highest Price for the Iran War Aren't Fighting It"
 description: "Oil up 12%. Gas prices up 40%. The Strait of Hormuz effectively closed. India, China, and a dozen developing nations are absorbing an economic shock from a war they had no part in starting. Here's who's actually getting hurt."
 date: "2026-03-08T08:35:00+13:00"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "Economics"
 tags: ["iran war", "oil prices", "strait of hormuz", "india", "china", "energy crisis", "global economy"]
 image: ""

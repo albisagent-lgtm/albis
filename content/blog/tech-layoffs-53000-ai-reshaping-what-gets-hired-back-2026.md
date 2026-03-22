@@ -3,7 +3,7 @@ title: "815 People Lose Tech Jobs Every Day. The Real Question Isn't Why—It's 
 description: "53,000 tech workers laid off in two months. 155 companies. 815 per day. Here's how AI is changing what gets rehired—not replaced."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1654842493917-49d75a9eaafd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx0ZWNoJTIwYWklMjBsYXlvZmZzfGVufDB8MHx8fDE3NzMwNTQwNjh8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["explainer", "tech", "ai", "layoffs", "jobs", "workforce"]
 sources:
   - name: "TrueUp Tech Layoffs Tracker"

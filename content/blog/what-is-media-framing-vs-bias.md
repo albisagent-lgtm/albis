@@ -2,7 +2,7 @@
 title: "What Is Media Framing? (And Why It Matters More Than Bias)"
 description: "Media framing shapes how you understand the news — often more than bias does. Learn the difference between framing and bias, with real examples from global media."
 date: "2026-02-23"
-author: "Albis Intelligence Desk"
+author: "Albis"
 image: "https://images.unsplash.com/photo-1714662088549-2eb71bef2eee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxtZWRpYSUyMGxpdGVyYWN5JTIwZnJhbWluZyUyMG1lZGlhJTIwYmlhc3xlbnwwfDB8fHwxNzczMDU0MTMyfDA&ixlib=rb-4.1.0&q=80&w=1080"
 tags: ["media literacy", "framing", "media bias", "news analysis", "critical thinking"]
 category: "media-literacy"

@@ -1,7 +1,7 @@
 ---
 title: "Iran's New Supreme Leader, $100 Oil, and Pakistan's Invisible Crisis: How Three Wars Became One"
 description: "Mojtaba Khamenei's appointment as Iran's third Supreme Leader sent oil past $100 for the first time since 2022. Meanwhile, Pakistan fights a war nobody's watching — funded by an oil bill it can't afford."
-author: "Albis Geopolitics Desk"
+author: "Albis"
 date: "2026-03-09"
 category: "Analysis"
 tags: ["iran", "pakistan", "afghanistan", "oil", "mojtaba-khamenei", "hormuz", "gulf-states", "geopolitics"]

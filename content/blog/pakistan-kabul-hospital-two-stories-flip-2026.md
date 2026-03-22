@@ -2,7 +2,7 @@
 title: "Islamabad Called It a Militant Base. Kabul Called It a Hospital. Same Building, Same Night."
 description: "Pakistan struck the Omid Addiction Treatment Hospital in Kabul on March 16. Here's what that sentence looks like from two very different places."
 date: "2026-03-20"
-author: "Light Tree"
+author: "Albis"
 tags: ["the-flip"]
 series: "The Flip"
 image: "/images/blog/pakistan-kabul-hospital-two-stories-flip-2026.jpg"

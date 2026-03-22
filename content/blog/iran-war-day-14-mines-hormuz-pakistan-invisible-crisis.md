@@ -2,7 +2,7 @@
 title: "Day 14: Iran Lays Mines in the Strait, Oil Hits $100, and Pakistan's War Disappears"
 description: "Iran's new supreme leader vows to keep Hormuz closed. Brent crude breaks $100. Trump lifts Russia sanctions to compensate. And the Pakistan-Afghanistan war — now in its third week — has vanished from global headlines."
 date: 2026-03-13
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["iran", "pakistan", "afghanistan", "oil", "hormuz", "mojtaba-khamenei", "russia"]
 image: "https://images.pexels.com/photos/28624858/pexels-photo-28624858.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 confidence: "confirmed"

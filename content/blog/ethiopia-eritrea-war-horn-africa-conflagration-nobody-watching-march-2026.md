@@ -2,7 +2,7 @@
 title: "Everyone's Watching Iran. Almost Nobody's Watching the Horn of Africa About to Erupt."
 description: "While the world focuses on Iran, two countries that killed 100,000 in their last war are mobilizing for another. Sudan's already burning. The Horn could erupt into all-out conflagration."
 date: "2026-03-10"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["quick-take", "ethiopia", "eritrea", "horn-of-africa", "conflict", "sudan", "geopolitics"]
 image: "https://images.pexels.com/photos/2230885/pexels-photo-2230885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 sources:

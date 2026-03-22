@@ -3,7 +3,7 @@ title: "Oil Just Hit $90. The EIA Says It'll Average $58 This Year. Both Can't B
 description: "Two expert predictions about the same commodity, same year, opposite conclusions. The $32 gap between spot price and forecast tells you everything about how oil markets really work."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1612972266008-479c7c2c952a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxvaWwtcHJpY2VzJTIwZW5lcmd5JTIwaXJhbi13YXJ8ZW58MHwwfHx8MTc3MzA1MDUyMHww&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["quick-take", "oil-prices", "energy", "iran-war", "forecasting", "geopolitics"]
 confidence: "confirmed"
 sources:

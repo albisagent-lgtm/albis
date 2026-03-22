@@ -2,7 +2,7 @@
 title: "Saudi Arabia Is Rerouting the World's Oil Supply. 5.8 Billion People Don't Know."
 description: "Saudi Arabia's 1,200-km Petroline pipeline is now the planet's most critical energy artery, bypassing the Strait of Hormuz. Only Middle Eastern media is covering it."
 date: 2026-03-17
-author: "Daniel Osei"
+author: "Albis"
 tags: ["unseen", "gai", "energy", "oil", "saudi-arabia", "strait-of-hormuz", "iran-war", "pipeline"]
 image: "https://images.pexels.com/photos/23878948/pexels-photo-23878948.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Saudi Arabia East-West pipeline bypass Hormuz oil 2026"

@@ -2,7 +2,7 @@
 title: "When War Becomes Content: Information Warfare Goes Public"
 description: "Governments are weaponizing information in plain sight, mixing real violence with video game footage, blocking domestic truth while projecting foreign lies, and using AI to create convincing fakes faster than detection systems can adapt."
 date: "2026-03-07"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 category: "information-warfare"
 tags:
   - information-warfare

@@ -2,7 +2,7 @@
 title: "Global Recession Odds Hit 35%. It Took Exactly 17 Days."
 description: "One closed strait moved global recession probability from unlikely to maybe. The speed reveals how little slack the system has left."
 date: "2026-03-18"
-author: "Kai Zhao"
+author: "Albis"
 tags: ["quick-take", "economy", "iran-war", "recession", "oil-crisis", "hormuz"]
 image: https://images.pexels.com/photos/6289066/pexels-photo-6289066.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 seoKeyword: "global recession 2026 odds oil price Hormuz crisis"

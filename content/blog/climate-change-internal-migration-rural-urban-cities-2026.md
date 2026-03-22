@@ -2,7 +2,7 @@
 title: "Climate Change Is Pushing People Into Cities Already Drowning"
 description: "Lagos, Dhaka, and Jakarta face flooding and heat — yet they're absorbing millions of climate migrants from rural areas. The cities that can't handle their current populations are about to get much bigger."
 date: "2026-03-17"
-author: "Sarah Mendez"
+author: "Albis"
 tags: ["quick-take", "climate", "migration", "cities", "urbanization", "infrastructure"]
 image: "https://images.pexels.com/photos/33072155/pexels-photo-33072155.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "climate change internal migration rural urban cities 2026"

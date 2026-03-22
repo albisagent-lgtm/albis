@@ -3,7 +3,7 @@ title: "Polarization Amplification: How Foreign Operators Deepen the Divisions Y
 description: "Polarization amplification exploits existing social divisions to weaken target societies. Here's how operators turn cracks into chasms."
 date: "2026-03-08"
 image: "https://picsum.photos/seed/polarization-amplification/1200/630"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["information-warfare", "mechanism-library", "media-literacy", "polarization-amplification"]
 faqs:
   - q: "What is polarization amplification?"

@@ -3,7 +3,7 @@ title: "Australia Had 14 Years to Prepare for This Fuel Crisis. It Didn't."
 description: "107 NSW petrol stations ran dry this week. Australia is the only IEA member that never built the required 90-day fuel reserve — and now a war 12,000km away is exposing it."
 date: "2026-03-22"
 pubDate: "2026-03-22"
-author: "Priya Sharma"
+author: "Albis"
 category: "quick-take"
 tags: ["quick-take", "australia", "fuel-crisis", "energy-security", "iran-war", "hormuz", "oil"]
 regions: ["asia_pacific"]

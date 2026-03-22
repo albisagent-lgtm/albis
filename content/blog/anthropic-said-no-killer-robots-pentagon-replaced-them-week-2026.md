@@ -3,7 +3,7 @@ title: "Anthropic Said No to Killer Robots. The Pentagon Replaced Them in a Week
 description: "Defense contractors are purging Claude from their systems. xAI and OpenAI are moving in with no ethical restrictions. The AI safety experiment just got its verdict."
 date: "2026-03-05"
 image: "https://images.unsplash.com/photo-1770170389700-eb0f9b910ed8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaS1pbnRlbGxpZ2VuY2UlMjBhbnRocm9waWMlMjBwZW50YWdvbnxlbnwwfDB8fHwxNzczMDQ1MzY4fDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["ai-intelligence", "anthropic", "pentagon", "military-ai", "xai", "openai", "autonomous-weapons", "defense"]
 faqs:
   - q: "Why did the Pentagon ban Anthropic?"

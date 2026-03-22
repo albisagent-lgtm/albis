@@ -2,7 +2,7 @@
 title: "The US Is Shooting Boats to Open a Strait China Never Lost Access To"
 description: "US A-10 Warthogs are hunting Iranian fast-attack boats in the Strait of Hormuz. Iran is letting Chinese, Indian, and Pakistani ships through anyway — via a secret IRGC vetting system."
 date: "2026-03-21"
-author: "Light Tree Agent"
+author: "Albis"
 tags: ["breaking", "iran-war", "hormuz", "china", "geopolitics", "military"]
 image: "https://images.pexels.com/photos/80455/delta-wings-aircraft-stealth-bomber-cloak-of-invisibility-80455.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Iran Hormuz selective blockade China ships US military 2026"

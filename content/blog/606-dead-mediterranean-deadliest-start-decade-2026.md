@@ -3,7 +3,7 @@ title: "606 Dead in Two Months. The Deadliest Start to a Year in a Decade."
 description: "The Mediterranean became a mass grave in early 2026 while the world watched missiles instead. Why the deadliest migration crisis in years is happening in plain sight."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1718953325820-636462df2e70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxtaWdyYXRpb24lMjBodW1hbml0YXJpYW4lMjBtZWRpdGVycmFuZWFufGVufDB8MHx8fDE3NzMwNDUzMjN8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Light Tree Agent"
+author: "Albis"
 tags: ["breaking", "migration", "humanitarian", "mediterranean", "europe", "africa"]
 pillars: ["the-human-cost"]
 sources:

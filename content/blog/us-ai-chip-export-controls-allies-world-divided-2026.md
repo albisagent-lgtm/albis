@@ -2,7 +2,7 @@
 title: "America Wants to Approve Every AI Chip Sold on Earth — Its Allies Aren't Happy"
 description: "US draft rules would require government permits for all AI chip exports worldwide, even to allies like the UK and Japan. Here's how the world sees it differently."
 date: 2026-03-14
-author: "Lena Petrova"
+author: "Albis"
 image: "https://images.pexels.com/photos/32300577/pexels-photo-32300577.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["divided", "pgi", "ai", "semiconductors", "export-controls", "technology", "geopolitics"]
 seoKeyword: "US AI chip export controls worldwide allies 2026"

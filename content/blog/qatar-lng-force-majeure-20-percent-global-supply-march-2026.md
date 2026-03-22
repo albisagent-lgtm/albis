@@ -2,7 +2,7 @@
 title: "Qatar's LNG Shutdown Pulled 20% of Global Gas Supply Offline. Nobody Can Replace It."
 description: "Iranian drone strikes shut down Qatar's LNG facilities on March 2. Restart takes at least a month. Europe and Asia are now competing for the same scarce cargoes, and the US can't help."
 date: "2026-03-15"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["breaking", "energy", "qatar", "lng", "iran-war", "natural-gas"]
 image: "https://images.pexels.com/photos/24244231/pexels-photo-24244231.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Qatar LNG shutdown force majeure 2026"

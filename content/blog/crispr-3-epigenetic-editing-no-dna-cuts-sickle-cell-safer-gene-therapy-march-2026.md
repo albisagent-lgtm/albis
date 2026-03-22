@@ -3,7 +3,7 @@ title: "CRISPR 3.0 Doesn't Cut Your DNA. That Changes Everything."
 description: "A new CRISPR technique edits genes without cutting DNA, eliminating cancer risks from traditional gene therapy. Here's why it matters for sickle cell and beyond."
 date: "2026-03-09"
 image: "https://images.unsplash.com/photo-1641903202531-bfa6bf0c6419?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGgtbG9uZ2V2aXR5JTIwY3Jpc3ByJTIwZ2VuZS10aGVyYXB5fGVufDB8MHx8fDE3NzMwNDY4NjJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["health-longevity", "crispr", "gene-therapy", "sickle-cell", "biotech", "epigenetics"]
 sources:
   - name: "ScienceDaily"

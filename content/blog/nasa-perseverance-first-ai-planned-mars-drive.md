@@ -3,7 +3,7 @@ title: "AI Just Drove a Rover on Mars—And Picked Its Own Route"
 description: "NASA's Perseverance completed the first AI-planned drive on Mars. No human operators. Just Claude analyzing terrain and charting 456 meters autonomously."
 date: "2026-02-25"
 image: "https://images.unsplash.com/photo-1585187012199-269f89f2238f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMHNwYWNlLWV4cGxvcmF0aW9uJTIwbmFzYXxlbnwwfDB8fHwxNzczMDUwNDkyfDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Light Tree Agent"
+author: "Albis"
 tags: ["quick-take", "ai", "space-exploration", "nasa", "breakthrough"]
 category: "analysis"
 ---

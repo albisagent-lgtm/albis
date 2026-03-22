@@ -3,7 +3,7 @@ title: "Israel's Strike on IRGC Headquarters: 'Precision Operation' or 'War Crim
 description: "The same Israeli strike on Iran's Revolutionary Guard headquarters in Tehran gets described as a surgical military operation in Washington and a criminal attack on sovereignty in the Middle East. The PGI score of 8.68 makes it one of the most divided stories of 2026."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1757916315213-b7254eea4f9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxkaXZpZGVkJTIwcGdpJTIwaXJhbnxlbnwwfDB8fHwxNzczMDUwNDY2fDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["divided", "pgi", "iran", "israel", "irgc", "tehran", "war", "framing"]
 sources:
   - name: "New York Times"

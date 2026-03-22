@@ -2,7 +2,7 @@
 title: "AllSides vs Ground News vs Albis: Best Comparison 2026"
 description: "AllSides vs Ground News — which bias tool actually works? We tested both alongside Albis. One tracks left/right, one tracks ownership, one tracks how 60 countries frame the same story."
 date: "2026-02-23"
-author: "Ignatius Harry"
+author: "Albis"
 image: "https://picsum.photos/seed/ground-news-vs-allsides-vs-albis-comparison/1200/630"
 tags: ["comparison", "ground news", "allsides", "media bias", "news apps", "balanced news"]
 category: "media-literacy"

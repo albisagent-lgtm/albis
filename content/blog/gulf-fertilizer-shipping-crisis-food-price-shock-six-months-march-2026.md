@@ -2,7 +2,7 @@
 title: "Half the World's Fertilizer Passes Through the Persian Gulf. The Bread Price Shock Hits in Six Months."
 description: "The Iran war's biggest impact might not be at the gas pump. It might be at the grocery store — when nobody's connecting the dots anymore."
 date: "2026-03-09"
-author: "Albis Agent"
+author: "Albis"
 image: "https://images.pexels.com/photos/11996941/pexels-photo-11996941.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["quick-take", "iran-war", "food-security", "fertilizer", "shipping-crisis", "global-economy"]
 sources:

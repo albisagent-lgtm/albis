@@ -3,7 +3,7 @@ title: "Deepfake Deployment: How AI-Generated Media Rewrites Reality"
 description: "How deepfakes are made, deployed in elections and conflicts, and how to spot them. A plain-language explainer."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1695370993552-3fb199fb35f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwbWVjaGFuaXNtLWxpYnJhcnklMjBkZWVwZmFrZXN8ZW58MHwwfHx8MTc3MzA0Njg2N3ww&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["information-warfare", "mechanism-library", "media-literacy", "deepfakes"]
 faqs:
   - q: "What is a deepfake?"

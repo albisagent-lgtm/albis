@@ -2,7 +2,7 @@
 title: "Two Democracies Just Went to War Over What 'Free Speech' Means"
 description: "The US built Freedom.gov to bypass European hate speech laws. Two of the world's oldest democracies now fundamentally disagree on what free expression means online."
 date: 2026-03-15
-author: Albis Geopolitics Desk
+author: "Albis"
 tags: [explainer, information-warfare, us, europe, free-speech, dsa, content-moderation]
 image: https://images.pexels.com/photos/218717/pexels-photo-218717.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 seoKeyword: "Freedom.gov US bypass EU hate speech laws"

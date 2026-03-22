@@ -2,7 +2,7 @@
 title: "Nepal's Gen Z Just Elected a 35-Year-Old Ex-Rapper by Two-Thirds. The Old Guard Got 13%."
 description: "Balen Shah's party won 182 seats in Nepal's parliament—just two shy of a supermajority. The establishment parties that ruled for 30 years barely broke double digits."
 date: "2026-03-19"
-author: "Priya Mehta"
+author: "Albis"
 tags: ["quick-take", "nepal", "democracy", "youth-politics", "south-asia"]
 image: "https://images.pexels.com/photos/8107705/pexels-photo-8107705.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Balen Shah Nepal election 2026 Gen Z victory"

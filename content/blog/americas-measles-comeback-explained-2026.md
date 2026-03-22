@@ -3,7 +3,7 @@ title: "America's measles comeback, explained"
 description: "The US had nearly wiped out measles. Now it's back with nearly 1,000 cases in two months. Here's how elimination status works, why vaccination rates matter, and what happens if the virus takes hold again."
 date: "2026-02-26"
 image: "https://images.unsplash.com/photo-1629361989971-2c0b5e850e46?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxtZWFzbGVzJTIwcHVibGljLWhlYWx0aCUyMHZhY2NpbmVzfGVufDB8MHx8fDE3NzMwNDUzNTl8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["explainer", "measles", "public-health", "vaccines", "health"]
 category: "analysis"
 ---

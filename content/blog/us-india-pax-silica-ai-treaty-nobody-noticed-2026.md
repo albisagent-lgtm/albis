@@ -3,7 +3,7 @@ title: "The US Just Locked India Into Its AI Ecosystem. Did Anyone Notice?"
 description: "While the world watched Iran, the US signed a treaty binding India to American AI infrastructure. India gets chips and investment. The US gets to decide who India shares AI with. Partnership or digital colonialism?"
 date: "2026-03-01"
 image: "https://images.unsplash.com/photo-1546833998-07256bcc76ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMGdlb3BvbGl0aWNzJTIwaW5kaWF8ZW58MHwwfHx8MTc3MzA1NDEwNXww&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["quick-take", "ai", "geopolitics", "india", "tech-policy", "semiconductors"]
 category: "analysis"
 ---

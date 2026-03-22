@@ -2,7 +2,7 @@
 title: "318 Million People Face Hunger. Two Famines Are Confirmed. And the Fertilizer Just Stopped."
 description: "Hunger has doubled since 2019. Gaza and Sudan are in confirmed famine. And the Iran war just choked the Strait that 25% of the world's fertilizer flows through. The next planting season may already be lost."
 date: "2026-03-15"
-author: "Albis Global Desk"
+author: "Albis"
 tags: ["quick-take", "food-security", "hunger", "famine", "iran-war", "fertilizer", "agriculture"]
 image: "https://images.pexels.com/photos/8078468/pexels-photo-8078468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "318 million hunger crisis famine Gaza Sudan 2026"

@@ -2,7 +2,7 @@
 title: "Kenya's Floods Killed 62 People. The World Didn't Notice."
 description: "Flash floods killed 62 Kenyans and destroyed 12,000 homes after months of drought. A month of rain fell on Nairobi in 24 hours. Six billion people never heard about it."
 date: 2026-03-14
-author: "Jacob Wilson"
+author: "Albis"
 tags: ["unseen", "gai", "kenya", "flooding", "climate", "weather-whiplash", "drought"]
 image: "https://images.pexels.com/photos/28447761/pexels-photo-28447761.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Kenya floods 62 dead drought climate whiplash 2026"

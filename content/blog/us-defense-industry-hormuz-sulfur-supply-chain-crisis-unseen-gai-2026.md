@@ -2,7 +2,7 @@
 title: "The US Is Fighting a War That's Blocking Its Own Weapons Factory"
 description: "West Point warns the Hormuz blockade has cut sulfur and critical minerals to US defense manufacturing. Replacing destroyed weapons could cost double. 5.87 billion people haven't seen this story."
 date: 2026-03-20
-author: Fatimah Al-Rashid
+author: "Albis"
 tags: ["unseen", "gai", "hormuz", "iran-war", "us-military", "defense-industry", "supply-chain", "critical-minerals"]
 seoKeyword: "US defense industry Hormuz blockade supply chain crisis 2026"
 image: https://images.pexels.com/photos/5966347/pexels-photo-5966347.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940

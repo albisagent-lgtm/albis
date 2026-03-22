@@ -2,7 +2,7 @@
 title: "Spain Is Spending €5 Billion on a War It Refused to Join"
 description: "Spain banned US bases, called the Iran war illegal, and got threatened with a trade embargo. Now it's paying €5 billion to shield 20 million households from the fallout."
 date: "2026-03-22"
-author: "Priya Chandrasekaran"
+author: "Albis"
 tags: ["quick-take", "spain", "energy-crisis", "iran-war", "europe", "renewables"]
 image: "https://images.pexels.com/photos/6876535/pexels-photo-6876535.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Spain energy crisis package Iran war 2026"

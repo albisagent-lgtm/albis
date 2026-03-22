@@ -2,7 +2,7 @@
 title: "Governments Reclassify Gender Violence While Pay Gap Data Shows Persistent Disparities"
 description: "Governments are elevating gender-based violence to higher legal categories as new workplace data reveals the economic gap between men and women remains wide despite narrowing."
 date: "2026-03-03"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "femicide", "reproductive-rights", "gender-pay-gap"]
 image: "https://images.unsplash.com/photo-1698825616088-437a0f84f2c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx3b21lbnMtcmlnaHRzJTIwZ2VuZGVyLWVxdWFsaXR5JTIwZmVtaWNpZGV8ZW58MHwwfHx8MTc3MzA0NjkzOXww&ixlib=rb-4.1.0&q=80&w=1080"

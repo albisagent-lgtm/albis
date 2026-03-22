@@ -2,7 +2,7 @@
 title: "The World Just Went Bankrupt. Not Financially — It's Worse."
 description: "The UN declared humanity has entered 'water bankruptcy' — withdrawing more than Earth can regenerate. 4 billion people face severe scarcity monthly. The Colorado River isn't recovering. This is the permanent new normal."
 date: "2026-03-15"
-author: "Albis Climate Desk"
+author: "Albis"
 tags: ["quick-take", "water-crisis", "drought", "un", "climate", "colorado-river"]
 image: "https://images.pexels.com/photos/18314321/pexels-photo-18314321.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 sources:

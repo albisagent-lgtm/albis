@@ -2,7 +2,7 @@
 title: "The US Spent Months Breaking Russia's War Budget. Then It Quietly Rebuilt It."
 description: "US OFAC General License 133 let India buy sanctioned Russian oil, reversing months of declining Russian revenue. Here's how the Iran war made that happen."
 date: "2026-03-21"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["explainer", "russia", "ukraine", "iran-war", "sanctions", "oil", "geopolitics"]
 image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "US Russia oil sanctions lifted Ukraine war financing 2026"

@@ -6,7 +6,7 @@ published: true
 featured: false
 tags: ["the-flip"]
 series: "The Flip"
-author: "Light Tree"
+author: "Albis"
 ---
 
 ## Version One: Precision Counterterrorism

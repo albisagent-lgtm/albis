@@ -3,7 +3,7 @@ title: "The US Is About to Build More Power in One Year Than It Has Since 2002"
 description: "86 GW of new capacity planned for 2026 — and 93% of it is solar, batteries, and wind. Here's what that means."
 date: "2026-02-26"
 image: "https://images.unsplash.com/photo-1662601680176-b797a4417c25?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjbGVhbi1lbmVyZ3klMjBzb2xhciUyMGJhdHRlcmllc3xlbnwwfDB8fHwxNzczMDU0MTIyfDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["clean-energy", "solar", "batteries", "wind", "renewables", "united-states", "energy-transition"]
 category: "analysis"
 ---

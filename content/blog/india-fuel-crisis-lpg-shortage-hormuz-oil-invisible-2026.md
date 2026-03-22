@@ -2,7 +2,7 @@
 title: "India's Crude Imports Dropped 23% in March. A Fifth of Mumbai's Restaurants Have Closed."
 description: "India's fuel crisis — LPG queues, 23% crude import drop, rupee at record lows — affects 1.4 billion people. Outside South Asia, almost nobody's covering it."
 date: "2026-03-22"
-author: "Maia Santos"
+author: "Albis"
 tags: ["unseen", "gai", "india", "energy-crisis", "oil", "lpg", "hormuz"]
 image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "India fuel crisis LPG shortage Hormuz oil imports 2026"

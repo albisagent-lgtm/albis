@@ -2,7 +2,7 @@
 title: "Gaza's Deadliest Week Happened While You Were Watching Iran"
 description: "Israeli strikes killed teenagers in Gaza this week—while the world's cameras pointed at Tehran. War creates cover for war."
 date: "2026-03-14"
-author: "Albis Global Desk"
+author: "Albis"
 tags: ["breaking", "gaza", "iran-war", "perception-gap", "middle-east"]
 seoKeyword: "Gaza airstrike deadliest since Iran war 2026"
 image: "https://images.pexels.com/photos/36520968/pexels-photo-36520968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

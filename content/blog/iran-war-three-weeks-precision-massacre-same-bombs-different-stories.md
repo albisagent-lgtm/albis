@@ -2,7 +2,7 @@
 title: "Three Weeks of Bombs. Two Completely Different Wars."
 description: "The US calls it precision regime change. Iran counts 1,348 dead civilians and 168 schoolgirls. Same conflict, two irreconcilable realities — and most of the world isn't even watching."
 date: 2026-03-17
-author: "Daniel Osei"
+author: "Albis"
 tags: ["divided", "pgi", "iran-war", "civilian-casualties", "perception-gap", "regime-change"]
 image: "https://images.pexels.com/photos/13741968/pexels-photo-13741968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Iran war civilian casualties precision strikes perception gap 2026"

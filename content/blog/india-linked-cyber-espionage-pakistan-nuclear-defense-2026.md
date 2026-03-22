@@ -3,7 +3,7 @@ title: "India's Hackers Spent a Year Inside Pakistan's Nuclear Agency. The Word 
 description: "An India-linked cyber espionage campaign targeted Pakistan's nuclear regulator, navy, and telecom for 12 months. Indian media calls it counterterrorism. Pakistani media calls it state-sponsored aggression. The same operation, two completely different stories."
 date: 2026-03-08
 image: "https://picsum.photos/seed/india-linked-cyber-espionage-pakistan-nuclear-defense-2026/1200/630"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["divided", "pgi", "cybersecurity", "india", "pakistan", "espionage", "south-asia"]
 sources:
   - name: "The Record (Recorded Future)"

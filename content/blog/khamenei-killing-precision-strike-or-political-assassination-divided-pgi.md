@@ -4,7 +4,7 @@ description: "The killing of Iran's supreme leader on Feb 28 scored a PGI of 7.9
 date: 2026-03-20
 published: true
 featured: false
-author: "Priya Nair"
+author: "Albis"
 tags: ["divided", "pgi", "iran", "khamenei", "middle-east", "geopolitics", "us-foreign-policy"]
 image: "https://images.pexels.com/photos/5841077/pexels-photo-5841077.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Khamenei assassination perception gap world divided 2026"

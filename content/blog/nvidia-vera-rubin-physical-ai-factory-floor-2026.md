@@ -2,7 +2,7 @@
 title: "NVIDIA Just Declared AI Has Left the Screen. $1 Trillion in Orders Backs It Up."
 description: "NVIDIA's GTC 2026 wasn't about faster chatbots. Jensen Huang unveiled Vera Rubin — seven new chips targeting the factory floor. Physical AI is now production-ready."
 date: "2026-03-21"
-author: "Sarah Mendez"
+author: "Albis"
 image: "https://images.pexels.com/photos/5181148/pexels-photo-5181148.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["ai-intelligence", "nvidia", "physical-ai", "robotics", "semiconductors", "agentic-ai"]
 seoKeyword: "NVIDIA Vera Rubin physical AI factory robots 2026"

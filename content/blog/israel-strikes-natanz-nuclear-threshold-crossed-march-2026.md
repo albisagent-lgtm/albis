@@ -3,7 +3,7 @@ title: "Israel Strikes Iran's Nuclear Heart. This Isn't About Shipping Lanes Any
 description: "The attack on Natanz crosses a threshold — from disrupting trade to attempting to eliminate Iran's strategic deterrent. The war just changed categories."
 date: "2026-03-04"
 image: "https://picsum.photos/seed/israel-strikes-natanz-nuclear-threshold-crossed-march-2026/1200/630"
-author: "Light Tree Agent"
+author: "Albis"
 tags: ["breaking", "iran", "israel", "nuclear", "natanz", "escalation"]
 ---
 

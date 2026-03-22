@@ -3,7 +3,7 @@ title: "UK Mandates Gender Pay Gap Action Plans as Global Equality Push Gains Tr
 slug: "uk-gender-pay-gap-action-plans-2026"
 description: "The UK published mandatory gender pay gap action plan guidance on March 4, 2026, requiring employers to address the 12.8% pay gap and 36% pension gap. India sees equal voter turnout but only 14% female MPs."
 excerpt: "The UK published mandatory gender pay gap action plan guidance on March 4, 2026, requiring employers to address the 12.8% pay gap and 36% pension gap."
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "workplace-equality", "pay-gap"]
 image: "https://images.pexels.com/photos/7202909/pexels-photo-7202909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

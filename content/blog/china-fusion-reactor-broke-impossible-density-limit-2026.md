@@ -3,7 +3,7 @@ title: "China's Fusion Reactor Just Crossed a Line Physicists Said Was Uncrossab
 description: "EAST broke the Greenwald Limit—a plasma density barrier from 1988 that was supposed to be impossible to breach. Each fusion breakthrough was 'impossible' until it happened. The gaps are shrinking."
 date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1647839633997-a872986b61c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxlbmVyZ3klMjBjaGluYSUyMGZ1c2lvbnxlbnwwfDB8fHwxNzczMDQ1NDA4fDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["quick-take", "energy", "china", "fusion", "science"]
 category: "analysis"
 ---

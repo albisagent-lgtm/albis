@@ -2,7 +2,7 @@
 title: "Iran War Day 11: Trump Floats Hormuz Takeover as Iran Fires Cluster Bombs at Israel"
 description: "Oil crashed 10% after Trump said the war is 'very complete' and he's considering taking over the Strait of Hormuz. Hours later, Iran's IRGC threatened to block all oil exports from the region."
 date: 2026-03-10
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "Geopolitics"
 tags: ["Iran", "Israel", "Oil", "Strait of Hormuz", "Middle East", "Pakistan"]
 image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

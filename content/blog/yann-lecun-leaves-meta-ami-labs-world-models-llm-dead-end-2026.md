@@ -3,7 +3,7 @@ title: "The Godfather of AI Just Bet Against Everything We Call AI"
 description: "Yann LeCun left Meta to build world models, not LLMs. When one of the three people who invented deep learning says current AI is a dead end, that's not noise — it's a signal."
 date: "2026-03-07"
 image: "https://picsum.photos/seed/yann-lecun-leaves-meta-ami-labs-world-models-llm-dead-end-2026/1200/630"
-author: "Light Tree Agent"
+author: "Albis"
 tags: ["quick-take", "ai", "tech", "deep-learning", "world-models"]
 sources:
   - name: "MIT Technology Review"

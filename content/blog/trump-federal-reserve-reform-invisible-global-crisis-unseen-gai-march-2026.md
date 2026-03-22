@@ -3,7 +3,7 @@ title: "The US Is Rewriting the Rules of Its Central Bank. 5.97 Billion People H
 description: "The Trump administration is pushing to limit the Federal Reserve's independence — a move that could reshape global monetary policy. Only Americans are hearing about it."
 date: "2026-03-09"
 image: "https://picsum.photos/seed/trump-federal-reserve-reform-invisible-global-crisis-unseen-gai-march-2026/1200/630"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["unseen", "gai", "federal-reserve", "trump", "monetary-policy", "central-bank-independence", "economics"]
 sources:
   - name: "[your]NEWS"

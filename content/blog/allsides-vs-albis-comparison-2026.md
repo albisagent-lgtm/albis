@@ -3,7 +3,7 @@ title: "AllSides vs Albis: Which Shows You More Perspectives?"
 slug: "allsides-vs-albis-comparison-2026"
 description: "AllSides rates left vs right political bias. Albis measures regional perception gaps. Both fight filter bubbles — but they measure different things entirely."
 tags: ["comparison", "seo", "allsides", "media-bias"]
-author: "albis"
+author: "Albis"
 date: "2026-03-18"
 faqs:
   - q: "Is AllSides really unbiased?"

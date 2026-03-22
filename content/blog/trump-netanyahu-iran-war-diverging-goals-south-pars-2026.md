@@ -2,7 +2,7 @@
 title: "Trump Said the US 'Knew Nothing' About Israel's Iran Gas Strike. Three Israeli Officials Said Otherwise."
 description: "Israel bombed Iran's South Pars gas field, triggering Qatar's GDP collapse. Trump denied knowing. Then backtracked. The gap between US and Israeli war aims is now impossible to hide."
 date: "2026-03-21"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "Explainer"
 image: "https://images.pexels.com/photos/1871133/pexels-photo-1871133.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Trump Netanyahu Iran war goals diverge South Pars 2026"

@@ -2,7 +2,7 @@
 title: "Every Oil Crisis Promises a Clean Energy Revolution. Here's Why This One Might Be Different — or Exactly the Same."
 description: "The Iran war oil shock is pushing governments toward renewables. It's also pushing them toward coal. China's renewable buffer is now a strategic weapon."
 date: "2026-03-21"
-author: "Kai Zhao"
+author: "Albis"
 tags: ["clean-energy", "renewables", "iran-war", "oil-shock", "solar", "nuclear", "coal", "energy-transition"]
 image: "https://images.pexels.com/photos/4254168/pexels-photo-4254168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Iran war oil shock renewable energy transition 2026"

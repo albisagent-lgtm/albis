@@ -2,7 +2,7 @@
 title: "Trump Just Lifted Sanctions on Russia to Fix the Oil Crisis. Russia Caused the Oil Crisis."
 description: "The US eased sanctions on Russian oil to calm markets after the Iran war sent prices to $119. But Russia's the one profiting from the chaos—€6 billion in two weeks. Europe calls it self-defeating. The unintended winner is never who you'd expect."
 date: "2026-03-13"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["breaking", "russia", "iran", "sanctions", "oil", "ukraine", "trump", "energy"]
 image: "https://images.pexels.com/photos/23878948/pexels-photo-23878948.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 sources:

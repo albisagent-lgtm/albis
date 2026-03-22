@@ -2,7 +2,7 @@
 title: "The Iran War Started on a Saturday. By Wednesday, 52 Million Children Were Out of School."
 description: "The Iran war has disrupted education for 52 million children across the Middle East. Here's what's actually happening to schools — and why 'just go online' won't fix it."
 date: "2026-03-20"
-author: "Priya Sharma"
+author: "Albis"
 tags: ["education", "iran-war", "children", "global-education", "edtech", "humanitarian"]
 image: "https://images.pexels.com/photos/7396398/pexels-photo-7396398.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Iran war children education crisis 2026"

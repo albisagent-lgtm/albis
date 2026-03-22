@@ -2,7 +2,7 @@
 title: "Russia Isn't Trying to Win the Information War. It's Trying to Make Sure Nobody Wins."
 slug: russia-operation-overload-iran-war-firehose-falsehood-march-2026
 publishDate: 2026-03-09T12:00:00+13:00
-author: Albis Geopolitics Desk
+author: "Albis"
 image: "https://images.pexels.com/photos/33095889/pexels-photo-33095889.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 category: Information Warfare
 tags: [russia, disinformation, iran-war, operation-overload, storm-1679, firehose-of-falsehood, fake-news]

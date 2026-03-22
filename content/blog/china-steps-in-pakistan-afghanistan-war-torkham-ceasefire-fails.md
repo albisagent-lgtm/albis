@@ -2,7 +2,7 @@
 title: "China Steps Into the Pakistan-Afghanistan War. A Ceasefire Collapsed Before They Could Retrieve a Body."
 slug: "china-steps-in-pakistan-afghanistan-war-torkham-ceasefire-fails"
 date: "2026-03-13"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "Geopolitics"
 tags: ["Pakistan", "Afghanistan", "China", "Diplomacy", "Taliban", "TTP", "Iran Crisis"]
 image: "https://images.pexels.com/photos/29890322/pexels-photo-29890322.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

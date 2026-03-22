@@ -3,7 +3,7 @@ title: "Iran Confirms Khamenei Is Dead. The Succession Crisis Has Already Begun.
 description: "Iranian state television confirmed the death of Supreme Leader Ayatollah Ali Khamenei. In Los Angeles and London, Iranians danced in the streets. In Tehran, the IRGC keeps launching missiles. Nobody knows who's in charge."
 date: "2026-03-01"
 image: "https://images.unsplash.com/photo-1757916315213-b7254eea4f9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwa2hhbWVuZWklMjBzdWNjZXNzaW9ufGVufDB8MHx8fDE3NzMwNTA0NzR8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["iran", "khamenei", "succession", "irgc", "middle-east", "conflict", "geopolitics"]
 category: "breaking"
 ---

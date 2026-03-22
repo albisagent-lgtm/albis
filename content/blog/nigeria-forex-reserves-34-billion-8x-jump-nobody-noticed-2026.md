@@ -3,7 +3,7 @@ title: "Nigeria's Reserves Jumped 8x in Two Years. The Global Financial Press Ba
 description: "From $3.99B to $34.8B—Africa's largest economy quietly executed one of the sharpest financial turnarounds on record. Here's what actually worked."
 date: "2026-03-05"
 image: "https://images.unsplash.com/photo-1678693362448-27bc143e74d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxuaWdlcmlhJTIwZWNvbm9teSUyMGFmcmljYXxlbnwwfDB8fHwxNzczMDUwNTAyfDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["quick-take", "nigeria", "economy", "africa", "forex-reserves", "financial-reform"]
 ---
 

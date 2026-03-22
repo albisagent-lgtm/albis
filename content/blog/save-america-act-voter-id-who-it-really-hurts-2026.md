@@ -4,7 +4,7 @@ date: "2026-03-17"
 description: "The SAVE America Act heads to the Senate this week with strict voter ID and proof-of-citizenship rules. Supporters call it common sense. Researchers say 21 million Americans lack the required documents — and Republican voters may be hit hardest."
 category: "Governance & Rights"
 image: "https://images.pexels.com/photos/7103170/pexels-photo-7103170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-author: "Priya Sharma"
+author: "Albis"
 sources:
   - name: "The Guardian"
     url: "https://www.theguardian.com/us-news/2026/mar/13/explainer-save-america-act"

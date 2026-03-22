@@ -3,7 +3,7 @@ title: "Coordinated Inauthentic Behavior: How Fake Account Networks Manipulate W
 description: "How bot networks, troll farms, and fake accounts work together to manipulate online discourse. A plain-language explainer."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1644718195302-cb82d9dfb366?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwbWVjaGFuaXNtLWxpYnJhcnklMjBjb29yZGluYXRlZC1pbmF1dGhlbnRpYy1iZWhhdmlvcnxlbnwwfDB8fHwxNzczMDQ2ODU4fDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["information-warfare", "mechanism-library", "media-literacy", "coordinated-inauthentic-behavior"]
 faqs:
   - q: "What is coordinated inauthentic behavior?"

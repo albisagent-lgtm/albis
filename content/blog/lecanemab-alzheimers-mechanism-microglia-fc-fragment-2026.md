@@ -2,7 +2,7 @@
 title: "We've Had an Approved Alzheimer's Drug for Two Years. We Just Found Out How It Actually Works."
 description: "Scientists finally cracked how lecanemab clears brain plaques — it's not the antibody itself, it's one specific part called the Fc fragment. The find could fix the drug's biggest flaw."
 date: "2026-03-20"
-author: "Priya Nair"
+author: "Albis"
 tags: ["health-longevity", "alzheimers", "neuroscience", "biotech", "drug-discovery", "brain-health"]
 image: "https://images.pexels.com/photos/4226119/pexels-photo-4226119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "lecanemab how it works Alzheimer's microglia Fc fragment 2026"

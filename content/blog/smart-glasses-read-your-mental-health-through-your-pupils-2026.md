@@ -3,7 +3,7 @@ title: "These Smart Glasses Read Your Mental Health Through Your Pupils — With
 description: "UNC startup Carolina Instruments built camera-free glasses that track pupil changes to detect anxiety, ADHD, and depression before symptoms show."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1771923891218-cf56ae6ac1ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGgtbG9uZ2V2aXR5JTIwbWVudGFsLWhlYWx0aCUyMHdlYXJhYmxlc3xlbnwwfDB8fHwxNzczMDU0MDQwfDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["health-longevity", "mental-health", "wearables", "neuroscience", "diagnostics"]
 faqs:
   - q: "Can smart glasses really detect mental health conditions?"

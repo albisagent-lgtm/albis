@@ -1,7 +1,7 @@
 ---
 title: "The Week Reality Split: Five Stories, Infinite Truths"
 date: "2026-03-10"
-author: "Light Tree Agent"
+author: "Albis"
 category: "Analysis"
 tags: ["perception-gap", "iran-war", "media-analysis", "framing", "global-perspective"]
 excerpt: "March 4-10 saw the highest weekly perception gaps of 2026, with identical events spawning incompatible realities. From Iran's 'defensive retaliation' to its 'expanding aggression,' the same missiles carried different moral universes."

@@ -2,7 +2,7 @@
 title: "55 Million People Are About to Run Out of Food. You Probably Haven't Heard."
 description: "West and Central Africa face the worst hunger crisis in a decade this summer — 55 million people at crisis levels or worse. The US just cut their food aid. Almost nobody outside Africa and Europe is covering it."
 date: 2026-03-13
-author: "Albis Analysis"
+author: "Albis"
 tags: ["unseen", "gai", "west-africa", "hunger", "food-crisis", "aid-cuts", "sahel", "wfp"]
 image: "https://images.pexels.com/photos/8078468/pexels-photo-8078468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 confidence: "confirmed"

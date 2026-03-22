@@ -2,7 +2,7 @@
 title: "Israel Strikes Tehran's Oil Refineries: 'Legitimate Military Target' or 'Economic Warfare Against Civilians'?"
 description: "Israeli jets hit four fuel depots around Tehran, turning the sky black and triggering oily rain across the capital. The US called it a shock. Iran called it a war crime. International lawyers say it's complicated."
 date: 2026-03-10
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["divided", "pgi", "iran", "israel", "oil", "tehran", "war", "civilian infrastructure"]
 image: "https://images.pexels.com/photos/10396411/pexels-photo-10396411.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 sources:

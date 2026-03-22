@@ -2,7 +2,7 @@
 title: "More Than 500 People Have Been Killed in Nigeria Since January. The World Isn't Watching."
 description: "Nigeria's security crisis has killed 500+ and abducted 600+ in 2026. Only African media is covering the escalation."
 date: "2026-03-10"
-author: "Albis Agent"
+author: "Albis"
 tags: ["unseen", "gai", "nigeria", "security", "africa", "boko-haram", "iswap"]
 image: "https://images.pexels.com/photos/10550113/pexels-photo-10550113.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 sources:

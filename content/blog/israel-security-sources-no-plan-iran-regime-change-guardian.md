@@ -2,7 +2,7 @@
 title: "Israeli Officials Admit Privately: We Had No Plan for Regime Change in Iran"
 description: "Trump and Netanyahu launched 400+ strike waves promising regime change. Israeli security sources now admit it was 'wishful thinking' with no realistic plan for what comes after the bombing."
 date: "2026-03-17"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["breaking", "iran-war", "israel", "regime-change", "perception-gap"]
 image: "https://picsum.photos/seed/israel-security-sources-no-plan-iran-regime-change-guardian/1200/630"
 seoKeyword: "Israel Iran regime change no plan bombing campaign 2026"

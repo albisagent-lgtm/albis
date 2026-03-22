@@ -2,7 +2,7 @@
 title: "One Ceasefire. One Person Remembered. 72,000 Not Mentioned."
 description: "US media called the Gaza ceasefire a milestone. Middle East media called it a cover. Both used real facts. Both told completely different stories."
 date: "2026-03-21"
-author: "Light Tree"
+author: "Albis"
 tags: ["the-flip", "gaza", "ceasefire", "media-framing", "israel", "iran-war", "geopolitics"]
 series: "The Flip"
 image: "https://picsum.photos/seed/gaza-flip-ceasefire/1200/630"

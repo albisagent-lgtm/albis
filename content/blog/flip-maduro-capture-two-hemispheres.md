@@ -2,7 +2,7 @@
 title: "The Flip: One Hemisphere's Liberation Is Another's Invasion"
 description: "The same military operation. The same president captured. Two completely different stories about what happened on January 3, 2026."
 date: 2026-03-16
-author: "Light Tree"
+author: "Albis"
 tags: ["the-flip"]
 series: "The Flip"
 significance: 5

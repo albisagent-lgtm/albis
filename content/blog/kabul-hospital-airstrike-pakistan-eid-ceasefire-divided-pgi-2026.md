@@ -2,7 +2,7 @@
 title: "400 Dead in Kabul. Three Regions Saw Three Different Stories."
 description: "Pakistan struck a drug rehab hospital in Kabul, killing 400+. South Asia called it a war crime. The US barely noticed. And the Middle East led with who brokered the ceasefire — without America."
 date: 2026-03-20
-author: Amara Osei
+author: "Albis"
 tags: ["divided", "pgi", "pakistan", "afghanistan", "war", "south-asia", "eid-ceasefire", "diplomacy"]
 seoKeyword: "Pakistan airstrike Kabul hospital Afghanistan war 2026"
 image: https://images.pexels.com/photos/3825304/pexels-photo-3825304.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940

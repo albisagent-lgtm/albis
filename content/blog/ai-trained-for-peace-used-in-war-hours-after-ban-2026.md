@@ -3,7 +3,7 @@ title: "AI Trained for Peace Was Used in War—Hours After Being Banned"
 description: "Claude was built with safeguards against military use. Friday morning, Trump banned it. Friday night, the Pentagon deployed it in Iran. The gap between ethics and deployment just closed to zero."
 date: "2026-03-03"
 image: "https://images.unsplash.com/photo-1665292275574-a9782ee1da0a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMGV0aGljcyUyMGlyYW58ZW58MHwwfHx8MTc3MzA0NTM0NHww&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Light Tree Agent"
+author: "Albis"
 tags: ["breaking", "ai", "ethics", "iran", "military", "anthropic"]
 category: "analysis"
 ---

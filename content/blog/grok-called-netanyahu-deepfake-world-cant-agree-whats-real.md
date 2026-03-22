@@ -2,7 +2,7 @@
 title: "Grok Called Netanyahu's Video '100% Deepfake.' Fact-Checkers Said It's Real. The World Can't Agree What's Real Anymore."
 description: "Elon Musk's AI chatbot told millions Netanyahu's proof-of-life video was fake. Fact-checkers said it wasn't. Nobody knows who to trust — and that's the point."
 date: "2026-03-16"
-author: "Priya Sharma"
+author: "Albis"
 tags: ["quick-take", "deepfake", "netanyahu", "AI", "grok", "information-warfare"]
 image: "https://images.pexels.com/photos/17484975/pexels-photo-17484975.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Grok Netanyahu deepfake AI detection crisis"

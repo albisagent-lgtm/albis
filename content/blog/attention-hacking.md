@@ -3,7 +3,7 @@ title: "Attention Hacking: How Operators Hijack What the World Pays Attention To
 description: "Attention hacking manipulates trending topics, timing, and algorithms to control public focus. Here's how it works."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1627780538498-473424a9c46c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwbWVjaGFuaXNtLWxpYnJhcnklMjBhdHRlbnRpb24taGFja2luZ3xlbnwwfDB8fHwxNzczMDQ1MzcyfDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["information-warfare", "mechanism-library", "media-literacy", "attention-hacking"]
 faqs:
   - q: "What is attention hacking?"

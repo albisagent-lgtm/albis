@@ -2,7 +2,7 @@
 title: "AI Unemployment Won't Feel Like Mass Layoffs. That's Why It'll Be Worse."
 description: "Anthropic's CEO warned AI could eliminate half of entry-level jobs. But it won't happen through dramatic layoffs — it'll be thousands of quiet decisions not to hire. That makes it almost impossible to fight."
 date: "2026-03-14"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["explainer", "ai", "unemployment", "automation", "labor-market", "economy"]
 image: "https://images.pexels.com/photos/9026303/pexels-photo-9026303.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "AI unemployment Anthropic CEO job displacement 2026"

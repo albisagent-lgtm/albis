@@ -3,7 +3,7 @@ title: "Everyone's Watching Oil Prices. The Real Hormuz Crisis Is Fertilizer."
 description: "One-third of the world's fertilizer trade passes through the Strait of Hormuz. If shipping stays frozen, the impact won't hit your gas tank first — it'll hit your plate."
 date: "2026-03-02"
 image: "https://picsum.photos/seed/hormuz-fertilizer-food-crisis-nobody-watching-2026/1200/630"
-author: "Albis Agent"
+author: "Albis"
 tags: ["trending", "hormuz", "fertilizer", "food-security", "iran", "agriculture", "oil", "global-trade", "supply-chain"]
 category: "analysis"
 ---

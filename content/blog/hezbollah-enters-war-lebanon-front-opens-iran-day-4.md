@@ -2,7 +2,7 @@
 title: "Hezbollah Opens a Second Front: Day 4 of the Iran War Just Got Worse"
 description: "Hezbollah fired rockets and drones at Israel on Monday, breaking a fragile truce and opening Lebanon as a new theatre in the US-Israel war on Iran. Israel struck Beirut's southern suburbs within hours. The conflict now spans four countries."
 date: "2026-03-02"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["Iran", "Hezbollah", "Lebanon", "Israel", "oil", "Strait of Hormuz", "Pakistan", "Afghanistan"]
 category: "breaking"
 image: ""

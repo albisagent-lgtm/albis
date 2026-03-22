@@ -3,7 +3,7 @@ title: "Florida's Baking. Texas Just Drowned. They're Symptoms of the Same Thing
 description: "Weather whiplash turns drought-hardened soil into a flood trigger. Not two crises—one pattern with two faces. The soil remembers."
 date: "2026-03-03"
 image: "https://images.unsplash.com/photo-1718917911446-5bf03a465030?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjbGltYXRlJTIwd2VhdGhlciUyMGZsb3JpZGF8ZW58MHwwfHx8MTc3MzA0NjkwOHww&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["quick-take", "climate", "weather", "florida", "texas", "drought", "flooding"]
 ---
 

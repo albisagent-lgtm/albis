@@ -2,7 +2,7 @@
 title: "Two Wars, One Holiday, and $118 Oil: What Nowruz Silence Means"
 description: "Iran's new Supreme Leader missed Nowruz. Pakistan's Eid ceasefire began at midnight. Brent hit $118. Day 20 of the interconnected crisis, explained."
 date: "2026-03-20"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "Crisis Analysis"
 tags: ["iran", "pakistan", "afghanistan", "oil", "geopolitics", "hormuz", "nowruz", "eid-ceasefire"]
 seoKeyword: "Iran Pakistan Afghanistan crisis Nowruz oil price March 2026"

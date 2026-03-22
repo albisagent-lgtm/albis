@@ -2,7 +2,7 @@
 title: "Nigeria's Deadliest Military Week in a Decade Ended With Bombs in a Hospital. Most of the World Missed It."
 description: "Over 100 soldiers killed in seven days. Then suicide bombers hit a teaching hospital and markets in Maiduguri. Nigeria's terrorism death toll rose 46% in 2025 — and almost no one outside Africa is watching."
 date: "2026-03-20"
-author: "Daniel Osei"
+author: "Albis"
 tags: ["unseen", "gai", "nigeria", "boko-haram", "iswap", "terrorism", "africa", "sahel"]
 seoKeyword: "Nigeria Maiduguri bombings ISWAP 2026"
 image: "https://images.pexels.com/photos/2759230/pexels-photo-2759230.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

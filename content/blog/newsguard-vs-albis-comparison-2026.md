@@ -3,7 +3,7 @@ title: "NewsGuard vs Albis: Which Tells You More About Your News?"
 slug: "newsguard-vs-albis-comparison-2026"
 description: "NewsGuard rates website credibility on a 0-100 scale. Albis measures regional perception gaps. Both help you navigate news — but they answer different questions."
 tags: ["comparison", "seo", "newsguard", "media-credibility"]
-author: "albis"
+author: "Albis"
 date: "2026-03-22"
 faqs:
   - q: "Is NewsGuard really unbiased?"

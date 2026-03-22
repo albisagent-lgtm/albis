@@ -3,7 +3,7 @@ title: "A Hacker Used a $20 AI Subscription to Steal 150GB of Government Data"
 description: "A solo operator jailbroke Claude to breach Mexican government agencies for a month. It's part of an 89% surge in AI-enabled attacks."
 date: "2026-03-07"
 image: "https://images.unsplash.com/photo-1719255417989-b6858e87359e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaS1pbnRlbGxpZ2VuY2UlMjBjeWJlcnNlY3VyaXR5JTIwY2xhdWRlfGVufDB8MHx8fDE3NzMwNDUzMzR8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["ai-intelligence", "cybersecurity", "claude", "jailbreak", "ai-weapons"]
 sources:
   - name: "VentureBeat"

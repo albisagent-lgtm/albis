@@ -2,7 +2,7 @@
 title: "South Asia's Fuel Crisis Shut Down Schools. The West Barely Noticed"
 description: "Bangladesh and Pakistan closed schools, rationed fuel, and deployed troops at petrol stations as the Iran war choked oil supplies. Western and South Asian media tell very different stories about why."
 date: 2026-03-14
-author: "Marco Silvestri"
+author: "Albis"
 tags: ["divided", "pgi", "south-asia", "bangladesh", "pakistan", "fuel-crisis", "iran-war", "energy"]
 image: "https://images.pexels.com/photos/11116153/pexels-photo-11116153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Bangladesh Pakistan fuel rationing Iran war 2026"

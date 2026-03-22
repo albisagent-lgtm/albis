@@ -2,7 +2,7 @@
 title: "A 35-Year-Old Rapper Just Beat Nepal's Four-Time Prime Minister by 49,614 Votes"
 description: "Nepal's Gen Z protests toppled a government in 48 hours. Six months later, their guy won two-thirds of parliament. South Asia's third youth revolution just completed."
 date: "2026-03-20"
-author: "Priya Nair"
+author: "Albis"
 tags: ["quick-take", "nepal", "south-asia", "gen-z", "politics", "elections", "youth"]
 image: "https://images.pexels.com/photos/8107705/pexels-photo-8107705.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 sources:

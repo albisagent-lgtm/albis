@@ -2,7 +2,7 @@
 title: "Iran War Day 14: Mines in the Strait, Nuclear Scientists Dead, and a New Leader Who Won't Back Down"
 slug: iran-war-day-14-mines-hormuz-nuclear-scientists-killed
 date: "2026-03-13"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "Geopolitics"
 tags: ["Iran", "Israel", "United States", "Strait of Hormuz", "Oil", "Nuclear", "Middle East", "Pakistan"]
 image: "https://images.pexels.com/photos/34468690/pexels-photo-34468690.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

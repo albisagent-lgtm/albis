@@ -2,7 +2,7 @@
 title: "Japan Refused Trump's Warships Call. Iran Called It a Reward."
 description: "Iran's FM told Kyodo Japan-linked vessels can transit Hormuz — because Japan stayed out of the coalition. PGI 6.83: three regions read the same offer three incompatible ways."
 date: 2026-03-21
-author: Amara Osei
+author: "Albis"
 tags: ["divided", "pgi", "iran", "japan", "hormuz", "diplomacy", "oil", "alliance"]
 image: https://images.pexels.com/photos/6741039/pexels-photo-6741039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 seoKeyword: "Iran Hormuz Japan bilateral deal neutrality reward 2026"

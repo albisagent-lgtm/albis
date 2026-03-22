@@ -3,7 +3,7 @@ title: "The Supreme Court Said No. Trump Did It Anyway. The Separation-of-Powers
 description: "SCOTUS struck down Trump's global tariffs as unconstitutional. Within hours, he imposed new 15% tariffs under different legal authority. What does it mean when a court ruling changes nothing?"
 date: "2026-03-05"
 image: "https://images.unsplash.com/photo-1659869764315-dc3d188141fe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxsYXclMjB0cmFkZSUyMGNvbnN0aXR1dGlvbnxlbnwwfDB8fHwxNzczMDU0MDYzfDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["quick-take", "law", "trade", "constitution", "presidential-power"]
 ---
 

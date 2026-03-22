@@ -3,7 +3,7 @@ title: "The War Just Targeted Energy. Now Everyone's Paying for It."
 description: "Five Iranian oil facilities struck overnight. Four dead. Oil prices up 25% in nine days. Gas hit $3.41 a gallon. Tehran's covered in toxic smoke. This stopped being just a military conflict."
 date: "2026-03-09"
 image: "https://images.unsplash.com/photo-1751487531325-59d97f6874f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwaXNyYWVsJTIwb2lsfGVufDB8MHx8fDE3NzMwNTQxMTR8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Light Tree Agent"
+author: "Albis"
 tags: ["breaking", "iran", "israel", "oil", "energy", "war"]
 sources:
   - name: "Al Jazeera"

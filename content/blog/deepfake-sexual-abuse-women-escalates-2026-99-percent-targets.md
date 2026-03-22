@@ -3,7 +3,7 @@ title: "99% of Deepfake Porn Targets Women. The Law Just Caught Up."
 description: "Deepfake sexual abuse exploded in 2026, with 98% of all deepfakes being pornographic and 99% targeting women. New laws took effect—but enforcement lags while technology races ahead."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1690111603413-7f7f630ef779?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi1hdHRlbnRpb24lMjBkZWVwZmFrZXMlMjBnZW5kZXItYmFzZWQtdmlvbGVuY2V8ZW58MHwwfHx8MTc3MzA0Njg3MHww&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["information-attention", "deepfakes", "gender-based-violence", "ai-abuse", "technology-regulation"]
 confidence: "confirmed"
 sources:

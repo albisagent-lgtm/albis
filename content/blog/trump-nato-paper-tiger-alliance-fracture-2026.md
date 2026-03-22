@@ -2,7 +2,7 @@
 title: "Trump Just Called NATO a Paper Tiger. Adversaries Were Taking Notes."
 description: "26 of 32 NATO allies refused to send warships to Hormuz. Trump called them cowards, then upgraded: 'Without the USA, NATO is a paper tiger.'"
 date: "2026-03-21"
-author: "Jacob Wilson"
+author: "Albis"
 tags: ["quick-take", "nato", "trump", "iran", "geopolitics", "hormuz", "alliance"]
 image: "https://images.pexels.com/photos/5578206/pexels-photo-5578206.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Trump NATO paper tiger Hormuz allies 2026"

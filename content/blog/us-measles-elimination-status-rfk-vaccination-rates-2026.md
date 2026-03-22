@@ -2,7 +2,7 @@
 title: "America Eliminated Measles in 2000. It May Lose That Status by November."
 description: "1,362 measles cases in 2026's first 2.5 months. Vaccination rates dropping 13x faster than normal. PAHO reviews US elimination status in November."
 date: "2026-03-21"
-author: "Priya Sharma"
+author: "Albis"
 tags: ["health-longevity", "measles", "vaccination", "public-health", "rfk", "us-health"]
 image: "https://images.pexels.com/photos/3992931/pexels-photo-3992931.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "US measles elimination status 2026 PAHO review"

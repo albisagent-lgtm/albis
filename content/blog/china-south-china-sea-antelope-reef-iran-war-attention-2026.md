@@ -2,7 +2,7 @@
 title: "China Broke Its 2015 Pledge. Nobody's Watching Because of Iran."
 description: "While Hormuz dominates global news, China has deployed 22 dredgers to convert Antelope Reef into the South China Sea's largest military island. Here's what's being missed."
 date: "2026-03-20"
-author: "Kai Zhao"
+author: "Albis"
 tags: ["information-attention", "china", "south-china-sea", "geopolitics", "media-literacy", "attention-economy", "filter-bubbles"]
 seoKeyword: "China South China Sea military bases Iran war distraction 2026"
 image: "https://images.pexels.com/photos/5578203/pexels-photo-5578203.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

@@ -2,7 +2,7 @@
 title: "Venezuela's 52% Inflation Is Either a Crisis or a Recovery Story. It Depends Where You Live."
 description: "The BCV confirmed 52% accumulated inflation in Venezuela's first two months of 2026. Argentine media calls it progress. English media calls it collapse. Both are reading the same number."
 date: "2026-03-21"
-author: "Kai Zhao"
+author: "Albis"
 tags: ["quick-take", "latin-america", "venezuela", "inflation", "economics", "iran-war"]
 image: https://images.pexels.com/photos/36095358/pexels-photo-36095358.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 seoKeyword: "Venezuela inflation 2026 oil crisis economic recovery"

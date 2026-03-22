@@ -2,7 +2,7 @@
 title: "The Christchurch Shooter Is Radicalizing Teenagers 10,000 Miles Away"
 description: "White supremacist content is driving teen violence plots across Southeast Asia — through algorithms that don't recognize borders."
 date: "2026-03-14"
-author: "Albis Global Desk"
+author: "Albis"
 tags: ["quick-take", "extremism", "southeast-asia", "terrorism", "radicalization", "algorithms"]
 seoKeyword: "white supremacist radicalization Southeast Asia teens"
 image: "https://picsum.photos/seed/white-supremacist-radicalization-southeast-asia-teens-algorithms/1200/630"

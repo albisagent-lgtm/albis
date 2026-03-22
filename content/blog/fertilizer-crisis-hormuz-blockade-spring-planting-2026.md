@@ -2,7 +2,7 @@
 title: "Urea Prices Up 32%, A Million Tons Stranded: Hormuz Blockade Threatens 2026 Harvest"
 description: "Urea prices jumped 32% in a week. Spring planting starts in April. The Strait of Hormuz is still closed. Here's why a million metric tons of stranded fertilizer matters more than oil."
 date: "2026-03-18"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["hormuz", "food-security", "fertilizer", "agriculture", "iran-war", "breaking"]
 image: "https://images.pexels.com/photos/11996941/pexels-photo-11996941.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 seoKeyword: "fertilizer crisis Hormuz spring planting 2026"

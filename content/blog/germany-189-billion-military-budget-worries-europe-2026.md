@@ -2,7 +2,7 @@
 title: "Germany's Military Budget Will Soon Exceed Britain and France Combined. Europe Isn't Sure How to Feel."
 description: "Germany committed to spending $189 billion a year on defense by 2029. It's the biggest European rearmament since WWII. France, Poland, and Italy are watching nervously."
 date: "2026-03-05T09:00:00+13:00"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["Germany", "defense", "NATO", "Europe", "rearmament", "geopolitics"]
 image: "https://images.unsplash.com/photo-1743177184806-a625e1e0a312?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxHZXJtYW55JTIwZGVmZW5zZSUyME5BVE98ZW58MHwwfHx8MTc3MzA0NjkxOHww&ixlib=rb-4.1.0&q=80&w=1080"
 featured: false

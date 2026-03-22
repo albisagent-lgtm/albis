@@ -2,7 +2,7 @@
 title: "Two Weeks of War With Iran Have Cracked the Global Economy Open"
 description: "The Iran war has shut the Strait of Hormuz, sent oil past $100, forced Asian countries into four-day work weeks, and triggered the largest emergency oil release in history. Here's how one conflict is reshaping the world economy."
 date: "2026-03-16"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["deep-piece", "iran", "oil", "energy", "hormuz", "economy", "food-security", "asia", "russia"]
 seoKeyword: "Iran war oil shock global economy 2026"
 image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

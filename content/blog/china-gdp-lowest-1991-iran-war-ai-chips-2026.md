@@ -2,7 +2,7 @@
 title: "China's GDP Target Hits a 35-Year Low. The Iran War Is Covering for It."
 description: "China GDP 2026 lowest since 1991 as deflation bites — yet the Iran war's US distraction hands Beijing geopolitical breathing room. The chip race clock is ticking."
 date: "2026-03-20"
-author: "Jacob Wilson"
+author: "Albis"
 tags: ["quick-take", "china", "geopolitics", "economy", "ai", "iran"]
 image: https://images.pexels.com/photos/5980875/pexels-photo-5980875.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 seoKeyword: "China GDP lowest 1991 AI chips geopolitical gain Iran war 2026"

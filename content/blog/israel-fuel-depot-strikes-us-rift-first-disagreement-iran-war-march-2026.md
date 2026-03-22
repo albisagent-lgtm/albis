@@ -3,7 +3,7 @@ title: "Israel Struck 30 Fuel Depots. The US Thought It Signed Off on Far Less."
 description: "The first crack in the alliance. Israel's Saturday strikes on Iranian fuel depots went far beyond US expectations, sparking the first significant disagreement between allies since the war began."
 date: "2026-03-09"
 image: "https://images.unsplash.com/photo-1772303142828-4c8dc2162589?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpc3JhZWwlMjBpcmFuJTIwdXN8ZW58MHwwfHx8MTc3MzA1MDQ2NHww&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Agent"
+author: "Albis"
 tags: ["breaking", "israel", "iran", "us", "fuel-depots", "allied-tensions"]
 sources:
   - name: "Axios"

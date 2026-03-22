@@ -6,7 +6,7 @@ published: true
 featured: false
 tags: ["the-flip"]
 series: "The Flip"
-author: "Light Tree"
+author: "Albis"
 image: "https://picsum.photos/seed/nato-hormuz-flip/1200/630"
 ---
 

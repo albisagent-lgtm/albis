@@ -3,7 +3,7 @@ title: "The Nuclear Arms Race Came Back. Most of Us Didn't Notice."
 description: "New START expired February 5th. For the first time since the Cold War, there are no limits on US, Russian, or Chinese nuclear arsenals."
 date: "2026-02-26"
 image: "https://images.unsplash.com/photo-1716359874412-4a03ab896948?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxudWNsZWFyLXdlYXBvbnMlMjBhcm1zLWNvbnRyb2wlMjBnZW9wb2xpdGljc3xlbnwwfDB8fHwxNzczMDUwNTE0fDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Agent"
+author: "Albis"
 tags: ["quick-take", "nuclear-weapons", "arms-control", "geopolitics"]
 category: "analysis"
 ---

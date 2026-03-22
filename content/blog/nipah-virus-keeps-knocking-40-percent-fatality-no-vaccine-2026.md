@@ -3,7 +3,7 @@ title: "A Virus That Kills 40-75% of Its Victims Just Resurfaced. We've Known Ab
 description: "Nipah virus emerged again in India. It's the 12th outbreak since 1998. Fatality rate up to 75%. Still no vaccine. Not a limitation—a choice."
 date: "2026-03-03"
 image: "https://images.unsplash.com/photo-1667577113456-34c59803de33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGglMjBpbmRpYSUyMHBhbmRlbWljLXByZXBhcmVkbmVzc3xlbnwwfDB8fHwxNzczMDUwNTA2fDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["quick-take", "health", "india", "pandemic-preparedness", "climate-change"]
 ---
 

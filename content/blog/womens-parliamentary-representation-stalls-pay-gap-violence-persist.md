@@ -2,7 +2,7 @@
 title: "Women's Parliamentary Representation Stalls as Pay Gap and Violence Persist Globally"
 description: "Women hold just 27.5% of parliamentary seats worldwide at the start of 2026, marking the slowest growth in nearly a decade, while new data reveals the gender pay gap doubles over women's careers and abortion restrictions drive preventable deaths in the United States."
 date: "2026-03-07"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "political-representation", "gender-pay-gap"]
 image: "https://images.unsplash.com/photo-1635359477291-fe922af7bf3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx3b21lbnMtcmlnaHRzJTIwZ2VuZGVyLWVxdWFsaXR5JTIwcG9saXRpY2FsLXJlcHJlc2VudGF0aW9ufGVufDB8MHx8fDE3NzMwNTQzMzZ8MA&ixlib=rb-4.1.0&q=80&w=1080"

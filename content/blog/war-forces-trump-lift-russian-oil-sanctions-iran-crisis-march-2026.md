@@ -2,7 +2,7 @@
 title: "Trump's Iran War Just Gave Putin a Lifeline"
 description: "A 30-day sanctions waiver on Russian oil reveals the geopolitical chaos created when America's war collides with global energy markets."
 date: "2026-03-14"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["breaking", "geopolitics", "energy", "russia", "iran", "oil", "sanctions"]
 image: https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 sources:

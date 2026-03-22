@@ -2,7 +2,7 @@
 title: "State of Information: War Fakes, Party Deepfakes, and the Week Truth Got Harder to Find"
 description: "AI-generated war footage floods social media, a US Senate committee weaponises deepfakes against its own candidates, Russia runs covert TikTok ops in Hungary, and the EU races to label synthetic content before it's too late. Your weekly briefing on information warfare."
 date: "2026-03-15"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags:
   - state-of-information
   - information-warfare

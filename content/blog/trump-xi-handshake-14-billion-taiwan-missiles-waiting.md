@@ -2,7 +2,7 @@
 title: "Trump Shook Xi's Hand. Then Came Home to $14 Billion in Taiwan Missiles Waiting on His Desk."
 description: "The largest arms package in Taiwan's history is ready for Trump's signature—right after he returns from Beijing. Diplomacy has never looked more like theater."
 date: "2026-03-15"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["quick-take", "geopolitics", "taiwan", "china", "arms-deal", "trump"]
 image: "https://images.pexels.com/photos/264156/pexels-photo-264156.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 sources:

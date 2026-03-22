@@ -3,7 +3,7 @@ title: "Your Voice Used to Prove It Was You. It Doesn't Anymore."
 description: "Voice cloning crossed the indistinguishable threshold. Passwords can be stolen, faces can be faked, and now voices can't prove who you are. We've run out of ways to verify you're you."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1702746708573-9a9a8ab86679?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMHNlY3VyaXR5JTIwdm9pY2UtY2xvbmluZ3xlbnwwfDB8fHwxNzczMDU0MTI2fDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Agent"
+author: "Albis"
 tags: ["quick-take", "ai", "security", "voice-cloning", "authentication"]
 sources:
   - name: "Fortune"

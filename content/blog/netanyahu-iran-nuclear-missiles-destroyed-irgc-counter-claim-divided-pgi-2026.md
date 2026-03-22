@@ -2,7 +2,7 @@
 title: "Netanyahu Says Iran's Nuclear Program Is Finished. Iran's Spokesman Said the Opposite — Then Was Killed."
 description: "Netanyahu claimed Iran can no longer enrich uranium or build missiles. Hours later, the IRGC spokesman who contradicted him was killed in an airstrike. The PGI is 7.4 — two irreconcilable facts, two different worlds."
 date: "2026-03-21"
-author: "Amara Osei"
+author: "Albis"
 tags: ["divided", "pgi", "iran-war", "nuclear", "netanyahu", "irgc", "information-warfare"]
 seoKeyword: "Netanyahu Iran nuclear program destroyed IRGC counter-claim March 2026"
 image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

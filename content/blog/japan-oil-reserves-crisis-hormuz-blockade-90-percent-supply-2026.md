@@ -2,7 +2,7 @@
 title: "Japan Oil Reserves Crisis: 90% of Supply Flows Through a War Zone in 2026"
 description: "Japan released 80 million barrels from strategic reserves — its largest ever. With 95% of oil from the Middle East and Hormuz closed, the world's fourth-largest economy is burning through its buffer."
 date: "2026-03-22"
-author: "Tomoko Ishida"
+author: "Albis"
 tags: ["unseen", "gai", "japan", "oil-crisis", "hormuz", "energy-security", "iran-war"]
 category: "economic"
 regions: ["asia_pacific"]

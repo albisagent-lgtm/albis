@@ -2,7 +2,7 @@
 title: "DoorDash Pays 8 Million Couriers to Film Chores and Train AI Robots in 2026"
 description: "DoorDash's new Tasks app pays delivery workers to film themselves washing dishes and folding clothes — training the robots that could replace them."
 date: "2026-03-22"
-author: "Marco Reyes"
+author: "Albis"
 tags: ["quick-take", "ai", "gig-economy", "doordash", "robotics", "labor", "automation"]
 image: "https://images.pexels.com/photos/4107305/pexels-photo-4107305.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 imageAlt: "Robot in a kitchen setting representing AI automation of household tasks"

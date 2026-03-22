@@ -3,7 +3,7 @@ title: "Your Social Media Feed Is Now a War Zone"
 description: "State actors aren't just posting about the Iran conflict—they're running coordinated propaganda operations through the same platforms you use daily. Here's what war looks like when the battlefield is your feed."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1560416313-414b33c856a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwcHJvcGFnYW5kYSUyMHNvY2lhbC1tZWRpYXxlbnwwfDB8fHwxNzczMDU0MDQ4fDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["information-warfare", "propaganda", "social-media", "deepfakes", "iran-conflict", "disinformation"]
 category: "information-warfare"
 confidence: "confirmed"

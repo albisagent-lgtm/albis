@@ -2,7 +2,7 @@
 title: "Your Face Gets Different Rights Depending on Which Side of the Atlantic You're Standing On"
 description: "The EU just banned facial recognition in public spaces. The US just told states they can't regulate AI. Same person, same technology—completely different legal protection based on GPS coordinates."
 date: "2026-03-10"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["explainer", "ai-regulation", "eu-ai-act", "facial-recognition", "privacy", "trump", "transatlantic"]
 image: "https://picsum.photos/seed/ai-regulation-eu-us-split/1200/630"
 confidence: "confirmed"

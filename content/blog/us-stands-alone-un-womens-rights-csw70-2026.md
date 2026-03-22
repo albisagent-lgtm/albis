@@ -2,7 +2,7 @@
 title: "US Casts Sole Vote Against UN Women's Rights Resolution at CSW70 2026"
 description: "The US was the only no vote in a 37-1 decision at the UN Commission on the Status of Women, breaking a near seven-decade consensus tradition over abortion, AI, and gender definitions."
 date: "2026-03-22"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "csw70", "reproductive-rights", "femicide"]
 image: "https://images.pexels.com/photos/6257343/pexels-photo-6257343.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

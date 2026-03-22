@@ -3,7 +3,7 @@ title: "Pakistan Is Being Crushed Between Two Wars That Everyone Pretends Are Se
 description: "Iran's collapse and the Afghanistan border war aren't two crises. They're one interconnected system, and Pakistan is the hinge."
 date: "2026-03-01"
 image: "https://picsum.photos/seed/pakistan-iran-afghanistan-connected-crisis-two-front-squeeze-2026/1200/630"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["trending", "pakistan", "iran", "afghanistan", "geopolitics", "perspectives", "information-awareness"]
 category: "analysis"
 ---

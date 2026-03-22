@@ -1,6 +1,6 @@
 ---
 title: "70% of Countries Still Have Laws That Block Women From Equal Justice"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1485113771930-4e8b61c60d64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx3b21lbnMtcmlnaHRzJTIwZ2VuZGVyLWVxdWFsaXR5JTIwZ2VuZGVyLXBheS1nYXB8ZW58MHwwfHx8MTc3MzA0NjkyN3ww&ixlib=rb-4.1.0&q=80&w=1080"
 category: "womens-rights"

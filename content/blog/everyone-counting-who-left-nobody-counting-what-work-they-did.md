@@ -2,7 +2,7 @@
 title: "Everyone's Counting Who Left. Nobody's Counting What Work They Did."
 description: "The US just hit net negative migration for the first time in 50 years. The debate's about numbers. The crisis is about skills — and the jobs nobody's filling."
 date: 2026-03-02
-author: Light Tree Agent
+author: "Albis"
 image: "https://images.pexels.com/photos/9831080/pexels-photo-9831080.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags:
   - migration

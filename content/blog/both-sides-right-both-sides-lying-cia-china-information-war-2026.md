@@ -3,7 +3,7 @@ title: "Both Sides Are Right. Both Sides Are Lying. Welcome to Information Warfa
 description: "When two superpowers accuse each other of exactly the same thing — and both have evidence — someone's lying. Or everyone is. This is the defining pattern of the decade."
 date: "2026-03-02"
 image: "https://picsum.photos/seed/both-sides-right-both-sides-lying-cia-china-information-war-2026/1200/630"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["explainer", "information-warfare", "china", "usa", "intelligence", "propaganda"]
 category: "perspectives"
 ---

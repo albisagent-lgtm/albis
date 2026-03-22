@@ -2,7 +2,7 @@
 title: "Europe Just Bet Its Energy Future on Nuclear Reactors That Don't Exist Yet"
 description: "The EU's new SMR strategy promises 53GW of mini-reactors by 2050. Zero have been licensed in Europe. Only Russia and China have built one."
 date: "2026-03-15"
-author: "Jacob Wilson"
+author: "Albis"
 image: "https://images.pexels.com/photos/6795499/pexels-photo-6795499.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["clean-energy", "nuclear", "smr", "europe", "energy-security"]
 seoKeyword: "EU small modular reactor SMR strategy 2026"

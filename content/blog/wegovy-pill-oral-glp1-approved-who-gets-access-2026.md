@@ -2,7 +2,7 @@
 title: "The World's Biggest Obesity Drug Just Became a Pill. Most of the World Still Can't Get It."
 description: "The FDA approved the first GLP-1 pill for weight loss. It works — 13.6% average weight loss. The catch: 1 billion obese adults, mostly in low-income countries, are priced out."
 date: "2026-03-20"
-author: "Layla Hassan"
+author: "Albis"
 tags: ["health-longevity", "obesity", "drug-discovery", "global-health-equity", "glp1", "biotech"]
 image: "https://images.pexels.com/photos/4210607/pexels-photo-4210607.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "oral GLP-1 pill Wegovy approved who gets access 2026"

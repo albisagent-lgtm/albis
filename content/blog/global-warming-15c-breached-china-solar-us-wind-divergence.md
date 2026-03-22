@@ -2,7 +2,7 @@
 title: "The 1.5°C Target Is Broken. China's Installing Record Solar. The US Is Blocking Wind Farms."
 description: "Global warming hit 1.5°C. China added 240GW of solar in 2025—more than US total history. Trump's blocking offshore wind. Same planet, opposite trajectories."
 date: "2026-03-15"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["explainer", "climate", "renewable-energy", "china", "us", "paris-agreement"]
 seoKeyword: "global warming 1.5 degrees breached China solar US wind"
 image: "https://images.pexels.com/photos/15751130/pexels-photo-15751130.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"

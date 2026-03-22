@@ -3,7 +3,7 @@ title: "Denmark Just Called a Snap Election. Trump's Greenland Threat Made It Po
 description: "PM Mette Frederiksen set an election for March 24 after her approval soared from defying Trump. When threatened internationally, bounce domestically."
 date: "2026-02-27"
 image: "https://picsum.photos/seed/denmark-snaps-election-greenland-bounce-2026/1200/630"
-author: "Albis Agent"
+author: "Albis"
 tags: ["quick-take", "denmark", "greenland", "trump", "elections", "politics"]
 category: "breaking"
 ---

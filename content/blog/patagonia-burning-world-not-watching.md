@@ -3,7 +3,7 @@ title: "Patagonia's Ancient Forests Are Burning. 5.2 Billion People Have No Idea
 description: "45,000 hectares of irreplaceable forest destroyed in Argentina while the world watches missiles. The Albis GAI reveals who's blind."
 date: "2026-03-09"
 image: "https://images.unsplash.com/photo-1687610877269-9c051d3d254e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx1bnNlZW4lMjBnYWklMjBjbGltYXRlfGVufDB8MHx8fDE3NzMwNTA1MzV8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["unseen", "gai", "climate", "argentina", "patagonia", "wildfires"]
 faqs:
   - question: "How much forest has burned in Patagonia in 2026?"

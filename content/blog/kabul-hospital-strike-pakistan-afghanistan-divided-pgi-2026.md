@@ -2,7 +2,7 @@
 title: "Pakistan Bombed a Hospital. The Death Toll Depends on Who You Ask."
 description: "Pakistan says it struck a military depot near Kabul. Afghanistan says 408 civilians died in a drug rehab hospital. UNAMA confirmed 143 dead. The gap is the story."
 date: 2026-03-20
-author: "Tomás Vega"
+author: "Albis"
 tags: ["divided", "pgi", "pakistan", "afghanistan", "kabul", "war", "south-asia", "civilian-harm"]
 seoKeyword: "Pakistan Kabul hospital airstrike death toll 2026"
 image: https://images.pexels.com/photos/6462835/pexels-photo-6462835.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940

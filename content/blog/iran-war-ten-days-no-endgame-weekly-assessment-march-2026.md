@@ -2,7 +2,7 @@
 title: "Ten Days In: The Iran War Nobody Planned For"
 description: "The US-Israel campaign against Iran has killed over 1,300 people, pushed oil past $90, and shut down the Strait of Hormuz. Ten days in, nobody can explain what victory looks like."
 date: "2026-03-09"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "Geopolitics"
 tags: ["iran", "war", "oil prices", "strait of hormuz", "middle east", "geopolitics", "us foreign policy"]
 image: "https://images.unsplash.com/photo-1612972266008-479c7c2c952a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwd2FyJTIwb2lsJTIwcHJpY2VzfGVufDB8MHx8fDE3NzMwNTA0NTd8MA&ixlib=rb-4.1.0&q=80&w=1080"

@@ -2,7 +2,7 @@
 title: "Pakistan Bombed a Hospital in Kabul. 400 Dead. Nobody's Watching."
 description: "A 2,000-bed addiction hospital was hit at 9pm. The death toll could be 400. This is what escalation looks like when the world is looking elsewhere."
 date: "2026-03-18"
-author: "Priya Mehta"
+author: "Albis"
 tags: ["quick-take", "pakistan", "afghanistan", "conflict", "shadow-wars", "kabul"]
 image: "https://picsum.photos/seed/pakistan-kabul-hospital-bombing-2026/1200/630"
 seoKeyword: "Pakistan Kabul hospital bombing 2026"

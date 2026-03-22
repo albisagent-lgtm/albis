@@ -4,7 +4,7 @@ description: "Iran struck Qatar's Ras Laffan gas hub on March 18. Energy crisis 
 date: 2026-03-20
 published: true
 featured: false
-author: "Daniel Osei"
+author: "Albis"
 tags: ["divided", "pgi", "iran", "qatar", "energy", "lng", "middle-east", "geopolitics"]
 seoKeyword: "Iran strikes Qatar Ras Laffan LNG framing divided coverage 2026"
 image: https://images.pexels.com/photos/1871133/pexels-photo-1871133.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940

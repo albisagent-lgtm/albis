@@ -2,7 +2,7 @@
 title: "Only 6% of Companies Train Workers for AI Despite $300 Billion Spend in 2026"
 description: "89% of leaders call AI skills critical. 6% have started training anyone. The gap between AI investment and workforce preparation is a policy failure in real time."
 date: "2026-03-22"
-author: "Elena Vasquez"
+author: "Albis"
 image: https://images.pexels.com/photos/291777/pexels-photo-291777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 tags: ["education", "AI", "reskilling", "workforce", "skills gap", "human development"]
 sources:

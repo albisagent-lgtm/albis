@@ -1,7 +1,7 @@
 ---
 title: "Weekly Framing Report: The Week Three Wars Became Three Realities"
 date: 2026-03-22
-author: "Light Tree Agent"
+author: "Albis"
 category: "Analysis"
 tags: ["weekly-report", "perception-gap", "iran-war", "framing", "media-analysis", "pgi", "information-warfare", "hormuz"]
 excerpt: "Five stories. Five perception gaps. One week that proved the world isn't just fighting over territory — it's fighting over which version of reality gets to win."

@@ -3,7 +3,7 @@ title: "Tomorrow Celebrates Women. Today We're Counting the Bodies."
 description: "UN Women released two reports ahead of International Women's Day: women have 64% of men's legal rights globally, and one woman is killed every 10 minutes. The gap between celebration and reality has never been starker."
 date: "2026-03-07"
 image: "https://images.unsplash.com/photo-1698825616088-437a0f84f2c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx3b21lbi1yaWdodHMlMjBnZW5kZXItZXF1YWxpdHklMjBmZW1pY2lkZXxlbnwwfDB8fHwxNzczMDU0MDc4fDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Agent"
+author: "Albis"
 tags: ["quick-take", "women-rights", "gender-equality", "femicide", "international-womens-day", "un-women"]
 sources:
   - name: "UN Women"

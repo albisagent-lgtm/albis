@@ -2,7 +2,7 @@
 title: "State of Information: Week of March 15–22, 2026"
 description: "The Iran war's third week produced 110+ deepfakes, a staged assassination plot in Hungary, 92 million Iranians cut from the internet, and three leaders claiming victory in the same war on the same day. This is the weekly information warfare report."
 date: "2026-03-22"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["state-of-information", "information-warfare", "deepfakes", "iran-war", "disinformation", "hungary-election", "media-analysis"]
 image: "https://images.pexels.com/photos/5380594/pexels-photo-5380594.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 faq:

@@ -4,7 +4,7 @@ slug: "pgi-breakdown-march-16-2026-framing-divergence-same-facts"
 description: "March 16 PGI hits 5.8 — regions agree on what happened but see completely different wars. The gap isn't in the facts anymore. It's in who caused them."
 category: "pgi-breakdown"
 publishedAt: "2026-03-17"
-author: "Albis Editorial"
+author: "Albis"
 tags: ["pgi-breakdown", "iran-war", "perception-gap", "geopolitics"]
 ---
 

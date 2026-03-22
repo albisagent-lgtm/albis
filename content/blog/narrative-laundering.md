@@ -3,7 +3,7 @@ title: "Narrative Laundering: How Fringe Stories Go Mainstream"
 description: "How fabricated narratives move from obscure sources to mainstream media through layers of laundering. A plain-language explainer."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1627780538498-473424a9c46c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwbWVjaGFuaXNtLWxpYnJhcnklMjBuYXJyYXRpdmUtbGF1bmRlcmluZ3xlbnwwfDB8fHwxNzczMDUwNDkwfDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["information-warfare", "mechanism-library", "media-literacy", "narrative-laundering"]
 faqs:
   - q: "What is narrative laundering?"

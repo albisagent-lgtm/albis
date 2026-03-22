@@ -2,7 +2,7 @@
 title: "When Your Prayer App Becomes a Weapon"
 description: "A hacked prayer app sent propaganda to 5 million Iranians during airstrikes. Iran cut 90 million people offline for 280 hours. YouTube's racing to detect political deepfakes. Here's how information warfare actually works in 2026."
 slug: "information-warfare-hacked-apps-internet-shutdowns"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 category: "information-warfare"
 tags: ["information-warfare", "deepfakes", "censorship", "propaganda", "disinformation", "iran", "platform-manipulation"]
 published_at: "2026-03-15T15:30:00+13:00"

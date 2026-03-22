@@ -3,7 +3,7 @@ title: "One Leader Apologized. The Other Promised Regime Change. You're Paying E
 description: "Iran's president apologized to Gulf neighbors Saturday. Netanyahu announced plans to eliminate Iran's regime. Oil hit $92. Gas hit $3.41. The war's direction is in the gap between those speeches."
 date: "2026-03-08"
 image: "https://picsum.photos/seed/iran-apology-netanyahu-regime-elimination-march-2026/1200/630"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["breaking", "iran-israel-war", "oil-prices", "geopolitics", "middle-east"]
 sources:
   - name: "The New York Times"

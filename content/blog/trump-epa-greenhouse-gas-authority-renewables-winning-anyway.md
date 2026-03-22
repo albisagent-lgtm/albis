@@ -2,7 +2,7 @@
 title: "Trump Just Killed the EPA's Climate Power. The US Is Installing Record Renewables Anyway."
 description: "The EPA lost authority to regulate greenhouse gases. Meanwhile, the US is adding 86GW of clean energy in 2026—a 62% jump. If economics already won, does federal climate authority even matter?"
 date: "2026-03-16"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["explainer", "climate", "epa", "renewable-energy", "trump", "us", "energy"]
 seoKeyword: "Trump EPA greenhouse gas regulation renewable energy 2026"
 image: "https://picsum.photos/seed/trump-epa-greenhouse-gas-authority-renewables-winning-anyway/1200/630"

@@ -2,7 +2,7 @@
 title: "Iran, Pakistan and Lebanon Are Fighting Separate Wars Through a Single Energy System"
 description: "The Iran war, Pakistan-Afghanistan conflict, and Lebanon invasion aren't separate crises. They're one interconnected system reshaping global energy, alliances, and the dollar itself."
 date: "2026-03-15"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "geopolitics"
 tags: ["iran-war", "pakistan-afghanistan", "strait-of-hormuz", "oil-crisis", "lebanon", "petro-yuan", "crisis-analysis"]
 image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

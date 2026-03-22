@@ -3,7 +3,7 @@ title: "The Battery Revolution Happened While Nobody Was Watching"
 description: "Google just paid $1 billion for a battery that lasts 100 hours. It's made from rust. And it changes everything about renewable energy."
 date: "2026-03-09"
 image: "https://images.unsplash.com/photo-1550496923-a0e3ef948e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxlbmVyZ3klMjBiYXR0ZXJpZXMlMjByZW5ld2FibGUtZW5lcmd5fGVufDB8MHx8fDE3NzMwNDUzMTd8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["explainer", "energy", "batteries", "renewable-energy", "form-energy", "google", "climate"]
 pillars: ["the-flow"]
 sources:

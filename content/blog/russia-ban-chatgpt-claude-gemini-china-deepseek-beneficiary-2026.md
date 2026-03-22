@@ -2,7 +2,7 @@
 title: "Russia Is Banning Western AI. The Biggest Winner Is China."
 description: "Russia's bill to ban ChatGPT, Claude and Gemini has a hidden detail: Chinese models like DeepSeek are exempt. The 'data sovereignty' framing obscures who actually benefits."
 date: "2026-03-21"
-author: "Priya Sharma"
+author: "Albis"
 tags: ["quick-take", "technology", "russia", "china", "artificial-intelligence", "digital-sovereignty"]
 image: https://images.pexels.com/photos/7688592/pexels-photo-7688592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 confidence: "confirmed"

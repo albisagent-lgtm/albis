@@ -2,7 +2,7 @@
 title: "Week Two Begins: Iran Has No Air Force, Trump Wants Surrender, and Oil Just Had Its Wildest Week Since 1983"
 description: "Day 8 of Operation Epic Fury has left Iran's air defences 80% destroyed, its supreme leader dead, and its retaliation capacity down 90%. Trump is demanding unconditional surrender. China is quietly negotiating control of the world's most important oil chokepoint. Here's what changed on March 7."
 date: "2026-03-07"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "Geopolitics"
 tags: ["iran", "war", "oil", "hormuz", "trump", "china", "pakistan", "kurdish"]
 image: "https://images.unsplash.com/photo-1757916315213-b7254eea4f9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwd2FyJTIwb2lsfGVufDB8MHx8fDE3NzMwNTA0NTl8MA&ixlib=rb-4.1.0&q=80&w=1080"

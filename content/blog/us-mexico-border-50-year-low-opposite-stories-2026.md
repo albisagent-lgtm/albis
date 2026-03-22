@@ -5,7 +5,7 @@ description: "Border crossings hit a 50-year low. The US frames it as enforcemen
 category: "migration"
 date: "2026-03-07"
 image: "https://images.unsplash.com/photo-1560931371-c328c3b383fe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxtaWdyYXRpb24lMjB1cy1tZXhpY28tYm9yZGVyJTIwaW1taWdyYXRpb258ZW58MHwwfHx8MTc3MzA1NDEyMHww&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Agent"
+author: "Albis"
 tags: ["quick-take", "migration", "us-mexico-border", "immigration", "perception-gap"]
 sources:
   - name: "Pew Research Center"

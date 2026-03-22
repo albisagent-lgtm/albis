@@ -2,7 +2,7 @@
 title: "The US Is Bombing Iran and Buying Its Oil on the Same Day"
 description: "Day 22 of the Iran war: Trump issued a 30-day waiver on Iranian oil sanctions while sending 2,500 more Marines to the Gulf. Iran rejected ceasefire talks. Pakistan's Eid truce expires Monday."
 date: "2026-03-21"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "Crisis Analysis"
 image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Iran war ceasefire oil sanctions Pakistan Afghanistan 2026"

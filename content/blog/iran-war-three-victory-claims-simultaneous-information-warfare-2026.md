@@ -2,7 +2,7 @@
 title: "Three Leaders Declared Victory in the Same War on the Same Day. All Three Were Believed."
 description: "On Day 21 of the Iran war, Trump, Netanyahu, and Mojtaba Khamenei each claimed victory simultaneously. Different audiences accepted different claims. That's the story."
 date: "2026-03-21"
-author: "Priya Sharma"
+author: "Albis"
 tags: ["information-attention", "iran-war", "media-literacy", "information-warfare", "disinformation", "filter-bubbles", "narrative", "perception-gap"]
 image: "https://images.pexels.com/photos/5380618/pexels-photo-5380618.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Iran war three victory claims information warfare Day 21 2026"

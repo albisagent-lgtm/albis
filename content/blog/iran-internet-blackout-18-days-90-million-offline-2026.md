@@ -2,7 +2,7 @@
 title: "Iran's 90 Million People Have Been Offline for 18 Days. Most of the World Doesn't Know."
 description: "Iran's internet blackout has cut 90 million people off for 18 days. Hospitals can't coordinate, families can't connect, and 5.5 billion people have no idea."
 date: "2026-03-18"
-author: "Priya Mehta"
+author: "Albis"
 image: "https://images.pexels.com/photos/5203849/pexels-photo-5203849.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["unseen", "gai", "iran", "internet-blackout", "cyber-warfare", "human-rights"]
 seoKeyword: "Iran internet blackout 2026 90 million offline"

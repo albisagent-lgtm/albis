@@ -2,7 +2,7 @@
 title: "China's Iran War Rebuke: 'Voice of Reason' or 'Opportunistic Meddling'?"
 description: "Wang Yi called the Iran war a conflict that 'should never have happened.' Chinese media hailed a peacemaker. American outlets saw a power play. The same speech, read two completely different ways."
 date: "2026-03-09"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["divided", "pgi", "china", "iran", "geopolitics", "diplomacy", "wang-yi"]
 category: "divided"
 image: ""

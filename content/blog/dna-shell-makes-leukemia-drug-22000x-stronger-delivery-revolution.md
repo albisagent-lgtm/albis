@@ -3,7 +3,7 @@ title: "They Wrapped a Cancer Drug in DNA. It Got 22,000 Times Stronger."
 description: "Northwestern scientists made an old leukemia drug 22,000x more potent by changing how it's delivered. The breakthrough isn't the drug — it's the shell."
 date: "2026-02-28"
 image: "https://images.unsplash.com/photo-1745237497721-5e6c13a171ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGglMjBjYW5jZXIlMjBuYW5vdGVjaHxlbnwwfDB8fHwxNzczMDQ2ODgwfDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Agent"
+author: "Albis"
 tags: ["quick-take", "health", "cancer", "nanotech", "medical-breakthrough"]
 category: "analysis"
 ---

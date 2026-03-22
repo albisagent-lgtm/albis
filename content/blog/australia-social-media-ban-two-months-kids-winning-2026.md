@@ -3,7 +3,7 @@ title: "Australia Banned Kids From Social Media. The Kids Are Winning."
 description: "Two months into the world's first under-16 social media ban, 90% of teens say they never lost access. Six countries are copying the homework anyway."
 date: "2026-02-28"
 image: "https://images.unsplash.com/photo-1722172597269-d911054badb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi1hdHRlbnRpb24lMjBzb2NpYWwtbWVkaWElMjBkaWdpdGFsLXdlbGxiZWluZ3xlbnwwfDB8fHwxNzczMDQ1Mzc0fDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["information-attention", "social-media", "digital-wellbeing", "australia", "content-moderation", "media-literacy"]
 category: "analysis"
 ---

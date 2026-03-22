@@ -2,7 +2,7 @@
 title: "Two Crowds Are Sharing Every Anti-War Protest Square — and They Want Opposite Things"
 description: "Global protests against the Iran war span 40+ countries. But two incompatible movements are being photographed together: Iranian diaspora demanding regime change, and global south activists demanding a ceasefire."
 date: "2026-03-20"
-author: "Fatimah Al-Rashid"
+author: "Albis"
 tags: ["quick-take", "iran", "protests", "geopolitics", "global-south", "diaspora", "war"]
 image: "https://images.pexels.com/photos/5428361/pexels-photo-5428361.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "anti-war protests Iran 2026 global south diaspora"

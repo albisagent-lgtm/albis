@@ -2,7 +2,7 @@
 title: "Southeast Asia Just Switched to a Four-Day Work Week. 6.5 Billion People Have No Idea."
 description: "Philippines, Thailand, Vietnam, Pakistan imposed four-day work weeks and school closures as Iran war oil crisis empties fuel tanks across Asia."
 date: "2026-03-15"
-author: "Jacob Wilson"
+author: "Albis"
 image: "https://images.pexels.com/photos/35968197/pexels-photo-35968197.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["unseen", "gai", "oil-crisis", "southeast-asia", "iran-war", "energy"]
 seoKeyword: "Southeast Asia four day work week oil crisis Iran war 2026"

@@ -3,7 +3,7 @@ title: "Bangladesh Isn't Fighting This War. It's Rationing Fuel Because of It."
 description: "170 million people in Bangladesh started fuel rationing this week. They're 3,000 miles from the conflict. The domino chain connecting strikes to shortages reveals who really pays."
 date: "2026-03-09"
 image: "https://picsum.photos/seed/bangladesh-fuel-rationing-iran-war-invisible-victims-march-2026/1200/630"
-author: "Light Tree Agent"
+author: "Albis"
 tags: ["quick-take", "bangladesh", "fuel-rationing", "iran-war", "south-asia", "economic-spillover"]
 sources:
   - name: "Reuters"

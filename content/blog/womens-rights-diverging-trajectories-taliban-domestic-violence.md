@@ -2,7 +2,7 @@
 title: "Women's Rights Face Diverging Trajectories as Taliban Legalizes Domestic Violence"
 description: "Thousands marched globally for International Women's Day on March 8, demanding equal pay, reproductive rights, and an end to gender-based violence. The demonstrations come as women's rights advance in some regions while retreating sharply in others."
 date: "2026-03-09"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "domestic-violence", "reproductive-rights", "political-representation"]
 image: "https://picsum.photos/seed/womens-rights-diverging-trajectories-taliban-domestic-violence/1200/630"

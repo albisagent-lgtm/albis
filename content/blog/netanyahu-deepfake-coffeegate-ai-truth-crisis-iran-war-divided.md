@@ -2,7 +2,7 @@
 title: "Netanyahu Posted a Coffee Shop Video to Prove He's Alive. Grok Called It '100% Deepfake.' The World Can't Agree on What's Real."
 description: "Netanyahu's 'Coffeegate' video split the world: Western fact-checkers debunked death rumors while Grok called it deepfake and Middle East media treated assassination claims as plausible. PGI 7.25."
 date: 2026-03-16
-author: "Priya Sharma"
+author: "Albis"
 tags: ["divided", "pgi", "deepfake", "netanyahu", "iran-war", "information-warfare", "ai", "disinformation"]
 image: "https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Netanyahu deepfake coffeegate video AI truth crisis"

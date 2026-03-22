@@ -2,7 +2,7 @@
 title: "Pakistan Has Hit 37 Sites in Afghanistan. Turkey Just Offered to Stop the Bleeding."
 description: "As Operation Ghazab-lil-Haq enters its ninth day, Erdogan offers mediation while Pakistani missiles strike near earthquake refugee camps. Both sides claim the other is lying about casualties."
 date: 2026-03-06T19:00:00+13:00
-author: Albis Geopolitics Desk
+author: "Albis"
 category: Geopolitics
 tags: ["pakistan", "afghanistan", "taliban", "turkey", "erdogan", "refugees", "durand line", "TTP", "iran war"]
 image: /images/blog/pakistan-afghanistan-march-6.jpg

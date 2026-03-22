@@ -2,7 +2,7 @@
 title: "Black Rain Is Falling on 10 Million People in Tehran. Five Billion Have No Idea."
 description: "Toxic black rain from bombed oil depots is contaminating Tehran's air, water and soil. The WHO warned of acid rain burning skin and lungs. 5.01 billion people in four regions haven't seen this story."
 date: 2026-03-18
-author: "Rajan Anand"
+author: "Albis"
 tags: ["unseen", "gai", "iran", "environment", "black-rain", "health", "tehran", "war"]
 image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Iran black rain Tehran toxic oil fires health crisis"

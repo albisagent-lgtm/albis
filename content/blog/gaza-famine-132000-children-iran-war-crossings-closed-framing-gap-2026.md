@@ -2,7 +2,7 @@
 title: "132,000 Children Face Starvation in Gaza. The World Can't Agree on Who's Responsible."
 description: "The IPC projects 132,000 children under five will suffer acute malnutrition by June 2026. US media frames it as 'renewed fighting.' Middle East media calls it deliberate starvation policy. Europe watches the crossings close and calculates migration risk."
 date: 2026-03-17
-author: "James O'Reilly"
+author: "Albis"
 tags: ["divided", "pgi", "gaza", "famine", "humanitarian", "iran-war", "children", "perception-gap"]
 image: "https://images.pexels.com/photos/6646909/pexels-photo-6646909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 sources:

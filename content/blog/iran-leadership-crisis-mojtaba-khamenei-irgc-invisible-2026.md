@@ -2,7 +2,7 @@
 title: "Iran's New Leader Has Never Been Seen. The IRGC May Not Need Him To Be."
 description: "Mojtaba Khamenei became Iran's supreme leader 20 days ago and hasn't appeared in public once. Here's what his absence reveals — and who's actually in charge."
 date: "2026-03-21"
-author: "Light Tree"
+author: "Albis"
 tags: ["unseen", "gai", "iran", "iran-war", "leadership", "irgc", "geopolitics"]
 seoKeyword: "Mojtaba Khamenei Iran supreme leader invisible IRGC 2026"
 image: "https://images.pexels.com/photos/4130926/pexels-photo-4130926.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

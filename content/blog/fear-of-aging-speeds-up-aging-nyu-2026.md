@@ -3,7 +3,7 @@ title: "Worrying About Getting Old Might Be Making You Age Faster"
 description: "NYU research finds that women who fear aging show faster biological aging at the cellular level. The irony is real — and it points to something bigger."
 date: "2026-02-27"
 image: "https://images.unsplash.com/photo-1630845523933-2d2028d56e41?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGgtbG9uZ2V2aXR5JTIwYWdpbmclMjBlcGlnZW5ldGljc3xlbnwwfDB8fHwxNzczMDQ2ODkzfDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["health-longevity", "aging", "epigenetics", "mental-health", "longevity-research"]
 category: "analysis"
 ---

@@ -2,7 +2,7 @@
 title: "Russia's New Citizenship Decree Is Erasing Ukrainian Children's Legal Ties to Home"
 description: "Russia's March 2026 decree fast-tracks citizenship for children under 14 in occupied Ukraine. It's not paperwork—it's demographic warfare designed to outlast the conflict."
 date: "2026-03-18"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["explainer", "russia", "ukraine", "children", "occupation", "war-crimes"]
 image: "https://images.pexels.com/photos/4922085/pexels-photo-4922085.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Russia citizenship Ukrainian children occupied territories"

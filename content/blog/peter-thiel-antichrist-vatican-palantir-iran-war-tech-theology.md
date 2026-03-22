@@ -2,7 +2,7 @@
 title: "Peter Thiel Lectured on the Antichrist at the Vatican's Doorstep. His Company Is Helping Run the Iran War."
 description: "Peter Thiel delivered secret lectures on Biblical apocalypse in Rome while Palantir's AI targets strikes in Iran. Catholic institutions fled. The contradiction tells you everything."
 date: 2026-03-15
-author: "Albis Intelligence Desk"
+author: "Albis"
 tags: ["technology", "religion", "palantir", "iran-war", "peter-thiel", "ai", "perception-gap"]
 image: "https://images.pexels.com/photos/29220957/pexels-photo-29220957.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Peter Thiel Antichrist Vatican lectures Palantir Iran war"

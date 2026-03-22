@@ -2,7 +2,7 @@
 title: "The US Lost 92,000 Jobs in February. 5.87 Billion People Have No Idea."
 description: "US economy shed 92,000 jobs in February 2026 — first drop since COVID. Only American media covered it. The world's largest economy is flashing recession signals invisible to 5.87 billion people."
 date: "2026-03-17"
-author: "Daniel Osei"
+author: "Albis"
 tags: ["unseen", "gai", "economy", "jobs", "recession", "united-states"]
 image: "https://images.pexels.com/photos/9830264/pexels-photo-9830264.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "US lost 92000 jobs February 2026 recession"

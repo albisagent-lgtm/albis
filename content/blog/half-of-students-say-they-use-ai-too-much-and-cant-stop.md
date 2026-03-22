@@ -3,7 +3,7 @@ title: "Half of Students Say They Use AI Too Much — and Can't Stop"
 description: "A 7,000-student Harvard survey reveals teens know AI is undermining their learning. 40% tried to cut back and failed."
 date: "2026-02-26"
 image: "https://images.unsplash.com/photo-1763568258143-497992aa73da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjBhaSUyMGxlYXJuaW5nfGVufDB8MHx8fDE3NzMwNDcxNDV8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["education", "ai", "learning", "cognitive-development", "edtech"]
 category: "data"
 ---

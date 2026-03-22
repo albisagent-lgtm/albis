@@ -2,7 +2,7 @@
 title: "Iran Is Hitting Its Neighbours. Each Side Says the Other Started It."
 description: "Iran has fired over a thousand missiles at Gulf states. The US calls it unprovoked aggression. Iran calls it self-defence against an illegal war. The Gulf states are caught in the middle — and furious at both sides."
 date: "2026-03-10"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 image: "https://images.pexels.com/photos/16660293/pexels-photo-16660293.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["divided", "pgi", "iran", "gulf states", "missiles", "perception gap", "middle east", "war"]
 sources:

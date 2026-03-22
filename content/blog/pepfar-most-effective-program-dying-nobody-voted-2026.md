@@ -3,7 +3,7 @@ title: "The Most Cost-Effective Program the US Ever Built Is Dying. Nobody Voted
 description: "PEPFAR saved 26 million lives at $1,500 each. The US spends 1,000x more to save an American life. Now 8 countries are running out of HIV drugs."
 date: "2026-03-02"
 image: "https://picsum.photos/seed/pepfar-most-effective-program-dying-nobody-voted-2026/1200/630"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["health-longevity", "global-health", "pepfar", "hiv", "foreign-aid", "health-equity"]
 category: "analysis"
 faqs:

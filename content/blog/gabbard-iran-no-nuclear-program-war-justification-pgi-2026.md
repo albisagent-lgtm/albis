@@ -2,7 +2,7 @@
 title: "America's Spy Chief Said Iran Wasn't Building a Bomb. The War Started Anyway."
 description: "Tulsi Gabbard confirmed Iran wasn't rebuilding nuclear enrichment before the Feb 28 war. The US calls it a strategic success. The Middle East and Global South call it a war launched on false pretenses. PGI: 7.68."
 date: 2026-03-20
-author: "Priya Anand"
+author: "Albis"
 tags: ["divided", "pgi", "iran", "nuclear", "gabbard", "war-justification", "intelligence", "us-iran-war"]
 seoKeyword: "Gabbard Iran nuclear program war justification 2026"
 image: https://images.pexels.com/photos/36150695/pexels-photo-36150695.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940

@@ -3,7 +3,7 @@ title: "Ground News vs Albis: Which Shows You More?"
 description: "Ground News rates political bias on a left-right spectrum. Albis measures how different regions frame the same story. Here's how they compare and when each tool is useful."
 slug: ground-news-vs-albis-comparison-2026
 date: 2026-03-17
-author: Albis Team
+author: "Albis"
 tags: [comparison, seo, ground-news, media-literacy]
 category: guides
 featured: false

@@ -2,7 +2,7 @@
 title: "Republicans Posted a Deepfake of a Senate Candidate. It Was Technically Legal."
 description: "The NRSC's AI-generated video of James Talarico — Texas's Senate Democratic nominee — had a faint 'AI GENERATED' label in the corner. That was enough. Here's how the law let it happen."
 date: "2026-03-21"
-author: "Albis Media Desk"
+author: "Albis"
 category: "Explainer"
 image: "https://images.pexels.com/photos/7689092/pexels-photo-7689092.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "NRSC Talarico deepfake Texas 2026 midterms political ad law"

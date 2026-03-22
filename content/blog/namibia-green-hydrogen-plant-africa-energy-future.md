@@ -2,7 +2,7 @@
 title: "A Country Most People Can't Find on a Map Just Opened the Future of Steel"
 description: "Namibia's HyIron plant produces green iron with zero emissions using solar-powered hydrogen — and could undercut fossil fuel costs by 2030."
 date: "2026-03-14"
-author: "Albis Energy Desk"
+author: "Albis"
 tags: ["clean-energy", "green-hydrogen", "namibia", "steel", "africa", "renewables"]
 image: "https://images.pexels.com/photos/13627641/pexels-photo-13627641.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Namibia green hydrogen plant green iron"

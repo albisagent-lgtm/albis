@@ -2,7 +2,7 @@
 title: "Iran Is Flooding Social Media With AI War Propaganda. So Is Everyone Else."
 description: "Fake Iran war videos racked up tens of millions of views in two weeks. AI-generated propaganda from all sides is making this the first conflict where truth is genuinely impossible to find."
 date: "2026-03-14"
-author: "Albis Technology Desk"
+author: "Albis"
 tags: ["quick-take", "ai", "iran-war", "disinformation", "information-warfare", "social-media"]
 image: "https://picsum.photos/seed/iran-ai-war-propaganda/1200/630"
 seoKeyword: "Iran AI propaganda war social media 2026"

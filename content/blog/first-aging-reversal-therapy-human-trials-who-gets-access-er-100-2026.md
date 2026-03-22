@@ -2,7 +2,7 @@
 title: "The First Therapy Designed to Reverse Aging Just Started Human Trials. Who Gets Access?"
 description: "ER-100 is treating aging as a software bug — reprogramming cells to a younger state. If it works, it rewrites healthcare economics. Who pays determines who grows young."
 date: "2026-03-15"
-author: "Jacob Wilson"
+author: "Albis"
 tags: ["quick-take", "health-longevity", "epigenetic-reprogramming", "aging", "biotech", "gene-therapy", "longevity", "healthcare-inequality"]
 image: "https://images.pexels.com/photos/18069424/pexels-photo-18069424.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "epigenetic reprogramming therapy human trials 2026"

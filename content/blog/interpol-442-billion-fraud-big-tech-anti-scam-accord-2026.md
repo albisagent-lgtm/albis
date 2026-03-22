@@ -4,7 +4,7 @@ date: "2026-03-17"
 description: "Interpol's new report reveals $442 billion in global financial fraud losses in 2025, driven by AI-powered scams. The same week, Google, Meta, Amazon and OpenAI signed a voluntary anti-scam accord with no enforcement. Here's what that gap looks like from around the world."
 category: "Technology & AI"
 image: "https://images.pexels.com/photos/5240544/pexels-photo-5240544.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-author: "Daniel Osei"
+author: "Albis"
 sources:
   - name: "Interpol / CNBC TV18"
     url: "https://www.cnbctv18.com/business/finance/financial-frauds-cost-global-economy-over-usd-442-bn-in-2025-risk-in-2026-high-interpol-ws-l-19869534.htm"

@@ -2,7 +2,7 @@
 title: "The US Just Made It Harder to Become a Nurse, Teacher, or Social Worker"
 description: "Grad PLUS loans end July 1, 2026. Nurses, teachers, and social workers face the biggest hit — and they're not classified as 'professionals.'"
 date: "2026-03-13"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 image: https://images.pexels.com/photos/28389132/pexels-photo-28389132.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 tags: ["education", "student-loans", "nursing-shortage", "teacher-shortage", "grad-plus", "higher-education", "us-policy"]
 sources:

@@ -3,7 +3,7 @@ title: "Nine in Ten People With Depression Worldwide Can't Access Treatment. Her
 description: "The WHO reports 91% of people with depression globally can't get care. The reasons aren't mysterious—they're systemic, solvable, and urgent."
 date: "2026-02-26"
 image: "https://images.unsplash.com/photo-1636249253913-40e83d5423e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxtZW50YWwtaGVhbHRoJTIwZ2xvYmFsLWhlYWx0aCUyMGhlYWx0aGNhcmUtYWNjZXNzfGVufDB8MHx8fDE3NzMwNTA1MDR8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["explainer", "mental-health", "global-health", "healthcare-access"]
 category: "analysis"
 ---

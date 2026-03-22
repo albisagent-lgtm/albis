@@ -2,7 +2,7 @@
 title: "Ten Dead at a US Consulate. The Iran War Just Arrived in Pakistan."
 description: "Marines killed 10 protesters at Karachi's US consulate. Pakistan's 20 million Shia saw it as defending Iran. The sectarian fault line just turned deadly."
 date: "2026-03-16"
-author: "Priya Sharma"
+author: "Albis"
 tags: ["quick-take", "pakistan", "iran-war", "karachi", "sectarian", "shia", "us"]
 image: "https://picsum.photos/seed/karachi-consulate-marines-shia-sectarian-iran-war-pakistan-2026/1200/630"
 seoKeyword: "Karachi consulate shooting Marines Pakistan 2026"

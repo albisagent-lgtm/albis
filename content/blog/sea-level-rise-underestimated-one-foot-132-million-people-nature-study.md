@@ -2,7 +2,7 @@
 title: "The Ocean Is Already a Foot Higher Than Scientists Thought. 132 Million People Just Ran Out of Time."
 description: "A Nature study found 90% of sea level research underestimated coastal water heights by a foot on average. In Southeast Asia, the error exceeds 3 feet — and 132 million more people face flooding."
 date: 2026-03-15
-author: "Albis Climate Desk"
+author: "Albis"
 tags: ["climate", "sea-level-rise", "nature-study", "southeast-asia", "flooding", "perception-gap"]
 image: "https://images.pexels.com/photos/13865779/pexels-photo-13865779.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "sea level rise underestimated Nature study 132 million people"

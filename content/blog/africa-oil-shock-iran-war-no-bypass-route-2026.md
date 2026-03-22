@@ -2,7 +2,7 @@
 title: "No Bypass Routes: How the Iran War's Oil Shock Is Landing on Africa's Empty Stomachs"
 description: "Sub-Saharan Africa imports 90% of its fertilizer. Oil hit $110 a barrel. And unlike Japan or India, no African country has a redirect route. Five scholars from across the continent explain what's happening."
 date: 2026-03-21
-author: Amara Osei
+author: "Albis"
 tags: ["unseen", "gai", "africa", "iran-war", "food-security", "oil-prices", "fertilizer", "hormuz", "information-shadow"]
 seoKeyword: "Africa oil price shock Iran war 2026"
 image: https://images.pexels.com/photos/36127632/pexels-photo-36127632.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940

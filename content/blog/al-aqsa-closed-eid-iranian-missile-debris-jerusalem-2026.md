@@ -2,7 +2,7 @@
 title: "Al-Aqsa Was Closed for Eid This Morning. That Hasn't Happened Since 1967."
 description: "Iranian missile debris fell 400m from Al-Aqsa on Eid al-Fitr 2026. The mosque closed — first time in 59 years. Arabic and Western media told two different stories."
 date: "2026-03-21"
-author: "Fatimah Al-Rashid"
+author: "Albis"
 tags: ["quick-take", "iran-war", "jerusalem", "al-aqsa", "eid", "middle-east", "perception-gap"]
 image: "https://images.pexels.com/photos/2102621/pexels-photo-2102621.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Al-Aqsa mosque closed Eid 2026 Iranian missile Jerusalem"

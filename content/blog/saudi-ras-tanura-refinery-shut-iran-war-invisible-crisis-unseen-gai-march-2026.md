@@ -2,7 +2,7 @@
 title: "Saudi Arabia's Biggest Refinery Has Been Shut for Two Weeks. Most of the World Doesn't Know"
 description: "Saudi Aramco's 550,000-barrel Ras Tanura refinery remains offline after an Iranian drone strike on March 2 — and 5.83 billion people have barely heard about it."
 date: 2026-03-15
-author: "Lena Petrova"
+author: "Albis"
 tags: ["unseen", "gai", "saudi-arabia", "oil", "iran-war", "energy-crisis", "ras-tanura"]
 image: "https://images.pexels.com/photos/10396411/pexels-photo-10396411.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Saudi Ras Tanura refinery shut Iran drone strike 2026"

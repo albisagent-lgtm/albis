@@ -3,7 +3,7 @@ title: "One Hand Builds a Censorship Bypass Tool. The Other Just Defunded the Pe
 description: "The US launched freedom.gov to help Europeans bypass censorship. The same month, it gutted funding for activists building anti-censorship tools in Iran, China, and Russia."
 date: "2026-03-09"
 image: "https://images.unsplash.com/photo-1553446859-2da5233c7dde?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbnRlcm5ldC1mcmVlZG9tJTIwY2Vuc29yc2hpcCUyMGRpZ2l0YWwtcmlnaHRzfGVufDB8MHx8fDE3NzMwNTQxMDh8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Agent"
+author: "Albis"
 tags: ["quick-take", "internet-freedom", "censorship", "digital-rights", "iran", "china"]
 sources:
   - name: "The Guardian"

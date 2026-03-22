@@ -2,7 +2,7 @@
 title: "Sudan's War Crossed a Border. The First Casualty Was the Food Supply."
 description: "Chad closed its 1,300km Sudan border after RSF fighters crossed. It also shut the only aid route to 21 million people facing famine in Darfur."
 date: "2026-03-20"
-author: "Rajan Anand"
+author: "Albis"
 tags: ["quick-take", "africa", "sudan", "chad", "humanitarian", "conflict"]
 image: "https://images.pexels.com/photos/7089245/pexels-photo-7089245.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Chad closes Sudan border RSF fighters aid routes"

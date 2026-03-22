@@ -3,7 +3,7 @@ title: "China's Been Hacking Russia for Years. What Does 'Ally' Even Mean?"
 description: "Putin and Xi call it a golden era of friendship. Meanwhile, China's stealing submarine blueprints and Russia's FSB calls them 'the enemy.' The gap between the handshake and the hack."
 date: "2026-03-07"
 image: "https://picsum.photos/seed/china-hacking-russia-ally-stealing-war-secrets-2026/1200/630"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["quick-take", "china", "russia", "cybersecurity", "geopolitics", "espionage"]
 sources:
   - name: "The New York Times"

@@ -4,7 +4,7 @@ date: "2026-03-16"
 description: "Attacks on a Jewish school in Amsterdam and a synagogue in Rotterdam mark a sharp escalation in antisemitic violence across Europe — driven by the war thousands of miles away."
 category: "Conflict & Security"
 image: "https://images.pexels.com/photos/20801238/pexels-photo-20801238.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-author: "Daniel Osei"
+author: "Albis"
 sources:
   - name: "The New York Times"
     url: "https://www.nytimes.com/2026/03/14/world/europe/amsterdam-rotterdam-antisemitic-attacks.html"

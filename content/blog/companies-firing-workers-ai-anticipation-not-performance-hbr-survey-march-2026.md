@@ -2,7 +2,7 @@
 title: "Companies Are Firing Workers Because They Expect AI to Replace Them—Not Because It Has"
 description: "HBR surveyed 1,006 executives. The layoffs are almost entirely anticipatory. People are losing jobs to a forecast, not a machine."
 date: "2026-03-10"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["quick-take", "ai", "employment", "technology"]
 image: https://picsum.photos/seed/ai-anticipatory-layoffs/1200/630
 sources:

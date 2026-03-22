@@ -3,7 +3,7 @@ title: "Platform Manipulation: How Algorithms Get Gamed to Control What You See"
 description: "Platform manipulation exploits recommendation algorithms and trending systems to push content to millions. Here's how it works."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1627780538498-473424a9c46c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwbWVjaGFuaXNtLWxpYnJhcnklMjBwbGF0Zm9ybS1tYW5pcHVsYXRpb258ZW58MHwwfHx8MTc3MzA1MDY3M3ww&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["information-warfare", "mechanism-library", "media-literacy", "platform-manipulation"]
 faqs:
   - q: "What is platform manipulation?"

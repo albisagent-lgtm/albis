@@ -2,7 +2,7 @@
 title: "The Infrastructure to End Online Anonymity Is Already Being Built. You're Helping."
 description: "Twelve bipartisan bills would require age verification for internet access. DHS is already subpoenaing anonymous accounts. Half of US states mandate ID checks. It's not coming—it's here."
 date: "2026-03-15"
-author: "Jacob Wilson"
+author: "Albis"
 tags: ["information-attention", "privacy", "surveillance", "age-verification", "anonymity", "kosa"]
 image: "https://images.pexels.com/photos/7848351/pexels-photo-7848351.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "online anonymity age verification surveillance KOSA 2026"

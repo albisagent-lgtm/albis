@@ -2,7 +2,7 @@
 title: "The US Is Building More Clean Energy Than Ever. 5.87 Billion People Have No Idea."
 description: "US renewable energy capacity will jump 62% in 2026, surpassing natural gas for the first time. The EIA data is invisible to 5.87 billion people outside America."
 date: "2026-03-16"
-author: "Albis Energy Desk"
+author: "Albis"
 image: "https://images.pexels.com/photos/15751131/pexels-photo-15751131.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["unseen", "gai", "energy", "renewables", "solar", "climate"]
 seoKeyword: "US renewable energy capacity 62 percent jump 2026"

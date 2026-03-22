@@ -2,7 +2,7 @@
 title: "The US Hasn't Finished a Nuclear Plant on Time in 30 Years. Japan Just Bet $40 Billion It Can."
 description: "Japan invested $40B in US small modular reactors during the Hormuz crisis. Zero SMRs operate in America. China's launches this year."
 date: "2026-03-22"
-author: "Rajan Anand"
+author: "Albis"
 image: https://images.pexels.com/photos/3044471/pexels-photo-3044471.jpeg
 tags: ["clean-energy", "nuclear", "smr", "japan", "us-energy", "hormuz-crisis"]
 confidence: "confirmed"

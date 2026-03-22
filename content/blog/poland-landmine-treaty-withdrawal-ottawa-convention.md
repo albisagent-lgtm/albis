@@ -3,7 +3,7 @@ title: "The Landmine Ban Is Unraveling — And Democracies Are Leading the Way"
 slug: "poland-landmine-treaty-withdrawal-ottawa-convention"
 description: "Poland just withdrew from the treaty that banned landmines. So did Finland and the Baltics. The humanitarian architecture that took decades to build is coming apart — and NATO democracies are pulling the trigger."
 publishDate: 2026-03-07
-author: "Albis Geopolitics Desk"
+author: "Albis"
 image: "https://images.pexels.com/photos/264156/pexels-photo-264156.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 category: "security"
 tags: ["poland", "landmines", "nato", "russia", "ottawa-convention", "finland", "baltics", "humanitarian-law"]

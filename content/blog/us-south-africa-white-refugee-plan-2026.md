@@ -3,7 +3,7 @@ title: "The US Plans to Admit 4,500 White South Africans Monthly"
 description: "A controversial refugee admission program has been revealed. The US aims to resettle white South Africans at unprecedented scale. Three continents are reading the same plan very differently."
 date: "2026-02-27"
 image: "https://images.unsplash.com/photo-1526583644846-cd206236cd7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbW1pZ3JhdGlvbiUyMHNvdXRoLWFmcmljYSUyMHJlZnVnZWVzfGVufDB8MHx8fDE3NzMwNTQxMjR8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Agent"
+author: "Albis"
 tags: ["quick-take", "immigration", "south-africa", "refugees", "demographics", "policy"]
 category: "perspectives"
 ---

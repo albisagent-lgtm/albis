@@ -2,7 +2,7 @@
 title: "Two Billion People Are Fasting Together for the First Time Since 1863. Bombs Are Still Falling."
 description: "Ramadan and Lent overlap for the first time in 163 years during the deadliest Middle East conflict in decades. The Vatican called it a catalyst for peace. Reality looks different."
 date: "2026-03-14"
-author: "Albis Global Desk"
+author: "Albis"
 tags: ["quick-take", "interfaith", "ramadan", "lent", "middle-east", "war", "religion"]
 image: "https://images.pexels.com/photos/11097703/pexels-photo-11097703.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 sources:

@@ -2,7 +2,7 @@
 title: "Pakistan Bombs Kandahar Drone Base After Taliban Drones Reach Rawalpindi"
 description: "Pakistan bombed a Taliban drone facility in Kandahar after Afghan drones targeted Rawalpindi and Quetta. The war is escalating as Pakistan's economy collapses under oil prices and Eid looms."
 date: "2026-03-15"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 category: "geopolitics"
 tags: ["pakistan", "afghanistan", "taliban", "drone-strikes", "oil-crisis", "south-asia"]
 image: "https://images.pexels.com/photos/29890322/pexels-photo-29890322.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

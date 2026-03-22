@@ -2,7 +2,7 @@
 title: "Spain Said No. Trump Moved the Jets. 5.8 Billion People Don't Know It Happened."
 description: "Spain blocked US base access for Iran strikes. Trump threatened a trade embargo. A sovereignty crisis is quietly reshaping NATO's entire European base network."
 date: "2026-03-21"
-author: "Jacob Wilson"
+author: "Albis"
 tags: ["unseen", "gai", "nato", "spain", "iran-war", "military-bases", "geopolitics"]
 seoKeyword: "US military bases Europe Iran war Spain NATO sovereignty crisis 2026"
 image: "https://images.pexels.com/photos/5409350/pexels-photo-5409350.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

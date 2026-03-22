@@ -3,7 +3,7 @@ title: "We Just Crossed the Line We Said We Wouldn't Cross"
 description: "Global warming hit 1.5°C. Not for a month—as a three-year average. The Paris Agreement threshold we promised to stay under is behind us. Now what?"
 date: "2026-03-05"
 image: "https://images.unsplash.com/photo-1657650505323-b9397cedd97a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjbGltYXRlJTIwUGFyaXMlMjBBZ3JlZW1lbnQlMjB0aXBwaW5nJTIwcG9pbnRzfGVufDB8MHx8fDE3NzMwNTQxMzB8MA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Geopolitics Desk"
+author: "Albis"
 tags: ["breaking", "climate", "Paris Agreement", "tipping points", "1.5C"]
 ---
 

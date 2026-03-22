@@ -2,7 +2,7 @@
 title: "Oil Swung $23 in 24 Hours. Russia Sees a Rescue. The Gulf Sees Ruin. India Sees Inflation."
 description: "Brent crude hit $111, then crashed to $88 in a single day. The same price move is being framed as a budget lifeline in Moscow, an existential threat in Riyadh, and an inflation bomb in New Delhi."
 date: 2026-03-18
-author: "Priya Mehta"
+author: "Albis"
 tags: ["divided", "pgi", "oil", "russia", "gulf", "india", "china", "energy", "hormuz", "iran"]
 image: "https://images.pexels.com/photos/6801650/pexels-photo-6801650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "oil price swing Hormuz Russia Gulf India framing 2026"

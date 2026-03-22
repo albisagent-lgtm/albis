@@ -1,7 +1,7 @@
 ---
 title: "Day Five: A Torpedo, a Failed Vote, and the First Whisper of Peace"
 description: "A US submarine sinks an Iranian frigate in the Indian Ocean — the first torpedo kill since WWII. The Senate votes to let Trump keep fighting. And behind the scenes, Iranian intelligence reaches out to the CIA."
-author: "Albis Geopolitics Desk"
+author: "Albis"
 date: "2026-03-05"
 category: "Geopolitics"
 tags: ["Iran", "United States", "Israel", "War", "Senate", "Navy", "Diplomacy", "Oil", "Pakistan"]

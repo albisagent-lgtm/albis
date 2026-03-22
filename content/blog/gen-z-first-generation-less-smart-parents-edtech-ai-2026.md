@@ -2,7 +2,7 @@
 title: "Gen Z Is the First Generation Less Cognitively Capable Than Their Parents. EdTech Did That."
 description: "US schools spent $30B on edtech. Gen Z's test scores dropped. Now AI tutoring is flooding classrooms — with less than 10% of tools having evidence they work."
 date: "2026-03-14"
-author: "Jacob Wilson"
+author: "Albis"
 tags: ["education", "edtech", "ai-tutoring", "gen-z", "learning-science"]
 image: "https://images.pexels.com/photos/8055830/pexels-photo-8055830.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Gen Z edtech test scores AI tutoring evidence 2026"

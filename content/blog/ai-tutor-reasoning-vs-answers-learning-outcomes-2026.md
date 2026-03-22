@@ -2,7 +2,7 @@
 title: "Students Scored Higher With an AI Tutor That Asked Questions Instead of Answering Them"
 description: "A new study found students paired with an AI that asks questions instead of giving answers scored higher on exams. Here's what that means for AI in education."
 date: "2026-03-21"
-author: "Lena Fischer"
+author: "Albis"
 tags: ["education", "ai-tutoring", "learning-science", "edtech", "higher-education"]
 image: "https://images.pexels.com/photos/3775128/pexels-photo-3775128.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "AI tutor reasoning learning outcomes college students 2026"

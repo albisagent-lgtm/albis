@@ -3,7 +3,7 @@ title: "AI Wins at Spotting Fake Photos, Humans Win at Videos"
 description: "A new University of Florida study reveals the detection split: AI crushes deepfake photos, but humans outperform machines at spotting fake videos."
 date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1695370993552-3fb199fb35f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwZGVlcGZha2VzJTIwY2Vuc29yc2hpcHxlbnwwfDB8fHwxNzczMDQ1MzQ2fDA&ixlib=rb-4.1.0&q=80&w=1080"
-author: "Albis Tech & Media Desk"
+author: "Albis"
 tags: ["information-warfare", "deepfakes", "censorship", "propaganda", "disinformation"]
 category: "media-literacy"
 faqs:

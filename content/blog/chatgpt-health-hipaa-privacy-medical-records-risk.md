@@ -2,7 +2,7 @@
 title: "Your Doctor Can't Share Your Medical Records. ChatGPT Can."
 description: "ChatGPT Health lets 40 million daily users upload medical records — but HIPAA doesn't protect data shared with AI. Here's what that means."
 date: "2026-03-14"
-author: "Albis Health Desk"
+author: "Albis"
 image: "https://images.pexels.com/photos/7195374/pexels-photo-7195374.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["health-longevity", "ai", "privacy", "hipaa", "chatgpt", "health-data"]
 seoKeyword: "ChatGPT Health HIPAA privacy medical records"
