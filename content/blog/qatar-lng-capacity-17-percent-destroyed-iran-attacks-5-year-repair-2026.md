@@ -53,17 +53,17 @@ faqs:
     a: "No. According to analytics firm Kpler, realistic supplementary supply from all alternative sources totals under 2 million tonnes against a 5.8 million tonne monthly shortfall. As one Reuters source put it, 'Nothing can replace Qatari LNG.'"
 ---
 
-Iranian missile strikes have permanently destroyed 17% of Qatar's liquefied natural gas export capacity. QatarEnergy CEO Saad al-Kaabi confirmed that two of the country's 14 LNG trains at the Ras Laffan industrial complex — Trains 4 and 6 — were damaged beyond quick repair. The 12.8 million tonnes per year of lost capacity won't come back for three to five years, and the $20 billion annual revenue hole may be the single most expensive piece of infrastructure damage in the entire Iran war.
+Iranian missile strikes destroyed 17% of Qatar's LNG export capacity permanently. QatarEnergy CEO Saad al-Kaabi confirmed two of the country's 14 LNG trains at Ras Laffan — Trains 4 and 6 — are damaged beyond quick repair. The 12.8 million tonnes per year won't come back for three to five years. The $20 billion annual revenue hole is likely the most expensive infrastructure damage of the entire Iran war.
 
-Qatar isn't fighting this war. It didn't fire a missile or choose a side. But three weeks after the conflict began, a country that took decades and hundreds of billions of dollars to build into the world's second-largest LNG exporter has lost roughly one-sixth of its earning power — possibly until 2031.
+Qatar isn't fighting this war. It didn't fire a missile or pick a side. But three weeks in, a country that spent decades building itself into the world's second-largest LNG exporter has lost a sixth of its earning power — possibly until 2031.
 
 ## What Actually Got Hit
 
-The Ras Laffan Industrial City sits on Qatar's northeast coast and houses the world's largest LNG export hub. Before the strikes, its 14 liquefaction trains had a combined capacity of 77 million tonnes per year.
+Ras Laffan Industrial City sits on Qatar's northeast coast — the world's largest LNG export hub. Before the strikes, its 14 liquefaction trains had combined capacity of 77 million tonnes per year.
 
-The attacks came in waves. On March 2, Iranian drone strikes forced QatarEnergy to halt all production and declare force majeure on its entire LNG output. Then on March 18, a second round of missile strikes caused what QatarEnergy called "extensive damage" to the complex — this time hitting specific infrastructure hard enough to create permanent capacity loss.
+The attacks came in waves. On March 2, Iranian drone strikes forced QatarEnergy to halt all production and declare force majeure on its entire LNG output. On March 18, a second round of missile strikes caused what QatarEnergy called "extensive damage" — hitting specific infrastructure hard enough to create permanent capacity loss.
 
-The damage breaks down like this:
+The damage:
 
 - **LNG Trains 4 and 6:** Both destroyed, removing 12.8 million tonnes per year of capacity. Repairs will take 3-5 years.
 - **Pearl GTL facility:** One of Shell's two gas-to-liquids trains needs at least a year to fix.
@@ -71,7 +71,7 @@ The damage breaks down like this:
 - **Helium production:** Cut by 14%, threatening global chip manufacturing supply chains.
 - **LPG exports:** Down 13%.
 
-This isn't a temporary shutdown. The initial March 2 halt was bad enough. But the March 18 strikes turned a disruption into a demolition.
+The March 2 halt was bad enough. March 18 turned a disruption into a demolition.
 
 ## Why It Takes Five Years to Fix
 
