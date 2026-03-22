@@ -16,6 +16,7 @@ import { ExitIntentModal } from "@/app/components/exit-intent-modal";
 import Image from "next/image";
 import { PerceptionGapVisual } from "@/app/components/perception-gap-visual";
 import { CoverageGapVisual } from "@/app/components/coverage-gap-visual";
+import { YourGapCard } from "@/app/components/your-gap-card";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -212,6 +213,27 @@ export default async function LensArticlePage({ params }: Props) {
 
         {/* Source Transparency */}
         <SourceTransparency sources={post.sources} confidence={post.confidence} />
+
+        {/* Personalised Gap Awareness */}
+        {(() => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const p = post as any;
+          const pgScore = typeof p.perception_gap === "number" ? p.perception_gap : null;
+          const found = Array.isArray(p.regions_found) ? (p.regions_found as string[]) : null;
+          const absent = Array.isArray(p.regions_absent) ? (p.regions_absent as string[]) : [];
+          const frames = p.region_frames as Record<string, string> | undefined;
+
+          if (pgScore == null || !found) return null;
+
+          return (
+            <YourGapCard
+              regionsFound={found}
+              regionsAbsent={absent}
+              pgi={pgScore}
+              regionFrames={frames}
+            />
+          );
+        })()}
 
         {/* Quiz CTA */}
         <div className="mt-12 rounded-xl border border-[#1a3a5c]/20 bg-[#1a3a5c]/5 p-5 dark:border-[#7ab0d8]/20 dark:bg-[#7ab0d8]/5">

@@ -107,6 +107,23 @@ export default async function PGIPage() {
         dates={(dates || []).map((d: any) => ({ date: d.date, pgi: Number(d.daily_pgi) }))}
       />
       <PGIClient />
+      {timelineData.length > 0 && (
+        <div className="mx-auto max-w-3xl px-6 py-8">
+          <PgiTimeline
+            data={timelineData}
+            title="PGI: Last 14 Days"
+            height={150}
+          />
+          <div className="mt-3 text-right">
+            <Link
+              href="/indexes/pgi/trends"
+              className="text-xs font-medium text-[#c8922a] hover:text-[#c8922a]/80 transition-colors"
+            >
+              View full 30-day trend →
+            </Link>
+          </div>
+        </div>
+      )}
       <div className="mx-auto max-w-6xl px-6">
         <SeriesArticleFeed
           tag="divided"
