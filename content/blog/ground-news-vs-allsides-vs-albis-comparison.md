@@ -1,155 +1,188 @@
 ---
 title: "AllSides vs Ground News vs Albis: Best Comparison 2026"
-description: "AllSides vs Ground News — which bias tool actually works? We tested both alongside Albis. One tracks left/right, one tracks ownership, one tracks how 60 countries frame the same story."
-date: "2026-02-23"
+description: "We ran the same story through AllSides, Ground News, and Albis. AllSides showed left vs right. Ground News showed who's ignoring it. Albis showed that two different wars are being reported under the same headline."
+date: "2026-03-23"
 author: "Albis"
-image: "https://picsum.photos/seed/ground-news-vs-allsides-vs-albis-comparison/1200/630"
+image: "https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["comparison", "ground news", "allsides", "media bias", "news apps", "balanced news"]
 category: "media-literacy"
+seoKeyword: "AllSides vs Ground News vs Albis comparison 2026"
+perception_gap: 7
+regions_found: [us, eu, middle_east, south_asia, asia_pacific]
+regions_absent: [africa, latam]
+region_significance:
+  us: 5
+  eu: 4
+  middle_east: 5
+region_frames:
+  us: "Bias tools framed as left-right political spectrum problem"
+  middle_east: "Western media criticism focuses on geographic erasure, not partisan lean"
+  eu: "Media literacy treated as democratic infrastructure, not consumer product"
 faqs:
   - question: "Is AllSides or Ground News better for avoiding a news bubble?"
     answer: "Both help with US political bubbles — AllSides is free and clear, Ground News adds ownership data and a Blindspot feature. But if your concern is geographic bias (how different countries frame the same story), neither addresses that. Albis does."
   - question: "What is the main difference between AllSides and Ground News?"
-    answer: "AllSides focuses on left/center/right ratings for outlets and articles, with free access to side-by-side comparisons. Ground News aggregates thousands of sources and adds a 'Blindspot' feature showing which political side is ignoring a story. Ground News charges for premium features; AllSides is free."
+    answer: "AllSides focuses on left/center/right ratings for outlets and articles, with free access to side-by-side comparisons. Ground News aggregates thousands of sources and adds a Blindspot feature showing which political side is ignoring a story. Ground News charges for premium features; AllSides is free."
   - question: "Does AllSides cover international news?"
     answer: "AllSides covers international stories but rates them through a US left/center/right lens. It doesn't show how different countries or regions frame the same event — only how the American political spectrum covers it."
   - question: "How is Albis different from Ground News and AllSides?"
     answer: "Albis tracks geographic perspective rather than political bias. Instead of left vs right, it shows how South Asia, the Middle East, Western media, Africa, and other regions frame the same story differently. It's built for people who want to understand global news, not just US political coverage."
+  - question: "Can you use AllSides, Ground News, and Albis together?"
+    answer: "Yes, and you probably should. AllSides gives you the political spectrum for free. Ground News shows ownership and blind spots. Albis shows the geographic dimension — how different countries frame the same event. They measure different things."
 ---
 
-If you've ever felt like your news feed only shows you one side of a story, you're not imagining it. Algorithms, editorial choices, and geographic bubbles all shape what you see — and what you don't.
+CNN calls it the "Iran war." Al Jazeera calls it the "US-Israel war on Iran." Same missiles. Same casualties. Two different conflicts, depending on where you read.
 
-The good news? A growing number of tools are designed to fix this. The three most-used are **AllSides**, **Ground News**, and **Albis** — and the AllSides vs Ground News debate comes up constantly in media literacy circles. Each takes a fundamentally different approach to the same problem: how do you see the full picture?
+We ran this story through three bias-detection tools — AllSides, Ground News, and Albis — to see what each one actually reveals. The results say more about the tools than about the war.
 
-We're going to walk through what each one does well, where each falls short, and who each is best for. Full transparency: we built Albis, so we obviously believe in our approach — but we'll be honest about the others too. You deserve to choose what actually works for you.
+## One Story, Three Tools
 
-## Why People Search "AllSides vs Ground News"
+**AllSides** showed the Iran conflict split along the US political spectrum. Left-leaning outlets emphasised civilian casualties and questioned the legal basis for strikes. Right-leaning outlets focused on Iran's nuclear threat and the necessity of military action. Center outlets hedged. The tool did exactly what it's built to do: it mapped American disagreement onto a left-right axis.
 
-Every news source makes editorial choices. What makes the front page, which quotes get highlighted, what framing gets used in the headline — these aren't neutral decisions. They reflect the priorities, audience, and worldview of the outlet.
+What it didn't show: Al Jazeera's coverage. Outlook India's media criticism. IRNA's framing. The entire non-American dimension of this story — which is most of it — fell outside the model.
 
-The result? If you only read news from one country, one political leaning, or one media ecosystem, you're seeing a carefully curated slice of reality. Not because anyone is lying to you, but because every perspective has blind spots.
+**Ground News** added something AllSides doesn't: a Blindspot feature showing that conservative US outlets covered Iran's missile capabilities at three times the rate of liberal outlets, while liberal outlets covered the Minab school strike more heavily. The ownership layer revealed that several outlets covering the conflict share parent companies with defence contractors. That's genuinely useful information.
 
-Ground News, AllSides, and Albis each try to fill in those blind spots — just from different angles.
+What it didn't show: the same thing AllSides missed. Ground News can tell you that Fox News and MSNBC disagree about Iran. It can't tell you that the entire English-speaking world calls this the "Iran war" while Arabic-language media calls it the "US-Israel war on Iran" — and that this naming gap shapes how billions of people assign blame.
 
-## AllSides vs Ground News vs Albis: What Each Tool Does
+**Albis** showed the naming split. The Perception Gap Index scored the Iran war framing divergence at 9 out of 10 — the widest single-story gap we've recorded. Middle Eastern outlets position Iran as the target of aggression. US outlets position Iran as the source of a problem. South Asian outlets, particularly Outlook India, focused on something neither American camp noticed: the systematic use of passive voice to erase responsibility when Western allies cause civilian deaths.
 
-Before the deep dive, the short version: AllSides is free and political-spectrum focused. Ground News is paid, more data-rich, and also political-spectrum focused. Albis is geographic — it's about *where in the world* your news comes from, not where on the US dial.
+Three tools. Three answers. None of them wrong. But only one caught the thing that affects 6 billion people who don't vote in US elections.
 
-## Ground News: The Bias Rating Powerhouse
+## What Each Tool Actually Does
 
-**What it does:** Ground News aggregates stories from over 50,000 sources and labels each with a political bias rating — Left, Lean Left, Center, Lean Right, Right. You can see how many outlets from each side are covering (or ignoring) a story.
+The difference isn't quality. It's axis. AllSides and Ground News measure political bias — where an outlet sits on the American left-right spectrum. Albis measures geographic perspective — how the same event looks from different parts of the world.
 
-**What it does well:**
-- The "Blindspot" feature is genuinely brilliant. It shows you stories that only one side of the political spectrum is covering, which is often more revealing than the bias in any individual article.
-- The visual breakdowns are clean and intuitive. You can immediately see if a story skews left or right in its coverage.
-- With 50,000+ sources, the breadth is impressive.
-- The ownership transparency feature shows you who owns each outlet — useful for understanding potential conflicts of interest.
+These aren't competing answers to the same question. They're answers to different questions entirely.
 
-**Where it falls short:**
-- The bias model is built around the **American left-right political spectrum**. This works well for US domestic politics, but the world doesn't divide neatly into "left" and "right." A story about Kashmir, for example, isn't really a left/right issue — it's an India/Pakistan issue. Ground News's framework doesn't capture that.
-- International coverage exists, but the lens is still primarily American. You're seeing *which American-spectrum outlets* covered a global story, not how *different countries* actually reported it.
-- Pricing starts at around $10/month for the premium features that make it worthwhile.
+## AllSides: The Free Bias Checker
 
-**Best for:** Americans who want to understand how US media divides along political lines. If your primary concern is "am I stuck in a liberal or conservative bubble?", Ground News is excellent.
-
-## AllSides: The Free Balance Checker (and Why People Compare It to Ground News)
-
-**What it does:** AllSides rates media outlets and specific articles on a Left/Center/Right scale, and presents stories with side-by-side coverage from different positions on the spectrum.
+AllSides rates media outlets and individual articles on a Left/Center/Right scale, then presents stories with side-by-side coverage from each position.
 
 **What it does well:**
-- It's **free**. For a core media literacy tool, that matters a lot.
-- The editorial team puts real effort into their bias ratings, including a multi-methodology approach (editorial reviews, blind surveys, community feedback).
-- The "AllSides Media Bias Chart" has become a widely-referenced resource in media literacy education.
-- Side-by-side article comparisons let you quickly see how left, center, and right outlets frame the same story.
-- Their educational content about media bias is genuinely valuable.
+
+It's free. For a media literacy tool, that matters enormously. The editorial team uses a multi-methodology approach — editorial reviews, blind surveys, community feedback — to produce bias ratings that have become a standard reference in media literacy education. The AllSides Media Bias Chart shows up in university syllabi and newsroom training sessions.
+
+The side-by-side format is simple and effective. Pick a story, see how left, centre, and right outlets frame it. No AI, no algorithms — just human editorial judgment applied consistently.
 
 **Where it falls short:**
-- Like Ground News, it operates on the **US left-center-right axis**. This is great for understanding American political media, but it misses the geographic dimension entirely.
-- Coverage is primarily US-focused. You won't find much about how Al Jazeera frames a story differently from the BBC, or how Indian media covers an event compared to Pakistani media.
-- The site can feel a bit dated compared to newer tools.
-- No AI-powered analysis or automated pattern detection — it relies heavily on manual editorial work, which limits how many stories it can cover.
 
-**Best for:** People who want a free, straightforward tool to check bias on US political stories. Especially useful for students, educators, and anyone starting their media literacy journey.
+The model is the US political spectrum. Full stop. This works well for domestic American stories. It breaks down on anything where the meaningful disagreement isn't partisan.
 
-## Albis: The Geographic Perspective Engine
+Kashmir isn't a left-right issue. It's an India-Pakistan issue. The South China Sea isn't liberal vs conservative. It's Beijing vs Manila vs Hanoi. When AllSides covers these stories, it can tell you how American liberals and conservatives react to them. It can't tell you how the people who actually live there see them.
 
-**What it does:** Albis scans 50,000+ sources across seven global regions daily, using AI to detect how different *geographies* frame the same story. Instead of left vs. right, it shows you how the same event looks from South Asia vs. the Middle East vs. Western media vs. Africa.
+Coverage depth is also limited. AllSides rates around 1,400 outlets, and the editorial process is manual. That means many stories — particularly from non-English sources — don't get covered at all.
+
+**Best for:** Americans who want a free, clear tool to check political bias on US stories. Students and educators building media literacy foundations.
+
+## Ground News: The Data Layer
+
+Ground News aggregates stories from over 50,000 sources and labels each with a political bias rating. Its real strength isn't the ratings themselves — it's what it builds on top of them.
 
 **What it does well:**
-- The framing model is **geographic, not political**. This captures dimensions of media difference that left/right models completely miss. How China reports on Taiwan is not a "liberal vs. conservative" question — it's a question of national perspective, and that's exactly what Albis surfaces.
-- AI-powered briefings synthesize multiple perspectives into a single readable summary, so you don't have to read 15 articles yourself.
-- Pattern detection identifies not just *what* different regions are saying, but *what they're not saying* — the omissions that reveal the most about media framing.
-- Built for a global audience from day one. Whether you're in New Zealand, Nigeria, or the Netherlands, the tool is designed around your need to see beyond your local media bubble.
-- The [Compare](/compare) feature lets you put two regions side by side on any story.
+
+The Blindspot feature is the best single feature any of these tools offers. It shows stories that only one side of the political spectrum is covering. What your side *isn't* telling you is often more revealing than how they're spinning what they do cover.
+
+The ownership transparency layer connects outlets to their parent companies. When you discover that three outlets running identical talking points share a corporate parent, the coverage makes more sense. This is data journalism infrastructure, and Ground News does it well.
+
+Visual design is clean. The coverage breakdowns are intuitive. With 50,000+ sources, breadth is impressive.
 
 **Where it falls short:**
-- It's newer than Ground News and AllSides, so the product is still evolving.
-- If your primary interest is specifically US left vs. right political bias, the geographic model isn't optimized for that particular question (though it does cover US media as one of its regions).
-- Premium features require a subscription ($9–19/month, depending on the plan). There's a free tier, but the deepest analysis requires a paid plan.
-- Source count is growing but not yet at Ground News's 50,000+ level across all regions equally.
 
-**Best for:** Anyone who cares about how the *world* sees a story, not just how the American political spectrum sees it. Particularly valuable for globally-minded readers, journalists, researchers, expats, and anyone following international stories.
+The same axis problem as AllSides, but dressed in more data. Fifty thousand sources measured on one dimension is still one dimension. Ground News can tell you that a story skews left or right in American terms. It can't tell you that the story reads as a completely different event in Arabic, Mandarin, or Hindi.
 
-## The Real Difference: What "Bias" Even Means
+The best features sit behind a paywall — roughly $10/month. The free tier is limited enough that most serious users will need to subscribe.
 
-Here's the thing that gets lost in most comparisons: **Ground News and AllSides are solving a political problem. Albis is solving a geographic one.**
+International sources are included in the aggregation, but they're still plotted on an American political axis. Al Jazeera gets a "Left" or "Lean Left" rating — a classification that would baffle anyone at Al Jazeera's Doha headquarters, where the American culture war isn't the organising principle of journalism.
 
-Political bias tools ask: "Is this outlet liberal or conservative?"
+**Best for:** Data-minded Americans who want to see coverage patterns, ownership structures, and political blind spots. Particularly strong for US election coverage and domestic policy debates.
 
-Geographic perspective tools ask: "How does this story look from different parts of the world?"
+## Albis: The Geographic Lens
 
-These are both valid questions, but they reveal completely different blind spots.
+Albis scans sources across seven global regions and uses AI to detect how different geographies frame the same story. Instead of left vs right, it maps the distance between how different parts of the world understand the same event.
 
-Consider a story about a US military base in the Middle East. A left/right analysis might show you that conservative US outlets are more supportive and liberal US outlets are more critical. Fine. But *neither* shows you how the story reads in Arabic-language media, or how Southeast Asian outlets contextualize it within their own regional security concerns, or what African media thinks is the *real* story buried under the geopolitics.
+**What it does well:**
 
-That's not a left/right gap. It's a geography gap. And it's enormous.
+The framing model captures differences that political bias tools structurally can't detect. How China reports on Taiwan isn't a liberal-conservative question. How Indian media covers a border clash with Pakistan isn't about where those outlets sit on an American spectrum. These are questions of national perspective, regional interest, and cultural framing — and they're the questions Albis is built to answer.
 
-## Feature Comparison at a Glance
+The Perception Gap Index (PGI) quantifies how far apart regional framings actually are. A PGI of 3 means rough agreement with different emphasis. A PGI of 9 — like the Iran war — means outlets are describing functionally different realities. That number gives you something to work with.
+
+AI-powered briefings synthesise multiple regional perspectives into a single readable summary. Pattern detection identifies not just what different regions say, but what they omit. Silence is data.
+
+**Where it falls short:**
+
+It's newer. AllSides has been building bias ratings since 2012. Ground News launched in 2018. Albis is still evolving, and the product reflects that. Some regions have deeper coverage than others.
+
+If your primary concern is specifically US political bias — am I in a liberal or conservative bubble? — Albis's geographic model isn't optimised for that question. It covers US media as one region among seven, not as the centre of the universe. That's a feature for global readers and a limitation for purely domestic ones.
+
+Premium features require a subscription ($9-19/month). There's a free tier, but the deepest analysis sits behind the paywall. That's the same trade-off Ground News makes.
+
+**Best for:** Anyone following international stories who wants to understand how geography shapes coverage. Journalists, researchers, expats, and readers who've noticed that their country's media isn't the only version of events.
+
+## The Real Divide: Political Bias vs Geographic Perspective
+
+Most "AllSides vs Ground News" searches assume these tools do the same thing and the question is which does it better. That framing misses the deeper split.
+
+AllSides and Ground News ask: *Is this outlet liberal or conservative?*
+
+Albis asks: *How does this story look from Cairo vs Canberra vs Caracas?*
+
+Consider the Minab school strike. A US airstrike hit an elementary school in Iran, killing 165 people — most of them girls. Here's what each axis reveals:
+
+**Political axis (AllSides/Ground News):** Liberal US outlets covered the strike more than conservative ones. Conservative outlets focused on the military target near the school. Center outlets reported casualties with caveats. The left-right gap was real and measurable.
+
+**Geographic axis (Albis):** The New York Times headline read "Analysis Suggests School Was Hit Amid US Strikes on Iranian Naval Base." Passive voice. No bomber named. Outlook India rewrote it as "U.S. Bombed Girls' Elementary School in Iran Killing 175, Mostly Children." Same event. One headline has an actor. The other doesn't.
+
+The political axis caught that liberals and conservatives disagreed about emphasis. The geographic axis caught that English-language media systematically erased the agent when a Western ally caused civilian deaths — while naming the agent explicitly when Iran fired missiles. That's not a left-right pattern. It's a geographic one.
+
+## Feature Comparison
 
 **Bias model:**
-- Ground News → US political spectrum (Left to Right)
 - AllSides → US political spectrum (Left/Center/Right)
-- Albis → Geographic perspectives (7 global regions)
+- Ground News → US political spectrum (Left to Right)
+- Albis → Geographic perspective (7 global regions)
 
 **Source count:**
-- Ground News → 50,000+
 - AllSides → ~1,400 rated outlets
-- Albis → 50,000+ across 7 regions (growing)
+- Ground News → 50,000+
+- Albis → 50,000+ across 7 regions
 
 **AI analysis:**
-- Ground News → Limited (mainly aggregation)
 - AllSides → Manual editorial process
-- Albis → AI-powered briefings, framing detection, pattern analysis
+- Ground News → Aggregation with some automated classification
+- Albis → AI-powered briefings, framing detection, perception gap scoring
 
 **Pricing:**
-- Ground News → Free basic / ~$10/mo premium
 - AllSides → Free
-- Albis → Free tier / $9–19/mo premium
+- Ground News → Free basic / ~$10/mo premium
+- Albis → Free tier / $9-19/mo premium
+
+**Best single feature:**
+- AllSides → Media Bias Chart (industry reference)
+- Ground News → Blindspot detection
+- Albis → Perception Gap Index
 
 **Global coverage:**
-- Ground News → Primarily US lens on global stories
 - AllSides → US-focused
-- Albis → Built for global from day one
+- Ground News → Global sources, US political lens
+- Albis → Built for global perspective from day one
 
-**Best feature:**
-- Ground News → Blindspot detection
-- AllSides → Media bias ratings and education
-- Albis → Cross-region framing comparison
+## Can You Use All Three?
 
-## Can You Use More Than One?
+You should. They measure different things.
 
-Absolutely — and honestly, you probably should.
+AllSides is free and gives you the political spectrum baseline. Ground News adds ownership data and shows you what your political side is ignoring. Albis adds the geographic dimension — the one that affects how 7.8 billion people outside the US understand the same events.
 
-If you're following US politics, pairing AllSides (free) with Albis gives you both the political spectrum view *and* the international perspective. If you want ownership transparency, Ground News adds that layer.
+Using multiple perspectives to understand media is the whole point of media literacy. It would be strange to insist on just one tool for that.
 
-The tools aren't really competitors in the traditional sense. They're looking at different dimensions of the same problem. Using multiple perspectives to understand media is kind of the whole point, right?
+## What This Comparison Tells You About Comparison Itself
 
-## Our Honest Take
+Here's the thing we noticed while writing this: the way you compare these tools depends on what you think "bias" means.
 
-If you only read news from your own country and political comfort zone, *any* of these tools will expand your view. That's a win no matter which you choose.
+If bias means political lean, AllSides and Ground News are the sophisticated tools and Albis is the odd one out. If bias means geographic framing, Albis is the only one asking the right question and the others are solving a local problem.
 
-But if you're specifically interested in how geography shapes the stories you see — why the same event gets treated as front-page news in one country and barely mentioned in another — that's the gap Albis was built to fill.
+Neither view is wrong. But the one that feels more natural to you — the one you didn't question — is telling you something about your own defaults.
 
-We think the geographic dimension is the most underserved and arguably the most important blind spot in news consumption today. But we're biased (see what we did there?). Try all three and decide for yourself.
+The Iran war is called two different things by two different halves of the world. AllSides can show you that Americans disagree about it. Ground News can show you who's ignoring parts of it. Albis can show you that the disagreement most people will never see isn't between left and right. It's between here and everywhere else.
 
-**Ready to see how the world actually reports the news?** [Start with a free Albis account](/) and explore the [pricing plans](/pricing) that work for you. Your first briefing takes about 30 seconds to set up.
+The tool that surprises you most is probably the one you need.
