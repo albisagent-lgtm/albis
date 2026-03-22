@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { getTodayScan } from "@/lib/scan-parser";
 import { PgiChart, GaiChart, DivergenceChart } from "./charts";
+import { PgiHero } from "../components/pgi-hero";
+import { PgiBar } from "../components/pgi-bar";
+import { PgiGaiQuadrant, type QuadrantStory } from "../components/pgi-gai-quadrant";
+import { PgiTimeline } from "../components/pgi-timeline";
 
 export const metadata: Metadata = {
   title: "Press Indexes | Albis",
@@ -94,13 +99,81 @@ async function fetchIndexData() {
   return { pgiData, gaiData, combinedData };
 }
 
+// Fetch latest PGI with trend for PgiHero + PgiBar
+async function getLatestPGI() {
+  try {
+    const supabase = createAdminClient();
+    const { data } = await supabase
+      .from("pgi_daily")
+      .select("date, daily_pgi")
+      .order("date", { ascending: false })
+      .limit(2);
+
+    if (!data || data.length === 0) return null;
+
+    const latest = { date: data[0].date, pgi: Number(data[0].daily_pgi) };
+    const previous = data.length > 1 ? Number(data[1].daily_pgi) : null;
+    const delta = previous !== null ? latest.pgi - previous : null;
+
+    return { ...latest, delta };
+  } catch (e) {
+    console.error("PGI fetch failed:", e);
+    return null;
+  }
+}
+
+// Fetch PGI timeline data (last 14 days)
+async function getPgiTimelineData() {
+  try {
+    const supabase = createAdminClient();
+    const { data } = await supabase
+      .from("pgi_daily")
+      .select("date, daily_pgi")
+      .order("date", { ascending: false })
+      .limit(14);
+
+    if (!data) return [];
+    return data.map((r) => ({ date: r.date, pgi: Number(r.daily_pgi) }));
+  } catch {
+    return [];
+  }
+}
+
 /* ── page ── */
 
 export default async function IndexesPage() {
-  const [{ pgiData, gaiData, combinedData }, { quadrants, scanDate }] = await Promise.all([
+  const [{ pgiData, gaiData, combinedData }, { quadrants, scanDate }, pgiLatest, timelineData, scan] = await Promise.all([
     fetchIndexData(),
     fetchMatrixData(),
+    getLatestPGI(),
+    getPgiTimelineData(),
+    getTodayScan(),
   ]);
+
+  // Build quadrant stories from scan data for PgiGaiQuadrant
+  const quadrantStories: QuadrantStory[] = (scan?.items ?? [])
+    .filter((item) => {
+      const pgi = item.perception_gap;
+      const breadth = item.coverage_breadth;
+      return pgi != null && pgi > 0 && breadth != null && breadth > 0;
+    })
+    .map((item) => {
+      const pgi = item.perception_gap!;
+      const gai = 10 - ((item.coverage_breadth! / 7) * 9);
+      const slug = item.tags?.[0] || item.headline
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "")
+        .slice(0, 60);
+      return {
+        headline: item.headline,
+        slug,
+        pgi,
+        gai: Math.round(gai * 10) / 10,
+        category: item.category,
+      };
+    })
+    .slice(0, 15);
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-12 pb-28 md:pb-12">
@@ -118,6 +191,42 @@ export default async function IndexesPage() {
           <br className="hidden sm:block" />
           <em>How well does the world actually understand itself?</em>
         </p>
+      </section>
+
+      {/* ━━ Perception Gap Index — Dashboard ━━ */}
+      <section className="mb-16">
+        <p className="text-center text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
+          Perception Gap Index
+        </p>
+
+        {/* PgiHero — today's score */}
+        <PgiHero pgi={pgiLatest?.pgi ?? null} delta={pgiLatest?.delta ?? null} date={pgiLatest?.date ?? null} />
+
+        {/* PgiBar — compact bar visualisation */}
+        {pgiLatest && (
+          <div className="mx-auto max-w-3xl mt-6">
+            <PgiBar pgi={pgiLatest.pgi} delta={pgiLatest.delta} date={pgiLatest.date} />
+          </div>
+        )}
+
+        {/* PgiTimeline — 14-day trend */}
+        {timelineData.length > 0 && (
+          <div className="mx-auto max-w-3xl mt-6">
+            <PgiTimeline data={timelineData} title="14-Day Trend" height={200} />
+          </div>
+        )}
+
+        {/* PgiGaiQuadrant — scatter plot */}
+        {quadrantStories.length >= 3 && (
+          <div className="mx-auto max-w-3xl mt-8">
+            <div className="text-center mb-4">
+              <h3 className="font-[family-name:var(--font-playfair)] text-xl md:text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                Today&apos;s Information Landscape
+              </h3>
+            </div>
+            <PgiGaiQuadrant stories={quadrantStories} date={scan?.displayDate} />
+          </div>
+        )}
       </section>
 
       {/* ━━ PGI Explainer ━━ */}
