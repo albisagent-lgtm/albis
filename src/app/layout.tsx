@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     template: "%s | Albis",
   },
   description:
-    "News intelligence, not noise. Albis measures how the same event gets told differently across seven regions — so you see the full picture, not just your version.",
+    "The world's news in 2 minutes. Scanned from every region, every language, every perspective — so you don't miss what matters.",
   keywords: [
     "news intelligence",
     "pattern detection",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     siteName: "Albis",
     title: "Albis — The news, understood.",
     description:
-      "News intelligence, not noise. Same event, seven regions, seven different stories. Albis measures the gap.",
+      "The world's news in 2 minutes. Scanned from every region, every language, every perspective.",
     images: [
       {
         url: "/og-image.png",
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Albis — The news, understood.",
-    description: "News intelligence, not noise. See the full picture.",
+    description: "The world's news in 2 minutes. Every region. Every perspective.",
     images: ["/og-image.png"],
   },
   robots: {

@@ -150,10 +150,10 @@ export default async function Home() {
           {/* Value proposition */}
           <div className="mt-10 md:mt-14 text-center">
             <h1 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.12] tracking-tight text-[#0f0f0f] dark:text-[#f0efec]">
-              Same event. Seven&nbsp;regions.<br />Seven different&nbsp;stories.
+              The world&apos;s news<br />in 2&nbsp;minutes.
             </h1>
             <p className="mt-5 font-[family-name:var(--font-source-serif)] text-base sm:text-lg text-zinc-500 dark:text-zinc-400 max-w-lg mx-auto leading-relaxed">
-              Every day, the same news gets told differently around the world. Albis shows you how — so you see the full picture, not just your&nbsp;version.
+              Scanned from every region, every language, every perspective — so you don&apos;t miss what&nbsp;matters.
             </p>
           </div>
 
@@ -209,12 +209,91 @@ export default async function Home() {
           {/* Email capture */}
           <div className="mt-10">
             <p className="text-center font-[family-name:var(--font-source-serif)] text-sm text-zinc-500 dark:text-zinc-400 mb-4">
-              Get this every morning. Free.
+              Get your daily briefing every morning. Free.
             </p>
             <EmailCapture variant="hero" showSocialProof={true} showYesterdayLink={true} />
           </div>
         </div>
       </section>
+
+      {/* ════════════════════════════════════════════════════════
+          SECTION 1.5: TODAY'S BRIEFING PREVIEW
+          ════════════════════════════════════════════════════════ */}
+      {topStories.length > 0 && (
+        <section className="border-t border-black/[0.05] bg-[#f8f7f4] dark:border-white/[0.05] dark:bg-[#0f0f0f]">
+          <div className="mx-auto max-w-3xl px-6 py-12 md:py-16">
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
+                  Today&apos;s Briefing
+                </p>
+                <p className="mt-1 text-sm text-zinc-400 dark:text-zinc-500">
+                  Your 2-minute global scan
+                </p>
+              </div>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+                Live
+              </span>
+            </div>
+
+            <div className="space-y-0">
+              {topStories.slice(0, 6).map((item, i) => {
+                const slug = findArticleSlug(item);
+                const regionCount = item.regions.filter((r) => r !== "global").length;
+
+                const briefingItem = (
+                  <div className={`flex gap-4 py-4 ${i < Math.min(topStories.length, 6) - 1 ? "border-b border-black/[0.05] dark:border-white/[0.05]" : ""}`}>
+                    <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-zinc-100 text-[11px] font-semibold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+                      {i + 1}
+                    </span>
+                    <div className="min-w-0">
+                      <h3 className="font-[family-name:var(--font-playfair)] text-base md:text-lg font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+                        {item.headline}
+                      </h3>
+                      {item.connection && (
+                        <p className="mt-1.5 font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 line-clamp-2">
+                          {item.connection}
+                        </p>
+                      )}
+                      <div className="mt-2 flex items-center gap-3 text-[10px] text-zinc-400 dark:text-zinc-500">
+                        {item.category && (
+                          <span
+                            className="font-medium tracking-[0.1em] uppercase"
+                            style={{ color: getCategoryAccent(item.category) }}
+                          >
+                            {CATEGORY_META[item.category]?.label || item.category}
+                          </span>
+                        )}
+                        {regionCount > 0 && (
+                          <span>{regionCount} region{regionCount !== 1 ? "s" : ""}</span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+
+                return slug ? (
+                  <Link key={i} href={`/lens/${slug}`} className="block transition-opacity hover:opacity-75">
+                    {briefingItem}
+                  </Link>
+                ) : (
+                  <div key={i}>{briefingItem}</div>
+                );
+              })}
+            </div>
+
+            <div className="mt-8 text-center">
+              <p className="font-[family-name:var(--font-source-serif)] text-sm text-zinc-500 dark:text-zinc-400">
+                This is what your inbox looks like every morning.
+              </p>
+              <div className="mt-4">
+                <EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} />
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ════════════════════════════════════════════════════════
           SECTION 2: TODAY'S STORIES
@@ -360,10 +439,10 @@ export default async function Home() {
       <section className="bg-[#1a3a5c] py-14 md:py-20">
         <div className="mx-auto max-w-xl px-6 text-center">
           <h2 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl font-semibold leading-tight text-white">
-            News intelligence, not&nbsp;noise.
+            Start your day informed,<br />not&nbsp;overwhelmed.
           </h2>
           <p className="mt-3 text-sm text-white/60 font-[family-name:var(--font-source-serif)]">
-            7 regions. Zero bias. Free forever.
+            Your daily briefing. Every region. Every perspective. 2&nbsp;minutes. Free.
           </p>
           <div className="mt-8">
             <EmailCapture showSocialProof={true} showYesterdayLink={false} />
