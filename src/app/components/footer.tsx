@@ -15,7 +15,7 @@ export function Footer() {
               Albis
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-zinc-400 dark:text-zinc-500">
-              News from 7 regions. All perspectives. 5 minutes.
+              News intelligence, not noise.
             </p>
             <p className="mt-4 text-xs text-zinc-400 dark:text-zinc-500">
               Free daily briefing · Zero bias · Unsubscribe anytime

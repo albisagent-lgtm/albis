@@ -176,10 +176,10 @@ export default async function Home() {
 
         <div className="relative mx-auto max-w-2xl px-6 pt-12 pb-10 md:pt-20 md:pb-14 text-center">
           <h1 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-5xl font-semibold leading-[1.15] tracking-tight text-[#0f0f0f] dark:text-[#f0efec]">
-            The world&apos;s news.<br />All perspectives. 5&nbsp;minutes.
+            Same event. Seven&nbsp;regions.<br />Seven different&nbsp;stories.
           </h1>
           <p className="mt-4 text-base sm:text-lg text-zinc-500 font-[family-name:var(--font-source-serif)] dark:text-zinc-400 max-w-lg mx-auto">
-            See how 7 regions cover the same story — free daily briefing with zero&nbsp;bias.
+            Albis measures how the same news gets told differently around the world — so you can see the full picture, not just your&nbsp;version.
           </p>
           <div className="mt-8">
             <EmailCapture variant="hero" showSocialProof={true} showYesterdayLink={true} />
