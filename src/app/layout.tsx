@@ -147,7 +147,7 @@ export default function RootLayout({
                 height: 512,
               },
               description:
-                "Albis is a global news intelligence platform that scans media in 9 languages across 60 countries three times daily, measuring narrative divergence using the Perception Gap Index (PGI) and Global Attention Index (GAI).",
+                "Albis is a global news intelligence platform that scans media in 16 languages across 60 countries three times daily, measuring narrative divergence using the Perception Gap Index (PGI) and Global Attention Index (GAI).",
               foundingDate: "2026",
               sameAs: [
                 "https://twitter.com/AlbisDaily",

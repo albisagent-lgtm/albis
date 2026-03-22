@@ -5,7 +5,7 @@ import { EmailCapture } from "../components/email-capture";
 export const metadata: Metadata = {
   title: "About Albis",
   description:
-    "The world's news in 2 minutes. Albis scans 7 regions in 9 languages three times daily so you see the full picture, not just your version.",
+    "The world's news in 2 minutes. Albis scans 7 regions in 16 languages three times daily so you see the full picture, not just your version.",
 };
 
 export default function AboutPage() {
@@ -26,7 +26,7 @@ export default function AboutPage() {
             Most people get their news from one country, in one language, through one lens. They think they&apos;re informed. They&apos;re seeing a fraction.
           </p>
           <p>
-            Albis scans the world three times a day — across <strong className="text-zinc-800 dark:text-zinc-200">seven regions</strong> and <strong className="text-zinc-800 dark:text-zinc-200">nine languages</strong> — and delivers a 2-minute briefing with everything you need to know. No spin. No noise. Just the full picture.
+            Albis scans the world three times a day — across <strong className="text-zinc-800 dark:text-zinc-200">seven regions</strong> and <strong className="text-zinc-800 dark:text-zinc-200">sixteen languages</strong> — and delivers a 2-minute briefing with everything you need to know. No spin. No noise. Just the full picture.
           </p>
         </div>
 
@@ -74,7 +74,7 @@ export default function AboutPage() {
           <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
             Languages We Scan
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {[
               ["English", "Global"],
               ["\u0641\u0627\u0631\u0633\u06CC", "Iran"],
@@ -86,6 +86,12 @@ export default function AboutPage() {
               ["Fran\u00E7ais", "West Africa"],
               ["T\u00FCrk\u00E7e", "Turkey"],
               ["Portugu\u00EAs", "Brazil"],
+              ["\u65E5\u672C\u8A9E", "Japan"],
+              ["\uD55C\uAD6D\uC5B4", "South Korea"],
+              ["\u0627\u0631\u062F\u0648", "Pakistan"],
+              ["\u09AC\u09BE\u0982\u09B2\u09BE", "Bangladesh"],
+              ["Kiswahili", "East Africa"],
+              ["Bahasa", "Indonesia"],
             ].map(([lang, region]) => (
               <div key={lang} className="rounded-lg border border-black/[0.05] px-4 py-3 dark:border-white/[0.05]">
                 <p className="font-[family-name:var(--font-source-serif)] font-semibold text-zinc-800 dark:text-zinc-200">{lang}</p>
@@ -102,7 +108,7 @@ export default function AboutPage() {
           </h2>
           <div className="space-y-5 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
             <p>
-              Albis is built by <strong className="text-zinc-800 dark:text-zinc-200">one person and AI</strong>. The scanning, analysis, and writing are done by AI agents that read global sources in 9 languages, detect framing patterns, and produce briefings. A human sets the direction and reviews the output.
+              Albis is built by <strong className="text-zinc-800 dark:text-zinc-200">one person and AI</strong>. The scanning, analysis, and writing are done by AI agents that read global sources in 16 languages, detect framing patterns, and produce briefings. A human sets the direction and reviews the output.
             </p>
             <p>
               We&apos;re upfront about this because a product that helps people see information clearly should be honest about its own. Every article on Albis is authored by &ldquo;Albis&rdquo; (AI-generated) or by name (human-written).
@@ -123,10 +129,13 @@ export default function AboutPage() {
           </p>
           <div className="mt-5 space-y-4 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
             <p>
-              Albis started as a question: how does the same event become completely different stories depending on where you read about it?
+              Albis started with a study into information and psychology — how the way a story is framed can change what people believe, how they feel, and what they do. The same event, told differently, creates different realities. We wanted to understand that mechanism. Not to judge it, but to make it visible.
             </p>
             <p>
-              That question became a tool. The tool became a daily practice. Now it scans the world three times a day, and anyone can see the patterns for themselves.
+              So we built a tool that takes everything — every region, every language, every perspective — and draws a clear line through the noise. Not telling you what to think. Just showing you the full picture so you can decide for yourself.
+            </p>
+            <p>
+              That tool became a daily practice. Now it scans the world three times a day in 16 languages, and anyone can see the patterns for themselves.
             </p>
           </div>
         </div>
