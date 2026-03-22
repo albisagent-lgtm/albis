@@ -70,9 +70,39 @@ function VsPage({ c }: { c: Comparison }) {
     })),
   };
 
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    name: c.title,
+    url: `https://www.albis.news/compare/${c.slug}`,
+    itemReviewed: {
+      "@type": "SoftwareApplication",
+      name: c.competitor,
+      applicationCategory: "News & Media",
+      url: c.competitorUrl,
+    },
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: "4",
+      bestRating: "5",
+      worstRating: "1",
+    },
+    author: {
+      "@type": "Organization",
+      name: "Albis",
+      url: "https://www.albis.news",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Albis",
+      url: "https://www.albis.news",
+    },
+  };
+
   return (
     <main className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }} />
       <div className="mx-auto max-w-3xl px-6 py-16 md:py-24">
         <nav className="mb-8 text-sm text-zinc-400">
           <Link href="/compare" className="hover:text-[#c8922a]">Compare</Link>
@@ -155,11 +185,45 @@ function MultiPage({ c }: { c: MultiComparison }) {
     })),
   };
 
+  // Review schemas for each non-Albis product in the comparison
+  const reviewSchemas = c.products
+    .filter((p) => p.name !== "Albis")
+    .map((p) => ({
+      "@context": "https://schema.org",
+      "@type": "Review",
+      name: `${p.name} Review — ${c.title}`,
+      url: `https://www.albis.news/compare/${c.slug}`,
+      itemReviewed: {
+        "@type": "SoftwareApplication",
+        name: p.name,
+        applicationCategory: "News & Media",
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "4",
+        bestRating: "5",
+        worstRating: "1",
+      },
+      author: {
+        "@type": "Organization",
+        name: "Albis",
+        url: "https://www.albis.news",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Albis",
+        url: "https://www.albis.news",
+      },
+    }));
+
   const productNames = c.products.map((p) => p.name);
 
   return (
     <main className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      {reviewSchemas.map((schema, i) => (
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
       <div className="mx-auto max-w-4xl px-6 py-16 md:py-24">
         <nav className="mb-8 text-sm text-zinc-400">
           <Link href="/compare" className="hover:text-[#c8922a]">Compare</Link>
