@@ -4,7 +4,7 @@ import Link from "next/link";
 import { getAllSlugs, getPostBySlug } from "@/lib/blog";
 import { markdownToHtml } from "@/lib/markdown";
 import { EmailCapture } from "@/app/components/email-capture";
-import { StickyCTA } from "@/app/components/sticky-cta";
+
 import { getRelatedPosts, getRelatedPages } from "@/lib/internal-links";
 import { matchTagToTopic } from "@/lib/topics";
 import { Breadcrumbs } from "@/app/components/breadcrumbs";
@@ -12,7 +12,7 @@ import { SourceTransparency } from "@/app/components/source-transparency";
 import { RelativeTime } from "@/app/components/relative-time";
 import { CATEGORIES } from "@/lib/categories";
 import { getAllPosts } from "@/lib/blog";
-import { ExitIntentModal } from "@/app/components/exit-intent-modal";
+
 import Image from "next/image";
 import { PerceptionGapVisual } from "@/app/components/perception-gap-visual";
 import { CoverageGapVisual } from "@/app/components/coverage-gap-visual";
@@ -326,18 +326,7 @@ export default async function LensArticlePage({ params }: Props) {
         </div>
       </article>
 
-      <StickyCTA />
-      <ExitIntentModal
-        articles={getAllPosts().slice(0, 10).map((p) => ({
-          slug: p.slug,
-          title: p.title,
-          description: p.description || "",
-          readingTime: p.readingTime,
-          category: p.category || "analysis",
-        }))}
-        currentSlug={slug}
-        currentCategory={post.category}
-      />
+
     </>
   );
 }
