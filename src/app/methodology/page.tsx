@@ -70,6 +70,11 @@ export default function MethodologyPage() {
           <h2 className="text-xs font-medium tracking-[0.15em] uppercase text-zinc-400 mb-space-6">
             The Perception Gap Index (PGI)
           </h2>
+          <p className="mb-space-4 text-sm text-zinc-500 dark:text-zinc-400">
+            <a href="/what-is-perception-gap-index" className="text-[#1a3a5c] hover:underline dark:text-[#7ab0d8]">
+              What is the PGI? Full explainer →
+            </a>
+          </p>
           <div className="space-y-space-4 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
             <p>
               The PGI measures{" "}
@@ -181,6 +186,11 @@ export default function MethodologyPage() {
           <h2 className="text-xs font-medium tracking-[0.15em] uppercase text-zinc-400 mb-space-6">
             The Global Attention Index (GAI)
           </h2>
+          <p className="mb-space-4 text-sm text-zinc-500 dark:text-zinc-400">
+            <a href="/what-is-global-attention-index" className="text-[#1a3a5c] hover:underline dark:text-[#7ab0d8]">
+              What is the GAI? Full explainer →
+            </a>
+          </p>
           <div className="space-y-space-4 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
             <p>
               The GAI measures whether stories are covered{" "}

@@ -20,6 +20,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/perception-gap/about`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
     { url: `${base}/indexes/pgi`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.7 },
     { url: `${base}/feed.xml`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.3 },
+    { url: `${base}/what-is-perception-gap-index`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${base}/what-is-global-attention-index`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${base}/indexes/gai`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.7 },
+    { url: `${base}/methodology`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${base}/live`, lastModified: new Date(), changeFrequency: "hourly" as const, priority: 0.8 },
   ];
 
   const allPosts = getAllPosts();
