@@ -1,6 +1,6 @@
 ---
-title: "Someone Is Hacking Pakistan's Nuclear Regulators. The World Hasn't Noticed."
-description: "An India-linked cyber espionage group spent a year infiltrating Pakistan's nuclear oversight, navy, and telecoms — and almost nobody outside South Asia heard about it."
+title: "India-Linked Cyber Attack on Pakistan's Nuclear Systems"
+description: "SloppyLemming spent a year inside Pakistan's nuclear regulators, navy, and telecoms. 112 domains. Custom malware. Here's the cyber attack on Pakistan that the world missed."
 date: "2026-03-08"
 image: "https://picsum.photos/seed/india-sloppylemming-espionage-nuclear-pakistan-unseen-gai-march-2026/1200/630"
 author: "Harry Wenham"
