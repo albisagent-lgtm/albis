@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { PGIClient } from "../../perception-gap/pgi-client";
+import { PGIClient } from "./pgi-client";
 import { PgiShareBar } from "./share-bar";
 import { PgiTimeline } from "@/app/components/pgi-timeline";
 import { SeriesArticleFeed } from "@/components/SeriesArticleFeed";

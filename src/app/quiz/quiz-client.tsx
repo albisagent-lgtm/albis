@@ -731,7 +731,7 @@ export function QuizClient() {
               Albis shows you how 7 world regions cover the same story differently. No spin, no algorithm — just the full picture.
             </p>
             <a
-              href="/briefing"
+              href="/archive"
               className="inline-block rounded-xl bg-[#c8922a] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#b8842a] dark:text-[#0f0f0f]"
             >
               Try the daily briefing

@@ -295,7 +295,7 @@ export default function SettingsPage() {
             {saved ? "Saved" : "Save changes"}
           </button>
           <Link
-            href="/briefing"
+            href="/archive"
             className="inline-flex min-h-[44px] items-center text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
           >
             Back to briefing

@@ -405,7 +405,7 @@ export default function AdminPage() {
         {/* Footer link */}
         <div className="mt-16 border-t border-zinc-200 pt-8 dark:border-zinc-800/50">
           <Link
-            href="/briefing"
+            href="/archive"
             className="text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
           >
             &larr; Back to briefing

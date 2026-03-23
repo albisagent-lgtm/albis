@@ -27,7 +27,7 @@ export default function NotFound() {
             Go home →
           </Link>
           <Link
-            href="/briefing"
+            href="/archive"
             className="inline-flex h-12 items-center rounded-full border border-black/[0.1] px-8 text-sm font-medium text-zinc-600 hover:bg-zinc-100/80 dark:border-white/[0.1] dark:text-zinc-400 dark:hover:bg-white/[0.05]"
           >
             Your briefing

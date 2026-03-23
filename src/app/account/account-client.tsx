@@ -129,7 +129,7 @@ export default function AccountClient() {
                 More features coming soon. For now, enjoy Albis completely free.
               </p>
               <Link
-                href="/briefing"
+                href="/archive"
                 className="inline-flex h-10 items-center justify-center rounded-full bg-[#1a3a5c] px-6 text-sm font-medium text-white hover:bg-[#1a3a5c]/90"
               >
                 View today's briefing

@@ -70,7 +70,7 @@ function UpgradePrompt({ loggedIn }: { loggedIn: boolean }) {
           </Link>
           {!loggedIn && (
             <Link
-              href="/briefing"
+              href="/archive"
               className="inline-flex h-11 items-center rounded-full border border-zinc-300 px-8 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
             >
               See what you get

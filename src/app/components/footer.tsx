@@ -41,12 +41,11 @@ export function Footer() {
                 Explore
               </p>
               <ul className="mt-4 space-y-2.5">
-                <FooterLink href="/quiz">Perspective Check</FooterLink>
+                <FooterLink href="/indexes">Perception Gap Index</FooterLink>
                 <FooterLink href="/blind-spots">Blind Spot Map</FooterLink>
-                <FooterLink href="/perception-gap">Perception Gap Index</FooterLink>
+                <FooterLink href="/quiz">Perspective Check</FooterLink>
                 <FooterLink href="/methodology">Methodology</FooterLink>
                 <FooterLink href="/topics">Topics</FooterLink>
-                <FooterLink href="/framing-lab">Framing Lab</FooterLink>
                 <li>
                   <a
                     href="/feed.xml"

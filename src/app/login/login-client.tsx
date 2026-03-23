@@ -47,7 +47,7 @@ export default function LoginClient() {
         router.push(redirect);
       } else {
         const prefs = getPreferences();
-        router.push(prefs.onboardingComplete ? "/briefing" : "/onboarding");
+        router.push(prefs.onboardingComplete ? "/archive" : "/");
       }
       router.refresh();
     } catch (err) {
