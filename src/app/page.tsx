@@ -329,15 +329,11 @@ export default async function Home() {
               </div>
             )}
 
-            {/* The sell */}
+            {/* End of briefing preview */}
             <div className="text-center pt-4">
               <p className="font-[family-name:var(--font-source-serif)] text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                That&apos;s your 2-minute scan.<br />
-                <span className="text-[#0f0f0f] dark:text-[#f0efec] font-medium">Get it in your inbox every morning.</span>
+                That&apos;s your 2-minute scan.
               </p>
-              <div className="mt-6">
-                <EmailCapture variant="hero" showSocialProof={true} showYesterdayLink={false} />
-              </div>
             </div>
           </div>
         </section>
