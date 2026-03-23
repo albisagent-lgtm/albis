@@ -104,7 +104,7 @@ export default async function CountryPerspectivePage({ params }: Props) {
 
         {/* Email capture CTA — always shown */}
         <div className="mt-space-12 rounded-2xl border border-black/[0.07] bg-white p-space-8 text-center dark:border-white/[0.06] dark:bg-white/[0.02]">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#1a3a5c]/10 dark:bg-[#7ab0d8]/10">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#c8922a]/10 dark:bg-[#c8922a]/10">
             <svg
               width="24"
               height="24"
@@ -114,7 +114,7 @@ export default async function CountryPerspectivePage({ params }: Props) {
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="text-[#1a3a5c] dark:text-[#7ab0d8]"
+              className="text-[#c8922a] dark:text-[#c8922a]"
             >
               <circle cx="12" cy="12" r="10" />
               <line x1="2" y1="12" x2="22" y2="12" />
@@ -228,7 +228,7 @@ export default async function CountryPerspectivePage({ params }: Props) {
         <div className="mt-space-12 text-center">
           <Link
             href="/perspectives"
-            className="text-sm font-medium text-[#1a3a5c] hover:underline dark:text-[#7ab0d8]"
+            className="text-sm font-medium text-[#c8922a] hover:underline dark:text-[#c8922a]"
           >
             &larr; All countries
           </Link>

@@ -166,7 +166,7 @@ export function MobileNav() {
               href={item.href}
               className={`flex min-h-[44px] min-w-[44px] flex-col items-center justify-center gap-0.5 rounded-lg px-3 py-1.5 text-[10px] font-medium transition-colors ${
                 active
-                  ? "text-[#1a3a5c] dark:text-[#c8922a]"
+                  ? "text-[#c8922a] dark:text-[#c8922a]"
                   : "text-zinc-400 hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300"
               }`}
             >

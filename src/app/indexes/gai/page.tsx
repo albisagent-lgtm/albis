@@ -243,7 +243,7 @@ function GAIPageInner() {
     return (
       <main className="mx-auto max-w-6xl px-6 py-20">
         <div className="flex flex-col items-center gap-4">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 border-t-[#d97706]" />
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 border-t-[#c8922a]" />
           <p className="text-sm text-zinc-500">Loading Global Attention Index...</p>
         </div>
       </main>
@@ -334,13 +334,13 @@ function GAIPageInner() {
                 onClick={() => handleRegionSelect(r.id)}
                 className={`rounded-2xl border p-4 text-center transition-all cursor-pointer ${
                   selectedRegion === r.id
-                    ? "border-[#d97706] bg-[#d97706]/10 dark:bg-[#d97706]/5"
+                    ? "border-[#c8922a] bg-[#c8922a]/10 dark:bg-[#c8922a]/5"
                     : "border-black/[0.07] bg-white/50 hover:border-zinc-300 dark:border-white/[0.06] dark:bg-white/[0.02] dark:hover:border-white/[0.12]"
                 }`}
               >
                 <div className="text-2xl">{r.emoji}</div>
                 <div className={`mt-1 text-xs font-medium ${
-                  selectedRegion === r.id ? "text-[#d97706]" : "text-zinc-500 dark:text-zinc-400"
+                  selectedRegion === r.id ? "text-[#c8922a]" : "text-zinc-500 dark:text-zinc-400"
                 }`}>
                   {r.label}
                 </div>
@@ -353,7 +353,7 @@ function GAIPageInner() {
             <div className="mt-8">
               <h3 className="mb-4 text-lg font-semibold text-zinc-700 dark:text-zinc-200">
                 If you read {selectedRegionInfo.label} media, you&apos;re probably missing{" "}
-                <span className="text-[#d97706]">{blindSpotStories.length} stories</span> today
+                <span className="text-[#c8922a]">{blindSpotStories.length} stories</span> today
               </h3>
 
               {blindSpotStories.length === 0 ? (
@@ -590,7 +590,7 @@ function GAIPageInner() {
         tag="unseen"
         title="Unseen: Stories the World Missed"
         subtitle="Full articles investigating the stories most of the world never sees. Published 3× daily."
-        accentColor="#d97706"
+        accentColor="#c8922a"
         articles={unseenArticles}
       />
 
@@ -607,8 +607,8 @@ function GAIPageInner() {
                   <AreaChart data={gaiHistory} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
                     <defs>
                       <linearGradient id="gaiTrendGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#d97706" stopOpacity={0.15} />
-                        <stop offset="100%" stopColor="#d97706" stopOpacity={0.01} />
+                        <stop offset="0%" stopColor="#c8922a" stopOpacity={0.15} />
+                        <stop offset="100%" stopColor="#c8922a" stopOpacity={0.01} />
                       </linearGradient>
                     </defs>
                     {[
@@ -642,13 +642,13 @@ function GAIPageInner() {
                         return (
                           <div className="rounded-lg border border-zinc-200 bg-white px-4 py-3 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
                             <p className="text-xs text-zinc-500">{dt.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "long", year: "numeric" })}</p>
-                            <p className="mt-1 text-2xl font-bold" style={{ color: "#d97706" }}>{score.toFixed(2)}</p>
+                            <p className="mt-1 text-2xl font-bold" style={{ color: "#c8922a" }}>{score.toFixed(2)}</p>
                             <p className="text-xs font-medium" style={{ color: t.color }}>{t.name}</p>
                           </div>
                         );
                       }}
                     />
-                    <Area type="monotone" dataKey="daily_gai" stroke="#d97706" strokeWidth={2} fill="url(#gaiTrendGrad)" dot={false} activeDot={{ r: 4, strokeWidth: 2, fill: "#fff", stroke: "#d97706" }} />
+                    <Area type="monotone" dataKey="daily_gai" stroke="#c8922a" strokeWidth={2} fill="url(#gaiTrendGrad)" dot={false} activeDot={{ r: 4, strokeWidth: 2, fill: "#fff", stroke: "#c8922a" }} />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
@@ -737,7 +737,7 @@ function GAIPageInner() {
               return (
                 <div className="mt-8 rounded-2xl border border-black/[0.07] bg-white/50 p-6 dark:border-white/[0.06] dark:bg-white/[0.02]">
                   <p className="text-sm text-zinc-600 dark:text-zinc-300">
-                    <span className="font-semibold text-[#d97706]">{blindest}</span> has been the
+                    <span className="font-semibold text-[#c8922a]">{blindest}</span> has been the
                     blindest region over the last{" "}
                     <span className="font-semibold">{totalDays} days</span> of data,
                     missing the most stories consistently.
@@ -837,7 +837,7 @@ function GAIPageInner() {
       <div className="mt-8 flex flex-wrap gap-4 text-sm">
         <Link
           href="/indexes/gai/data"
-          className="text-[#d97706] hover:underline"
+          className="text-[#c8922a] hover:underline"
         >
           View raw GAI data →
         </Link>

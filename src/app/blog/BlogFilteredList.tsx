@@ -68,7 +68,7 @@ export default function BlogFilteredList({ posts }: { posts: PostSummary[] }) {
                     day: "numeric",
                   })}
                 </time>
-                <h2 className="mt-space-2 font-[family-name:var(--font-playfair)] text-3xl font-semibold tracking-tight group-hover:text-[#1a3a5c] dark:group-hover:text-[#7ab0d8] md:text-[2rem] leading-tight">
+                <h2 className="mt-space-2 font-[family-name:var(--font-playfair)] text-3xl font-semibold tracking-tight group-hover:text-[#c8922a] dark:group-hover:text-[#c8922a] md:text-[2rem] leading-tight">
                   {featuredPost.title}
                 </h2>
                 <p className="mt-space-2 text-lg text-zinc-600 leading-relaxed dark:text-zinc-300">
@@ -96,7 +96,7 @@ export default function BlogFilteredList({ posts }: { posts: PostSummary[] }) {
                         day: "numeric",
                       })}
                     </time>
-                    <h2 className="mt-space-2 font-[family-name:var(--font-playfair)] text-xl font-semibold leading-snug group-hover:text-[#1a3a5c] dark:group-hover:text-[#7ab0d8] md:text-2xl">
+                    <h2 className="mt-space-2 font-[family-name:var(--font-playfair)] text-xl font-semibold leading-snug group-hover:text-[#c8922a] dark:group-hover:text-[#c8922a] md:text-2xl">
                       {post.title}
                     </h2>
                     <p className="mt-space-2 text-sm text-zinc-500 leading-relaxed dark:text-zinc-400 line-clamp-2">

@@ -22,7 +22,7 @@ export default function NotFound() {
         <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <Link
             href="/"
-            className="inline-flex h-12 items-center gap-2 rounded-full bg-[#1a3a5c] px-8 text-sm font-medium text-white shadow-[0_2px_12px_rgb(26,58,92,0.3)] hover:bg-[#243f66]"
+            className="inline-flex h-12 items-center gap-2 rounded-full bg-[#c8922a] px-8 text-sm font-medium text-white shadow-[0_2px_12px_rgb(200,146,42,0.3)] hover:bg-[#b17f24]"
           >
             Go home →
           </Link>

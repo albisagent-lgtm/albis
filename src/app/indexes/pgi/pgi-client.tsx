@@ -121,7 +121,7 @@ function renderMarkdown(md: string) {
       if (trimmed.startsWith("# "))
         return `<h2 class="text-2xl font-semibold mt-8 mb-space-3 font-[family-name:var(--font-playfair)]">${trimmed.slice(2)}</h2>`;
       if (trimmed.startsWith("> "))
-        return `<blockquote class="border-l-3 border-[#4f46e5] pl-4 italic text-zinc-500 dark:text-zinc-400 my-4">${trimmed.slice(2)}</blockquote>`;
+        return `<blockquote class="border-l-3 border-[#c8922a] pl-4 italic text-zinc-500 dark:text-zinc-400 my-4">${trimmed.slice(2)}</blockquote>`;
       const formatted = trimmed
         .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
         .replace(/\*(.+?)\*/g, "<em>$1</em>")
@@ -281,7 +281,7 @@ export function PGIClient() {
     return (
       <main className="mx-auto max-w-6xl px-space-6 py-space-16 md:py-space-24">
         <div className="flex flex-col items-center gap-4">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 border-t-[#4f46e5]" />
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 border-t-[#c8922a]" />
           <p className="text-sm text-zinc-500">Loading Perception Gap Index…</p>
         </div>
       </main>
@@ -378,9 +378,9 @@ export function PGIClient() {
                 <Line
                   type="monotone"
                   dataKey="pgi"
-                  stroke="#4f46e5"
+                  stroke="#c8922a"
                   strokeWidth={2.5}
-                  dot={{ r: 4, fill: "#4f46e5", stroke: "#0f0f0f", strokeWidth: 2 }}
+                  dot={{ r: 4, fill: "#c8922a", stroke: "#0f0f0f", strokeWidth: 2 }}
                   activeDot={{ r: 6 }}
                 />
               </LineChart>
@@ -397,7 +397,7 @@ export function PGIClient() {
             dangerouslySetInnerHTML={{ __html: renderMarkdown(signature.content_md) }}
           />
           <div className="mt-8 flex items-center gap-space-3 border-t border-black/[0.07] pt-6 dark:border-white/[0.06]">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#4f46e5] to-[#3730a3] flex items-center justify-center text-white text-sm font-bold">
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#c8922a] to-[#b17f24] flex items-center justify-center text-white text-sm font-bold">
               LT
             </div>
             <div>
@@ -590,7 +590,7 @@ export function PGIClient() {
                     <div className="mt-3">
                       <button
                         onClick={() => setExpandedStory(isExpanded ? null : story.id)}
-                        className="text-xs text-[#4f46e5] hover:underline"
+                        className="text-xs text-[#c8922a] hover:underline"
                       >
                         {isExpanded ? "Hide rationale ▴" : "Why this score? ▾"}
                       </button>

@@ -97,7 +97,7 @@ export default function LoginClient() {
                 required
                 autoComplete="email"
                 placeholder="you@example.com"
-                className="h-11 rounded-xl border border-black/[0.1] bg-[#f8f7f4] px-3.5 text-sm text-[#0f0f0f] placeholder:text-zinc-400 focus:border-[#1a3a5c] focus:outline-none focus:ring-2 focus:ring-[#1a3a5c]/15 dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-[#f0efec] dark:placeholder:text-zinc-600 dark:focus:border-[#4a7baa] dark:focus:ring-[#4a7baa]/15"
+                className="h-11 rounded-xl border border-black/[0.1] bg-[#f8f7f4] px-3.5 text-sm text-[#0f0f0f] placeholder:text-zinc-400 focus:border-[#c8922a] focus:outline-none focus:ring-2 focus:ring-[#c8922a]/15 dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-[#f0efec] dark:placeholder:text-zinc-600 dark:focus:border-[#c8922a] dark:focus:ring-[#c8922a]/15"
               />
             </div>
 
@@ -120,7 +120,7 @@ export default function LoginClient() {
                 required
                 autoComplete="current-password"
                 placeholder="Your password"
-                className="h-11 rounded-xl border border-black/[0.1] bg-[#f8f7f4] px-3.5 text-sm text-[#0f0f0f] placeholder:text-zinc-400 focus:border-[#1a3a5c] focus:outline-none focus:ring-2 focus:ring-[#1a3a5c]/15 dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-[#f0efec] dark:placeholder:text-zinc-600 dark:focus:border-[#4a7baa] dark:focus:ring-[#4a7baa]/15"
+                className="h-11 rounded-xl border border-black/[0.1] bg-[#f8f7f4] px-3.5 text-sm text-[#0f0f0f] placeholder:text-zinc-400 focus:border-[#c8922a] focus:outline-none focus:ring-2 focus:ring-[#c8922a]/15 dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-[#f0efec] dark:placeholder:text-zinc-600 dark:focus:border-[#c8922a] dark:focus:ring-[#c8922a]/15"
               />
             </div>
 
@@ -135,7 +135,7 @@ export default function LoginClient() {
             <button
               type="submit"
               disabled={loading}
-              className="mt-2 flex h-12 items-center justify-center rounded-xl bg-[#1a3a5c] text-sm font-semibold text-white shadow-[0_2px_12px_rgb(26,58,92,0.3)] transition-all hover:bg-[#243f66] hover:shadow-[0_4px_16px_rgb(26,58,92,0.4)] disabled:opacity-50"
+              className="mt-2 flex h-12 items-center justify-center rounded-xl bg-[#c8922a] text-sm font-semibold text-white shadow-[0_2px_12px_rgb(200,146,42,0.3)] transition-all hover:bg-[#b17f24] hover:shadow-[0_4px_16px_rgb(200,146,42,0.4)] disabled:opacity-50"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
@@ -157,7 +157,7 @@ export default function LoginClient() {
           No account?{" "}
           <Link
             href="/signup"
-            className="font-medium text-[#1a3a5c] hover:underline dark:text-[#7ab0d8]"
+            className="font-medium text-[#c8922a] hover:underline dark:text-[#c8922a]"
           >
             Sign up free
           </Link>

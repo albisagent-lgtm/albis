@@ -375,7 +375,7 @@ function ArticleCard({ post }: { post: Post }) {
             </>
           )}
         </div>
-        <h3 className="mt-3 font-[family-name:var(--font-playfair)] text-lg font-semibold leading-snug tracking-tight group-hover:text-[#1a3a5c] dark:group-hover:text-[#7ab0d8] md:text-xl">
+        <h3 className="mt-3 font-[family-name:var(--font-playfair)] text-lg font-semibold leading-snug tracking-tight group-hover:text-[#c8922a] dark:group-hover:text-[#c8922a] md:text-xl">
           {post.title}
         </h3>
         <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
@@ -428,7 +428,7 @@ function ArticleRow({ post }: { post: Post }) {
           <span className="text-zinc-400">·</span>
           <time className="text-zinc-500"><FreshDate dateString={post.date} /></time>
         </div>
-        <h3 className="mt-2 text-base font-semibold leading-snug group-hover:text-[#1a3a5c] dark:group-hover:text-[#7ab0d8]">
+        <h3 className="mt-2 text-base font-semibold leading-snug group-hover:text-[#c8922a] dark:group-hover:text-[#c8922a]">
           {post.title}
         </h3>
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400 line-clamp-1">{post.description}</p>

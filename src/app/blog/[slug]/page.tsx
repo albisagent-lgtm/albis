@@ -306,7 +306,7 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="mt-space-12 text-center">
           <Link
             href="/blog"
-            className="text-sm font-medium text-[#1a3a5c] hover:underline dark:text-[#7ab0d8]"
+            className="text-sm font-medium text-[#c8922a] hover:underline dark:text-[#c8922a]"
           >
             &larr; All articles
           </Link>

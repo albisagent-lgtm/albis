@@ -129,7 +129,7 @@ export default async function PGIPage() {
           tag="divided"
           title="Divided: Same Story, Different Realities"
           subtitle="Full articles showing how the same event looks completely different depending on where you live. Published 3× daily."
-          accentColor="#4f46e5"
+          accentColor="#c8922a"
           articles={dividedArticles}
         />
       </div>

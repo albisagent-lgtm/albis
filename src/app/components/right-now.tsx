@@ -182,7 +182,7 @@ export function RightNow({
         <div className="mt-8 text-center">
           <Link
             href="/lens"
-            className="inline-flex items-center gap-2 rounded-full bg-[#1a3a5c] px-6 py-2.5 text-sm font-medium text-white shadow-[0_2px_12px_rgb(26,58,92,0.3)] hover:bg-[#243f66] transition-colors"
+            className="inline-flex items-center gap-2 rounded-full bg-[#c8922a] px-6 py-2.5 text-sm font-medium text-white shadow-[0_2px_12px_rgb(200,146,42,0.3)] hover:bg-[#b17f24] transition-colors"
           >
             See the full News Wall
           </Link>

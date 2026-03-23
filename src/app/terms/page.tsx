@@ -42,7 +42,7 @@ export default function TermsPage() {
             suspect unauthorised access, contact us immediately at{" "}
             <a
               href="mailto:hello@albis.news"
-              className="font-medium text-[#1a3a5c] underline decoration-[#1a3a5c]/30 underline-offset-2 hover:decoration-[#1a3a5c] dark:text-[#7ab0d8] dark:decoration-[#7ab0d8]/30 dark:hover:decoration-[#7ab0d8]"
+              className="font-medium text-[#c8922a] underline decoration-[#c8922a]/30 underline-offset-2 hover:decoration-[#c8922a] dark:text-[#c8922a] dark:decoration-[#c8922a]/30 dark:hover:decoration-[#c8922a]"
             >
               hello@albis.news
             </a>
@@ -172,7 +172,7 @@ export default function TermsPage() {
           <p className="mt-3">
             <a
               href="mailto:hello@albis.news"
-              className="font-medium text-[#1a3a5c] underline decoration-[#1a3a5c]/30 underline-offset-2 hover:decoration-[#1a3a5c] dark:text-[#7ab0d8] dark:decoration-[#7ab0d8]/30 dark:hover:decoration-[#7ab0d8]"
+              className="font-medium text-[#c8922a] underline decoration-[#c8922a]/30 underline-offset-2 hover:decoration-[#c8922a] dark:text-[#c8922a] dark:decoration-[#c8922a]/30 dark:hover:decoration-[#c8922a]"
             >
               hello@albis.news
             </a>

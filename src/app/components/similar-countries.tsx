@@ -38,7 +38,7 @@ export function SimilarCountries({ countrySlug }: Props) {
           >
             <span className="text-2xl leading-none mt-0.5">{c.flag}</span>
             <div className="min-w-0">
-              <span className="font-medium text-[#0f0f0f] dark:text-[#f0efec] group-hover:text-[#1a3a5c] dark:group-hover:text-[#7ab0d8] transition-colors">
+              <span className="font-medium text-[#0f0f0f] dark:text-[#f0efec] group-hover:text-[#c8922a] dark:group-hover:text-[#c8922a] transition-colors">
                 {c.name}
               </span>
               <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">

@@ -405,12 +405,12 @@ export default async function Home() {
       {/* ════════════════════════════════════════════════════════
           SECTION 4: FINAL CTA
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-[#1a3a5c] py-14 md:py-20">
+      <section className="bg-[#0f0f0f] py-14 md:py-20">
         <div className="mx-auto max-w-xl px-6 text-center">
-          <h2 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl font-semibold leading-tight text-white">
+          <h2 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl font-semibold leading-tight text-[#f0efec]">
             Start your day informed,<br />not&nbsp;overwhelmed.
           </h2>
-          <p className="mt-3 text-sm text-white/60 font-[family-name:var(--font-source-serif)]">
+          <p className="mt-3 text-sm text-[#f0efec]/60 font-[family-name:var(--font-source-serif)]">
             Your daily briefing. Every region. Every perspective. 2&nbsp;minutes. Free.
           </p>
           <div className="mt-8">

@@ -107,7 +107,7 @@ export default function SignupClient({
             </p>
             <Link
               href="/"
-              className="mt-space-8 inline-block text-sm font-medium text-[#1a3a5c] hover:underline dark:text-[#7ab0d8]"
+              className="mt-space-8 inline-block text-sm font-medium text-[#c8922a] hover:underline dark:text-[#c8922a]"
             >
               ← Explore Albis
             </Link>
@@ -152,7 +152,7 @@ export default function SignupClient({
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="rounded-lg bg-[#1a3a5c] px-6 py-3 font-medium text-white transition-colors hover:bg-[#1a3a5c]/90 disabled:opacity-60"
+                className="rounded-lg bg-[#c8922a] px-6 py-3 font-medium text-white transition-colors hover:bg-[#c8922a]/90 disabled:opacity-60"
               >
                 {status === "loading" ? "..." : "Subscribe →"}
               </button>

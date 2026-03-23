@@ -203,7 +203,7 @@ export default async function StoryClusterPage({ params }: Props) {
 
         {/* Back */}
         <div className="mt-12 text-center">
-          <Link href="/stories" className="text-sm font-medium text-[#1a3a5c] hover:underline dark:text-[#7ab0d8]">
+          <Link href="/stories" className="text-sm font-medium text-[#c8922a] hover:underline dark:text-[#c8922a]">
             ← All stories
           </Link>
         </div>

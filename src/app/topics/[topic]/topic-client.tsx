@@ -167,7 +167,7 @@ export function TopicDataSection({
               <div className="flex-1">
                 <div className="h-6 overflow-hidden rounded-full bg-black/[0.04] dark:bg-white/[0.04]">
                   <div
-                    className="h-full rounded-full bg-[#1a3a5c] dark:bg-[#7ab0d8] transition-all"
+                    className="h-full rounded-full bg-[#c8922a] dark:bg-[#c8922a] transition-all"
                     style={{ width: `${(count / maxCount) * 100}%` }}
                   />
                 </div>
@@ -189,7 +189,7 @@ export function TopicDataSection({
             return (
               <div key={date}>
                 <div className="flex items-center gap-3">
-                  <div className="h-3 w-3 rounded-full bg-[#1a3a5c] dark:bg-[#7ab0d8]" />
+                  <div className="h-3 w-3 rounded-full bg-[#c8922a] dark:bg-[#c8922a]" />
                   <time className="text-sm font-medium text-zinc-600 dark:text-zinc-300">
                     {new Date(date + "T00:00:00").toLocaleDateString("en-US", {
                       month: "short",
@@ -228,15 +228,15 @@ export function TopicDataSection({
       {/* Stats summary */}
       <section className="grid grid-cols-3 gap-4">
         <div className="rounded-xl border border-black/[0.07] p-4 text-center dark:border-white/[0.06]">
-          <p className="text-2xl font-bold text-[#1a3a5c] dark:text-[#7ab0d8]">{items.length}</p>
+          <p className="text-2xl font-bold text-[#c8922a] dark:text-[#c8922a]">{items.length}</p>
           <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Stories tracked</p>
         </div>
         <div className="rounded-xl border border-black/[0.07] p-4 text-center dark:border-white/[0.06]">
-          <p className="text-2xl font-bold text-[#1a3a5c] dark:text-[#7ab0d8]">{sortedRegions.length}</p>
+          <p className="text-2xl font-bold text-[#c8922a] dark:text-[#c8922a]">{sortedRegions.length}</p>
           <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Regions covering</p>
         </div>
         <div className="rounded-xl border border-black/[0.07] p-4 text-center dark:border-white/[0.06]">
-          <p className="text-2xl font-bold text-[#1a3a5c] dark:text-[#7ab0d8]">{timelineDates.length}</p>
+          <p className="text-2xl font-bold text-[#c8922a] dark:text-[#c8922a]">{timelineDates.length}</p>
           <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Days of data</p>
         </div>
       </section>

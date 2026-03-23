@@ -102,7 +102,7 @@ export function BreakingNewsBanner() {
     <div className={`relative border-b z-[60] ${
       isBreaking 
         ? "bg-[#1a1a1a] border-red-900/30" 
-        : "bg-[#1a3a5c] border-[#c8922a]/20"
+        : "bg-[#0f0f0f] border-[#c8922a]/20"
     }`}>
       {item.url ? (
         <Link href={item.url} className="block hover:opacity-90">

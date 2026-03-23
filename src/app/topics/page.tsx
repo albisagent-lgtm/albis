@@ -38,7 +38,7 @@ export default function TopicsIndex() {
           >
             <div className="flex items-center gap-3">
               <span className="text-2xl">{topic.emoji}</span>
-              <h2 className="font-[family-name:var(--font-playfair)] text-lg font-semibold group-hover:text-[#1a3a5c] dark:group-hover:text-[#7ab0d8]">
+              <h2 className="font-[family-name:var(--font-playfair)] text-lg font-semibold group-hover:text-[#c8922a] dark:group-hover:text-[#c8922a]">
                 {topic.name}
               </h2>
             </div>

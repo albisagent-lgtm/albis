@@ -88,7 +88,7 @@ export default function ReferralsPage() {
             <button
               onClick={lookupReferrals}
               disabled={loading}
-              className="h-11 rounded-lg bg-[#1a3a5c] px-5 text-sm font-medium text-white hover:bg-[#243f66] disabled:opacity-50 transition-colors"
+              className="h-11 rounded-lg bg-[#c8922a] px-5 text-sm font-medium text-white hover:bg-[#b17f24] disabled:opacity-50 transition-colors"
             >
               {loading ? "..." : "Look up"}
             </button>

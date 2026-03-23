@@ -58,7 +58,7 @@ export default function AccountClient() {
   if (loading) {
     return (
       <main className="flex min-h-[60vh] items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 border-t-[#1a3a5c]" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 border-t-[#c8922a]" />
       </main>
     );
   }
@@ -113,7 +113,7 @@ export default function AccountClient() {
               <button
                 onClick={handleManage}
                 disabled={portalLoading}
-                className="inline-flex h-10 items-center justify-center rounded-full bg-[#1a3a5c] px-6 text-sm font-medium text-white hover:bg-[#1a3a5c]/90 disabled:opacity-60"
+                className="inline-flex h-10 items-center justify-center rounded-full bg-[#c8922a] px-6 text-sm font-medium text-white hover:bg-[#c8922a]/90 disabled:opacity-60"
               >
                 {portalLoading ? "Loading…" : "Manage subscription"}
               </button>
@@ -130,7 +130,7 @@ export default function AccountClient() {
               </p>
               <Link
                 href="/archive"
-                className="inline-flex h-10 items-center justify-center rounded-full bg-[#1a3a5c] px-6 text-sm font-medium text-white hover:bg-[#1a3a5c]/90"
+                className="inline-flex h-10 items-center justify-center rounded-full bg-[#c8922a] px-6 text-sm font-medium text-white hover:bg-[#c8922a]/90"
               >
                 View today's briefing
               </Link>

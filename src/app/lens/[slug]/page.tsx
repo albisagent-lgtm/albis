@@ -235,13 +235,13 @@ export default async function LensArticlePage({ params }: Props) {
         })()}
 
         {/* Quiz CTA */}
-        <div className="mt-12 rounded-xl border border-[#1a3a5c]/20 bg-[#1a3a5c]/5 p-5 dark:border-[#7ab0d8]/20 dark:bg-[#7ab0d8]/5">
+        <div className="mt-12 rounded-xl border border-[#c8922a]/20 bg-[#c8922a]/5 p-5 dark:border-[#c8922a]/20 dark:bg-[#c8922a]/5">
           <Link href="/quiz" className="flex items-center justify-between group">
             <div>
-              <p className="font-medium text-[#1a3a5c] dark:text-[#7ab0d8]">Think you know today&apos;s news?</p>
+              <p className="font-medium text-[#c8922a] dark:text-[#c8922a]">Think you know today&apos;s news?</p>
               <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Take the daily quiz — 5 questions, 60 seconds</p>
             </div>
-            <span className="text-[#1a3a5c] dark:text-[#7ab0d8] group-hover:translate-x-1 transition-transform text-lg">&rarr;</span>
+            <span className="text-[#c8922a] dark:text-[#c8922a] group-hover:translate-x-1 transition-transform text-lg">&rarr;</span>
           </Link>
         </div>
 
@@ -318,7 +318,7 @@ export default async function LensArticlePage({ params }: Props) {
         <div className="mt-12 text-center">
           <Link
             href="/lens"
-            className="text-sm font-medium text-[#1a3a5c] hover:underline dark:text-[#7ab0d8]"
+            className="text-sm font-medium text-[#c8922a] hover:underline dark:text-[#c8922a]"
           >
             &larr; All articles
           </Link>

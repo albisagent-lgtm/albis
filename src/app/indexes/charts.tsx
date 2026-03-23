@@ -14,8 +14,8 @@ import {
 } from "recharts";
 
 // --- Constants ---
-const PGI_COLOR = "#4f46e5";
-const GAI_COLOR = "#d97706";
+const PGI_COLOR = "#c8922a";
+const GAI_COLOR = "#c8922a";
 
 const TIER_BANDS = [
   { y1: 0, y2: 2, fill: "#22c55e", pgiLabel: "Global Consensus", gaiLabel: "Global Spotlight" },

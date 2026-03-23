@@ -117,7 +117,7 @@ export function SourceTransparency({ sources, confidence }: SourceTransparencyPr
                 href={source.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#1a3a5c] hover:text-[#c8922a] dark:text-[#7ab0d8] dark:hover:text-[#c8922a] transition-colors"
+                className="text-[#c8922a] hover:text-[#c8922a] dark:text-[#c8922a] dark:hover:text-[#c8922a] transition-colors"
               >
                 {source.name}
                 <ExternalLinkIcon />

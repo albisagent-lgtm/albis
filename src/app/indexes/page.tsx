@@ -180,7 +180,7 @@ export default async function IndexesPage() {
 
       {/* ━━ Hero ━━ */}
       <section className="mb-20 text-center">
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#4f46e5]">
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#c8922a]">
           Original Research
         </p>
         <h1 className="mt-3 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">
@@ -231,10 +231,10 @@ export default async function IndexesPage() {
 
       {/* ━━ PGI Explainer ━━ */}
       <section className="mb-20">
-        <div className="rounded-2xl border border-[#4f46e5]/20 bg-[#4f46e5]/[0.03] p-8 md:p-12">
+        <div className="rounded-2xl border border-[#c8922a]/20 bg-[#c8922a]/[0.03] p-8 md:p-12">
           <div className="flex items-center gap-3 mb-2">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#4f46e5]/10 text-lg font-bold text-[#4f46e5]">P</span>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#4f46e5]">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#c8922a]/10 text-lg font-bold text-[#c8922a]">P</span>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
               Perception Gap Index
             </p>
           </div>
@@ -295,7 +295,7 @@ export default async function IndexesPage() {
 
           {/* Explore link */}
           <div className="mt-8">
-            <Link href="/indexes/pgi" className="inline-flex items-center gap-2 text-sm font-medium text-[#4f46e5] hover:underline">
+            <Link href="/indexes/pgi" className="inline-flex items-center gap-2 text-sm font-medium text-[#c8922a] hover:underline">
               Explore live PGI data &rarr;
             </Link>
           </div>
@@ -304,10 +304,10 @@ export default async function IndexesPage() {
 
       {/* ━━ GAI Explainer ━━ */}
       <section className="mb-20">
-        <div className="rounded-2xl border border-[#d97706]/20 bg-[#d97706]/[0.03] p-8 md:p-12">
+        <div className="rounded-2xl border border-[#c8922a]/20 bg-[#c8922a]/[0.03] p-8 md:p-12">
           <div className="flex items-center gap-3 mb-2">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d97706]/10 text-lg font-bold text-[#d97706]">G</span>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#d97706]">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#c8922a]/10 text-lg font-bold text-[#c8922a]">G</span>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
               Global Awareness Index
             </p>
           </div>
@@ -353,8 +353,8 @@ export default async function IndexesPage() {
           </div>
 
           {/* Why it matters */}
-          <div className="mt-8 rounded-xl border border-[#d97706]/10 bg-[#d97706]/[0.03] p-6">
-            <p className="text-sm font-semibold text-[#d97706]">Why this matters</p>
+          <div className="mt-8 rounded-xl border border-[#c8922a]/10 bg-[#c8922a]/[0.03] p-6">
+            <p className="text-sm font-semibold text-[#c8922a]">Why this matters</p>
             <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
               Media bias research focuses on <em>how</em> stories are covered. Almost nobody asks <em>whether</em> they&apos;re
               covered at all. The GAI fills that gap. If 5 billion people in Asia never see a story that
@@ -363,7 +363,7 @@ export default async function IndexesPage() {
           </div>
 
           <div className="mt-8">
-            <Link href="/indexes/gai" className="inline-flex items-center gap-2 text-sm font-medium text-[#d97706] hover:underline">
+            <Link href="/indexes/gai" className="inline-flex items-center gap-2 text-sm font-medium text-[#c8922a] hover:underline">
               Explore live GAI data &rarr;
             </Link>
           </div>
@@ -379,11 +379,11 @@ export default async function IndexesPage() {
           Before you disagree about a story, you have to see it. The Albis indexes measure two fundamental links in the chain.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm font-medium">
-          <span className="rounded-full bg-[#d97706]/10 px-5 py-2 text-[#d97706]">
+          <span className="rounded-full bg-[#c8922a]/10 px-5 py-2 text-[#c8922a]">
             Attention (GAI)
           </span>
           <span className="text-zinc-300 dark:text-zinc-600">&rarr;</span>
-          <span className="rounded-full bg-[#4f46e5]/10 px-5 py-2 text-[#4f46e5]">
+          <span className="rounded-full bg-[#c8922a]/10 px-5 py-2 text-[#c8922a]">
             Perception (PGI)
           </span>
           <span className="text-zinc-300 dark:text-zinc-600">&rarr;</span>
@@ -408,17 +408,17 @@ export default async function IndexesPage() {
       </section>
 
       {/* PGI Chart */}
-      <Link href="/indexes/pgi" className="group mb-10 block rounded-2xl border border-black/[0.07] bg-white/50 p-6 transition-all hover:border-[#4f46e5]/30 hover:shadow-lg md:p-8 dark:border-white/[0.06] dark:bg-white/[0.02] dark:hover:border-[#4f46e5]/40">
+      <Link href="/indexes/pgi" className="group mb-10 block rounded-2xl border border-black/[0.07] bg-white/50 p-6 transition-all hover:border-[#c8922a]/30 hover:shadow-lg md:p-8 dark:border-white/[0.06] dark:bg-white/[0.02] dark:hover:border-[#c8922a]/40">
         <div className="mb-4 flex items-baseline justify-between">
           <div>
-            <p className="text-xs font-medium uppercase tracking-widest text-[#4f46e5]">
+            <p className="text-xs font-medium uppercase tracking-widest text-[#c8922a]">
               Perception Gap Index
             </p>
             <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
               How differently the world frames the same story
             </p>
           </div>
-          <span className="text-sm font-medium text-[#4f46e5] group-hover:underline">
+          <span className="text-sm font-medium text-[#c8922a] group-hover:underline">
             Explore PGI &rarr;
           </span>
         </div>
@@ -426,17 +426,17 @@ export default async function IndexesPage() {
       </Link>
 
       {/* GAI Chart */}
-      <Link href="/indexes/gai" className="group mb-10 block rounded-2xl border border-black/[0.07] bg-white/50 p-6 transition-all hover:border-[#d97706]/30 hover:shadow-lg md:p-8 dark:border-white/[0.06] dark:bg-white/[0.02] dark:hover:border-[#d97706]/40">
+      <Link href="/indexes/gai" className="group mb-10 block rounded-2xl border border-black/[0.07] bg-white/50 p-6 transition-all hover:border-[#c8922a]/30 hover:shadow-lg md:p-8 dark:border-white/[0.06] dark:bg-white/[0.02] dark:hover:border-[#c8922a]/40">
         <div className="mb-4 flex items-baseline justify-between">
           <div>
-            <p className="text-xs font-medium uppercase tracking-widest text-[#d97706]">
+            <p className="text-xs font-medium uppercase tracking-widest text-[#c8922a]">
               Global Awareness Index
             </p>
             <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
               Whether a story reaches you in the first place
             </p>
           </div>
-          <span className="text-sm font-medium text-[#d97706] group-hover:underline">
+          <span className="text-sm font-medium text-[#c8922a] group-hover:underline">
             Explore GAI &rarr;
           </span>
         </div>
@@ -464,10 +464,10 @@ export default async function IndexesPage() {
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {([
-              { idx: 0, label: "High Perception Gap, Low Attention Gap", desc: "Everyone sees it. Nobody agrees.", bg: "bg-[#4f46e5]/5", border: "border-[#4f46e5]/20", text: "text-[#4f46e5]", dot: "bg-[#4f46e5]" },
+              { idx: 0, label: "High Perception Gap, Low Attention Gap", desc: "Everyone sees it. Nobody agrees.", bg: "bg-[#c8922a]/5", border: "border-[#c8922a]/20", text: "text-[#c8922a]", dot: "bg-[#c8922a]" },
               { idx: 2, label: "High Perception Gap, High Attention Gap", desc: "Invisible AND distorted. The danger zone. ⚠️", bg: "bg-red-500/5", border: "border-red-500/20", text: "text-red-600", dot: "bg-red-500" },
               { idx: 3, label: "Low Perception Gap, Low Attention Gap", desc: "Global consensus. Rare.", bg: "bg-emerald-500/5", border: "border-emerald-500/20", text: "text-emerald-600", dot: "bg-emerald-500" },
-              { idx: 1, label: "Low Perception Gap, High Attention Gap", desc: "Where covered, people agree. But most don't see it.", bg: "bg-[#d97706]/5", border: "border-[#d97706]/20", text: "text-[#d97706]", dot: "bg-[#d97706]" },
+              { idx: 1, label: "Low Perception Gap, High Attention Gap", desc: "Where covered, people agree. But most don't see it.", bg: "bg-[#c8922a]/5", border: "border-[#c8922a]/20", text: "text-[#c8922a]", dot: "bg-[#c8922a]" },
             ] as const).map((q) => (
               <div key={q.idx} className={`rounded-2xl border ${q.border} ${q.bg} p-5 dark:border-white/[0.06]`}>
                 <div className="mb-3">
@@ -513,10 +513,10 @@ export default async function IndexesPage() {
           <Link href="/perception-gap/about" className="rounded-lg border border-[#c8922a]/30 px-4 py-2 text-sm font-medium text-[#c8922a] transition-colors hover:bg-[#c8922a]/5">
             Methodology →
           </Link>
-          <Link href="/indexes/pgi/data" className="rounded-lg border border-[#4f46e5]/30 px-4 py-2 text-sm font-medium text-[#4f46e5] transition-colors hover:bg-[#4f46e5]/5">
+          <Link href="/indexes/pgi/data" className="rounded-lg border border-[#c8922a]/30 px-4 py-2 text-sm font-medium text-[#c8922a] transition-colors hover:bg-[#c8922a]/5">
             Raw PGI Data →
           </Link>
-          <Link href="/indexes/gai/data" className="rounded-lg border border-[#d97706]/30 px-4 py-2 text-sm font-medium text-[#d97706] transition-colors hover:bg-[#d97706]/5">
+          <Link href="/indexes/gai/data" className="rounded-lg border border-[#c8922a]/30 px-4 py-2 text-sm font-medium text-[#c8922a] transition-colors hover:bg-[#c8922a]/5">
             Raw GAI Data →
           </Link>
           <Link href="/about" className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-500 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-white/[0.03]">
