@@ -106,7 +106,7 @@ export function NavAuth() {
       </Link>
       <Link
         href="/signup"
-        className="rounded-full bg-[#c8922a] px-4 py-1.5 text-sm font-medium text-white shadow-[0_2px_8px_rgb(200,146,42,0.3)] transition-all hover:bg-[#b17f24] hover:shadow-[0_3px_10px_rgb(200,146,42,0.4)] dark:shadow-[0_2px_8px_rgb(200,146,42,0.4)]"
+        className="rounded-full bg-[#c8922a] px-4 py-1.5 text-sm font-medium text-[#0f0f0f] shadow-[0_2px_8px_rgb(200,146,42,0.3)] transition-all hover:bg-[#b17f24] hover:shadow-[0_3px_10px_rgb(200,146,42,0.4)] dark:shadow-[0_2px_8px_rgb(200,146,42,0.4)]"
       >
         Subscribe
       </Link>

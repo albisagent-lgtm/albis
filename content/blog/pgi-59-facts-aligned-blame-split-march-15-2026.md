@@ -1,5 +1,6 @@
 ---
 title: "PGI 5.9: The World Agrees on What Happened. It Can't Agree on Who's to Blame."
+image: "https://images.pexels.com/photos/5561913/pexels-photo-5561913.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: 2026-03-15
 modified: 2026-03-15
 excerpt: "Today's perception gap sits in a strange zone: most of the world agrees on the basic facts, but the causal narratives are splitting wide open. When the facts aren't in dispute but the blame is, you're watching interests shape reality."

@@ -5,7 +5,7 @@ date: "2026-03-20"
 author: "Albis"
 tags: ["the-flip"]
 series: "The Flip"
-image: "/images/blog/pakistan-kabul-hospital-two-stories-flip-2026.jpg"
+image: "https://images.pexels.com/photos/36533585/pexels-photo-36533585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 ---
 
 ## Pakistan's Story

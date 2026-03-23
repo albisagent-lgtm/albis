@@ -1,6 +1,7 @@
 ---
 title: "Germany Japan Military Pact 2026: Reciprocal Access Agreement Draws Beijing Warning"
 description: "Germany's defense minister invited Japan to sign a visiting-forces agreement at a naval base in Yokosuka. Berlin calls it shared security. Beijing calls it revived militarism. Tokyo calls it insurance."
+image: "https://images.pexels.com/photos/7467938/pexels-photo-7467938.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 pubDate: "2026-03-23"
 category: "under-the-radar"
 tags: ["Germany", "Japan", "China", "Indo-Pacific", "East Asia", "security", "NATO"]

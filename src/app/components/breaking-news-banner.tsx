@@ -69,7 +69,7 @@ export function BreakingNewsBanner() {
     };
   }, []);
 
-  if (!item || dismissed) return null;
+  if (!item || dismissed) return <div className="h-0" />;
 
   const isBreaking = item.mode === "breaking";
 

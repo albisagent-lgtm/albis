@@ -5,7 +5,7 @@ date: 2026-03-06T19:00:00+13:00
 author: "Albis"
 category: Geopolitics
 tags: ["pakistan", "afghanistan", "taliban", "turkey", "erdogan", "refugees", "durand line", "TTP", "iran war"]
-image: /images/blog/pakistan-afghanistan-march-6.jpg
+image: "https://images.pexels.com/photos/6896961/pexels-photo-6896961.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 featured: false
 faqs:
   - q: "Why are Pakistan and Afghanistan at war in 2026?"

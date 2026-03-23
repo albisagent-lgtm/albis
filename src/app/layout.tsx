@@ -119,10 +119,9 @@ export default function RootLayout({
     <html lang="en" className="" suppressHydrationWarning>
       <head>
         <link rel="alternate" type="application/rss+xml" title="Albis — The Lens" href="https://www.albis.news/feed.xml" />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-49B2PLPBJP" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-49B2PLPBJP');`,
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-49B2PLPBJP');setTimeout(function(){var s=document.createElement('script');s.src='https://www.googletagmanager.com/gtag/js?id=G-49B2PLPBJP';document.head.appendChild(s)},2500);`,
           }}
         />
         <script

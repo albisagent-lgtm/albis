@@ -1,6 +1,7 @@
 ---
 title: "Quiz: Can You Spot the Regional Framing?"
 description: "Test your media literacy skills by identifying which headlines come from which regions. Same story, totally different angles."
+image: "https://images.pexels.com/photos/5505718/pexels-photo-5505718.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: "2026-03-14"
 author: "Albis"
 tags: ["media-literacy", "framing", "global-news", "quiz"]

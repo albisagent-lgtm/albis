@@ -87,4 +87,4 @@ Every shared link is an act of trust. Source spoofing exploits that trust at sca
 
 ---
 
-*This article is part of the [Albis Mechanism Library](/tags/mechanism-library) — explaining how information warfare works so you can see it. [Explore all mechanisms →](/tags/mechanism-library)*
+*This article is part of the [Albis Mechanism Library](/lens?category=explainer) — explaining how information warfare works so you can see it. [Explore all mechanisms →](/lens?category=explainer)*

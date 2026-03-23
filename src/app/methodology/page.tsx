@@ -71,7 +71,7 @@ export default function MethodologyPage() {
             The Perception Gap Index (PGI)
           </h2>
           <p className="mb-space-4 text-sm text-zinc-500 dark:text-zinc-400">
-            <a href="/what-is-perception-gap-index" className="text-[#c8922a] hover:underline dark:text-[#c8922a]">
+            <a href="/indexes/pgi" className="text-[#c8922a] hover:underline dark:text-[#c8922a]">
               What is the PGI? Full explainer →
             </a>
           </p>
@@ -187,7 +187,7 @@ export default function MethodologyPage() {
             The Global Attention Index (GAI)
           </h2>
           <p className="mb-space-4 text-sm text-zinc-500 dark:text-zinc-400">
-            <a href="/what-is-global-attention-index" className="text-[#c8922a] hover:underline dark:text-[#c8922a]">
+            <a href="/indexes/gai" className="text-[#c8922a] hover:underline dark:text-[#c8922a]">
               What is the GAI? Full explainer →
             </a>
           </p>

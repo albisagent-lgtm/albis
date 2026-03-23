@@ -510,7 +510,7 @@ export default async function IndexesPage() {
           these indexes provide quantifiable, daily evidence.
         </p>
         <div className="mt-6 flex flex-wrap gap-4">
-          <Link href="/perception-gap/about" className="rounded-lg border border-[#c8922a]/30 px-4 py-2 text-sm font-medium text-[#c8922a] transition-colors hover:bg-[#c8922a]/5">
+          <Link href="/methodology" className="rounded-lg border border-[#c8922a]/30 px-4 py-2 text-sm font-medium text-[#c8922a] transition-colors hover:bg-[#c8922a]/5">
             Methodology →
           </Link>
           <Link href="/indexes/pgi/data" className="rounded-lg border border-[#c8922a]/30 px-4 py-2 text-sm font-medium text-[#c8922a] transition-colors hover:bg-[#c8922a]/5">

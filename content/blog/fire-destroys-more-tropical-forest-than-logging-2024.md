@@ -6,7 +6,7 @@ category: "climate"
 publishedAt: "2026-03-07T12:00:00+13:00"
 author: "Albis"
 tags: ["amazon", "congo-basin", "deforestation", "wildfires", "climate-change", "tipping-point", "savannification", "carbon-sink"]
-image: ""
+image: "https://images.pexels.com/photos/4070727/pexels-photo-4070727.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 relatedTopics: ["climate-change", "biodiversity", "carbon-emissions"]
 faqs:
   - q: "How fast can rainforest become grassland once fire takes over?"

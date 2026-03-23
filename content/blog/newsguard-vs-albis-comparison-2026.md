@@ -2,6 +2,7 @@
 title: "NewsGuard vs Albis: Which Tells You More About Your News?"
 slug: "newsguard-vs-albis-comparison-2026"
 description: "NewsGuard rates website credibility on a 0-100 scale. Albis measures regional perception gaps. Both help you navigate news — but they answer different questions."
+image: "https://images.pexels.com/photos/6120172/pexels-photo-6120172.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["comparison", "seo", "newsguard", "media-credibility"]
 author: "Albis"
 date: "2026-03-22"
@@ -46,7 +47,7 @@ The [Perception Gap Index](/indexes/pgi) tracks how the same event gets covered 
 
 Take a trade dispute. US outlets might frame it as economic policy. Asian outlets might frame it as geopolitical strategy. African outlets might focus on commodity price impacts. All factually accurate. All telling a different story.
 
-Albis doesn't ask "is this source trustworthy?" It asks "what are you not seeing?" The [regional perception analysis](/perception-gap/about) shows which stories your media ecosystem buries and which narratives dominate elsewhere.
+Albis doesn't ask "is this source trustworthy?" It asks "what are you not seeing?" The [regional perception analysis](/methodology) shows which stories your media ecosystem buries and which narratives dominate elsewhere.
 
 Free tier shows PGI scores and regional coverage summaries. Premium unlocks full cross-regional analysis.
 

@@ -145,12 +145,12 @@ export default async function Home() {
         <div className="mx-auto max-w-3xl px-6 pt-10 pb-12 md:pt-16 md:pb-16">
 
           {/* Date line */}
-          <p className="text-center text-xs tracking-wide text-zinc-400 dark:text-zinc-500">
+          <p className="text-center text-xs tracking-wide text-zinc-500 dark:text-zinc-400">
             {dateString}
           </p>
 
           {/* Region strip */}
-          <div className="mt-4 flex items-center justify-center gap-3 text-xs text-zinc-400 dark:text-zinc-500">
+          <div className="mt-4 flex items-center justify-center gap-3 text-xs text-zinc-500 dark:text-zinc-400">
             <span>US</span>
             <span className="text-zinc-300 dark:text-zinc-700">&middot;</span>
             <span>EU</span>
@@ -353,7 +353,7 @@ export default async function Home() {
             </h2>
 
             <div className="mt-8 grid gap-5 sm:grid-cols-2">
-              {lensPosts.map((post) => (
+              {lensPosts.map((post, idx) => (
                 <Link
                   key={post.slug}
                   href={`/lens/${post.slug}`}
@@ -367,6 +367,7 @@ export default async function Home() {
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                         sizes="(max-width: 640px) 100vw, 384px"
+                        {...(idx < 2 ? { priority: true } : {})}
                       />
                     </div>
                   )}

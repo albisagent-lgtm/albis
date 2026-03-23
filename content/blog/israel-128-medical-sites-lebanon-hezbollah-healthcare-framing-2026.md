@@ -1,6 +1,7 @@
 ---
 title: "Israel Struck 128 Medical Sites in Lebanon: Healthcare Targeting or Hezbollah Infrastructure 2026"
 description: "Forty healthcare workers dead, 128 sites hit in three weeks. One side calls it a war crime. The other calls it a military necessity. The facts they share — and the facts they don't — tell two completely different stories."
+image: "https://images.pexels.com/photos/6462787/pexels-photo-6462787.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: 2026-03-23T00:30:00.000Z
 draft: false
 tags:

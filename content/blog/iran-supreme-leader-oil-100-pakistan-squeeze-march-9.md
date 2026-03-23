@@ -5,7 +5,7 @@ author: "Albis"
 date: "2026-03-09"
 category: "Analysis"
 tags: ["iran", "pakistan", "afghanistan", "oil", "mojtaba-khamenei", "hormuz", "gulf-states", "geopolitics"]
-image: ""
+image: "https://images.pexels.com/photos/6289061/pexels-photo-6289061.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 featured: true
 sources:
   - name: "AP News"

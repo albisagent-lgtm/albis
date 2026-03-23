@@ -1,3 +1,10 @@
+---
+title: "The Power of What's Left Out: Understanding Selection & Salience in News"
+description: "Understanding how selection and salience shape news framing"
+image: "https://images.pexels.com/photos/5505718/pexels-photo-5505718.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+date: 2026-03-18
+---
+
 # The Power of What's Left Out: Understanding Selection & Salience in News
 
 *March 18, 2026*

@@ -2,6 +2,7 @@
 title: "AllSides vs Albis: Which Shows You More Perspectives?"
 slug: "allsides-vs-albis-comparison-2026"
 description: "AllSides rates left vs right political bias. Albis measures regional perception gaps. Both fight filter bubbles — but they measure different things entirely."
+image: "https://images.pexels.com/photos/5505690/pexels-photo-5505690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["comparison", "seo", "allsides", "media-bias"]
 author: "Albis"
 date: "2026-03-18"
@@ -117,6 +118,6 @@ Most people need both. Political and geographic echo chambers stack. Breaking ou
 
 AllSides is excellent at what it does: exposing US political spectrum bias. Its methodology is transparent, its ratings are crowd-sourced, and it's genuinely useful for escaping partisan filter bubbles.
 
-Albis is excellent at something different: showing you what the rest of the world is seeing and saying. Its [Perception Gap Index](/perception-gap/about) measures something no other tool tracks — regional divergence in coverage and framing.
+Albis is excellent at something different: showing you what the rest of the world is seeing and saying. Its [Perception Gap Index](/methodology) measures something no other tool tracks — regional divergence in coverage and framing.
 
 They're not competitors. They're complementary. One maps ideology. The other maps geography. Both matter if you want the full picture.

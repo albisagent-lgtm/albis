@@ -1,6 +1,7 @@
 ---
 title: "1,444 Dead. 13 Dead. Same War. Different Story."
 description: "Three weeks into the Iran war, US and Middle Eastern media report the same death toll data. They tell completely different stories about who counts."
+image: "https://images.pexels.com/photos/36533585/pexels-photo-36533585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 pubDate: "2026-03-22"
 heroImage: "/images/the-flip-iran-war-death-toll-who-counts-framing-2026.jpg"
 badge: "THE FLIP"

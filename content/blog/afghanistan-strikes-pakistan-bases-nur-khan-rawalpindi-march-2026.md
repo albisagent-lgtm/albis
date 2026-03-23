@@ -5,7 +5,7 @@ date: "2026-03-02"
 author: "Albis"
 tags: ["Afghanistan", "Pakistan", "Nur Khan Airbase", "Rawalpindi", "Taliban", "border war", "South Asia"]
 category: "breaking"
-image: "/images/blog/afpak-nur-khan-march-2026.jpg"
+image: "https://images.pexels.com/photos/7155383/pexels-photo-7155383.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 sources:
   - name: "Dawn"
     url: "https://www.dawn.com/news/afghanistan-strikes-nur-khan-airbase"

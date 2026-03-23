@@ -5,7 +5,7 @@ date: "2026-03-10T08:30:00+13:00"
 author: "Albis"
 category: "Analysis"
 tags: ["terrorism", "framing", "New York", "Mamdani", "ISIS", "anti-Islam", "perception gap"]
-image: ""
+image: "https://images.pexels.com/photos/4614141/pexels-photo-4614141.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 draft: false
 sources:
   - name: "The Guardian"

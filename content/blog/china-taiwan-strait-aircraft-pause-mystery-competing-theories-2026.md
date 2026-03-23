@@ -5,7 +5,7 @@ date: 2026-03-17
 categories: ["lens"]
 tags: ["Taiwan", "China", "East Asia", "security", "perception"]
 author: "Albis"
-image: "/images/taiwan-strait.jpg"
+image: "https://images.pexels.com/photos/36027903/pexels-photo-36027903.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 ---
 
 For nearly two weeks, the Taiwan Strait fell silent. The Chinese warplanes that routinely circle the island — sometimes a handful, other days dozens — stopped coming. Thirteen consecutive days. Zero aircraft.

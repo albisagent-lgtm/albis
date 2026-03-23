@@ -1,5 +1,6 @@
 ---
 title: "One War, Many Cracks: What a Month of Scanning Revealed"
+image: "https://images.pexels.com/photos/3944377/pexels-photo-3944377.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: "2026-03-16"
 slug: "march-2026-scan-retrospective-one-war-many-cracks"
 category: "Meta"

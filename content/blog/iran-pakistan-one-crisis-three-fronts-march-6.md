@@ -5,7 +5,7 @@ date: "2026-03-06T04:00:00.000Z"
 author: "Albis"
 category: "geopolitics"
 tags: ["Iran", "Pakistan", "Afghanistan", "Lebanon", "Hezbollah", "Oil", "Strait of Hormuz", "Middle East"]
-image: ""
+image: "https://images.pexels.com/photos/3743622/pexels-photo-3743622.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 featured: true
 faqs:
   - q: "How are the Iran war, Pakistan-Afghanistan war, and Lebanon fighting connected?"

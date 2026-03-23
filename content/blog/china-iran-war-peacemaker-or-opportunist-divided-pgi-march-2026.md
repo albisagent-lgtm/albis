@@ -5,7 +5,7 @@ date: "2026-03-09"
 author: "Albis"
 tags: ["divided", "pgi", "china", "iran", "geopolitics", "diplomacy", "wang-yi"]
 category: "divided"
-image: ""
+image: "https://images.pexels.com/photos/6409003/pexels-photo-6409003.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 sources:
   - name: "The Guardian"
     url: "https://www.theguardian.com/world/2026/mar/08/chinas-foreign-minister-says-iran-war-should-never-have-happened"

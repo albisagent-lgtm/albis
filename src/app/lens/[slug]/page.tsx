@@ -110,7 +110,7 @@ export default async function LensArticlePage({ params }: Props) {
               { label: post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title },
             ]}
           />
-          <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-400 dark:text-zinc-500">
+          <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-500 dark:text-zinc-400">
             <time>
               {new Date(post.date).toLocaleDateString("en-US", {
                 year: "numeric",

@@ -5,7 +5,7 @@ date: "2026-03-09"
 author: "Albis"
 category: "Geopolitics"
 tags: ["Pakistan", "Afghanistan", "Stock Market", "Oil Prices", "Ceasefire", "Turkey", "Iran Crisis"]
-image: ""
+image: "https://images.pexels.com/photos/5561920/pexels-photo-5561920.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 featured: false
 sources:
   - name: "Bloom Pakistan"

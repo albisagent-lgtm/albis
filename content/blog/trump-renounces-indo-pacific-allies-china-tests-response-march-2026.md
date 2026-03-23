@@ -1,6 +1,7 @@
 ---
 title: "Trump Renounced Japan, South Korea and Australia. China Sent 28 Jets Toward Taiwan Within 24 Hours"
 description: "Trump renounced three Indo-Pacific allies on March 17 for refusing to help in the Hormuz crisis. Within 24 hours, China launched its biggest Taiwan Strait sortie in weeks. The timing isn't coincidence — it's a probe."
+image: "https://images.pexels.com/photos/36052977/pexels-photo-36052977.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 category: "lens"
 pubDate: 2026-03-18
 preview: "When Trump said 'we no longer need' Japan, South Korea and Australia, China heard an invitation. The PLA sent 28 aircraft toward Taiwan the next day — the biggest surge since the pause ended."
