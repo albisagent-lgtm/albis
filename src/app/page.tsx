@@ -68,17 +68,17 @@ export default async function Home() {
   const lensPosts: typeof allPosts = [];
   const usedCategories = new Set<string>();
   for (const post of allPosts) {
-    if (lensPosts.length >= 6) break;
+    if (lensPosts.length >= 4) break;
     const cat = post.category || "uncategorised";
     if (!usedCategories.has(cat)) {
       lensPosts.push(post);
       usedCategories.add(cat);
     }
   }
-  // If we don't have 6 unique categories, fill with latest
-  if (lensPosts.length < 6) {
+  // If we don't have 4 unique categories, fill with latest
+  if (lensPosts.length < 4) {
     for (const post of allPosts) {
-      if (lensPosts.length >= 6) break;
+      if (lensPosts.length >= 4) break;
       if (!lensPosts.includes(post)) {
         lensPosts.push(post);
       }
@@ -94,6 +94,21 @@ export default async function Home() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function findArticleSlug(item: any): string | null {
     if (item.slug) return item.slug;
+    // Try to find an article whose title shares key words with the headline
+    const headlineWords = (item.headline || "").toLowerCase().split(/\s+/).filter((w: string) => w.length > 3);
+    let bestSlug: string | null = null;
+    let bestScore = 0;
+    // Only check recent articles (first 30 = newest)
+    for (const post of allPosts.slice(0, 30)) {
+      const titleWords = post.title.toLowerCase().split(/\s+/);
+      const overlap = headlineWords.filter((w: string) => titleWords.includes(w)).length;
+      if (overlap > bestScore) {
+        bestScore = overlap;
+        bestSlug = post.slug;
+      }
+    }
+    if (bestScore >= 2) return bestSlug;
+    // Fallback to tag matching
     for (const tag of item.tags || []) {
       if (articleSlugs[tag.toLowerCase()]) return articleSlugs[tag.toLowerCase()];
     }
@@ -165,21 +180,19 @@ export default async function Home() {
             {dateString}
           </p>
 
-          {/* Region strip */}
-          <div className="mt-4 flex items-center justify-center gap-3 text-xs text-zinc-500 dark:text-zinc-400">
+          {/* Region strip — subtle proof of coverage breadth */}
+          <div className="mt-4 flex items-center justify-center gap-2 text-[10px] tracking-[0.15em] uppercase text-zinc-400 dark:text-zinc-500">
             <span>US</span>
-            <span className="text-zinc-300 dark:text-zinc-700">&middot;</span>
-            <span>EU</span>
-            <span className="text-zinc-300 dark:text-zinc-700">&middot;</span>
-            <span>MENA</span>
-            <span className="text-zinc-300 dark:text-zinc-700">&middot;</span>
-            <span>South Asia</span>
-            <span className="text-zinc-300 dark:text-zinc-700">&middot;</span>
-            <span>East Asia</span>
-            <span className="text-zinc-300 dark:text-zinc-700">&middot;</span>
+            <span>·</span>
+            <span>Europe</span>
+            <span>·</span>
+            <span>Middle East</span>
+            <span>·</span>
+            <span>Asia</span>
+            <span>·</span>
             <span>Africa</span>
-            <span className="text-zinc-300 dark:text-zinc-700">&middot;</span>
-            <span>Latin America</span>
+            <span>·</span>
+            <span>Americas</span>
           </div>
 
           {/* Value proposition */}
@@ -188,7 +201,7 @@ export default async function Home() {
               The world&apos;s news<br />in 2&nbsp;minutes.
             </h1>
             <p className="mt-5 font-[family-name:var(--font-source-serif)] text-base sm:text-lg text-zinc-500 dark:text-zinc-400 max-w-lg mx-auto leading-relaxed">
-              Scanned from every region, every language, every perspective — so you don&apos;t miss what&nbsp;matters.
+              A free daily briefing covering every region and perspective. 2&nbsp;minutes. Every&nbsp;morning.
             </p>
           </div>
 
@@ -255,7 +268,7 @@ export default async function Home() {
           SECTION 1.5: TODAY'S BRIEFING — Full Preview
           ════════════════════════════════════════════════════════ */}
       {topStories.length > 0 && (
-        <section className="border-t border-black/[0.05] bg-white dark:border-white/[0.05] dark:bg-[#141414]">
+        <section className="border-t border-black/[0.05] bg-[#f8f7f4] dark:border-white/[0.05] dark:bg-[#141414]">
           <div className="mx-auto max-w-2xl px-6 py-12 md:py-16">
 
             {/* Briefing header — like an email */}
@@ -267,34 +280,9 @@ export default async function Home() {
                 {dateString}
               </h2>
               <p className="mt-2 text-sm text-zinc-400 dark:text-zinc-500">
-                {topStories.length} stories · {topStories.filter(s => s.regions.some(r => r !== "global")).length > 0 ? "7 regions" : "Global"} · 2 min read
+                {scan?.items ? `${topStories.length} stories · 7 regions · ` : ""}2 min read
               </p>
             </div>
-
-            {/* Top story — the big one */}
-            {leadStory && (
-              <div className="mb-8 pb-8 border-b border-black/[0.08] dark:border-white/[0.08]">
-                <p className="text-xs font-bold tracking-[0.2em] uppercase text-red-600 dark:text-red-400 mb-2">
-                  Top Story
-                </p>
-                <h3 className="font-[family-name:var(--font-playfair)] text-xl md:text-2xl font-bold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
-                  {leadStory.headline}
-                </h3>
-                {leadStory.connection && (
-                  <p className="mt-3 font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-                    {leadStory.connection}
-                  </p>
-                )}
-                {(() => {
-                  const slug = findArticleSlug(leadStory);
-                  return slug ? (
-                    <Link href={`/lens/${slug}`} className="mt-3 inline-block text-sm font-medium text-[#c8922a] hover:underline">
-                      Read more →
-                    </Link>
-                  ) : null;
-                })()}
-              </div>
-            )}
 
             {/* Quick Hits — the scannable section */}
             {secondaryStories.length > 0 && (
@@ -345,11 +333,19 @@ export default async function Home() {
               </div>
             )}
 
-            {/* End of briefing preview */}
-            <div className="text-center pt-4">
+            {/* End of briefing preview — soft gate */}
+            <div className="text-center pt-6 border-t border-black/[0.06] dark:border-white/[0.06]">
               <p className="font-[family-name:var(--font-source-serif)] text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                That&apos;s your 2-minute scan.
+                That&apos;s a taste. The full briefing hits your inbox every morning.
               </p>
+              <div className="mt-4">
+                <Link
+                  href="#subscribe"
+                  className="inline-flex h-11 items-center rounded-full bg-[#c8922a] px-8 text-sm font-medium text-[#0f0f0f] shadow-[0_2px_12px_rgb(200,146,42,0.3)] hover:bg-[#b17f24] transition-colors"
+                >
+                  Get the free briefing →
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -379,7 +375,7 @@ export default async function Home() {
                     <div className="relative aspect-[16/9] w-full overflow-hidden">
                       <Image
                         src={post.image}
-                        alt=""
+                        alt={post.title}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                         sizes="(max-width: 640px) 100vw, 384px"
@@ -400,7 +396,10 @@ export default async function Home() {
                       {post.title}
                     </h3>
                     <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
-                      <RelativeTime date={post.date} />
+                      <RelativeTime
+                        date={post.date}
+                        fallback={<span>{new Date(post.date).toLocaleDateString("en-NZ", { month: "short", day: "numeric" })}</span>}
+                      />
                     </p>
                   </div>
                 </Link>

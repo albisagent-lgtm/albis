@@ -75,7 +75,7 @@ export default async function LensArticlePage({ params }: Props) {
     image: post.image.startsWith("http") ? post.image : `https://www.albis.news${post.image}`,
     datePublished: post.date,
     dateModified: post.date,
-    author: { "@type": "Person", name: post.author, url: "https://www.albis.news/about", jobTitle: "Correspondent" },
+    author: { "@type": post.author === "Albis" || post.author === "Harry Wenham" ? "Organization" : "Person", name: post.author || "Albis", url: "https://www.albis.news/about" },
     publisher: {
       "@type": "Organization",
       name: "Albis",
@@ -129,13 +129,13 @@ export default async function LensArticlePage({ params }: Props) {
             {post.description}
           </p>
           <div className="mt-4 flex items-center gap-2 text-sm text-zinc-400 dark:text-zinc-500">
-            <span>By {post.author || "Albis Intelligence Desk"}</span>
+            <span>By {post.author || "Albis"}</span>
           </div>
           {post.image && post.image !== "/og-image.png" && (
             <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden rounded-xl">
               <Image
                 src={post.image}
-                alt=""
+                alt={post.title}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 672px"
@@ -266,7 +266,7 @@ export default async function LensArticlePage({ params }: Props) {
                       })}
                     </time>
                     <span>&middot;</span>
-                    <span>3 min</span>
+                    <span>{(rp as any).readingTime || 3} min</span>
                   </div>
                   <h3 className="font-medium leading-snug text-[#0f0f0f] group-hover:text-[#c8922a] dark:text-[#f0efec] dark:group-hover:text-[#c8922a]">{rp.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 line-clamp-2">{rp.description}</p>
@@ -296,7 +296,7 @@ export default async function LensArticlePage({ params }: Props) {
           </section>
         )}
 
-        {/* CTA */}
+        {/* CTA — inline email capture */}
         <div className="mt-16 rounded-2xl border border-[#c8922a]/20 bg-[#f8f7f4] p-8 text-center dark:border-[#c8922a]/20 dark:bg-white/[0.03]">
           <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#c8922a]">
             Get this delivered free every morning
@@ -305,12 +305,7 @@ export default async function LensArticlePage({ params }: Props) {
             The daily briefing with perspectives from 7 regions — straight to your inbox.
           </p>
           <div className="mt-6">
-            <Link
-              href="/signup"
-              className="inline-flex items-center justify-center rounded-lg bg-[#c8922a] px-6 py-3 font-medium text-white transition-colors hover:bg-[#b17f24]"
-            >
-              Get the daily briefing free
-            </Link>
+            <EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} />
           </div>
         </div>
 
