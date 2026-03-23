@@ -48,8 +48,22 @@ export default async function Home() {
       })
     : [];
 
-  const leadStory = topStories[0];
-  const secondaryStories = topStories.slice(1, 5);
+  function postToScanItem(p: typeof allPosts[0]): ScanItem & { slug: string } {
+    return {
+      headline: p.title,
+      connection: p.description,
+      regions: [] as string[],
+      tags: p.tags || [],
+      patterns: [],
+      significance: "high" as const,
+      category: p.category || "analysis",
+      slug: p.slug,
+    };
+  }
+  const leadStory = topStories[0] || (allPosts[0] ? postToScanItem(allPosts[0]) : null);
+  const secondaryStories = topStories.length > 1
+    ? topStories.slice(1, 5)
+    : allPosts.slice(1, 5).map(postToScanItem);
   // Pick 6 articles from different categories for variety
   const lensPosts: typeof allPosts = [];
   const usedCategories = new Set<string>();
@@ -77,7 +91,9 @@ export default async function Home() {
     postBySlug[post.slug] = post;
   }
 
-  function findArticleSlug(item: ScanItem): string | null {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function findArticleSlug(item: any): string | null {
+    if (item.slug) return item.slug;
     for (const tag of item.tags || []) {
       if (articleSlugs[tag.toLowerCase()]) return articleSlugs[tag.toLowerCase()];
     }

@@ -13,15 +13,20 @@ function getRelativeTime(dateStr: string, prefix: string): string {
     then.setTime(nzDate.getTime());
   }
 
+  // Check if same calendar day in NZ timezone
+  const nzNow = new Date(now.toLocaleString("en-US", { timeZone: "Pacific/Auckland" }));
+  const nzThen = new Date(then.toLocaleString("en-US", { timeZone: "Pacific/Auckland" }));
+  const isToday = nzNow.toDateString() === nzThen.toDateString();
+  const yesterday = new Date(nzNow);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const isYesterday = yesterday.toDateString() === nzThen.toDateString();
+
+  if (isToday) return `${prefix}Today`;
+  if (isYesterday) return `${prefix}Yesterday`;
+
   const diffMs = now.getTime() - then.getTime();
-  const diffMin = Math.floor(diffMs / 60000);
-  const diffHrs = Math.floor(diffMs / 3600000);
   const diffDays = Math.floor(diffMs / 86400000);
 
-  if (diffMin < 1) return `${prefix}just now`;
-  if (diffMin < 60) return `${prefix}${diffMin} minute${diffMin === 1 ? "" : "s"} ago`;
-  if (diffHrs < 24) return `${prefix}${diffHrs} hour${diffHrs === 1 ? "" : "s"} ago`;
-  if (diffDays === 1) return `${prefix}yesterday`;
   if (diffDays < 7) return `${prefix}${diffDays} days ago`;
   
   return `${prefix}${then.toLocaleDateString("en-NZ", { month: "short", day: "numeric" })}`;
