@@ -147,7 +147,7 @@ export function EmbedCode({ src, width = 400, height = 200 }: EmbedCodeProps) {
           {copied ? "Copied!" : "Copy code"}
         </button>
       </div>
-      <pre className="text-[11px] text-zinc-400 dark:text-zinc-500 overflow-x-auto whitespace-pre-wrap break-all leading-relaxed">
+      <pre className="text-xs text-zinc-400 dark:text-zinc-500 overflow-x-auto whitespace-pre-wrap break-all leading-relaxed">
         {code}
       </pre>
     </div>

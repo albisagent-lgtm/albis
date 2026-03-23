@@ -60,7 +60,7 @@ export function TabbedArticles({ articles }: { articles: ArticlePreview[] }) {
               href={`/lens/${post.slug}`}
               className="group rounded-2xl border border-black/[0.06] bg-white p-space-6 transition-all hover:border-[#c8922a]/30 hover:shadow-lg dark:border-white/[0.06] dark:bg-white/[0.02] dark:hover:border-[#c8922a]/30"
             >
-              <time className="text-[11px] text-zinc-400 dark:text-zinc-500">
+              <time className="text-xs text-zinc-400 dark:text-zinc-500">
                 {new Date(post.date).toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",

@@ -116,7 +116,7 @@ function CostChart() {
         const pct = (d.cost / max) * 100;
         return (
           <div key={d.day} className="flex flex-1 flex-col items-center gap-1.5">
-            <span className="text-[10px] tabular-nums text-zinc-400 dark:text-zinc-500">
+            <span className="text-xs tabular-nums text-zinc-400 dark:text-zinc-500">
               ${d.cost.toFixed(0)}
             </span>
             <div className="w-full flex items-end" style={{ height: "80px" }}>
@@ -125,7 +125,7 @@ function CostChart() {
                 style={{ height: `${pct}%` }}
               />
             </div>
-            <span className="text-[10px] font-medium text-zinc-500 dark:text-zinc-400">
+            <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
               {d.day}
             </span>
           </div>
@@ -174,7 +174,7 @@ export default function AdminPage() {
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-600">
               Admin
             </p>
-            <h1 className="mt-3 text-3xl font-light italic leading-snug text-zinc-800 dark:text-zinc-100 md:text-4xl">
+            <h1 className="mt-3 font-[family-name:var(--font-playfair)] text-3xl font-bold tracking-tight text-[#0f0f0f] dark:text-[#f0efec] md:text-4xl">
               Dashboard
             </h1>
           </div>
@@ -355,7 +355,7 @@ export default function AdminPage() {
                   key={i}
                   className="flex items-start gap-3 rounded-lg border border-zinc-200 px-4 py-3 dark:border-zinc-800/50"
                 >
-                  <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-zinc-100 text-[10px] font-bold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+                  <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-zinc-100 text-xs font-bold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
                     {i + 1}
                   </span>
                   <div className="min-w-0 flex-1">

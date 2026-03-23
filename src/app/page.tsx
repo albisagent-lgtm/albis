@@ -179,7 +179,7 @@ export default async function Home() {
           {/* Lead story — proof of concept */}
           {leadStory && (
             <div className="mt-10 md:mt-12 rounded-xl border border-black/[0.06] bg-white/60 p-6 md:p-8 dark:border-white/[0.06] dark:bg-white/[0.03]">
-              <p className="text-[11px] font-medium tracking-[0.2em] uppercase text-[#c8922a]">
+              <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
                 Today&apos;s lead story
               </p>
               <h2 className="mt-3 font-[family-name:var(--font-playfair)] text-xl sm:text-2xl md:text-3xl font-bold leading-[1.15] tracking-tight text-[#0f0f0f] dark:text-[#f0efec]">
@@ -194,7 +194,7 @@ export default async function Home() {
               {/* Regional coverage indicator */}
               {leadStory.regions.filter((r) => r !== "global").length > 0 && (
                 <div className="mt-4 flex flex-wrap items-center gap-2">
-                  <span className="text-[10px] font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                  <span className="text-xs font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
                     Covered by:
                   </span>
                   {leadStory.regions
@@ -203,7 +203,7 @@ export default async function Home() {
                     .map((r) => (
                       <span
                         key={r}
-                        className="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2.5 py-0.5 text-[10px] font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400"
+                        className="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400"
                       >
                         {REGION_FLAGS[r]} {REGION_SHORT_LABELS[r] || REGION_LABELS[r] || r}
                       </span>
@@ -258,14 +258,14 @@ export default async function Home() {
             {/* Top story — the big one */}
             {leadStory && (
               <div className="mb-8 pb-8 border-b border-black/[0.08] dark:border-white/[0.08]">
-                <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-red-600 dark:text-red-400 mb-2">
+                <p className="text-xs font-bold tracking-[0.2em] uppercase text-red-600 dark:text-red-400 mb-2">
                   Top Story
                 </p>
                 <h3 className="font-[family-name:var(--font-playfair)] text-xl md:text-2xl font-bold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
                   {leadStory.headline}
                 </h3>
                 {leadStory.connection && (
-                  <p className="mt-3 font-[family-name:var(--font-source-serif)] text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-400">
+                  <p className="mt-3 font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                     {leadStory.connection}
                   </p>
                 )}
@@ -283,7 +283,7 @@ export default async function Home() {
             {/* Quick Hits — the scannable section */}
             {secondaryStories.length > 0 && (
               <div className="mb-8">
-                <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#c8922a] mb-4">
+                <p className="text-xs font-bold tracking-[0.2em] uppercase text-[#c8922a] mb-4">
                   Quick Hits
                 </p>
                 <div className="space-y-4">
@@ -295,7 +295,7 @@ export default async function Home() {
                           ▸
                         </span>
                         <div>
-                          <p className="font-[family-name:var(--font-source-serif)] text-[15px] leading-relaxed text-[#0f0f0f] dark:text-[#f0efec]">
+                          <p className="font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-[#0f0f0f] dark:text-[#f0efec]">
                             <span className="font-semibold">{item.headline}.</span>
                             {item.connection && (
                               <span className="text-zinc-500 dark:text-zinc-400"> {item.connection}</span>
@@ -320,7 +320,7 @@ export default async function Home() {
             {/* Scan metadata — the framing insight */}
             {scan?.framingNote && (
               <div className="mb-8 pb-8 border-t border-b border-black/[0.08] dark:border-white/[0.08] py-6">
-                <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#c8922a] mb-3">
+                <p className="text-xs font-bold tracking-[0.2em] uppercase text-[#c8922a] mb-3">
                   How The World Sees It
                 </p>
                 <p className="font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-zinc-600 dark:text-zinc-400 italic">
@@ -373,7 +373,7 @@ export default async function Home() {
                   <div className="p-4">
                     {post.category && (
                       <span
-                        className="text-[10px] font-medium tracking-[0.15em] uppercase"
+                        className="text-xs font-medium tracking-[0.15em] uppercase"
                         style={{ color: getCategoryAccent(post.category) }}
                       >
                         {CATEGORY_META[post.category]?.label || post.category}

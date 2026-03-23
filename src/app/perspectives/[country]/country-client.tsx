@@ -302,12 +302,12 @@ export function CountryPerspectiveClient({ country, todayScan, allItems }: Props
                   {item.regions.map(r => (
                     <span
                       key={r}
-                      className="inline-flex rounded bg-zinc-100 px-1.5 py-0.5 text-[10px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-500"
+                      className="inline-flex rounded bg-zinc-100 px-1.5 py-0.5 text-xs font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-500"
                     >
                       {REGION_LABELS[r] || r}
                     </span>
                   ))}
-                  <span className="inline-flex rounded bg-amber-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-700 dark:bg-amber-950/50 dark:text-amber-400">
+                  <span className="inline-flex rounded bg-amber-50 px-1.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-amber-700 dark:bg-amber-950/50 dark:text-amber-400">
                     Framing
                   </span>
                 </div>
@@ -352,16 +352,16 @@ function StoryRow({ item }: { item: ScanItemWithDate }) {
             {item.headline}
           </h3>
           <div className="mt-2 flex flex-wrap items-center gap-1.5">
-            <span className="text-[10px] text-zinc-400 dark:text-zinc-500">
+            <span className="text-xs text-zinc-400 dark:text-zinc-500">
               {item.displayDate}
             </span>
-            <span className="inline-flex rounded bg-zinc-100 px-1.5 py-0.5 text-[10px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-500">
+            <span className="inline-flex rounded bg-zinc-100 px-1.5 py-0.5 text-xs font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-500">
               {meta.label}
             </span>
             {item.patterns.map(p => (
               <span
                 key={p}
-                className={`inline-flex rounded px-1.5 py-0.5 text-[10px] font-medium ${
+                className={`inline-flex rounded px-1.5 py-0.5 text-xs font-medium ${
                   p === "framing"
                     ? "bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400/80"
                     : "bg-violet-50 text-violet-600 dark:bg-violet-950/30 dark:text-violet-400/70"

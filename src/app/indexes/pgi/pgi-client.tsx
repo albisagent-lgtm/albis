@@ -393,7 +393,7 @@ export function PGIClient() {
       {signature?.content_md && (
         <section className="mt-space-16 pt-space-16 border-t border-black/5 dark:border-white/5 mx-auto max-w-3xl">
           <article
-            className="prose prose-zinc dark:prose-invert max-w-none text-[15px] leading-[1.75]"
+            className="prose prose-zinc dark:prose-invert max-w-none text-sm leading-[1.75]"
             dangerouslySetInnerHTML={{ __html: renderMarkdown(signature.content_md) }}
           />
           <div className="mt-8 flex items-center gap-space-3 border-t border-black/[0.07] pt-6 dark:border-white/[0.06]">
@@ -541,7 +541,7 @@ export function PGIClient() {
                         {story.regions_covered.map((r) => (
                           <span
                             key={r}
-                            className="rounded bg-black/[0.03] px-1.5 py-0.5 text-[10px] text-zinc-500 dark:bg-white/[0.04] dark:text-zinc-400"
+                            className="rounded bg-black/[0.03] px-1.5 py-0.5 text-xs text-zinc-500 dark:bg-white/[0.04] dark:text-zinc-400"
                           >
                             {r}
                           </span>
@@ -573,7 +573,7 @@ export function PGIClient() {
                           />
                         </div>
                         <div className="mt-1 flex items-center justify-between">
-                          <span className="text-[10px] text-zinc-400">{d.label}</span>
+                          <span className="text-xs text-zinc-400">{d.label}</span>
                           <span
                             className="text-xs font-semibold tabular-nums"
                             style={{ color: getTierColor(d.value) }}

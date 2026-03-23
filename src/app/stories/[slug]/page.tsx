@@ -159,7 +159,7 @@ export default async function StoryClusterPage({ params }: Props) {
                   </p>
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {article.tags.slice(0, 4).map((tag) => (
-                      <span key={tag} className="text-[10px] text-zinc-400 dark:text-zinc-500 border border-black/[0.05] dark:border-white/[0.05] rounded-full px-2 py-0.5">
+                      <span key={tag} className="text-xs text-zinc-400 dark:text-zinc-500 border border-black/[0.05] dark:border-white/[0.05] rounded-full px-2 py-0.5">
                         {tag}
                       </span>
                     ))}

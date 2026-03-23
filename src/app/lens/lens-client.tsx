@@ -591,7 +591,7 @@ export default function LensClient({ posts, initialPillar }: { posts: Post[]; in
             <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold tracking-tight">
               Today&apos;s Picks
             </h2>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
               Fresh
             </span>

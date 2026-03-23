@@ -147,7 +147,7 @@ export default function SignupClient({
                 }}
                 placeholder="your@email.com"
                 required
-                className="w-full flex-1 rounded-lg border border-black/10 bg-white px-4 py-3 text-[15px] text-[#0f0f0f] placeholder-zinc-400 outline-none focus:ring-2 focus:ring-[#c8922a]/30 dark:border-white/10 dark:bg-zinc-900 dark:text-[#f0efec] dark:placeholder-zinc-500"
+                className="w-full flex-1 rounded-lg border border-black/10 bg-white px-4 py-3 text-sm text-[#0f0f0f] placeholder-zinc-400 outline-none focus:ring-2 focus:ring-[#c8922a]/30 dark:border-white/10 dark:bg-zinc-900 dark:text-[#f0efec] dark:placeholder-zinc-500"
               />
               <button
                 type="submit"

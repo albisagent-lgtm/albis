@@ -150,12 +150,12 @@ export function SearchBar({ autoFocus, onActiveChange }: SearchBarProps) {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-zinc-400 dark:text-zinc-500">{r.displayDate}</span>
-                    <span className="inline-flex items-center gap-1 rounded bg-zinc-100 px-1.5 py-0.5 text-[10px] text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
+                    <span className="inline-flex items-center gap-1 rounded bg-zinc-100 px-1.5 py-0.5 text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
                       <span className={`h-1.5 w-1.5 rounded-full ${colorDot[meta.color] || "bg-zinc-500"}`} />
                       {meta.label}
                     </span>
                     {r.regions.slice(0, 2).map((region) => (
-                      <span key={region} className="rounded bg-zinc-100 px-1.5 py-0.5 text-[10px] text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+                      <span key={region} className="rounded bg-zinc-100 px-1.5 py-0.5 text-xs text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
                         {REGION_LABELS[region] || region}
                       </span>
                     ))}

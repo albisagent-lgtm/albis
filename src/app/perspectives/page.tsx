@@ -168,7 +168,7 @@ export default function PerspectivesIndex() {
             placeholder="🔍 Search countries..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 text-[15px] placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#c8922a]/30"
+            className="w-full pl-11 pr-4 py-3 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 text-sm placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#c8922a]/30"
           />
         </div>
       </div>
@@ -188,7 +188,7 @@ export default function PerspectivesIndex() {
                   <span className="text-xl" role="img" aria-label={`${country.name} flag`}>
                     {country.flag}
                   </span>
-                  <span className="text-[15px] text-zinc-600 group-hover:text-[#c8922a] dark:text-zinc-400 dark:group-hover:text-[#c8922a] transition-colors">
+                  <span className="text-sm text-zinc-600 group-hover:text-[#c8922a] dark:text-zinc-400 dark:group-hover:text-[#c8922a] transition-colors">
                     {country.name}
                   </span>
                 </Link>
@@ -243,7 +243,7 @@ export default function PerspectivesIndex() {
                         <span className="text-xl" role="img" aria-label={`${country.name} flag`}>
                           {country.flag}
                         </span>
-                        <span className="text-[15px] text-zinc-600 group-hover:text-[#c8922a] dark:text-zinc-400 dark:group-hover:text-[#c8922a] transition-colors">
+                        <span className="text-sm text-zinc-600 group-hover:text-[#c8922a] dark:text-zinc-400 dark:group-hover:text-[#c8922a] transition-colors">
                           {country.name}
                         </span>
                       </Link>

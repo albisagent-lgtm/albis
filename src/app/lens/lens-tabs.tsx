@@ -91,7 +91,7 @@ function PGIBadge({ score }: { score: number }) {
   };
 
   return (
-    <span className={`inline-block rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${getColorClasses(score)}`}>
+    <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${getColorClasses(score)}`}>
       PGI {score.toFixed(1)}
     </span>
   );
@@ -118,7 +118,7 @@ function InformationPulseCard({ items }: InformationPulseProps) {
 
   return (
     <div className="rounded-2xl border border-black/[0.07] bg-white/50 p-6 dark:border-white/[0.06] dark:bg-white/[0.02]">
-      <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#c8922a]">
+      <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#c8922a]">
         Today's Information Pulse
       </p>
       <div className="mt-4 grid gap-4 md:grid-cols-3">
@@ -185,7 +185,7 @@ function HeadlinesView({ items, articles, patternOfDay, framingNote, displayDate
       {/* Pattern of the Day */}
       {patternOfDay && (
         <div className="rounded-2xl border border-[#c8922a]/20 bg-[#c8922a]/5 p-6 dark:bg-[#c8922a]/[0.06]">
-          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#c8922a]">
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#c8922a]">
             Pattern of the Day
           </p>
           {patternOfDay.title && (
@@ -202,7 +202,7 @@ function HeadlinesView({ items, articles, patternOfDay, framingNote, displayDate
       {/* Framing Watch */}
       {framingNote && (
         <div className="rounded-2xl border border-rose-200/30 bg-rose-50/50 p-6 dark:border-rose-500/10 dark:bg-rose-950/10">
-          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-rose-600 dark:text-rose-400">
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-rose-600 dark:text-rose-400">
             Framing Watch
           </p>
           <p className="mt-3 text-sm leading-relaxed text-zinc-600 font-[family-name:var(--font-source-serif)] dark:text-zinc-400">
@@ -226,7 +226,7 @@ function HeadlinesView({ items, articles, patternOfDay, framingNote, displayDate
               }`}
             >
               <div className="flex items-center gap-2">
-                <span className={`inline-block rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${
+                <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${
                   item.significance === "high"
                     ? "bg-red-50 text-red-600 dark:bg-red-950/30 dark:text-red-400"
                     : item.significance === "medium"
@@ -235,11 +235,11 @@ function HeadlinesView({ items, articles, patternOfDay, framingNote, displayDate
                 }`}>
                   {item.significance}
                 </span>
-                <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-[10px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+                <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
                   {CATEGORY_META[item.category]?.label || item.category}
                 </span>
                 {hasFramingWatch(item) && (
-                  <span className="rounded-full bg-rose-50 px-2.5 py-0.5 text-[10px] font-medium text-rose-500 dark:bg-rose-950/30 dark:text-rose-400">
+                  <span className="rounded-full bg-rose-50 px-2.5 py-0.5 text-xs font-medium text-rose-500 dark:bg-rose-950/30 dark:text-rose-400">
                     Framing
                   </span>
                 )}
@@ -263,7 +263,7 @@ function HeadlinesView({ items, articles, patternOfDay, framingNote, displayDate
                 </p>
               )}
               {match && (
-                <p className="mt-2 text-[10px] text-zinc-300 group-hover:text-[#c8922a]/60 dark:text-zinc-600 transition-colors">
+                <p className="mt-2 text-xs text-zinc-300 group-hover:text-[#c8922a]/60 dark:text-zinc-600 transition-colors">
                   Read more →
                 </p>
               )}

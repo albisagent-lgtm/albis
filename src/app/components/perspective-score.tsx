@@ -36,7 +36,7 @@ export function PerspectiveScore({ regions }: PerspectiveScoreProps) {
       </div>
 
       {/* Label */}
-      <span className="text-[11px] text-zinc-400 dark:text-zinc-500">
+      <span className="text-xs text-zinc-400 dark:text-zinc-500">
         {count}/{total}
       </span>
 

@@ -376,14 +376,14 @@ function GAIPageInner() {
                             </h4>
                             {story.regions_found && story.regions_found.length > 0 && (
                               <div className="mt-2">
-                                <span className="text-[10px] uppercase tracking-wider text-zinc-400">
+                                <span className="text-xs uppercase tracking-wider text-zinc-400">
                                   Covered by:
                                 </span>
                                 <div className="mt-1 flex flex-wrap gap-1">
                                   {story.regions_found.map((r) => (
                                     <span
                                       key={r}
-                                      className="rounded bg-emerald-50 px-1.5 py-0.5 text-[10px] text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400"
+                                      className="rounded bg-emerald-50 px-1.5 py-0.5 text-xs text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400"
                                     >
                                       {r}
                                     </span>
@@ -546,14 +546,14 @@ function GAIPageInner() {
                       </h3>
                       {story.regions_absent && story.regions_absent.length > 0 && (
                         <div className="mt-2">
-                          <span className="text-[10px] uppercase tracking-wider text-zinc-400">
+                          <span className="text-xs uppercase tracking-wider text-zinc-400">
                             Missing from:
                           </span>
                           <div className="mt-1 flex flex-wrap gap-1">
                             {story.regions_absent.map((r) => (
                               <span
                                 key={r}
-                                className="rounded bg-red-50 px-1.5 py-0.5 text-[10px] text-red-600 dark:bg-red-900/20 dark:text-red-400"
+                                className="rounded bg-red-50 px-1.5 py-0.5 text-xs text-red-600 dark:bg-red-900/20 dark:text-red-400"
                               >
                                 {r}
                               </span>
@@ -682,7 +682,7 @@ function GAIPageInner() {
                         <span className="text-lg font-bold text-zinc-300 dark:text-zinc-600">--</span>
                       )}
                     </div>
-                    <p className="text-[11px] text-zinc-500 mb-2">{t.name}</p>
+                    <p className="text-xs text-zinc-500 mb-2">{t.name}</p>
                     {hasAnyData ? (
                       <div className="h-12 w-full">
                         <ResponsiveContainer width="100%" height="100%">
@@ -700,7 +700,7 @@ function GAIPageInner() {
                       </div>
                     ) : (
                       <div className="flex h-12 items-center justify-center">
-                        <p className="text-[10px] text-zinc-300 dark:text-zinc-600">No data yet</p>
+                        <p className="text-xs text-zinc-300 dark:text-zinc-600">No data yet</p>
                       </div>
                     )}
                   </div>

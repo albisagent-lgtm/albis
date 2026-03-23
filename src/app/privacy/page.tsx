@@ -18,7 +18,7 @@ export default function PrivacyPage() {
         </p>
       </header>
 
-      <div className="space-y-10 text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-400">
+      <div className="space-y-10 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
         {/* Intro */}
         <section>
           <p>

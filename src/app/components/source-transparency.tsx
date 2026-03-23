@@ -126,7 +126,7 @@ export function SourceTransparency({ sources, confidence }: SourceTransparencyPr
               <span className="text-zinc-700 dark:text-zinc-300">{source.name}</span>
             )}
             {source.region && (
-              <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium ${REGION_COLORS[source.region] || REGION_COLORS.global}`}>
+              <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${REGION_COLORS[source.region] || REGION_COLORS.global}`}>
                 {REGION_LABELS[source.region] || source.region}
               </span>
             )}

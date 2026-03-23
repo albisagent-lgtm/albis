@@ -99,10 +99,10 @@ export default function GlossaryPage() {
       <div className="min-h-screen bg-white">
         <div className="max-w-3xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
           <header className="mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl font-bold text-[#0f0f0f] dark:text-[#f0efec] mb-4">
               Glossary
             </h1>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-zinc-600 dark:text-zinc-400">
               Key terms and concepts in media analysis, perception gaps, and information warfare.
             </p>
           </header>
@@ -110,21 +110,21 @@ export default function GlossaryPage() {
           <div className="space-y-8">
             {terms.map(({ id, term, definition }) => (
               <div key={id} id={id} className="scroll-mt-20">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+                <h2 className="text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec] mb-2">
                   {term}
                 </h2>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed">
                   {definition}
                 </p>
               </div>
             ))}
           </div>
 
-          <footer className="mt-16 pt-8 border-t border-gray-200">
-            <p className="text-sm text-gray-500">
+          <footer className="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+            <p className="text-sm text-zinc-500 dark:text-zinc-400">
               These definitions reflect Albis methodology and may differ from usage in other contexts.
               For questions about our approach, contact{' '}
-              <a href="mailto:harry@albis.news" className="text-gray-900 underline">
+              <a href="mailto:harry@albis.news" className="text-[#0f0f0f] dark:text-[#f0efec] underline">
                 harry@albis.news
               </a>
             </p>

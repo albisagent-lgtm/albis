@@ -93,7 +93,7 @@ export function PgiGaiQuadrant({ stories, date }: PgiGaiQuadrantProps) {
         </span>
 
         {/* Y-axis label */}
-        <span className="absolute -left-6 md:-left-7 top-1/2 -translate-y-1/2 -rotate-90 text-[10px] md:text-[11px] font-medium text-zinc-400 dark:text-zinc-500 whitespace-nowrap select-none tracking-wide">
+        <span className="absolute -left-6 md:-left-7 top-1/2 -translate-y-1/2 -rotate-90 text-[10px] md:text-xs font-medium text-zinc-400 dark:text-zinc-500 whitespace-nowrap select-none tracking-wide">
           Attention Gap
         </span>
 
@@ -147,7 +147,7 @@ export function PgiGaiQuadrant({ stories, date }: PgiGaiQuadrantProps) {
       </div>
 
       {/* X-axis label */}
-      <p className="text-center text-[10px] md:text-[11px] font-medium text-zinc-400 dark:text-zinc-500 tracking-wide select-none">
+      <p className="text-center text-[10px] md:text-xs font-medium text-zinc-400 dark:text-zinc-500 tracking-wide select-none">
         Perception Gap →
       </p>
 

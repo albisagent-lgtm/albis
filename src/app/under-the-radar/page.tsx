@@ -174,12 +174,12 @@ function BlindspotCard({ item }: { item: ScanItem }) {
           {/* Category + significance */}
           <div className="flex flex-wrap items-center gap-2 mb-1.5">
             {item.category && (
-              <span className="text-[11px] font-medium tracking-[0.15em] uppercase text-[#c8922a]">
+              <span className="text-xs font-medium tracking-[0.15em] uppercase text-[#c8922a]">
                 {CATEGORY_META[item.category]?.label || item.category}
               </span>
             )}
             {item.significance === "high" && (
-              <span className="text-[11px] font-medium text-red-500">High significance</span>
+              <span className="text-xs font-medium text-red-500">High significance</span>
             )}
           </div>
 
@@ -197,9 +197,9 @@ function BlindspotCard({ item }: { item: ScanItem }) {
           <div className="mt-3 flex flex-wrap items-center gap-3">
             {/* Covered by */}
             <div className="flex items-center gap-1.5">
-              <span className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Seen by:</span>
+              <span className="text-xs font-medium text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Seen by:</span>
               {coveredBy.map((r) => (
-                <span key={r} className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400">
+                <span key={r} className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400">
                   <span>{getRegionFlag(r)}</span>
                   {getRegionLabel(r)}
                 </span>
@@ -209,15 +209,15 @@ function BlindspotCard({ item }: { item: ScanItem }) {
             {/* Missing from */}
             {missingFrom.length > 0 && (
               <div className="flex items-center gap-1.5">
-                <span className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Missing from:</span>
+                <span className="text-xs font-medium text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Missing from:</span>
                 {missingFrom.slice(0, 4).map((r) => (
-                  <span key={r} className="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-500 dark:bg-zinc-800/50 dark:text-zinc-400">
+                  <span key={r} className="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-500 dark:bg-zinc-800/50 dark:text-zinc-400">
                     <span>{getRegionFlag(r)}</span>
                     {getRegionLabel(r)}
                   </span>
                 ))}
                 {missingFrom.length > 4 && (
-                  <span className="text-[10px] text-zinc-400 dark:text-zinc-500">
+                  <span className="text-xs text-zinc-400 dark:text-zinc-500">
                     +{missingFrom.length - 4} more
                   </span>
                 )}

@@ -31,14 +31,14 @@ export default function MethodologyPage() {
     <main className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
       <div className="mx-auto max-w-2xl px-space-6 py-space-16 md:py-space-24">
         {/* Hero */}
-        <h1 className="text-xs font-medium tracking-[0.15em] uppercase text-zinc-400">
+        <p className="text-xs font-medium tracking-[0.15em] uppercase text-zinc-400">
           Methodology
-        </h1>
+        </p>
 
         <div className="mt-space-12 space-y-space-4 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
-          <p className="font-[family-name:var(--font-playfair)] text-3xl font-semibold leading-tight text-zinc-900 dark:text-zinc-100 md:text-4xl">
+          <h1 className="font-[family-name:var(--font-playfair)] text-3xl font-bold leading-tight tracking-tight text-[#0f0f0f] dark:text-[#f0efec] md:text-4xl">
             How Albis Measures the World
-          </p>
+          </h1>
           <p className="text-xl text-zinc-500 dark:text-zinc-400">
             The methodology behind the Perception Gap Index and Global Attention
             Index — fully transparent, fully open.

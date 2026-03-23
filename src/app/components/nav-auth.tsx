@@ -119,25 +119,25 @@ export function NavLinks() {
     <div className="hidden items-center gap-6 sm:flex">
       <Link
         href="/lens"
-        className="text-[13px] font-medium tracking-wide text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+        className="text-xs font-medium tracking-wide text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
       >
         The Lens
       </Link>
       <Link
         href="/perspectives"
-        className="text-[13px] font-medium tracking-wide text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+        className="text-xs font-medium tracking-wide text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
       >
         Perspectives
       </Link>
       <Link
         href="/indexes"
-        className="text-[13px] font-medium tracking-wide text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+        className="text-xs font-medium tracking-wide text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
       >
         Indexes
       </Link>
       <Link
         href="/about"
-        className="text-[13px] font-medium tracking-wide text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+        className="text-xs font-medium tracking-wide text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
       >
         About
       </Link>

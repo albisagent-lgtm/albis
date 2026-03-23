@@ -504,7 +504,7 @@ function BlindSpotCard({ spot }: { spot: BlindSpot }) {
           {spot.coveredBy.map((r) => (
             <span
               key={r}
-              className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium text-emerald-700 dark:text-emerald-400"
+              className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-xs font-medium text-emerald-700 dark:text-emerald-400"
             >
               {REGION_MAP[r].name}
             </span>
@@ -516,7 +516,7 @@ function BlindSpotCard({ spot }: { spot: BlindSpot }) {
           {spot.missedBy.map((r) => (
             <span
               key={r}
-              className="rounded-full bg-red-500/10 px-2 py-0.5 text-[11px] font-medium text-red-700 dark:text-red-400"
+              className="rounded-full bg-red-500/10 px-2 py-0.5 text-xs font-medium text-red-700 dark:text-red-400"
             >
               {REGION_MAP[r].name}
             </span>

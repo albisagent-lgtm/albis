@@ -229,7 +229,7 @@ export function ExitIntentModal({ articles, currentSlug, currentCategory }: Exit
                 </button>
               </form>
             )}
-            <p className="mt-2 text-[11px] text-zinc-400">
+            <p className="mt-2 text-xs text-zinc-400">
               Free · Daily · Unsubscribe anytime
             </p>
           </div>

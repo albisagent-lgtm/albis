@@ -25,7 +25,7 @@ export function Footer() {
           {/* Links + Telegram */}
           <div className="flex gap-14">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
                 Navigate
               </p>
               <ul className="mt-4 space-y-2.5">
@@ -37,7 +37,7 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
                 Explore
               </p>
               <ul className="mt-4 space-y-2.5">
@@ -57,7 +57,7 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
                 Community
               </p>
               <ul className="mt-4 space-y-2.5">
@@ -77,7 +77,7 @@ export function Footer() {
               </ul>
             </div>
             <div className="max-w-xs">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
                 Newsletter
               </p>
               <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">

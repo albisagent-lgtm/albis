@@ -86,7 +86,7 @@ export function BubbleReport({
                   {region.label}
                 </span>
                 {!isCovered && (
-                  <span className="ml-auto text-[10px] uppercase tracking-wider text-zinc-300 dark:text-zinc-600">
+                  <span className="ml-auto text-xs uppercase tracking-wider text-zinc-300 dark:text-zinc-600">
                     blind spot
                   </span>
                 )}
@@ -107,7 +107,7 @@ export function BubbleReport({
               key={i}
               className="rounded-xl border border-black/[0.05] bg-white/60 px-4 py-3 dark:border-white/[0.05] dark:bg-white/[0.02]"
             >
-              <p className="text-[11px] font-medium uppercase tracking-wider text-amber-600/70 dark:text-amber-400/50">
+              <p className="text-xs font-medium uppercase tracking-wider text-amber-600/70 dark:text-amber-400/50">
                 From {item.region}
               </p>
               <p className="mt-1 font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">

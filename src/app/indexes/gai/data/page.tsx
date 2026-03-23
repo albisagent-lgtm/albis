@@ -107,14 +107,14 @@ export default async function GAIDataPage() {
         <header className="mb-12">
           <Link
             href="/indexes/gai"
-            className="text-sm text-gray-500 hover:text-gray-700 mb-4 inline-block"
+            className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:text-zinc-300 mb-4 inline-block"
           >
             ← Back to GAI Overview
           </Link>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-[#0f0f0f] dark:text-[#f0efec] mb-4">
             Global Attention Index Data
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-zinc-600 dark:text-zinc-400">
             Current GAI scores measuring how unevenly global news coverage is distributed across regions.
           </p>
         </header>
@@ -122,47 +122,47 @@ export default async function GAIDataPage() {
         {daily ? (
           <>
             <section className="mb-12">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              <h2 className="text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec] mb-4">
                 Current Daily Score
               </h2>
-              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <div className="bg-[#f8f7f4] dark:bg-[#0f0f0f] rounded-lg p-6 border border-zinc-200 dark:border-zinc-800">
                 <div className="flex items-baseline gap-4 mb-2">
-                  <div className="text-5xl font-bold text-gray-900">
+                  <div className="text-5xl font-bold text-[#0f0f0f] dark:text-[#f0efec]">
                     {daily.daily_gai.toFixed(1)}
                   </div>
-                  <div className="text-lg text-gray-600">
+                  <div className="text-lg text-zinc-600 dark:text-zinc-400">
                     {getTierLabel(daily.daily_gai)}
                   </div>
                 </div>
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-zinc-500 dark:text-zinc-400">
                   {formatDate(daily.date)}
                 </div>
               </div>
             </section>
 
             <section className="mb-12">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              <h2 className="text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec] mb-4">
                 GAI Tributaries
               </h2>
-              <p className="text-gray-600 mb-6">
+              <p className="text-zinc-600 dark:text-zinc-400 mb-6">
                 Seven tributary measurements showing attention blindness by news category.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {tributaries.map((tributary) => (
                   <div
                     key={tributary.code}
-                    className="bg-white rounded-lg p-4 border border-gray-200"
+                    className="bg-white rounded-lg p-4 border border-zinc-200 dark:border-zinc-800"
                   >
                     <div className="flex items-baseline justify-between">
                       <div>
-                        <div className="text-sm font-medium text-gray-500">
+                        <div className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
                           GAI-{tributary.code}
                         </div>
-                        <div className="text-lg text-gray-900">
+                        <div className="text-lg text-[#0f0f0f] dark:text-[#f0efec]">
                           {tributary.name}
                         </div>
                       </div>
-                      <div className="text-2xl font-bold text-gray-900">
+                      <div className="text-2xl font-bold text-[#0f0f0f] dark:text-[#f0efec]">
                         {tributary.value !== null && tributary.value !== undefined
                           ? tributary.value.toFixed(1)
                           : '\u2014'}
@@ -175,11 +175,11 @@ export default async function GAIDataPage() {
           </>
         ) : (
           <section className="mb-12">
-            <div className="bg-gray-50 rounded-lg p-8 border border-gray-200 text-center">
-              <p className="text-lg font-medium text-gray-700">
+            <div className="bg-[#f8f7f4] dark:bg-[#0f0f0f] rounded-lg p-8 border border-zinc-200 dark:border-zinc-800 text-center">
+              <p className="text-lg font-medium text-zinc-700 dark:text-zinc-300">
                 First GAI readings coming soon
               </p>
-              <p className="mt-2 text-sm text-gray-500">
+              <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
                 Data collection begins today. Scores will appear here once calculated.
               </p>
             </div>
@@ -188,35 +188,35 @@ export default async function GAIDataPage() {
 
         {stories.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+            <h2 className="text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec] mb-4">
               Top Stories by Invisibility (Past 7 Days)
             </h2>
             <div className="space-y-4">
               {stories.map((story, idx) => (
                 <div
                   key={idx}
-                  className="bg-white rounded-lg p-4 border border-gray-200"
+                  className="bg-white rounded-lg p-4 border border-zinc-200 dark:border-zinc-800"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
-                      <h3 className="font-medium text-gray-900 mb-1">
+                      <h3 className="font-medium text-[#0f0f0f] dark:text-[#f0efec] mb-1">
                         {story.story_headline}
                       </h3>
-                      <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                      <div className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 mb-2">
                         <span>{story.category}</span>
                         <span>•</span>
                         <span>{story.region_count} of {story.total_regions} regions</span>
                         <span>•</span>
                         <span>{formatDate(story.scan_date)}</span>
                       </div>
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs text-gray-500">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs text-zinc-500 dark:text-zinc-400">
                         <span>D1 Breadth: {story.d1_coverage_breadth?.toFixed(1) ?? '\u2014'}</span>
                         <span>D2 Prominence: {story.d2_placement_prominence?.toFixed(1) ?? '\u2014'}</span>
                         <span>D3 Sources: {story.d3_source_diversity?.toFixed(1) ?? '\u2014'}</span>
                         <span>D4 Persistence: {story.d4_temporal_persistence?.toFixed(1) ?? '\u2014'}</span>
                       </div>
                     </div>
-                    <div className="text-2xl font-bold text-gray-900">
+                    <div className="text-2xl font-bold text-[#0f0f0f] dark:text-[#f0efec]">
                       {story.story_gai.toFixed(1)}
                     </div>
                   </div>
@@ -228,20 +228,20 @@ export default async function GAIDataPage() {
 
         {blindnessRanked.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+            <h2 className="text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec] mb-4">
               Region Blindness
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="text-zinc-600 dark:text-zinc-400 mb-6">
               How many stories each region missed in the past 7 days.
             </p>
             <div className="space-y-3">
               {blindnessRanked.map((r) => (
                 <div
                   key={r.region}
-                  className="bg-white rounded-lg p-4 border border-gray-200 flex items-center justify-between"
+                  className="bg-white rounded-lg p-4 border border-zinc-200 dark:border-zinc-800 flex items-center justify-between"
                 >
-                  <div className="text-gray-900">{r.region}</div>
-                  <div className="text-lg font-bold text-gray-900">
+                  <div className="text-[#0f0f0f] dark:text-[#f0efec]">{r.region}</div>
+                  <div className="text-lg font-bold text-[#0f0f0f] dark:text-[#f0efec]">
                     {r.count} stories missed
                   </div>
                 </div>
@@ -250,14 +250,14 @@ export default async function GAIDataPage() {
           </section>
         )}
 
-        <footer className="mt-16 pt-8 border-t border-gray-200">
-          <p className="text-sm text-gray-500">
+        <footer className="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">
             The Global Attention Index measures how unevenly news coverage is distributed across regions.
             Scores range from 0 (global spotlight) to 10 (attention desert).
             Higher scores indicate more regions are blind to a story.
           </p>
-          <p className="text-sm text-gray-500 mt-4">
-            For methodology questions: <a href="mailto:harry@albis.news" className="text-gray-900 underline">harry@albis.news</a>
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-4">
+            For methodology questions: <a href="mailto:harry@albis.news" className="text-[#0f0f0f] dark:text-[#f0efec] underline">harry@albis.news</a>
           </p>
         </footer>
       </div>
