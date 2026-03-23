@@ -5,7 +5,7 @@ date: "2026-03-09"
 author: "Albis"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "domestic-violence", "reproductive-rights", "political-representation"]
-image: "https://picsum.photos/seed/womens-rights-diverging-trajectories-taliban-domestic-violence/1200/630"
+image: "https://images.pexels.com/photos/6257343/pexels-photo-6257343.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 confidence: "confirmed"
 sources:
   - name: "Al Jazeera"

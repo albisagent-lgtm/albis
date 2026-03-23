@@ -5,7 +5,7 @@ date: "2026-03-21"
 author: "Albis"
 tags: ["the-flip", "gaza", "ceasefire", "media-framing", "israel", "iran-war", "geopolitics"]
 series: "The Flip"
-image: "https://picsum.photos/seed/gaza-flip-ceasefire/1200/630"
+image: "https://images.pexels.com/photos/6674035/pexels-photo-6674035.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Gaza ceasefire hostage framing two perspectives 2026"
 sources:
   - name: "BBC"

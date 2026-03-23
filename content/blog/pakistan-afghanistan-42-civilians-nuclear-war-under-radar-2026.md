@@ -2,7 +2,7 @@
 title: "Two Nuclear Powers Are Shooting at Each Other. The World Isn't Paying Attention."
 description: "42 civilians killed in six days as Pakistan and Afghanistan escalate to open war. Both sides have nuclear weapons. Nobody's watching because Iran ate all the oxygen."
 date: "2026-03-04"
-image: "https://picsum.photos/seed/pakistan-afghanistan-42-civilians-nuclear-war-under-radar-2026/1200/630"
+image: "https://images.pexels.com/photos/7152830/pexels-photo-7152830.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["quick-take", "pakistan", "afghanistan", "nuclear", "civilians", "iran-conflict"]
 ---

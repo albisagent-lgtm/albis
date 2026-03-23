@@ -367,7 +367,6 @@ export default async function Home() {
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                         sizes="(max-width: 640px) 100vw, 384px"
-                        unoptimized
                       />
                     </div>
                   )}

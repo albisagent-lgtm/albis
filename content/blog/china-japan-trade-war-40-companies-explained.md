@@ -2,7 +2,7 @@
 title: "China Just Sanctioned 40 Japanese Companies. Here's What That Actually Means."
 description: "Export controls are the new weapons in the tech cold war. China's latest move against Japan shows how global supply chains are being weaponized—and who's caught in the crossfire."
 date: "2026-02-27"
-image: "https://picsum.photos/seed/china-japan-trade-war-40-companies-explained/1200/630"
+image: "https://images.pexels.com/photos/36652830/pexels-photo-36652830.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["explainer", "china", "japan", "trade-war", "semiconductors", "supply-chains"]
 category: "analysis"

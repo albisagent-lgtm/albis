@@ -4,7 +4,7 @@ description: "Trump invited 12 Latin American leaders to Florida. Three of the h
 date: "2026-03-10"
 author: "Albis"
 tags: ["quick-take", "geopolitics", "latin-america", "trump", "diplomacy"]
-image: https://picsum.photos/seed/trump-latin-america-summit-ideology-not-geography-march-2026/1200/630
+image: "https://images.pexels.com/photos/7327850/pexels-photo-7327850.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 sources:
   - name: "The Guardian"
     url: "https://www.theguardian.com/world/2026/mar/07/an-ideological-guest-list-trump-invites-latin-americas-rightwing-leaders-to-florida-summit"

@@ -4,7 +4,7 @@ description: "The EU just banned facial recognition in public spaces. The US jus
 date: "2026-03-10"
 author: "Albis"
 tags: ["explainer", "ai-regulation", "eu-ai-act", "facial-recognition", "privacy", "trump", "transatlantic"]
-image: "https://picsum.photos/seed/ai-regulation-eu-us-split/1200/630"
+image: "https://images.pexels.com/photos/6345325/pexels-photo-6345325.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 confidence: "confirmed"
 sources:
   - name: "Brookings Institution"

@@ -3,7 +3,7 @@ title: "How to Escape Your News Filter Bubble: A Practical Guide"
 description: "Your news feed is lying to you — by omission. Here's a practical, step-by-step guide to breaking out of your filter bubble and actually seeing the full picture."
 date: "2026-02-21"
 author: "Albis"
-image: "https://picsum.photos/seed/how-to-escape-news-filter-bubble/1200/630"
+image: "https://images.pexels.com/photos/4387779/pexels-photo-4387779.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["filter bubble", "media literacy", "news", "guide"]
 category: "media-literacy"
 ---

@@ -4,7 +4,7 @@ description: "Global fertility hit 2.25 births per woman in 2024—below replace
 date: "2026-03-17"
 author: "Albis"
 tags: ["quick-take", "demographics", "fertility", "global", "aging", "population"]
-image: "https://picsum.photos/seed/global-fertility-rate-below-replacement-2026/1200/630"
+image: "https://images.pexels.com/photos/6849571/pexels-photo-6849571.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "global fertility rate below replacement 2026"
 sources:
   - name: "Voronoi App"

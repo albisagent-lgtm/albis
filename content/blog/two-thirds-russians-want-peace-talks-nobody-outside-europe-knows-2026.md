@@ -2,7 +2,7 @@
 title: "Two-Thirds of Russians Want Peace Talks. Almost Nobody Outside Europe Knows."
 description: "Levada Center poll finds 67% of Russians favor peace negotiations and only 24% want war to continue — record highs in both directions. The world isn't paying attention."
 date: "2026-03-08"
-image: "https://picsum.photos/seed/two-thirds-russians-want-peace-talks-nobody-outside-europe-knows-2026/1200/630"
+image: "https://images.pexels.com/photos/6257339/pexels-photo-6257339.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["unseen", "gai", "russia", "ukraine", "public-opinion", "peace-negotiations", "levada"]
 faqs:

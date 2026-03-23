@@ -2,7 +2,7 @@
 title: "Headlines Change What You Think Before You Read the Article"
 description: "A news headline doesn't just summarize a story. It tells your brain how to interpret everything that follows. Here's how that works — and what you can do about it."
 date: "2026-03-04"
-image: "https://picsum.photos/seed/headlines-change-what-you-think-before-you-read-the-article/1200/630"
+image: "https://images.pexels.com/photos/6236039/pexels-photo-6236039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 category: "Information Awareness"
 tags: ["information awareness", "media literacy", "psychology", "headlines", "framing"]

@@ -2,7 +2,7 @@
 title: "The UK Is One Shock Away From Food Riots. Not a Famine—a Cyber-Attack."
 description: "Britain imports 46% of its food. Experts say one port hack, one bad harvest, or the Iran war rippling through fertiliser costs could trigger empty shelves and 30,000 violent injuries."
 date: "2026-03-04"
-image: "https://picsum.photos/seed/uk-food-system-one-shock-from-riots-experts-warn-2026/1200/630"
+image: "https://images.pexels.com/photos/4437148/pexels-photo-4437148.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["quick-take", "food-security", "uk", "cyber", "infrastructure"]
 ---

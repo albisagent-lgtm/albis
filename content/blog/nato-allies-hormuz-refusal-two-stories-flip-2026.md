@@ -7,7 +7,7 @@ featured: false
 tags: ["the-flip"]
 series: "The Flip"
 author: "Albis"
-image: "https://picsum.photos/seed/nato-hormuz-flip/1200/630"
+image: "https://images.pexels.com/photos/7327850/pexels-photo-7327850.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 ---
 
 ## From Washington

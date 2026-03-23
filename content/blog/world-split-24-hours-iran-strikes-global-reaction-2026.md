@@ -2,7 +2,7 @@
 title: "40 Countries Responded to the Iran Strikes. They Described Two Different Wars."
 description: "The same military operation read as liberation or aggression depending on where you stood."
 date: "2026-03-01"
-image: "https://picsum.photos/seed/world-split-24-hours-iran-strikes-global-reaction-2026/1200/630"
+image: "https://images.pexels.com/photos/6950205/pexels-photo-6950205.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["trending", "iran", "geopolitics", "global-reaction", "perspectives", "information-awareness"]
 category: "perspectives"

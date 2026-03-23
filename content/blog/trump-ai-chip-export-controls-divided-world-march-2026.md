@@ -2,7 +2,7 @@
 title: "America Wants to Control Every AI Chip on Earth. The Rest of the World Heard Something Else."
 description: "The US is drafting rules to approve or deny every major AI chip shipment worldwide. Washington calls it national security. Beijing calls it economic coercion. Both are reading the same policy document."
 date: 2026-03-09
-image: "https://picsum.photos/seed/trump-ai-chip-export-controls-divided-world-march-2026/1200/630"
+image: "https://images.pexels.com/photos/3520679/pexels-photo-3520679.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["divided", "pgi", "ai", "export-controls", "semiconductors", "china", "geopolitics", "tech"]
 confidence: "confirmed"

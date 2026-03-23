@@ -2,7 +2,7 @@
 title: "Pakistan Just Bombed Kabul and Kandahar. This Is Now a War."
 description: "Pakistan launched airstrikes on Afghanistan's two largest cities, declared 'open war,' and shattered a fragile ceasefire. Here's how it happened."
 date: "2026-02-28"
-image: "https://picsum.photos/seed/pakistan-bombs-kabul-kandahar-open-war-afghanistan-2026/1200/630"
+image: "https://images.pexels.com/photos/5373891/pexels-photo-5373891.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["trending", "pakistan", "afghanistan", "war", "taliban", "durand-line", "geopolitics"]
 category: "breaking"

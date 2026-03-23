@@ -4,7 +4,7 @@ description: "Sudan's civil war killed more civilians in one week than the first
 date: "2026-03-16"
 author: "Albis"
 tags: ["quick-take", "sudan", "drone-warfare", "conflict", "africa", "invisible-crisis"]
-image: "https://picsum.photos/seed/sudan-drone-strike-eleven-dead-invisible-war-democratized-aerial-violence/1200/630"
+image: "https://images.pexels.com/photos/2665146/pexels-photo-2665146.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 sources:
   - name: "Al Jazeera"
     url: "https://www.aljazeera.com/news/2026/3/13/drone-attack-on-market-in-sudan-kills-11-as-air-war-civilian-toll-mounts"

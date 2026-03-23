@@ -307,7 +307,6 @@ function PickCard({ post, size = "normal" }: { post: Post; size?: "large" | "nor
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes={isLarge ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
-          unoptimized
         />
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
@@ -359,7 +358,6 @@ function ArticleCard({ post }: { post: Post }) {
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, 33vw"
-              unoptimized
             />
           </div>
         )}
@@ -411,7 +409,6 @@ function ArticleRow({ post }: { post: Post }) {
               fill
               className="object-cover"
               sizes="80px"
-              unoptimized
             />
           </div>
         )}

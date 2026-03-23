@@ -2,7 +2,7 @@
 title: "An Indonesian Court Just Acquitted Protest Leaders. 6.2 Billion People Didn't Notice."
 description: "Indonesia's year-long democracy crisis has killed 10 people, burned parliament buildings, and triggered the biggest protests since 1998. Almost nobody outside Asia is paying attention."
 date: "2026-03-07"
-image: "https://picsum.photos/seed/indonesia-protests-invisible-democracy-crisis-2026/1200/630"
+image: "https://images.pexels.com/photos/36167515/pexels-photo-36167515.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["unseen", "gai", "indonesia", "protests", "democracy", "southeast-asia"]
 sources:

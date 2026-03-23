@@ -2,7 +2,7 @@
 title: "The US Just Made College Money Available for 8-Week Programs. There's a Catch Nobody's Talking About."
 description: "Workforce Pell Grants go live July 2026, letting students use federal aid for short-term certificates. But every dollar spent counts against their lifetime limit for a full degree."
 date: "2026-03-02"
-image: "https://picsum.photos/seed/workforce-pell-grant-eight-week-college-money-july-2026/1200/630"
+image: "https://images.pexels.com/photos/7683892/pexels-photo-7683892.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["education", "pell-grants", "workforce", "reskilling", "policy"]
 category: "analysis"

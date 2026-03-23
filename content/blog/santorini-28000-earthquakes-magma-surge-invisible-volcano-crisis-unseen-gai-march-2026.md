@@ -2,7 +2,7 @@
 title: "28,000 Earthquakes Hit Santorini. 6.5 Billion People Have No Idea."
 description: "300 million cubic meters of magma surged beneath one of the world's most famous islands. Only Europe noticed."
 date: "2026-03-09"
-image: "https://picsum.photos/seed/santorini-28000-earthquakes-magma-surge-invisible-volcano-crisis-unseen-gai-march-2026/1200/630"
+image: "https://images.pexels.com/photos/5943231/pexels-photo-5943231.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["unseen", "gai", "santorini", "volcano", "earthquakes", "greece", "kolumbo", "magma"]
 faqs:

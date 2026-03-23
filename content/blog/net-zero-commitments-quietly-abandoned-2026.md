@@ -2,7 +2,7 @@
 title: "The World Agreed on Net Zero by 2050. Then Quietly Stopped Caring."
 description: "Bloomberg says net zero is dead. Trump gutted EPA climate authority. Rich nations went from 15 mentions to 1. Global fossil fuel demand hit all-time highs. The climate targets we heard about for years are being abandoned."
 date: "2026-03-06"
-image: "https://picsum.photos/seed/net-zero-commitments-quietly-abandoned-2026/1200/630"
+image: "https://images.pexels.com/photos/36155544/pexels-photo-36155544.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["quick-take", "climate", "net-zero", "energy-policy", "trump", "bloomberg"]
 sources:

@@ -4,7 +4,7 @@ description: "A 2,000-bed addiction hospital was hit at 9pm. The death toll coul
 date: "2026-03-18"
 author: "Albis"
 tags: ["quick-take", "pakistan", "afghanistan", "conflict", "shadow-wars", "kabul"]
-image: "https://picsum.photos/seed/pakistan-kabul-hospital-bombing-2026/1200/630"
+image: "https://images.pexels.com/photos/5373891/pexels-photo-5373891.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Pakistan Kabul hospital bombing 2026"
 sources:
   - name: "The Guardian"

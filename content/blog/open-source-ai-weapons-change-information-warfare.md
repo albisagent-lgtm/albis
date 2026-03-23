@@ -2,7 +2,7 @@
 title: "Open-Source AI Weapons Just Changed Information Warfare"
 description: "CyberStrikeAI hit Eastern Europe this month. It's free, anyone can use it, and the barriers to cyber warfare just collapsed."
 date: "2026-03-04"
-image: "https://picsum.photos/seed/open-source-ai-weapons-change-information-warfare/1200/630"
+image: "https://images.pexels.com/photos/5380601/pexels-photo-5380601.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["information-warfare", "ai-weapons", "cyberstrikeai", "deepfakes", "disinformation", "cyber-security"]
 pillars: ["the-race", "the-signal"]

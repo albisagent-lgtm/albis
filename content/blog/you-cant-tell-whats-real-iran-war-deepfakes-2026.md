@@ -2,7 +2,7 @@
 title: "You Can't Tell What's Real Anymore. And That's the Point."
 description: "The Iran-Israel war is the first conflict where deepfakes flood feeds faster than fact-checkers can debunk them. Here's how the trust infrastructure of war reporting just broke."
 date: "2026-03-05"
-image: "https://picsum.photos/seed/you-cant-tell-whats-real-iran-war-deepfakes-2026/1200/630"
+image: "https://images.pexels.com/photos/7152846/pexels-photo-7152846.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Harry Wenham"
 tags: ["explainer", "deepfakes", "Iran", "Israel", "information warfare", "AI", "misinformation"]
 faqs: [

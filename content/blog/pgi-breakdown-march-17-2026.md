@@ -3,7 +3,7 @@ title: "The World Agrees on the Facts. The Problem is Who's to Blame."
 description: "Today's PGI score of 5.4 reveals a pattern: every region sees the same deaths, the same closed strait, the same oil spike—but none of them agree on why it's happening or who benefits."
 pubDate: 2026-03-18
 updatedDate: 2026-03-18
-heroImage: "https://picsum.photos/seed/pgi-march-17-2026/1200/630"
+heroImage: "https://images.pexels.com/photos/5138168/pexels-photo-5138168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 category: "analysis"
 tags: ["pgi-breakdown"]
 ---

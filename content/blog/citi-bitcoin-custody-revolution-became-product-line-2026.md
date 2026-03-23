@@ -2,7 +2,7 @@
 title: "The Bank That Survived 2008 Just Started Holding Bitcoin. The Revolution Is Over."
 description: "Citigroup's launching Bitcoin custody this year. When the establishment absorbs what was designed to replace it, who won?"
 date: "2026-03-01"
-image: "https://picsum.photos/seed/citi-bitcoin-custody-revolution-became-product-line-2026/1200/630"
+image: "https://images.pexels.com/photos/6764526/pexels-photo-6764526.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["quick-take", "bitcoin", "cryptocurrency", "finance", "wall-street"]
 category: "analysis"

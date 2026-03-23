@@ -2,7 +2,7 @@
 title: "China's Squeezing Taiwan With Two Hands: Military Drills and Economic Pressure"
 description: "China's running military blockade rehearsals around Taiwan while economically punishing Japan for supporting it. This isn't an invasion — it's a slow suffocation strategy."
 date: "2026-03-07"
-image: "https://picsum.photos/seed/china-taiwan-squeeze-military-drills-economic-pressure-japan-2026/1200/630"
+image: "https://images.pexels.com/photos/36300907/pexels-photo-36300907.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["explainer", "china", "taiwan", "japan", "military", "blockade", "geopolitics"]
 faqs:

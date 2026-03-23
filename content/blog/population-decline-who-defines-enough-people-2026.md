@@ -1,7 +1,7 @@
 ---
 title: "Population Decline Accelerates: Who Gets to Define 'Enough People'?"
 date: 2026-03-04
-image: "https://picsum.photos/seed/population-decline-who-defines-enough-people-2026/1200/630"
+image: "https://images.pexels.com/photos/6849571/pexels-photo-6849571.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 excerpt: "Global fertility just hit 2.25. Europe sees existential crisis. Sub-Saharan Africa sees overpopulation. The same number triggers opposite responses—and nobody's plan is working."
 category: Migration & Demographics

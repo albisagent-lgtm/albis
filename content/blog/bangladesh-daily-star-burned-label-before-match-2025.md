@@ -2,7 +2,7 @@
 title: "A Mob Burned Bangladesh's Oldest Newspaper. The Label Came First."
 description: "The Daily Star's offices were torched after being called an 'Indian agent.' The accusation justified the violence. The pattern is older than print itself."
 date: "2026-02-28"
-image: "https://picsum.photos/seed/bangladesh-daily-star-burned-label-before-match-2025/1200/630"
+image: "https://images.pexels.com/photos/5505718/pexels-photo-5505718.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["quick-take", "press-freedom", "bangladesh", "media", "violence"]
 category: "media-literacy"

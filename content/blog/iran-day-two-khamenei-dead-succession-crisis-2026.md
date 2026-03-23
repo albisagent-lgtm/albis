@@ -2,7 +2,7 @@
 title: "Iranian Missiles Hit Tel Aviv. Nobody Knows Who's In Charge."
 description: "Iranian hypersonic missiles struck Tel Aviv and Haifa after Khamenei's death. The IRGC controls the arsenal, but no clear successor has emerged."
 date: "2026-03-01"
-image: "https://picsum.photos/seed/iran-day-two-khamenei-dead-succession-crisis-2026/1200/630"
+image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["trending", "iran", "geopolitics", "middle-east", "us-iran", "israel", "oil", "crisis"]
 category: "breaking"

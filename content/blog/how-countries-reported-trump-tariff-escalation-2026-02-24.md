@@ -2,7 +2,7 @@
 title: "How Different Countries Reported Trump's Tariff Escalation After Supreme Court Ruling"
 description: "The same tariff policy shift produced victory narratives in the US, trade-deal betrayal warnings in Europe, and unexpected market gains in Latin America. Here's how four regions saw one event completely differently."
 date: "2026-02-24"
-image: "https://picsum.photos/seed/how-countries-reported-trump-tariff-escalation-2026-02-24/1200/630"
+image: "https://images.pexels.com/photos/6770610/pexels-photo-6770610.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["reactive", "global-perspectives", "trade-policy", "economic-flows", "information-asymmetry"]
 category: "perspectives"

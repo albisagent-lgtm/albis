@@ -2,7 +2,7 @@
 title: "The Robots Are Inheriting the Roads' Intelligence"
 description: "Physical AI is converging: the same technology that taught cars to drive is now teaching humanoid robots to walk, work, and reason."
 date: "2026-02-26"
-image: "https://picsum.photos/seed/robots-inherit-self-driving-intelligence-2026/1200/630"
+image: "https://images.pexels.com/photos/7521902/pexels-photo-7521902.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Harry Wenham"
 tags: ["ai-intelligence", "robotics", "autonomous-vehicles", "nvidia", "physical-ai"]
 category: "analysis"

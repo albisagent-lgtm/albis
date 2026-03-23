@@ -4,7 +4,7 @@ description: "HBR surveyed 1,006 executives. The layoffs are almost entirely ant
 date: "2026-03-10"
 author: "Albis"
 tags: ["quick-take", "ai", "employment", "technology"]
-image: https://picsum.photos/seed/ai-anticipatory-layoffs/1200/630
+image: "https://images.pexels.com/photos/4623349/pexels-photo-4623349.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 sources:
   - name: "Harvard Business Review"
     url: "https://hbr.org/2026/01/companies-are-laying-off-workers-because-of-ais-potential-not-its-performance"

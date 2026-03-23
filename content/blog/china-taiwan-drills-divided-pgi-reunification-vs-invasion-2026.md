@@ -2,7 +2,7 @@
 title: "China's Taiwan Drills: 'Reunification Exercise' or 'Invasion Rehearsal'? It Depends Where You Read the News"
 description: "The same military drills around Taiwan are described as a legitimate sovereignty action in Beijing and an invasion rehearsal in Washington. The PGI score of 7.2 reveals one of the sharpest perception gaps in the world right now."
 date: 2026-03-07
-image: "https://picsum.photos/seed/china-taiwan-drills-divided-pgi-reunification-vs-invasion-2026/1200/630"
+image: "https://images.pexels.com/photos/5578206/pexels-photo-5578206.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["divided", "pgi", "china", "taiwan", "military", "geopolitics", "asia-pacific", "perception-gap"]
 confidence: "confirmed"

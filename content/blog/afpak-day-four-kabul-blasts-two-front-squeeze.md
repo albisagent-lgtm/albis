@@ -2,7 +2,7 @@
 title: "Day Four in Kabul: Anti-Aircraft Fire Lights Up the Sky as Pakistan's Two-Front Nightmare Deepens"
 slug: "afpak-day-four-kabul-blasts-two-front-squeeze"
 date: "2026-03-01"
-image: "https://picsum.photos/seed/afpak-day-four-kabul-blasts-two-front-squeeze/1200/630"
+image: "https://images.pexels.com/photos/5373891/pexels-photo-5373891.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"
 tags: ["Afghanistan", "Pakistan", "Taliban", "TTP", "Iran", "South Asia", "conflict"]
 category: "analysis"

@@ -139,7 +139,6 @@ export default async function LensArticlePage({ params }: Props) {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 672px"
-                unoptimized
                 priority
               />
             </div>

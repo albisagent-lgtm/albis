@@ -2,7 +2,7 @@
 title: "Two Numbers Explain 2026: The Rich Owe More Than Ever, the Poor Can't Afford Eggs"
 description: "Global debt is approaching World War II levels while food inflation hits hardest in the world's poorest nations. These aren't separate crises — the same system that creates the debt creates the hunger."
 date: 2026-03-01
-image: "https://picsum.photos/seed/two-numbers-explain-2026-rich-debt-poor-hunger/1200/630"
+image: "https://images.pexels.com/photos/7181493/pexels-photo-7181493.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: Harry Wenham
 tags: [debt, food security, inflation, developing nations, global economy, austerity]
 category: "data"
