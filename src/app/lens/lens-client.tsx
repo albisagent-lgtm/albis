@@ -315,7 +315,7 @@ function PickCard({ post, size = "normal" }: { post: Post; size?: "large" | "nor
           <span className="rounded-full border border-[#c8922a]/40 bg-[#c8922a]/20 px-2.5 py-0.5 font-semibold text-[#c8922a]">
             {getTypeLabel(post)}
           </span>
-          <span className="text-zinc-500">{post.readingTime} min</span>
+          <span className="text-zinc-500 dark:text-zinc-400">{post.readingTime} min</span>
           {depthBadge && <span className={`font-medium ${depthBadge.color}`}>{depthBadge.label}</span>}
         </div>
         <h3 className={`mt-3 font-[family-name:var(--font-playfair)] font-bold leading-tight tracking-tight text-white group-hover:text-[#e8b84a] transition-colors ${
@@ -328,7 +328,7 @@ function PickCard({ post, size = "normal" }: { post: Post; size?: "large" | "nor
             {post.description}
           </p>
         )}
-        <div className="mt-3 flex items-center gap-2 text-xs text-zinc-500">
+        <div className="mt-3 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
           <span>{post.author}</span>
           <span>·</span>
           <time><FreshDate dateString={post.date} /></time>
@@ -418,7 +418,7 @@ function ArticleRow({ post }: { post: Post }) {
             {getTypeLabel(post)}
           </span>
           <span className="text-zinc-400">·</span>
-          <span className="text-zinc-500">{post.readingTime} min read</span>
+          <span className="text-zinc-500 dark:text-zinc-400">{post.readingTime} min read</span>
           {depthBadge && (
             <>
               <span className="text-zinc-400">·</span>
@@ -426,7 +426,7 @@ function ArticleRow({ post }: { post: Post }) {
             </>
           )}
           <span className="text-zinc-400">·</span>
-          <time className="text-zinc-500"><FreshDate dateString={post.date} /></time>
+          <time className="text-zinc-500 dark:text-zinc-400"><FreshDate dateString={post.date} /></time>
         </div>
         <h3 className="mt-2 text-base font-semibold leading-snug group-hover:text-[#c8922a] dark:group-hover:text-[#c8922a]">
           {post.title}

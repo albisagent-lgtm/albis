@@ -79,7 +79,7 @@ export default async function ArchivePage() {
         <p className="text-xs font-medium tracking-[0.15em] uppercase text-zinc-400">
           Daily Briefings
         </p>
-        <p className="text-lg font-[family-name:var(--font-source-serif)] text-zinc-500 mt-space-2">
+        <p className="text-lg font-[family-name:var(--font-source-serif)] text-zinc-500 dark:text-zinc-400 mt-space-2">
           What lands in your inbox every morning.
         </p>
 
@@ -117,7 +117,7 @@ export default async function ArchivePage() {
           </div>
         ) : (
           <div className="mt-space-16 text-center">
-            <p className="font-[family-name:var(--font-source-serif)] text-lg text-zinc-500">
+            <p className="font-[family-name:var(--font-source-serif)] text-lg text-zinc-500 dark:text-zinc-400">
               Briefings archive coming soon.
             </p>
             <p className="text-sm text-zinc-400 mt-space-2">

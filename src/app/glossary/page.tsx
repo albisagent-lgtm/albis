@@ -96,7 +96,7 @@ export default function GlossaryPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-[#f8f7f4] dark:bg-[#0f0f0f]">
         <div className="max-w-3xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
           <header className="mb-12">
             <h1 className="text-4xl font-bold text-[#0f0f0f] dark:text-[#f0efec] mb-4">

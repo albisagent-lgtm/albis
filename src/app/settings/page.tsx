@@ -162,7 +162,7 @@ export default function SettingsPage() {
   if (!mounted) {
     return (
       <main className="min-h-[60vh] flex items-center justify-center">
-        <div className="text-sm text-zinc-500">Loading&hellip;</div>
+        <div className="text-sm text-zinc-500 dark:text-zinc-400">Loading&hellip;</div>
       </main>
     );
   }

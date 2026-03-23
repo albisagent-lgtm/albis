@@ -519,7 +519,7 @@ export default async function IndexesPage() {
           <Link href="/indexes/gai/data" className="rounded-lg border border-[#c8922a]/30 px-4 py-2 text-sm font-medium text-[#c8922a] transition-colors hover:bg-[#c8922a]/5">
             Raw GAI Data →
           </Link>
-          <Link href="/about" className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-500 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-white/[0.03]">
+          <Link href="/about" className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-500 dark:text-zinc-400 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-white/[0.03]">
             About Albis →
           </Link>
         </div>

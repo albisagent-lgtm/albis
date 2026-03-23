@@ -274,7 +274,7 @@ export default async function BriefingPage({ params }: Props) {
         {/* Back link */}
         <Link
           href="/archive"
-          className="text-sm text-zinc-500 hover:text-[#c8922a] transition-colors"
+          className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-[#c8922a] transition-colors"
         >
           ← All Briefings
         </Link>
@@ -290,7 +290,7 @@ export default async function BriefingPage({ params }: Props) {
         </h1>
 
         {/* Metadata */}
-        <div className="text-sm text-zinc-500 mt-space-4 flex gap-space-4">
+        <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-space-4 flex gap-space-4">
           {mood && <span>{mood}</span>}
           {storyCount != null && storyCount > 0 && (
             <span>{storyCount} stories</span>
@@ -320,7 +320,7 @@ export default async function BriefingPage({ params }: Props) {
           {prev ? (
             <Link
               href={`/archive/${prev.date}`}
-              className="text-zinc-500 hover:text-[#c8922a] transition-colors"
+              className="text-zinc-500 dark:text-zinc-400 hover:text-[#c8922a] transition-colors"
             >
               ← Previous Briefing
             </Link>
@@ -330,7 +330,7 @@ export default async function BriefingPage({ params }: Props) {
           {next ? (
             <Link
               href={`/archive/${next.date}`}
-              className="text-zinc-500 hover:text-[#c8922a] transition-colors"
+              className="text-zinc-500 dark:text-zinc-400 hover:text-[#c8922a] transition-colors"
             >
               Next Briefing →
             </Link>

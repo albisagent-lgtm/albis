@@ -91,7 +91,7 @@ export default async function CountryPerspectivePage({ params }: Props) {
             <h1 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl font-bold">
               {country.name}
             </h1>
-            <p className="mt-2 text-sm text-zinc-500">{country.region}</p>
+            <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">{country.region}</p>
           </div>
         </header>
 

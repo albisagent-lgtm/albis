@@ -729,7 +729,7 @@ export function BlindSpotsClient() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setSelectedRegion(null)}
-                  className="flex items-center gap-1 text-xs text-zinc-500 hover:text-[#c8922a] transition-colors"
+                  className="flex items-center gap-1 text-xs text-zinc-500 dark:text-zinc-400 hover:text-[#c8922a] transition-colors"
                 >
                   <ArrowLeft className="h-3.5 w-3.5" />
                   All regions

@@ -177,7 +177,7 @@ function IndexTooltip({
 
   return (
     <div className="rounded-lg border border-zinc-200 bg-white px-4 py-3 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
-      <p className="text-xs text-zinc-500">{formatFullDate(String(label))}</p>
+      <p className="text-xs text-zinc-500 dark:text-zinc-400">{formatFullDate(String(label))}</p>
       <p className="mt-1 text-2xl font-bold" style={{ color }}>
         {score.toFixed(2)}
       </p>
@@ -203,7 +203,7 @@ function DivergenceTooltip({
 
   return (
     <div className="rounded-lg border border-zinc-200 bg-white px-4 py-3 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
-      <p className="mb-2 text-xs text-zinc-500">{formatFullDate(String(label))}</p>
+      <p className="mb-2 text-xs text-zinc-500 dark:text-zinc-400">{formatFullDate(String(label))}</p>
       {pgi && (
         <div className="flex items-baseline gap-2">
           <span
@@ -263,7 +263,7 @@ export function PgiChart({ data }: { data: PgiPoint[] }) {
               <p className="text-4xl font-bold tracking-tight" style={{ color: tierColor(latest.daily_pgi) }}>
                 {latest.daily_pgi.toFixed(2)}
               </p>
-              <p className="mt-1 text-sm text-zinc-500">
+              <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
                 {tierName(latest.daily_pgi)} — {formatFullDate(latest.date)}
               </p>
             </>
@@ -352,7 +352,7 @@ export function GaiChart({ data }: { data: GaiPoint[] }) {
     return (
       <div className="flex h-80 items-center justify-center">
         <div className="text-center">
-          <p className="text-sm text-zinc-500">Data collection begins today</p>
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">Data collection begins today</p>
           <p className="mt-2 text-xs text-zinc-400">
             The Global Attention Index will appear here once data accumulates
           </p>
@@ -370,7 +370,7 @@ export function GaiChart({ data }: { data: GaiPoint[] }) {
               <p className="text-4xl font-bold tracking-tight" style={{ color: tierColor(latest.daily_gai) }}>
                 {latest.daily_gai.toFixed(2)}
               </p>
-              <p className="mt-1 text-sm text-zinc-500">
+              <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
                 {tierName(latest.daily_gai, "gai")} — {formatFullDate(latest.date)}
               </p>
             </>
@@ -482,7 +482,7 @@ export function DivergenceChart({
           <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
             The Divergence
           </h3>
-          <p className="mt-1 text-sm text-zinc-500">
+          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
             {hasPgi && hasGai
               ? "PGI and GAI — when lines diverge, information fails differently"
               : hasPgi

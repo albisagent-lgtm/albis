@@ -156,7 +156,7 @@ export default function AdminPage() {
   if (!mounted || !authorized) {
     return (
       <main className="flex min-h-[60vh] items-center justify-center">
-        <div className="text-sm text-zinc-500">Loading&hellip;</div>
+        <div className="text-sm text-zinc-500 dark:text-zinc-400">Loading&hellip;</div>
       </main>
     );
   }

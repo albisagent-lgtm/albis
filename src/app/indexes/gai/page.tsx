@@ -244,7 +244,7 @@ function GAIPageInner() {
       <main className="mx-auto max-w-6xl px-6 py-20">
         <div className="flex flex-col items-center gap-4">
           <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 border-t-[#c8922a]" />
-          <p className="text-sm text-zinc-500">Loading Global Attention Index...</p>
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">Loading Global Attention Index...</p>
         </div>
       </main>
     );
@@ -358,7 +358,7 @@ function GAIPageInner() {
 
               {blindSpotStories.length === 0 ? (
                 <div className="rounded-2xl border border-black/[0.07] bg-white/50 p-6 text-center dark:border-white/[0.06] dark:bg-white/[0.02]">
-                  <p className="text-sm text-zinc-500">No blind spots detected for {selectedRegionInfo.label} today — good coverage!</p>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400">No blind spots detected for {selectedRegionInfo.label} today — good coverage!</p>
                 </div>
               ) : (
                 <div className="space-y-4">
@@ -503,7 +503,7 @@ function GAIPageInner() {
                         style={{ width: `${pct}%` }}
                       />
                     </div>
-                    <div className="w-20 text-right text-sm text-zinc-500">
+                    <div className="w-20 text-right text-sm text-zinc-500 dark:text-zinc-400">
                       {r.count} of {stories.length} stories
                     </div>
                   </div>
@@ -641,7 +641,7 @@ function GAIPageInner() {
                         const dt = new Date(String(label) + "T00:00:00");
                         return (
                           <div className="rounded-lg border border-zinc-200 bg-white px-4 py-3 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
-                            <p className="text-xs text-zinc-500">{dt.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "long", year: "numeric" })}</p>
+                            <p className="text-xs text-zinc-500 dark:text-zinc-400">{dt.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "long", year: "numeric" })}</p>
                             <p className="mt-1 text-2xl font-bold" style={{ color: "#c8922a" }}>{score.toFixed(2)}</p>
                             <p className="text-xs font-medium" style={{ color: t.color }}>{t.name}</p>
                           </div>
@@ -682,7 +682,7 @@ function GAIPageInner() {
                         <span className="text-lg font-bold text-zinc-300 dark:text-zinc-600">--</span>
                       )}
                     </div>
-                    <p className="text-xs text-zinc-500 mb-2">{t.name}</p>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-2">{t.name}</p>
                     {hasAnyData ? (
                       <div className="h-12 w-full">
                         <ResponsiveContainer width="100%" height="100%">

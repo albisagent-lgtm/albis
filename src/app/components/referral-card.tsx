@@ -31,7 +31,7 @@ export function ReferralCard({ email }: { email: string }) {
   if (loading) {
     return (
       <div className="rounded-lg border border-zinc-200 p-6 dark:border-zinc-800/50">
-        <p className="text-sm text-zinc-500">Loading referral info…</p>
+        <p className="text-sm text-zinc-500 dark:text-zinc-400">Loading referral info…</p>
       </div>
     );
   }

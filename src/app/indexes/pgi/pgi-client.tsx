@@ -282,7 +282,7 @@ export function PGIClient() {
       <main className="mx-auto max-w-6xl px-space-6 py-space-16 md:py-space-24">
         <div className="flex flex-col items-center gap-4">
           <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 border-t-[#c8922a]" />
-          <p className="text-sm text-zinc-500">Loading Perception Gap Index…</p>
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">Loading Perception Gap Index…</p>
         </div>
       </main>
     );
@@ -328,7 +328,7 @@ export function PGIClient() {
             )}
           </div>
         ) : (
-          <div className="mt-10 text-zinc-500">No data available for today yet.</div>
+          <div className="mt-10 text-zinc-500 dark:text-zinc-400">No data available for today yet.</div>
         )}
       </section>
 
@@ -338,7 +338,7 @@ export function PGIClient() {
           <h2 className="mb-3 font-[family-name:var(--font-playfair)] text-2xl font-semibold">
             Daily Trend
           </h2>
-          <p className="mb-6 text-sm text-zinc-500 font-[family-name:var(--font-source-serif)]">
+          <p className="mb-6 text-sm text-zinc-500 dark:text-zinc-400 font-[family-name:var(--font-source-serif)]">
             How the perception gap has shifted over the past 30 days.
           </p>
           <div className="rounded-2xl border border-black/[0.07] bg-white/50 p-space-8 dark:border-white/[0.06] dark:bg-white/[0.02]">
@@ -414,7 +414,7 @@ export function PGIClient() {
           <h2 className="mb-3 font-[family-name:var(--font-playfair)] text-2xl font-semibold">
             The River System
           </h2>
-          <p className="mb-8 text-sm text-zinc-500 font-[family-name:var(--font-source-serif)]">
+          <p className="mb-8 text-sm text-zinc-500 dark:text-zinc-400 font-[family-name:var(--font-source-serif)]">
             Seven tributaries feed the PGI, each measuring narrative divergence in a different category of news.
           </p>
           <div className="grid gap-space-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -455,7 +455,7 @@ export function PGIClient() {
                       </div>
                     </>
                   ) : (
-                    <p className="mt-3 text-2xl font-bold tabular-nums text-zinc-500">--</p>
+                    <p className="mt-3 text-2xl font-bold tabular-nums text-zinc-500 dark:text-zinc-400">--</p>
                   )}
                 </div>
               );
@@ -470,7 +470,7 @@ export function PGIClient() {
           <h2 className="mb-3 font-[family-name:var(--font-playfair)] text-2xl font-semibold">
             Today&apos;s Scans
           </h2>
-          <p className="mb-6 text-sm text-zinc-500 font-[family-name:var(--font-source-serif)]">
+          <p className="mb-6 text-sm text-zinc-500 dark:text-zinc-400 font-[family-name:var(--font-source-serif)]">
             Three daily snapshots show how narratives shift throughout the day.
           </p>
           <div className="grid gap-space-4 sm:grid-cols-3">
@@ -507,7 +507,7 @@ export function PGIClient() {
           <h2 className="mb-3 font-[family-name:var(--font-playfair)] text-2xl font-semibold">
             Top Stories by Perception Gap
           </h2>
-          <p className="mb-6 text-sm text-zinc-500 font-[family-name:var(--font-source-serif)]">
+          <p className="mb-6 text-sm text-zinc-500 dark:text-zinc-400 font-[family-name:var(--font-source-serif)]">
             Stories ranked by how differently they're being reported across regions.
           </p>
           <div className="space-y-space-4">
@@ -614,7 +614,7 @@ export function PGIClient() {
           <h2 className="mb-3 font-[family-name:var(--font-playfair)] text-2xl font-semibold">
             Most Divergent Region Pairs
           </h2>
-          <p className="mb-6 text-sm text-zinc-500 font-[family-name:var(--font-source-serif)]">
+          <p className="mb-6 text-sm text-zinc-500 dark:text-zinc-400 font-[family-name:var(--font-source-serif)]">
             Which regions see the world most differently from each other today.
           </p>
           <div className="rounded-2xl border border-black/[0.07] bg-white/50 p-space-8 dark:border-white/[0.06] dark:bg-white/[0.02]">
@@ -656,7 +656,7 @@ export function PGIClient() {
           <h2 className="mb-3 font-[family-name:var(--font-playfair)] text-2xl font-semibold">
             Past 7 Days
           </h2>
-          <p className="mb-6 text-sm text-zinc-500 font-[family-name:var(--font-source-serif)]">
+          <p className="mb-6 text-sm text-zinc-500 dark:text-zinc-400 font-[family-name:var(--font-source-serif)]">
             A quick look at how the perception gap has evolved over the past week.
           </p>
           <div className="grid gap-space-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
