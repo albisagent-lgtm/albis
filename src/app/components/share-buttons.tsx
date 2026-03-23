@@ -81,7 +81,7 @@ export function ShareButtons({ url, title, description, compact = false }: Share
   }
 
   const btnClass = compact
-    ? "inline-flex items-center justify-center h-8 w-8 rounded-lg border border-black/[0.06] text-xs transition-colors hover:border-[#c8922a]/30 hover:text-[#c8922a] dark:border-white/[0.06]"
+    ? "inline-flex items-center justify-center h-11 w-11 rounded-lg border border-black/[0.06] text-xs transition-colors hover:border-[#c8922a]/30 hover:text-[#c8922a] dark:border-white/[0.06]"
     : "inline-flex items-center gap-2 rounded-lg border border-black/[0.06] px-3 py-2 text-xs font-medium text-zinc-600 transition-colors hover:border-[#c8922a]/30 hover:text-[#c8922a] dark:border-white/[0.06] dark:text-zinc-400";
 
   return (

@@ -203,6 +203,7 @@ export default function RootLayout({
         <BreakingNewsBanner />
 
         {/* Navigation — hides on scroll down, shows on scroll up (mobile) */}
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:rounded-lg focus:bg-[#c8922a] focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white">Skip to content</a>
         <nav className="nav-auto-hide sticky top-0 z-50 border-b border-black/[0.07] bg-[#f8f7f4]/90 backdrop-blur-xl dark:border-white/[0.06] dark:bg-[#0f0f0f]/90">
           <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
             <div className="flex items-center gap-8">
@@ -222,8 +223,8 @@ export default function RootLayout({
           </div>
         </nav>
 
-        {/* Main content with page transition */}
-        <div className="page-transition">
+        {/* Main content with page transition + mobile nav clearance */}
+        <div id="main-content" className="page-transition pb-20 md:pb-0">
           {children}
         </div>
 

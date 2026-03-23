@@ -447,6 +447,7 @@ export default function LensClient({ posts, initialPillar }: { posts: Post[]; in
   const [activeType, setActiveType] = useState<ArticleType>("all");
   const [activeTopic, setActiveTopic] = useState<TopicFilter | null>(null);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Today's picks for the hero section (shown only on "today" tab)
   const todaysPicks = useMemo(() => {
@@ -479,8 +480,18 @@ export default function LensClient({ posts, initialPillar }: { posts: Post[]; in
       result = posts.filter(p => isRecent(p.date, 36));
     }
 
+    // Search filter
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(p =>
+        p.title.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        p.tags.some(t => t.toLowerCase().includes(q))
+      );
+    }
+
     return result;
-  }, [posts, activePillar, activeType, activeTopic]);
+  }, [posts, activePillar, activeType, activeTopic, searchQuery]);
 
   // For "today" tab, separate hero picks from the rest
   const heroPicks = activeType === "today" && !activeTopic ? todaysPicks : [];
@@ -523,6 +534,17 @@ export default function LensClient({ posts, initialPillar }: { posts: Post[]; in
 
   return (
     <div>
+      {/* ── Search ──────────────────────────── */}
+      <div className="mb-6">
+        <input
+          type="text"
+          placeholder="Search articles..."
+          value={searchQuery}
+          onChange={(e) => { setSearchQuery(e.target.value); setVisibleCount(ITEMS_PER_PAGE); }}
+          className="w-full max-w-md rounded-lg border border-black/10 bg-white px-4 py-3 text-sm placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#c8922a]/30 dark:border-white/10 dark:bg-zinc-900 dark:placeholder:text-zinc-500 dark:text-white"
+        />
+      </div>
+
       {/* ── Type Filter Tabs ──────────────────────────── */}
       <div className="mb-4">
         <div className="flex flex-wrap gap-2">

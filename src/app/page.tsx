@@ -201,7 +201,7 @@ export default async function Home() {
               The world&apos;s news<br />in 2&nbsp;minutes.
             </h1>
             <p className="mt-5 font-[family-name:var(--font-source-serif)] text-base sm:text-lg text-zinc-500 dark:text-zinc-400 max-w-lg mx-auto leading-relaxed">
-              A free daily briefing covering every region and perspective. 2&nbsp;minutes. Every&nbsp;morning.
+              The world&apos;s news, from every region and language, in one morning briefing.
             </p>
           </div>
 
