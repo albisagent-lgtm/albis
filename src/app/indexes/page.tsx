@@ -277,16 +277,15 @@ export default async function IndexesPage() {
             </p>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {[
-                { icon: "📊", name: "Factual Divergence", desc: "Do regions agree on the basic facts?" },
-                { icon: "🔗", name: "Causal Attribution", desc: "Who or what do they blame?" },
-                { icon: "🔍", name: "Framing & Emphasis", desc: "What aspect gets the spotlight?" },
-                { icon: "💬", name: "Emotional Valence", desc: "Outrage, sympathy, indifference?" },
-                { icon: "👤", name: "Actor Portrayal", desc: "Hero, villain, or invisible?" },
-                { icon: "💰", name: "Cui Bono", desc: "Whose interests does the framing serve?" },
+                { name: "Factual Divergence", desc: "Do regions agree on the basic facts?" },
+                { name: "Causal Attribution", desc: "Who or what do they blame?" },
+                { name: "Framing & Emphasis", desc: "What aspect gets the spotlight?" },
+                { name: "Emotional Valence", desc: "Outrage, sympathy, indifference?" },
+                { name: "Actor Portrayal", desc: "Hero, villain, or invisible?" },
+                { name: "Cui Bono", desc: "Whose interests does the framing serve?" },
               ].map((d) => (
                 <div key={d.name} className="rounded-xl border border-black/[0.05] bg-white/40 p-4 dark:border-white/[0.05] dark:bg-white/[0.01]">
-                  <div className="text-xl">{d.icon}</div>
-                  <p className="mt-2 text-sm font-semibold text-zinc-700 dark:text-zinc-200">{d.name}</p>
+                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-200">{d.name}</p>
                   <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{d.desc}</p>
                 </div>
               ))}
@@ -344,7 +343,7 @@ export default async function IndexesPage() {
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
-              {["🇺🇸 US", "🇪🇺 EU", "🌍 Middle East", "🌏 Asia-Pacific", "🇮🇳 South Asia", "🌍 Africa", "🌎 Latin America"].map((r) => (
+              {["US", "Europe", "Middle East", "Asia-Pacific", "South Asia", "Africa", "Latin America"].map((r) => (
                 <div key={r} className="rounded-lg border border-black/[0.05] bg-white/40 px-3 py-2 text-center text-xs text-zinc-600 dark:border-white/[0.05] dark:bg-white/[0.01] dark:text-zinc-400">
                   {r}
                 </div>
@@ -465,7 +464,7 @@ export default async function IndexesPage() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {([
               { idx: 0, label: "High Perception Gap, Low Attention Gap", desc: "Everyone sees it. Nobody agrees.", bg: "bg-[#c8922a]/5", border: "border-[#c8922a]/20", text: "text-[#c8922a]", dot: "bg-[#c8922a]" },
-              { idx: 2, label: "High Perception Gap, High Attention Gap", desc: "Invisible AND distorted. The danger zone. ⚠️", bg: "bg-red-500/5", border: "border-red-500/20", text: "text-red-600", dot: "bg-red-500" },
+              { idx: 2, label: "High Perception Gap, High Attention Gap", desc: "Invisible AND distorted. The danger zone.", bg: "bg-red-500/5", border: "border-red-500/20", text: "text-red-600", dot: "bg-red-500" },
               { idx: 3, label: "Low Perception Gap, Low Attention Gap", desc: "Global consensus. Rare.", bg: "bg-emerald-500/5", border: "border-emerald-500/20", text: "text-emerald-600", dot: "bg-emerald-500" },
               { idx: 1, label: "Low Perception Gap, High Attention Gap", desc: "Where covered, people agree. But most don't see it.", bg: "bg-[#c8922a]/5", border: "border-[#c8922a]/20", text: "text-[#c8922a]", dot: "bg-[#c8922a]" },
             ] as const).map((q) => (

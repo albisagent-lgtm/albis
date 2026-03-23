@@ -31,6 +31,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug);
   if (!post) return {};
   const url = `https://www.albis.news/lens/${slug}`;
+  // Build dynamic OG image URL with title + PGI + regions
+  const ogParams = new URLSearchParams({ title: post.title });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const p = post as any;
+  if (typeof p.perception_gap === "number") ogParams.set("pgi", p.perception_gap.toFixed(1));
+  if (Array.isArray(p.regions_found) && p.regions_found.length > 0) ogParams.set("regions", p.regions_found.slice(0, 4).join(","));
+  if (post.date && !isNaN(new Date(post.date).getTime())) ogParams.set("date", new Date(post.date).toLocaleDateString("en-NZ", { day: "numeric", month: "long", year: "numeric" }));
+  const ogImageUrl = `https://www.albis.news/api/og?${ogParams.toString()}`;
   return {
     title: post.title,
     description: post.description,
@@ -40,17 +48,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.description,
       url,
       type: "article",
-      publishedTime: post.date,
+      publishedTime: isNaN(new Date(post.date).getTime()) ? undefined : new Date(post.date).toISOString(),
       authors: [post.author],
       section: CATEGORIES[post.category as keyof typeof CATEGORIES] || "Analysis",
       tags: post.tags,
-      images: [{ url: post.image, width: 1200, height: 630 }],
+      images: [{ url: ogImageUrl, width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      images: [post.image],
+      images: [ogImageUrl],
     },
     alternates: { canonical: url },
   };
@@ -305,7 +313,7 @@ export default async function LensArticlePage({ params }: Props) {
             The daily briefing with perspectives from 7 regions — straight to your inbox.
           </p>
           <div className="mt-6">
-            <EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} />
+            <EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} source="article-bottom" />
           </div>
         </div>
 

@@ -111,7 +111,9 @@ export async function POST(request: Request) {
         });
       }
 
-      const insertData: Record<string, string> = { email, source: "website" };
+      const clientSource = body.source?.trim();
+      const source = clientSource && typeof clientSource === "string" && clientSource.length <= 64 ? clientSource : "website";
+      const insertData: Record<string, string> = { email, source };
       const ref = body.ref?.trim();
       if (ref && typeof ref === "string" && ref.length <= 32) {
         insertData.referred_by = ref;

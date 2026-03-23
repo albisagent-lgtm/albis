@@ -15,7 +15,7 @@ export function BlogCTA() {
         </p>
         
         <div className="mt-8">
-          <EmailCapture variant="hero" />
+          <EmailCapture variant="hero" source="blog-cta" />
         </div>
 
         <p className="mt-4 text-xs text-zinc-400 dark:text-zinc-500">

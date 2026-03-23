@@ -313,7 +313,7 @@ export default async function BriefingPage({ params }: Props) {
         <hr className="my-space-12 border-black/5 dark:border-white/5" />
 
         {/* Email capture */}
-        <EmailCapture />
+        <EmailCapture source="archive-detail" />
 
         {/* Prev/Next navigation */}
         <nav className="mt-space-12 flex justify-between text-sm">

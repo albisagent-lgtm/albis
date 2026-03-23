@@ -65,7 +65,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="mt-8">
-            <EmailCapture variant="hero" showSocialProof={true} showYesterdayLink={false} />
+            <EmailCapture variant="hero" showSocialProof={true} showYesterdayLink={false} source="about" />
           </div>
         </div>
 

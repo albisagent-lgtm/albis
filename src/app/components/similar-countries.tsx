@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getCountryBySlug } from "@/app/perspectives/countries";
+import { getCountryBySlug } from "@/lib/countries";
 import { getSimilarCountries } from "@/data/country-similarities";
 
 interface Props {

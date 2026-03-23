@@ -259,7 +259,7 @@ export default async function Home() {
             <p className="text-center font-[family-name:var(--font-source-serif)] text-sm text-zinc-500 dark:text-zinc-400 mb-4">
               Get your daily briefing every morning. Free.
             </p>
-            <EmailCapture variant="hero" showSocialProof={true} showYesterdayLink={true} />
+            <EmailCapture variant="hero" showSocialProof={true} showYesterdayLink={true} source="homepage-hero" />
           </div>
         </div>
       </section>
@@ -430,7 +430,7 @@ export default async function Home() {
             Your daily briefing. Every region. Every perspective. 2&nbsp;minutes. Free.
           </p>
           <div className="mt-8">
-            <EmailCapture showSocialProof={true} showYesterdayLink={false} />
+            <EmailCapture showSocialProof={true} showYesterdayLink={false} source="homepage-bottom" />
           </div>
         </div>
       </section>

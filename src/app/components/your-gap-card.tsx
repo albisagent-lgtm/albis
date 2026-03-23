@@ -194,10 +194,10 @@ export function YourGapCard({
 
       <div className="mt-4">
         <Link
-          href="/perspectives"
+          href="/lens"
           className="text-sm font-medium text-[#c8922a] transition-colors hover:text-[#b17f24]"
         >
-          See all regional perspectives &rarr;
+          Explore more articles &rarr;
         </Link>
       </div>
     </div>

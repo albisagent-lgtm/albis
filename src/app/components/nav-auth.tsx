@@ -124,12 +124,6 @@ export function NavLinks() {
         The Lens
       </Link>
       <Link
-        href="/perspectives"
-        className="text-xs font-medium tracking-wide text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-      >
-        Perspectives
-      </Link>
-      <Link
         href="/indexes"
         className="text-xs font-medium tracking-wide text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
       >

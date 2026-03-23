@@ -128,7 +128,7 @@ export default async function ArchivePage() {
 
         {/* Email capture */}
         <div className="mt-space-16 pt-space-12 border-t border-black/5 dark:border-white/5">
-          <EmailCapture />
+          <EmailCapture source="archive" />
         </div>
       </div>
     </main>

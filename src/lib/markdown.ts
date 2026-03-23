@@ -1,5 +1,5 @@
 import { TOPICS } from "@/lib/topics";
-import { COUNTRIES } from "@/app/perspectives/countries";
+import { COUNTRIES } from "@/lib/countries";
 import { getAllPosts } from "@/lib/blog";
 
 interface LinkCandidate {

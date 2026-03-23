@@ -1,6 +1,6 @@
 import { getAllPosts, type BlogPost } from "@/lib/blog";
 import { TOPICS, type Topic } from "@/lib/topics";
-import { COUNTRIES } from "@/app/perspectives/countries";
+import { COUNTRIES } from "@/lib/countries";
 
 export interface RelatedPost {
   slug: string;
@@ -57,37 +57,21 @@ export function getRelatedPages(tags: string[]): RelatedLink[] {
   const links: RelatedLink[] = [];
   const lowerTags = tags.map((t) => t.toLowerCase());
 
-  // Match topics
+  // Match topics — link to /lens with topic filter
   for (const topic of TOPICS) {
     const match = topic.keywords.some((kw) =>
       lowerTags.some((t) => t.includes(kw) || kw.includes(t))
     );
     if (match) {
       links.push({
-        href: `/topics/${topic.slug}`,
-        label: `${topic.emoji} ${topic.name}`,
+        href: `/lens?topic=${topic.slug}`,
+        label: topic.name,
         type: "topic",
       });
     }
   }
 
-  // Match countries mentioned in tags
-  for (const country of COUNTRIES) {
-    const match = lowerTags.some(
-      (t) =>
-        t.includes(country.name.toLowerCase()) ||
-        t.includes(country.slug)
-    );
-    if (match) {
-      links.push({
-        href: `/perspectives/${country.slug}`,
-        label: `${country.flag} ${country.name}`,
-        type: "perspective",
-      });
-    }
-  }
-
-  return links.slice(0, 8);
+  return links.slice(0, 5);
 }
 
 /**

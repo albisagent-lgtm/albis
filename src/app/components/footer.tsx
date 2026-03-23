@@ -31,7 +31,6 @@ export function Footer() {
               <ul className="mt-4 space-y-2.5">
                 <FooterLink href="/">Home</FooterLink>
                 <FooterLink href="/archive">Briefings</FooterLink>
-                <FooterLink href="/perspectives">Perspectives</FooterLink>
                 <FooterLink href="/about">About</FooterLink>
                 <FooterLink href="/lens">The Lens</FooterLink>
               </ul>
@@ -42,10 +41,9 @@ export function Footer() {
               </p>
               <ul className="mt-4 space-y-2.5">
                 <FooterLink href="/indexes">Perception Gap Index</FooterLink>
-                <FooterLink href="/blind-spots">Blind Spot Map</FooterLink>
-                <FooterLink href="/quiz">Perspective Check</FooterLink>
+                <FooterLink href="/indexes/gai">Global Awareness Index</FooterLink>
                 <FooterLink href="/methodology">Methodology</FooterLink>
-                <FooterLink href="/topics">Topics</FooterLink>
+                <FooterLink href="/quiz">Perspective Check</FooterLink>
                 <li>
                   <a
                     href="/feed.xml"
@@ -84,7 +82,7 @@ export function Footer() {
                 Daily briefing, free forever.
               </p>
               <div className="mt-3">
-                <EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} />
+                <EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} source="footer" />
               </div>
             </div>
           </div>

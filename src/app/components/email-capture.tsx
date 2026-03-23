@@ -8,9 +8,10 @@ interface EmailCaptureProps {
   showSocialProof?: boolean;
   showYesterdayLink?: boolean;
   heading?: string;
+  source?: string;
 }
 
-export function EmailCapture({ variant = "default", showSocialProof = true, showYesterdayLink = false, heading }: EmailCaptureProps) {
+export function EmailCapture({ variant = "default", showSocialProof = true, showYesterdayLink = false, heading, source }: EmailCaptureProps) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -42,6 +43,7 @@ export function EmailCapture({ variant = "default", showSocialProof = true, show
           _t: mountTimeRef.current,
           ref: typeof window !== "undefined" ? localStorage.getItem("albis_ref") || "" : "",
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          source: source || "unknown",
         }),
       });
       const data = await res.json();

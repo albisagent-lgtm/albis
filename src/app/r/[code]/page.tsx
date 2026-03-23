@@ -32,7 +32,7 @@ export default async function ReferralPage({ params }: PageProps) {
         </p>
 
         <div className="mt-8">
-          <EmailCapture variant="hero" showSocialProof={true} showYesterdayLink={true} />
+          <EmailCapture variant="hero" showSocialProof={true} showYesterdayLink={true} source="referral" />
         </div>
 
         {/* Store referral code in client */}

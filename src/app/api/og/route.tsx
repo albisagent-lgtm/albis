@@ -23,6 +23,7 @@ const REGION_LABELS: Record<string, string> = {
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const title = searchParams.get("title") || "Today's Global Story";
+  const pgi = searchParams.get("pgi");
   const regions = searchParams.get("regions")?.split(",").filter(Boolean) || [
     "western-world",
     "east-se-asia",
@@ -104,6 +105,34 @@ export async function GET(req: NextRequest) {
           {title}
         </div>
 
+        {/* PGI Badge */}
+        {pgi && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
+              marginTop: "20px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                backgroundColor: "rgba(200,146,42,0.15)",
+                border: "1px solid rgba(200,146,42,0.3)",
+                borderRadius: "8px",
+                padding: "8px 16px",
+              }}
+            >
+              <span style={{ fontSize: "14px", fontWeight: 700, color: "#c8922a", letterSpacing: "0.1em" }}>PGI</span>
+              <span style={{ fontSize: "24px", fontWeight: 700, color: "#c8922a" }}>{pgi}</span>
+            </div>
+            <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)" }}>Perception Gap Index</span>
+          </div>
+        )}
+
         {/* Spacer */}
         <div style={{ flex: 1, display: "flex" }} />
 
@@ -158,7 +187,7 @@ export async function GET(req: NextRequest) {
               fontWeight: 500,
             }}
           >
-            See all perspectives at albis.news
+            albis.news
           </div>
           <div
             style={{
@@ -166,7 +195,7 @@ export async function GET(req: NextRequest) {
               color: "rgba(255,255,255,0.3)",
             }}
           >
-            One event. Multiple perspectives.
+            News intelligence, not noise.
           </div>
         </div>
       </div>
