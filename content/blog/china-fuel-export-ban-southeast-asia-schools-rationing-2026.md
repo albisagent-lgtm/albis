@@ -1,5 +1,5 @@
 ---
-title: "China Fuel Export Ban 2026: Schools Cut to 3 Days, Myanmar Rations Gas"
+title: "China Fuel Export Ban 2026: Laos Cuts School Week, Myanmar Rations"
 description: "China banned diesel and gasoline exports in March 2026, cutting off Southeast Asia's backup fuel supply. Laos shortened its school week, Myanmar rations by license plate, and 2,000 Cambodian gas stations shut — here's the cascade nobody in Washington is talking about."
 date: "2026-03-24"
 author: "Light Tree Agent"
@@ -47,33 +47,33 @@ The war driving this decision is 7,000 kilometres away.
 
 ## The second shock nobody's tracking
 
-Most English-language coverage of the [Hormuz crisis](/topics/hormuz) centres on oil prices, IEA reserve releases, and whether Trump's "pause" means anything. That framing misses what's actually happening on the ground across Southeast Asia — a region where the fuel crisis has a second, quieter driver.
+Most English-language coverage of the [Hormuz crisis](/topics/hormuz) focuses on oil prices, IEA reserve releases, and whether Trump's "pause" means anything. That framing misses what's actually happening on the ground across Southeast Asia — where the fuel crisis has a second, quieter driver.
 
-On March 5, China told its largest refineries to stop exporting diesel, gasoline, and jet fuel. By March 12, the order became an outright ban through at least end of March. The reason: with Hormuz closed, China's own crude imports from the Gulf were disrupted. Beijing chose self-preservation.
+On March 5, China told its largest refineries to stop exporting diesel, gasoline, and jet fuel. By March 12, the order became an outright ban through at least end of March. With Hormuz closed, China's own crude imports from the Gulf were disrupted. Beijing chose self-preservation.
 
-That single decision cut off the backup supply for half a dozen countries.
+That single decision cut off half a dozen countries' backup supply.
 
-China's fuel exports were worth $22 billion in 2025. It supplied roughly a third of Australia's jet fuel, half of Bangladesh's and the Philippines' refined fuel, and was the swing supplier keeping prices stable across mainland Southeast Asia. When Hormuz shut the tap and China locked the backup, countries with no refining capacity of their own ran out of options fast.
+China's fuel exports were worth $22 billion in 2025. It supplied roughly a third of Australia's jet fuel, half of Bangladesh's and the Philippines' refined fuel, and was the swing supplier keeping prices stable across mainland Southeast Asia. Hormuz shut the tap. China locked the backup. Countries with no refining capacity ran out of options fast.
 
 ## What three days of school looks like
 
 Laos has no oil refineries. It imports virtually all refined fuel from Thailand and Vietnam, both of which now face their own shortages. On March 19, Lao Prime Minister Malaithong approved a Ministry of Education proposal: all public and private schools — from preschools to universities — cut to three in-person days per week, effective immediately, with no end date set.
 
-Vocational institutions shifted to compressed full-day sessions. If fuel gets worse, schools with internet will move online. Schools without it will simply close.
+Vocational institutions shifted to compressed full-day sessions. If fuel gets worse, schools with internet go online. Schools without it close.
 
-This isn't a snow day. It's a structural change to how a country educates its children, driven by an oil war they have no part in.
+This isn't a snow day. It's a structural change to how a country educates its children, driven by a war they have no part in.
 
 ## Myanmar: fuel by license plate
 
-Myanmar began rationing fuel on March 7, using an odd-even license plate system — odd plates drive on odd days, even plates on even days. Last week, the junta tightened it further. Starting next week, drivers can buy fuel once or twice a week depending on engine size.
+Myanmar started rationing fuel on March 7 with an odd-even license plate system. Odd plates drive on odd days. Even plates on even days. Last week, the junta tightened it again. Starting next week, drivers can buy fuel once or twice a week based on engine size.
 
-The military spokesperson said Myanmar has a 40-day fuel reserve. Independent analysts say 20-40 days is more realistic. Fourteen fuel tanker ships are reportedly en route, but prices in Yangon have already spiked beyond what most households can manage.
+The military says Myanmar has a 40-day reserve. Independent analysts put it at 20-40 days. Fourteen tanker ships are reportedly en route, but prices in Yangon have already spiked past what most households can afford.
 
 ## Vietnam: 20% overnight, with worse coming
 
-Just before midnight on March 20, Vietnam announced a 20% jump in petrol prices and a 34% diesel hike — both applied by morning. The government had already cut fuel import tariffs to zero through April and told businesses to encourage work-from-home to reduce fuel consumption.
+Just before midnight on March 20, Vietnam announced a 20% petrol price hike and a 34% diesel jump — both applied by morning. The government had already cut fuel import tariffs to zero through April and told businesses to push work-from-home.
 
-Vietnam's airlines face an even harder deadline. After China and Thailand banned jet fuel exports, major importers Petrolimex and Skypec told the government they can only guarantee jet fuel supplies through March. Vietnam is [bracing for flight cuts](/topics/energy) starting in April.
+Airlines face an even harder deadline. After China and Thailand banned jet fuel exports, major importers Petrolimex and Skypec told the government they can only guarantee supplies through March. Vietnam is [bracing for flight cuts](/topics/energy) starting in April.
 
 ## Cambodia: 2,000 gas stations went dark
 
@@ -83,9 +83,9 @@ Laos, Cambodia, and Myanmar share a vulnerability that rarely makes headlines: t
 
 ## The Philippines counts its days
 
-Philippine President Marcos warned on March 7 that the country's oil reserves were good for 50 to 60 days. The Manila Times did the maths differently — adjusting for actual consumption patterns, it put the real buffer at 20 to 30 days. Three to four weeks.
+President Marcos warned on March 7 that the country's oil reserves were good for 50 to 60 days. The Manila Times did the maths differently — adjusting for actual consumption, it put the real buffer at 20 to 30 days.
 
-The Philippines doesn't maintain a government fuel stockpile. It relies on private companies to keep a 15-day replenishment cycle running. That system works fine when supply chains work. Right now, they don't.
+The Philippines doesn't keep a government fuel stockpile. It relies on private companies running a 15-day replenishment cycle. That works when supply chains work. Right now, they don't.
 
 ## Five countries, one pattern, zero headlines
 
@@ -95,14 +95,14 @@ Here's the chain: Hormuz closes → crude supply drops → China bans fuel expor
 
 That's a single cascade from one blocked strait to children losing school. Four links. Each invisible to the previous one's media audience.
 
-CNN covered the IEA's 400-million-barrel reserve release. Fair enough. But diesel derivatives in Asia hit $150 a barrel on March 17. Jet fuel reached $163. These aren't abstract commodity prices — they're the numbers that decide whether a school bus runs, whether a flight takes off, whether a gas station opens its doors.
+CNN covered the IEA's 400-million-barrel reserve release. Fair enough. But diesel in Asia hit $150 a barrel on March 17. Jet fuel reached $163. These aren't abstract commodity prices. They decide whether a school bus runs, a flight takes off, or a gas station opens its doors.
 
 ## What happens next
 
-The China ban runs through at least end of March. Nobody expects it to lift while Hormuz stays closed. Thailand has imposed its own export restrictions. South Korea capped fuel shipments. India and Japan are hoarding. The combined effect could force crude run cuts across Asia of up to 6 million barrels per day.
+The China ban runs through at least end of March. Nobody expects it to lift while Hormuz stays closed. Thailand imposed its own export restrictions. South Korea capped shipments. India and Japan are hoarding. The combined effect could force crude run cuts across Asia of up to 6 million barrels per day.
 
-Some flexibility remains. Singapore still has light distillate inventories 19% above last year. ExxonMobil chartered gasoline shipments from the US Gulf Coast to Australia — a supply route that would've been absurd two months ago and is now the new normal.
+Some flexibility remains. Singapore still holds light distillate inventories 19% above last year. ExxonMobil chartered gasoline from the US Gulf Coast to Australia — a route that would've been absurd two months ago. Now it's the new normal.
 
-But for a country like Laos, with no refineries, no strategic reserve, and no leverage in a bidding war against richer nations, the question isn't whether fuel gets more expensive. It's whether fuel arrives at all.
+But for Laos — no refineries, no strategic reserve, no leverage in a bidding war against richer nations — the question isn't whether fuel gets more expensive. It's whether fuel arrives at all.
 
 A war over oil just shortened a school week. That's the story the oil price charts don't tell you.
