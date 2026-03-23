@@ -303,7 +303,7 @@ function PickCard({ post, size = "normal" }: { post: Post; size?: "large" | "nor
       {hasImage && (
         <Image
           src={post.image!}
-          alt=""
+          alt={post.title}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes={isLarge ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
@@ -354,7 +354,7 @@ function ArticleCard({ post }: { post: Post }) {
           <div className="relative aspect-[16/9] w-full overflow-hidden">
             <Image
               src={post.image!}
-              alt=""
+              alt={post.title}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, 33vw"
@@ -405,7 +405,7 @@ function ArticleRow({ post }: { post: Post }) {
           <div className="relative hidden sm:block h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg">
             <Image
               src={post.image!}
-              alt=""
+              alt={post.title}
               fill
               className="object-cover"
               sizes="80px"
@@ -444,7 +444,7 @@ export default function LensClient({ posts, initialPillar }: { posts: Post[]; in
   // Validate and set initial pillar (exclude "the-lens" since that's the container now)
   const validInitialPillar = initialPillar && Object.keys(PILLARS).includes(initialPillar) && initialPillar !== "the-lens" ? initialPillar as PillarSlug : "all";
   const [activePillar, setActivePillar] = useState<PillarFilter>(validInitialPillar);
-  const [activeType, setActiveType] = useState<ArticleType>("today");
+  const [activeType, setActiveType] = useState<ArticleType>("all");
   const [activeTopic, setActiveTopic] = useState<TopicFilter | null>(null);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
@@ -523,26 +523,6 @@ export default function LensClient({ posts, initialPillar }: { posts: Post[]; in
 
   return (
     <div>
-      {/* ── Pillar Filter Tabs ────────────────────────── */}
-      <div className="mb-6">
-        <div className="flex flex-wrap gap-2 justify-center">
-          {PILLAR_FILTERS.map(f => (
-            <button
-              key={f.value}
-              onClick={() => handlePillarChange(f.value)}
-              className={
-                activePillar === f.value
-                  ? "flex items-center gap-2 rounded-full bg-[#c8922a] px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-all"
-                  : "flex items-center gap-2 rounded-full border border-black/[0.08] bg-white/60 px-5 py-2.5 text-sm font-medium text-zinc-600 transition-all hover:border-[#c8922a]/40 hover:bg-[#c8922a]/10 hover:text-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-zinc-400 dark:hover:text-[#c8922a]"
-              }
-            >
-              {f.emoji && <span className="text-base">{f.emoji}</span>}
-              {f.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* ── Type Filter Tabs ──────────────────────────── */}
       <div className="mb-4">
         <div className="flex flex-wrap gap-2">
@@ -552,7 +532,7 @@ export default function LensClient({ posts, initialPillar }: { posts: Post[]; in
               onClick={() => handleTypeChange(f.value)}
               className={
                 activeType === f.value
-                  ? "rounded-full bg-[#c8922a] px-4 py-2 text-sm font-medium text-white shadow-sm transition-all"
+                  ? "rounded-full bg-[#c8922a] px-4 py-2 text-sm font-medium text-[#0f0f0f] shadow-sm transition-all"
                   : "rounded-full border border-black/[0.07] bg-white/50 px-4 py-2 text-sm text-zinc-600 transition-all hover:border-[#c8922a]/30 hover:bg-[#c8922a]/10 dark:border-white/[0.07] dark:bg-white/[0.02] dark:text-zinc-400 dark:hover:text-[#c8922a]"
               }
             >
@@ -587,14 +567,10 @@ export default function LensClient({ posts, initialPillar }: { posts: Post[]; in
       {/* ── Today's Hero Picks ────────────────────────── */}
       {heroPicks.length > 0 && (
         <section className="mb-12">
-          <div className="mb-5 flex items-center gap-3">
+          <div className="mb-5">
             <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold tracking-tight">
               Today&apos;s Picks
             </h2>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-              Fresh
-            </span>
           </div>
 
           <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 auto-rows-auto">
@@ -616,11 +592,6 @@ export default function LensClient({ posts, initialPillar }: { posts: Post[]; in
             </div>
           )}
         </section>
-      )}
-
-      {/* ── Intelligence Deep Dive (when pillar is selected) ── */}
-      {activePillar !== "all" && (
-        <IntelligenceCard pillar={activePillar} />
       )}
 
       {/* ── Article Grid ──────────────────────────────── */}
