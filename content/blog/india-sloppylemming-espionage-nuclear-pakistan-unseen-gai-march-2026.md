@@ -1,6 +1,6 @@
 ---
-title: "India-Linked Cyber Attack on Pakistan's Nuclear Systems"
-description: "SloppyLemming spent a year inside Pakistan's nuclear regulators, navy, and telecoms. 112 domains. Custom malware. Here's the cyber attack on Pakistan that the world missed."
+title: "The Cyber Attack on Pakistan Nobody Reported"
+description: "India-linked hackers spent 12 months inside Pakistan's nuclear authority, navy, and telecoms — 112 domains, custom malware. The world was watching Iran. Here's what it missed."
 date: "2026-03-08"
 image: "https://images.pexels.com/photos/3044471/pexels-photo-3044471.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Harry Wenham"
@@ -36,7 +36,7 @@ faqs:
     a: "The Iran-Israel war and other conflicts have dominated international news cycles. Cyber espionage stories — especially between regional rivals in South Asia — rarely break through to Western media unless they involve Western targets directly."
 ---
 
-An India-linked hacking group spent an entire year infiltrating Pakistan's nuclear regulators, navy, and telecom networks — and the story barely registered outside South Asia. An estimated 6.2 billion people have no idea it happened.
+A major cyber attack on Pakistan's most sensitive systems ran for a full year without making global headlines. An India-linked hacking group infiltrated Pakistan's nuclear regulators, navy, and telecom networks — and an estimated 6.2 billion people have no idea it happened.
 
 The group is called SloppyLemming. The name sounds ridiculous. The operation was not.
 

@@ -1,12 +1,12 @@
 ---
-title: "AllSides vs Ground News vs Albis: Best Comparison 2026"
-description: "We ran the same story through AllSides, Ground News, and Albis. AllSides showed left vs right. Ground News showed who's ignoring it. Albis showed that two different wars are being reported under the same headline."
+title: "AllSides vs Ground News: What Both Miss (2026)"
+description: "AllSides shows left vs right. Ground News shows who's ignoring a story. We ran the same event through both — and found a gap neither catches. Here's what 6 billion people see differently."
 date: "2026-03-23"
 author: "Albis"
 image: "https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["comparison", "ground news", "allsides", "media bias", "news apps", "balanced news"]
 category: "media-literacy"
-seoKeyword: "AllSides vs Ground News vs Albis comparison 2026"
+seoKeyword: "AllSides vs Ground News comparison 2026"
 perception_gap: 7
 regions_found: [us, eu, middle_east, south_asia, asia_pacific]
 regions_absent: [africa, latam]
@@ -33,7 +33,7 @@ faqs:
 
 CNN calls it the "Iran war." Al Jazeera calls it the "US-Israel war on Iran." Same missiles. Same casualties. Two different conflicts, depending on where you read.
 
-We ran this story through three bias-detection tools — AllSides, Ground News, and Albis — to see what each one actually reveals. The results say more about the tools than about the war.
+If you're comparing AllSides vs Ground News to figure out which bias tool actually cuts through the noise, we ran the same story through both — plus Albis — to see what each one reveals. The results say more about the tools than about the war.
 
 ## One Story, Three Tools
 

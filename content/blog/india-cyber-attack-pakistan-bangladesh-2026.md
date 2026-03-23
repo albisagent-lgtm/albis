@@ -1,6 +1,6 @@
 ---
-title: "India's Running Sophisticated Cyber Operations Against Its Cricket Partners"
-description: "India-linked hackers targeted Pakistan's nuclear authority, Bangladesh's power grid, and Sri Lankan telecoms. Nobody outside South Asia noticed. Here's the emerging pattern of friendly-fire cyber warfare."
+title: "India's Cyber War on Pakistan: The Campaign Nobody Covered"
+description: "India-linked hackers hit Pakistan's nuclear authority, Bangladesh's power grid, and Sri Lankan telecoms in a year-long cyber attack. Nobody outside South Asia noticed. Here's the full picture."
 date: "2026-03-15"
 author: "Harry Wenham"
 tags: ["explainer", "cyber-warfare", "south-asia", "india", "pakistan", "bangladesh"]
