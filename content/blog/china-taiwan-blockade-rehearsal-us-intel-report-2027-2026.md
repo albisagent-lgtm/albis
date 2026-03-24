@@ -1,5 +1,5 @@
 ---
-title: "The US Said China Won't Invade Taiwan in 2027. China Then Released Drone Footage of Taipei."
+title: "US Says No Taiwan Invasion. China Released Drone Footage."
 description: "America's spy agencies just softened their Taiwan invasion forecast. Two days later, China dropped drone footage showing Taipei 101 from 9km away."
 date: "2026-03-21"
 author: "Albis"

@@ -1,5 +1,5 @@
 ---
-title: "Israel Just Bombed Tehran's Oil Refineries. That's Not a Military Target—It's Economic Warfare."
+title: "Israel Bombed Tehran's Refineries. That's Not War."
 description: "For the first time, Israel struck civilian infrastructure serving millions of Iranians. Refineries that heat homes and power the economy are burning. Trump says the war ends 'very soon.' But a 7th US soldier just died, oil hit $119, and the escalation ladder just added a new rung nobody agreed on."
 date: "2026-03-10"
 author: "Albis"

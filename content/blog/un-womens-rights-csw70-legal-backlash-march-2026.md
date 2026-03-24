@@ -1,5 +1,5 @@
 ---
-title: "UN Women's Commission Forced to Vote for First Time in 70 Years After US Objection"
+title: "UN Women's Commission Forced to Vote After 70 Years"
 slug: "un-womens-rights-csw70-legal-backlash-march-2026"
 excerpt: "The UN Commission on the Status of Women broke 70 years of tradition by adopting its outcome document through a vote after U.S. objections, while India introduced legislation removing transgender self-identification rights and the UK debates abortion decriminalization."
 description: "UN women's rights session adopts justice roadmap by historic vote as India removes transgender self-ID rights, UK debates abortion law, and Spain reports deadliest start for gender violence since 2020."

@@ -1,5 +1,5 @@
 ---
-title: "The US Lifted Russia's Oil Sanctions to Fight Iran. Ukraine Called It War Financing."
+title: "Russia Oil Sanctions Lifted. Ukraine Calls It War Funding."
 description: "On March 12, 2026, the US Treasury quietly issued General License 133 — letting India buy Russian oil again. Four regions read the same decision as four completely different events."
 date: "2026-03-21"
 author: "Albis"

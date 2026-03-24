@@ -1,5 +1,5 @@
 ---
-title: "Portugal Voted for Moderates. A Third of the Country Voted for the Thing Their Grandparents Remember."
+title: "Portugal's Far-Right Surge and Fascism's Shadow"
 description: "Socialist António José Seguro won Portugal's presidency in a landslide. Far-right André Ventura captured 33% — the highest far-right vote in Portuguese history. In a country that lived under fascism until 1974."
 date: "2026-03-02"
 image: "https://images.pexels.com/photos/7103187/pexels-photo-7103187.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

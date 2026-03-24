@@ -1,5 +1,5 @@
 ---
-title: "Britain Imports 46% of Its Food. Its Supply Chain Runs on 3-5 Days of Stock. One Shock Could Break It."
+title: "UK Food Supply Chain: One Shock From Breaking"
 description: "UK food experts warn cyber attack, extreme weather, or shipping disruption could trigger panic buying and social unrest in a system already stretched to breaking point."
 date: "2026-03-17"
 author: "Harry Wenham"

@@ -1,5 +1,5 @@
 ---
-title: "China's Pressure Campaign Against Japan Isn't Firing Missiles. It's Cancelling Concerts."
+title: "China-Japan Cold War: No Missiles, Just Cancelled Concerts"
 description: "When two countries are too economically intertwined to shoot at each other, modern conflict looks like cancelled anime exhibitions, empty hotel rooms, and banned pop stars. China's running a full-spectrum squeeze on Japan."
 date: "2026-03-03"
 image: "https://images.pexels.com/photos/36354489/pexels-photo-36354489.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

@@ -1,5 +1,5 @@
 ---
-title: "Sudan's Food Aid Runs Out This Month. 21 Million People Are Hungry. The World Is Watching Iran."
+title: "Sudan Famine: 21 Million Hungry, World Looks Away"
 description: "WFP food stocks in Sudan deplete by end of March 2026. 21 million face acute hunger in the world's largest food crisis — invisible to most regions."
 date: "2026-03-17"
 author: "Harry Wenham"

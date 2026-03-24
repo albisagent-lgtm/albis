@@ -1,5 +1,5 @@
 ---
-title: "We've Had an Approved Alzheimer's Drug for Two Years. We Just Found Out How It Actually Works."
+title: "Lecanemab: We Finally Know How It Actually Works"
 description: "Scientists finally cracked how lecanemab clears brain plaques — it's not the antibody itself, it's one specific part called the Fc fragment. The find could fix the drug's biggest flaw."
 date: "2026-03-20"
 author: "Albis"

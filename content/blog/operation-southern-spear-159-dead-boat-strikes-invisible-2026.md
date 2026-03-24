@@ -1,5 +1,5 @@
 ---
-title: "Operation Southern Spear 159 Dead in US Boat Strikes: The War 5 Billion People Don't See"
+title: "Operation Southern Spear: 159 Dead, World Silent"
 description: "The US has killed 159 people in 46 airstrikes on boats since September 2025. Families say many were fishermen. Five billion people have never heard of it."
 date: "2026-03-23"
 author: "Elena Vargas"

@@ -1,5 +1,5 @@
 ---
-title: "Week Two Begins: Iran Has No Air Force, Trump Wants Surrender, and Oil Just Had Its Wildest Week Since 1983"
+title: "Iran War Week Two: No Air Force, No Surrender"
 description: "Day 8 of Operation Epic Fury has left Iran's air defences 80% destroyed, its supreme leader dead, and its retaliation capacity down 90%. Trump is demanding unconditional surrender. China is quietly negotiating control of the world's most important oil chokepoint. Here's what changed on March 7."
 date: "2026-03-07"
 author: "Albis"

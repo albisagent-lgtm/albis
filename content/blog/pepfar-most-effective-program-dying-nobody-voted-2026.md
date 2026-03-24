@@ -1,5 +1,5 @@
 ---
-title: "The Most Cost-Effective Program the US Ever Built Is Dying. Nobody Voted to Kill It."
+title: "PEPFAR Is Dying. Nobody Voted to Kill It."
 description: "PEPFAR saved 26 million lives at $1,500 each. The US spends 1,000x more to save an American life. Now 8 countries are running out of HIV drugs."
 date: "2026-03-02"
 image: "https://images.pexels.com/photos/4989161/pexels-photo-4989161.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

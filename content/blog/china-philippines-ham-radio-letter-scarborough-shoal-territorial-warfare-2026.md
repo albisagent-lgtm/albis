@@ -1,5 +1,5 @@
 ---
-title: "China's Sovereignty Claim Rests on a 1990 Letter to a HAM Radio Operator. The Philippines Says It's Fake."
+title: "China's Scarborough Claim Rests on a Ham Radio Letter"
 description: "Beijing posted a decades-old diplomat's letter to support South China Sea claims. Manila questions its authenticity. Both sides are waging documentary warfare on social media."
 image: "https://images.pexels.com/photos/36296445/pexels-photo-36296445.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 category: "lens"

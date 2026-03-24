@@ -1,5 +1,5 @@
 ---
-title: "Teachers Unions Training 400,000 Educators on AI While Striking for Protection Against It in 2026"
+title: "Teachers Train on AI While Striking Against It"
 description: "America's teachers are learning to build AI agents and threatening to walk out over AI replacement — in the same week. The dual strategy reshaping education."
 date: "2026-03-23"
 author: "Amara Osei"

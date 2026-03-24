@@ -1,5 +1,5 @@
 ---
-title: "Three Superpowers Just Made Three Opposite Bets on Energy. Only One Can Be Right."
+title: "Three Superpowers, Three Energy Bets. One Is Wrong."
 description: "The US is killing offshore wind. Europe just signed the biggest wind deal in history. China's solar overtook wind for the first time. The global energy map is splitting in real time."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1754619880959-2b0528375883?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjbGVhbi1lbmVyZ3klMjBnZW9wb2xpdGljcyUyMHNvbGFyfGVufDB8MHx8fDE3NzMwNTQwNzR8MA&ixlib=rb-4.1.0&q=80&w=1080"

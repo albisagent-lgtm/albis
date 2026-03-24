@@ -1,5 +1,5 @@
 ---
-title: "Trump Iran 48-Hour Ultimatum: Power Plant Strikes or Permanent Hormuz Closure 2026"
+title: "Trump Iran 48-Hour Ultimatum: Strike or Blockade?"
 description: "Trump's 48-hour deadline to obliterate Iran's power plants expires Monday night. Iran says Hormuz closes permanently if he strikes. Neither side has an off-ramp."
 date: "2026-03-23"
 author: "Harry Wenham"

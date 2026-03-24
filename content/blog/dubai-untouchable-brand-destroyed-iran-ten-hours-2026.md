@@ -1,5 +1,5 @@
 ---
-title: "Iranian Missiles and Drones Hit Dubai: Burj Al Arab, Jebel Ali Port Struck in 2026 Attack"
+title: "Iran Strikes Dubai: Burj Al Arab and Jebel Ali Hit"
 description: "Iranian drones hit Dubai's Burj Al Arab and Jebel Ali port. Flights grounded, stock markets shut. Here's what happened, the damage, and how Dubai, Iran, and Western media each told a different story."
 date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1656012615206-f44cc6e7142c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx0cmVuZGluZyUyMGR1YmFpJTIwdWFlfGVufDB8MHx8fDE3NzMwNDY4ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080"

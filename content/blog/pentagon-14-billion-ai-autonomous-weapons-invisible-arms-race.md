@@ -1,5 +1,5 @@
 ---
-title: "The Pentagon Is Spending $14 Billion on AI Weapons. Most of the World Has No Idea."
+title: "Pentagon's $14B AI Weapons Nobody Knows About"
 description: "The US military's record $14.2 billion AI weapons budget includes armed humanoid robots and autonomous drones — invisible to 6 of 7 global regions."
 date: "2026-03-15"
 author: "Albis"

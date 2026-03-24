@@ -1,5 +1,5 @@
 ---
-title: "Venezuela's 52% Inflation Is Either a Crisis or a Recovery Story. It Depends Where You Live."
+title: "Venezuela's 52% Inflation: Crisis or Recovery?"
 description: "The BCV confirmed 52% accumulated inflation in Venezuela's first two months of 2026. Argentine media calls it progress. English media calls it collapse. Both are reading the same number."
 date: "2026-03-21"
 author: "Albis"

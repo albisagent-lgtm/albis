@@ -1,5 +1,5 @@
 ---
-title: "The Iran War Started on a Saturday. By Wednesday, 52 Million Children Were Out of School."
+title: "Iran War Left 52 Million Children Out of School"
 description: "The Iran war has disrupted education for 52 million children across the Middle East. Here's what's actually happening to schools — and why 'just go online' won't fix it."
 date: "2026-03-20"
 author: "Albis"

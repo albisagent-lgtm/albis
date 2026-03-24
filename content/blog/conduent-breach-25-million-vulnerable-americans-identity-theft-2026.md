@@ -1,5 +1,5 @@
 ---
-title: "25 Million of America's Most Vulnerable Just Had Their Data Stolen. They Never Chose to Trust the Company."
+title: "Conduent Breach: 25 Million Vulnerable Americans Exposed"
 description: "Conduent processes food stamps, Medicaid, child support. One ransomware breach exposed 25.9M records. The people who can least afford identity theft just became its likeliest victims."
 date: "2026-03-04"
 image: "https://images.unsplash.com/photo-1614064642639-e398cf05badb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5JTIwZ292ZXJubWVudCUyMGRhdGEtYnJlYWNofGVufDB8MHx8fDE3NzMwNDY4NTV8MA&ixlib=rb-4.1.0&q=80&w=1080"

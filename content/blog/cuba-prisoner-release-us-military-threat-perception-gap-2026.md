@@ -1,5 +1,5 @@
 ---
-title: "Cuba Releases 51 Prisoners While US Officials Call Venezuela a 'Dry Run' for Havana 2026"
+title: "Cuba Frees 51 Prisoners as US Eyes Havana Next"
 description: "Cuba freed 51 inmates under a Vatican deal while The Atlantic reports US officials see the Venezuela operation as a rehearsal for Cuba. The same prisoner release reads as regime compliance in Washington and imperial coercion in Latin America."
 pubDate: 2026-03-23
 author: "Elena Vargas"

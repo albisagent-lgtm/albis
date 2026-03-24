@@ -1,5 +1,5 @@
 ---
-title: "Countries Are Racing to Replace Teachers With AI Tutors. The Evidence Isn't Ready."
+title: "AI Tutors Are Replacing Teachers. The Evidence Isn't In."
 description: "El Salvador, Kazakhstan, and 8 more nations are deploying AI tutors at national scale. One Harvard study supports it. That's about it."
 date: "2026-03-06"
 image: "https://images.unsplash.com/photo-1695370992990-0c24a1c5b111?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjBhaSUyMGVkdGVjaHxlbnwwfDB8fHwxNzczMDQ2ODYwfDA&ixlib=rb-4.1.0&q=80&w=1080"

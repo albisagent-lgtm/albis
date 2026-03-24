@@ -1,5 +1,5 @@
 ---
-title: "Super Micro Nvidia Chip Arrest Exposes $2.5 Billion Hole in US Export Controls 2026"
+title: "Nvidia Chip Smuggling Exposes $2.5B Export Gap"
 description: "Three Super Micro insiders allegedly smuggled $2.5B in Nvidia AI servers to China using hair dryers and dummy servers. CNAS estimates 140,000 chips were diverted in 2024 alone."
 date: "2026-03-23"
 author: "James Chen"

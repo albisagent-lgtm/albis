@@ -1,5 +1,5 @@
 ---
-title: "The World's Biggest Obesity Drug Just Became a Pill. Most of the World Still Can't Get It."
+title: "Wegovy Is Now a Pill. Most of the World Can't Get It"
 description: "The FDA approved the first GLP-1 pill for weight loss. It works — 13.6% average weight loss. The catch: 1 billion obese adults, mostly in low-income countries, are priced out."
 date: "2026-03-20"
 author: "Albis"

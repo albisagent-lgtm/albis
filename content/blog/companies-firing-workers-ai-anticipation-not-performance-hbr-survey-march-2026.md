@@ -1,5 +1,5 @@
 ---
-title: "Companies Are Firing Workers Because They Expect AI to Replace Them—Not Because It Has"
+title: "Companies Firing Workers for AI That Doesn't Exist Yet"
 description: "HBR surveyed 1,006 executives. The layoffs are almost entirely anticipatory. People are losing jobs to a forecast, not a machine."
 date: "2026-03-10"
 author: "Albis"

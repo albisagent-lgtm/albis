@@ -1,5 +1,5 @@
 ---
-title: "China Just Poured Money Into Tech. And Let Emissions Rise. Both Are the Same Bet."
+title: "China's Five-Year Plan: Tech Boom and Rising Emissions"
 description: "China's five-year plan commits 7% more R&D to AI, quantum, and biotech while allowing emissions to grow 3-6%. Two policies from one document tell the same story: growth first, tech independence always."
 date: 2026-03-16
 category: "Tech Geopolitics"

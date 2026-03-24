@@ -1,5 +1,5 @@
 ---
-title: "YouTube Deepfake Detection Expands as Iran Runs Fake Accounts Across Three Platforms"
+title: "YouTube Fights Deepfakes as Iran Floods Platforms"
 slug: "youtube-deepfake-detection-iran-propaganda-information-warfare-2026"
 description: "YouTube expands deepfake detection to politicians while Iran runs 62 fake accounts across platforms. Information warfare reached a new threshold in 2026."
 author: "Albis"

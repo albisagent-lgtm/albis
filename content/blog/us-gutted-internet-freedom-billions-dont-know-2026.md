@@ -1,5 +1,5 @@
 ---
-title: "The US Quietly Killed the Internet's Safety Net — and 5.4 Billion People Have No Idea"
+title: "The US Quietly Killed Internet Freedom"
 description: "The US gutted its Internet Freedom program, threatening anti-censorship tools used by billions. Most of the world hasn't heard about it."
 date: "2026-03-10"
 author: "Harry Wenham"

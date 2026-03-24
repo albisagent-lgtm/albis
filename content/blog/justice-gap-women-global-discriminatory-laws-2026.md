@@ -1,5 +1,5 @@
 ---
-title: "Global Justice Systems Fail Women as Discriminatory Laws Persist in 70% of Countries"
+title: "70% of Countries Still Have Discriminatory Laws"
 description: "Women hold just 64% of men's legal rights worldwide. From pay gaps to femicide, discriminatory laws persist across 70% of countries."
 publishedAt: "2026-03-10T03:00:00Z"
 author: "Albis"

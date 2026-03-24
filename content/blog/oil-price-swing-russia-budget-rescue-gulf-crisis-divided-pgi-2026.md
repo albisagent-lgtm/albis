@@ -1,5 +1,5 @@
 ---
-title: "Oil Swung $23 in 24 Hours. Russia Sees a Rescue. The Gulf Sees Ruin. India Sees Inflation."
+title: "Oil Swung $23 in 24 Hours. Three Countries, Three Stories."
 description: "Brent crude hit $111, then crashed to $88 in a single day. The same price move is being framed as a budget lifeline in Moscow, an existential threat in Riyadh, and an inflation bomb in New Delhi."
 date: 2026-03-18
 author: "Albis"

@@ -1,5 +1,5 @@
 ---
-title: "Iranian Missiles Near Dubai's Burj Khalifa: What Three Media Systems Won't Tell You"
+title: "Iranian Missiles Near the Burj Khalifa: Three Stories"
 description: "Iran has fired 314 ballistic missiles at the UAE since February 28. Debris landed near the Burj Khalifa. How Dubai, Western, and Iranian media frame the same strikes tells you more than the strikes themselves."
 image: "https://images.pexels.com/photos/36134241/pexels-photo-36134241.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 pubDate: "2026-03-22"

@@ -1,5 +1,5 @@
 ---
-title: "Trump Threatened to Destroy the Gas Field He's Protecting. Markets Didn't Buy It."
+title: "Trump Threatened South Pars. Markets Didn't Buy It."
 description: "Trump vowed to 'massively blow up' South Pars if Iran struck Qatar again — but the gas field he'd destroy is the same one powering Qatar's LNG exports. Oil hit $114. Gas prices jumped 23%."
 date: "2026-03-20"
 author: "Albis"

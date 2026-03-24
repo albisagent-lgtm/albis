@@ -1,5 +1,5 @@
 ---
-title: "Taliban Drones Reached Islamabad. Pakistan Is Now Fighting a War It Can't Afford."
+title: "Taliban Drones Reach Islamabad. Pakistan Can't Cope."
 description: "Taliban-linked drones were intercepted near Islamabad on March 14 as Pakistan fights Afghanistan, defends Saudi Arabia, and faces an oil-driven economic crisis during Ramadan."
 date: "2026-03-14"
 author: "Albis"

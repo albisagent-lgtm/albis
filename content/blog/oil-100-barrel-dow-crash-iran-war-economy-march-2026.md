@@ -1,5 +1,5 @@
 ---
-title: "Oil Hits $100, Dow Crashes to 2026 Low: The Iran War Is Wrecking the Global Economy"
+title: "Oil Hits $100, Dow Crashes: Iran War Wrecks Markets"
 description: "Brent crude crossed $100 a barrel. The Dow lost 739 points. Gas jumped 21% in two weeks. Here's how the Iran war is hitting wallets from Detroit to Delhi -- and why the Fed can't help."
 date: 2026-03-14
 category: economic

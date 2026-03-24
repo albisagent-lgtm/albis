@@ -1,5 +1,5 @@
 ---
-title: "Two Explosions in Two Days: How the Iran War Is Reaching Europe's Jewish Communities"
+title: "Iran War Blowback Reaches Europe's Jewish Communities"
 date: "2026-03-16"
 description: "Attacks on a Jewish school in Amsterdam and a synagogue in Rotterdam mark a sharp escalation in antisemitic violence across Europe — driven by the war thousands of miles away."
 category: "Conflict & Security"

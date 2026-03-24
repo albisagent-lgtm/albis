@@ -1,5 +1,5 @@
 ---
-title: "People Aren't Leaving Social Media for Another Platform. They're Leaving for Its Absence."
+title: "People Aren't Leaving Social Media. They're Vanishing."
 description: "Social media time dropped 10% globally. 'Proof of Human' is the new cultural currency. The biggest shift of 2026 isn't a new app—it's the spaces between them."
 date: "2026-03-04"
 image: "https://images.unsplash.com/photo-1600859343572-566b5ee12973?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjdWx0dXJlJTIwc29jaWFsLW1lZGlhJTIwZGlnaXRhbC1mYXRpZ3VlfGVufDB8MHx8fDE3NzMwNTA1Mzl8MA&ixlib=rb-4.1.0&q=80&w=1080"

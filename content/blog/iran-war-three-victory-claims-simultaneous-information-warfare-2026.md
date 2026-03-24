@@ -1,5 +1,5 @@
 ---
-title: "Three Leaders Declared Victory in the Same War on the Same Day. All Three Were Believed."
+title: "Same War, Same Day, Three Victory Claims. All Believed."
 description: "On Day 21 of the Iran war, Trump, Netanyahu, and Mojtaba Khamenei each claimed victory simultaneously. Different audiences accepted different claims. That's the story."
 date: "2026-03-21"
 author: "Albis"

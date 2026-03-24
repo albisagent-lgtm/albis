@@ -1,5 +1,5 @@
 ---
-title: "China Steps Into the Pakistan-Afghanistan War. A Ceasefire Collapsed Before They Could Retrieve a Body."
+title: "China Steps Into the Pakistan-Afghanistan War"
 slug: "china-steps-in-pakistan-afghanistan-war-torkham-ceasefire-fails"
 date: "2026-03-13"
 author: "Albis"

@@ -1,5 +1,5 @@
 ---
-title: "The Iran War's Food Crisis Won't Hit Supermarkets Until Autumn. The Decision Point Is Now."
+title: "Iran War Food Crisis: It Won't Hit Until Autumn"
 description: "The WFP says 45 million more people could face acute hunger by June. But the clock that actually matters runs out in April — when farmers must decide whether to fertilize."
 date: "2026-03-20"
 author: "Harry Wenham"

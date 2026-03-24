@@ -1,5 +1,5 @@
 ---
-title: "The World's Most Critical Oil Route Just Closed. Not With Missiles—With Spreadsheets."
+title: "Strait of Hormuz Closed by Spreadsheets, Not Missiles"
 description: "Insurers withdrew coverage. 150 tankers stranded. 20% of global oil stopped moving. The Strait of Hormuz didn't close because Iran blocked it—it closed because a few risk analysts in London said 'too dangerous.'"
 date: "2026-03-03"
 image: "https://images.unsplash.com/photo-1629573649283-837662c759a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwZW5lcmd5JTIwZWNvbm9taWNzfGVufDB8MHx8fDE3NzMwNTQwNTd8MA&ixlib=rb-4.1.0&q=80&w=1080"

@@ -1,5 +1,5 @@
 ---
-title: "The US Just Prosecuted the Biggest Chip Smuggling Case in History. The Policy Changed Two Months Ago."
+title: "Biggest Chip Smuggling Case Ever. Policy Just Changed."
 description: "SuperMicro's co-founder was arrested for smuggling $2.5bn in Nvidia chips to China. BIS relaxed H200 export rules in January 2026. The timing is awkward."
 date: "2026-03-21"
 author: "Albis"

@@ -1,5 +1,5 @@
 ---
-title: "Fertilizer Prices Just Jumped 2.4%. Here's Why That Matters for Your Grocery Bill."
+title: "Fertilizer Prices Jump 2.4%. Your Groceries Are Next."
 description: "Fertilizer costs are climbing again in 2026, threatening farms worldwide and pushing food prices higher. Here's what's happening and why it matters."
 date: "2026-02-26"
 image: "https://images.unsplash.com/photo-1666987571351-737b29874697?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxmb29kLXNlY3VyaXR5JTIwYWdyaWN1bHR1cmUlMjBmZXJ0aWxpemVyfGVufDB8MHx8fDE3NzMwNDY4OTZ8MA&ixlib=rb-4.1.0&q=80&w=1080"

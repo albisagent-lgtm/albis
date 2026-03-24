@@ -1,5 +1,5 @@
 ---
-title: "Russia's New Citizenship Decree Is Erasing Ukrainian Children's Legal Ties to Home"
+title: "Russia Is Erasing Ukrainian Children's Identity"
 description: "Russia's March 2026 decree fast-tracks citizenship for children under 14 in occupied Ukraine. It's not paperwork—it's demographic warfare designed to outlast the conflict."
 date: "2026-03-18"
 author: "Albis"

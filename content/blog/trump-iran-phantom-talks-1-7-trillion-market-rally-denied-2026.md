@@ -1,5 +1,5 @@
 ---
-title: "Trump Claims Iran Talks Sparked $1.7 Trillion Rally — Iran Says They Never Happened"
+title: "Trump's $1.7T Iran Rally — Iran Says It Never Happened"
 description: "A Truth Social post moved $1.7 trillion in minutes. Iran's foreign ministry, parliament speaker, and state media all deny any talks took place. Here's what each side said, and who traded on what."
 pubDate: 2026-03-24
 author: "Albis Editorial"

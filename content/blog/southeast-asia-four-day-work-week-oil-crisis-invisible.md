@@ -1,5 +1,5 @@
 ---
-title: "Southeast Asia Just Switched to a Four-Day Work Week. 6.5 Billion People Have No Idea."
+title: "Southeast Asia's Four-Day Work Week. Nobody Noticed."
 description: "Philippines, Thailand, Vietnam, Pakistan imposed four-day work weeks and school closures as Iran war oil crisis empties fuel tanks across Asia."
 date: "2026-03-15"
 author: "Albis"

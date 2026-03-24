@@ -1,5 +1,5 @@
 ---
-title: "AI Agents Just Wiped $2 Trillion Off Software Stocks. Here's What Actually Happened."
+title: "AI Agents Wiped $2T Off Software Stocks. Why?"
 description: "The SaaSpocalypse explained: how AI agents triggered the biggest software selloff since 2022 and what it means for the future of enterprise tech."
 date: "2026-03-08"
 image: "https://images.pexels.com/photos/5561919/pexels-photo-5561919.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

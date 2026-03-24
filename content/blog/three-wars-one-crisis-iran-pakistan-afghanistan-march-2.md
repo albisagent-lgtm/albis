@@ -1,5 +1,5 @@
 ---
-title: "Three Wars, One Crisis: How Iran, Pakistan, and Afghanistan Became a Single Conflict"
+title: "Iran, Pakistan, Afghanistan: Three Wars, One Crisis"
 description: "The US-Israel strikes on Iran, Hezbollah's entry into the war, and Afghanistan's drone strikes on Pakistani military bases are not separate stories. They're one interconnected crisis reshaping Asia and the Middle East simultaneously."
 date: "2026-03-02"
 author: "Albis"

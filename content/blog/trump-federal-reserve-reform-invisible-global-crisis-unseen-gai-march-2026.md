@@ -1,5 +1,5 @@
 ---
-title: "The US Is Rewriting the Rules of Its Central Bank. 5.97 Billion People Have No Idea."
+title: "Trump Federal Reserve Reform Nobody's Watching"
 description: "The Trump administration is pushing to limit the Federal Reserve's independence — a move that could reshape global monetary policy. Only Americans are hearing about it."
 date: "2026-03-09"
 image: "https://images.pexels.com/photos/36658182/pexels-photo-36658182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

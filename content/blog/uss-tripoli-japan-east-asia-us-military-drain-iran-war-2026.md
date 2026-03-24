@@ -1,5 +1,5 @@
 ---
-title: "The USS Tripoli Left Japan Ten Days Ago. Three Capitals Drew Three Different Conclusions."
+title: "USS Tripoli Left Japan. Three Capitals, Three Takes"
 description: "Washington calls it routine. Beijing asks if it's an opening. Seoul wonders if the alliance still holds. The Iran war is quietly reshaping East Asia's security balance."
 image: "https://images.pexels.com/photos/36674255/pexels-photo-36674255.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 pubDate: "2026-03-22"

@@ -1,5 +1,5 @@
 ---
-title: "TikTok Mental Health Misinformation 2026: 52% of ADHD Content Is Wrong, Study Finds"
+title: "TikTok ADHD Content: 52% Is Wrong, Study Finds"
 description: "A University of East Anglia study found 52% of TikTok ADHD videos are inaccurate — while whistleblowers reveal the platform knew outrage drives engagement."
 date: "2026-03-22"
 author: "Albis"

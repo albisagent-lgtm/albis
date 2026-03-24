@@ -1,5 +1,5 @@
 ---
-title: "The US Captured Venezuela's President. Ten Weeks Later, Two Continents Still Can't Agree on What Happened"
+title: "The US Captured Maduro. Two Continents Disagree"
 description: "The US captured Nicolás Maduro on January 3, 2026. Washington calls it liberation. Latin America's left calls it illegal invasion. Ten weeks on, the framing gap is wider than ever."
 date: 2026-03-15
 author: "Albis"

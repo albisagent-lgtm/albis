@@ -1,5 +1,5 @@
 ---
-title: "US Marines Shot Protesters in Karachi. Pakistan Says It Was a Massacre. Washington Says It Was Self-Defence"
+title: "Karachi Consulate Shooting: Massacre or Self-Defence?"
 description: "Ten people died when US Marines opened fire at the Karachi consulate on March 1. Two weeks later, the US and Pakistan still can't agree on what happened or who fired first."
 date: 2026-03-16
 author: "Albis"

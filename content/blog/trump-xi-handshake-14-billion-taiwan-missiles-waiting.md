@@ -1,5 +1,5 @@
 ---
-title: "Trump Shook Xi's Hand. Then Came Home to $14 Billion in Taiwan Missiles Waiting on His Desk."
+title: "Trump Shook Xi's Hand. $14B in Missiles Waited."
 description: "The largest arms package in Taiwan's history is ready for Trump's signature—right after he returns from Beijing. Diplomacy has never looked more like theater."
 date: "2026-03-15"
 author: "Albis"

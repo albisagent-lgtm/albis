@@ -1,5 +1,5 @@
 ---
-title: "The US Hasn't Finished a Nuclear Plant on Time in 30 Years. Japan Just Bet $40 Billion It Can."
+title: "Japan Bet $40B on US Nuclear. History Says Otherwise"
 description: "Japan invested $40B in US small modular reactors during the Hormuz crisis. Zero SMRs operate in America. China's launches this year."
 date: "2026-03-22"
 author: "Albis"

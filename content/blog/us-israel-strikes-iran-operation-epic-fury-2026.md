@@ -1,5 +1,5 @@
 ---
-title: "Operation Epic Fury: The Day the US and Israel Struck Iran — and Iran Struck Back"
+title: "Operation Epic Fury: US and Israel Strike Iran"
 description: "On February 28, the US and Israel launched the largest joint military operation in decades against Iran. Tehran retaliated across the Gulf within hours. Here's what happened, who's affected, and what comes next."
 date: "2026-03-01"
 author: "Albis"

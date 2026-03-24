@@ -1,5 +1,5 @@
 ---
-title: "Trump Just Killed the EPA's Climate Power. The US Is Installing Record Renewables Anyway."
+title: "Trump Killed EPA Climate Power. Renewables Won Anyway."
 description: "The EPA lost authority to regulate greenhouse gases. Meanwhile, the US is adding 86GW of clean energy in 2026—a 62% jump. If economics already won, does federal climate authority even matter?"
 date: "2026-03-16"
 author: "Albis"

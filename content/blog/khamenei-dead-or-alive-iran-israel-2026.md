@@ -1,5 +1,5 @@
 ---
-title: "Iran's Supreme Leader Has Not Been Seen Since the Strikes Began. Nobody Can Prove He's Alive."
+title: "Khamenei Missing Since Strikes. Nobody Can Prove Life."
 description: "Israel says Khamenei was killed in the opening salvo of Operation Roaring Lion. Iran says he's fine. Neither side has shown proof. Here's what we actually know."
 date: "2026-02-28"
 image: "https://images.pexels.com/photos/36167546/pexels-photo-36167546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

@@ -1,5 +1,5 @@
 ---
-title: "The US and Iran Just Spent Nine Hours Talking. Here's Why They Still Walked Away."
+title: "US-Iran Nuclear Talks: 9 Hours, No Deal"
 description: "Nine hours of negotiations. No deal. Two carrier groups in the Gulf. What's keeping the US and Iran from an agreement—and what happens next."
 date: "2026-02-27"
 image: "https://images.unsplash.com/photo-1772299399824-592b030b2dde?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxJcmFuJTIwbnVjbGVhciUyMGRpcGxvbWFjeXxlbnwwfDB8fHwxNzczMDU0MTEyfDA&ixlib=rb-4.1.0&q=80&w=1080"

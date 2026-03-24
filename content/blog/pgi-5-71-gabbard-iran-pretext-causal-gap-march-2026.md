@@ -1,5 +1,5 @@
 ---
-title: "PGI 5.71: Everyone Read the Same Intelligence Admission. Nobody Drew the Same Conclusion."
+title: "PGI 5.71: Same Intel, Opposite Conclusions"
 description: "Yesterday's Perception Gap Index hit 5.71 — Diverging Narratives. The biggest driver wasn't disputed facts. It was disputed meaning. Here's how that works."
 date: "2026-03-20"
 author: "Albis"

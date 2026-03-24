@@ -1,5 +1,5 @@
 ---
-title: "Video Confirmed a US Tomahawk Hit a School in Iran. 168 Dead. The US Is Investigating. Iran Calls It a War Crime."
+title: "US Tomahawk Hit an Iran School. 168 Dead."
 description: "Multiple investigations verified US missile struck Minab school killing 168, mostly children. US frames as potential collateral damage under investigation. Middle East frames as deliberate war crime. The perception gap reveals everything."
 date: "2026-03-10"
 author: "Harry Wenham"

@@ -1,5 +1,5 @@
 ---
-title: "Putin Just Authorized 2.4 Million Troops. The Real Question Is Whether He Can Find Them."
+title: "Putin Authorized 2.4M Troops. Can He Find Them?"
 description: "The decree sets Russia's military at 1.5M personnel — a 50% increase from pre-war levels. But the number on paper isn't the number in the field. Historically, Russia fills 70-80% of authorized positions. And right now, recruitment's falling while losses are rising."
 publishedAt: 2026-03-08
 updatedAt: 2026-03-08

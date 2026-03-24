@@ -1,5 +1,5 @@
 ---
-title: "North Korea Is Rewriting Its Constitution to Erase South Korea. The Assembly Meets in 48 Hours."
+title: "North Korea Rewrites Constitution to Erase the South"
 description: "On March 22, North Korea's new parliament convenes to ratify a constitutional revision formally declaring South Korea a hostile foreign state. It ends any legal path to reunification — and almost nobody outside the peninsula is paying attention."
 image: "https://images.pexels.com/photos/36253883/pexels-photo-36253883.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: "2026-03-20"

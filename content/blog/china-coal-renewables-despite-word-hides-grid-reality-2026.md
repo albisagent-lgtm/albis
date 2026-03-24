@@ -1,5 +1,5 @@
 ---
-title: "China Built More Coal Plants Than Any Year Since 2008. It Also Built More Renewables Than Anyone in History. Here's How Both Are True."
+title: "China Built Record Coal AND Record Renewables. How?"
 description: "The word 'despite' in every headline about China's energy does more work than any policy document. It assumes coal and renewables compete. They don't — not yet."
 date: "2026-02-28"
 image: "https://images.unsplash.com/photo-1724294907597-d70f0ff46aa1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjaGluYSUyMGNvYWwlMjByZW5ld2FibGVzfGVufDB8MHx8fDE3NzMwNDU0MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080"

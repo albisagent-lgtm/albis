@@ -1,5 +1,5 @@
 ---
-title: "Taiwan's President Called the Island Sovereign. China Sent 26 Warplanes the Next Day"
+title: "Taiwan Said 'Sovereign.' China Sent 26 Warplanes."
 description: "Lai Ching-te's March 14 sovereignty statement broke a 13-day PLA aircraft pause. Taiwan calls it democratic affirmation. Beijing calls it independence provocation. The framing gap explains everything."
 image: "https://images.pexels.com/photos/36064880/pexels-photo-36064880.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: 2026-03-18

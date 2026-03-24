@@ -1,5 +1,5 @@
 ---
-title: "Trump Said the US 'Knew Nothing' About Israel's Iran Gas Strike. Three Israeli Officials Said Otherwise."
+title: "Trump Denied Knowing Israel's Iran Strike. They Disagree."
 description: "Israel bombed Iran's South Pars gas field, triggering Qatar's GDP collapse. Trump denied knowing. Then backtracked. The gap between US and Israeli war aims is now impossible to hide."
 date: "2026-03-21"
 author: "Albis"

@@ -1,5 +1,5 @@
 ---
-title: "Nigeria's Deadliest Military Week in a Decade Ended With Bombs in a Hospital. Most of the World Missed It."
+title: "Nigeria's Deadliest Week: Bombs Hit a Hospital"
 description: "Over 100 soldiers killed in seven days. Then suicide bombers hit a teaching hospital and markets in Maiduguri. Nigeria's terrorism death toll rose 46% in 2025 — and almost no one outside Africa is watching."
 date: "2026-03-20"
 author: "Albis"

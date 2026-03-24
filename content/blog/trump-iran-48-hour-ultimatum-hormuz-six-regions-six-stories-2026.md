@@ -1,5 +1,5 @@
 ---
-title: "Trump Iran 48-Hour Power Plant Ultimatum: How Six Regions Told Six Different Stories in 2026"
+title: "Trump Iran Ultimatum: Six Regions, Six Stories"
 description: "Trump threatened to bomb Iran's power plants. Iran promised to seal Hormuz forever. The same 48-hour deadline became an oil crisis, a food catastrophe, a geopolitical windfall, and a desperate bluff — depending on where you read about it."
 pubDate: 2026-03-23
 author: "Albis"

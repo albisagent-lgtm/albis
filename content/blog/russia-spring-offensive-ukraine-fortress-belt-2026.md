@@ -1,5 +1,5 @@
 ---
-title: "Russia's 2026 Spring Offensive Against Ukraine's Fortress Belt: 900 Troops Lost in 36 Hours"
+title: "Russia's Spring Offensive: 900 Troops Lost in 36 Hours"
 description: "Russia launched its biggest assault of 2026 against Ukraine's main defensive line in Donetsk. ISW says the offensive will fail — but Sloviansk is evacuating children anyway."
 date: "2026-03-23"
 author: "Harry Wenham"

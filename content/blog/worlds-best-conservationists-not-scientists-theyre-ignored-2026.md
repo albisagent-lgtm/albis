@@ -1,5 +1,5 @@
 ---
-title: "The World's Best Conservationists Aren't Scientists. And Governments Keep Ignoring Them."
+title: "The Best Conservationists Aren't Scientists"
 slug: worlds-best-conservationists-not-scientists-theyre-ignored-2026
 description: "Indigenous communities protect 80% of remaining biodiversity on 28% of Earth's land — outperforming national parks. The Amazon is still predicted to lose up to 40% by 2050. We know what works. We're just not funding it."
 publishedAt: 2026-03-03

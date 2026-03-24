@@ -1,5 +1,5 @@
 ---
-title: "A Nobel Laureate Built a Machine That Pulls Drinking Water From Desert Air. It Doesn't Need Electricity."
+title: "This Machine Pulls Water From Desert Air. No Power."
 description: "Omar Yaghi's shipping-container-sized device extracts 1,000 litres of clean water daily from air as dry as 20% humidity, powered only by sunlight."
 date: "2026-03-04"
 image: "https://images.unsplash.com/photo-1759899343930-7a443e2cbf0a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjbGVhbi1lbmVyZ3klMjB3YXRlciUyMHRlY2hub2xvZ3l8ZW58MHwwfHx8MTc3MzA1MDUxMHww&ixlib=rb-4.1.0&q=80&w=1080"

@@ -1,5 +1,5 @@
 ---
-title: "Fewer Than 10,000 People Crossed the US-Mexico Border Last Month. The US Calls It Success. Latin America Calls It Terror."
+title: "US-Mexico Border Hits 50-Year Low. Two Stories."
 slug: "us-mexico-border-50-year-low-opposite-stories-2026"
 description: "Border crossings hit a 50-year low. The US frames it as enforcement working. Latin America frames it as fear driving people away. Same number. Opposite stories. The Albis Perception Gap Index scored this 6.7."
 category: "migration"

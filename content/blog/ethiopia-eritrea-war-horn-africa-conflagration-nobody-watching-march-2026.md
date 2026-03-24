@@ -1,5 +1,5 @@
 ---
-title: "Everyone's Watching Iran. Almost Nobody's Watching the Horn of Africa About to Erupt."
+title: "Horn of Africa Is About to Erupt. Nobody's Watching."
 description: "While the world focuses on Iran, two countries that killed 100,000 in their last war are mobilizing for another. Sudan's already burning. The Horn could erupt into all-out conflagration."
 date: "2026-03-10"
 author: "Albis"

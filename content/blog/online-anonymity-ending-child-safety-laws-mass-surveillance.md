@@ -1,5 +1,5 @@
 ---
-title: "The Infrastructure to End Online Anonymity Is Already Being Built. You're Helping."
+title: "Online Anonymity Is Ending. You're Helping Build It."
 description: "Twelve bipartisan bills would require age verification for internet access. DHS is already subpoenaing anonymous accounts. Half of US states mandate ID checks. It's not coming—it's here."
 date: "2026-03-15"
 author: "Albis"

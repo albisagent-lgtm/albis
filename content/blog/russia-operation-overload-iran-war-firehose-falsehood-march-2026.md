@@ -1,5 +1,5 @@
 ---
-title: "Russia Isn't Trying to Win the Information War. It's Trying to Make Sure Nobody Wins."
+title: "Russia's Information War Goal: Nobody Wins"
 description: "Operation Overload doesn't try to convince you. It floods the zone until you can't tell real from fake. Here's how Russia's strategy works."
 slug: russia-operation-overload-iran-war-firehose-falsehood-march-2026
 publishDate: 2026-03-09T12:00:00+13:00

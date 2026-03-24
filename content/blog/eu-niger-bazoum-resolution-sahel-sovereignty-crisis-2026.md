@@ -1,5 +1,5 @@
 ---
-title: "EU Parliament Demands Niger Free Bazoum: Human Rights or Neo-Colonial Interference in 2026?"
+title: "EU Demands Niger Free Bazoum: Rights or Neo-Colonialism?"
 description: "The European Parliament voted 524-2 to demand Niger release its ousted president. Then thousands marched against the resolution in Niamey. Both sides cite democracy — but they mean completely different things."
 date: "2026-03-24"
 tags: ["the-flip", "niger", "sahel", "eu", "bazoum", "sovereignty"]

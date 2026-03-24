@@ -1,5 +1,5 @@
 ---
-title: "\"I Don't Have Instagram\" Just Became a Flex. If You Can't Afford to Say It, You're Stuck."
+title: "Quitting Social Media Is a Class Privilege Now"
 description: "The richest people are leaving social media first. Newsletters and reading clubs are the new status symbols. But if you're a freelancer or small business owner, logging off is a luxury you can't afford."
 date: "2026-03-09"
 author: "Albis"

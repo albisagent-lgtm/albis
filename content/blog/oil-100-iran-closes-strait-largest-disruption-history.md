@@ -1,5 +1,5 @@
 ---
-title: "Oil Hit $100. 1,000 Ships Are Blocked. This Is the Largest Oil Disruption in History."
+title: "Oil at $100: The Largest Oil Disruption in History"
 description: "Iran closed the Strait of Hormuz, choking 20% of global oil. Prices hit $100, 1,000+ ships blocked, Asia scrambling. Worst energy crisis since 1973—three times bigger."
 date: "2026-03-16"
 author: "Albis"

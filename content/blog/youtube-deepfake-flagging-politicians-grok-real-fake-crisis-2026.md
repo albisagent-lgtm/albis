@@ -1,5 +1,5 @@
 ---
-title: "YouTube Gave Politicians a Deepfake Delete Button. Grok Just Called Netanyahu's Real Video Fake."
+title: "YouTube's Deepfake Tool Has a Problem. Ask Grok."
 description: "YouTube's deepfake flagging tool can't stop what it can't see — and the detection systems themselves are creating more confusion than clarity."
 date: "2026-03-17"
 author: "Albis"

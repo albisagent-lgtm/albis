@@ -1,5 +1,5 @@
 ---
-title: "Kim Jong Un Declares South Korea 'Most Hostile State' While THAAD Shield Depleted 2026"
+title: "Kim Jong Un: South Korea 'Most Hostile State'"
 date: "2026-03-24T15:00:00+13:00"
 description: "North Korea's leader formally designated South Korea as the 'most hostile state' and declared nuclear status irreversible — the same week US-deployed THAAD interceptors left Korean soil for the Iran war. Here's what each capital isn't saying."
 category: "lens"

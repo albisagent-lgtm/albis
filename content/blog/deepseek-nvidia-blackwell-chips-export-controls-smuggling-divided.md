@@ -1,5 +1,5 @@
 ---
-title: "DeepSeek Trained on Banned Nvidia Chips. Washington Calls It a Crime. Beijing Calls It a Trap."
+title: "DeepSeek Trained on Banned Nvidia Chips. Crime or Trap?"
 description: "US says DeepSeek used smuggled Nvidia Blackwell chips in Inner Mongolia. China says the export controls are illegitimate. PGI 6.55 — the same chips, two incompatible stories."
 date: 2026-03-16
 author: "Albis"

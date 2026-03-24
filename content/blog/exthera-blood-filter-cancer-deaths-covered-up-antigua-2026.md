@@ -1,5 +1,5 @@
 ---
-title: "A Blood Filter Startup Lured Cancer Patients to the Caribbean. Two Died. Executives Hid It From the FDA."
+title: "Blood Filter Startup Hid Patient Deaths From the FDA"
 description: "ExThera Medical charged $45,000 to filter cancer patients' blood in Antigua using a device only approved for Covid. When two patients died, executives covered it up."
 date: "2026-03-07"
 image: "https://images.unsplash.com/photo-1585590586287-93df0912b26a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGgtbG9uZ2V2aXR5JTIwbWVkaWNhbC1kZXZpY2VzJTIwZmRhfGVufDB8MHx8fDE3NzMwNDY4ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080"

@@ -1,5 +1,5 @@
 ---
-title: "China Just Set Its Lowest Growth Target Since 1991 — and Most of the World Missed It"
+title: "China's Lowest GDP Target Since 1991. Nobody Noticed."
 description: "China cut its GDP target to 4.5-5% at the Two Sessions, the lowest since 1991. Here's why 6 billion people should care."
 date: "2026-03-14"
 author: "Albis"

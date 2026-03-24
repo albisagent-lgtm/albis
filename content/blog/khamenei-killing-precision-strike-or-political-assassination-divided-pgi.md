@@ -1,5 +1,5 @@
 ---
-title: "Khamenei's Death Was a Precision Strike. Or a Political Assassination. Depends Where You Read."
+title: "Khamenei Killed: Precision Strike or Assassination?"
 description: "The killing of Iran's supreme leader on Feb 28 scored a PGI of 7.95. In the West it's regime change. Across the Middle East it's political assassination. The same event, two incompatible stories."
 date: 2026-03-20
 published: true

@@ -1,5 +1,5 @@
 ---
-title: "The World Built for 10 Billion People. What Happens to the Roads When We're Only 9?"
+title: "Shrinking Cities: Who Pays for Empty Roads?"
 slug: "shrinking-cities-infrastructure-burden-japan-italy-germany-korea-march-2026"
 description: "Japan has 9 million abandoned homes. Italy has 136 villages with zero residents. Germany merged 70% of its municipalities. The problem isn't birth rates—it's the concrete and pipes built for a world that no longer exists."
 publishDate: "2026-03-09"

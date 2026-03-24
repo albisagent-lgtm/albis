@@ -1,5 +1,5 @@
 ---
-title: "The SAVE America Act Says It Protects Elections. Here's Who It Actually Locks Out"
+title: "SAVE America Act: Who It Actually Locks Out"
 date: "2026-03-17"
 description: "The SAVE America Act heads to the Senate this week with strict voter ID and proof-of-citizenship rules. Supporters call it common sense. Researchers say 21 million Americans lack the required documents — and Republican voters may be hit hardest."
 category: "Governance & Rights"

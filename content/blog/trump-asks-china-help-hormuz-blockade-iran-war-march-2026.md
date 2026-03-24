@@ -1,5 +1,5 @@
 ---
-title: "Trump Just Asked China to Help Break Iran's Oil Blockade. China Gets a Third of Its Oil From There."
+title: "Trump Asked China to Break Iran's Oil Blockade"
 description: "Over 1,000 ships are blocked from the Strait of Hormuz as Trump calls on China, France, and the UK to send warships. Experts say nobody can secure the strait. The countries being asked are the ones getting crushed."
 date: "2026-03-15"
 author: "Albis"

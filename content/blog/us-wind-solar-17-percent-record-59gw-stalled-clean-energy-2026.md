@@ -1,5 +1,5 @@
 ---
-title: "US Wind and Solar Hit Record 17% of Electricity While 59 GW of Clean Power Sits Stalled in 2026"
+title: "US Wind and Solar Hit 17% — While 59 GW Sits Stalled"
 description: "Wind and solar generated 760,000 GWh of US electricity in 2025 — a record. But 59 gigawatts of clean energy projects face 19-month delays, and solar installations fell 14%."
 date: "2026-03-23"
 author: "Priya Shankar"

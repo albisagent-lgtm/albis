@@ -1,5 +1,5 @@
 ---
-title: "More Than 500 People Have Been Killed in Nigeria Since January. The World Isn't Watching."
+title: "500 Killed in Nigeria This Year. Nobody's Watching."
 description: "Nigeria's security crisis has killed 500+ and abducted 600+ in 2026. Only African media is covering the escalation."
 date: "2026-03-10"
 author: "Albis"

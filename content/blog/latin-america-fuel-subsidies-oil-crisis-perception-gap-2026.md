@@ -1,5 +1,5 @@
 ---
-title: "Latin America Fuel Subsidies 2026: English Media Got the Story Wrong for Two Countries"
+title: "Latin America Fuel Subsidies: Media Got It Wrong"
 description: "English outlets reported Latin America is ending fuel subsidies during the oil crisis. But Mexico is expanding them and Brazil is absorbing the shock. Only Argentina is actually cutting. Here's what each country is really doing."
 pubDate: 2026-03-24
 author: "Albis"

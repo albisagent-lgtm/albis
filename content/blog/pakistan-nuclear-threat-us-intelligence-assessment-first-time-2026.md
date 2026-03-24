@@ -1,5 +1,5 @@
 ---
-title: "Pakistan Named as US Homeland Nuclear Threat for First Time in 2026 Intelligence Assessment"
+title: "Pakistan Named US Nuclear Threat for the First Time"
 description: "The 2026 Annual Threat Assessment places Pakistan alongside Russia, China, and North Korea as a missile threat to US soil. Indian media treats it as a crisis. Western media barely noticed."
 date: "2026-03-23"
 author: "Amara Osei"

@@ -1,5 +1,5 @@
 ---
-title: "China's Taiwan Aircraft Vanished for Two Weeks. Five Regions Have Five Theories Why."
+title: "China's Taiwan Flights Vanished for Two Weeks. Why?"
 description: "Chinese warplanes stopped buzzing Taiwan for 13 days — the longest pause since tracking began. Analysts across regions can't agree if it was diplomacy, military purges, or sending Trump a message."
 date: 2026-03-17
 categories: ["lens"]

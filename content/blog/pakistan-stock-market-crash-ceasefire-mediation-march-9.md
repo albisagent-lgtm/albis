@@ -1,5 +1,5 @@
 ---
-title: "Pakistan's Stock Exchange Triggers Emergency Halt as Oil Hits $118 and Ceasefire Mediators Circle"
+title: "Pakistan Stock Market Halted as Oil Hits $118"
 description: "The KSE-30 crashed hard enough to trigger a circuit breaker. Oil is up 75% since the Iran war started. And Turkey, Malaysia, and Indonesia are pushing for a ceasefire with Afghanistan before the economy collapses entirely."
 date: "2026-03-09"
 author: "Albis"

@@ -1,5 +1,5 @@
 ---
-title: "US Marines Killed Protesters in Karachi. The Story You Read Depends on Where You Live."
+title: "Karachi Shooting: The Story Depends Where You Live"
 description: "Ten people died at the US consulate in Karachi on March 1. American outlets called it self-defense. Pakistani media called it a massacre. Both can't be right."
 date: 2026-03-16
 author: "Albis"

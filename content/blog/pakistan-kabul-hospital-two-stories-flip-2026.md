@@ -1,5 +1,5 @@
 ---
-title: "Islamabad Called It a Militant Base. Kabul Called It a Hospital. Same Building, Same Night."
+title: "Militant Base or Hospital? Same Building, Two Stories"
 description: "Pakistan struck the Omid Addiction Treatment Hospital in Kabul on March 16. Here's what that sentence looks like from two very different places."
 date: "2026-03-20"
 author: "Albis"

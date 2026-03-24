@@ -1,5 +1,5 @@
 ---
-title: "China Flew 5,709 Military Aircraft Near Taiwan Last Year. That's Not the Scary Part."
+title: "5,709 Chinese Military Flights Near Taiwan. The Scary Part?"
 description: "China's air incursions jumped 1,400% in five years—but Taiwan stopped scrambling jets. How 'normalization of pressure' works as military strategy."
 date: "2026-03-14"
 author: "Harry Wenham"

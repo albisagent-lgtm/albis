@@ -1,5 +1,5 @@
 ---
-title: "Two Crowds Are Sharing Every Anti-War Protest Square — and They Want Opposite Things"
+title: "Two Crowds, One Protest Square, Opposite Goals"
 description: "Global protests against the Iran war span 40+ countries. But two incompatible movements are being photographed together: Iranian diaspora demanding regime change, and global south activists demanding a ceasefire."
 date: "2026-03-20"
 author: "Albis"

@@ -1,5 +1,5 @@
 ---
-title: "Netanyahu Says Iran's Nuclear Program Is Finished. Iran's Spokesman Said the Opposite — Then Was Killed."
+title: "Netanyahu: Iran's Nukes Are Done. Then the Denial Died."
 description: "Netanyahu claimed Iran can no longer enrich uranium or build missiles. Hours later, the IRGC spokesman who contradicted him was killed in an airstrike. The PGI is 7.4 — two irreconcilable facts, two different worlds."
 date: "2026-03-21"
 author: "Albis"

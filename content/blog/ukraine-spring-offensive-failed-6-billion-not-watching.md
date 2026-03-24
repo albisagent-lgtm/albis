@@ -1,5 +1,5 @@
 ---
-title: "Russia's Spring Offensive Just Failed in Ukraine. 6.9 Billion People Aren't Watching"
+title: "Russia's Spring Offensive Failed. Nobody Noticed"
 description: "Zelensky says Russia's planned spring offensive has 'drowned.' Ukraine retook 430 sq km in the south. But 87% of the world's population saw none of it."
 date: "2026-03-16"
 author: "Albis"
