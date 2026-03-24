@@ -1,5 +1,5 @@
 ---
-title: "French Prosecutors Allege Musk Used Grok Deepfake Scandal to Inflate X Valuation 2026"
+title: "French Prosecutors Allege Musk Used Grok Deepfakes"
 description: "Paris prosecutors suspect Elon Musk deliberately encouraged Grok's explicit deepfake controversy to boost X and xAI's value before the $1.25 trillion SpaceX-xAI IPO."
 date: "2026-03-23"
 author: "Priya Sharma"

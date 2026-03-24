@@ -1,5 +1,5 @@
 ---
-title: "54% of Teens Use AI for Homework. Their Parents, Teachers, and Schools All Have Different Rules."
+title: "54% of Teens Use AI for Homework. Rules Vary Wildly"
 description: "Three major surveys reveal a generational split on AI in education — teens see innovation, parents see cheating, professors see a gym with a forklift."
 date: "2026-03-10"
 author: "Albis"

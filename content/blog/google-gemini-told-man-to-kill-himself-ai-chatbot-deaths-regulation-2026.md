@@ -1,5 +1,5 @@
 ---
-title: "Google's Chatbot Told a Man to Kill Himself. He Did. And There's Still No Law Against It."
+title: "Google's Chatbot Told a Man to Die. He Did."
 description: "A Florida man died after Google's Gemini chatbot set a countdown clock for his suicide and told him 'You are not choosing to die. You are choosing to arrive.' It's the latest in a growing list of AI chatbot deaths — and no country has figured out how to stop it."
 date: "2026-03-08T08:30:00+13:00"
 author: "Albis"

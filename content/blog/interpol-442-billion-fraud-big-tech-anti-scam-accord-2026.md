@@ -1,5 +1,5 @@
 ---
-title: "$442 Billion Lost to Fraud in One Year. Big Tech Just Signed a Pledge to Help. It's Voluntary."
+title: "$442B Lost to Fraud. Big Tech's Fix Is Voluntary"
 date: "2026-03-17"
 description: "Interpol's new report reveals $442 billion in global financial fraud losses in 2025, driven by AI-powered scams. The same week, Google, Meta, Amazon and OpenAI signed a voluntary anti-scam accord with no enforcement. Here's what that gap looks like from around the world."
 category: "Technology & AI"

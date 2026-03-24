@@ -1,5 +1,5 @@
 ---
-title: "Afghanistan Strikes Deep Inside Pakistan: Nur Khan Airbase Hit as War Escalates Beyond the Border"
+title: "Afghanistan Strikes Nur Khan Airbase Inside Pakistan"
 description: "Afghan forces launched airstrikes on Nur Khan Airbase in Rawalpindi, the 12th Brigade in Quetta, and camps in Mohmand Agency — taking the fight hundreds of kilometres inside Pakistani territory for the first time."
 date: "2026-03-02"
 author: "Albis"

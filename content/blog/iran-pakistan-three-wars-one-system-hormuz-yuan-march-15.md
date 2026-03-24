@@ -1,5 +1,5 @@
 ---
-title: "Iran, Pakistan and Lebanon Are Fighting Separate Wars Through a Single Energy System"
+title: "Three Wars, One Energy System: Iran Pakistan Lebanon"
 description: "The Iran war, Pakistan-Afghanistan conflict, and Lebanon invasion aren't separate crises. They're one interconnected system reshaping global energy, alliances, and the dollar itself."
 date: "2026-03-15"
 author: "Albis"

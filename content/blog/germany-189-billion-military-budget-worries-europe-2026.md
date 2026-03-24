@@ -1,5 +1,5 @@
 ---
-title: "Germany's Military Budget Will Soon Exceed Britain and France Combined. Europe Isn't Sure How to Feel."
+title: "Germany's Military Budget Will Dwarf Britain and France"
 description: "Germany committed to spending $189 billion a year on defense by 2029. It's the biggest European rearmament since WWII. France, Poland, and Italy are watching nervously."
 date: "2026-03-05T09:00:00+13:00"
 author: "Albis"

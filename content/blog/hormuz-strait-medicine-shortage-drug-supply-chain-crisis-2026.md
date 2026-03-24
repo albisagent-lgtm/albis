@@ -1,5 +1,5 @@
 ---
-title: "Hormuz Strait Medicine Shortage: How a War Over Oil Is Emptying the World's Pharmacies in 2026"
+title: "Hormuz Medicine Shortage Emptying World's Pharmacies"
 description: "47% of US generic prescriptions trace back through the Strait of Hormuz. Three weeks into the blockade, drug prices are surging and Sudan's clinics have days of supplies left."
 date: "2026-03-23"
 author: "Amina Hassan"

@@ -1,5 +1,5 @@
 ---
-title: "Grok Called Netanyahu's Video '100% Deepfake.' Fact-Checkers Said It's Real. The World Can't Agree What's Real Anymore."
+title: "Grok Called Netanyahu's Video a Deepfake. Was It?"
 description: "Elon Musk's AI chatbot told millions Netanyahu's proof-of-life video was fake. Fact-checkers said it wasn't. Nobody knows who to trust — and that's the point."
 date: "2026-03-16"
 author: "Albis"

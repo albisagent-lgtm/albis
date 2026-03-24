@@ -1,5 +1,5 @@
 ---
-title: "Every Oil Crisis Promises a Clean Energy Revolution. Here's Why This One Might Be Different — or Exactly the Same."
+title: "Oil Crisis Promises Clean Energy. Will This One Deliver?"
 description: "The Iran war oil shock is pushing governments toward renewables. It's also pushing them toward coal. China's renewable buffer is now a strategic weapon."
 date: "2026-03-21"
 author: "Albis"

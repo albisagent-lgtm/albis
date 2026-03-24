@@ -1,5 +1,5 @@
 ---
-title: "One Leader Apologized. The Other Promised Regime Change. You're Paying Either Way."
+title: "One Apologized. One Wants Regime Change. You Pay"
 description: "Iran's president apologized to Gulf neighbors Saturday. Netanyahu announced plans to eliminate Iran's regime. Oil hit $92. Gas hit $3.41. The war's direction is in the gap between those speeches."
 date: "2026-03-08"
 image: "https://images.pexels.com/photos/6950205/pexels-photo-6950205.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

@@ -1,5 +1,5 @@
 ---
-title: "Half the World's Fertilizer Passes Through the Persian Gulf. The Bread Price Shock Hits in Six Months."
+title: "Gulf Fertilizer Crisis: Bread Price Shock in 6 Months"
 description: "The Iran war's biggest impact might not be at the gas pump. It might be at the grocery store — when nobody's connecting the dots anymore."
 date: "2026-03-09"
 author: "Albis"

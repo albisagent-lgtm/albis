@@ -1,5 +1,5 @@
 ---
-title: "318 Million People Face Hunger. Two Famines Are Confirmed. And the Fertilizer Just Stopped."
+title: "Two Famines Confirmed, Fertilizer Stopped: 318M Hungry"
 description: "Hunger has doubled since 2019. Gaza and Sudan are in confirmed famine. And the Iran war just choked the Strait that 25% of the world's fertilizer flows through. The next planting season may already be lost."
 date: "2026-03-15"
 author: "Albis"

@@ -1,5 +1,5 @@
 ---
-title: "One Crisis, Three Fronts: How Iran, Pakistan, and Lebanon Are Locked in a Single Spiral"
+title: "One Crisis, Three Fronts: Iran, Pakistan, Lebanon"
 description: "The US-Israel war on Iran, Pakistan's open war with Afghanistan, and Israel's ground incursion into Lebanon aren't separate conflicts. They share the same trigger, the same power vacuum, and the same victims."
 date: "2026-03-06T04:00:00.000Z"
 author: "Albis"

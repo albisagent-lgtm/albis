@@ -1,5 +1,6 @@
 ---
 title: "The Week Reality Split: Five Stories, Infinite Truths"
+description: "March 4–10 saw the highest perception gaps of 2026. Identical events spawned incompatible realities across seven global regions."
 date: "2026-03-10"
 author: "Albis"
 category: "Analysis"

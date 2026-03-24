@@ -1,5 +1,5 @@
 ---
-title: "An Indonesian Court Just Acquitted Protest Leaders. 6.2 Billion People Didn't Notice."
+title: "Indonesia Acquitted Protest Leaders. Nobody Noticed"
 description: "Indonesia's year-long democracy crisis has killed 10 people, burned parliament buildings, and triggered the biggest protests since 1998. Almost nobody outside Asia is paying attention."
 date: "2026-03-07"
 image: "https://images.pexels.com/photos/36167515/pexels-photo-36167515.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

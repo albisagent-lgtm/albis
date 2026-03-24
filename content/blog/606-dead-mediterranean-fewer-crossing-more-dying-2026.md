@@ -1,5 +1,5 @@
 ---
-title: "606 Dead in Two Months. Fewer People Are Crossing the Mediterranean—More Are Dying."
+title: "606 Dead: Fewer Cross the Mediterranean, More Die"
 description: "The Mediterranean just had its deadliest start to a year in over a decade. The twist? Arrivals dropped 61%. The death rate is surging even as crossings fall."
 date: "2026-03-01"
 image: "https://images.unsplash.com/photo-1653237168937-6ac70e5a30e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxtaWdyYXRpb24lMjBtZWRpdGVycmFuZWFuJTIwZXVyb3BlfGVufDB8MHx8fDE3NzMwNDUzMjZ8MA&ixlib=rb-4.1.0&q=80&w=1080"

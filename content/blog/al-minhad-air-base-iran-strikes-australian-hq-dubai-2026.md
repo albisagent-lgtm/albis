@@ -1,5 +1,5 @@
 ---
-title: "Iran Strikes Al Minhad Air Base Near Dubai: Australian Troops Caught in 2026 Iran War"
+title: "Iran Strikes Al Minhad Air Base Near Dubai"
 date: "2026-03-03"
 image: "https://images.pexels.com/photos/36300907/pexels-photo-36300907.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"

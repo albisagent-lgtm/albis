@@ -1,5 +1,5 @@
 ---
-title: "Fire Now Destroys More Tropical Forest Than Logging. That's a Tipping Point Nobody Announced."
+title: "Fire Destroys More Tropical Forest Than Logging Now"
 slug: "fire-destroys-more-tropical-forest-than-logging-2024"
 description: "48% of tropical forest loss in 2024 came from fire, not chainsaws. The Amazon and Congo Basin aren't being cut down — they're burning themselves down. Conservation strategies built around stopping loggers just became obsolete."
 category: "climate"

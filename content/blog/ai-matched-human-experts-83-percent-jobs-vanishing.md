@@ -1,5 +1,5 @@
 ---
-title: "AI Just Matched Human Experts 83% of the Time. Then 4,000 People Lost Their Jobs."
+title: "AI Matched Experts 83% of the Time. 4,000 Lost Jobs."
 description: "GPT-5.4 scored 83% on professional work benchmarks across 44 occupations. Days later, Block fired half its workforce. The AI job crisis isn't theoretical anymore."
 date: "2026-03-15"
 author: "Albis"

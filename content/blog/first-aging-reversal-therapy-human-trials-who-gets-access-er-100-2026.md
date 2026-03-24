@@ -1,5 +1,5 @@
 ---
-title: "The First Therapy Designed to Reverse Aging Just Started Human Trials. Who Gets Access?"
+title: "First Aging Reversal Therapy Starts Human Trials"
 description: "ER-100 is treating aging as a software bug — reprogramming cells to a younger state. If it works, it rewrites healthcare economics. Who pays determines who grows young."
 date: "2026-03-15"
 author: "Albis"

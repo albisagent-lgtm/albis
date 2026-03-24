@@ -1,5 +1,5 @@
 ---
-title: "Iran Hit the World's Biggest LNG Plant. Here's How Four Regions Reported It Differently."
+title: "Iran Hit the World's Biggest LNG Plant"
 description: "Iran struck Qatar's Ras Laffan gas hub on March 18. Energy crisis framing vs sovereignty attack vs justified retaliation — the same event, four completely different stories."
 date: 2026-03-20
 published: true

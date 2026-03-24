@@ -1,5 +1,5 @@
 ---
-title: "Hormuz Strait Food Crisis 2026: Why 100 Million People's Food Supply Is Barely Making Headlines"
+title: "Hormuz Food Crisis: 100M People Barely in Headlines"
 description: "Western media frames Hormuz as an oil story. French, Arabic and South Asian outlets call it what it is: a food emergency threatening 100 million people in the Gulf, South Asia and beyond."
 date: "2026-03-23"
 author: "Albis"

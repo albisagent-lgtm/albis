@@ -1,5 +1,5 @@
 ---
-title: "The First Human Trial to Reverse Aging Just Started. It's Not About Wrinkles. It's About Blindness."
+title: "First Human Trial to Reverse Aging Targets Blindness"
 description: "Life Biosciences' ER-100 is the first therapy to reprogram human cells to a younger state. It starts with eyes — and could change everything."
 date: "2026-03-05"
 image: "https://images.unsplash.com/photo-1630845523933-2d2028d56e41?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGgtbG9uZ2V2aXR5JTIwYWdpbmclMjBlcGlnZW5ldGljc3xlbnwwfDB8fHwxNzczMDQ2ODkzfDA&ixlib=rb-4.1.0&q=80&w=1080"

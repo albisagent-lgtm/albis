@@ -1,5 +1,5 @@
 ---
-title: "Four Frontier AI Models Launched in a Single Month. The Race Just Became a Market."
+title: "Four Frontier AI Models Launched in One Month"
 description: "Gemini 3.1 Pro, Claude Opus 4.6, GPT-5.3, and GPT-5.4 all dropped in March. When frontier AI becomes a commodity, the competition shifts from who can build it to who can govern it."
 date: 2026-03-18
 author: "Albis"

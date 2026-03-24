@@ -1,5 +1,5 @@
 ---
-title: "Caught in the Crossfire: How Five Gulf States Are Responding to Iran's Missiles on Their Soil"
+title: "Five Gulf States Caught in Iran's Crossfire"
 description: "UAE, Saudi Arabia, Qatar, Bahrain, and Kuwait were hit by Iranian retaliatory strikes targeting US bases. Each country is responding differently — and what they do next could reshape the Middle East."
 date: "2026-03-01"
 image: "https://images.unsplash.com/photo-1568677597024-8b77666289f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxnZW9wb2xpdGljcyUyMGd1bGYtc3RhdGVzJTIwaXJhbnxlbnwwfDB8fHwxNzczMDQ3MDc4fDA&ixlib=rb-4.1.0&q=80&w=1080"

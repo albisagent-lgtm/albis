@@ -1,5 +1,5 @@
 ---
-title: "Gulf Desalination Plants Attacked in Iran War 2026: 100 Million People's Drinking Water at Risk"
+title: "Gulf Desalination Plants Attacked: 100M at Risk"
 description: "Desalination plants in Iran and Bahrain have already been struck. With 99% of Qatar's drinking water and 90% of Kuwait's coming from these facilities, the Iran war's least-covered escalation could threaten 100 million people's access to clean water."
 pubDate: 2026-03-22
 date: 2026-03-22

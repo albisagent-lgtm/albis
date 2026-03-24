@@ -1,5 +1,5 @@
 ---
-title: "Google Sold the World's Most Famous Robot Maker. Now It Wants to Be the Operating System Inside Every Robot."
+title: "Google Wants to Be the Android for Robots"
 description: "Google folded Intrinsic into its core business, betting the Android playbook can win robotics. The $370B question: software or hardware?"
 date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1674027326347-37509301f286?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaS1pbnRlbGxpZ2VuY2UlMjByb2JvdGljcyUyMGdvb2dsZXxlbnwwfDB8fHwxNzczMDQ2OTM1fDA&ixlib=rb-4.1.0&q=80&w=1080"

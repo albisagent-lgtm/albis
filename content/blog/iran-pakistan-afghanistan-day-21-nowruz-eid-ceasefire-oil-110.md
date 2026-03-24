@@ -1,5 +1,5 @@
 ---
-title: "On Nowruz, Iran's Supreme Leader Is Missing. On the Afghan Border, Both Sides Paused. Oil Hit $119."
+title: "Nowruz, a Missing Leader, and Oil at $119"
 description: "Day 21 of the Iran war: Mojtaba Khamenei hasn't appeared in public since his appointment. Oil spiked to $119 on energy-infrastructure strikes. And two simultaneous ceasefires — Eid and Nowruz — created the conflict's first real de-escalation window."
 date: 2026-03-20
 author: "Albis"

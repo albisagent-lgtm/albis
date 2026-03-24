@@ -1,5 +1,5 @@
 ---
-title: "318 Million People Are Facing Starvation. It Didn't Happen All at Once. It's a Cascade."
+title: "318 Million Facing Starvation: How the Cascade Built"
 description: "Hunger doubled since 2019. Not because of one cause—because of six. Each link in the chain makes the next one worse. Two famines running simultaneously for the first time this century."
 publishedAt: "2026-03-10"
 author: "Harry Wenham"

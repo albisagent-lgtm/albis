@@ -1,5 +1,5 @@
 ---
-title: "Gen Z Is the First Generation Less Cognitively Capable Than Their Parents. EdTech Did That."
+title: "Gen Z Is Less Cognitively Capable Than Their Parents"
 description: "US schools spent $30B on edtech. Gen Z's test scores dropped. Now AI tutoring is flooding classrooms — with less than 10% of tools having evidence they work."
 date: "2026-03-14"
 author: "Albis"

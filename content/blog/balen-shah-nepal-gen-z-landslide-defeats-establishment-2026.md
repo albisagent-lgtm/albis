@@ -1,5 +1,5 @@
 ---
-title: "Nepal's Gen Z Just Elected a 35-Year-Old Ex-Rapper by Two-Thirds. The Old Guard Got 13%."
+title: "Nepal Elected an Ex-Rapper President in a Landslide"
 description: "Balen Shah's party won 182 seats in Nepal's parliament—just two shy of a supermajority. The establishment parties that ruled for 30 years barely broke double digits."
 date: "2026-03-19"
 author: "Albis"

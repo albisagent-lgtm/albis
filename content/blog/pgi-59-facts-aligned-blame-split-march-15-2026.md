@@ -1,5 +1,6 @@
 ---
 title: "PGI 5.9: The World Agrees on What Happened. It Can't Agree on Who's to Blame."
+description: "The world agrees on the facts but splits on blame. When causation diverges, you're watching interests shape reality in real time."
 image: "https://images.pexels.com/photos/5561913/pexels-photo-5561913.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: 2026-03-15
 modified: 2026-03-15

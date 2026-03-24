@@ -1,5 +1,5 @@
 ---
-title: "170 Million People Just Changed Their Government. Nobody Outside South Asia Noticed."
+title: "Bangladesh Changed Its Government. Nobody Noticed."
 description: "Bangladesh held its most significant election in 20 years while the world watched missiles fly over the Gulf. The BNP won a landslide. India and Pakistan both responded. The rest of the world kept scrolling."
 date: "2026-03-07"
 image: "https://images.unsplash.com/photo-1740477138822-906f6b845579?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxiYW5nbGFkZXNoJTIwZGVtb2NyYWN5JTIwc291dGgtYXNpYXxlbnwwfDB8fHwxNzczMDQ1Mzc2fDA&ixlib=rb-4.1.0&q=80&w=1080"

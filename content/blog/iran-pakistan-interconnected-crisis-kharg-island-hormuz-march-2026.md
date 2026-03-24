@@ -1,5 +1,5 @@
 ---
-title: "Iran, Pakistan, and the War Nobody Sees as One: How Kharg Island, Hormuz, and Islamabad Are Connected"
+title: "Iran, Pakistan, and the War Nobody Sees as One"
 description: "The US strike on Kharg Island, Iran's active mining of Hormuz, and Taliban drones reaching Islamabad are one crisis — connected by oil, debt, and military overstretch. Here's the system."
 date: "2026-03-14"
 author: "Albis"

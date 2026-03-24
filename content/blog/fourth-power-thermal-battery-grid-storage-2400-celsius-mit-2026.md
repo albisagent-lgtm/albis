@@ -1,5 +1,5 @@
 ---
-title: "The US Threw Away 20 Million MWh of Clean Energy Last Year. A MIT Startup Wants to Store It in Molten Tin."
+title: "20 Million MWh of Clean Energy Wasted. One Fix Exists"
 description: "The US curtailed 20M MWh of clean energy in 2024 — wasted solar and wind. MIT's Fourth Power thermal battery stores excess power at 2,400°C and targets $25/kWh grid storage."
 date: "2026-03-22"
 author: "Harry Wenham"

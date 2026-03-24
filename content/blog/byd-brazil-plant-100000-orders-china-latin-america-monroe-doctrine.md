@@ -1,5 +1,5 @@
 ---
-title: "BYD Pre-Sold 100,000 Cars From a Brazilian Factory Most Americans Don't Know Exists"
+title: "BYD Pre-Sold 100K Cars From a Factory You Don't Know"
 description: "China isn't exporting EVs to Latin America. It's building them there. BYD's Bahia plant sold two-thirds of annual output in eight months. The Monroe Doctrine meets the electric vehicle age."
 date: "2026-03-16"
 author: "Albis"

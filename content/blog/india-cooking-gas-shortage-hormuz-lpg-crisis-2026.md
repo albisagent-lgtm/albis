@@ -1,5 +1,5 @@
 ---
-title: "India Cooking Gas Shortage 2026: How the Hormuz Blockade Left 310 Million Kitchens Short"
+title: "India Cooking Gas Shortage: 310 Million Kitchens Hit"
 description: "India imports 60% of its cooking gas through the Strait of Hormuz. Three weeks into the blockade, black market cylinders sell for 4x the normal price, restaurants are shutting, and the government is handing out coal."
 pubDate: 2026-03-23
 author: "Albis Geopolitics Desk"

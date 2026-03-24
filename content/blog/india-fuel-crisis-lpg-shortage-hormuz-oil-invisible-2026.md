@@ -1,5 +1,5 @@
 ---
-title: "India's Crude Imports Dropped 23% in March. A Fifth of Mumbai's Restaurants Have Closed."
+title: "India's Crude Imports Dropped 23%. Restaurants Closed"
 description: "India's fuel crisis — LPG queues, 23% crude import drop, rupee at record lows — affects 1.4 billion people. Outside South Asia, almost nobody's covering it."
 date: "2026-03-22"
 author: "Albis"

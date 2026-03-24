@@ -1,5 +1,5 @@
 ---
-title: "The World Just Crossed Below Replacement Rate. Every Region Blames a Different Cause."
+title: "Global Fertility Rate Just Fell Below Replacement"
 description: "Global fertility hit 2.25 births per woman in 2024—below replacement. But Asia blames housing, Europe pushes immigration, and America splits on policy. The data is the same. The story isn't."
 date: "2026-03-17"
 author: "Albis"

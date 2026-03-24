@@ -1,5 +1,5 @@
 ---
-title: "The IAEA Found a Fourth Iranian Nuclear Site. The US Says It Proves the War Was Right. The Middle East Says It Proves the War Was Botched."
+title: "IAEA Found a Fourth Iranian Nuclear Site. Now What?"
 description: "Iran built a fourth undisclosed uranium enrichment site at Isfahan. The IAEA can't inspect it. The same finding is being used to justify the war and condemn it simultaneously."
 date: 2026-03-20
 author: "Albis"

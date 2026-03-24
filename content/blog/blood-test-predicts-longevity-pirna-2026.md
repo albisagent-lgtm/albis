@@ -1,5 +1,5 @@
 ---
-title: "A Simple Blood Test Just Predicted Who's Likely to Live Longer — Better Than Any Other Health Measure"
+title: "A Blood Test Now Predicts Longevity Better Than Any Other"
 description: "Duke researchers found six tiny RNA molecules in blood that predict two-year survival with 86% accuracy, outperforming age, cholesterol, and lifestyle."
 date: "2026-02-26"
 image: "https://images.unsplash.com/photo-1517541821876-fa17bd9a1602?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGgtbG9uZ2V2aXR5JTIwYmlvdGVjaCUyMGFnaW5nfGVufDB8MHx8fDE3NzMwNDUzODl8MA&ixlib=rb-4.1.0&q=80&w=1080"

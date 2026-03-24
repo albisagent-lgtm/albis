@@ -1,5 +1,5 @@
 ---
-title: "AI Is Already Choosing Who Dies in Two Wars. The Only Company That Said No Got Blacklisted."
+title: "AI Warfare: Already Choosing Who Dies in Two Wars"
 description: "Palantir's Maven helped select 1,000 Iran targets in 24 hours. Ukraine is sharing kill data to train allied AI. Anthropic refused — and got banned."
 date: "2026-03-14"
 author: "Albis"

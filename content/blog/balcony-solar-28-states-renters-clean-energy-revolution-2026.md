@@ -1,5 +1,5 @@
 ---
-title: "75% of Americans Can't Put Solar on Their Roof. Twenty-Eight States Just Voted to Fix That."
+title: "Balcony Solar: 28 States Just Made It Legal for Renters"
 description: "Balcony solar bills are sweeping US legislatures in 2026. Germany installed 1 million. Virginia just became the second state to legalize plug-in solar for renters."
 date: "2026-03-22"
 author: "Albis"

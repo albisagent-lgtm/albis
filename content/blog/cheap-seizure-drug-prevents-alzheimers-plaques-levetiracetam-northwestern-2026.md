@@ -1,5 +1,5 @@
 ---
-title: "A $7 Seizure Drug Might Prevent Alzheimer's. But You'd Need to Start Taking It 20 Years Early."
+title: "$7 Seizure Drug May Prevent Alzheimer's. There's a Catch."
 description: "Northwestern scientists found levetiracetam stops toxic brain plaques from forming. The catch: it only works decades before symptoms appear."
 date: "2026-03-10"
 author: "Harry Wenham"

@@ -1,5 +1,5 @@
 ---
-title: "Germany Just Proposed a VIP Lane for Europe's Biggest Countries. 21 Nations Would Be Left in the Slow Lane."
+title: "Germany Proposed a VIP Lane. 21 Nations Left Behind"
 description: "Germany wants a two-speed EU where six major economies decide first, smaller countries follow later. It's either reform or fracture."
 date: "2026-03-08"
 image: "https://images.pexels.com/photos/4330055/pexels-photo-4330055.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

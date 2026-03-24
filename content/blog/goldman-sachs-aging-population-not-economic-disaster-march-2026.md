@@ -1,5 +1,6 @@
 ---
 title: "What If the 'Demographic Time Bomb' Was Wrong All Along?"
+description: "Governments spent trillions preparing for demographic collapse. Goldman Sachs says the crisis model was wrong. Here's what they missed."
 slug: "goldman-sachs-aging-population-not-economic-disaster-march-2026"
 publishDate: 2026-03-08
 author: "Harry Wenham"

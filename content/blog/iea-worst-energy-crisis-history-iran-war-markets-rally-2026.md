@@ -1,5 +1,5 @@
 ---
-title: "IEA Declares Worst Energy Crisis in History as Markets Rally on Trump Iran Post 2026"
+title: "IEA Declares Worst Energy Crisis as Markets Rally"
 description: "The IEA chief said the Iran war energy crisis is worse than the 1970s oil shocks and Ukraine war combined. The same day, a single Truth Social post sent stocks soaring and oil tumbling. The gap between physical reality and market narrative has never been wider."
 pubDate: 2026-03-24
 author: "Albis Editorial"

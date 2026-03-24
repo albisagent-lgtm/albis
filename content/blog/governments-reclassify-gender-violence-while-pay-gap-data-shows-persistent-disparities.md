@@ -1,5 +1,5 @@
 ---
-title: "Governments Reclassify Gender Violence While Pay Gap Data Shows Persistent Disparities"
+title: "Gender Violence Reclassified While Pay Gap Persists"
 description: "Governments are elevating gender-based violence to higher legal categories as new workplace data reveals the economic gap between men and women remains wide despite narrowing."
 date: "2026-03-03"
 author: "Albis"

@@ -1,5 +1,5 @@
 ---
-title: "1.1 Million Tons of Fertilizer Stuck in the Gulf. Spring Planting Starts in Four Weeks."
+title: "1.1M Tons of Fertilizer Stuck. Planting Starts Soon"
 description: "Over twenty ships carrying nearly a million metric tons of fertilizer are trapped behind a closed strait. Miss the planting window, and this year's global harvest shrinks by double digits."
 date: "2026-03-16"
 author: "Harry Wenham"

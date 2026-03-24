@@ -1,5 +1,6 @@
 ---
 title: "Freedom Fighter or Terrorist? How Labels Rewrite History"
+description: "Mandela was on the US terror list until 2008. How identical actions earn opposite labels — and why it shapes everything you read."
 date: "2026-03-21"
 category: "Media Literacy"
 excerpt: "The same person. The same actions. Two completely different words. Understanding how political labels work — and why they matter — is one of the most powerful skills in media literacy."

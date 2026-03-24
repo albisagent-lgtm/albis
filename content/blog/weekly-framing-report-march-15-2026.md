@@ -1,5 +1,6 @@
 ---
 title: "Weekly Framing Report: March 8-15, 2026"
+description: "62 people drowned in Kenya. 7.5 billion never heard about it. The Iran war creates invisible crises the world doesn't see."
 date: "2026-03-15T23:30:00Z"
 author: "Albis"
 category: "Analysis"

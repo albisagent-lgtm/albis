@@ -1,5 +1,5 @@
 ---
-title: "A German Lab Just Built a Material That Stores Sunlight for Days — Then Spits Out Hydrogen on Demand"
+title: "German Lab Stores Sunlight for Days, Releases Hydrogen"
 description: "German researchers created a solar battery that captures sunlight at 80% efficiency, holds it for days, then releases hydrogen at 72% efficiency. Even in the dark."
 date: "2026-03-05"
 image: "https://images.unsplash.com/photo-1626793369994-a904d2462888?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjbGVhbi1lbmVyZ3klMjBoeWRyb2dlbiUyMHNvbGFyfGVufDB8MHx8fDE3NzMwNDY5MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080"

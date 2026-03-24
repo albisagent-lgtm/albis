@@ -1,5 +1,5 @@
 ---
-title: "Iran's 90 Million People Have Been Offline for 18 Days. Most of the World Doesn't Know."
+title: "Iran's 90 Million People Offline for 18 Days"
 description: "Iran's internet blackout has cut 90 million people off for 18 days. Hospitals can't coordinate, families can't connect, and 5.5 billion people have no idea."
 date: "2026-03-18"
 author: "Albis"

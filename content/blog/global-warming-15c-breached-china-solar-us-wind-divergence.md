@@ -1,5 +1,5 @@
 ---
-title: "The 1.5°C Target Is Broken. China's Installing Record Solar. The US Is Blocking Wind Farms."
+title: "1.5°C Target Broken. Solar Booms. Wind Farms Blocked"
 description: "Global warming hit 1.5°C. China added 240GW of solar in 2025—more than US total history. Trump's blocking offshore wind. Same planet, opposite trajectories."
 date: "2026-03-15"
 author: "Albis"
