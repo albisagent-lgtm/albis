@@ -48,6 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [post.image],
     },
     alternates: { canonical: url },
+    ...(post.noindex ? { robots: { index: false, follow: true } } : {}),
   };
 }
 

@@ -61,6 +61,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [ogImageUrl],
     },
     alternates: { canonical: url },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ...((post as any).noindex ? { robots: { index: false, follow: true } } : {}),
   };
 }
 

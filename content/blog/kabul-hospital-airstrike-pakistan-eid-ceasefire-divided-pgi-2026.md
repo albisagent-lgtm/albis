@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "400 Dead in Kabul. Three Regions, Three Stories."
 description: "Pakistan struck a drug rehab hospital in Kabul, killing 400+. South Asia called it a war crime. The US barely noticed. And the Middle East led with who brokered the ceasefire — without America."
 date: 2026-03-20

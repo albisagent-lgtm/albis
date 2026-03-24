@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "America's measles comeback, explained"
 description: "The US had nearly wiped out measles. Now it's back with nearly 1,000 cases in two months. Here's how elimination status works, why vaccination rates matter, and what happens if the virus takes hold again."
 date: "2026-02-26"

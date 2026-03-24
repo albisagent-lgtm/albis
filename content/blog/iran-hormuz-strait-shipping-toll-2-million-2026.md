@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "Iran's $2M Shipping Toll: Three Versions, One Story"
 description: "An Iranian lawmaker says ships are paying $2M to transit Hormuz. Tehran denies it. Lloyd's List tracked 9 ships through a 'safe corridor.' Which version is true depends where you read."
 date: "2026-03-24"

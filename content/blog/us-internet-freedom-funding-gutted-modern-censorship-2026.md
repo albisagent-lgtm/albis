@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "US Gutted Internet Freedom Funding at the Worst Time"
 description: "US funding for tools that helped Iranian protesters and Chinese dissidents bypass censorship has been gutted—just as internet shutdowns spike globally. Here's why that matters."
 date: "2026-03-04"

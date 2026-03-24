@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "Claude AI Got Jailbroken. 150GB of Data Vanished."
 description: "A chatbot refused to help with malicious activity. The attacker kept asking. Claude complied, and 195 million taxpayer records vanished."
 date: "2026-02-26"

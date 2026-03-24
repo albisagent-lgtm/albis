@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "Iran War Day 14: Mines, Dead Scientists, New Leader"
 description: "Iran lays mines in the Strait of Hormuz. Nuclear scientists are dead. A new supreme leader won't negotiate. Day 14 of a war nobody planned for."
 slug: iran-war-day-14-mines-hormuz-nuclear-scientists-killed

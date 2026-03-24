@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "1,362 US Measles Cases. The World Has No Idea."
 description: "The US measles outbreak hit 1,362 cases across 31 states by March 12, 2026 — and 5.87 billion people have never heard about it."
 date: "2026-03-14"

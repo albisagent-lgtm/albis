@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "The US Built a Censorship Tool, Then Defunded It"
 description: "The US launched freedom.gov to help Europeans bypass censorship. The same month, it gutted funding for activists building anti-censorship tools in Iran, China, and Russia."
 date: "2026-03-09"

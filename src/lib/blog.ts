@@ -39,6 +39,7 @@ export interface BlogPost {
   confidence: ConfidenceLevel;
   readingTime: number;
   content: string;
+  noindex?: boolean;
 }
 
 function estimateReadingTime(text: string): number {
@@ -49,7 +50,7 @@ function estimateReadingTime(text: string): number {
 export function getAllPosts(): BlogPost[] {
   if (!fs.existsSync(BLOG_DIR)) return [];
   const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".md"));
-  const posts = files.map((file) => getPostBySlug(file.replace(/\.md$/, ""))!).filter(Boolean);
+  const posts = files.map((file) => getPostBySlug(file.replace(/\.md$/, ""))!).filter(Boolean).filter((p) => !p.noindex);
   return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
@@ -74,6 +75,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
     confidence: (data.confidence as ConfidenceLevel) || 'developing',
     readingTime: estimateReadingTime(content),
     content,
+    noindex: data.noindex === true,
   };
 }
 

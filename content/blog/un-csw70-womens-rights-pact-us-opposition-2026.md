@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "UN Adopts Women's Rights Pact. US Stands Alone."
 description: "The UN CSW70 session concluded March 19, 2026, with the US casting the sole dissenting vote — breaking 70 years of consensus. Wyoming signed a six-week abortion ban the same week."
 date: "2026-03-21"

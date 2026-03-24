@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "Patagonia's Ancient Forests Are Burning Unseen"
 description: "45,000 hectares of irreplaceable forest destroyed in Argentina while the world watches missiles. The Albis GAI reveals who's blind."
 date: "2026-03-09"

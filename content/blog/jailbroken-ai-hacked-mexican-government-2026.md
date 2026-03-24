@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "Jailbroken AI Just Hacked a Government"
 description: "Hackers used a jailbroken Claude AI to breach the Mexican government. First confirmed case of AI weaponized for cyberattacks. The tools we built to help are being turned against us."
 date: "2026-02-27"

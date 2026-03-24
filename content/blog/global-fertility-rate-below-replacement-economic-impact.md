@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "The World Dropped Below 2.1. Everything Changes Now."
 description: "Fertility rates are falling faster than expected across every continent. The US hit 1.6, China's at its lowest since 1738, and by 2100 only six countries will be above replacement level."
 date: "2026-02-26"

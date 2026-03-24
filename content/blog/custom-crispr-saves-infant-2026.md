@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "Doctors Built a Custom Gene Therapy for One Baby. It Worked."
 description: "A therapy designed for one child stopped a fatal genetic disorder. Medicine just entered a new era."
 date: "2026-02-27"

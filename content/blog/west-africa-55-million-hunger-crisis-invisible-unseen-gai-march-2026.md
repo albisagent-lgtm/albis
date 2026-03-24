@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "55 Million Running Out of Food. You Haven't Heard."
 description: "West and Central Africa face the worst hunger crisis in a decade this summer — 55 million people at crisis levels or worse. The US just cut their food aid. Almost nobody outside Africa and Europe is covering it."
 date: 2026-03-13
