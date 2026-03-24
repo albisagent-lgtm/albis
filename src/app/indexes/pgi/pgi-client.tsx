@@ -108,27 +108,108 @@ const DIMENSION_LABELS = [
   { key: "d6_cui_bono", short: "Cui Bono", full: "Who Benefits", sigKey: "avg_d6_cui_bono" },
 ];
 
+function stripFrontmatter(md: string): string {
+  const trimmed = md.trim();
+  if (trimmed.startsWith("---")) {
+    const endIdx = trimmed.indexOf("---", 3);
+    if (endIdx !== -1) return trimmed.slice(endIdx + 3).trim();
+  }
+  return trimmed;
+}
+
 function renderMarkdown(md: string) {
-  return md
-    .split("\n\n")
-    .map((block) => {
-      const trimmed = block.trim();
-      if (!trimmed) return "";
-      if (trimmed.startsWith("### "))
-        return `<h4 class="text-lg font-semibold mt-6 mb-2">${trimmed.slice(4)}</h4>`;
-      if (trimmed.startsWith("## "))
-        return `<h3 class="text-xl font-semibold mt-8 mb-space-3 font-[family-name:var(--font-playfair)]">${trimmed.slice(3)}</h3>`;
-      if (trimmed.startsWith("# "))
-        return `<h2 class="text-2xl font-semibold mt-8 mb-space-3 font-[family-name:var(--font-playfair)]">${trimmed.slice(2)}</h2>`;
-      if (trimmed.startsWith("> "))
-        return `<blockquote class="border-l-3 border-[#c8922a] pl-4 italic text-zinc-500 dark:text-zinc-400 my-4">${trimmed.slice(2)}</blockquote>`;
-      const formatted = trimmed
-        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-        .replace(/\*(.+?)\*/g, "<em>$1</em>")
-        .replace(/\n/g, "<br/>");
-      return `<p class="mb-4 leading-relaxed">${formatted}</p>`;
-    })
-    .join("");
+  const clean = stripFrontmatter(md);
+  const sections: string[] = [];
+  let currentSection: string[] = [];
+
+  const blocks = clean.split("\n\n");
+
+  for (const block of blocks) {
+    const trimmed = block.trim();
+    if (!trimmed) continue;
+
+    // Horizontal rules (---) create visual section breaks
+    if (/^-{3,}$/.test(trimmed)) {
+      if (currentSection.length > 0) {
+        sections.push(
+          `<div class="mb-10 pb-10 border-b border-black/[0.06] dark:border-white/[0.06]">${currentSection.join("")}</div>`
+        );
+        currentSection = [];
+      }
+      continue;
+    }
+
+    // Section headings — styled as distinct visual anchors
+    if (trimmed.startsWith("### ")) {
+      currentSection.push(
+        `<h4 class="text-base font-semibold mt-8 mb-3 text-[#0f0f0f] dark:text-[#f0efec]">${formatInline(trimmed.slice(4))}</h4>`
+      );
+    } else if (trimmed.startsWith("## ")) {
+      currentSection.push(
+        `<h3 class="text-xl font-bold mt-10 mb-4 font-[family-name:var(--font-playfair)] text-[#0f0f0f] dark:text-[#f0efec]">${formatInline(trimmed.slice(3))}</h3>`
+      );
+    } else if (trimmed.startsWith("# ")) {
+      currentSection.push(
+        `<h2 class="text-2xl font-bold mt-10 mb-4 font-[family-name:var(--font-playfair)] text-[#0f0f0f] dark:text-[#f0efec]">${formatInline(trimmed.slice(2))}</h2>`
+      );
+    }
+    // Blockquotes
+    else if (trimmed.startsWith("> ")) {
+      currentSection.push(
+        `<blockquote class="border-l-3 border-[#c8922a] pl-5 my-6 italic text-zinc-500 dark:text-zinc-400 text-[15px] leading-relaxed">${formatInline(trimmed.slice(2))}</blockquote>`
+      );
+    }
+    // Key insight callouts — paragraphs starting with bold labels
+    else if (/^(The key insight|The pattern|The bottom line|Together,)/.test(trimmed)) {
+      currentSection.push(
+        `<div class="my-6 rounded-xl border border-[#c8922a]/20 bg-[#c8922a]/[0.03] p-5"><p class="text-[15px] leading-[1.8] text-zinc-700 dark:text-zinc-300">${formatInline(trimmed)}</p></div>`
+      );
+    }
+    // Stat/metric lines (e.g. "PGI-GP (Geopolitics): 6.12")
+    else if (/^PGI-[A-Z]{2}/.test(trimmed)) {
+      currentSection.push(
+        `<div class="my-4 rounded-lg border border-black/[0.05] bg-[#f8f7f4] dark:bg-white/[0.02] dark:border-white/[0.05] p-4"><p class="text-sm leading-[1.8] text-zinc-700 dark:text-zinc-300">${formatInline(trimmed)}</p></div>`
+      );
+    }
+    // "Most divergent" / region pair lines
+    else if (/^(Most divergent|Sharpest bilateral|The .+ pair|The .+ consensus|The quietest pair|The attention desert|The climate desert|The global spotlight|Latin America:)/.test(trimmed)) {
+      currentSection.push(
+        `<div class="my-4 pl-4 border-l-2 border-zinc-200 dark:border-zinc-700"><p class="text-[15px] leading-[1.8] text-zinc-700 dark:text-zinc-300">${formatInline(trimmed)}</p></div>`
+      );
+    }
+    // "The most invisible stories:" header
+    else if (/^The most invisible stories/.test(trimmed)) {
+      currentSection.push(
+        `<h4 class="text-base font-semibold mt-8 mb-3 text-[#0f0f0f] dark:text-[#f0efec]">${formatInline(trimmed)}</h4>`
+      );
+    }
+    // Individual invisible story items (start with country/topic name + GAI)
+    else if (/^(Pakistan|Cuba|US CFO|Palantir|South Sudan)/.test(trimmed) && trimmed.includes("GAI:")) {
+      currentSection.push(
+        `<div class="my-3 rounded-lg border border-black/[0.05] bg-[#f8f7f4] dark:bg-white/[0.02] dark:border-white/[0.05] p-4"><p class="text-sm leading-[1.8] text-zinc-700 dark:text-zinc-300">${formatInline(trimmed)}</p></div>`
+      );
+    }
+    // Regular paragraphs
+    else {
+      currentSection.push(
+        `<p class="mb-5 text-[15px] leading-[1.85] text-zinc-600 dark:text-zinc-400">${formatInline(trimmed)}</p>`
+      );
+    }
+  }
+
+  // Push any remaining section
+  if (currentSection.length > 0) {
+    sections.push(`<div class="mb-8">${currentSection.join("")}</div>`);
+  }
+
+  return sections.join("");
+}
+
+function formatInline(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong class="text-[#0f0f0f] dark:text-[#f0efec] font-semibold">$1</strong>')
+    .replace(/\*(.+?)\*/g, "<em>$1</em>")
+    .replace(/\n/g, "<br/>");
 }
 
 function formatDate(dateStr: string) {
@@ -389,21 +470,61 @@ export function PGIClient() {
         </section>
       )}
 
-      {/* ── Signature Piece ── */}
+      {/* ── Daily Analysis Preview ── */}
       {signature?.content_md && (
-        <section className="mt-space-16 pt-space-16 border-t border-black/5 dark:border-white/5 mx-auto max-w-3xl">
-          <article
-            className="prose prose-zinc dark:prose-invert max-w-none text-sm leading-[1.75]"
-            dangerouslySetInnerHTML={{ __html: renderMarkdown(signature.content_md) }}
-          />
-          <div className="mt-8 flex items-center gap-space-3 border-t border-black/[0.07] pt-6 dark:border-white/[0.06]">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#c8922a] to-[#b17f24] flex items-center justify-center text-white text-sm font-bold">
-              LT
-            </div>
-            <div>
-              <p className="text-sm font-semibold">{signature.author}</p>
-              <p className="text-xs text-zinc-400">AI Media Analyst · Albis</p>
-            </div>
+        <section className="mt-space-16 pt-space-16 border-t border-black/5 dark:border-white/5">
+          <div className="mx-auto max-w-3xl">
+            <p className="text-xs font-medium tracking-[0.15em] uppercase text-[#c8922a]">
+              Today&apos;s Analysis
+            </p>
+            <a
+              href={`/indexes/pgi/${signature.date}`}
+              className="mt-4 block rounded-2xl border border-black/[0.06] bg-white/50 p-6 transition-all hover:border-[#c8922a]/30 hover:shadow-md dark:border-white/[0.06] dark:bg-white/[0.02]"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1 min-w-0">
+                  <h2 className="font-[family-name:var(--font-playfair)] text-xl font-bold md:text-2xl">
+                    {formatDate(signature.date)}
+                  </h2>
+                  <div className="mt-2 flex flex-wrap items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
+                    {signature.story_count && (
+                      <span>{signature.story_count} stories</span>
+                    )}
+                    {signature.region_count && (
+                      <>
+                        <span className="text-zinc-300 dark:text-zinc-600">·</span>
+                        <span>{signature.region_count} regions</span>
+                      </>
+                    )}
+                    {signature.word_count && (
+                      <>
+                        <span className="text-zinc-300 dark:text-zinc-600">·</span>
+                        <span>{Math.ceil(signature.word_count / 250)} min read</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+                <div className="shrink-0 text-right">
+                  <div
+                    className="text-3xl font-bold tabular-nums font-[family-name:var(--font-geist-mono)]"
+                    style={{ color: tier?.color }}
+                  >
+                    {Number(signature.daily_pgi).toFixed(1)}
+                  </div>
+                </div>
+              </div>
+              {/* Teaser — first ~2 paragraphs */}
+              <p className="mt-4 text-[15px] leading-[1.75] text-zinc-600 dark:text-zinc-400 line-clamp-4">
+                {(() => {
+                  const clean = signature.content_md.replace(/^---[\s\S]*?---\s*/, "").replace(/^#+\s.*\n?/, "").trim();
+                  const firstPara = clean.split("\n\n").filter((p: string) => p.trim() && !p.trim().startsWith("#"))[0] || "";
+                  return firstPara.replace(/\*\*/g, "").replace(/\*/g, "").trim();
+                })()}
+              </p>
+              <span className="mt-4 inline-block text-sm font-medium text-[#c8922a]">
+                Read full analysis →
+              </span>
+            </a>
           </div>
         </section>
       )}

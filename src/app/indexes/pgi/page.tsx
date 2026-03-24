@@ -46,6 +46,34 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+async function getAllReports() {
+  try {
+    const supabase = createAdminClient();
+    const { data } = await supabase
+      .from("pgi_signature_pieces")
+      .select("date, daily_pgi, tier, word_count, story_count, region_count")
+      .order("date", { ascending: false });
+    if (!data) return [];
+    return data.map((d: any) => ({
+      date: d.date,
+      pgi: Number(d.daily_pgi),
+      tier: d.tier,
+      wordCount: d.word_count,
+      storyCount: d.story_count,
+      regionCount: d.region_count,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+function getTierColor(pgi: number) {
+  if (pgi <= 3) return "#22c55e";
+  if (pgi <= 5) return "#71717a";
+  if (pgi <= 7) return "#f59e0b";
+  return "#ef4444";
+}
+
 async function getLast14Days() {
   try {
     const supabase = createAdminClient();
@@ -68,6 +96,7 @@ export default async function PGIPage() {
   const latest = await getLatestPgi();
   const timelineData = await getLast14Days();
   const dividedArticles = getArticlesByTag("divided", 5);
+  const allReports = await getAllReports();
 
   // Fetch available dates for archive
   const supabase = createAdminClient();
@@ -124,6 +153,75 @@ export default async function PGIPage() {
           </div>
         </div>
       )}
+      {/* ── Daily Reports Archive ── */}
+      {allReports.length > 0 && (
+        <div className="mx-auto max-w-3xl px-6 py-8">
+          <div className="mb-6">
+            <p className="text-xs font-medium tracking-[0.15em] uppercase text-[#c8922a]">
+              Archive
+            </p>
+            <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-bold">
+              Daily PGI Reports
+            </h2>
+            <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+              Every day&apos;s full analysis — how differently the world understood the same events.
+            </p>
+          </div>
+          <div className="space-y-3">
+            {allReports.map((report) => {
+              const d = new Date(report.date + "T00:00:00");
+              const dateLabel = d.toLocaleDateString("en-NZ", {
+                weekday: "short",
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              });
+              return (
+                <Link
+                  key={report.date}
+                  href={`/indexes/pgi/${report.date}`}
+                  className="flex items-center justify-between gap-4 rounded-xl border border-black/[0.06] bg-white/50 p-4 transition-all hover:border-[#c8922a]/30 hover:shadow-sm dark:border-white/[0.06] dark:bg-white/[0.02]"
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                      {dateLabel}
+                    </p>
+                    <div className="mt-1 flex items-center gap-2 text-xs text-zinc-400">
+                      <span
+                        className="font-medium"
+                        style={{ color: getTierColor(report.pgi) }}
+                      >
+                        {report.tier}
+                      </span>
+                      {report.storyCount && (
+                        <>
+                          <span>·</span>
+                          <span>{report.storyCount} stories</span>
+                        </>
+                      )}
+                      {report.wordCount && (
+                        <>
+                          <span>·</span>
+                          <span>{Math.ceil(report.wordCount / 250)} min read</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  <div className="shrink-0 text-right">
+                    <div
+                      className="text-2xl font-bold tabular-nums font-[family-name:var(--font-geist-mono)]"
+                      style={{ color: getTierColor(report.pgi) }}
+                    >
+                      {report.pgi.toFixed(1)}
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <div className="mx-auto max-w-6xl px-6">
         <SeriesArticleFeed
           tag="divided"

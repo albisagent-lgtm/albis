@@ -48,7 +48,7 @@ export function PgiShareBar({ latestDate, latestPgi, dates }: PgiShareBarProps) 
           </button>
           {latestDate && (
             <Link
-              href={`/pgi/${latestDate}`}
+              href={`/indexes/pgi/${latestDate}`}
               className="text-xs font-medium text-[#c8922a] hover:text-[#c8922a]/80 transition-colors"
             >
               Latest report →
@@ -77,7 +77,7 @@ export function PgiShareBar({ latestDate, latestPgi, dates }: PgiShareBarProps) 
               return (
                 <Link
                   key={d.date}
-                  href={`/pgi/${d.date}`}
+                  href={`/indexes/pgi/${d.date}`}
                   className="flex items-center justify-between rounded-lg border border-black/[0.04] px-3 py-2 text-xs hover:border-[#c8922a]/30 transition-colors dark:border-white/[0.04]"
                 >
                   <span className="text-zinc-600 dark:text-zinc-400">{label}</span>
