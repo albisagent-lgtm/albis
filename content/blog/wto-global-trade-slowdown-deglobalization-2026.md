@@ -1,5 +1,5 @@
 ---
-title: "The Global Trading System Is Dying. Here's What's Replacing It."
+title: "The Global Trading System Is Dying. What's Next?"
 description: "WTO projects global trade growth will slow to just 0.5% in 2026—the slowest since the pandemic. But where it's collapsing tells the real story of deglobalization."
 date: 2026-03-14
 author: Harry Wenham

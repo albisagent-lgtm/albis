@@ -1,5 +1,5 @@
 ---
-title: "Pakistan Ex-Diplomat Threatens to Bomb Mumbai and Delhi Over Iran War in 2026"
+title: "Pakistan Ex-Diplomat Threatens to Nuke Mumbai"
 description: "Former Pakistan High Commissioner Abdul Basit said Pakistan would strike Mumbai and New Delhi 'without thinking twice' if the US targets its nuclear program — but 4.4 billion people never heard him say it."
 pubDate: 2026-03-23
 author: "Kofi Asante"

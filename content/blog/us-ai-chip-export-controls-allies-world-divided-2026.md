@@ -1,5 +1,5 @@
 ---
-title: "America Wants to Approve Every AI Chip Sold on Earth — Its Allies Aren't Happy"
+title: "The US Wants to Approve Every AI Chip Sold on Earth"
 description: "US draft rules would require government permits for all AI chip exports worldwide, even to allies like the UK and Japan. Here's how the world sees it differently."
 date: 2026-03-14
 author: "Albis"

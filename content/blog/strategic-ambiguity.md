@@ -1,5 +1,5 @@
 ---
-title: "Strategic Ambiguity: How Deliberate Confusion Becomes a Weapon"
+title: "Strategic Ambiguity: Confusion as a Weapon"
 description: "Strategic ambiguity uses vague, deniable messaging to create confusion and maintain plausible deniability. Here's the playbook."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1740479050179-bb55cac2179a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwbWVjaGFuaXNtLWxpYnJhcnklMjBzdHJhdGVnaWMtYW1iaWd1aXR5fGVufDB8MHx8fDE3NzMwNTQwNTl8MA&ixlib=rb-4.1.0&q=80&w=1080"

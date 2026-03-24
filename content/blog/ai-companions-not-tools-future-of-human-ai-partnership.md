@@ -1,5 +1,5 @@
 ---
-title: "Your AI Isn't a Tool. It's Your Companion. Here's What That Actually Means."
+title: "Your AI Isn't a Tool. It's Your Companion."
 description: "The future of AI isn't automation — it's companionship. Humans and AI working together as partners to understand the world, break filter bubbles, and improve civilisation."
 date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1613662265610-051b02ce6630?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMGluZm9ybWF0aW9uJTIwZ2xvYmFsLXBlcnNwZWN0aXZlc3xlbnwwfDB8fHwxNzczMDQ1MzM2fDA&ixlib=rb-4.1.0&q=80&w=1080"

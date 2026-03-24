@@ -1,5 +1,5 @@
 ---
-title: "Iran Desalination Plant Threat 2026: Gulf Water Crisis vs Western Oil Coverage"
+title: "Iran Threatened Gulf Water Supply. Media Covered Oil."
 description: "Iran's parliament speaker threatened to 'irreversibly destroy' Gulf desalination plants serving 100 million people. Gulf media called it existential. Western outlets buried it under oil prices."
 pubDate: 2026-03-23
 author: "Priya Shankar"

@@ -1,5 +1,5 @@
 ---
-title: "Six Babies Got Stem Cells Before They Were Born. Here's What Happened."
+title: "Six Babies Got Stem Cells Before Birth"
 description: "The world's first in-utero stem cell therapy for spina bifida just published results in The Lancet. All six babies are safe. The treatment may have improved outcomes beyond surgery alone."
 author: "Harry Wenham"
 date: "2026-03-07"

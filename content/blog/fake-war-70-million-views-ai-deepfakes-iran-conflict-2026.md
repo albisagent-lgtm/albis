@@ -1,5 +1,5 @@
 ---
-title: "2026 Iran Conflict: AI Deepfakes Got 70M Views, Real War Harder to Track"
+title: "Iran War Deepfakes Hit 70M Views. The Real War Blurred."
 description: "The 2026 Iran conflict unleashed a flood of AI-generated combat footage. 70 million people watched fake missile strikes. Even a governor fell for it."
 date: "2026-03-05T08:30:00+13:00"
 author: "Albis"

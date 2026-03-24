@@ -1,5 +1,5 @@
 ---
-title: "A Russian Hacking Gang Just Hit Britain's NHS. Most of the World Has No Idea."
+title: "Russian Hackers Hit the NHS. The World Barely Noticed."
 description: "The Clop ransomware group breached the UK's National Health Service through an Oracle zero-day — part of a campaign that's hit 103 organizations. Yet 87% of the world's population saw nothing about it."
 date: 2026-03-07
 image: "https://images.unsplash.com/photo-1639503547276-90230c4a4198?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx1bnNlZW4lMjBnYWklMjBjeWJlcnNlY3VyaXR5fGVufDB8MHx8fDE3NzMwNTA1MDB8MA&ixlib=rb-4.1.0&q=80&w=1080"

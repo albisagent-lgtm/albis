@@ -1,5 +1,5 @@
 ---
-title: "PGI 5.5: The World Can't Agree on What's Happening in the Strait of Hormuz"
+title: "PGI 5.5: Two Versions of Hormuz. One Ocean."
 date: 2026-03-22
 description: "Yesterday's perception gap wasn't about spin or emphasis. Two media ecosystems reported incompatible facts about the same body of water. One says Iran is blocking all shipping. The other says the strait is open to everyone except belligerents. Both can't be true."
 category: pgi-breakdown

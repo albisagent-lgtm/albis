@@ -1,5 +1,5 @@
 ---
-title: "A Country Most People Can't Find on a Map Just Opened the Future of Steel"
+title: "Namibia Just Opened the Future of Green Steel"
 description: "Namibia's HyIron plant produces green iron with zero emissions using solar-powered hydrogen — and could undercut fossil fuel costs by 2030."
 date: "2026-03-14"
 author: "Albis"

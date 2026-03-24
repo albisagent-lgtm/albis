@@ -1,5 +1,5 @@
 ---
-title: "Russian Tanker Anatoly Kolodkin Arrives at Cuba Oil Blockade Standoff 2026"
+title: "Russian Tanker Arrives at Cuba Oil Standoff"
 description: "A sanctioned Russian tanker with 730,000 barrels reaches Cuba today as US Coast Guard cutters wait. 10 million people's power depends on what happens next."
 date: "2026-03-23"
 author: "James Chen"

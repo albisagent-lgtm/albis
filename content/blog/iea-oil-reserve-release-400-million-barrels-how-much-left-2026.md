@@ -1,5 +1,5 @@
 ---
-title: "IEA Oil Reserve Release 2026: 400 Million Barrels Gone, How Much Is Left?"
+title: "400 Million Barrels of Oil Reserves Gone. What Now?"
 description: "The IEA just made its largest emergency oil release ever — one-third of all public reserves. Here's the math on what's left, who runs out first, and why there's no Plan B."
 pubDate: 2026-03-24
 date: "2026-03-24"

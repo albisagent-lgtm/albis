@@ -1,5 +1,5 @@
 ---
-title: "Trump Just Called NATO a Paper Tiger. Adversaries Were Taking Notes."
+title: "Trump Called NATO a Paper Tiger. Who Listened?"
 description: "26 of 32 NATO allies refused to send warships to Hormuz. Trump called them cowards, then upgraded: 'Without the USA, NATO is a paper tiger.'"
 date: "2026-03-21"
 author: "Albis"

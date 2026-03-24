@@ -1,5 +1,5 @@
 ---
-title: "Iran Hormuz Strait $2 Million Shipping Toll: Three Versions of One Story in 2026"
+title: "Iran's $2M Shipping Toll: Three Versions, One Story"
 description: "An Iranian lawmaker says ships are paying $2M to transit Hormuz. Tehran denies it. Lloyd's List tracked 9 ships through a 'safe corridor.' Which version is true depends where you read."
 date: "2026-03-24"
 author: "Albis Editorial"

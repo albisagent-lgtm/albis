@@ -1,5 +1,5 @@
 ---
-title: "Two Democracies Just Went to War Over What 'Free Speech' Means"
+title: "Two Democracies Are at War Over Free Speech Online"
 description: "The US built Freedom.gov to bypass European hate speech laws. Two of the world's oldest democracies now fundamentally disagree on what free expression means online."
 date: 2026-03-15
 author: "Albis"

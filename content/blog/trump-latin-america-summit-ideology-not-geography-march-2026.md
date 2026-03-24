@@ -1,5 +1,5 @@
 ---
-title: "Diplomacy Used to Be About Geography. Now It's About Who Agrees With You."
+title: "Diplomacy Isn't About Geography Anymore"
 description: "Trump invited 12 Latin American leaders to Florida. Three of the hemisphere's biggest economies weren't on the list. The split wasn't borders. It was ideology."
 date: "2026-03-10"
 author: "Albis"

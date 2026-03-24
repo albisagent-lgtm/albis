@@ -1,5 +1,5 @@
 ---
-title: "Censorship Architecture: How States Control What You Can See Online"
+title: "Censorship Architecture: How States Control the Web"
 description: "How governments build systems to control, filter, and shut down the internet. Technical methods explained in plain language."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1601327707681-63fac29e4bf1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwbWVjaGFuaXNtLWxpYnJhcnklMjBjZW5zb3JzaGlwfGVufDB8MHx8fDE3NzMwNDU0MDF8MA&ixlib=rb-4.1.0&q=80&w=1080"

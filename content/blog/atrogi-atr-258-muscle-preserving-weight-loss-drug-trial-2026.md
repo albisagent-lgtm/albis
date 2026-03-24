@@ -1,5 +1,5 @@
 ---
-title: "ATR-258 Muscle-Preserving Weight Loss Drug: First Human Trial Results in 2026"
+title: "ATR-258: The Weight Loss Drug That Saves Muscle"
 description: "Swedish biotech Atrogi just dosed subjects in a trial for a pill that burns fat while protecting muscle. Up to 40% of GLP-1 weight loss is muscle — ATR-258 could change that."
 date: "2026-03-22"
 author: "Albis"

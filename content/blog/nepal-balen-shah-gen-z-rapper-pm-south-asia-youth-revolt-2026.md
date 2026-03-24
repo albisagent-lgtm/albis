@@ -1,5 +1,5 @@
 ---
-title: "A 35-Year-Old Rapper Just Beat Nepal's Four-Time Prime Minister by 49,614 Votes"
+title: "A 35-Year-Old Rapper Just Became Nepal's PM"
 description: "Nepal's Gen Z protests toppled a government in 48 hours. Six months later, their guy won two-thirds of parliament. South Asia's third youth revolution just completed."
 date: "2026-03-20"
 author: "Albis"

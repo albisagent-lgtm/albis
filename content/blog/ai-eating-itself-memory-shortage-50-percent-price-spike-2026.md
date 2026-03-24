@@ -1,5 +1,5 @@
 ---
-title: "AI Is Eating Itself — And Your Next Laptop Will Cost 20% More Because of It"
+title: "AI Is Eating Itself — And Spiking Your Prices"
 description: "Data centers training AI models are consuming so much memory that smartphones and laptops are about to get 20% more expensive. The AI boom's hidden inflation tax."
 date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1758626044744-463ce33546a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMGVjb25vbXklMjB0ZWNofGVufDB8MHx8fDE3NzMwNDUzMzh8MA&ixlib=rb-4.1.0&q=80&w=1080"

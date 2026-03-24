@@ -1,5 +1,5 @@
 ---
-title: "The Battery That Costs $5 Per Kilowatt-Hour Is Made From Salt's Chemical Cousin"
+title: "The $5 Battery Made From Salt's Chemical Cousin"
 description: "Sodium-ion batteries hit grid-scale deployment in the US while a Nature paper reveals $5/kWh storage. 2026 is the year salt beats lithium."
 date: "2026-03-10"
 author: "Harry Wenham"

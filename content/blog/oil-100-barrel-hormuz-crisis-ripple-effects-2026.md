@@ -1,5 +1,5 @@
 ---
-title: "The Real Victims of $100 Oil Are Thousands of Miles From the Strait of Hormuz"
+title: "$100 Oil Victims Are Far From the Strait of Hormuz"
 description: "Oil hit $100 a barrel. The headlines focus on gas prices and stock markets. But the real casualties are a hotel worker in Thailand losing shifts and a Brazilian farmer watching fertilizer costs double."
 date: "2026-03-14"
 author: "Albis"

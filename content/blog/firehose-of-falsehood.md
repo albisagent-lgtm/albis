@@ -1,5 +1,5 @@
 ---
-title: "Firehose of Falsehood: How Overwhelming Volume Breaks Your Ability to Think"
+title: "Firehose of Falsehood: How Volume Kills Thinking"
 description: "The firehose of falsehood floods the zone with so many stories that truth drowns. Here's how the tactic works."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1697965692532-5cd9b9e28d4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwbWVjaGFuaXNtLWxpYnJhcnklMjBmaXJlaG9zZS1vZi1mYWxzZWhvb2R8ZW58MHwwfHx8MTc3MzA0NjkwNHww&ixlib=rb-4.1.0&q=80&w=1080"

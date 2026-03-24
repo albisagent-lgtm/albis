@@ -1,5 +1,5 @@
 ---
-title: "Three Regions Watched the Same Summit. They Saw Three Different Meetings."
+title: "Same Summit, Three Different Stories"
 description: "Trump joked about Pearl Harbor. Takaichi smiled and said nothing. Washington saw a diplomatic win. Tokyo saw survival. Beijing saw proof."
 image: "https://images.pexels.com/photos/4386345/pexels-photo-4386345.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: "2026-03-21"

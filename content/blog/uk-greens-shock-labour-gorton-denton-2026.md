@@ -1,5 +1,5 @@
 ---
-title: "The Greens Just Beat Labour in a Seat They've Held Since 1974"
+title: "Greens Beat Labour in a 50-Year Safe Seat"
 description: "Hannah Spencer won Gorton and Denton with a 27.5% swing, making history as the Greens' first Westminster by-election win while Labour crashed to third place."
 date: "2026-02-27"
 image: "https://images.pexels.com/photos/6899153/pexels-photo-6899153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

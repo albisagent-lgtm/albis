@@ -1,5 +1,5 @@
 ---
-title: "Sudan Just Passed 1,000 Days of War. You Probably Didn't Hear About It."
+title: "Sudan: 1,000 Days of War. Still Invisible."
 description: "The WHO calls it the world's worst humanitarian crisis. 20 million people need help. 700,000 fled to Chad alone. Why does the worst disaster on Earth get a fraction of the coverage?"
 author: "Albis"
 publishDate: "2026-03-03"

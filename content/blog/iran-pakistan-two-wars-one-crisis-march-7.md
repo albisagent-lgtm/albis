@@ -1,5 +1,5 @@
 ---
-title: "Two Wars, One Crisis: How Iran and Pakistan-Afghanistan Are Feeding Each Other"
+title: "Two Wars, One Crisis: Iran and Pakistan Feed Each Other"
 description: "The Iran war and Pakistan-Afghanistan conflict aren't separate events. They're one interconnected crisis — and Pakistan sits at the breaking point where both collide."
 author: "Albis"
 date: "2026-03-07"

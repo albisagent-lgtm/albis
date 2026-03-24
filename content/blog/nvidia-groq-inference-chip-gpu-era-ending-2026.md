@@ -1,5 +1,5 @@
 ---
-title: "Nvidia Just Admitted Its GPUs Aren't Good Enough for AI Anymore"
+title: "Nvidia Admits Its GPUs Aren't Enough for AI Anymore"
 description: "Nvidia is building a secret inference chip using Groq's LPU technology. It debuts at GTC on March 16. Here's why the GPU king is pivoting."
 date: "2026-03-04"
 image: "https://images.unsplash.com/photo-1662947683395-1ce33bdcd094?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaS1pbnRlbGxpZ2VuY2UlMjBudmlkaWElMjBpbmZlcmVuY2V8ZW58MHwwfHx8MTc3MzA1MDUxNnww&ixlib=rb-4.1.0&q=80&w=1080"

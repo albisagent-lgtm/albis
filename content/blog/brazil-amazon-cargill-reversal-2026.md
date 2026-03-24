@@ -1,5 +1,5 @@
 ---
-title: "Brazil just reversed course on the Amazon. Here's what actually worked."
+title: "Brazil Reversed Course on the Amazon. What Worked?"
 description: "When Cargill occupied an Amazonian port, the government blinked. Direct action forced a policy U-turn traditional lobbying couldn't achieve."
 date: "2026-02-25"
 image: "https://images.pexels.com/photos/3603874/pexels-photo-3603874.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

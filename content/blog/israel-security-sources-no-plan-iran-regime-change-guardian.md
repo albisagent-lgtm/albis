@@ -1,5 +1,5 @@
 ---
-title: "Israeli Officials Admit Privately: We Had No Plan for Regime Change in Iran"
+title: "Israel Admits: No Plan for Iran Regime Change"
 description: "Trump and Netanyahu launched 400+ strike waves promising regime change. Israeli security sources now admit it was 'wishful thinking' with no realistic plan for what comes after the bombing."
 date: "2026-03-17"
 author: "Albis"

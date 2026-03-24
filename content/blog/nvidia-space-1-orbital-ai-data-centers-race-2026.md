@@ -1,5 +1,5 @@
 ---
-title: "Nvidia Space-1 Orbital AI Data Centers: Who's Racing to Put Chips in Space 2026"
+title: "Who's Racing to Put AI Data Centres in Orbit?"
 description: "Nvidia unveiled its Vera Rubin Space-1 module for orbital AI data centers at GTC 2026. SpaceX filed for 1 million satellites, Google launched Project Suncatcher — but Gartner calls it 'peak insanity.'"
 date: "2026-03-23"
 author: "Harry Wenham"

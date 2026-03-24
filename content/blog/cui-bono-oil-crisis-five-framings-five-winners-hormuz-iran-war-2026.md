@@ -1,5 +1,5 @@
 ---
-title: "Five Versions of the Same Oil Crisis. Each One Made Someone Richer."
+title: "Same Oil Crisis, Five Stories, Five Winners"
 description: "The Iran war's Hormuz blockade was told five different ways this week. Every version served specific financial interests — from $130 billion in Western oil windfalls to Russia's rescued war budget."
 pubDate: 2026-03-17
 tags: ["cui-bono"]

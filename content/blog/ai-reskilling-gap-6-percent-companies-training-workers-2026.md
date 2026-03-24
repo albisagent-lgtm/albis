@@ -1,5 +1,5 @@
 ---
-title: "Only 6% of Companies Train Workers for AI Despite $300 Billion Spend in 2026"
+title: "Only 6% of Companies Train Workers for AI. Why?"
 description: "89% of leaders call AI skills critical. 6% have started training anyone. The gap between AI investment and workforce preparation is a policy failure in real time."
 date: "2026-03-22"
 author: "Albis"

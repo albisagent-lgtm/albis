@@ -1,5 +1,5 @@
 ---
-title: "Europe Just Bet Its Energy Future on Nuclear Reactors That Don't Exist Yet"
+title: "Europe Bet on Nuclear Reactors That Don't Exist Yet"
 description: "The EU's new SMR strategy promises 53GW of mini-reactors by 2050. Zero have been licensed in Europe. Only Russia and China have built one."
 date: "2026-03-15"
 author: "Albis"

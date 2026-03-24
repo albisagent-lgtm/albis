@@ -1,5 +1,5 @@
 ---
-title: "Ten Dead at a US Consulate. The Iran War Just Arrived in Pakistan."
+title: "Ten Dead at a US Consulate. Iran's War Hits Pakistan."
 description: "Marines killed 10 protesters at Karachi's US consulate. Pakistan's 20 million Shia saw it as defending Iran. The sectarian fault line just turned deadly."
 date: "2026-03-16"
 author: "Albis"

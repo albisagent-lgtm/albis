@@ -1,5 +1,5 @@
 ---
-title: "Iran Fired 3 Missiles at Turkey in 18 Days, NATO Didn't Invoke Article 5 2026"
+title: "3 Missiles Hit Turkey. NATO Said Nothing."
 description: "Iran fired three ballistic missiles at or near Turkish territory in 18 days. NATO intercepted all three. Nobody invoked Article 5. Erdogan is walking the most dangerous tightrope in modern alliance history — and the consequences reach far beyond Ankara."
 date: "2026-03-23"
 author: "Harry Wenham"

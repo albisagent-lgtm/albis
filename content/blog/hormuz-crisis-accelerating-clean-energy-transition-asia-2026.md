@@ -1,5 +1,5 @@
 ---
-title: "Hormuz Crisis Accelerating Clean Energy Faster Than Any Climate Summit in 2026"
+title: "Hormuz Did More for Clean Energy Than Any Summit"
 description: "Pakistan's cement plants run on solar at 2 cents/kWh while Bangladesh rations fuel. The Hormuz blockade is splitting Asia into clean energy winners and fossil fuel losers."
 date: "2026-03-24"
 author: "Lena Castillo"

@@ -1,5 +1,5 @@
 ---
-title: "The US Just Stopped Funding the Internet's Underground Railroad"
+title: "The US Cut Funding for the Internet's Underground"
 description: "America's budget cuts just pulled the plug on tools helping activists in Iran, China, and Russia bypass censorship. Who fills the void now?"
 date: 2026-03-17
 author: "Harry Wenham"

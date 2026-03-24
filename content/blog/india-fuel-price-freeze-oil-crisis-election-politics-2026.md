@@ -1,5 +1,5 @@
 ---
-title: "India Freezes Fuel Prices Despite $112 Oil in 2026 Election Year"
+title: "India Froze Fuel Prices at $112 Oil. Elections Explain Why."
 description: "Oil hit $112/barrel but Indian petrol pumps haven't moved. OMCs are bleeding ₹15/litre. Four state elections explain why — and 4 billion people have no idea."
 date: "2026-03-23"
 author: "Albis"

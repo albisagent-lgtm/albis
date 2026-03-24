@@ -1,5 +1,5 @@
 ---
-title: "Dimona Missile Strike 2026: Five Countries Told Five Different Stories"
+title: "Dimona Strike: Five Countries, Five Different Stories"
 description: "Iranian missiles hit near Israel's nuclear facility. The NYT saw a defense failure. Al Jazeera saw 1,500 Iranian dead. India saw a nuclear doctrine test. Each version served someone's bottom line."
 date: 2026-03-24
 tags: ["cui-bono", "iran-war", "dimona", "missile-defense", "perception-gap", "media-framing"]

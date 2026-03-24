@@ -1,5 +1,5 @@
 ---
-title: "The US Hit Natanz. Iran Hit Dimona. Both Sides Called It Self-Defence."
+title: "Natanz and Dimona Hit. Both Sides Called It Defence."
 description: "US-Israel struck Iran's Natanz nuclear facility on March 21. Hours later, Iran hit Dimona — Israel's nuclear town. PGI 6.95: five regions, five incompatible stories about the same nuclear escalation."
 date: 2026-03-22
 author: "Albis"

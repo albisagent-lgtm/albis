@@ -1,5 +1,5 @@
 ---
-title: "Iran Missile Strikes Destroy 17% of Qatar LNG Capacity in 2026"
+title: "Iran Destroyed 17% of Qatar's LNG. Now What?"
 description: "Two of Qatar's 14 LNG trains at Ras Laffan are gone. 12.8 million tonnes of annual capacity won't return for five years — and Europe just lost its backup plan."
 date: "2026-03-22"
 author: "Harry Wenham"

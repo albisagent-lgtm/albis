@@ -1,5 +1,5 @@
 ---
-title: "The Landmine Ban Is Unraveling — And Democracies Are Leading the Way"
+title: "Democracies Are Quitting the Landmine Ban"
 slug: "poland-landmine-treaty-withdrawal-ottawa-convention"
 description: "Poland just withdrew from the treaty that banned landmines. So did Finland and the Baltics. The humanitarian architecture that took decades to build is coming apart — and NATO democracies are pulling the trigger."
 publishDate: 2026-03-07

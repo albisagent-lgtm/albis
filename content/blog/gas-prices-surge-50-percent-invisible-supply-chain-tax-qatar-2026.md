@@ -1,5 +1,5 @@
 ---
-title: "Gas Prices Just Jumped 50%. Your Grocery Bill Is About to Follow."
+title: "Gas Jumped 50%. Your Grocery Bill Is Next."
 description: "Oil grabs headlines. Natural gas quietly raises the cost of everything you buy. A 50% surge from Qatar's LNG disruption means your electricity bill, heating costs, and food prices are all about to move."
 publishedAt: 2026-03-05
 author: "Albis"

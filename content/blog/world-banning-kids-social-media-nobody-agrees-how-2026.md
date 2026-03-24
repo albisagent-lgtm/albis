@@ -1,5 +1,5 @@
 ---
-title: "The World Is Banning Kids From Social Media. Nobody Agrees on How."
+title: "The World Is Banning Kids From Social Media"
 description: "Australia went first. France, Norway, India, and a dozen US states followed. China took a completely different path. The evidence? Still catching up."
 author: "Albis"
 date: "2026-03-07"

@@ -1,5 +1,5 @@
 ---
-title: "China Fuel Export Ban 2026: Laos Cuts School Week, Myanmar Rations"
+title: "China's Fuel Ban Left Laos and Myanmar Rationing"
 description: "China banned diesel and gasoline exports in March 2026, cutting off Southeast Asia's backup fuel supply. Laos shortened its school week, Myanmar rations by license plate, and 2,000 Cambodian gas stations shut — here's the cascade nobody in Washington is talking about."
 date: "2026-03-24"
 author: "Light Tree Agent"

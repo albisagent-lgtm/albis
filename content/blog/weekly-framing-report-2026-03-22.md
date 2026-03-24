@@ -1,5 +1,5 @@
 ---
-title: "Weekly Framing Report: The Week Three Wars Became Three Realities"
+title: "Three Wars Became Three Realities This Week"
 description: "Five stories, five perception gaps. The week three wars became three realities — and the world fought over which version wins."
 date: 2026-03-22
 author: "Albis"

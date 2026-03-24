@@ -1,5 +1,5 @@
 ---
-title: "Gulf States Losing $1 Billion a Day as Hormuz War Hits Post-Oil Economy in 2026"
+title: "Gulf States Are Losing $1 Billion a Day. Not Just Oil."
 description: "Arabic media breaks down the '$1 billion daily' headline into three separate crises — energy, cargo, and tourism — revealing how four weeks of war is dismantling decades of diversification."
 date: 2026-03-24
 author: "Priya Sharma"

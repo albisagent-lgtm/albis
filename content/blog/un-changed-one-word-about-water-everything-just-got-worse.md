@@ -1,5 +1,5 @@
 ---
-title: "The UN Changed One Word About Water. Everything Just Got Worse."
+title: "The UN Changed One Word About Water. It Got Worse."
 description: "They stopped calling it drought. Now they call it bankruptcy. The difference between those words is the difference between waiting for rain and accepting there isn't enough left."
 date: 2026-03-02
 author: Harry Wenham

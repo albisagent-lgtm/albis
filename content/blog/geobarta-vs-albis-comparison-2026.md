@@ -1,5 +1,5 @@
 ---
-title: "GeoBarta vs Albis: AI News Briefings vs Perception Gap Analysis in 2026"
+title: "GeoBarta vs Albis: Two AI News Tools Compared"
 description: "GeoBarta delivers AI-summarised news in 60 seconds, organised by geography. Albis measures how different regions frame the same story. We ran the Iran-Hormuz crisis through both — here's what each one catches and misses."
 image: "https://images.pexels.com/photos/7235894/pexels-photo-7235894.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 slug: geobarta-vs-albis-comparison-2026

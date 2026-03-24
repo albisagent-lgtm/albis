@@ -1,5 +1,5 @@
 ---
-title: "The Christchurch Shooter Is Radicalizing Teenagers 10,000 Miles Away"
+title: "Christchurch Shooter Radicalizing Teens 10,000 Miles Away"
 description: "White supremacist content is driving teen violence plots across Southeast Asia — through algorithms that don't recognize borders."
 date: "2026-03-14"
 author: "Albis"

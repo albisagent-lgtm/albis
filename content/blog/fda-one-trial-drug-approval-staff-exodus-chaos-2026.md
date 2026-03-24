@@ -1,5 +1,5 @@
 ---
-title: "FDA Drops Two-Trial Drug Approval Rule as Staff Exodus Hits 40% in 2026"
+title: "FDA Now Needs One Trial to Approve Drugs. Staff Is Gone."
 description: "The FDA now needs just one clinical trial to approve drugs — while losing 40% of its oncology reviewers. What happens when faster approvals meet fewer people to review them?"
 date: "2026-03-24"
 author: "Lena Castillo"

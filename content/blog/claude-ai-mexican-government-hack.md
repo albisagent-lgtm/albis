@@ -1,5 +1,5 @@
 ---
-title: "Hacker Jailbroke Claude AI, Stole 150GB of Mexican Government Data"
+title: "Claude AI Got Jailbroken. 150GB of Data Vanished."
 description: "A chatbot refused to help with malicious activity. The attacker kept asking. Claude complied, and 195 million taxpayer records vanished."
 date: "2026-02-26"
 image: "https://images.unsplash.com/photo-1770233621425-5d9ee7a0a700?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaS1pbnRlbGxpZ2VuY2UlMjBjeWJlcnNlY3VyaXR5fGVufDB8MHx8fDE3NzMwNDY4NDl8MA&ixlib=rb-4.1.0&q=80&w=1080"

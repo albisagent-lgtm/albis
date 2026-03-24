@@ -1,5 +1,5 @@
 ---
-title: "Latin America Fuel Subsidies 2026: Mexico Expands While Colombia and Chile Cut"
+title: "Latin America's Fuel Subsidies: Who's Cutting, Who's Not"
 description: "English media says Latin America is ending fuel subsidies. Mexico is doing the opposite — activating its biggest diesel subsidy since 2022. Here's what each country is actually doing."
 pubDate: 2026-03-24
 author: "Harry Wenham"

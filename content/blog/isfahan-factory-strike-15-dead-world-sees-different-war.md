@@ -1,5 +1,5 @@
 ---
-title: "15 Workers Died in an Isfahan Factory. The World Can't Agree on What It Was"
+title: "15 Dead in Isfahan. The World Can't Agree What It Was"
 description: "A US-Israel strike killed 15 workers in an Isfahan factory on March 14. Western outlets call it a military target. Iranian media says it made refrigerators. The framing gap is enormous."
 date: 2026-03-15
 author: "Albis"

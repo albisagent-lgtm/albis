@@ -1,5 +1,5 @@
 ---
-title: "US Kharg Island Seizure Debate 2026: Five Regions Tell Five Different Stories"
+title: "Kharg Island: Five Regions, Five Different Wars"
 description: "The US is weighing plans to occupy Iran's Kharg Island — the 8-square-mile hub handling 90% of Iran's oil exports. Five regions frame the same plan as strategic masterstroke, imperial aggression, or economic threat. Here's what each one sees."
 pubDate: 2026-03-24
 author: "Tomás Reyes"

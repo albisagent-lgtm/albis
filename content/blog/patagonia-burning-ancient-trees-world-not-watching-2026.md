@@ -1,5 +1,5 @@
 ---
-title: "Patagonia's 3,600-Year-Old Trees Are Burning. 5.2 Billion People Have No Idea."
+title: "Patagonia's 3,600-Year-Old Trees Are Burning"
 description: "Wildfires have scorched 50,000+ hectares in Patagonia, threatening Earth's second-oldest trees in a UNESCO site. Most of the world isn't covering it."
 date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1687610877269-9c051d3d254e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx1bnNlZW4lMjBnYWklMjBjbGltYXRlfGVufDB8MHx8fDE3NzMwNTA1MzV8MA&ixlib=rb-4.1.0&q=80&w=1080"

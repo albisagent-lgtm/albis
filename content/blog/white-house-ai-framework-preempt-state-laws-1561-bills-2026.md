@@ -1,5 +1,5 @@
 ---
-title: "45 States Wrote AI Laws. The White House Just Told Them to Stop."
+title: "45 States Wrote AI Laws. The White House Said Stop."
 description: "Trump's AI framework would preempt 1,561 state AI bills across 45 states. The DOJ already has a task force to sue them. Here's why that matters."
 date: "2026-03-22"
 author: "Albis"

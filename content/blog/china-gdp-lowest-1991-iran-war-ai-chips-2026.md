@@ -1,5 +1,5 @@
 ---
-title: "China's GDP Target Hits a 35-Year Low. The Iran War Is Covering for It."
+title: "China's GDP Hits 35-Year Low. Iran Covers for It."
 description: "China GDP 2026 lowest since 1991 as deflation bites — yet the Iran war's US distraction hands Beijing geopolitical breathing room. The chip race clock is ticking."
 date: "2026-03-20"
 author: "Albis"

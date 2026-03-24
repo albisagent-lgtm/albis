@@ -1,5 +1,5 @@
 ---
-title: "70% of Countries Still Have Laws That Block Women From Equal Justice"
+title: "70% of Countries Still Block Women From Equal Justice"
 description: "No country has achieved full legal equality for women. A global survey reveals the laws still blocking justice in 70% of nations."
 author: "Albis"
 date: "2026-03-08"

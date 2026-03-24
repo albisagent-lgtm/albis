@@ -1,5 +1,5 @@
 ---
-title: "The AI Boss Just Said the Quiet Part Out Loud: Half Your Jobs Are Gone"
+title: "The AI CEO Said It: Half Your Jobs Are Gone"
 description: "Anthropic's CEO warns AI could eliminate 50% of entry-level white-collar jobs and spike unemployment to 20%. He's not trying to scare you. He's building it."
 date: "2026-03-13"
 author: "Albis"

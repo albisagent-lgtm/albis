@@ -1,5 +1,5 @@
 ---
-title: "Israel Strikes Iran's Nuclear Heart. This Isn't About Shipping Lanes Anymore."
+title: "Israel Strikes Natanz. This Isn't About Shipping Now."
 description: "The attack on Natanz crosses a threshold — from disrupting trade to attempting to eliminate Iran's strategic deterrent. The war just changed categories."
 date: "2026-03-04"
 image: "https://images.pexels.com/photos/6795499/pexels-photo-6795499.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

@@ -1,5 +1,5 @@
 ---
-title: "Hormuz Closure Impact on Philippines, Sri Lanka, and Nepal in 2026"
+title: "Hormuz Closed. Three Countries Are Already Breaking."
 description: "Three weeks after the Strait of Hormuz closed, restaurants are shutting in Manila, petrol is rationed in Colombo, and Nepali migrants are heading home from India."
 date: "2026-03-22"
 author: "Albis"

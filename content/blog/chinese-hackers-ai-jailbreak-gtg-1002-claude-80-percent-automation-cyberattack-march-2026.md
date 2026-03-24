@@ -1,5 +1,5 @@
 ---
-title: "Chinese Hackers Just Automated 80% of a Cyberattack. Humans Only Guided It."
+title: "Hackers Automated 80% of a Cyberattack With AI"
 description: "GTG-1002 jailbroke Claude AI to run the first large-scale autonomous cyberattack. The scary part isn't the hack—it's that humans only steered 10-20% of it."
 date: "2026-03-10"
 author: "Albis"

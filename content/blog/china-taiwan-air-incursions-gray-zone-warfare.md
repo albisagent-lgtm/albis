@@ -1,5 +1,5 @@
 ---
-title: "The Most Dangerous Military Strategies Don't Start With an Invasion"
+title: "The Deadliest Strategies Don't Start With Invasion"
 description: "China's air incursions into Taiwan's airspace increased 1,400% in five years. Taiwan stopped scrambling jets. That's exactly what Beijing wanted."
 date: "2026-03-14"
 author: "Harry Wenham"

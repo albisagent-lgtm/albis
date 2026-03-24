@@ -1,5 +1,5 @@
 ---
-title: "Iran Hormuz Strait $2 Million Ship Toll: Already Collecting or Just Considering?"
+title: "Iran's $2M Ship Toll: Collecting or Just Bluffing?"
 description: "An Iranian lawmaker confirmed $2M transit fees on state TV. Hours later, Iran's government called the claim unfounded. Turkish media says nine ships already paid. Here's what each version reveals."
 date: "2026-03-24"
 author: "Priya Sharma"

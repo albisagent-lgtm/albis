@@ -1,5 +1,5 @@
 ---
-title: "Russia Made $150 Million a Day From a War It Didn't Start. That's the Point."
+title: "Russia Made $150M/Day From a War It Didn't Start"
 description: "The Hormuz blockade isn't just an oil crisis. It's a stress test exposing who built the system, who breaks it, and who profits when it shatters."
 date: "2026-03-15"
 author: "Harry Wenham"

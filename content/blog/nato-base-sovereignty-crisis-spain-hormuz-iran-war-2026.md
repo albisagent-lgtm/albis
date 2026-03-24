@@ -1,5 +1,5 @@
 ---
-title: "Spain Said No. Trump Moved the Jets. 5.8 Billion People Don't Know It Happened."
+title: "Spain Said No. Trump Moved the Jets. Nobody Noticed."
 description: "Spain blocked US base access for Iran strikes. Trump threatened a trade embargo. A sovereignty crisis is quietly reshaping NATO's entire European base network."
 date: "2026-03-21"
 author: "Albis"

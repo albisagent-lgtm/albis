@@ -1,5 +1,5 @@
 ---
-title: "Trump Says America Doesn't Need NATO. Europe Says It Never Asked to Join."
+title: "Trump Says He Doesn't Need NATO. Europe Agrees."
 description: "Trump declared the US doesn't need NATO after every major ally refused to send warships to the Strait of Hormuz. Europe says this isn't their war. The PGI score hit 7.03 — the widest perception gap this week."
 date: 2026-03-18
 author: "Albis"

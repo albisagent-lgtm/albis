@@ -1,5 +1,5 @@
 ---
-title: "Fifteen Minutes a Day Just Solved a Reading Crisis. Then the Money Disappeared."
+title: "15 Minutes a Day Fixed a Reading Crisis. Then Poof."
 description: "Johns Hopkins research shows 15 min/day virtual tutoring took first graders from 6% to 48% reading proficiency. But ESSER funding just expired."
 date: "2026-02-27"
 image: "https://images.unsplash.com/photo-1758525861793-9258e09708e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjB0dXRvcmluZyUyMGxpdGVyYWN5fGVufDB8MHx8fDE3NzMwNDY4OTh8MA&ixlib=rb-4.1.0&q=80&w=1080"

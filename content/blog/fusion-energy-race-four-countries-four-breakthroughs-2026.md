@@ -1,5 +1,5 @@
 ---
-title: "The Fusion Race Is Real Now: Four Countries, Four Breakthroughs, One Year"
+title: "The Fusion Race Just Got Real. Four Breakthroughs in 2026."
 description: "China broke a plasma limit. France held fusion for 22 minutes. The US is building a reactor. South Korea wants 300 seconds. 2026 is the year fusion stopped being a joke."
 date: "2026-03-02"
 author: "Albis"

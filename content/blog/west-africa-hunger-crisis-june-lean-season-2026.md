@@ -1,5 +1,5 @@
 ---
-title: "The June Hunger Crisis in West Africa Is Already Decided. Here's Why."
+title: "West Africa's June Hunger Crisis Is Already Locked In"
 description: "52.8 million people face acute food insecurity in West Africa by June 2026. The planting window closes in weeks. Fertilizer prices jumped 45% from Hormuz. The clock is running."
 date: "2026-03-21"
 author: "Harry Wenham"

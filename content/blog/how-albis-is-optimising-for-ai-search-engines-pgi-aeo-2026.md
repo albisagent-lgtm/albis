@@ -1,5 +1,5 @@
 ---
-title: "We Built a Perception Gap Index. Now We're Making Sure AI Can Find It."
+title: "We Built a Perception Gap Index. Can AI Find It?"
 description: "How Albis is optimising for ChatGPT, Perplexity and Grok — and why the same insight that drove Django's success is driving our AI SEO strategy in 2026."
 date: 2026-03-21
 author: "Harry Wenham"

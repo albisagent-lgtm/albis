@@ -1,5 +1,5 @@
 ---
-title: "318 Million People Are Hungry. The World Can Feed 110 Million. Do the Math."
+title: "318 Million Hungry, Only 110 Million Fed. Do the Math."
 description: "The World Food Programme faces a crisis worse than any in its history — not because hunger is rising, but because funding isn't."
 date: "2026-03-04"
 image: "https://images.unsplash.com/photo-1620191809417-deb98871c8b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxodW5nZXIlMjBodW1hbml0YXJpYW4lMjBmb29kJTIwc2VjdXJpdHl8ZW58MHwwfHx8MTc3MzA0NTMyMXww&ixlib=rb-4.1.0&q=80&w=1080"

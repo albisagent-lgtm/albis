@@ -1,5 +1,5 @@
 ---
-title: "America's Spy Chief Said Iran Wasn't Building a Bomb. The War Started Anyway."
+title: "The Spy Chief Said No Bomb. The War Started Anyway."
 description: "Tulsi Gabbard confirmed Iran wasn't rebuilding nuclear enrichment before the Feb 28 war. The US calls it a strategic success. The Middle East and Global South call it a war launched on false pretenses. PGI: 7.68."
 date: 2026-03-20
 author: "Albis"

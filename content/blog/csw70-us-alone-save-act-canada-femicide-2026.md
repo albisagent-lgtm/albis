@@ -1,5 +1,5 @@
 ---
-title: "US Stands Alone at UN Gender Summit as SAVE Act and Femicide Data Emerge"
+title: "The US Was the Only 'No' at the UN Gender Summit"
 slug: "csw70-us-alone-save-act-canada-femicide-2026"
 excerpt: "The US was the sole opposing vote at CSW70, while the SAVE America Act advances in the Senate and Canada's femicide observatory records 30 women killed in the year's first 80 days."
 description: "The US was the only nation opposing the CSW70 outcome at the UN. Meanwhile the SAVE Act raises voter access concerns for women and Canada records 30 femicides in 80 days."

@@ -1,5 +1,5 @@
 ---
-title: "The US Is Shooting Boats to Open a Strait China Never Lost Access To"
+title: "The US Shoots Boats for a Strait China Never Lost"
 description: "US A-10 Warthogs are hunting Iranian fast-attack boats in the Strait of Hormuz. Iran is letting Chinese, Indian, and Pakistani ships through anyway — via a secret IRGC vetting system."
 date: "2026-03-21"
 author: "Albis"

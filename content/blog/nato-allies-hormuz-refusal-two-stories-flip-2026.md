@@ -1,5 +1,5 @@
 ---
-title: "America's Oldest Allies All Said No. Here's What Each Side Thinks That Means."
+title: "NATO Allies All Said No. Both Sides Claim Victory."
 description: "The same refusal. Two entirely different stories about what it says about NATO, America, and who actually started this war."
 date: 2026-03-20
 published: true

@@ -1,5 +1,5 @@
 ---
-title: "The US Sanctioned Russia, Belarus, and Iran. Then Quietly Lifted All Three."
+title: "US Sanctioned Three Enemies. Then Lifted All Three."
 description: "In 20 days, the US issued sanctions waivers for Russia, Belarus, and Iran — the three adversaries it was simultaneously fighting or sanctioning. A pattern that breaks the logic of US foreign policy."
 date: "2026-03-21"
 author: "Albis"

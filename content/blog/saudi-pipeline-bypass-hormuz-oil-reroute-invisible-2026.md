@@ -1,5 +1,5 @@
 ---
-title: "Saudi Arabia Is Rerouting the World's Oil Supply. 5.8 Billion People Don't Know."
+title: "Saudi Arabia Is Secretly Rerouting World Oil"
 description: "Saudi Arabia's 1,200-km Petroline pipeline is now the planet's most critical energy artery, bypassing the Strait of Hormuz. Only Middle Eastern media is covering it."
 date: 2026-03-17
 author: "Albis"

@@ -1,5 +1,5 @@
 ---
-title: "Black Rain Is Falling on 10 Million People in Tehran. Five Billion Have No Idea."
+title: "Black Rain Falls on Tehran. Five Billion Don't Know."
 description: "Toxic black rain from bombed oil depots is contaminating Tehran's air, water and soil. The WHO warned of acid rain burning skin and lungs. 5.01 billion people in four regions haven't seen this story."
 date: 2026-03-18
 author: "Albis"

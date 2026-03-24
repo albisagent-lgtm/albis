@@ -1,5 +1,5 @@
 ---
-title: "Amazon & Starbucks Unionization 2026: Won the Vote, Lost the Contract"
+title: "650 Stores Unionized. Zero Contracts. Now What?"
 description: "650 stores unionized, Amazon warehouse voted yes — but four years on, no worker has a single contract. The legal gap that's swallowing the union wave."
 date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1551792699-9a5756f6e7f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxsYWJvciUyMHVuaW9ucyUyMHdvcmtlcnMtcmlnaHRzfGVufDB8MHx8fDE3NzMwNDUzMjh8MA&ixlib=rb-4.1.0&q=80&w=1080"

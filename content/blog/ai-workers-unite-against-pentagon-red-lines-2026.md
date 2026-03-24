@@ -1,5 +1,5 @@
 ---
-title: "300 Google Employees Just Drew a Line the Pentagon Can't Cross"
+title: "300 Google Workers Drew a Pentagon Red Line"
 description: "AI workers at Google, OpenAI, and Anthropic are refusing to build weapons and surveillance tools. The deadline is tonight."
 date: "2026-02-28"
 image: "https://images.pexels.com/photos/6257456/pexels-photo-6257456.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

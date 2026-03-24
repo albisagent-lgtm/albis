@@ -1,5 +1,5 @@
 ---
-title: "NVIDIA Just Declared AI Has Left the Screen. $1 Trillion in Orders Backs It Up."
+title: "Nvidia Says AI Has Left the Screen. Orders Prove It."
 description: "NVIDIA's GTC 2026 wasn't about faster chatbots. Jensen Huang unveiled Vera Rubin — seven new chips targeting the factory floor. Physical AI is now production-ready."
 date: "2026-03-21"
 author: "Albis"

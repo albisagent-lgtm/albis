@@ -1,5 +1,5 @@
 ---
-title: "Iran Is Charging Ships $2 Million to Cross a Strait It Legally Can't Close"
+title: "Iran Charges $2M Per Ship for a Strait It Can't Close"
 description: "Iran has built a fee-and-vetting system for Hormuz passage. One tanker already paid $2M. The problem: international law says Iran can't do any of this."
 date: "2026-03-22"
 author: "Harry Wenham"

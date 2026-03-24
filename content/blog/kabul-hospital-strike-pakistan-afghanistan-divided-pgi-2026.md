@@ -1,5 +1,5 @@
 ---
-title: "Pakistan Bombed a Hospital. The Death Toll Depends on Who You Ask."
+title: "Pakistan Bombed a Hospital. The Toll Depends Who You Ask"
 description: "Pakistan says it struck a military depot near Kabul. Afghanistan says 408 civilians died in a drug rehab hospital. UNAMA confirmed 143 dead. The gap is the story."
 date: 2026-03-20
 author: "Albis"

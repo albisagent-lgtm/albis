@@ -1,5 +1,5 @@
 ---
-title: "The First Therapy Designed to Reverse Aging Just Entered Human Trials"
+title: "The First Anti-Aging Therapy Just Hit Human Trials"
 description: "Life Biosciences' ER-100 is the first epigenetic reprogramming therapy to reach human trials, aiming to reverse age-related vision loss by resetting cells to a younger state."
 date: "2026-03-15"
 author: "Albis"

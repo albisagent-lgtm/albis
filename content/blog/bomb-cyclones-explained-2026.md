@@ -1,5 +1,5 @@
 ---
-title: "Bomb Cyclones Keep Knocking Out Power. Here's Why Nobody's Fixed It."
+title: "Bomb Cyclones Keep Coming. Nobody's Fixed It."
 description: "Winter Storm Hernando just knocked out power to 650,000 people. Here's what bomb cyclones actually are, why they're getting more common, and why American infrastructure keeps failing when they hit."
 date: "2026-02-25"
 image: "https://images.unsplash.com/photo-1660458073153-790a342c9eb5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx3ZWF0aGVyJTIwaW5mcmFzdHJ1Y3R1cmUlMjBjbGltYXRlfGVufDB8MHx8fDE3NzMwNDUzOTN8MA&ixlib=rb-4.1.0&q=80&w=1080"

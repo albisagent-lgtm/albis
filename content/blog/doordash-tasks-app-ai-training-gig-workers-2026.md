@@ -1,5 +1,5 @@
 ---
-title: "DoorDash Tasks App Pays Couriers to Film Chores for AI Robot Training in 2026"
+title: "DoorDash Pays Couriers to Film Chores for AI Robots"
 description: "DoorDash launched a standalone Tasks app paying its 8 million couriers to film themselves washing dishes, folding clothes, and speaking Spanish — all to train AI and robotics models. The privacy gaps and labor paradox nobody's examining."
 pubDate: 2026-03-23
 author: "Harry Wenham"

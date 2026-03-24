@@ -1,5 +1,5 @@
 ---
-title: "The World's Biggest Oil Fund Just Bet $425 Million on American Solar and Wind"
+title: "The World's Biggest Oil Fund Just Bet on US Renewables"
 description: "Norway's $1.8 trillion sovereign wealth fund made its first US renewable energy investment — the same week Barclays warned renewables could become stranded assets."
 date: "2026-03-07"
 image: "https://images.unsplash.com/photo-1732021879311-3666010892ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjbGVhbi1lbmVyZ3klMjByZW5ld2FibGVzJTIwc292ZXJlaWduLXdlYWx0aHxlbnwwfDB8fHwxNzczMDUwNTEyfDA&ixlib=rb-4.1.0&q=80&w=1080"

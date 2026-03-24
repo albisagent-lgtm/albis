@@ -1,5 +1,5 @@
 ---
-title: "US Measles Outbreak Hits 1,500 Cases in 2026 as Vaccination Rates Collapse"
+title: "US Measles Hits 1,500 as Vaccination Collapses"
 description: "America's worst measles surge since 1991 is invisible outside the US. 5.87 billion people don't know it's happening — or why Europe's outbreak went the other direction."
 date: "2026-03-24"
 author: "Harry Wenham"

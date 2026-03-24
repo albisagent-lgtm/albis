@@ -1,5 +1,5 @@
 ---
-title: "Today's Perception Gap: Agreement on Facts, Complete Divergence on Blame"
+title: "Same Facts, Opposite Conclusions. Today's PGI."
 slug: "pgi-breakdown-march-16-2026-framing-divergence-same-facts"
 description: "March 16 PGI hits 5.8 — regions agree on what happened but see completely different wars. The gap isn't in the facts anymore. It's in who caused them."
 image: "https://images.pexels.com/photos/5505690/pexels-photo-5505690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

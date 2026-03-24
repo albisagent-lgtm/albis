@@ -1,5 +1,5 @@
 ---
-title: "Trump's Top Counterterrorism Official Just Quit. Says Iran Was No Threat."
+title: "Trump's Counterterrorism Chief Quit Over Iran"
 description: "Joe Kent resigned March 17, saying Iran posed no imminent threat and blaming Israeli pressure. He's the first Trump official to quit over the Iran war."
 date: "2026-03-19"
 author: "Albis"

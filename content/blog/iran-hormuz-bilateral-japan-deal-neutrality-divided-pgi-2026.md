@@ -1,5 +1,5 @@
 ---
-title: "Japan Refused Trump's Warships Call. Iran Called It a Reward."
+title: "Japan Refused Trump's Warships. Iran Called It a Gift."
 description: "Iran's FM told Kyodo Japan-linked vessels can transit Hormuz — because Japan stayed out of the coalition. PGI 6.83: three regions read the same offer three incompatible ways."
 date: 2026-03-21
 author: "Albis"

@@ -1,5 +1,5 @@
 ---
-title: "55 Million People Heading Into Hunger. The World Just Cut Their Food Aid"
+title: "55 Million Face Hunger. The World Cut Their Aid."
 description: "West Africa faces its worst hunger crisis in years as aid funding dries up and the Iran war chokes fertilizer supplies—just as the lean season arrives."
 date: "2026-03-14"
 author: "Albis"

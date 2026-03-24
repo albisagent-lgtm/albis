@@ -1,5 +1,5 @@
 ---
-title: "To Fight the Attention Economy, You First Have to Capture Attention"
+title: "Fighting the Attention Economy Is a Paradox"
 description: "A new documentary premiering at SXSW exposes the attention economy — but 25+ advocacy groups had to coordinate a viral trailer launch to make anyone care."
 date: "2026-03-14"
 author: "Albis"

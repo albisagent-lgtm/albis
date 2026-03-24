@@ -1,5 +1,5 @@
 ---
-title: "Sulfur Shortage From Hormuz Blockade Threatens 2027 Global Food Supply"
+title: "Hormuz Blockade Sulfur Shortage Threatens Food"
 description: "Nearly half of global sulfur exports are trapped behind the Hormuz blockade. Without sulfur, phosphate fertilizer production collapses — and 2027 harvests are at risk."
 date: "2026-03-24"
 author: "Tomás Reyes"

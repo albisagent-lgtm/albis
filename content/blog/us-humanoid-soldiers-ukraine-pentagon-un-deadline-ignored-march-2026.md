@@ -1,5 +1,5 @@
 ---
-title: "The US Just Put Humanoid Soldiers in a War Zone. Nobody Voted on This."
+title: "Humanoid Soldiers Are in a War Zone. No One Voted."
 description: "Foundation's Phantom robots deployed to Ukraine in February. Pentagon wants thousands more by 2027. The UN's 2026 deadline for regulation is being ignored."
 date: "2026-03-13"
 image: "https://images.pexels.com/photos/8294557/pexels-photo-8294557.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

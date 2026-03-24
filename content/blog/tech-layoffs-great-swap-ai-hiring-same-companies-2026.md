@@ -1,5 +1,5 @@
 ---
-title: "The Great Swap: Tech Fires 51,000 Workers, Hires Them Back as Someone Else"
+title: "Tech Fired 51,000 Workers Then Rehired Them"
 description: "Same companies cutting thousands are hiring AI engineers for millions. The jobs aren't disappearing — the people are."
 date: "2026-03-04"
 image: "https://images.unsplash.com/photo-1654842493917-49d75a9eaafd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx0ZWNoJTIwQUklMjBsYXlvZmZzfGVufDB8MHx8fDE3NzMwNTQwNzB8MA&ixlib=rb-4.1.0&q=80&w=1080"

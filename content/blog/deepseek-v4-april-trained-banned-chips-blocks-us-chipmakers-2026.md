@@ -1,5 +1,5 @@
 ---
-title: "China's DeepSeek Trained on Banned Chips, Now Locks Out US Companies"
+title: "DeepSeek Trained on Banned Chips, Then Locked Out the US"
 description: "DeepSeek V4 launches in April after training on prohibited Nvidia hardware, then blocks US chipmakers from optimization access while giving Huawei a head start."
 date: "2026-03-17"
 author: "Albis"

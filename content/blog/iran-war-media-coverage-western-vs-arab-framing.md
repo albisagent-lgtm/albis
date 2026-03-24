@@ -1,5 +1,5 @@
 ---
-title: "Three Narratives, One War: How Iran War Coverage Splits the World"
+title: "Three Narratives, One War: How Iran Coverage Splits"
 description: "Western media shows precision strikes. Iranian media shows 1,348 civilian deaths. Arab media frames US-Israeli aggression. The same war, three completely different stories."
 date: "2026-03-18"
 image: "https://images.pexels.com/photos/33925166/pexels-photo-33925166.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

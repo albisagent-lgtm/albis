@@ -1,5 +1,5 @@
 ---
-title: "Drone Strike Kills 64 at Sudan Hospital in Darfur, WHO Confirms March 2026"
+title: "Drone Strike Kills 64 at Sudan Hospital"
 description: "A drone strike hit a teaching hospital in East Darfur on March 20, killing 64 people including 13 children. WHO says healthcare fatalities in Sudan's war now exceed 2,000 — but most of the world isn't watching."
 date: "2026-03-23"
 author: "Albis"

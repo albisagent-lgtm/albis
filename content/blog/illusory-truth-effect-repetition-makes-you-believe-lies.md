@@ -1,5 +1,5 @@
 ---
-title: "The Illusory Truth Effect: Why Your Brain Believes Lies It's Heard Before"
+title: "Illusory Truth: Why Repetition Makes Lies Feel Real"
 description: "Repetition makes false claims feel true — even when you know better. The illusory truth effect explains how propaganda, ads, and social media exploit your brain's shortcuts."
 date: "2026-03-18"
 image: "https://images.pexels.com/photos/7269620/pexels-photo-7269620.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

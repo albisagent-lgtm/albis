@@ -1,5 +1,5 @@
 ---
-title: "The EU Makes Deepfakes Illegal in August. The US Midterms Are in November."
+title: "EU Bans Deepfakes in August. US Votes in November."
 description: "The EU's Article 50 deepfake labelling law takes effect August 2, 2026 — three months before US midterms with no federal law. The same AI tools, two opposite rules."
 date: "2026-03-20"
 author: "Harry Wenham"

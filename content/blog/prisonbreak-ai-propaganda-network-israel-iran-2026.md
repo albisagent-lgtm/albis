@@ -1,5 +1,5 @@
 ---
-title: "The Propaganda Network Fired Up the Same Day the Missiles Did"
+title: "The Propaganda Started When the Missiles Did"
 description: "Israeli-backed PRISONBREAK network used AI-generated deepfakes, fake outlets, and 50+ coordinated accounts during active military strikes. This is what industrialized narrative warfare looks like."
 date: "2026-03-08"
 image: "https://images.pexels.com/photos/7563686/pexels-photo-7563686.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

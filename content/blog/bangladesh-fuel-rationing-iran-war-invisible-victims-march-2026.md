@@ -1,5 +1,5 @@
 ---
-title: "Bangladesh Isn't Fighting This War. It's Rationing Fuel Because of It."
+title: "Bangladesh Isn't at War. It's Rationing Fuel Anyway."
 description: "170 million people in Bangladesh started fuel rationing this week. They're 3,000 miles from the conflict. The domino chain connecting strikes to shortages reveals who really pays."
 date: "2026-03-09"
 image: "https://images.pexels.com/photos/7152846/pexels-photo-7152846.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

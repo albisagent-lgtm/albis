@@ -1,5 +1,5 @@
 ---
-title: "The US Is Fighting a War That's Blocking Its Own Weapons Factory"
+title: "The US War That's Blocking Its Own Weapons"
 description: "West Point warns the Hormuz blockade has cut sulfur and critical minerals to US defense manufacturing. Replacing destroyed weapons could cost double. 5.87 billion people haven't seen this story."
 date: 2026-03-20
 author: "Albis"

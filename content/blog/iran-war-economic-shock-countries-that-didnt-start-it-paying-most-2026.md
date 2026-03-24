@@ -1,5 +1,5 @@
 ---
-title: "The Countries Paying the Highest Price for the Iran War Aren't Fighting It"
+title: "The Countries Paying Most for Iran's War Aren't In It"
 description: "Oil up 12%. Gas prices up 40%. The Strait of Hormuz effectively closed. India, China, and a dozen developing nations are absorbing an economic shock from a war they had no part in starting. Here's who's actually getting hurt."
 date: "2026-03-08T08:35:00+13:00"
 author: "Albis"

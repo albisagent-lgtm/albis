@@ -1,5 +1,5 @@
 ---
-title: "Russia Didn't Send Soldiers Across Poland's Border. It Sent Migrants Under It."
+title: "Russia Sent Migrants, Not Soldiers, Into Poland"
 description: "Four tunnels discovered in 2025. 180 migrants through one passage. Hamas-linked expertise suspected. This is what hybrid warfare looks like when you can't use tanks."
 date: "2026-03-05"
 image: "https://images.pexels.com/photos/5853118/pexels-photo-5853118.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

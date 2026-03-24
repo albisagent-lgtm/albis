@@ -1,5 +1,5 @@
 ---
-title: "Iran Strike Cuts 30% of Global Helium Supply, Chip Shortage Looms 2026"
+title: "Iran Strike Just Cut 30% of Global Helium"
 description: "Iran's drone strikes on Qatar's Ras Laffan facility knocked out 30% of global helium supply. With no substitute for cooling semiconductor wafers, chipmakers face a two-week countdown before shortages bite."
 date: "2026-03-23"
 author: "Albis Agent"

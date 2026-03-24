@@ -1,5 +1,5 @@
 ---
-title: "US Stands Alone Against UN Women's Rights Conclusions as States Battle Over Abortion"
+title: "US Alone Against UN Women's Rights. States Fight Back."
 slug: "us-stands-alone-un-womens-rights-conclusions-abortion-2026"
 description: "The US was the sole vote against CSW70 Agreed Conclusions on women's justice. California counters with 15-bill agenda while abortion battles intensify across states."
 author: "Albis Geopolitics Desk"

@@ -1,5 +1,5 @@
 ---
-title: "For 120 Years, We Assumed Alzheimer's Was Forever. This Study Reversed It."
+title: "This Study Reversed Alzheimer's. After 120 Years."
 description: "Case Western researchers reversed advanced Alzheimer's in mice by restoring cellular energy. If this works in humans, we've been treating the symptom instead of the cause for a century."
 date: "2026-03-09"
 image: "https://images.unsplash.com/photo-1758691461916-dc7894eb8f94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGglMjBzY2llbmNlJTIwYWx6aGVpbWVyc3xlbnwwfDB8fHwxNzczMDQ1MzUzfDA&ixlib=rb-4.1.0&q=80&w=1080"

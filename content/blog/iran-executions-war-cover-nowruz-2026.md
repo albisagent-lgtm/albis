@@ -1,5 +1,5 @@
 ---
-title: "Iran Executed 648 People in 60 Days. The War Made Sure Nobody Noticed."
+title: "Iran Executed 648 People in 60 Days. Nobody Noticed."
 description: "Iran hanged three protesters in Qom on Nowruz eve. 648 executions in 60 days. 92 million people offline. The war didn't just start a conflict — it ended the world's attention."
 date: "2026-03-20"
 author: "Harry Wenham"

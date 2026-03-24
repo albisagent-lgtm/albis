@@ -1,5 +1,5 @@
 ---
-title: "The Houthis Promised to Fight Iran's War. Three Weeks Later, They Haven't."
+title: "The Houthis Promised War. Three Weeks of Silence."
 description: "Yemen's Houthis threatened Red Sea escalation the moment Iran's war began. Three weeks in, not a single missile has fired. Here's why their silence reveals a bigger shift."
 date: "2026-03-20"
 author: "Albis"

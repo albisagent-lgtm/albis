@@ -1,5 +1,5 @@
 ---
-title: "Two Cheap Drugs Extended Mouse Lifespan by 70%. But Only If You're Male."
+title: "Two Cheap Drugs Extended Lifespan 70% — in Males Only"
 description: "UC Berkeley combined oxytocin and an Alk5 inhibitor in elderly mice. Males lived 73% longer. Females got nothing. What that means for longevity science."
 date: "2026-03-03"
 image: "https://images.unsplash.com/photo-1650897492361-536039aeeb73?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGgtbG9uZ2V2aXR5JTIwYWdpbmclMjBsb25nZXZpdHl8ZW58MHwwfHx8MTc3MzA1NDA4OHww&ixlib=rb-4.1.0&q=80&w=1080"

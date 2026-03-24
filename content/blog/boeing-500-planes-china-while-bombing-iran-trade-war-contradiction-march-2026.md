@@ -1,5 +1,5 @@
 ---
-title: "The Same Week America Bombed Iran's Oil, It Sold China 500 Planes"
+title: "America Bombed Iran's Oil. Then Sold China 500 Planes."
 description: "Boeing is closing its largest China deal in a decade — 500 jets worth tens of billions — while the US bombs Iran and China condemns the war. Welcome to geopolitics in 2026."
 date: "2026-03-09"
 author: "Albis"

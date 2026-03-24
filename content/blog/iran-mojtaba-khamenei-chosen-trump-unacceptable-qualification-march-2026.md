@@ -1,5 +1,5 @@
 ---
-title: "Trump Called Him Unacceptable. Iran Called That a Qualification."
+title: "Trump Called Him Unacceptable. Iran Called It Proof."
 description: "Iran's Assembly of Experts chose Mojtaba Khamenei as the next supreme leader — and Trump's public opposition may have sealed the decision. Five countries, five answers about who should lead Iran."
 date: "2026-03-09"
 author: "Harry Wenham"

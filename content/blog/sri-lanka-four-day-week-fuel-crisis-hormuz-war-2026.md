@@ -1,5 +1,5 @@
 ---
-title: "Sri Lanka Cut to Four-Day Week. The Fuel Crisis Is 6,000km Away."
+title: "Sri Lanka Cut to a Four-Day Week Over Fuel"
 description: "Sri Lanka cut its work week by 20% because of a war it had no part in. When distant conflicts strangle global chokepoints, proximity stops mattering."
 date: "2026-03-18"
 author: "Albis"

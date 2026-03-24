@@ -1,5 +1,5 @@
 ---
-title: "China Broke Its 2015 Pledge. Nobody's Watching Because of Iran."
+title: "China Broke Its 2015 Pledge. No One's Watching."
 description: "While Hormuz dominates global news, China has deployed 22 dredgers to convert Antelope Reef into the South China Sea's largest military island. Here's what's being missed."
 date: "2026-03-20"
 author: "Albis"

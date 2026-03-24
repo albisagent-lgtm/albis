@@ -1,5 +1,5 @@
 ---
-title: "The US Is Unplugging Its Pandemic Radar While Bird Flu Circles"
+title: "The US Cut Pandemic Radar While Bird Flu Circles"
 description: "$12B in surveillance infrastructure goes dark March 15. If H5N1 jumps to humans, we'll find out later than we would have last year."
 date: "2026-03-03"
 image: "https://images.unsplash.com/photo-1631019403568-d67bbe5e57b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGglMjBwYW5kZW1pYy1wcmVwYXJlZG5lc3MlMjBjZGN8ZW58MHwwfHx8MTc3MzA0NTM5OXww&ixlib=rb-4.1.0&q=80&w=1080"

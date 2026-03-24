@@ -1,5 +1,5 @@
 ---
-title: "Mali Releases 100 Al-Qaeda Prisoners for Fuel Convoy Access in 2026"
+title: "Mali Freed 100 Jihadists for Fuel. Here's the Deal."
 description: "Mali freed over 100 suspected jihadists to stop attacks on fuel trucks. The junta says it doesn't negotiate with terrorists — but French media tells a different story."
 date: "2026-03-24"
 author: "Priya Sharma"

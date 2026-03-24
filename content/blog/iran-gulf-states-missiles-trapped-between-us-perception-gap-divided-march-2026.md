@@ -1,5 +1,5 @@
 ---
-title: "Iran Is Hitting Its Neighbours. Each Side Says the Other Started It."
+title: "Iran Hits Its Neighbours. Both Sides Blame the Other."
 description: "Iran has fired over a thousand missiles at Gulf states. The US calls it unprovoked aggression. Iran calls it self-defence against an illegal war. The Gulf states are caught in the middle — and furious at both sides."
 date: "2026-03-10"
 author: "Albis"

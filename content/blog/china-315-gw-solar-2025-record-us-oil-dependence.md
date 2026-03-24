@@ -1,5 +1,5 @@
 ---
-title: "China Installed More Solar in 2025 Than the US Has Ever Built"
+title: "China Built More Solar in 2025 Than the US Ever Has"
 description: "China added 315 GW of solar in 2025 — more than the entire US cumulative capacity of 279 GW. Here's why that gap is now a geopolitical weapon."
 date: "2026-03-20"
 author: "Harry Wenham"

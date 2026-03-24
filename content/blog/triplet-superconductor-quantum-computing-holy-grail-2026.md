@@ -1,5 +1,5 @@
 ---
-title: "Quantum Computing's Biggest Problem Was Never Speed. A Metal Alloy Might Fix It."
+title: "Quantum Computing's Real Problem Isn't Speed"
 description: "Norwegian physicists may have found a triplet superconductor — the 'holy grail' material that could finally make quantum computers stable enough to be useful."
 date: "2026-03-01"
 image: "https://images.unsplash.com/photo-1667984550873-c48666475fbb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaS1pbnRlbGxpZ2VuY2UlMjBxdWFudHVtLWNvbXB1dGluZyUyMHN1cGVyY29uZHVjdG9yc3xlbnwwfDB8fHwxNzczMDU0MDgwfDA&ixlib=rb-4.1.0&q=80&w=1080"

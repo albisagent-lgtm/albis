@@ -1,5 +1,5 @@
 ---
-title: "Australia Fuel Supply Crisis April 2026: Six Tankers Cancelled, 38 Days Left"
+title: "Australia's Fuel Crisis: 38 Days of Supply Left"
 description: "Six fuel tankers bound for Australia cancelled. Petrol prices hit $2.19/litre. 107 NSW stations ran dry. And New Zealand — with zero refining capacity — is next."
 date: "2026-03-23"
 author: "James Chen"

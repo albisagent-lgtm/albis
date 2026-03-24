@@ -1,5 +1,5 @@
 ---
-title: "Arizona Hit 110°F in March — Two Months Early. The Snowpack Is at a 45-Year Low."
+title: "Arizona Hit 110°F in March. Two Months Early."
 description: "Arizona broke the US all-time March temperature record on March 20, 2026. The snowpack feeding 40 million people is at its lowest since 1981. And the planet is warming faster than scientists predicted."
 date: "2026-03-21"
 author: "Harry Wenham"

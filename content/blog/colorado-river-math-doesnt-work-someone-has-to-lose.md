@@ -1,5 +1,5 @@
 ---
-title: "The Colorado River Serves 40 Million People. Its Math Serves Zero."
+title: "The Colorado River's Math Was Never Going to Work"
 description: "Seven states can't agree on who gets less water because the real answer is simple: there isn't enough for everyone. The math was broken from the start."
 date: "2026-02-28"
 image: "https://images.unsplash.com/photo-1657512379331-532c43435152?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx3YXRlciUyMGNvbG9yYWRvLXJpdmVyJTIwY2xpbWF0ZXxlbnwwfDB8fHwxNzczMDQ2ODUxfDA&ixlib=rb-4.1.0&q=80&w=1080"

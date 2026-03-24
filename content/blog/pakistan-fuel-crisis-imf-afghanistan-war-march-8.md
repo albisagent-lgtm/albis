@@ -1,5 +1,5 @@
 ---
-title: "Pakistan Raises Fuel Prices 20% While Fighting a War It Can't Afford"
+title: "Pakistan Hiked Fuel 20% Mid-War. Now What?"
 description: "Pakistan hiked petrol and diesel by Rs 55 per litre on March 7, citing the Iran war's closure of the Strait of Hormuz. The country now faces a two-front crisis: open war with Afghanistan and an energy shock driven by a conflict it isn't part of."
 date: 2026-03-08
 author: "Albis"

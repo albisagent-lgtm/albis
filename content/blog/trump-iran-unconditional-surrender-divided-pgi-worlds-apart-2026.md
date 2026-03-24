@@ -1,5 +1,5 @@
 ---
-title: "Trump's 'Unconditional Surrender' Demand: Decisive Leadership or Endless War?"
+title: "Trump's Iran Surrender Demand Split the World"
 description: "The same eight words from the US president are heard as strength in Washington and as a death sentence in Tehran. How four regions frame Trump's demand to Iran — and what the gap reveals."
 date: 2026-03-07
 image: "https://images.unsplash.com/photo-1757916315213-b7254eea4f9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxkaXZpZGVkJTIwcGdpJTIwaXJhbi13YXJ8ZW58MHwwfHx8MTc3MzA1MDQ1MXww&ixlib=rb-4.1.0&q=80&w=1080"

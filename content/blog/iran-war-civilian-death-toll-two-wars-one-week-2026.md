@@ -1,5 +1,5 @@
 ---
-title: "1,332 Dead in Iran. The Number You See Depends on Where You Live."
+title: "1,332 Dead in Iran. The Count Depends Where You Live."
 description: "Eight days into the US-Israel strikes on Iran, the civilian death toll has passed 1,300. But how — and whether — that number reaches you depends entirely on your news source's geography."
 date: "2026-03-07"
 image: "https://images.unsplash.com/photo-1757916315213-b7254eea4f9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxkaXZpZGVkJTIwcGdpJTIwaXJhbi13YXJ8ZW58MHwwfHx8MTc3MzA1MDQ1MXww&ixlib=rb-4.1.0&q=80&w=1080"

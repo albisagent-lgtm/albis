@@ -1,5 +1,5 @@
 ---
-title: "Two Attacks in One Day: The Iran War Just Came Home to America"
+title: "Two Attacks, One Day: Iran's War Comes Home to America"
 description: "A Lebanese-American who lost family in an airstrike rammed a Michigan synagogue. An ISIS supporter shot up a Virginia ROTC class. Both on March 12. Here's what the world sees that Americans don't."
 date: 2026-03-14
 category: current_events

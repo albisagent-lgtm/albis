@@ -1,5 +1,5 @@
 ---
-title: "Everyone's Counting Who Left. Nobody's Counting What Work They Did."
+title: "Everyone Counted Who Left. Nobody Counted the Work."
 description: "The US just hit net negative migration for the first time in 50 years. The debate's about numbers. The crisis is about skills — and the jobs nobody's filling."
 date: 2026-03-02
 author: "Albis"

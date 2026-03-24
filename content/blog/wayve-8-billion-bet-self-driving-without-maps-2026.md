@@ -1,5 +1,5 @@
 ---
-title: "An $8.6 Billion Startup Just Proved Self-Driving Cars Don't Need Maps"
+title: "Self-Driving Cars Without Maps? This $8.6B Bet Says Yes."
 description: "Wayve raised $1.2B from Nvidia, Microsoft, and Uber for AI that learns to drive like a human — no HD maps required. Here's why that changes everything."
 date: "2026-03-03"
 image: "https://images.pexels.com/photos/5478088/pexels-photo-5478088.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

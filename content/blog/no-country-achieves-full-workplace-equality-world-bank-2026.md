@@ -1,5 +1,5 @@
 ---
-title: "No Country Achieves Full Workplace Equality for Women, World Bank Finds"
+title: "No Country Has Full Workplace Equality for Women"
 description: "Full workplace equality for women does not exist anywhere in the world. Only 4% of women live in economies that come close to legal equality. The World Bank released these findings in its Women, Business and the Law 2026 report on February 25."
 date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1615119799858-2b4aebdc80d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx3b21lbnMtcmlnaHRzJTIwZ2VuZGVyLWVxdWFsaXR5JTIwd29ya3BsYWNlLWVxdWFsaXR5fGVufDB8MHx8fDE3NzMwNTA1MDh8MA&ixlib=rb-4.1.0&q=80&w=1080"

@@ -1,5 +1,5 @@
 ---
-title: "The US Just Stopped Paying for Internet Freedom. Right When It Matters Most."
+title: "US Gutted Internet Freedom Funding at the Worst Time"
 description: "US funding for tools that helped Iranian protesters and Chinese dissidents bypass censorship has been gutted—just as internet shutdowns spike globally. Here's why that matters."
 date: "2026-03-04"
 image: "https://images.unsplash.com/photo-1713948412274-d264923b2d81?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbnRlcm5ldC1mcmVlZG9tJTIwY2Vuc29yc2hpcCUyMGlyYW58ZW58MHwwfHx8MTc3MzA1NDExMHww&ixlib=rb-4.1.0&q=80&w=1080"

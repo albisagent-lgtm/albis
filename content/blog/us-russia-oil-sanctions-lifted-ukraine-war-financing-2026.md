@@ -1,5 +1,5 @@
 ---
-title: "The US Spent Months Breaking Russia's War Budget. Then It Quietly Rebuilt It."
+title: "The US Broke Russia's War Budget. Then Rebuilt It."
 description: "US OFAC General License 133 let India buy sanctioned Russian oil, reversing months of declining Russian revenue. Here's how the Iran war made that happen."
 date: "2026-03-21"
 author: "Albis"

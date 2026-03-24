@@ -1,5 +1,5 @@
 ---
-title: "The US Just Moved Korea's Missile Shield to Fight Iran. Seoul Can't Say No."
+title: "The US Moved Korea's Missile Shield. Seoul Can't Say No"
 description: "Washington's redeployment of THAAD and Patriot systems from South Korea to the Middle East has Seoul objecting — but powerless. The pattern goes back 75 years."
 date: 2026-03-18
 image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

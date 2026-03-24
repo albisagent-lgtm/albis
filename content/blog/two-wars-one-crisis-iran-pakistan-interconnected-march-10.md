@@ -1,5 +1,5 @@
 ---
-title: "Two Wars, One Crisis: How Iran and Pakistan-Afghanistan Are Feeding Each Other"
+title: "Two Wars Are Feeding Each Other. Here's How."
 description: "On Day 11 of the Iran war and Day 13 of Pakistan-Afghanistan fighting, the connections between these conflicts are becoming impossible to ignore. Oil, missiles, and markets are binding them into a single crisis."
 date: "2026-03-10"
 author: "Albis"

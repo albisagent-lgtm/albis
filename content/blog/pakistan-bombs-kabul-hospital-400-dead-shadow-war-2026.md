@@ -1,5 +1,5 @@
 ---
-title: "Pakistan Bombed a Hospital in Kabul. 400 Dead. Nobody's Watching."
+title: "Pakistan Bombed a Kabul Hospital. 400 Dead."
 description: "A 2,000-bed addiction hospital was hit at 9pm. The death toll could be 400. This is what escalation looks like when the world is looking elsewhere."
 date: "2026-03-18"
 author: "Albis"

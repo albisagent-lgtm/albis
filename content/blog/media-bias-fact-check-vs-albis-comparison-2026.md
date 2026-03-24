@@ -1,5 +1,5 @@
 ---
-title: "Media Bias Fact Check vs Albis: Which Reveals More About Your News in 2026?"
+title: "Media Bias Fact Check vs Albis: Which Tells You More?"
 slug: "media-bias-fact-check-vs-albis-comparison-2026"
 description: "MBFC rates 3,900+ outlets on a left-right scale. Albis measures how the same story changes across world regions. Here's what each tool actually shows you — and what it misses."
 image: "https://images.pexels.com/photos/5561920/pexels-photo-5561920.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

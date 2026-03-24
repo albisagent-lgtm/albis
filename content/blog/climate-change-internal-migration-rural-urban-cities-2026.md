@@ -1,5 +1,5 @@
 ---
-title: "Climate Change Is Pushing People Into Cities Already Drowning"
+title: "Climate Migrants Are Fleeing to Cities Already Drowning"
 description: "Lagos, Dhaka, and Jakarta face flooding and heat — yet they're absorbing millions of climate migrants from rural areas. The cities that can't handle their current populations are about to get much bigger."
 date: "2026-03-17"
 author: "Albis"

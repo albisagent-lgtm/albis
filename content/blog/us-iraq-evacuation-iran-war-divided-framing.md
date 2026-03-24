@@ -1,5 +1,5 @@
 ---
-title: "The US Told Americans to Leave Iraq. The Two Sides Can't Agree on Why"
+title: "US Told Americans to Leave Iraq. Nobody Agrees Why."
 description: "The US Embassy told Americans to leave Iraq 'now' as Iran-backed militia attacks mount. Washington calls it a safety measure. The Middle East sees escalation."
 date: 2026-03-15
 author: "Albis"
