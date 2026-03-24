@@ -1,6 +1,6 @@
 ---
 title: "Germany-Japan Military Pact Draws Beijing Warning"
-description: "Germany's defense minister invited Japan to sign a visiting-forces agreement at a naval base in Yokosuka. Berlin calls it shared security. Beijing calls it revived militarism. Tokyo calls it insurance."
+description: "Germany invited Japan to sign a military pact no European country has ever offered. Beijing called it revived militarism. Nobody in the West noticed."
 image: "https://images.pexels.com/photos/7467938/pexels-photo-7467938.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 pubDate: "2026-03-23"
 category: "under-the-radar"

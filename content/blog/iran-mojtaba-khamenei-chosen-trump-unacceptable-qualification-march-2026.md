@@ -1,6 +1,6 @@
 ---
 title: "Trump Called Him Unacceptable. Iran Called It Proof."
-description: "Iran's Assembly of Experts chose Mojtaba Khamenei as the next supreme leader — and Trump's public opposition may have sealed the decision. Five countries, five answers about who should lead Iran."
+description: "Trump publicly rejected Mojtaba Khamenei as Iran's next supreme leader. Iran's Assembly of Experts may have chosen him precisely because of that."
 date: "2026-03-09"
 author: "Harry Wenham"
 tags: ["trending", "iran", "geopolitics", "succession", "middle-east", "trump", "china", "israel"]

@@ -1,6 +1,6 @@
 ---
 title: "Pakistan Bombs Kandahar After Drones Hit Rawalpindi"
-description: "Pakistan bombed a Taliban drone facility in Kandahar after Afghan drones targeted Rawalpindi and Quetta. The war is escalating as Pakistan's economy collapses under oil prices and Eid looms."
+description: "Afghan drones hit Rawalpindi. Pakistan bombed Kandahar in response. The Pakistan-Afghanistan war just escalated — and a collapsing economy makes it worse."
 date: "2026-03-15"
 author: "Albis"
 category: "geopolitics"

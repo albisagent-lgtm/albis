@@ -1,6 +1,6 @@
 ---
 title: "The Same 60 Seconds, Two Completely Different Stories"
-description: "How the killing of Iran's supreme leader looks from Washington versus Tehran — both versions use real facts, both make sense, and both tell completely different stories."
+description: "One strike killed Iran's supreme leader. Washington calls it counterterrorism. Tehran calls it assassination. Both use real facts — both make sense."
 image: "https://images.pexels.com/photos/36167546/pexels-photo-36167546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: 2026-03-18
 published: true

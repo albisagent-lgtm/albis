@@ -1,6 +1,6 @@
 ---
 title: "China's Been Hacking Russia. Some 'Ally.'"
-description: "Putin and Xi call it a golden era of friendship. Meanwhile, China's stealing submarine blueprints and Russia's FSB calls them 'the enemy.' The gap between the handshake and the hack."
+description: "Russia's FSB calls China 'the enemy' in internal memos. Meanwhile, Putin and Xi shake hands for the cameras. The hacking never stopped."
 date: "2026-03-07"
 image: "https://images.pexels.com/photos/5380603/pexels-photo-5380603.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"

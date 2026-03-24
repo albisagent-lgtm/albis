@@ -102,12 +102,34 @@ export default async function LensArticlePage({ params }: Props) {
     } : {}),
   };
 
+  // FAQ structured data if available
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const faqs = (post as any).faqs;
+  const faqJsonLd = faqs && faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq: { q: string; a: string }) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  } : null;
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-2xl px-6 py-16 md:py-24">
         {/* Header */}

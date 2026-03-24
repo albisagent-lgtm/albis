@@ -1,6 +1,6 @@
 ---
 title: "Ground News vs Albis: Counting Bias vs Reading Framing"
-description: "Ground News counts how many left and right outlets cover a story. Albis shows how different countries frame it. We ran the same story through both. Here's what each one sees — and misses."
+description: "Ground News counts left vs right. Albis compares how countries frame the same event. We ran one story through both — the blind spots were different."
 image: "https://images.pexels.com/photos/5561913/pexels-photo-5561913.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 slug: ground-news-vs-albis-comparison-2026
 date: 2026-03-17

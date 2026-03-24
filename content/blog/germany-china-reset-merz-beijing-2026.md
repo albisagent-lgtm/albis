@@ -1,6 +1,6 @@
 ---
 title: "Germany's Chancellor Landed in Beijing. Why It Matters"
-description: "Merz brought the heads of Volkswagen, BMW, and Mercedes to China while Trump's tariffs bite. Europe is choosing between Washington's chaos and Beijing's market — and the old alliance is cracking."
+description: "While Trump delivered the longest State of the Union ever, Germany's chancellor flew to Beijing with the CEOs of BMW, VW, and Mercedes. The alliance is cracking."
 date: "2026-02-25"
 image: "https://images.unsplash.com/photo-1690742215448-37b787cd3494?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxnZXJtYW55JTIwY2hpbmElMjB0cmFkZXxlbnwwfDB8fHwxNzczMDQ2OTIwfDA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"

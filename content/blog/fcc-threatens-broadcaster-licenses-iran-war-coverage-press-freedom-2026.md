@@ -1,7 +1,7 @@
 ---
 title: "FCC Threatened to Pull Licenses Over War Coverage"
 date: "2026-03-16"
-description: "FCC Chairman Brendan Carr warned TV broadcasters to 'correct course' on Iran war reporting or lose their licenses. Here's what different countries are saying — and what history tells us about wartime press freedom."
+description: "The FCC told broadcasters to 'correct course' on Iran war coverage — or lose their licenses. Wartime press freedom just got its first real test since 2003."
 category: "Media & Information"
 image: "https://images.pexels.com/photos/12249230/pexels-photo-12249230.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"

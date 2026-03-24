@@ -1,6 +1,6 @@
 ---
 title: "Two Democracies Are at War Over Free Speech Online"
-description: "The US built Freedom.gov to bypass European hate speech laws. Two of the world's oldest democracies now fundamentally disagree on what free expression means online."
+description: "The US built Freedom.gov with a built-in VPN to bypass EU hate speech laws. Two democracies now disagree on what free speech even means."
 date: 2026-03-15
 author: "Albis"
 tags: [explainer, information-warfare, us, europe, free-speech, dsa, content-moderation]

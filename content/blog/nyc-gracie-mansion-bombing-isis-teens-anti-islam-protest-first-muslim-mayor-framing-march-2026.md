@@ -1,6 +1,6 @@
 ---
 title: "NYC Gracie Mansion Bombing: Everyone Saw Different"
-description: "ISIS-inspired teenagers hurled TATP explosives at a far-right protest outside NYC Mayor Mamdani's residence. The framing battle that followed reveals more than the bombs did."
+description: "ISIS-inspired teens threw bombs at a protest outside NYC's first Muslim mayor's home. The framing war that followed reveals more than the attack itself."
 date: "2026-03-10T08:30:00+13:00"
 author: "Albis"
 category: "Analysis"

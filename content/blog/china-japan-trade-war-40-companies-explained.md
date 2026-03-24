@@ -1,6 +1,6 @@
 ---
 title: "China Sanctioned 40 Japanese Firms. Here's Why."
-description: "Export controls are the new weapons in the tech cold war. China's latest move against Japan shows how global supply chains are being weaponized—and who's caught in the crossfire."
+description: "China sanctioned 40 Japanese firms in one day — including a car company. Export controls are the new weapons, and supply chains are the battlefield."
 date: "2026-02-27"
 image: "https://images.pexels.com/photos/36652830/pexels-photo-36652830.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"

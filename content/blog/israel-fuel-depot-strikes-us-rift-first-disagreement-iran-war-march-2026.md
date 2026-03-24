@@ -1,6 +1,6 @@
 ---
 title: "Israel Hit 30 Fuel Depots. The US Approved Far Fewer."
-description: "The first crack in the alliance. Israel's Saturday strikes on Iranian fuel depots went far beyond US expectations, sparking the first significant disagreement between allies since the war began."
+description: "The US approved limited strikes. Israel hit 30 fuel depots. Washington's reaction — 'What the f***' — marks the first crack in the Iran war alliance."
 date: "2026-03-09"
 image: "https://images.unsplash.com/photo-1772303142828-4c8dc2162589?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpc3JhZWwlMjBpcmFuJTIwdXN8ZW58MHwwfHx8MTc3MzA1MDQ2NHww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"

@@ -1,6 +1,6 @@
 ---
 title: "Hormuz Closed. Three Countries Are Already Breaking."
-description: "Three weeks after the Strait of Hormuz closed, restaurants are shutting in Manila, petrol is rationed in Colombo, and Nepali migrants are heading home from India."
+description: "Restaurants closing in Manila. Petrol rationed in Colombo. Nepali migrants walking home. Three weeks after Hormuz closed, three countries are breaking."
 date: "2026-03-22"
 author: "Albis"
 tags: ["quick-take", "hormuz", "energy-crisis", "philippines", "sri-lanka", "nepal", "india", "south-asia", "southeast-asia"]

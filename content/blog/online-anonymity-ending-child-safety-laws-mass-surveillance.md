@@ -1,6 +1,6 @@
 ---
 title: "Online Anonymity Is Ending. You're Helping Build It."
-description: "Twelve bipartisan bills would require age verification for internet access. DHS is already subpoenaing anonymous accounts. Half of US states mandate ID checks. It's not coming—it's here."
+description: "DHS is subpoenaing anonymous social media accounts right now. Half of US states require ID to go online. Online anonymity isn't ending — it's already gone."
 date: "2026-03-15"
 author: "Albis"
 tags: ["information-attention", "privacy", "surveillance", "age-verification", "anonymity", "kosa"]

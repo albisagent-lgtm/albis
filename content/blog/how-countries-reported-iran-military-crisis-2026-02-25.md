@@ -1,6 +1,6 @@
 ---
 title: "Same Aircraft Carriers, Three Completely Different Wars"
-description: "The US sees careful calibration. Gulf states see impending catastrophe. Iran sees unprovoked aggression. Here's how global media split on the Iran-US military standoff."
+description: "Same aircraft carriers, same photos — three completely different wars. The Iran military crisis split global media wide open."
 date: "2026-02-25"
 image: "https://images.pexels.com/photos/36300907/pexels-photo-36300907.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"

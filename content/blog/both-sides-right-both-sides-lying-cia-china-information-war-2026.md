@@ -1,6 +1,6 @@
 ---
 title: "Both Sides Are Right. Both Sides Are Lying."
-description: "When two superpowers accuse each other of exactly the same thing — and both have evidence — someone's lying. Or everyone is. This is the defining pattern of the decade."
+description: "Both sides have evidence. Both sides are lying. The CIA and China accused each other of the same thing in the same week. Welcome to information warfare."
 date: "2026-03-02"
 image: "https://images.pexels.com/photos/6236039/pexels-photo-6236039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"

@@ -1,6 +1,6 @@
 ---
 title: "Lecanemab: We Finally Know How It Actually Works"
-description: "Scientists finally cracked how lecanemab clears brain plaques — it's not the antibody itself, it's one specific part called the Fc fragment. The find could fix the drug's biggest flaw."
+description: "Lecanemab was approved before anyone knew how it worked. Scientists just found the mechanism — and it could fix the drug's most dangerous side effect."
 date: "2026-03-20"
 author: "Albis"
 tags: ["health-longevity", "alzheimers", "neuroscience", "biotech", "drug-discovery", "brain-health"]

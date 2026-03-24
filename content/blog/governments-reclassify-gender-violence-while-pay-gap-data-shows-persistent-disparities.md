@@ -1,6 +1,6 @@
 ---
 title: "Gender Violence Reclassified While Pay Gap Persists"
-description: "Governments are elevating gender-based violence to higher legal categories as new workplace data reveals the economic gap between men and women remains wide despite narrowing."
+description: "Canada just created a legal category for femicide. Australia's pay gap shrank — but men still earn double at the top. Progress and stagnation, same week."
 date: "2026-03-03"
 author: "Albis"
 category: "womens-rights"

@@ -1,6 +1,6 @@
 ---
 title: "Israel Strikes Tehran Refineries: War or Economics?"
-description: "Israeli jets hit four fuel depots around Tehran, turning the sky black and triggering oily rain across the capital. The US called it a shock. Iran called it a war crime. International lawyers say it's complicated."
+description: "Black rain fell on Tehran after Israel struck its oil refineries. Ten million people breathed toxic air. Is bombing fuel infrastructure a war crime?"
 date: 2026-03-10
 author: "Albis"
 tags: ["divided", "pgi", "iran", "israel", "oil", "tehran", "war", "civilian infrastructure"]

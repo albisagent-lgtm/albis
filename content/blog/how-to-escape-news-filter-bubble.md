@@ -1,6 +1,6 @@
 ---
 title: "How to Escape Your News Filter Bubble: A Practical Guide"
-description: "Your news feed is lying to you — by omission. Here's a practical, step-by-step guide to breaking out of your filter bubble and actually seeing the full picture."
+description: "You passed the filter bubble test, right? Most people fail all three questions. A practical guide to escaping the news bubble you don't know you're in."
 date: "2026-02-21"
 author: "Albis"
 image: "https://images.pexels.com/photos/4387779/pexels-photo-4387779.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

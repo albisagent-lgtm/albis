@@ -1,6 +1,6 @@
 ---
 title: "BYD Pre-Sold 100K Cars From a Factory You Don't Know"
-description: "China isn't exporting EVs to Latin America. It's building them there. BYD's Bahia plant sold two-thirds of annual output in eight months. The Monroe Doctrine meets the electric vehicle age."
+description: "100,000 orders before the paint dried. BYD isn't exporting EVs to Latin America — it's building them there. The Monroe Doctrine didn't see this coming."
 date: "2026-03-16"
 author: "Albis"
 tags: ["quick-take", "china", "electric-vehicles", "latin-america", "trade", "manufacturing"]

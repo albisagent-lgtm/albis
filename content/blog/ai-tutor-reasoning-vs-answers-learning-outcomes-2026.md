@@ -1,6 +1,6 @@
 ---
 title: "AI Tutor That Asks Questions Beats One That Answers"
-description: "A new study found students paired with an AI that asks questions instead of giving answers scored higher on exams. Here's what that means for AI in education."
+description: "Students using the AI tutor that refused to give answers outscored everyone. The ones who got instant replies? Their reasoning got worse."
 date: "2026-03-21"
 author: "Albis"
 tags: ["education", "ai-tutoring", "learning-science", "edtech", "higher-education"]

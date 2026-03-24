@@ -1,6 +1,6 @@
 ---
 title: "The Real Hormuz Crisis Isn't Oil. It's Fertilizer."
-description: "One-third of the world's fertilizer trade passes through the Strait of Hormuz. If shipping stays frozen, the impact won't hit your gas tank first — it'll hit your plate."
+description: "Everyone's watching oil prices. Almost nobody noticed that one-third of global fertilizer exports just got cut off at the Strait of Hormuz."
 date: "2026-03-02"
 image: "https://images.pexels.com/photos/36567301/pexels-photo-36567301.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"

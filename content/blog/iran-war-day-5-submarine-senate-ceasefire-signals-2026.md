@@ -1,6 +1,6 @@
 ---
 title: "Day Five: A Torpedo, a Vote, and a Whisper of Peace"
-description: "A US submarine sinks an Iranian frigate in the Indian Ocean — the first torpedo kill since WWII. The Senate votes to let Trump keep fighting. And behind the scenes, Iranian intelligence reaches out to the CIA."
+description: "A US submarine sank an Iranian warship — the first torpedo kill since WWII. Hours later, Iran's intelligence contacted the CIA about ending the war."
 author: "Albis"
 date: "2026-03-05"
 category: "Geopolitics"

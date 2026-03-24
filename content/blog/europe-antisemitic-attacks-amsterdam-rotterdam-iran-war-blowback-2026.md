@@ -1,7 +1,7 @@
 ---
 title: "Iran War Blowback Reaches Europe's Jewish Communities"
 date: "2026-03-16"
-description: "Attacks on a Jewish school in Amsterdam and a synagogue in Rotterdam mark a sharp escalation in antisemitic violence across Europe — driven by the war thousands of miles away."
+description: "A bomb at a Jewish school in Amsterdam. An arson at a Rotterdam synagogue. Two days apart. The Iran war's blowback just hit Europe's doorstep."
 category: "Conflict & Security"
 image: "https://images.pexels.com/photos/20801238/pexels-photo-20801238.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"

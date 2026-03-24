@@ -1,6 +1,6 @@
 ---
 title: "The Houthis Promised War. Three Weeks of Silence."
-description: "Yemen's Houthis threatened Red Sea escalation the moment Iran's war began. Three weeks in, not a single missile has fired. Here's why their silence reveals a bigger shift."
+description: "The Houthis promised to unleash hell on Red Sea shipping when Iran's war started. Three weeks later — total silence. The reason changes everything."
 date: "2026-03-20"
 author: "Albis"
 tags: ["breaking", "yemen", "houthis", "iran", "red-sea", "geopolitics", "middle-east"]

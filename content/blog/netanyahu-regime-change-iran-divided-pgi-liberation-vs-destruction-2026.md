@@ -1,6 +1,6 @@
 ---
 title: "Netanyahu's Iran Regime Change: Liberation or War?"
-description: "Israel's prime minister says toppling Iran's government will transform the Middle East. US intelligence says it probably won't work. The rest of the world can't agree on what to call it."
+description: "Netanyahu promised Iran regime change would transform the Middle East. US intelligence says it won't work. Five regions delivered five different verdicts."
 date: 2026-03-08
 image: "https://images.unsplash.com/photo-1757916315213-b7254eea4f9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxkaXZpZGVkJTIwcGdpJTIwaXJhbnxlbnwwfDB8fHwxNzczMDUwNDY2fDA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"

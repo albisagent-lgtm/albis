@@ -1,6 +1,6 @@
 ---
 title: "How Countries Reported Trump's Tariff Escalation"
-description: "The same tariff policy shift produced victory narratives in the US, trade-deal betrayal warnings in Europe, and unexpected market gains in Latin America. Here's how four regions saw one event completely differently."
+description: "Trump's tariff escalation was a victory in the US, a betrayal in Europe, and a windfall in Latin America. Same policy, four opposite stories."
 date: "2026-02-24"
 image: "https://images.pexels.com/photos/6770610/pexels-photo-6770610.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 author: "Albis"

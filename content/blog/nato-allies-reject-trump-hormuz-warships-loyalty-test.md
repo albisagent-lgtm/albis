@@ -1,6 +1,6 @@
 ---
 title: "Trump Asked NATO for Warships. Every Ally Said No."
-description: "Germany, UK, Japan, Australia and Spain all rejected Trump's demand for warships in the Strait of Hormuz. The US called it a loyalty test. Europe called it not NATO's war."
+description: "Trump demanded NATO allies send warships to the Strait of Hormuz. Every single one said no. What the refusal reveals runs deeper than Iran."
 date: 2026-03-17
 author: "Albis"
 tags: ["divided", "pgi", "nato", "iran-war", "strait-of-hormuz", "atlantic-alliance", "trump", "geopolitics"]

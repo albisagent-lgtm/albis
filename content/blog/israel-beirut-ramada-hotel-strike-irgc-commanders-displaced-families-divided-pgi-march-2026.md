@@ -1,6 +1,6 @@
 ---
 title: "Israel Hit a Beirut Hotel Full of Refugees. Why?"
-description: "Five IRGC Quds Force commanders killed in an Israeli Navy strike on a Ramada hotel in Beirut's Raouche district — the same building sheltering families who'd fled earlier bombings. The word for what happened depends on who's talking."
+description: "Israel struck a Beirut hotel sheltering displaced families — and five IRGC commanders hiding among them. What you call it depends on where you live."
 date: "2026-03-09"
 image: "https://images.unsplash.com/photo-1618481293647-ee7605370f5a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxkaXZpZGVkJTIwcGdpJTIwbGViYW5vbnxlbnwwfDB8fHwxNzczMDUwNDYyfDA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
