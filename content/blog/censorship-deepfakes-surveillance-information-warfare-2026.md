@@ -50,86 +50,74 @@ region_frames:
   africa: "Framed as tension between smart city security investment and privacy rights"
 ---
 
-Governments, corporations, and individuals are all weaponising information right now — through [censorship](/topics/censorship) settlements, deepfake job candidates, expanded [surveillance](/topics/surveillance) laws, and AI-powered mass monitoring. Here's what happened in the past 48 hours across five countries.
+Governments, corporations, and individuals are weaponising information through [censorship](/topics/censorship) settlements, deepfake job candidates, expanded [surveillance](/topics/surveillance) laws, and AI-powered mass monitoring. Five countries, 48 hours.
 
 ## The US government just agreed to stop pressuring social media censorship
 
-The Missouri v. Biden lawsuit reached a historic settlement on March 24, 2026. The New Civil Liberties Alliance secured a consent decree that bars three federal agencies — the Surgeon General's office, the CDC, and CISA — from coercing social media platforms to suppress constitutionally protected speech.
+The Missouri v. Biden lawsuit settled on March 24. The New Civil Liberties Alliance secured a consent decree barring three federal agencies — the Surgeon General's office, the CDC, and CISA — from coercing social media platforms to suppress constitutionally protected speech.
 
-The case began during the Biden administration's COVID-era content moderation push. Government agencies pressured Facebook, Instagram, X, LinkedIn, and YouTube to remove posts the administration disagreed with. Critics described it as a "whole of government" censorship operation.
+The case began during COVID-era content moderation. Government agencies pressured Facebook, Instagram, X, LinkedIn, and YouTube to remove posts the administration disagreed with. The consent decree bars these agencies from threatening platforms into removing content or directing content moderation choices.
 
-The consent decree does something specific. It prohibits these agencies from threatening social media companies into removing content. It also bars them from directing or vetoing content moderation choices.
+The case previously reached the Supreme Court as Murthy v. Missouri. The Court vacated an earlier injunction on standing grounds. The settlement bypasses that ruling.
 
-This case previously reached the Supreme Court as Murthy v. Missouri. The Court vacated an earlier injunction on standing grounds. The settlement bypasses that ruling entirely.
-
-The mechanism matters here. The government didn't pass a censorship law. It used informal pressure — meetings, emails, implied threats — to achieve the same result. The settlement acknowledges this tactic and specifically prohibits it going forward.
+The mechanism matters. The government didn't pass a [censorship law](/blog/us-internet-freedom-funding-gutted-modern-censorship-2026). It used informal pressure — meetings, emails, implied threats — to achieve the same result. The settlement names that tactic and bans it.
 
 ## Deepfake candidates are showing up to job interviews
 
-In Bengaluru, an AI interview platform called InCruiter caught a [deepfake](/topics/deepfakes) candidate during a live automated interview for a global fintech client.
+In Bengaluru, AI interview platform InCruiter caught a [deepfake](/topics/deepfakes) candidate during a live automated interview for a global fintech client.
 
-The applicant appeared normal at first. They answered technical questions naturally. But InCruiter's continuous detection system flagged subtle visual anomalies — the kind humans miss.
+The applicant looked normal. Answered technical questions naturally. But InCruiter's detection system flagged subtle visual anomalies humans miss. The person on screen wasn't real — an AI-generated avatar overlaid in real time, replicating someone else's face and voice. The goal: pass screening and land a role at a company handling sensitive financial data.
 
-The person on screen wasn't real. An AI-generated avatar had been overlaid onto the video feed, replicating someone else's face and voice in real time. The goal: pass the automated screening and land a role at a company handling sensitive financial data.
+The broader picture: InCruiter's system flags fraud in 25–30% of suspicious sessions. Nearly double what human interviewers catch. Industry-wide, cheating in online interviews runs at 10–15%.
 
-InCruiter's data paints a broader picture. Their deepfake detection system flags fraudulent activity in 25 to 30 percent of suspicious interview sessions. That's nearly double what human interviewers catch. Across the industry, cheating in online interviews runs at 10 to 15 percent.
-
-Separately, deepfake X-rays are now fooling radiologists. A study published this week found that only seven of 17 radiologists could identify AI-generated medical images — even when told fakes were present.
-
-The same technology that powers entertainment and creative tools is being repurposed for fraud, identity theft, and infiltration.
+Separately, [deepfake X-rays are fooling radiologists](/blog/deepfakes-broke-identity-verification). Only seven of 17 could identify AI-generated medical images — even when told fakes were present.
 
 ## Canada wants police to access your digital life faster
 
-On March 12, 2026, the Canadian government introduced Bill C-22, the Lawful Access Act. It expands police and intelligence agency powers to access personal digital information. In many cases, without the safeguards Canadians are used to.
+Canada introduced Bill C-22, the Lawful Access Act, on March 12. It expands police and intelligence powers to access personal digital information — in many cases, without the safeguards Canadians expect.
 
-The bill has three parts. Part 1 amends the Criminal Code and the Canadian Security Intelligence Service Act to speed up digital data collection during investigations. Part 2 creates a new law requiring telecom and electronic service companies to build and maintain technical capabilities for government data access. Part 3 promises a parliamentary review — after three years.
+Three parts. Part 1 amends the Criminal Code and CSIS Act to speed digital data collection. Part 2 forces telecom and electronic service companies to build and maintain government-accessible surveillance infrastructure. Part 3 promises parliamentary review — after three years.
 
-The most significant change is the legal threshold. Traditional Canadian law requires "reasonable grounds to believe" before police can compel someone to hand over data. Bill C-22 lowers this to "reasonable grounds to suspect." That's a meaningful difference. Suspicion requires less evidence than belief.
+The key change: the legal threshold. Canadian law traditionally requires "reasonable grounds to believe" before police can compel data handover. Bill C-22 lowers this to "reasonable grounds to suspect." Suspicion requires less evidence than belief.
 
-The bill also creates new preservation orders that force companies to keep your data available for police access, even before charges are filed.
+New preservation orders also force companies to hold your data for police access before charges are filed.
 
-The government frames this as modernisation. Digital communications have outpaced existing laws. But the mechanism chosen — lowering legal standards and compelling private companies to build surveillance infrastructure — goes further than closing gaps.
+The government calls it modernisation. The mechanism — [lowering legal standards and compelling companies to build surveillance infrastructure](/blog/online-anonymity-ending-child-safety-laws-mass-surveillance) — goes further than closing gaps.
 
 ## Nigeria is Africa's biggest surveillance buyer
 
-Nigeria has spent over $470 million on smart city [surveillance](/topics/surveillance) technology, making it Africa's largest buyer of AI-powered monitoring systems.
+Nigeria has spent $470 million on smart city [surveillance](/topics/surveillance) tech, making it Africa's largest buyer of AI-powered monitoring.
 
-At the centre is the National Public Security Communication System. It's a joint project financed 15 percent by the Nigerian government and 85 percent through a China Eximbank loan — roughly $399 million in external borrowing. Chinese firms ZTE Corporation and Hikvision won the contracts.
+The centrepiece: the National Public Security Communication System. Financed 15% by Nigeria, 85% through a $399 million China Eximbank loan. ZTE and Hikvision won the contracts.
 
-Lagos State alone has deployed approximately 23,000 CCTV cameras, many equipped with facial recognition. Oyo State partnered with Huawei and Hikvision for similar systems.
+Lagos alone has deployed roughly 23,000 CCTV cameras, many with facial recognition. Oyo State partnered with Huawei and Hikvision for similar systems.
 
-The stated goal is public safety and crime reduction. But Nigeria has no specific legislation regulating large-scale surveillance. There are no mandatory human rights impact assessments before deployment. Privacy advocates point to a $470 million system operating in a legal vacuum.
+The stated goal: public safety. But Nigeria has no legislation regulating large-scale surveillance. No mandatory human rights assessments before deployment. A $470 million system in a legal vacuum.
 
-The project has also faced implementation problems. Systems installed as early as 2013 went offline or fell into disrepair. Allegations of mismanagement and possible fund misappropriation have surfaced.
-
-The pattern is familiar globally. Governments invest heavily in surveillance infrastructure before building the legal frameworks to govern it.
+Systems installed as early as 2013 went offline or fell into disrepair. Allegations of mismanagement and fund misappropriation have surfaced. The pattern is global: governments build surveillance infrastructure before building the legal frameworks to govern it.
 
 ## The EU sanctioned four Russian disinformation operatives
 
-The European Union added four individuals to its sanctions list for spreading Russian [propaganda](/topics/propaganda). Among them: a former military serviceman and a freelance journalist accused of war crimes.
+The EU added four individuals to its sanctions list for spreading Russian [propaganda](/topics/propaganda) — including a former military serviceman and a freelance journalist accused of war crimes.
 
-These sanctions sit within a broader EU effort to hold specific people accountable for [information operations](/topics/information-warfare), rather than just targeting platforms or content.
-
-The approach differs from the US model. Where the Missouri v. Biden case focused on what the government can't do to platforms, the EU is targeting the individuals producing and distributing state-backed disinformation.
+The approach differs from the US model. Missouri v. Biden focused on what government *can't* do to platforms. The EU targets the individuals producing and distributing state-backed [disinformation](/blog/ai-deepfake-coverage-iran-war-selective-reporting-2026).
 
 ## Electronic warfare is reshaping the Iran conflict
 
-The US-Israel war on Iran isn't just missiles and drones. An analysis from India's Observer Research Foundation documents how the electromagnetic spectrum became a primary battleground.
+The Iran war isn't just missiles and drones. India's Observer Research Foundation documents how the electromagnetic spectrum became a primary battleground.
 
-Before Operation Epic Fury's first aircraft entered Iranian airspace on February 28, 2026, Iran's electronic environment had already been dismantled. Radars blinded. Command-and-control links severed. Communications networks taken down.
+Before Operation Epic Fury's first aircraft entered Iranian airspace on February 28, Iran's electronic environment had already been dismantled. Radars blinded. Command links severed. Communications networks down.
 
-The Iranian hacker group Handala responded with a cyberattack on Stryker Corporation, a major US medical technology firm. The attack disrupted global operations and exfiltrated large volumes of data.
+Iranian hacker group Handala responded with a cyberattack on Stryker Corporation, a major US medical tech firm — disrupting global operations and exfiltrating large volumes of data.
 
-This convergence — kinetic strikes, electronic warfare, and cyber operations happening simultaneously — represents something military theorists predicted but hadn't seen at this scale. The information domain isn't separate from the physical battlefield. It's increasingly where wars are decided before the first visible shot.
+Kinetic strikes, electronic warfare, and cyber operations running simultaneously. The information domain isn't separate from the physical battlefield. It's where wars are decided before the first visible shot.
 
 ## What connects all of this
 
-These stories span five countries and multiple continents. The common thread: information itself has become the territory being fought over.
+Five countries. One thread: information itself is the territory being fought over.
 
-In the US, the battle is over who controls what appears on social media. In Canada, it's about who can access private digital communications. In Nigeria, it's cameras and facial recognition deployed without legal guardrails. In Europe, it's holding propagandists individually accountable. In the [Iran conflict](/blog/iran-war-natanz-dimona-nuclear-exchange-hormuz-ultimatum-march-2026), it's blinding an entire nation's information infrastructure before the bombs arrive.
+In the US, who controls social media content. In Canada, who accesses private communications. In Nigeria, cameras and facial recognition without legal guardrails. In Europe, holding propagandists individually accountable. In the [Iran conflict](/blog/iran-war-natanz-dimona-nuclear-exchange-hormuz-ultimatum-march-2026), blinding a nation's information infrastructure before the bombs arrive.
 
-Each case involves a different mechanism. Informal government pressure. Legislative expansion of surveillance powers. Mass procurement of monitoring technology. Targeted sanctions. Electronic spectrum dominance.
+Different mechanisms. Informal pressure. Legislative expansion. Mass procurement. Targeted sanctions. Spectrum dominance. Same dynamic: control the information environment, control the outcome — whether that's an election, a hiring process, a criminal investigation, or a war.
 
-But the underlying dynamic is the same. Control the information environment, and you control the outcome — whether that's an election, a hiring process, a criminal investigation, or a war.
-
-Understanding these mechanisms doesn't require picking sides. It requires paying attention to how they work.
+Understanding these mechanisms doesn't require picking sides. It requires watching how they work.

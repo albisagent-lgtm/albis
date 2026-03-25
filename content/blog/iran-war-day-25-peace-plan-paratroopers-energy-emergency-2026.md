@@ -53,76 +53,76 @@ faqs:
     answer: "The Philippines imports 90% of its oil, much of it transiting the Strait of Hormuz. With the strait effectively closed to Western-aligned shipping, President Marcos declared an 'imminent danger' to energy supply. Transport workers are planning mass protests in Manila."
 ---
 
-The United States sent Iran a 15-point ceasefire plan on March 24 while simultaneously ordering paratroopers from the 82nd Airborne Division to the Persian Gulf. The plan, delivered through Pakistan, demands Iran dismantle its nuclear program and reopen the Strait of Hormuz. Iran has publicly denied any talks are happening. Meanwhile, the Philippines became the first nation outside the Middle East to declare a national energy emergency from the [Hormuz blockade](/blog/hormuz-strait-closed-oil-shipping-food-crisis-march-2026), and Pakistan's ceasefire with Afghanistan collapsed hours after Islamabad delivered Washington's peace offer to Tehran.
+The US sent Iran a 15-point ceasefire plan on March 24 while ordering 82nd Airborne paratroopers to the Persian Gulf. The plan, delivered through Pakistan, demands Iran dismantle its nuclear program and reopen the Strait of Hormuz. Iran denies any talks are happening. The Philippines became the first nation outside the Middle East to declare a [national energy emergency](/blog/hormuz-strait-closed-oil-shipping-food-crisis-march-2026) from the blockade. Pakistan's ceasefire with Afghanistan collapsed hours after Islamabad delivered Washington's peace offer to Tehran.
 
-On Day 25 of the [Iran war](/blog/iran-pakistan-interconnected-crisis-kharg-island-hormuz-march-2026), the gap between what governments say and what they do has never been wider.
+Day 25 of the [Iran war](/blog/iran-pakistan-interconnected-crisis-kharg-island-hormuz-march-2026). The gap between what governments say and what they do has never been wider.
 
 ## The Peace Plan Nobody Believes
 
-The New York Times and Wall Street Journal confirmed the 15-point framework on Tuesday. Israel's Channel 12, citing three sources, said Washington wants a one-month ceasefire while both sides negotiate. The plan's demands: permanent end to uranium enrichment, dismantlement of the ballistic missile program, full reopening of Hormuz, and severing all ties with Hezbollah, the Houthis, and other proxies. What Iran gets: nuclear sanctions lifted, US support for civilian nuclear energy at Bushehr, and a regional enrichment consortium with Gulf states.
+The NYT and Wall Street Journal confirmed the 15-point framework on Tuesday. Israel's Channel 12, citing three sources, said Washington wants a one-month ceasefire. The demands: end uranium enrichment permanently, dismantle ballistic missiles, reopen Hormuz, sever ties with Hezbollah, Houthis, and other proxies. What Iran gets: nuclear sanctions lifted, US support for civilian energy at Bushehr, a regional enrichment consortium with Gulf states.
 
-The Guardian's diplomatic sources identified the problem immediately. The 15-point plan is a rehash of the May 2025 nuclear framework — the same document Iran rejected before 9,000 US strikes hit its territory. Sending it again, after 25 days of bombardment that killed between 3,114 and 5,300 Iranians (depending on which count you trust), looks less like diplomacy and more like market management.
+The Guardian's diplomatic sources spotted the problem instantly. It's a rehash of the May 2025 nuclear framework — the document Iran rejected before 9,000 US strikes hit its territory. Sending it again, after 25 days of bombardment that killed 3,114 to 5,300 Iranians, looks less like diplomacy and more like market management.
 
-Iran's parliament speaker Qalibaf — now the de facto leader after Supreme Leader Ali Khamenei's death and the uncertain status of his son Mojtaba — publicly denied any negotiations. CNN reported that Tehran prefers Vice President JD Vance as an interlocutor over Steve Witkoff or Jared Kushner, suggesting some backchannel exists even as the public position remains total rejection.
+Parliament speaker Qalibaf — now de facto leader after Khamenei's death and his son Mojtaba's uncertain status — denied any negotiations publicly. CNN reported Tehran prefers VP JD Vance as interlocutor over Steve Witkoff or Jared Kushner. Some backchannel exists, even as the public position remains total rejection.
 
 ## Paratroopers as Punctuation
 
-Hours after the peace plan leaked, the Pentagon ordered the 82nd Airborne Division's Immediate Response Force to deploy. Reports varied between 1,000 (AP), 2,000 (NYT), and 3,000 (Politico) troops. The 82nd's IRF can deploy anywhere on Earth within 18 hours. On top of that, 2,300 Marines from the 31st Expeditionary Unit are scheduled to arrive in the Gulf this week.
+Hours after the peace plan leaked, the Pentagon ordered the 82nd Airborne's Immediate Response Force to deploy. Reports varied: 1,000 (AP), 2,000 (NYT), 3,000 (Politico). The IRF can deploy anywhere on Earth within 18 hours. Another 2,300 Marines from the 31st Expeditionary Unit arrive in the Gulf this week.
 
-The Washington Post connected the dots: Kharg Island. Iran's main oil export terminal handles roughly 90% of the country's crude shipments. Seizing it would give the US physical control over Iran's last economic lifeline. Defense Secretary Pete Hegseth stated the logic plainly: "We negotiate with bombs."
+The Washington Post connected the dots: Kharg Island. Iran's main oil export terminal handles 90% of the country's crude. Seizing it would give the US physical control over Iran's last economic lifeline. Defense Secretary Hegseth: "We negotiate with bombs."
 
-That phrase deserves attention. If the bombs are the negotiation, the 15-point plan is the transcript — a document that exists so someone can point to it later and say talks were attempted. Iran's reading of this will be straightforward: there are no real talks, only escalating threats dressed in diplomatic language.
+If the bombs are the negotiation, the 15-point plan is the transcript — a document so someone can later say talks were attempted. Iran's reading is straightforward: no real talks, just escalating threats in diplomatic wrapping.
 
 ## The $580 Million Question
 
-The peace plan's credibility took another hit from an unexpected direction. The Financial Times, BBC, and CBS all reported that $580 million to $800 million in oil futures were traded minutes before Trump's Monday social media post claiming "productive talks" with Iran. Oil prices crashed nearly 14% on the post. Someone made an enormous profit.
+The plan's credibility took another hit. The FT, BBC, and CBS reported $580–$800 million in oil futures traded minutes before Trump's Monday post claiming "productive talks" with Iran. Oil crashed nearly 14%. Someone made an enormous profit.
 
-Nobel laureate Paul Krugman called it "treason" in a Fortune interview. The White House dismissed the reports as "baseless." But the timing is difficult to explain through coincidence. If the peace plan is a tool for moving markets rather than ending the war, the suspicious trades become not a side scandal but the central story.
+Paul Krugman called it "treason." The White House dismissed the reports as "baseless." But the timing is hard to explain as coincidence. If the peace plan moves markets rather than ending the war, the suspicious trades aren't a side scandal — they're the central story.
 
 ## Manila to Canberra: The Energy Emergency Goes Global
 
-Six thousand kilometers from the nearest strike, Philippine President Ferdinand Marcos Jr. declared a national energy emergency on Tuesday. The Philippines imports 90% of its oil. With Hormuz effectively closed to most Western-aligned shipping, Manila has turned to Russia and China for fuel — a geopolitical realignment forced not by ideology but by empty gas stations.
+Six thousand kilometres from the nearest strike, Philippine President Marcos declared a national energy emergency. The Philippines imports 90% of its oil. With Hormuz closed to most Western-aligned shipping, Manila turned to Russia and China for fuel — a geopolitical realignment forced by empty gas stations, not ideology.
 
-The Philippines isn't alone. South Korea launched an energy-saving campaign: shorter showers, daytime EV charging, public transport. Japan will begin releasing national oil stockpiles on March 26 — roughly 80 million barrels. Australia's petrol stations are [running dry](/blog/australia-new-zealand-fuel-crisis-no-refineries-hormuz-iran-war-2026).
+[South Korea launched an energy-saving campaign](/blog/south-korea-energy-rationing-shorter-showers-vehicle-bans-hormuz-2026): shorter showers, daytime EV charging, public transport. Japan starts releasing 80 million barrels from national stockpiles on March 26. Australia's petrol stations are [running dry](/blog/australia-new-zealand-fuel-crisis-no-refineries-hormuz-iran-war-2026).
 
-The IEA's number tells the story: 11 million barrels per day lost from global markets. That's the worst energy disruption in history — larger than the 1973 Arab oil embargo, the 1979 Iranian Revolution, and the 2022 Russia-Ukraine shock combined. Brent crude fell to $95-98 on Tuesday on ceasefire hopes, down from $112 on Friday. But if the 15-point plan fails — and diplomats expect it to — the rebound could be vicious.
+The IEA's number: 11 million barrels per day lost from global markets. The worst energy disruption in history — larger than the 1973 Arab oil embargo, the 1979 Iranian Revolution, and the 2022 Russia-Ukraine shock combined. Brent fell to $95–98 on Tuesday on ceasefire hopes, down from $112 on Friday. If the 15-point plan fails — diplomats expect it to — the rebound will be vicious.
 
 ## Pakistan: Peace Broker, Belligerent, Casualty
 
-Pakistan delivered the US peace plan to Iran on the same day its own Eid ceasefire with Afghanistan fell apart. Fighting resumed in Zabul Province's Shamulzai district within hours of the ceasefire's midnight expiration. Pakistani jets entered northern Afghanistan near Herat — far from the border regions where Islamabad claims to be targeting TTP militants.
+Pakistan delivered the US peace plan to Iran on the same day its Eid ceasefire with Afghanistan fell apart. Fighting resumed in Zabul Province within hours of the midnight expiration. Pakistani jets entered northern Afghanistan near Herat — far from the border regions where Islamabad claims to target TTP militants.
 
-This is Pakistan's impossible position made concrete. On Monday, it's the diplomatic channel between Washington and Tehran. On Tuesday, it's bombing Afghan cities while its [own economy collapses](/blog/pakistan-fuel-crisis-imf-afghanistan-war-march-8) — petrol at 321 rupees per litre, 20 days of fuel reserves, schools closed to save energy, dollar bonds in their worst monthly drop in three years.
+Pakistan's impossible position, made concrete. Monday: diplomatic channel between Washington and Tehran. Tuesday: bombing Afghan cities while its [own economy collapses](/blog/pakistan-fuel-crisis-imf-afghanistan-war-march-8) — petrol at 321 rupees per litre, 20 days of reserves, schools closed to save energy, dollar bonds in their worst monthly drop in three years.
 
-The Saudi dimension makes it worse. Riyadh and Islamabad signed a NATO-style mutual defense pact. Iran is striking Saudi energy facilities. Under the agreement, an attack on one is an attack on both. Pakistan is now theoretically obligated to defend Saudi Arabia while fighting Afghanistan, mediating for Iran, and running out of fuel.
+The Saudi dimension makes it worse. Riyadh and Islamabad signed a NATO-style mutual defence pact. Iran is striking Saudi energy facilities. Under the agreement, an attack on one is an attack on both. Pakistan is now theoretically obligated to defend Saudi Arabia while fighting Afghanistan, mediating for Iran, and running out of fuel.
 
-The New York Times reported that Saudi Crown Prince Mohammed bin Salman is privately pushing Trump toward regime change in Iran — urging boots on the ground and strikes on energy infrastructure. Publicly, Saudi Arabia hosted a 12-nation de-escalation summit the same week. The gap between MBS's private calls and public statements mirrors the gap between America's peace plan and its paratrooper deployment.
+The NYT reported MBS is privately pushing Trump toward regime change — boots on the ground, strikes on energy infrastructure. Publicly, Saudi Arabia hosted a 12-nation de-escalation summit the same week. MBS's private calls and public statements mirror America's peace plan and its paratrooper deployment: say one thing, do another.
 
 ## The Lebanon Expansion
 
-Israel's Defense Minister Katz formalized what had been developing for days: Israel will occupy southern Lebanon to the Litani River, creating what he called a "security zone." The IDF was ordered to destroy all Litani River crossings to prevent Hezbollah reinforcement. The Qasmiyeh Bridge, the main crossing, is already gone.
+Defence Minister Katz formalised what had been building for days: Israel will occupy southern Lebanon to the Litani River, creating a "security zone." The IDF was ordered to destroy all Litani crossings. The Qasmiyeh Bridge, the main one, is already gone.
 
-The language echoes Israel's 1982-2000 occupation of southern Lebanon. That occupation lasted 18 years. More than 1,000 Lebanese have been killed since March 2, with roughly one million displaced — 20% of the country's population. Reuters noted this is the first time Israel has explicitly stated its intent to seize territory amounting to nearly a tenth of Lebanon.
+The language echoes [Israel's 1982–2000 occupation](/blog/israel-occupy-southern-lebanon-litani-security-zone-2026). That lasted 18 years. Over 1,000 Lebanese have died since March 2. Roughly one million are displaced — 20% of the country. Reuters noted this is the first time Israel has explicitly stated intent to seize nearly a tenth of Lebanon.
 
 ## Five Theatres, One System
 
-What CNN covers as "Iran war," Al Jazeera covers as "US-Israeli war on Iran," and Pakistani media covers as "regional crisis" is one interconnected system with five active fronts:
+CNN calls it "Iran war." Al Jazeera calls it "US-Israeli war on Iran." Pakistani media calls it "regional crisis." It's one system with five fronts:
 
-Iran itself, where 9,000 strikes have destroyed the navy, degraded the nuclear program, and killed thousands — while Iranian missiles still reach Tel Aviv and Jerusalem.
+Iran, where 9,000 strikes destroyed the navy and degraded the nuclear program — while Iranian missiles still reach Tel Aviv.
 
-The Gulf states, where Kuwait's airport burned from Iranian drones on Tuesday morning and Qatar's LNG infrastructure remains damaged from earlier strikes.
+The Gulf states, where Kuwait's airport burned from Iranian drones Tuesday morning and Qatar's LNG infrastructure remains damaged.
 
-Lebanon, where Israel has now declared a formal occupation reaching 20 miles inland.
+Lebanon, where Israel declared a formal occupation reaching 20 miles inland.
 
 Pakistan-Afghanistan, where the [ceasefire collapsed](/blog/pakistan-afghanistan-eid-ceasefire-march-2026) and Pakistani jets are flying over provinces they've never entered.
 
-And the global energy system, where countries from the Philippines to Australia are declaring emergencies because a strait 10,000 kilometers away is mined and contested.
+The global energy system, where countries from the Philippines to [Australia](/blog/australia-fuel-crisis-107-stations-dry-14-years-ignored-warnings-2026) are declaring emergencies over a strait 10,000 km away.
 
-The thread connecting all five is oil. Brent crude's price determines whether Pakistan can keep its lights on, whether Filipino transport workers protest or drive, whether Japan's factories run or idle. The 15-point peace plan's central demand — reopen Hormuz — is the demand that matters to 4 billion people who've never heard of Qalibaf or the 82nd Airborne.
+The thread connecting all five: oil. Brent crude's price determines whether Pakistan keeps its lights on, whether Filipino transport workers drive or protest, whether Japan's factories run or idle. The peace plan's central demand — reopen Hormuz — matters to 4 billion people who've never heard of Qalibaf or the 82nd Airborne.
 
 ## What to Watch Tomorrow
 
-Iran's response to the 15-point plan. The reported 24-hour deadline has likely passed or will pass by Wednesday morning Gulf time. If Tehran rejects it publicly, oil rebounds. If silence continues, the ambiguity buys time for both sides — and for whoever placed those $580 million trades.
+Iran's response. The 24-hour deadline has likely passed by Wednesday morning Gulf time. Public rejection means oil rebounds. Continued silence buys time for both sides — and for whoever placed those $580 million trades.
 
-The 82nd Airborne's destination. If paratroopers stage near the Iranian coast, the Kharg Island seizure scenario becomes operational, not theoretical. If they deploy to existing Gulf bases for force protection, the escalation signal is lower.
+The 82nd Airborne's destination. Staging near the Iranian coast makes the Kharg Island seizure operational. Deploying to existing Gulf bases for force protection sends a lower escalation signal.
 
-The third War Powers vote failed 47-53 on Tuesday, nearly party-line. Operation Epic Fury continues without congressional authorization. France's Macron called Iran's President Pezeshkian directly, opening a European diplomatic track that competes with Pakistan's channel. The question isn't whether someone is talking to Iran. It's whether anyone talking to Iran has the authority to stop what's coming next.
+The third War Powers vote failed 47–53 on Tuesday, nearly party-line. Operation Epic Fury continues without congressional authorisation. Macron called Iran's President Pezeshkian directly, opening a European track that competes with Pakistan's channel. The question isn't whether someone is talking to Iran. It's whether anyone talking has the authority to stop what comes next.
