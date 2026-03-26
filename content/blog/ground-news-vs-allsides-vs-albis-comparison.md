@@ -33,9 +33,9 @@ faqs:
 
 CNN calls it the "Iran war." Al Jazeera calls it the "US-Israel war on Iran." Same missiles. Same casualties. Two different conflicts, depending on where you read.
 
-If you're comparing AllSides vs Ground News to figure out which bias tool actually cuts through the noise, we ran the same story through both — plus Albis — to see what each one reveals. The results say more about the tools than about the war.
+If you're comparing AllSides vs Ground News in 2026, you're asking the right question — but maybe not the complete one. We ran the same breaking story through AllSides, Ground News, and Albis to compare what each tool actually reveals. The gap between them says more about media bias itself than any single headline.
 
-## One Story, Three Tools
+## AllSides vs Ground News: Same Story, Different Results
 
 **AllSides** showed the Iran conflict split along the US political spectrum. Left-leaning outlets emphasised civilian casualties and questioned the legal basis for strikes. Right-leaning outlets focused on Iran's nuclear threat and the necessity of military action. Center outlets hedged. The tool did exactly what it's built to do: it mapped American disagreement onto a left-right axis.
 
@@ -49,9 +49,9 @@ What it didn't show: the same thing AllSides missed. Ground News can tell you th
 
 Three tools. Three answers. None of them wrong. But only one caught the thing that affects 6 billion people who don't vote in US elections.
 
-## What Each Tool Actually Does
+## AllSides vs Ground News vs Albis: What Each Tool Does
 
-The difference isn't quality. It's axis. AllSides and Ground News measure political bias — where an outlet sits on the American left-right spectrum. Albis measures geographic perspective — how the same event looks from different parts of the world.
+The difference isn't quality — it's axis. AllSides and Ground News measure political bias, mapping where an outlet sits on the American left-right spectrum. Albis measures geographic perspective — how the same event looks from different parts of the world.
 
 These aren't competing answers to the same question. They're answers to different questions entirely.
 

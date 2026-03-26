@@ -1,6 +1,6 @@
 ---
-title: "India's Cyber War on Pakistan: The Campaign Nobody Covered"
-description: "India-linked hackers hit Pakistan's nuclear authority, Bangladesh's power grid, and Sri Lankan telecoms in a year-long cyber attack. Nobody outside South Asia noticed. Here's the full picture."
+title: "India Cyber Attack on Pakistan: A Year-Long Campaign"
+description: "India-linked hackers breached Pakistan's nuclear authority, Bangladesh's power grid, and Sri Lankan telecoms — for a year. Why the world ignored a cyber campaign hitting 3 countries."
 date: "2026-03-15"
 author: "Harry Wenham"
 tags: ["explainer", "cyber-warfare", "south-asia", "india", "pakistan", "bangladesh"]
@@ -37,9 +37,9 @@ faqs:
     a: "Global attention focuses almost exclusively on Russia and China's cyber campaigns against Western targets. India's operations against regional neighbors rarely make international headlines, creating a blind spot in how we understand state-sponsored hacking."
 ---
 
-India-linked hackers targeted Pakistan's nuclear regulatory authority, Bangladesh's power grid, and Sri Lankan telecoms in a year-long campaign that wrapped up in early 2026.
+A state-linked cyber attack on Pakistan's nuclear authority, Bangladesh's power grid, and Sri Lankan telecoms ran for over a year — and almost nobody outside South Asia reported it.
 
-The operation hit government agencies and critical infrastructure across three democracies. Most of the world has no idea it happened.
+India-linked hackers targeted critical infrastructure across three democracies in a campaign that wrapped up in early 2026. The operation compromised government agencies, military systems, and the energy infrastructure that keeps hundreds of millions of people connected.
 
 Everyone's watching Russia hack the West and China breach US networks. Meanwhile, India's quietly running sophisticated cyber operations against countries it trades with, plays cricket with, and shares thousands of miles of borders with.
 

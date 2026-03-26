@@ -1,6 +1,6 @@
 ---
-title: "Russian Tanker Arrives at Cuba Oil Standoff"
-description: "A sanctioned Russian tanker with 730,000 barrels reaches Cuba today as US Coast Guard cutters wait. 10 million people's power depends on what happens next."
+title: "Anatoly Kolodkin: Russian Tanker at Cuba Standoff"
+description: "The Anatoly Kolodkin — a sanctioned Russian tanker carrying 730,000 barrels — arrives at Cuba as US Coast Guard cutters wait. What happens next affects 10 million people."
 date: "2026-03-23"
 author: "James Chen"
 tags: ["quick-take", "cuba", "russia", "oil-blockade", "cold-war", "hormuz"]
@@ -39,6 +39,15 @@ sources:
     region: "Middle East"
     quote: "Can't live like this"
 confidence: "confirmed"
+faqs:
+  - question: "What is the Anatoly Kolodkin tanker?"
+    answer: "The Anatoly Kolodkin is a sanctioned Russian oil tanker owned by state shipping company Sovcomflot. It left the Baltic port of Primorsk on March 8, 2026, carrying 730,000 barrels of crude oil bound for Cuba's Matanzas oil terminal."
+  - question: "Why is the Anatoly Kolodkin headed to Cuba?"
+    answer: "Cuba has been without stable fuel supplies since January 9, 2026, when Mexico made its last delivery. The island has experienced rolling blackouts lasting over 30 hours, with hospitals and water pumps failing. The tanker represents roughly a month of fuel for Cuba's 10 million people."
+  - question: "What happened when the tanker arrived in Cuba?"
+    answer: "The Anatoly Kolodkin arrived at Cuba with a Russian Navy corvette escort through the English Channel. Two US Coast Guard cutters were positioned off Cuba's northeast coast, creating the most direct US-Russia confrontation in the Western Hemisphere since the Cuban Missile Crisis."
+  - question: "Is the Anatoly Kolodkin under US sanctions?"
+    answer: "Yes. The tanker is owned by Sovcomflot, Russia's state shipping company, which is under US sanctions. OFAC issued a new license explicitly banning Russian oil deliveries to Cuba. Two previous tankers were already intercepted or diverted before the Kolodkin's arrival."
 ---
 
 The Anatoly Kolodkin listed its destination as "Atlantis, USA." It's headed to Cuba.
