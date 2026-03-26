@@ -46,62 +46,62 @@ faqs:
     a: "Alpha School charges $55,000 per year in Chicago. The school uses AI software to teach core academics in about two hours per day, with adult 'guides' (not certified teachers) supervising. Afternoons focus on life skills workshops and projects."
 ---
 
-Alpha School, a private K-8 chain that replaces teachers with AI software and charges $55,000 a year, just announced a Chicago campus opening this fall. Two days earlier, New York City told its 78,000 public school teachers that AI can't grade a single student. Same country, same week, [opposite answers to the same question](/blog/countries-racing-to-replace-teachers-with-ai-tutors-before-evidence-is-in): can artificial intelligence do a teacher's job?
+Alpha School, a private K-8 chain that replaces teachers with AI software and charges $55,000 a year, just announced a Chicago campus for this fall. Two days earlier, New York City told its 78,000 public school teachers that AI can't grade a single student. Same country, same week, [opposite answers to the same question](/blog/countries-racing-to-replace-teachers-with-ai-tutors-before-evidence-is-in): can AI do a teacher's job?
 
-The collision couldn't be sharper. Alpha's founder, MacKenzie Price, sat with Education Secretary Linda McMahon at the Austin campus. An Alpha student appeared alongside Melania Trump at the State of the Union. Meanwhile, 1,500 New York parents signed a petition demanding a two-year moratorium on AI in their children's schools.
+The collision's sharp. Alpha's founder sat with Education Secretary Linda McMahon at the Austin campus. An Alpha student appeared alongside Melania Trump at the State of the Union. Meanwhile, 1,500 New York parents signed a petition demanding a two-year AI moratorium in their kids' schools.
 
-## Two hours, $55,000, no homework
+## Two Hours, $55,000, No Homework
 
-Here's how Alpha works. Kids arrive, do a group activity, then sit at computers for roughly two hours. AI software — a mix of Alpha's own platform, Khan Academy, Membean, and MobyMax — teaches math, reading, and science. Adults in the room are called "guides." They don't teach. They motivate.
+Kids arrive, do a group activity, then sit at computers for roughly two hours. AI software — Alpha's own platform, Khan Academy, Membean, and MobyMax — teaches maths, reading, and science. Adults in the room are called "guides." They don't teach. They motivate.
 
-By lunch, laptops close. Afternoons are workshops: public speaking, coding, managing a food truck, giving TEDx talks. Alpha says 94% of its 1,000 students across 22 campuses "love school." Sixty percent say they'd rather go to school than on vacation.
+By lunch, laptops close. Afternoons are workshops: public speaking, coding, managing a food truck, giving TEDx talks. Alpha says 94% of its 1,000 students across 22 campuses "love school." Sixty percent say they'd rather attend than go on holiday.
 
-The numbers Alpha promotes are striking. Students score in the top 1% on national standardised MAP tests. They grow 2.6 times faster than their peers. The school has drawn $55,000 tuition — one of Chicago's most expensive private options — from families willing to bet on the model.
+The numbers Alpha promotes are striking. Top 1% on national MAP tests. Growth at 2.6 times the rate of peers. At $55,000 — one of Chicago's priciest private options — families are betting big.
 
-There's a catch. According to Wikipedia's entry on Alpha School, the test data "has not been independently reviewed." A former student who attended Alpha High School in Austin for two years posted on Reddit: "The whole 'AI-taught' thing is honestly bullshit. There isn't much actual teaching. You're mostly just teaching yourself using apps like IXL."
+There's a catch. The test data "has not been independently reviewed," per Wikipedia. A former Austin student posted on Reddit: "The whole 'AI-taught' thing is honestly bullshit. There isn't much actual teaching. You're mostly just teaching yourself using apps like IXL."
 
-And in February, 404 Media published an investigation based on internal company documents. The AI-generated lesson plans were sometimes "faulty," with illogical multiple-choice questions. Alpha's own documentation found the AI lessons sometimes did "more harm than good." Educators who received transfer students from Alpha reported kids who could solve math problems quickly but struggled to construct arguments, revise drafts, or write with depth.
+In February, 404 Media published an investigation based on internal documents. The AI-generated lesson plans were sometimes "faulty," with illogical multiple-choice questions. Alpha's own docs said the AI lessons sometimes did "more harm than good." Educators who received transfer students from Alpha reported kids who could solve maths problems quickly but couldn't construct arguments, revise drafts, or write with depth.
 
-## NYC draws a line
+## NYC Draws a Line
 
-Three hundred miles east, New York City took the opposite approach.
+Three hundred miles east, NYC took the opposite approach.
 
-On March 24, the city's Education Department released its first AI guidelines for the country's largest school system — 1.1 million students, 78,000 teachers. The framework uses a traffic light model. Green: teachers can use AI to brainstorm lesson plans and draft parent communications. Yellow: AI can spot trends in student data or generate translations, but a trained human must review everything before it reaches students. Red: AI can't grade, discipline, write special education plans, counsel, or make any decision about a child. Period.
+On March 24, the Education Department released its first AI guidelines for the country's largest school system — 1.1 million students, 78,000 teachers. The framework uses a traffic light model. Green: AI for lesson brainstorming and parent communications. Yellow: AI spots trends in student data or generates translations, but a human reviews everything. Red: AI can't grade, discipline, write special education plans, counsel, or decide anything about a child.
 
-"AI is here, and our responsibility is to put strong systemwide safeguards in place," Chancellor Kamar Samuels wrote.
+"AI is here, and our responsibility is to put strong systemwide safeguards in place," Chancellor Samuels wrote.
 
-The red-light prohibitions aren't expected to change in the final policy, due in June. And pushback isn't just from administrators. Several Community Education Councils have passed resolutions calling for a full AI moratorium. Google and OpenAI sit on the city's external advisory council — and parents are watching.
+The red-light bans aren't expected to change in the final policy, due June. Several Community Education Councils passed resolutions calling for a full AI moratorium. Google and OpenAI sit on the city's advisory council — parents are watching.
 
-The contrast matters. Alpha says AI *is* the teacher. NYC says AI can't even *grade* for the teacher.
+Alpha says AI *is* the teacher. NYC says AI can't even *grade* for the teacher.
 
-## Who's right? Nobody knows yet
+## Who's Right? Nobody Knows
 
-This is where [the evidence gets thin](/blog/seventy-percent-of-school-needs-to-change-ai-skills-gap-2026). A 2024 study found that highly motivated students benefited from AI-assisted studying — but the technology had "little effect on actual test scores." Additional research shows modest positive gains, mostly in narrow tasks like drill-based maths practice. Nothing peer-reviewed has validated the claim that AI can replace classroom instruction at scale.
+[The evidence is thin](/blog/seventy-percent-of-school-needs-to-change-ai-skills-gap-2026). A 2024 study found motivated students benefited from AI-assisted studying — but the tech had "little effect on actual test scores." Other research shows modest gains, mostly in narrow tasks like drill-based maths. Nothing peer-reviewed validates the claim that AI can replace classroom instruction at scale.
 
-MacKenzie Price has donated more than $2 million since 2023 to Republican candidates and school-choice PACs, according to The Washington Post. Alpha's principal is billionaire Joe Liemandt, whom conservative pundit Bari Weiss once called "the godfather of Austin tech." The Trump administration's enthusiasm for Alpha isn't accidental — it fits a broader push to move public education spending toward private alternatives.
+MacKenzie Price has donated over $2 million since 2023 to Republican candidates and school-choice PACs, per the Washington Post. Alpha's principal is billionaire Joe Liemandt, whom Bari Weiss called "the godfather of Austin tech." The Trump administration's enthusiasm isn't accidental — it fits a broader push to shift public education spending toward private alternatives.
 
-But the question doesn't split neatly along political lines. Northwestern University's Liz Gerber, who studies human-computer interaction, visited Alpha and hesitated to call it an "AI school" at all. "It's really not that new, to be honest. It's personalised learning," she told CBS Chicago. Her real concern: at $55,000 a year, the model can't scale. "The cost is just prohibitive."
+The question doesn't split neatly along political lines. Northwestern's Liz Gerber, who studies human-computer interaction, visited Alpha and hesitated to call it an "AI school." "It's really not that new, to be honest. It's personalised learning," she told CBS Chicago. Her concern: at $55,000 a year, it can't scale. "The cost is just prohibitive."
 
-This is the gap that matters most. Alpha's defenders point to happy students and top-percentile scores. Its critics point to unverified data, faulty AI lessons, and a price tag that excludes 99% of families. Both sides are talking past each other — because neither has the long-term evidence to settle it.
+Alpha's defenders point to happy students and top scores. Critics point to unverified data, faulty AI lessons, and a price tag that excludes 99% of families. Both sides are talking past each other — neither has long-term evidence to settle it.
 
-## The UK is actually trying to find out
+## The UK Is Actually Measuring
 
 While America argues, the UK is running experiments.
 
-This week, the British government launched a six-week pilot putting social media bans, one-hour daily caps, and overnight screen curfews in the homes of 300 teenagers aged 13-15 across all four UK nations. It's the first government-run trial of its kind — and alongside it, a Wellcome Trust-funded study at Bradford will recruit 4,000 students for the world's first large randomised controlled trial on reducing social media's effects on adolescent anxiety, sleep, and school absence.
+This week, the British government launched a six-week pilot: social media bans, one-hour daily caps, and overnight screen curfews in the homes of 300 teenagers aged 13-15 across all four UK nations. First government-run trial of its kind. Alongside it, a Wellcome Trust-funded Bradford study will recruit 4,000 students for the world's first large randomised trial on social media's effects on teen anxiety, sleep, and school absence.
 
-The UK isn't asking whether to restrict technology for children. It's measuring what happens when you do. That's a fundamentally different posture from both Alpha ("replace teachers with AI") and NYC ("ban AI from grading"). One country is generating evidence. The other is generating ideology.
+The UK isn't asking whether to restrict technology for children. It's measuring what happens when you do. One country generates evidence. The other generates ideology.
 
-## What [Asia's fuel crisis schools](/blog/asia-schools-close-fuel-crisis-ai-teachers-2026) tell us
+## What [Asia's Fuel Crisis Schools](/blog/asia-schools-close-fuel-crisis-ai-teachers-2026) Show
 
-The Alpha-versus-NYC debate feels urgent until you zoom out. In Pakistan, all schools closed until March 31 — not over AI policy, but because there isn't enough diesel to run school buses. The Philippines declared a national energy emergency. Vietnam has three weeks of crude oil left.
+The Alpha-versus-NYC debate feels urgent until you zoom out. In Pakistan, all schools closed until March 31 — not over AI policy, but because there's not enough diesel to run school buses. The Philippines declared a national energy emergency. Vietnam has three weeks of crude left.
 
-For 660 million children living in countries affected by the Hormuz energy crisis, the question isn't whether AI should teach them. It's whether they'll get to school at all. That's the education story 5.01 billion people can't see this week — because it's invisible outside South Asia and Southeast Asia.
+For 660 million children in countries hit by the Hormuz energy crisis, the question isn't whether AI should teach them. It's whether they'll get to school at all.
 
-Alpha School's $55,000 classrooms and NYC's 78,000-teacher guidelines are both products of abundance. The education question that most of the world is actually facing is simpler and harder: can we keep the lights on?
+Alpha's $55,000 classrooms and NYC's 78,000-teacher guidelines are both products of abundance. The education question most of the world faces is simpler and harder: can we keep the lights on?
 
-## What to watch
+## What to Watch
 
-The Chicago campus opens this fall with a target of 50 students. NYC's final AI policy drops in June. The Bradford trial begins recruiting 4,000 teens later this year. By 2027, we'll have real data on what screen restrictions do to adolescent wellbeing. We still won't have peer-reviewed evidence on whether AI can teach a child to write.
+Chicago campus opens this fall: 50 students. NYC's final AI policy drops in June. Bradford recruits 4,000 teens later this year. By 2027, we'll have real data on what screen restrictions do to teen wellbeing. We still won't have peer-reviewed evidence on whether AI can teach a child to write.
 
-Alpha is running an experiment on kids at $55,000 per seat. NYC is refusing to run one at all. Bradford is running the experiment properly. The answer to "should AI teach children" will come from whichever city actually bothers to measure.
+Alpha's running an experiment on kids at $55,000 per seat. NYC refuses to run one. Bradford's running it properly. The answer to "should AI teach children" will come from whichever city actually bothers to measure.
