@@ -1,12 +1,12 @@
 ---
-title: "AllSides vs Ground News: What Both Miss (2026)"
-description: "AllSides shows left vs right. Ground News shows who's ignoring a story. We ran the same event through both — and found a gap neither catches. Here's what 6 billion people see differently."
+title: "AllSides vs Ground News vs Albis: Honest Comparison"
+description: "We ran the same breaking story through AllSides, Ground News, and Albis. One caught what the others structurally can't. Here's what each tool actually does — and what it misses."
 date: "2026-03-23"
 author: "Albis"
-image: "https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["comparison", "ground news", "allsides", "media bias", "news apps", "balanced news"]
 category: "media-literacy"
-seoKeyword: "AllSides vs Ground News comparison 2026"
+seoKeyword: "AllSides vs Ground News"
 perception_gap: 7
 regions_found: [us, eu, middle_east, south_asia, asia_pacific]
 regions_absent: [africa, latam]
@@ -33,9 +33,9 @@ faqs:
 
 CNN calls it the "Iran war." Al Jazeera calls it the "US-Israel war on Iran." Same missiles. Same casualties. Two different conflicts, depending on where you read.
 
-If you're comparing AllSides vs Ground News in 2026, you're asking the right question — but maybe not the complete one. We ran the same breaking story through AllSides, Ground News, and Albis to compare what each tool actually reveals. The gap between them says more about media bias itself than any single headline.
+Searching for AllSides vs Ground News? You're asking the right question — but maybe not the complete one. Both tools measure media bias on a left-right political axis. We ran the same breaking story through AllSides, Ground News, and Albis to see what each actually catches. The gap between them reveals something about bias itself that no single headline can.
 
-## AllSides vs Ground News: Same Story, Different Results
+## AllSides vs Ground News: Same Story, Different Answers
 
 **AllSides** showed the Iran conflict split along the US political spectrum. Left-leaning outlets emphasised civilian casualties and questioned the legal basis for strikes. Right-leaning outlets focused on Iran's nuclear threat and the necessity of military action. Center outlets hedged. The tool did exactly what it's built to do: it mapped American disagreement onto a left-right axis.
 

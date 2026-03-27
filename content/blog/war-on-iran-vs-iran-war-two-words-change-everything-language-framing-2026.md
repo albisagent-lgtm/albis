@@ -2,7 +2,7 @@
 title: "'War on Iran' vs 'Iran War' — Two Words Change All"
 description: "Al Jazeera calls it the 'US-Israel war on Iran.' CNN calls it the 'Iran war.' Two words — a preposition and an actor — determine whether you see a country being attacked or a country causing trouble. Here's how naming shapes everything you think about this conflict."
 date: 2026-03-22
-image: https://images.pexels.com/photos/5505718/pexels-photo-5505718.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/5505718/pexels-photo-5505718.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 author: Harry Wenham
 tags:
   - media-literacy

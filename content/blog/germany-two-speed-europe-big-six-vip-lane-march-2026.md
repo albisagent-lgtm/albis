@@ -2,7 +2,7 @@
 title: "Germany Proposed a VIP Lane. 21 Nations Left Behind"
 description: "Germany wants a two-speed EU where six major economies decide first, smaller countries follow later. It's either reform or fracture."
 date: "2026-03-08"
-image: "https://images.pexels.com/photos/4330055/pexels-photo-4330055.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4330055/pexels-photo-4330055.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["quick-take", "eu-politics", "germany", "france", "poland", "spain", "italy", "netherlands", "eu-reform", "sovereignty"]
 sources:

@@ -5,7 +5,7 @@ description: "America's worst measles surge since 1991 is invisible outside the 
 date: "2026-03-24"
 author: "Harry Wenham"
 tags: ["unseen", "gai", "health", "vaccination", "measles", "children", "united-states"]
-image: "https://images.pexels.com/photos/8830479/pexels-photo-8830479.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/8830479/pexels-photo-8830479.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "US measles outbreak 2026 vaccination rates"
 perception_gap: 3
 regions_found: [us]

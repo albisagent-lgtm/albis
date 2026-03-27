@@ -4,7 +4,7 @@ description: "Nigeria's security crisis has killed 500+ and abducted 600+ in 202
 date: "2026-03-10"
 author: "Albis"
 tags: ["unseen", "gai", "nigeria", "security", "africa", "boko-haram", "iswap"]
-image: "https://images.pexels.com/photos/10550113/pexels-photo-10550113.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/10550113/pexels-photo-10550113.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "Reuters"
     url: "https://www.reuters.com/world/africa/islamist-militants-kill-15-coordinated-raids-across-northeast-nigeria-2026-03-09/"

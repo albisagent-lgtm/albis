@@ -6,7 +6,7 @@ author: "Daniel Pearson"
 category: "energy"
 tags: ["quick-take", "south-korea", "energy-crisis", "hormuz", "fuel-rationing", "oil-reserves", "iran-war"]
 regions: ["Asia-Pacific", "North America", "Europe"]
-image: "https://images.pexels.com/photos/32211609/pexels-photo-32211609.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/32211609/pexels-photo-32211609.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Seoul commuters adjusting to energy conservation measures during the Hormuz oil crisis"
 seoKeyword: "south korea energy rationing shorter showers hormuz 2026"
 perception_gap: 4

@@ -6,7 +6,7 @@ published: true
 featured: false
 author: "Albis"
 tags: ["divided", "pgi", "iran", "khamenei", "middle-east", "geopolitics", "us-foreign-policy"]
-image: "https://images.pexels.com/photos/5841077/pexels-photo-5841077.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5841077/pexels-photo-5841077.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Khamenei assassination perception gap world divided 2026"
 confidence: "confirmed"
 sources:

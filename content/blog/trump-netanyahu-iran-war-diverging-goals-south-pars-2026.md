@@ -4,7 +4,7 @@ description: "Israel bombed Iran's South Pars gas field, triggering Qatar's GDP 
 date: "2026-03-21"
 author: "Albis"
 category: "Explainer"
-image: "https://images.pexels.com/photos/1871133/pexels-photo-1871133.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/1871133/pexels-photo-1871133.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Trump Netanyahu Iran war goals diverge South Pars 2026"
 confidence: "confirmed"
 sources:

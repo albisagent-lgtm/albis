@@ -2,7 +2,7 @@
 title: "95% of Students Use AI on Assignments. Now What?"
 description: "A major UK survey found 95% of undergrads use AI for assessed work, up from near-zero three years ago. Universities are scrambling to respond as students say AI is 'making us all lazy.'"
 date: "2026-03-15"
-image: "https://images.pexels.com/photos/8197511/pexels-photo-8197511.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/8197511/pexels-photo-8197511.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Harry Wenham"
 tags: ["education", "ai", "universities", "assessments", "learning-science", "edtech"]
 seoKeyword: "students using AI university assessments 2026"

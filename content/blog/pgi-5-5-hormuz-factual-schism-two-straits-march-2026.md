@@ -4,7 +4,7 @@ date: 2026-03-22
 description: "Yesterday's perception gap wasn't about spin or emphasis. Two media ecosystems reported incompatible facts about the same body of water. One says Iran is blocking all shipping. The other says the strait is open to everyone except belligerents. Both can't be true."
 category: pgi-breakdown
 tags: ["pgi-breakdown", "hormuz", "iran-war", "perception-gap", "media-analysis"]
-image: "https://images.pexels.com/photos/6741039/pexels-photo-6741039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6741039/pexels-photo-6741039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 draft: false
 ---

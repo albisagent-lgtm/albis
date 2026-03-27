@@ -4,7 +4,7 @@ description: "Brent crude crossed $100 a barrel. The Dow lost 739 points. Gas ju
 date: 2026-03-14
 category: economic
 tags: [breaking, economy, oil, iran-war, stock-market, energy, recession]
-image: https://images.pexels.com/photos/3151717/pexels-photo-3151717.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/3151717/pexels-photo-3151717.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "oil price $100 barrel Iran war stock market crash 2026"
 sources:
   - name: "CNBC"

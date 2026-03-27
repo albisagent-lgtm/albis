@@ -6,7 +6,7 @@ date: "2026-03-23"
 author: "Harry Wenham"
 tags: ["quick-take", "iran-war", "trump", "hormuz", "ultimatum", "power-plants", "escalation"]
 regions: ["US", "Middle East", "Europe", "South Asia", "Asia-Pacific"]
-image: "https://images.pexels.com/photos/2155988/pexels-photo-2155988.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2155988/pexels-photo-2155988.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Industrial power plant with smoke stacks, representing Trump's threat to obliterate Iran's power infrastructure"
 seoKeyword: "trump iran 48 hour ultimatum hormuz power plants 2026"
 perception_gap: 9

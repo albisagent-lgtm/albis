@@ -7,7 +7,7 @@ author: "Albis Geopolitics Desk"
 category: "current-events"
 tags: ["explainer", "IEA", "oil-reserves", "strategic-petroleum-reserve", "hormuz", "iran-war", "energy-crisis", "southeast-asia"]
 regions: ["North America", "Europe", "Middle East", "Asia-Pacific", "Southeast Asia"]
-image: "https://images.pexels.com/photos/6537731/pexels-photo-6537731.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6537731/pexels-photo-6537731.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Industrial oil storage tanks representing depleting strategic petroleum reserves"
 seoKeyword: "IEA oil reserve release 2026 how much left"
 perception_gap: 8

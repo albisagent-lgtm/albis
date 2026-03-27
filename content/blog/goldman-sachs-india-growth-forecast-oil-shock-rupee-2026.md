@@ -5,7 +5,7 @@ date: "2026-03-26"
 author: "Priya Sharma"
 category: "quick-take"
 tags: ["quick-take", "india", "economy", "oil-shock", "goldman-sachs", "rupee", "hormuz", "inflation", "rbi"]
-image: "https://images.pexels.com/photos/6901511/pexels-photo-6901511.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6901511/pexels-photo-6901511.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Indian currency representing economic pressure from oil shock"
 seoKeyword: "Goldman Sachs India growth forecast oil shock 2026"
 perception_gap: 5

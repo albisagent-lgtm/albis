@@ -3,7 +3,7 @@ noindex: true
 title: "25 Million Americans Were Breached. Nobody Told Them."
 description: "The Conduent breach started at 400,000 victims. Then 4 million. Now 25 million and climbing. How did a ransomware attack on Medicaid data get this bad?"
 date: "2026-02-28"
-image: "https://images.pexels.com/photos/5380618/pexels-photo-5380618.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5380618/pexels-photo-5380618.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["breaking", "cybersecurity", "data-breach", "healthcare", "ransomware"]
 category: "breaking"

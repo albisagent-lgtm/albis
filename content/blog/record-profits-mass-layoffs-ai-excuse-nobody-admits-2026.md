@@ -2,7 +2,7 @@
 title: "Record Profits, Mass Layoffs: The AI Excuse"
 description: "Tech companies are posting their best revenues ever — and firing tens of thousands. They say it's restructuring. Workers say it's AI. The truth is messier."
 date: "2026-03-04"
-image: "https://images.pexels.com/photos/4623349/pexels-photo-4623349.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4623349/pexels-photo-4623349.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Harry Wenham"
 tags: ["tech", "AI", "layoffs", "economy", "labor"]
 sources:

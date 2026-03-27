@@ -4,7 +4,7 @@ description: "Three Super Micro insiders allegedly smuggled $2.5B in Nvidia AI s
 date: "2026-03-23"
 author: "James Chen"
 tags: ["quick-take", "ai", "technology", "china", "us-china", "export-controls", "semiconductors", "nvidia"]
-image: "https://images.pexels.com/photos/5480781/pexels-photo-5480781.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5480781/pexels-photo-5480781.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "super micro nvidia chip smuggling china arrest"
 sources:
   - "CNBC - Super Micro shares tank 33% after employees charged"

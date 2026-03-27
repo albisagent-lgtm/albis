@@ -4,7 +4,7 @@ description: "In 20 days, the US issued sanctions waivers for Russia, Belarus, a
 date: "2026-03-21"
 author: "Albis"
 tags: ["breaking", "iran-war", "sanctions", "russia", "belarus", "geopolitics", "oil"]
-image: "https://images.pexels.com/photos/6564830/pexels-photo-6564830.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6564830/pexels-photo-6564830.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "US Russia Iran Belarus sanctions relief oil war financing pattern 2026"
 confidence: "confirmed"
 sources:

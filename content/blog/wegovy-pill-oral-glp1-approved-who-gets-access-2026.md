@@ -4,7 +4,7 @@ description: "The FDA approved the first GLP-1 pill for weight loss. It works â€
 date: "2026-03-20"
 author: "Albis"
 tags: ["health-longevity", "obesity", "drug-discovery", "global-health-equity", "glp1", "biotech"]
-image: "https://images.pexels.com/photos/4210607/pexels-photo-4210607.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4210607/pexels-photo-4210607.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "oral GLP-1 pill Wegovy approved who gets access 2026"
 confidence: "confirmed"
 sources:

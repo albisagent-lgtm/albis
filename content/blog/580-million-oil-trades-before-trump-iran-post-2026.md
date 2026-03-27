@@ -4,7 +4,7 @@ description: "Someone bet $580 million that oil would fall 15 minutes before Tru
 date: "2026-03-24"
 author: "Albis"
 tags: ["information-attention", "market-manipulation", "iran-war", "oil-prices", "insider-trading", "media-literacy", "information-warfare"]
-image: "https://images.pexels.com/photos/16902140/pexels-photo-16902140.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/16902140/pexels-photo-16902140.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "$580 million oil trades Trump Iran post insider trading 2026"
 confidence: "developing"
 faqs:

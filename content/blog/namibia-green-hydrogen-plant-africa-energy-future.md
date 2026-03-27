@@ -4,7 +4,7 @@ description: "Namibia's HyIron plant produces green iron with zero emissions usi
 date: "2026-03-14"
 author: "Albis"
 tags: ["clean-energy", "green-hydrogen", "namibia", "steel", "africa", "renewables"]
-image: "https://images.pexels.com/photos/13627641/pexels-photo-13627641.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/13627641/pexels-photo-13627641.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Namibia green hydrogen plant green iron"
 sources:
   - name: "DW"

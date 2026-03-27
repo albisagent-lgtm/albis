@@ -4,7 +4,7 @@ description: "An Iranian lawmaker confirmed $2M transit fees on state TV. Hours 
 date: "2026-03-24"
 author: "Priya Sharma"
 tags: ["quick-take", "hormuz", "iran", "shipping", "tolls", "perception-gap", "iran-war", "maritime-law"]
-image: "https://images.pexels.com/photos/21937964/pexels-photo-21937964.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/21937964/pexels-photo-21937964.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Cargo ship navigating narrow shipping strait waters"
 seoKeyword: "iran hormuz strait shipping toll 2026"
 confidence: "developing"

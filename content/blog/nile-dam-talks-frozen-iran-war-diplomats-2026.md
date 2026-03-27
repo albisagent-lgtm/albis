@@ -4,7 +4,7 @@ description: "Trump offered to mediate the Egypt-Ethiopia GERD water dispute in 
 date: "2026-03-24"
 author: "Lena Castillo"
 tags: ["quick-take", "water", "africa", "diplomacy", "iran-war", "egypt", "ethiopia", "gerd"]
-image: https://images.pexels.com/photos/12607742/pexels-photo-12607742.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/12607742/pexels-photo-12607742.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "nile dam talks frozen iran war 2026"
 perception_gap: 5
 regions_found: [middle_east, africa]

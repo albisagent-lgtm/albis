@@ -5,7 +5,7 @@ date: 2026-03-21
 author: "Albis"
 tags: ["unseen", "gai", "africa", "iran-war", "food-security", "oil-prices", "fertilizer", "hormuz", "information-shadow"]
 seoKeyword: "Africa oil price shock Iran war 2026"
-image: https://images.pexels.com/photos/36127632/pexels-photo-36127632.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/36127632/pexels-photo-36127632.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 sources:
   - "AllAfrica/The Conversation — five scholars: Nigeria, South Africa, Senegal, Kenya, Ethiopia (March 20, 2026)"
   - "CNBC — 'A global food price shock looms as Middle East war rages on' (March 12, 2026)"

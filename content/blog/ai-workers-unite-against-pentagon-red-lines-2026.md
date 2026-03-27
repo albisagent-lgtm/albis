@@ -2,7 +2,7 @@
 title: "300 Google Workers Drew a Pentagon Red Line"
 description: "AI workers at Google, OpenAI, and Anthropic are refusing to build weapons and surveillance tools. The deadline is tonight."
 date: "2026-02-28"
-image: "https://images.pexels.com/photos/6257456/pexels-photo-6257456.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6257456/pexels-photo-6257456.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Harry Wenham"
 tags: ["trending", "AI", "pentagon", "google", "openai", "anthropic", "military", "tech-ethics"]
 category: "analysis"

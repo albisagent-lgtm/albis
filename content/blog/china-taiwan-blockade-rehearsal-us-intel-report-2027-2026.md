@@ -4,7 +4,7 @@ description: "America's spy agencies just softened their Taiwan invasion forecas
 date: "2026-03-21"
 author: "Albis"
 tags: ["quick-take", "taiwan", "china", "geopolitics", "military", "pla", "indo-pacific"]
-image: "https://images.pexels.com/photos/7467926/pexels-photo-7467926.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7467926/pexels-photo-7467926.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "China Taiwan blockade rehearsal US intelligence 2027 2026"
 confidence: "confirmed"
 sources:

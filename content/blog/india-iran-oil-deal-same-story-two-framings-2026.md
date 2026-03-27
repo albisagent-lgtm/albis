@@ -4,7 +4,7 @@ description: "Reliance bought 5 million barrels of Iranian crude — Hindi media
 date: 2026-03-25
 author: "Rajan Mehta"
 tags: ["divided", "pgi", "india", "iran", "oil", "sanctions", "hormuz", "energy"]
-image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Oil tanker at port — India's first Iranian crude purchase since 2019"
 seoKeyword: "India Iran oil deal sanctions waiver"
 perception_gap: 6.9

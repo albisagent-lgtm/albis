@@ -2,7 +2,7 @@
 title: "DeepSeek V4: A Trillion Parameters, Zero Nvidia Chips"
 description: "DeepSeek V4 launched March 2026 with a trillion parameters, optimized for Chinese chips. It costs 1/20th of GPT-5 and matches frontier performance."
 date: "2026-03-10"
-image: "https://images.pexels.com/photos/6974258/pexels-photo-6974258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6974258/pexels-photo-6974258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["ai-intelligence", "deepseek", "china", "nvidia", "open-source", "huawei", "chips"]
 faqs:

@@ -2,7 +2,7 @@
 title: "Who Decides How Many People Is Enough?"
 description: "Global fertility hit 2.25 — crisis or triumph depending on where you stand. The same number triggers opposite alarms worldwide."
 date: 2026-03-04
-image: "https://images.pexels.com/photos/6849571/pexels-photo-6849571.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6849571/pexels-photo-6849571.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 excerpt: "Global fertility just hit 2.25. Europe sees existential crisis. Sub-Saharan Africa sees overpopulation. The same number triggers opposite responses—and nobody's plan is working."
 category: Migration & Demographics

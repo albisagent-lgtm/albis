@@ -4,7 +4,7 @@ description: "For the first time, Israel struck civilian infrastructure serving 
 date: "2026-03-10"
 author: "Albis"
 tags: ["breaking", "iran", "israel", "oil", "infrastructure", "war-escalation"]
-image: "https://images.pexels.com/photos/13247379/pexels-photo-13247379.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/13247379/pexels-photo-13247379.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "The Conversation"

@@ -3,7 +3,7 @@ title: "Saudi Expels Iran Diplomats. China's Deal Dies."
 description: "Saudi Arabia declared five Iranian diplomats persona non grata within 24 hours, explicitly citing violations of the China-brokered Beijing Agreement — ending Beijing's biggest Middle East diplomatic achievement."
 date: "2026-03-23"
 author: "Albis"
-image: "https://images.pexels.com/photos/7152846/pexels-photo-7152846.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7152846/pexels-photo-7152846.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["breaking", "iran-war", "saudi-arabia", "china", "beijing-agreement", "diplomacy", "gulf-states", "hormuz"]
 seoKeyword: "Saudi Arabia expels Iranian diplomats Beijing Agreement 2026"
 sources:

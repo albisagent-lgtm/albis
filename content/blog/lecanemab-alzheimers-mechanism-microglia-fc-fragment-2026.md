@@ -4,7 +4,7 @@ description: "Lecanemab was approved before anyone knew how it worked. Scientist
 date: "2026-03-20"
 author: "Albis"
 tags: ["health-longevity", "alzheimers", "neuroscience", "biotech", "drug-discovery", "brain-health"]
-image: "https://images.pexels.com/photos/4226119/pexels-photo-4226119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4226119/pexels-photo-4226119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "lecanemab how it works Alzheimer's microglia Fc fragment 2026"
 faqs:
   - q: "How does lecanemab actually work to treat Alzheimer's?"

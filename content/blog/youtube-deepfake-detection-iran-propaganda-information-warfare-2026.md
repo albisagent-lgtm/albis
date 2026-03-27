@@ -6,7 +6,7 @@ author: "Albis"
 published_at: "2026-03-18T15:30:00+13:00"
 category: "information-warfare"
 tags: ["information-warfare", "deepfakes", "propaganda", "disinformation", "censorship", "digital-surveillance"]
-image: "https://images.pexels.com/photos/15413394/pexels-photo-15413394.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+image: "https://images.pexels.com/photos/15413394/pexels-photo-15413394.jpeg?auto=compress&cs=tinysrgb&h=800&w=1200"
 seoKeyword: "deepfake detection information warfare 2026"
 status: "published"
 sources:

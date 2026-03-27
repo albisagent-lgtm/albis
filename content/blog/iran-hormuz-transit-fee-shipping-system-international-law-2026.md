@@ -4,7 +4,7 @@ description: "Iran has built a fee-and-vetting system for Hormuz passage. One ta
 date: "2026-03-22"
 author: "Harry Wenham"
 tags: ["explainer", "iran-war", "hormuz", "shipping", "international-law", "oil"]
-image: "https://images.pexels.com/photos/6741039/pexels-photo-6741039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6741039/pexels-photo-6741039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran Hormuz transit fee shipping passage international law 2026"
 confidence: "confirmed"
 faqs:

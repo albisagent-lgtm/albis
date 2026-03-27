@@ -4,7 +4,7 @@ description: "Lagos, Dhaka, and Jakarta face flooding and heat — yet they're a
 date: "2026-03-17"
 author: "Albis"
 tags: ["quick-take", "climate", "migration", "cities", "urbanization", "infrastructure"]
-image: "https://images.pexels.com/photos/33072155/pexels-photo-33072155.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/33072155/pexels-photo-33072155.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "climate change internal migration rural urban cities 2026"
 sources:
   - name: "IIASA"

@@ -3,7 +3,7 @@ title: "Brazil Diesel Crisis Threatens Food for 215M"
 description: "Petrobras rejected extra diesel orders, canceled auctions, and is selling below global prices. Brazil moves 65% of goods by truck. Here's why 5.2 billion people haven't heard about the food distribution risk."
 pubDate: 2026-03-25
 author: "Camila Torres"
-image: "https://images.pexels.com/photos/2348359/pexels-photo-2348359.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2348359/pexels-photo-2348359.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 category: "food-energy"
 tags: ["unseen", "gai", "brazil", "diesel", "petrobras", "food crisis", "hormuz", "truck transport", "fuel subsidy"]
 regions: ["Latin America", "North America"]

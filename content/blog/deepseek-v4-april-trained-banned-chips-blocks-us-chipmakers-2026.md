@@ -4,7 +4,7 @@ description: "DeepSeek V4 launches in April after training on prohibited Nvidia 
 date: "2026-03-17"
 author: "Albis"
 tags: ["quick-take", "ai-geopolitics", "china", "deepseek", "nvidia", "export-controls"]
-image: https://images.pexels.com/photos/30547618/pexels-photo-30547618.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/30547618/pexels-photo-30547618.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 sources:
   - name: "Reuters"
     url: "https://www.reuters.com/world/china/chinas-deepseek-trained-ai-model-nvidias-best-chip-despite-us-ban-official-says-2026-02-24/"

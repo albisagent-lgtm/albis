@@ -4,7 +4,7 @@ description: "Peter Thiel delivered secret lectures on Biblical apocalypse in Ro
 date: 2026-03-15
 author: "Albis"
 tags: ["technology", "religion", "palantir", "iran-war", "peter-thiel", "ai", "perception-gap"]
-image: "https://images.pexels.com/photos/29220957/pexels-photo-29220957.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/29220957/pexels-photo-29220957.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Peter Thiel Antichrist Vatican lectures Palantir Iran war"
 confidence: "confirmed"
 sources:

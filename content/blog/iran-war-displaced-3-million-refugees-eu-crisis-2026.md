@@ -3,7 +3,7 @@ title: "Iran War Displaces 3.2 Million: Who Are They?"
 description: "UNHCR confirms 3.2 million Iranians displaced since February 2026. Middle Eastern media covers humanitarian catastrophe. EU media covers migration policy. US media barely covers it at all."
 date: "2026-03-24"
 author: "Tomás Reyes"
-image: "https://images.pexels.com/photos/13449380/pexels-photo-13449380.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/13449380/pexels-photo-13449380.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["quick-take", "iran", "refugees", "displacement", "eu-migration", "perception-gap"]
 seoKeyword: "iran war refugees displaced 3 million 2026"
 perception_gap: 6

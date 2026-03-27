@@ -5,7 +5,7 @@ date: 2026-03-17
 author: "Harry Wenham"
 category: "digital-rights"
 tags: ["internet-freedom", "censorship", "us-policy", "soft-power", "digital-rights"]
-image: "https://images.pexels.com/photos/5723266/pexels-photo-5723266.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5723266/pexels-photo-5723266.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "The Guardian"

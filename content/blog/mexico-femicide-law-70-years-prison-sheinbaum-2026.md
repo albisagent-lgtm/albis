@@ -5,7 +5,7 @@ date: "2026-03-26"
 author: "Priya Sharma"
 category: "womens-rights"
 tags: ["unseen", "gai", "femicide", "Mexico", "womens-rights", "Sheinbaum", "Latin America", "impunity"]
-image: "https://images.pexels.com/photos/6257343/pexels-photo-6257343.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6257343/pexels-photo-6257343.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Mexico femicide law 70 years prison"
 perception_gap: 3
 regions_found: [latam, us]

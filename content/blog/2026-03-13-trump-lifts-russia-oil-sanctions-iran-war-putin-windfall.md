@@ -4,7 +4,7 @@ description: "The US eased sanctions on Russian oil to calm markets after the Ir
 date: "2026-03-13"
 author: "Albis"
 tags: ["breaking", "russia", "iran", "sanctions", "oil", "ukraine", "trump", "energy"]
-image: "https://images.pexels.com/photos/23878948/pexels-photo-23878948.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/23878948/pexels-photo-23878948.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "The New York Times"
     url: "https://www.nytimes.com/2026/03/12/us/politics/trump-russia-oil-sanctions.html"

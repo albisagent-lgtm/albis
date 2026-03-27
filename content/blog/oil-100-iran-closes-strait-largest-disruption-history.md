@@ -4,7 +4,7 @@ description: "Iran closed the Strait of Hormuz, choking 20% of global oil. Price
 date: "2026-03-16"
 author: "Albis"
 tags: ["breaking", "energy", "iran-war", "oil", "hormuz", "economy", "crisis"]
-image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "oil $100 barrel Strait Hormuz Iran war 2026"
 sources:
   - name: "The Guardian"

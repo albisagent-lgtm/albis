@@ -6,7 +6,7 @@ date: "2026-03-17"
 author: "Harry Wenham"
 category: "research"
 tags: ["cascade-economics", "Strait of Hormuz", "global systems", "food crisis", "supply-chain", "economic theory", "geopolitics", "fertilizer crisis", "systemic-risk", "Iran war"]
-image: "https://images.pexels.com/photos/12969405/pexels-photo-12969405.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+image: "https://images.pexels.com/photos/12969405/pexels-photo-12969405.jpeg?auto=compress&cs=tinysrgb&h=800&w=1200"
 imageCaption: "Photo by Atlantic Ambience / Pexels"
 readingTime: "18 min read"
 type: "research"

@@ -2,7 +2,7 @@
 title: "Investors Just Pulled $75 Billion Out of US Stocks"
 description: "The biggest equity exodus since 2010 just happened. Markets bounced back, but the message is clear: uncertainty has a price tag."
 date: "2026-02-26"
-image: "https://images.pexels.com/photos/6770610/pexels-photo-6770610.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6770610/pexels-photo-6770610.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["quick-take", "markets", "capital-flight", "economics", "tariffs"]
 category: "data"

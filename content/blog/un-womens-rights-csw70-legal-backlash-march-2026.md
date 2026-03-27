@@ -7,7 +7,7 @@ author: "Albis"
 date: "2026-03-18T04:00:00Z"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "reproductive-rights", "united-nations", "transgender-rights", "femicide"]
-image: "https://images.pexels.com/photos/17344169/pexels-photo-17344169.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/17344169/pexels-photo-17344169.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "UN women's rights CSW70 2026"
 faqs:
   - q: "What is the UN Commission on the Status of Women CSW70?"

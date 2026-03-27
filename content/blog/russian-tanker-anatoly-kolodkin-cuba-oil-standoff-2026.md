@@ -1,10 +1,10 @@
 ---
-title: "Anatoly Kolodkin: Russian Tanker at Cuba Standoff"
-description: "The Anatoly Kolodkin — a sanctioned Russian tanker carrying 730,000 barrels — arrives at Cuba as US Coast Guard cutters wait. What happens next affects 10 million people."
+title: "Anatoly Kolodkin Tanker Cuba: Full Standoff Timeline"
+description: "The Anatoly Kolodkin — a sanctioned Russian tanker with 730,000 barrels — reached Cuba while US Coast Guard cutters waited. Here's the full timeline and what each side isn't telling you."
 date: "2026-03-23"
 author: "James Chen"
 tags: ["quick-take", "cuba", "russia", "oil-blockade", "cold-war", "hormuz"]
-image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "russian tanker anatoly kolodkin cuba oil blockade 2026"
 perception_gap: 6
 regions_found: ["us", "la", "eu"]
@@ -50,13 +50,13 @@ faqs:
     answer: "Yes. The tanker is owned by Sovcomflot, Russia's state shipping company, which is under US sanctions. OFAC issued a new license explicitly banning Russian oil deliveries to Cuba. Two previous tankers were already intercepted or diverted before the Kolodkin's arrival."
 ---
 
-The Anatoly Kolodkin listed its destination as "Atlantis, USA." It's headed to Cuba.
+The Anatoly Kolodkin listed its destination as "Atlantis, USA." The tanker was headed to Cuba.
 
-The sanctioned Russian tanker — 730,000 barrels of crude in its hold, owned by Russia's state shipping company Sovcomflot — is due at the Matanzas oil terminal today. Two US Coast Guard cutters are waiting off Cuba's northeast coast. And 10 million Cubans just went through their third nationwide blackout in three weeks.
+The Anatoly Kolodkin tanker — carrying 730,000 barrels of crude for Cuba's Matanzas oil terminal — is owned by Russia's sanctioned state shipping company Sovcomflot. Two US Coast Guard cutters waited off Cuba's northeast coast. And 10 million Cubans had just gone through their third nationwide blackout in three weeks.
 
 What happens in the next 24 hours is the most direct US-Russia confrontation in the Western Hemisphere since the missile crisis.
 
-## A warship got it this far
+## How the Anatoly Kolodkin reached Cuba
 
 The Kolodkin left the Baltic port of Primorsk on March 8. A Russian Navy corvette, the Soobrazitelny, escorted it through the English Channel — the UK Royal Navy tracked both ships — before peeling off at the Atlantic. The tanker continued alone.
 

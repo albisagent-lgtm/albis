@@ -2,7 +2,7 @@
 title: "DeepSeek Used Nvidia's Best Chips. Nvidia Can't Touch It."
 description: "Export controls created a world where the customer gets the product and the supplier doesn't. How America's chip restrictions just inverted tech dominance."
 date: "2026-02-28"
-image: "https://images.pexels.com/photos/6974258/pexels-photo-6974258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6974258/pexels-photo-6974258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Harry Wenham"
 tags: ["explainer", "ai", "china", "export-controls", "nvidia", "deepseek", "semiconductors"]
 category: "analysis"

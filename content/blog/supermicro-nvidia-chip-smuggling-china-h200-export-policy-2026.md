@@ -4,7 +4,7 @@ description: "SuperMicro's co-founder was arrested for smuggling $2.5bn in Nvidi
 date: "2026-03-21"
 author: "Albis"
 tags: ["quick-take", "ai", "technology", "china", "us-china", "export-controls", "semiconductors"]
-image: "https://images.pexels.com/photos/3665442/pexels-photo-3665442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3665442/pexels-photo-3665442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "SuperMicro Nvidia chip smuggling China Taiwan charges 2026"
 sources:
   - name: "CNBC"

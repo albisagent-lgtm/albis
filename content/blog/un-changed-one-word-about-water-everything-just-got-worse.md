@@ -3,7 +3,7 @@ title: "The UN Changed One Word About Water. It Got Worse."
 description: "They stopped calling it drought. Now they call it bankruptcy. The difference between those words is the difference between waiting for rain and accepting there isn't enough left."
 date: 2026-03-02
 author: Harry Wenham
-image: "https://images.pexels.com/photos/34297636/pexels-photo-34297636.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/34297636/pexels-photo-34297636.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags:
   - water scarcity
   - climate crisis

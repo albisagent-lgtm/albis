@@ -5,7 +5,7 @@ date: "2026-03-20"
 author: "Albis"
 tags: ["information-attention", "china", "south-china-sea", "geopolitics", "media-literacy", "attention-economy", "filter-bubbles"]
 seoKeyword: "China South China Sea military bases Iran war distraction 2026"
-image: "https://images.pexels.com/photos/5578203/pexels-photo-5578203.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5578203/pexels-photo-5578203.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "CSIS Asia Maritime Transparency Initiative (AMTI)"

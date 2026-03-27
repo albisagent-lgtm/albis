@@ -4,7 +4,7 @@ description: "Arizona broke the US all-time March temperature record on March 20
 date: "2026-03-21"
 author: "Harry Wenham"
 category: "Explainer"
-image: "https://images.pexels.com/photos/4321312/pexels-photo-4321312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4321312/pexels-photo-4321312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Arizona March heat record Colorado River water crisis 2026"
 confidence: "confirmed"
 sources:

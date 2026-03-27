@@ -4,7 +4,7 @@ description: "Trump and Netanyahu launched 400+ strike waves promising regime ch
 date: "2026-03-17"
 author: "Albis"
 tags: ["breaking", "iran-war", "israel", "regime-change", "perception-gap"]
-image: "https://images.pexels.com/photos/7468214/pexels-photo-7468214.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7468214/pexels-photo-7468214.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Israel Iran regime change no plan bombing campaign 2026"
 sources:
   - name: "The Guardian"

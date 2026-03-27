@@ -4,7 +4,7 @@ description: "Black rain fell on Tehran after Israel struck its oil refineries. 
 date: 2026-03-10
 author: "Albis"
 tags: ["divided", "pgi", "iran", "israel", "oil", "tehran", "war", "civilian infrastructure"]
-image: "https://images.pexels.com/photos/10396411/pexels-photo-10396411.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/10396411/pexels-photo-10396411.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "TIME"
     url: "https://time.com/7383099/iran-news-oil-strikes-tehran/"

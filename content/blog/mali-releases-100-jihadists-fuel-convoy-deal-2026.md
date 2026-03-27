@@ -4,7 +4,7 @@ description: "Mali freed over 100 suspected jihadists to stop attacks on fuel tr
 date: "2026-03-24"
 author: "Priya Sharma"
 tags: ["quick-take", "mali", "sahel", "energy-crisis", "jnim", "africa", "fuel-shortage"]
-image: "https://images.pexels.com/photos/36228061/pexels-photo-36228061.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36228061/pexels-photo-36228061.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "mali releases jihadists fuel convoy crisis 2026"
 perception_gap: 5
 regions_found: ["africa", "eu"]

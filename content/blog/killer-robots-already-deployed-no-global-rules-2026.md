@@ -5,7 +5,7 @@ pubDate: 2026-03-17
 author: "Harry Wenham"
 category: "military-ai"
 tags: ["ai", "military", "autonomous-weapons", "ethics"]
-image: "https://images.pexels.com/photos/13226195/pexels-photo-13226195.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/13226195/pexels-photo-13226195.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 faqs:
   - q: "What are lethal autonomous weapons systems (LAWS)?"
     a: "LAWS are weapons that can select and engage targets without human intervention once activated. Unlike remote-controlled drones, they use AI to identify, track, and kill targets on their own—no human in the loop."

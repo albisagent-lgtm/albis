@@ -5,7 +5,7 @@ pubDate: 2026-03-26
 author: "Priya Sharma"
 category: "energy-power"
 tags: ["unseen", "gai", "philippines", "energy-emergency", "fuel-rationing", "hormuz", "iran-war", "jeepney-strike", "russian-oil"]
-image: "https://images.pexels.com/photos/36044446/pexels-photo-36044446.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36044446/pexels-photo-36044446.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Philippines energy emergency fuel crisis"
 perception_gap: 5
 regions_found: [asia_pacific, us]

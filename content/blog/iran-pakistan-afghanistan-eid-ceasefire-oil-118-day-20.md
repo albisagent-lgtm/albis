@@ -6,7 +6,7 @@ author: "Albis"
 category: "Crisis Analysis"
 tags: ["iran", "pakistan", "afghanistan", "oil", "geopolitics", "hormuz", "nowruz", "eid-ceasefire"]
 seoKeyword: "Iran Pakistan Afghanistan crisis Nowruz oil price March 2026"
-image: "https://images.pexels.com/photos/7049642/pexels-photo-7049642.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7049642/pexels-photo-7049642.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "New York Times"

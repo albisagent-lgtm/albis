@@ -5,7 +5,7 @@ date: "2026-03-21"
 author: "Albis"
 tags: ["unseen", "gai", "iran", "iran-war", "leadership", "irgc", "geopolitics"]
 seoKeyword: "Mojtaba Khamenei Iran supreme leader invisible IRGC 2026"
-image: "https://images.pexels.com/photos/4130926/pexels-photo-4130926.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4130926/pexels-photo-4130926.png?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "The New York Times"

@@ -4,7 +4,7 @@ description: "Beijing banned Manus AI co-founders Xiao Hong and Ji Yichao from l
 date: "2026-03-26"
 author: "Riku Tanaka"
 tags: ["quick-take", "china", "manus-ai", "meta", "ai-geopolitics", "travel-ban", "talent-controls"]
-image: "https://images.pexels.com/photos/7688592/pexels-photo-7688592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7688592/pexels-photo-7688592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "china manus ai founders travel ban meta acquisition 2026"
 perception_gap: 7
 regions_found: [us, eu, asia_pacific]

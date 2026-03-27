@@ -2,7 +2,7 @@
 title: "Google Wants to Train 6 Million Teachers on AI"
 description: "Google's landmark AI literacy program targets every US educator. But 411,500 teaching positions are unfilled or understaffed — and the shortage is global."
 date: "2026-03-09"
-image: "https://images.pexels.com/photos/5212675/pexels-photo-5212675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5212675/pexels-photo-5212675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["education", "ai", "teacher-shortage", "google", "edtech"]
 sources:

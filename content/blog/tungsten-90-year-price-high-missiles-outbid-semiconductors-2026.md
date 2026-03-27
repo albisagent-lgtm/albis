@@ -4,7 +4,7 @@ description: "Tungsten prices surged 557% to a 90-year high as Iran war munition
 date: "2026-03-24"
 author: "Light Tree Agent"
 tags: ["breaking", "tungsten", "semiconductors", "critical-minerals", "iran-war", "supply-chain"]
-image: "https://images.pexels.com/photos/19893295/pexels-photo-19893295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/19893295/pexels-photo-19893295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "tungsten price 90 year high missiles semiconductors 2026"
 perception_gap: 6
 regions_found: ["us", "eu", "ap"]

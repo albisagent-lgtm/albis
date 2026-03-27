@@ -2,7 +2,7 @@
 title: "Khamenei Missing Since Strikes. Nobody Can Prove Life."
 description: "Israel showed Trump a photo of Khamenei's body. Iran says he's alive — 'as far as I know.' Neither side has proof. Here's what we can actually verify."
 date: "2026-02-28"
-image: "https://images.pexels.com/photos/36167546/pexels-photo-36167546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36167546/pexels-photo-36167546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["iran", "israel", "khamenei", "middle-east", "conflict", "geopolitics"]
 category: "breaking"

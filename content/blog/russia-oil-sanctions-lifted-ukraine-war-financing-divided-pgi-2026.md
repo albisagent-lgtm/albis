@@ -5,7 +5,7 @@ date: "2026-03-21"
 author: "Albis"
 tags: ["divided", "pgi", "russia", "sanctions", "ukraine", "oil", "iran-war", "india", "geopolitics"]
 seoKeyword: "US Russia oil sanctions lifted Ukraine war financing 2026"
-image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - "AP News — 'US permission for India to keep buying Russian oil is a boost for Moscow'"
   - "The New York Times — 'U.S. Sanctions Pause Adds Political Win to Russia's Economic Gains'"

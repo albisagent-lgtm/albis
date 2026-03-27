@@ -3,7 +3,7 @@ title: "Japan Approves First Treatments From Reprogrammed Cells"
 description: "Japan approved two iPS cell therapies for Parkinson's and heart failure — the first ever sold commercially. Based on just 6-8 patients. Here's what it means."
 date: "2026-03-26"
 author: "Lena Castillo"
-image: "https://images.pexels.com/photos/7722873/pexels-photo-7722873.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7722873/pexels-photo-7722873.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["health-longevity", "stem-cells", "ips-cells", "parkinsons", "heart-failure", "regenerative-medicine", "japan", "biotech"]
 faqs:
   - q: "What are iPS cell treatments and how do they work?"

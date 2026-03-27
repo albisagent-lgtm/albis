@@ -5,7 +5,7 @@ date: 2026-03-14
 author: "Albis"
 category: geopolitics
 tags: ['iran war', 'kharg island', 'strait of hormuz', 'oil crisis', 'mojtaba khamenei', 'pakistan afghanistan', 'operation epic fury']
-image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "US Kharg Island strike Iran oil threat 2026"
 confidence: "confirmed"
 sources:

@@ -4,7 +4,7 @@ description: "US schools spent $30B on edtech. Gen Z's test scores dropped. Now 
 date: "2026-03-14"
 author: "Albis"
 tags: ["education", "edtech", "ai-tutoring", "gen-z", "learning-science"]
-image: "https://images.pexels.com/photos/8055830/pexels-photo-8055830.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/8055830/pexels-photo-8055830.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Gen Z edtech test scores AI tutoring evidence 2026"
 faqs:
   - q: "Is Gen Z really less cognitively capable than previous generations?"

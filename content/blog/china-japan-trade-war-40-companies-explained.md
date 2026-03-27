@@ -2,7 +2,7 @@
 title: "China Sanctioned 40 Japanese Firms. Here's Why."
 description: "China sanctioned 40 Japanese firms in one day — including a car company. Export controls are the new weapons, and supply chains are the battlefield."
 date: "2026-02-27"
-image: "https://images.pexels.com/photos/36652830/pexels-photo-36652830.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36652830/pexels-photo-36652830.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["explainer", "china", "japan", "trade-war", "semiconductors", "supply-chains"]
 category: "analysis"

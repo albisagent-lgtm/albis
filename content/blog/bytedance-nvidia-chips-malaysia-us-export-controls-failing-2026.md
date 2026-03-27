@@ -6,7 +6,7 @@ author: "Harry Wenham"
 category: "tech"
 tags: ["ai chips", "export controls", "ByteDance", "Nvidia", "sanctions", "Malaysia", "semiconductor"]
 regions: ["Asia-Pacific", "North America", "Southeast Asia"]
-image: "https://images.pexels.com/photos/5480781/pexels-photo-5480781.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5480781/pexels-photo-5480781.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Server room with rows of computing hardware representing AI chip infrastructure"
 seoKeyword: "bytedance nvidia chips malaysia sanctions evasion 2026"
 perception_gap: 7

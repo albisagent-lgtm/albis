@@ -4,7 +4,7 @@ description: "The RN captured France's 5th largest city and quadrupled its counc
 date: 2026-03-25
 author: "Camila Torres"
 tags: ["quick-take", "france", "elections", "far-right", "europe", "politics"]
-image: "https://images.pexels.com/photos/29872514/pexels-photo-29872514.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/29872514/pexels-photo-29872514.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Nice, France — the Mediterranean city that just became the far right's biggest municipal prize"
 seoKeyword: "french far right nice municipal election 2026"
 perception_gap: 4

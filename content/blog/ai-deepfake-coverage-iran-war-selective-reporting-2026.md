@@ -5,7 +5,7 @@ pubDate: "2026-03-24"
 author: "Albis Geopolitics Desk"
 category: "information-warfare"
 tags: ["information-warfare", "deepfakes", "AI", "Iran", "media-bias", "perception-gap", "PRISONBREAK", "IRGC"]
-image: "https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "AI deepfakes iran war both sides 2026"
 confidence: "confirmed"
 perception_gap: 8

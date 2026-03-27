@@ -4,7 +4,7 @@ description: "Global protests against the Iran war span 40+ countries. But two i
 date: "2026-03-20"
 author: "Albis"
 tags: ["quick-take", "iran", "protests", "geopolitics", "global-south", "diaspora", "war"]
-image: "https://images.pexels.com/photos/5428361/pexels-photo-5428361.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5428361/pexels-photo-5428361.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "anti-war protests Iran 2026 global south diaspora"
 confidence: "confirmed"
 sources:

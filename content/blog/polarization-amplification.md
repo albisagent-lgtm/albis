@@ -2,7 +2,7 @@
 title: "How Foreign Operators Deepen Your Divisions"
 description: "Polarization amplification exploits existing social divisions to weaken target societies. Here's how operators turn cracks into chasms."
 date: "2026-03-08"
-image: "https://images.pexels.com/photos/4108503/pexels-photo-4108503.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4108503/pexels-photo-4108503.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["information-warfare", "mechanism-library", "media-literacy", "polarization-amplification"]
 faqs:

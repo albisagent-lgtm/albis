@@ -5,7 +5,7 @@ description: "West Africa faces its worst hunger crisis in years as aid funding 
 date: "2026-03-14"
 author: "Albis"
 tags: ["quick-take", "africa", "hunger", "humanitarian", "iran-war", "sahel", "wfp"]
-image: "https://images.pexels.com/photos/30582337/pexels-photo-30582337.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/30582337/pexels-photo-30582337.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "West Africa hunger crisis 2026 food emergency"
 confidence: "confirmed"
 sources:

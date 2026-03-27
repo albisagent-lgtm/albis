@@ -5,7 +5,7 @@ date: "2026-03-20"
 author: "Harry Wenham"
 category: "Food & Agriculture"
 tags: ["food-security", "fertilizer", "hormuz", "iran-war", "wfp", "hunger", "agriculture"]
-image: "https://images.pexels.com/photos/6489275/pexels-photo-6489275.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6489275/pexels-photo-6489275.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran war food crisis 45 million hunger fertilizer spring planting"
 confidence: "confirmed"
 sources:

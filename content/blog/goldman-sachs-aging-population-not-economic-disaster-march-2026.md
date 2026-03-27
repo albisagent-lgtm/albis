@@ -4,7 +4,7 @@ description: "Governments spent trillions preparing for demographic collapse. Go
 slug: "goldman-sachs-aging-population-not-economic-disaster-march-2026"
 publishDate: 2026-03-08
 author: "Harry Wenham"
-image: "https://images.pexels.com/photos/31843105/pexels-photo-31843105.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/31843105/pexels-photo-31843105.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 category: "demographics"
 tags: ["demographics", "aging", "economy", "goldman_sachs", "japan", "pensions", "productivity"]
 excerpt: "Goldman Sachs says aging populations might not crash economies after all. Trillions in policy bets are riding on the opposite assumption. Here's why the narrative might be flipped."

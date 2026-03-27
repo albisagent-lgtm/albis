@@ -6,7 +6,7 @@ author: "Albis Geopolitics Desk"
 published_at: "2026-03-24T16:00:00+13:00"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "reproductive-rights", "csw70", "united-nations"]
-image: "https://images.pexels.com/photos/6257540/pexels-photo-6257540.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6257540/pexels-photo-6257540.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "US UN women's rights vote CSW70 2026"
 status: "published"
 sources:

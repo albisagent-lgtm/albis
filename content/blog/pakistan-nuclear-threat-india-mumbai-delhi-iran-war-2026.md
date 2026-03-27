@@ -3,7 +3,7 @@ title: "Pakistan Ex-Diplomat Threatens to Nuke Mumbai"
 description: "Former Pakistan High Commissioner Abdul Basit said Pakistan would strike Mumbai and New Delhi 'without thinking twice' if the US targets its nuclear program — but 4.4 billion people never heard him say it."
 pubDate: 2026-03-23
 author: "Kofi Asante"
-image: "https://images.pexels.com/photos/3581962/pexels-photo-3581962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3581962/pexels-photo-3581962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 category: "current-events"
 tags: ["unseen", "gai", "pakistan", "india", "nuclear", "iran-war", "south-asia"]
 seoKeyword: "Pakistan nuclear threat India Mumbai Delhi 2026"

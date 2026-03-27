@@ -5,7 +5,7 @@ date: "2026-03-23"
 author: "Albis"
 category: "unseen"
 tags: ["unseen", "gai", "india", "fuel-prices", "oil-crisis", "iran-war", "hormuz", "elections", "economics"]
-image: "https://images.pexels.com/photos/5829264/pexels-photo-5829264.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5829264/pexels-photo-5829264.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Fuel pump nozzle at a petrol station, representing India's frozen fuel prices during the 2026 oil crisis"
 seoKeyword: "India fuel price freeze oil crisis 2026"
 perception_gap: 7

@@ -4,7 +4,7 @@ description: "Arm launched its first-ever in-house chip, a 136-core AI CPU with 
 date: "2026-03-26"
 author: "Rajan Mehta"
 tags: ["ai-intelligence", "semiconductors", "arm", "meta", "alibaba", "chips", "agentic-ai"]
-image: https://images.pexels.com/photos/3665442/pexels-photo-3665442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/3665442/pexels-photo-3665442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 sources:
   - name: "CNBC"
     url: "https://www.cnbc.com/2026/03/25/arm-stock-chip-revenue-agi-cpu.html"

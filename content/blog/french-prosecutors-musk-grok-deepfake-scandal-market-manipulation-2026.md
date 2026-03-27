@@ -3,7 +3,7 @@ title: "French Prosecutors Allege Musk Used Grok Deepfakes"
 description: "Paris prosecutors suspect Elon Musk deliberately encouraged Grok's explicit deepfake controversy to boost X and xAI's value before the $1.25 trillion SpaceX-xAI IPO."
 date: "2026-03-23"
 author: "Priya Sharma"
-image: "https://images.pexels.com/photos/6491498/pexels-photo-6491498.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6491498/pexels-photo-6491498.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["information-attention", "deepfakes", "elon-musk", "grok", "market-manipulation", "attention-economy", "media-literacy"]
 confidence: "developing"
 faqs:

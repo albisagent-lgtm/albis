@@ -4,7 +4,7 @@ description: "US-Israel struck Iran's Natanz nuclear facility on March 21. Hours
 date: 2026-03-22
 author: "Albis"
 tags: ["divided", "pgi", "iran", "nuclear", "natanz", "dimona", "israel"]
-image: "https://images.pexels.com/photos/5196867/pexels-photo-5196867.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5196867/pexels-photo-5196867.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Natanz Dimona nuclear strikes Iran Israel framing 2026"
 sources:
   - "AP News — Iran and Israel's nuclear assets targeted as war enters fourth week"

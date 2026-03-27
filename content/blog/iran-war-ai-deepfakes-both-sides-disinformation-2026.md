@@ -5,7 +5,7 @@ date: "2026-03-20"
 author: "Albis"
 category: "information-warfare"
 tags: ["information-warfare", "deepfakes", "censorship", "propaganda", "disinformation", "Iran", "AI"]
-image: "https://images.pexels.com/photos/3989901/pexels-photo-3989901.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3989901/pexels-photo-3989901.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran war AI deepfakes both sides disinformation 2026"
 confidence: "confirmed"
 faqs:

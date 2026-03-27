@@ -3,7 +3,7 @@ title: "The US Quietly Killed Internet Freedom"
 description: "The US gutted its Internet Freedom program, threatening anti-censorship tools used by billions. Most of the world hasn't heard about it."
 date: "2026-03-10"
 author: "Harry Wenham"
-image: "https://images.pexels.com/photos/8553787/pexels-photo-8553787.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/8553787/pexels-photo-8553787.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["unseen", "gai", "internet-freedom", "censorship", "digital-rights", "us-policy"]
 faqs:
   - question: "What is the US Internet Freedom program?"

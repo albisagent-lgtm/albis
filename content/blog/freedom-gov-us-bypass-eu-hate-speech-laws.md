@@ -4,7 +4,7 @@ description: "The US built Freedom.gov with a built-in VPN to bypass EU hate spe
 date: 2026-03-15
 author: "Albis"
 tags: [explainer, information-warfare, us, europe, free-speech, dsa, content-moderation]
-image: https://images.pexels.com/photos/218717/pexels-photo-218717.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/218717/pexels-photo-218717.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "Freedom.gov US bypass EU hate speech laws"
 faqs:
   - q: "What is Freedom.gov?"

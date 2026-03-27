@@ -5,7 +5,7 @@ date: 2026-03-08
 author: "Albis"
 category: Geopolitics
 tags: ['Pakistan', 'Afghanistan', 'Iran', 'Oil Prices', 'IMF', 'Strait of Hormuz', 'Energy Crisis']
-image: "https://images.pexels.com/photos/6369306/pexels-photo-6369306.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6369306/pexels-photo-6369306.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "Arab News Pakistan"

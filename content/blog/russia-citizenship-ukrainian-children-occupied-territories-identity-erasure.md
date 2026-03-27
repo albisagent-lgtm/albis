@@ -4,7 +4,7 @@ description: "Russia's March 2026 decree fast-tracks citizenship for children un
 date: "2026-03-18"
 author: "Albis"
 tags: ["explainer", "russia", "ukraine", "children", "occupation", "war-crimes"]
-image: "https://images.pexels.com/photos/4922085/pexels-photo-4922085.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4922085/pexels-photo-4922085.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Russia citizenship Ukrainian children occupied territories"
 faqs:
   - q: "How many Ukrainian children have been deported to Russia?"

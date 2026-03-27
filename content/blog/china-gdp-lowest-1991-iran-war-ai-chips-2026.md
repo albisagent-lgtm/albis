@@ -4,7 +4,7 @@ description: "China GDP 2026 lowest since 1991 as deflation bites — yet the Ir
 date: "2026-03-20"
 author: "Albis"
 tags: ["quick-take", "china", "geopolitics", "economy", "ai", "iran"]
-image: https://images.pexels.com/photos/5980875/pexels-photo-5980875.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/5980875/pexels-photo-5980875.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "China GDP lowest 1991 AI chips geopolitical gain Iran war 2026"
 confidence: "confirmed"
 sources:

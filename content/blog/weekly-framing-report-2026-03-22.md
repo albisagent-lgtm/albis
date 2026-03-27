@@ -6,7 +6,7 @@ author: "Albis"
 category: "Analysis"
 tags: ["weekly-report", "perception-gap", "iran-war", "framing", "media-analysis", "pgi", "information-warfare", "hormuz"]
 excerpt: "Five stories. Five perception gaps. One week that proved the world isn't just fighting over territory — it's fighting over which version of reality gets to win."
-image: "https://images.pexels.com/photos/36111623/pexels-photo-36111623.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36111623/pexels-photo-36111623.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 ---
 
 # Weekly Framing Report — March 15–21, 2026

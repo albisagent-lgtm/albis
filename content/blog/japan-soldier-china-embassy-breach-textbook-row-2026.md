@@ -2,7 +2,7 @@
 title: "Japan Soldier Breaches China Embassy as Textbook Row Erupts"
 description: "A Japanese soldier scaled the Chinese embassy wall with a knife. Hours later, Japan approved textbooks denying comfort women coercion. Beijing, Seoul, and Tokyo each saw a different crisis."
 date: "2026-03-26"
-image: "https://images.pexels.com/photos/4386345/pexels-photo-4386345.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4386345/pexels-photo-4386345.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 category: "lens"
 tags: ["Japan", "China", "South Korea", "East Asia", "security", "diplomacy", "history"]

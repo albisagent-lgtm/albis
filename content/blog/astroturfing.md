@@ -2,7 +2,7 @@
 title: "Astroturfing: How Fake Grassroots Movements Are Manufactured"
 description: "How states and organizations create fake grassroots support to simulate public consensus. A plain-language explainer."
 date: "2026-03-08"
-image: "https://images.pexels.com/photos/7596913/pexels-photo-7596913.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7596913/pexels-photo-7596913.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["information-warfare", "mechanism-library", "media-literacy", "astroturfing"]
 pillars: ["the-signal", "the-lens"]

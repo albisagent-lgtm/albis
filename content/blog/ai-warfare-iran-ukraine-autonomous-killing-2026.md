@@ -3,7 +3,7 @@ title: "AI Warfare: Already Choosing Who Dies in Two Wars"
 description: "Palantir's Maven helped select 1,000 Iran targets in 24 hours. Ukraine is sharing kill data to train allied AI. Anthropic refused — and got banned."
 date: "2026-03-14"
 author: "Albis"
-image: "https://images.pexels.com/photos/7581920/pexels-photo-7581920.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7581920/pexels-photo-7581920.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["ai-intelligence", "autonomous-weapons", "iran-war", "ukraine", "military-ai", "palantir", "anthropic"]
 seoKeyword: "AI autonomous weapons Iran Ukraine warfare 2026"
 confidence: "confirmed"

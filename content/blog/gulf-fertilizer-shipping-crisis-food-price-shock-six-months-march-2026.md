@@ -3,7 +3,7 @@ title: "Gulf Fertilizer Crisis: Bread Price Shock in 6 Months"
 description: "The Iran war's biggest impact might not be at the gas pump. It might be at the grocery store — when nobody's connecting the dots anymore."
 date: "2026-03-09"
 author: "Albis"
-image: "https://images.pexels.com/photos/11996941/pexels-photo-11996941.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/11996941/pexels-photo-11996941.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["quick-take", "iran-war", "food-security", "fertilizer", "shipping-crisis", "global-economy"]
 sources:
   - name: "The Guardian"

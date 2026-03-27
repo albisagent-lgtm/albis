@@ -2,7 +2,7 @@
 title: "The Country the US Armed Now Offers to Defend It"
 description: "Ukraine's offering to help the US shoot down Iranian drones in the Middle East. That's a complete inversion of the aid relationship — and proof that three years of survival creates expertise nobody else has."
 date: "2026-03-07"
-image: "https://images.pexels.com/photos/2665146/pexels-photo-2665146.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2665146/pexels-photo-2665146.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["quick-take", "ukraine", "us", "iran", "drones", "defense", "middle-east", "shahed"]
 sources:

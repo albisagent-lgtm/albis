@@ -6,7 +6,7 @@ author: "Harry Wenham"
 category: "explainer"
 tags: ["explainer", "energy", "qatar", "lng", "iran-war", "infrastructure", "europe", "gas"]
 regions: ["middle-east", "europe", "asia-pacific"]
-image: "https://images.pexels.com/photos/1871133/pexels-photo-1871133.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/1871133/pexels-photo-1871133.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Industrial gas processing facility at dusk, representing LNG infrastructure"
 seoKeyword: "Qatar LNG capacity damaged Iran attacks 2026"
 perception_gap: 7

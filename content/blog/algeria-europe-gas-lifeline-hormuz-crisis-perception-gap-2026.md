@@ -5,7 +5,7 @@ pubDate: 2026-03-24
 author: "Albis Editorial"
 category: "Unseen"
 tags: ["algeria", "europe", "gas", "energy", "hormuz", "qatar", "pipeline", "perception-gap", "france", "italy", "spain"]
-image: "https://images.pexels.com/photos/17963031/pexels-photo-17963031.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/17963031/pexels-photo-17963031.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Algeria gas supply Europe Hormuz crisis 2026"
 confidence: "confirmed"
 perception_gap: 5

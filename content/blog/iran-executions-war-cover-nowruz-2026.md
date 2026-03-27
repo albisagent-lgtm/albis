@@ -5,7 +5,7 @@ date: "2026-03-20"
 author: "Harry Wenham"
 tags: ["quick-take", "iran", "human-rights", "executions", "war", "nowruz", "protests"]
 seoKeyword: "Iran executions 648 war cover protesters Nowruz 2026"
-image: https://images.pexels.com/photos/36167515/pexels-photo-36167515.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/36167515/pexels-photo-36167515.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 confidence: "confirmed"
 sources:
   - name: "Iran Human Rights Monitor"

@@ -4,7 +4,7 @@ description: "India's fuel crisis — LPG queues, 23% crude import drop, rupee a
 date: "2026-03-22"
 author: "Albis"
 tags: ["unseen", "gai", "india", "energy-crisis", "oil", "lpg", "hormuz"]
-image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "India fuel crisis LPG shortage Hormuz oil imports 2026"
 sources:
   - name: "The Guardian"

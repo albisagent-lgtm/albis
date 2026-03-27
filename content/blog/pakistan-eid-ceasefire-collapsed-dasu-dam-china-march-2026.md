@@ -7,7 +7,7 @@ category: "power-conflict"
 tags: ["pakistan", "afghanistan", "ceasefire", "dasu-dam", "china", "cpec", "ttp", "taliban", "iran-war", "two-front-squeeze"]
 regions: ["south_asia", "asia_pacific"]
 seoKeyword: "Pakistan Afghanistan ceasefire collapsed Dasu Dam bombing 2026"
-image: https://images.pexels.com/photos/5942747/pexels-photo-5942747.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/5942747/pexels-photo-5942747.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 sources:
   - "Washington Post — 'Fighting resumes between Pakistan and Afghanistan after temporary ceasefire ends' (March 25, 2026)"
   - "Dawn — 'Clerics from Pakistan, Afghanistan appeal to extend pause in fighting till Eidul Azha' (March 25, 2026)"

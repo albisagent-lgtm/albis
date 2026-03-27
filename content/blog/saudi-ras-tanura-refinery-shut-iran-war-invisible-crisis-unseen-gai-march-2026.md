@@ -4,7 +4,7 @@ description: "Saudi Aramco's 550,000-barrel Ras Tanura refinery remains offline 
 date: 2026-03-15
 author: "Albis"
 tags: ["unseen", "gai", "saudi-arabia", "oil", "iran-war", "energy-crisis", "ras-tanura"]
-image: "https://images.pexels.com/photos/10396411/pexels-photo-10396411.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/10396411/pexels-photo-10396411.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Saudi Ras Tanura refinery shut Iran drone strike 2026"
 sources:
   - name: "Reuters"

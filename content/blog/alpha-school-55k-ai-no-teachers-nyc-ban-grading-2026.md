@@ -2,7 +2,7 @@
 title: "Alpha School's $55K AI Classrooms vs NYC's AI Ban"
 description: "Alpha School opens in Chicago with no teachers and $55K tuition. NYC just banned AI from grading students. Same week, opposite answers."
 date: "2026-03-26"
-image: "https://images.pexels.com/photos/5530450/pexels-photo-5530450.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5530450/pexels-photo-5530450.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Lena Castillo"
 tags: ["education", "ai", "edtech", "alpha-school", "nyc-schools", "child-development"]
 seoKeyword: "Alpha School AI no teachers $55K tuition Chicago"

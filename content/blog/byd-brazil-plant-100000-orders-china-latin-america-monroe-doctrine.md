@@ -4,7 +4,7 @@ description: "100,000 orders before the paint dried. BYD isn't exporting EVs to 
 date: "2026-03-16"
 author: "Albis"
 tags: ["quick-take", "china", "electric-vehicles", "latin-america", "trade", "manufacturing"]
-image: https://images.pexels.com/photos/2183113/pexels-photo-2183113.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/2183113/pexels-photo-2183113.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 sources:
   - name: "CarNewsChina"
     url: "https://carnewschina.com/2026/03/15/byds-brazil-plant-secures-100000-vehicle-orders-from-argentina-and-mexico/"

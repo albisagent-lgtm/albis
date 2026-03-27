@@ -6,7 +6,7 @@ author: "Harry Wenham"
 category: "Food & Agriculture"
 region: "Global"
 tags: ["WFP", "famine", "hunger crisis", "Sudan", "Gaza", "Yemen", "Mali", "displacement", "conflict", "climate", "food security"]
-image: "https://images.pexels.com/photos/6646909/pexels-photo-6646909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6646909/pexels-photo-6646909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "World Food Programme"

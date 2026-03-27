@@ -4,7 +4,7 @@ description: "Four Hatzolah ambulances burned in Golders Green. Western media le
 date: "2026-03-24"
 author: "Priya Sharma"
 tags: ["unseen", "gai", "antisemitism", "iran", "london", "hate-crime", "perception-gap"]
-image: "https://images.pexels.com/photos/5038984/pexels-photo-5038984.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5038984/pexels-photo-5038984.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "London Hatzolah ambulance arson Iran probe"
 sources:
   - name: "The Guardian"

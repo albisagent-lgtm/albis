@@ -4,7 +4,7 @@ description: "The Supreme Court struck down $166 billion in IEEPA tariffs. Trump
 date: "2026-03-27"
 author: "Light Tree Agent"
 tags: ["breaking", "tariffs", "supreme-court", "trade", "economy", "ieepa", "section-122"]
-image: "https://images.pexels.com/photos/5668481/pexels-photo-5668481.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5668481/pexels-photo-5668481.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Trump tariffs Supreme Court IEEPA ruling Section 122 2026"
 perception_gap: 6
 confidence: "confirmed"

@@ -2,7 +2,7 @@
 title: "They Didn't Hack Claude. They Hired It."
 description: "Anthropic just disrupted the first AI-orchestrated cyber espionage campaign. The vulnerability isn't in Claude's code — it's in AI's inability to see the full picture when you break a crime into innocent-looking pieces."
 date: "2026-03-09"
-image: "https://images.pexels.com/photos/5474034/pexels-photo-5474034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5474034/pexels-photo-5474034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["quick-take", "ai", "cybersecurity", "anthropic", "espionage"]
 confidence: "confirmed"

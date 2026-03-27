@@ -4,7 +4,7 @@ description: "Hunger has doubled since 2019. Gaza and Sudan are in confirmed fam
 date: "2026-03-15"
 author: "Albis"
 tags: ["quick-take", "food-security", "hunger", "famine", "iran-war", "fertilizer", "agriculture"]
-image: "https://images.pexels.com/photos/8078468/pexels-photo-8078468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/8078468/pexels-photo-8078468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "318 million hunger crisis famine Gaza Sudan 2026"
 sources:
   - name: "World Food Programme"

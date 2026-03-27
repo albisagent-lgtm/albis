@@ -4,7 +4,7 @@ description: "Ten people died when US Marines opened fire at the Karachi consula
 date: 2026-03-16
 author: "Albis"
 tags: ["divided", "pgi", "pakistan", "iran-war", "karachi", "us-marines", "protest"]
-image: "https://images.pexels.com/photos/8343677/pexels-photo-8343677.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/8343677/pexels-photo-8343677.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Karachi consulate shooting Marines protesters 2026"
 confidence: "confirmed"
 sources:

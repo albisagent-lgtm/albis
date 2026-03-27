@@ -3,7 +3,7 @@ title: "Operation Southern Spear: 159 Dead, World Silent"
 description: "The US has killed 159 people in 46 airstrikes on boats since September 2025. Families say many were fishermen. Five billion people have never heard of it."
 date: "2026-03-23"
 author: "Elena Vargas"
-image: "https://images.pexels.com/photos/5578206/pexels-photo-5578206.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5578206/pexels-photo-5578206.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["unseen", "gai", "operation-southern-spear", "venezuela", "us-military", "drug-war", "latin-america", "human-rights"]
 seoKeyword: "Operation Southern Spear boat strikes 2026"
 perception_gap: 7

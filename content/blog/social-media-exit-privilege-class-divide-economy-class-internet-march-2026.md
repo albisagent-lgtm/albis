@@ -3,7 +3,7 @@ title: "Quitting Social Media Is a Class Privilege Now"
 description: "The richest people are leaving social media first. Newsletters and reading clubs are the new status symbols. But if you're a freelancer or small business owner, logging off is a luxury you can't afford."
 date: "2026-03-09"
 author: "Albis"
-image: "https://images.pexels.com/photos/5678243/pexels-photo-5678243.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5678243/pexels-photo-5678243.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["information-attention", "social-media", "digital-detox", "class-divide", "privilege"]
 confidence: "confirmed"
 sources:

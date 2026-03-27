@@ -2,7 +2,7 @@
 title: "Is Netanyahu Dead or Alive? It Depends Where You Read"
 description: "Same evidence. Same video. Same war. Two completely different conclusions about whether Israel's prime minister is alive."
 date: 2026-03-17
-image: "https://images.pexels.com/photos/6593773/pexels-photo-6593773.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6593773/pexels-photo-6593773.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["the-flip"]
 series: "The Flip"
 ---

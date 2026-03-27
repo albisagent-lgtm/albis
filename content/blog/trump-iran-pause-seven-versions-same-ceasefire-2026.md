@@ -3,7 +3,7 @@ title: "Trump Iran Pause: Seven Regions, Seven Stories"
 description: "Trump announced a five-day pause on Iran grid strikes, claiming productive talks. Iran called it fake news. Russian media called it a windfall. Chinese media called it strategic confusion. The same ceasefire looks completely different depending on where you live."
 pubDate: 2026-03-25
 author: "Roya Khanlari"
-image: "https://images.pexels.com/photos/1587268/pexels-photo-1587268.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/1587268/pexels-photo-1587268.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["divided", "pgi", "iran-war", "trump", "perception-gap", "energy", "ceasefire"]
 category: "divided"
 seoKeyword: "Trump Iran pause ceasefire talks"

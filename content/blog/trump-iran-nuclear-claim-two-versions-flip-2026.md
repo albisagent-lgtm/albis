@@ -6,7 +6,7 @@ author: "Albis"
 category: "the-flip"
 tags: ["the-flip", "iran-war", "nuclear", "perception-gap", "information-warfare", "oil-markets", "trump", "pgi"]
 series: "The Flip"
-image: "https://images.pexels.com/photos/8553867/pexels-photo-8553867.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/8553867/pexels-photo-8553867.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Trump Iran nuclear claim"
 confidence: "confirmed"
 perception_gap: 9

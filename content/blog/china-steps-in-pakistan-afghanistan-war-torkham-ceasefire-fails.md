@@ -5,7 +5,7 @@ date: "2026-03-13"
 author: "Albis"
 category: "Geopolitics"
 tags: ["Pakistan", "Afghanistan", "China", "Diplomacy", "Taliban", "TTP", "Iran Crisis"]
-image: "https://images.pexels.com/photos/29890322/pexels-photo-29890322.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/29890322/pexels-photo-29890322.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 description: "China's mediation has eased the worst Pakistan-Afghanistan fighting since the Taliban returned to power, but a collapsed ceasefire at Torkham and Pakistan's two-front economic crisis show how fragile any progress remains."
 confidence: "confirmed"
 sources:

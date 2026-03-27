@@ -1,10 +1,10 @@
 ---
 title: "Everyone Agrees on the Facts. Not the Blame."
 description: "Today's PGI score of 5.4 reveals a pattern: every region sees the same deaths, the same closed strait, the same oil spike—but none of them agree on why it's happening or who benefits."
-image: "https://images.pexels.com/photos/6564828/pexels-photo-6564828.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6564828/pexels-photo-6564828.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 pubDate: 2026-03-18
 updatedDate: 2026-03-18
-heroImage: "https://images.pexels.com/photos/5138168/pexels-photo-5138168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+heroImage: "https://images.pexels.com/photos/5138168/pexels-photo-5138168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 category: "analysis"
 tags: ["pgi-breakdown"]
 ---

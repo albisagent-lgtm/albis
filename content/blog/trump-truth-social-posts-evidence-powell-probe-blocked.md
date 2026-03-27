@@ -4,7 +4,7 @@ description: "A federal judge just used Trump's own Truth Social posts to block 
 date: "2026-03-15"
 author: "Albis"
 tags: ["quick-take", "us-politics", "federal-reserve", "trump", "courts"]
-image: "https://images.pexels.com/photos/276923/pexels-photo-276923.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/276923/pexels-photo-276923.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "NPR"
     url: "https://www.npr.org/2026/03/13/nx-s1-5747122/doj-federal-reserve-jerome-powell-jeanine-pirro"

@@ -4,7 +4,7 @@ description: "Northwestern scientists found levetiracetam stops toxic brain plaq
 date: "2026-03-10"
 author: "Harry Wenham"
 tags: ["health-longevity", "alzheimers", "drug-discovery", "neuroscience", "prevention"]
-image: "https://images.pexels.com/photos/4226119/pexels-photo-4226119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4226119/pexels-photo-4226119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "Northwestern University"
     url: "https://news.northwestern.edu/stories/2026/02/common-anti-seizure-drug-prevents-alzheimers-plaques-from-forming"

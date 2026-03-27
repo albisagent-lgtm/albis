@@ -4,7 +4,7 @@ description: "At least 10 countries are rationing fuel, cutting work weeks, and 
 date: 2026-03-26
 author: "Priya Chandran"
 tags: ["divided", "pgi", "energy-lockdown", "fuel-rationing", "hormuz", "iran-war", "perception-gap", "covid-comparison"]
-image: "https://images.pexels.com/photos/6369306/pexels-photo-6369306.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6369306/pexels-photo-6369306.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "energy lockdown countries fuel rationing 2026"
 confidence: "confirmed"
 perception_gap: 7

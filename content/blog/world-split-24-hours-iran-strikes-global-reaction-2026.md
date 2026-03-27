@@ -2,7 +2,7 @@
 title: "40 Countries, Two Different Wars After Iran Strikes"
 description: "The same military operation read as liberation or aggression depending on where you stood."
 date: "2026-03-01"
-image: "https://images.pexels.com/photos/6950205/pexels-photo-6950205.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6950205/pexels-photo-6950205.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["trending", "iran", "geopolitics", "global-reaction", "perspectives", "information-awareness"]
 category: "perspectives"

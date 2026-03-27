@@ -2,7 +2,7 @@
 title: "The Cyber Attack on Pakistan Nobody Reported"
 description: "India-linked hackers spent 12 months inside Pakistan's nuclear authority, navy, and telecoms — 112 domains, custom malware. The world was watching Iran. Here's what it missed."
 date: "2026-03-08"
-image: "https://images.pexels.com/photos/3044471/pexels-photo-3044471.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3044471/pexels-photo-3044471.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Harry Wenham"
 tags: ["unseen", "gai", "cybersecurity", "south-asia", "india", "pakistan", "espionage"]
 sources:

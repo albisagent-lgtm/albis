@@ -4,7 +4,7 @@ description: "Over 1,000 ships are blocked from the Strait of Hormuz as Trump ca
 date: "2026-03-15"
 author: "Albis"
 tags: ["breaking", "geopolitics", "iran-war", "hormuz", "oil", "china", "energy"]
-image: "https://images.pexels.com/photos/12355316/pexels-photo-12355316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/12355316/pexels-photo-12355316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "The Guardian"
     url: "https://www.theguardian.com/world/2026/mar/13/what-is-strait-hormuz-can-us-stop-iran-blocking-it"

@@ -4,7 +4,7 @@ description: "Chad closed its 1,300km Sudan border after RSF fighters crossed. I
 date: "2026-03-20"
 author: "Albis"
 tags: ["quick-take", "africa", "sudan", "chad", "humanitarian", "conflict"]
-image: "https://images.pexels.com/photos/7089245/pexels-photo-7089245.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7089245/pexels-photo-7089245.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Chad closes Sudan border RSF fighters aid routes"
 sources:
   - name: "Al Jazeera"

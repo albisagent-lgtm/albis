@@ -5,7 +5,7 @@ date: "2026-03-10T08:45:00+13:00"
 author: "Albis"
 category: "Analysis"
 tags: ["government shutdown", "TSA", "airport security", "DHS", "spring break", "Iran war"]
-image: "https://images.pexels.com/photos/2574091/pexels-photo-2574091.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2574091/pexels-photo-2574091.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 draft: false
 sources:
   - name: "USA Today"

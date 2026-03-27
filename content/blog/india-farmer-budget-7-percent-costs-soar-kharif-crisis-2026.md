@@ -3,7 +3,7 @@ title: "India Farm Budget 2026: 7% Rise, 50% Fertilizer Spike"
 description: "India gave farmers a 7% budget increase while fertilizer costs surged 50-80%. With Kharif planting weeks away, 600 million people face a squeeze nobody outside South Asia is watching."
 date: "2026-03-27"
 author: "Priya Sharma"
-image: "https://images.pexels.com/photos/7415332/pexels-photo-7415332.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7415332/pexels-photo-7415332.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["unseen", "gai", "india", "agriculture", "food-security", "fertilizer", "hormuz", "kharif"]
 category: "food"
 seoKeyword: "India farmer budget fertilizer costs 2026"

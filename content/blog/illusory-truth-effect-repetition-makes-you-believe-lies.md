@@ -2,7 +2,7 @@
 title: "Illusory Truth: Why Repetition Makes Lies Feel Real"
 description: "You believed a lie this week — not because you're gullible, but because you heard it twice. The illusory truth effect exploits a glitch in every brain."
 date: "2026-03-18"
-image: "https://images.pexels.com/photos/7269620/pexels-photo-7269620.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7269620/pexels-photo-7269620.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 category: "Information Awareness"
 tags: ["information awareness", "media literacy", "psychology", "cognitive bias", "misinformation"]

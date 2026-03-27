@@ -4,7 +4,7 @@ description: "GPT-5.4 scored 83% on professional work benchmarks across 44 occup
 date: "2026-03-15"
 author: "Albis"
 tags: ["ai-intelligence", "jobs", "gpt-5", "morgan-stanley", "automation"]
-image: https://images.pexels.com/photos/30547606/pexels-photo-30547606.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/30547606/pexels-photo-30547606.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "AI replaces human experts GPT-5.4 jobs crisis 2026"
 faqs:
   - q: "Can GPT-5.4 really outperform human professionals?"

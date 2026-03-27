@@ -4,7 +4,7 @@ description: "The decree sets Russia's military at 1.5M personnel — a 50% incr
 publishedAt: 2026-03-08
 updatedAt: 2026-03-08
 author: "Harry Wenham"
-image: "https://images.pexels.com/photos/7875853/pexels-photo-7875853.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7875853/pexels-photo-7875853.png?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 category: "Geopolitics"
 tags: ["russia", "military", "putin", "ukraine", "recruitment", "conscription"]
 featured: false

@@ -5,7 +5,7 @@ date: 2026-03-26
 categories: ["lens"]
 tags: ["East Asia", "security", "Philippines", "Taiwan", "Japan", "South Korea", "China", "Iran war", "alliance", "perception"]
 author: "Albis"
-image: "https://images.pexels.com/photos/1098515/pexels-photo-1098515.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/1098515/pexels-photo-1098515.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 perception_gap: 8
 regions_found: [us, asia_pacific, middle_east, eu]
 regions_absent: [africa, latam, south_asia]

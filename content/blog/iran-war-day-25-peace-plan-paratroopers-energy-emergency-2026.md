@@ -5,7 +5,7 @@ date: "2026-03-25"
 author: "Albis Geopolitics Desk"
 category: "crisis-analysis"
 tags: ["iran-war", "ceasefire", "82nd-airborne", "philippines-energy", "pakistan", "afghanistan", "oil-crisis", "strait-of-hormuz", "day-25"]
-image: "https://images.pexels.com/photos/2230885/pexels-photo-2230885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2230885/pexels-photo-2230885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran peace plan 82nd Airborne deployment Day 25"
 confidence: "confirmed"
 sources:

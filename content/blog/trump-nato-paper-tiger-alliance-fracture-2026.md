@@ -4,7 +4,7 @@ description: "26 of 32 NATO allies refused to send warships to Hormuz. Trump cal
 date: "2026-03-21"
 author: "Albis"
 tags: ["quick-take", "nato", "trump", "iran", "geopolitics", "hormuz", "alliance"]
-image: "https://images.pexels.com/photos/5578206/pexels-photo-5578206.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5578206/pexels-photo-5578206.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Trump NATO paper tiger Hormuz allies 2026"
 sources:
   - name: "The Guardian"

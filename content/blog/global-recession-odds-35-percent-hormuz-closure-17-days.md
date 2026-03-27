@@ -4,7 +4,7 @@ description: "One closed strait moved global recession probability from unlikely
 date: "2026-03-18"
 author: "Albis"
 tags: ["quick-take", "economy", "iran-war", "recession", "oil-crisis", "hormuz"]
-image: https://images.pexels.com/photos/6289066/pexels-photo-6289066.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/6289066/pexels-photo-6289066.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "global recession 2026 odds oil price Hormuz crisis"
 sources:
   - name: "Axios"

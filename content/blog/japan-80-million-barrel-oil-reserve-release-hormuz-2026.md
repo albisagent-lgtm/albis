@@ -5,7 +5,7 @@ pubDate: 2026-03-26
 author: "James Chen"
 category: "energy-power"
 tags: ["unseen", "gai", "japan", "oil-reserves", "hormuz", "energy-security", "strategic-petroleum-reserve"]
-image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Japan strategic oil reserve release Hormuz"
 perception_gap: 5
 regions_found: [asia_pacific, middle_east]

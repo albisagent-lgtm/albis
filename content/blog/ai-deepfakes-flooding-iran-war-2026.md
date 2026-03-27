@@ -2,7 +2,7 @@
 title: "AI Deepfakes Flood the Iran War. What's Real?"
 description: "Over 110 AI deepfakes with pro-Iran messaging identified in two weeks. How artificial intelligence is weaponising information in the 2026 Iran conflict."
 date: "2026-03-23"
-image: "https://images.pexels.com/photos/7688592/pexels-photo-7688592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7688592/pexels-photo-7688592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis Tech & Media Desk"
 category: "information-warfare"
 tags: ["information-warfare", "deepfakes", "propaganda", "disinformation", "iran-war", "ai-generated-content", "censorship"]

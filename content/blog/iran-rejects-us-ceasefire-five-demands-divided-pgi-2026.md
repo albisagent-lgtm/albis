@@ -5,7 +5,7 @@ date: "2026-03-26"
 author: "Lena Voss"
 category: "divided"
 tags: ["divided", "pgi", "iran-war", "ceasefire", "diplomacy", "perception-gap", "peace-plan", "hormuz"]
-image: "https://images.pexels.com/photos/6950017/pexels-photo-6950017.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6950017/pexels-photo-6950017.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran rejects US ceasefire plan five demands"
 perception_gap: 7.35
 confidence: "confirmed"

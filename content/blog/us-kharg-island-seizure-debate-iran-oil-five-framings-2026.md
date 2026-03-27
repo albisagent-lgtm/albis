@@ -3,7 +3,7 @@ title: "Kharg Island: Five Regions, Five Different Wars"
 description: "The US is weighing plans to occupy Iran's Kharg Island — the 8-square-mile hub handling 90% of Iran's oil exports. Five regions frame the same plan as strategic masterstroke, imperial aggression, or economic threat. Here's what each one sees."
 pubDate: 2026-03-24
 author: "Tomás Reyes"
-image: "https://images.pexels.com/photos/17420870/pexels-photo-17420870.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/17420870/pexels-photo-17420870.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 category: "divided"
 tags: ["divided", "pgi", "iran-war", "kharg-island", "energy", "hormuz", "military"]
 regions: ["us", "eu", "middle_east", "south_asia", "asia_pacific"]

@@ -6,7 +6,7 @@ author: "Priya Sharma"
 category: "markets"
 tags: ["quick-take", "gold", "markets", "iran-war", "safe-haven", "federal-reserve", "perception-gap"]
 regions: ["North America", "South Asia", "Asia-Pacific", "Middle East"]
-image: "https://images.pexels.com/photos/29336321/pexels-photo-29336321.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/29336321/pexels-photo-29336321.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Gold bars representing the precious metal market crash of March 2026"
 seoKeyword: "gold price crash worst week since 1983 2026"
 perception_gap: 6

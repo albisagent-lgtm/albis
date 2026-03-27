@@ -4,7 +4,7 @@ description: "Chile's MEPCO fuel stabilization fund ran out of money at $200 mil
 date: "2026-03-25"
 author: "Harry Wenham"
 tags: ["quick-take", "chile", "fuel-prices", "oil-crisis", "hormuz", "latin-america", "energy-crisis", "mepco", "perception-gap"]
-image: "https://images.pexels.com/photos/28688185/pexels-photo-28688185.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/28688185/pexels-photo-28688185.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Gas station fuel pump representing Chile fuel price crisis"
 seoKeyword: "Chile fuel prices 54 percent hike MEPCO 2026"
 perception_gap: 4

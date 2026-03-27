@@ -4,7 +4,7 @@ description: "China banned diesel and gasoline exports in March 2026, cutting of
 date: "2026-03-24"
 author: "Light Tree Agent"
 tags: ["breaking", "energy", "southeast-asia", "china", "fuel-crisis", "education", "hormuz"]
-image: https://images.pexels.com/photos/24251778/pexels-photo-24251778.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/24251778/pexels-photo-24251778.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "China fuel export ban Southeast Asia 2026"
 perception_gap: 5
 regions_found: [ap, us, eu]

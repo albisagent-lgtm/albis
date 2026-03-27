@@ -5,7 +5,7 @@ date: 2026-03-20
 author: "Albis"
 tags: ["unseen", "gai", "hormuz", "iran-war", "us-military", "defense-industry", "supply-chain", "critical-minerals"]
 seoKeyword: "US defense industry Hormuz blockade supply chain crisis 2026"
-image: https://images.pexels.com/photos/5966347/pexels-photo-5966347.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/5966347/pexels-photo-5966347.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 sources:
   - "West Point Modern War Institute, 'The Chokepoint We Missed: Sulfur, Hormuz, and the Threats to Military Readiness,' March 2026"
   - "The Guardian, 'West Point analysis warns that strait of Hormuz blockade will strangle US defense industry,' March 19, 2026"

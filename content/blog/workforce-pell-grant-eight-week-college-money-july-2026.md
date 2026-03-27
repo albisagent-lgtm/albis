@@ -2,7 +2,7 @@
 title: "Pell Grants for 8-Week Programs: The Hidden Catch"
 description: "Workforce Pell Grants go live July 2026, letting students use federal aid for short-term certificates. But every dollar spent counts against their lifetime limit for a full degree."
 date: "2026-03-02"
-image: "https://images.pexels.com/photos/7683892/pexels-photo-7683892.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7683892/pexels-photo-7683892.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["education", "pell-grants", "workforce", "reskilling", "policy"]
 category: "analysis"

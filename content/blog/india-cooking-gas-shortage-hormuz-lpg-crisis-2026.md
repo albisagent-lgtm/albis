@@ -6,7 +6,7 @@ author: "Albis Geopolitics Desk"
 category: "current-events"
 tags: ["india", "lpg-crisis", "hormuz", "energy-crisis", "iran-war", "cooking-gas", "south-asia"]
 regions: ["South Asia", "Middle East"]
-image: "https://images.pexels.com/photos/4063198/pexels-photo-4063198.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4063198/pexels-photo-4063198.png?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Gas stove flame, representing India's cooking gas crisis as Hormuz blockade cuts LPG supply"
 seoKeyword: "india cooking gas shortage hormuz crisis 2026"
 perception_gap: 6

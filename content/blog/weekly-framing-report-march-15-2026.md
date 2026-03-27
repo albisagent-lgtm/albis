@@ -5,7 +5,7 @@ date: "2026-03-15T23:30:00Z"
 author: "Albis"
 category: "Analysis"
 tags: ["perception-gaps", "framing", "iran-war", "information-architecture", "cascading-effects"]
-image: "https://images.pexels.com/photos/15559037/pexels-photo-15559037.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+image: "https://images.pexels.com/photos/15559037/pexels-photo-15559037.jpeg?auto=compress&cs=tinysrgb&h=800&w=1200"
 excerpt: "The Iran war creates invisible crises, AI warfare advances in regulatory shadow, and 62 deaths in Kenya disappear from global consciousness."
 ---
 

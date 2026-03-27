@@ -4,7 +4,7 @@ description: "47% of US generic prescriptions trace back through the Strait of H
 date: "2026-03-23"
 author: "Amina Hassan"
 tags: ["health-longevity", "hormuz", "pharmaceutical-supply-chain", "global-health", "drug-shortage", "iran-war-impact"]
-image: "https://images.pexels.com/photos/5742325/pexels-photo-5742325.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5742325/pexels-photo-5742325.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "hormuz strait medicine shortage drug supply chain 2026"
 perception_gap: 6
 regions_found: [us, eu, south_asia]

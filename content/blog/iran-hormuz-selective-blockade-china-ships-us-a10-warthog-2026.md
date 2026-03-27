@@ -4,7 +4,7 @@ description: "US A-10 Warthogs are hunting Iranian fast-attack boats in the Stra
 date: "2026-03-21"
 author: "Albis"
 tags: ["breaking", "iran-war", "hormuz", "china", "geopolitics", "military"]
-image: "https://images.pexels.com/photos/80455/delta-wings-aircraft-stealth-bomber-cloak-of-invisibility-80455.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/80455/delta-wings-aircraft-stealth-bomber-cloak-of-invisibility-80455.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran Hormuz selective blockade China ships US military 2026"
 confidence: "confirmed"
 sources:

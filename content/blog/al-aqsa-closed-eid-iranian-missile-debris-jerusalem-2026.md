@@ -4,7 +4,7 @@ description: "Iranian missile debris fell 400m from Al-Aqsa on Eid al-Fitr 2026.
 date: "2026-03-21"
 author: "Albis"
 tags: ["quick-take", "iran-war", "jerusalem", "al-aqsa", "eid", "middle-east", "perception-gap"]
-image: "https://images.pexels.com/photos/2102621/pexels-photo-2102621.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2102621/pexels-photo-2102621.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Al-Aqsa mosque closed Eid 2026 Iranian missile Jerusalem"
 confidence: "confirmed"
 sources:

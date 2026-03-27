@@ -4,7 +4,7 @@ description: "Three major surveys reveal a generational split on AI in education
 date: "2026-03-10"
 author: "Albis"
 tags: ["education", "artificial-intelligence", "students", "parenting", "edtech"]
-image: "https://images.pexels.com/photos/5212695/pexels-photo-5212695.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5212695/pexels-photo-5212695.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "Education Week"
     url: "https://www.edweek.org/technology/teens-say-they-should-be-able-to-use-ai-to-complete-assignments-parents-disagree/2026/03"

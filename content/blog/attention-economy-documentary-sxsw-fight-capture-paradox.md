@@ -5,7 +5,7 @@ date: "2026-03-14"
 author: "Albis"
 tags: ["information-attention", "documentary", "social-media", "attention-economy", "digital-wellbeing", "sxsw"]
 seoKeyword: "attention economy documentary social media 2026"
-image: "https://images.pexels.com/photos/2228555/pexels-photo-2228555.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2228555/pexels-photo-2228555.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 faqs:
   - q: "What is the Your Attention Please documentary about?"
     a: "Your Attention Please is a documentary premiering at SXSW 2026 that explores how social media turned friendship, affection, and belonging into numerical metrics like likes and followers. Director Sara Robin examines how the attention economy rewired what humans value."

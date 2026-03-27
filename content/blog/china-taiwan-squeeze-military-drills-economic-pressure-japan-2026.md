@@ -2,7 +2,7 @@
 title: "China's Squeezing Taiwan With Two Hands at Once"
 description: "Taiwan imports 100% of its energy and 70% of its food. China isn't planning an invasion — it's rehearsing a blockade. The suffocation has already begun."
 date: "2026-03-07"
-image: "https://images.pexels.com/photos/36300907/pexels-photo-36300907.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36300907/pexels-photo-36300907.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["explainer", "china", "taiwan", "japan", "military", "blockade", "geopolitics"]
 faqs:

@@ -3,7 +3,7 @@ title: "Hormuz Did More for Clean Energy Than Any Summit"
 description: "Pakistan's cement plants run on solar at 2 cents/kWh while Bangladesh rations fuel. The Hormuz blockade is splitting Asia into clean energy winners and fossil fuel losers."
 date: "2026-03-24"
 author: "Lena Castillo"
-image: "https://images.pexels.com/photos/17641123/pexels-photo-17641123.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/17641123/pexels-photo-17641123.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["clean-energy", "hormuz-crisis", "solar", "asia", "energy-transition", "perception-gap"]
 category: "Clean Energy & Water"
 seoKeyword: "Hormuz crisis clean energy transition 2026"

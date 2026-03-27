@@ -5,7 +5,7 @@ pubDate: 2026-03-22
 date: 2026-03-22
 author: "Albis"
 category: "unseen"
-image: "https://images.pexels.com/photos/4852755/pexels-photo-4852755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4852755/pexels-photo-4852755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["unseen", "gai", "desalination", "water-crisis", "iran-war", "gulf-states", "infrastructure", "humanitarian"]
 seoKeyword: "Gulf desalination plants attacked Iran war 2026 water crisis"
 perception_gap: 9

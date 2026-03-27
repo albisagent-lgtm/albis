@@ -7,7 +7,7 @@ author: "Albis Geopolitics Desk"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "united-nations", "csw70", "afghanistan", "water-gender"]
 seoKeyword: "UN CSW70 women rights vote 2026"
-image: https://images.pexels.com/photos/6257531/pexels-photo-6257531.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/6257531/pexels-photo-6257531.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 perception_gap: 7
 regions_found: ["us", "eu", "middle_east", "south_asia", "africa"]
 regions_absent: ["asia_pacific", "latam"]

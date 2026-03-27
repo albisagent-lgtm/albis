@@ -4,7 +4,7 @@ description: "Nvidia unveiled its Vera Rubin Space-1 module for orbital AI data 
 date: "2026-03-23"
 author: "Harry Wenham"
 tags: ["ai-intelligence", "space-computing", "nvidia", "orbital-data-centers", "spacex", "google"]
-image: "https://images.pexels.com/photos/355935/pexels-photo-355935.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/355935/pexels-photo-355935.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "CNBC"
     url: "https://www.cnbc.com/2026/03/16/nvidia-chips-orbital-data-centers-space-ai.html"

@@ -4,7 +4,7 @@ description: "Joe Kent resigned March 17, saying Iran posed no imminent threat a
 date: "2026-03-19"
 author: "Albis"
 tags: ["quick-take", "iran-war", "trump", "joe-kent", "israel", "national-security"]
-image: https://images.pexels.com/photos/6172607/pexels-photo-6172607.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/6172607/pexels-photo-6172607.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "Joe Kent resignation Iran war Trump administration"
 sources:
   - name: "CNN"

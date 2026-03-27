@@ -4,7 +4,7 @@ description: "Trump declared the US doesn't need NATO after every major ally ref
 date: 2026-03-18
 author: "Albis"
 tags: ["divided", "pgi", "nato", "trump", "iran-war", "hormuz", "europe", "alliance"]
-image: "https://images.pexels.com/photos/13343102/pexels-photo-13343102.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/13343102/pexels-photo-13343102.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Trump NATO alliance split Iran Hormuz 2026"
 confidence: "confirmed"
 sources:

@@ -4,7 +4,7 @@ description: "A 30-day sanctions waiver on Russian oil reveals the geopolitical 
 date: "2026-03-14"
 author: "Albis"
 tags: ["breaking", "geopolitics", "energy", "russia", "iran", "oil", "sanctions"]
-image: https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 sources:
   - name: "The Washington Post"
     url: "https://www.washingtonpost.com/business/2026/03/12/russian-oil-sanctions-lifted-iran/"

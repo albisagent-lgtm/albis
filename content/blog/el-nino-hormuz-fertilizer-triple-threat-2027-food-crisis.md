@@ -4,7 +4,7 @@ description: "Three slow-moving crises are converging on a single harvest year. 
 date: "2026-03-25"
 author: "Albis Geopolitics Desk"
 tags: ["explainer", "food-security", "el-nino", "climate", "fertilizer", "hormuz", "agriculture", "2027"]
-image: "https://images.pexels.com/photos/6915305/pexels-photo-6915305.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6915305/pexels-photo-6915305.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 category: "Food & Agriculture"
 seoKeyword: "super el nino 2027 food crisis compound risk"
 perception_gap: 5

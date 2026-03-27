@@ -5,7 +5,7 @@ date: "2026-03-02"
 author: "Albis"
 tags: ["Iran", "Hezbollah", "Lebanon", "Israel", "oil", "Strait of Hormuz", "Pakistan", "Afghanistan"]
 category: "breaking"
-image: "https://images.pexels.com/photos/6462810/pexels-photo-6462810.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6462810/pexels-photo-6462810.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 faqs:
   - q: "Has Hezbollah entered the war against Israel?"
     a: "Yes. On March 2, Hezbollah launched rockets and drones at Israeli military sites near Haifa, triggering air raid sirens across northern Israel. The IDF responded with strikes across Lebanon, including Beirut's Dahiya suburb. Hezbollah said it acted to avenge the killing of Iran's Supreme Leader Khamenei."

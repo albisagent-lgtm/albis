@@ -6,7 +6,7 @@ author: "Harry Wenham"
 category: "PGI Breakdown"
 tags: ["pgi-breakdown", "perception-gap", "hormuz", "iran-war", "food-security", "oil-prices", "media-framing", "2026"]
 seoKeyword: "PGI perception gap index Hormuz food crisis oil crisis March 2026"
-image: "https://images.pexels.com/photos/1108117/pexels-photo-1108117.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/1108117/pexels-photo-1108117.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 perception_gap: 5
 regions_found: [us, eu, middle_east, south_asia, asia_pacific, latam, africa]

@@ -5,7 +5,7 @@ date: 2026-03-20
 author: "Albis"
 tags: ["divided", "pgi", "iran", "nuclear", "gabbard", "war-justification", "intelligence", "us-iran-war"]
 seoKeyword: "Gabbard Iran nuclear program war justification 2026"
-image: https://images.pexels.com/photos/36150695/pexels-photo-36150695.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/36150695/pexels-photo-36150695.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 confidence: "confirmed"
 sources:
   - name: "Al Jazeera"

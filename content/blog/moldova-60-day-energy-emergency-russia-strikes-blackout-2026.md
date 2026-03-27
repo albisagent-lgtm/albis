@@ -4,7 +4,7 @@ description: "Russian strikes on Ukraine severed Moldova's main power link with 
 date: "2026-03-25"
 author: "Harry Wenham"
 tags: ["unseen", "gai", "energy", "moldova", "russia", "ukraine", "blackout", "europe"]
-image: "https://images.pexels.com/photos/1587268/pexels-photo-1587268.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/1587268/pexels-photo-1587268.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 category: "energy"
 seoKeyword: "Moldova energy emergency blackout 2026"
 perception_gap: 5

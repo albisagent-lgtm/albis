@@ -4,7 +4,7 @@ description: "Spain banned US bases, called the Iran war illegal, and got threat
 date: "2026-03-22"
 author: "Albis"
 tags: ["quick-take", "spain", "energy-crisis", "iran-war", "europe", "renewables"]
-image: "https://images.pexels.com/photos/6876535/pexels-photo-6876535.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6876535/pexels-photo-6876535.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Spain energy crisis package Iran war 2026"
 sources:
   - name: "Euronews"

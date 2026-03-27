@@ -4,7 +4,7 @@ description: "Orbán halts gas exports to Ukraine over Druzhba pipeline dispute 
 date: "2026-03-26"
 author: "Camila Torres"
 tags: ["quick-take", "energy", "ukraine", "hungary", "eu", "election", "orban"]
-image: https://images.pexels.com/photos/5872386/pexels-photo-5872386.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/5872386/pexels-photo-5872386.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 sources:
   - "Reuters — Hungary to curb gas flows to Ukraine until Druzhba oil flows resume"
   - "Euronews — Hungary will gradually halt gas exports to Ukraine"

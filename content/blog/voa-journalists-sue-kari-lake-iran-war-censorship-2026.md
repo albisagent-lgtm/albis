@@ -4,7 +4,7 @@ description: "Voice of America staff allege Kari Lake banned coverage of a girls
 date: "2026-03-26"
 author: "Albis"
 tags: ["quick-take", "press-freedom", "voa", "iran-war", "censorship", "kari-lake", "first-amendment"]
-image: "https://images.pexels.com/photos/6950230/pexels-photo-6950230.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6950230/pexels-photo-6950230.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "VOA journalists sue kari lake iran war censorship 2026"
 confidence: "confirmed"
 perception_gap: 4

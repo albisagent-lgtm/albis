@@ -5,7 +5,7 @@ date: "2026-03-21"
 author: "Albis"
 tags: ["unseen", "gai", "nato", "spain", "iran-war", "military-bases", "geopolitics"]
 seoKeyword: "US military bases Europe Iran war Spain NATO sovereignty crisis 2026"
-image: "https://images.pexels.com/photos/5409350/pexels-photo-5409350.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5409350/pexels-photo-5409350.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 faqs:
   - q: "Did Spain actually block US military bases during the Iran war?"
     a: "Yes. On March 2, 2026, Spain refused to allow the US to use its jointly-operated Rota and Morón de la Frontera bases for Iran strikes. At least 15 US aircraft left both bases. Trump then threatened a total US trade embargo against Spain — a response that received almost no coverage outside Spanish media."

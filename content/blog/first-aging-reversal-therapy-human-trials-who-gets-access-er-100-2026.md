@@ -4,7 +4,7 @@ description: "ER-100 is treating aging as a software bug — reprogramming cells
 date: "2026-03-15"
 author: "Albis"
 tags: ["quick-take", "health-longevity", "epigenetic-reprogramming", "aging", "biotech", "gene-therapy", "longevity", "healthcare-inequality"]
-image: "https://images.pexels.com/photos/18069424/pexels-photo-18069424.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/18069424/pexels-photo-18069424.png?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "epigenetic reprogramming therapy human trials 2026"
 sources:
   - name: "Life Biosciences"

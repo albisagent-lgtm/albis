@@ -4,7 +4,7 @@ description: "Marines killed 10 protesters at Karachi's US consulate. Pakistan's
 date: "2026-03-16"
 author: "Albis"
 tags: ["quick-take", "pakistan", "iran-war", "karachi", "sectarian", "shia", "us"]
-image: "https://images.pexels.com/photos/36470903/pexels-photo-36470903.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36470903/pexels-photo-36470903.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Karachi consulate shooting Marines Pakistan 2026"
 sources:
   - name: "Reuters"

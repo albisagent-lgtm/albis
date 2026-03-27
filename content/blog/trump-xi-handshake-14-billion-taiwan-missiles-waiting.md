@@ -4,7 +4,7 @@ description: "The largest arms package in Taiwan's history is ready for Trump's 
 date: "2026-03-15"
 author: "Albis"
 tags: ["quick-take", "geopolitics", "taiwan", "china", "arms-deal", "trump"]
-image: "https://images.pexels.com/photos/264156/pexels-photo-264156.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/264156/pexels-photo-264156.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "Reuters"
     url: "https://www.reuters.com/world/china/new-us-weapons-taiwan-could-be-approved-after-trumps-china-trip-sources-say-2026-03-13/"

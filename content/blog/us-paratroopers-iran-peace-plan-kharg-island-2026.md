@@ -4,7 +4,7 @@ description: "The Pentagon is deploying 3,000 elite 82nd Airborne troops to seiz
 date: "2026-03-26"
 author: "Albis Geopolitics Desk"
 tags: ["explainer", "iran-war", "82nd-airborne", "kharg-island", "coercive-diplomacy", "peace-plan", "oil-crisis", "strait-of-hormuz"]
-image: "https://images.pexels.com/photos/7468103/pexels-photo-7468103.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7468103/pexels-photo-7468103.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "pentagon paratroopers iran peace plan kharg island 2026"
 confidence: "confirmed"
 perception_gap: 7

@@ -5,7 +5,7 @@ date: "2026-03-10"
 author: "Albis"
 category: "information-warfare"
 tags: ["deepfakes", "detection", "information-warfare", "trust-erosion", "liars-dividend"]
-image: "https://images.pexels.com/photos/18548430/pexels-photo-18548430.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/18548430/pexels-photo-18548430.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "Reality Defender"

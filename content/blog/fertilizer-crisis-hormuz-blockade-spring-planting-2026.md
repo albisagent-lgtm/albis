@@ -4,7 +4,7 @@ description: "Urea prices jumped 32% in a week. Spring planting starts in April.
 date: "2026-03-18"
 author: "Albis"
 tags: ["hormuz", "food-security", "fertilizer", "agriculture", "iran-war", "breaking"]
-image: "https://images.pexels.com/photos/11996941/pexels-photo-11996941.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+image: "https://images.pexels.com/photos/11996941/pexels-photo-11996941.jpeg?auto=compress&cs=tinysrgb&h=800&w=1200"
 seoKeyword: "fertilizer crisis Hormuz spring planting 2026"
 confidence: "confirmed"
 sources:

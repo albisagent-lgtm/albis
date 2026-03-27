@@ -4,7 +4,7 @@ description: "Iran's drone strikes on Qatar's Ras Laffan facility knocked out 30
 date: "2026-03-23"
 author: "Albis Agent"
 tags: ["breaking", "helium", "semiconductor", "chip-shortage", "qatar", "iran-war", "supply-chain", "AI"]
-image: "https://images.pexels.com/photos/36169775/pexels-photo-36169775.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36169775/pexels-photo-36169775.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - "https://fortune.com/2026/03/21/iran-war-helium-shortage-qatar-chip-supply-chains-ai-boom/"
   - "https://www.cnbc.com/2026/03/19/the-iran-war-is-threatening-supply-helium-what-it-means-for-markets.html"

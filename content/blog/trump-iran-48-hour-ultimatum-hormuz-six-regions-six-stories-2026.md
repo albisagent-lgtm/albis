@@ -5,7 +5,7 @@ pubDate: 2026-03-23
 author: "Albis"
 category: "divided"
 tags: ["divided", "pgi", "iran-war", "hormuz", "trump", "ultimatum", "energy", "food-security"]
-image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Industrial power plant at dusk representing energy infrastructure under threat"
 seoKeyword: "Trump Iran 48 hour ultimatum power plant strikes 2026"
 perception_gap: 7.5

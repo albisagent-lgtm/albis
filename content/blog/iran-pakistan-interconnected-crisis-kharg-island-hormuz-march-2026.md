@@ -5,7 +5,7 @@ date: "2026-03-14"
 author: "Albis"
 category: "geopolitics"
 tags: ["iran-war", "pakistan", "afghanistan", "strait-of-hormuz", "oil-crisis", "kharg-island", "geopolitics"]
-image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran Pakistan interconnected crisis Hormuz oil 2026"
 confidence: "confirmed"
 sources:

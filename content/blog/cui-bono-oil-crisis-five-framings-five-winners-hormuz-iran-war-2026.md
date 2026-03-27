@@ -4,7 +4,7 @@ description: "The Iran war's Hormuz blockade was told five different ways this w
 pubDate: 2026-03-17
 tags: ["cui-bono"]
 series: "Cui Bono"
-image: "https://images.pexels.com/photos/3151717/pexels-photo-3151717.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3151717/pexels-photo-3151717.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 ---
 
 This story was told five different ways this week. Every version served someone.

@@ -5,7 +5,7 @@ description: "DoorDash's new Tasks app pays delivery workers to film themselves 
 date: "2026-03-22"
 author: "Albis"
 tags: ["quick-take", "ai", "gig-economy", "doordash", "robotics", "labor", "automation"]
-image: "https://images.pexels.com/photos/4107305/pexels-photo-4107305.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4107305/pexels-photo-4107305.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Robot in a kitchen setting representing AI automation of household tasks"
 seoKeyword: "DoorDash AI training workers film chores 2026"
 sources:

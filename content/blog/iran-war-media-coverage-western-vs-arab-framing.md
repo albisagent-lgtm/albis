@@ -2,7 +2,7 @@
 title: "Three Narratives, One War: How Iran Coverage Splits"
 description: "Western media shows precision strikes. Iranian media shows 1,348 civilian deaths. Arab media frames US-Israeli aggression. The same war, three completely different stories."
 date: "2026-03-18"
-image: "https://images.pexels.com/photos/33925166/pexels-photo-33925166.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/33925166/pexels-photo-33925166.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Harry Wenham"
 excerpt: "Day 18 of the Iran war has killed 1,348 civilians. But the story you're seeing depends entirely on where you live. The Albis Perception Gap Index scored this war 7.05 — meaning 6.24 billion people see fundamentally different versions of the same conflict."
 seoKeyword: "Iran war media coverage Western vs Arab framing"

@@ -2,7 +2,7 @@
 title: "Citi Now Holds Bitcoin. The Revolution Became a Product."
 description: "Citigroup's launching Bitcoin custody this year. When the establishment absorbs what was designed to replace it, who won?"
 date: "2026-03-01"
-image: "https://images.pexels.com/photos/6764526/pexels-photo-6764526.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6764526/pexels-photo-6764526.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["quick-take", "bitcoin", "cryptocurrency", "finance", "wall-street"]
 category: "analysis"

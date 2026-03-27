@@ -3,7 +3,7 @@ title: "FDA Now Needs One Trial to Approve Drugs. Staff Is Gone."
 description: "The FDA now needs just one clinical trial to approve drugs — while losing 40% of its oncology reviewers. What happens when faster approvals meet fewer people to review them?"
 date: "2026-03-24"
 author: "Lena Castillo"
-image: "https://images.pexels.com/photos/3912481/pexels-photo-3912481.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3912481/pexels-photo-3912481.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["health-longevity", "fda", "drug-approval", "biotech", "rare-disease"]
 seoKeyword: "FDA one trial drug approval rule change 2026"
 sources:

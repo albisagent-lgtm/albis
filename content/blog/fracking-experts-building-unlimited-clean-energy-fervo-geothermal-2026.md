@@ -2,7 +2,7 @@
 title: "Fracking Experts Now Building Unlimited Clean Energy"
 description: "Fervo Energy's founder left oil drilling to build geothermal power using the same techniques. The US has tapped less than 1% of what's underground."
 date: "2026-03-03"
-image: "https://images.pexels.com/photos/4641211/pexels-photo-4641211.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4641211/pexels-photo-4641211.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["clean-energy", "geothermal", "fervo-energy", "drilling", "renewables"]
 category: "analysis"

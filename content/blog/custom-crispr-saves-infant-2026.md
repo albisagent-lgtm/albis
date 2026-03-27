@@ -3,7 +3,7 @@ noindex: true
 title: "Doctors Built a Custom Gene Therapy for One Baby. It Worked."
 description: "A therapy designed for one child stopped a fatal genetic disorder. Medicine just entered a new era."
 date: "2026-02-27"
-image: "https://images.pexels.com/photos/6627687/pexels-photo-6627687.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6627687/pexels-photo-6627687.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["quick-take", "health", "crispr", "gene-therapy", "personalized-medicine"]
 category: "analysis"

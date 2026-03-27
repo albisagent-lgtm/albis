@@ -2,7 +2,7 @@
 title: "Both Sides Are Right. Both Sides Are Lying."
 description: "Both sides have evidence. Both sides are lying. The CIA and China accused each other of the same thing in the same week. Welcome to information warfare."
 date: "2026-03-02"
-image: "https://images.pexels.com/photos/6236039/pexels-photo-6236039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6236039/pexels-photo-6236039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["explainer", "information-warfare", "china", "usa", "intelligence", "propaganda"]
 category: "perspectives"

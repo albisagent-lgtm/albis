@@ -4,7 +4,7 @@ description: "Toxic black rain from bombed oil depots is contaminating Tehran's 
 date: 2026-03-18
 author: "Albis"
 tags: ["unseen", "gai", "iran", "environment", "black-rain", "health", "tehran", "war"]
-image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran black rain Tehran toxic oil fires health crisis"
 sources:
   - name: "AP News"

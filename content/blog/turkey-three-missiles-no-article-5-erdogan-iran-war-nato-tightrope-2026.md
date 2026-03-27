@@ -6,7 +6,7 @@ author: "Harry Wenham"
 category: "Deep Dive"
 tags: ["deep-dive", "turkey", "nato", "iran-war", "article-5", "erdogan", "incirlik", "geopolitics", "missiles"]
 seoKeyword: "Turkey Iran missiles NATO Article 5 Erdogan 2026"
-image: "https://images.pexels.com/photos/35994468/pexels-photo-35994468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/35994468/pexels-photo-35994468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "Reuters"

@@ -4,7 +4,7 @@ description: "Iran's new supreme leader vows to keep Hormuz closed. Brent crude 
 date: 2026-03-13
 author: "Albis"
 tags: ["iran", "pakistan", "afghanistan", "oil", "hormuz", "mojtaba-khamenei", "russia"]
-image: "https://images.pexels.com/photos/28624858/pexels-photo-28624858.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/28624858/pexels-photo-28624858.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "New York Times"

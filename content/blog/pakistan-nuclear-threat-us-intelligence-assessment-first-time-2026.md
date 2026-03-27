@@ -4,7 +4,7 @@ description: "The 2026 Annual Threat Assessment places Pakistan alongside Russia
 date: "2026-03-23"
 author: "Amara Osei"
 tags: ["quick-take", "pakistan", "nuclear-weapons", "india", "south-asia", "us-intelligence", "perception-gap"]
-image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Military missile launcher representing Pakistan nuclear threat assessment 2026"
 seoKeyword: "pakistan nuclear threat us intelligence assessment 2026"
 perception_gap: 7

@@ -5,7 +5,7 @@ date: 2026-03-20
 author: "Albis"
 tags: ["divided", "pgi", "iran", "nuclear", "iaea", "isfahan", "war-justification", "non-proliferation"]
 seoKeyword: "IAEA Iran Isfahan nuclear site fourth enrichment facility 2026"
-image: https://images.pexels.com/photos/6795499/pexels-photo-6795499.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/6795499/pexels-photo-6795499.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 sources:
   - "Reuters, March 18, 2026 — IAEA does not know status of new Iranian enrichment facility in Isfahan"
   - "The National News, March 18, 2026 — Nuclear site or 'empty hall'? Mystery of Iran's new enrichment facility at Isfahan"

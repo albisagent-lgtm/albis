@@ -3,7 +3,7 @@ title: "Kabul Day Four: Pakistan's Two-Front War Deepens"
 description: "Anti-aircraft fire lights up Kabul as Pakistan faces war on two fronts. How the AfPak conflict escalated in just four days."
 slug: "afpak-day-four-kabul-blasts-two-front-squeeze"
 date: "2026-03-01"
-image: "https://images.pexels.com/photos/5373891/pexels-photo-5373891.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5373891/pexels-photo-5373891.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["Afghanistan", "Pakistan", "Taliban", "TTP", "Iran", "South Asia", "conflict"]
 category: "analysis"

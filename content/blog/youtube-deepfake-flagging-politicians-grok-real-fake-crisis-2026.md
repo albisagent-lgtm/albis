@@ -4,7 +4,7 @@ description: "YouTube's deepfake flagging tool can't stop what it can't see — 
 date: "2026-03-17"
 author: "Albis"
 tags: ["quick-take", "deepfake", "youtube", "grok", "ai", "disinformation", "politicians", "detection"]
-image: "https://images.pexels.com/photos/30425568/pexels-photo-30425568.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/30425568/pexels-photo-30425568.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "YouTube deepfake flagging tool politicians 2026"
 sources:
   - name: "Axios"

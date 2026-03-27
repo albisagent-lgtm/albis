@@ -5,7 +5,7 @@ date: "2026-03-16"
 author: "Albis"
 tags: ["explainer", "climate", "epa", "renewable-energy", "trump", "us", "energy"]
 seoKeyword: "Trump EPA greenhouse gas regulation renewable energy 2026"
-image: "https://images.pexels.com/photos/6876535/pexels-photo-6876535.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6876535/pexels-photo-6876535.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 faqs:
   - q: "Did Trump strip the EPA's authority to regulate greenhouse gases?"
     a: "Yes. In February 2026, the EPA formally revoked the 2009 'endangerment finding'—the legal basis that allowed federal regulation of greenhouse gases under the Clean Air Act. The move eliminates the EPA's power to limit carbon pollution from power plants and other major sources."

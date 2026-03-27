@@ -4,7 +4,7 @@ description: "Nepal's Gen Z protests toppled a government in 48 hours. Six month
 date: "2026-03-20"
 author: "Albis"
 tags: ["quick-take", "nepal", "south-asia", "gen-z", "politics", "elections", "youth"]
-image: "https://images.pexels.com/photos/8107705/pexels-photo-8107705.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/8107705/pexels-photo-8107705.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "BBC News"
     url: "https://www.bbc.com/news/articles/c93w6y0lnd9o"

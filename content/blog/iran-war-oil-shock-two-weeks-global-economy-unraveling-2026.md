@@ -5,7 +5,7 @@ date: "2026-03-16"
 author: "Albis"
 tags: ["deep-piece", "iran", "oil", "energy", "hormuz", "economy", "food-security", "asia", "russia"]
 seoKeyword: "Iran war oil shock global economy 2026"
-image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "The Guardian"

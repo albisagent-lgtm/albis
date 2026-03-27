@@ -6,7 +6,7 @@ date: 2026-03-23
 author: "Albis Geopolitics Desk"
 category: "Geopolitics"
 tags: ["iran war 2026", "hormuz strait", "trump ultimatum", "oil crisis", "gulf states", "IRGC", "desalination", "energy crisis"]
-image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - "NYT Live Updates, March 22-23, 2026"
   - "Al Jazeera, Trump 48-hour Hormuz ultimatum, March 22, 2026"

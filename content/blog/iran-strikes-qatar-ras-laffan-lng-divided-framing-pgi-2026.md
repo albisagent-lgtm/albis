@@ -7,7 +7,7 @@ featured: false
 author: "Albis"
 tags: ["divided", "pgi", "iran", "qatar", "energy", "lng", "middle-east", "geopolitics"]
 seoKeyword: "Iran strikes Qatar Ras Laffan LNG framing divided coverage 2026"
-image: https://images.pexels.com/photos/1871133/pexels-photo-1871133.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/1871133/pexels-photo-1871133.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 confidence: "confirmed"
 sources:
   - name: "Al Jazeera"

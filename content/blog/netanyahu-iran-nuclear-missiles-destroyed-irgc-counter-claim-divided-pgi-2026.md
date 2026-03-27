@@ -5,7 +5,7 @@ date: "2026-03-21"
 author: "Albis"
 tags: ["divided", "pgi", "iran-war", "nuclear", "netanyahu", "irgc", "information-warfare"]
 seoKeyword: "Netanyahu Iran nuclear program destroyed IRGC counter-claim March 2026"
-image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - "CNBC, March 19 2026 — Netanyahu press conference"
   - "Al Jazeera, March 20 2026 — IRGC confirms Naini killed"

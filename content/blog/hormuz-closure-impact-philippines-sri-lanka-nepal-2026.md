@@ -4,7 +4,7 @@ description: "Restaurants closing in Manila. Petrol rationed in Colombo. Nepali 
 date: "2026-03-22"
 author: "Albis"
 tags: ["quick-take", "hormuz", "energy-crisis", "philippines", "sri-lanka", "nepal", "india", "south-asia", "southeast-asia"]
-image: "https://images.pexels.com/photos/6910727/pexels-photo-6910727.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6910727/pexels-photo-6910727.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Hormuz closure impact Philippines Sri Lanka Nepal 2026"
 perception_gap: 5
 regions_found: [south_asia, asia_pacific]

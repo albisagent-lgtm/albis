@@ -4,7 +4,7 @@ description: "Sri Lanka cut its work week by 20% because of a war it had no part
 date: "2026-03-18"
 author: "Albis"
 tags: ["quick-take", "energy", "sri-lanka", "iran", "hormuz", "fuel-crisis"]
-image: https://images.pexels.com/photos/13074031/pexels-photo-13074031.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/13074031/pexels-photo-13074031.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "Sri Lanka four day week fuel crisis 2026"
 confidence: "confirmed"
 sources:

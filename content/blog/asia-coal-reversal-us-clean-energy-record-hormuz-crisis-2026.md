@@ -4,7 +4,7 @@ description: "Six Asian nations reversed to coal while the US added 55 GW of sol
 date: "2026-03-26"
 author: "Maren Althaus"
 tags: ["clean-energy", "coal", "renewables", "asia", "iran-war", "energy-transition", "solar", "batteries"]
-image: "https://images.pexels.com/photos/7563986/pexels-photo-7563986.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7563986/pexels-photo-7563986.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 faqs:
   - q: "Why is Asia increasing coal use during the Iran war?"

@@ -2,7 +2,7 @@
 title: "The Sleeper Effect: Why Bad Sources Persuade You"
 description: "You dismissed the claim when you saw who said it. Weeks later, you believe it anyway. The sleeper effect explains how your brain forgets the source but keeps the message — and why that matters more than ever."
 date: "2026-03-25"
-image: "https://images.pexels.com/photos/15410078/pexels-photo-15410078.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/15410078/pexels-photo-15410078.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 category: "Information Awareness"
 tags: ["information awareness", "media literacy", "psychology", "cognitive bias", "misinformation", "sleeper effect"]

@@ -2,7 +2,7 @@
 title: "Anthropic Dropped Its Safety Promise. Then What?"
 description: "Anthropic promised to pause AI if it got too dangerous. This week they scrapped that pledge — then the Pentagon gave them a Friday deadline."
 date: "2026-02-28"
-image: "https://images.pexels.com/photos/36169771/pexels-photo-36169771.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36169771/pexels-photo-36169771.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Harry Wenham"
 tags: ["ai-intelligence", "ai-safety", "anthropic", "pentagon", "military-ai", "policy"]
 category: "analysis"

@@ -8,7 +8,7 @@ author: "Albis"
 date: "2026-03-20T03:00:00Z"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "reproductive-rights", "femicide", "united-nations"]
-image: "https://images.pexels.com/photos/6257343/pexels-photo-6257343.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6257343/pexels-photo-6257343.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "US opposes CSW70 SAVE Act women voting rights 2026"
 confidence: "confirmed"
 faqs:

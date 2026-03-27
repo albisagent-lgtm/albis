@@ -6,7 +6,7 @@ author: "Elena Vargas"
 category: "Quick Take"
 tags: ["quick-take", "cuba", "blackout", "energy-crisis", "hormuz", "latin-america", "protests"]
 seoKeyword: "cuba blackout protests energy crisis 2026"
-image: "https://images.pexels.com/photos/5650593/pexels-photo-5650593.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5650593/pexels-photo-5650593.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 perception_gap: 5
 regions_found: [us, latam, eu]

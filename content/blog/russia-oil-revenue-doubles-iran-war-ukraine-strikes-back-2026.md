@@ -4,7 +4,7 @@ description: "Russia's daily oil revenue hit $270 million — a four-year high p
 date: "2026-03-26"
 author: "Albis"
 tags: ["breaking", "russia", "oil", "ukraine", "iran-war", "energy", "drones", "sanctions"]
-image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Russia oil revenue Iran war Ukraine drone strikes 2026"
 perception_gap: 7
 confidence: "confirmed"

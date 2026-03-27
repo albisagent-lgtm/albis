@@ -2,7 +2,7 @@
 title: "The Polar Vortex Just Split in Two"
 description: "A 'sudden stratospheric warming event' broke apart the polar vortex in mid-February. That's why half the world is freezing right now—and why it might keep happening."
 date: "2026-02-27"
-image: "https://images.pexels.com/photos/4759281/pexels-photo-4759281.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4759281/pexels-photo-4759281.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["explainer", "weather", "polar-vortex", "climate", "science"]
 category: "analysis"

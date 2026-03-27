@@ -4,7 +4,7 @@ description: "A deepfake of Texas Senate candidate Talarico went viral — and i
 date: "2026-03-21"
 author: "Albis"
 category: "Explainer"
-image: "https://images.pexels.com/photos/7689092/pexels-photo-7689092.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7689092/pexels-photo-7689092.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "NRSC Talarico deepfake Texas 2026 midterms political ad law"
 confidence: "confirmed"
 sources:

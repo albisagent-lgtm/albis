@@ -10,7 +10,7 @@ tags:
   - disinformation
   - ai-regulation
   - iran-war
-image: "https://images.pexels.com/photos/9558582/pexels-photo-9558582.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/9558582/pexels-photo-9558582.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 faq:
   - q: "What is the State of Information report?"
     a: "A weekly Albis briefing tracking how information warfare, disinformation campaigns, deepfakes, and synthetic media shape public perception worldwide."

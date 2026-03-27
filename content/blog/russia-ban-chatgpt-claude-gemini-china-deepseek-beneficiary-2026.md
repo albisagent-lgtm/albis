@@ -4,7 +4,7 @@ description: "Russia's bill to ban ChatGPT, Claude and Gemini has a hidden detai
 date: "2026-03-21"
 author: "Albis"
 tags: ["quick-take", "technology", "russia", "china", "artificial-intelligence", "digital-sovereignty"]
-image: https://images.pexels.com/photos/7688592/pexels-photo-7688592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/7688592/pexels-photo-7688592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 confidence: "confirmed"
 sources:
   - name: "Reuters"

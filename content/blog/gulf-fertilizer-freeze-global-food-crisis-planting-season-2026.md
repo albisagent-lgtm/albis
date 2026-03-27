@@ -5,7 +5,7 @@ date: "2026-03-16"
 author: "Harry Wenham"
 category: "Food Security"
 tags: ["fertilizer", "Iran-war", "food-security", "agriculture", "supply-chain", "Strait-of-Hormuz"]
-image: "https://images.pexels.com/photos/11996941/pexels-photo-11996941.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/11996941/pexels-photo-11996941.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 faqs:
   - q: "How much fertilizer is stuck in the Gulf right now?"
     a: "More than 1.1 million metric tons of urea and ammonia fertilizers are stranded across 20+ ships. That's roughly one month of global fertilizer trade — trapped behind a closed strait."

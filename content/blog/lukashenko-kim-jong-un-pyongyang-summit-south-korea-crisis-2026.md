@@ -6,7 +6,7 @@ author: "Daniel Pearson"
 category: "lens"
 tags: ["North Korea", "South Korea", "Belarus", "Lukashenko", "Kim Jong Un", "East Asia", "security", "fuel-rationing", "iran-war", "THAAD", "perception-gap"]
 regions: ["Asia-Pacific", "Europe", "North America"]
-image: "https://images.pexels.com/photos/2833037/pexels-photo-2833037.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2833037/pexels-photo-2833037.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Diplomatic summit between authoritarian leaders amid East Asian security tensions"
 seoKeyword: "lukashenko kim jong un pyongyang summit 2026"
 perception_gap: 7

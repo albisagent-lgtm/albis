@@ -4,7 +4,7 @@ description: "A US-operated Patriot interceptor likely caused the March 9 explos
 date: "2026-03-25"
 author: "Albis Geopolitics Desk"
 tags: ["breaking", "bahrain", "patriot-missile", "iran-war", "civilians", "friendly-fire", "air-defense", "perception-gap"]
-image: "https://images.pexels.com/photos/16660293/pexels-photo-16660293.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/16660293/pexels-photo-16660293.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Bahrain Patriot missile blast civilians 2026"
 perception_gap: 7
 confidence: "confirmed"

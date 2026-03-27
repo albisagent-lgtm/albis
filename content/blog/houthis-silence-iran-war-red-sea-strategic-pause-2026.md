@@ -4,7 +4,7 @@ description: "The Houthis promised to unleash hell on Red Sea shipping when Iran
 date: "2026-03-20"
 author: "Albis"
 tags: ["breaking", "yemen", "houthis", "iran", "red-sea", "geopolitics", "middle-east"]
-image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Houthis Red Sea Iran war silence 2026"
 confidence: "confirmed"
 sources:

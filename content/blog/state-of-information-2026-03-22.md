@@ -4,7 +4,7 @@ description: "The Iran war's third week produced 110+ deepfakes, a staged assass
 date: "2026-03-22"
 author: "Albis"
 tags: ["state-of-information", "information-warfare", "deepfakes", "iran-war", "disinformation", "hungary-election", "media-analysis"]
-image: "https://images.pexels.com/photos/5380594/pexels-photo-5380594.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5380594/pexels-photo-5380594.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 faq:
   - q: "How many AI-generated deepfakes were identified in the Iran war this week?"
     a: "The New York Times identified more than 110 unique pro-Iran deepfakes in the two weeks ending March 20, covering battlefield imagery, missile strikes, and fabricated war footage. The Foundation for Defense of Democracies confirmed the count."

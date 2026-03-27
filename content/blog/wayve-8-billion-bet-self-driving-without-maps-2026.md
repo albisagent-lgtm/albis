@@ -2,7 +2,7 @@
 title: "Self-Driving Cars Without Maps? This $8.6B Bet Says Yes."
 description: "Wayve raised $1.2B from Nvidia, Microsoft, and Uber for AI that learns to drive like a human — no HD maps required. Here's why that changes everything."
 date: "2026-03-03"
-image: "https://images.pexels.com/photos/5478088/pexels-photo-5478088.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5478088/pexels-photo-5478088.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["ai-intelligence", "autonomous-driving", "wayve", "robotics", "embodied-ai"]
 category: "analysis"

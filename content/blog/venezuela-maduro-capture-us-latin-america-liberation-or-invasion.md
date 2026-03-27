@@ -4,7 +4,7 @@ description: "The US captured Nicolás Maduro on January 3, 2026. Washington cal
 date: 2026-03-15
 author: "Albis"
 tags: ["divided", "pgi", "venezuela", "maduro", "us-intervention", "latin-america", "geopolitics"]
-image: "https://images.pexels.com/photos/35524224/pexels-photo-35524224.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/35524224/pexels-photo-35524224.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "US capture Maduro Venezuela liberation or invasion 2026"
 sources:
   - name: "BBC News"

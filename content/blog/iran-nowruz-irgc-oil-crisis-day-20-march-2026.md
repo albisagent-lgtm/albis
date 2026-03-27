@@ -5,7 +5,7 @@ date: "2026-03-20"
 author: "Albis"
 category: "Crisis Tracker"
 tags: ["iran", "war", "geopolitics", "oil", "irgc", "nowruz", "middle-east"]
-image: "https://images.pexels.com/photos/2348808/pexels-photo-2348808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2348808/pexels-photo-2348808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran war Nowruz leadership crisis oil prices 2026"
 confidence: "confirmed"
 sources:

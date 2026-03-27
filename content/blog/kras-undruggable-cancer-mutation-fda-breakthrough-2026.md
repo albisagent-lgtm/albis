@@ -3,7 +3,7 @@ title: "KRAS Cancer Drugs Get Two FDA Breakthroughs"
 description: "After 40 years as cancer's 'undruggable' mutation, KRAS now has two FDA breakthrough drugs in the same month. 3.4 million patients a year could benefit."
 date: "2026-03-25"
 author: "Lena Castillo"
-image: "https://images.pexels.com/photos/7723620/pexels-photo-7723620.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7723620/pexels-photo-7723620.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["health-longevity", "cancer-research", "kras", "fda", "biotech", "drug-discovery", "pancreatic-cancer"]
 seoKeyword: "KRAS cancer drug FDA breakthrough therapy 2026"
 sources:

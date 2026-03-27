@@ -4,7 +4,7 @@ description: "Fake Iran war videos racked up tens of millions of views in two we
 date: "2026-03-14"
 author: "Albis"
 tags: ["quick-take", "ai", "iran-war", "disinformation", "information-warfare", "social-media"]
-image: "https://images.pexels.com/photos/7563686/pexels-photo-7563686.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7563686/pexels-photo-7563686.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran AI propaganda war social media 2026"
 sources:
   - name: "CNN"

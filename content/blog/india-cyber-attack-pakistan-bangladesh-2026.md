@@ -1,11 +1,11 @@
 ---
-title: "India Cyber Attack on Pakistan: A Year-Long Campaign"
-description: "India-linked hackers breached Pakistan's nuclear authority, Bangladesh's power grid, and Sri Lankan telecoms — for a year. Why the world ignored a cyber campaign hitting 3 countries."
+title: "India Cyber Attack Pakistan: Nuclear Systems Breached"
+description: "India-linked hackers spent a year inside Pakistan's nuclear authority, Bangladesh's power grid, and Sri Lanka's telecoms. Three countries compromised. Zero headlines. Here's what happened."
 date: "2026-03-15"
 author: "Harry Wenham"
 tags: ["explainer", "cyber-warfare", "south-asia", "india", "pakistan", "bangladesh"]
 seoKeyword: "India cyber attack Pakistan Bangladesh 2026"
-image: "https://images.pexels.com/photos/2036656/pexels-photo-2036656.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+image: "https://images.pexels.com/photos/2036656/pexels-photo-2036656.jpeg?auto=compress&cs=tinysrgb&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "The Record"

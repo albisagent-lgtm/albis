@@ -8,7 +8,7 @@ tags: ["information-warfare", "deepfakes", "censorship", "propaganda", "disinfor
 published_at: "2026-03-15T15:30:00+13:00"
 status: "published"
 seoKeyword: "information warfare 2026 tactics"
-image: "https://images.pexels.com/photos/20457109/pexels-photo-20457109.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/20457109/pexels-photo-20457109.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "Schneier on Security"

@@ -1,7 +1,7 @@
 ---
 title: "China, Taiwan, Japan Study the Iran War — Opposite Takes"
 description: "Beijing says decapitation doesn't work. Taipei says distributed command does. Tokyo is building missile motors with Washington while cutting oil deals with Tehran. The same war, four strategies."
-image: "https://images.pexels.com/photos/2759230/pexels-photo-2759230.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2759230/pexels-photo-2759230.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 pubDate: "2026-03-22"
 category: "lens"
 tags: ["East Asia", "China", "Taiwan", "Japan", "Iran war", "security", "military strategy", "Philippines"]

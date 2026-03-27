@@ -4,7 +4,7 @@ description: "The Iran war oil shock is pushing governments toward renewables. I
 date: "2026-03-21"
 author: "Albis"
 tags: ["clean-energy", "renewables", "iran-war", "oil-shock", "solar", "nuclear", "coal", "energy-transition"]
-image: "https://images.pexels.com/photos/4254168/pexels-photo-4254168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4254168/pexels-photo-4254168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran war oil shock renewable energy transition 2026"
 confidence: "confirmed"
 faqs:

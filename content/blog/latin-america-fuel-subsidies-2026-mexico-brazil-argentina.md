@@ -3,7 +3,7 @@ title: "Latin America's Fuel Subsidies: Who's Cutting, Who's Not"
 description: "English media says Latin America is ending fuel subsidies. Mexico is doing the opposite — activating its biggest diesel subsidy since 2022. Here's what each country is actually doing."
 pubDate: 2026-03-24
 author: "Harry Wenham"
-image: "https://images.pexels.com/photos/7908624/pexels-photo-7908624.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7908624/pexels-photo-7908624.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 category: "energy"
 tags: ["fuel subsidies", "Latin America", "Mexico", "Brazil", "Argentina", "Colombia", "Chile", "oil crisis", "Hormuz"]
 regions: ["Latin America", "North America"]

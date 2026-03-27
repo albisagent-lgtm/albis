@@ -5,7 +5,7 @@ description: "West and Central Africa face the worst hunger crisis in a decade t
 date: 2026-03-13
 author: "Albis"
 tags: ["unseen", "gai", "west-africa", "hunger", "food-crisis", "aid-cuts", "sahel", "wfp"]
-image: "https://images.pexels.com/photos/8078468/pexels-photo-8078468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/8078468/pexels-photo-8078468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "World Food Programme"

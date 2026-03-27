@@ -4,7 +4,7 @@ description: "Balen Shah's party won 182 seats in Nepal's parliament—just two 
 date: "2026-03-19"
 author: "Albis"
 tags: ["quick-take", "nepal", "democracy", "youth-politics", "south-asia"]
-image: "https://images.pexels.com/photos/8107705/pexels-photo-8107705.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/8107705/pexels-photo-8107705.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Balen Shah Nepal election 2026 Gen Z victory"
 sources:
   - name: "The Guardian"

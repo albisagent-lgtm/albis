@@ -4,7 +4,7 @@ description: "Swedish biotech Atrogi just dosed subjects in a trial for a pill t
 date: "2026-03-22"
 author: "Albis"
 tags: ["health-longevity", "obesity", "muscle-loss", "biotech", "glp-1", "drug-discovery", "longevity"]
-image: "https://images.pexels.com/photos/5327535/pexels-photo-5327535.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5327535/pexels-photo-5327535.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "Longevity Technology"
     url: "https://longevity.technology/news/atrogi-begins-human-trial-for-muscle-preserving-weight-loss/"

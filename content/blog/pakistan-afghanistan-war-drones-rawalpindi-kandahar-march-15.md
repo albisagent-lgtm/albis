@@ -5,7 +5,7 @@ date: "2026-03-15"
 author: "Albis"
 category: "geopolitics"
 tags: ["pakistan", "afghanistan", "taliban", "drone-strikes", "oil-crisis", "south-asia"]
-image: "https://images.pexels.com/photos/29890322/pexels-photo-29890322.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/29890322/pexels-photo-29890322.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Pakistan Afghanistan war drone strikes 2026"
 confidence: "confirmed"
 sources:

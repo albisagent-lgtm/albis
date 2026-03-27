@@ -4,7 +4,7 @@ description: "The Iran war has disrupted education for 52 million children acros
 date: "2026-03-20"
 author: "Albis"
 tags: ["education", "iran-war", "children", "global-education", "edtech", "humanitarian"]
-image: "https://images.pexels.com/photos/7396398/pexels-photo-7396398.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7396398/pexels-photo-7396398.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran war children education crisis 2026"
 confidence: "confirmed"
 sources:

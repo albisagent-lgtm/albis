@@ -6,7 +6,7 @@ author: "Albis"
 category: "divided"
 tags: ["divided", "pgi", "iran-war", "nuclear", "dimona", "natanz", "perception-gap", "middle-east", "israel"]
 regions: ["us", "eu", "middle_east", "asia_pacific", "south_asia"]
-image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Smoke and fire representing missile strike and nuclear escalation"
 seoKeyword: "Iran Dimona missile strike Natanz nuclear 2026"
 sources:

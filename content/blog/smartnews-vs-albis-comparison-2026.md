@@ -1,7 +1,7 @@
 ---
 title: "SmartNews vs Albis: Speed vs Perception"
 description: "SmartNews delivers 50 million readers fast, personalised headlines from 3,000+ sources. Albis shows how the same story reads differently across six world regions. One optimises for speed — the other for what speed leaves out."
-image: "https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 slug: smartnews-vs-albis-comparison-2026
 date: 2026-03-26
 author: "Albis"

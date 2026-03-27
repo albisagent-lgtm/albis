@@ -5,7 +5,7 @@ date: "2026-03-14"
 author: "Albis"
 category: "Geopolitics"
 tags: ["pakistan", "afghanistan", "taliban", "iran-war", "oil-crisis", "south-asia"]
-image: "https://images.pexels.com/photos/2665146/pexels-photo-2665146.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2665146/pexels-photo-2665146.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Pakistan Afghanistan war drones Islamabad 2026"
 sources:
   - name: "Los Angeles Times"

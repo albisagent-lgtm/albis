@@ -3,7 +3,7 @@ title: "China Registered 700 AI Models. All Pro-Beijing."
 description: "China filed 700+ AI models with its government. Alibaba's Qwen was caught pushing pro-Beijing views. When AI models arrive pre-loaded with geopolitical loyalties, the race isn't just about capability — it's about whose version of reality becomes the default."
 date: "2026-03-15"
 author: "Albis"
-image: "https://images.pexels.com/photos/9026303/pexels-photo-9026303.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/9026303/pexels-photo-9026303.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["quick-take", "ai", "china", "qwen", "geopolitics", "information-warfare"]
 seoKeyword: "China AI models pro-Beijing bias Qwen 2026"
 faqs:

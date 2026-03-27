@@ -4,7 +4,7 @@ description: "The US curtailed 20M MWh of clean energy in 2024 — wasted solar 
 date: "2026-03-22"
 author: "Harry Wenham"
 tags: ["clean-energy", "energy-storage", "grid-tech", "renewables", "batteries"]
-image: "https://images.pexels.com/photos/3639037/pexels-photo-3639037.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3639037/pexels-photo-3639037.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "thermal battery grid energy storage 2026"
 confidence: "confirmed"
 sources:

@@ -3,7 +3,7 @@ title: "Meta Found Liable for Harming Children Twice in 48 Hours"
 description: "Two juries in two states ruled Meta designed products that hurt kids. $381M in damages so far, 2,000 lawsuits waiting, and insurers won't cover it."
 date: "2026-03-26"
 author: "Priya Sharma"
-image: "https://images.pexels.com/photos/5860963/pexels-photo-5860963.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5860963/pexels-photo-5860963.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["information-attention", "social-media", "meta", "children", "algorithms", "content-moderation"]
 category: "analysis"
 confidence: "confirmed"

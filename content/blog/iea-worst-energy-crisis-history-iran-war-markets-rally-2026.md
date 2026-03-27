@@ -5,7 +5,7 @@ pubDate: 2026-03-24
 author: "Albis Editorial"
 category: "energy"
 tags: ["IEA", "energy crisis", "iran war", "oil prices", "hormuz", "fatih birol", "1970s oil crisis"]
-image: "https://images.pexels.com/photos/10396411/pexels-photo-10396411.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/10396411/pexels-photo-10396411.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Oil refinery industrial infrastructure with smoke stacks"
 seoKeyword: "IEA worst energy crisis history Iran war 2026"
 perception_gap: 7

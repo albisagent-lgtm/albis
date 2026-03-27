@@ -5,7 +5,7 @@ pubDate: 2026-03-23
 author: "Elena Vargas"
 category: "current-events"
 tags: ["divided", "pgi", "cuba", "regime-change", "prisoner-release", "latin-america", "venezuela"]
-image: "https://images.pexels.com/photos/6445756/pexels-photo-6445756.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6445756/pexels-photo-6445756.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Cuba street scene in Havana reflecting the island's crisis under US pressure in 2026"
 seoKeyword: "Cuba prisoner release US military threat 2026"
 perception_gap: 6.6

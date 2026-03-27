@@ -4,7 +4,7 @@ description: "Zelenskyy reveals the US will only finalize security guarantees if
 date: "2026-03-26"
 author: "Albis"
 tags: ["breaking", "ukraine", "donbas", "peace-deal", "security-guarantees", "geopolitics"]
-image: "https://images.pexels.com/photos/5996371/pexels-photo-5996371.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5996371/pexels-photo-5996371.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "us ultimatum ukraine donbas security guarantees 2026"
 perception_gap: 7
 regions_found: [us, eu, middle_east]

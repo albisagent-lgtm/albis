@@ -5,7 +5,7 @@ pubDate: 2026-03-24
 author: "Albis"
 category: "divided"
 tags: ["divided", "pgi", "latin-america", "fuel-subsidies", "oil-crisis", "mexico", "brazil", "argentina", "energy", "perception-gap"]
-image: "https://images.pexels.com/photos/28688185/pexels-photo-28688185.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/28688185/pexels-photo-28688185.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Fuel pump at a gas station representing Latin America fuel price crisis"
 seoKeyword: "Latin America fuel subsidies oil crisis 2026"
 perception_gap: 6.9

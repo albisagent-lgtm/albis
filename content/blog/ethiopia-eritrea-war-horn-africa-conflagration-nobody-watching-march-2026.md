@@ -4,7 +4,7 @@ description: "While the world focuses on Iran, two countries that killed 100,000
 date: "2026-03-10"
 author: "Albis"
 tags: ["quick-take", "ethiopia", "eritrea", "horn-of-africa", "conflict", "sudan", "geopolitics"]
-image: "https://images.pexels.com/photos/2230885/pexels-photo-2230885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2230885/pexels-photo-2230885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "International Crisis Group"
     url: "https://www.crisisgroup.org/global/10-conflicts-watch-2026"

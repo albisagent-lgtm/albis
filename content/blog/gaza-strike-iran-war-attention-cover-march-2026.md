@@ -5,7 +5,7 @@ date: "2026-03-14"
 author: "Albis"
 tags: ["breaking", "gaza", "iran-war", "perception-gap", "middle-east"]
 seoKeyword: "Gaza airstrike deadliest since Iran war 2026"
-image: "https://images.pexels.com/photos/36520968/pexels-photo-36520968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36520968/pexels-photo-36520968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "Reuters"
     url: "https://www.reuters.com/world/middle-east/israeli-strike-kills-three-gaza-regional-offensives-escalate-2026-03-13/"

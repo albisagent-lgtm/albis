@@ -4,7 +4,7 @@ description: "US says DeepSeek used smuggled Nvidia Blackwell chips in Inner Mon
 date: 2026-03-16
 author: "Albis"
 tags: ["divided", "pgi", "deepseek", "nvidia", "export-controls", "ai", "tech-geopolitics", "china"]
-image: "https://images.pexels.com/photos/32300577/pexels-photo-32300577.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/32300577/pexels-photo-32300577.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "DeepSeek Nvidia Blackwell chips export controls smuggling 2026"
 sources:
   - name: "Reuters"

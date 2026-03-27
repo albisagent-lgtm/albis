@@ -4,7 +4,7 @@ description: "1,362 measles cases in 2026's first 2.5 months. Vaccination rates 
 date: "2026-03-21"
 author: "Albis"
 tags: ["health-longevity", "measles", "vaccination", "public-health", "rfk", "us-health"]
-image: "https://images.pexels.com/photos/3992931/pexels-photo-3992931.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3992931/pexels-photo-3992931.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "US measles elimination status 2026 PAHO review"
 faqs:
   - q: "Will the US lose its measles elimination status in 2026?"

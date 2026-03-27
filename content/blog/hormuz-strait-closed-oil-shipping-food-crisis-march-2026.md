@@ -2,7 +2,7 @@
 title: "Hormuz Strait Just Shut Down. Watch What Happens"
 description: "Five ships crossed the Strait of Hormuz on Thursday. Normally hundreds pass through daily. When 21% of global oil stops flowing, everything downstream moves — from food prices to diplomatic calculations."
 date: "2026-03-07"
-image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["breaking", "strait-of-hormuz", "iran-war", "oil-crisis", "global-economy", "shipping", "food-security"]
 confidence: "confirmed"

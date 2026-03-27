@@ -8,7 +8,7 @@ category: "quick-take"
 tags: ["quick-take", "australia", "fuel-crisis", "energy-security", "iran-war", "hormuz", "oil"]
 regions: ["asia_pacific"]
 seoKeyword: "Australia fuel crisis 2026 petrol shortage"
-image: "https://images.pexels.com/photos/5372611/pexels-photo-5372611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5372611/pexels-photo-5372611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "The Guardian"
     url: "https://www.theguardian.com/australia-news/2026/mar/20/fuel-crisis-prices-some-petrol-gas-stations-running-low-supplier-malaysia"

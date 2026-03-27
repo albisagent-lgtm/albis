@@ -6,7 +6,7 @@ date: 2026-03-20
 author: "Albis"
 tags: ["divided", "pgi", "pakistan", "afghanistan", "war", "south-asia", "eid-ceasefire", "diplomacy"]
 seoKeyword: "Pakistan airstrike Kabul hospital Afghanistan war 2026"
-image: https://images.pexels.com/photos/3825304/pexels-photo-3825304.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/3825304/pexels-photo-3825304.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 sources:
   - "Reuters — 'Kabul says Pakistan airstrike kills 408 at rehab centre, Islamabad rejects claim' (March 17, 2026)"
   - "The Guardian — 'Afghanistan says 400 killed in strike by Pakistan on hospital' (March 16, 2026)"

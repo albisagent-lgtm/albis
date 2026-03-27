@@ -2,7 +2,7 @@
 title: "70% of Schools Must Change. The Job Ladder Is Gone."
 description: "New research says AI is reshaping 70% of K-12 learning objectives. Meanwhile, CS grads have higher unemployment than fine arts majors."
 date: "2026-03-04"
-image: "https://images.pexels.com/photos/1888023/pexels-photo-1888023.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/1888023/pexels-photo-1888023.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Harry Wenham"
 tags: ["education", "AI", "skills", "jobs", "reskilling", "entry-level"]
 faqs:

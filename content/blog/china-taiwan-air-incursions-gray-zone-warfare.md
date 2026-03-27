@@ -5,7 +5,7 @@ description: "China's air incursions into Taiwan's airspace increased 1,400% in 
 date: "2026-03-14"
 author: "Harry Wenham"
 tags: ["explainer", "china", "taiwan", "gray-zone-warfare", "military", "geopolitics"]
-image: https://images.pexels.com/photos/34094839/pexels-photo-34094839.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/34094839/pexels-photo-34094839.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "China Taiwan air incursions gray zone warfare"
 faqs:
   - q: "How many Chinese military aircraft entered Taiwan's airspace in 2025?"

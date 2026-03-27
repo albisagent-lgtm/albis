@@ -4,7 +4,7 @@ description: "Trump's AI framework would preempt 1,561 state AI bills across 45 
 date: "2026-03-22"
 author: "Albis"
 tags: ["quick-take", "ai", "regulation", "united-states", "technology"]
-image: "https://images.pexels.com/photos/7688592/pexels-photo-7688592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7688592/pexels-photo-7688592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "White House AI framework preempt state laws 2026"
 sources:
   - name: "TechCrunch"

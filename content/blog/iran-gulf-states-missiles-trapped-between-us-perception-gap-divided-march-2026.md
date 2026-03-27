@@ -3,7 +3,7 @@ title: "Iran Hits Its Neighbours. Both Sides Blame the Other."
 description: "Over 1,000 Iranian missiles hit Gulf states. Washington and Tehran both blame each other. The countries actually getting bombed disagree with everyone."
 date: "2026-03-10"
 author: "Albis"
-image: "https://images.pexels.com/photos/16660293/pexels-photo-16660293.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/16660293/pexels-photo-16660293.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["divided", "pgi", "iran", "gulf states", "missiles", "perception gap", "middle east", "war"]
 sources:
   - name: "Al Jazeera"

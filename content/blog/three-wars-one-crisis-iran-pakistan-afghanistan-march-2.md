@@ -5,7 +5,7 @@ date: "2026-03-02"
 author: "Albis"
 tags: ["Iran", "Pakistan", "Afghanistan", "Hezbollah", "oil", "Strait of Hormuz", "geopolitics"]
 category: "analysis"
-image: "https://images.pexels.com/photos/3456070/pexels-photo-3456070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3456070/pexels-photo-3456070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 faqs:
   - q: "Are Iran, Pakistan, and Afghanistan fighting the same war?"
     a: "Not directly, but the conflicts are deeply interconnected. Iran was mediating Pakistan-Afghanistan tensions before US-Israeli strikes killed Khamenei. That mediation channel is now dead, and the Strait of Hormuz closure threatens Pakistan's oil imports while it fights Afghanistan on its western border."

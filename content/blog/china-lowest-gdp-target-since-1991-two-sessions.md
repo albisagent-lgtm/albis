@@ -3,7 +3,7 @@ title: "China's Lowest GDP Target Since 1991. Nobody Noticed."
 description: "China cut its GDP target to 4.5-5% at the Two Sessions, the lowest since 1991. Here's why 6 billion people should care."
 date: "2026-03-14"
 author: "Albis"
-image: "https://images.pexels.com/photos/7899651/pexels-photo-7899651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7899651/pexels-photo-7899651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["unseen", "gai", "china", "economy", "two-sessions", "gdp"]
 seoKeyword: "China GDP growth target 2026 Two Sessions"
 faqs:

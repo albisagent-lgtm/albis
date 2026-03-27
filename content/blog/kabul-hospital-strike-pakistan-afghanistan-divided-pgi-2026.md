@@ -5,7 +5,7 @@ date: 2026-03-20
 author: "Albis"
 tags: ["divided", "pgi", "pakistan", "afghanistan", "kabul", "war", "south-asia", "civilian-harm"]
 seoKeyword: "Pakistan Kabul hospital airstrike death toll 2026"
-image: https://images.pexels.com/photos/6462835/pexels-photo-6462835.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/6462835/pexels-photo-6462835.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 confidence: "confirmed"
 sources:
   - name: "BBC News"

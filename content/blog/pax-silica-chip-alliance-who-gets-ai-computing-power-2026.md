@@ -2,7 +2,7 @@
 title: "Pax Silica: 13 Nations Decide Who Gets AI Chips"
 description: "The US-led Pax Silica semiconductor alliance now spans 13 countries and a $4 trillion investment fund. China calls it a bluff. A $2.5 billion smuggling arrest suggests the walls already have holes. Here's what it means for computing power."
 pubDate: "2026-03-26"
-image: "https://images.pexels.com/photos/3665442/pexels-photo-3665442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3665442/pexels-photo-3665442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Harry Wenham"
 category: "explainer"
 tags: ["explainer", "semiconductors", "ai", "geopolitics", "pax-silica", "china", "export-controls", "supply-chain"]

@@ -3,7 +3,7 @@ title: "Pentagon's $14B AI Weapons Nobody Knows About"
 description: "The US military's record $14.2 billion AI weapons budget includes armed humanoid robots and autonomous drones — invisible to 6 of 7 global regions."
 date: "2026-03-15"
 author: "Albis"
-image: "https://images.pexels.com/photos/32998808/pexels-photo-32998808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/32998808/pexels-photo-32998808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["unseen", "gai", "ai", "autonomous-weapons", "pentagon", "military", "drones"]
 seoKeyword: "Pentagon AI autonomous weapons budget 2026"
 faqs:

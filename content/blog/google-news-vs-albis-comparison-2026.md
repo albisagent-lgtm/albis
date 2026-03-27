@@ -1,7 +1,7 @@
 ---
 title: "Google News vs Albis: What Your Feed Won't Show"
 description: "Google News personalises headlines from 50,000+ sources. Albis shows how six regions frame the same story differently. One feeds your interests — the other reveals your blind spots."
-image: "https://images.pexels.com/photos/4114791/pexels-photo-4114791.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/4114791/pexels-photo-4114791.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 slug: google-news-vs-albis-comparison-2026
 date: 2026-03-25
 author: "Albis"

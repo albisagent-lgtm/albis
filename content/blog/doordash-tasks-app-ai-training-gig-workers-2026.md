@@ -6,7 +6,7 @@ author: "Harry Wenham"
 category: "tech-ai"
 tags: ["doordash", "ai-training", "gig-economy", "robotics", "data-labor", "automation"]
 regions: ["us"]
-image: "https://images.pexels.com/photos/7362877/pexels-photo-7362877.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7362877/pexels-photo-7362877.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Delivery worker using smartphone to record video, representing DoorDash Tasks AI training gig"
 seoKeyword: "doordash tasks app ai training gig workers"
 perception_gap: 3

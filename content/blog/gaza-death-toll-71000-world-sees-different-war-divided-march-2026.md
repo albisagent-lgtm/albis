@@ -4,7 +4,7 @@ description: "Gaza's death toll hit 71,439 and the world can't agree on what's h
 date: "2026-03-14"
 author: "Albis"
 tags: ["divided", "pgi", "gaza", "palestine", "israel", "perception-gap", "middle-east", "humanitarian"]
-image: https://images.pexels.com/photos/6896961/pexels-photo-6896961.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/6896961/pexels-photo-6896961.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "Gaza death toll 71000 different perspectives 2026"
 sources:
   - name: "Al Jazeera"

@@ -3,7 +3,7 @@ title: "Sudan Famine: 21 Million Hungry, World Looks Away"
 description: "WFP food stocks in Sudan deplete by end of March 2026. 21 million face acute hunger in the world's largest food crisis — invisible to most regions."
 date: "2026-03-17"
 author: "Harry Wenham"
-image: "https://images.pexels.com/photos/12981948/pexels-photo-12981948.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/12981948/pexels-photo-12981948.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["unseen", "gai", "sudan", "famine", "humanitarian", "food-security"]
 seoKeyword: "Sudan famine WFP food stocks depleted March 2026"
 sources:

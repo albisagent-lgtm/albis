@@ -4,7 +4,7 @@ description: "The BCV confirmed 52% accumulated inflation in Venezuela's first t
 date: "2026-03-21"
 author: "Albis"
 tags: ["quick-take", "latin-america", "venezuela", "inflation", "economics", "iran-war"]
-image: https://images.pexels.com/photos/36095358/pexels-photo-36095358.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/36095358/pexels-photo-36095358.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "Venezuela inflation 2026 oil crisis economic recovery"
 confidence: "confirmed"
 sources:

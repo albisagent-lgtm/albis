@@ -5,7 +5,7 @@ date: "2026-03-15"
 author: "Albis"
 tags: ["explainer", "climate", "renewable-energy", "china", "us", "paris-agreement"]
 seoKeyword: "global warming 1.5 degrees breached China solar US wind"
-image: "https://images.pexels.com/photos/15751130/pexels-photo-15751130.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+image: "https://images.pexels.com/photos/15751130/pexels-photo-15751130.jpeg?auto=compress&cs=tinysrgb&h=800&w=1200"
 faqs:
   - q: "What does it mean that global warming has reached 1.5°C?"
     a: "Scientific consensus confirms we've breached the Paris Agreement's guardrail. It's a long-term average over decades, not just one hot year. The threshold was meant to prevent increasingly dangerous floods, droughts, fires, and climate impacts."

@@ -3,7 +3,7 @@ title: "US Tomahawk Hit an Iran School. 168 Dead."
 description: "Multiple investigations verified US missile struck Minab school killing 168, mostly children. US frames as potential collateral damage under investigation. Middle East frames as deliberate war crime. The perception gap reveals everything."
 date: "2026-03-10"
 author: "Harry Wenham"
-image: "https://images.pexels.com/photos/5887839/pexels-photo-5887839.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5887839/pexels-photo-5887839.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["breaking", "iran", "war", "civilian-casualties", "war-crimes", "perception-gap"]
 sources:
   - name: "The Guardian"

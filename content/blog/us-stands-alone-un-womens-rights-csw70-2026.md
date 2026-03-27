@@ -5,7 +5,7 @@ date: "2026-03-22"
 author: "Albis"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "csw70", "perception-gap", "media-literacy", "united-nations"]
-image: "https://images.pexels.com/photos/6257343/pexels-photo-6257343.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6257343/pexels-photo-6257343.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "US votes against UN women's rights CSW70 2026"
 perception_gap: 9
 regions_found: [us, eu, middle_east, africa, asia_pacific]

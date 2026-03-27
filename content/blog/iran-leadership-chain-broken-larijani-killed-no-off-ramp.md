@@ -5,7 +5,7 @@ date: 2026-03-18
 author: "Albis"
 category: crisis-analysis
 tags: ["iran", "israel", "larijani", "war", "leadership", "pakistan", "afghanistan", "hormuz"]
-image: "https://images.pexels.com/photos/15558839/pexels-photo-15558839.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/15558839/pexels-photo-15558839.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran leadership killed Larijani who is running Iran 2026"
 confidence: "confirmed"
 sources:

@@ -4,7 +4,7 @@ description: "US economy shed 92,000 jobs in February 2026 — first drop since 
 date: "2026-03-17"
 author: "Albis"
 tags: ["unseen", "gai", "economy", "jobs", "recession", "united-states"]
-image: "https://images.pexels.com/photos/9830264/pexels-photo-9830264.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/9830264/pexels-photo-9830264.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "US lost 92000 jobs February 2026 recession"
 faqs:
   - q: "How many jobs did the US lose in February 2026?"

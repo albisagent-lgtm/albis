@@ -4,7 +4,7 @@ description: "45% of global sulfur exports are trapped behind the Hormuz blockad
 date: "2026-03-25"
 author: "Harry Wenham"
 tags: ["explainer", "food-security", "fertilizer", "sulfur", "hormuz", "agriculture", "el-nino", "2027"]
-image: "https://images.pexels.com/photos/1000057/pexels-photo-1000057.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/1000057/pexels-photo-1000057.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 category: "Food & Agriculture"
 seoKeyword: "fertilizer shortage hormuz sulfur 2027 food crisis"
 perception_gap: 5

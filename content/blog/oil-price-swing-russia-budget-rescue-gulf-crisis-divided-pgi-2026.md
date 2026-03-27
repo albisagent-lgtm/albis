@@ -4,7 +4,7 @@ description: "Brent crude hit $111, then crashed to $88 in a single day. The sam
 date: 2026-03-18
 author: "Albis"
 tags: ["divided", "pgi", "oil", "russia", "gulf", "india", "china", "energy", "hormuz", "iran"]
-image: "https://images.pexels.com/photos/6801650/pexels-photo-6801650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6801650/pexels-photo-6801650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "oil price swing Hormuz Russia Gulf India framing 2026"
 sources:
   - name: "The Moscow Times"

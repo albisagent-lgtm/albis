@@ -4,7 +4,7 @@ description: "Anthropic's CEO warned AI could eliminate half of entry-level jobs
 date: "2026-03-14"
 author: "Albis"
 tags: ["explainer", "ai", "unemployment", "automation", "labor-market", "economy"]
-image: "https://images.pexels.com/photos/9026303/pexels-photo-9026303.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/9026303/pexels-photo-9026303.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "AI unemployment Anthropic CEO job displacement 2026"
 sources:
   - name: "The Atlantic"

@@ -4,7 +4,7 @@ description: "Oil grabs headlines. Natural gas quietly raises the cost of everyt
 publishedAt: 2026-03-05
 author: "Albis"
 category: Energy & Climate
-image: "https://images.pexels.com/photos/7390887/pexels-photo-7390887.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7390887/pexels-photo-7390887.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["natural gas", "Qatar", "Iran conflict", "energy", "food prices", "fertiliser", "supply chain", "Europe"]
 sources:
   - url: "https://www.bloomberg.com/news/articles/2026-03-02/european-gas-rallies-more-than-30-as-qatar-halts-lng-production"

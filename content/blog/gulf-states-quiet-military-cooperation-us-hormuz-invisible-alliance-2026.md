@@ -3,7 +3,7 @@ title: "Gulf States Quietly Joining America's Hormuz Fight"
 description: "UAE signals it may join a US-led Hormuz coalition while Gulf states spend $2bn+ on air defense. Arabic media reports details invisible worldwide."
 date: "2026-03-18"
 author: "Albis"
-image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["unseen", "gai", "gulf-states", "iran-war", "hormuz", "uae", "saudi-arabia"]
 seoKeyword: "Gulf states US Hormuz military cooperation 2026"
 faqs:

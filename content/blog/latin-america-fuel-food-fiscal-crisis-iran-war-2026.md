@@ -5,7 +5,7 @@ date: "2026-03-26"
 author: "Albis Geopolitics Desk"
 category: "explainer"
 tags: ["explainer", "latin-america", "fuel-crisis", "food-crisis", "iran-war", "chile", "brazil", "argentina", "dominican-republic", "hormuz", "fertilizer", "oil-crisis", "perception-gap"]
-image: "https://images.pexels.com/photos/5032848/pexels-photo-5032848.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5032848/pexels-photo-5032848.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Gas station fuel pumps representing Latin America energy crisis"
 seoKeyword: "latin america fuel food crisis iran war 2026"
 perception_gap: 5

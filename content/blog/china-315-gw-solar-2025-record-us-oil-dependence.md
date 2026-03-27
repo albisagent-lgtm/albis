@@ -5,7 +5,7 @@ date: "2026-03-20"
 author: "Harry Wenham"
 category: "Explainer"
 tags: ["china", "solar", "energy", "ai", "geopolitics", "iran", "renewables"]
-image: "https://images.pexels.com/photos/6876535/pexels-photo-6876535.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6876535/pexels-photo-6876535.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "China 315 GW solar record 2025 US energy comparison"
 confidence: "confirmed"
 faqs:

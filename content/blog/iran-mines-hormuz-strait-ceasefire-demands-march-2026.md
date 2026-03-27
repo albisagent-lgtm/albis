@@ -6,7 +6,7 @@ author: "Albis"
 date: "2026-03-13"
 categories: ["geopolitics", "middle-east", "global-economy"]
 tags: ["iran", "us", "israel", "strait-of-hormuz", "ceasefire", "fertilizer", "food-security"]
-image: "https://images.pexels.com/photos/18959221/pexels-photo-18959221.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/18959221/pexels-photo-18959221.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Cargo ships anchored at coastal port"
 imageCredit: "Zifeng Xiong / Pexels"
 faqs:

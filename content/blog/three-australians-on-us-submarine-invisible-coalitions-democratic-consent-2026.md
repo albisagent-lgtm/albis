@@ -2,7 +2,7 @@
 title: "Your Country Might Be at War Right Now"
 description: "Three Australians were on the US submarine that sank an Iranian warship. PM Albanese confirmed it. Most Australians had no idea their soldiers were fighting someone else's war."
 date: "2026-03-08"
-image: "https://images.pexels.com/photos/36455299/pexels-photo-36455299.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36455299/pexels-photo-36455299.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["quick-take", "australia", "aukus", "iran-war", "coalition-warfare", "democratic-consent"]
 confidence: "confirmed"

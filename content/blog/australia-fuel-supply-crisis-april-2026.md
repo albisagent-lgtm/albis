@@ -4,7 +4,7 @@ description: "Six fuel tankers bound for Australia cancelled. Petrol prices hit 
 date: "2026-03-23"
 author: "James Chen"
 tags: ["quick-take", "australia", "fuel-crisis", "hormuz", "new-zealand", "energy-security", "pacific"]
-image: "https://images.pexels.com/photos/3971795/pexels-photo-3971795.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3971795/pexels-photo-3971795.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Fuel pumps at an Australian service station"
 seoKeyword: "australia fuel supply crisis april 2026"
 confidence: "confirmed"

@@ -4,7 +4,7 @@ description: "Trump vowed to 'massively blow up' South Pars if Iran struck Qatar
 date: "2026-03-20"
 author: "Albis"
 tags: ["breaking", "iran", "energy", "trump", "qatar", "geopolitics", "south-pars"]
-image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Trump South Pars blow up threat Iran Qatar energy strikes 2026"
 confidence: "confirmed"
 sources:

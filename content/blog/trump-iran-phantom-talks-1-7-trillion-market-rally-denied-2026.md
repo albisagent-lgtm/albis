@@ -5,7 +5,7 @@ pubDate: 2026-03-24
 author: "Albis Editorial"
 category: "perception-gap"
 tags: ["iran war", "trump", "stock market", "oil prices", "perception gap", "hormuz", "ceasefire"]
-image: "https://images.pexels.com/photos/6802046/pexels-photo-6802046.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6802046/pexels-photo-6802046.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Stock market trading screen showing volatile price movements"
 seoKeyword: "Trump Iran talks market rally denied 2026"
 perception_gap: 9

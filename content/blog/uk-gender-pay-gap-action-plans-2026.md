@@ -6,7 +6,7 @@ excerpt: "The UK published mandatory gender pay gap action plan guidance on Marc
 author: "Albis"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "workplace-equality", "pay-gap"]
-image: "https://images.pexels.com/photos/7202909/pexels-photo-7202909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7202909/pexels-photo-7202909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 published_at: "2026-03-14T16:00:00Z"
 seoKeyword: "UK gender pay gap action plans 2026"
 confidence: "confirmed"

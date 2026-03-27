@@ -3,7 +3,7 @@ title: "Australia Has 32 Days of Diesel. NZ Has Zero Refineries."
 description: "Australia and New Zealand dismantled their refining capacity over two decades. Now the Strait of Hormuz is closed and both nations face fuel rationing within weeks — an energy crisis they built themselves."
 pubDate: 2026-03-22
 author: "Albis"
-image: "https://images.pexels.com/photos/3971795/pexels-photo-3971795.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3971795/pexels-photo-3971795.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["energy-crisis", "australia", "new-zealand", "fuel-supply", "hormuz", "iran-war", "oil"]
 category: "analysis"
 sources:

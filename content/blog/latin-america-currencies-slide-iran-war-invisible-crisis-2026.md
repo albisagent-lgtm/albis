@@ -5,7 +5,7 @@ pubDate: 2026-03-25
 author: "Harry Wenham"
 category: "unseen"
 tags: ["unseen", "gai", "latin-america", "currencies", "iran-war", "oil-crisis", "emerging-markets", "fed", "inflation"]
-image: "https://images.pexels.com/photos/8183466/pexels-photo-8183466.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/8183466/pexels-photo-8183466.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Currency exchange board showing declining rates"
 seoKeyword: "Latin America currencies falling oil crisis 2026"
 perception_gap: 5.4

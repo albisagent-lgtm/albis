@@ -5,7 +5,7 @@ date: 2026-03-16
 category: "Tech Geopolitics"
 author: "Harry Wenham"
 tags: ["ai-geopolitics", "China", "climate", "tech", "carbon-emissions", "self-sufficiency"]
-image: "https://images.pexels.com/photos/744347/pexels-photo-744347.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/744347/pexels-photo-744347.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "China five year plan 2026 R&D spending climate"
 faqs:
   - q: "How much is China increasing R&D spending?"

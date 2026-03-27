@@ -4,7 +4,7 @@ description: "A US-Israel strike killed 15 workers in an Isfahan factory on Marc
 date: 2026-03-15
 author: "Albis"
 tags: ["divided", "pgi", "iran-war", "isfahan", "perception-gap", "civilian-casualties"]
-image: "https://images.pexels.com/photos/32918869/pexels-photo-32918869.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/32918869/pexels-photo-32918869.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Isfahan factory strike civilian deaths Iran 2026"
 confidence: "confirmed"
 sources:

@@ -5,7 +5,7 @@ date: 2026-03-04
 author: "Albis"
 category: Health
 tags: [pandemic, disease x, mpox, bird flu, H5N1, oropouche, rubella, CDC, surveillance, public health]
-image: "https://images.pexels.com/photos/5801745/pexels-photo-5801745.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5801745/pexels-photo-5801745.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 faqs: 
   - q: "What is Disease X?"
     a: "Disease X is the WHO's placeholder name for an unknown pathogen that could cause the next pandemic. It's not a specific virus—it's a planning concept. The four viruses experts are currently watching (mpox, H5N1 bird flu, Oropouche, rubella) are candidates."

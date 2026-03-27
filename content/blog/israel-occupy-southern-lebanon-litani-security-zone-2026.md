@@ -4,7 +4,7 @@ description: "Defence Minister Katz declares Israel will seize territory up to t
 date: 2026-03-25
 author: "Albis"
 tags: ["divided", "pgi", "lebanon", "israel", "occupation", "displacement", "litani"]
-image: https://images.pexels.com/photos/28558771/pexels-photo-28558771.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/28558771/pexels-photo-28558771.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "Israel occupy southern Lebanon Litani River"
 perception_gap: 7
 regions_found: [middle_east, eu, us]

@@ -4,7 +4,7 @@ description: "A Lebanese-American who lost family in an airstrike rammed a Michi
 date: 2026-03-14
 category: current_events
 tags: [breaking, geopolitics, iran-war, terrorism, michigan, virginia, perception-gap]
-image: https://images.pexels.com/photos/20801238/pexels-photo-20801238.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/20801238/pexels-photo-20801238.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "Michigan synagogue attack Iran war domestic terrorism 2026"
 sources:
   - name: "The Guardian"

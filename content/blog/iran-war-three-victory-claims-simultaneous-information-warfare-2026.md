@@ -4,7 +4,7 @@ description: "On Day 21 of the Iran war, Trump, Netanyahu, and Mojtaba Khamenei 
 date: "2026-03-21"
 author: "Albis"
 tags: ["information-attention", "iran-war", "media-literacy", "information-warfare", "disinformation", "filter-bubbles", "narrative", "perception-gap"]
-image: "https://images.pexels.com/photos/5380618/pexels-photo-5380618.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5380618/pexels-photo-5380618.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran war three victory claims information warfare Day 21 2026"
 confidence: "confirmed"
 sources:

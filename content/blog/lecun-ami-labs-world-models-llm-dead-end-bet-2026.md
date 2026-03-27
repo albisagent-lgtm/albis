@@ -2,7 +2,7 @@
 title: "The AI Godfather Just Bet That ChatGPT Is a Dead End"
 description: "Yann LeCun left Meta to launch AMI Labs — building AI that understands physics instead of just predicting words. If he's right, the trillion-dollar LLM industry is doomed. If he's wrong, he just walked away from the best-funded AI lab in the world for nothing."
 date: "2026-03-03"
-image: "https://images.pexels.com/photos/7688592/pexels-photo-7688592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7688592/pexels-photo-7688592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["quick-take", "ai", "tech", "yann-lecun", "world-models"]
 ---

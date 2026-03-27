@@ -5,7 +5,7 @@ pubDate: 2026-03-25
 date: 2026-03-25
 author: "Albis"
 category: "trending"
-image: "https://images.pexels.com/photos/28688185/pexels-photo-28688185.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/28688185/pexels-photo-28688185.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["trending", "energy-crisis", "philippines", "iran-war", "hormuz", "oil", "fuel-rationing", "asia-pacific", "perception-gap"]
 seoKeyword: "Philippines energy emergency Iran war 2026"
 perception_gap: 7

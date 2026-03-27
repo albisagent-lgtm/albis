@@ -5,7 +5,7 @@ pubDate: 2026-03-25
 date: 2026-03-25
 author: "Albis"
 category: "unseen"
-image: "https://images.pexels.com/photos/9353664/pexels-photo-9353664.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/9353664/pexels-photo-9353664.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["unseen", "gai", "hunger", "drought", "kenya", "east-africa", "turkana", "ethiopia", "somalia", "aid-cuts", "perception-gap"]
 seoKeyword: "East Africa hunger crisis 26 million Kenya Turkana 2026"
 perception_gap: 3

@@ -2,7 +2,7 @@
 title: "India Hacked Pakistan's Nuclear Agency for a Year"
 description: "An India-linked cyber espionage campaign targeted Pakistan's nuclear regulator, navy, and telecom for 12 months. Indian media calls it counterterrorism. Pakistani media calls it state-sponsored aggression. The same operation, two completely different stories."
 date: 2026-03-08
-image: "https://images.pexels.com/photos/2036656/pexels-photo-2036656.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2036656/pexels-photo-2036656.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["divided", "pgi", "cybersecurity", "india", "pakistan", "espionage", "south-asia"]
 sources:

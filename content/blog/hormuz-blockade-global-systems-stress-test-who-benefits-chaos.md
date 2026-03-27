@@ -5,7 +5,7 @@ date: "2026-03-15"
 author: "Harry Wenham"
 tags: ["the-lens", "geopolitics", "oil", "iran-war", "hormuz", "russia", "perception-gap"]
 pillars: ["the-flow", "the-lens"]
-image: https://images.pexels.com/photos/21937964/pexels-photo-21937964.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/21937964/pexels-photo-21937964.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 category: "the-lens"
 seoKeyword: "Hormuz blockade who benefits Russia oil crisis 2026"
 pgiScore: 8

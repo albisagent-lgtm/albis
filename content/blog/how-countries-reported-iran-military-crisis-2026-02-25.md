@@ -2,7 +2,7 @@
 title: "Same Aircraft Carriers, Three Completely Different Wars"
 description: "Same aircraft carriers, same photos — three completely different wars. The Iran military crisis split global media wide open."
 date: "2026-02-25"
-image: "https://images.pexels.com/photos/36300907/pexels-photo-36300907.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36300907/pexels-photo-36300907.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["reactive", "global-perspectives", "iran", "military", "middle-east", "media-framing"]
 category: "perspectives"

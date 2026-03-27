@@ -4,7 +4,7 @@ description: "Pakistan shut all schools until March 31 to save diesel. The US ju
 date: "2026-03-24"
 author: "Harry Wenham"
 tags: ["education", "energy-crisis", "AI-tutoring", "Pakistan", "school-closures", "perception-gap"]
-image: https://images.pexels.com/photos/2675061/pexels-photo-2675061.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/2675061/pexels-photo-2675061.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "Asia schools close fuel crisis 2026"
 perception_gap: 6
 regions_found: [us, eu, sa, ap]

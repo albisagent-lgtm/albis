@@ -3,7 +3,7 @@ title: "Students Using AI as Friends Are Getting Lonelier"
 description: "15% of UK undergrads now use AI for companionship. New research shows the comfort comes at a cost — eroding real-world social connections."
 date: "2026-03-25"
 author: "Priya Sharma"
-image: "https://images.pexels.com/photos/7683709/pexels-photo-7683709.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7683709/pexels-photo-7683709.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["education", "ai", "mental-health", "loneliness", "students", "child-development"]
 confidence: "confirmed"
 sources:

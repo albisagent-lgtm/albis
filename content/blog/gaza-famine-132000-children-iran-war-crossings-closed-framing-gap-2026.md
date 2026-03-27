@@ -4,7 +4,7 @@ description: "The IPC projects 132,000 children under five will suffer acute mal
 date: 2026-03-17
 author: "Albis"
 tags: ["divided", "pgi", "gaza", "famine", "humanitarian", "iran-war", "children", "perception-gap"]
-image: "https://images.pexels.com/photos/6646909/pexels-photo-6646909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6646909/pexels-photo-6646909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "The Guardian"
     url: "https://www.theguardian.com/world/2026/mar/02/iran-attacks-gaza-under-siege"

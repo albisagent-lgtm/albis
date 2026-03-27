@@ -2,7 +2,7 @@
 title: "China-Japan Cold War: No Missiles, Just Cancelled Concerts"
 description: "No missiles. No tanks. China cancelled Hatsune Miku, banned pop stars, and crashed Japan's tourism by 45%. This is what modern cold war looks like."
 date: "2026-03-03"
-image: "https://images.pexels.com/photos/36354489/pexels-photo-36354489.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36354489/pexels-photo-36354489.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["explainer", "china", "japan", "taiwan", "geopolitics", "economic-coercion"]
 category: "perspectives"

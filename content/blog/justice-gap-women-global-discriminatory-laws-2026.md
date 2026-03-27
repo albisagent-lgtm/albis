@@ -6,7 +6,7 @@ author: "Albis"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "femicide", "reproductive-rights", "workplace-equality"]
 excerpt: "Women worldwide have only 64 percent of the legal rights that men possess. No country has achieved full legal equality between women and men. These are the findings of a UN Women report released March 4."
-image: "https://images.pexels.com/photos/6592163/pexels-photo-6592163.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/6592163/pexels-photo-6592163.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "UN News"

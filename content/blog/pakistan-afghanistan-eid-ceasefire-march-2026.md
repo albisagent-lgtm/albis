@@ -6,7 +6,7 @@ author: "Albis"
 category: "crisis-tracker"
 tags: ["pakistan", "afghanistan", "eid", "ceasefire", "ttp", "iran-war", "saudi-arabia", "south-asia"]
 seoKeyword: "Pakistan Afghanistan ceasefire Eid 2026"
-image: "https://images.pexels.com/photos/2759230/pexels-photo-2759230.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2759230/pexels-photo-2759230.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - "Al Jazeera — Pakistan-Afghanistan Eid pause agreement, March 18, 2026"
   - "Washington Post — TTP ceasefire announcement, March 19, 2026"

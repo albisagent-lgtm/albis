@@ -4,7 +4,7 @@ title: "1,362 US Measles Cases. The World Has No Idea."
 description: "The US measles outbreak hit 1,362 cases across 31 states by March 12, 2026 — and 5.87 billion people have never heard about it."
 date: "2026-03-14"
 author: "Albis"
-image: "https://images.pexels.com/photos/8830479/pexels-photo-8830479.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/8830479/pexels-photo-8830479.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["unseen", "gai", "measles", "health", "vaccination", "public-health"]
 seoKeyword: "US measles outbreak 2026 cases elimination status"
 faqs:

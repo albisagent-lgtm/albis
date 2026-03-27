@@ -5,7 +5,7 @@ date: "2026-03-23"
 author: "Albis"
 tags: ["trending", "sudan", "darfur", "drone-strike", "healthcare", "war", "blind-spot", "humanitarian"]
 category: "analysis"
-image: "https://images.pexels.com/photos/36533585/pexels-photo-36533585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36533585/pexels-photo-36533585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Sudan hospital drone strike Darfur 64 killed WHO 2026"
 sources:
   - name: "Al Jazeera"

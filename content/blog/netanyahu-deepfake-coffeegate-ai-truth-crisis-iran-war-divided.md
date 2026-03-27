@@ -4,7 +4,7 @@ description: "Netanyahu's 'Coffeegate' video split the world: Western fact-check
 date: 2026-03-16
 author: "Albis"
 tags: ["divided", "pgi", "deepfake", "netanyahu", "iran-war", "information-warfare", "ai", "disinformation"]
-image: "https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Netanyahu deepfake coffeegate video AI truth crisis"
 sources:
   - name: "Metro UK"

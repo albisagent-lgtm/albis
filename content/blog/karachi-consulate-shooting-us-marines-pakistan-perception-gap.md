@@ -4,7 +4,7 @@ description: "Ten people died at the US consulate in Karachi on March 1. America
 date: 2026-03-16
 author: "Albis"
 tags: ["divided", "pgi", "pakistan", "iran-war", "karachi", "us", "perception-gap"]
-image: "https://images.pexels.com/photos/5343097/pexels-photo-5343097.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5343097/pexels-photo-5343097.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Karachi US consulate Marines shooting Pakistan 2026"
 sources:
   - name: "AP News"

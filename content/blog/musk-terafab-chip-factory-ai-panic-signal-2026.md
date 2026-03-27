@@ -4,7 +4,7 @@ description: "Bernstein analysts say Musk's Terafab chip factory needs 140-360 n
 date: "2026-03-25"
 author: "James Chen"
 tags: ["ai-intelligence", "semiconductors", "elon-musk", "terafab", "tesla", "tsmc", "chip-shortage", "ai-chips"]
-image: "https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "musk terafab chip factory cost ai shortage"
 faqs:
   - q: "What is Elon Musk's Terafab chip factory?"

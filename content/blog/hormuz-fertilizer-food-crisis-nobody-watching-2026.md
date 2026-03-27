@@ -2,7 +2,7 @@
 title: "The Real Hormuz Crisis Isn't Oil. It's Fertilizer."
 description: "Everyone's watching oil prices. Almost nobody noticed that one-third of global fertilizer exports just got cut off at the Strait of Hormuz."
 date: "2026-03-02"
-image: "https://images.pexels.com/photos/36567301/pexels-photo-36567301.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36567301/pexels-photo-36567301.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["trending", "hormuz", "fertilizer", "food-security", "iran", "agriculture", "oil", "global-trade", "supply-chain"]
 category: "analysis"

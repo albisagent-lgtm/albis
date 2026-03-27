@@ -4,7 +4,7 @@ description: "The EU's Article 50 deepfake labelling law takes effect August 2, 
 date: "2026-03-20"
 author: "Harry Wenham"
 category: "Explainer"
-image: "https://images.pexels.com/photos/7688592/pexels-photo-7688592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7688592/pexels-photo-7688592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "deepfake 2026 US midterm elections EU AI Act law gap"
 confidence: "confirmed"
 sources:

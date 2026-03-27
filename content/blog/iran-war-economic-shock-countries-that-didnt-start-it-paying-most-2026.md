@@ -5,7 +5,7 @@ date: "2026-03-08T08:35:00+13:00"
 author: "Albis"
 category: "Economics"
 tags: ["iran war", "oil prices", "strait of hormuz", "india", "china", "energy crisis", "global economy"]
-image: "https://images.pexels.com/photos/36520962/pexels-photo-36520962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36520962/pexels-photo-36520962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 featured: false
 sources:
   - name: "New Lines Institute"

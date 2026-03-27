@@ -4,7 +4,7 @@ description: "DHS is subpoenaing anonymous social media accounts right now. Half
 date: "2026-03-15"
 author: "Albis"
 tags: ["information-attention", "privacy", "surveillance", "age-verification", "anonymity", "kosa"]
-image: "https://images.pexels.com/photos/7848351/pexels-photo-7848351.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/7848351/pexels-photo-7848351.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "online anonymity age verification surveillance KOSA 2026"
 sources:
   - name: "The New York Times"

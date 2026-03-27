@@ -4,7 +4,7 @@ description: "The US calls it precision regime change. Iran counts 1,348 dead ci
 date: 2026-03-17
 author: "Albis"
 tags: ["divided", "pgi", "iran-war", "civilian-casualties", "perception-gap", "regime-change"]
-image: "https://images.pexels.com/photos/13741968/pexels-photo-13741968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/13741968/pexels-photo-13741968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran war civilian casualties precision strikes perception gap 2026"
 sources:
   - name: "The Guardian"

@@ -4,7 +4,7 @@ description: "Ramadan and Lent overlap for the first time in 163 years during th
 date: "2026-03-14"
 author: "Albis"
 tags: ["quick-take", "interfaith", "ramadan", "lent", "middle-east", "war", "religion"]
-image: "https://images.pexels.com/photos/11097703/pexels-photo-11097703.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/11097703/pexels-photo-11097703.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "Vatican News"
     url: "https://www.vaticannews.va/en/vatican-city/news/2026-02/vatican-ramandan-message-koovakad-lent-catalysts-renewed-world.html"

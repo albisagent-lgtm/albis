@@ -5,7 +5,7 @@ description: "An Iranian lawmaker says ships are paying $2M to transit Hormuz. T
 date: "2026-03-24"
 author: "Albis Editorial"
 tags: ["quick-take", "hormuz", "iran", "shipping", "perception-gap", "oil", "maritime", "iran-war"]
-image: "https://images.pexels.com/photos/21937964/pexels-photo-21937964.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/21937964/pexels-photo-21937964.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Oil tanker ship navigating narrow shipping strait waters"
 seoKeyword: "iran hormuz strait shipping toll 2026"
 confidence: "disputed"

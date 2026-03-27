@@ -5,7 +5,7 @@ date: 2026-03-14
 author: Harry Wenham
 tags: [explainer, economy, trade, wto, deglobalization, tariffs, china, us, eu]
 seoKeyword: "WTO global trade slowdown 2026 deglobalization"
-image: https://images.pexels.com/photos/1624695/pexels-photo-1624695.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: https://images.pexels.com/photos/1624695/pexels-photo-1624695.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 confidence: "confirmed"
 sources:
   - name: "World Trade Organization"

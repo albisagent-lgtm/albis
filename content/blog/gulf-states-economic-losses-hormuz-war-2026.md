@@ -3,7 +3,7 @@ title: "Gulf States Are Losing $1 Billion a Day. Not Just Oil."
 description: "Arabic media breaks down the '$1 billion daily' headline into three separate crises — energy, cargo, and tourism — revealing how four weeks of war is dismantling decades of diversification."
 date: 2026-03-24
 author: "Priya Sharma"
-image: "https://images.pexels.com/photos/3769312/pexels-photo-3769312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/3769312/pexels-photo-3769312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 category: "economy"
 tags: ["quick-take", "Gulf states", "Dubai", "UAE", "Hormuz", "tourism", "post-oil economy", "perception gap"]
 regions: ["Middle East", "Europe", "Asia-Pacific"]

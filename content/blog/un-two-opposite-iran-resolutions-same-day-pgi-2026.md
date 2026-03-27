@@ -5,7 +5,7 @@ date: 2026-03-26
 author: "Rajan Mehta"
 category: "divided"
 tags: ["divided", "pgi", "iran", "united-nations", "gulf-states", "human-rights", "perception-gap", "hormuz"]
-image: "https://images.pexels.com/photos/36290473/pexels-photo-36290473.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36290473/pexels-photo-36290473.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "United Nations building representing diplomatic tensions and competing resolutions"
 seoKeyword: "UN Iran resolutions Human Rights Council"
 perception_gap: 8

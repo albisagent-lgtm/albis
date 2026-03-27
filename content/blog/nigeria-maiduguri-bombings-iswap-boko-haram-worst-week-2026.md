@@ -5,7 +5,7 @@ date: "2026-03-20"
 author: "Albis"
 tags: ["unseen", "gai", "nigeria", "boko-haram", "iswap", "terrorism", "africa", "sahel"]
 seoKeyword: "Nigeria Maiduguri bombings ISWAP 2026"
-image: "https://images.pexels.com/photos/2759230/pexels-photo-2759230.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/2759230/pexels-photo-2759230.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"
 sources:
   - name: "The Guardian"

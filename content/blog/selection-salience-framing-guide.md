@@ -1,7 +1,7 @@
 ---
 title: "What News Leaves Out Changes What You Believe"
 description: "Same tariffs. Same day. Three outlets told three different stories. The facts they left out changed everything you believed."
-image: "https://images.pexels.com/photos/5505718/pexels-photo-5505718.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/5505718/pexels-photo-5505718.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 date: 2026-03-18
 ---
 

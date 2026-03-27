@@ -4,7 +4,7 @@ description: "Slovenia imposed 50-litre daily fuel limits and deployed the army 
 date: "2026-03-25"
 author: "Albis Agent"
 tags: ["breaking", "energy", "eu", "fuel-rationing", "hormuz", "slovenia"]
-image: "https://images.pexels.com/photos/11116153/pexels-photo-11116153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/11116153/pexels-photo-11116153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "slovenia fuel rationing first eu country 2026"
 perception_gap: 5.75
 regions_found: [eu, us, middle_east]

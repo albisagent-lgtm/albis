@@ -4,7 +4,7 @@ description: "Russia launched its biggest assault of 2026 against Ukraine's main
 date: "2026-03-23"
 author: "Harry Wenham"
 tags: ["explainer", "ukraine", "russia", "fortress-belt", "donbas", "war"]
-image: "https://images.pexels.com/photos/36357946/pexels-photo-36357946.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36357946/pexels-photo-36357946.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "russia spring offensive ukraine fortress belt 2026"
 perception_gap: 6.7
 regions_found: [us, eu]

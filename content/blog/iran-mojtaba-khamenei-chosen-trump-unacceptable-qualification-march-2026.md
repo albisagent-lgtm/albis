@@ -5,7 +5,7 @@ date: "2026-03-09"
 author: "Harry Wenham"
 tags: ["trending", "iran", "geopolitics", "succession", "middle-east", "trump", "china", "israel"]
 category: "explainer"
-image: "https://images.pexels.com/photos/36217227/pexels-photo-36217227.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+image: "https://images.pexels.com/photos/36217227/pexels-photo-36217227.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "Al Jazeera"
     url: "https://www.aljazeera.com/news/2026/3/8/irans-assembly-of-experts-says-consensus-reached-on-khameneis-successor"
