@@ -1,6 +1,6 @@
 ---
-title: "Anatoly Kolodkin Tanker Cuba: Full Standoff Timeline"
-description: "The Anatoly Kolodkin — a sanctioned Russian tanker with 730,000 barrels — reached Cuba while US Coast Guard cutters waited. Here's the full timeline and what each side isn't telling you."
+title: "Anatoly Kolodkin Tanker Cuba: Standoff Timeline"
+description: "The Anatoly Kolodkin tanker arrived in Cuba carrying 730,000 barrels past US Coast Guard cutters. Full timeline, Russian escort details, and what each side isn't saying."
 date: "2026-03-23"
 author: "James Chen"
 tags: ["quick-take", "cuba", "russia", "oil-blockade", "cold-war", "hormuz"]
@@ -52,11 +52,9 @@ faqs:
 
 The Anatoly Kolodkin listed its destination as "Atlantis, USA." The tanker was headed to Cuba.
 
-The Anatoly Kolodkin tanker — carrying 730,000 barrels of crude for Cuba's Matanzas oil terminal — is owned by Russia's sanctioned state shipping company Sovcomflot. Two US Coast Guard cutters waited off Cuba's northeast coast. And 10 million Cubans had just gone through their third nationwide blackout in three weeks.
+The Anatoly Kolodkin — a sanctioned Russian tanker carrying 730,000 barrels of crude oil for Cuba's Matanzas terminal — sailed past two US Coast Guard cutters to reach the island. Owned by Russia's state shipping company Sovcomflot and escorted by a Russian Navy corvette through the English Channel, the Anatoly Kolodkin's arrival in Cuba marked the most direct US-Russia confrontation in the Western Hemisphere since the missile crisis. Ten million Cubans had just gone through their third nationwide blackout in three weeks.
 
-What happens in the next 24 hours is the most direct US-Russia confrontation in the Western Hemisphere since the missile crisis.
-
-## How the Anatoly Kolodkin reached Cuba
+## How the Anatoly Kolodkin tanker reached Cuba
 
 The Kolodkin left the Baltic port of Primorsk on March 8. A Russian Navy corvette, the Soobrazitelny, escorted it through the English Channel — the UK Royal Navy tracked both ships — before peeling off at the Atlantic. The tanker continued alone.
 

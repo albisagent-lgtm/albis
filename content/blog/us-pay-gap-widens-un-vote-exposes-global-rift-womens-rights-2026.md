@@ -1,8 +1,8 @@
 ---
-title: "US Pay Gap Widens as UN Vote Exposes Global Rift on Women's Rights"
+title: "US Gender Pay Gap Widens, UN CSW70 Votes 37-1"
 description: "US gender pay gap widens for second year as UN women's commission holds historic vote, Romania passes femicide law, and EU launches 2026-2030 equality strategy."
 date: "2026-03-28"
-author: "Albis Geopolitics Desk"
+author: "Harry Wenham"
 image: "https://images.pexels.com/photos/8553078/pexels-photo-8553078.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "gender-pay-gap", "femicide", "csw70"]
@@ -49,52 +49,44 @@ region_frames:
   asia_pacific: "Covered primarily through UN multilateral lens at CSW70"
 ---
 
-The gender pay gap in the United States has widened for the second consecutive year, with women now earning 81 cents for every dollar men earn, down from 83 cents in 2024. At the same time, a historic vote at the United Nations Commission on the Status of Women revealed deep geopolitical divisions over how to advance gender equality. Romania passed landmark femicide legislation, and the European Commission launched a new five-year gender equality strategy.
+American women earned 81 cents for every dollar men earned in 2024 — down from 83 cents the year before. Equal Pay Day fell on March 26, a day later than 2025. It's the first consecutive widening of the [gender pay gap](/blog/governments-reclassify-gender-violence-while-pay-gap-data-shows-persistent-disparities) since the 1960s. The same week, the UN's women's commission [held its first-ever recorded vote](/blog/un-csw70-womens-rights-pact-us-opposition-2026) after the US objected. Romania passed femicide legislation. The EU launched a five-year equality strategy. Progress in some places, reversal in others.
 
-These developments, all within the past week, illustrate a global landscape where progress on women's rights moves forward in some regions while stalling or reversing in others.
+## Equal Pay Day Arrives Later
 
-## Equal Pay Day Arrives Later Than Last Year
+Men's median income grew 3.7% between 2023 and 2024. Women's stayed flat. The data predates the Trump administration — this happened under Biden.
 
-Equal Pay Day fell on March 26 this year, one day later than in 2025. The date marks how far into the new year women must work to match what men earned the previous year. According to U.S. Census Bureau data, it is the first consecutive widening of the wage gap since the 1960s.
+An AP-NORC poll found sharp divergence. Six in ten employed women said men have more wage opportunities. Among employed men, half said both genders have equal chances. Three in ten employed women reported personal wage discrimination.
 
-Men's median income grew by 3.7 percent between 2023 and 2024. Women's median income remained flat. The data predates the current Trump administration, reflecting conditions under President Biden.
+"We're reversing decades of hard won progress," said Deborah Vagins, director of Equal Pay Today. Federal pay transparency laws have stalled in Congress. States have adopted their own rules, with mixed results.
 
-A new AP-NORC poll published alongside Equal Pay Day found sharp divergence in how men and women perceive the gap. About six in ten employed women said men have more opportunities for competitive wages. Among employed men, roughly four in ten agreed, while half said both genders have equal opportunities. Three in ten employed women reported personally experiencing wage discrimination.
+## UN Commission Breaks 80 Years of Consensus
 
-Deborah Vagins, director of Equal Pay Today, said the country is "reversing decades of hard won progress." Advocates continue to push for federal pay transparency laws requiring employers to disclose salary ranges, though such legislation has repeatedly stalled in Congress. A number of states have adopted their own pay transparency rules, with mixed results.
+CSW70 ended with something that hadn't happened in eight decades: a recorded vote. The Agreed Conclusions passed 37–1. The US cast the sole opposing vote, objecting to language on abortion and gender terminology.
 
-## UN Commission Breaks Eight Decades of Consensus
+The document calls on governments to repeal laws that discriminate against women — family relations, property rights, financial credit, child marriage, FGM. It addresses online gender-based violence, including nonconsensual intimate images and [deepfakes targeting women](/blog/deepfake-sexual-abuse-women-escalates-2026-99-percent-targets).
 
-The 70th session of the UN Commission on the Status of Women concluded in late March with an unprecedented event: a recorded vote. For the first time in the body's eight-decade history, the Agreed Conclusions were not adopted by consensus but by a vote of 37 to one.
-
-The United States cast the sole opposing vote, objecting to language on abortion and gender-related terminology. The document calls on governments to review and repeal laws that discriminate against women and girls, including those governing family relations, property rights, and financial credit, as well as laws that permit child marriage and female genital mutilation.
-
-The Conclusions also address online gender-based violence, including nonconsensual intimate images and deepfakes that disproportionately target women. They urge governments to strengthen accountability mechanisms and ensure survivors have access to equitable remedies.
-
-The Council on Foreign Relations noted that no country has yet achieved full legal equality between women and men, according to a UN secretary-general's report presented during the session. During panel discussions, speakers from Kenya, Iceland, and other nations emphasized that legal frameworks alone do not guarantee equal rights without enforcement infrastructure.
+No country has achieved full legal equality between women and men, per a UN secretary-general's report. Kenya's delegation pointed to mobile courts in rural areas. Iceland's national police commissioner noted that even top-ranked countries face gaps between law and reality.
 
 ## Romania Passes Femicide Law
 
-Romania's parliament on March 25 adopted a law that for the first time defines femicide in the country's legal code. The bill passed with 284 votes in favor, one against, and two abstentions.
+Romania's parliament voted 284–1 on March 25 to define femicide in law for the first time. Sentences: 15–25 years or life. The law requires nationwide data collection and recognises children of victims as direct victims entitled to assistance.
 
-Femicide is now classified as aggravated murder, carrying sentences of 15 to 25 years or life imprisonment. The law requires authorities to collect nationwide data on femicide and related violence. Children of femicide victims will be formally recognised as direct victims and granted immediate assistance.
+The numbers behind it: 53 women killed by current or former partners in 2025. At least 14 women assaulted every hour. Police responded to over 130,000 domestic violence cases last year — 5% more than 2024.
 
-The legislation follows a sharp rise in domestic violence killings. In 2025, 53 women in Romania were killed by current or former partners. Justice Ministry data show at least 14 women are assaulted every hour. Police responded to more than 130,000 domestic violence cases last year, nearly five percent more than in 2024.
+FILIA, the feminist organisation that pushed for the law, called it "an important day." It awaits promulgation by President Nicusor Dan.
 
-FILIA, a Romanian feminist organisation that pushed for the law, called it "an important day" and said women "will now have more protection mechanisms." The law awaits promulgation by President Nicusor Dan.
+In North Macedonia, International Women's Day marches in Skopje began with a minute of silence for Ivana and Katja Jovanovski — mother and daughter killed after prolonged domestic violence.
 
-In North Macedonia, protests on International Women's Day highlighted similar concerns. The march in Skopje began with a minute of silence for Ivana and Katja Jovanovski, a mother and daughter killed after prolonged domestic violence.
+## EU Launches New Equality Strategy
 
-## EU Launches New Gender Equality Strategy
+The European Commission's Gender Equality Strategy for 2026–2030 covers cyberviolence, AI-related risks to women, and workplace inequality. At the current pace, the EU won't reach full gender equality for 50 years.
 
-The European Commission presented its Gender Equality Strategy for 2026-2030 in early March. The strategy addresses cyberviolence, AI-related risks to women, and ongoing workplace inequality.
+The strategy builds on the 2020–2025 plan: directives on violence against women, pay transparency, gender balance on corporate boards. A new toolkit released March 26 provides EU-wide guidelines for gender-neutral job evaluation.
 
-According to the European Institute for Gender Equality, at the current pace of change it would take 50 years for the EU to reach full gender equality. The new strategy builds on legislation adopted under the previous 2020-2025 plan, including directives on combating violence against women, pay transparency, and gender balance on corporate boards.
+## Three Directions at Once
 
-The European Institute for Gender Equality also released a toolkit on March 26 providing EU-wide guidelines for gender-neutral job evaluation and classification, aimed at helping organisations implement the pay transparency directive.
+The EU expands regulation. Romania adds criminal law. The US scales back enforcement and opposes [international consensus documents](/blog/csw70-us-alone-save-act-canada-femicide-2026).
 
-## Regional Perspectives
+The gap isn't just policy — it's perception. US media frames Equal Pay Day as a domestic labour story. EU coverage frames it as regulatory progress. The CSW70 vote barely registered in American newsrooms. In European ones, it led as proof the US is retreating from multilateral women's rights commitments.
 
-The week's developments reveal contrasting approaches. The EU is expanding its regulatory framework with binding legislation on pay transparency and violence prevention. Romania is adding criminal law tools. The United States, by contrast, is scaling back federal enforcement mechanisms and opposing international consensus documents.
-
-In the Global South, the CSW70 discussions highlighted how legal reforms often outpace enforcement capacity. Kenya's delegation pointed to mobile courts in rural areas as a practical response. Iceland's national police commissioner noted that even countries ranked highest in gender equality indices face persistent gaps between law and lived experience.
+Same week. Same data. Three framings that don't overlap.

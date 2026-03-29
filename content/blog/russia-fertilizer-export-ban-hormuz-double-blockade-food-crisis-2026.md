@@ -2,7 +2,7 @@
 title: "Russia Fertilizer Ban Hits During Hormuz Blockade"
 description: "Russia halted ammonium nitrate exports on March 21 — the same week Hormuz cut off 33% of global fertilizer supply. Two blockades, one planting season, and the 2027 harvest is already compromised."
 date: 2026-03-28
-author: "Albis Geopolitics Desk"
+author: "Harry Wenham"
 category: "Food & Agriculture"
 tags: ["explainer", "food-security", "fertilizer", "russia", "hormuz", "agriculture", "iran-war", "planting-season"]
 image: "https://images.pexels.com/photos/11996941/pexels-photo-11996941.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
@@ -55,60 +55,60 @@ faqs:
 
 Two blockades hit global fertilizer at the same time this week. Russia suspended all ammonium nitrate exports on March 21 — cutting up to 40% of global trade in the crop nutrient — while the [Hormuz blockade](/blog/hormuz-fertilizer-food-crisis-nobody-watching-2026) continues choking off 33% of the world's seaborne fertilizer supply. Urea prices have surged roughly 50% since the war began, and fertilizer plants are shutting down on three continents. The damage is happening now, during spring planting season, and it's irreversible by May.
 
-This is being reported as three separate stories: a Russian export policy, a Middle East war disruption, and a commodity price spike. It's one crisis.
+Three separate stories — Russian export policy, Middle East war disruption, commodity price spike. One crisis.
 
-## What happened
+## What Happened
 
-On March 21, Russia cancelled all existing export licenses for ammonium nitrate and froze new ones until April 21. The official reason: securing domestic supply for Russia's own spring planting. The timing couldn't be worse for the rest of the world.
+Russia cancelled all ammonium nitrate export licenses on March 21 and froze new ones until April 21. Official reason: securing domestic supply for spring planting. The timing couldn't be worse.
 
-Russia accounts for 25-40% of global ammonium nitrate trade, depending on which estimate you use. Reuters and Bloomberg both confirmed the suspension on March 24. Russian domestic media framed it as responsible self-preservation — Anadolu Agency's Russian-language service described it as prioritising "spring field work." Moscow didn't mention that its own fertilizer infrastructure has been degraded by Ukrainian drone strikes on factories and ports.
+Russia accounts for 25–40% of global ammonium nitrate trade. Reuters and Bloomberg confirmed the suspension on March 24. Russian media framed it as self-preservation — Anadolu Agency's Russian-language service called it prioritising "spring field work." Moscow didn't mention its own fertilizer plants have been hit by Ukrainian drone strikes.
 
-The same week, the Hormuz blockade entered its second month. The Strait carries roughly one-third of all seaborne fertilizer, including nearly 46% of global urea supply. QatarEnergy has stopped downstream urea production entirely. Saudi Arabia, Bahrain, and Iran — all major nitrogen fertilizer exporters — can't ship product.
+The same week, the Hormuz blockade entered month two. The strait carries a third of all seaborne fertilizer, including 46% of global urea. QatarEnergy has stopped urea production entirely. Saudi Arabia, Bahrain, and Iran — all major nitrogen exporters — can't ship.
 
-As Al Jazeera put it in a March 27 analysis: "Unlike oil, fertiliser cannot be rerouted. There are no pipelines for ammonia or urea."
+Al Jazeera's March 27 analysis: "Unlike oil, fertiliser cannot be rerouted. There are no pipelines for ammonia or urea."
 
-Oil has bypass options. Saudi Arabia built a pipeline to the Red Sea. No equivalent exists for ammonia, urea, or diammonium phosphate. Every ton of [fertilizer stranded behind Hormuz](/blog/sulfur-shortage-hormuz-blockade-threatens-2027-food-supply) stays stranded.
+Oil has bypasses. Saudi Arabia built a pipeline to the Red Sea. No equivalent exists for ammonia, urea, or diammonium phosphate. Every ton of [fertilizer stranded behind Hormuz](/blog/sulfur-shortage-hormuz-blockade-threatens-2027-food-supply) stays stranded.
 
-## The chain reaction
+## The Chain Reaction
 
-Natural gas accounts for about 80% of nitrogen fertilizer production costs. Hormuz's closure hasn't just blocked finished fertilizer from reaching markets — it's driven gas prices high enough to shut down the plants that make it.
+Natural gas drives 80% of nitrogen fertilizer production costs. Hormuz's closure hasn't just blocked finished fertilizer — it's pushed gas prices high enough to shut down the plants that make it.
 
-The New York Times reported on March 27 that fertilizer plants in India, Algeria, and Slovakia have shut down or reduced output because of rising gas prices. These aren't countries near the war zone. They're on three different continents, all hitting the same wall: the gas they need to produce nitrogen fertilizer has become too expensive to buy.
+The NYT reported March 27 that fertilizer plants in India, Algeria, and Slovakia have shut down or cut output. Three continents, same wall: gas too expensive to buy.
 
-China, the world's other major fertilizer producer, responded by restricting its own exports — protecting domestic supply rather than filling the gap. Bangladesh, where 80% of the population depends on agriculture, has roughly 18 days of ammonium nitrate reserves left for spring planting, according to Chinese financial analysis from Sina Finance.
+China restricted its own fertilizer exports — protecting domestic supply, not filling the gap. Bangladesh, where 80% of the population depends on farming, has 18 days of ammonium nitrate reserves left, per Sina Finance.
 
-The Anadolu Agency's data is stark: Hormuz's closure has disrupted 38% of global nitrate-based fertilizer supply and 20% of phosphate-based fertilizers. Combine that with Russia's export halt, and the world just lost access to the majority of its internationally traded nitrogen supply during the exact weeks farmers need it most.
+Anadolu Agency's data: Hormuz has disrupted 38% of global nitrate-based fertilizer and 20% of phosphate-based fertilizer. Add Russia's halt, and the world just lost the majority of its traded nitrogen supply during the exact weeks farmers need it.
 
-## Why nitrogen can't wait
+## Why Nitrogen Can't Wait
 
-"You can skip a season of potash, you can skip a season of phosphates, but you can't skip a season of nitrogen." That's Dawid Heyl, co-portfolio manager for global natural resources at Ninety One, speaking to CNBC.
+"You can skip a season of potash, you can skip a season of phosphates, but you can't skip a season of nitrogen." — Dawid Heyl, Ninety One, to CNBC.
 
-Nitrogen is the nutrient that drives plant growth. Without adequate nitrogen application, corn yields can drop 30-50%. Wheat needs it for both yield and protein content — spring wheat requires roughly 14% protein for milling grade, and that's almost impossible to achieve without full nitrogen application.
+Nitrogen drives plant growth. Without it, corn yields drop 30–50%. Spring wheat needs roughly 14% protein for milling grade — impossible without full nitrogen application.
 
-The window is closing. Northern Hemisphere spring planting runs from March through May. Farmers who don't have fertilizer in the next 4-6 weeks won't get a second chance. Australian wheat farmers are already planting less, according to Bloomberg. US corn acreage is projected to drop by 5 million acres. And the American Farm Bureau Federation sent a letter to President Trump begging for market assistance.
+The window's closing. Northern Hemisphere planting runs March through May. Farmers who don't have fertilizer in 4–6 weeks don't get a second chance. Australian wheat farmers are already planting less. US corn acreage is projected to drop by 5 million acres. The American Farm Bureau Federation wrote to Trump begging for help.
 
-Urea prices tell the story. Before the war began on February 28, Egyptian FOB granular urea — the bellwether for nitrogen fertilizer prices — traded at $400-490 per metric ton. By mid-March, it hit $720. That's a 50% jump in less than three weeks.
+Urea tells the story. Before the war, Egyptian FOB granular urea traded at $400–490 per metric ton. By mid-March: $720. A 50% jump in three weeks.
 
-## Three stories, one crisis
+## Three Stories, One Crisis
 
-Western media covers Russia's export ban as a separate story about Moscow's domestic policy. The Hormuz blockade gets filed under "Middle East conflict." Plant closures in India and Slovakia appear in business pages as commodity market updates. But these aren't three stories. They're one supply chain breaking at every link simultaneously.
+Western media files Russia's ban as domestic policy. Hormuz goes under "Middle East conflict." Plant closures in India and Slovakia run as commodity updates. One supply chain breaking at every link. Three different desks covering it.
 
-The framing gap matters. Sina Finance, China's major financial outlet, ran a detailed analysis headlined: "Russia suddenly 'closes the valve' — 40% of trade flows cut off, global buyers panic." The piece tracked the crisis through to Bangladesh's 18-day reserves. Chinese coverage treats this as what it is: a food emergency.
+Sina Finance ran a detailed analysis: "Russia suddenly 'closes the valve' — 40% of trade flows cut off, global buyers panic." The piece tracked the crisis to Bangladesh's 18-day reserves. Chinese coverage treats this as a food emergency.
 
-Hindi media — Republic Bharat, Navbharat Live — leads with "After oil and LPG, now global fertilizer crisis." Navbharat Live warned of "famine danger worldwide." But India's coverage also carries a unique angle entirely absent from Western reporting: Iran opened Hormuz for its "friendly five" nations, and India is negotiating to be on that list. The same crisis that's an existential threat in the New York Times is a diplomatic opportunity in Desh Federal.
+Hindi media — Republic Bharat, Navbharat Live — leads with "After oil and LPG, now global fertilizer crisis." But India's coverage carries an angle absent from Western reporting: Iran opened Hormuz for its "friendly five" nations, and India's negotiating to join. The same crisis that's existential in the NYT is a diplomatic opportunity in Desh Federal.
 
-Russian domestic media, meanwhile, frames the export ban as entirely reasonable. Forbes Russia and Mail.ru confirmed the March 21-April 21 suspension without mentioning the global impact. The Kremlin's message: we're feeding our own people first. The subtext — that Russia is both a victim of and contributor to a global food squeeze — goes unsaid.
+Russian media frames the ban as reasonable. Forbes Russia and Mail.ru confirmed the suspension without mentioning global impact. The message: we feed our own first. The subtext — Russia as both victim and contributor to a global food squeeze — goes unsaid.
 
-The Albis Perception Gap Index scored the Russia fertilizer ban at 7, with Western and Chinese outlets diverging most sharply on whether this is policy or weapon.
+[Perception Gap Index](/blog/pgi-breakdown-march-28-2026-same-event-swapped-story) score: 7. Western and Chinese outlets diverge most sharply on whether this is policy or weapon.
 
-## What happens next
+## What Happens Next
 
-The arithmetic is simple. Corn and wheat that don't receive nitrogen in the next month will yield less grain. Period. The deficit won't show up as empty shelves tomorrow. It'll show up as higher bread prices in September, as more expensive animal feed by October, as [African nations already in fuel emergency](/blog/africa-fuel-crisis-seven-countries-emergency-measures-2026) facing a second shock in food costs by early 2027.
+Corn and wheat that don't get nitrogen this month yield less grain. The deficit won't hit shelves tomorrow. It'll hit as higher bread prices in September, pricier animal feed by October, and [African nations already in fuel emergency](/blog/africa-fuel-crisis-seven-countries-emergency-measures-2026) facing a second shock by early 2027.
 
-Trump's Hormuz deadline is April 6 — nine days away. If the strait reopens and Russia lifts its ban on April 21, some farmers in faster-planting regions might still recover. That's the optimistic scenario, and it requires two separate geopolitical breakthroughs in three weeks.
+Trump's Hormuz deadline is April 6 — nine days away. If the strait reopens and Russia lifts its ban on April 21, some farmers might recover. That scenario needs two geopolitical breakthroughs in three weeks.
 
-The pessimistic scenario: Hormuz stays closed through planting season, Russia extends its ban (it's done so before — this is the third export restriction since December 2021), and the 2027 Northern Hemisphere harvest comes in 15-30% below normal.
+The pessimistic scenario: Hormuz stays closed through planting season, Russia extends its ban (this is the third restriction since December 2021), and the 2027 harvest comes in 15–30% below normal.
 
-The Carnegie Endowment warned it plainly: "Even if the Strait of Hormuz does open soon, restarting production and transport for fertilizers and their components could take weeks — weeks that Northern Hemisphere farmers do not have."
+The Carnegie Endowment: "Even if the Strait of Hormuz does open soon, restarting production and transport for fertilizers could take weeks — weeks that Northern Hemisphere farmers do not have."
 
-The world is watching oil at $112 a barrel. The real price of this war will be paid at the grocery store. And by then, it'll be too late to plant.
+The world watches oil at $112. The real price gets paid at the grocery store — and by then, it's too late to plant.

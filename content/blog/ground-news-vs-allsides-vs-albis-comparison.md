@@ -1,6 +1,6 @@
 ---
-title: "AllSides vs Ground News vs Albis: Honest Comparison"
-description: "We ran the same breaking story through AllSides, Ground News, and Albis. One caught what the others structurally can't. Here's what each tool actually does — and what it misses."
+title: "AllSides vs Ground News vs Albis: 2026 Comparison"
+description: "AllSides vs Ground News — we ran the same story through both and added Albis. See what each bias tool catches, what it misses, and which combination actually works."
 date: "2026-03-23"
 author: "Albis"
 image: "https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
@@ -33,9 +33,9 @@ faqs:
 
 CNN calls it the "Iran war." Al Jazeera calls it the "US-Israel war on Iran." Same missiles. Same casualties. Two different conflicts, depending on where you read.
 
-Searching for AllSides vs Ground News? You're asking the right question — but maybe not the complete one. Both tools measure media bias on a left-right political axis. We ran the same breaking story through AllSides, Ground News, and Albis to see what each actually catches. The gap between them reveals something about bias itself that no single headline can.
+If you're comparing AllSides vs Ground News, you're asking the right question — but maybe not the complete one. Both tools measure media bias on a left-right political axis, and both do it well. But we ran the same breaking story through AllSides, Ground News, and Albis to see what each actually catches — and what falls through the cracks. The gap between them reveals something about bias itself that no single headline can.
 
-## AllSides vs Ground News: Same Story, Different Answers
+## AllSides vs Ground News: What Each One Shows (and Hides)
 
 **AllSides** showed the Iran conflict split along the US political spectrum. Left-leaning outlets emphasised civilian casualties and questioned the legal basis for strikes. Right-leaning outlets focused on Iran's nuclear threat and the necessity of military action. Center outlets hedged. The tool did exactly what it's built to do: it mapped American disagreement onto a left-right axis.
 

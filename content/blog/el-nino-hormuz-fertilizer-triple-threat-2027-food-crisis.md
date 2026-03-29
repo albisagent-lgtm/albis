@@ -1,134 +1,148 @@
 ---
-title: "El Niño, Hormuz, and Fertilizer: 2027 Food Crisis"
-description: "Three slow-moving crises are converging on a single harvest year. NOAA forecasts a potential Super El Niño. The Hormuz blockade cut 45% of global sulfur. Fertilizer hit $650/ton. Nobody is reporting them as one story — but they'll hit one harvest at one time."
-date: "2026-03-25"
-author: "Albis Geopolitics Desk"
+title: "Super El Niño Meets War: 2027 Food Crisis"
+description: "ECMWF gives 80% chance of strong El Niño as WFP warns 45 million more face hunger. Three crises converge on one harvest year."
+date: "2026-03-29"
+author: "Harry Wenham"
 tags: ["explainer", "food-security", "el-nino", "climate", "fertilizer", "hormuz", "agriculture", "2027"]
-image: "https://images.pexels.com/photos/6915305/pexels-photo-6915305.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
+image: "https://images.pexels.com/photos/36315088/pexels-photo-36315088.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 category: "Food & Agriculture"
 seoKeyword: "super el nino 2027 food crisis compound risk"
-perception_gap: 5
-regions_found: [us, eu, south_asia]
-regions_absent: [middle_east, asia_pacific, latam, africa]
+perception_gap: 7
+regions_found: [us, eu, south_asia, asia_pacific, latam]
+regions_absent: [middle_east, africa]
 region_significance:
   us: 4
   eu: 3
-  south_asia: 4
+  south_asia: 5
+  asia_pacific: 5
+  latam: 5
 region_frames:
-  us: "Framed as separate stories — heatwave coverage, farm cost coverage, and ENSO forecast — never connected"
-  eu: "Framed through energy and climate lens, with food angle emerging in agricultural press only"
-  south_asia: "Framed as domestic kharif season risk; global compound threat invisible"
+  us: "Framed as separate stories — El Niño forecast, farm costs, energy markets — rarely connected"
+  eu: "Framed through energy transition lens, with food angle emerging only in specialist agricultural press"
+  south_asia: "Framed as national crisis — tankers trapped, monsoon risk, domestic food security emergency"
+  asia_pacific: "China treats as agricultural planning emergency with specific regional projections; Japan calls it existential"
+  latam: "Brazil reports 89% urea increase year-on-year; government warns of 1-3 million tonne phosphate deficit"
 confidence: "confirmed"
 sources:
-  - name: "NOAA Climate Prediction Center"
-    url: "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
-    region: "North America"
-    quote: "In June-August 2026, El Niño is likely to emerge (62% chance) and persist through at least the end of 2026."
-  - name: "CBC News"
-    url: "https://www.cbc.ca/news/science/super-el-nino-9.7133680"
-    region: "North America"
-    quote: "We're in for a strong El Niño with a chance of a super strong event. Something that could even challenge what we saw in 2015-2016."
-  - name: "WMO State of Global Climate 2025"
-    url: "https://wmo.int/publication-series/state-of-global-climate/state-of-global-climate-2025"
+  - name: "ECMWF / Sydney Morning Herald"
+    url: "https://www.smh.com.au/environment/climate-change/a-globally-catastrophic-super-el-nino-could-form-by-spring-20260324-p5uqmg.html"
+    region: "Asia-Pacific"
+    quote: "ECMWF gives 98% chance of moderate El Niño, 80% chance of strong, and 20-25% chance of a super El Niño"
+  - name: "Semafor / WFP"
+    url: "https://www.semafor.com/article/03/27/2026/iran-war-risks-grave-global-food-crisis-experts-warn"
     region: "International"
-    quote: "2015-2025 are the hottest 11 years on record. Earth's energy imbalance is highest in the sixty-five-year record."
-  - name: "The Guardian"
-    url: "https://www.theguardian.com/us-news/2026/mar/24/heatwave-west-climate-crisis-wildfires"
-    region: "North America"
-    quote: "By mid-March, more than half of the continental US had already been classified in moderate to exceptional drought conditions."
-  - name: "Severe Weather Europe"
-    url: "https://www.severe-weather.eu/long-range-2/spring-2026-forecast-update-polar-vortex-core-el-nino-rising-united-states-canada-europe-fa/"
+    quote: "WFP warned 45 million more people could fall into acute food insecurity if the conflict doesn't end soon"
+  - name: "New Statesman"
+    url: "https://www.newstatesman.com/international-politics/geopolitics/2026/03/the-world-energy-shock-is-coming"
     region: "Europe"
-    quote: "The peak warm anomalies in this forecast reach or exceed the threshold for a Super El Niño event in 2026/2027."
+    quote: "40% of fertiliser exports at risk at the time when key markets from the US to India have a planting season"
+  - name: "NPR"
+    url: "https://www.npr.org/2026/03/24/g-s1-114940/asia-boosts-coal-use-as-iran-war-squeezes-global-lng-supplies"
+    region: "North America"
+    quote: "India, South Korea, Indonesia, Thailand, Philippines and Vietnam are all boosting coal-fired power"
+  - name: "Nature Climate Change"
+    url: "https://www.nature.com/articles/s41558-025-02534-4"
+    region: "International"
+    quote: "The 1997-98 El Niño caused $5.7 trillion in economic losses extending more than five years after its occurrence"
 faqs:
-  - q: "What is a Super El Niño and why does it matter for food?"
-    a: "A Super El Niño occurs when Pacific Ocean surface temperatures exceed 2°C above normal for a sustained period. It triggers droughts across Southeast Asia and Australia, erratic monsoons in India, and flooding in South America — all of which reduce crop yields. The 2015-16 El Niño caused an estimated $5.7 trillion in global economic losses."
-  - q: "Will there be a global food crisis in 2027?"
-    a: "Three threats are converging on 2027 harvests: the Hormuz blockade has cut 45% of global sulfur exports (essential for fertilizer), farmers worldwide are planting less due to record fertilizer costs, and a potential Super El Niño could reduce yields on whatever does get planted. No single threat guarantees a crisis — but together, they could produce the weakest harvests in a generation."
-  - q: "How does the Hormuz blockade affect food when it's about oil?"
-    a: "The Strait of Hormuz carries far more than oil. It's the transit route for 45% of global sulfur exports and 35% of seaborne fertilizer trade. Sulfur is essential for making phosphate fertilizer. When the blockade cut oil shipments, it also cut the raw material that grows food for 8 billion people."
+  - q: "What is a Super El Niño and how likely is one in 2026?"
+    a: "A Super El Niño occurs when Pacific surface temperatures exceed 2.4°C above normal. ECMWF models give a 98% chance of at least moderate El Niño by August 2026, 80% chance of strong, and 20-25% chance of super. Only three have occurred since 1980 — each was followed by a record-breaking hottest year."
+  - q: "How does the Iran war affect global food supply?"
+    a: "The Strait of Hormuz carries 35% of seaborne fertilizer trade, 45% of global sulfur exports, and 40% of fertilizer raw materials. The blockade has pushed urea up 35% globally and 89% in Brazil year-on-year. The WFP warns 45 million more people could fall into acute hunger if the conflict continues."
+  - q: "Will there be a food crisis in 2027?"
+    a: "Three threats are converging on 2027 harvests simultaneously: the Hormuz blockade has cut fertilizer supply, farmers worldwide are planting less of what they can't afford to fertilize, and a potential Super El Niño could slash yields on whatever gets planted. The WFP and multiple governments are treating this as an emergency-level risk."
 ---
 
-Three crises are converging on one harvest year. NOAA gives a 62% chance El Niño emerges by mid-2026. The [Hormuz blockade](/blog/sulfur-shortage-hormuz-blockade-threatens-2027-food-supply) has cut 45% of global sulfur exports, pushing US fertilizer past $650 per ton. The WMO just confirmed 2015–2025 as the hottest eleven-year stretch on record. Each story makes news alone. Nobody is reporting them together. They'll hit one harvest, at one time — and 2027 could produce the weakest global food output in a generation.
+The European Centre for Medium-Range Weather Forecasts gives a 98% chance of El Niño forming by August 2026, an 80% chance it'll be strong, and a 20–25% chance it reaches "super" status — an event that's only happened three times since 1980. It's arriving into a world where the [Hormuz blockade](/blog/fertilizer-crisis-hormuz-blockade-spring-planting-2026) has already cut 40% of global fertilizer exports and the World Food Programme warns 45 million more people could fall into acute hunger. Three crises, one harvest year, no plan.
 
-A warming Pacific Ocean, a naval blockade in the Persian Gulf, and $650-a-ton urea all land on the same fields, in the same growing seasons, between now and late 2027.
+The Albis Perception Gap Index scored this story 7, with Chinese and Brazilian media treating it as an agricultural emergency while English-language outlets bury it as a weather forecast.
 
-## Threat one: a Super El Niño is building
+## What's actually building in the Pacific
 
-NOAA issued an El Niño Watch on March 12. La Niña is collapsing faster than expected. Models are swinging hard toward warmth.
+La Niña is dying fast. The warm water pool that drives El Niño is surging eastward across the tropical Pacific, and every major forecasting centre agrees on where this is heading — they just disagree on how bad it gets.
 
-NOAA forecasts 62% odds El Niño emerges by June–August 2026, persisting through year's end. The ECMWF projects something worse: sea surface temperatures 1–2°C above normal across the tropical Pacific by summer, peaking along the South American coast.
+NOAA gives 62% odds El Niño emerges by June–August 2026. ECMWF's latest models are more aggressive: 98% chance of at least moderate, 80% strong, 20–25% super. UNSW climate scientist Matthew England called a super El Niño "a globally catastrophic event" that brings "horrendous flooding rains to Latin America, severe drought and bushfire to Australia, Indonesia, and parts of Asia."
 
-Zeke Hausfather of Berkeley Earth analysed 433 forecasts from 11 models. His finding: "We're in for a strong El Niño with a chance of a super strong event. Something that could even challenge what we saw in 2015–2016."
+Three times since 1980, the Pacific has crossed the super threshold: 1982–83, 1997–98, and 2015–16. Each time, the following year smashed the global heat record. The 2015–16 event peaked at 3°C above normal. The 1997–98 event caused $5.7 trillion in economic losses extending over five years, according to a January 2026 study in *Nature Climate Change*.
 
-The 2015–16 event hit 2°C above average. Current models track 2.4°C. Severe Weather Europe noted the forecast "reaches or exceeds the threshold for a Super El Niño event in 2026/2027."
+Brazil's agricultural meteorology council puts the probability even higher — 84.6% chance of transition to El Niño during the second quarter of 2026, with irregular rainfall forecast for April.
 
-What El Niño does to food: drought across Southeast Asia and Australia, erratic monsoons in South Asia, floods in South America. Past strong events cut Indonesian and Philippine rice output 5–10%. A *Nature Communications* study found El Niño reduces global maize yields by up to 4.3%. India's kharif rice harvest — feeding 1.4 billion people — depends on monsoon rains El Niño disrupts.
+The prediction is still passing through what scientists call the "autumn predictability barrier" — forecasts made in March and April are historically less reliable. But NOAA notes the "large amount of heat in the subsurface ocean" makes this signal unusually strong for the season.
 
-The Philippines has already [declared a national energy emergency](/blog/philippines-energy-emergency-first-nation-iran-war-2026). Add drought on top of fuel shortages, and 110 million people face compounding crises from two directions.
+## The fertilizer chain was already broken
 
-## Threat two: the fertilizer chain is already broken
+Before El Niño even enters the picture, the [Iran war's Hormuz blockade](/blog/318-million-hunger-famine-fertilizer-crisis-iran-war-2026) has gutted the world's fertilizer supply line.
 
-We've detailed the [Hormuz sulfur-to-fertilizer chain](/blog/sulfur-shortage-hormuz-blockade-threatens-2027-food-supply) before. The short version: Hormuz carries 45% of global sulfur exports, 35% of seaborne urea and phosphate trade, and the raw materials feeding the world's fertilizer plants.
+The New Statesman laid out the numbers this week: one fifth of global LNG exports, one third of crude oil, one third of fertilizers, two fifths of helium, and nearly half of sulfur all normally pass through the Strait of Hormuz. That pipeline is cut.
 
-That pipeline is cut. The consequences are already measurable.
+The consequences are arriving at different speeds in different countries — and the alarm gap between languages tells you who's actually exposed.
 
-Urea at New Orleans passed $650/ton — up 20%+ in two weeks. UAN28 liquid nitrogen surged 31% year-on-year. DAP phosphate climbed 11%. All eight major US retail fertilizer categories are higher than last year. Four by double digits.
+English media reports fertilizer up 35% as a market indicator. Turkish media calls it a "perfect storm in agriculture," with urea at 26,000 TL per ton. Brazilian media reports urea up 89% year-on-year, with government officials warning of "a real risk of a 1–3 million tonne deficit in phosphate fertilizers." Xinhua called Hormuz "both an oil road and a food road." CLS Financial reported nearly one million tons of fertilizer trapped behind the blockade.
 
-The USDA projects American corn acreage will drop nearly 5 million acres as farmers flee nitrogen-hungry crops for cheaper soybeans. An estimated 10–15% of Northern US farmers haven't bought spring supplies. The Prospective Plantings report drops March 31 — six days away — and it'll show how many acres the [fertilizer crisis](/blog/fertilizer-crisis-hormuz-blockade-spring-planting-2026) has already erased.
+The countries most alarmed are the ones feeding the world. The countries calmest about it import most of their food.
 
-India's pre-war urea buffer runs out in May, as kharif planting begins. Brazil's 2026/2027 soybean cycle starts in September — and Brazil needs Gulf urea to grow the crop feeding Chinese livestock. China has [restricted fertilizer exports](/blog/china-fuel-export-ban-southeast-asia-schools-rationing-2026) to protect its own farmers, tightening supply further.
+## Asia burns coal while the climate warms
 
-Chinese media has been clearest on this. Xinhua called Hormuz "both an oil road and a food road." CLS Financial reported the blockade has trapped nearly 1 million tons of fertilizer. Sohu: "On February 28, the world focused on oil. Half a month later, another crisis signal emerged — fertilizer prices soaring."
+Here's where the collision gets ugly. The same war that's cutting fertilizer supply is pushing Asia backward on climate — right as El Niño threatens to amplify every climate risk already in motion.
 
-Russian media added a detail absent everywhere else: Russia benefits. Izvestia noted a third of global urea and 45% of sulfur pass through Hormuz, but "for Russia, the situation does not look like a crisis — the domestic market has a price-fixing mechanism." Russia's farmers are shielded. Everyone else isn't.
+NPR reported this week that India, South Korea, Indonesia, Thailand, the Philippines, and Vietnam are all [boosting coal-fired power](/blog/asia-coal-reversal-us-clean-energy-record-hormuz-crisis-2026) to cover LNG shortfalls from Hormuz. India is bracing for peak summer demand of 270 gigawatts — nearly twice Spain's total electricity capacity — and will rely more on coal to get there. South Korea has lifted caps on coal-generated electricity. China, which reduced coal generation for the first time in 2025, will likely reverse that trend after Iranian missiles destroyed 17% of Qatar's LNG capacity.
 
-## Threat three: the baseline is already broken
+"You learn to respond to shocks generated by certain insecurities by reproducing the insecurity," said Pauline Heinrichs, a climate researcher at King's College London.
 
-The WMO released its State of the Global Climate 2025 report two days ago. 2015–2025: the hottest eleven years on record. 2025 hit 1.43°C above the pre-industrial baseline. Earth's energy imbalance — the gap between heat absorbed and heat radiated — is the highest in the 65-year measurement record.
+More coal means more warming. More warming means a stronger El Niño. A stronger El Niño means worse harvests. Worse harvests mean more dependence on the energy-intensive supply chains the war already broke.
 
-The ocean has absorbed the equivalent of eighteen times annual human energy use every year for two decades. That stored heat amplifies El Niño events, fuels extreme weather, and raises the floor beneath every future temperature reading.
+## What El Niño does to food
 
-Right now, a historic March heatwave is smashing records in nearly 180 US cities. Over half the continental US is already in moderate to exceptional drought. The area hit by extreme weather in the past five years has doubled compared to twenty years ago.
+El Niño isn't a weather event — it's a crop-yield event.
 
-The warming baseline makes every El Niño stronger, every drought deeper, every crop loss larger. The WMO report didn't just confirm the hottest decade — it confirmed the floor is rising. Whatever El Niño does this year, it'll do it on top of already record-breaking conditions.
+The pattern is well-documented. Strong El Niño brings drought across Southeast Asia and Australia, erratic monsoons in South Asia, and floods in South America. A *Nature Communications* study found it reduces global maize yields by up to 4.3%. Past strong events cut Indonesian and Philippine rice output 5–10%. India's kharif rice harvest — feeding 1.4 billion people — depends on monsoon rains El Niño disrupts.
 
-## The compound risk nobody's connecting
+Now add the war. Indian farmers enter monsoon planting season in May with pre-war urea buffers running out. The Philippines has already [declared a national energy emergency](/blog/philippines-energy-emergency-45-days-fuel-left-2026) — fishermen can't afford fuel that's doubled in price. Add drought on top of fuel shortages, and 110 million Filipinos face compounding crises from two directions.
 
-Each story travels through a different news desk. Climate reporters cover El Niño. Agricultural journalists cover fertilizer. Energy correspondents cover Hormuz. They rarely sit in the same room.
+Brazilian soybean planting starts in September. Brazil needs Gulf urea to grow the crop that feeds Chinese livestock. China has [restricted fertilizer exports](/blog/china-fuel-export-ban-southeast-asia-schools-rationing-2026) to protect its own farmers, tightening the remaining supply further.
+
+## WFP: 45 million more face hunger
+
+The World Food Programme issued its starkest warning yet this week: 45 million more people could fall into acute food insecurity (IPC Phase 3+) if the Iran conflict continues and oil stays above $100 per barrel.
+
+"It's setting up to be a far worse situation" than 2022, an expert told the Financial Times.
+
+That 45 million figure doesn't include El Niño. It's the war alone. Layer a strong or super El Niño on top and the compound effect has no modern precedent.
+
+The Sahel already has [52.8 million people facing hunger](/blog/west-africa-sahel-hunger-crisis-55-million-2026) by summer. Sudan has confirmed famine across multiple regions with 9.5 million displaced. These crises existed before the war. The war's fertilizer and fuel shocks are accelerating them. El Niño would accelerate them again.
+
+## The baseline keeps rising
+
+The WMO's State of the Global Climate report confirmed 2015–2025 as the hottest eleven years on record. 2025 hit 1.43°C above pre-industrial baseline. Ocean heat storage is at a 65-year high.
+
+That stored heat is what powers El Niño events. The warmer the baseline, the stronger the El Niño, the worse the crop losses. Half the continental US is already in moderate to exceptional drought before El Niño even begins.
+
+Whatever El Niño does this year, it does it on top of record-breaking conditions. The floor is rising. Each crisis starts from a higher baseline than the last.
+
+## The deadlines
+
+Five deadlines are closing at once.
+
+**March 31:** USDA Prospective Plantings report — first hard data on how the [fertilizer crisis](/blog/us-farmers-corn-soybean-acreage-flip-fertilizer-crisis-2026) reshaped American agriculture. US corn acreage is expected to drop nearly 5 million acres.
+
+**April 6:** Trump's Iran energy infrastructure deadline. Eight days away. The decision made here shapes energy, food, and commodity prices for the next two years.
+
+**May 2026:** India's pre-war urea buffer depletes. If Hormuz hasn't reopened, India enters monsoon planting short of nitrogen.
+
+**June–August 2026:** El Niño emergence window. NOAA gives 62% odds. ECMWF gives 98% for moderate, 80% for strong.
+
+**September 2026:** Brazil's 2026/27 soybean cycle begins. Brazil needs Gulf urea. China needs Brazilian soy. No workaround if Hormuz stays closed.
+
+**October–December 2026:** El Niño projected to peak. Strongest impacts on monsoon agriculture, Australian wheat, Southeast Asian rice, and African food production.
+
+## What the framing gap tells you
+
+Chinese media is treating the El Niño–war convergence as an agricultural planning emergency, with Xinhua running specific regional drought and flood projections. Brazilian media frames it as an immediate threat to their growing season. Turkish farmers read about "the biggest crisis before spring planting."
+
+English-language media covers El Niño on the science desk, fertilizer on the business desk, and Hormuz on the foreign affairs desk. They rarely sit in the same story.
 
 They converge on the same fields.
 
-An Iowa farmer faces $650/ton nitrogen AND El Niño-driven heat stress on whatever corn she plants. A Philippine rice grower faces fuel shortages from Hormuz AND drought from El Niño AND fertilizer prices he can't afford. An Indian smallholder faces a May urea deadline AND an erratic monsoon AND a government already stretched by energy costs.
+An Iowa farmer faces $650/ton nitrogen AND El Niño-driven heat stress. A Philippine rice grower faces fuel shortages AND drought AND fertilizer prices she can't afford. An Indian smallholder faces a May urea deadline AND an erratic monsoon AND a government already stretched by energy costs.
 
-PGI score: 5. The regions most exposed — Sub-Saharan Africa, South and Southeast Asia — have the least coverage of the triple convergence bearing down on their food supply. Chinese media connects Hormuz to food. Western media connects El Niño to weather. Nobody connects all three to 2027.
-
-The World Bank warned in 2024 that a "sustained oil price spike from Middle East escalation would raise food prices." That warning is now reality. The World Bank's scenario didn't model a simultaneous Super El Niño on top of a hot-decade baseline.
-
-## The timeline
-
-Three deadlines closing at once.
-
-**March 31, 2026:** USDA Prospective Plantings report. First hard data on how the [fertilizer crisis reshaped American agriculture](/blog/sulfur-shortage-hormuz-blockade-threatens-2027-food-supply). This number sets expectations for global grain supply for eighteen months.
-
-**May 2026:** India's pre-war urea buffer depletes. If Hormuz hasn't reopened, India enters monsoon planting season short of nitrogen — the input that determines whether 1.4 billion people have enough rice.
-
-**June–August 2026:** El Niño emergence window. NOAA gives 62% odds. ECMWF models suggest it could reach Super El Niño thresholds. If it arrives strong, it compounds every agricultural risk already in motion.
-
-**September 2026:** Brazil's 2026/2027 soybean planting begins. Brazil needs Gulf urea. China needs Brazilian soy. The circular dependency has no workaround if Hormuz stays closed.
-
-**October–December 2026:** El Niño projected to peak. Strongest impacts on monsoon agriculture, Australian wheat, Southeast Asian rice, and African food production hit during this window.
-
-**2027:** The harvest year. Everything planted, fertilized, and weathered between now and December 2026 determines what the world eats in 2027. Less fertilizer + weaker monsoons + drought-stressed crops = the weakest Northern Hemisphere harvest in years.
-
-## The part that should keep you up
-
-We've seen each before. The 1997–98 Super El Niño devastated Southeast Asian agriculture. The 2008 fertilizer crisis triggered [food riots in 30 countries](/blog/318-million-hunger-famine-fertilizer-crisis-iran-war-2026). The 2022 Ukraine war showed how one conflict cascades through food supply chains.
-
-We've never seen all three at once.
-
-Hormuz is cutting fertilizer supply. Farmers are planting less. A potential Super El Niño threatens to slash yields on whatever does get planted. The warming baseline means every weather event hits harder than historical models predict.
-
-Three stories. Three news desks. Three headlines. One harvest.
-
-The 2027 food crisis isn't a prediction. It's a chain of events already in motion, with deadlines attached, and three fall before Christmas.
+The 2027 food crisis isn't a prediction. It's a chain of events already in motion, with deadlines attached, and five of them fall before Christmas.
