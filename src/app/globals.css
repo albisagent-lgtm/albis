@@ -434,12 +434,20 @@ a, button {
 .blog-prose > p:first-of-type::first-letter {
   font-family: var(--font-playfair), Georgia, serif;
   color: #c8922a;
-  font-size: 3.5rem;
+  font-size: 2.75rem;
   float: left;
-  line-height: 0.8;
-  padding-right: 0.5rem;
-  padding-top: 0.25rem;
+  line-height: 0.85;
+  padding-right: 0.35rem;
+  padding-top: 0.15rem;
   font-weight: 700;
+}
+@media (min-width: 768px) {
+  .blog-prose > p:first-of-type::first-letter {
+    font-size: 3.5rem;
+    line-height: 0.8;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+  }
 }
 .blog-prose img {
   border-radius: 0.75rem;

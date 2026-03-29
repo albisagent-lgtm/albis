@@ -452,7 +452,7 @@ export default async function Home() {
                 All stories →
               </Link>
             </div>
-            <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-x-8 gap-y-8 sm:gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
               {moreStories.map((item, i) => {
                 const regions = getRegions(item);
                 return (

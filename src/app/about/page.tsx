@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
-      <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
+      <div className="mx-auto max-w-2xl px-5 py-12 sm:px-6 md:py-24">
         {/* Header */}
         <p className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
           About Albis
@@ -30,7 +30,7 @@ export default function AboutPage() {
         </div>
 
         {/* How it works */}
-        <div className="mt-16 border-t border-black/5 pt-16 dark:border-white/5">
+        <div className="mt-12 border-t border-black/5 pt-12 md:mt-16 md:pt-16 dark:border-white/5">
           <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-8">
             How it works
           </h2>
@@ -78,7 +78,7 @@ export default function AboutPage() {
         </div>
 
         {/* What makes us different */}
-        <div className="mt-16 border-t border-black/5 pt-16 dark:border-white/5">
+        <div className="mt-12 border-t border-black/5 pt-12 md:mt-16 md:pt-16 dark:border-white/5">
           <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
             What makes Albis different
           </h2>
@@ -99,7 +99,7 @@ export default function AboutPage() {
         </div>
 
         {/* Daily briefing + email capture */}
-        <div className="mt-16 border-t border-black/5 pt-16 dark:border-white/5">
+        <div className="mt-12 border-t border-black/5 pt-12 md:mt-16 md:pt-16 dark:border-white/5">
           <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
             The daily briefing
           </h2>
@@ -117,7 +117,7 @@ export default function AboutPage() {
         </div>
 
         {/* Languages */}
-        <div className="mt-16 border-t border-black/5 pt-16 dark:border-white/5">
+        <div className="mt-12 border-t border-black/5 pt-12 md:mt-16 md:pt-16 dark:border-white/5">
           <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
             Languages we scan
           </h2>
@@ -149,7 +149,7 @@ export default function AboutPage() {
         </div>
 
         {/* Who we are */}
-        <div className="mt-16 border-t border-black/5 pt-16 dark:border-white/5">
+        <div className="mt-12 border-t border-black/5 pt-12 md:mt-16 md:pt-16 dark:border-white/5">
           <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
             Who we are
           </h2>
@@ -164,7 +164,7 @@ export default function AboutPage() {
         </div>
 
         {/* Why we built this */}
-        <div className="mt-16 border-t border-black/5 pt-16 dark:border-white/5">
+        <div className="mt-12 border-t border-black/5 pt-12 md:mt-16 md:pt-16 dark:border-white/5">
           <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-4">
             Why we built this
           </h2>
@@ -185,7 +185,7 @@ export default function AboutPage() {
         </div>
 
         {/* Contact */}
-        <div className="mt-16 border-t border-black/5 pt-16 dark:border-white/5">
+        <div className="mt-12 border-t border-black/5 pt-12 md:mt-16 md:pt-16 dark:border-white/5">
           <p className="font-[family-name:var(--font-source-serif)] text-lg text-zinc-600 dark:text-zinc-400">
             Questions, ideas, or just want to say hello?<br />
             <a href="mailto:harry@albis.news" className="text-[#c8922a] hover:underline">harry@albis.news</a>

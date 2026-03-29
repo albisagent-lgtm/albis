@@ -12,6 +12,7 @@ import { RelativeTime } from "@/app/components/relative-time";
 import { CATEGORIES } from "@/lib/categories";
 import Image from "next/image";
 import { RegionBar } from "@/app/components/region-bar";
+import { ReadingProgress } from "@/app/components/reading-progress";
 import { normalizeRegion, CATEGORY_META } from "@/lib/scan-types";
 import { ShareButtons } from "./share-buttons";
 
@@ -149,6 +150,7 @@ export default async function LensArticlePage({ params }: Props) {
 
   return (
     <>
+      <ReadingProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -160,9 +162,9 @@ export default async function LensArticlePage({ params }: Props) {
         />
       )}
 
-      <article className="mx-auto max-w-[720px] px-6 py-12 md:py-20">
+      <article className="mx-auto max-w-[720px] px-5 py-10 md:px-6 md:py-20">
         {/* Header */}
-        <header className="mb-12">
+        <header className="mb-10 md:mb-12">
           <Breadcrumbs
             items={[
               { label: "Home", href: "/" },
@@ -184,17 +186,17 @@ export default async function LensArticlePage({ params }: Props) {
           </div>
 
           {/* Headline */}
-          <h1 className="mt-5 font-[family-name:var(--font-playfair)] text-[1.75rem] font-bold leading-[1.2] tracking-tight sm:text-[2rem] md:text-[2.5rem] lg:text-[2.75rem]">
+          <h1 className="mt-5 font-[family-name:var(--font-playfair)] text-[1.65rem] font-bold leading-[1.2] tracking-tight sm:text-[2rem] md:text-[2.5rem] lg:text-[2.75rem]">
             {post.title}
           </h1>
 
           {/* Description */}
-          <p className="mt-4 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-500 dark:text-zinc-400">
+          <p className="mt-3 font-[family-name:var(--font-source-serif)] text-base leading-relaxed text-zinc-500 sm:mt-4 sm:text-lg dark:text-zinc-400">
             {post.description}
           </p>
 
           {/* Meta line */}
-          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-[family-name:var(--font-inter)] text-sm text-zinc-500 dark:text-zinc-400">
+          <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-[family-name:var(--font-inter)] text-[13px] text-zinc-500 sm:mt-6 sm:text-sm dark:text-zinc-400">
             <span className="font-medium text-zinc-700 dark:text-zinc-300">
               {post.author || "Albis"}
             </span>
