@@ -63,7 +63,11 @@ export function getPostBySlug(slug: string): BlogPost | null {
     slug,
     title: data.title || slug,
     description: data.description || data.excerpt || "",
-    date: data.date || data.publishDate || data.publishedAt || "",
+    date: (() => {
+      const raw = data.date || data.publishDate || data.publishedAt || "";
+      if (raw instanceof Date) return raw.toISOString().split("T")[0];
+      return String(raw);
+    })(),
     updatedDate: data.updatedDate || undefined,
     author: data.author || "Albis",
     image: data.image || "/og-image.png",
