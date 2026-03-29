@@ -261,10 +261,7 @@ a, button {
 
 /* ─── Feature card hover effects ─────────────────────────────── */
 .feature-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.feature-card:hover {
-  transform: translateY(-2px);
+  transition: color 0.2s ease;
 }
 
 /* ─── Story card hover teaser ────────────────────────────────── */
@@ -434,12 +431,19 @@ a, button {
 .blog-prose > p:first-of-type::first-letter {
   font-family: var(--font-playfair), Georgia, serif;
   color: #c8922a;
-  font-size: 2.75rem;
+  font-size: 2.5rem;
   float: left;
   line-height: 0.85;
-  padding-right: 0.35rem;
-  padding-top: 0.15rem;
+  padding-right: 0.3rem;
+  padding-top: 0.1rem;
   font-weight: 700;
+}
+@media (min-width: 640px) {
+  .blog-prose > p:first-of-type::first-letter {
+    font-size: 2.75rem;
+    padding-right: 0.35rem;
+    padding-top: 0.15rem;
+  }
 }
 @media (min-width: 768px) {
   .blog-prose > p:first-of-type::first-letter {

@@ -23,7 +23,7 @@ export function Footer() {
           </div>
 
           {/* Links */}
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 md:gap-10">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 md:gap-10 max-sm:gap-6">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
                 Sections

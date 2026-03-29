@@ -162,7 +162,7 @@ export default async function LensArticlePage({ params }: Props) {
         />
       )}
 
-      <article className="mx-auto max-w-[720px] px-5 py-10 md:px-6 md:py-20">
+      <article className="mx-auto max-w-[680px] px-5 py-8 md:px-6 md:py-20">
         {/* Header */}
         <header className="mb-10 md:mb-12">
           <Breadcrumbs
@@ -235,13 +235,13 @@ export default async function LensArticlePage({ params }: Props) {
 
           {/* Featured image */}
           {post.image && post.image !== "/og-image.png" && (
-            <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden rounded-xl">
+            <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden">
               <Image
                 src={post.image}
                 alt={post.title}
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, 720px"
+                sizes="(max-width: 768px) 100vw, 680px"
                 priority
               />
             </div>
@@ -399,7 +399,7 @@ export default async function LensArticlePage({ params }: Props) {
                   <Link
                     key={rp.slug}
                     href={`/lens/${rp.slug}`}
-                    className="group block overflow-hidden rounded-xl border border-black/[0.06] bg-white transition-all hover:shadow-md dark:border-white/[0.06] dark:bg-[#1a1a1a]"
+                    className="group block overflow-hidden border-t border-black/[0.08] bg-white pt-4 dark:border-white/[0.08] dark:bg-transparent"
                   >
                     {rp.image && rp.image !== "/og-image.png" && (
                       <div className="relative aspect-[16/9] w-full overflow-hidden">
@@ -407,20 +407,20 @@ export default async function LensArticlePage({ params }: Props) {
                           src={rp.image}
                           alt={rp.title}
                           fill
-                          className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                          className="object-cover"
                           sizes="(max-width: 640px) 100vw, 240px"
                         />
                       </div>
                     )}
-                    <div className="p-4">
+                    <div className="pt-3">
                       <span
-                        className="inline-block rounded-full px-2 py-0.5 font-[family-name:var(--font-inter)] text-[9px] font-semibold uppercase tracking-wider text-white"
-                        style={{ backgroundColor: rpCat.accent }}
+                        className="inline-block font-[family-name:var(--font-inter)] text-[9px] font-semibold uppercase tracking-wider"
+                        style={{ color: rpCat.accent }}
                       >
                         {rpCat.label}
                       </span>
-                      <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-sm font-bold leading-snug text-[#0f0f0f] dark:text-[#f0efec] line-clamp-2 group-hover:text-[#c8922a] transition-colors">
-                        {rp.title}
+                      <h3 className="mt-1.5 font-[family-name:var(--font-playfair)] text-sm font-bold leading-snug text-[#0f0f0f] dark:text-[#f0efec] line-clamp-2">
+                        <span className="transition-colors group-hover:text-[#c8922a]">{rp.title}</span>
                       </h3>
                       <div className="mt-2 flex items-center gap-2 font-[family-name:var(--font-inter)] text-[11px] text-zinc-400 dark:text-zinc-500">
                         <span>{rp.readingTime} min read</span>
