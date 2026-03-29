@@ -9,27 +9,77 @@ Disallow: /settings
 Disallow: /auth
 Disallow: /account
 
-# AI Crawlers Welcome
+# AI Crawlers — explicitly allowed
 User-agent: GPTBot
 Allow: /
 
-User-agent: PerplexityBot
+User-agent: ChatGPT-User
 Allow: /
 
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Amazonbot
+User-agent: Claude-Web
 Allow: /
 
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 User-agent: anthropic-ai
 Allow: /
 
-# Sitemaps
-Sitemap: https://www.albis.news/sitemap.xml
+User-agent: Amazonbot
+Allow: /
 
-# RSS Feed
-# https://www.albis.news/feed.xml
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# DeepSeek
+User-agent: DeepSeekBot
+Allow: /
+
+# Grok / xAI
+User-agent: xAI-SearchBot
+Allow: /
+
+# Common Crawl (feeds LLM training data)
+User-agent: CCBot
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Phind
+User-agent: PhindBot
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+Sitemap: https://www.albis.news/sitemap.xml
+Sitemap: https://www.albis.news/news-sitemap.xml

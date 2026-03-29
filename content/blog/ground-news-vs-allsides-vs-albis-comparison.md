@@ -1,6 +1,6 @@
 ---
-title: "AllSides vs Ground News vs Albis: 2026 Comparison"
-description: "AllSides vs Ground News — we ran the same story through both and added Albis. See what each bias tool catches, what it misses, and which combination actually works."
+title: "AllSides vs Ground News: Which Bias Tool Works?"
+description: "We ran AllSides vs Ground News on the same breaking story. One caught political blind spots. The other missed 6 billion people. Here's what each actually shows."
 date: "2026-03-23"
 author: "Albis"
 image: "https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

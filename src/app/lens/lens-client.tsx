@@ -441,7 +441,6 @@ function ArticleRow({ post }: { post: Post }) {
 // ── Main Component ─────────────────────────────────────────────
 
 export default function LensClient({ posts, initialPillar }: { posts: Post[]; initialPillar?: string }) {
-  // Validate and set initial pillar (exclude "the-lens" since that's the container now)
   const validInitialPillar = initialPillar && Object.keys(PILLARS).includes(initialPillar) && initialPillar !== "the-lens" ? initialPillar as PillarSlug : "all";
   const [activePillar, setActivePillar] = useState<PillarFilter>(validInitialPillar);
   const [activeType, setActiveType] = useState<ArticleType>("all");

@@ -1,8 +1,8 @@
 ---
-title: "US Stands Alone Against UN Women's Rights Vote as Pay Gap Widens"
+title: "US Casts Sole Vote Against UN Women's Rights at CSW70"
 description: "CSW70 sees first-ever vote as US opposes women's rights conclusions, gender pay gap widens for second year, and Mexico and Romania pass landmark femicide laws in March 2026."
 date: "2026-03-29"
-author: "Albis Geopolitics Desk"
+author: "Harry Wenham"
 category: "womens-rights"
 tags: ["womens-rights", "gender-equality", "gender-pay-gap", "femicide", "reproductive-rights", "csw70"]
 image: "https://images.pexels.com/photos/8107553/pexels-photo-8107553.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
@@ -50,56 +50,56 @@ region_frames:
   latam: "Framed as landmark legal reform against endemic femicide crisis"
 ---
 
-The United States cast the sole vote against the UN Commission on the Status of Women's agreed conclusions at CSW70, losing 37 to one in the first contested vote in the commission's eight-decade history. The March 19 vote capped two weeks of US attempts to defer, amend, and block the outcome document, which calls on governments to repeal discriminatory laws, prosecute gender-based violence, and close the gender digital divide. Days later, Equal Pay Day on March 26 revealed that the US gender wage gap has widened for the second consecutive year — women working full-time now earn 81 cents for every dollar men make.
+The US cast the sole vote against the UN Commission on the Status of Women's agreed conclusions at CSW70, losing 37-1 in the commission's first contested vote in eight decades. The March 19 vote capped two weeks of US attempts to defer, amend, and block the document — which calls on governments to repeal discriminatory laws, prosecute gender-based violence, and close the gender digital divide. Days later, Equal Pay Day revealed the US gender wage gap widened for a second straight year. Women working full-time now earn 81 cents for every dollar men make.
 
 ## Historic Standoff at CSW70
 
-The 70th session of the Commission on the Status of Women, held March 9-19 at UN headquarters in New York, focused on access to justice for women and girls. The UN secretary-general's report presented at the session found that no country has yet achieved full legal equality between women and men.
+CSW70, held March 9-19 at UN headquarters, focused on access to justice for women and girls. The secretary-general's report found no country has achieved full legal equality between women and men.
 
-The US delegation pushed a proposal to redefine "gender" in strictly binary terms. Member states voted to halt consideration of that proposal. The Trump administration has also withdrawn from UN Women, eliminated $60 billion in foreign aid, and helped set in motion a proposal to merge UN Women with the UN Population Fund.
+The US pushed to redefine "gender" in strictly binary terms. Member states voted to halt that proposal. The Trump administration also withdrew from UN Women, cut $60 billion in foreign aid, and helped set in motion a merger of UN Women with the UN Population Fund.
 
-The agreed conclusions passed with 37 votes in favor and six abstentions. They urge governments to ratify the Convention on the Elimination of Violence Against Women, investigate and prosecute all forms of exploitation and violence against women, and address online gender-based violence including nonconsensual intimate images and deepfakes.
+The agreed conclusions passed 37-0-6. They urge governments to ratify the Convention on the Elimination of Violence Against Women, prosecute all forms of gender-based violence, and address online threats including [nonconsensual deepfakes](/blog/deepfake-2026-us-midterm-elections-eu-ai-act-law-gap).
 
-The Council on Foreign Relations noted that the conclusions call for comprehensive review of national laws to repeal provisions that discriminate against women, including those governing family relations, property rights, and financial credit, and those permitting child marriage and female genital mutilation.
+The Council on Foreign Relations noted the conclusions call for repeal of laws discriminating against women — covering family relations, property rights, financial credit, child marriage, and female genital mutilation.
 
 ## US Gender Pay Gap Reverses Decades of Progress
 
 Equal Pay Day marks how far into the new year women must work to match what men earned the previous year. In 2026, it fell on March 26 — a day later than 2025.
 
-The consecutive widening is the first since the 1960s, according to Deborah Vagins, director of Equal Pay Today. Census data shows men's median income grew 3.7% between 2023 and 2024 while women's median income remained flat.
+The consecutive widening's the first since the 1960s, per Deborah Vagins of Equal Pay Today. Census data: men's median income grew 3.7% between 2023 and 2024. Women's stayed flat.
 
-An AP-NORC poll released the same week found sharp disagreement between men and women on the issue. About six in ten employed women said men have more opportunities to earn competitive wages. Roughly one-third of men agreed.
+An AP-NORC poll found sharp disagreement. Six in ten employed women said men have more opportunities to earn competitive wages. One-third of men agreed.
 
-The data predates the current administration — it reflects 2024 earnings under President Biden. The Biden administration supported equal pay efforts but failed to secure federal pay transparency legislation through Congress. The Trump administration has since eliminated the data collection tools that tracked pay disparities by sex, ethnicity, and race at the Equal Employment Opportunity Commission.
+The data predates this administration — it reflects 2024 earnings under Biden. Biden supported equal pay but failed to secure federal pay transparency legislation. The Trump administration has since eliminated the EEOC data collection tools that tracked pay disparities by sex, ethnicity, and race.
 
 ## Mexico Passes Sweeping Femicide Law
 
-Mexico enacted a national law against femicide in late March, introducing penalties of up to 70 years in prison. The reform amends Article 73 of the Constitution, empowering Congress to create a unified legal framework across federal, state, and municipal levels.
+Mexico enacted a national [femicide law](/blog/mexico-femicide-law-70-years-prison-sheinbaum-2026) in late March: up to 70 years in prison. The reform amends Article 73 of the Constitution, giving Congress power to create a unified legal framework across federal, state, and municipal levels.
 
-The law classifies femicide as a grave human rights violation and requires that every violent death of a woman be investigated as potential femicide from the outset. It eliminates statutes of limitations, strips perpetrators of inheritance rights and parental authority, and outlines nine gender-based criteria for classification including sexual violence and power dynamics.
+The law classifies femicide as a grave human rights violation. Every violent death of a woman must be investigated as potential femicide from the outset. It eliminates statutes of limitations, strips perpetrators of inheritance rights and parental authority, and outlines nine gender-based criteria including sexual violence and power dynamics.
 
-Attorney General Ernestina Godoy Ramos emphasized that the constitutional amendment enables coordinated action across all levels of government. Mexico recorded 797 femicides in 2024 and a national rate of approximately 1.43 per 100,000 women in 2022, part of a broader Latin American crisis where Brazil, Honduras, Guatemala, and the Dominican Republic report even higher levels.
+Attorney General Ernestina Godoy Ramos said the constitutional amendment enables coordinated action across all government levels. Mexico recorded 797 femicides in 2024 — part of a broader Latin American crisis where Brazil, Honduras, Guatemala, and the Dominican Republic report even higher rates.
 
-The legislation also mandates support for children orphaned by femicide, requires digital platforms to prevent circulation of sensationalistic images of victims, and establishes a national registry of orphaned minors.
+The law also mandates support for children orphaned by femicide, requires platforms to prevent circulation of sensationalistic victim images, and establishes a national registry of orphaned minors.
 
 ## Romania Adopts First Femicide Definition
 
-Romania's Chamber of Deputies adopted a bill on March 25 implementing the country's first legal definition of femicide. The law passed 284 to one with two abstentions, signed by more than 270 parliamentarians from all parties.
+Romania's Chamber of Deputies passed its first legal definition of femicide on March 25. The vote: 284-1, with two abstentions. More than 270 parliamentarians from all parties signed on.
 
-The bill defines femicide as "the intentional killing of a woman, as well as the death of a woman resulting from blows or injuries causing death." Sentences range from 15 to 25 years or life imprisonment. Criminal proceedings for gender-based violence can now be initiated ex officio without a prior complaint.
+The bill defines femicide as "the intentional killing of a woman, as well as the death of a woman resulting from blows or injuries causing death." Sentences: 15 to 25 years, or life. Criminal proceedings for gender-based violence can now start ex officio — no prior complaint needed.
 
-Romania recorded 59 femicide cases in 2025. On average, three women or girls were killed per month by a family member in the first eight months of that year. The far-right Alliance for the Union of Romanians called the bill overregulation.
+Romania recorded 59 femicide cases in 2025. Three women or girls killed per month by a family member in the first eight months. The far-right Alliance for the Union of Romanians called it overregulation.
 
 ## EU Launches Five-Year Gender Equality Strategy
 
-The European Commission presented its Gender Equality Strategy 2026-2030 ahead of International Women's Day. It builds on legislation from the previous strategy including rules on combating violence against women, pay transparency, and gender balance on corporate boards.
+The European Commission presented its Gender Equality Strategy 2026-2030 ahead of International Women's Day. It builds on existing rules on violence against women, pay transparency, and corporate board gender balance.
 
-The European Institute for Gender Equality estimates that at the current pace, the EU would take 50 years to reach full gender equality. The new strategy turns the 2025 Roadmap for Women's Rights into concrete actions targeting women's economic empowerment, male engagement, and opposition to rights rollbacks.
+At the current pace, the EU would take 50 years to reach full gender equality, per the European Institute for Gender Equality. The new strategy turns the 2025 Roadmap for Women's Rights into concrete actions: women's economic empowerment, male engagement, and opposition to rights rollbacks.
 
-Member states and social partners met on March 25 to discuss gender dimensions of job quality as part of the strategy's early implementation.
+Member states met March 25 to discuss gender dimensions of job quality as early implementation.
 
 ## US States Face Federal Pressure on Reproductive Rights
 
-The Trump administration's Department of Health and Human Services launched investigations into 13 states — California, Colorado, Delaware, Illinois, Maine, Maryland, Massachusetts, Minnesota, New Jersey, New York, Oregon, Vermont, and Washington — claiming they violate the Weldon Amendment by requiring insurers to cover abortion care. States have 20 days to respond or face federal funding cuts.
+HHS launched investigations into 13 states — California, Colorado, Delaware, Illinois, Maine, Maryland, Massachusetts, Minnesota, New Jersey, New York, Oregon, Vermont, and Washington — claiming they violate the Weldon Amendment by requiring insurers to cover abortion care. Twenty days to respond or face federal funding cuts.
 
-All 13 targeted states voted for Kamala Harris in 2024. Voters in Missouri, Nevada, and Virginia will face abortion-related ballot measures in November 2026. In Arizona, Republican lawmakers continue efforts to enshrine fetal personhood into state law despite the state constitution currently protecting abortion as a fundamental right.
+All 13 voted for Kamala Harris in 2024. Missouri, Nevada, and Virginia voters face abortion-related ballot measures in November 2026. In Arizona, Republican lawmakers push to enshrine fetal personhood despite the state constitution currently protecting abortion as a fundamental right.

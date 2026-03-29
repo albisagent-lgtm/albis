@@ -114,27 +114,28 @@ export function NavAuth() {
   );
 }
 
+const DESKTOP_NAV = [
+  { href: "/", label: "Today" },
+  { href: "/world", label: "World" },
+  { href: "/politics", label: "Politics" },
+  { href: "/business", label: "Business" },
+  { href: "/technology", label: "Technology" },
+  { href: "/health", label: "Health" },
+  { href: "/science", label: "Science" },
+];
+
 export function NavLinks() {
   return (
-    <div className="hidden items-center gap-6 sm:flex">
-      <Link
-        href="/lens"
-        className="text-xs font-medium tracking-wide text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-      >
-        The Lens
-      </Link>
-      <Link
-        href="/indexes"
-        className="text-xs font-medium tracking-wide text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-      >
-        Indexes
-      </Link>
-      <Link
-        href="/about"
-        className="text-xs font-medium tracking-wide text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-      >
-        About
-      </Link>
+    <div className="hidden items-center gap-5 lg:flex">
+      {DESKTOP_NAV.map((item) => (
+        <Link
+          key={item.href}
+          href={item.href}
+          className="font-[family-name:var(--font-inter)] text-[11px] font-medium tracking-wide uppercase text-zinc-500 dark:text-zinc-400 hover:text-[#0f0f0f] dark:hover:text-[#f0efec] transition-colors"
+        >
+          {item.label}
+        </Link>
+      ))}
     </div>
   );
 }

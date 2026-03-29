@@ -12,6 +12,14 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'source.unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+      },
     ],
   },
   // Configure `pageExtensions` to include MDX files
@@ -62,12 +70,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/scan/:date',
-        destination: '/briefing',
+        destination: '/archive',
         permanent: false,
       },
       {
         source: '/history',
-        destination: '/briefing',
+        destination: '/archive',
         permanent: false,
       },
       {
@@ -114,6 +122,122 @@ const nextConfig: NextConfig = {
       {
         source: '/intelligence/energy',
         destination: '/lens?pillar=the-flow',
+        permanent: true,
+      },
+      // Page purge redirects (2026-03-23)
+      {
+        source: '/divided',
+        destination: '/indexes/pgi',
+        permanent: true,
+      },
+      {
+        source: '/unseen',
+        destination: '/indexes/gai',
+        permanent: true,
+      },
+      {
+        source: '/pillars',
+        destination: '/lens',
+        permanent: true,
+      },
+      {
+        source: '/pillars/:pillar',
+        destination: '/lens',
+        permanent: true,
+      },
+      {
+        source: '/perception-gap-index',
+        destination: '/indexes/pgi',
+        permanent: true,
+      },
+      {
+        source: '/perception-gap/about',
+        destination: '/methodology',
+        permanent: true,
+      },
+      {
+        source: '/pgi/:date',
+        destination: '/indexes/pgi',
+        permanent: true,
+      },
+      {
+        source: '/what-is-perception-gap-index',
+        destination: '/methodology',
+        permanent: true,
+      },
+      {
+        source: '/what-is-global-attention-index',
+        destination: '/methodology',
+        permanent: true,
+      },
+      {
+        source: '/indexes/information',
+        destination: '/indexes',
+        permanent: true,
+      },
+      {
+        source: '/live',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/research',
+        destination: '/about',
+        permanent: true,
+      },
+      {
+        source: '/framing-lab',
+        destination: '/lens',
+        permanent: true,
+      },
+      {
+        source: '/briefing',
+        destination: '/archive',
+        permanent: true,
+      },
+      {
+        source: '/digest',
+        destination: '/archive',
+        permanent: true,
+      },
+      {
+        source: '/tags/:tag',
+        destination: '/lens',
+        permanent: true,
+      },
+      {
+        source: '/blind-spots',
+        destination: '/lens',
+        permanent: true,
+      },
+      {
+        source: '/stories/:slug',
+        destination: '/lens/:slug',
+        permanent: true,
+      },
+      {
+        source: '/topics/:topic',
+        destination: '/lens',
+        permanent: true,
+      },
+      {
+        source: '/under-the-radar',
+        destination: '/lens',
+        permanent: true,
+      },
+      {
+        source: '/glossary',
+        destination: '/about',
+        permanent: true,
+      },
+      {
+        source: '/perspectives',
+        destination: '/lens',
+        permanent: true,
+      },
+      {
+        source: '/perspectives/:country',
+        destination: '/lens',
         permanent: true,
       },
     ];

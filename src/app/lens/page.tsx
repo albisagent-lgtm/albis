@@ -1,21 +1,18 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
 import { getTodayScan } from "@/lib/scan-parser";
 import LensClient from "./lens-client";
 import { LensTabs } from "./lens-tabs";
 import { Breadcrumbs } from "@/app/components/breadcrumbs";
 
-import { PILLARS } from "@/lib/pillars";
-
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "The Lens — Albis",
+  title: "Stories — Albis News",
   description:
     "Today's headlines and in-depth articles from around the world. Perspectives, analysis, and insights from Albis.",
   openGraph: {
-    title: "The Lens — Albis",
+    title: "Stories — Albis News",
     description:
       "Today's headlines and in-depth articles from around the world.",
     url: "https://www.albis.news/lens",
@@ -52,7 +49,6 @@ export default async function LensPage({ searchParams }: LensPageProps) {
     displayDate: scan.displayDate,
   } : null;
 
-  // Article refs for headline matching
   const articleRefs = allPosts.map(p => ({
     slug: p.slug,
     title: p.title,
@@ -60,34 +56,30 @@ export default async function LensPage({ searchParams }: LensPageProps) {
   }));
 
   return (
-    <main className="mx-auto max-w-6xl px-6 py-10 md:py-14">
-      {/* Breadcrumbs */}
+    <main className="mx-auto max-w-6xl px-6 py-12 md:py-16">
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },
-          { label: "The Lens" },
+          { label: "Stories" },
         ]}
       />
 
-      {/* Header */}
-      <header className="mb-8 text-center">
-        <h1 className="font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-5xl">
-          THE LENS
+      <header className="mb-10 text-center">
+        <h1 className="font-[family-name:var(--font-playfair)] text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
+          Latest Stories
         </h1>
-        <p className="mt-3 text-base text-zinc-500 dark:text-zinc-400 leading-relaxed">
-          Today&apos;s headlines and in-depth analysis from around the world.
+        <p className="mx-auto mt-3 max-w-lg font-[family-name:var(--font-source-serif)] text-base text-zinc-500 dark:text-zinc-400 leading-relaxed">
+          Headlines, analysis, and in-depth reporting from around the world.
         </p>
       </header>
 
       <LensTabs scanData={scanData} articles={articleRefs}>
         {allPosts.length === 0 ? (
-          <p className="text-center text-zinc-400">No articles yet. Check back soon.</p>
+          <p className="py-16 text-center text-zinc-400">No articles yet. Check back soon.</p>
         ) : (
           <LensClient posts={allPosts} initialPillar={searchParams.pillar} />
         )}
       </LensTabs>
-
-
     </main>
   );
 }

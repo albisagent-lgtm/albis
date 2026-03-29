@@ -50,19 +50,19 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.albis.news";
 
 export const metadata: Metadata = {
   title: {
-    default: "Albis — The news, understood.",
-    template: "%s | Albis",
+    default: "Albis — Global News From Every Region",
+    template: "%s | Albis News",
   },
   description:
-    "The world's news in 2 minutes. Scanned from every region, every language, every perspective — so you don't miss what matters.",
+    "Global news scanned from 60 countries, 7 regions, and 16 languages every day. See how the world sees the news.",
   keywords: [
-    "news intelligence",
-    "pattern detection",
-    "framing analysis",
     "global news",
-    "personalised briefing",
+    "world news",
+    "news from every region",
+    "international news",
+    "news analysis",
     "media literacy",
-    "anti-doomscroll",
+    "news intelligence",
   ],
   authors: [{ name: "Albis" }],
   metadataBase: new URL(siteUrl),
@@ -74,23 +74,23 @@ export const metadata: Metadata = {
     locale: "en_NZ",
     url: siteUrl,
     siteName: "Albis",
-    title: "Albis — The news, understood.",
+    title: "Albis — Global News From Every Region",
     description:
-      "The world's news in 2 minutes. Scanned from every region, every language, every perspective.",
+      "Global news scanned from 60 countries, 7 regions, and 16 languages every day.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Albis — News intelligence, not noise",
+        alt: "Albis — Global News From Every Region",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Albis — The news, understood.",
-    description: "The world's news in 2 minutes. Every region. Every perspective.",
+    title: "Albis — Global News From Every Region",
+    description: "Global news from 60 countries, 7 regions, and 16 languages. Every day.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -130,7 +130,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="" suppressHydrationWarning>
       <head>
-        <link rel="alternate" type="application/rss+xml" title="Albis — The Lens" href="https://www.albis.news/feed.xml" />
+        <link rel="alternate" type="application/rss+xml" title="Albis News" href="https://www.albis.news/feed.xml" />
         <script
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-49B2PLPBJP');setTimeout(function(){var s=document.createElement('script');s.src='https://www.googletagmanager.com/gtag/js?id=G-49B2PLPBJP';document.head.appendChild(s)},2500);`,

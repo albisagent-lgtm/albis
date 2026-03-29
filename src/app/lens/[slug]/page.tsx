@@ -4,19 +4,36 @@ import Link from "next/link";
 import { getAllSlugs, getPostBySlug } from "@/lib/blog";
 import { markdownToHtml } from "@/lib/markdown";
 import { EmailCapture } from "@/app/components/email-capture";
-
-import { getRelatedPosts, getRelatedPages } from "@/lib/internal-links";
+import { getRelatedPosts } from "@/lib/internal-links";
 import { matchTagToTopic } from "@/lib/topics";
 import { Breadcrumbs } from "@/app/components/breadcrumbs";
 import { SourceTransparency } from "@/app/components/source-transparency";
 import { RelativeTime } from "@/app/components/relative-time";
 import { CATEGORIES } from "@/lib/categories";
-import { getAllPosts } from "@/lib/blog";
-
 import Image from "next/image";
-import { PerceptionGapVisual } from "@/app/components/perception-gap-visual";
-import { CoverageGapVisual } from "@/app/components/coverage-gap-visual";
-import { YourGapCard } from "@/app/components/your-gap-card";
+import { RegionBar } from "@/app/components/region-bar";
+import { normalizeRegion, CATEGORY_META } from "@/lib/scan-types";
+import { ShareButtons } from "./share-buttons";
+
+function getCategoryDisplay(category: string): { label: string; accent: string } {
+  if (CATEGORY_META[category]) {
+    return { label: CATEGORY_META[category].label, accent: CATEGORY_META[category].accent };
+  }
+  const NAV_MAP: Record<string, string[]> = {
+    world: ["current-events", "geopolitics", "conflict"],
+    politics: ["governance"],
+    business: ["economic-flows"],
+    technology: ["tech-ai", "cyber-info-warfare"],
+    health: ["health"],
+    science: ["science-space"],
+  };
+  for (const [navCat, scanCats] of Object.entries(NAV_MAP)) {
+    if (scanCats.includes(category)) {
+      return { label: navCat.charAt(0).toUpperCase() + navCat.slice(1), accent: CATEGORY_META[scanCats[0]]?.accent || "#c8922a" };
+    }
+  }
+  return { label: category, accent: "#c8922a" };
+}
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -31,7 +48,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug);
   if (!post) return {};
   const url = `https://www.albis.news/lens/${slug}`;
-  // Build dynamic OG image URL with title + PGI + regions
   const ogParams = new URLSearchParams({ title: post.title });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const p = post as any;
@@ -74,8 +90,22 @@ export default async function LensArticlePage({ params }: Props) {
   const html = markdownToHtml(post.content);
   const url = `https://www.albis.news/lens/${slug}`;
 
-  const relatedPosts = getRelatedPosts(post.tags, slug, 3);
-  const relatedPages = getRelatedPages(post.tags);
+  const relatedPostMeta = getRelatedPosts(post.tags, slug, 3);
+  const relatedPosts = relatedPostMeta
+    .map((rp) => getPostBySlug(rp.slug))
+    .filter((p): p is NonNullable<typeof p> => p !== null);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const pAny = post as any;
+  const regionsFound: string[] = Array.isArray(pAny.regions_found)
+    ? pAny.regions_found.map((r: string) => normalizeRegion(r))
+    : [];
+  const regionsAbsent: string[] = Array.isArray(pAny.regions_absent)
+    ? pAny.regions_absent.map((r: string) => normalizeRegion(r))
+    : [];
+  const regionCount = regionsFound.length;
+
+  const cat = getCategoryDisplay(post.category);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -102,7 +132,6 @@ export default async function LensArticlePage({ params }: Props) {
     } : {}),
   };
 
-  // FAQ structured data if available
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const faqs = (post as any).faqs;
   const faqJsonLd = faqs && faqs.length > 0 ? {
@@ -131,19 +160,46 @@ export default async function LensArticlePage({ params }: Props) {
         />
       )}
 
-      <article className="mx-auto max-w-2xl px-6 py-16 md:py-24">
+      <article className="mx-auto max-w-[720px] px-6 py-12 md:py-20">
         {/* Header */}
         <header className="mb-12">
           <Breadcrumbs
             items={[
               { label: "Home", href: "/" },
-              { label: "The Lens", href: "/lens" },
+              { label: "Stories", href: "/lens" },
               { label: CATEGORIES[post.category as keyof typeof CATEGORIES] || "Analysis", href: `/lens?category=${post.category}` },
-              { label: post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title },
+              { label: post.title.length > 50 ? post.title.slice(0, 50) + "\u2026" : post.title },
             ]}
           />
-          <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-500 dark:text-zinc-400">
-            <time>
+
+          {/* Category tag */}
+          <div className="mt-6">
+            <Link
+              href={`/lens?category=${post.category}`}
+              className="inline-block rounded-full px-3 py-1 font-[family-name:var(--font-inter)] text-[11px] font-semibold uppercase tracking-wider text-white transition-opacity hover:opacity-80"
+              style={{ backgroundColor: cat.accent }}
+            >
+              {cat.label}
+            </Link>
+          </div>
+
+          {/* Headline */}
+          <h1 className="mt-5 font-[family-name:var(--font-playfair)] text-[1.75rem] font-bold leading-[1.2] tracking-tight sm:text-[2rem] md:text-[2.5rem] lg:text-[2.75rem]">
+            {post.title}
+          </h1>
+
+          {/* Description */}
+          <p className="mt-4 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-500 dark:text-zinc-400">
+            {post.description}
+          </p>
+
+          {/* Meta line */}
+          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-[family-name:var(--font-inter)] text-sm text-zinc-500 dark:text-zinc-400">
+            <span className="font-medium text-zinc-700 dark:text-zinc-300">
+              {post.author || "Albis"}
+            </span>
+            <span className="text-zinc-300 dark:text-zinc-600">&middot;</span>
+            <time dateTime={post.date}>
               {new Date(post.date).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
@@ -151,18 +207,31 @@ export default async function LensArticlePage({ params }: Props) {
               })}
             </time>
             <RelativeTime date={post.date} prefix="· " className="text-sm text-zinc-400 dark:text-zinc-500" />
-            <span>&middot;</span>
+            <span className="text-zinc-300 dark:text-zinc-600">&middot;</span>
             <span>{post.readingTime} min read</span>
+            {regionCount > 0 && (
+              <>
+                <span className="text-zinc-300 dark:text-zinc-600">&middot;</span>
+                <span className="font-medium text-[#c8922a]">
+                  Scanned from {regionCount} region{regionCount !== 1 ? "s" : ""}
+                </span>
+              </>
+            )}
           </div>
-          <h1 className="mt-6 font-[family-name:var(--font-playfair)] text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-[2.75rem]">
-            {post.title}
-          </h1>
-          <p className="mt-4 text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">
-            {post.description}
-          </p>
-          <div className="mt-4 flex items-center gap-2 text-sm text-zinc-400 dark:text-zinc-500">
-            <span>By {post.author || "Albis"}</span>
-          </div>
+
+          {/* Region bar */}
+          {regionsFound.length > 0 && (
+            <div className="mt-5">
+              <RegionBar regions={regionsFound} />
+              {regionsAbsent.length > 0 && (
+                <p className="mt-1.5 font-[family-name:var(--font-inter)] text-[11px] text-zinc-400 dark:text-zinc-500">
+                  Not covered in {regionsAbsent.length} region{regionsAbsent.length !== 1 ? "s" : ""}
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* Featured image */}
           {post.image && post.image !== "/og-image.png" && (
             <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden rounded-xl">
               <Image
@@ -170,14 +239,15 @@ export default async function LensArticlePage({ params }: Props) {
                 alt={post.title}
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, 672px"
+                sizes="(max-width: 768px) 100vw, 720px"
                 priority
               />
             </div>
           )}
+
           {/* Tags */}
           {post.tags.length > 0 && (
-            <div className="mt-space-4 flex flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap gap-2">
               {post.tags.slice(0, 5).map((tag) => {
                 const match = matchTagToTopic(tag);
                 if (match) {
@@ -207,36 +277,9 @@ export default async function LensArticlePage({ params }: Props) {
               )}
             </div>
           )}
-          {/* Perception Gap Visuals — graceful when data unavailable */}
-          {(() => {
-            // These fields may be added to frontmatter later; safe access via cast
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const p = post as any;
-            const pgScore = typeof p.perception_gap === "number" ? p.perception_gap : null;
-            const found = Array.isArray(p.regions_found) ? (p.regions_found as string[]) : null;
-            const absent = Array.isArray(p.regions_absent) ? (p.regions_absent as string[]) : [];
-            const significance = p.region_significance as Record<string, number> | undefined;
-
-            if (pgScore == null || !found) return null;
-
-            return (
-              <div className="mt-8 space-y-3">
-                <PerceptionGapVisual
-                  pgi={pgScore}
-                  regionsFound={found}
-                  regionsAbsent={absent}
-                  regionSignificance={significance}
-                />
-                <CoverageGapVisual
-                  regionsFound={found}
-                  regionsAbsent={absent}
-                />
-              </div>
-            );
-          })()}
         </header>
 
-        {/* Body */}
+        {/* Article body */}
         <div
           className="blog-prose font-[family-name:var(--font-source-serif)] text-[1.0625rem] leading-[1.8] text-[#1a1a1a] dark:text-[#d4d3d0]"
           dangerouslySetInnerHTML={{ __html: html }}
@@ -245,114 +288,166 @@ export default async function LensArticlePage({ params }: Props) {
         {/* Source Transparency */}
         <SourceTransparency sources={post.sources} confidence={post.confidence} />
 
-        {/* Personalised Gap Awareness */}
+        {/* How regions covered this */}
         {(() => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const p = post as any;
-          const pgScore = typeof p.perception_gap === "number" ? p.perception_gap : null;
-          const found = Array.isArray(p.regions_found) ? (p.regions_found as string[]) : null;
-          const absent = Array.isArray(p.regions_absent) ? (p.regions_absent as string[]) : [];
           const frames = p.region_frames as Record<string, string> | undefined;
+          const found: string[] = Array.isArray(p.regions_found) ? p.regions_found : [];
+          const absent: string[] = Array.isArray(p.regions_absent) ? p.regions_absent : [];
 
-          if (pgScore == null || !found) return null;
+          if (!frames || Object.keys(frames).length === 0) return null;
+
+          const FRAME_DISPLAY: Record<string, { flag: string; label: string }> = {
+            us: { flag: "\u{1F1FA}\u{1F1F8}", label: "North America" },
+            eu: { flag: "\u{1F1EA}\u{1F1FA}", label: "Europe" },
+            middle_east: { flag: "\u{1F54C}", label: "Middle East" },
+            south_asia: { flag: "\u{1F1EE}\u{1F1F3}", label: "South Asia" },
+            asia_pacific: { flag: "\u{1F30F}", label: "East Asia & Pacific" },
+            africa: { flag: "\u{1F30D}", label: "Africa" },
+            latam: { flag: "\u{1F30E}", label: "Latin America" },
+          };
+
+          const absentWithoutFrame = absent.filter((r) => !frames[r]);
 
           return (
-            <YourGapCard
-              regionsFound={found}
-              regionsAbsent={absent}
-              pgi={pgScore}
-              regionFrames={frames}
-            />
+            <section className="mt-14 rounded-xl border border-black/[0.06] bg-black/[0.015] p-6 md:p-8 dark:border-white/[0.06] dark:bg-white/[0.02]">
+              <h2 className="font-[family-name:var(--font-playfair)] text-xl font-semibold text-[#0f0f0f] dark:text-[#f0efec] md:text-2xl">
+                How regions covered this
+              </h2>
+              <p className="mt-1.5 font-[family-name:var(--font-inter)] text-sm text-zinc-400 dark:text-zinc-500">
+                The same story, framed differently around the world
+              </p>
+              <div className="mt-5 space-y-0 divide-y divide-black/[0.06] dark:divide-white/[0.06]">
+                {Object.entries(frames).map(([region, frame]) => {
+                  const display = FRAME_DISPLAY[region];
+                  return (
+                    <div key={region} className="flex items-start gap-3.5 py-4">
+                      <span className="mt-0.5 text-lg leading-none">{display?.flag || "\u{1F310}"}</span>
+                      <div className="min-w-0 flex-1">
+                        <span className="font-[family-name:var(--font-inter)] text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                          {display?.label || region}
+                        </span>
+                        <p className="mt-1 font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+                          {frame}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+                {absentWithoutFrame.map((region) => {
+                  const display = FRAME_DISPLAY[region];
+                  return (
+                    <div key={region} className="flex items-start gap-3.5 py-4 opacity-50">
+                      <span className="mt-0.5 text-lg leading-none grayscale">{display?.flag || "\u{1F310}"}</span>
+                      <div className="min-w-0 flex-1">
+                        <span className="font-[family-name:var(--font-inter)] text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                          {display?.label || region}
+                        </span>
+                        <p className="mt-1 font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-zinc-400 italic dark:text-zinc-500">
+                          Not covered in this region
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              {/* Region bar */}
+              <div className="mt-5 border-t border-black/[0.06] pt-4 dark:border-white/[0.06]">
+                <p className="mb-2 font-[family-name:var(--font-inter)] text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                  Coverage map
+                </p>
+                <RegionBar regions={found.map((r: string) => normalizeRegion(r))} />
+              </div>
+            </section>
           );
         })()}
 
-        {/* Quiz CTA */}
-        <div className="mt-12 rounded-xl border border-[#c8922a]/20 bg-[#c8922a]/5 p-5 dark:border-[#c8922a]/20 dark:bg-[#c8922a]/5">
-          <Link href="/quiz" className="flex items-center justify-between group">
-            <div>
-              <p className="font-medium text-[#c8922a] dark:text-[#c8922a]">Think you know today&apos;s news?</p>
-              <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Take the daily quiz — 5 questions, 60 seconds</p>
-            </div>
-            <span className="text-[#c8922a] dark:text-[#c8922a] group-hover:translate-x-1 transition-transform text-lg">&rarr;</span>
-          </Link>
+        {/* Share */}
+        <div className="mt-10 flex items-center justify-between border-t border-black/[0.06] pt-6 dark:border-white/[0.06]">
+          <p className="font-[family-name:var(--font-inter)] text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+            Share this story
+          </p>
+          <ShareButtons url={url} title={post.title} />
         </div>
 
-        {/* Related Articles */}
-        {relatedPosts.length > 0 && (
-          <section className="mt-12">
-            <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold">
-              Keep Reading
-            </h2>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {relatedPosts.map((rp) => (
-                <Link
-                  key={rp.slug}
-                  href={`/lens/${rp.slug}`}
-                  className="group block rounded-xl border border-black/[0.07] p-5 transition-all hover:border-[#c8922a]/30 hover:shadow-sm dark:border-white/[0.06] dark:hover:border-[#c8922a]/30"
-                >
-                  <div className="mb-3 flex items-center gap-2 text-xs text-zinc-400 dark:text-zinc-500">
-                    <time>
-                      {new Date(rp.date).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </time>
-                    <span>&middot;</span>
-                    <span>{(rp as any).readingTime || 3} min</span>
-                  </div>
-                  <h3 className="font-medium leading-snug text-[#0f0f0f] group-hover:text-[#c8922a] dark:text-[#f0efec] dark:group-hover:text-[#c8922a]">{rp.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 line-clamp-2">{rp.description}</p>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Explore Perspectives */}
-        {relatedPages.length > 0 && (
-          <section className="mt-12">
-            <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold">
-              Explore Perspectives
-            </h2>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {relatedPages.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="flex items-center gap-1 rounded-lg border border-black/[0.07] px-3 py-2 text-sm transition-colors hover:border-black/[0.15] dark:border-white/[0.06] dark:hover:border-white/[0.12]"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* CTA — inline email capture */}
-        <div className="mt-16 rounded-2xl border border-[#c8922a]/20 bg-[#f8f7f4] p-8 text-center dark:border-[#c8922a]/20 dark:bg-white/[0.03]">
-          <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#c8922a]">
-            Get this delivered free every morning
+        {/* Email capture */}
+        <div className="mt-12 rounded-2xl border border-[#c8922a]/20 bg-[#f8f7f4] p-8 text-center dark:border-[#c8922a]/20 dark:bg-white/[0.03]">
+          <h3 className="font-[family-name:var(--font-playfair)] text-xl font-semibold text-[#c8922a] md:text-2xl">
+            Get the daily briefing free
           </h3>
-          <p className="mx-auto mt-3 max-w-md text-zinc-600 dark:text-zinc-400">
-            The daily briefing with perspectives from 7 regions — straight to your inbox.
+          <p className="mx-auto mt-3 max-w-md font-[family-name:var(--font-source-serif)] text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            News from 7 regions and 16 languages, delivered to your inbox every morning.
           </p>
           <div className="mt-6">
             <EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} source="article-bottom" />
           </div>
         </div>
 
+        {/* Related Stories */}
+        {relatedPosts.length > 0 && (
+          <section className="mt-14">
+            <h2 className="font-[family-name:var(--font-playfair)] text-xl font-semibold text-[#0f0f0f] dark:text-[#f0efec] md:text-2xl">
+              Related Stories
+            </h2>
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+              {relatedPosts.slice(0, 3).map((rp) => {
+                const rpCat = getCategoryDisplay(rp.category);
+                return (
+                  <Link
+                    key={rp.slug}
+                    href={`/lens/${rp.slug}`}
+                    className="group block overflow-hidden rounded-xl border border-black/[0.06] bg-white transition-all hover:shadow-md dark:border-white/[0.06] dark:bg-[#1a1a1a]"
+                  >
+                    {rp.image && rp.image !== "/og-image.png" && (
+                      <div className="relative aspect-[16/9] w-full overflow-hidden">
+                        <Image
+                          src={rp.image}
+                          alt={rp.title}
+                          fill
+                          className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                          sizes="(max-width: 640px) 100vw, 240px"
+                        />
+                      </div>
+                    )}
+                    <div className="p-4">
+                      <span
+                        className="inline-block rounded-full px-2 py-0.5 font-[family-name:var(--font-inter)] text-[9px] font-semibold uppercase tracking-wider text-white"
+                        style={{ backgroundColor: rpCat.accent }}
+                      >
+                        {rpCat.label}
+                      </span>
+                      <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-sm font-bold leading-snug text-[#0f0f0f] dark:text-[#f0efec] line-clamp-2 group-hover:text-[#c8922a] transition-colors">
+                        {rp.title}
+                      </h3>
+                      <div className="mt-2 flex items-center gap-2 font-[family-name:var(--font-inter)] text-[11px] text-zinc-400 dark:text-zinc-500">
+                        <span>{rp.readingTime} min read</span>
+                        <span>&middot;</span>
+                        <time>
+                          {new Date(rp.date).toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                          })}
+                        </time>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
         {/* Back link */}
         <div className="mt-12 text-center">
           <Link
             href="/lens"
-            className="text-sm font-medium text-[#c8922a] hover:underline dark:text-[#c8922a]"
+            className="font-[family-name:var(--font-inter)] text-sm font-medium text-[#c8922a] hover:underline"
           >
-            &larr; All articles
+            &larr; All stories
           </Link>
         </div>
       </article>
-
-
     </>
   );
 }

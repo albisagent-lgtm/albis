@@ -1,5 +1,5 @@
 ---
-title: "Three Fertilizer Blockades Hit at Once. 2027 Pays."
+title: "Three Fertilizer Blockades Hit at Once, 2027 Harvest at Risk"
 description: "Hormuz is closed. China froze phosphate exports. Russia suspended ammonium nitrate. Spring planting can't wait — and the damage to next year's harvests is being locked in this week."
 date: 2026-03-29
 author: "Harry Wenham"
@@ -60,17 +60,17 @@ region_frames:
   asia_pacific: "Framed as food chain domino: oil to gas to fertilizer to food"
 ---
 
-Three simultaneous blockades have cut off the world's major fertilizer supply routes at the worst possible moment. The Strait of Hormuz — carrying 30% of global urea trade — has been effectively closed since late February. China froze phosphate fertilizer exports until August. Russia suspended ammonium nitrate shipments through April 21. Spring planting in the Northern Hemisphere can't wait, and farmers across four continents are making irreversible decisions this week that will determine whether 2027's harvests feed the world or fall short.
+Three simultaneous blockades have cut the world's major fertilizer supply routes at the worst moment. Hormuz — carrying 30% of global urea trade — has been effectively closed since late February. China froze phosphate exports until August. Russia suspended ammonium nitrate through April 21. Spring planting can't wait. Farmers across four continents are making irreversible decisions this week that determine whether 2027's harvests feed the world or fall short.
 
 The war everyone's watching involves missiles and warships. The war that'll hit your grocery bill involves white pellets called urea — and the planting calendar just became the most important clock in the global economy.
 
 ## You can't skip a season of nitrogen
 
-Here's the thing most [oil crisis coverage](/blog/hormuz-strait-closed-oil-shipping-food-crisis-march-2026) misses: fertilizer isn't like fuel. You don't just pay more and keep driving. Nitrogen — the most critical nutrient for growing corn, wheat, and rice — doesn't accumulate in soil between seasons. It leaches out. Every single year, farmers must reapply it.
+Most [oil crisis coverage](/blog/hormuz-strait-closed-oil-shipping-food-crisis-march-2026) misses this: fertilizer isn't like fuel. You don't just pay more and keep driving. Nitrogen — the most critical nutrient for corn, wheat, and rice — doesn't accumulate in soil between seasons. It leaches out. Every year, farmers must reapply.
 
 "You can skip a season of potash, you can skip a season of phosphates, but you can't skip a season of nitrogen," Dawid Heyl, co-portfolio manager at Ninety One, told CNBC. "There's a direct correlation to your nitrogen application and your agricultural yield in the end."
 
-That's the sentence that should terrify you. It means the damage being done right now isn't temporary. It's a countdown. Urea needs to be applied 7 to 10 days before sowing so soil enzymes can convert it into the ammonium nitrogen that plants actually absorb. Miss that window, and the fertilizer that arrives in May is useless for the 2026 corn crop.
+That sentence should terrify you. The damage isn't temporary. It's a countdown. Urea needs to go down 7 to 10 days before sowing so soil enzymes can convert it to ammonium nitrogen. Miss that window and fertilizer arriving in May is useless for the 2026 corn crop.
 
 As Reuters reported: "Most fertilizer needs to be applied before the crop starts growing, so any supplies arriving too late cannot be used for the 2026 crop."
 
@@ -78,35 +78,35 @@ As Reuters reported: "Most fertilizer needs to be applied before the crop starts
 
 This isn't one disruption. It's three, hitting simultaneously.
 
-**Hormuz: 30% of global urea trade — gone.** Iran, Saudi Arabia, Qatar, and Bahrain together export roughly 30% of the world's traded urea. All of it normally transits the Strait of Hormuz. Since Operation Epic Fury began on February 28, the strait has been effectively closed. CRU's Chris Lawson estimates 30% of exportable nitrogen supply "is not really available to the market right now."
+**Hormuz: 30% of global urea trade — gone.** Iran, Saudi Arabia, Qatar, and Bahrain together export roughly 30% of the world's traded urea. All of it normally transits Hormuz. Since Operation Epic Fury began February 28, the strait's been effectively closed. CRU's Chris Lawson: 30% of exportable nitrogen supply "is not really available to the market right now."
 
-FOB granular urea in Egypt — the global benchmark for nitrogen fertilizers — jumped from $400-$490 per metric ton before the war to around $700. That's not a price increase. That's a different market.
+FOB granular urea in Egypt — the global benchmark — jumped from $400-$490 per metric ton to around $700. That's not a price increase. That's a different market.
 
-**China: phosphate exports frozen until August.** China's state-linked fertilizer association told major producers to halt phosphate exports until August 2026. The rationale, as reported in Chinese financial media: "If we export phosphate fertilizer, it's Chinese people who go hungry." China's spring planting season needs 6.47 million tonnes of phosphate — 58% of annual demand. India, which previously imported 75% of its DAP from China, has seen that supply cut almost entirely. Indian media reports New Delhi is now [asking China to export urea](https://www.albis.news/blog/china-phosphate-ev-batteries-food-crisis-batteries-over-bread-2026) — a reversal that shows how desperate the situation has become.
+**China: phosphate exports frozen until August.** China's state-linked fertilizer association told producers to halt phosphate exports until August. The rationale, per Chinese financial media: "If we export phosphate fertilizer, it's Chinese people who go hungry." Spring planting needs 6.47 million tonnes — 58% of annual demand. India, which imported 75% of its DAP from China, has seen that supply cut almost entirely. New Delhi's now [asking China to export urea](/blog/china-phosphate-ev-batteries-food-crisis-batteries-over-bread-2026) — a reversal showing how desperate things have become.
 
-**Russia: ammonium nitrate exports suspended.** Bloomberg reported on March 24 that Russia temporarily suspended exports of ammonium nitrate through April 21. Russia is the world's largest exporter of nitrogen fertilizers. Hungary has already asked the EU to ease fertilizer tariffs introduced in 2025. Fertilizer Australia has urged its government to lift restrictions to avoid what it called "catastrophic impacts" on domestic agricultural output.
+**Russia: ammonium nitrate exports suspended.** Bloomberg reported March 24 that Russia suspended ammonium nitrate exports through April 21. Russia's the world's largest nitrogen fertilizer exporter. Hungary's asked the EU to ease fertilizer tariffs. Fertilizer Australia urged its government to lift restrictions to avoid "catastrophic impacts" on domestic output.
 
-Three of the world's four largest fertilizer supply sources — the Gulf, China, and Russia — are now partially or fully blocked. At the same time.
+Three of the world's four largest fertilizer sources — the Gulf, China, and Russia — are now partially or fully blocked. Simultaneously.
 
 ## The planting calendar doesn't negotiate
 
-Goldman Sachs published a commodity analyst report on March 27 that landed differently depending on where you read it. In New York, it was a market note. In New Delhi, it was a crisis warning.
+Goldman Sachs published a commodity report March 27 that landed differently depending on where you read it. In New York: a market note. In New Delhi: a crisis warning.
 
-The key finding: "The largest potential boost to grain prices could come from reduced grain supply" driven by "yield losses from delayed/sub-optimal nitrogen application" and "potential acreage shifts toward less fertilizer-intensive crops."
+Key finding: "The largest potential boost to grain prices could come from reduced grain supply" driven by "yield losses from delayed/sub-optimal nitrogen application" and "potential acreage shifts toward less fertilizer-intensive crops."
 
-Translation: farmers who can't afford or can't find nitrogen will do two things. First, they'll [switch from corn to soybeans](/blog/us-farmers-corn-soybean-acreage-flip-fertilizer-crisis-2026) — soybeans fix their own nitrogen and don't need as much fertilizer. Second, those who do plant corn will apply less nitrogen per acre, accepting lower yields.
+Translation: farmers who can't afford or find nitrogen will [switch from corn to soybeans](/blog/us-farmers-corn-soybean-acreage-flip-fertilizer-crisis-2026) — soybeans fix their own nitrogen. Those who do plant corn will apply less per acre, accepting lower yields.
 
-Both decisions are being made right now. In the US Midwest, spring planting begins in April. Break-even prices for corn sit at $4.70-$4.90 per bushel — close to or above current market prices, according to CME Group's analysis. For farmers already squeezed by higher input costs, the math increasingly says: plant less corn, accept less risk.
+Both decisions are being made now. US Midwest planting starts in April. Break-even corn prices sit at $4.70-$4.90 per bushel — close to or above current market prices. For farmers already squeezed by input costs, the maths says: plant less corn, accept less risk.
 
-The American Farm Bureau Federation reported that some farmers contacted suppliers only to be told pricing was "not available" — suppliers were waiting to see "how high" wholesale prices would go. Others who planned fall applications and waited for spring are now facing not just higher prices but potential supply allocation issues.
+The American Farm Bureau reported some farmers contacted suppliers only to hear pricing was "not available" — suppliers waiting to see "how high" wholesale goes. Others who planned fall applications and waited for spring now face not just higher prices but supply allocation problems.
 
 Former USDA chief economist Seth Meyer told Fortune: "A bad decision this year could be pretty costly."
 
 ## Why this is worse than 2022
 
-The farmdoc daily analysis from the University of Illinois puts this in historical context. When Russia invaded Ukraine in 2022, urea peaked above $1,000 per metric ton. The current spike — to $600-$700 — looks smaller.
+Farmdoc daily analysis from the University of Illinois puts this in context. When Russia invaded Ukraine in 2022, urea peaked above $1,000 per metric ton. The current spike — $600-$700 — looks smaller.
 
-But the 2022 shock hit grain markets harder because Russia and Ukraine together export 29% of the world's wheat. The direct supply was interrupted. This time, the grain supply isn't disrupted *yet*. The disruption hits one link earlier in the chain: the fertilizer that determines whether next season's grain even grows.
+But 2022 hit grain markets harder because Russia and Ukraine export 29% of the world's wheat. Direct supply was interrupted. This time, grain supply isn't disrupted *yet*. The disruption hits one link earlier: the fertilizer that determines whether next season's grain even grows.
 
 "That's why I'm a lot more concerned about the current crisis than I was when Russia-Ukraine happened four years ago," Heyl told CNBC.
 
@@ -116,20 +116,20 @@ And the math keeps getting more grim. Goldman Sachs notes that nitrogen accounts
 
 ## The urgency gap
 
-Read Chinese financial media, and you'll find Yicai (First Financial) mapping a chain: oil prices → gas costs → fertilizer costs → "the dining table — the last link in the inflation chain." CNPC News calls it a "domino effect."
+Chinese financial media maps the chain: oil prices → gas costs → fertilizer costs → "the dining table — the last link in the inflation chain." CNPC News calls it a "domino effect."
 
-Read Brazilian media, and urea is up 89% year-on-year, with the government warning of a 1-3 million tonne phosphate deficit. Turkish media calls the situation a "perfect storm in agriculture."
+Brazilian media: urea's up 89% year-on-year. The government warns of a 1-3 million tonne phosphate deficit. Turkish media calls it a "perfect storm in agriculture."
 
-Read English-language outlets, and the 35% price increase reads like a commodity market data point.
+English-language outlets: the 35% price increase reads like a commodity data point.
 
-The Albis Perception Gap Index scored this story 8.0, with the sharpest divergence between English-language and South Asian/Latin American coverage. In New York, it's a chart on a Bloomberg terminal. In São Paulo and New Delhi, it's a question of whether farmers can afford to plant.
+PGI scored this story 8.0, with the sharpest divergence between English-language and South Asian/Latin American coverage. In New York, it's a Bloomberg terminal chart. In São Paulo and New Delhi, it's whether farmers can afford to plant.
 
 ## What 2027 looks like
 
-The damage is non-linear. A 30% reduction in nitrogen application doesn't produce a 30% yield loss — it produces something more like 15-20%, because crops partition nutrients into survival growth first and grain production second. But across billions of acres globally, even a 10% yield reduction is tens of millions of tonnes of grain that don't exist.
+The damage isn't linear. A 30% nitrogen cut doesn't produce 30% yield loss — more like 15-20%, because crops partition nutrients into survival growth first and grain second. But across billions of acres, even a 10% yield drop is tens of millions of tonnes of grain that don't exist.
 
-If the [El Niño forming this summer](/blog/el-nino-hormuz-fertilizer-triple-threat-2027-food-crisis) hits hard — ECMWF gives it a 62% chance of reaching super El Niño status — those already-weakened 2027 harvests face drought and flooding on top of nutrient deficiency. Two systems breaking at once.
+If the [El Niño forming this summer](/blog/el-nino-hormuz-fertilizer-triple-threat-2027-food-crisis) hits hard — ECMWF gives 62% chance of super El Niño — those weakened 2027 harvests face drought and flooding on top of nutrient deficiency. Two systems breaking at once.
 
-The spring planting window closes in April across most of the Northern Hemisphere. Every day the triple blockade continues, the decisions farmers make get more permanent. They're not choosing between expensive fertilizer and cheap fertilizer. They're choosing between some harvest and less harvest.
+The planting window closes in April across most of the Northern Hemisphere. Every day the triple blockade continues, farmer decisions get more permanent. They're not choosing between expensive and cheap fertilizer. They're choosing between some harvest and less harvest.
 
-The missiles will eventually stop. The missing nitrogen won't come back.
+The missiles will stop. The missing nitrogen won't come back.

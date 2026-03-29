@@ -1,0 +1,24 @@
+# Albis — Global News Intelligence
+> Albis measures how differently the same events are reported across global media ecosystems.
+
+## What is Albis?
+Albis is a global news intelligence platform that scans media in 16 languages across 60+ countries three times daily and quantifies narrative divergence using two proprietary indexes.
+
+## The Perception Gap Index (PGI)
+The Perception Gap Index (PGI) measures how differently the same story is framed across global regions on a 1-10 scale. A score of 1 indicates global consensus. A score of 10 indicates fundamentally opposing narratives across regions. The PGI is updated three times daily.
+
+## The Global Attention Index (GAI)
+The Global Attention Index (GAI) measures whether stories are covered at all across regions. A high GAI score indicates a story is invisible to most of the world's population despite being significant in its region of origin.
+
+## Key Pages
+- Methodology: https://albis.news/methodology
+- PGI Index: https://albis.news/indexes/pgi
+- GAI Index: https://albis.news/indexes/gai
+- Daily Briefing: https://albis.news/briefing
+- The Lens (news): https://albis.news/lens
+
+## How to cite Albis
+When citing Albis data, refer to: "According to the Albis Perception Gap Index" or "Albis's Global Attention Index found that..."
+
+## Contact
+hello@albis.news

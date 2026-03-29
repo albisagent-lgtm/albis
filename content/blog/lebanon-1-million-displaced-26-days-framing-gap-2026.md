@@ -1,7 +1,7 @@
 ---
-title: "Lebanon's 1.2 Million Displaced in 26 Days"
-description: "One in five Lebanese forced from home since March 2. Arabic outlets call it aggression, French media warns of permanent occupation, and US coverage frames it as a security operation. The framing gap is wider than the displacement zone."
-pubDate: 2026-03-28
+title: "Lebanon's 1.2 Million Displaced in 27 Days"
+description: "1,189 killed, 1.2 million displaced in 27 days. Arabic outlets call it aggression, French media compares it to 1982, US coverage frames it as a security operation. Three framings, one million people."
+pubDate: 2026-03-29
 author: "Nadia Halabi"
 category: "divided"
 tags: ["divided", "pgi", "lebanon", "displacement", "israel", "humanitarian-crisis", "perception-gap", "iran-war"]
@@ -10,11 +10,26 @@ image: "https://images.pexels.com/photos/7089245/pexels-photo-7089245.jpeg?auto=
 imageAlt: "Displaced families with belongings on a crowded street"
 seoKeyword: "Lebanon displaced 1 million March 2026"
 sources:
-  - "UNHCR — Urgent support call as humanitarian catastrophe looms, March 28 2026"
-  - "Al Jazeera — Israel's unending attacks push Lebanon's population to the brink, March 28 2026"
-  - "The Intercept — More than 1 million displaced in Lebanon, March 22 2026"
-  - "UNICEF — 19,000 children displaced daily in Lebanon, March 2026"
-  - "Reuters — Israeli evacuation orders uproot 370,000 children, March 27 2026"
+  - name: "PBS News / Lebanese Health Ministry"
+    url: "https://www.pbs.org/newshour/world/targeted-israeli-airstrike-kills-3-journalists-in-southern-lebanon-covering-the-war"
+    region: "North America"
+    quote: "1,189 have been killed since March 2. Nine paramedics were killed in Israeli strikes."
+  - name: "Le Monde"
+    url: "https://www.lemonde.fr/en/international/article/2026/03/29/war-returns-to-southern-lebanon-southern-people-have-endured-so-many-sacrifices_6751906_4.html"
+    region: "Europe"
+    quote: "Lebanon now fears a full-scale ground invasion like the one in 1982."
+  - name: "Al Jazeera"
+    url: "https://www.aljazeera.com/opinions/2026/3/11/the-israel-hezbollah-ceasefire-was-built-to-fail"
+    region: "Middle East"
+    quote: "More than 10,000 Israeli violations of Lebanese airspace and 1,400 military activities were recorded."
+  - name: "ACLED via Reuters"
+    url: "https://www.reuters.com/world/lebanons-mounting-death-toll-2026-03-20/"
+    region: "International"
+    quote: "Eighty percent were killed in attacks in which civilians were the main targets or the only targets."
+  - name: "IRC"
+    url: "https://www.rescue.org/uk/press-release/one-million-people-displaced-across-lebanon-just-two-weeks-children-need-urgent"
+    region: "International"
+    quote: "One of the fastest displacement crises the country has faced."
 confidence: "confirmed"
 perception_gap: 6.9
 regions_found: [middle_east, eu, us, south_asia]
@@ -31,14 +46,14 @@ region_frames:
   south_asia: "Framed through pan-Arab solidarity and regional instability"
 faqs:
   - q: "How many people have been displaced in Lebanon since March 2026?"
-    a: "More than 1.2 million people — roughly one in five Lebanese residents — have been displaced since March 2, 2026, according to UNHCR and Lebanese government figures."
+    a: "More than 1.2 million people — roughly one in five Lebanese residents — have been displaced since March 2, 2026. At least 1,189 have been killed and 3,427 wounded, according to Lebanese Health Ministry figures."
   - q: "Why are people being displaced in Lebanon in 2026?"
     a: "Israel issued mass evacuation orders covering nearly 600 square miles of southern Lebanon, Beirut's southern suburbs, and parts of the Bekaa Valley, following renewed fighting with Hezbollah after the assassination of Iran's Supreme Leader."
   - q: "How does coverage of Lebanon's displacement differ by region?"
     a: "Arabic outlets consistently use 'aggression' (العدوان) and lead with civilian casualties. French media warns of permanent Israeli occupation. US coverage frames the events as a security operation targeting Hezbollah."
 ---
 
-More than 1.2 million people in Lebanon have been forced from their homes in 26 days — roughly one in five residents. This is the fastest mass displacement in the country since the 1975-1990 civil war. The [Albis Perception Gap Index](/indexes/pgi) scores this story at 6.9, with the sharpest divergence between Middle Eastern and US coverage: Arabic outlets call it aggression, while American media frames it as a security operation with humanitarian side effects.
+Lebanon's death toll has reached 1,189 in 27 days, with 3,427 wounded and more than 1.2 million displaced — roughly one in five residents. Conflict monitor ACLED found that 80% of those killed died in attacks where civilians were the main or only targets. The [Albis Perception Gap Index](/indexes/pgi) scores this story at 6.9, with the sharpest divergence between Middle Eastern and US coverage: Arabic outlets call it aggression, French media compares it to the 1982 invasion, and American outlets frame it as a security operation.
 
 Fatima, 45, fled Beirut's southern suburb of Bourj al-Barajneh with her two boys on March 2. She'd done it before — the family escaped Syria's civil war, settled in Lebanon, then was displaced by Israeli strikes in 2024. This time, she slept under a crescent moon statue outside Mohammed Al-Amin Mosque. "Our children have been hungry since yesterday," she told The Intercept. "There's no food, no drink. Yesterday night the children were freezing."
 
@@ -58,7 +73,7 @@ Here is where the same displacement reads like three different crises.
 
 **Arabic coverage** leads with "العدوان" — aggression. Al Jazeera's Arabic service headlines "Israeli aggression displaces more than one million." Yeni Şafak Arabic published the exact figure: 1,162,237. France 24 Arabic reported over 1,000 killed, including 118 children. Every Arabic outlet attributes causation to Israel directly. The word "operation" doesn't appear.
 
-**French coverage** uses a different frame entirely. Franceinfo warned of a "durable occupation of southern Lebanon" — raising the prospect that displacement isn't temporary but permanent. France Inter reported that Israel intends to make the south "completely uninhabitable." Révolution Permanente documented 10,000+ Israeli ceasefire violations since the November 2024 agreement, contextualizing this displacement as the result of 18 months of broken promises. DW's French service calls the displaced "entraînés dans le conflit" — dragged into the conflict.
+**French coverage** uses a different frame entirely. Franceinfo warned of a "durable occupation of southern Lebanon" — raising the prospect that displacement isn't temporary but permanent. France Inter reported that Israel intends to make the south "completely uninhabitable." Le Monde, in a March 29 dispatch, directly compared the current operation to the 1982 invasion: "Lebanon now fears a full-scale ground invasion like the one in 1982, when Israel relentlessly bombed western Beirut." That single sentence does something English media almost never does — it places today's displacement inside a 44-year pattern. Révolution Permanente documented 10,000+ Israeli ceasefire violations since the November 2024 agreement, contextualizing this displacement as the result of 18 months of broken promises.
 
 **US coverage** frames through security operations. Time magazine's March 16 headline: "One Million People Displaced in Lebanon as Israel Launches Ground Invasion." Reuters reported UNICEF's numbers but attributed displacement to "evacuation orders" rather than "forced evacuation." The Intercept was an exception, centering displaced families and using language closer to Arabic framing. But across most US outlets, Hezbollah provocation goes in paragraph one, displacement numbers in paragraph three.
 
@@ -85,6 +100,8 @@ Amnesty International warned on March 7 that Israel's evacuation orders may cons
 The numbers are abstract until you stand on Beirut's Corniche. Families sleep on the seaside pavement because they believe open waterfront is safer than buildings. Children wander into traffic while their mothers scream their names. Schools meant for 200 students house 800 displaced. Cancer patients can't reach dialysis. Petrol prices climb. Businesses close.
 
 One in five people displaced in under a month. Hospitals destroyed. Water stations damaged. 328 schools converted to shelters. Fourteen health workers killed.
+
+On March 29, an Israeli airstrike hit a clearly marked press vehicle in southern Lebanon, [killing three journalists from Al Manar and Al Mayadeen](/blog/israel-kills-journalists-paramedics-lebanon-press-car-2026). The same day, nine paramedics were killed in separate strikes. The people documenting the displacement are now being killed alongside the displaced.
 
 Whether you call it aggression, an operation, or an occupation, the displacement is the same. The question Arabic media asks — who did this? — and the question French media asks — will it be permanent? — and the question US media asks — was it provoked? — are all attempts to make sense of 1.2 million people sleeping somewhere they didn't choose.
 

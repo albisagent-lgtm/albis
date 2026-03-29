@@ -1,6 +1,6 @@
 ---
-title: "Anatoly Kolodkin Tanker Cuba: Standoff Timeline"
-description: "The Anatoly Kolodkin tanker arrived in Cuba carrying 730,000 barrels past US Coast Guard cutters. Full timeline, Russian escort details, and what each side isn't saying."
+title: "Anatoly Kolodkin Tanker Cuba: Full Timeline"
+description: "The Anatoly Kolodkin tanker reached Cuba with 730,000 barrels of Russian oil past US Coast Guard cutters. Full escort timeline and arrival updates."
 date: "2026-03-23"
 author: "James Chen"
 tags: ["quick-take", "cuba", "russia", "oil-blockade", "cold-war", "hormuz"]
@@ -52,9 +52,9 @@ faqs:
 
 The Anatoly Kolodkin listed its destination as "Atlantis, USA." The tanker was headed to Cuba.
 
-The Anatoly Kolodkin — a sanctioned Russian tanker carrying 730,000 barrels of crude oil for Cuba's Matanzas terminal — sailed past two US Coast Guard cutters to reach the island. Owned by Russia's state shipping company Sovcomflot and escorted by a Russian Navy corvette through the English Channel, the Anatoly Kolodkin's arrival in Cuba marked the most direct US-Russia confrontation in the Western Hemisphere since the missile crisis. Ten million Cubans had just gone through their third nationwide blackout in three weeks.
+The Anatoly Kolodkin tanker — a sanctioned Russian vessel carrying 730,000 barrels of crude oil — arrived in Cuba after sailing past two US Coast Guard cutters to reach the island. Owned by Russia's state shipping company Sovcomflot and escorted by a Russian Navy corvette through the English Channel, the Anatoly Kolodkin's arrival in Cuba marked the most direct US-Russia confrontation in the Western Hemisphere since the missile crisis. Ten million Cubans had just gone through their third nationwide blackout in three weeks.
 
-## How the Anatoly Kolodkin tanker reached Cuba
+## Anatoly Kolodkin tanker Cuba arrival: how it happened
 
 The Kolodkin left the Baltic port of Primorsk on March 8. A Russian Navy corvette, the Soobrazitelny, escorted it through the English Channel — the UK Royal Navy tracked both ships — before peeling off at the Atlantic. The tanker continued alone.
 
@@ -70,7 +70,7 @@ Pot-banging protests — cacerolazos — started in Morón, where someone set fi
 
 Cuba's deputy energy minister called it the "most complex" scenario for the national grid. That's bureaucrat-speak for: we're out of fuel.
 
-## Two stories about one tanker
+## Two stories about the Anatoly Kolodkin tanker
 
 Read this story in English and it's a [geopolitical chess match](/topics/geopolitics). "Russia tests US blockade credibility." "First real test of how far the Kremlin will go." The Washington Post frames the Kolodkin as a Kremlin gambit. CNBC calls Cuba "the biggest test since the collapse of the Soviet Union."
 

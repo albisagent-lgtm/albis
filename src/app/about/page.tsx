@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { EmailCapture } from "../components/email-capture";
 
 export const metadata: Metadata = {
-  title: "About Albis",
+  title: "About — Albis News",
   description:
-    "The world's news in 2 minutes. Albis scans 7 regions in 16 languages three times daily so you see the full picture, not just your version.",
+    "Albis scans news across 60 countries, 7 regions, and 16 languages every day. See how the world sees the news.",
 };
 
 export default function AboutPage() {
@@ -13,52 +12,100 @@ export default function AboutPage() {
     <main className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
       <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
         {/* Header */}
-        <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
-          About
+        <p className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a]">
+          About Albis
         </p>
         <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl md:text-4xl font-bold leading-[1.15] tracking-tight text-[#0f0f0f] dark:text-[#f0efec]">
-          The world&apos;s news in 2&nbsp;minutes.
+          Global news from every&nbsp;region.
         </h1>
 
         {/* Opening */}
-        <div className="mt-8 space-y-5 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+        <div className="mt-8 space-y-5 font-[family-name:var(--font-source-serif)] text-lg leading-[1.8] text-zinc-600 dark:text-zinc-400">
           <p>
-            Most people get their news from one country, in one language, through one lens. They think they&apos;re informed. They&apos;re seeing a fraction.
+            Albis scans news across <strong className="text-zinc-800 dark:text-zinc-200">60 countries</strong>, <strong className="text-zinc-800 dark:text-zinc-200">7 regions</strong>, and <strong className="text-zinc-800 dark:text-zinc-200">16 languages</strong> every day. We read the news the way the world reads it &mdash; not just the English-language version.
           </p>
           <p>
-            Albis scans the world three times a day — across <strong className="text-zinc-800 dark:text-zinc-200">seven regions</strong> and <strong className="text-zinc-800 dark:text-zinc-200">sixteen languages</strong> — and delivers a 2-minute briefing with everything you need to know. No spin. No noise. Just the full picture.
+            Most people see the news through one country&apos;s lens. Albis shows you what every region is reporting, how they&apos;re framing it, and what stories you&apos;re missing entirely.
           </p>
+        </div>
+
+        {/* How it works */}
+        <div className="mt-16 border-t border-black/5 pt-16 dark:border-white/5">
+          <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-8">
+            How it works
+          </h2>
+          <div className="space-y-8">
+            <div className="flex gap-5">
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#c8922a]/10 font-[family-name:var(--font-inter)] text-sm font-bold text-[#c8922a]">
+                1
+              </div>
+              <div>
+                <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                  We scan
+                </h3>
+                <p className="mt-1.5 font-[family-name:var(--font-source-serif)] text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
+                  Every day, we read news sources in 16 languages across 7 regions &mdash; from Farsi and Mandarin to Swahili and Portuguese. We read what each region is actually saying, not just what gets translated into English.
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-5">
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#c8922a]/10 font-[family-name:var(--font-inter)] text-sm font-bold text-[#c8922a]">
+                2
+              </div>
+              <div>
+                <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                  We synthesise
+                </h3>
+                <p className="mt-1.5 font-[family-name:var(--font-source-serif)] text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
+                  We compare how different regions cover the same events. Where narratives align, we note it. Where they diverge, we show you both sides. Where stories are invisible to most of the world, we surface them.
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-5">
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#c8922a]/10 font-[family-name:var(--font-inter)] text-sm font-bold text-[#c8922a]">
+                3
+              </div>
+              <div>
+                <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                  We publish
+                </h3>
+                <p className="mt-1.5 font-[family-name:var(--font-source-serif)] text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
+                  You get clear, calm reporting on what matters. Every story shows which regions covered it, how they framed it, and what the rest of the world isn&apos;t seeing. No spin, no noise.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* What makes us different */}
         <div className="mt-16 border-t border-black/5 pt-16 dark:border-white/5">
-          <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
-            What Makes Albis Different
+          <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
+            What makes Albis different
           </h2>
-          <div className="space-y-5 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+          <div className="space-y-5 font-[family-name:var(--font-source-serif)] text-lg leading-[1.8] text-zinc-600 dark:text-zinc-400">
             <p>
               <strong className="text-zinc-800 dark:text-zinc-200">We read the world in its own languages.</strong> Iranian media in Farsi. Chinese outlets in Mandarin. Arabic sources in Arabic. The domestic narrative is often fundamentally different from what English-language media reports. We capture both.
             </p>
             <p>
-              <strong className="text-zinc-800 dark:text-zinc-200">We measure the gap.</strong> Our Perception Gap Index tracks how differently regions frame the same story. When the same missile strike is a &ldquo;security operation&rdquo; in one language and a &ldquo;war crime&rdquo; in another, we measure that distance. So you can see it.
+              <strong className="text-zinc-800 dark:text-zinc-200">We show you the framing.</strong> The same event gets told differently in different regions. A military strike might be a &ldquo;security operation&rdquo; in one country and a &ldquo;civilian massacre&rdquo; in another. We show you both framings so you can judge for yourself.
             </p>
             <p>
-              <strong className="text-zinc-800 dark:text-zinc-200">We find the invisible.</strong> Our Global Attention Index measures which stories most of the world never sees. Important events covered by one or two regions while billions of people have no idea they happened.
+              <strong className="text-zinc-800 dark:text-zinc-200">We find the invisible stories.</strong> Important events covered by one or two regions while billions of people have no idea they happened. We surface what the rest of the world is missing.
             </p>
             <p>
-              <strong className="text-zinc-800 dark:text-zinc-200">We trace the chain.</strong> When a shipping lane closes and food prices spike three continents away, most outlets cover each link as a separate story. We connect them.
+              <strong className="text-zinc-800 dark:text-zinc-200">We connect the dots.</strong> When a shipping lane closes and food prices spike three continents away, most outlets cover each link as a separate story. We connect them.
             </p>
           </div>
         </div>
 
-        {/* The daily briefing */}
+        {/* Daily briefing + email capture */}
         <div className="mt-16 border-t border-black/5 pt-16 dark:border-white/5">
-          <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
-            The Daily Briefing
+          <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
+            The daily briefing
           </h2>
-          <div className="space-y-5 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+          <div className="space-y-5 font-[family-name:var(--font-source-serif)] text-lg leading-[1.8] text-zinc-600 dark:text-zinc-400">
             <p>
-              Every morning, you get the world&apos;s most important stories — scanned from every region, every language, every perspective. One top story with context. Quick hits on everything else. And a &ldquo;How The World Sees It&rdquo; section showing how different regions are framing the same events.
+              Every morning, you get the world&apos;s most important stories &mdash; scanned from every region, every language. One top story with context. Quick hits on everything else. Plus a &ldquo;How regions covered this&rdquo; section showing you the different framings.
             </p>
             <p>
               Read it in 2 minutes. Understand what&apos;s actually happening. Get on with your day.
@@ -71,8 +118,8 @@ export default function AboutPage() {
 
         {/* Languages */}
         <div className="mt-16 border-t border-black/5 pt-16 dark:border-white/5">
-          <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
-            Languages We Scan
+          <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
+            Languages we scan
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {[
@@ -95,47 +142,44 @@ export default function AboutPage() {
             ].map(([lang, region]) => (
               <div key={lang} className="rounded-lg border border-black/[0.05] px-4 py-3 dark:border-white/[0.05]">
                 <p className="font-[family-name:var(--font-source-serif)] font-semibold text-zinc-800 dark:text-zinc-200">{lang}</p>
-                <p className="text-sm text-zinc-400 dark:text-zinc-500">{region}</p>
+                <p className="font-[family-name:var(--font-inter)] text-sm text-zinc-400 dark:text-zinc-500">{region}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* How it's built */}
+        {/* Who we are */}
         <div className="mt-16 border-t border-black/5 pt-16 dark:border-white/5">
-          <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
-            How It&apos;s Built
+          <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
+            Who we are
           </h2>
-          <div className="space-y-5 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+          <div className="space-y-5 font-[family-name:var(--font-source-serif)] text-lg leading-[1.8] text-zinc-600 dark:text-zinc-400">
             <p>
-              Albis is built by <strong className="text-zinc-800 dark:text-zinc-200">one person and AI</strong>. The scanning, analysis, and writing are done by AI agents that read global sources in 16 languages, detect framing patterns, and produce briefings. A human sets the direction and reviews the output.
+              Albis uses AI-powered scanning and analysis to read global sources in 16 languages, detect framing differences, and produce reporting. A human editorial team sets the direction and reviews everything.
             </p>
             <p>
-              We&apos;re upfront about this because a product that helps people see information clearly should be honest about its own. Every article on Albis is authored by &ldquo;Albis&rdquo; (AI-generated) or by name (human-written).
+              We believe a publication that helps people see information clearly should be honest about how it&apos;s made. Every article is authored by &ldquo;Albis&rdquo; (AI-assisted) or by name (human-written).
             </p>
           </div>
         </div>
 
-        {/* The founder */}
+        {/* Why we built this */}
         <div className="mt-16 border-t border-black/5 pt-16 dark:border-white/5">
-          <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-4">
-            The Founder
+          <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-4">
+            Why we built this
           </h2>
           <p className="font-[family-name:var(--font-playfair)] text-2xl font-semibold text-zinc-800 dark:text-zinc-200">
             Harry Wenham
           </p>
-          <p className="mt-1 text-sm text-zinc-400 dark:text-zinc-500">
-            New Zealand
+          <p className="mt-1 font-[family-name:var(--font-inter)] text-sm text-zinc-400 dark:text-zinc-500">
+            Founder &middot; New Zealand
           </p>
-          <div className="mt-5 space-y-4 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+          <div className="mt-5 space-y-4 font-[family-name:var(--font-source-serif)] text-lg leading-[1.8] text-zinc-600 dark:text-zinc-400">
             <p>
-              Albis started with a study into information and psychology — how the way a story is framed can change what people believe, how they feel, and what they do. The same event, told differently, creates different realities. We wanted to understand that mechanism. Not to judge it, but to make it visible.
+              Albis started from a simple observation: the same event, reported in different languages and different regions, creates different realities. A shipping crisis is an economic story in Europe, a security story in the Middle East, and barely covered in Africa. Each audience thinks they have the full picture. None of them do.
             </p>
             <p>
-              So we built a tool that takes everything — every region, every language, every perspective — and draws a clear line through the noise. Not telling you what to think. Just showing you the full picture so you can decide for yourself.
-            </p>
-            <p>
-              That tool became a daily practice. Now it scans the world three times a day in 16 languages, and anyone can see the patterns for themselves.
+              We built Albis to make that visible. Not to tell you what to think, but to show you what every region is reporting &mdash; so you can see the full picture and decide for yourself.
             </p>
           </div>
         </div>
