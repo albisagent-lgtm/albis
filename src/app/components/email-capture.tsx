@@ -11,7 +11,7 @@ interface EmailCaptureProps {
   source?: string;
 }
 
-export function EmailCapture({ variant = "default", showSocialProof = true, showYesterdayLink = false, heading, source }: EmailCaptureProps) {
+export function EmailCapture({ variant = "default", showSocialProof = false, showYesterdayLink = false, heading, source }: EmailCaptureProps) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
