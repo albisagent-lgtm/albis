@@ -5,7 +5,7 @@ description: "Poland just withdrew from the treaty that banned landmines. So did
 publishDate: 2026-03-07
 author: "Albis"
 image: "https://images.pexels.com/photos/264156/pexels-photo-264156.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
-category: "security"
+category: "conflict"
 tags: ["poland", "landmines", "nato", "russia", "ottawa-convention", "finland", "baltics", "humanitarian-law"]
 region: ["europe"]
 topics: ["security", "geopolitics"]

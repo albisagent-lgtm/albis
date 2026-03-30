@@ -5,7 +5,7 @@ date: "2026-03-01"
 image: "https://images.unsplash.com/photo-1546833998-07256bcc76ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMGdlb3BvbGl0aWNzJTIwaW5kaWF8ZW58MHwwfHx8MTc3MzA1NDEwNXww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["quick-take", "ai", "geopolitics", "india", "tech-policy", "semiconductors"]
-category: "analysis"
+category: "tech-ai"
 ---
 
 While missiles flew over the Gulf, the US signed a treaty that might matter more in 20 years.

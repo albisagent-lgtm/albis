@@ -3,7 +3,7 @@ title: "Iran War Day 29: Pentagon Plans Ground Ops, Houthis Fire"
 description: "The Pentagon is preparing weeks of ground operations in Iran as Yemen's Houthis fired two waves of missiles at Israel — the same weekend four nations gather in Islamabad to push for a ceasefire nobody believes will work."
 date: "2026-03-29"
 author: "Harry Wenham"
-category: "crisis-analysis"
+category: "conflict"
 tags: ["iran-war", "ground-operations", "houthis", "islamabad-summit", "hormuz", "bab-al-mandab", "ceasefire", "pakistan", "day-29", "oil-crisis", "double-chokepoint"]
 image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Iran war ground operations Houthis attack Israel"

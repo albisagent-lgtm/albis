@@ -5,7 +5,7 @@ date: "2026-02-27"
 image: "https://images.pexels.com/photos/4905079/pexels-photo-4905079.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["quick-take", "denmark", "greenland", "trump", "elections", "politics"]
-category: "breaking"
+category: "current-events"
 ---
 
 Mette Frederiksen just called Denmark to the polls.

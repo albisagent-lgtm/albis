@@ -3,7 +3,7 @@ title: "Russia Gasoline Export Ban Starts Tomorrow"
 description: "Russia halts all gasoline exports from April 1 to July 31 — removing 117,000 barrels per day from a market already in crisis. Here's who gets hurt and who profits."
 pubDate: 2026-03-30
 author: "Albis Geopolitics Desk"
-category: "energy"
+category: "climate-energy"
 tags: ["russia", "gasoline", "energy", "oil", "iran-war", "fuel-crisis", "exports"]
 regions: ["europe", "central-asia", "africa", "south-asia"]
 image: "https://images.pexels.com/photos/15970029/pexels-photo-15970029.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

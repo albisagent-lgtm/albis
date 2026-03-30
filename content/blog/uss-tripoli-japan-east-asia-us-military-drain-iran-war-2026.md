@@ -3,7 +3,7 @@ title: "USS Tripoli Left Japan. Three Capitals, Three Takes"
 description: "Washington calls it routine. Beijing asks if it's an opening. Seoul wonders if the alliance still holds. The Iran war is quietly reshaping East Asia's security balance."
 image: "https://images.pexels.com/photos/36674255/pexels-photo-36674255.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 pubDate: "2026-03-22"
-category: "lens"
+category: "analysis"
 tags: ["East Asia", "Japan", "South Korea", "China", "Taiwan", "security", "United States", "Iran war"]
 featured: false
 ---

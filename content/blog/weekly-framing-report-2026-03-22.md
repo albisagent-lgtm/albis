@@ -3,7 +3,7 @@ title: "Three Wars Became Three Realities This Week"
 description: "Five stories, five perception gaps. The week three wars became three realities — and the world fought over which version wins."
 date: 2026-03-22
 author: "Albis"
-category: "Analysis"
+category: "analysis"
 tags: ["weekly-report", "perception-gap", "iran-war", "framing", "media-analysis", "pgi", "information-warfare", "hormuz"]
 excerpt: "Five stories. Five perception gaps. One week that proved the world isn't just fighting over territory — it's fighting over which version of reality gets to win."
 image: "https://images.pexels.com/photos/36111623/pexels-photo-36111623.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

@@ -2,7 +2,7 @@
 title: "Causal Attribution Framing: How 6 Countries Explained the Same Iran Event in 2026"
 description: "Trump said Iran talks were 'productive.' Iran called it fake news. Six countries told six different stories about the same 24 hours — here's how causal attribution framing works."
 date: "2026-03-25"
-category: "Media Literacy"
+category: "media-literacy"
 excerpt: "One event. Six countries. Six completely different explanations of why it happened. This is causal attribution framing — and it's reshaping how billions understand the Iran conflict right now."
 image: "https://images.pexels.com/photos/4025825/pexels-photo-4025825.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
 author: "Albis"

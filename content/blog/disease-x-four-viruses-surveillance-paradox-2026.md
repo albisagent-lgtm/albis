@@ -3,7 +3,7 @@ title: "Disease X: We Know Which Viruses. We Stopped Looking."
 description: "Mpox, H5N1 bird flu, Oropouche, and rubella are being watched closely by scientists—who are losing their jobs in March. The detection paradox: we've never been better at identifying threats and never worse at funding the systems that identify them."
 date: 2026-03-04
 author: "Albis"
-category: Health
+category: "health"
 tags: [pandemic, disease x, mpox, bird flu, H5N1, oropouche, rubella, CDC, surveillance, public health]
 image: "https://images.pexels.com/photos/5801745/pexels-photo-5801745.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 faqs: 

@@ -3,7 +3,7 @@ title: "Trump's $1.7T Iran Rally — Iran Says It Never Happened"
 description: "A Truth Social post moved $1.7 trillion in minutes. Iran's foreign ministry, parliament speaker, and state media all deny any talks took place. Here's what each side said, and who traded on what."
 pubDate: 2026-03-24
 author: "Albis Editorial"
-category: "perception-gap"
+category: "perception-gap-index"
 tags: ["iran war", "trump", "stock market", "oil prices", "perception gap", "hormuz", "ceasefire"]
 image: "https://images.pexels.com/photos/6802046/pexels-photo-6802046.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Stock market trading screen showing volatile price movements"

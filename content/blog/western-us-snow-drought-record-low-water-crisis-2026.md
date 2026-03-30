@@ -3,7 +3,7 @@ title: "Western US Snow Drought Hits Record Low. 40M at Risk."
 description: "Only 5 of 70 western river basins have normal snowpack. Colorado hit 90°F in March. Lake Powell may lose hydropower by December. 5.87 billion people have no idea."
 date: "2026-03-27"
 author: "Lena Ortiz"
-category: "unseen"
+category: "analysis"
 tags: ["unseen", "gai", "water-crisis", "drought", "climate", "colorado-river", "snowpack", "western-us"]
 image: "https://images.pexels.com/photos/6087150/pexels-photo-6087150.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Dry cracked earth in a drought-stricken western landscape, representing the 2026 snow drought threatening water supplies"

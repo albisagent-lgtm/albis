@@ -5,7 +5,7 @@ date: "2026-02-26"
 image: "https://images.pexels.com/photos/6974258/pexels-photo-6974258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["quick-take", "nvidia", "ai", "earnings", "tech"]
-category: "breaking"
+category: "current-events"
 ---
 
 Nvidia just posted numbers that made the skeptics go quiet.

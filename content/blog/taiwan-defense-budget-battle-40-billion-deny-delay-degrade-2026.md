@@ -2,7 +2,7 @@
 title: "Taiwan's $40B Defense Plan: Deny, Delay, Degrade"
 date: "2026-03-24T08:30:00+13:00"
 description: "Taiwan's legislature is fighting over three competing defense budgets while the military publicly reveals how it plans to stop a Chinese invasion. The opposition wants to cut it by two-thirds."
-category: "lens"
+category: "analysis"
 tags: ["Taiwan", "China", "East Asia", "security", "defense", "military"]
 image: "/images/taiwan-defense-budget-2026.jpg"
 perception_gap: 8

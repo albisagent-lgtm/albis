@@ -3,7 +3,7 @@ title: "Pakistan Hits 37 Afghan Sites. Turkey Steps In."
 description: "Pakistani missiles hit near earthquake refugee camps. Erdogan offered to mediate. Islamabad refused. Both sides are lying about casualties."
 date: 2026-03-06T19:00:00+13:00
 author: "Albis"
-category: Geopolitics
+category: "geopolitics"
 tags: ["pakistan", "afghanistan", "taliban", "turkey", "erdogan", "refugees", "durand line", "TTP", "iran war"]
 image: "https://images.pexels.com/photos/6896961/pexels-photo-6896961.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 featured: false

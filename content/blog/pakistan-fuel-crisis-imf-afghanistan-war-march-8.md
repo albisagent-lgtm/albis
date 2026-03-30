@@ -3,7 +3,7 @@ title: "Pakistan Hiked Fuel 20% Mid-War. Now What?"
 description: "Pakistan hiked petrol and diesel by Rs 55 per litre on March 7, citing the Iran war's closure of the Strait of Hormuz. The country now faces a two-front crisis: open war with Afghanistan and an energy shock driven by a conflict it isn't part of."
 date: 2026-03-08
 author: "Albis"
-category: Geopolitics
+category: "geopolitics"
 tags: ['Pakistan', 'Afghanistan', 'Iran', 'Oil Prices', 'IMF', 'Strait of Hormuz', 'Energy Crisis']
 image: "https://images.pexels.com/photos/6369306/pexels-photo-6369306.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"

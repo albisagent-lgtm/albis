@@ -3,7 +3,7 @@ title: "Iran-Israel Nuclear Exchange: Five Regions, Five Takes"
 description: "Iran hit Dimona hours after the US struck Natanz — the first nuclear-facility-to-nuclear-facility exchange. But whether it was retaliation or escalation depends entirely on where you read the news."
 pubDate: 2026-03-22
 author: "Albis"
-category: "divided"
+category: "climate-energy"
 tags: ["divided", "pgi", "iran-war", "nuclear", "dimona", "natanz", "perception-gap", "middle-east", "israel"]
 regions: ["us", "eu", "middle_east", "asia_pacific", "south_asia"]
 image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

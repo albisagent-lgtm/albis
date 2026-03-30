@@ -3,7 +3,7 @@ title: "Gold Crashes 10% in Worst Week Since 1983"
 description: "Gold lost $9 trillion in market value during the worst energy crisis in decades. Three billion people across three countries are asking the same question with completely different answers."
 date: "2026-03-25"
 author: "Priya Sharma"
-category: "markets"
+category: "economic-flows"
 tags: ["quick-take", "gold", "markets", "iran-war", "safe-haven", "federal-reserve", "perception-gap"]
 regions: ["North America", "South Asia", "Asia-Pacific", "Middle East"]
 image: "https://images.pexels.com/photos/29336321/pexels-photo-29336321.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

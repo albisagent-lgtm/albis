@@ -5,7 +5,7 @@ date: "2026-03-28"
 author: "Harry Wenham"
 image: "https://images.pexels.com/photos/11116152/pexels-photo-11116152.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["breaking", "oil-crisis", "big-oil", "iran-war", "energy", "fuel-prices", "windfall-profits", "ceraweek"]
-category: "Energy & Power"
+category: "climate-energy"
 seoKeyword: "big oil profits iran war windfall chevron shell 2026"
 confidence: "confirmed"
 sources:

@@ -5,7 +5,7 @@ date: "2026-03-27"
 author: "Harry Wenham"
 image: "https://images.pexels.com/photos/36315088/pexels-photo-36315088.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["food-security", "sahel", "west-africa", "famine", "humanitarian", "gai", "unseen"]
-category: "food-security"
+category: "economic-flows"
 seoKeyword: "west africa sahel hunger crisis 55 million 2026"
 perception_gap: 6
 regions_found: [africa, eu]

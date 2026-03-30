@@ -3,7 +3,7 @@ title: "ByteDance Gets 36,000 Nvidia Chips Despite US Ban"
 description: "ByteDance deployed $2.5 billion in Nvidia's most powerful AI chips through a Malaysian intermediary. Days earlier, a Super Micro exec was arrested for smuggling the same chips. Two methods, same result — and the wall is full of holes."
 date: "2026-03-25"
 author: "Harry Wenham"
-category: "tech"
+category: "tech-ai"
 tags: ["ai chips", "export controls", "ByteDance", "Nvidia", "sanctions", "Malaysia", "semiconductor"]
 regions: ["Asia-Pacific", "North America", "Southeast Asia"]
 image: "https://images.pexels.com/photos/5480781/pexels-photo-5480781.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

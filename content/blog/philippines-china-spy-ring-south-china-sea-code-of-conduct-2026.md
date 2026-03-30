@@ -3,7 +3,7 @@ title: "Philippines Catches 3 Chinese Spies Leaking Routes"
 description: "Three Filipino military insiders leaked classified patrol routes to Beijing using Tetris-hidden apps and fake food deliveries. Manila is simultaneously leading ASEAN's Code of Conduct talks with the same government it just accused of espionage."
 image: "https://images.pexels.com/photos/6564821/pexels-photo-6564821.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 pubDate: "2026-03-23"
-category: "lens"
+category: "analysis"
 tags: ["Philippines", "China", "South China Sea", "ASEAN", "East Asia", "security", "espionage"]
 perception_gap: 8
 regions_found: [asia_pacific, us]

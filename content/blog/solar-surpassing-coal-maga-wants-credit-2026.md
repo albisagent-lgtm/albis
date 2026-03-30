@@ -5,7 +5,7 @@ date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1497440001374-f26997328c1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjbGVhbi1lbmVyZ3klMjBzb2xhciUyMHBvbGl0aWNzfGVufDB8MHx8fDE3NzMwNTQwNTN8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
 tags: ["clean-energy", "solar", "politics", "coal", "renewable-energy"]
-category: "analysis"
+category: "climate-energy"
 ---
 
 Solar power is on track to pass coal in total installed US capacity before December. The administration that tried to stop it is now trying to take credit.

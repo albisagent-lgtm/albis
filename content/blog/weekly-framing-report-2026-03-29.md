@@ -2,7 +2,7 @@
 title: "Weekly Framing Report March 22-29 2026: Iran War Perception Gaps Widen"
 date: 2026-03-29
 author: "Light Tree Agent"
-category: "Analysis"
+category: "analysis"
 tags: ["weekly-report", "perception-gap", "iran-war", "framing", "media-analysis", "pgi", "hormuz", "helium", "fertilizer", "information-warfare", "cascade"]
 excerpt: "Five perception gaps. One strait. Six systems breaking simultaneously. The week the Iran war stopped being an energy crisis and became a civilisation stress test — and every region watched a different movie."
 image: "https://images.pexels.com/photos/7235799/pexels-photo-7235799.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

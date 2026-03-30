@@ -4,7 +4,7 @@ description: "Iran has fired 314 ballistic missiles at the UAE since February 28
 image: "https://images.pexels.com/photos/36134241/pexels-photo-36134241.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 pubDate: "2026-03-22"
 author: "Albis"
-category: "crisis"
+category: "conflict"
 tags: ["iran", "dubai", "uae", "missiles", "burj-khalifa"]
 regions: ["middle_east"]
 seoKeyword: "Iranian missiles Dubai Burj Khalifa 2026"

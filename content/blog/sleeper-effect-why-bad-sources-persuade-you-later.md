@@ -4,7 +4,7 @@ description: "You dismissed the claim when you saw who said it. Weeks later, you
 date: "2026-03-25"
 image: "https://images.pexels.com/photos/15410078/pexels-photo-15410078.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
-category: "Information Awareness"
+category: "analysis"
 tags: ["information awareness", "media literacy", "psychology", "cognitive bias", "misinformation", "sleeper effect"]
 featured: false
 seoKeyword: "sleeper effect persuasion bad sources"

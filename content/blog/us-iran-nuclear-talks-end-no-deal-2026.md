@@ -5,7 +5,7 @@ date: "2026-02-27"
 image: "https://images.unsplash.com/photo-1772299399824-592b030b2dde?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxJcmFuJTIwbnVjbGVhciUyMGRpcGxvbWFjeXxlbnwwfDB8fHwxNzczMDU0MTEyfDA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["explainer", "Iran", "nuclear", "diplomacy", "geopolitics", "JCPOA"]
-category: "analysis"
+category: "climate-energy"
 ---
 
 They talked for nine hours. Then they left without a deal.

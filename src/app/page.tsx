@@ -551,52 +551,50 @@ export default async function Home() {
         </section>
       )}
 
-      {/* ─── LATEST ARTICLES ─── */}
-      {recentArticles.length > 0 && (
-        <section className="border-t border-black/[0.08] bg-[#f8f7f4] dark:border-white/[0.08] dark:bg-[#0f0f0f]">
-          <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
-            <SectionHeader title="Latest news" link="/lens" linkLabel="All articles →" />
-            <div className="grid gap-x-8 gap-y-0 sm:grid-cols-2 lg:grid-cols-4">
-              {recentArticles.map((post) => (
-                <Link
-                  key={post.slug}
-                  href={getPostUrl(post)}
-                  className="group block border-t border-black/[0.06] py-5 dark:border-white/[0.06]"
-                >
-                  <article>
-                    {post.image && (
-                      <div className="aspect-[16/9] overflow-hidden bg-zinc-100 dark:bg-zinc-800">
-                        <img
-                          src={post.image}
-                          alt={post.title}
-                          className="h-full w-full object-cover"
-                          loading="lazy"
-                        />
-                      </div>
-                    )}
-                    {post.category && (
-                      <div className="mt-3">
-                        <CategoryBadge category={post.category} size="xs" />
-                      </div>
-                    )}
-                    <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-sm font-bold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
-                      <span className="transition-colors group-hover:text-[#c8922a]">
-                        {post.title}
-                      </span>
-                    </h3>
-                    <p className="mt-1 text-xs leading-relaxed text-zinc-500 line-clamp-2 dark:text-zinc-400">
-                      {post.description}
-                    </p>
-                    <p className="mt-2 font-[family-name:var(--font-inter)] text-[10px] text-zinc-400">
-                      {post.readingTime} min read · {post.date}
-                    </p>
-                  </article>
-                </Link>
-              ))}
-            </div>
+      {/* ─── LATEST ARTICLES (always shown) ─── */}
+      <section className="border-t border-black/[0.08] bg-[#f8f7f4] dark:border-white/[0.08] dark:bg-[#0f0f0f]">
+        <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
+          <SectionHeader title="Latest" link="/lens" linkLabel="All articles →" />
+          <div className="grid gap-x-8 gap-y-0 sm:grid-cols-2 lg:grid-cols-4">
+            {allPosts.slice(0, 8).map((post) => (
+              <Link
+                key={post.slug}
+                href={getPostUrl(post)}
+                className="group block border-t border-black/[0.06] py-5 dark:border-white/[0.06]"
+              >
+                <article>
+                  {post.image && (
+                    <div className="aspect-[16/9] overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  {post.category && (
+                    <div className="mt-3">
+                      <CategoryBadge category={post.category} size="xs" />
+                    </div>
+                  )}
+                  <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-sm font-bold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+                    <span className="transition-colors group-hover:text-[#c8922a]">
+                      {post.title}
+                    </span>
+                  </h3>
+                  <p className="mt-1 text-xs leading-relaxed text-zinc-500 line-clamp-2 dark:text-zinc-400">
+                    {post.description}
+                  </p>
+                  <p className="mt-2 font-[family-name:var(--font-inter)] text-[10px] text-zinc-400">
+                    {post.readingTime} min read · {post.date}
+                  </p>
+                </article>
+              </Link>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* ─── BOTTOM CTA ─── */}
       <section className="bg-[#0f0f0f] py-14 md:py-20">

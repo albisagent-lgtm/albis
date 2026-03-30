@@ -5,7 +5,7 @@ pubDate: 2026-03-25
 author: "Roya Khanlari"
 image: "https://images.pexels.com/photos/1587268/pexels-photo-1587268.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["divided", "pgi", "iran-war", "trump", "perception-gap", "energy", "ceasefire"]
-category: "divided"
+category: "governance"
 seoKeyword: "Trump Iran pause ceasefire talks"
 perception_gap: 8.1
 regions_found: [us, eu, middle_east, south_asia, asia_pacific, latam, africa]

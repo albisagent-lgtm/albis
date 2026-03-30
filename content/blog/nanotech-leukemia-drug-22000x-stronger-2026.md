@@ -5,7 +5,7 @@ date: "2026-02-28"
 image: "https://images.unsplash.com/photo-1706204787318-d7de50772977?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGglMjBjYW5jZXIlMjBiaW90ZWNofGVufDB8MHx8fDE3NzMwNTA0ODd8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
 tags: ["quick-take", "health", "cancer", "biotech", "medical-breakthrough"]
-category: "analysis"
+category: "health"
 ---
 
 Northwestern scientists just made an old leukemia drug 22,000 times stronger.

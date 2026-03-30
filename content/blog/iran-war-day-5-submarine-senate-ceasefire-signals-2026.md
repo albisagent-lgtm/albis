@@ -3,7 +3,7 @@ title: "Day Five: A Torpedo, a Vote, and a Whisper of Peace"
 description: "A US submarine sank an Iranian warship — the first torpedo kill since WWII. Hours later, Iran's intelligence contacted the CIA about ending the war."
 author: "Albis"
 date: "2026-03-05"
-category: "Geopolitics"
+category: "geopolitics"
 tags: ["Iran", "United States", "Israel", "War", "Senate", "Navy", "Diplomacy", "Oil", "Pakistan"]
 image: "https://images.unsplash.com/photo-1772303142828-4c8dc2162589?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxJcmFuJTIwVW5pdGVkJTIwU3RhdGVzJTIwSXNyYWVsfGVufDB8MHx8fDE3NzMwNTA0NTN8MA&ixlib=rb-4.1.0&q=80&w=1080"
 faqs:

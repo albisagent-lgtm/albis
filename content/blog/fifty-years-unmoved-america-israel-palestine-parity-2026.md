@@ -5,7 +5,7 @@ date: "2026-02-28"
 image: "https://images.unsplash.com/photo-1620673176095-bf73cdd9b077?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpc3JhZWwtcGFsZXN0aW5lJTIwcG9sbGluZyUyMHB1YmxpYy1vcGluaW9ufGVufDB8MHx8fDE3NzMwNDY5MDB8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["quick-take", "israel-palestine", "polling", "public-opinion", "gallup", "media-perception"]
-category: "perspectives"
+category: "analysis"
 ---
 
 For 24 years straight, Americans sided with Israel. Double digits. Every year.

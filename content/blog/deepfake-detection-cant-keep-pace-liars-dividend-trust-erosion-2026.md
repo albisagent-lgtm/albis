@@ -3,7 +3,7 @@ title: "Deepfake Detection Is Evolving. It Just Can't Keep Pace."
 description: "Detection tools work today. But generation improves faster. The real damage isn't fake videos people believe—it's real videos they can now dismiss."
 date: "2026-03-10"
 author: "Albis"
-category: "information-warfare"
+category: "cyber-info-warfare"
 tags: ["deepfakes", "detection", "information-warfare", "trust-erosion", "liars-dividend"]
 image: "https://images.pexels.com/photos/18548430/pexels-photo-18548430.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"

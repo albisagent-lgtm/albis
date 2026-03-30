@@ -3,7 +3,7 @@ title: "37 Countries Voted Yes on Women's Rights. One Said No."
 description: "The US cast the sole vote against the UN's gender-equality resolution at CSW70 — breaking a 30-year consensus tradition. The room gave a standing ovation. Most Americans never heard about it."
 date: "2026-03-22"
 author: "Albis"
-category: "womens-rights"
+category: "governance"
 tags: ["womens-rights", "gender-equality", "csw70", "perception-gap", "media-literacy", "united-nations"]
 image: "https://images.pexels.com/photos/6257343/pexels-photo-6257343.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "US votes against UN women's rights CSW70 2026"

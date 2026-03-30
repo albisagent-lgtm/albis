@@ -5,7 +5,7 @@ pubDate: 2026-03-22
 author: "Albis"
 image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["iran-war", "natanz", "diego-garcia", "nuclear", "trump", "escalation", "missiles"]
-category: "analysis"
+category: "governance"
 sources:
   - name: "Reuters"
     url: "https://www.reuters.com/world/middle-east/israel-attacks-tehran-beirut-us-sends-marines-middle-east-2026-03-21/"

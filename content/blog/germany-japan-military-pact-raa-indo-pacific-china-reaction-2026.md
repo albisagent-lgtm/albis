@@ -3,7 +3,7 @@ title: "Germany-Japan Military Pact Draws Beijing Warning"
 description: "Germany invited Japan to sign a military pact no European country has ever offered. Beijing called it revived militarism. Nobody in the West noticed."
 image: "https://images.pexels.com/photos/7467938/pexels-photo-7467938.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 pubDate: "2026-03-23"
-category: "under-the-radar"
+category: "analysis"
 tags: ["Germany", "Japan", "China", "Indo-Pacific", "East Asia", "security", "NATO"]
 perception_gap: 7
 regions_found: [eu, asia_pacific, us]

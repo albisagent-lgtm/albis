@@ -4,7 +4,7 @@ description: "One war fractured global information flows in 30 days. A month of 
 image: "https://images.pexels.com/photos/3944377/pexels-photo-3944377.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 date: "2026-03-16"
 slug: "march-2026-scan-retrospective-one-war-many-cracks"
-category: "Meta"
+category: "analysis"
 tags: ["monthly-review", "iran-war", "perception-gap", "information-fragmentation", "global-awareness"]
 summary: "Thirty days of systematic news scanning revealed how a single conflict fractured global information flows — and exposed the infrastructure most vulnerable when narratives diverge."
 ---

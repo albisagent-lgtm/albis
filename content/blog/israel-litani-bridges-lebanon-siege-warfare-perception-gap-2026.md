@@ -3,7 +3,7 @@ title: "Israel Destroys Litani Bridges: Strikes or Siege?"
 description: "Israel ordered the destruction of every Litani River crossing in south Lebanon. English media calls them 'bridge strikes.' Arabic media names five bridges and calls it siege warfare creating humanitarian islands. Over a million displaced."
 pubDate: 2026-03-24
 author: "Albis Editorial"
-category: "Divided"
+category: "analysis"
 tags: ["lebanon", "israel", "litani", "bridges", "siege-warfare", "perception-gap", "iran-war", "humanitarian"]
 image: "https://images.pexels.com/photos/10854152/pexels-photo-10854152.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Israel Litani bridges destroyed Lebanon siege 2026"

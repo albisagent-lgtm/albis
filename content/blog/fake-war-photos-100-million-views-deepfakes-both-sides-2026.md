@@ -3,7 +3,7 @@ title: "Fake Iran War Photos Hit 100M Views, Both Sides 2026"
 description: "Both sides of the Iran war flood social media with AI deepfakes, recycled footage, and fabricated victories. 100 million people saw a fake sunken warship. Here's how the machine works."
 pubDate: 2026-03-30T17:00:00+13:00
 author: "Harry Wenham"
-category: "Information & Perception"
+category: "analysis"
 tags: ["deepfakes", "disinformation", "Iran war", "AI", "information warfare", "media literacy", "social media", "propaganda"]
 image: "https://images.pexels.com/photos/9967888/pexels-photo-9967888.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 featured: false

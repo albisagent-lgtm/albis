@@ -5,7 +5,7 @@ date: "2026-02-28"
 image: "https://images.pexels.com/photos/36167546/pexels-photo-36167546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["iran", "israel", "khamenei", "middle-east", "conflict", "geopolitics"]
-category: "breaking"
+category: "current-events"
 ---
 
 A photograph reportedly showing the body of Ayatollah Ali Khamenei was presented to both Benjamin Netanyahu and Donald Trump on Saturday evening. Israeli Channel 12 broke the story. Kan, Israel's public broadcaster, followed with a detail: Khamenei's body was recovered from the rubble of his compound in Tehran.

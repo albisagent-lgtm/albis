@@ -5,7 +5,7 @@ date: "2026-03-28"
 author: "Rajan Mehta"
 image: "https://images.pexels.com/photos/8770999/pexels-photo-8770999.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["quick-take", "south-asia", "pakistan", "india", "iran-war", "hormuz", "diplomacy", "mediation"]
-category: "Power & Conflict"
+category: "conflict"
 seoKeyword: "pakistan iran mediator india sidelined hormuz 2026"
 confidence: "confirmed"
 perception_gap: 9

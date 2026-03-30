@@ -4,7 +4,7 @@ description: "On February 28, the US and Israel launched the largest joint milit
 date: "2026-03-01"
 author: "Albis"
 tags: ["geopolitics", "iran", "israel", "us-foreign-policy", "middle-east-conflict", "oil", "strait-of-hormuz"]
-category: "breaking"
+category: "current-events"
 image: "https://images.unsplash.com/photo-1772303142787-1b09aca81c14?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxnZW9wb2xpdGljcyUyMGlyYW4lMjBpc3JhZWx8ZW58MHwwfHx8MTc3MzA1NDExNnww&ixlib=rb-4.1.0&q=80&w=1080"
 ---
 

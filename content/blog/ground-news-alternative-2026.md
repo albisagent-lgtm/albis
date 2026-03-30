@@ -6,7 +6,7 @@ slug: ground-news-alternative-2026
 date: 2026-03-29
 author: "Albis"
 tags: [comparison, seo, ground-news, media-literacy, alternatives]
-category: guides
+category: "explainer"
 featured: false
 perception_gap: 6
 regions_found: [us, eu]

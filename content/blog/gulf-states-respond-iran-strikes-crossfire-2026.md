@@ -5,7 +5,7 @@ date: "2026-03-01"
 image: "https://images.unsplash.com/photo-1568677597024-8b77666289f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxnZW9wb2xpdGljcyUyMGd1bGYtc3RhdGVzJTIwaXJhbnxlbnwwfDB8fHwxNzczMDQ3MDc4fDA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["geopolitics", "gulf-states", "iran", "middle-east", "UAE", "saudi-arabia", "qatar", "bahrain", "kuwait", "military"]
-category: "perspectives"
+category: "analysis"
 ---
 
 A Pakistani national was walking through a residential neighborhood in Abu Dhabi when shrapnel from an intercepted Iranian missile fell from the sky and killed him.

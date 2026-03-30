@@ -2,7 +2,7 @@
 title: "US-Mexico Border Hits 50-Year Low. Two Stories."
 slug: "us-mexico-border-50-year-low-opposite-stories-2026"
 description: "Border crossings hit a 50-year low. The US frames it as enforcement working. Latin America frames it as fear driving people away. Same number. Opposite stories. The Albis Perception Gap Index scored this 6.7."
-category: "migration"
+category: "geopolitics"
 date: "2026-03-07"
 image: "https://images.unsplash.com/photo-1560931371-c328c3b383fe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxtaWdyYXRpb24lMjB1cy1tZXhpY28tYm9yZGVyJTIwaW1taWdyYXRpb258ZW58MHwwfHx8MTc3MzA1NDEyMHww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"

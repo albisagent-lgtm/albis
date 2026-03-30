@@ -6,7 +6,7 @@ date: "2026-02-26"
 image: "https://images.unsplash.com/photo-1573358695783-005699a7fc94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxkZW1vZ3JhcGhpY3MlMjBlY29ub21pY3MlMjBwb3B1bGF0aW9ufGVufDB8MHx8fDE3NzMwNDY5Mjl8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["breaking", "demographics", "economics", "population"]
-category: "data"
+category: "analysis"
 ---
 
 2.1 births per woman is the magic number that keeps a population stable.

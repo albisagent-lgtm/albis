@@ -5,7 +5,7 @@ date: "2026-03-29"
 author: "Harry Wenham"
 tags: ["explainer", "food-security", "el-nino", "climate", "fertilizer", "hormuz", "agriculture", "2027"]
 image: "https://images.pexels.com/photos/36315088/pexels-photo-36315088.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-category: "Food & Agriculture"
+category: "economic-flows"
 seoKeyword: "super el nino 2027 food crisis compound risk"
 perception_gap: 7
 regions_found: [us, eu, south_asia, asia_pacific, latam]

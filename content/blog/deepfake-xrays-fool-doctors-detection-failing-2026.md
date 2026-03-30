@@ -3,7 +3,7 @@ title: "Deepfake X-Rays Now Fool Doctors. Detection Is Losing."
 description: "AI-generated X-rays fool trained radiologists across six countries. Detection tools fail in real-world banking. State propaganda goes viral. Deepfakes crossed the quality threshold in three domains at once."
 date: "2026-03-28"
 author: "Albis Tech & Media Desk"
-category: "information-warfare"
+category: "cyber-info-warfare"
 tags: ["information-warfare", "deepfakes", "healthcare", "financial-fraud", "ai-detection", "propaganda"]
 image: "https://images.pexels.com/photos/6528862/pexels-photo-6528862.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "deepfake X-rays fool doctors"

@@ -3,7 +3,7 @@ title: "Iran's Supreme Leader Missing. Oil at $118. IRGC Rules"
 description: "On Persian New Year, Iran has no visible leader, Brent crude jumped 10% to $118 a barrel, and Europe's gas prices surged 30%. Here's what changed in the past 24 hours."
 date: "2026-03-20"
 author: "Albis"
-category: "Crisis Tracker"
+category: "conflict"
 tags: ["iran", "war", "geopolitics", "oil", "irgc", "nowruz", "middle-east"]
 image: "https://images.pexels.com/photos/2348808/pexels-photo-2348808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran war Nowruz leadership crisis oil prices 2026"

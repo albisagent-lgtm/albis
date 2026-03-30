@@ -5,7 +5,7 @@ date: "2026-03-28"
 author: "Priya Sharma"
 image: "https://images.pexels.com/photos/22730371/pexels-photo-22730371.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["quick-take", "trade", "latin-america", "africa", "celac", "colombia", "ghana", "south-south", "global-south"]
-category: "Economy & Trade"
+category: "economic-flows"
 seoKeyword: "celac africa forum trade route colombia ghana 2026"
 confidence: "confirmed"
 perception_gap: 4

@@ -6,7 +6,7 @@ image: "/images/defaults/perception-gap.webp"
 author: "Albis"
 tags: ["the-flip", "china", "japan", "gallium", "germanium", "semiconductors", "trade-war", "supply-chains"]
 series: "The Flip"
-category: "the-flip"
+category: "analysis"
 perception_gap: 7
 regions_found: [us, eu, asia_pacific]
 regions_absent: [africa, latam, south_asia]

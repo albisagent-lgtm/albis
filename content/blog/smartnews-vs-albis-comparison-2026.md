@@ -6,7 +6,7 @@ slug: smartnews-vs-albis-comparison-2026
 date: 2026-03-26
 author: "Albis"
 tags: [comparison, seo, smartnews, media-literacy]
-category: guides
+category: "explainer"
 featured: false
 perception_gap: 7
 regions_found: [us, eu, asia_pacific]

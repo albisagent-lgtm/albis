@@ -3,7 +3,7 @@ title: "Taliban Drones Reach Islamabad. Pakistan Can't Cope."
 description: "Taliban-linked drones were intercepted near Islamabad on March 14 as Pakistan fights Afghanistan, defends Saudi Arabia, and faces an oil-driven economic crisis during Ramadan."
 date: "2026-03-14"
 author: "Albis"
-category: "Geopolitics"
+category: "geopolitics"
 tags: ["pakistan", "afghanistan", "taliban", "iran-war", "oil-crisis", "south-asia"]
 image: "https://images.pexels.com/photos/2665146/pexels-photo-2665146.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Pakistan Afghanistan war drones Islamabad 2026"

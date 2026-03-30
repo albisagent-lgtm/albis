@@ -6,7 +6,7 @@ publishedAt: 2026-03-03
 updatedAt: 2026-03-03
 author: Harry Wenham
 image: "https://images.pexels.com/photos/32696007/pexels-photo-32696007.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
-category: Climate, Energy & Natural World
+category: "climate-energy"
 tags:
   - indigenous
   - conservation

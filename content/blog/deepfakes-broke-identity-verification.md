@@ -3,7 +3,7 @@ title: "Deepfakes Just Broke Identity Verification"
 description: "Deepfakes can now fool the systems banks and apps use to verify you're real. The tools built to catch fake videos are failing."
 date: "2026-03-03"
 author: "Albis"
-category: "information-warfare"
+category: "cyber-info-warfare"
 tags: ["information-warfare", "deepfakes", "identity-verification", "propaganda", "disinformation", "cyber-warfare"]
 image: "https://images.unsplash.com/photo-1695370993552-3fb199fb35f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwZGVlcGZha2VzJTIwaWRlbnRpdHktdmVyaWZpY2F0aW9ufGVufDB8MHx8fDE3NzMwNDY4NzJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
 faqs:

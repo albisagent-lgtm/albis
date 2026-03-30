@@ -5,7 +5,7 @@ date: "2026-03-02"
 image: "https://images.pexels.com/photos/6236039/pexels-photo-6236039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["explainer", "information-warfare", "china", "usa", "intelligence", "propaganda"]
-category: "perspectives"
+category: "analysis"
 ---
 
 China says the CIA is running disinformation campaigns against its global projects.

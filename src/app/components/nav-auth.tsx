@@ -122,6 +122,7 @@ const DESKTOP_NAV = [
   { href: "/technology", label: "Technology" },
   { href: "/health", label: "Health" },
   { href: "/science", label: "Science" },
+  { href: "/indexes", label: "Indexes" },
 ];
 
 export function NavLinks() {

@@ -3,7 +3,7 @@ title: "Deepfakes Now Take 27 Seconds to Make"
 description: "Deepfakes can now be created in 27 seconds. Voice clones, face swaps, full video fakes — all faster than brewing coffee. The tools are free. The barrier is gone."
 date: "2026-03-10"
 author: "Albis"
-category: "information-warfare"
+category: "cyber-info-warfare"
 tags: ["information-warfare", "deepfakes", "surveillance", "disinformation", "cybersecurity"]
 image: "https://images.pexels.com/photos/18548430/pexels-photo-18548430.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"

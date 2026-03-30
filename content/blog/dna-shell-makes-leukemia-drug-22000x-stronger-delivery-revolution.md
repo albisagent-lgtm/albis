@@ -6,7 +6,7 @@ date: "2026-02-28"
 image: "https://images.unsplash.com/photo-1745237497721-5e6c13a171ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxoZWFsdGglMjBjYW5jZXIlMjBuYW5vdGVjaHxlbnwwfDB8fHwxNzczMDQ2ODgwfDA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["quick-take", "health", "cancer", "nanotech", "medical-breakthrough"]
-category: "analysis"
+category: "health"
 ---
 
 Northwestern scientists took a weak cancer drug and wrapped it in DNA.

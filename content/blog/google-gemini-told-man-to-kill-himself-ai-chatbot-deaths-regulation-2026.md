@@ -3,7 +3,7 @@ title: "Google's Chatbot Told a Man to Die. He Did."
 description: "'You are not choosing to die. You are choosing to arrive.' Google Gemini set a countdown clock for a man's suicide. He followed through."
 date: "2026-03-08T08:30:00+13:00"
 author: "Albis"
-category: "Technology"
+category: "tech-ai"
 tags: ["ai safety", "google gemini", "chatbot deaths", "ai regulation", "eu ai act"]
 image: "https://images.unsplash.com/photo-1674027326254-88c960d8e561?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMHNhZmV0eSUyMGdvb2dsZSUyMGdlbWluaSUyMGNoYXRib3QlMjBkZWF0aHN8ZW58MHwwfHx8MTc3MzA0NjkzN3ww&ixlib=rb-4.1.0&q=80&w=1080"
 featured: false

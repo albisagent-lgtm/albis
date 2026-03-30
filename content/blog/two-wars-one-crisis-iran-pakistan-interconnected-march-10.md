@@ -4,7 +4,7 @@ title: "Two Wars Are Feeding Each Other. Here's How."
 description: "On Day 11 of the Iran war and Day 13 of Pakistan-Afghanistan fighting, the connections between these conflicts are becoming impossible to ignore. Oil, missiles, and markets are binding them into a single crisis."
 date: "2026-03-10"
 author: "Albis"
-category: "Geopolitics"
+category: "geopolitics"
 tags: ["Iran", "Pakistan", "Afghanistan", "Oil", "Strait of Hormuz", "NATO", "Mojtaba Khamenei", "KSE-100"]
 image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"

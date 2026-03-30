@@ -3,7 +3,7 @@ title: "Iran War's Cyber Front: Spyware in Bomb Shelters"
 description: "Iranian hackers sent spyware disguised as bomb shelter apps during live missile strikes on Israel. Nearly 5,800 cyberattacks from 50 groups have hit US and Israeli networks in one month. The digital war isn't separate from the physical one — it's synchronised with it."
 pubDate: "2026-03-30"
 author: "Harry Wenham"
-category: "information-warfare"
+category: "cyber-info-warfare"
 tags: ["information-warfare", "cyberattacks", "spyware", "Iran", "Israel", "deepfakes", "propaganda", "hacking", "disinformation"]
 image: "https://images.pexels.com/photos/34258666/pexels-photo-34258666.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Iran war cyberattacks spyware bomb shelters"

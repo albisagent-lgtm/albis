@@ -3,7 +3,7 @@ title: "The US Cut Funding for the Internet's Underground"
 description: "America's budget cuts just pulled the plug on tools helping activists in Iran, China, and Russia bypass censorship. Who fills the void now?"
 date: 2026-03-17
 author: "Harry Wenham"
-category: "digital-rights"
+category: "governance"
 tags: ["internet-freedom", "censorship", "us-policy", "soft-power", "digital-rights"]
 image: "https://images.pexels.com/photos/5723266/pexels-photo-5723266.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"

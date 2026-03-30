@@ -4,7 +4,7 @@ description: "A fertilizer ship sits idle in the Persian Gulf. Within weeks, 318
 slug: "cascade-economics-how-one-shock-breaks-everything"
 date: "2026-03-17"
 author: "Harry Wenham"
-category: "research"
+category: "analysis"
 tags: ["cascade-economics", "Strait of Hormuz", "global systems", "food crisis", "supply-chain", "economic theory", "geopolitics", "fertilizer crisis", "systemic-risk", "Iran war"]
 image: "https://images.pexels.com/photos/12969405/pexels-photo-12969405.jpeg?auto=compress&cs=tinysrgb&h=800&w=1200"
 imageCaption: "Photo by Atlantic Ambience / Pexels"

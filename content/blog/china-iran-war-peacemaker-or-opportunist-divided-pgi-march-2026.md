@@ -4,7 +4,7 @@ description: "Wang Yi called the Iran war a conflict that 'should never have hap
 date: "2026-03-09"
 author: "Albis"
 tags: ["divided", "pgi", "china", "iran", "geopolitics", "diplomacy", "wang-yi"]
-category: "divided"
+category: "analysis"
 image: "https://images.pexels.com/photos/6409003/pexels-photo-6409003.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "The Guardian"

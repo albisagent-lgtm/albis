@@ -5,7 +5,7 @@ date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1615119799858-2b4aebdc80d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx3b21lbnMtcmlnaHRzJTIwZ2VuZGVyLWVxdWFsaXR5JTIwd29ya3BsYWNlLWVxdWFsaXR5fGVufDB8MHx8fDE3NzMwNTA1MDh8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["womens-rights", "gender-equality", "workplace-equality", "reproductive-rights", "domestic-violence"]
-category: "data"
+category: "analysis"
 faqs:
   - q: "Does any country have full workplace equality for women?"
     a: "No. According to the World Bank's 2026 report analyzing 190 economies, full workplace equality does not exist anywhere in the world. Only 4% of women live in economies that come close to legal equality, and laws designed to ensure equal economic opportunities are only half-enforced globally."

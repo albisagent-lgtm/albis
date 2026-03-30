@@ -5,7 +5,7 @@ date: "2026-02-27"
 image: "https://images.unsplash.com/photo-1704022472896-c7f2423b3ce7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaS1pbnRlbGxpZ2VuY2UlMjByb2JvdGljcyUyMGNoaW5hfGVufDB8MHx8fDE3NzMwNDU3OTF8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["ai-intelligence", "robotics", "china", "manufacturing", "humanoid-robots"]
-category: "analysis"
+category: "tech-ai"
 ---
 
 A year ago, China's humanoid robots were a punchline. At the 2025 Spring Festival Gala — the world's most-watched TV broadcast — they wobbled through a folk dance, twirling handkerchiefs like toddlers in a school play. At a robot marathon in April, they stumbled, smoked, and fell apart mid-stride. Social media had a field day.

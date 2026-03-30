@@ -5,7 +5,7 @@ date: "2026-03-01"
 image: "https://images.unsplash.com/photo-1757916315213-b7254eea4f9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwa2hhbWVuZWklMjBzdWNjZXNzaW9ufGVufDB8MHx8fDE3NzMwNTA0NzR8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["iran", "khamenei", "succession", "irgc", "middle-east", "conflict", "geopolitics"]
-category: "breaking"
+category: "current-events"
 ---
 
 In Westwood, Los Angeles — the heart of what locals call Tehrangeles — fireworks cracked over Wilshire Boulevard before dawn. A woman who'd emigrated from Tehran a decade ago brought her husband, infant son, and mother to the street. She told the LA Times she hoped the shah's dynasty would return. Around her, hundreds waved pre-revolution Iranian flags and held up posters of Donald Trump.

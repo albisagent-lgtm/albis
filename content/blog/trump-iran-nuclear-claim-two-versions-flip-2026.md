@@ -3,7 +3,7 @@ title: "Trump Iran Nuclear Claim: Two Versions of One Day"
 description: "Trump said Iran agreed to give up nukes. Iran said he's lying. Oil dropped 10%. Two regions, same 24 hours, completely opposite realities — and $580 million moved before anyone knew."
 date: 2026-03-26
 author: "Albis"
-category: "the-flip"
+category: "governance"
 tags: ["the-flip", "iran-war", "nuclear", "perception-gap", "information-warfare", "oil-markets", "trump", "pgi"]
 series: "The Flip"
 image: "https://images.pexels.com/photos/8553867/pexels-photo-8553867.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

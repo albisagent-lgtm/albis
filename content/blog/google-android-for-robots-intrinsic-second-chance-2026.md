@@ -5,7 +5,7 @@ date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1674027326347-37509301f286?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaS1pbnRlbGxpZ2VuY2UlMjByb2JvdGljcyUyMGdvb2dsZXxlbnwwfDB8fHwxNzczMDQ2OTM1fDA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["ai-intelligence", "robotics", "google", "intrinsic", "physical-ai", "android"]
-category: "analysis"
+category: "tech-ai"
 ---
 
 Google bought Boston Dynamics in 2013. It had no idea what to do with it. Four years later, it sold the company to SoftBank and walked away from robotics entirely.

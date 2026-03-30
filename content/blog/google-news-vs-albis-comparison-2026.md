@@ -6,7 +6,7 @@ slug: google-news-vs-albis-comparison-2026
 date: 2026-03-25
 author: "Albis"
 tags: [comparison, seo, google-news, media-literacy]
-category: guides
+category: "explainer"
 featured: false
 perception_gap: 7
 regions_found: [us, eu, middle_east, asia_pacific]

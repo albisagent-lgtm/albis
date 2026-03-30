@@ -2,7 +2,7 @@
 title: "Both Dimona and Natanz Exist Because of the Same Country"
 description: "Iran's missile struck near Israel's nuclear facility this week. To understand why, you need to go back to 1953 — and a double standard that's shaped the Middle East for seven decades."
 image: "https://images.pexels.com/photos/6795499/pexels-photo-6795499.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
-category: perspectives
+category: "analysis"
 tags:
   - Iran
   - Israel

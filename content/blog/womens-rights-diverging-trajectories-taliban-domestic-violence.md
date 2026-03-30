@@ -3,7 +3,7 @@ title: "Women's Rights Diverge as Taliban Legalizes Abuse"
 description: "Thousands marched globally for International Women's Day on March 8, demanding equal pay, reproductive rights, and an end to gender-based violence. The demonstrations come as women's rights advance in some regions while retreating sharply in others."
 date: "2026-03-09"
 author: "Albis"
-category: "womens-rights"
+category: "governance"
 tags: ["womens-rights", "gender-equality", "domestic-violence", "reproductive-rights", "political-representation"]
 image: "https://images.pexels.com/photos/6257343/pexels-photo-6257343.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"

@@ -5,7 +5,7 @@ description: "Iran lays mines in the Strait of Hormuz. Nuclear scientists are de
 slug: iran-war-day-14-mines-hormuz-nuclear-scientists-killed
 date: "2026-03-13"
 author: "Albis"
-category: "Geopolitics"
+category: "geopolitics"
 tags: ["Iran", "Israel", "United States", "Strait of Hormuz", "Oil", "Nuclear", "Middle East", "Pakistan"]
 image: "https://images.pexels.com/photos/34468690/pexels-photo-34468690.png?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 confidence: "confirmed"

@@ -5,7 +5,7 @@ date: "2026-03-28"
 author: "Lena Castillo"
 image: "https://images.pexels.com/photos/33848676/pexels-photo-33848676.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["clean-energy", "nuclear", "southeast-asia", "smr", "hormuz-crisis", "energy-transition", "ai-data-centers"]
-category: "Clean Energy & Water"
+category: "climate-energy"
 seoKeyword: "southeast asia nuclear power iran war 2026"
 confidence: "confirmed"
 perception_gap: 5

@@ -5,7 +5,7 @@ date: "2026-02-24"
 image: "https://images.pexels.com/photos/6770610/pexels-photo-6770610.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["reactive", "global-perspectives", "trade-policy", "economic-flows", "information-asymmetry"]
-category: "perspectives"
+category: "governance"
 ---
 
 When the US Supreme Court struck down President Trump's tariff authority on February 20, 2026, and he responded by announcing a new 15% global tariff, media outlets around the world reported the same sequence of events — but told radically different stories about what it meant.

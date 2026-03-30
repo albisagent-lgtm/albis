@@ -5,7 +5,7 @@ date: "2026-02-25"
 image: "https://images.unsplash.com/photo-1737735511537-7a25ff2c2176?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMG1pbGl0YXJ5JTIwZXRoaWNzfGVufDB8MHx8fDE3NzMwNDUzNjR8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["quick-take", "ai", "military", "ethics", "anthropic", "pentagon"]
-category: "analysis"
+category: "tech-ai"
 ---
 
 The Pentagon gave Anthropic until Friday.

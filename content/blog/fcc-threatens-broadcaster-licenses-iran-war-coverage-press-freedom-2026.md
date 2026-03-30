@@ -2,7 +2,7 @@
 title: "FCC Threatened to Pull Licenses Over War Coverage"
 date: "2026-03-16"
 description: "The FCC told broadcasters to 'correct course' on Iran war coverage — or lose their licenses. Wartime press freedom just got its first real test since 2003."
-category: "Media & Information"
+category: "cyber-info-warfare"
 image: "https://images.pexels.com/photos/12249230/pexels-photo-12249230.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 sources:

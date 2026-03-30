@@ -2,7 +2,7 @@
 title: "China's Scarborough Claim Rests on a Ham Radio Letter"
 description: "China's Scarborough Shoal claim hinges on a 1990 letter to a German ham radio hobbyist. The Philippines says it's fake. Welcome to documentary warfare."
 image: "https://images.pexels.com/photos/36296445/pexels-photo-36296445.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
-category: "lens"
+category: "analysis"
 pubDate: 2026-03-17
 tags: ["Philippines", "China", "South China Sea", "East Asia", "territorial disputes", "information warfare"]
 featured: false

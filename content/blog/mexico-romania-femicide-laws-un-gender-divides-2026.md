@@ -3,7 +3,7 @@ title: "Mexico and Romania Pass Landmark Femicide Laws as UN Gender Talks Expose
 description: "Mexico enacts femicide penalties up to 70 years, Romania toughens sentences, while CSW70 adopts justice conclusions over US objections and the SAVE Act threatens women's voting access."
 date: 2026-03-26
 author: Albis Geopolitics Desk
-category: womens-rights
+category: "governance"
 tags: [womens-rights, gender-equality, femicide, voting-rights, csw70]
 seoKeyword: "femicide laws Mexico Romania 2026"
 image: https://images.pexels.com/photos/6257343/pexels-photo-6257343.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200

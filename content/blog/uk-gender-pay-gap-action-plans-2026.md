@@ -4,7 +4,7 @@ slug: "uk-gender-pay-gap-action-plans-2026"
 description: "The UK published mandatory gender pay gap action plan guidance on March 4, 2026, requiring employers to address the 12.8% pay gap and 36% pension gap. India sees equal voter turnout but only 14% female MPs."
 excerpt: "The UK published mandatory gender pay gap action plan guidance on March 4, 2026, requiring employers to address the 12.8% pay gap and 36% pension gap."
 author: "Albis"
-category: "womens-rights"
+category: "governance"
 tags: ["womens-rights", "gender-equality", "workplace-equality", "pay-gap"]
 image: "https://images.pexels.com/photos/7202909/pexels-photo-7202909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 published_at: "2026-03-14T16:00:00Z"

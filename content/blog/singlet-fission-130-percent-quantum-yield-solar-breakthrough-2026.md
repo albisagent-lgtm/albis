@@ -5,7 +5,7 @@ date: "2026-03-30"
 author: "Priya Sharma"
 image: "https://images.pexels.com/photos/15751136/pexels-photo-15751136.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["clean-energy", "solar", "singlet-fission", "quantum-yield", "energy-breakthrough", "renewable-energy"]
-category: "Clean Energy & Water"
+category: "climate-energy"
 confidence: "confirmed"
 faqs:
   - question: "What is singlet fission in solar cells?"

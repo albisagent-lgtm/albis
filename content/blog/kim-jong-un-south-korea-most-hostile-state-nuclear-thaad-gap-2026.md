@@ -2,7 +2,7 @@
 title: "Kim Jong Un: South Korea 'Most Hostile State'"
 date: "2026-03-24T15:00:00+13:00"
 description: "Kim Jong Un declared South Korea the 'most hostile state' — the same week its THAAD missile defence left for Iran. Nobody mentioned the timing."
-category: "lens"
+category: "analysis"
 tags: ["North Korea", "South Korea", "East Asia", "security", "nuclear", "THAAD", "Korean Peninsula"]
 image: "/images/kim-hostile-state-thaad-2026.jpg"
 perception_gap: 8

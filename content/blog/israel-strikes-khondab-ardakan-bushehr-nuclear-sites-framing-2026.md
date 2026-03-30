@@ -5,7 +5,7 @@ date: 2026-03-28
 author: "Priya Moran"
 tags: ["divided", "pgi", "iran-war", "nuclear", "khondab", "ardakan", "bushehr", "israel", "iaea"]
 image: "https://images.pexels.com/photos/16705829/pexels-photo-16705829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-category: "divided"
+category: "climate-energy"
 seoKeyword: "Israel strikes Iran nuclear sites Khondab Ardakan Bushehr"
 perception_gap: 7.5
 regions_found: [us, eu, middle_east, south_asia, asia_pacific]

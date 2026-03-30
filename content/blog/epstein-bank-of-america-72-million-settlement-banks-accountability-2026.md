@@ -2,7 +2,7 @@
 title: "Bank of America Pays $72.5 Million Over Epstein — Three Banks, $437 Million, Zero Admissions"
 description: "Bank of America settled a class-action lawsuit alleging it facilitated Jeffrey Epstein's sex trafficking operation. Combined with JPMorgan and Deutsche Bank settlements, victims have won $437.5 million from banks that say they did nothing wrong."
 date: "2026-03-30"
-category: "Divided"
+category: "analysis"
 tags: ["epstein", "bank of america", "sex trafficking", "financial accountability", "institutional failure", "perception gap"]
 image: "https://images.pexels.com/photos/7821470/pexels-photo-7821470.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1200"
 author: "Albis"

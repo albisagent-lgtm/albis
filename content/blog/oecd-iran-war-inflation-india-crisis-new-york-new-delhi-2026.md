@@ -3,7 +3,7 @@ title: "Iran War Inflation Hits 4.2% — But India Feels It Worse"
 description: "The OECD says global inflation will hit 4%. In New York, that's an annoyance. In New Delhi, it's a national crisis with warships deployed and the rupee at record lows."
 date: "2026-03-29"
 author: "Kai Strand"
-category: "quick-take"
+category: "economic-flows"
 tags: ["quick-take", "inflation", "india", "oecd", "iran-war", "economy", "rupee", "oil-crisis"]
 image: "https://images.pexels.com/photos/8139313/pexels-photo-8139313.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 imageAlt: "Indian currency notes representing economic pressure from oil shock"

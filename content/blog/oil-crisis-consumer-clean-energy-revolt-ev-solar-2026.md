@@ -5,7 +5,7 @@ date: "2026-03-27"
 author: "Priya Sharma"
 image: "https://images.pexels.com/photos/36405842/pexels-photo-36405842.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["clean-energy", "ev-sales", "solar", "oil-crisis", "hormuz", "energy-transition", "consumer-behavior"]
-category: "Clean Energy & Water"
+category: "climate-energy"
 seoKeyword: "oil crisis ev sales solar boom clean energy 2026"
 perception_gap: 5
 regions_found: [us, eu, asia_pacific, south_asia, latam]

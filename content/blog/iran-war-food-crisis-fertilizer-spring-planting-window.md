@@ -3,7 +3,7 @@ title: "Iran War Food Crisis: It Won't Hit Until Autumn"
 description: "The WFP says 45 million more people could face acute hunger by June. But the clock that actually matters runs out in April — when farmers must decide whether to fertilize."
 date: "2026-03-20"
 author: "Harry Wenham"
-category: "Food & Agriculture"
+category: "economic-flows"
 tags: ["food-security", "fertilizer", "hormuz", "iran-war", "wfp", "hunger", "agriculture"]
 image: "https://images.pexels.com/photos/6489275/pexels-photo-6489275.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran war food crisis 45 million hunger fertilizer spring planting"

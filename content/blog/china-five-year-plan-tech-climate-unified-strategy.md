@@ -2,7 +2,7 @@
 title: "China's Five-Year Plan: Tech Boom and Rising Emissions"
 description: "China's five-year plan commits 7% more R&D to AI, quantum, and biotech while allowing emissions to grow 3-6%. Two policies from one document tell the same story: growth first, tech independence always."
 date: 2026-03-16
-category: "Tech Geopolitics"
+category: "tech-ai"
 author: "Harry Wenham"
 tags: ["ai-geopolitics", "China", "climate", "tech", "carbon-emissions", "self-sufficiency"]
 image: "https://images.pexels.com/photos/744347/pexels-photo-744347.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

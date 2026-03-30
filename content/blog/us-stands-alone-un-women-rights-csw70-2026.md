@@ -4,7 +4,7 @@ title: "US Stands Alone Against UN Women's Rights Pact"
 description: "The United States cast the sole vote against UN CSW70 agreed conclusions on women and justice, breaking a seven-decade consensus streak while Afghanistan faces deepening gender crisis."
 date: 2026-03-23
 author: "Albis Geopolitics Desk"
-category: "womens-rights"
+category: "governance"
 tags: ["womens-rights", "gender-equality", "united-nations", "csw70", "afghanistan", "water-gender"]
 seoKeyword: "UN CSW70 women rights vote 2026"
 image: https://images.pexels.com/photos/6257531/pexels-photo-6257531.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200

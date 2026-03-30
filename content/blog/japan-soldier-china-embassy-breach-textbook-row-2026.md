@@ -4,7 +4,7 @@ description: "A Japanese soldier scaled the Chinese embassy wall with a knife. H
 date: "2026-03-26"
 image: "https://images.pexels.com/photos/4386345/pexels-photo-4386345.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
-category: "lens"
+category: "analysis"
 tags: ["Japan", "China", "South Korea", "East Asia", "security", "diplomacy", "history"]
 perception_gap: 7
 regions_found: [asia_pacific, us, eu]

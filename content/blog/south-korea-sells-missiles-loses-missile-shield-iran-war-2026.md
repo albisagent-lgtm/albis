@@ -2,7 +2,7 @@
 title: "South Korea Sells Missiles While Losing Its Own Shield"
 date: "2026-03-25T08:30:00+13:00"
 description: "South Korea's Cheongung interceptor is the hottest weapon in the Middle East — 96% accuracy, a quarter the price of Patriot. But back home, THAAD batteries left for Iran and Kim Jong Un just called Seoul the 'most hostile state.' One story is a triumph. The other is a crisis. Korean media covers both. Western media picks one."
-category: "lens"
+category: "analysis"
 tags: ["South Korea", "East Asia", "security", "Iran war", "THAAD", "arms exports", "North Korea", "Cheongung"]
 image: "/images/south-korea-missile-paradox-2026.jpg"
 perception_gap: 8

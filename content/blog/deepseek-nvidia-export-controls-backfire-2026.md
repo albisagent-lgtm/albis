@@ -5,7 +5,7 @@ date: "2026-02-28"
 image: "https://images.pexels.com/photos/6974258/pexels-photo-6974258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Harry Wenham"
 tags: ["explainer", "ai", "china", "export-controls", "nvidia", "deepseek", "semiconductors"]
-category: "analysis"
+category: "tech-ai"
 ---
 
 Nvidia's Blackwell chip is the most advanced AI processor on the planet. US law bans its export to China. DeepSeek just trained its latest AI model on a cluster of Blackwells in Inner Mongolia.

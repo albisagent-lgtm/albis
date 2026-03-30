@@ -3,7 +3,7 @@ title: "AI Deepfakes Are Running Both Sides of the Iran War"
 description: "Iran war AI deepfakes hit 110+ confirmed fakes in two weeks. Both Tehran-linked and Israeli-backed networks are running operations. Here's how the mechanism works."
 date: "2026-03-20"
 author: "Albis"
-category: "information-warfare"
+category: "cyber-info-warfare"
 tags: ["information-warfare", "deepfakes", "censorship", "propaganda", "disinformation", "Iran", "AI"]
 image: "https://images.pexels.com/photos/3989901/pexels-photo-3989901.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran war AI deepfakes both sides disinformation 2026"

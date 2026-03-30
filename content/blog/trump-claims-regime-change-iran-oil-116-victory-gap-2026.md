@@ -3,7 +3,7 @@ title: "Trump Claims Iran Regime Change as Oil Hits $116"
 description: "Trump says killing Iran's leaders equals regime change and a deal is 'close.' Iran's parliament promises fire. Oil hits $116. Five regions report five different wars — here's what each one sees."
 date: 2026-03-30
 author: "Tariq Osei"
-category: "Divided"
+category: "governance"
 tags: ["divided", "pgi", "iran-war", "trump", "regime-change", "oil-crisis", "perception-gap", "decapitation-strategy"]
 image: "https://images.pexels.com/photos/13074031/pexels-photo-13074031.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Fuel pump display showing rising prices during global oil crisis"

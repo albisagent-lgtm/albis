@@ -6,7 +6,7 @@ slug: 1440-newsletter-vs-albis-comparison-2026
 date: 2026-03-27
 author: "Albis"
 tags: [comparison, seo, "1440", newsletter, media-literacy]
-category: guides
+category: "explainer"
 featured: false
 seoKeyword: "1440 newsletter vs Albis"
 perception_gap: 6

@@ -5,7 +5,7 @@ date: "2026-03-28"
 author: "Albis"
 image: "https://images.pexels.com/photos/30530412/pexels-photo-30530412.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["information-attention", "ai-chatbots", "sycophancy", "fact-checking", "media-literacy", "misinformation"]
-category: "Information & Attention"
+category: "tech-ai"
 seoKeyword: "AI chatbot sycophancy fact checking study"
 perception_gap: 6
 regions_found: [us, eu]

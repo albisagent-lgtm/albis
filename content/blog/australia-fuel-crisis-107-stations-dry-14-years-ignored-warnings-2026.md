@@ -4,7 +4,7 @@ description: "107 NSW petrol stations ran dry this week. Australia is the only I
 date: "2026-03-22"
 pubDate: "2026-03-22"
 author: "Albis"
-category: "quick-take"
+category: "analysis"
 tags: ["quick-take", "australia", "fuel-crisis", "energy-security", "iran-war", "hormuz", "oil"]
 regions: ["asia_pacific"]
 seoKeyword: "Australia fuel crisis 2026 petrol shortage"

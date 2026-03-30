@@ -5,7 +5,7 @@ excerpt: "The UN Commission on the Status of Women broke 70 years of tradition b
 description: "UN women's rights session adopts justice roadmap by historic vote as India removes transgender self-ID rights, UK debates abortion law, and Spain reports deadliest start for gender violence since 2020."
 author: "Albis"
 date: "2026-03-18T04:00:00Z"
-category: "womens-rights"
+category: "governance"
 tags: ["womens-rights", "gender-equality", "reproductive-rights", "united-nations", "transgender-rights", "femicide"]
 image: "https://images.pexels.com/photos/17344169/pexels-photo-17344169.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "UN women's rights CSW70 2026"

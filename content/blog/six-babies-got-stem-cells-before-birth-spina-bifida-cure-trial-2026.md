@@ -4,7 +4,7 @@ description: "The world's first in-utero stem cell therapy for spina bifida just
 author: "Harry Wenham"
 date: "2026-03-07"
 published: true
-category: "Health & Science"
+category: "health"
 tags: ["stem cells", "spina bifida", "medical breakthrough", "fetal surgery", "UC Davis", "Lancet"]
 image: "https://images.unsplash.com/photo-1601055283742-8b27e81b5553?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxzdGVtJTIwY2VsbHMlMjBzcGluYSUyMGJpZmlkYSUyMG1lZGljYWwlMjBicmVha3Rocm91Z2h8ZW58MHwwfHx8MTc3MzA1NDAzOHww&ixlib=rb-4.1.0&q=80&w=1080"
 slug: "six-babies-got-stem-cells-before-birth-spina-bifida-cure-trial-2026"

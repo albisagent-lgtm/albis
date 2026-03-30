@@ -5,7 +5,7 @@ date: 2026-03-30
 author: "Priya Sharma"
 tags: ["unseen", "gai", "energy", "gas", "europe", "lng", "iran-war"]
 image: "https://images.pexels.com/photos/27404517/pexels-photo-27404517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-category: "energy"
+category: "climate-energy"
 seoKeyword: "Europe gas reserves lowest 2026"
 perception_gap: 6
 regions_found: [us, eu]

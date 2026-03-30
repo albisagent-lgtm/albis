@@ -3,7 +3,7 @@ title: "South Korea Tells Citizens to Take Shorter Showers"
 description: "South Korea launched a 12-step energy saving campaign and vehicle rationing as Hormuz cuts 70% of its oil supply. The world's 10th largest economy is running on 68 days of reserves."
 date: "2026-03-25"
 author: "Daniel Pearson"
-category: "energy"
+category: "climate-energy"
 tags: ["quick-take", "south-korea", "energy-crisis", "hormuz", "fuel-rationing", "oil-reserves", "iran-war"]
 regions: ["Asia-Pacific", "North America", "Europe"]
 image: "https://images.pexels.com/photos/32211609/pexels-photo-32211609.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

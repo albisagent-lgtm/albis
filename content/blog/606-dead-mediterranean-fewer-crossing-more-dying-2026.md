@@ -5,7 +5,7 @@ date: "2026-03-01"
 image: "https://images.unsplash.com/photo-1653237168937-6ac70e5a30e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxtaWdyYXRpb24lMjBtZWRpdGVycmFuZWFuJTIwZXVyb3BlfGVufDB8MHx8fDE3NzMwNDUzMjZ8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
 tags: ["breaking", "migration", "mediterranean", "europe", "humanitarian"]
-category: "data"
+category: "analysis"
 sources:
   - name: "UNHCR"
     url: "https://data.unhcr.org/en/situations/mediterranean"

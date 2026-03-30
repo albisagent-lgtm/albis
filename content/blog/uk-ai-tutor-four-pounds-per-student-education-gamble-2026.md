@@ -5,7 +5,7 @@ date: "2026-02-28"
 image: "https://images.unsplash.com/photo-1614492898637-435e0f87cef8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjBBSSUyMHR1dG9yaW5nfGVufDB8MHx8fDE3NzMwNTQwOTJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
 tags: ["education", "AI", "tutoring", "UK", "inequality", "edtech"]
-category: "analysis"
+category: "tech-ai"
 ---
 
 England just committed £1.8 million to build AI tutoring tools for 450,000 disadvantaged students. That's £4 per kid.

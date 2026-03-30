@@ -4,7 +4,7 @@ description: "SoftBank borrowed $40 billion — unsecured — to buy 13% of Open
 date: "2026-03-28"
 author: "Harry Wenham"
 image: "https://images.pexels.com/photos/5480781/pexels-photo-5480781.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
-category: "quick-take"
+category: "tech-ai"
 tags: ["quick-take", "softbank", "openai", "ai-investment", "masayoshi-son", "technology", "concentration-of-power"]
 seoKeyword: "SoftBank $40 billion OpenAI loan 2026"
 perception_gap: 4

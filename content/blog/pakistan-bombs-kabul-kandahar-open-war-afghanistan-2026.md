@@ -5,7 +5,7 @@ date: "2026-02-28"
 image: "https://images.pexels.com/photos/5373891/pexels-photo-5373891.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["trending", "pakistan", "afghanistan", "war", "taliban", "durand-line", "geopolitics"]
-category: "breaking"
+category: "current-events"
 ---
 
 At 1:50 in the morning on Friday, explosions shook Kabul.

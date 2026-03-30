@@ -5,7 +5,7 @@ date: "2026-02-25"
 image: "https://images.unsplash.com/photo-1690742215448-37b787cd3494?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxnZXJtYW55JTIwY2hpbmElMjB0cmFkZXxlbnwwfDB8fHwxNzczMDQ2OTIwfDA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["breaking", "germany", "china", "trade", "geopolitics", "europe"]
-category: "breaking"
+category: "current-events"
 ---
 
 While Trump was delivering the longest State of the Union speech in American history last night — promising a "golden age" — Friedrich Merz was boarding a plane to Beijing.

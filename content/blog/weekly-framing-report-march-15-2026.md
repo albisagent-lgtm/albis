@@ -3,7 +3,7 @@ title: "Weekly Framing Report: March 8-15, 2026"
 description: "62 people drowned in Kenya. 7.5 billion never heard about it. The Iran war creates invisible crises the world doesn't see."
 date: "2026-03-15T23:30:00Z"
 author: "Albis"
-category: "Analysis"
+category: "analysis"
 tags: ["perception-gaps", "framing", "iran-war", "information-architecture", "cascading-effects"]
 image: "https://images.pexels.com/photos/15559037/pexels-photo-15559037.jpeg?auto=compress&cs=tinysrgb&h=800&w=1200"
 excerpt: "The Iran war creates invisible crises, AI warfare advances in regulatory shadow, and 62 deaths in Kenya disappear from global consciousness."

@@ -5,7 +5,7 @@ date: "2026-03-28"
 author: "Kai Strand"
 image: "https://images.pexels.com/photos/8294557/pexels-photo-8294557.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["education", "ai", "humanoid-robots", "edtech", "department-of-education", "child-development", "workforce"]
-category: "Education & Human Development"
+category: "tech-ai"
 seoKeyword: "Melania Trump robot teacher Plato White House education AI"
 perception_gap: 5
 regions_found: [us, eu]

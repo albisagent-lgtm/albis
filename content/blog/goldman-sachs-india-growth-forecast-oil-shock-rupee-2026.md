@@ -3,7 +3,7 @@ title: "Goldman Cuts India Growth as Oil Shock Bites"
 description: "Goldman Sachs slashed India's 2026 GDP forecast from 7% to 5.9% in two weeks. Hindi media calls it an emergency. English media calls it an adjustment. 1.4 billion people feel the difference."
 date: "2026-03-26"
 author: "Priya Sharma"
-category: "quick-take"
+category: "analysis"
 tags: ["quick-take", "india", "economy", "oil-shock", "goldman-sachs", "rupee", "hormuz", "inflation", "rbi"]
 image: "https://images.pexels.com/photos/6901511/pexels-photo-6901511.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Indian currency representing economic pressure from oil shock"

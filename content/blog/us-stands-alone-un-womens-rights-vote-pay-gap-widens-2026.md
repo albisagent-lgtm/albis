@@ -3,7 +3,7 @@ title: "US Casts Sole Vote Against UN Women's Rights at CSW70"
 description: "CSW70 sees first-ever vote as US opposes women's rights conclusions, gender pay gap widens for second year, and Mexico and Romania pass landmark femicide laws in March 2026."
 date: "2026-03-29"
 author: "Harry Wenham"
-category: "womens-rights"
+category: "governance"
 tags: ["womens-rights", "gender-equality", "gender-pay-gap", "femicide", "reproductive-rights", "csw70"]
 image: "https://images.pexels.com/photos/8107553/pexels-photo-8107553.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "UN women's rights vote CSW70 2026"

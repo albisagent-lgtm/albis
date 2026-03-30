@@ -5,7 +5,7 @@ date: "2026-02-27"
 image: "https://images.pexels.com/photos/36652830/pexels-photo-36652830.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["explainer", "china", "japan", "trade-war", "semiconductors", "supply-chains"]
-category: "analysis"
+category: "governance"
 ---
 
 On Tuesday, China announced export restrictions on 40 Japanese companies. The official reason? Japan's "remilitarization." The real story? A lot more complicated—and it affects way more than just Japan.

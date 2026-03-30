@@ -5,7 +5,7 @@ date: "2026-02-25"
 image: "https://images.unsplash.com/photo-1585187012199-269f89f2238f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMHNwYWNlLWV4cGxvcmF0aW9uJTIwbmFzYXxlbnwwfDB8fHwxNzczMDUwNDkyfDA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["quick-take", "ai", "space-exploration", "nasa", "breakthrough"]
-category: "analysis"
+category: "tech-ai"
 ---
 
 NASA's Perseverance rover just drove 456 meters across Mars. That's not the interesting part—it's done that before.

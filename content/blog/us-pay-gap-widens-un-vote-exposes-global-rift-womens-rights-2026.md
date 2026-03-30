@@ -4,7 +4,7 @@ description: "US gender pay gap widens for second year as UN women's commission 
 date: "2026-03-28"
 author: "Harry Wenham"
 image: "https://images.pexels.com/photos/8553078/pexels-photo-8553078.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-category: "womens-rights"
+category: "governance"
 tags: ["womens-rights", "gender-equality", "gender-pay-gap", "femicide", "csw70"]
 seoKeyword: "gender pay gap widening 2026"
 faqs:

@@ -3,7 +3,7 @@ title: "Iran War AI Coverage: Which Deepfakes Get Reported?"
 description: "English media covered 110+ Iranian deepfakes while barely mentioning Israel's PRISONBREAK AI campaign. Arabic outlets reported both. The coverage of disinformation has become its own form of disinformation."
 pubDate: "2026-03-24"
 author: "Albis Geopolitics Desk"
-category: "information-warfare"
+category: "cyber-info-warfare"
 tags: ["information-warfare", "deepfakes", "AI", "Iran", "media-bias", "perception-gap", "PRISONBREAK", "IRGC"]
 image: "https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "AI deepfakes iran war both sides 2026"

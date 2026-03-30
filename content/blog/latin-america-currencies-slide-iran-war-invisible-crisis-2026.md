@@ -3,7 +3,7 @@ title: "Latin America Currency Slide: 5 Billion Can't See It"
 description: "Latin American currencies are falling as the Iran war pushes oil prices up and the Fed freezes rate cuts. Only two regions are watching. 5.2 billion people have no idea."
 pubDate: 2026-03-25
 author: "Harry Wenham"
-category: "unseen"
+category: "economic-flows"
 tags: ["unseen", "gai", "latin-america", "currencies", "iran-war", "oil-crisis", "emerging-markets", "fed", "inflation"]
 image: "https://images.pexels.com/photos/8183466/pexels-photo-8183466.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Currency exchange board showing declining rates"

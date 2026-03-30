@@ -3,7 +3,7 @@ title: "Gas Jumped 50%. Your Grocery Bill Is Next."
 description: "Oil grabs headlines. Natural gas quietly raises the cost of everything you buy. A 50% surge from Qatar's LNG disruption means your electricity bill, heating costs, and food prices are all about to move."
 publishedAt: 2026-03-05
 author: "Albis"
-category: Energy & Climate
+category: "climate-energy"
 image: "https://images.pexels.com/photos/7390887/pexels-photo-7390887.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["natural gas", "Qatar", "Iran conflict", "energy", "food prices", "fertiliser", "supply chain", "Europe"]
 sources:

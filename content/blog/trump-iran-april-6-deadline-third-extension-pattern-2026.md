@@ -3,7 +3,7 @@ title: "Trump's Iran Deadline Pattern: What April 6 Means"
 description: "Three deadline extensions in two weeks. Each time Trump extended the Hormuz ultimatum, military strikes followed within hours. Here's the pattern — and what it tells you about April 6."
 date: 2026-03-28
 author: "Harry Wenham"
-category: "Geopolitics"
+category: "geopolitics"
 tags: ["iran war 2026", "trump deadline", "hormuz strait", "april 6 deadline", "iran diplomacy", "oil crisis", "military strikes"]
 image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "trump iran april 6 deadline third extension"

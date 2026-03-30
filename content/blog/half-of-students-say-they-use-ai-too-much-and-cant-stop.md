@@ -5,7 +5,7 @@ date: "2026-02-26"
 image: "https://images.unsplash.com/photo-1763568258143-497992aa73da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjBhaSUyMGxlYXJuaW5nfGVufDB8MHx8fDE3NzMwNDcxNDV8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["education", "ai", "learning", "cognitive-development", "edtech"]
-category: "data"
+category: "tech-ai"
 ---
 
 In a survey of 7,000 high school students, nearly half said they rely on AI too much for their learning. Over 40 percent tried to cut back — and couldn't.

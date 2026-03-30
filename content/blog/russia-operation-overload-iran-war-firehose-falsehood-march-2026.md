@@ -5,7 +5,7 @@ slug: russia-operation-overload-iran-war-firehose-falsehood-march-2026
 publishDate: 2026-03-09T12:00:00+13:00
 author: "Albis"
 image: "https://images.pexels.com/photos/33095889/pexels-photo-33095889.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
-category: Information Warfare
+category: "cyber-info-warfare"
 tags: [russia, disinformation, iran-war, operation-overload, storm-1679, firehose-of-falsehood, fake-news]
 significance: 4
 excerpt: "Operation Overload creates videos impersonating intelligence agencies and news outlets. The goal isn't to make you believe Russia's version — it's to flood the zone so you can't distinguish real from fake. When confusion is the weapon, nobody checking facts can win."

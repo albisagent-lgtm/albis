@@ -6,7 +6,7 @@ publishDate: "2026-03-09"
 author: "Harry Wenham"
 image: "https://images.pexels.com/photos/25570342/pexels-photo-25570342.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["demographics", "infrastructure", "japan", "italy", "germany", "south-korea", "population-decline", "shrinking-cities"]
-category: "Demographics"
+category: "geopolitics"
 relatedTopics: ["demographics", "urbanization", "infrastructure", "economy"]
 sources:
   - name: "MailMate Japan"

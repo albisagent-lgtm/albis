@@ -5,7 +5,7 @@ date: "2026-02-26"
 image: "https://images.pexels.com/photos/3665444/pexels-photo-3665444.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["breaking", "quantum-computing", "technology", "silicon", "innovation"]
-category: "breaking"
+category: "current-events"
 ---
 
 99% doesn't sound revolutionary until you realize it's the difference between a science experiment and a product you can actually build.

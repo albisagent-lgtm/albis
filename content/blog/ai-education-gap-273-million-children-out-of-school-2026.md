@@ -5,7 +5,7 @@ date: "2026-03-29"
 author: "Priya Sharma"
 image: "https://images.pexels.com/photos/5212695/pexels-photo-5212695.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["education", "ai", "digital-divide", "unesco", "edtech", "global-education", "skills-gap"]
-category: "Education & Human Development"
+category: "tech-ai"
 seoKeyword: "AI education gap digital divide 273 million children out of school"
 faqs:
   - q: "How many children are out of school globally in 2026?"

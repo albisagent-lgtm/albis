@@ -6,7 +6,7 @@ slug: geobarta-vs-albis-comparison-2026
 date: 2026-03-24
 author: "Albis"
 tags: [comparison, seo, geobarta, ai-news, media-literacy]
-category: guides
+category: "explainer"
 featured: false
 perception_gap: 8
 regions_found: [us, eu, middle_east, asia_pacific, south_asia]

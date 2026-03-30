@@ -4,7 +4,7 @@ description: "One Iranian strike on Ras Laffan knocked out LNG exports, 30% of g
 date: "2026-03-29"
 author: "Priya Sharma"
 tags: ["helium", "qatar", "MRI", "semiconductor", "chip-shortage", "iran-war", "supply-chain", "healthcare", "LNG", "cascade"]
-category: "economic"
+category: "economic-flows"
 regions: ["middle_east", "asia_pacific", "europe", "north_america"]
 image: "https://images.pexels.com/photos/7089017/pexels-photo-7089017.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Qatar helium crisis MRI chips LNG 2026"

@@ -4,7 +4,7 @@ description: "A news headline doesn't just summarize a story. It tells your brai
 date: "2026-03-04"
 image: "https://images.pexels.com/photos/6236039/pexels-photo-6236039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
-category: "Information Awareness"
+category: "analysis"
 tags: ["information awareness", "media literacy", "psychology", "headlines", "framing"]
 featured: true
 faqs:

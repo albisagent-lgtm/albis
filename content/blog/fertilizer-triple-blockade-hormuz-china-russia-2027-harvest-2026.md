@@ -3,7 +3,7 @@ title: "Three Fertilizer Blockades Hit at Once, 2027 Harvest at Risk"
 description: "Hormuz is closed. China froze phosphate exports. Russia suspended ammonium nitrate. Spring planting can't wait — and the damage to next year's harvests is being locked in this week."
 date: 2026-03-29
 author: "Harry Wenham"
-category: "Food & Agriculture"
+category: "economic-flows"
 tags: ["explainer", "food-security", "fertilizer", "hormuz", "china", "russia", "spring-planting", "urea", "nitrogen", "iran-war", "agriculture", "2027-harvest"]
 image: "https://images.pexels.com/photos/11679734/pexels-photo-11679734.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "fertilizer shortage spring planting 2026 food crisis"

@@ -5,7 +5,7 @@ date: "2026-02-27"
 image: "https://images.unsplash.com/photo-1614064642578-7faacdc6336e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5JTIwQUklMjBqYWlsYnJlYWt8ZW58MHwwfHx8MTc3MzA0Njg0N3ww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["cybersecurity", "AI", "breaking", "jailbreak", "government", "data-breach"]
-category: "breaking"
+category: "current-events"
 ---
 
 It wasn't a team of hackers. It wasn't years of planning. It wasn't even a particularly sophisticated virus.

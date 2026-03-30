@@ -3,7 +3,7 @@ title: "Trump Iran Ultimatum: Six Regions, Six Stories"
 description: "Trump threatened to bomb Iran's power plants. Iran promised to seal Hormuz forever. The same 48-hour deadline became an oil crisis, a food catastrophe, a geopolitical windfall, and a desperate bluff — depending on where you read about it."
 pubDate: 2026-03-23
 author: "Albis"
-category: "divided"
+category: "governance"
 tags: ["divided", "pgi", "iran-war", "hormuz", "trump", "ultimatum", "energy", "food-security"]
 image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Industrial power plant at dusk representing energy infrastructure under threat"

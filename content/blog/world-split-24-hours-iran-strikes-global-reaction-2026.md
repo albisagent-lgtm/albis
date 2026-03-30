@@ -5,7 +5,7 @@ date: "2026-03-01"
 image: "https://images.pexels.com/photos/6950205/pexels-photo-6950205.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["trending", "iran", "geopolitics", "global-reaction", "perspectives", "information-awareness"]
-category: "perspectives"
+category: "analysis"
 ---
 
 Within 24 hours of the first bombs falling on Tehran, at least 40 governments issued statements. They described two completely different events.

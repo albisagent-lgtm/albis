@@ -3,7 +3,7 @@ title: "Lebanon's 1.2 Million Displaced in 27 Days"
 description: "1,189 killed, 1.2 million displaced in 27 days. Arabic outlets call it aggression, French media compares it to 1982, US coverage frames it as a security operation. Three framings, one million people."
 pubDate: 2026-03-29
 author: "Nadia Halabi"
-category: "divided"
+category: "analysis"
 tags: ["divided", "pgi", "lebanon", "displacement", "israel", "humanitarian-crisis", "perception-gap", "iran-war"]
 regions: ["us", "eu", "middle_east", "south_asia"]
 image: "https://images.pexels.com/photos/7089245/pexels-photo-7089245.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"

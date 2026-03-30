@@ -3,7 +3,7 @@ title: "UN Passed Two Opposite Iran Resolutions in One Day"
 description: "The UN Human Rights Council condemned Iran's attacks on Gulf states — then Iran called its own session over a bombed girls' school. Same building, opposite verdicts, and neither side's media covered both."
 date: 2026-03-26
 author: "Rajan Mehta"
-category: "divided"
+category: "analysis"
 tags: ["divided", "pgi", "iran", "united-nations", "gulf-states", "human-rights", "perception-gap", "hormuz"]
 image: "https://images.pexels.com/photos/36290473/pexels-photo-36290473.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "United Nations building representing diplomatic tensions and competing resolutions"

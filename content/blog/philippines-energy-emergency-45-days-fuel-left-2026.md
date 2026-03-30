@@ -3,7 +3,7 @@ title: "Philippines Energy Emergency: 45 Days of Fuel Left"
 description: "The Philippines declared a national energy emergency, accepted its first Russian oil in five years, and put civil servants on a four-day week. 4.3 billion people have no idea. GAI score: 6.44."
 pubDate: 2026-03-26
 author: "Priya Sharma"
-category: "energy-power"
+category: "climate-energy"
 tags: ["unseen", "gai", "philippines", "energy-emergency", "fuel-rationing", "hormuz", "iran-war", "jeepney-strike", "russian-oil"]
 image: "https://images.pexels.com/photos/36044446/pexels-photo-36044446.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Philippines energy emergency fuel crisis"

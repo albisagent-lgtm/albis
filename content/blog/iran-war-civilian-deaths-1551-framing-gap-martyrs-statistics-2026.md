@@ -5,7 +5,7 @@ pubDate: 2026-03-29
 author: James Chen
 image: https://images.pexels.com/photos/30931767/pexels-photo-30931767.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 tags: ["divided", "pgi", "iran-war", "civilian-casualties", "framing", "perception-gap"]
-category: crisis-analysis
+category: "conflict"
 seoKeyword: "Iran war civilian deaths framing"
 perception_gap: 7.15
 regions_found: [us, eu, middle_east, south_asia]

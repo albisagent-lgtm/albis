@@ -3,7 +3,7 @@ title: "Russia Fertilizer Ban Hits During Hormuz Blockade"
 description: "Russia halted ammonium nitrate exports on March 21 — the same week Hormuz cut off 33% of global fertilizer supply. Two blockades, one planting season, and the 2027 harvest is already compromised."
 date: 2026-03-28
 author: "Harry Wenham"
-category: "Food & Agriculture"
+category: "economic-flows"
 tags: ["explainer", "food-security", "fertilizer", "russia", "hormuz", "agriculture", "iran-war", "planting-season"]
 image: "https://images.pexels.com/photos/11996941/pexels-photo-11996941.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "russia fertilizer export ban hormuz global food crisis 2026"

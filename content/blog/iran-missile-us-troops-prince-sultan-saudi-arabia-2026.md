@@ -5,7 +5,7 @@ date: 2026-03-28
 author: "Kai Strand"
 tags: ["quick-take", "iran-war", "us-casualties", "prince-sultan", "saudi-arabia", "escalation", "pgi"]
 image: "https://images.pexels.com/photos/32898966/pexels-photo-32898966.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-category: "quick-take"
+category: "analysis"
 seoKeyword: "Iran missile attack US troops Prince Sultan Air Base Saudi Arabia"
 confidence: "confirmed"
 perception_gap: 9

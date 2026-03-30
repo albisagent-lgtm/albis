@@ -3,7 +3,7 @@ title: "Cuba's Grid Collapsed Again. 10 Million in the Dark."
 description: "Cuba's power grid collapsed for the third time in March 2026. No oil since January, 89% in extreme poverty, and protests spreading. Here's what Spanish media is reporting that English outlets aren't."
 date: "2026-03-23"
 author: "Elena Vargas"
-category: "Quick Take"
+category: "analysis"
 tags: ["quick-take", "cuba", "blackout", "energy-crisis", "hormuz", "latin-america", "protests"]
 seoKeyword: "cuba blackout protests energy crisis 2026"
 image: "https://images.pexels.com/photos/5650593/pexels-photo-5650593.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

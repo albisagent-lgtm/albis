@@ -3,7 +3,7 @@ title: "China's Chip Surge: Threat or Triumph?"
 description: "China will make 42% of the world's mature chips by 2028. Washington calls it a threat. Beijing calls it a victory born from US pressure. The same data tells two opposite stories about who's winning the AI race."
 date: "2026-03-27"
 author: "Kai Strand"
-category: "divided"
+category: "tech-ai"
 tags: ["divided", "pgi", "ai-geopolitics", "semiconductors", "china", "export-controls", "self-sufficiency", "chip-war"]
 image: "https://images.pexels.com/photos/3665442/pexels-photo-3665442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "China chip production 42 percent export controls"

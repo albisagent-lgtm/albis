@@ -3,7 +3,7 @@ title: "China Locked Weapons Radar on a Philippine Ship"
 description: "A Chinese navy vessel pointed fire-control radar at a Philippine patrol ship near Sabina Shoal on March 7. The same week, leaked documents revealed China built an AI-powered database of 23 million Taiwanese citizen records to run propaganda campaigns. Two stories. One pattern."
 image: "https://images.pexels.com/photos/36674255/pexels-photo-36674255.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 date: "2026-03-21"
-category: "lens"
+category: "analysis"
 tags: ["Philippines", "China", "South China Sea", "Taiwan", "East Asia", "security", "media literacy"]
 author: "Albis"
 slug: "china-south-china-sea-philippines-radar-lock-taiwan-golaxy-cognitive-war-2026"

@@ -5,7 +5,7 @@ date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1656012615206-f44cc6e7142c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx0cmVuZGluZyUyMGR1YmFpJTIwdWFlfGVufDB8MHx8fDE3NzMwNDY4ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["trending", "dubai", "uae", "iran", "tourism", "economics", "brand", "middle-east", "geopolitics"]
-category: "perspectives"
+category: "analysis"
 ---
 
 The Fairmont Hotel on Palm Jumeirah was sold for $325 million in late 2025. Kuwait's Arzan Investment Management bought it as a bet on Dubai's unstoppable hospitality boom.

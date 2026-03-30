@@ -4,7 +4,7 @@ description: "Helium cuts, energy costs, and carbon penalties are squeezing Sout
 date: "2026-03-29"
 author: "Kai Strand"
 tags: ["unseen", "gai", "south-korea", "semiconductors", "helium", "energy", "iran-war", "supply-chain"]
-category: "economic"
+category: "economic-flows"
 regions: ["asia_pacific"]
 image: "https://images.pexels.com/photos/5118462/pexels-photo-5118462.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "South Korea chip factory crisis helium energy 2026"

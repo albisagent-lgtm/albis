@@ -5,7 +5,7 @@ date: 2026-03-29
 author: "Albis Geopolitics Desk"
 image: "https://images.pexels.com/photos/3665442/pexels-photo-3665442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["explainer", "ai", "semiconductors", "deepseek", "export-controls", "china", "us-china", "tech-geopolitics"]
-category: "AI & Technology"
+category: "tech-ai"
 regions: ["us", "asia-pacific"]
 seoKeyword: "deepseek chip smuggling export controls 2026"
 confidence: "confirmed"

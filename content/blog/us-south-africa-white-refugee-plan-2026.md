@@ -5,7 +5,7 @@ date: "2026-02-27"
 image: "https://images.unsplash.com/photo-1526583644846-cd206236cd7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbW1pZ3JhdGlvbiUyMHNvdXRoLWFmcmljYSUyMHJlZnVnZWVzfGVufDB8MHx8fDE3NzMwNTQxMjR8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["quick-take", "immigration", "south-africa", "refugees", "demographics", "policy"]
-category: "perspectives"
+category: "analysis"
 ---
 
 The United States government plans to admit 4,500 white South Africans monthly as refugees — 54,000 annually — according to documents revealed this week.

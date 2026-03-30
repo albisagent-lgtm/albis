@@ -5,7 +5,7 @@ date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1758626044744-463ce33546a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMGVjb25vbXklMjB0ZWNofGVufDB8MHx8fDE3NzMwNDUzMzh8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
 tags: ["quick-take", "ai", "economy", "tech", "semiconductors", "consumer-electronics"]
-category: "analysis"
+category: "tech-ai"
 ---
 
 AI feels free to use. The hardware bill is about to arrive — and regular consumers are paying it.

@@ -5,7 +5,7 @@ date: "2026-02-26"
 image: "https://images.pexels.com/photos/7521902/pexels-photo-7521902.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Harry Wenham"
 tags: ["ai-intelligence", "robotics", "autonomous-vehicles", "nvidia", "physical-ai"]
-category: "analysis"
+category: "tech-ai"
 ---
 
 Humanoid robots just inherited a decade of self-driving car research. The same AI stack that learned to navigate highways is now learning to walk factory floors, manipulate objects, and reason through tasks humans do every day.

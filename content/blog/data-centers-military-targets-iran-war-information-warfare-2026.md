@@ -3,7 +3,7 @@ title: "Data Centers Are Now Military Targets"
 description: "Iran struck AWS facilities in the Gulf. Israel hit Tehran banking servers. A civilian messaging app became a psyops weapon. Data infrastructure is the new frontline of warfare — and the perception gap between who calls it terrorism and who calls it strategy is enormous."
 date: 2026-03-26
 author: "Albis Tech & Media Desk"
-category: "information-warfare"
+category: "cyber-info-warfare"
 tags: [information-warfare, cyber-warfare, data-centers, iran-war, surveillance, disinformation, infrastructure]
 image: https://images.pexels.com/photos/5480781/pexels-photo-5480781.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "data centers military targets Iran war"

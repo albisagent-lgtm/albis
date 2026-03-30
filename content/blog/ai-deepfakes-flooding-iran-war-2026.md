@@ -4,7 +4,7 @@ description: "Over 110 AI deepfakes with pro-Iran messaging identified in two we
 date: "2026-03-23"
 image: "https://images.pexels.com/photos/7688592/pexels-photo-7688592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis Tech & Media Desk"
-category: "information-warfare"
+category: "cyber-info-warfare"
 tags: ["information-warfare", "deepfakes", "propaganda", "disinformation", "iran-war", "ai-generated-content", "censorship"]
 seoKeyword: "AI deepfakes Iran war disinformation"
 perception_gap: 7

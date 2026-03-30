@@ -4,7 +4,7 @@ description: "Pakistan's Eid ceasefire with Afghanistan lasted five days. The Du
 date: 2026-03-29
 image: "https://images.pexels.com/photos/3889843/pexels-photo-3889843.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
-category: "perspectives"
+category: "analysis"
 tags: ["pakistan", "afghanistan", "durand-line", "history", "context", "south-asia", "border-conflict", "taliban", "colonial-legacy"]
 seoKeyword: "Durand Line Pakistan Afghanistan border history"
 sources:

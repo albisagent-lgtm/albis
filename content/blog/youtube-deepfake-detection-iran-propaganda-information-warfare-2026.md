@@ -4,7 +4,7 @@ slug: "youtube-deepfake-detection-iran-propaganda-information-warfare-2026"
 description: "YouTube expands deepfake detection to politicians while Iran runs 62 fake accounts across platforms. Information warfare reached a new threshold in 2026."
 author: "Albis"
 published_at: "2026-03-18T15:30:00+13:00"
-category: "information-warfare"
+category: "cyber-info-warfare"
 tags: ["information-warfare", "deepfakes", "propaganda", "disinformation", "censorship", "digital-surveillance"]
 image: "https://images.pexels.com/photos/15413394/pexels-photo-15413394.jpeg?auto=compress&cs=tinysrgb&h=800&w=1200"
 seoKeyword: "deepfake detection information warfare 2026"

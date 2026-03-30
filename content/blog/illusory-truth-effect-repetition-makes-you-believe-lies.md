@@ -4,7 +4,7 @@ description: "You believed a lie this week — not because you're gullible, but 
 date: "2026-03-18"
 image: "https://images.pexels.com/photos/7269620/pexels-photo-7269620.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
-category: "Information Awareness"
+category: "analysis"
 tags: ["information awareness", "media literacy", "psychology", "cognitive bias", "misinformation"]
 featured: false
 seoKeyword: "illusory truth effect repetition belief"

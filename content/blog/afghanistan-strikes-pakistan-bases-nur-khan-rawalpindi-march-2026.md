@@ -4,7 +4,7 @@ description: "Afghan forces launched airstrikes on Nur Khan Airbase in Rawalpind
 date: "2026-03-02"
 author: "Albis"
 tags: ["Afghanistan", "Pakistan", "Nur Khan Airbase", "Rawalpindi", "Taliban", "border war", "South Asia"]
-category: "breaking"
+category: "current-events"
 image: "https://images.pexels.com/photos/7155383/pexels-photo-7155383.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:
   - name: "Dawn"

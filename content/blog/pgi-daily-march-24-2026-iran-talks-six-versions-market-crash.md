@@ -3,7 +3,7 @@ title: "PGI Daily: Six Countries, Six Versions of Iran Talks"
 description: "Today's PGI hit 5.14 but the top story scored 8.23 — the highest this week. The question wasn't how to interpret events. It was whether a negotiation happened at all. Oil swung 16% on the answer."
 date: "2026-03-25"
 author: "Harry Wenham"
-category: "PGI Breakdown"
+category: "perception-gap-index"
 tags: ["pgi-breakdown", "perception-gap", "iran-war", "iran-talks", "oil-prices", "media-framing", "cui-bono", "2026"]
 seoKeyword: "PGI perception gap index Iran talks market crash March 2026"
 image: "https://images.pexels.com/photos/6802046/pexels-photo-6802046.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

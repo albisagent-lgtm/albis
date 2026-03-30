@@ -3,7 +3,7 @@ title: "TSA Workers Unpaid for a Month. Airport Lines Hit 5 Hours."
 description: "The DHS shutdown left TSA agents working without paychecks. Now they're calling in sick, spring break is here, and the country is at war. The airport line is the story nobody's connecting."
 date: "2026-03-10T08:45:00+13:00"
 author: "Albis"
-category: "Analysis"
+category: "analysis"
 tags: ["government shutdown", "TSA", "airport security", "DHS", "spring break", "Iran war"]
 image: "https://images.pexels.com/photos/2574091/pexels-photo-2574091.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 draft: false

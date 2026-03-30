@@ -5,7 +5,7 @@ date: "2026-03-02"
 image: "https://images.pexels.com/photos/4989161/pexels-photo-4989161.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["health-longevity", "global-health", "pepfar", "hiv", "foreign-aid", "health-equity"]
-category: "analysis"
+category: "governance"
 faqs:
   - q: "What is PEPFAR and why is it being cut?"
     a: "PEPFAR is the US President's Emergency Plan for AIDS Relief, launched in 2003. It's the largest commitment by any nation to fight a single disease, saving 26 million lives across 50+ countries. It's being gutted not by direct legislation but as collateral damage from a blanket foreign aid freeze and proposed 42% budget cuts."

@@ -5,7 +5,7 @@ date: "2026-03-13"
 image: "https://images.pexels.com/photos/8294557/pexels-photo-8294557.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["ai-intelligence", "autonomous-weapons", "military", "ukraine", "regulation"]
-category: "analysis"
+category: "governance"
 sources:
   - name: "TIME Magazine"
     url: "https://time.com/article/2026/03/09/ai-robots-soldiers-war/"

@@ -5,7 +5,7 @@ date: "2026-02-22"
 author: "Albis"
 image: "https://images.pexels.com/photos/3944377/pexels-photo-3944377.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["media literacy", "framing", "global news", "perspective"]
-category: "perspectives"
+category: "analysis"
 ---
 
 ## One Event, Seven Stories

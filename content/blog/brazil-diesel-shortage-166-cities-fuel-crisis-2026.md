@@ -4,7 +4,7 @@ description: "A third of Rio Grande do Sul's cities report diesel shortages. Two
 date: 2026-03-27
 author: "Marco Chen"
 image: "https://images.pexels.com/photos/36228061/pexels-photo-36228061.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
-category: "quick-take"
+category: "analysis"
 tags: ["quick-take", "brazil", "diesel", "fuel crisis", "hormuz", "food security", "rio grande do sul", "petrobras"]
 regions: ["Latin America", "North America"]
 seoKeyword: "brazil diesel shortage 166 cities fuel crisis 2026"

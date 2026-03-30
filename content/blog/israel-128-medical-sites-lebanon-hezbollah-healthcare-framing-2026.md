@@ -13,7 +13,7 @@ tags:
   - iran-war
   - perception-gap
 series: "The Flip"
-category: "The Flip"
+category: "health"
 author: "Harry Wenham"
 perception_gap: 7
 regions_found: [us, eu, middle_east, south_asia]

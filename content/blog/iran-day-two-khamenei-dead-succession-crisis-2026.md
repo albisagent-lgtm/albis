@@ -5,7 +5,7 @@ date: "2026-03-01"
 image: "https://images.pexels.com/photos/935482/pexels-photo-935482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["trending", "iran", "geopolitics", "middle-east", "us-iran", "israel", "oil", "crisis"]
-category: "breaking"
+category: "current-events"
 faqs:
   - question: "What happened in the 2026 Iran war?"
     answer: "The 2026 Iran conflict began when US and Israeli forces launched Operation Epic Fury, killing Supreme Leader Ayatollah Ali Khamenei and striking Iran's nuclear facilities, missile arrays, and defense infrastructure across nine cities. Iran retaliated with hypersonic missiles targeting Tel Aviv, Haifa, and US bases in seven countries."

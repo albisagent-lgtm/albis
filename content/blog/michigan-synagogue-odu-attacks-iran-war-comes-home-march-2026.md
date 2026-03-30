@@ -2,7 +2,7 @@
 title: "Two Attacks, One Day: Iran's War Comes Home to America"
 description: "A Lebanese-American who lost family in an airstrike rammed a Michigan synagogue. An ISIS supporter shot up a Virginia ROTC class. Both on March 12. Here's what the world sees that Americans don't."
 date: 2026-03-14
-category: current_events
+category: "current-events"
 tags: [breaking, geopolitics, iran-war, terrorism, michigan, virginia, perception-gap]
 image: https://images.pexels.com/photos/20801238/pexels-photo-20801238.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200
 seoKeyword: "Michigan synagogue attack Iran war domestic terrorism 2026"

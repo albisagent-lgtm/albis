@@ -3,7 +3,7 @@ title: "Iran's Ceasefire Rejection: Five Versions of One 'No'"
 description: "Iran rejected Trump's 15-point ceasefire plan — but Farsi media published five counter-demands, Arabic media revealed secret mediators, and Chinese outlets focused on US contradictions. The same 'no' reads completely differently depending on where you live."
 date: "2026-03-26"
 author: "Lena Voss"
-category: "divided"
+category: "analysis"
 tags: ["divided", "pgi", "iran-war", "ceasefire", "diplomacy", "perception-gap", "peace-plan", "hormuz"]
 image: "https://images.pexels.com/photos/6950017/pexels-photo-6950017.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran rejects US ceasefire plan five demands"

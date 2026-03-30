@@ -3,7 +3,7 @@ title: "South Korea Breaks Sanctions, Buys Russian Naphtha 2026"
 description: "South Korea imported Russian naphtha for the first time since 2022, breaking its own sanctions to keep hospitals stocked with IV bags. Three factories already shut. Here's why."
 date: "2026-03-30"
 author: "Harry Wenham"
-category: "energy"
+category: "climate-energy"
 tags: ["breaking", "south-korea", "naphtha", "russia", "sanctions", "iran-war", "petrochemical", "energy-crisis", "hormuz"]
 image: "https://images.pexels.com/photos/10490664/pexels-photo-10490664.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 imageAlt: "South Korean industrial petrochemical facility facing naphtha supply crisis"

@@ -6,7 +6,7 @@ date: "2026-02-28"
 image: "https://images.pexels.com/photos/5380618/pexels-photo-5380618.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["breaking", "cybersecurity", "data-breach", "healthcare", "ransomware"]
-category: "breaking"
+category: "current-events"
 ---
 
 Twenty-five million Americans just learned their Social Security numbers, medical records, and health insurance details were stolen 16 months ago.

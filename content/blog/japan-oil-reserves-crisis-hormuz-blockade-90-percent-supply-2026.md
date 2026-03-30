@@ -4,7 +4,7 @@ description: "Japan released 80 million barrels from strategic reserves — its 
 date: "2026-03-22"
 author: "Albis"
 tags: ["unseen", "gai", "japan", "oil-crisis", "hormuz", "energy-security", "iran-war"]
-category: "economic"
+category: "economic-flows"
 regions: ["asia_pacific"]
 image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Japan oil reserves crisis Hormuz blockade 2026"

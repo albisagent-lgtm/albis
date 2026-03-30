@@ -3,7 +3,7 @@ title: "NYC Gracie Mansion Bombing: Everyone Saw Different"
 description: "ISIS-inspired teens threw bombs at a protest outside NYC's first Muslim mayor's home. The framing war that followed reveals more than the attack itself."
 date: "2026-03-10T08:30:00+13:00"
 author: "Albis"
-category: "Analysis"
+category: "analysis"
 tags: ["terrorism", "framing", "New York", "Mamdani", "ISIS", "anti-Islam", "perception gap"]
 image: "https://images.pexels.com/photos/4614141/pexels-photo-4614141.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 draft: false

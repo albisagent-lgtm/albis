@@ -4,7 +4,7 @@ description: "Fertilizer prices are up 30% and Russia just banned ammonium nitra
 date: "2026-03-29"
 author: "Kai Strand"
 tags: ["food-crisis", "fertilizer", "agriculture", "iran-war", "hormuz", "corn", "soybeans", "planting", "Russia", "supply-chain"]
-category: "economic"
+category: "economic-flows"
 regions: ["north_america", "international", "africa", "latin_america"]
 image: "https://images.pexels.com/photos/32706359/pexels-photo-32706359.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "US corn soybean acreage flip fertilizer 2026"

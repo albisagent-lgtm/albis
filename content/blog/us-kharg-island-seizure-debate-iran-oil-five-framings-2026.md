@@ -4,7 +4,7 @@ description: "The US is weighing plans to occupy Iran's Kharg Island — the 8-s
 pubDate: 2026-03-24
 author: "Tomás Reyes"
 image: "https://images.pexels.com/photos/17420870/pexels-photo-17420870.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
-category: "divided"
+category: "analysis"
 tags: ["divided", "pgi", "iran-war", "kharg-island", "energy", "hormuz", "military"]
 regions: ["us", "eu", "middle_east", "south_asia", "asia_pacific"]
 seoKeyword: "US Kharg Island seizure debate 2026"

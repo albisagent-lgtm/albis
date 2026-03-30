@@ -3,7 +3,7 @@ title: "Iran Threatened Gulf Water Supply. Media Covered Oil."
 description: "Iran's parliament speaker threatened to 'irreversibly destroy' Gulf desalination plants serving 100 million people. Gulf media called it existential. Western outlets buried it under oil prices."
 pubDate: 2026-03-23
 author: "Priya Shankar"
-category: "divided"
+category: "analysis"
 tags: ["divided", "pgi", "iran-war", "desalination", "water-security", "hormuz", "gulf", "perception-gap"]
 image: "https://images.pexels.com/photos/36471614/pexels-photo-36471614.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Desalination plant infrastructure in the Gulf region"

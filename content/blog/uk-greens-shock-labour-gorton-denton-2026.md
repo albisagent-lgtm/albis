@@ -5,7 +5,7 @@ date: "2026-02-27"
 image: "https://images.pexels.com/photos/6899153/pexels-photo-6899153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["breaking", "UK", "politics", "Labour", "Greens", "Starmer", "elections"]
-category: "breaking"
+category: "current-events"
 ---
 
 Labour didn't just lose Gorton and Denton. They came third.

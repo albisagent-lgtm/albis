@@ -5,7 +5,7 @@ date: "2026-03-09"
 author: "Albis"
 image: "https://images.unsplash.com/photo-1757916315213-b7254eea4f9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpbmZvcm1hdGlvbi13YXJmYXJlJTIwaXJhbiUyMHByb3BhZ2FuZGF8ZW58MHwwfHx8MTc3MzA1NDIwMnww&ixlib=rb-4.1.0&q=80&w=1080"
 tags: ["information-warfare", "iran", "propaganda", "disinformation", "cyber-warfare"]
-category: "information-warfare"
+category: "cyber-info-warfare"
 confidence: "confirmed"
 sources:
   - name: "NetBlocks"

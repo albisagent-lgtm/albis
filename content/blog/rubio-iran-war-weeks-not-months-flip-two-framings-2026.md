@@ -3,7 +3,7 @@ title: "Rubio Says Iran War Ends in Weeks: Two Versions"
 description: "On the same day Rubio told the G7 the war would end in 'weeks not months,' an Iranian missile wounded 12 US troops in Saudi Arabia. One side saw victory. The other saw proof it's just beginning."
 date: 2026-03-29
 author: "Albis"
-category: "The Flip"
+category: "analysis"
 tags: ["the-flip", "iran war 2026", "rubio g7", "weeks not months", "perception gap", "media framing", "prince sultan air base", "hormuz"]
 series: "The Flip"
 image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

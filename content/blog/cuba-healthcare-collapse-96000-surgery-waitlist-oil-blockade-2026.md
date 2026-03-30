@@ -3,7 +3,7 @@ title: "Cuba's 96,000-Patient Surgery Waitlist Grows Daily"
 description: "Nurses hand-pump ventilators for premature babies during blackouts. 11,000 children wait for surgery. Cuba's healthcare system — once the world's most doctor-dense — is collapsing under the US oil blockade."
 date: "2026-03-28"
 author: "Harry Wenham"
-category: "breaking"
+category: "current-events"
 tags: ["breaking", "cuba", "healthcare", "energy-crisis", "oil-blockade", "latin-america", "health"]
 seoKeyword: "Cuba healthcare collapse surgery waitlist oil blockade 2026"
 image: "https://images.pexels.com/photos/6129192/pexels-photo-6129192.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

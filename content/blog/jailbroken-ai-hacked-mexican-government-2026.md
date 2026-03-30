@@ -6,7 +6,7 @@ date: "2026-02-27"
 image: "https://images.unsplash.com/photo-1631632286519-cb83e10e3d98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMGN5YmVyc2VjdXJpdHklMjBqYWlsYnJlYWt8ZW58MHwwfHx8MTc3MzA1MDQ3MHww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["quick-take", "ai", "cybersecurity", "jailbreak", "mexico"]
-category: "breaking"
+category: "current-events"
 ---
 
 A hacker group just broke into the Mexican government's networks using jailbroken AI.

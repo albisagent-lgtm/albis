@@ -3,7 +3,7 @@ title: "Killer Robots Already Deployed With No Global Rules"
 description: "Autonomous weapons that pick and kill targets without human input are already in the field. The UN has been talking about rules for 12 years—while the US and Russia block binding restrictions."
 pubDate: 2026-03-17
 author: "Harry Wenham"
-category: "military-ai"
+category: "tech-ai"
 tags: ["ai", "military", "autonomous-weapons", "ethics"]
 image: "https://images.pexels.com/photos/13226195/pexels-photo-13226195.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 faqs:

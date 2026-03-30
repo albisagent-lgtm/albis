@@ -5,7 +5,7 @@ date: "2026-02-28"
 image: "https://images.unsplash.com/photo-1724294907597-d70f0ff46aa1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjaGluYSUyMGNvYWwlMjByZW5ld2FibGVzfGVufDB8MHx8fDE3NzMwNDU0MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["explainer", "china", "coal", "renewables", "energy", "grid", "climate"]
-category: "analysis"
+category: "climate-energy"
 ---
 
 Every headline about China's energy follows the same script.

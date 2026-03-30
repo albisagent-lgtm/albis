@@ -5,7 +5,7 @@ date: "2026-03-29"
 author: "Harry Wenham"
 image: "https://images.pexels.com/photos/36236254/pexels-photo-36236254.jpeg?w=1200"
 tags: ["energy-food", "food-security", "fertilizer", "china", "india", "ev-batteries", "phosphate", "lfp", "hormuz", "iran-war"]
-category: "Food & Agriculture"
+category: "economic-flows"
 seoKeyword: "china phosphate fertilizer export ban EV battery food crisis 2026"
 faqs:
   - q: "Why is China banning phosphate fertilizer exports?"

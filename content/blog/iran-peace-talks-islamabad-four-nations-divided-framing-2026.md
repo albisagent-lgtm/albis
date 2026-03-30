@@ -3,7 +3,7 @@ title: "Iran Peace Talks in Islamabad: Four Versions"
 description: "Pakistan hosts Iran war peace talks with Saudi, Turkish, and Egyptian ministers. But each country sees these talks completely differently — one even wants the war to continue."
 pubDate: 2026-03-30
 author: "Harry Wenham"
-category: "divided"
+category: "analysis"
 tags: ["divided", "pgi", "iran-war", "peace-talks", "pakistan", "diplomacy", "saudi-arabia", "turkey", "egypt"]
 image: "https://images.pexels.com/photos/15965251/pexels-photo-15965251.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "Iran peace talks Islamabad 2026"

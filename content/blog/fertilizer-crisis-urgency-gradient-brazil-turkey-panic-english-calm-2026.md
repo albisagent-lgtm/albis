@@ -3,7 +3,7 @@ title: "Urea Up 89% in Brazil, 50% in Turkey — English Media Calls It a Market
 description: "The same fertilizer crisis reads as panic in Sao Paulo, emergency in Ankara, strategic alarm in Beijing, and a commodity update in New York. The urgency gradient reveals who's watching food security collapse and who isn't."
 date: 2026-03-29
 author: "Harry Wenham"
-category: "Food & Agriculture"
+category: "economic-flows"
 tags: ["divided", "food-security", "fertilizer", "brazil", "turkey", "perception-gap", "hormuz", "iran-war", "spring-planting", "urea"]
 image: "https://images.pexels.com/photos/32890865/pexels-photo-32890865.jpeg?w=1200"
 seoKeyword: "fertilizer crisis 2026 urea prices food security hormuz blockade"

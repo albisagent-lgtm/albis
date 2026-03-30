@@ -4,7 +4,7 @@ description: "Australia went first. France, Norway, India, and a dozen US states
 author: "Albis"
 date: "2026-03-07"
 published: true
-category: "Tech & Society"
+category: "tech-ai"
 tags: ["social media", "children", "Australia", "regulation", "mental health", "India", "France", "China"]
 image: "https://images.pexels.com/photos/35968132/pexels-photo-35968132.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 slug: "world-banning-kids-social-media-nobody-agrees-how-2026"

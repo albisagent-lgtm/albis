@@ -3,7 +3,7 @@ title: "Iran's Wartime Leadership Is Broken. No One's Left"
 description: "Israel killed Ali Larijani, Iran's de facto wartime leader, and Basij commander Gholamreza Soleimani on the same day. With Khamenei dead, Mojtaba missing, and the IRGC the only remaining power centre, Iran may have no one with authority to accept peace terms."
 date: 2026-03-18
 author: "Albis"
-category: crisis-analysis
+category: "conflict"
 tags: ["iran", "israel", "larijani", "war", "leadership", "pakistan", "afghanistan", "hormuz"]
 image: "https://images.pexels.com/photos/15558839/pexels-photo-15558839.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran leadership killed Larijani who is running Iran 2026"

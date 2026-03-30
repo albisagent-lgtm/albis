@@ -5,7 +5,7 @@ date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1711212722279-56892b9ddfcf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwaXNyYWVsJTIwbWlkZGxlLWVhc3R8ZW58MHwwfHx8MTc3MzA1MDQ0M3ww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["breaking", "iran", "israel", "middle-east", "escalation", "civilians"]
-category: "breaking"
+category: "current-events"
 faqs:
   - question: "What type of missiles did Iran use against Tel Aviv?"
     answer: "Iran used hypersonic ballistic missiles in the Saturday night strike on Tel Aviv, marking the first time these advanced weapons were deployed against Israeli civilian areas. The missiles broke through Israel's Iron Dome defense system."

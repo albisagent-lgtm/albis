@@ -3,7 +3,7 @@ title: "Israel Kills 3 Journalists, 9 Paramedics in Lebanon"
 description: "Four missiles hit a marked press car in Jezzine. Nine paramedics died in five separate strikes the same day. One side says war crime. The other says legitimate target. The framing gap is the widest of 2026."
 date: 2026-03-29T01:50:00.000Z
 author: "James Chen"
-category: "divided"
+category: "analysis"
 image: "https://images.pexels.com/photos/7618399/pexels-photo-7618399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["divided", "pgi", "lebanon", "press-freedom", "health-workers", "information-framing", "war-crimes"]
 seoKeyword: "Israel kills journalists Lebanon press car 2026"

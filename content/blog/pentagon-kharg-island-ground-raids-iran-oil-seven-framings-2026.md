@@ -3,7 +3,7 @@ title: "Pentagon Kharg Island Ground Raid Plans Leaked 2026"
 description: "The Washington Post reported Pentagon ground raid plans for Iran's Kharg Island oil hub. Seven regions read the same leak and saw seven different wars."
 pubDate: 2026-03-30
 author: "Lena Castillo"
-category: "divided"
+category: "analysis"
 image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 tags: ["divided", "pgi", "iran-war", "kharg-island", "ground-invasion", "hormuz", "energy-crisis", "pentagon"]
 seoKeyword: "Pentagon Kharg Island ground raids Iran"

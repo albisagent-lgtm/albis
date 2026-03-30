@@ -5,7 +5,7 @@ date: "2026-03-01"
 image: "https://images.unsplash.com/photo-1711212722279-56892b9ddfcf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxpcmFuJTIwaXNyYWVsJTIwbWlkZGxlLWVhc3R8ZW58MHwwfHx8MTc3MzA1MDQ0M3ww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["breaking", "iran", "israel", "middle-east", "military", "us-foreign-policy"]
-category: "breaking"
+category: "current-events"
 ---
 
 The missiles started flying back ten minutes after the first wave hit.

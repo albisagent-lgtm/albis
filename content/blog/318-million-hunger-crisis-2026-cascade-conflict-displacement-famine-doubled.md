@@ -3,7 +3,7 @@ title: "318 Million Facing Starvation: How the Cascade Built"
 description: "Hunger doubled since 2019. Not because of one cause—because of six. Each link in the chain makes the next one worse. Two famines running simultaneously for the first time this century."
 publishedAt: "2026-03-10"
 author: "Harry Wenham"
-category: "Food & Agriculture"
+category: "economic-flows"
 region: "Global"
 tags: ["WFP", "famine", "hunger crisis", "Sudan", "Gaza", "Yemen", "Mali", "displacement", "conflict", "climate", "food security"]
 image: "https://images.pexels.com/photos/6646909/pexels-photo-6646909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

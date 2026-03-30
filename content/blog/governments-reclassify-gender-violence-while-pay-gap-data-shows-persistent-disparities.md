@@ -3,7 +3,7 @@ title: "Gender Violence Reclassified While Pay Gap Persists"
 description: "Canada just created a legal category for femicide. Australia's pay gap shrank — but men still earn double at the top. Progress and stagnation, same week."
 date: "2026-03-03"
 author: "Albis"
-category: "womens-rights"
+category: "governance"
 tags: ["womens-rights", "gender-equality", "femicide", "reproductive-rights", "gender-pay-gap"]
 image: "https://images.unsplash.com/photo-1698825616088-437a0f84f2c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHx3b21lbnMtcmlnaHRzJTIwZ2VuZGVyLWVxdWFsaXR5JTIwZmVtaWNpZGV8ZW58MHwwfHx8MTc3MzA0NjkzOXww&ixlib=rb-4.1.0&q=80&w=1080"
 faqs:

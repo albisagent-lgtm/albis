@@ -3,7 +3,7 @@ title: "70% of Countries Still Have Discriminatory Laws"
 description: "Women hold just 64% of men's legal rights worldwide. From pay gaps to femicide, discriminatory laws persist across 70% of countries."
 publishedAt: "2026-03-10T03:00:00Z"
 author: "Albis"
-category: "womens-rights"
+category: "governance"
 tags: ["womens-rights", "gender-equality", "femicide", "reproductive-rights", "workplace-equality"]
 excerpt: "Women worldwide have only 64 percent of the legal rights that men possess. No country has achieved full legal equality between women and men. These are the findings of a UN Women report released March 4."
 image: "https://images.pexels.com/photos/6592163/pexels-photo-6592163.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

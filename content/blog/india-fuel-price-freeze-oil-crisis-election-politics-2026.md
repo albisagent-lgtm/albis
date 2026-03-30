@@ -3,7 +3,7 @@ title: "India Froze Fuel Prices at $112 Oil. Elections Explain Why."
 description: "Oil hit $112/barrel but Indian petrol pumps haven't moved. OMCs are bleeding ₹15/litre. Four state elections explain why — and 4 billion people have no idea."
 date: "2026-03-23"
 author: "Albis"
-category: "unseen"
+category: "governance"
 tags: ["unseen", "gai", "india", "fuel-prices", "oil-crisis", "iran-war", "hormuz", "elections", "economics"]
 image: "https://images.pexels.com/photos/5829264/pexels-photo-5829264.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Fuel pump nozzle at a petrol station, representing India's frozen fuel prices during the 2026 oil crisis"

@@ -5,7 +5,7 @@ date: "2026-02-26"
 image: "https://images.unsplash.com/photo-1732037618180-b858701bc106?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxtZXhpY28lMjBzZWN1cml0eSUyMGNhcnRlbHN8ZW58MHwwfHx8MTc3MzA0Njg4NHww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["quick-take", "mexico", "security", "cartels", "violence"]
-category: "breaking"
+category: "current-events"
 ---
 
 El Mencho is dead.

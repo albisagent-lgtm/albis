@@ -3,7 +3,7 @@ title: "Four Frontier AI Models Launched in One Month"
 description: "Gemini 3.1 Pro, Claude Opus 4.6, GPT-5.3, and GPT-5.4 all dropped in March. When frontier AI becomes a commodity, the competition shifts from who can build it to who can govern it."
 date: 2026-03-18
 author: "Albis"
-category: "AI & Intelligence"
+category: "tech-ai"
 tags: ["ai", "frontier-models", "regulation", "competition", "eu-ai-act"]
 image: "https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "AI model race 2026 GPT Gemini Claude comparison"
