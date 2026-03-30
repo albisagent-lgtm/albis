@@ -298,6 +298,26 @@ export default async function Home() {
         </div>
       </header>
 
+      {/* ─── HERO CAPTURE ─── */}
+      <section className="border-b border-black/[0.06] bg-[#0f0f0f] dark:border-white/[0.06]">
+        <div className="mx-auto max-w-3xl px-4 py-6 text-center md:py-8">
+          <h1 className="font-[family-name:var(--font-playfair)] text-lg font-bold leading-snug text-[#f0efec] md:text-xl">
+            The world&apos;s news in 2&nbsp;minutes
+          </h1>
+          <p className="mt-1.5 text-xs text-white/40 md:text-sm">
+            60 countries · 7 regions · 16 languages · scanned three times daily
+          </p>
+          <div className="mx-auto mt-4 max-w-md">
+            <EmailCapture
+              variant="default"
+              showSocialProof={true}
+              showYesterdayLink={false}
+              source="homepage-hero"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* ─── LEAD STORY + SIDEBAR ─── */}
       <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
         <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
