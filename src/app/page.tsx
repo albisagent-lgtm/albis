@@ -518,7 +518,7 @@ export default async function Home() {
       {recentArticles.length > 0 && (
         <section className="border-t border-black/[0.08] bg-[#f8f7f4] dark:border-white/[0.08] dark:bg-[#0f0f0f]">
           <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
-            <SectionHeader title="Latest analysis" link="/lens" linkLabel="View all →" />
+            <SectionHeader title="Latest analysis" link="/analysis" linkLabel="All articles →" />
             <div className="grid gap-x-8 gap-y-0 sm:grid-cols-2 lg:grid-cols-4">
               {recentArticles.map((post) => (
                 <Link
