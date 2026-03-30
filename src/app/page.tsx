@@ -12,7 +12,7 @@ import {
 import { EmailCapture } from "./components/email-capture";
 import { getPostUrl } from "@/lib/blog";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300; // re-fetch scan data every 5 minutes
 
 /* ─── Region display helpers ─── */
 const REGION_SHORT: Record<string, string> = {

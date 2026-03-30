@@ -146,7 +146,10 @@ function extractScanMeta(md: string): string | null {
 // ---------------------------------------------------------------------------
 
 async function getSupabaseScan(date: string, scanTime?: string): Promise<ParsedScan | null> {
-  if (!supabase) return null;
+  if (!supabase) {
+    console.warn('[scan-parser] No Supabase client available');
+    return null;
+  }
 
   try {
     let query = supabase
@@ -161,18 +164,28 @@ async function getSupabaseScan(date: string, scanTime?: string): Promise<ParsedS
     const { data, error } = await query.order('scan_time', { ascending: false });
 
     if (error) {
-      console.error('Supabase query error:', error);
+      console.error('[scan-parser] Supabase query error:', error);
       return null;
     }
 
-    if (!data || data.length === 0) return null;
+    if (!data || data.length === 0) {
+      console.log(`[scan-parser] No scan rows found for date=${date}`);
+      return null;
+    }
+
+    console.log(`[scan-parser] Found ${data.length} scan row(s) for date=${date}`);
 
     // Use the latest scan's metadata but combine items from all scans for the day
     const latest = data[0];
     const allItems: any[] = [];
     for (const scan of data) {
-      if (scan.items && Array.isArray(scan.items)) {
-        for (const item of scan.items) {
+      // Handle items stored as JSON string or as native array
+      let items = scan.items;
+      if (typeof items === 'string') {
+        try { items = JSON.parse(items); } catch { items = null; }
+      }
+      if (items && Array.isArray(items)) {
+        for (const item of items) {
           if (item && item.headline && item.category) {
             allItems.push({
               headline: item.headline,
@@ -190,8 +203,15 @@ async function getSupabaseScan(date: string, scanTime?: string): Promise<ParsedS
             });
           }
         }
+      } else {
+        console.warn(`[scan-parser] Scan row id=${scan.id} has no parseable items (type=${typeof scan.items})`);
       }
     }
+
+    console.log(`[scan-parser] Parsed ${allItems.length} items for date=${date}`);
+
+    // If scan rows exist but have no items, return null so caller can try fallback dates
+    if (allItems.length === 0) return null;
 
     // Extract framing note from framing_watch jsonb
     const framingWatch = latest.framing_watch;
@@ -199,7 +219,7 @@ async function getSupabaseScan(date: string, scanTime?: string): Promise<ParsedS
 
     // Combine raw markdown from all scans
     const rawMarkdown = data.map((s: any) => s.raw_markdown || '').filter(Boolean).join('\n\n---\n\n');
-    
+
     return {
       date: latest.scan_date,
       displayDate: formatDisplayDate(latest.scan_date),
@@ -216,7 +236,7 @@ async function getSupabaseScan(date: string, scanTime?: string): Promise<ParsedS
       framingWatchRaw: framingNote,
     };
   } catch (error) {
-    console.error('Error fetching scan from Supabase:', error);
+    console.error('[scan-parser] Error fetching scan from Supabase:', error);
     return null;
   }
 }
@@ -334,12 +354,23 @@ export async function getTodayScan(): Promise<ParsedScan | null> {
   const now = new Date();
   const nzDate = new Date(now.getTime() + 13 * 60 * 60 * 1000);
   const today = nzDate.toISOString().split("T")[0];
-  
+
   // Try Supabase first if we're on Vercel or local files don't exist
   if (supabase && (isVercel || !isLocal)) {
-    return await getSupabaseScan(today);
+    // Try today and the last 2 days as fallback (timezone mismatches, empty items)
+    for (let daysBack = 0; daysBack < 3; daysBack++) {
+      const d = new Date(nzDate);
+      d.setDate(d.getDate() - daysBack);
+      const dateStr = d.toISOString().split("T")[0];
+      console.log(`[scan-parser] getTodayScan trying date=${dateStr} (daysBack=${daysBack})`);
+      const scan = await getSupabaseScan(dateStr);
+      if (scan && scan.items.length > 0) return scan;
+    }
+    // Last resort: get the most recent scan from any date
+    console.log('[scan-parser] getTodayScan falling back to getLatestScan');
+    return await getLatestScan();
   }
-  
+
   // Fallback to local filesystem
   if (isLocal) {
     const filePath = path.join(SCANS_DIR, `${today}.md`);
