@@ -211,6 +211,7 @@ function StoryLink({
 export default async function Home() {
   const scan = await getTodayScan();
   const allPosts = getAllPosts();
+  const latestPosts = allPosts.slice(0, 12);
   const findArticleSlug = buildSlugMatcher(allPosts);
 
   const allItems = scan?.items
@@ -322,13 +323,29 @@ export default async function Home() {
       <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
         <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
           {allItems.length === 0 ? (
-            <div className="py-20 text-center">
-              <p className="font-[family-name:var(--font-playfair)] text-lg italic text-zinc-400">
-                Today&apos;s scan is loading...
-              </p>
-              <p className="mt-2 text-sm text-zinc-300">
-                Check back shortly — scans run at 7am, 1pm, and 7pm NZST.
-              </p>
+            /* ─── FALLBACK: show latest articles when no scan data ─── */
+            <div>
+              <SectionHeader title="Latest stories" link="/analysis" linkLabel="All articles →" />
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {latestPosts.slice(0, 9).map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={getPostUrl(post)}
+                    className="group block border-b border-black/[0.06] pb-5 dark:border-white/[0.06]"
+                  >
+                    <span className="font-[family-name:var(--font-inter)] text-[9px] font-semibold uppercase tracking-wider text-[#c8922a]">
+                      {CATEGORY_META[post.category]?.label || post.category}
+                    </span>
+                    <h3 className="mt-1 font-[family-name:var(--font-playfair)] text-base font-bold leading-snug text-[#1a1a1a] group-hover:text-[#c8922a] transition-colors dark:text-[#f0efec]">
+                      {post.title}
+                    </h3>
+                    <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                      {post.description}
+                    </p>
+                    <time className="mt-2 block text-[11px] text-zinc-400">{post.date}</time>
+                  </Link>
+                ))}
+              </div>
             </div>
           ) : (
             <div className="grid gap-0 lg:grid-cols-12">
