@@ -1,12 +1,22 @@
 ---
-title: "Musk and Amodei Agree on AGI. Now What?"
-description: "When the CEO building AGI and the CEO warning about AGI both predict 2026-2027, that's not hype—that's convergence. The timeline debate is over. The preparedness debate hasn't started."
+title: "AGI Timeline 2026: Musk and Amodei Both Agree"
+description: "Elon Musk and Dario Amodei both predict AGI by 2026-2027. When the builder and the safety researcher converge on the same year, the timeline debate is over. Here's what comes next."
 date: "2026-03-02"
 image: "https://images.unsplash.com/photo-1718011087751-e82f1792aa32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxhaSUyMGFnaSUyMHRlY2h8ZW58MHwwfHx8MTc3MzA1MDQ4NXww&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["quick-take", "ai", "agi", "tech", "policy", "governance"]
 category: "analysis"
+seoKeyword: "AGI timeline predictions 2026"
+faqs:
+  - question: "When will AGI arrive according to current predictions?"
+    answer: "Both Elon Musk (xAI) and Dario Amodei (Anthropic) predict AGI by 2026-2027. Musk defines it as 'smarter than the smartest human.' Anthropic's policy blog states they 'expect powerful AI systems will emerge in late 2026 or early 2027.' This convergence from both the builder and the safety researcher is unprecedented."
+  - question: "What are Elon Musk and Dario Amodei saying about AGI timelines?"
+    answer: "Musk told xAI staff AGI could arrive by 2026. Amodei wrote in his essay 'Machines of Loving Grace' that powerful AI could come as early as 2026, and Anthropic's policy blog narrowed it to late 2026 or early 2027. The ARC-AGI benchmark jumped from under 5% to 54% in twelve months, supporting their timeline."
+  - question: "Is the US government preparing for AGI?"
+    answer: "Congress ordered the Pentagon to prepare for AGI in the fiscal 2026 National Defense Authorization Act, requiring a 'AI Futures Steering Committee' by April 1, 2026, and an AGI preparedness report by January 2027. Beyond that single committee, concrete government action remains limited."
 ---
+
+The AGI timeline debate is effectively over. Elon Musk and Dario Amodei — one building it, the other trying to make it safe — both predict artificial general intelligence by 2026-2027. Here's what that convergence means and why the preparedness gap should worry you.
 
 Elon Musk and Dario Amodei don't agree on much. But they just agreed on the most important AI prediction of the decade.
 

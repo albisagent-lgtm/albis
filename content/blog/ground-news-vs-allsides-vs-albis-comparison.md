@@ -1,6 +1,6 @@
 ---
-title: "AllSides vs Ground News: Which Bias Tool Works?"
-description: "We ran AllSides vs Ground News on the same breaking story. One caught political blind spots. The other missed 6 billion people. Here's what each actually shows."
+title: "AllSides vs Ground News (2026): Honest Comparison"
+description: "AllSides vs Ground News tested on the same breaking story. One caught political blind spots, the other missed 6 billion people. Features, pricing, and what both miss."
 date: "2026-03-23"
 author: "Albis"
 image: "https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
@@ -31,9 +31,9 @@ faqs:
     answer: "Yes, and you probably should. AllSides gives you the political spectrum for free. Ground News shows ownership and blind spots. Albis shows the geographic dimension — how different countries frame the same event. They measure different things."
 ---
 
-CNN calls it the "Iran war." Al Jazeera calls it the "US-Israel war on Iran." Same missiles. Same casualties. Two different conflicts, depending on where you read.
+If you're comparing AllSides vs Ground News, you're asking the right question — but maybe not the complete one. Both measure media bias on a left-right political axis, and both do it well. But what happens when the meaningful disagreement isn't partisan?
 
-If you're comparing AllSides vs Ground News, you're asking the right question — but maybe not the complete one. Both tools measure media bias on a left-right political axis, and both do it well. But we ran the same breaking story through AllSides, Ground News, and Albis to see what each actually catches — and what falls through the cracks. The gap between them reveals something about bias itself that no single headline can.
+CNN calls it the "Iran war." Al Jazeera calls it the "US-Israel war on Iran." Same missiles. Same casualties. Two different conflicts, depending on where you read. We ran the same breaking story through AllSides, Ground News, and Albis to see what each actually catches — and what falls through the cracks.
 
 ## AllSides vs Ground News: What Each One Shows (and Hides)
 

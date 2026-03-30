@@ -1,6 +1,6 @@
 ---
-title: "Anatoly Kolodkin Tanker Cuba: Full Timeline"
-description: "The Anatoly Kolodkin tanker reached Cuba with 730,000 barrels of Russian oil past US Coast Guard cutters. Full escort timeline and arrival updates."
+title: "Anatoly Kolodkin: Russian Tanker Cuba Arrival (Update)"
+description: "Anatoly Kolodkin tanker arrived in Cuba with 730,000 barrels of Russian oil, escorted past US Coast Guard cutters. Full timeline, latest status, and what it means."
 date: "2026-03-23"
 author: "James Chen"
 tags: ["quick-take", "cuba", "russia", "oil-blockade", "cold-war", "hormuz"]
@@ -50,9 +50,9 @@ faqs:
     answer: "Yes. The tanker is owned by Sovcomflot, Russia's state shipping company, which is under US sanctions. OFAC issued a new license explicitly banning Russian oil deliveries to Cuba. Two previous tankers were already intercepted or diverted before the Kolodkin's arrival."
 ---
 
-The Anatoly Kolodkin listed its destination as "Atlantis, USA." The tanker was headed to Cuba.
+The Anatoly Kolodkin listed its destination as "Atlantis, USA." The tanker was headed to Cuba. Here's the latest on the Anatoly Kolodkin tanker's arrival in Cuba, what happened with the US Coast Guard standoff, and why this story looks completely different depending on where you read it.
 
-The Anatoly Kolodkin tanker — a sanctioned Russian vessel carrying 730,000 barrels of crude oil — arrived in Cuba after sailing past two US Coast Guard cutters to reach the island. Owned by Russia's state shipping company Sovcomflot and escorted by a Russian Navy corvette through the English Channel, the Anatoly Kolodkin's arrival in Cuba marked the most direct US-Russia confrontation in the Western Hemisphere since the missile crisis. Ten million Cubans had just gone through their third nationwide blackout in three weeks.
+The Anatoly Kolodkin — a sanctioned Russian vessel carrying 730,000 barrels of crude oil — arrived in Cuba after sailing past two US Coast Guard cutters to reach the island. Owned by Russia's state shipping company Sovcomflot and escorted by a Russian Navy corvette through the English Channel, the Anatoly Kolodkin's arrival in Cuba marked the most direct US-Russia confrontation in the Western Hemisphere since the missile crisis. Ten million Cubans had just gone through their third nationwide blackout in three weeks.
 
 ## Anatoly Kolodkin tanker Cuba arrival: how it happened
 
