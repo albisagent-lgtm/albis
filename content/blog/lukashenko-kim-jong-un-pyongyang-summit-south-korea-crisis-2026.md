@@ -3,7 +3,7 @@ title: "Lukashenko Meets Kim While South Korea Rations Fuel"
 description: "Belarus's president is in Pyongyang for the first European head-of-state visit in years. South Korea started fuel rationing the same day. The coverage gap between these two stories tells you everything."
 date: "2026-03-25"
 author: "Daniel Pearson"
-category: "analysis"
+category: "energy"
 tags: ["North Korea", "South Korea", "Belarus", "Lukashenko", "Kim Jong Un", "East Asia", "security", "fuel-rationing", "iran-war", "THAAD", "perception-gap"]
 regions: ["Asia-Pacific", "Europe", "North America"]
 image: "https://images.pexels.com/photos/2833037/pexels-photo-2833037.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

@@ -5,7 +5,7 @@ date: "2026-02-27"
 image: "https://images.unsplash.com/photo-1653543362916-f7df09926982?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjbGVhbi1lbmVyZ3klMjBiYXR0ZXJpZXMlMjB3YXRlcnxlbnwwfDB8fHwxNzczMDU0MDUxfDA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
 tags: ["clean-energy", "batteries", "water", "desalination", "sodium-ion"]
-category: "analysis"
+category: "water"
 ---
 
 Here's something that almost never happens in science: researchers tried the lazy approach, and it worked better.

@@ -4,7 +4,7 @@ description: "Japan is panic-buying toilet paper again. The same fear — oil cu
 date: "2026-03-25"
 author: "Albis"
 tags: ["Japan", "oil crisis", "Hormuz", "history", "East Asia", "context", "1973", "Pearl Harbor", "energy security", "perception gap"]
-category: "analysis"
+category: "energy"
 image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Japan oil crisis history 1941 1973 2026"
 confidence: "confirmed"

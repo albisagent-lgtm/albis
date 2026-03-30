@@ -3,7 +3,7 @@ title: "PGI Daily: Hormuz Is Two Different Crises at Once"
 description: "Today's Perception Gap Index dropped to 5.01 — but the world's biggest divergence isn't about facts. It's about whether Hormuz is an energy story or a starvation story. The answer depends entirely on your country's supply chain."
 date: "2026-03-23"
 author: "Harry Wenham"
-category: "perception-gap-index"
+category: "energy"
 tags: ["pgi-breakdown", "perception-gap", "hormuz", "iran-war", "food-security", "oil-prices", "media-framing", "2026"]
 seoKeyword: "PGI perception gap index Hormuz food crisis oil crisis March 2026"
 image: "https://images.pexels.com/photos/1108117/pexels-photo-1108117.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

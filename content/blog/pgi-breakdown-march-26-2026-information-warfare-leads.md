@@ -3,7 +3,7 @@ title: "PGI 5.38: When One Post Moves Oil and $580M"
 description: "The Perception Gap Index hit a record 5.38 on March 25. For the first time, information warfare — not geopolitics — drove the widest gaps. Here's what that shift means for how the world sees the Iran war."
 date: "2026-03-26"
 author: "Lena Voss"
-category: "perception-gap-index"
+category: "energy"
 tags: ["pgi-breakdown", "PGI", "perception-gap-index", "information-warfare", "iran-war", "oil-markets", "daily-score"]
 image: /images/pgi-daily.webp
 seoKeyword: "perception gap index daily score explained"

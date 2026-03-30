@@ -3,7 +3,7 @@ title: "The US Hit Iran's Oil Lifeline. Why Not Destroy It?"
 description: "US forces struck military targets on Kharg Island, Iran's oil export hub handling 90% of exports. Trump's threat to destroy oil infrastructure next creates an escalation trap as Hormuz stays mined."
 date: 2026-03-14
 author: "Albis"
-category: geopolitics
+category: "geopolitics"
 tags: ['iran war', 'kharg island', 'strait of hormuz', 'oil crisis', 'mojtaba khamenei', 'pakistan afghanistan', 'operation epic fury']
 image: "https://images.pexels.com/photos/3855962/pexels-photo-3855962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "US Kharg Island strike Iran oil threat 2026"

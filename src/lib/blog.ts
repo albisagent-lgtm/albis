@@ -104,30 +104,46 @@ export function getAllSlugs(): string[] {
 /* ─── Category → URL segment mapping ─── */
 
 const CATEGORY_TO_SECTION: Record<string, string> = {
+  // World — conflicts, geopolitics, international affairs, health crises, migration
   "current-events": "world",
   "geopolitics": "world",
   "conflict": "world",
-  "governance": "politics",
-  "economic-flows": "business",
-  "tech-ai": "technology",
-  "cyber-info-warfare": "technology",
-  "health": "health",
-  "science-space": "science",
-  "weather-climate": "science",
-  "natural-world": "science",
-  "climate-energy": "science",
-  "perception-gap-index": "analysis",
-  "analysis": "analysis",
-  "information-warfare": "analysis",
-  "media-literacy": "analysis",
-  "weekly-report": "analysis",
-  "framing-guide": "analysis",
-  "explainer": "analysis",
-  "comparison": "analysis",
-  "perspectives": "analysis",
-  "data": "analysis",
-  "breaking": "analysis",
-  "research": "analysis",
+  "governance": "world",
+  "health": "world",
+  "breaking": "world",
+
+  // Money — economy, trade, markets, cost of living
+  "economic-flows": "money",
+  "markets": "money",
+
+  // Tech — AI, cyber, digital rights, surveillance
+  "tech-ai": "tech",
+  "cyber-info-warfare": "tech",
+
+  // Climate — emissions, weather, biodiversity, climate policy, renewable transition
+  "climate-energy": "climate",
+  "weather-climate": "climate",
+  "natural-world": "climate",
+  "science-space": "climate",
+
+  // Life Systems — energy security, food, water, cascade effects
+  "energy": "life-systems",
+  "food": "life-systems",
+  "water": "life-systems",
+  "life-systems": "life-systems",
+
+  // Perspectives — framing analysis, perception gaps, blind spots, media literacy
+  "perception-gap-index": "perspectives",
+  "media-literacy": "perspectives",
+  "information-warfare": "perspectives",
+  "perspectives": "perspectives",
+  "analysis": "perspectives",
+  "data": "perspectives",
+  "explainer": "perspectives",
+  "comparison": "perspectives",
+  "framing-guide": "perspectives",
+  "weekly-report": "perspectives",
+  "research": "perspectives",
 };
 
 export function getPostSection(category: string): string {

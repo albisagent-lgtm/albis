@@ -3,7 +3,7 @@ title: "Algeria: Europe's Emergency Gas Lifeline After Hormuz"
 description: "French gas imports from Algeria nearly doubled in March 2026 as the Hormuz crisis cut Qatar's LNG. Algerian media celebrates strategic vindication. English media barely noticed. Here's the energy map being redrawn."
 pubDate: 2026-03-24
 author: "Albis Editorial"
-category: "analysis"
+category: "energy"
 tags: ["algeria", "europe", "gas", "energy", "hormuz", "qatar", "pipeline", "perception-gap", "france", "italy", "spain"]
 image: "https://images.pexels.com/photos/17963031/pexels-photo-17963031.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Algeria gas supply Europe Hormuz crisis 2026"

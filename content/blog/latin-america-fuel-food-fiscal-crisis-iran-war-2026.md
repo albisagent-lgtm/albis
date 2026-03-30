@@ -3,7 +3,7 @@ title: "Latin America's Triple Crisis: Fuel, Food, Fiscal"
 description: "Chile's fuel just jumped 54%. The Dominican Republic told citizens to prepare for sacrifices. Argentina celebrates oil exports while 45 million consumers drown in inflation. 660 million people are choosing between eating, commuting, or keeping the lights on — and the Iran war just arrived in Latin America."
 date: "2026-03-26"
 author: "Albis Geopolitics Desk"
-category: "explainer"
+category: "food"
 tags: ["explainer", "latin-america", "fuel-crisis", "food-crisis", "iran-war", "chile", "brazil", "argentina", "dominican-republic", "hormuz", "fertilizer", "oil-crisis", "perception-gap"]
 image: "https://images.pexels.com/photos/5032848/pexels-photo-5032848.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Gas station fuel pumps representing Latin America energy crisis"

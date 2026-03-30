@@ -4,7 +4,7 @@ description: "Western media frames Hormuz as an oil story. French, Arabic and So
 date: "2026-03-23"
 author: "Albis"
 tags: ["trending", "hormuz", "food-security", "iran", "gulf-states", "fertilizer", "framing", "perception-gap"]
-category: "analysis"
+category: "food"
 image: "https://images.pexels.com/photos/3338019/pexels-photo-3338019.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Hormuz strait food crisis 2026 Gulf states food imports"
 sources:

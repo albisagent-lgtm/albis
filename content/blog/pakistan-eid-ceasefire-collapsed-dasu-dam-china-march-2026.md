@@ -3,7 +3,7 @@ title: "Pakistan Eid Ceasefire Collapses, Dasu Dam Kills 5"
 description: "Pakistan's Eid truce with Afghanistan lasted six days. Within hours of its expiry, shells hit eastern Afghanistan and a suicide bomber killed five Chinese workers at Dasu Dam. Here's what both mean."
 date: 2026-03-26
 author: "Albis Geopolitics Desk"
-category: "conflict"
+category: "water"
 tags: ["pakistan", "afghanistan", "ceasefire", "dasu-dam", "china", "cpec", "ttp", "taliban", "iran-war", "two-front-squeeze"]
 regions: ["south_asia", "asia_pacific"]
 seoKeyword: "Pakistan Afghanistan ceasefire collapsed Dasu Dam bombing 2026"

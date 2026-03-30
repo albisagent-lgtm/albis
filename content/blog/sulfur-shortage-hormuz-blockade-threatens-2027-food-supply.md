@@ -5,7 +5,7 @@ date: "2026-03-25"
 author: "Harry Wenham"
 tags: ["explainer", "food-security", "fertilizer", "sulfur", "hormuz", "agriculture", "el-nino", "2027"]
 image: "https://images.pexels.com/photos/1000057/pexels-photo-1000057.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
-category: "economic-flows"
+category: "energy"
 seoKeyword: "fertilizer shortage hormuz sulfur 2027 food crisis"
 perception_gap: 5
 regions_found: [us, eu, south_asia]

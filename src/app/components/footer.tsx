@@ -31,11 +31,11 @@ export function Footer() {
               <ul className="mt-4 space-y-2.5">
                 <FooterLink href="/">Today</FooterLink>
                 <FooterLink href="/world">World</FooterLink>
-                <FooterLink href="/politics">Politics</FooterLink>
-                <FooterLink href="/business">Business</FooterLink>
-                <FooterLink href="/technology">Technology</FooterLink>
-                <FooterLink href="/health">Health</FooterLink>
-                <FooterLink href="/science">Science</FooterLink>
+                <FooterLink href="/money">Money</FooterLink>
+                <FooterLink href="/tech">Tech</FooterLink>
+                <FooterLink href="/climate">Climate</FooterLink>
+                <FooterLink href="/life-systems">Life Systems</FooterLink>
+                <FooterLink href="/perspectives">Perspectives</FooterLink>
               </ul>
             </div>
             <div>

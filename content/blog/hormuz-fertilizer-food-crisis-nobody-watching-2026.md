@@ -5,7 +5,7 @@ date: "2026-03-02"
 image: "https://images.pexels.com/photos/36567301/pexels-photo-36567301.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 author: "Albis"
 tags: ["trending", "hormuz", "fertilizer", "food-security", "iran", "agriculture", "oil", "global-trade", "supply-chain"]
-category: "analysis"
+category: "food"
 ---
 
 Brent crude is expected to jump 9% when markets open Monday morning. Goldman Sachs says $110 a barrel if the Strait of Hormuz stays closed. JPMorgan says $120 to $130.

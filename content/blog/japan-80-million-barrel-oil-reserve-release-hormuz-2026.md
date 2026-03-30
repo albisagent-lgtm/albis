@@ -3,7 +3,7 @@ title: "Japan Drains 80M Barrels of Oil — Why No One Noticed"
 description: "Japan just began the largest strategic oil reserve release in its history — 80 million barrels, 45 days of supply. Five of seven world regions have no idea it's happening. Here's what the silence means."
 pubDate: 2026-03-26
 author: "James Chen"
-category: "climate-energy"
+category: "energy"
 tags: ["unseen", "gai", "japan", "oil-reserves", "hormuz", "energy-security", "strategic-petroleum-reserve"]
 image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Japan strategic oil reserve release Hormuz"

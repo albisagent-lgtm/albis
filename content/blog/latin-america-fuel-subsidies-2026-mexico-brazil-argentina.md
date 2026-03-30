@@ -4,7 +4,7 @@ description: "English media says Latin America is ending fuel subsidies. Mexico 
 pubDate: 2026-03-24
 author: "Harry Wenham"
 image: "https://images.pexels.com/photos/7908624/pexels-photo-7908624.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
-category: "climate-energy"
+category: "energy"
 tags: ["fuel subsidies", "Latin America", "Mexico", "Brazil", "Argentina", "Colombia", "Chile", "oil crisis", "Hormuz"]
 regions: ["Latin America", "North America"]
 seoKeyword: "latin america fuel subsidies 2026 mexico brazil"

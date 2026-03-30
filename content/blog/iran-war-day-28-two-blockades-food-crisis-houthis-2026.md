@@ -3,7 +3,7 @@ title: "Iran War Day 28: Two Blockades Now Threaten Food"
 description: "Russia halted fertilizer exports the same week Houthis threatened to close a second strait. With Hormuz already blocked and spring planting underway, here's how the Iran war is becoming a food crisis."
 date: "2026-03-28"
 author: "Harry Wenham"
-category: "conflict"
+category: "food"
 tags: ["iran-war", "food-crisis", "fertilizer", "houthis", "hormuz", "bab-al-mandab", "russia", "spring-planting", "oil-crisis", "day-28", "pakistan", "escalation"]
 image: "https://images.pexels.com/photos/36315088/pexels-photo-36315088.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran war food crisis fertilizer blockade 2026"

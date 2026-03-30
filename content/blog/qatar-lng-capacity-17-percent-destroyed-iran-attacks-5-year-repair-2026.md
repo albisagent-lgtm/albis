@@ -3,7 +3,7 @@ title: "Iran Destroyed 17% of Qatar's LNG. Now What?"
 description: "Two of Qatar's 14 LNG trains at Ras Laffan are gone. 12.8 million tonnes of annual capacity won't return for five years — and Europe just lost its backup plan."
 date: "2026-03-22"
 author: "Harry Wenham"
-category: "explainer"
+category: "energy"
 tags: ["explainer", "energy", "qatar", "lng", "iran-war", "infrastructure", "europe", "gas"]
 regions: ["middle-east", "europe", "asia-pacific"]
 image: "https://images.pexels.com/photos/1871133/pexels-photo-1871133.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

@@ -4,7 +4,7 @@ title: "Trump Gives Iran 48 Hours on Hormuz"
 description: "Trump gave Iran 48 hours to reopen the Strait of Hormuz or face strikes on its power plants. Iran responded by threatening to close the strait entirely and target Gulf desalination facilities. Here's what happens when the deadline expires Monday night."
 date: 2026-03-23
 author: "Albis Geopolitics Desk"
-category: "geopolitics"
+category: "energy"
 tags: ["iran war 2026", "hormuz strait", "trump ultimatum", "oil crisis", "gulf states", "IRGC", "desalination", "energy crisis"]
 image: "https://images.pexels.com/photos/3856438/pexels-photo-3856438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 sources:

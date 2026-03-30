@@ -11,7 +11,7 @@ tags:
   - framing
   - perception-gap
   - information-warfare
-category: explainer
+category: "explainer"
 seoKeyword: war on Iran vs Iran war language framing media 2026
 sources:
   - name: "Al Jazeera"

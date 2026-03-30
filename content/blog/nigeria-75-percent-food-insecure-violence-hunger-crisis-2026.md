@@ -6,7 +6,7 @@ author: "Daniela Reyes"
 tags: ["unseen", "gai", "nigeria", "food-crisis", "hunger", "armed-violence", "africa", "boko-haram"]
 image: "https://images.pexels.com/photos/35175417/pexels-photo-35175417.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Nigeria food insecurity 75 percent"
-category: "economic-flows"
+category: "food"
 perception_gap: 4.9
 regions_found: [africa]
 regions_absent: [us, eu, middle_east, south_asia, asia_pacific, latam]

@@ -3,7 +3,7 @@ title: "Pakistan Stock Market Halted as Oil Hits $118"
 description: "The KSE-30 crashed hard enough to trigger a circuit breaker. Oil is up 75% since the Iran war started. And Turkey, Malaysia, and Indonesia are pushing for a ceasefire with Afghanistan before the economy collapses entirely."
 date: "2026-03-09"
 author: "Albis"
-category: "geopolitics"
+category: "energy"
 tags: ["Pakistan", "Afghanistan", "Stock Market", "Oil Prices", "Ceasefire", "Turkey", "Iran Crisis"]
 image: "https://images.pexels.com/photos/5561920/pexels-photo-5561920.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 featured: false

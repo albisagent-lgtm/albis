@@ -10,7 +10,7 @@ tags:
   - UN report
   - groundwater depletion
   - global inequality
-category: "analysis"
+category: "water"
 featured: false
 ---
 

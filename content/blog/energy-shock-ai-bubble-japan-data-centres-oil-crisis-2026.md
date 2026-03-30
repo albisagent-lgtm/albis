@@ -3,7 +3,7 @@ title: "Japan's ¥15 Trillion AI Bet Runs on Oil It Can't Get"
 description: "The Iran war energy shock is exposing a vulnerability nobody in Silicon Valley wants to discuss: AI data centres need cheap, stable power, and the Hormuz blockade just ended both. Japan faces ¥15 trillion in losses. The US and EU aren't talking about it."
 date: "2026-03-30"
 author: "Kai Strand"
-category: "climate-energy"
+category: "energy"
 tags: ["energy", "ai", "iran-war", "japan", "data-centres", "oil-crisis", "hormuz", "perception-gap"]
 image: "https://images.pexels.com/photos/5480781/pexels-photo-5480781.jpeg?auto=compress&cs=tinysrgb&w=1200"
 imageAlt: "Server racks in a data centre representing AI infrastructure dependent on energy supply"

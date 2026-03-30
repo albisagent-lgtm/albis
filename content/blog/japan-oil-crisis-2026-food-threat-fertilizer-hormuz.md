@@ -4,7 +4,7 @@ description: "Japan calls it the greatest oil crisis in history. But 130 million
 date: "2026-03-29"
 author: "James Chen"
 tags: ["quick-take", "japan", "oil-crisis", "food-security", "fertilizer", "hormuz", "energy", "asia-pacific"]
-category: "climate-energy"
+category: "food"
 image: "https://images.pexels.com/photos/15970029/pexels-photo-15970029.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 seoKeyword: "japan oil crisis hormuz strait 2026"
 confidence: "confirmed"

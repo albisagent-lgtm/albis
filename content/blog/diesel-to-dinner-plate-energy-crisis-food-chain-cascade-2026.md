@@ -3,7 +3,7 @@ title: "From Diesel Pump to Dinner Plate: The Energy-Food Chain Nobody Sees"
 description: "Bangladesh can't irrigate its rice. The Philippines can't move its vegetables. Cuba can't refrigerate anything. West Africa can't afford fertilizer. The Iran war's energy shock is becoming a food crisis across four continents — and the connections are invisible to most of the world."
 date: 2026-03-30
 author: "Harry Wenham"
-category: "economic-flows"
+category: "food"
 tags: ["explainer", "food-security", "energy-crisis", "fertilizer", "hormuz", "iran-war", "bangladesh", "philippines", "cuba", "west-africa", "diesel", "rice", "cascade-economics", "agriculture"]
 image: "https://images.pexels.com/photos/36797458/pexels-photo-36797458.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "energy crisis food shortage 2026 Iran war diesel fertilizer"

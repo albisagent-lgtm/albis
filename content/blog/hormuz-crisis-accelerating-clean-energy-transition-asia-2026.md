@@ -5,7 +5,7 @@ date: "2026-03-24"
 author: "Lena Castillo"
 image: "https://images.pexels.com/photos/17641123/pexels-photo-17641123.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["clean-energy", "hormuz-crisis", "solar", "asia", "energy-transition", "perception-gap"]
-category: "climate-energy"
+category: "energy"
 seoKeyword: "Hormuz crisis clean energy transition 2026"
 perception_gap: 4
 regions_found: [us, eu, asia_pacific, south_asia]

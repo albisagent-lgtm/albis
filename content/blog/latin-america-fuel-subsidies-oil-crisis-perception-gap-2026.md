@@ -3,7 +3,7 @@ title: "Latin America Fuel Subsidies: Media Got It Wrong"
 description: "English outlets reported Latin America is ending fuel subsidies during the oil crisis. But Mexico is expanding them and Brazil is absorbing the shock. Only Argentina is actually cutting. Here's what each country is really doing."
 pubDate: 2026-03-24
 author: "Albis"
-category: "analysis"
+category: "energy"
 tags: ["divided", "pgi", "latin-america", "fuel-subsidies", "oil-crisis", "mexico", "brazil", "argentina", "energy", "perception-gap"]
 image: "https://images.pexels.com/photos/28688185/pexels-photo-28688185.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Fuel pump at a gas station representing Latin America fuel price crisis"

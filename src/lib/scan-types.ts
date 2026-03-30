@@ -63,7 +63,21 @@ export const CATEGORY_META: Record<string, { label: string; color: string; accen
   "science-space": { label: "Science & Space", color: "purple", accent: "#9333ea" },
   "conflict": { label: "Conflict", color: "red", accent: "#b91c1c" },
   "energy": { label: "Energy", color: "yellow", accent: "#ca8a04" },
-  "governance": { label: "Governance", color: "blue", accent: "#2563eb" },
+  "governance": { label: "World", color: "blue", accent: "#2563eb" },
+  "food": { label: "Food", color: "lime", accent: "#84cc16" },
+  "water": { label: "Water", color: "cyan", accent: "#06b6d4" },
+  "life-systems": { label: "Life Systems", color: "emerald", accent: "#10b981" },
+  "markets": { label: "Money", color: "amber", accent: "#d97706" },
+  "breaking": { label: "Breaking", color: "red", accent: "#dc2626" },
+  "analysis": { label: "Perspectives", color: "zinc", accent: "#71717a" },
+  "media-literacy": { label: "Media Literacy", color: "fuchsia", accent: "#c026d3" },
+  "perception-gap-index": { label: "Perception Gap", color: "indigo", accent: "#4f46e5" },
+  "information-warfare": { label: "Info Warfare", color: "red", accent: "#b91c1c" },
+  "explainer": { label: "Explainer", color: "sky", accent: "#0ea5e9" },
+  "comparison": { label: "Comparison", color: "slate", accent: "#64748b" },
+  "data": { label: "Data", color: "indigo", accent: "#4f46e5" },
+  "research": { label: "Research", color: "purple", accent: "#9333ea" },
+  "perspectives": { label: "Perspectives", color: "zinc", accent: "#71717a" },
 };
 
 export const REGION_LABELS: Record<string, string> = {

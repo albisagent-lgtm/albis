@@ -3,7 +3,7 @@ title: "1.1M Tons of Fertilizer Stuck. Planting Starts Soon"
 description: "Over twenty ships carrying nearly a million metric tons of fertilizer are trapped behind a closed strait. Miss the planting window, and this year's global harvest shrinks by double digits."
 date: "2026-03-16"
 author: "Harry Wenham"
-category: "economic-flows"
+category: "food"
 tags: ["fertilizer", "Iran-war", "food-security", "agriculture", "supply-chain", "Strait-of-Hormuz"]
 image: "https://images.pexels.com/photos/11996941/pexels-photo-11996941.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 faqs:

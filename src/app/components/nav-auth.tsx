@@ -117,11 +117,11 @@ export function NavAuth() {
 const DESKTOP_NAV = [
   { href: "/", label: "Today" },
   { href: "/world", label: "World" },
-  { href: "/politics", label: "Politics" },
-  { href: "/business", label: "Business" },
-  { href: "/technology", label: "Technology" },
-  { href: "/health", label: "Health" },
-  { href: "/science", label: "Science" },
+  { href: "/money", label: "Money" },
+  { href: "/tech", label: "Tech" },
+  { href: "/climate", label: "Climate" },
+  { href: "/life-systems", label: "Life Systems" },
+  { href: "/perspectives", label: "Perspectives" },
   { href: "/indexes", label: "Indexes" },
 ];
 

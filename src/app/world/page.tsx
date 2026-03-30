@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { CategoryGrid } from "@/app/components/category-grid";
 
-const CATEGORY_FILTERS = ["current-events", "geopolitics", "conflict"];
+const CATEGORY_FILTERS = ["current-events", "geopolitics", "conflict", "governance", "health", "breaking"];
 
 export const metadata: Metadata = {
   title: "World News — Albis",

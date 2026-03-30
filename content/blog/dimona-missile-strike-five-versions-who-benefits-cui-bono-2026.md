@@ -4,7 +4,7 @@ description: "Iranian missiles hit near Israel's nuclear facility. The NYT saw a
 date: 2026-03-24
 tags: ["cui-bono", "iran-war", "dimona", "missile-defense", "perception-gap", "media-framing"]
 series: "Cui Bono"
-category: current-events
+category: "current-events"
 perception_gap: 8
 regions_found: [us, eu, middle_east, south_asia, asia_pacific]
 regions_absent: [africa, latam]

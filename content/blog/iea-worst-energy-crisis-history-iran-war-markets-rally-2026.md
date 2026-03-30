@@ -3,7 +3,7 @@ title: "IEA Declares Worst Energy Crisis as Markets Rally"
 description: "The IEA chief said the Iran war energy crisis is worse than the 1970s oil shocks and Ukraine war combined. The same day, a single Truth Social post sent stocks soaring and oil tumbling. The gap between physical reality and market narrative has never been wider."
 pubDate: 2026-03-24
 author: "Albis Editorial"
-category: "climate-energy"
+category: "energy"
 tags: ["IEA", "energy crisis", "iran war", "oil prices", "hormuz", "fatih birol", "1970s oil crisis"]
 image: "https://images.pexels.com/photos/10396411/pexels-photo-10396411.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 imageAlt: "Oil refinery industrial infrastructure with smoke stacks"

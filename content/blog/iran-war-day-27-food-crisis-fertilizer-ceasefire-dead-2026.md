@@ -3,7 +3,7 @@ title: "Iran War Day 27: Fertilizer Crisis Threatens Food"
 description: "Spring planting season is underway across the Northern Hemisphere, but urea prices have jumped 33% since the Hormuz blockade began. Shell's CEO warns Europe faces fuel shortages by April. Here's the food crisis nobody's talking about."
 date: "2026-03-26"
 author: "Albis Geopolitics Desk"
-category: "conflict"
+category: "food"
 tags: ["iran-war", "fertilizer-crisis", "food-security", "hormuz", "pakistan", "afghanistan", "ceasefire", "spring-planting", "oil-crisis", "day-27"]
 image: "https://images.pexels.com/photos/36637275/pexels-photo-36637275.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran war fertilizer crisis spring planting 2026"

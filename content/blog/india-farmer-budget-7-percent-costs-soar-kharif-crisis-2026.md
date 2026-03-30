@@ -5,7 +5,7 @@ date: "2026-03-27"
 author: "Priya Sharma"
 image: "https://images.pexels.com/photos/7415332/pexels-photo-7415332.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 tags: ["unseen", "gai", "india", "agriculture", "food-security", "fertilizer", "hormuz", "kharif"]
-category: "economic-flows"
+category: "food"
 seoKeyword: "India farmer budget fertilizer costs 2026"
 perception_gap: 3
 regions_found: [south_asia]

@@ -5,7 +5,7 @@ date: "2026-03-08"
 image: "https://images.unsplash.com/photo-1754619880959-2b0528375883?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxjbGVhbi1lbmVyZ3klMjBnZW9wb2xpdGljcyUyMHNvbGFyfGVufDB8MHx8fDE3NzMwNTQwNzR8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Albis"
 tags: ["clean-energy", "geopolitics", "solar", "wind", "renewables", "china", "europe", "united-states"]
-category: "climate-energy"
+category: "energy"
 confidence: "confirmed"
 sources:
   - name: "Bloomberg"

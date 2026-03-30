@@ -3,7 +3,7 @@ title: "Three Wars, One Energy System: Iran Pakistan Lebanon"
 description: "Iran, Pakistan, Lebanon — three wars the media treats as separate. Follow the oil, the yuan, and the Strait of Hormuz and they collapse into one system."
 date: "2026-03-15"
 author: "Albis"
-category: "geopolitics"
+category: "energy"
 tags: ["iran-war", "pakistan-afghanistan", "strait-of-hormuz", "oil-crisis", "lebanon", "petro-yuan", "crisis-analysis"]
 image: "https://images.pexels.com/photos/33284879/pexels-photo-33284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"
 seoKeyword: "Iran Pakistan Lebanon interconnected crisis 2026"

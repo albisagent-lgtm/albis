@@ -4,7 +4,7 @@ description: "The IEA just made its largest emergency oil release ever — one-t
 pubDate: 2026-03-24
 date: "2026-03-24"
 author: "Albis Geopolitics Desk"
-category: "current-events"
+category: "energy"
 tags: ["explainer", "IEA", "oil-reserves", "strategic-petroleum-reserve", "hormuz", "iran-war", "energy-crisis", "southeast-asia"]
 regions: ["North America", "Europe", "Middle East", "Asia-Pacific", "Southeast Asia"]
 image: "https://images.pexels.com/photos/6537731/pexels-photo-6537731.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200"

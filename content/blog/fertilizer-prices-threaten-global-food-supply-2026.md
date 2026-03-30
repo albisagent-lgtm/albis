@@ -5,7 +5,7 @@ date: "2026-02-26"
 image: "https://images.unsplash.com/photo-1666987571351-737b29874697?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTExNTJ8MHwxfHNlYXJjaHwxfHxmb29kLXNlY3VyaXR5JTIwYWdyaWN1bHR1cmUlMjBmZXJ0aWxpemVyfGVufDB8MHx8fDE3NzMwNDY4OTZ8MA&ixlib=rb-4.1.0&q=80&w=1080"
 author: "Harry Wenham"
 tags: ["explainer", "food-security", "agriculture", "fertilizer", "economics"]
-category: "analysis"
+category: "food"
 ---
 
 Your grocery bill probably doesn't mention nitrogen, phosphorus, or potassium. But those three elements—the building blocks of modern fertilizer—are why food exists on supermarket shelves at all.
