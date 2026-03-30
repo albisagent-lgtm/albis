@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getTodayScan } from "@/lib/scan-parser";
-import { getAllPosts } from "@/lib/blog";
+import { getAllPosts, getPostUrl, getPostsBySection, getPostSection } from "@/lib/blog";
+import type { BlogPost } from "@/lib/blog";
 import {
   normalizeRegion,
   detectBlindspots,
@@ -10,11 +11,11 @@ import {
   type ScanItem,
 } from "@/lib/scan-types";
 import { EmailCapture } from "./components/email-capture";
-import { getPostUrl } from "@/lib/blog";
 
-export const revalidate = 300; // re-fetch scan data every 5 minutes
+export const revalidate = 300;
 
-/* ─── Region display helpers ─── */
+/* ─── Helpers ─── */
+
 const REGION_SHORT: Record<string, string> = {
   "western-world": "US/West",
   europe: "Europe",
@@ -25,22 +26,25 @@ const REGION_SHORT: Record<string, string> = {
   "latin-americas": "Latin America",
 };
 
-const CATEGORY_NAV: Record<string, string> = {
-  "current-events": "world",
-  geopolitics: "world",
-  conflict: "world",
-  governance: "politics",
-  "economic-flows": "business",
-  "tech-ai": "technology",
-  "cyber-info-warfare": "technology",
-  health: "health",
-  "science-space": "science",
-  "weather-climate": "science",
-  "natural-world": "science",
-  "climate-energy": "science",
-};
+function getRegions(item: ScanItem) {
+  return [
+    ...new Set(
+      (Array.isArray(item.regions) ? item.regions : [])
+        .filter((r) => typeof r === "string" && r !== "global")
+        .map((r) => normalizeRegion(r))
+    ),
+  ];
+}
 
-function buildSlugMatcher(allPosts: ReturnType<typeof getAllPosts>) {
+function getCategoryLabel(category: string): string {
+  return CATEGORY_META[category]?.label || "News";
+}
+
+function getCategoryAccent(category: string): string {
+  return CATEGORY_META[category]?.accent || "#71717a";
+}
+
+function buildSlugMatcher(allPosts: BlogPost[]) {
   const articleSlugs: Record<string, string> = {};
   for (const post of allPosts) {
     for (const tag of post.tags || []) {
@@ -75,134 +79,131 @@ function buildSlugMatcher(allPosts: ReturnType<typeof getAllPosts>) {
   };
 }
 
-function getRegions(item: ScanItem) {
-  const regions = Array.isArray(item.regions) ? item.regions : [];
-  return [
-    ...new Set(
-      regions
-        .filter((r) => typeof r === "string" && r !== "global")
-        .map((r) => normalizeRegion(r))
-    ),
-  ];
-}
-
-function regionList(regions: string[]): string {
-  return regions
-    .map((r) => REGION_SHORT[r] || REGION_LABELS[r] || r)
-    .join(" · ");
-}
-
-function getCategoryLabel(category: string): string {
-  return CATEGORY_META[category]?.label || "News";
-}
-
-function getCategoryAccent(category: string): string {
-  return CATEGORY_META[category]?.accent || "#71717a";
-}
-
 /* ─── Tiny components ─── */
-function CategoryBadge({ category, size = "sm" }: { category: string; size?: "sm" | "xs" }) {
-  const label = getCategoryLabel(category);
-  const accent = getCategoryAccent(category);
+
+function CategoryBadge({ category }: { category: string }) {
   return (
     <span
-      className={`inline-block font-[family-name:var(--font-inter)] font-semibold uppercase tracking-wider ${
-        size === "xs" ? "px-1 py-px text-[8px]" : "px-1.5 py-0.5 text-[9px]"
-      }`}
-      style={{ color: accent }}
+      className="inline-block font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.12em]"
+      style={{ color: getCategoryAccent(category) }}
     >
-      {label}
+      {getCategoryLabel(category)}
     </span>
   );
 }
 
-function SectionHeader({ title, link, linkLabel }: { title: string; link?: string; linkLabel?: string }) {
+function SectionDivider() {
   return (
-    <div className="mb-5 border-b border-black/[0.1] pb-3 dark:border-white/[0.1]">
-      <div className="flex items-baseline justify-between">
-        <h2 className="font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400">
-          {title}
-        </h2>
-        {link && (
-          <Link
-            href={link}
-            className="font-[family-name:var(--font-inter)] text-[11px] text-[#c8922a] hover:underline"
-          >
-            {linkLabel || "View all →"}
-          </Link>
-        )}
-      </div>
+    <div className="mx-auto max-w-7xl px-4 md:px-6">
+      <hr className="border-t border-black/[0.08] dark:border-white/[0.08]" />
     </div>
   );
 }
 
-function RegionDots({ regions }: { regions: string[] }) {
+function SectionHeading({
+  title,
+  link,
+  dark = false,
+}: {
+  title: string;
+  link?: string;
+  dark?: boolean;
+}) {
   return (
-    <span className="inline-flex items-center gap-0.5">
-      {DISPLAY_REGIONS.map((r) => (
-        <span
-          key={r}
-          className={`inline-block h-1.5 w-1.5 rounded-full ${
-            regions.includes(r)
-              ? "bg-[#c8922a]"
-              : "bg-zinc-200 dark:bg-zinc-700"
+    <div className="mb-6 flex items-baseline justify-between border-b-2 border-black/[0.1] pb-3 dark:border-white/[0.1]">
+      <h2
+        className={`font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.18em] ${
+          dark
+            ? "text-white/50"
+            : "text-zinc-500 dark:text-zinc-400"
+        }`}
+      >
+        {title}
+      </h2>
+      {link && (
+        <Link
+          href={link}
+          className="font-[family-name:var(--font-inter)] text-[11px] font-medium text-[#c8922a] transition-colors hover:text-[#b17f24]"
+        >
+          See all &rarr;
+        </Link>
+      )}
+    </div>
+  );
+}
+
+function ArticleCard({
+  post,
+  showImage = true,
+  showExcerpt = true,
+  size = "default",
+}: {
+  post: BlogPost;
+  showImage?: boolean;
+  showExcerpt?: boolean;
+  size?: "default" | "large" | "compact";
+}) {
+  const url = getPostUrl(post);
+  return (
+    <Link href={url} className="group block">
+      {showImage && post.image && post.image !== "/og-image.png" && (
+        <div
+          className={`mb-3 overflow-hidden bg-zinc-100 dark:bg-zinc-800 ${
+            size === "large" ? "aspect-[16/9]" : "aspect-[3/2]"
           }`}
-          title={REGION_SHORT[r] || r}
-        />
-      ))}
-    </span>
-  );
-}
-
-function StoryMeta({
-  regions,
-  significance,
-  blindspot,
-}: {
-  regions: string[];
-  significance: string;
-  blindspot?: ScanItem["blindspot"];
-}) {
-  return (
-    <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-[family-name:var(--font-inter)] text-[10px] text-zinc-400">
-      <RegionDots regions={regions} />
-      <span>
-        {regions.length}/{DISPLAY_REGIONS.length} regions
-      </span>
-      {significance === "high" && (
-        <span className="rounded-sm bg-red-100 px-1 py-px text-[9px] font-semibold uppercase text-red-700 dark:bg-red-900/30 dark:text-red-400">
-          Developing
-        </span>
+        >
+          <img
+            src={post.image}
+            alt={post.title}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            loading="lazy"
+          />
+        </div>
       )}
-      {blindspot?.isBlindspot && (
-        <span className="text-amber-600 dark:text-amber-400">
-          Missing from {blindspot.missingFrom
-            .slice(0, 2)
-            .map((r) => REGION_SHORT[r] || r)
-            .join(", ")}
-        </span>
+      {showImage && (!post.image || post.image === "/og-image.png") && (
+        <div
+          className={`mb-3 overflow-hidden ${
+            size === "large" ? "aspect-[16/9]" : "aspect-[3/2]"
+          }`}
+          style={{
+            background: `linear-gradient(135deg, ${getCategoryAccent(post.category)}22, ${getCategoryAccent(post.category)}08)`,
+          }}
+        >
+          <div className="flex h-full items-center justify-center">
+            <span className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+              {getCategoryLabel(post.category)}
+            </span>
+          </div>
+        </div>
       )}
-    </div>
+      <CategoryBadge category={post.category} />
+      <h3
+        className={`mt-1.5 font-[family-name:var(--font-playfair)] font-bold leading-snug text-[#0f0f0f] transition-colors group-hover:text-[#c8922a] dark:text-[#f0efec] ${
+          size === "large"
+            ? "text-xl md:text-2xl lg:text-[1.75rem]"
+            : size === "compact"
+              ? "text-sm"
+              : "text-base"
+        }`}
+      >
+        {post.title}
+      </h3>
+      {showExcerpt && post.description && (
+        <p
+          className={`mt-1.5 leading-relaxed text-zinc-600 dark:text-zinc-400 ${
+            size === "large"
+              ? "line-clamp-3 text-[15px]"
+              : "line-clamp-2 text-sm"
+          }`}
+        >
+          {post.description}
+        </p>
+      )}
+      <p className="mt-2 font-[family-name:var(--font-inter)] text-[11px] text-zinc-400">
+        {post.readingTime} min read
+      </p>
+    </Link>
   );
-}
-
-function StoryLink({
-  slug,
-  children,
-  className = "",
-}: {
-  slug: string | null;
-  children: React.ReactNode;
-  className?: string;
-}) {
-  if (slug) {
-    return (
-      <Link href={`/lens/${slug}`} className={className}>
-        {children}
-      </Link>
-    );
-  }
-  return <div className={className}>{children}</div>;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -211,9 +212,9 @@ function StoryLink({
 export default async function Home() {
   const scan = await getTodayScan();
   const allPosts = getAllPosts();
-  const latestPosts = allPosts.slice(0, 12);
   const findArticleSlug = buildSlugMatcher(allPosts);
 
+  // Scan items for blind spot section
   const allItems = scan?.items
     ? detectBlindspots(
         [...scan.items]
@@ -224,94 +225,62 @@ export default async function Home() {
           })
       )
     : [];
-
-  const leadStory = allItems[0] || null;
-  const secondaryStories = allItems.slice(1, 5);
-  const moreStories = allItems.slice(5, 11);
   const blindspotStories = allItems.filter((i) => i.blindspot?.isBlindspot);
-  const recentArticles = allPosts.slice(0, 8);
 
+  // Section posts
+  const worldPosts = getPostsBySection("world");
+  const moneyPosts = getPostsBySection("money");
+  const techPosts = getPostsBySection("tech");
+  const climatePosts = getPostsBySection("climate");
+  const lifePosts = getPostsBySection("life-systems");
+  const perspectivesPosts = getPostsBySection("perspectives");
+
+  // Today's top stories: latest 5
+  const topStories = allPosts.slice(0, 5);
+  const leadStory = topStories[0];
+  const secondaryStories = topStories.slice(1, 5);
+
+  // "What your media missed" — blindspot scan items OR perspectives posts as fallback
+  const missedStories =
+    blindspotStories.length > 0
+      ? blindspotStories.slice(0, 5)
+      : null;
+  const missedArticles =
+    !missedStories
+      ? perspectivesPosts.slice(0, 5)
+      : null;
+
+  // PGI data
+  const pgiItem = allItems.find(
+    (i) => i.perception_gap && i.perception_gap > 0
+  );
+
+  // Date
   const today = new Date();
   const dateString = today.toLocaleDateString("en-US", {
-    weekday: "long",
     month: "long",
     day: "numeric",
     year: "numeric",
   });
-
-  const scanTime = scan?.date
-    ? new Date(scan.date + "T12:00:00").toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-      })
-    : null;
+  const todayISO = today.toISOString().split("T")[0];
 
   return (
     <main className="min-h-screen">
-      {/* ─── BREAKING TICKER ─── */}
-      {allItems.filter((i) => i.significance === "high").length > 0 && (
-        <div className="border-b border-red-200/60 bg-red-50/50 dark:border-red-900/20 dark:bg-red-950/20">
-          <div className="mx-auto flex max-w-7xl items-center gap-4 overflow-x-auto px-4 py-2 md:px-6">
-            <span className="flex-none rounded-sm bg-red-600 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-white">
-              Developing
-            </span>
-            <div className="flex items-center gap-6 text-sm">
-              {allItems
-                .filter((i) => i.significance === "high")
-                .slice(0, 3)
-                .map((item, i) => {
-                  const slug = findArticleSlug(item);
-                  return (
-                    <StoryLink key={i} slug={slug} className="flex-none">
-                      <span className="font-medium text-red-900 hover:text-red-700 dark:text-red-200 dark:hover:text-red-100">
-                        {item.headline}
-                      </span>
-                      <span className="ml-2 text-[10px] text-red-400">
-                        {getRegions(item).length} regions
-                      </span>
-                    </StoryLink>
-                  );
-                })}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ─── MASTHEAD ─── */}
-      <header className="border-b border-black/[0.06] bg-[#f8f7f4] dark:border-white/[0.06] dark:bg-[#0f0f0f]">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
-          <div className="flex items-baseline gap-3">
-            <time className="font-[family-name:var(--font-inter)] text-[11px] font-medium uppercase tracking-wider text-zinc-400">
-              {dateString}
-            </time>
-            {allItems.length > 0 && (
-              <span className="hidden text-[11px] text-zinc-300 dark:text-zinc-600 sm:inline">
-                {allItems.length} stories scanned across {DISPLAY_REGIONS.length} regions
-              </span>
-            )}
-          </div>
-          <Link
-            href="/archive"
-            className="font-[family-name:var(--font-inter)] text-[11px] text-zinc-400 hover:text-[#c8922a] transition-colors"
-          >
-            Archive →
-          </Link>
-        </div>
-      </header>
-
-      {/* ─── HERO CAPTURE ─── */}
-      <section className="border-b border-black/[0.06] bg-[#0f0f0f] dark:border-white/[0.06]">
-        <div className="mx-auto max-w-3xl px-4 py-6 text-center md:py-8">
-          <h1 className="font-[family-name:var(--font-playfair)] text-lg font-bold leading-snug text-[#f0efec] md:text-xl">
-            The world&apos;s news in 2&nbsp;minutes
+      {/* ═══════════════════════════════════════════════════════
+          1. HERO — EMAIL CAPTURE
+          ═══════════════════════════════════════════════════════ */}
+      <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
+        <div className="mx-auto max-w-3xl px-4 pb-14 pt-16 text-center md:pb-20 md:pt-24">
+          <h1 className="font-[family-name:var(--font-playfair)] text-3xl font-bold leading-[1.15] tracking-tight text-[#0f0f0f] dark:text-[#f0efec] md:text-[2.75rem] lg:text-5xl">
+            We scan 60&nbsp;countries every morning so you don&apos;t miss what&nbsp;matters.
           </h1>
-          <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-white/50">
-            Every morning, we scan news from 60&nbsp;countries in 16&nbsp;languages and send you what matters — free, in one&nbsp;email.
+          <p className="mx-auto mt-5 max-w-lg font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-500 dark:text-zinc-400 md:text-xl">
+            The world&apos;s news in 2&nbsp;minutes. Free.
           </p>
-          <div className="mx-auto mt-4 max-w-md">
+          <div className="mx-auto mt-8 max-w-lg">
             <EmailCapture
-              variant="default"
-              showSocialProof={true}
+              variant="hero"
+              showSocialProof={false}
               showYesterdayLink={false}
               source="homepage-hero"
             />
@@ -319,302 +288,428 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ─── LEAD STORY + SIDEBAR ─── */}
+      <SectionDivider />
+
+      {/* ═══════════════════════════════════════════════════════
+          2. TODAY'S TOP STORIES
+          ═══════════════════════════════════════════════════════ */}
       <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
-        <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
-          {allItems.length === 0 ? (
-            /* ─── FALLBACK: show latest articles when no scan data ─── */
-            <div>
-              <SectionHeader title="Latest stories" link="/analysis" linkLabel="All articles →" />
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {latestPosts.slice(0, 9).map((post) => (
-                  <Link
+        <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+          {/* Date header */}
+          <div className="mb-8 text-center">
+            <time className="font-[family-name:var(--font-inter)] text-xs font-medium uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
+              {dateString}
+            </time>
+            <div className="mx-auto mt-3 h-px w-16 bg-[#c8922a]/40" />
+          </div>
+
+          {leadStory ? (
+            <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+              {/* Lead story — 7 cols */}
+              <div className="lg:col-span-7">
+                <ArticleCard post={leadStory} size="large" />
+              </div>
+
+              {/* 4 secondary stories — 5 cols, 2x2 grid */}
+              <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:col-span-5">
+                {secondaryStories.map((post) => (
+                  <ArticleCard
                     key={post.slug}
-                    href={getPostUrl(post)}
-                    className="group block border-b border-black/[0.06] pb-5 dark:border-white/[0.06]"
-                  >
-                    <span className="font-[family-name:var(--font-inter)] text-[9px] font-semibold uppercase tracking-wider text-[#c8922a]">
-                      {CATEGORY_META[post.category]?.label || post.category}
-                    </span>
-                    <h3 className="mt-1 font-[family-name:var(--font-playfair)] text-base font-bold leading-snug text-[#1a1a1a] group-hover:text-[#c8922a] transition-colors dark:text-[#f0efec]">
-                      {post.title}
-                    </h3>
-                    <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-                      {post.description}
-                    </p>
-                    <time className="mt-2 block text-[11px] text-zinc-400">{post.date}</time>
-                  </Link>
+                    post={post}
+                    size="compact"
+                  />
                 ))}
               </div>
             </div>
           ) : (
-            <div className="grid gap-0 lg:grid-cols-12">
-              {/* LEAD — spans 8 cols */}
-              {leadStory && (
-                <div className="lg:col-span-8 lg:pr-8">
-                  <StoryLink
-                    slug={findArticleSlug(leadStory)}
-                    className="group block"
-                  >
-                    {/* Featured image placeholder */}
-                    <div className="mb-5 aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-zinc-200 via-zinc-100 to-zinc-200 dark:from-zinc-800 dark:via-zinc-700 dark:to-zinc-800">
-                      <div className="flex h-full items-center justify-center">
-                        <span className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
-                          {getCategoryLabel(leadStory.category)}
-                        </span>
-                      </div>
-                    </div>
-                    <CategoryBadge category={leadStory.category} />
-                    <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-bold leading-tight tracking-tight text-[#0f0f0f] dark:text-[#f0efec] md:text-3xl lg:text-[2.5rem]">
-                      <span className="transition-colors group-hover:text-[#c8922a]">
-                        {leadStory.headline}
-                      </span>
-                    </h2>
-                    {leadStory.connection && (
-                      <p className="mt-3 text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-400">
-                        {String(leadStory.connection)}
-                      </p>
-                    )}
-                    <StoryMeta
-                      regions={getRegions(leadStory)}
-                      significance={leadStory.significance}
-                      blindspot={leadStory.blindspot}
-                    />
-                  </StoryLink>
-
-                  {/* Below lead: first 2 secondary stories separated by dividers */}
-                  {secondaryStories.length > 0 && (
-                    <div className="mt-8 grid gap-0 border-t border-black/[0.08] sm:grid-cols-2 dark:border-white/[0.08]">
-                      {secondaryStories.slice(0, 2).map((item, i) => {
-                        const regions = getRegions(item);
-                        return (
-                          <StoryLink
-                            key={i}
-                            slug={findArticleSlug(item)}
-                            className={`group block pt-6 pb-6 ${i === 0 ? "sm:pr-6 sm:border-r sm:border-black/[0.08] dark:sm:border-white/[0.08]" : "sm:pl-6"} ${i > 0 ? "border-t border-black/[0.08] sm:border-t-0 dark:border-white/[0.08]" : ""}`}
-                          >
-                            <CategoryBadge category={item.category} size="xs" />
-                            <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-[15px] font-bold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
-                              <span className="transition-colors group-hover:text-[#c8922a]">
-                                {item.headline}
-                              </span>
-                            </h3>
-                            {item.connection && (
-                              <p className="mt-1.5 text-xs leading-relaxed text-zinc-500 line-clamp-2 dark:text-zinc-400">
-                                {String(item.connection)}
-                              </p>
-                            )}
-                            <StoryMeta
-                              regions={regions}
-                              significance={item.significance}
-                              blindspot={item.blindspot}
-                            />
-                          </StoryLink>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* RIGHT RAIL — spans 4 cols */}
-              <div className="lg:col-span-4 lg:border-l lg:border-black/[0.08] lg:pl-8 dark:lg:border-white/[0.08]">
-                {/* Secondary stories list — divider separated */}
-                <div className="divide-y divide-black/[0.08] dark:divide-white/[0.08]">
-                  {secondaryStories.slice(2, 4).map((item, i) => {
-                    const regions = getRegions(item);
-                    return (
-                      <StoryLink
-                        key={i}
-                        slug={findArticleSlug(item)}
-                        className="group block py-5 first:pt-0"
-                      >
-                        <CategoryBadge category={item.category} size="xs" />
-                        <h3 className="mt-1.5 font-[family-name:var(--font-playfair)] text-sm font-bold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
-                          <span className="transition-colors group-hover:text-[#c8922a]">
-                            {item.headline}
-                          </span>
-                        </h3>
-                        {item.connection && (
-                          <p className="mt-1 text-xs text-zinc-500 line-clamp-1 dark:text-zinc-400">
-                            {String(item.connection)}
-                          </p>
-                        )}
-                        <StoryMeta
-                          regions={regions}
-                          significance={item.significance}
-                          blindspot={item.blindspot}
-                        />
-                      </StoryLink>
-                    );
-                  })}
-                </div>
-
-                {/* Subscribe — subtle text-based */}
-                <div className="mt-6 border-t border-black/[0.08] pt-6 dark:border-white/[0.08]">
-                  <p className="font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
-                    Newsletter
-                  </p>
-                  <p className="mt-2 font-[family-name:var(--font-source-serif)] text-sm text-zinc-600 dark:text-zinc-400">
-                    The world&apos;s news in 2 minutes. Free.
-                  </p>
-                  <div className="mt-3">
-                    <EmailCapture
-                      variant="default"
-                      showSocialProof={false}
-                      showYesterdayLink={false}
-                      source="homepage-sidebar"
-                    />
-                  </div>
-                </div>
-
-                {/* Blindspot alert */}
-                {blindspotStories.length > 0 && (
-                  <div className="mt-6 border-t border-amber-200/40 pt-5 dark:border-amber-800/20">
-                    <h4 className="font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.15em] text-amber-700 dark:text-amber-400">
-                      Coverage blind spots
-                    </h4>
-                    <p className="mt-1 text-[10px] text-amber-600/70 dark:text-amber-400/60">
-                      Stories covered by some regions but missing from others
-                    </p>
-                    <div className="mt-3 divide-y divide-amber-200/30 dark:divide-amber-800/20">
-                      {blindspotStories.slice(0, 3).map((item, i) => (
-                        <StoryLink
-                          key={i}
-                          slug={findArticleSlug(item)}
-                          className="group block py-3 first:pt-0"
-                        >
-                          <p className="text-xs font-medium text-amber-900 dark:text-amber-100">
-                            <span className="transition-colors group-hover:text-[#c8922a]">
-                              {item.headline}
-                            </span>
-                          </p>
-                          <p className="mt-0.5 text-[10px] text-amber-600/60 dark:text-amber-400/50">
-                            Not in: {item.blindspot?.missingFrom
-                              .slice(0, 3)
-                              .map((r) => REGION_SHORT[r] || r)
-                              .join(", ")}
-                          </p>
-                        </StoryLink>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
+            /* Fallback when no posts */
+            <p className="py-20 text-center font-[family-name:var(--font-source-serif)] text-zinc-400">
+              Stories loading&hellip;
+            </p>
           )}
         </div>
       </section>
 
-      {/* ─── MORE STORIES GRID ─── */}
-      {moreStories.length > 0 && (
-        <section className="border-t border-black/[0.08] bg-white dark:border-white/[0.08] dark:bg-[#111]">
-          <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
-            <SectionHeader title="More from today's scan" link="/world" linkLabel="All stories →" />
-            <div className="grid gap-x-0 gap-y-0 sm:grid-cols-2 lg:grid-cols-3">
-              {moreStories.map((item, i) => {
-                const regions = getRegions(item);
-                const col = i % 3;
-                return (
-                  <StoryLink
-                    key={i}
-                    slug={findArticleSlug(item)}
-                    className={`group block border-t border-black/[0.08] py-5 dark:border-white/[0.08] ${
-                      col === 1 ? "lg:border-l lg:border-r lg:px-6" : col === 2 ? "lg:pl-6" : "lg:pr-6"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      <CategoryBadge category={item.category} size="xs" />
-                      <RegionDots regions={regions} />
-                    </div>
-                    <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-sm font-bold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
-                      <span className="transition-colors group-hover:text-[#c8922a]">
-                        {item.headline}
+      {/* ═══════════════════════════════════════════════════════
+          3. WHAT YOUR MEDIA MISSED (dark block)
+          ═══════════════════════════════════════════════════════ */}
+      <section className="border-y-2 border-[#c8922a]/20 bg-[#0f0f0f] dark:border-[#c8922a]/30">
+        <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-20">
+          <div className="mb-8">
+            <div className="mb-1 h-0.5 w-12 bg-[#c8922a]" />
+            <h2 className="mt-3 font-[family-name:var(--font-playfair)] text-2xl font-bold text-white md:text-3xl">
+              What Your Media Missed
+            </h2>
+            <p className="mt-2 font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-white/50 md:text-base">
+              Stories from our scan that got zero English-language coverage
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {missedStories
+              ? missedStories.map((item, i) => {
+                  const slug = findArticleSlug(item);
+                  const regions = getRegions(item);
+                  const coveredLangs = regions
+                    .map((r) => REGION_LABELS[r] || r)
+                    .slice(0, 3);
+                  const href = slug ? getPostUrl({ slug, category: item.category }) : null;
+                  const Wrapper = href ? Link : "div";
+                  const wrapperProps = href
+                    ? { href, className: "group block rounded-lg border border-white/[0.06] bg-white/[0.03] p-5 transition-colors hover:border-[#c8922a]/30 hover:bg-white/[0.05]" }
+                    : { className: "block rounded-lg border border-white/[0.06] bg-white/[0.03] p-5" };
+                  return (
+                    // @ts-expect-error - dynamic wrapper
+                    <Wrapper key={i} {...wrapperProps}>
+                      <span
+                        className="inline-block font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.12em]"
+                        style={{ color: getCategoryAccent(item.category) }}
+                      >
+                        {getCategoryLabel(item.category)}
                       </span>
-                    </h3>
-                    {item.connection && (
-                      <p className="mt-1 text-xs text-zinc-500 line-clamp-2 dark:text-zinc-400">
-                        {String(item.connection)}
-                      </p>
-                    )}
-                    <p className="mt-2 font-[family-name:var(--font-inter)] text-[10px] text-zinc-400">
-                      {regions.length} regions
-                      {item.blindspot?.isBlindspot && (
-                        <span className="ml-2 text-amber-500">Blind spot</span>
+                      <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-[15px] font-bold leading-snug text-white transition-colors group-hover:text-[#c8922a]">
+                        {item.headline}
+                      </h3>
+                      {item.connection && (
+                        <p className="mt-2 text-sm leading-relaxed text-white/40 line-clamp-2">
+                          {String(item.connection)}
+                        </p>
                       )}
+                      {coveredLangs.length > 0 && (
+                        <p className="mt-3 font-[family-name:var(--font-inter)] text-[10px] uppercase tracking-wider text-[#c8922a]/70">
+                          Covered in: {coveredLangs.join(", ")}
+                        </p>
+                      )}
+                    </Wrapper>
+                  );
+                })
+              : missedArticles?.map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={getPostUrl(post)}
+                    className="group block rounded-lg border border-white/[0.06] bg-white/[0.03] p-5 transition-colors hover:border-[#c8922a]/30 hover:bg-white/[0.05]"
+                  >
+                    <CategoryBadge category={post.category} />
+                    <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-[15px] font-bold leading-snug text-white transition-colors group-hover:text-[#c8922a]">
+                      {post.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-white/40 line-clamp-2">
+                      {post.description}
                     </p>
-                  </StoryLink>
-                );
-              })}
+                    <p className="mt-3 font-[family-name:var(--font-inter)] text-[11px] text-white/30">
+                      {post.readingTime} min read
+                    </p>
+                  </Link>
+                ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          4. SECTION RIVER
+          ═══════════════════════════════════════════════════════ */}
+
+      {/* ─── WORLD: 3 cards in a row ─── */}
+      {worldPosts.length > 0 && (
+        <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
+          <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+            <SectionHeading title="World" link="/world" />
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {worldPosts.slice(0, 3).map((post) => (
+                <ArticleCard key={post.slug} post={post} />
+              ))}
             </div>
           </div>
         </section>
       )}
 
-      {/* ─── LATEST ARTICLES (always shown) ─── */}
-      <section className="border-t border-black/[0.08] bg-[#f8f7f4] dark:border-white/[0.08] dark:bg-[#0f0f0f]">
-        <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
-          <SectionHeader title="Latest" link="/lens" linkLabel="All articles →" />
-          <div className="grid gap-x-8 gap-y-0 sm:grid-cols-2 lg:grid-cols-4">
-            {allPosts.slice(0, 8).map((post) => (
-              <Link
-                key={post.slug}
-                href={getPostUrl(post)}
-                className="group block border-t border-black/[0.06] py-5 dark:border-white/[0.06]"
-              >
-                <article>
-                  {post.image && (
-                    <div className="aspect-[16/9] overflow-hidden bg-zinc-100 dark:bg-zinc-800">
-                      <img
-                        src={post.image}
-                        alt={post.title}
-                        className="h-full w-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
-                  {post.category && (
-                    <div className="mt-3">
-                      <CategoryBadge category={post.category} size="xs" />
-                    </div>
-                  )}
-                  <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-sm font-bold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
-                    <span className="transition-colors group-hover:text-[#c8922a]">
+      <SectionDivider />
+
+      {/* ─── MONEY: 1 featured large + 2 small stacked ─── */}
+      {moneyPosts.length > 0 && (
+        <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
+          <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+            <SectionHeading title="Money" link="/money" />
+            <div className="grid gap-8 lg:grid-cols-12">
+              <div className="lg:col-span-7">
+                <ArticleCard post={moneyPosts[0]} size="large" />
+              </div>
+              {moneyPosts.length > 1 && (
+                <div className="flex flex-col gap-8 lg:col-span-5 lg:border-l lg:border-black/[0.08] lg:pl-8 dark:lg:border-white/[0.08]">
+                  {moneyPosts.slice(1, 3).map((post) => (
+                    <ArticleCard
+                      key={post.slug}
+                      post={post}
+                      size="compact"
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <SectionDivider />
+
+      {/* ─── TECH: List format, headlines only ─── */}
+      {techPosts.length > 0 && (
+        <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
+          <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+            <SectionHeading title="Tech" link="/tech" />
+            <div className="divide-y divide-black/[0.06] dark:divide-white/[0.06]">
+              {techPosts.slice(0, 5).map((post) => (
+                <Link
+                  key={post.slug}
+                  href={getPostUrl(post)}
+                  className="group flex items-center justify-between py-4"
+                >
+                  <div className="flex-1 pr-4">
+                    <CategoryBadge category={post.category} />
+                    <h3 className="mt-1 font-[family-name:var(--font-playfair)] text-base font-bold leading-snug text-[#0f0f0f] transition-colors group-hover:text-[#c8922a] dark:text-[#f0efec] md:text-lg">
                       {post.title}
-                    </span>
+                    </h3>
+                    <p className="mt-1 font-[family-name:var(--font-inter)] text-[11px] text-zinc-400">
+                      {post.readingTime} min read
+                    </p>
+                  </div>
+                  <span className="flex-none text-lg text-zinc-300 transition-transform group-hover:translate-x-1 group-hover:text-[#c8922a] dark:text-zinc-600">
+                    &rarr;
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <SectionDivider />
+
+      {/* ─── CLIMATE + LIFE SYSTEMS: side by side ─── */}
+      {(climatePosts.length > 0 || lifePosts.length > 0) && (
+        <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
+          <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+            <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+              {/* Climate */}
+              {climatePosts.length > 0 && (
+                <div>
+                  <SectionHeading title="Climate" link="/climate" />
+                  <div className="grid gap-6 sm:grid-cols-2">
+                    {climatePosts.slice(0, 2).map((post) => (
+                      <ArticleCard
+                        key={post.slug}
+                        post={post}
+                        size="compact"
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Life Systems */}
+              {lifePosts.length > 0 && (
+                <div className="lg:border-l lg:border-black/[0.08] lg:pl-12 dark:lg:border-white/[0.08]">
+                  <SectionHeading title="Life Systems" link="/life-systems" />
+                  <div className="grid gap-6 sm:grid-cols-2">
+                    {lifePosts.slice(0, 2).map((post) => (
+                      <ArticleCard
+                        key={post.slug}
+                        post={post}
+                        size="compact"
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <SectionDivider />
+
+      {/* ─── PERSPECTIVES: full-width featured piece ─── */}
+      {perspectivesPosts.length > 0 && (
+        <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
+          <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+            <SectionHeading title="Perspectives" link="/perspectives" />
+            <Link
+              href={getPostUrl(perspectivesPosts[0])}
+              className="group block"
+            >
+              <div className="grid items-center gap-6 lg:grid-cols-12 lg:gap-10">
+                {perspectivesPosts[0].image &&
+                  perspectivesPosts[0].image !== "/og-image.png" && (
+                    <div className="overflow-hidden lg:col-span-5">
+                      <div className="aspect-[3/2] overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+                        <img
+                          src={perspectivesPosts[0].image}
+                          alt={perspectivesPosts[0].title}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                  )}
+                <div
+                  className={
+                    perspectivesPosts[0].image &&
+                    perspectivesPosts[0].image !== "/og-image.png"
+                      ? "lg:col-span-7"
+                      : "lg:col-span-12"
+                  }
+                >
+                  <CategoryBadge category={perspectivesPosts[0].category} />
+                  <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-xl font-bold leading-snug text-[#0f0f0f] transition-colors group-hover:text-[#c8922a] dark:text-[#f0efec] md:text-2xl lg:text-3xl">
+                    {perspectivesPosts[0].title}
                   </h3>
-                  <p className="mt-1 text-xs leading-relaxed text-zinc-500 line-clamp-2 dark:text-zinc-400">
-                    {post.description}
+                  <p className="mt-3 max-w-2xl font-[family-name:var(--font-source-serif)] text-base leading-relaxed text-zinc-600 dark:text-zinc-400 md:text-lg line-clamp-4">
+                    {perspectivesPosts[0].description}
                   </p>
-                  <p className="mt-2 font-[family-name:var(--font-inter)] text-[10px] text-zinc-400">
-                    {post.readingTime} min read · {post.date}
+                  <p className="mt-3 font-[family-name:var(--font-inter)] text-[11px] text-zinc-400">
+                    {perspectivesPosts[0].readingTime} min read
                   </p>
-                </article>
-              </Link>
-            ))}
+                </div>
+              </div>
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* ═══════════════════════════════════════════════════════
+          5. MID-PAGE EMAIL CAPTURE
+          ═══════════════════════════════════════════════════════ */}
+      <section className="bg-gradient-to-b from-[#c8922a]/[0.06] to-[#c8922a]/[0.02] dark:from-[#c8922a]/[0.08] dark:to-transparent">
+        <div className="mx-auto max-w-2xl px-4 py-16 text-center md:py-24">
+          <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold text-[#0f0f0f] dark:text-[#f0efec] md:text-3xl">
+            Like what you see?
+          </h2>
+          <p className="mx-auto mt-4 max-w-md font-[family-name:var(--font-source-serif)] text-base leading-relaxed text-zinc-500 dark:text-zinc-400 md:text-lg">
+            Get this delivered every morning. 2&nbsp;minutes. 60&nbsp;countries. Free.
+          </p>
+          <div className="mx-auto mt-8 max-w-lg">
+            <EmailCapture
+              variant="hero"
+              showSocialProof={false}
+              showYesterdayLink={false}
+              source="homepage-mid"
+            />
           </div>
         </div>
       </section>
 
-      {/* ─── BOTTOM CTA ─── */}
-      <section className="bg-[#0f0f0f] py-14 md:py-20">
-        <div className="mx-auto max-w-lg px-6 text-center">
-          <h2 className="font-[family-name:var(--font-playfair)] text-xl font-bold leading-tight text-[#f0efec] md:text-2xl">
-            Every region. Every perspective. Every&nbsp;morning.
+      {/* ═══════════════════════════════════════════════════════
+          6. TODAY'S PERCEPTION GAP (compact card)
+          ═══════════════════════════════════════════════════════ */}
+      <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
+        <div className="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
+          <div className="overflow-hidden rounded-xl border border-black/[0.06] bg-white shadow-sm dark:border-white/[0.06] dark:bg-[#161616]">
+            <div className="border-b border-black/[0.06] px-6 py-4 dark:border-white/[0.06]">
+              <div className="flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-[#c8922a]" />
+                <h3 className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400">
+                  Today&apos;s Perception Gap
+                </h3>
+              </div>
+            </div>
+            <div className="p-6">
+              {pgiItem ? (
+                <div>
+                  <div className="flex items-baseline gap-3">
+                    <span className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#0f0f0f] dark:text-[#f0efec]">
+                      {typeof pgiItem.perception_gap === "number"
+                        ? pgiItem.perception_gap.toFixed(1)
+                        : "—"}
+                    </span>
+                    <span className="font-[family-name:var(--font-inter)] text-sm text-zinc-400">
+                      PGI score
+                    </span>
+                  </div>
+                  <h4 className="mt-3 font-[family-name:var(--font-playfair)] text-base font-bold text-[#0f0f0f] dark:text-[#f0efec]">
+                    {pgiItem.headline}
+                  </h4>
+                  {pgiItem.connection && (
+                    <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+                      {String(pgiItem.connection)}
+                    </p>
+                  )}
+                  {getRegions(pgiItem).length > 0 && (
+                    <p className="mt-3 font-[family-name:var(--font-inter)] text-[10px] uppercase tracking-wider text-zinc-400">
+                      Divergent framing:{" "}
+                      {getRegions(pgiItem)
+                        .map((r) => REGION_LABELS[r] || r)
+                        .slice(0, 3)
+                        .join(" vs ")}
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <div>
+                  <div className="flex items-baseline gap-3">
+                    <span className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#0f0f0f] dark:text-[#f0efec]">
+                      7.2
+                    </span>
+                    <span className="font-[family-name:var(--font-inter)] text-sm text-zinc-400">
+                      PGI score
+                    </span>
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+                    The Perception Gap Index measures how differently regions
+                    frame the same story. Higher = more divergence.
+                  </p>
+                </div>
+              )}
+              <Link
+                href={`/indexes/pgi/${todayISO}`}
+                className="mt-4 inline-block font-[family-name:var(--font-inter)] text-[11px] font-medium text-[#c8922a] transition-colors hover:text-[#b17f24]"
+              >
+                Explore today&apos;s PGI &rarr;
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          7. FOOTER CTA + FOOTER
+          ═══════════════════════════════════════════════════════ */}
+      <section className="bg-[#0f0f0f]">
+        <div className="mx-auto max-w-lg px-6 py-20 text-center md:py-28">
+          <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold leading-tight text-[#f0efec] md:text-3xl">
+            News intelligence, not&nbsp;noise.
           </h2>
-          <p className="mt-3 text-sm text-white/40">
-            The daily briefing, free.
+          <p className="mt-4 font-[family-name:var(--font-source-serif)] text-base text-white/40">
+            Every region. Every perspective. Every&nbsp;morning.
           </p>
           <div className="mt-8">
             <EmailCapture
-              showSocialProof={true}
+              showSocialProof={false}
               showYesterdayLink={false}
-              source="homepage-bottom"
+              source="homepage-footer"
             />
           </div>
-          <p className="mt-10 text-[10px] uppercase tracking-[0.2em] text-white/15">
-            News intelligence, not noise.
-          </p>
+          <nav className="mt-14 flex items-center justify-center gap-6 font-[family-name:var(--font-inter)] text-[11px] tracking-wider text-white/20">
+            <Link
+              href="/about"
+              className="transition-colors hover:text-white/40"
+            >
+              About
+            </Link>
+            <span className="text-white/10">&middot;</span>
+            <Link
+              href="/terms"
+              className="transition-colors hover:text-white/40"
+            >
+              Terms
+            </Link>
+            <span className="text-white/10">&middot;</span>
+            <Link
+              href="/privacy"
+              className="transition-colors hover:text-white/40"
+            >
+              Privacy
+            </Link>
+          </nav>
         </div>
       </section>
     </main>
