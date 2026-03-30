@@ -44,10 +44,7 @@ export function Footer() {
               </p>
               <ul className="mt-4 space-y-2.5">
                 <FooterLink href="/trending">Trending</FooterLink>
-                <FooterLink href="/indexes">Indexes</FooterLink>
-                <FooterLink href="/methodology">Methodology</FooterLink>
                 <FooterLink href="/about">About</FooterLink>
-                <FooterLink href="/quiz">Perspective Check</FooterLink>
                 <li>
                   <a
                     href="/feed.xml"

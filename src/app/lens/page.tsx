@@ -60,7 +60,7 @@ export default async function LensPage({ searchParams }: LensPageProps) {
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },
-          { label: "Stories" },
+          { label: "Latest" },
         ]}
       />
 

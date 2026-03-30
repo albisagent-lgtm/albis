@@ -564,10 +564,10 @@ export default async function Home() {
       <section className="bg-[#0f0f0f] py-14 md:py-20">
         <div className="mx-auto max-w-lg px-6 text-center">
           <h2 className="font-[family-name:var(--font-playfair)] text-xl font-bold leading-tight text-[#f0efec] md:text-2xl">
-            Start your day informed, not&nbsp;overwhelmed.
+            Every region. Every perspective. Every&nbsp;morning.
           </h2>
           <p className="mt-3 text-sm text-white/40">
-            Every region. Every perspective. 2&nbsp;minutes. Free.
+            The daily briefing, free.
           </p>
           <div className="mt-8">
             <EmailCapture

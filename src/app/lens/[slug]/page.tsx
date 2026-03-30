@@ -168,7 +168,6 @@ export default async function LensArticlePage({ params }: Props) {
           <Breadcrumbs
             items={[
               { label: "Home", href: "/" },
-              { label: "Stories", href: "/lens" },
               { label: CATEGORIES[post.category as keyof typeof CATEGORIES] || "Analysis", href: `/lens?category=${post.category}` },
               { label: post.title.length > 50 ? post.title.slice(0, 50) + "\u2026" : post.title },
             ]}
