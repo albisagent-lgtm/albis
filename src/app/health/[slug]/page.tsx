@@ -1,0 +1,29 @@
+import type { Metadata } from "next";
+import { notFound, redirect } from "next/navigation";
+import { getPostBySlug, getPostsBySection, getPostUrl, getPostSection } from "@/lib/blog";
+import { ArticlePage, generateArticleMetadata } from "@/app/components/article-page";
+
+const SECTION = "health";
+
+interface Props {
+  params: Promise<{ slug: string }>;
+}
+
+export function generateStaticParams() {
+  return getPostsBySection(SECTION).map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+  if (!post) return {};
+  return generateArticleMetadata(post);
+}
+
+export default async function HealthArticlePage({ params }: Props) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+  if (!post) notFound();
+  if (getPostSection(post.category) !== SECTION) redirect(getPostUrl(post));
+  return <ArticlePage post={post} />;
+}

@@ -10,6 +10,7 @@ import {
   type ScanItem,
 } from "@/lib/scan-types";
 import { EmailCapture } from "./components/email-capture";
+import { getPostUrl } from "@/lib/blog";
 
 export const dynamic = "force-dynamic";
 
@@ -522,7 +523,7 @@ export default async function Home() {
               {recentArticles.map((post) => (
                 <Link
                   key={post.slug}
-                  href={`/lens/${post.slug}`}
+                  href={getPostUrl(post)}
                   className="group block border-t border-black/[0.06] py-5 dark:border-white/[0.06]"
                 >
                   <article>
