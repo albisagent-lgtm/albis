@@ -305,8 +305,8 @@ export default async function Home() {
           <h1 className="font-[family-name:var(--font-playfair)] text-lg font-bold leading-snug text-[#f0efec] md:text-xl">
             The world&apos;s news in 2&nbsp;minutes
           </h1>
-          <p className="mt-1.5 text-xs text-white/40 md:text-sm">
-            60 countries · 7 regions · 16 languages · scanned three times daily
+          <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-white/50">
+            Every morning, we scan news from 60&nbsp;countries in 16&nbsp;languages and send you what matters — free, in one&nbsp;email.
           </p>
           <div className="mx-auto mt-4 max-w-md">
             <EmailCapture
