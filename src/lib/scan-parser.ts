@@ -204,7 +204,38 @@ async function getSupabaseScan(date: string, scanTime?: string): Promise<ParsedS
           }
         }
       } else {
-        console.warn(`[scan-parser] Scan row id=${scan.id} has no parseable items (type=${typeof scan.items})`);
+        console.warn(`[scan-parser] Scan row id=${scan.id} has no parseable items in scans.items (type=${typeof scan.items})`);
+      }
+    }
+
+    // Fallback: if scans.items is empty, try the scan_items table
+    if (allItems.length === 0 && supabase) {
+      console.log(`[scan-parser] Trying scan_items table for date=${date}`);
+      const scanIds = data.map((s: any) => s.id);
+      const { data: itemRows, error: itemErr } = await supabase
+        .from('scan_items')
+        .select('*')
+        .in('scan_id', scanIds);
+      if (!itemErr && itemRows && itemRows.length > 0) {
+        console.log(`[scan-parser] Found ${itemRows.length} items in scan_items table`);
+        for (const item of itemRows) {
+          if (item && item.headline && item.category) {
+            allItems.push({
+              headline: item.headline,
+              category: item.category?.replace(/_/g, '-') || 'analysis',
+              regions: Array.isArray(item.regions) ? item.regions : [],
+              tags: Array.isArray(item.tags) ? item.tags : [],
+              patterns: Array.isArray(item.patterns) ? item.patterns : [],
+              significance: item.significance || "medium",
+              connection: item.connection || "",
+              perception_gap: item.perception_gap ?? null,
+              coverage_breadth: item.coverage_breadth ?? null,
+              regions_found: item.regions_found || [],
+              regions_absent: item.regions_absent || [],
+              blindspot: item.blindspot || undefined,
+            });
+          }
+        }
       }
     }
 
