@@ -1,4 +1,4 @@
-import { getAllPosts } from "@/lib/blog";
+import { getAllPosts, getPostUrl } from "@/lib/blog";
 
 export async function GET() {
   const allPosts = getAllPosts();
@@ -21,7 +21,7 @@ export async function GET() {
         .replace(/'/g, "&apos;");
 
       return `  <url>
-    <loc>https://www.albis.news/lens/${post.slug}</loc>
+    <loc>https://www.albis.news${getPostUrl(post)}</loc>
     <news:news>
       <news:publication>
         <news:name>Albis</news:name>

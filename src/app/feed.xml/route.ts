@@ -1,4 +1,4 @@
-import { getAllPosts } from "@/lib/blog";
+import { getAllPosts, getPostUrl } from "@/lib/blog";
 
 export async function GET() {
   const posts = getAllPosts();
@@ -9,8 +9,8 @@ export async function GET() {
       (post) => `
     <item>
       <title><![CDATA[${post.title}]]></title>
-      <link>${siteUrl}/lens/${post.slug}</link>
-      <guid isPermaLink="true">${siteUrl}/lens/${post.slug}</guid>
+      <link>${siteUrl}${getPostUrl(post)}</link>
+      <guid isPermaLink="true">${siteUrl}${getPostUrl(post)}</guid>
       <description><![CDATA[${post.description || ""}]]></description>
       <pubDate>${new Date(post.date).toUTCString()}</pubDate>
       ${post.author ? `<dc:creator><![CDATA[${post.author}]]></dc:creator>` : ""}

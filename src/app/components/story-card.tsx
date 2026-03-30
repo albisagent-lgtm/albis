@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CATEGORY_META, normalizeRegion, type ScanItem } from "@/lib/scan-types";
 import type { BlogPost } from "@/lib/blog";
+import { getPostUrl } from "@/lib/post-url";
 import { RegionBar } from "./region-bar";
 
 // ────────────────────────────────────────────────────────────────
@@ -64,7 +65,7 @@ export function StoryCard({ variant, item, post, slug, date, regionCount }: Stor
 
   const { label: catLabel, accent: catAccent } = getCategoryDisplay(category);
 
-  const href = slug ? `/lens/${slug}` : post ? `/lens/${post.slug}` : null;
+  const href = slug ? `/lens/${slug}` : post ? getPostUrl(post) : null;
 
   // ── Freshness line ──
   const freshnessText = regionCt > 0

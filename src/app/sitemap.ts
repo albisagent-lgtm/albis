@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getAllPosts } from "@/lib/blog";
+import { getAllPosts, getPostUrl } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.albis.news";
@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const allPosts = getAllPosts();
 
   const lensPosts: MetadataRoute.Sitemap = allPosts.map((post) => ({
-    url: `${base}/lens/${post.slug}`,
+    url: `${base}${getPostUrl(post)}`,
     lastModified: isNaN(new Date(post.date).getTime()) ? new Date() : new Date(post.date),
     changeFrequency: "monthly" as const,
     priority: 0.7,
