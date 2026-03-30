@@ -22,25 +22,22 @@ export default function PoliticsPage() {
   );
 
   return (
-    <main className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
-      <div className="mx-auto max-w-5xl px-6 py-16 md:py-24">
-        <header className="text-center">
-          <p className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.25em] uppercase text-[#c8922a]">
-            Category
-          </p>
-          <h1 className="mt-3 font-[family-name:var(--font-playfair)] text-3xl md:text-4xl font-bold text-[#0f0f0f] dark:text-[#f0efec]">
-            Politics
-          </h1>
-          <p className="mx-auto mt-3 max-w-lg font-[family-name:var(--font-source-serif)] text-base text-zinc-500 dark:text-zinc-400">
+    <main className="min-h-screen bg-[#f8f7f4] dark:bg-[#0f0f0f]">
+      <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
+        <header className="mb-8 border-b border-black/[0.1] pb-4 dark:border-white/[0.1]">
+          <div className="flex items-baseline justify-between">
+            <h1 className="font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400">
+              Politics
+            </h1>
+            <span className="font-[family-name:var(--font-inter)] text-[11px] text-zinc-400 dark:text-zinc-500">
+              {posts.length} article{posts.length !== 1 ? "s" : ""}
+            </span>
+          </div>
+          <p className="mt-2 max-w-xl font-[family-name:var(--font-source-serif)] text-sm text-zinc-500 dark:text-zinc-400">
             Governance, policy, and political developments — how power is wielded differently across 7 regions.
           </p>
-          <p className="mt-2 font-[family-name:var(--font-inter)] text-sm text-zinc-400 dark:text-zinc-500">
-            {posts.length} article{posts.length !== 1 ? "s" : ""}
-          </p>
         </header>
-        <div className="mt-12">
-          <CategoryGrid posts={posts} />
-        </div>
+        <CategoryGrid posts={posts} />
       </div>
     </main>
   );
