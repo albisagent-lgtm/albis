@@ -329,7 +329,7 @@ export default async function Home() {
             </ol>
             <div className="mt-6 text-center">
               <p className="mb-3 font-[family-name:var(--font-inter)] text-xs text-zinc-400">
-                {briefing.story_count} stories scanned · Delivered free every morning
+                Delivered free every morning
               </p>
               <EmailCapture
                 showSocialProof={false}
