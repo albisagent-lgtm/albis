@@ -11,6 +11,7 @@ import {
   type ScanItem,
 } from "@/lib/scan-types";
 import { EmailCapture } from "./components/email-capture";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 export const revalidate = 300;
 
@@ -255,6 +256,19 @@ export default async function Home() {
     (i) => i.perception_gap && i.perception_gap > 0
   );
 
+  // Briefing taster — fetch latest from Supabase
+  let briefing: { title: string; top_stories: Array<{ region: string; headline: string }>; story_count: number; date: string } | null = null;
+  try {
+    const supabase = createAdminClient();
+    const { data } = await supabase
+      .from("briefings")
+      .select("title,top_stories,story_count,date")
+      .order("date", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    if (data) briefing = data;
+  } catch { /* silently fail */ }
+
   // Date
   const today = new Date();
   const dateString = today.toLocaleDateString("en-US", {
@@ -287,6 +301,45 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          BRIEFING TASTER — preview of what subscribers get
+          ═══════════════════════════════════════════════════════ */}
+      {briefing && briefing.top_stories && briefing.top_stories.length > 0 && (
+        <section className="border-t border-black/[0.06] bg-[#f5f3ee] dark:border-white/[0.06] dark:bg-[#141414]">
+          <div className="mx-auto max-w-2xl px-4 py-10 md:px-6 md:py-12">
+            <div className="mb-4 flex items-center gap-2">
+              <span className="text-lg">📧</span>
+              <h2 className="font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.15em] text-[#c8922a]">
+                Today&apos;s Briefing Preview
+              </h2>
+            </div>
+            <p className="mb-6 font-[family-name:var(--font-source-serif)] text-base leading-relaxed text-[#0f0f0f] dark:text-[#e8e6e1] md:text-lg">
+              {briefing.title}
+            </p>
+            <ol className="space-y-3 border-l-2 border-[#c8922a]/30 pl-4">
+              {briefing.top_stories.slice(0, 5).map((story, i) => (
+                <li key={i} className="font-[family-name:var(--font-source-serif)] text-sm leading-snug text-zinc-700 dark:text-zinc-300">
+                  <span className="mr-2 font-[family-name:var(--font-inter)] text-[10px] font-semibold uppercase tracking-wider text-[#c8922a]">
+                    {story.region}
+                  </span>
+                  {story.headline}
+                </li>
+              ))}
+            </ol>
+            <div className="mt-6 text-center">
+              <p className="mb-3 font-[family-name:var(--font-inter)] text-xs text-zinc-400">
+                {briefing.story_count} stories scanned · Delivered free every morning
+              </p>
+              <EmailCapture
+                showSocialProof={false}
+                variant="default"
+                source="homepage-briefing-taster"
+              />
+            </div>
+          </div>
+        </section>
+      )}
 
       <SectionDivider />
 
@@ -452,36 +505,7 @@ export default async function Home() {
 
       <SectionDivider />
 
-      {/* ─── TECH: List format, headlines only ─── */}
-      {techPosts.length > 0 && (
-        <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
-          <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
-            <SectionHeading title="Tech" link="/tech" />
-            <div className="divide-y divide-black/[0.06] dark:divide-white/[0.06]">
-              {techPosts.slice(0, 5).map((post) => (
-                <Link
-                  key={post.slug}
-                  href={getPostUrl(post)}
-                  className="group flex items-center justify-between py-4"
-                >
-                  <div className="flex-1 pr-4">
-                    <CategoryBadge category={post.category} />
-                    <h3 className="mt-1 font-[family-name:var(--font-playfair)] text-base font-bold leading-snug text-[#0f0f0f] transition-colors group-hover:text-[#c8922a] dark:text-[#f0efec] md:text-lg">
-                      {post.title}
-                    </h3>
-                    <p className="mt-1 font-[family-name:var(--font-inter)] text-[11px] text-zinc-400">
-                      {post.readingTime} min read
-                    </p>
-                  </div>
-                  <span className="flex-none text-lg text-zinc-300 transition-transform group-hover:translate-x-1 group-hover:text-[#c8922a] dark:text-zinc-600">
-                    &rarr;
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* ─── TECH: removed from homepage — accessible via nav ─── */}
 
       <SectionDivider />
 
