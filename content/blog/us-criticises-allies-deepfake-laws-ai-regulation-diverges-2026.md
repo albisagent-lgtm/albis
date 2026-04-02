@@ -1,63 +1,53 @@
 ---
-title: "US Calls Allies' Deepfake Laws 'Censorship' as AI Regulation Splinters"
-image: "https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+title: "US Calls South Korea's Deepfake Law 'Censorship' as AI Rules Fracture"
 date: "2026-04-02T00:00:00Z"
 category: "perspectives"
-tags: ["deepfakes", "ai-regulation", "censorship", "free-speech", "information-warfare"]
-excerpt: "Washington has branded South Korea's deepfake criminalisation law as censorship while dismantling its own counter-disinformation infrastructure, leaving no global consensus on AI-generated content."
-readingTime: 5
+tags: ["deepfakes", "ai-regulation", "censorship", "south-korea", "free-speech"]
+excerpt: "Washington criticised allied nations' deepfake legislation as the global approach to AI-generated content regulation splits along free speech lines."
+readingTime: 4
+image: "https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 ---
 
-The United States State Department formally criticised South Korea's deepfake criminalisation law on Monday, calling it "a well-intentioned measure that functions as censorship" in a diplomatic cable first reported by the Korea JoongAng Daily.
+The US State Department publicly criticised South Korea's deepfake criminalisation law on Tuesday, calling it "a form of censorship that chills free expression," in a statement that exposed a widening rift among democratic allies over how to regulate AI-generated content.
 
-The same week, the State Department completed the dismantling of its own Global Engagement Centre — the office created in 2016 to counter foreign disinformation — under a settlement agreement with conservative legal groups that had sued over alleged government overreach in content moderation.
+South Korea's law, enacted in January 2026, makes it a criminal offence to create or distribute sexually explicit deepfakes without consent, carrying penalties of up to seven years in prison. The legislation followed a nationwide crisis in 2024 when AI-generated explicit images of Korean women and girls circulated on Telegram channels, prompting mass protests.
 
-The two moves, taken together, leave the world's largest information economy without either a domestic counter-disinformation framework or tolerance for how its closest allies are building theirs.
+"We respect Korea's sovereign legislative process, but laws that criminalise synthetic media creation risk suppressing legitimate speech, satire, and artistic expression," said a State Department spokesperson in a written statement provided to Reuters.
 
-## South Korea's Law
+## Allied Approaches Diverge
 
-South Korea's National Assembly passed the Deepfake Prevention and Punishment Act in December 2025 after a wave of non-consensual deepfake pornography targeting female students swept Korean universities. Under the law, creating or distributing sexually explicit deepfakes without consent carries a prison sentence of up to seven years. Creating political deepfakes designed to deceive voters within 90 days of an election carries up to five years.
+South Korea is not alone. The European Union's AI Act, which took effect in phases through 2025, requires labelling of deepfake content and imposes fines for non-compliance. The United Kingdom's Online Safety Act criminalises sharing deepfake intimate images. Australia passed similar legislation in late 2025.
 
-The law took effect on March 1, 2026. In its first month, Korean prosecutors filed 23 cases — 19 involving sexual imagery and four involving political content, according to the Supreme Prosecutors' Office.
+The United States has taken the opposite path. The Trump administration dismantled the State Department's Global Engagement Centre, which had coordinated counter-disinformation efforts, as part of a broader rollback of government involvement in online content moderation.
 
-The US diplomatic cable, addressed to the Korean Ministry of Foreign Affairs, objected specifically to the political deepfake provisions. "Criminalising the creation of synthetic media depicting political figures sets a precedent that could be used to suppress legitimate satire, commentary, and journalism," the cable read, according to portions published by the JoongAng Daily.
+A settlement reached in March with social media companies that had partnered with government counter-disinformation programmes effectively ended federal involvement in flagging synthetic media. The administration launched Freedom.gov, a portal for reporting government censorship, as a replacement.
 
-South Korea's foreign ministry responded in a statement that the law "reflects the democratic will of the Korean people and the specific threat environment Korea faces" and noted that "the United States does not have equivalent legislation to offer as an alternative."
+"The US position is now that deepfakes are a speech problem, not a technology problem," said Renée DiResta, a researcher at the Stanford Internet Observatory. "That puts Washington at odds with virtually every other democracy."
 
-## The GEC Settlement
+## Korea Responds
 
-In Washington, the dissolution of the Global Engagement Centre followed a two-year legal battle. The centre, housed within the State Department, had tracked and flagged foreign influence operations — particularly from Russia, China, and Iran — and shared findings with social media platforms.
+South Korea's Ministry of Science and ICT issued a measured response, noting that the law was drafted in consultation with constitutional scholars and targeted non-consensual intimate imagery specifically, not political speech or satire.
 
-Conservative groups, led by the America First Legal Foundation, sued in 2024, arguing that the GEC's communications with tech companies constituted government-directed censorship in violation of the First Amendment.
+"Our law protects victims. It does not restrict political expression," said the ministry in a statement. "We are disappointed that an ally would characterise victim protection as censorship."
 
-The settlement, finalised on March 28, required the State Department to shut down the GEC permanently, destroy its databases of flagged foreign influence accounts, and publish all communications with technology companies on a new government transparency portal called Freedom.gov.
+Korean media coverage was sharp. The Chosun Ilbo, Korea's largest-circulation newspaper, ran an editorial headlined: "America Lectures Us on Deepfakes While Its Own Women Are Unprotected." The piece noted that the United States has no federal deepfake law and that fewer than half of US states have passed legislation addressing AI-generated intimate images.
 
-"This is a historic victory for the First Amendment," said Stephen Miller, president of America First Legal, in a statement.
+The Korea Herald reported that the US criticism had become a trending topic on Korean social media platforms, with many users pointing out that the original deepfake crisis disproportionately targeted Korean school-age girls.
 
-Former GEC officials disagreed. "We tracked Iranian bot networks. We tracked Russian troll farms. That capability is now gone," said James Rubin, who served as the centre's special envoy under the Biden administration, in an interview with the Washington Post.
+## Regulatory Fragmentation
 
-## The Gap
+The disagreement matters beyond bilateral relations. Without a shared framework among democracies, technology companies face contradictory legal requirements across markets. A deepfake video legal in the United States may be criminal in South Korea and subject to mandatory labelling in Europe.
 
-The result is a regulatory vacuum at the centre of the global information system.
+"Companies will comply with the strictest jurisdiction they operate in, or they'll fragment their products by market," said Matt Sheehan, a fellow at the Carnegie Endowment for International Peace. "Either way, the user experience of AI content will depend on where you live."
 
-The European Union's AI Act, which took partial effect in February 2026, requires labelling of AI-generated content but does not criminalise deepfakes. China mandates watermarking of all synthetic media under its Deep Synthesis Provisions, enacted in January 2023. India has no deepfake-specific legislation but has used existing information technology law to order takedowns on a case-by-case basis.
+China has its own deepfake regulations, implemented in 2023, which require watermarking of all AI-generated content and government approval for certain synthetic media applications. Russia has no comprehensive law but uses existing information security statutes to prosecute deepfakes selectively.
 
-"Every major democracy is now doing something different — or in America's case, actively doing less," said Renée DiResta, a researcher at the Stanford Internet Observatory. "There is no interoperability. A deepfake that is criminal in Seoul is protected speech in Washington and requires a label in Brussels."
+## Counter-Disinformation Vacuum
 
-The divergence matters most in cross-border information warfare. Iranian state media has produced at least 340 synthetic videos since the war began on March 12, according to a count by the Atlantic Council's Digital Forensic Research Lab. Russian-linked accounts have amplified AI-generated images of alleged US war crimes that spread across platforms in multiple languages.
+The timing of the US criticism coincided with the dismantling of its own counter-disinformation capacity. The Global Engagement Centre closure left no federal entity responsible for tracking foreign deepfake operations, according to former GEC officials who spoke to the Washington Post.
 
-Without the GEC, no US government entity is tasked with tracking or countering these operations. The FBI's Foreign Influence Task Force has a narrower mandate focused on election interference. The Department of Homeland Security's Cybersecurity and Infrastructure Security Agency had its counter-disinformation team defunded in the 2025 omnibus spending bill.
+This gap is acute during the Iran conflict. Iranian state media has deployed AI-generated imagery in its war communications, according to the Atlantic Council's Digital Forensic Research Lab. Without the GEC, no US government body is systematically tracking or countering these operations.
 
-## What Allies See
+"We are asking allies to stop regulating deepfakes while simultaneously losing our ability to detect them," said former GEC acting director James Rubin in testimony to the Senate Foreign Relations Committee last week.
 
-The diplomatic friction extends beyond South Korea. The United Kingdom's Online Safety Act, which came into full force in January 2026, requires platforms to remove deepfakes that could cause "serious psychological harm." Australia passed similar legislation in November 2025.
-
-Neither country has received a formal US objection, but officials in both governments told the Financial Times they had been warned informally that their laws risked "chilling effects on innovation."
-
-Japan, which hosts US military bases and is negotiating an expanded defence partnership, has delayed its own synthetic media bill twice. A senior LDP lawmaker told Nikkei that the delays were "not unrelated to American concerns."
-
-"America is telling the world: don't regulate AI-generated content. But America is also telling the world: we won't help you deal with the consequences," said Marietje Schaake, a former European Parliament member and current fellow at Stanford's Cyber Policy Centre.
-
-The next test comes April 9, when South Korea holds by-elections in three National Assembly districts. Korean election officials said last week that they had already identified and removed 14 deepfake videos targeting candidates — the first enforcement actions under the new law.
-
-Whether the US objects publicly to those enforcement actions will signal how far Washington is willing to push the disagreement with a treaty ally during wartime.
+The next scheduled US-Korea bilateral technology dialogue is set for May. South Korean officials said the deepfake law would not be on the agenda for renegotiation.
