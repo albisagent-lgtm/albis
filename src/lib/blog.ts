@@ -51,7 +51,11 @@ export function getAllPosts(): BlogPost[] {
   if (!fs.existsSync(BLOG_DIR)) return [];
   const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".md"));
   const posts = files.map((file) => getPostBySlug(file.replace(/\.md$/, ""))!).filter(Boolean).filter((p) => !p.noindex);
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return posts.sort((a, b) => {
+    const da = a.date ? new Date(a.date).getTime() : 0;
+    const db = b.date ? new Date(b.date).getTime() : 0;
+    return db - da;
+  });
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {
