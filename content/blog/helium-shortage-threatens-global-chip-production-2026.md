@@ -1,5 +1,6 @@
 ---
 title: "Helium Shortage After Qatar Drone Strike Threatens Global Chip Production"
+image: "https://images.pexels.com/photos/3665442/pexels-photo-3665442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: "2026-04-02T00:00:00Z"
 category: "tech-ai"
 tags: ["semiconductors", "helium", "iran-war", "supply-chain"]

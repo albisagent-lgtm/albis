@@ -1,5 +1,6 @@
 ---
 title: "Liberation Day, One Year Later: Factory Jobs Down, Prices Up"
+image: "https://images.pexels.com/photos/32048359/pexels-photo-32048359.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: "2026-04-02T00:00:00Z"
 category: "economic-flows"
 tags: ["tariffs", "trade", "inflation", "jobs", "manufacturing"]

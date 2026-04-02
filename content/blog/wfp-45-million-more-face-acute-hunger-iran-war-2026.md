@@ -1,5 +1,6 @@
 ---
 title: "WFP: 45 Million More People Face Acute Hunger Because of Iran War"
+image: "https://images.pexels.com/photos/8078468/pexels-photo-8078468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: "2026-04-02T00:00:00Z"
 category: "food"
 tags: ["food-security", "WFP", "hunger", "iran-war", "fertilizer"]

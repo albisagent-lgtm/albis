@@ -1,5 +1,6 @@
 ---
 title: "Trump Promises 'Very Powerful' Iran Strikes Within 2-3 Weeks"
+image: "https://images.pexels.com/photos/33356653/pexels-photo-33356653.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: "2026-04-02T00:00:00Z"
 category: "conflict"
 tags: ["iran-war", "trump", "escalation", "military", "oil"]

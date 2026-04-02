@@ -1,5 +1,6 @@
 ---
 title: "China's Water Ministry Warns of Severe Flooding and Drought in 2026"
+image: "https://images.pexels.com/photos/8770485/pexels-photo-8770485.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: "2026-04-02T00:00:00Z"
 category: "climate-energy"
 tags: ["china", "flooding", "drought", "water", "climate"]

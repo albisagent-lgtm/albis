@@ -1,5 +1,6 @@
 ---
 title: "Iran Fires Largest Missile Barrage at Israel, Cluster Warheads Hit Suburbs"
+image: "https://images.pexels.com/photos/16660293/pexels-photo-16660293.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 date: "2026-04-02T00:00:00Z"
 category: "conflict"
 tags: ["iran-war", "missiles", "cluster-munitions", "israel"]
