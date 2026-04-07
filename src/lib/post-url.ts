@@ -35,7 +35,7 @@ const CATEGORY_TO_SECTION: Record<string, string> = {
 };
 
 export function getPostSection(category: string): string {
-  return CATEGORY_TO_SECTION[category] || "perspectives";
+  return CATEGORY_TO_SECTION[category] || "analysis";
 }
 
 export function getPostUrl(post: { slug: string; category: string }): string {

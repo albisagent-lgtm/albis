@@ -202,6 +202,7 @@ export function ArticlePage({ post }: { post: BlogPost }) {
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 680px"
                 priority
+                unoptimized
               />
             </div>
           )}
@@ -368,6 +369,7 @@ export function ArticlePage({ post }: { post: BlogPost }) {
                           fill
                           className="object-cover"
                           sizes="(max-width: 640px) 100vw, 240px"
+                          unoptimized
                         />
                       </div>
                     )}

@@ -230,16 +230,6 @@ const nextConfig: NextConfig = {
         destination: '/about',
         permanent: true,
       },
-      {
-        source: '/perspectives',
-        destination: '/lens',
-        permanent: true,
-      },
-      {
-        source: '/perspectives/:country',
-        destination: '/lens',
-        permanent: true,
-      },
     ];
   },
 };
