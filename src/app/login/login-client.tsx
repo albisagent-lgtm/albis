@@ -39,6 +39,15 @@ export default function LoginClient() {
         return;
       }
 
+      // Track last login
+      if (data.user) {
+        supabase
+          .from("profiles")
+          .update({ last_login_at: new Date().toISOString() })
+          .eq("id", data.user.id)
+          .then(() => {});
+      }
+
       // Success - check for redirect parameter, otherwise use onboarding status
       const params = new URLSearchParams(window.location.search);
       const redirect = params.get("redirect");
@@ -154,12 +163,12 @@ export default function LoginClient() {
 
         {/* Switch */}
         <p className="mt-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
-          No account?{" "}
+          Don&apos;t have an account?{" "}
           <Link
-            href="/signup"
+            href="/register"
             className="font-medium text-[#c8922a] hover:underline dark:text-[#c8922a]"
           >
-            Sign up free
+            Sign up
           </Link>
         </p>
       </div>
