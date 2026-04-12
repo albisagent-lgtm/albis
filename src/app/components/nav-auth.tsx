@@ -10,33 +10,20 @@ export function NavAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [mounted, setMounted] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [hasCompanyProfile, setHasCompanyProfile] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     const supabase = createClient();
 
     // Get initial session
-    supabase.auth.getUser().then(async ({ data: { user } }) => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
       setUser(user);
       setMounted(true);
-
-      // Check if user has a completed company profile
-      if (user) {
-        const { data } = await supabase
-          .from("company_profiles")
-          .select("id")
-          .eq("owner_id", user.id)
-          .eq("onboarding_completed", true)
-          .maybeSingle();
-        setHasCompanyProfile(!!data);
-      }
     });
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
-      if (!session?.user) setHasCompanyProfile(false);
     });
 
     return () => subscription.unsubscribe();
@@ -83,15 +70,13 @@ export function NavAuth() {
                     {user.email}
                   </p>
                 </div>
-                {hasCompanyProfile && (
-                  <Link
-                    href="/dashboard/profile"
-                    onClick={() => setShowMenu(false)}
-                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-zinc-600 transition-colors hover:bg-black/[0.04] dark:text-zinc-300 dark:hover:bg-white/[0.04]"
-                  >
-                    Company Profile
-                  </Link>
-                )}
+                <Link
+                  href="/dashboard"
+                  onClick={() => setShowMenu(false)}
+                  className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-zinc-600 transition-colors hover:bg-black/[0.04] dark:text-zinc-300 dark:hover:bg-white/[0.04]"
+                >
+                  Dashboard
+                </Link>
                 <Link
                   href="/account"
                   onClick={() => setShowMenu(false)}
@@ -146,6 +131,7 @@ const DESKTOP_NAV = [
   { href: "/life-systems", label: "Life Systems" },
   { href: "/perspectives", label: "Perspectives" },
   { href: "/indexes", label: "Indexes" },
+  { href: "/pricing", label: "For Business" },
 ];
 
 export function NavLinks() {

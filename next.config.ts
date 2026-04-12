@@ -38,11 +38,7 @@ const nextConfig: NextConfig = {
         destination: '/lens/:slug',
         permanent: true,
       },
-      {
-        source: '/pricing',
-        destination: '/',
-        permanent: false,
-      },
+      // /pricing redirect removed — real pricing page now exists (Phase 6)
       {
         source: '/compare',
         destination: '/lens',

@@ -32,6 +32,23 @@ export async function GET(request: Request) {
         console.log("[AUTH CALLBACK] → type=recovery, redirecting to /reset-password/confirm");
         return NextResponse.redirect(`${origin}/reset-password/confirm`);
       }
+      // After signup verification, route based on company profile state
+      if (type === "signup" || type === "email") {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from("company_profiles")
+            .select("onboarding_completed")
+            .eq("owner_id", user.id)
+            .maybeSingle();
+          if (profile?.onboarding_completed) {
+            console.log("[AUTH CALLBACK] → signup verified, profile exists, redirecting to /dashboard");
+            return NextResponse.redirect(`${origin}/dashboard`);
+          }
+          console.log("[AUTH CALLBACK] → signup verified, no profile, redirecting to /onboarding/company");
+          return NextResponse.redirect(`${origin}/onboarding/company`);
+        }
+      }
       console.log("[AUTH CALLBACK] → type=", type, ", redirecting to:", next);
       return NextResponse.redirect(`${origin}${next}`);
     }
