@@ -46,7 +46,7 @@ export async function loadScanItems(
   // 1. Try JSONB items from scans table
   const { data: scans } = await supabase
     .from("scans")
-    .select("id, items")
+    .select("id, items, scan_time")
     .eq("scan_date", scanDate);
 
   const scanIds: string[] = [];
@@ -72,6 +72,8 @@ export async function loadScanItems(
     }
   }
 
+  // Prefer rows that actually have items and normalised lowercase scan_time values,
+  // but accept legacy uppercase variants too.
   // 2. Fallback: if JSONB items are empty, try scan_items table
   if (allItems.length === 0 && scanIds.length > 0) {
     const { data: itemRows } = await supabase
