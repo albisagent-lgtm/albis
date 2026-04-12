@@ -1,0 +1,92 @@
+[
+  {
+    "id": "phase4-scoring-001",
+    "agentId": "main",
+    "name": "Company Briefing — Score All (8:30pm NZST)",
+    "enabled": true,
+    "createdAtMs": 1776000000000,
+    "updatedAtMs": 1776000000000,
+    "schedule": {
+      "kind": "cron",
+      "expr": "30 20 * * *",
+      "tz": "Pacific/Auckland"
+    },
+    "sessionTarget": "isolated",
+    "wakeMode": "now",
+    "payload": {
+      "kind": "agentTurn",
+      "message": "You are the Albis Company Briefing Scorer. Score today's scan stories against all active company profiles.\n\nSTEP 1: Determine today's date in NZST.\nDATE=$(TZ=Pacific/Auckland date +%Y-%m-%d)\n\nSTEP 2: Update pipeline status — tagging started.\ncurl -s -X POST \"https://www.albis.news/api/pipeline/update\" \\\n  -H \"Authorization: Bearer d328fe4b3da2a1bc20edeae7719865b8daf934ded161fb65a521a6b856302273\" \\\n  -H \"Content-Type: application/json\" \\\n  -d \"{\\\"run_date\\\": \\\"$DATE\\\", \\\"tagging_started_at\\\": \\\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\\\", \\\"status\\\": \\\"running\\\"}\"\n\nSTEP 3: Call the score-all endpoint to score all company profiles against today's scan.\nRESULT=$(curl -s -X POST \"https://www.albis.news/api/company-briefings/score-all\" \\\n  -H \"Authorization: Bearer d328fe4b3da2a1bc20edeae7719865b8daf934ded161fb65a521a6b856302273\" \\\n  -H \"Content-Type: application/json\" \\\n  -d \"{\\\"scan_date\\\": \\\"$DATE\\\"}\")\n\necho \"$RESULT\"\n\nSTEP 4: Parse the response. Report how many companies were scored and how many stories were in the scan.\n\nSTEP 5: Update pipeline status — tagging completed.\nExtract companies_scored and stories_in_scan from the response.\ncurl -s -X POST \"https://www.albis.news/api/pipeline/update\" \\\n  -H \"Authorization: Bearer d328fe4b3da2a1bc20edeae7719865b8daf934ded161fb65a521a6b856302273\" \\\n  -H \"Content-Type: application/json\" \\\n  -d \"{\\\"run_date\\\": \\\"$DATE\\\", \\\"tagging_completed_at\\\": \\\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\\\", \\\"tagging_stories_count\\\": STORIES_COUNT}\"\n\nReplace STORIES_COUNT with the actual stories_in_scan value from the response.\n\nSTEP 6: Report results. If the response contains an error, report it clearly.\n\nRULES:\n- This is a scoring job, not a generation job. Do NOT generate briefing text.\n- If no scan data exists for today, report it and exit.\n- If no company profiles exist, report it and exit.\n- The score-all endpoint handles all the work — just call it and report results.",
+      "model": "openai-codex/gpt-5.4",
+      "timeoutSeconds": 300
+    },
+    "delivery": {
+      "mode": "none"
+    },
+    "failureAlert": {
+      "after": 2,
+      "channel": "telegram",
+      "to": "2117971152",
+      "cooldownMs": 21600000
+    }
+  },
+  {
+    "id": "phase4-generation-002",
+    "agentId": "main",
+    "name": "Company Briefing — Generate All (9:00pm NZST)",
+    "enabled": true,
+    "createdAtMs": 1776000000000,
+    "updatedAtMs": 1776000000000,
+    "schedule": {
+      "kind": "cron",
+      "expr": "0 21 * * *",
+      "tz": "Pacific/Auckland"
+    },
+    "sessionTarget": "isolated",
+    "wakeMode": "now",
+    "payload": {
+      "kind": "agentTurn",
+      "message": "You are the Albis Company Briefing Generator. You generate personalised daily briefings for each company profile.\n\nThis is the most important job in the membership pipeline. Each company pays for a daily intelligence briefing tailored to their business. Quality matters.\n\n═══════════════════════════════════════════\nSTEP 1 — GET SCORED DATA\n═══════════════════════════════════════════\n\nDetermine today's date:\nDATE=$(TZ=Pacific/Auckland date +%Y-%m-%d)\n\nUpdate pipeline — generation started:\ncurl -s -X POST \"https://www.albis.news/api/pipeline/update\" \\\n  -H \"Authorization: Bearer d328fe4b3da2a1bc20edeae7719865b8daf934ded161fb65a521a6b856302273\" \\\n  -H \"Content-Type: application/json\" \\\n  -d \"{\\\"run_date\\\": \\\"$DATE\\\", \\\"generation_started_at\\\": \\\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\\\"}\"\n\nCall the score-all endpoint to get scored stories for all companies:\ncurl -s -X POST \"https://www.albis.news/api/company-briefings/score-all\" \\\n  -H \"Authorization: Bearer d328fe4b3da2a1bc20edeae7719865b8daf934ded161fb65a521a6b856302273\" \\\n  -H \"Content-Type: application/json\" \\\n  -d \"{\\\"scan_date\\\": \\\"$DATE\\\"}\"\n\nSave the full JSON response. It contains a \"companies\" array. Each entry has:\n- company_profile_id\n- company_name\n- briefing_id\n- signal_level\n- selected_stories (array of scored/selected stories with headlines, summaries, relevance_tags)\n- profile_summary (sector, regions, tracked_themes, risk_priorities, etc.)\n\nIf the response has no companies or an error, update pipeline as failed and exit.\n\n═══════════════════════════��═══════════════\nSTEP 2 — GENERATE BRIEFING FOR EACH COMPANY\n══════════���════════════════════════════════\n\nFor EACH company in the response, generate a personalised briefing. This is where your LLM capability is essential.\n\nFor each company, read its:\n- company_name, sector, regions, tracked_themes, risk_priorities, watchlist_entities, supply_chain_exposure\n- selected_stories (the stories scored as most relevant)\n- signal_level\n\nThen generate briefing content with this EXACT JSON structure:\n\n{\n  \"header\": {\n    \"company_name\": \"<company name>\",\n    \"date\": \"<YYYY-MM-DD>\",\n    \"scan_focus\": \"<top theme from today's scan — 2-4 words>\",\n    \"signal_level\": \"<low|moderate|elevated|high from scoring>\"\n  },\n  \"what_changed\": [\n    {\n      \"headline\": \"<story headline — clear, specific, factual>\",\n      \"summary\": \"<2-3 sentences explaining what happened AND why it matters to THIS company specifically. Reference their sector, regions, or risk priorities. Be concrete.>\",\n      \"relevance_tags\": [\"<from the scoring: geography match, sector match, tracked theme, etc.>\"]\n    }\n  ],\n  \"why_it_matters\": \"<2-4 sentences connecting ALL the stories above to this company's specific situation. Reference their sector, tracked themes, and risk priorities by name. This is the most valuable section — make it specific and actionable, not generic.>\",\n  \"what_to_watch\": [\n    {\n      \"monitor_point\": \"<specific thing to monitor — a decision, data release, deadline, or development>\",\n      \"timeframe\": \"<this week | next 30 days | next quarter>\"\n    }\n  ],\n  \"regional_framing\": \"<optional: 1-2 sentences if regions frame a key story very differently. Only include if genuinely insightful.>\"\n}\n\nBRIEFING WRITING RULES:\n- Include 5-8 stories in what_changed (use all selected stories from the scoring)\n- what_changed summaries must be specific to THIS company — not generic news summaries\n- why_it_matters must reference the company's sector, themes, and priorities by name\n- what_to_watch should have 2-4 items with specific, actionable monitoring points\n- Write in direct, clear business language. No filler. No preamble. No AI padding words.\n- Total output should be under 500 words per briefing (2-minute read)\n- Wire-service tone: factual, precise, attributed\n- regional_framing only if there is a genuine perception gap worth noting\n\nBRIEFING DEPTH — check the company's preferred_briefing_depth:\n- \"executive_summary\": 3-5 stories in what_changed, very concise summaries (1-2 sentences each), 1-2 watch items\n- \"standard\": 5-8 stories, 2-3 sentence summaries, 2-4 watch items (this is the default)\n- \"detailed\": 5-8 stories, 3-4 sentence summaries with more context, 3-4 watch items, always include regional_framing\n\n════════��══════════════════════════��═══════\nSTEP 3 — SUBMIT EACH BRIEFING\n═══════════════════════════════════════════\n\nAfter generating the briefing content JSON for a company, submit it:\n\ncurl -s -X POST \"https://www.albis.news/api/company-briefings/submit\" \\\n  -H \"Authorization: Bearer d328fe4b3da2a1bc20edeae7719865b8daf934ded161fb65a521a6b856302273\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"briefing_id\": \"<briefing_id from score response>\",\n    \"briefing_content\": <the JSON object you generated>\n  }'\n\nIf briefing_id is null, use company_profile_id + briefing_date instead:\n  -d '{\n    \"company_profile_id\": \"<id>\",\n    \"briefing_date\": \"<DATE>\",\n    \"briefing_content\": <the JSON object>\n  }'\n\nCheck the response. If {\"ok\": true}, the briefing was saved. If error, log it and continue to the next company.\n\n═══════════════════════════════════���═══════\nSTEP 4 — UPDATE PIPELINE STATUS\n═══════════════════��═══════════════════════\n\nAfter processing all companies:\ncurl -s -X POST \"https://www.albis.news/api/pipeline/update\" \\\n  -H \"Authorization: Bearer d328fe4b3da2a1bc20edeae7719865b8daf934ded161fb65a521a6b856302273\" \\\n  -H \"Content-Type: application/json\" \\\n  -d \"{\\\"run_date\\\": \\\"$DATE\\\", \\\"generation_completed_at\\\": \\\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\\\", \\\"generation_companies_count\\\": COMPANIES_COUNT, \\\"generation_failures\\\": FAILURES_COUNT}\"\n\nReplace COMPANIES_COUNT with how many briefings were successfully generated.\nReplace FAILURES_COUNT with how many failed.\n\n��══════════════════════════════════════════\nSTEP 5 — REPORT\n═════════════════════════���═════════════════\n\nPrint a summary:\n- Date: $DATE\n- Companies processed: X\n- Briefings generated: Y\n- Failures: Z\n- For each company: name, signal level, stories selected, status (ok/failed)\n\n══��════════════════════════════════════════\nRULES\n═════════════════════════��═════════════════\n- Process ALL companies. If one fails, log the error and continue to the next.\n- Do NOT skip companies.\n- Each briefing must be submitted individually via the submit endpoint.\n- The briefing content must be valid JSON matching the exact structure above.\n- If no companies have scored stories, update pipeline as completed with 0 counts and exit.\n- Be thorough. Each company is paying for this. Quality over speed.",
+      "model": "openai-codex/gpt-5.4",
+      "timeoutSeconds": 1200
+    },
+    "delivery": {
+      "mode": "none"
+    },
+    "failureAlert": {
+      "after": 2,
+      "channel": "telegram",
+      "to": "2117971152",
+      "cooldownMs": 21600000
+    }
+  },
+  {
+    "id": "phase4-delivery-003",
+    "agentId": "main",
+    "name": "Company Briefing — Email Delivery (hourly)",
+    "enabled": true,
+    "createdAtMs": 1776000000000,
+    "updatedAtMs": 1776000000000,
+    "schedule": {
+      "kind": "cron",
+      "expr": "0 * * * *",
+      "tz": "Pacific/Auckland"
+    },
+    "sessionTarget": "isolated",
+    "wakeMode": "now",
+    "payload": {
+      "kind": "agentTurn",
+      "message": "You are the Albis Company Briefing Delivery Agent. You run every hour to deliver briefing emails to companies at their preferred delivery time.\n\nSTEP 1: Determine today's date.\nDATE=$(TZ=Pacific/Auckland date +%Y-%m-%d)\n\nSTEP 2: Call the delivery endpoint.\nRESULT=$(curl -s -X POST \"https://www.albis.news/api/company-briefings/deliver\" \\\n  -H \"Authorization: Bearer d328fe4b3da2a1bc20edeae7719865b8daf934ded161fb65a521a6b856302273\" \\\n  -H \"Content-Type: application/json\" \\\n  -d \"{\\\"briefing_date\\\": \\\"$DATE\\\"}\")\n\necho \"$RESULT\"\n\nSTEP 3: Parse the response and report:\n- How many companies were checked\n- How many emails were sent\n- How many failed\n- For any failures, report the error\n\nSTEP 4: If any emails were sent, update the pipeline:\ncurl -s -X POST \"https://www.albis.news/api/pipeline/update\" \\\n  -H \"Authorization: Bearer d328fe4b3da2a1bc20edeae7719865b8daf934ded161fb65a521a6b856302273\" \\\n  -H \"Content-Type: application/json\" \\\n  -d \"{\\\"run_date\\\": \\\"$DATE\\\", \\\"delivery_started_at\\\": \\\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\\\", \\\"delivery_sent_count\\\": SENT_COUNT, \\\"delivery_failures\\\": FAIL_COUNT}\"\n\nReplace SENT_COUNT and FAIL_COUNT with actual values from the delivery response.\n\nIf ALL pending briefings have been delivered (emails_sent > 0 and no more pending), also set:\n\\\"delivery_completed_at\\\": \\\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\\\", \\\"status\\\": \\\"completed\\\"\n\nSTEP 5: If no briefings needed delivery this hour (all waiting for their preferred time), just report that and exit.\n\nRULES:\n- This runs every hour. Most hours it will have nothing to do — that is normal.\n- The delivery endpoint handles timezone matching internally.\n- Do NOT force-send to companies outside their preferred time.\n- Keep the report brief. Only detail failures.",
+      "model": "openai-codex/gpt-5.4",
+      "timeoutSeconds": 300
+    },
+    "delivery": {
+      "mode": "none"
+    },
+    "failureAlert": {
+      "after": 3,
+      "channel": "telegram",
+      "to": "2117971152",
+      "cooldownMs": 21600000
+    }
+  }
+]
