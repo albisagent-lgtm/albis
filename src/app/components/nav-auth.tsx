@@ -131,6 +131,7 @@ const DESKTOP_NAV = [
   { href: "/life-systems", label: "Life Systems" },
   { href: "/perspectives", label: "Perspectives" },
   { href: "/indexes", label: "Indexes" },
+  { href: "/pricing", label: "For Business" },
 ];
 
 export function NavLinks() {
