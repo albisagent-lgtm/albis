@@ -81,9 +81,6 @@ export async function POST(req: NextRequest) {
     }
 
     if (error) {
-      );
-
-    if (error) {
       console.error("Supabase upsert error:", error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
