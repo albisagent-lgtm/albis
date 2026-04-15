@@ -1,6 +1,6 @@
 # Albis — Current State
 
-**Last updated:** 2026-04-15 (tier enforcement wired in)
+**Last updated:** 2026-04-15 (tier enforcement confirmed working; login redirect fixed)
 **Owner:** Harry Wenham
 **Purpose:** Snapshot of build state. Overwritten each session, never appended.
 
@@ -56,8 +56,9 @@
 
 ### Fixed this session (2026-04-15)
 - **`scripts/push-scan-to-supabase.js` section-clobbering bug.** Fixed. Proper upsert via supabase-js client, sections deduped by scan_time, full markdown stored. Needs re-running on OpenClaw's machine to backfill 2026-03-20 through 2026-04-15.
-- **Tier enforcement wired into product.** Onboarding wizard + dashboard profile editor both use `getOnboardingTier()` (Pro limits for unsubscribed, actual tier otherwise). Dashboard home shows "Subscribe to activate" banner when not active/in-grace. `/api/company-briefings/score` and `/score-all` gate on `shouldGenerateBriefing(ownerProfile)` — inactive subscriptions are skipped (returned in `skipped[]` array so OpenClaw can log them but ignores for generation).
+- **Tier enforcement wired into product and confirmed working.** Onboarding wizard + dashboard profile editor both use `getOnboardingTier()` (Pro limits for unsubscribed, actual tier otherwise). Dashboard home shows "Subscribe to activate" banner when not active/in-grace. `/api/company-briefings/score` and `/score-all` gate on `shouldGenerateBriefing(ownerProfile)` — inactive subscriptions are skipped (returned in `skipped[]` array).
 - **Free-tier policy resolved.** Option B: free users can complete onboarding in preview mode, profile is saved, briefings never generate. Tier definitions unchanged.
+- **Login redirect fixed.** `login-client.tsx` previously routed to `/archive` or `/` based on localStorage `albis-preferences`. Now queries `company_profiles.onboarding_completed` and routes to `/dashboard` if present, `/onboarding/company` if not. The `?redirect=` query param still takes precedence.
 
 ### Quality bugs (outstanding)
 - **`/dashboard/briefing/today` shows most recent, not today** — if today's briefing doesn't exist it silently shows yesterday's.

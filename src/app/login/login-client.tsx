@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { getPreferences } from "@/lib/preferences";
 
 export default function LoginClient() {
   const router = useRouter();
@@ -48,15 +47,23 @@ export default function LoginClient() {
           .then(() => {});
       }
 
-      // Success - check for redirect parameter, otherwise use onboarding status
+      // Success - check for redirect parameter, otherwise route based on
+      // whether the user has completed company onboarding.
       const params = new URLSearchParams(window.location.search);
       const redirect = params.get("redirect");
-      
+
       if (redirect) {
         router.push(redirect);
+      } else if (data.user) {
+        const { data: companyProfile } = await supabase
+          .from("company_profiles")
+          .select("onboarding_completed")
+          .eq("owner_id", data.user.id)
+          .maybeSingle();
+
+        router.push(companyProfile?.onboarding_completed ? "/dashboard" : "/onboarding/company");
       } else {
-        const prefs = getPreferences();
-        router.push(prefs.onboardingComplete ? "/archive" : "/");
+        router.push("/onboarding/company");
       }
       router.refresh();
     } catch (err) {

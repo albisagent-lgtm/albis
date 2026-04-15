@@ -4,6 +4,9 @@ Append-only log of architectural, product, and strategic decisions. Newest at to
 
 ---
 
+## [2026-04-15] Login redirect now checks company_profiles, not localStorage
+`login-client.tsx` previously used the localStorage-backed `getPreferences()` to decide post-login destination and routed paid users to `/archive` or `/` — wrong for the company-intelligence funnel. Now queries `company_profiles.onboarding_completed` and routes to `/dashboard` (if complete) or `/onboarding/company` (if not). The `?redirect=` URL param still wins when present.
+
 ## [2026-04-15] Tier enforcement wired in with Option B — free users can complete onboarding in preview mode
 Added `getOnboardingTier()` helper returning Pro limits for unsubscribed users and actual tier for subscribed. UI (onboarding wizard + profile editor) uses this so anyone can fill out a profile. Hard paywall lives in `shouldGenerateBriefing(ownerProfile)` which is called in `/score` and `/score-all`, skipping inactive subscriptions. Dashboard home shows a persistent "Subscribe to activate" banner when not active/in-grace. Tier definitions untouched; free tier remains 0/0/0 for the hard paywall.
 
