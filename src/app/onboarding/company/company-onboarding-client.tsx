@@ -14,9 +14,14 @@ import {
   SUGGESTED_THEMES,
   MAX_RISK_PRIORITIES,
   MAX_TRACKED_THEMES,
-  MAX_WATCHLIST_ENTITIES,
   type SectorId,
 } from "@/lib/company-profile";
+import {
+  getOnboardingTier,
+  isSubscriptionActive,
+  isInGracePeriod,
+  type ProfileSubscription,
+} from "@/lib/tier-enforcement";
 
 // ---------------------------------------------------------------------------
 // Color classes (reused from settings page)
@@ -145,6 +150,21 @@ export default function CompanyOnboardingClient() {
   const [emailRecipients, setEmailRecipients] = useState<string[]>([]);
   const [emailInput, setEmailInput] = useState("");
 
+  // Subscription state (used for tier limits + preview banner)
+  const [subscription, setSubscription] = useState<ProfileSubscription>({
+    subscription_status: null,
+    subscription_tier: null,
+    subscription_period_end: null,
+  });
+
+  // Effective tier limits for onboarding (Pro limits if unsubscribed)
+  const onboardingTier = getOnboardingTier(subscription);
+  const maxThemes = onboardingTier.maxTrackedThemes;
+  const maxEntities = onboardingTier.maxWatchlistEntities;
+  const maxRecipients = onboardingTier.maxEmailRecipients;
+  const isPreview =
+    !isSubscriptionActive(subscription) && !isInGracePeriod(subscription);
+
   // Check auth and redirect if profile already exists
   useEffect(() => {
     const supabase = createClient();
@@ -154,6 +174,21 @@ export default function CompanyOnboardingClient() {
         return;
       }
       setUserId(user.id);
+
+      // Fetch subscription state from profiles (drives tier limits)
+      const { data: userProfile } = await supabase
+        .from("profiles")
+        .select("subscription_status, subscription_tier, subscription_period_end")
+        .eq("id", user.id)
+        .single();
+
+      if (userProfile) {
+        setSubscription({
+          subscription_status: userProfile.subscription_status,
+          subscription_tier: userProfile.subscription_tier,
+          subscription_period_end: userProfile.subscription_period_end,
+        });
+      }
 
       // Check if company profile already exists
       const { data: profile } = await supabase
@@ -399,6 +434,22 @@ export default function CompanyOnboardingClient() {
           </p>
         </div>
 
+        {/* Preview banner for unsubscribed users */}
+        {isPreview && (
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#c8922a]/30 bg-[#c8922a]/5 px-5 py-3 dark:bg-[#c8922a]/10">
+            <p className="text-sm text-zinc-700 dark:text-zinc-300">
+              <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">Preview mode.</span>{" "}
+              Your profile will be saved, but briefings don&apos;t generate until you subscribe.
+            </p>
+            <Link
+              href="/pricing"
+              className="shrink-0 rounded-full bg-[#c8922a] px-4 py-1.5 text-xs font-semibold text-white shadow-[0_2px_8px_rgb(200,146,42,0.3)] hover:bg-[#b17f24]"
+            >
+              View plans
+            </Link>
+          </div>
+        )}
+
         {/* Progress bar */}
         <div className="mb-10">
           <div className="flex items-center justify-between">
@@ -617,7 +668,7 @@ export default function CompanyOnboardingClient() {
                 <div className="flex items-baseline justify-between">
                   <label className={labelClass}>Tracked themes</label>
                   <span className="text-xs text-zinc-400 dark:text-zinc-600">
-                    {trackedThemes.length}/{MAX_TRACKED_THEMES}
+                    {trackedThemes.length}/{maxThemes}
                   </span>
                 </div>
                 <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-500">
@@ -627,11 +678,11 @@ export default function CompanyOnboardingClient() {
                   tags={trackedThemes}
                   input={themeInput}
                   setInput={setThemeInput}
-                  max={MAX_TRACKED_THEMES}
+                  max={maxThemes}
                   placeholder="e.g. sanctions, shipping routes, oil prices"
-                  onAdd={(v) => addTag(v, trackedThemes, setTrackedThemes, setThemeInput, MAX_TRACKED_THEMES)}
+                  onAdd={(v) => addTag(v, trackedThemes, setTrackedThemes, setThemeInput, maxThemes)}
                   onRemove={(v) => removeTag(v, trackedThemes, setTrackedThemes)}
-                  onKeyDown={(e) => handleTagKeyDown(e, themeInput, trackedThemes, setTrackedThemes, setThemeInput, MAX_TRACKED_THEMES)}
+                  onKeyDown={(e) => handleTagKeyDown(e, themeInput, trackedThemes, setTrackedThemes, setThemeInput, maxThemes)}
                 />
                 {sector && SUGGESTED_THEMES[sector] && (
                   <div className="mt-3">
@@ -645,7 +696,7 @@ export default function CompanyOnboardingClient() {
                           <button
                             key={t}
                             onClick={() => {
-                              if (trackedThemes.length < MAX_TRACKED_THEMES) {
+                              if (trackedThemes.length < maxThemes) {
                                 setTrackedThemes([...trackedThemes, t]);
                               }
                             }}
@@ -664,7 +715,7 @@ export default function CompanyOnboardingClient() {
                 <div className="flex items-baseline justify-between">
                   <label className={labelClass}>Watchlist entities</label>
                   <span className="text-xs text-zinc-400 dark:text-zinc-600">
-                    {watchlistEntities.length}/{MAX_WATCHLIST_ENTITIES}
+                    {watchlistEntities.length}/{maxEntities}
                   </span>
                 </div>
                 <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-500">
@@ -674,11 +725,11 @@ export default function CompanyOnboardingClient() {
                   tags={watchlistEntities}
                   input={entityInput}
                   setInput={setEntityInput}
-                  max={MAX_WATCHLIST_ENTITIES}
+                  max={maxEntities}
                   placeholder="e.g. Maersk, OPEC, Xi Jinping"
-                  onAdd={(v) => addTag(v, watchlistEntities, setWatchlistEntities, setEntityInput, MAX_WATCHLIST_ENTITIES)}
+                  onAdd={(v) => addTag(v, watchlistEntities, setWatchlistEntities, setEntityInput, maxEntities)}
                   onRemove={(v) => removeTag(v, watchlistEntities, setWatchlistEntities)}
-                  onKeyDown={(e) => handleTagKeyDown(e, entityInput, watchlistEntities, setWatchlistEntities, setEntityInput, MAX_WATCHLIST_ENTITIES)}
+                  onKeyDown={(e) => handleTagKeyDown(e, entityInput, watchlistEntities, setWatchlistEntities, setEntityInput, maxEntities)}
                 />
               </div>
 
@@ -845,7 +896,7 @@ export default function CompanyOnboardingClient() {
                       placeholder="Add email address"
                       onAdd={(v) => {
                         if (v.includes("@")) {
-                          addTag(v, emailRecipients, setEmailRecipients, setEmailInput, 3);
+                          addTag(v, emailRecipients, setEmailRecipients, setEmailInput, maxRecipients);
                         }
                       }}
                       onRemove={(v) => removeTag(v, emailRecipients, setEmailRecipients)}
@@ -853,7 +904,7 @@ export default function CompanyOnboardingClient() {
                         if (e.key === "Enter" || e.key === ",") {
                           e.preventDefault();
                           if (emailInput.includes("@")) {
-                            addTag(emailInput, emailRecipients, setEmailRecipients, setEmailInput, 3);
+                            addTag(emailInput, emailRecipients, setEmailRecipients, setEmailInput, maxRecipients);
                           }
                         }
                         if (e.key === "Backspace" && !emailInput && emailRecipients.length > 0) {

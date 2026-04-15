@@ -35,12 +35,26 @@ export function isInGracePeriod(profile: ProfileSubscription): boolean {
 /**
  * Get the effective tier definition for a user.
  * Returns free tier if subscription is not active and not in grace period.
+ * Used for the HARD paywall — briefing generation, feature gating, etc.
  */
 export function getEffectiveTier(profile: ProfileSubscription): TierDefinition {
   if (isSubscriptionActive(profile) || isInGracePeriod(profile)) {
     return getTier(profile.subscription_tier);
   }
   return getTier("free");
+}
+
+/**
+ * Get the tier definition to use for onboarding/profile-editing UI.
+ * Non-subscribed users get Pro-tier limits so they can complete onboarding
+ * in "preview mode" — their profile is saved but briefings don't generate
+ * until they subscribe (shouldGenerateBriefing is the real gate).
+ */
+export function getOnboardingTier(profile: ProfileSubscription): TierDefinition {
+  if (isSubscriptionActive(profile) || isInGracePeriod(profile)) {
+    return getTier(profile.subscription_tier);
+  }
+  return getTier("pro");
 }
 
 /**

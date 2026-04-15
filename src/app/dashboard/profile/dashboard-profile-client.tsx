@@ -14,9 +14,14 @@ import {
   SUGGESTED_THEMES,
   MAX_RISK_PRIORITIES,
   MAX_TRACKED_THEMES,
-  MAX_WATCHLIST_ENTITIES,
   type CompanyProfile,
 } from "@/lib/company-profile";
+import {
+  getOnboardingTier,
+  isSubscriptionActive,
+  isInGracePeriod,
+  type ProfileSubscription,
+} from "@/lib/tier-enforcement";
 
 // ---------------------------------------------------------------------------
 // Color classes (reused from settings page)
@@ -131,6 +136,19 @@ export default function DashboardProfileClient() {
   const [emailRecipients, setEmailRecipients] = useState<string[]>([]);
   const [emailInput, setEmailInput] = useState("");
 
+  // Subscription state for tier limits
+  const [subscription, setSubscription] = useState<ProfileSubscription>({
+    subscription_status: null,
+    subscription_tier: null,
+    subscription_period_end: null,
+  });
+  const onboardingTier = getOnboardingTier(subscription);
+  const maxThemes = onboardingTier.maxTrackedThemes;
+  const maxEntities = onboardingTier.maxWatchlistEntities;
+  const maxRecipients = onboardingTier.maxEmailRecipients;
+  const isPreview =
+    !isSubscriptionActive(subscription) && !isInGracePeriod(subscription);
+
   // Load profile
   useEffect(() => {
     const supabase = createClient();
@@ -140,6 +158,20 @@ export default function DashboardProfileClient() {
         return;
       }
       setUserId(user.id);
+
+      // Fetch subscription from profiles table
+      const { data: userProfile } = await supabase
+        .from("profiles")
+        .select("subscription_status, subscription_tier, subscription_period_end")
+        .eq("id", user.id)
+        .single();
+      if (userProfile) {
+        setSubscription({
+          subscription_status: userProfile.subscription_status,
+          subscription_tier: userProfile.subscription_tier,
+          subscription_period_end: userProfile.subscription_period_end,
+        });
+      }
 
       const { data } = await supabase
         .from("company_profiles")
@@ -288,6 +320,21 @@ export default function DashboardProfileClient() {
             Account settings
           </Link>
         </div>
+
+        {isPreview && (
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#c8922a]/30 bg-[#c8922a]/5 px-5 py-3 dark:bg-[#c8922a]/10">
+            <p className="text-sm text-zinc-700 dark:text-zinc-300">
+              <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">Preview mode.</span>{" "}
+              Your profile is saved, but briefings don&apos;t generate until you subscribe.
+            </p>
+            <Link
+              href="/pricing"
+              className="shrink-0 rounded-full bg-[#c8922a] px-4 py-1.5 text-xs font-semibold text-white shadow-[0_2px_8px_rgb(200,146,42,0.3)] hover:bg-[#b17f24]"
+            >
+              View plans
+            </Link>
+          </div>
+        )}
 
         <div className="mt-10 space-y-6">
           {/* ── Company basics ── */}
@@ -493,18 +540,18 @@ export default function DashboardProfileClient() {
                 <div className="flex items-baseline justify-between">
                   <label className={labelClass}>Tracked themes</label>
                   <span className="text-xs text-zinc-400 dark:text-zinc-600">
-                    {trackedThemes.length}/{MAX_TRACKED_THEMES}
+                    {trackedThemes.length}/{maxThemes}
                   </span>
                 </div>
                 <TagInput
                   tags={trackedThemes}
                   input={themeInput}
                   setInput={setThemeInput}
-                  max={MAX_TRACKED_THEMES}
+                  max={maxThemes}
                   placeholder="Type and press Enter"
-                  onAdd={(v) => addTag(v, trackedThemes, setTrackedThemes, setThemeInput, MAX_TRACKED_THEMES)}
+                  onAdd={(v) => addTag(v, trackedThemes, setTrackedThemes, setThemeInput, maxThemes)}
                   onRemove={(v) => removeTag(v, trackedThemes, setTrackedThemes)}
-                  onKeyDown={(e) => handleTagKeyDown(e, themeInput, trackedThemes, setTrackedThemes, setThemeInput, MAX_TRACKED_THEMES)}
+                  onKeyDown={(e) => handleTagKeyDown(e, themeInput, trackedThemes, setTrackedThemes, setThemeInput, maxThemes)}
                 />
                 {sector && SUGGESTED_THEMES[sector] && (
                   <div className="mt-2 flex flex-wrap gap-1.5">
@@ -515,7 +562,7 @@ export default function DashboardProfileClient() {
                         <button
                           key={t}
                           onClick={() => {
-                            if (trackedThemes.length < MAX_TRACKED_THEMES) {
+                            if (trackedThemes.length < maxThemes) {
                               setTrackedThemes([...trackedThemes, t]);
                             }
                           }}
@@ -533,18 +580,18 @@ export default function DashboardProfileClient() {
                 <div className="flex items-baseline justify-between">
                   <label className={labelClass}>Watchlist entities</label>
                   <span className="text-xs text-zinc-400 dark:text-zinc-600">
-                    {watchlistEntities.length}/{MAX_WATCHLIST_ENTITIES}
+                    {watchlistEntities.length}/{maxEntities}
                   </span>
                 </div>
                 <TagInput
                   tags={watchlistEntities}
                   input={entityInput}
                   setInput={setEntityInput}
-                  max={MAX_WATCHLIST_ENTITIES}
+                  max={maxEntities}
                   placeholder="Competitors, organisations, people"
-                  onAdd={(v) => addTag(v, watchlistEntities, setWatchlistEntities, setEntityInput, MAX_WATCHLIST_ENTITIES)}
+                  onAdd={(v) => addTag(v, watchlistEntities, setWatchlistEntities, setEntityInput, maxEntities)}
                   onRemove={(v) => removeTag(v, watchlistEntities, setWatchlistEntities)}
-                  onKeyDown={(e) => handleTagKeyDown(e, entityInput, watchlistEntities, setWatchlistEntities, setEntityInput, MAX_WATCHLIST_ENTITIES)}
+                  onKeyDown={(e) => handleTagKeyDown(e, entityInput, watchlistEntities, setWatchlistEntities, setEntityInput, maxEntities)}
                 />
               </div>
 
@@ -734,14 +781,14 @@ export default function DashboardProfileClient() {
                       placeholder="Add email address"
                       onAdd={(v) => {
                         if (v.includes("@"))
-                          addTag(v, emailRecipients, setEmailRecipients, setEmailInput, 3);
+                          addTag(v, emailRecipients, setEmailRecipients, setEmailInput, maxRecipients);
                       }}
                       onRemove={(v) => removeTag(v, emailRecipients, setEmailRecipients)}
                       onKeyDown={(e) => {
                         if (e.key === "Enter" || e.key === ",") {
                           e.preventDefault();
                           if (emailInput.includes("@"))
-                            addTag(emailInput, emailRecipients, setEmailRecipients, setEmailInput, 3);
+                            addTag(emailInput, emailRecipients, setEmailRecipients, setEmailInput, maxRecipients);
                         }
                         if (e.key === "Backspace" && !emailInput && emailRecipients.length > 0) {
                           setEmailRecipients(emailRecipients.slice(0, -1));

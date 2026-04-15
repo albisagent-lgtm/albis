@@ -9,6 +9,11 @@ import {
   BriefingEmpty,
   type BriefingContent,
 } from "@/app/components/briefing-renderer";
+import {
+  isSubscriptionActive,
+  isInGracePeriod,
+  type ProfileSubscription,
+} from "@/lib/tier-enforcement";
 
 interface DashboardData {
   briefing: {
@@ -24,6 +29,7 @@ interface DashboardData {
     briefingsReceived: number;
     topThemes: string[];
   };
+  subscription: ProfileSubscription;
 }
 
 export default function DashboardHomeClient() {
@@ -34,6 +40,19 @@ export default function DashboardHomeClient() {
     const supabase = createClient();
     supabase.auth.getUser().then(async ({ data: { user } }) => {
       if (!user) return;
+
+      // Fetch subscription from profiles
+      const { data: userProfile } = await supabase
+        .from("profiles")
+        .select("subscription_status, subscription_tier, subscription_period_end")
+        .eq("id", user.id)
+        .single();
+
+      const subscription: ProfileSubscription = {
+        subscription_status: userProfile?.subscription_status ?? null,
+        subscription_tier: userProfile?.subscription_tier ?? null,
+        subscription_period_end: userProfile?.subscription_period_end ?? null,
+      };
 
       // Get company profile
       const { data: profile } = await supabase
@@ -101,6 +120,7 @@ export default function DashboardHomeClient() {
 
       setData({
         briefing,
+        subscription,
         stats: {
           daysSinceSignup,
           briefingsReceived,
@@ -121,7 +141,9 @@ export default function DashboardHomeClient() {
 
   if (!data) return null;
 
-  const { briefing, stats } = data;
+  const { briefing, stats, subscription } = data;
+  const showSubscribeBanner =
+    !isSubscriptionActive(subscription) && !isInGracePeriod(subscription);
   const hasBriefingContent =
     briefing?.status === "generated" || briefing?.status === "delivered";
 
@@ -130,6 +152,27 @@ export default function DashboardHomeClient() {
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-10">
+      {/* Subscribe banner for non-active users */}
+      {showSubscribeBanner && (
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#c8922a]/30 bg-[#c8922a]/5 p-5 dark:bg-[#c8922a]/10">
+          <div>
+            <p className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+              Subscribe to activate your daily briefing
+            </p>
+            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+              Your profile is saved in preview mode. Briefings start generating
+              the day after you subscribe.
+            </p>
+          </div>
+          <Link
+            href="/pricing"
+            className="shrink-0 rounded-full bg-[#c8922a] px-5 py-2 text-sm font-semibold text-white shadow-[0_2px_8px_rgb(200,146,42,0.3)] hover:bg-[#b17f24]"
+          >
+            View plans
+          </Link>
+        </div>
+      )}
+
       {/* Quick stats */}
       <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
         <StatCard label="Days active" value={String(stats.daysSinceSignup)} />

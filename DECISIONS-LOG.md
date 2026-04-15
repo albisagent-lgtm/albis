@@ -4,6 +4,9 @@ Append-only log of architectural, product, and strategic decisions. Newest at to
 
 ---
 
+## [2026-04-15] Tier enforcement wired in with Option B — free users can complete onboarding in preview mode
+Added `getOnboardingTier()` helper returning Pro limits for unsubscribed users and actual tier for subscribed. UI (onboarding wizard + profile editor) uses this so anyone can fill out a profile. Hard paywall lives in `shouldGenerateBriefing(ownerProfile)` which is called in `/score` and `/score-all`, skipping inactive subscriptions. Dashboard home shows a persistent "Subscribe to activate" banner when not active/in-grace. Tier definitions untouched; free tier remains 0/0/0 for the hard paywall.
+
 ## [2026-04-15] Fixed scan push pipeline — section-clobbering bug was silently dropping all items
 `scripts/push-scan-to-supabase.js` was iterating every `## AM/Midday/PM Xxx` header as a separate upsert with DELETE-then-INSERT, so later scoring-object sections (PGI/GAI) wiped the items array written by earlier data sections. Fix: dedupe section spans by scan_time, use proper `supabase.upsert({onConflict:'scan_date,scan_time'})`, store full markdown not a slice, normalise scan_time to lowercase. Verified against 2026-03-20 markdown: old logic produced 0/0/0 items, new logic produces 38/0/25.
 

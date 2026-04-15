@@ -6,6 +6,7 @@ import {
   determineSignalLevel,
 } from "@/lib/relevance-engine";
 import { loadScanItems } from "@/lib/scan-loader";
+import { shouldGenerateBriefing } from "@/lib/tier-enforcement";
 import type { CompanyProfile } from "@/lib/company-profile";
 
 const INGEST_KEY = process.env.SCAN_INGEST_KEY;
@@ -68,6 +69,25 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         { error: "Company profile not found or onboarding not complete" },
         { status: 404 }
+      );
+    }
+
+    // Gate: only score for active/trialing subscriptions
+    const { data: ownerProfile } = await supabase
+      .from("profiles")
+      .select("subscription_status, subscription_tier, subscription_period_end")
+      .eq("id", profile.owner_id)
+      .single();
+
+    if (!ownerProfile || !shouldGenerateBriefing(ownerProfile)) {
+      return NextResponse.json(
+        {
+          skipped: true,
+          reason: "subscription_inactive",
+          company_profile_id,
+          company_name: profile.company_name,
+        },
+        { status: 200 }
       );
     }
 

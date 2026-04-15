@@ -1,6 +1,6 @@
 # Albis — Current State
 
-**Last updated:** 2026-04-15
+**Last updated:** 2026-04-15 (tier enforcement wired in)
 **Owner:** Harry Wenham
 **Purpose:** Snapshot of build state. Overwritten each session, never appended.
 
@@ -55,11 +55,11 @@
 - **OpenClaw pipeline not yet running end-to-end** — the full score→generate→submit→deliver loop has never been executed with real data. Test prompt documented.
 
 ### Fixed this session (2026-04-15)
-- **`scripts/push-scan-to-supabase.js` was silently dropping all items due to a section-clobbering bug.** Fixed. Proper upsert via supabase-js client, sections deduped by scan_time, full markdown stored. On OpenClaw's machine, re-running the script over 2026-03-20 through 2026-04-15 will backfill all lost items for files that contain ```json blocks. Files that are prose-only (like 2026-04-12) will still produce 0 items — that's a scan-generator issue, not a push-script issue. NEEDS VERIFICATION by running on the scan-source machine.
+- **`scripts/push-scan-to-supabase.js` section-clobbering bug.** Fixed. Proper upsert via supabase-js client, sections deduped by scan_time, full markdown stored. Needs re-running on OpenClaw's machine to backfill 2026-03-20 through 2026-04-15.
+- **Tier enforcement wired into product.** Onboarding wizard + dashboard profile editor both use `getOnboardingTier()` (Pro limits for unsubscribed, actual tier otherwise). Dashboard home shows "Subscribe to activate" banner when not active/in-grace. `/api/company-briefings/score` and `/score-all` gate on `shouldGenerateBriefing(ownerProfile)` — inactive subscriptions are skipped (returned in `skipped[]` array so OpenClaw can log them but ignores for generation).
+- **Free-tier policy resolved.** Option B: free users can complete onboarding in preview mode, profile is saved, briefings never generate. Tier definitions unchanged.
 
 ### Quality bugs (outstanding)
-- **Tier enforcement not wired in** — `canAddTheme/Entity/Recipient` functions exist in `tier-enforcement.ts` but profile editor and onboarding don't call them. A free user can set 15 themes.
-- **Free users not gated** — a user who hasn't paid can complete company onboarding. Product story ambiguous.
 - **`/dashboard/briefing/today` shows most recent, not today** — if today's briefing doesn't exist it silently shows yesterday's.
 - **Some 2026-04-12 scans have prose-only markdown** (no ```json blocks). Push script can't save them as items. Scan prompt needs verification that it's emitting JSON blocks consistently.
 
@@ -105,8 +105,6 @@ _Nothing actively being built. Session ended after push script fix + doc update.
 2. Swap Stripe placeholder price IDs for real ones
 3. Run OpenClaw pipeline end-to-end once to prove full score→generate→submit→deliver works
 4. Verify scan generator is consistently producing ```json blocks (not just prose like 2026-04-12)
-5. Wire tier enforcement into profile editor + onboarding wizard
-6. Decide free-tier policy (gate onboarding behind subscription, or allow dormant profile)
 
 ---
 
@@ -124,4 +122,3 @@ _Nothing actively being built. Session ended after push script fix + doc update.
 - Is current $49/$99/$199 pricing staying, or moving to $199/$499/$1,499 per research doc?
 - When will OpenClaw cron be scheduled — daily at what NZ time?
 - Path A / B / hybrid for onboarding redesign (see ONBOARDING-REDESIGN-RESEARCH.md)?
-- Free-tier policy: dormant profile vs hard gate?
