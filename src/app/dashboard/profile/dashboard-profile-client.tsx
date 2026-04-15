@@ -6,22 +6,27 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { COUNTRIES, getCountriesByRegion } from "@/lib/countries";
 import {
-  SECTORS,
   RISK_PRIORITIES,
-  COMPANY_REGIONS,
   BRIEFING_DEPTHS,
   DELIVERY_TIMES,
-  SUGGESTED_THEMES,
   MAX_RISK_PRIORITIES,
-  MAX_TRACKED_THEMES,
   type CompanyProfile,
 } from "@/lib/company-profile";
+import {
+  SECTORS,
+  COMPANY_REGIONS,
+  THEME_CATALOG,
+  WATCHLIST_CATALOG,
+  SUPPLY_CHAIN_CATALOG,
+  getBundleFor,
+} from "@/lib/onboarding-taxonomy";
 import {
   getOnboardingTier,
   isSubscriptionActive,
   isInGracePeriod,
   type ProfileSubscription,
 } from "@/lib/tier-enforcement";
+import { TaxonomyCombobox } from "@/app/components/taxonomy-combobox";
 
 // ---------------------------------------------------------------------------
 // Color classes (reused from settings page)
@@ -535,80 +540,41 @@ export default function DashboardProfileClient() {
           <div className={cardClass}>
             <h2 className={sectionHeader}>What to track</h2>
             <div className="mt-5 space-y-5">
-              {/* Tracked themes */}
-              <div>
-                <div className="flex items-baseline justify-between">
-                  <label className={labelClass}>Tracked themes</label>
-                  <span className="text-xs text-zinc-400 dark:text-zinc-600">
-                    {trackedThemes.length}/{maxThemes}
-                  </span>
-                </div>
-                <TagInput
-                  tags={trackedThemes}
-                  input={themeInput}
-                  setInput={setThemeInput}
-                  max={maxThemes}
-                  placeholder="Type and press Enter"
-                  onAdd={(v) => addTag(v, trackedThemes, setTrackedThemes, setThemeInput, maxThemes)}
-                  onRemove={(v) => removeTag(v, trackedThemes, setTrackedThemes)}
-                  onKeyDown={(e) => handleTagKeyDown(e, themeInput, trackedThemes, setTrackedThemes, setThemeInput, maxThemes)}
-                />
-                {sector && SUGGESTED_THEMES[sector] && (
-                  <div className="mt-2 flex flex-wrap gap-1.5">
-                    {SUGGESTED_THEMES[sector]
-                      .filter((t) => !trackedThemes.includes(t))
-                      .slice(0, 5)
-                      .map((t) => (
-                        <button
-                          key={t}
-                          onClick={() => {
-                            if (trackedThemes.length < maxThemes) {
-                              setTrackedThemes([...trackedThemes, t]);
-                            }
-                          }}
-                          className="rounded-full border border-dashed border-zinc-600/30 px-2.5 py-0.5 text-xs text-zinc-400 hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-zinc-700 dark:text-zinc-500"
-                        >
-                          + {t}
-                        </button>
-                      ))}
-                  </div>
-                )}
-              </div>
+              <TaxonomyCombobox
+                label="Tracked themes"
+                helpText="Topics your briefing should prioritise."
+                value={trackedThemes}
+                onChange={setTrackedThemes}
+                catalog={THEME_CATALOG}
+                bundleValues={getBundleFor(sector).themes.bundle}
+                additionalValues={getBundleFor(sector).themes.additional}
+                max={maxThemes}
+                customPlaceholder="Add custom theme"
+              />
 
-              {/* Watchlist */}
-              <div>
-                <div className="flex items-baseline justify-between">
-                  <label className={labelClass}>Watchlist entities</label>
-                  <span className="text-xs text-zinc-400 dark:text-zinc-600">
-                    {watchlistEntities.length}/{maxEntities}
-                  </span>
-                </div>
-                <TagInput
-                  tags={watchlistEntities}
-                  input={entityInput}
-                  setInput={setEntityInput}
-                  max={maxEntities}
-                  placeholder="Competitors, organisations, people"
-                  onAdd={(v) => addTag(v, watchlistEntities, setWatchlistEntities, setEntityInput, maxEntities)}
-                  onRemove={(v) => removeTag(v, watchlistEntities, setWatchlistEntities)}
-                  onKeyDown={(e) => handleTagKeyDown(e, entityInput, watchlistEntities, setWatchlistEntities, setEntityInput, maxEntities)}
-                />
-              </div>
+              <TaxonomyCombobox
+                label="Watchlist entities"
+                helpText="Competitors, organisations, people, countries to monitor."
+                value={watchlistEntities}
+                onChange={setWatchlistEntities}
+                catalog={WATCHLIST_CATALOG}
+                bundleValues={getBundleFor(sector).watchlist.bundle}
+                additionalValues={getBundleFor(sector).watchlist.additional}
+                max={maxEntities}
+                customPlaceholder="Add custom entity"
+              />
 
-              {/* Supply chain */}
-              <div>
-                <label className={labelClass}>Supply chain exposure</label>
-                <TagInput
-                  tags={supplyChainExposure}
-                  input={supplyInput}
-                  setInput={setSupplyInput}
-                  max={MAX_TRACKED_THEMES}
-                  placeholder="Commodities, routes, dependencies"
-                  onAdd={(v) => addTag(v, supplyChainExposure, setSupplyChainExposure, setSupplyInput, MAX_TRACKED_THEMES)}
-                  onRemove={(v) => removeTag(v, supplyChainExposure, setSupplyChainExposure)}
-                  onKeyDown={(e) => handleTagKeyDown(e, supplyInput, supplyChainExposure, setSupplyChainExposure, setSupplyInput, MAX_TRACKED_THEMES)}
-                />
-              </div>
+              <TaxonomyCombobox
+                label="Supply chain exposure"
+                helpText="Commodities, routes, dependencies relevant to your operations."
+                value={supplyChainExposure}
+                onChange={setSupplyChainExposure}
+                catalog={SUPPLY_CHAIN_CATALOG}
+                bundleValues={getBundleFor(sector).supplyChain.bundle}
+                additionalValues={getBundleFor(sector).supplyChain.additional}
+                max={maxThemes}
+                customPlaceholder="Add custom exposure"
+              />
 
               {successSection === "tracking" && <div className={successMsg}>Changes saved.</div>}
               {errorSection === "tracking" && <div className={errorMsgClass}>{errorMessage}</div>}
