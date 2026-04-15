@@ -1,6 +1,6 @@
 # Albis — Current State
 
-**Last updated:** 2026-04-12
+**Last updated:** 2026-04-15
 **Owner:** Harry Wenham
 **Purpose:** Snapshot of build state. Overwritten each session, never appended.
 
@@ -23,7 +23,7 @@
 ### Phase 3 — Relevance Scoring ✅
 - `src/lib/relevance-engine.ts` — deterministic 8-dimension scoring (no LLM)
 - `src/lib/scan-loader.ts` — shared loader with JSONB + scan_items fallback
-- API: `POST /api/company-briefings/score` (one company), `/score-all` (all active), `/submit` (OpenClaw submits generated briefing)
+- API: `POST /api/company-briefings/score`, `/score-all`, `/submit`
 - `company_story_scores` and `company_briefings` tables
 
 ### Phase 4 — Cron Jobs & Email Delivery ✅
@@ -44,8 +44,7 @@
 - `/pricing` public page with monthly/annual toggle
 - `/checkout/[tier]` Stripe Checkout redirect
 - `/dashboard/subscription` — current plan, usage bars, upgrade options, Stripe Portal
-- Stripe webhook + portal routes existing pre-Phase 6
-- "For Business" link added to main site nav
+- "For Business" link in main site nav
 
 ---
 
@@ -53,18 +52,21 @@
 
 ### Critical
 - **Stripe price IDs are placeholders** — no real purchase possible until swapped in Stripe Dashboard and `src/lib/stripe.ts` / `src/app/checkout/[tier]/checkout-client.tsx` are updated
-- **OpenClaw pipeline not yet running** — the full score→generate→submit→deliver loop has never run end-to-end. Test prompt documented but not yet executed
-- **`scans.items` JSONB column empty since ~2026-03-23** — recent scan rows exist but items not pushed into JSONB. `scan-loader.ts` falls back to `scan_items` table, which itself only has data for one date (2026-03-20). Root cause of push script bug unknown.
+- **OpenClaw pipeline not yet running end-to-end** — the full score→generate→submit→deliver loop has never been executed with real data. Test prompt documented.
 
-### Quality bugs
+### Fixed this session (2026-04-15)
+- **`scripts/push-scan-to-supabase.js` was silently dropping all items due to a section-clobbering bug.** Fixed. Proper upsert via supabase-js client, sections deduped by scan_time, full markdown stored. On OpenClaw's machine, re-running the script over 2026-03-20 through 2026-04-15 will backfill all lost items for files that contain ```json blocks. Files that are prose-only (like 2026-04-12) will still produce 0 items — that's a scan-generator issue, not a push-script issue. NEEDS VERIFICATION by running on the scan-source machine.
+
+### Quality bugs (outstanding)
 - **Tier enforcement not wired in** — `canAddTheme/Entity/Recipient` functions exist in `tier-enforcement.ts` but profile editor and onboarding don't call them. A free user can set 15 themes.
-- **Free users not gated** — a user who hasn't paid can complete company onboarding. Product story is ambiguous.
+- **Free users not gated** — a user who hasn't paid can complete company onboarding. Product story ambiguous.
 - **`/dashboard/briefing/today` shows most recent, not today** — if today's briefing doesn't exist it silently shows yesterday's.
+- **Some 2026-04-12 scans have prose-only markdown** (no ```json blocks). Push script can't save them as items. Scan prompt needs verification that it's emitting JSON blocks consistently.
 
 ---
 
 ## What's In Progress
-_Nothing actively being built. Session ended at Phase 6 + reference docs._
+_Nothing actively being built. Session ended after push script fix + doc update._
 
 ---
 
@@ -76,6 +78,7 @@ _Nothing actively being built. Session ended at Phase 6 + reference docs._
 - `src/lib/subscription-tiers.ts` — tier definitions with limits
 - `src/lib/tier-enforcement.ts` — limit checking helpers (not wired in)
 - `src/lib/stripe.ts` — PRICE_TO_TIER + TIER_TO_PRICE (placeholder IDs)
+- `scripts/push-scan-to-supabase.js` — **fixed 2026-04-15** (section dedupe + proper upsert)
 
 ### Migrations (run via Supabase dashboard)
 - `20260411_add_profile_membership_columns.sql`
@@ -86,21 +89,24 @@ _Nothing actively being built. Session ended at Phase 6 + reference docs._
 ### API routes
 - `/api/company-briefings/score`, `/score-all`, `/submit`, `/deliver`
 - `/api/pipeline/update`, `/status`
+- `/api/scans/ingest` (still available, but push script now uses direct supabase client)
 - `/api/stripe/checkout`, `/portal`, `/webhook`
 
 ### Reference docs in repo
 - `MEMBERSHIP-BUILD-SPEC.md` — full 7-phase spec
 - `ALBIS-PRICING-RESEARCH.md` — competitor analysis, recommends $199/$499/$1,499
+- `ONBOARDING-REDESIGN-RESEARCH.md` — dropdown redesign plan + scan tag mapping
 
 ---
 
 ## Blockers Before Launch
 
-1. Swap Stripe placeholder price IDs for real ones
-2. Run OpenClaw pipeline end-to-end once to prove it works
-3. Fix scan data push — `scans.items` needs fresh data OR scan_items needs to be current
-4. Wire tier enforcement into profile editor + onboarding wizard
-5. Decide free-tier policy (gate onboarding behind subscription, or let free users have a dormant profile)
+1. **Run fixed `push-scan-to-supabase.js` on OpenClaw's machine** across 2026-03-20..present to backfill lost scan items
+2. Swap Stripe placeholder price IDs for real ones
+3. Run OpenClaw pipeline end-to-end once to prove full score→generate→submit→deliver works
+4. Verify scan generator is consistently producing ```json blocks (not just prose like 2026-04-12)
+5. Wire tier enforcement into profile editor + onboarding wizard
+6. Decide free-tier policy (gate onboarding behind subscription, or allow dormant profile)
 
 ---
 
@@ -117,5 +123,5 @@ _Nothing actively being built. Session ended at Phase 6 + reference docs._
 ## Open Questions
 - Is current $49/$99/$199 pricing staying, or moving to $199/$499/$1,499 per research doc?
 - When will OpenClaw cron be scheduled — daily at what NZ time?
-- How to handle existing "legacy" Stripe price IDs from pre-Phase 6 subscribers (if any)?
+- Path A / B / hybrid for onboarding redesign (see ONBOARDING-REDESIGN-RESEARCH.md)?
 - Free-tier policy: dormant profile vs hard gate?

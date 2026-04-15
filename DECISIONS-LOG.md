@@ -4,6 +4,9 @@ Append-only log of architectural, product, and strategic decisions. Newest at to
 
 ---
 
+## [2026-04-15] Fixed scan push pipeline — section-clobbering bug was silently dropping all items
+`scripts/push-scan-to-supabase.js` was iterating every `## AM/Midday/PM Xxx` header as a separate upsert with DELETE-then-INSERT, so later scoring-object sections (PGI/GAI) wiped the items array written by earlier data sections. Fix: dedupe section spans by scan_time, use proper `supabase.upsert({onConflict:'scan_date,scan_time'})`, store full markdown not a slice, normalise scan_time to lowercase. Verified against 2026-03-20 markdown: old logic produced 0/0/0 items, new logic produces 38/0/25.
+
 ## [2026-04-12] Pricing research concluded — current $49/$99/$199 is 80-95% below serious competitors
 Competitor analysis (Meltwater, Dataminr, Stratfor, Politico Pro, Oxford Analytica) places Albis's business intelligence product in the wrong category at $49/mo — that's SMB-SaaS territory. Research recommends $199/$499/$1,499 annual-only, but no code changes made until validated with 5-10 target customers. Reference doc in `ALBIS-PRICING-RESEARCH.md`.
 
