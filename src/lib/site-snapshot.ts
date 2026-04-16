@@ -8,9 +8,12 @@
 // Consumers (this PR): src/app/page.tsx, src/app/api/scans/today/route.ts.
 // More consumers swap over in subsequent PRs (see § H of the execution plan).
 //
-// This reader uses the anon/cookie-aware server client — the RLS policy in
-// the migration allows anon SELECT, so public pages don't need the service
-// role. The writer (scripts/write-site-snapshot.ts) uses the admin client.
+// This reader uses a non-cookie anon client (src/lib/supabase/anon.ts).
+// The RLS policy in the migration allows anon SELECT, so public pages don't
+// need the service role. The writer (scripts/write-site-snapshot.ts) uses
+// the admin client. Using a cookie-aware client here would call cookies()
+// from next/headers and force /, /lens, /trending into dynamic rendering,
+// defeating their `revalidate = 300` ISR contract.
 //
 // Empty-state handling: if the row is missing entirely OR has no scan data
 // populated yet (scan_date is null), we return a sentinel object with
@@ -24,7 +27,7 @@
 // do NOT wrap with unstable_cache in this PR — adding a third caching layer
 // risks surprises. Revisit if profiling shows the Supabase round-trip is hot.
 
-import { createClient } from "@/lib/supabase/server";
+import { createAnonClient } from "@/lib/supabase/anon";
 import type { ScanItem, PatternOfDay } from "@/lib/scan-types";
 
 export interface BriefingTopStory {
@@ -205,7 +208,7 @@ function toSnapshot(row: SiteSnapshotRow): SiteSnapshot {
  */
 export async function getSiteSnapshot(): Promise<SiteSnapshot> {
   try {
-    const supabase = await createClient();
+    const supabase = createAnonClient();
     const { data, error } = await supabase
       .from("site_snapshot")
       .select("*")
