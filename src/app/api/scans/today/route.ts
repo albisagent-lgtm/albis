@@ -1,26 +1,51 @@
-import { NextResponse } from "next/server";
-import { getTodayScan } from "@/lib/scan-parser";
+// src/app/api/scans/today/route.ts
+//
+// GET /api/scans/today
+//
+// Returns today's scan items in a minimal shape for external/country-mention
+// consumers: { date, items: [{ headline, connection }] }.
+//
+// Reads from the site_snapshot singleton (populated by
+// scripts/write-site-snapshot.ts at the end of each scan run) instead of
+// hitting getTodayScan() which composes data from Supabase + filesystem.
+// Response shape is preserved so existing callers are unaffected.
+//
+// Empty-state: if the snapshot hasn't been populated yet, returns
+// { date: null, items: [] } with HTTP 200 — consumers should handle an
+// empty response, not treat it as an error.
+//
+// See docs/Cloudflare_Execution_Plan.md § D for the snapshot contract.
 
-export const dynamic = "force-dynamic";
+import { NextResponse } from "next/server";
+import { getSiteSnapshot } from "@/lib/site-snapshot";
 
 export async function GET() {
-  try {
-    const scan = await getTodayScan();
-    
-    if (!scan) {
-      return NextResponse.json({ items: [] }, { status: 200 });
-    }
+  const snapshot = await getSiteSnapshot();
 
-    // Return minimal data needed for country mentions
-    return NextResponse.json({
-      date: scan.date,
-      items: scan.items.map(item => ({
+  if (snapshot.isEmpty) {
+    return NextResponse.json(
+      { date: null, items: [] },
+      {
+        status: 200,
+        headers: {
+          "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+        },
+      }
+    );
+  }
+
+  return NextResponse.json(
+    {
+      date: snapshot.scanDate,
+      items: snapshot.items.map((item) => ({
         headline: item.headline,
         connection: item.connection || "",
       })),
-    });
-  } catch (error) {
-    console.error("Error fetching today's scan:", error);
-    return NextResponse.json({ error: "Failed to fetch scan data" }, { status: 500 });
-  }
+    },
+    {
+      headers: {
+        "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+      },
+    }
+  );
 }
