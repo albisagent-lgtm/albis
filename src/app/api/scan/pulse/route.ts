@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import { createAdminClient } from "@/lib/supabase/admin";
-
-export const dynamic = "force-dynamic";
+import { getSiteSnapshot } from "@/lib/site-snapshot";
 
 interface ScanPulseRow {
   id: number;
@@ -27,29 +25,31 @@ const DEFAULT_PULSE: ScanPulseRow = {
   stories_found: 0,
 };
 
+const CACHE_HEADERS = {
+  "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+};
+
 export async function GET() {
   try {
-    const supabase = createAdminClient();
+    const snapshot = await getSiteSnapshot();
 
-    const { data, error } = await supabase
-      .from("scan_pulse")
-      .select("*")
-      .eq("id", 1)
-      .single();
-
-    if (error || !data) {
-      return NextResponse.json({ pulse: DEFAULT_PULSE }, {
-        headers: {
-          "Cache-Control": "public, s-maxage=30, stale-while-revalidate=60",
-        },
-      });
+    if (snapshot.isEmpty) {
+      return NextResponse.json({ pulse: DEFAULT_PULSE }, { headers: CACHE_HEADERS });
     }
 
-    return NextResponse.json({ pulse: data as ScanPulseRow }, {
-      headers: {
-        "Cache-Control": "public, s-maxage=30, stale-while-revalidate=60",
-      },
-    });
+    const pulse: ScanPulseRow = {
+      id: 1,
+      updated_at: snapshot.updatedAt ?? new Date().toISOString(),
+      scan_period: snapshot.scanPeriod,
+      global_mood: snapshot.globalMood,
+      top_pgi_story: snapshot.topPgiStory,
+      top_pgi_score: snapshot.topPgiScore,
+      top_gai_story: snapshot.topGaiStory,
+      top_gai_score: snapshot.topGaiScore,
+      stories_found: snapshot.storiesFound ?? 0,
+    };
+
+    return NextResponse.json({ pulse }, { headers: CACHE_HEADERS });
   } catch {
     return NextResponse.json({ pulse: DEFAULT_PULSE });
   }

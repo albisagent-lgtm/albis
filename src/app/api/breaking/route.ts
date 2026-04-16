@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
+import { getSiteSnapshot } from "@/lib/site-snapshot";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -8,58 +9,36 @@ function getSupabase() {
   return createClient(supabaseUrl, serviceKey);
 }
 
-async function ensureTable(sb: ReturnType<typeof createClient>) {
-  // Try a select first — if table doesn't exist, create it via raw SQL
-  const { error } = await sb.from("breaking_news").select("id").limit(1);
-  if (error?.code === "PGRST205") {
-    // Table doesn't exist — create it via the SQL endpoint
-    // We'll use a workaround: create via RPC or just let the POST fail gracefully
-    // Actually, we need to create the table. Use the admin API.
-    const res = await fetch(`${supabaseUrl}/rest/v1/rpc/`, {
-      method: "POST",
-      headers: {
-        apikey: serviceKey,
-        Authorization: `Bearer ${serviceKey}`,
-        "Content-Type": "application/json",
-      },
-    });
-    // If RPC doesn't work, return false
-    return false;
-  }
-  return true;
-}
+const GET_CACHE_HEADERS = {
+  "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+};
 
+// GET is served from site_snapshot (PR 3). The synthesized row is narrower
+// than the underlying breaking_news row — only the fields the public site
+// needs (headline, url, expires_at). The known consumer,
+// src/app/components/breaking-news-banner.tsx, reads .headline and .url only.
 export async function GET() {
   try {
-    const sb = getSupabase();
-    const now = new Date().toISOString();
+    const snapshot = await getSiteSnapshot();
 
-    const { data, error } = await sb
-      .from("breaking_news")
-      .select("*")
-      .eq("active", true)
-      .or(`expires_at.is.null,expires_at.gt.${now}`)
-      .order("created_at", { ascending: false })
-      .limit(1);
-
-    if (error) {
-      // Table might not exist yet
-      if (error.code === "PGRST205") {
-        return NextResponse.json({ breaking: null });
-      }
-      return NextResponse.json({ error: error.message }, { status: 500 });
+    if (!snapshot.hasBreaking) {
+      return NextResponse.json({ breaking: null }, { headers: GET_CACHE_HEADERS });
     }
 
     return NextResponse.json(
-      { breaking: data && data.length > 0 ? data[0] : null },
       {
-        headers: {
-          "Cache-Control": "public, s-maxage=30, stale-while-revalidate=60",
+        breaking: {
+          headline: snapshot.breakingHeadline,
+          url: snapshot.breakingUrl,
+          expires_at: snapshot.breakingExpiresAt,
+          active: true,
         },
-      }
+      },
+      { headers: GET_CACHE_HEADERS }
     );
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e: unknown) {
+    const message = e instanceof Error ? e.message : "unknown error";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 

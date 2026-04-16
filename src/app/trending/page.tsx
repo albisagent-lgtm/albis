@@ -1,10 +1,10 @@
-import { getTodayScan } from "@/lib/scan-parser";
+import { getSiteSnapshot } from "@/lib/site-snapshot";
 import { getAllPosts } from "@/lib/blog";
 import { normalizeRegion, detectBlindspots, CATEGORY_META, type ScanItem } from "@/lib/scan-types";
 import Link from "next/link";
 import type { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Trending",
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function TrendingPage() {
-  const scan = await getTodayScan();
+  const snapshot = await getSiteSnapshot();
   const allPosts = getAllPosts();
 
   const articleSlugs: Record<string, string> = {};
@@ -38,9 +38,9 @@ export default async function TrendingPage() {
     return null;
   }
 
-  const items = scan?.items
+  const items = snapshot.hasScan && snapshot.items.length > 0
     ? detectBlindspots(
-        [...scan.items].sort((a, b) => {
+        [...snapshot.items].sort((a, b) => {
           // Sort by region count (most covered first), then significance
           const aRegions = [...new Set(a.regions.filter(r => r !== "global").map(r => normalizeRegion(r)))].length;
           const bRegions = [...new Set(b.regions.filter(r => r !== "global").map(r => normalizeRegion(r)))].length;
