@@ -4,9 +4,11 @@ Items deliberately deferred from the Cloudflare migration. These are not migrati
 
 Source: answers to the 10 open questions in `docs/Cloudflare_Execution_Plan.md` § G, captured during PR 1 planning.
 
-## Deferred items
+## Consciously dropped during migration (restore if social traffic demands it)
 
-- **Restore dynamic per-article OG images.** Migration Q3 decided to drop `/api/og` and `/api/og/pgi` and rely on the static site-wide `/og-image.png`. Per-article social cards are a nice-to-have, not critical-path. Revisit if social referral traffic becomes material. Options: pre-render PNGs at scan-ingest time and upload to Supabase Storage or R2, or run the `next/og` edge runtime behind a feature flag once Cloudflare adapter support is proven.
+- **Dynamic per-article OG images.** Dropped in PR 7.3. The `/api/og` and `/api/og/pgi` routes pulled `@vercel/og` (Satori + `resvg.wasm` + `yoga.wasm` + `index.edge.js`) into the Worker bundle, which pushed it past Cloudflare's 3 MiB free-tier size limit during the PR 7 Phase 2a first-deploy attempt (error code 10027). Metadata now falls back to the static site-wide `/og-image.png`; for articles, `generateArticleMetadata()` in `src/app/components/article-page.tsx` uses `post.image` when it's a real file and `/og-image.png` otherwise (preserving per-article cards for posts with their own hero image). Restore options if social referral traffic becomes material: (a) pre-render PNGs at scan-ingest time and store in Supabase Storage or R2, then reference by URL from the metadata generator; (b) re-introduce `next/og` behind a feature flag on Cloudflare Workers Paid (10 MiB limit) once we know the rest of the bundle is trimmed; (c) offload per-article OG rendering to an external service (e.g. a small separate Worker or Vercel edge function just for OG).
+
+## Deferred items
 
 - **Replace `/admin` localStorage auth gate with proper server-side auth.** Migration Q10 flagged this as a pre-existing security concern. `src/app/admin/page.tsx` currently gates on a localStorage value, which any user can set in devtools. Route should be protected by a Supabase-authenticated middleware check against an `is_admin` column on `profiles` (or similar).
 
