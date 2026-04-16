@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.albis.news";
+
 export async function POST(req: NextRequest) {
   try {
     const { priceId, userId } = await req.json();
@@ -18,8 +20,8 @@ export async function POST(req: NextRequest) {
       "payment_method_types[0]": "card",
       "line_items[0][price]": priceId,
       "line_items[0][quantity]": "1",
-      success_url: "https://www.albis.news/account?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "https://www.albis.news/pricing",
+      success_url: `${siteUrl}/account?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${siteUrl}/pricing`,
       client_reference_id: userId,
       "metadata[userId]": userId,
     });
