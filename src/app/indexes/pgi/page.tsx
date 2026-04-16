@@ -7,7 +7,7 @@ import { PgiTimeline } from "@/app/components/pgi-timeline";
 import { SeriesArticleFeed } from "@/components/SeriesArticleFeed";
 import { getArticlesByTag } from "@/lib/blog/tagged";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 async function getLatestPgi() {
   try {

@@ -3,7 +3,20 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
+
+export async function generateStaticParams() {
+  try {
+    const supabase = createAdminClient();
+    const { data } = await supabase
+      .from("pgi_signature_pieces")
+      .select("date")
+      .order("date", { ascending: false });
+    return (data ?? []).map((row: { date: string }) => ({ date: row.date }));
+  } catch {
+    return [];
+  }
+}
 
 interface SignaturePiece {
   date: string;

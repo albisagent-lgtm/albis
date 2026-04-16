@@ -239,7 +239,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
+
+export async function generateStaticParams() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) return [];
+  const supabase = createClient(url, key, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+  const { data } = await supabase
+    .from("briefings")
+    .select("date")
+    .order("date", { ascending: false });
+  return (data ?? []).map((row: { date: string }) => ({ date: row.date }));
+}
 
 export default async function BriefingPage({ params }: Props) {
   const { date } = await params;
