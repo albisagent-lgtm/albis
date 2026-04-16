@@ -1,0 +1,29 @@
+-- 2026-04-16 — Drop scan_pulse table (superseded by site_snapshot)
+--
+-- WHAT THIS MIGRATION DOES:
+--
+-- Drops the `scan_pulse` singleton table. Its data is now served from
+-- `site_snapshot` (see supabase/migrations/20260416_site_snapshot.sql) via
+-- the columns: scan_period, global_mood, top_pgi_story, top_pgi_score,
+-- top_gai_story, top_gai_score, stories_found.
+--
+-- As of PR 3 the only consumer (/api/scan/pulse GET) reads from site_snapshot
+-- instead of scan_pulse. There are no remaining writers or readers of this
+-- table in the application code.
+--
+-- CASCADE is used so any dependent objects (views, constraints) are dropped
+-- without erroring. We are not aware of any dependents at the time of this
+-- migration, but CASCADE keeps the migration idempotent against dependents
+-- that may have been added externally.
+--
+-- HOW TO RUN THIS:
+--   Paste the statement below into Supabase Dashboard → SQL Editor → New
+--   query → Run.
+--
+-- ROLLBACK NOTE:
+--   Not reversible in-place: restoring scan_pulse requires recreating the
+--   table definition from an earlier migration (or backup) and re-seeding.
+--   Any writers you add in the future should target site_snapshot, not
+--   scan_pulse.
+
+DROP TABLE IF EXISTS public.scan_pulse CASCADE;

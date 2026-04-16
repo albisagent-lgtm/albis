@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
-import { getTodayScan } from "@/lib/scan-parser";
+import { getSiteSnapshot } from "@/lib/site-snapshot";
 import LensClient from "./lens-client";
 import { LensTabs } from "./lens-tabs";
 import { Breadcrumbs } from "@/app/components/breadcrumbs";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Stories — Albis News",
@@ -40,13 +40,13 @@ export default async function LensPage({ searchParams }: LensPageProps) {
     pillars: p.pillars || undefined,
   }));
 
-  const scan = await getTodayScan();
+  const snapshot = await getSiteSnapshot();
 
-  const scanData = scan && scan.items.length > 0 ? {
-    items: scan.items,
-    patternOfDay: scan.patternOfDay,
-    framingNote: scan.framingNote,
-    displayDate: scan.displayDate,
+  const scanData = snapshot.hasScan && snapshot.items.length > 0 ? {
+    items: snapshot.items,
+    patternOfDay: snapshot.patternOfDay,
+    framingNote: snapshot.framingNote,
+    displayDate: snapshot.scanDisplayDate ?? undefined,
   } : null;
 
   const articleRefs = allPosts.map(p => ({
