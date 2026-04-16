@@ -4,6 +4,19 @@
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-04-16",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  // Plain-text vars live here so `wrangler deploy` does not treat
+  // Dashboard-set values as drift and wipe them. Secrets (service role key,
+  // Stripe keys, Resend key, SCAN_INGEST_KEY, PEXELS_API_KEY) stay in the
+  // Cloudflare Dashboard as encrypted secrets — NEVER add them here.
+  // NEXT_PUBLIC_* values are already shipped in the browser bundle; the
+  // Supabase anon key is RLS-protected, not secret. NODE_ENV has no
+  // security implications.
+  "vars": {
+    "NEXT_PUBLIC_SUPABASE_URL": "https://wguydvzpxwsgrhvojpnk.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_TijRtvYeJ-iL8HhhS8NpMg_zbla_orj",
+    "NEXT_PUBLIC_SITE_URL": "https://albis.albisagent.workers.dev",
+    "NODE_ENV": "production"
+  },
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
