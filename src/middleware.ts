@@ -37,14 +37,18 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
+  // Narrowed to auth-protected paths only — per docs/Cloudflare_Execution_Plan.md
+  // § C1.7 and § F.3. Public pages no longer trigger supabase.auth.getUser()
+  // per request, which is the single biggest cache-busting issue on Cloudflare.
+  // :path* matches zero or more segments, so `/dashboard/:path*` covers both
+  // `/dashboard` and `/dashboard/foo/bar`.
   matcher: [
-    /*
-     * Match all request paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon)
-     * - public assets
-     */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/dashboard/:path*",
+    "/account/:path*",
+    "/settings/:path*",
+    "/onboarding/:path*",
+    "/api/stripe/portal",
+    "/api/company-briefings/submit",
+    "/auth/callback",
   ],
 };
