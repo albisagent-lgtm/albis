@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.albis.news";
+
 export async function POST(req: NextRequest) {
   try {
     const supabase = await createClient();
@@ -22,7 +24,7 @@ export async function POST(req: NextRequest) {
 
     const params = new URLSearchParams({
       customer: profile.stripe_customer_id,
-      return_url: "https://www.albis.news/account",
+      return_url: `${siteUrl}/account`,
     });
 
     const res = await fetch("https://api.stripe.com/v1/billing_portal/sessions", {
