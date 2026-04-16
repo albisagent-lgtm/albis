@@ -67,7 +67,7 @@ function formatDate(dateStr: string): string {
   });
 }
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default async function ArchivePage() {
   const briefings = await getBriefings();
