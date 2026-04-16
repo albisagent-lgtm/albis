@@ -419,13 +419,9 @@ export function ArticlePage({ post }: { post: BlogPost }) {
 
 export function generateArticleMetadata(post: BlogPost) {
   const url = `https://www.albis.news${getPostUrl(post)}`;
-  const ogParams = new URLSearchParams({ title: post.title });
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const p = post as any;
-  if (typeof p.perception_gap === "number") ogParams.set("pgi", p.perception_gap.toFixed(1));
-  if (Array.isArray(p.regions_found) && p.regions_found.length > 0) ogParams.set("regions", p.regions_found.slice(0, 4).join(","));
-  if (post.date && !isNaN(new Date(post.date).getTime())) ogParams.set("date", new Date(post.date).toLocaleDateString("en-NZ", { day: "numeric", month: "long", year: "numeric" }));
-  const ogImageUrl = `https://www.albis.news/api/og?${ogParams.toString()}`;
+  const ogImageUrl = post.image && post.image !== "/og-image.png"
+    ? `https://www.albis.news${post.image}`
+    : `https://www.albis.news/og-image.png`;
 
   const CATEGORIES: Record<string, string> = {
     analysis: "Analysis",

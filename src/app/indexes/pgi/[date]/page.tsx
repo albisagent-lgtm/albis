@@ -172,7 +172,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `PGI ${report.daily_pgi.toFixed(1)} — ${tier.name} | Albis`,
       description: `${report.story_count} stories scored across ${report.region_count} regions. How differently did the world understand ${formatDateShort(date)}'s events?`,
-      images: [{ url: `/api/og/pgi?pgi=${report.daily_pgi}&date=${date}`, width: 1200, height: 630 }],
+      images: [{ url: "https://www.albis.news/og-image.png", width: 1200, height: 630 }],
     },
   };
 }
