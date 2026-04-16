@@ -2,21 +2,28 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { headers } from "next/headers";
 
-// --- Rate Limiting (in-memory) ---
+// --- Rate Limiting (in-memory, per Worker isolate) ---
+//
+// Lazy cleanup per request, no module-scope timers. On Cloudflare Workers,
+// setInterval at module scope runs per-isolate and offers no reliable prune
+// guarantee; see docs/Cloudflare_Execution_Plan.md § F.5. Each request prunes
+// stale entries before the rate check — O(n) in the number of active IPs,
+// which is bounded by the 60s window and fine at this endpoint's volume.
+//
+// State resets when an isolate is recycled; this is a softer guarantee than
+// a single-process Node server, but matches the Workers model.
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_WINDOW = 60_000; // 60 seconds
 const RATE_LIMIT_MAX = 5;
 
-// Cleanup old entries every 60s
-setInterval(() => {
-  const now = Date.now();
-  for (const [ip, entry] of rateLimitMap) {
-    if (now > entry.resetAt) rateLimitMap.delete(ip);
-  }
-}, 60_000);
-
 function checkRateLimit(ip: string): boolean {
   const now = Date.now();
+
+  // Lazy prune of expired entries before the check.
+  for (const [key, entry] of rateLimitMap) {
+    if (now > entry.resetAt) rateLimitMap.delete(key);
+  }
+
   const entry = rateLimitMap.get(ip);
   if (!entry || now > entry.resetAt) {
     rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
