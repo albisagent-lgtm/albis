@@ -2,18 +2,13 @@
 /**
  * Push scan data from markdown files to Supabase.
  *
- * Usage: node scripts/push-scan-to-supabase.js [YYYY-MM-DD]
+ * Usage: node scripts/push-scan-to-supabase.js [YYYY-MM-DD[-am|-midday|-pm]]
  * If no date specified, pushes today's scan (NZST).
  *
- * Bug-fix version (2026-04-15):
- *  - Dedupe sections by scan_time prefix (previously "## AM Scan" / "## AM Data"
- *    / "## AM PGI Scores" each triggered a separate upsert with DELETE-then-INSERT,
- *    so later scoring sections clobbered the earlier items).
- *  - Use proper Supabase upsert (on_conflict) instead of DELETE+INSERT, so idempotent
- *    re-runs don't temporarily erase data.
- *  - Store the full markdown file in raw_markdown, not a section slice.
- *  - Normalise scan_time to lowercase ("am" | "midday" | "pm") to match recent
- *    rows and avoid casing-duplicate rows.
+ * Bug-fix version:
+ *  - Supports period-specific filenames like 2026-04-17-pm.md
+ *  - Correctly infers scan_time from filename when provided
+ *  - Uses proper Supabase upsert (onConflict) so reruns are idempotent
  */
 
 const fs = require('fs');
@@ -32,10 +27,6 @@ if (!SERVICE_KEY) {
 const supabase = createClient(SUPABASE_URL, SERVICE_KEY, {
   auth: { autoRefreshToken: false, persistSession: false },
 });
-
-// ---------------------------------------------------------------------------
-// Parsers
-// ---------------------------------------------------------------------------
 
 function extractSection(md, label) {
   const boldRegex = new RegExp(
@@ -64,12 +55,6 @@ function parsePatternOfDay(raw) {
   return { title: '', body: raw };
 }
 
-/**
- * Extract all scan items from all ```json blocks in a markdown slice.
- * Accepts any block that parses as a JSON array of {headline, category, ...}.
- * Silently skips blocks that parse as objects (PGI/GAI scoring blocks) or
- * blocks that fail to parse.
- */
 function extractJsonItems(md) {
   const items = [];
   const jsonBlockRegex = /```json\s*\n([\s\S]*?)```/g;
@@ -109,19 +94,6 @@ function extractFramingWatch(md) {
   return framingMatch[1].trim();
 }
 
-// ---------------------------------------------------------------------------
-// Section detection — dedupe by scan_time
-// ---------------------------------------------------------------------------
-
-/**
- * Find section spans in the markdown. Each span represents one scan_time
- * (am/midday/pm) and covers EVERY `## AM Xxx`, `## AM Yyy`, etc. heading up
- * until the first heading of the next scan_time.
- *
- * Returns: [{ scanTime: 'am', start: Number, end: Number }, ...]
- *   where `start` is the index of the first matching header, and `end` is
- *   the index where the next-scan-time's first header starts (or md.length).
- */
 function findScanTimeSpans(md) {
   const headerRegex = /^## (AM|Midday|PM)\b[^\n]*/gm;
   const hits = [];
@@ -131,9 +103,6 @@ function findScanTimeSpans(md) {
   }
   if (hits.length === 0) return [];
 
-  // Collapse consecutive headers with the same scan_time into one span.
-  // The span for scan_time X starts at its first header and ends at the
-  // first header of a DIFFERENT scan_time (or EOF).
   const spans = [];
   let cur = { scanTime: hits[0].scanTime, start: hits[0].index, end: md.length };
   for (let i = 1; i < hits.length; i++) {
@@ -145,25 +114,17 @@ function findScanTimeSpans(md) {
   }
   spans.push(cur);
 
-  // If a scan_time appears multiple times non-contiguously (unusual), merge by
-  // taking the FIRST start and LAST end. We also need to deduplicate the spans
-  // so we upsert each scan_time once.
   const byTime = new Map();
   for (const s of spans) {
     const existing = byTime.get(s.scanTime);
-    if (!existing) {
-      byTime.set(s.scanTime, { ...s });
-    } else {
+    if (!existing) byTime.set(s.scanTime, { ...s });
+    else {
       existing.start = Math.min(existing.start, s.start);
       existing.end = Math.max(existing.end, s.end);
     }
   }
   return [...byTime.values()].sort((a, b) => a.start - b.start);
 }
-
-// ---------------------------------------------------------------------------
-// Upsert via Supabase client (proper on_conflict, no DELETE+INSERT)
-// ---------------------------------------------------------------------------
 
 async function upsertScan(scanDate, scanTime, data, fullMarkdown) {
   const body = {
@@ -182,23 +143,34 @@ async function upsertScan(scanDate, scanTime, data, fullMarkdown) {
     .from('scans')
     .upsert(body, { onConflict: 'scan_date,scan_time' });
 
-  if (error) {
-    throw new Error(`Supabase upsert failed: ${error.message}`);
-  }
+  if (error) throw new Error(`Supabase upsert failed: ${error.message}`);
 
   console.log(`✅ Upserted ${scanDate} ${scanTime} — ${body.items.length} items, mood=${body.mood || '—'}`);
 }
 
-// ---------------------------------------------------------------------------
-// Main
-// ---------------------------------------------------------------------------
+function parseArg(arg) {
+  if (!arg) {
+    const now = new Date();
+    const nzDate = new Date(now.getTime() + 13 * 60 * 60 * 1000);
+    return { scanDate: nzDate.toISOString().split('T')[0], period: null, fileName: `${nzDate.toISOString().split('T')[0]}.md` };
+  }
+
+  const fullMatch = arg.match(/^(\d{4}-\d{2}-\d{2})-(am|midday|pm)$/i);
+  if (fullMatch) {
+    return { scanDate: fullMatch[1], period: fullMatch[2].toLowerCase(), fileName: `${fullMatch[1]}-${fullMatch[2].toLowerCase()}.md` };
+  }
+
+  const dateMatch = arg.match(/^(\d{4}-\d{2}-\d{2})$/);
+  if (dateMatch) {
+    return { scanDate: dateMatch[1], period: null, fileName: `${dateMatch[1]}.md` };
+  }
+
+  throw new Error(`Unsupported argument format: ${arg}`);
+}
 
 async function main() {
-  // Default to NZST date (UTC+13)
-  const now = new Date();
-  const nzDate = new Date(now.getTime() + 13 * 60 * 60 * 1000);
-  const dateArg = process.argv[2] || nzDate.toISOString().split('T')[0];
-  const filePath = path.join(SCANS_DIR, `${dateArg}.md`);
+  const parsed = parseArg(process.argv[2]);
+  const filePath = path.join(SCANS_DIR, parsed.fileName);
 
   if (!fs.existsSync(filePath)) {
     console.error(`Scan file not found: ${filePath}`);
@@ -208,7 +180,6 @@ async function main() {
   const md = fs.readFileSync(filePath, 'utf-8');
   console.log(`📄 Reading ${filePath} (${md.length} chars)`);
 
-  // Top-level fallbacks (used if a section doesn't define its own)
   const topTheme = extractSection(md, 'Top theme') || extractSection(md, 'Top Theme');
   const mood = extractSection(md, 'Mood');
   const patternRaw = extractSection(md, 'Pattern') || extractSection(md, 'Patterns');
@@ -220,15 +191,34 @@ async function main() {
   console.log(`🔍 Detected ${spans.length} scan-time span(s): ${spans.map(s => s.scanTime).join(', ') || '(none — single scan)'}`);
 
   if (spans.length === 0) {
-    // No AM/Midday/PM headers — treat whole file as one "am" scan
+    const inferredTime = parsed.period || 'am';
     const allItems = extractJsonItems(md);
     console.log(`   → extracted ${allItems.length} items from full markdown`);
-    await upsertScan(dateArg, 'am', {
+    await upsertScan(parsed.scanDate, inferredTime, {
       topTheme,
       mood,
       patternOfDay,
       framingWatch: framingWatch || framingNote,
       items: allItems,
+    }, md);
+  } else if (parsed.period) {
+    const target = spans.find((s) => s.scanTime === parsed.period);
+    if (!target) throw new Error(`Could not find ${parsed.period} section in ${parsed.fileName}`);
+    const sectionMd = md.substring(target.start, target.end);
+    const sItems = extractJsonItems(sectionMd);
+    const sTopTheme = extractSection(sectionMd, 'Top theme') || extractSection(sectionMd, 'Top Theme');
+    const sMood = extractSection(sectionMd, 'Mood');
+    const sPatternRaw = extractSection(sectionMd, 'Pattern') || extractSection(sectionMd, 'Patterns');
+    const sPatternOfDay = parsePatternOfDay(sPatternRaw);
+    const sFramingNote = extractSection(sectionMd, 'Framing');
+    const sFramingWatch = extractFramingWatch(sectionMd);
+    console.log(`   → ${target.scanTime}: ${sItems.length} items from chars ${target.start}-${target.end}`);
+    await upsertScan(parsed.scanDate, target.scanTime, {
+      topTheme: sTopTheme || topTheme,
+      mood: sMood || mood,
+      patternOfDay: sPatternOfDay || patternOfDay,
+      framingWatch: sFramingWatch || sFramingNote || framingWatch || framingNote,
+      items: sItems,
     }, md);
   } else {
     for (const span of spans) {
@@ -242,8 +232,7 @@ async function main() {
       const sFramingWatch = extractFramingWatch(sectionMd);
 
       console.log(`   → ${span.scanTime}: ${sItems.length} items from chars ${span.start}-${span.end}`);
-
-      await upsertScan(dateArg, span.scanTime, {
+      await upsertScan(parsed.scanDate, span.scanTime, {
         topTheme: sTopTheme || topTheme,
         mood: sMood || mood,
         patternOfDay: sPatternOfDay || patternOfDay,

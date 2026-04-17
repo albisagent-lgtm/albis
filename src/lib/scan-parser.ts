@@ -251,7 +251,7 @@ async function getSupabaseFramingItems(): Promise<any[]> {
 
 function parseScanFile(filePath: string): ParsedScan | null {
   const filename = path.basename(filePath, ".md");
-  const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})$/);
+  const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})(?:-(am|midday|pm))?$/i);
   if (!dateMatch) return null;
 
   const date = dateMatch[1];
@@ -313,9 +313,17 @@ export async function getTodayScan(): Promise<ParsedScan | null> {
 
   // Fallback to local filesystem
   if (isLocal) {
-    const filePath = path.join(SCANS_DIR, `${today}.md`);
-    if (fs.existsSync(filePath)) {
-      return parseScanFile(filePath);
+    const candidates = [
+      path.join(SCANS_DIR, `${today}-pm.md`),
+      path.join(SCANS_DIR, `${today}-midday.md`),
+      path.join(SCANS_DIR, `${today}-am.md`),
+      path.join(SCANS_DIR, `${today}.md`),
+    ];
+    for (const filePath of candidates) {
+      if (fs.existsSync(filePath)) {
+        const parsed = parseScanFile(filePath);
+        if (parsed && parsed.items.length > 0) return parsed;
+      }
     }
   }
 
@@ -335,11 +343,17 @@ export async function getLatestScan(): Promise<ParsedScan | null> {
   // Fallback to local filesystem
   if (!isLocal || !fs.existsSync(SCANS_DIR)) return null;
 
+  const periodRank: Record<string, number> = { am: 1, midday: 2, pm: 3 };
   const files = fs
     .readdirSync(SCANS_DIR)
-    .filter((f) => /^\d{4}-\d{2}-\d{2}\.md$/.test(f))
-    .sort()
-    .reverse();
+    .filter((f) => /^\d{4}-\d{2}-\d{2}(?:-(am|midday|pm))?\.md$/i.test(f))
+    .sort((a, b) => {
+      const ma = a.match(/^(\d{4}-\d{2}-\d{2})(?:-(am|midday|pm))?\.md$/i);
+      const mb = b.match(/^(\d{4}-\d{2}-\d{2})(?:-(am|midday|pm))?\.md$/i);
+      if (!ma || !mb) return b.localeCompare(a);
+      if (ma[1] !== mb[1]) return mb[1].localeCompare(ma[1]);
+      return (periodRank[(mb[2] || 'am').toLowerCase()] || 0) - (periodRank[(ma[2] || 'am').toLowerCase()] || 0);
+    });
 
   if (files.length === 0) return null;
 
