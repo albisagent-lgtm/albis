@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { headers } from "next/headers";
+import { sendEmail } from "@/lib/email";
+import { generateWelcomeEmail } from "@/lib/email-templates/welcome";
 
 // --- Rate Limiting (in-memory, per Worker isolate) ---
 //
@@ -137,12 +139,20 @@ export async function POST(request: Request) {
 
       if (error) {
         console.error("Supabase insert error:", error.message);
+      } else {
+        // Fire welcome email. Failures must not block the subscription.
+        try {
+          const { subject, html } = generateWelcomeEmail(email);
+          await sendEmail({ to: email, subject, html });
+        } catch (sendErr) {
+          console.error("Welcome email send failed:", sendErr);
+        }
       }
     }
 
     return NextResponse.json({
       success: true,
-      message: "You're on the list! We'll be in touch soon.",
+      message: "You're in. Your first briefing arrives tomorrow morning.",
     });
   } catch (err) {
     console.error("Subscribe error:", err);

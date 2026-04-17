@@ -52,15 +52,24 @@ export async function getSubscriberEmails(): Promise<string[]> {
  */
 export async function getSubscriberEmailsByLocalHour(targetHour: number): Promise<string[]> {
   const supabase = createAdminClient();
-  
-  // Get all subscribers with their timezones
-  const { data, error } = await supabase
-    .from("subscribers")
-    .select("email, timezone");
 
-  if (error) {
-    console.error("Failed to fetch subscribers:", error.message);
-    return [];
+  // Prefer the subscribed=true filter; fall back if the column doesn't exist
+  // (matches the pattern used by getSubscriberEmails).
+  let data: { email: string; timezone: string | null }[] | null = null;
+  const filtered = await supabase
+    .from("subscribers")
+    .select("email, timezone")
+    .eq("subscribed", true);
+
+  if (filtered.error) {
+    const fallback = await supabase.from("subscribers").select("email, timezone");
+    if (fallback.error) {
+      console.error("Failed to fetch subscribers:", fallback.error.message);
+      return [];
+    }
+    data = fallback.data;
+  } else {
+    data = filtered.data;
   }
 
   if (!data || data.length === 0) return [];
