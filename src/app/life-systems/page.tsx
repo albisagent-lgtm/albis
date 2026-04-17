@@ -4,7 +4,7 @@ import { CategoryGrid } from "@/app/components/category-grid";
 
 export const revalidate = 300;
 
-const CATEGORY_FILTERS = ["energy", "food", "water", "life-systems"];
+const CATEGORY_FILTERS = ["energy", "food", "water", "life-systems", "climate-energy"];
 
 export const metadata: Metadata = {
   title: "Life Systems — Albis",
