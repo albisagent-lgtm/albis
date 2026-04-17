@@ -60,10 +60,14 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Only `published_at` controls visibility. Do NOT fall back to `date` —
+    // `date` is the article's logical/content date (often a future calendar
+    // day), whereas `published_at` is the actual publication timestamp that
+    // drives the anon RLS filter `published_at <= NOW()`. Treating `date` as
+    // `published_at` silently hides the article until the future date arrives.
     const publishedAtIso = (() => {
-      const raw = published_at || date;
-      if (!raw) return new Date().toISOString();
-      const d = new Date(raw);
+      if (!published_at) return new Date().toISOString();
+      const d = new Date(published_at);
       return Number.isNaN(d.getTime()) ? new Date().toISOString() : d.toISOString();
     })();
 
