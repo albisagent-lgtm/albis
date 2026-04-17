@@ -18,13 +18,13 @@ image: >-
 excerpt: >-
   Any real normalization in Hormuz would immediately affect fuel costs, shipping
   lanes, insurance pricing, and inflation expectations worldwide.
-author: Harry
+author: Albis
 ---
 Hormuz reopening signals and deal speculation push oil lower as traders price de-escalation matters because it changes the system around it, not just the headline cycle.
 
 Any real normalization in Hormuz would immediately affect fuel costs, shipping lanes, insurance pricing, and inflation expectations worldwide.
 
-From the April 17  scan, the important signal is not only what happened but what it changes next: who gains leverage, what becomes more fragile, and which regions treat the story as core rather than peripheral.
+From the 2026-04-17 economic-flows scan, the important signal is not only what happened but what it changes next: who gains leverage, what becomes more fragile, and which regions treat the story as core rather than peripheral.
 
 The framing pattern in the scan points to a real gap between simple event coverage and systems consequences. This story is best understood through the pattern of de-escalation, framing, consensus.
 

@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { spawnSync } from 'child_process';
 import matter from 'gray-matter';
+import readingTime from 'reading-time';
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 
@@ -127,9 +128,9 @@ function buildArticle(item: any, date: string) {
   const excerpt = item.connection || item.headline;
   const description = excerpt;
   const tags = Array.isArray(item.tags) ? item.tags : [];
-  const body = `${item.headline.startsWith('A ') || item.headline.startsWith('The ') ? item.headline : title} matters because it changes the system around it, not just the headline cycle.\n\n${item.connection || 'The underlying shift in this story is larger than the immediate event.'}\n\nFrom the April 17 ${date ? '' : ''} scan, the important signal is not only what happened but what it changes next: who gains leverage, what becomes more fragile, and which regions treat the story as core rather than peripheral.\n\nThe framing pattern in the scan points to a real gap between simple event coverage and systems consequences. ${Array.isArray(item.patterns) && item.patterns.length ? `This story is best understood through the pattern of ${item.patterns.join(', ')}.` : 'The downstream effects are likely to matter as much as the immediate trigger.'}\n\nWhat matters now is whether this becomes a one-cycle headline or a durable state change. That depends on what happens next in policy, markets, diplomacy and public response.\n\nFor Albis, this is exactly the kind of story worth publishing: globally relevant, unevenly framed, and more structurally important than it may first appear.`;
+  const body = `${item.headline.startsWith('A ') || item.headline.startsWith('The ') ? item.headline : title} matters because it changes the system around it, not just the headline cycle.\n\n${item.connection || 'The underlying shift in this story is larger than the immediate event.'}\n\nFrom the ${date} ${item.category || 'global'} scan, the important signal is not only what happened but what it changes next: who gains leverage, what becomes more fragile, and which regions treat the story as core rather than peripheral.\n\nThe framing pattern in the scan points to a real gap between simple event coverage and systems consequences. ${Array.isArray(item.patterns) && item.patterns.length ? `This story is best understood through the pattern of ${item.patterns.join(', ')}.` : 'The downstream effects are likely to matter as much as the immediate trigger.'}\n\nWhat matters now is whether this becomes a one-cycle headline or a durable state change. That depends on what happens next in policy, markets, diplomacy and public response.\n\nFor Albis, this is exactly the kind of story worth publishing: globally relevant, unevenly framed, and more structurally important than it may first appear.`;
 
-  const fm = {
+  const frontmatter = {
     title,
     description,
     date: `${date}T21:59:00+12:00`,
@@ -137,24 +138,74 @@ function buildArticle(item: any, date: string) {
     tags,
     image: chooseImage(category),
     excerpt,
-    author: 'Harry',
+    author: 'Albis',
   };
-  return { slug, content: matter.stringify(body, fm) };
+  const markdown = matter.stringify(body, frontmatter);
+  return {
+    slug,
+    title,
+    description,
+    date,
+    category,
+    tags,
+    image: frontmatter.image,
+    excerpt,
+    author: 'Albis',
+    content: body,
+    markdown,
+    reading_time: `${Math.ceil(readingTime(body).minutes)} min read`,
+    frontmatter,
+  };
 }
 
-function writeArticles(items: any[], date: string, period: Period) {
+function writeArticlesLocally(articles: ReturnType<typeof buildArticle>[]) {
   const blogDir = path.resolve(process.cwd(), 'content/blog');
-  const chosen = items.slice(0, 3);
-  const paths: string[] = [];
-  for (const item of chosen) {
-    const article = buildArticle(item, date);
+  for (const article of articles) {
     const fullPath = path.join(blogDir, `${article.slug}.md`);
-    fs.writeFileSync(fullPath, article.content);
-    paths.push(fullPath);
-    console.log(`✅ Wrote article ${path.basename(fullPath)}`);
+    fs.writeFileSync(fullPath, article.markdown);
+    console.log(`✅ Wrote backup article ${path.basename(fullPath)}`);
   }
-  if (!paths.length) fail('No article files were written');
-  return paths;
+}
+
+async function ingestArticles(articles: ReturnType<typeof buildArticle>[]) {
+  const key = process.env.SCAN_INGEST_KEY;
+  if (!key) fail('Missing SCAN_INGEST_KEY for article ingest');
+
+  for (const article of articles) {
+    const res = await fetch('https://www.albis.news/api/articles/ingest', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${key}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        slug: article.slug,
+        title: article.title,
+        description: article.description,
+        date: article.date,
+        category: article.category,
+        tags: article.tags,
+        image: article.image,
+        excerpt: article.excerpt,
+        author: article.author,
+        content: article.content,
+        reading_time: article.reading_time,
+        frontmatter: article.frontmatter,
+      }),
+    });
+
+    const text = await res.text();
+    if (!res.ok) fail(`Article ingest failed for ${article.slug}: ${res.status} ${text}`);
+    console.log(`✅ Ingested article ${article.slug}`);
+  }
+}
+
+async function verifyArticles(articles: ReturnType<typeof buildArticle>[]) {
+  const slugs = articles.map((a) => a.slug);
+  const { data, error } = await supabase.from('articles').select('slug').in('slug', slugs);
+  if (error) fail(`Article verify failed: ${error.message}`);
+  if (!data || data.length !== slugs.length) fail(`Expected ${slugs.length} articles in Supabase, found ${data?.length || 0}`);
+  console.log(`✅ Verified ${data.length} article row(s) in Supabase`);
 }
 
 async function verifySnapshot(date: string) {
@@ -164,17 +215,21 @@ async function verifySnapshot(date: string) {
   console.log(`✅ Verified site_snapshot updated for briefing_date=${date}`);
 }
 
-function maybeCommitAndPush(date: string) {
-  run('git', ['add', 'content/blog/']);
-  const status = spawnSync('git', ['diff', '--cached', '--quiet'], { cwd: process.cwd(), env: process.env });
-  if (status.status === 0) {
-    console.log('ℹ️ No article changes to commit');
+function maybeCommitAndPushCodeChanges() {
+  const status = spawnSync('git', ['status', '--porcelain'], { cwd: process.cwd(), env: process.env, encoding: 'utf8' });
+  const changed = (status.stdout || '')
+    .split('\n')
+    .map((l) => l.trim())
+    .filter(Boolean)
+    .filter((l) => !l.includes('content/blog/'));
+  if (!changed.length) {
+    console.log('ℹ️ No code changes to commit');
     return;
   }
-  run('git', ['commit', '-m', `articles: ${date} scan`]);
+  run('git', ['add', '.']);
+  run('git', ['commit', '-m', 'chore: update pipeline code']);
   run('git', ['push', 'origin', 'main']);
-  console.log('✅ Commit and push complete');
-  console.log('Ready for deploy — run git pull && npm run deploy on the build machine.');
+  console.log('✅ Code changes committed and pushed');
 }
 
 async function main() {
@@ -194,12 +249,15 @@ async function main() {
   run('openclaw', ['cron', 'run', 'a79cb02a-98ef-4e9a-85e6-f10e37a8deb9'], path.resolve(process.cwd(), '..'));
   await verifyBriefing(date);
 
-  writeArticles(items, date, period);
+  const articles = items.slice(0, 3).map((item: any) => buildArticle(item, date));
+  writeArticlesLocally(articles);
+  await ingestArticles(articles);
+  await verifyArticles(articles);
 
   run('npx', ['tsx', 'scripts/write-site-snapshot.ts']);
   await verifySnapshot(date);
 
-  maybeCommitAndPush(date);
+  maybeCommitAndPushCodeChanges();
   console.log('🎉 Post-scan pipeline completed successfully');
 }
 

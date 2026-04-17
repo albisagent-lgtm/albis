@@ -20,13 +20,13 @@ excerpt: >-
   A live ceasefire changes civilian movement, military tempo, and diplomatic
   space across the Middle East while immediately affecting global energy and
   risk pricing.
-author: Harry
+author: Albis
 ---
 Israel-Lebanon 10-day ceasefire takes effect but early violation claims cloud durability matters because it changes the system around it, not just the headline cycle.
 
 A live ceasefire changes civilian movement, military tempo, and diplomatic space across the Middle East while immediately affecting global energy and risk pricing.
 
-From the April 17  scan, the important signal is not only what happened but what it changes next: who gains leverage, what becomes more fragile, and which regions treat the story as core rather than peripheral.
+From the 2026-04-17 conflict scan, the important signal is not only what happened but what it changes next: who gains leverage, what becomes more fragile, and which regions treat the story as core rather than peripheral.
 
 The framing pattern in the scan points to a real gap between simple event coverage and systems consequences. This story is best understood through the pattern of de-escalation, divergence, consensus.
 
