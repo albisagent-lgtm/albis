@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { CategoryGrid } from "@/app/components/category-grid";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 const CATEGORY_FILTERS = ["perception-gap-index", "media-literacy", "information-warfare", "perspectives", "analysis", "data", "explainer", "comparison", "framing-guide", "weekly-report", "research"];
 

@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { cache } from "react";
 import matter from "gray-matter";
 import { createAnonClient } from "@/lib/supabase/anon";
 export { CATEGORIES } from "./categories";
@@ -61,7 +62,9 @@ interface ArticleRow {
   image: string | null;
   excerpt: string | null;
   author: string | null;
-  content: string;
+  // Optional: listing queries omit this column to keep payloads small. Only
+  // single-article reads (getPostBySlug) include it.
+  content?: string | null;
   reading_time: number | null;
   published_at: string;
   frontmatter: Record<string, unknown> | null;
@@ -100,7 +103,11 @@ function rowToPost(row: ArticleRow): BlogPost {
   };
 }
 
-const ARTICLE_COLUMNS = "slug,title,description,date,category,tags,keywords,image,excerpt,author,content,reading_time,published_at,frontmatter";
+// Listing columns omit `content` — the body is several KB per row and
+// a 951-row fetch was pulling multi-MB payloads (~3.3s) for every page
+// render that needed a link-candidate list or section grid.
+const ARTICLE_COLUMNS_LIST = "slug,title,description,date,category,tags,keywords,image,excerpt,author,reading_time,published_at,frontmatter";
+const ARTICLE_COLUMNS_FULL = ARTICLE_COLUMNS_LIST + ",content";
 
 /* ─── Supabase fetchers ─── */
 
@@ -112,7 +119,7 @@ async function supabaseGetAllPosts(): Promise<BlogPost[] | null> {
     const supabase = createAnonClient();
     const { data, error } = await supabase
       .from("articles")
-      .select(ARTICLE_COLUMNS)
+      .select(ARTICLE_COLUMNS_LIST)
       .order("published_at", { ascending: false })
       .limit(2000);
     if (error) {
@@ -135,7 +142,7 @@ async function supabaseGetPostBySlug(slug: string): Promise<BlogPost | null> {
     const supabase = createAnonClient();
     const { data, error } = await supabase
       .from("articles")
-      .select(ARTICLE_COLUMNS)
+      .select(ARTICLE_COLUMNS_FULL)
       .eq("slug", slug)
       .maybeSingle();
     if (error) {
@@ -143,7 +150,7 @@ async function supabaseGetPostBySlug(slug: string): Promise<BlogPost | null> {
       return null;
     }
     if (!data) return null;
-    return rowToPost(data as ArticleRow);
+    return rowToPost(data as unknown as ArticleRow);
   } catch (e) {
     console.error(`[blog] supabase getPostBySlug(${slug}) threw:`, e);
     return null;
@@ -197,11 +204,15 @@ function fsGetPostBySlug(slug: string): BlogPost | null {
 
 /* ─── Public API (async — Supabase primary, fs fallback) ─── */
 
-export async function getAllPosts(): Promise<BlogPost[]> {
+// React.cache dedupes calls within a single request render. Several server
+// components (section grid + markdown link-candidate builder + related-posts
+// selector) each need the full list; without this they each issued the same
+// ~3s Supabase query.
+export const getAllPosts = cache(async (): Promise<BlogPost[]> => {
   const fromDb = await supabaseGetAllPosts();
   if (fromDb && fromDb.length > 0) return fromDb;
   return fsGetAllPosts();
-}
+});
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   const fromDb = await supabaseGetPostBySlug(slug);

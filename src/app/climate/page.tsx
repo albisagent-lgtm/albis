@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { CategoryGrid } from "@/app/components/category-grid";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 const CATEGORY_FILTERS = ["climate-energy", "weather-climate", "natural-world", "science-space"];
 

@@ -13,7 +13,6 @@ import { RegionBar } from "@/app/components/region-bar";
 import { ReadingProgress } from "@/app/components/reading-progress";
 import { normalizeRegion, CATEGORY_META } from "@/lib/scan-types";
 import { ShareButtons } from "@/app/components/share-buttons";
-import { getPostBySlug } from "@/lib/blog";
 
 const SECTION_LABELS: Record<string, string> = {
   world: "World",
@@ -52,13 +51,9 @@ export async function ArticlePage({ post }: { post: BlogPost }) {
   const sectionLabel = SECTION_LABELS[section] || "Analysis";
   const url = `https://www.albis.news${getPostUrl(post)}`;
 
-  const relatedPostMeta = await getRelatedPosts(post.tags, post.slug, 3);
-  const relatedPostsRaw = await Promise.all(
-    relatedPostMeta.map((rp) => getPostBySlug(rp.slug))
-  );
-  const relatedPosts = relatedPostsRaw.filter(
-    (p): p is NonNullable<typeof p> => p !== null
-  );
+  // getRelatedPosts returns full card data (image, category, readingTime) so
+  // we don't need to re-fetch each related post with getPostBySlug.
+  const relatedPosts = await getRelatedPosts(post.tags, post.slug, 3);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pAny = post as any;
