@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getPostsBySection } from "@/lib/blog";
 import { CategoryGrid } from "@/app/components/category-grid";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Analysis — Albis",

@@ -32,6 +32,27 @@ const nextConfig: NextConfig = {
   },
   // Configure `pageExtensions` to include MDX files
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  // Cloudflare edge-cache hints for ISR pages. Lets the CDN serve repeat
+  // requests without touching the Worker at all. s-maxage=300 matches the
+  // per-page `revalidate = 300`; stale-while-revalidate=3600 lets a stale
+  // edge copy be served for up to an hour while Next regenerates behind it.
+  // Browser sees `max-age=0, must-revalidate` via Next's default;
+  // Cloudflare sees s-maxage and caches that way.
+  async headers() {
+    const SECTIONS = "world|money|tech|climate|life-systems|perspectives|analysis";
+    const ISR_CACHE = "public, s-maxage=300, stale-while-revalidate=3600";
+    return [
+      { source: "/", headers: [{ key: "Cache-Control", value: ISR_CACHE }] },
+      {
+        source: `/:section(${SECTIONS})`,
+        headers: [{ key: "Cache-Control", value: ISR_CACHE }],
+      },
+      {
+        source: `/:section(${SECTIONS})/:slug`,
+        headers: [{ key: "Cache-Control", value: ISR_CACHE }],
+      },
+    ];
+  },
   // Redirects for simplified navigation
   async redirects() {
     return [

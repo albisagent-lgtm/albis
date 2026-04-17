@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { CategoryGrid } from "@/app/components/category-grid";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const CATEGORY_FILTERS = ["tech-ai", "cyber-info-warfare"];
 

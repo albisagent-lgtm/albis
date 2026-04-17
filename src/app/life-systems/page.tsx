@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { CategoryGrid } from "@/app/components/category-grid";
 
-// force-dynamic: ISR with staticAssetsIncrementalCache is read-only on
-// Cloudflare Workers, so `revalidate` never actually refreshes. Render on
-// every request so newly-ingested Supabase articles appear immediately.
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const CATEGORY_FILTERS = ["energy", "food", "water", "life-systems"];
 
