@@ -214,10 +214,23 @@ export const getAllPosts = cache(async (): Promise<BlogPost[]> => {
   return fsGetAllPosts();
 });
 
-export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+// React.cache so generateMetadata and the page component share one fetch
+// per request instead of each calling Supabase independently.
+export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null> => {
   const fromDb = await supabaseGetPostBySlug(slug);
   if (fromDb) return fromDb;
   return fsGetPostBySlug(slug);
+});
+
+// Route-entry helper for article pages: fires getPostBySlug and getAllPosts
+// in parallel. The getAllPosts call warms the React.cache that ArticlePage's
+// link-candidates + related-posts selector both consume, so the single-row
+// and full-list round-trips overlap instead of running serially.
+export async function getPostBySlugAndWarmListCache(
+  slug: string
+): Promise<BlogPost | null> {
+  const [post] = await Promise.all([getPostBySlug(slug), getAllPosts()]);
+  return post;
 }
 
 export async function getPostsByCategory(category: string): Promise<BlogPost[]> {

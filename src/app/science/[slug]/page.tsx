@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { getPostBySlug, getPostsBySection, getPostUrl, getPostSection } from "@/lib/blog";
+import { getPostBySlug, getPostBySlugAndWarmListCache, getPostsBySection, getPostUrl, getPostSection } from "@/lib/blog";
 import { ArticlePage, generateArticleMetadata } from "@/app/components/article-page";
 
 export const revalidate = 300;
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ScienceArticlePage({ params }: Props) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const post = await getPostBySlugAndWarmListCache(slug);
   if (!post) notFound();
   if (getPostSection(post.category) !== SECTION) redirect(getPostUrl(post));
   return <ArticlePage post={post} />;

@@ -4,6 +4,12 @@
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-04-16",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  // Smart placement: once Cloudflare learns the Worker's subrequest pattern,
+  // it relocates the isolate close to the hottest origin — for us that's
+  // Supabase's PostgREST endpoint. Origin sits in APAC (cf-ray returned AKL
+  // for UK requests), so without placement every DB call cost ~500ms RTT.
+  // With placement, Supabase round-trips drop to ~20–50ms intra-region.
+  "placement": { "mode": "smart" },
   // Plain-text vars live here so `wrangler deploy` does not treat
   // Dashboard-set values as drift and wipe them. Secrets (service role key,
   // Stripe keys, Resend key, SCAN_INGEST_KEY, PEXELS_API_KEY) stay in the
