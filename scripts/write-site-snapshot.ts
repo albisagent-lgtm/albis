@@ -54,9 +54,19 @@
 // the dynamic import of scan-parser below — scan-parser reads env vars at
 // module-load time to build its Supabase client, and ES-module static
 // imports are hoisted above this call.
-import { config } from "dotenv";
+//
+// dotenv is optional: on machines where it isn't installed (e.g. the
+// OpenClaw host) the env vars are expected to already be present in the
+// process environment, so we try to load it and silently skip if missing.
 import { resolve } from "path";
-config({ path: resolve(process.cwd(), ".env.local") });
+import { createRequire } from "module";
+try {
+  const require = createRequire(import.meta.url);
+  const { config } = require("dotenv");
+  config({ path: resolve(process.cwd(), ".env.local") });
+} catch {
+  // dotenv not installed — assume env vars are already set in the environment.
+}
 
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
