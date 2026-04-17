@@ -69,3 +69,4 @@ What remains unresolved may matter even more. Will the ceasefire hold? Will it e
 Those are the questions that determine whether this becomes the first chapter of de-escalation or just a brief interruption in a longer cycle of pressure.
 
 For now, the honest conclusion is this: the ceasefire is real, meaningful and worth leading with. It is also still only a window. The region beyond it remains unsettled.
+
