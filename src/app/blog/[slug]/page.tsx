@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getPostBySlug, getPostUrl } from "@/lib/blog";
 
 export const revalidate = 300;
+export const dynamicParams = true;
 
 interface Props {
   params: Promise<{ slug: string }>;

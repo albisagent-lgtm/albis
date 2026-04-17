@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getAllSlugs, getPostBySlug, getPostUrl } from "@/lib/blog";
 
 export const revalidate = 300;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const slugs = await getAllSlugs();

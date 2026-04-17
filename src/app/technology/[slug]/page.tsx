@@ -4,6 +4,7 @@ import { getPostBySlug, getPostsBySection, getPostUrl, getPostSection } from "@/
 import { ArticlePage, generateArticleMetadata } from "@/app/components/article-page";
 
 export const revalidate = 300;
+export const dynamicParams = true;
 
 const SECTION = "technology";
 
