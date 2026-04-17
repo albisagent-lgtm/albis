@@ -11,7 +11,6 @@ import { ThemeToggle } from "./components/theme-toggle";
 import { NavAuth, NavLinks } from "./components/nav-auth";
 import { MobileNav } from "./components/mobile-nav";
 import { Footer } from "./components/footer";
-import { BreakingNewsBanner } from "./components/breaking-news-banner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -202,9 +201,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${sourceSerif4.variable} ${inter.variable} min-h-screen bg-[#f8f7f4] font-[family-name:var(--font-source-serif)] text-[#0f0f0f] antialiased dark:bg-[#0f0f0f] dark:text-[#f0efec]`}
       >
-        {/* Breaking News Banner — above everything */}
-        <BreakingNewsBanner />
-
         {/* Navigation — hides on scroll down, shows on scroll up (mobile) */}
         <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:rounded-lg focus:bg-[#c8922a] focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white">Skip to content</a>
         <nav className="nav-auto-hide sticky top-0 z-50 border-b border-black/[0.07] bg-[#f8f7f4]/90 backdrop-blur-xl dark:border-white/[0.06] dark:bg-[#0f0f0f]/90">

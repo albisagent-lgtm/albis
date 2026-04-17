@@ -6,6 +6,7 @@ import {
   determineSignalLevel,
 } from "@/lib/relevance-engine";
 import { loadScanItems } from "@/lib/scan-loader";
+import { shouldGenerateBriefing } from "@/lib/tier-enforcement";
 import type { CompanyProfile } from "@/lib/company-profile";
 
 const INGEST_KEY = process.env.SCAN_INGEST_KEY;
@@ -73,9 +74,30 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 3. Score for each company
+    // Batch-fetch owner subscription status for all profiles
+    const ownerIds = [...new Set(profiles.map((p) => p.owner_id))];
+    const { data: ownerProfiles } = await supabase
+      .from("profiles")
+      .select("id, subscription_status, subscription_tier, subscription_period_end")
+      .in("id", ownerIds);
+
+    const ownerMap = new Map(
+      (ownerProfiles || []).map((o) => [o.id, o])
+    );
+
+    // 3. Score for each company (skipping those without active subscriptions)
     const results = [];
+    const skipped: Array<{ company_profile_id: string; company_name: string; reason: string }> = [];
     for (const profile of profiles) {
+      const owner = ownerMap.get(profile.owner_id);
+      if (!owner || !shouldGenerateBriefing(owner)) {
+        skipped.push({
+          company_profile_id: profile.id,
+          company_name: profile.company_name,
+          reason: "subscription_inactive",
+        });
+        continue;
+      }
       const scored = scoreStoriesForCompany(allItems, profile as CompanyProfile);
       const selected = getSelectedStories(scored);
       const signalLevel = determineSignalLevel(selected);
@@ -175,7 +197,9 @@ export async function POST(req: NextRequest) {
       scan_date: scanDate,
       stories_in_scan: allItems.length,
       companies_scored: results.length,
+      companies_skipped: skipped.length,
       companies: results,
+      skipped,
     });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Unknown error";

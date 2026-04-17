@@ -1,8 +1,16 @@
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+
+// Makes Cloudflare bindings available to `next dev`. Safe to call
+// unconditionally — no-op outside Cloudflare dev flows.
+initOpenNextCloudflareForDev();
 
 const nextConfig: NextConfig = {
   images: {
+    // Cloudflare Pages has no default image optimizer; without this every
+    // <Image> would 500 on Cloudflare. Addresses § F.6 of the execution plan.
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

@@ -13,6 +13,10 @@ export interface BlogPost {
   content: string;
   readingTime: string;
   publishedAt: Date;
+  category: string;
+  image: string;
+  excerpt: string;
+  tags: string[];
 }
 
 export interface BlogPostMeta {
@@ -24,17 +28,21 @@ export interface BlogPostMeta {
   author: string;
   readingTime: string;
   publishedAt: Date;
+  category: string;
+  image: string;
+  excerpt: string;
+  tags: string[];
 }
 
-const postsDirectory = join(process.cwd(), "src/content/blog");
+const postsDirectory = join(process.cwd(), "content/blog");
 
 export function getAllPosts(): BlogPost[] {
   try {
     const fileNames = readdirSync(postsDirectory);
     const allPostsData = fileNames
-      .filter((name) => name.endsWith(".mdx"))
+      .filter((name) => name.endsWith(".md") || name.endsWith(".mdx"))
       .map((fileName) => {
-        const slug = fileName.replace(/\.mdx$/, "");
+        const slug = fileName.replace(/\.mdx?$/, "");
         const fullPath = join(postsDirectory, fileName);
         const fileContents = readFileSync(fullPath, "utf8");
         const { data, content } = matter(fileContents);
@@ -51,6 +59,10 @@ export function getAllPosts(): BlogPost[] {
           content,
           readingTime: readTimeResult.text,
           publishedAt: new Date(data.date),
+          category: data.category || "",
+          image: data.image || "",
+          excerpt: data.excerpt || "",
+          tags: data.tags || [],
         };
       });
 
@@ -65,8 +77,8 @@ export function getPostSlugs(): string[] {
   try {
     const fileNames = readdirSync(postsDirectory);
     return fileNames
-      .filter((name) => name.endsWith(".mdx"))
-      .map((name) => name.replace(/\.mdx$/, ""));
+      .filter((name) => name.endsWith(".md") || name.endsWith(".mdx"))
+      .map((name) => name.replace(/\.mdx?$/, ""));
   } catch {
     return [];
   }
@@ -74,8 +86,14 @@ export function getPostSlugs(): string[] {
 
 export function getPostBySlug(slug: string): BlogPost | null {
   try {
-    const fullPath = join(postsDirectory, `${slug}.mdx`);
-    const fileContents = readFileSync(fullPath, "utf8");
+    const mdPath = join(postsDirectory, `${slug}.md`);
+    const mdxPath = join(postsDirectory, `${slug}.mdx`);
+    let fileContents: string;
+    try {
+      fileContents = readFileSync(mdPath, "utf8");
+    } catch {
+      fileContents = readFileSync(mdxPath, "utf8");
+    }
     const { data, content } = matter(fileContents);
 
     const readTimeResult = readingTime(content);
@@ -90,6 +108,10 @@ export function getPostBySlug(slug: string): BlogPost | null {
       content,
       readingTime: readTimeResult.text,
       publishedAt: new Date(data.date),
+      category: data.category || "",
+      image: data.image || "",
+      excerpt: data.excerpt || "",
+      tags: data.tags || [],
     };
   } catch {
     return null;
@@ -100,9 +122,9 @@ export function getPostsMeta(): BlogPostMeta[] {
   try {
     const fileNames = readdirSync(postsDirectory);
     const allPostsData = fileNames
-      .filter((name) => name.endsWith(".mdx"))
+      .filter((name) => name.endsWith(".md") || name.endsWith(".mdx"))
       .map((fileName) => {
-        const slug = fileName.replace(/\.mdx$/, "");
+        const slug = fileName.replace(/\.mdx?$/, "");
         const fullPath = join(postsDirectory, fileName);
         const fileContents = readFileSync(fullPath, "utf8");
         const { data, content } = matter(fileContents);
@@ -118,6 +140,10 @@ export function getPostsMeta(): BlogPostMeta[] {
           author: data.author,
           readingTime: readTimeResult.text,
           publishedAt: new Date(data.date),
+          category: data.category || "",
+          image: data.image || "",
+          excerpt: data.excerpt || "",
+          tags: data.tags || [],
         };
       });
 

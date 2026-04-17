@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getTodayScan } from "@/lib/scan-parser";
+import { getSiteSnapshot } from "@/lib/site-snapshot";
 import { getAllPosts, getPostUrl, getPostsBySection, getPostSection } from "@/lib/blog";
 import type { BlogPost } from "@/lib/blog";
 import {
@@ -11,7 +11,6 @@ import {
   type ScanItem,
 } from "@/lib/scan-types";
 import { EmailCapture } from "./components/email-capture";
-import { createAdminClient } from "@/lib/supabase/admin";
 
 export const revalidate = 300;
 
@@ -211,14 +210,17 @@ function ArticleCard({
    HOME PAGE
    ═══════════════════════════════════════════════════════════ */
 export default async function Home() {
-  const scan = await getTodayScan();
+  // Single read replaces getTodayScan() + a second admin read for briefings.
+  // See docs/Cloudflare_Execution_Plan.md § D for the snapshot contract and
+  // supabase/migrations/20260416_site_snapshot.sql for the row shape.
+  const snapshot = await getSiteSnapshot();
   const allPosts = getAllPosts();
   const findArticleSlug = buildSlugMatcher(allPosts);
 
   // Scan items for blind spot section
-  const allItems = scan?.items
+  const allItems = snapshot.items.length > 0
     ? detectBlindspots(
-        [...scan.items]
+        [...snapshot.items]
           .filter((item) => item && typeof item.headline === "string")
           .sort((a, b) => {
             const order = { high: 0, medium: 1, low: 2 };
@@ -256,18 +258,17 @@ export default async function Home() {
     (i) => i.perception_gap && i.perception_gap > 0
   );
 
-  // Briefing taster — fetch latest from Supabase
-  let briefing: { title: string; top_stories: Array<{ region: string; headline: string }>; story_count: number; date: string } | null = null;
-  try {
-    const supabase = createAdminClient();
-    const { data } = await supabase
-      .from("briefings")
-      .select("title,top_stories,story_count,date")
-      .order("date", { ascending: false })
-      .limit(1)
-      .maybeSingle();
-    if (data) briefing = data;
-  } catch { /* silently fail */ }
+  // Briefing taster — reconstructed from snapshot fields so the JSX below
+  // (existing shape: { title, top_stories, story_count, date }) is unchanged.
+  const briefing: { title: string; top_stories: Array<{ region: string; headline: string }>; story_count: number; date: string } | null =
+    snapshot.briefingTitle && snapshot.briefingDate
+      ? {
+          title: snapshot.briefingTitle,
+          top_stories: snapshot.briefingTopStories,
+          story_count: snapshot.briefingStoryCount ?? 0,
+          date: snapshot.briefingDate,
+        }
+      : null;
 
   // Date
   const today = new Date();
@@ -303,9 +304,21 @@ export default async function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          BRIEFING TASTER — preview of what subscribers get
+          BRIEFING TASTER — preview of what subscribers get.
+          Gated on snapshot.hasBriefing so the briefing renders whenever
+          a briefing row exists, independent of scan presence.
+          Empty-state: calm "being prepared" message when no briefing yet.
+          See src/lib/site-snapshot.ts.
           ═══════════════════════════════════════════════════════ */}
-      {briefing && briefing.top_stories && briefing.top_stories.length > 0 && (
+      {!snapshot.hasBriefing ? (
+        <section className="border-t border-black/[0.06] bg-[#f5f3ee] dark:border-white/[0.06] dark:bg-[#141414]">
+          <div className="mx-auto max-w-2xl px-4 py-10 text-center md:px-6 md:py-12">
+            <p className="font-[family-name:var(--font-source-serif)] text-base leading-relaxed text-zinc-500 dark:text-zinc-400 md:text-lg">
+              Today&apos;s briefing is being prepared.
+            </p>
+          </div>
+        </section>
+      ) : briefing && briefing.top_stories && briefing.top_stories.length > 0 ? (
         <section className="border-t border-black/[0.06] bg-[#f5f3ee] dark:border-white/[0.06] dark:bg-[#141414]">
           <div className="mx-auto max-w-2xl px-4 py-10 md:px-6 md:py-12">
             <div className="mb-4 flex items-center gap-2">
@@ -339,7 +352,7 @@ export default async function Home() {
             </div>
           </div>
         </section>
-      )}
+      ) : null}
 
       <SectionDivider />
 

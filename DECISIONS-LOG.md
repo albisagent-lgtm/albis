@@ -4,6 +4,30 @@ Append-only log of architectural, product, and strategic decisions. Newest at to
 
 ---
 
+## [2026-04-16] Onboarding redesign shipped — bundle-first, 24 sectors, Taxonomy combobox
+Expanded from 16 to 24 sectors (added Aviation, Banking split from Investment, Insurance, Telecom, Healthcare split from Pharma, Real Estate, Hospitality, Defence, NGO). Sector pick auto-applies recommended bundle to themes/watchlist/supply-chain/risks. Every option maps to canonical scan tags via new `onboarding-taxonomy.ts`. Three visual zones in the combobox: Recommended / Additional / Custom. Gap options (no scan tag match) flagged with ⚠ but still selectable.
+
+## [2026-04-16] Sector change after bundle applied uses confirm prompt (Option B)
+Changing sector mid-wizard shows modal: Replace (apply new bundle, clobber current selections) / Keep (just update the sector label, keep selections) / Cancel. Rejected silent-replace (destructive) and additive-only (clutter) in favour of explicit user choice. First-time sector pick applies bundle without prompting — only subsequent changes trigger it.
+
+## [2026-04-16] Fast-path three-click onboarding flow added
+After picking sector on Step 1, two CTAs appear: "Continue" (full 6-step wizard) and "Use recommended defaults" (jumps to Step 5 Delivery with bundle pre-applied). Target: 30-second onboarding for sector-typical users. Full wizard stays available for customisers.
+
+## [2026-04-16] "Other / Custom" sector asks "What's your #1 concern?"
+Softer landing than blank-slate. Free-text input splits on commas into lowercase-hyphenated tokens and adds them as custom themes. No LLM processing — pure tokenisation for MVP.
+
+## [2026-04-16] BriefingPreview card is placeholder quality — format redesign deferred
+Preview shown on Steps 5 and 6 of onboarding uses mock content and labelled "Format may evolve". Will be replaced when the briefing output format is reviewed and upgraded to premium quality standard. Present implementation uses browser-detected timezone (Intl.DateTimeFormat) so a London user sees "London time" not NZST.
+
+## [2026-04-16] Deferred post-redesign items logged
+Four items deferred until the onboarding redesign has real user feedback: social proof ("others in your sector track X"), company-name lookup auto-fill (2000-company map), real-time relevance preview (live story count), and the scan prompt commodity tag expansion. Tracked in CURRENT-STATE.md under Deferred/Future.
+
+## [2026-04-15] Login redirect now checks company_profiles, not localStorage
+`login-client.tsx` previously used the localStorage-backed `getPreferences()` to decide post-login destination and routed paid users to `/archive` or `/` — wrong for the company-intelligence funnel. Now queries `company_profiles.onboarding_completed` and routes to `/dashboard` (if complete) or `/onboarding/company` (if not). The `?redirect=` URL param still wins when present.
+
+## [2026-04-15] Tier enforcement wired in with Option B — free users can complete onboarding in preview mode
+Added `getOnboardingTier()` helper returning Pro limits for unsubscribed users and actual tier for subscribed. UI (onboarding wizard + profile editor) uses this so anyone can fill out a profile. Hard paywall lives in `shouldGenerateBriefing(ownerProfile)` which is called in `/score` and `/score-all`, skipping inactive subscriptions. Dashboard home shows a persistent "Subscribe to activate" banner when not active/in-grace. Tier definitions untouched; free tier remains 0/0/0 for the hard paywall.
+
 ## [2026-04-15] Fixed scan push pipeline — section-clobbering bug was silently dropping all items
 `scripts/push-scan-to-supabase.js` was iterating every `## AM/Midday/PM Xxx` header as a separate upsert with DELETE-then-INSERT, so later scoring-object sections (PGI/GAI) wiped the items array written by earlier data sections. Fix: dedupe section spans by scan_time, use proper `supabase.upsert({onConflict:'scan_date,scan_time'})`, store full markdown not a slice, normalise scan_time to lowercase. Verified against 2026-03-20 markdown: old logic produced 0/0/0 items, new logic produces 38/0/25.
 

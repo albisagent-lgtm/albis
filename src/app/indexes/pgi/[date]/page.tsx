@@ -3,7 +3,20 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
+
+export async function generateStaticParams() {
+  try {
+    const supabase = createAdminClient();
+    const { data } = await supabase
+      .from("pgi_signature_pieces")
+      .select("date")
+      .order("date", { ascending: false });
+    return (data ?? []).map((row: { date: string }) => ({ date: row.date }));
+  } catch {
+    return [];
+  }
+}
 
 interface SignaturePiece {
   date: string;
@@ -159,7 +172,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `PGI ${report.daily_pgi.toFixed(1)} — ${tier.name} | Albis`,
       description: `${report.story_count} stories scored across ${report.region_count} regions. How differently did the world understand ${formatDateShort(date)}'s events?`,
-      images: [{ url: `/api/og/pgi?pgi=${report.daily_pgi}&date=${date}`, width: 1200, height: 630 }],
+      images: [{ url: "https://www.albis.news/og-image.png", width: 1200, height: 630 }],
     },
   };
 }

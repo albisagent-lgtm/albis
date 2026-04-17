@@ -7,7 +7,7 @@ import { PgiTimeline } from "@/app/components/pgi-timeline";
 import { SeriesArticleFeed } from "@/components/SeriesArticleFeed";
 import { getArticlesByTag } from "@/lib/blog/tagged";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 async function getLatestPgi() {
   try {
@@ -35,13 +35,13 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: `PGI ${pgi.toFixed(1)} — Perception Gap Index | Albis`,
       description: "How differently does the world see the same stories? The PGI measures narrative distance across 7 regions.",
-      images: [{ url: `/api/og/pgi?pgi=${pgi}&date=${date}`, width: 1200, height: 630 }],
+      images: [{ url: "https://www.albis.news/og-image.png", width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
       title: `PGI ${pgi.toFixed(1)} | Albis`,
       description: "How differently does the world see the same stories?",
-      images: [`/api/og/pgi?pgi=${pgi}&date=${date}`],
+      images: ["https://www.albis.news/og-image.png"],
     },
   };
 }

@@ -19,6 +19,14 @@ export {
 
 import type { ScanItem, PatternOfDay, ParsedScan } from "./scan-types";
 import { detectBlindspots } from "./scan-types";
+import {
+  formatDisplayDate,
+  extractSection,
+  parsePatternOfDay,
+  parseNotableItems,
+  extractJsonItems,
+  extractScanMeta,
+} from "./scan-parser-core";
 
 const SCANS_DIR =
   process.env.SCANS_DIR ||
@@ -38,108 +46,9 @@ if ((isVercel || !isLocal) && process.env.NEXT_PUBLIC_SUPABASE_URL && process.en
 }
 
 // ---------------------------------------------------------------------------
-// Helpers
+// Helpers — pure markdown/string helpers now live in ./scan-parser-core.ts
+// and are imported above. The Supabase/filesystem orchestration stays here.
 // ---------------------------------------------------------------------------
-
-function formatDisplayDate(dateStr: string): string {
-  const date = new Date(dateStr + "T12:00:00");
-  return date.toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
-
-function extractSection(md: string, label: string): string | null {
-  const boldRegex = new RegExp(
-    `\\*\\*${label}:?\\*\\*\\s*(.+?)(?=\\n\\*\\*[A-Z]|\\n---|\\n##|\\n\`\`\`|$)`,
-    "is"
-  );
-  const boldMatch = md.match(boldRegex);
-  if (boldMatch) return boldMatch[1].trim();
-
-  const plainRegex = new RegExp(
-    `^${label}:\\s*(.+?)(?=\\n[A-Z]\\w+:|\\n---|\\n##|\\n\`\`\`|$)`,
-    "ims"
-  );
-  const plainMatch = md.match(plainRegex);
-  return plainMatch ? plainMatch[1].trim() : null;
-}
-
-function parsePatternOfDay(raw: string | null): PatternOfDay | null {
-  if (!raw) return null;
-
-  const italicMatch = raw.match(/^\*([^*]+)\*\s*([\s\S]*)/);
-  if (italicMatch) {
-    return { title: italicMatch[1].trim(), body: italicMatch[2].trim() };
-  }
-
-  const boldMatch = raw.match(/^\*\*([^*]+)\*\*\s*([\s\S]*)/);
-  if (boldMatch) {
-    return { title: boldMatch[1].trim(), body: boldMatch[2].trim() };
-  }
-
-  const sentenceMatch = raw.match(/^(.+?[.!?])\s+([\s\S]*)/);
-  if (sentenceMatch) {
-    return { title: sentenceMatch[1].trim(), body: sentenceMatch[2].trim() };
-  }
-
-  return { title: "", body: raw };
-}
-
-function parseNotableItems(md: string): string[] {
-  const sectionRegex =
-    /\*\*Notable(?:\s+headlines)?:?\*\*\s*\n([\s\S]+?)(?=\n\*\*[A-Z]|\n---|\n##|\n```|$)/i;
-  const sectionMatch = md.match(sectionRegex);
-  if (!sectionMatch) return [];
-
-  return sectionMatch[1]
-    .split("\n")
-    .filter((line) => line.trim().startsWith("-"))
-    .map((line) => line.replace(/^[\s]*-\s*/, "").trim())
-    .filter(Boolean);
-}
-
-function extractJsonItems(md: string): ScanItem[] {
-  const items: ScanItem[] = [];
-  const jsonBlockRegex = /```json\s*\n([\s\S]*?)```/g;
-
-  let match;
-  while ((match = jsonBlockRegex.exec(md)) !== null) {
-    try {
-      const parsed = JSON.parse(match[1]);
-      if (Array.isArray(parsed)) {
-        for (const item of parsed) {
-          if (item.headline && item.category) {
-            items.push({
-              headline: item.headline,
-              category: item.category,
-              regions: item.regions || [],
-              tags: item.tags || [],
-              patterns: item.patterns || [],
-              significance: item.significance || "medium",
-              connection: item.connection || "",
-              perception_gap: item.perception_gap ?? null,
-              coverage_breadth: item.coverage_breadth ?? null,
-              regions_found: item.regions_found || [],
-              regions_absent: item.regions_absent || [],
-            });
-          }
-        }
-      }
-    } catch {
-      // Skip malformed JSON blocks
-    }
-  }
-
-  return items;
-}
-
-function extractScanMeta(md: string): string | null {
-  const metaMatch = md.match(/_Scan complete:\s*(.+?)_/);
-  return metaMatch ? metaMatch[1].trim() : null;
-}
 
 // ---------------------------------------------------------------------------
 // Supabase data fetching (for Vercel/production)
