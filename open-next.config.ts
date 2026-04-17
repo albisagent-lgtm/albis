@@ -1,6 +1,11 @@
 import { defineCloudflareConfig } from "@opennextjs/cloudflare";
+import staticAssetsIncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/static-assets-incremental-cache";
 
-// Bare configuration — no R2 incremental-cache override, no KV bindings.
-// ISR cache stays in-memory per worker isolate for PR 7 Phase 1.
-// Revisit if production ISR behaviour is poor under real traffic.
-export default defineCloudflareConfig({});
+// Serve prerendered pages (including /world, /tech, /life-systems and their
+// [slug] children) from Workers static assets. Without an incremental-cache
+// override, .open-next/cache/ never ships and the Worker re-renders every
+// request — which fails for filesystem-backed pages because the 911 blog
+// markdown files in content/blog/ are not bundled into handler.mjs.
+export default defineCloudflareConfig({
+  incrementalCache: staticAssetsIncrementalCache,
+});
