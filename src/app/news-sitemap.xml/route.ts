@@ -1,7 +1,9 @@
 import { getAllPosts, getPostUrl } from "@/lib/blog";
 
+export const revalidate = 300;
+
 export async function GET() {
-  const allPosts = getAllPosts();
+  const allPosts = await getAllPosts();
   const now = new Date();
   const fortyEightHoursAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
 

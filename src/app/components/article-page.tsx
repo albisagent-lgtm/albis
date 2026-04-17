@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { BlogPost } from "@/lib/blog";
 import { getPostUrl, getPostSection } from "@/lib/blog";
-import { markdownToHtml } from "@/lib/markdown";
+import { markdownToHtml, getMarkdownLinkCandidates } from "@/lib/markdown";
 import { EmailCapture } from "@/app/components/email-capture";
 import { getRelatedPosts } from "@/lib/internal-links";
 import { matchTagToTopic } from "@/lib/topics";
@@ -45,16 +45,20 @@ function getCategoryDisplay(category: string): { label: string; accent: string }
   return { label: category, accent: "#c8922a" };
 }
 
-export function ArticlePage({ post }: { post: BlogPost }) {
-  const html = markdownToHtml(post.content);
+export async function ArticlePage({ post }: { post: BlogPost }) {
+  const linkCandidates = await getMarkdownLinkCandidates();
+  const html = markdownToHtml(post.content, linkCandidates);
   const section = getPostSection(post.category);
   const sectionLabel = SECTION_LABELS[section] || "Analysis";
   const url = `https://www.albis.news${getPostUrl(post)}`;
 
-  const relatedPostMeta = getRelatedPosts(post.tags, post.slug, 3);
-  const relatedPosts = relatedPostMeta
-    .map((rp) => getPostBySlug(rp.slug))
-    .filter((p): p is NonNullable<typeof p> => p !== null);
+  const relatedPostMeta = await getRelatedPosts(post.tags, post.slug, 3);
+  const relatedPostsRaw = await Promise.all(
+    relatedPostMeta.map((rp) => getPostBySlug(rp.slug))
+  );
+  const relatedPosts = relatedPostsRaw.filter(
+    (p): p is NonNullable<typeof p> => p !== null
+  );
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pAny = post as any;

@@ -2,19 +2,17 @@ import { TOPICS } from "@/lib/topics";
 import { COUNTRIES } from "@/lib/countries";
 import { getAllPosts } from "@/lib/blog";
 
-interface LinkCandidate {
+export interface LinkCandidate {
   term: string;
   href: string;
-  // Longer terms get matched first to avoid partial matches
   termLength: number;
 }
 
 /**
- * Build a list of terms to auto-link, sorted longest-first.
- * Only includes topic names (not keywords) and country names to avoid
- * over-linking on generic words.
+ * Builds candidates from static TOPICS + COUNTRIES only.
+ * Safe to call in any context — no I/O.
  */
-function buildLinkCandidates(): LinkCandidate[] {
+function buildStaticLinkCandidates(): LinkCandidate[] {
   const candidates: LinkCandidate[] = [];
 
   for (const topic of TOPICS) {
@@ -25,7 +23,6 @@ function buildLinkCandidates(): LinkCandidate[] {
     });
   }
 
-  // Only link country names that are 4+ chars to avoid matching "Chad", "Mali" etc. inside words
   for (const country of COUNTRIES) {
     if (country.name.length >= 4) {
       candidates.push({
@@ -36,9 +33,19 @@ function buildLinkCandidates(): LinkCandidate[] {
     }
   }
 
-  // Recent article titles (only long-enough titles to avoid false matches)
+  return candidates;
+}
+
+/**
+ * Build the full candidate list including recent article titles.
+ * Async because it awaits `getAllPosts()`. Pass the result into
+ * `markdownToHtml(md, candidates)` from the calling server component.
+ */
+export async function getMarkdownLinkCandidates(): Promise<LinkCandidate[]> {
+  const candidates = buildStaticLinkCandidates();
+
   try {
-    const posts = getAllPosts().slice(0, 50);
+    const posts = (await getAllPosts()).slice(0, 50);
     for (const post of posts) {
       if (post.title.length >= 20) {
         candidates.push({
@@ -49,12 +56,10 @@ function buildLinkCandidates(): LinkCandidate[] {
       }
     }
   } catch {
-    // getAllPosts may fail during build for non-blog pages; ignore
+    // ignore — static candidates still usable
   }
 
-  // Sort longest first so we match "South Korea" before "Korea", etc.
   candidates.sort((a, b) => b.termLength - a.termLength);
-
   return candidates;
 }
 
@@ -67,8 +72,7 @@ function buildLinkCandidates(): LinkCandidate[] {
  *  - Never link inside <h1>-<h6>, <a>, <pre>, <code> tags
  *  - Case-insensitive matching but must be a whole word
  */
-function injectAutoLinks(html: string): string {
-  const candidates = buildLinkCandidates();
+function injectAutoLinks(html: string, candidates: LinkCandidate[]): string {
   const usedHrefs = new Set<string>();
   let linkCount = 0;
   const MAX_LINKS = 5;
@@ -83,14 +87,9 @@ function injectAutoLinks(html: string): string {
     if (linkCount >= MAX_LINKS) break;
     if (usedHrefs.has(candidate.href)) continue;
 
-    // Escape special regex chars in the term
     const escaped = candidate.term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    // Word-boundary match, case-insensitive
     const regex = new RegExp(`\\b(${escaped})\\b`, "i");
 
-    // We need to only replace inside "safe" text nodes — not inside tags
-    // or protected elements. Strategy: split by protected regions, only
-    // process the safe parts.
     const result = replaceInSafeRegions(
       html,
       regex,
@@ -107,21 +106,11 @@ function injectAutoLinks(html: string): string {
   return html;
 }
 
-/**
- * Replace the first regex match in HTML, but only within text that is NOT
- * inside <a>, <h1>-<h6>, <pre>, <code> tags.
- *
- * Works by splitting the HTML into segments: "protected" (inside forbidden
- * tags) and "safe" (everything else), then only doing replacement in safe
- * segments.
- */
 function replaceInSafeRegions(
   html: string,
   regex: RegExp,
   replacer: (match: string) => string
 ): string {
-  // Pattern matches opening+content+closing of protected elements
-  // We protect: a, h1-h6, pre, code
   const protectedPattern =
     /(<(?:a |a>|h[1-6][ >]|pre[ >]|code[ >])[\s\S]*?<\/(?:a|h[1-6]|pre|code)>)/gi;
 
@@ -131,17 +120,12 @@ function replaceInSafeRegions(
   for (let i = 0; i < parts.length; i++) {
     if (replaced) break;
 
-    // Check if this part is a protected region
     if (protectedPattern.test(parts[i])) {
-      // Reset lastIndex since we use .test which advances it
       protectedPattern.lastIndex = 0;
       continue;
     }
-
-    // Reset regex lastIndex
     protectedPattern.lastIndex = 0;
 
-    // Try to replace in this safe segment (first occurrence only)
     const newPart = parts[i].replace(regex, (m) => {
       if (replaced) return m;
       replaced = true;
@@ -153,8 +137,9 @@ function replaceInSafeRegions(
   return parts.join("");
 }
 
-// Simple markdown to HTML converter (no heavy deps)
-export function markdownToHtml(md: string): string {
+// Simple markdown to HTML converter (no heavy deps).
+// Pass `linkCandidates` to enable auto-linking; omit to skip it.
+export function markdownToHtml(md: string, linkCandidates?: LinkCandidate[]): string {
   let html = md;
 
   // Code blocks (``` ... ```)
@@ -182,7 +167,6 @@ export function markdownToHtml(md: string): string {
 
   // Blockquotes
   html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
-  // Merge adjacent blockquotes
   html = html.replace(/<\/blockquote>\n<blockquote>/g, '\n');
 
   // Unordered lists
@@ -203,8 +187,9 @@ export function markdownToHtml(md: string): string {
   // Clean up empty paragraphs
   html = html.replace(/<p><\/p>/g, '');
 
-  // Auto-inject contextual internal links
-  html = injectAutoLinks(html);
+  if (linkCandidates && linkCandidates.length > 0) {
+    html = injectAutoLinks(html, linkCandidates);
+  }
 
   return html;
 }

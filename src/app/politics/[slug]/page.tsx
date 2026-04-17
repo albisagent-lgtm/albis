@@ -3,26 +3,29 @@ import { notFound, redirect } from "next/navigation";
 import { getPostBySlug, getPostsBySection, getPostUrl, getPostSection } from "@/lib/blog";
 import { ArticlePage, generateArticleMetadata } from "@/app/components/article-page";
 
+export const revalidate = 300;
+
 const SECTION = "politics";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
-export function generateStaticParams() {
-  return getPostsBySection(SECTION).map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  const posts = await getPostsBySection(SECTION);
+  return posts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return {};
   return generateArticleMetadata(post);
 }
 
 export default async function PoliticsArticlePage({ params }: Props) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
   if (getPostSection(post.category) !== SECTION) redirect(getPostUrl(post));
   return <ArticlePage post={post} />;

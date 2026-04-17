@@ -214,7 +214,7 @@ export default async function Home() {
   // See docs/Cloudflare_Execution_Plan.md § D for the snapshot contract and
   // supabase/migrations/20260416_site_snapshot.sql for the row shape.
   const snapshot = await getSiteSnapshot();
-  const allPosts = getAllPosts();
+  const allPosts = await getAllPosts();
   const findArticleSlug = buildSlugMatcher(allPosts);
 
   // Scan items for blind spot section
@@ -231,12 +231,14 @@ export default async function Home() {
   const blindspotStories = allItems.filter((i) => i.blindspot?.isBlindspot);
 
   // Section posts
-  const worldPosts = getPostsBySection("world");
-  const moneyPosts = getPostsBySection("money");
-  const techPosts = getPostsBySection("tech");
-  const climatePosts = getPostsBySection("climate");
-  const lifePosts = getPostsBySection("life-systems");
-  const perspectivesPosts = getPostsBySection("perspectives");
+  const [worldPosts, moneyPosts, techPosts, climatePosts, lifePosts, perspectivesPosts] = await Promise.all([
+    getPostsBySection("world"),
+    getPostsBySection("money"),
+    getPostsBySection("tech"),
+    getPostsBySection("climate"),
+    getPostsBySection("life-systems"),
+    getPostsBySection("perspectives"),
+  ]);
 
   // Today's top stories: latest 5
   const topStories = allPosts.slice(0, 5);

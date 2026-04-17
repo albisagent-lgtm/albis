@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { SearchClient } from "./search-client";
 
+export const revalidate = 300;
+
 export const metadata: Metadata = {
   title: "Search — Albis",
   description: "Search across all Albis articles — global news scanned from 7 regions.",
@@ -12,8 +14,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function SearchPage() {
-  const posts = getAllPosts().map((p) => ({
+export default async function SearchPage() {
+  const posts = (await getAllPosts()).map((p) => ({
     slug: p.slug,
     title: p.title,
     description: p.description,

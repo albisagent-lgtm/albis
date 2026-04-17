@@ -1,7 +1,9 @@
 import { getAllPosts, getPostUrl } from "@/lib/blog";
 
+export const revalidate = 300;
+
 export async function GET() {
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
   const siteUrl = "https://www.albis.news";
 
   const rssItems = posts

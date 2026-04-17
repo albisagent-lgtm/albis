@@ -2,8 +2,11 @@ import { redirect } from "next/navigation";
 import { notFound } from "next/navigation";
 import { getAllSlugs, getPostBySlug, getPostUrl } from "@/lib/blog";
 
-export function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  const slugs = await getAllSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 interface Props {
@@ -12,7 +15,7 @@ interface Props {
 
 export default async function LensRedirect({ params }: Props) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
   redirect(getPostUrl(post));
 }

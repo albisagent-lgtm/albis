@@ -11,7 +11,8 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "tag parameter required" }, { status: 400 });
   }
 
-  const posts = getAllPosts()
+  const allPosts = await getAllPosts();
+  const posts = allPosts
     .filter((p) => p.tags.includes(tag))
     .slice(0, limit)
     .map(({ content, ...rest }) => ({

@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts, getPostUrl } from "@/lib/blog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 300;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = "https://www.albis.news";
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -17,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/feed.xml`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.3 },
   ];
 
-  const allPosts = getAllPosts();
+  const allPosts = await getAllPosts();
 
   const lensPosts: MetadataRoute.Sitemap = allPosts.map((post) => ({
     url: `${base}${getPostUrl(post)}`,

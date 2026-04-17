@@ -116,9 +116,11 @@ function fmtDate(iso: string): string {
 
 /* ── page ─────────────────────────────────────────────────── */
 
-export default function IranWarHub() {
+export const revalidate = 300;
+
+export default async function IranWarHub() {
   /* 1. collect matching posts (getAllPosts already filters noindex) */
-  const allPosts = getAllPosts();
+  const allPosts = await getAllPosts();
   const posts = allPosts.filter((p) => matchesIranWar(p.slug));
 
   /* 2. bucket into sections */

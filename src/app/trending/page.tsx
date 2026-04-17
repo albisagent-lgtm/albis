@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default async function TrendingPage() {
   const snapshot = await getSiteSnapshot();
-  const allPosts = getAllPosts();
+  const allPosts = await getAllPosts();
 
   const articleSlugs: Record<string, string> = {};
   for (const post of allPosts) {

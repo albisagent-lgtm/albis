@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { getPostsBySection } from "@/lib/blog";
 import { CategoryGrid } from "@/app/components/category-grid";
 
+export const revalidate = 300;
+
 export const metadata: Metadata = {
   title: "Analysis — Albis",
   description:
@@ -14,8 +16,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AnalysisPage() {
-  const posts = getPostsBySection("analysis");
+export default async function AnalysisPage() {
+  const posts = await getPostsBySection("analysis");
 
   return (
     <main className="min-h-screen bg-[#f8f7f4] dark:bg-[#0f0f0f]">

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { CategoryGrid } from "@/app/components/category-grid";
 
+export const revalidate = 300;
+
 const CATEGORY_FILTERS = ["current-events", "geopolitics", "conflict", "governance", "health", "breaking"];
 
 export const metadata: Metadata = {
@@ -16,8 +18,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function WorldPage() {
-  const posts = getAllPosts().filter((p) =>
+export default async function WorldPage() {
+  const posts = (await getAllPosts()).filter((p) =>
     CATEGORY_FILTERS.includes(p.category)
   );
 

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { CategoryGrid } from "@/app/components/category-grid";
 
+export const revalidate = 300;
+
 const CATEGORY_FILTERS = ["tech-ai", "cyber-info-warfare"];
 
 export const metadata: Metadata = {
@@ -9,8 +11,8 @@ export const metadata: Metadata = {
   description: "AI, cyber warfare, digital rights, and surveillance — technology shaping the world.",
 };
 
-export default function TechPage() {
-  const posts = getAllPosts().filter((p) => CATEGORY_FILTERS.includes(p.category));
+export default async function TechPage() {
+  const posts = (await getAllPosts()).filter((p) => CATEGORY_FILTERS.includes(p.category));
   return (
     <main className="min-h-screen bg-[#f8f7f4] dark:bg-[#0f0f0f]">
       <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">

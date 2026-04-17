@@ -1,6 +1,5 @@
-import { getAllPosts, type BlogPost } from "@/lib/blog";
-import { TOPICS, type Topic } from "@/lib/topics";
-import { COUNTRIES } from "@/lib/countries";
+import { getAllPosts } from "@/lib/blog";
+import { TOPICS } from "@/lib/topics";
 
 export interface RelatedPost {
   slug: string;
@@ -18,12 +17,12 @@ export interface RelatedLink {
 /**
  * Given tags/topic, return related blog posts (excluding the current slug).
  */
-export function getRelatedPosts(
+export async function getRelatedPosts(
   tags: string[],
   currentSlug?: string,
   limit = 5
-): RelatedPost[] {
-  const allPosts = getAllPosts();
+): Promise<RelatedPost[]> {
+  const allPosts = await getAllPosts();
   const lowerTags = tags.map((t) => t.toLowerCase());
   const now = Date.now();
   const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
@@ -57,7 +56,6 @@ export function getRelatedPages(tags: string[]): RelatedLink[] {
   const links: RelatedLink[] = [];
   const lowerTags = tags.map((t) => t.toLowerCase());
 
-  // Match topics — link to /lens with topic filter
   for (const topic of TOPICS) {
     const match = topic.keywords.some((kw) =>
       lowerTags.some((t) => t.includes(kw) || kw.includes(t))
@@ -77,11 +75,11 @@ export function getRelatedPages(tags: string[]): RelatedLink[] {
 /**
  * Given a topic slug, return blog posts related to that topic.
  */
-export function getBlogPostsForTopic(topicSlug: string, limit = 5): RelatedPost[] {
+export async function getBlogPostsForTopic(topicSlug: string, limit = 5): Promise<RelatedPost[]> {
   const topic = TOPICS.find((t) => t.slug === topicSlug);
   if (!topic) return [];
 
-  const allPosts = getAllPosts();
+  const allPosts = await getAllPosts();
   return allPosts
     .filter((post) => {
       const postTags = post.tags.map((t) => t.toLowerCase());

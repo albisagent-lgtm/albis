@@ -60,8 +60,8 @@ export function getCluster(slug: string): StoryCluster | null {
   return parseClusterFile(filePath);
 }
 
-export function getArticlesForCluster(cluster: StoryCluster): BlogPost[] {
-  const posts = getAllPosts();
+export async function getArticlesForCluster(cluster: StoryCluster): Promise<BlogPost[]> {
+  const posts = await getAllPosts();
   const clusterTags = new Set(cluster.tags);
   return posts.filter((post) => {
     const postTags = post.tags.map((t) => t.toLowerCase());
@@ -79,10 +79,10 @@ export function getClustersForArticle(article: BlogPost): StoryCluster[] {
   });
 }
 
-export function getClusterWithArticles(slug: string): StoryClusterWithArticles | null {
+export async function getClusterWithArticles(slug: string): Promise<StoryClusterWithArticles | null> {
   const cluster = getCluster(slug);
   if (!cluster) return null;
-  const articles = getArticlesForCluster(cluster);
+  const articles = await getArticlesForCluster(cluster);
   return {
     ...cluster,
     articles,
@@ -91,11 +91,11 @@ export function getClusterWithArticles(slug: string): StoryClusterWithArticles |
   };
 }
 
-export function getAllClustersWithArticles(): StoryClusterWithArticles[] {
+export async function getAllClustersWithArticles(): Promise<StoryClusterWithArticles[]> {
   const clusters = getStoryClusters();
-  return clusters
-    .map((cluster) => {
-      const articles = getArticlesForCluster(cluster);
+  const hydrated = await Promise.all(
+    clusters.map(async (cluster) => {
+      const articles = await getArticlesForCluster(cluster);
       return {
         ...cluster,
         articles,
@@ -103,9 +103,10 @@ export function getAllClustersWithArticles(): StoryClusterWithArticles[] {
         latestArticleDate: articles.length > 0 ? articles[0].date : null,
       };
     })
-    .sort((a, b) => {
-      const dateA = a.latestArticleDate || a.startDate;
-      const dateB = b.latestArticleDate || b.startDate;
-      return new Date(dateB).getTime() - new Date(dateA).getTime();
-    });
+  );
+  return hydrated.sort((a, b) => {
+    const dateA = a.latestArticleDate || a.startDate;
+    const dateB = b.latestArticleDate || b.startDate;
+    return new Date(dateB).getTime() - new Date(dateA).getTime();
+  });
 }

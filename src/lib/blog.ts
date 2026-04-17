@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { createAnonClient } from "@/lib/supabase/anon";
 export { CATEGORIES } from "./categories";
 export type { CategorySlug } from "./categories";
 import type { CategorySlug } from "./categories";
@@ -47,10 +48,117 @@ function estimateReadingTime(text: string): number {
   return Math.ceil(words / 230);
 }
 
-export function getAllPosts(): BlogPost[] {
+/* ─── Supabase row shape ─── */
+
+interface ArticleRow {
+  slug: string;
+  title: string;
+  description: string | null;
+  date: string | null;
+  category: string | null;
+  tags: string[] | null;
+  keywords: string[] | null;
+  image: string | null;
+  excerpt: string | null;
+  author: string | null;
+  content: string;
+  reading_time: number | null;
+  published_at: string;
+  frontmatter: Record<string, unknown> | null;
+}
+
+function rowToPost(row: ArticleRow): BlogPost {
+  const fm = (row.frontmatter ?? {}) as Record<string, unknown>;
+  const pillarsRaw = fm.pillars;
+  const pillars = pillarsRaw
+    ? (Array.isArray(pillarsRaw) ? pillarsRaw : [pillarsRaw]) as PillarSlug[]
+    : undefined;
+
+  const dateStr = (() => {
+    if (row.date) return row.date;
+    if (row.published_at) return row.published_at.split("T")[0];
+    return "";
+  })();
+
+  return {
+    slug: row.slug,
+    title: row.title || row.slug,
+    description: row.description || row.excerpt || "",
+    date: dateStr,
+    updatedDate: typeof fm.updatedDate === "string" ? fm.updatedDate : undefined,
+    author: row.author || "Albis",
+    image: row.image || "/og-image.png",
+    tags: row.tags || [],
+    category: (row.category as CategorySlug) || 'analysis',
+    pillars,
+    faqs: Array.isArray(fm.faqs) ? (fm.faqs as FAQ[]) : undefined,
+    sources: Array.isArray(fm.sources) ? (fm.sources as Source[]) : [],
+    confidence: (typeof fm.confidence === "string" ? fm.confidence : "developing") as ConfidenceLevel,
+    readingTime: row.reading_time ?? estimateReadingTime(row.content || ""),
+    content: row.content || "",
+    noindex: fm.noindex === true,
+  };
+}
+
+const ARTICLE_COLUMNS = "slug,title,description,date,category,tags,keywords,image,excerpt,author,content,reading_time,published_at,frontmatter";
+
+/* ─── Supabase fetchers ─── */
+
+async function supabaseGetAllPosts(): Promise<BlogPost[] | null> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return null;
+  }
+  try {
+    const supabase = createAnonClient();
+    const { data, error } = await supabase
+      .from("articles")
+      .select(ARTICLE_COLUMNS)
+      .order("published_at", { ascending: false })
+      .limit(2000);
+    if (error) {
+      console.error("[blog] supabase getAllPosts error:", error.message);
+      return null;
+    }
+    if (!data || data.length === 0) return null;
+    return (data as ArticleRow[]).map(rowToPost).filter((p) => !p.noindex);
+  } catch (e) {
+    console.error("[blog] supabase getAllPosts threw:", e);
+    return null;
+  }
+}
+
+async function supabaseGetPostBySlug(slug: string): Promise<BlogPost | null> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return null;
+  }
+  try {
+    const supabase = createAnonClient();
+    const { data, error } = await supabase
+      .from("articles")
+      .select(ARTICLE_COLUMNS)
+      .eq("slug", slug)
+      .maybeSingle();
+    if (error) {
+      console.error(`[blog] supabase getPostBySlug(${slug}) error:`, error.message);
+      return null;
+    }
+    if (!data) return null;
+    return rowToPost(data as ArticleRow);
+  } catch (e) {
+    console.error(`[blog] supabase getPostBySlug(${slug}) threw:`, e);
+    return null;
+  }
+}
+
+/* ─── Filesystem fallback (retained — primary path is Supabase) ─── */
+
+function fsGetAllPosts(): BlogPost[] {
   if (!fs.existsSync(BLOG_DIR)) return [];
   const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".md"));
-  const posts = files.map((file) => getPostBySlug(file.replace(/\.md$/, ""))!).filter(Boolean).filter((p) => !p.noindex);
+  const posts = files
+    .map((file) => fsGetPostBySlug(file.replace(/\.md$/, ""))!)
+    .filter(Boolean)
+    .filter((p) => !p.noindex);
   return posts.sort((a, b) => {
     const da = a.date ? new Date(a.date).getTime() : 0;
     const db = b.date ? new Date(b.date).getTime() : 0;
@@ -58,7 +166,7 @@ export function getAllPosts(): BlogPost[] {
   });
 }
 
-export function getPostBySlug(slug: string): BlogPost | null {
+function fsGetPostBySlug(slug: string): BlogPost | null {
   const filePath = path.join(BLOG_DIR, `${slug}.md`);
   if (!fs.existsSync(filePath)) return null;
   const raw = fs.readFileSync(filePath, "utf8");
@@ -87,22 +195,34 @@ export function getPostBySlug(slug: string): BlogPost | null {
   };
 }
 
-export function getPostsByCategory(category: string): BlogPost[] {
-  const posts = getAllPosts();
+/* ─── Public API (async — Supabase primary, fs fallback) ─── */
+
+export async function getAllPosts(): Promise<BlogPost[]> {
+  const fromDb = await supabaseGetAllPosts();
+  if (fromDb && fromDb.length > 0) return fromDb;
+  return fsGetAllPosts();
+}
+
+export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+  const fromDb = await supabaseGetPostBySlug(slug);
+  if (fromDb) return fromDb;
+  return fsGetPostBySlug(slug);
+}
+
+export async function getPostsByCategory(category: string): Promise<BlogPost[]> {
+  const posts = await getAllPosts();
   if (category === 'all') return posts;
   return posts.filter((post) => post.category === category);
 }
 
-export function getPostsByPillar(pillar: PillarSlug): BlogPost[] {
-  const posts = getAllPosts();
+export async function getPostsByPillar(pillar: PillarSlug): Promise<BlogPost[]> {
+  const posts = await getAllPosts();
   return posts.filter((post) => post.pillars?.includes(pillar));
 }
 
-export function getAllSlugs(): string[] {
-  if (!fs.existsSync(BLOG_DIR)) return [];
-  return fs.readdirSync(BLOG_DIR)
-    .filter((f) => f.endsWith(".md"))
-    .map((f) => f.replace(/\.md$/, ""));
+export async function getAllSlugs(): Promise<string[]> {
+  const posts = await getAllPosts();
+  return posts.map((p) => p.slug);
 }
 
 /* ─── Category → URL segment mapping ─── */
@@ -158,7 +278,7 @@ export function getPostUrl(post: { slug: string; category: string }): string {
   return `/${getPostSection(post.category)}/${post.slug}`;
 }
 
-export function getPostsBySection(section: string): BlogPost[] {
-  const posts = getAllPosts();
+export async function getPostsBySection(section: string): Promise<BlogPost[]> {
+  const posts = await getAllPosts();
   return posts.filter((p) => getPostSection(p.category) === section);
 }

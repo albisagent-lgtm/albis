@@ -27,7 +27,7 @@ interface LensPageProps {
 }
 
 export default async function LensPage({ searchParams }: LensPageProps) {
-  const allPosts = getAllPosts().map(p => ({
+  const allPosts = (await getAllPosts()).map(p => ({
     slug: p.slug,
     title: p.title,
     description: p.description,
