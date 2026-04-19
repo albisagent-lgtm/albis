@@ -242,7 +242,15 @@ async function main() {
   run('node', ['scripts/push-scan-to-supabase.js', `${date}-${period}`]);
   await verifyScan(date, period);
 
-  run('npx', ['tsx', `scripts/score-pgi-gai-${date}-${period}.ts`]);
+  const tsScorer = path.resolve(process.cwd(), `scripts/score-pgi-gai-${date}-${period}.ts`);
+  const jsScorer = path.resolve(process.cwd(), `scripts/score-pgi-gai-${date}-${period}.js`);
+  if (fs.existsSync(tsScorer)) {
+    run('npx', ['tsx', tsScorer]);
+  } else if (fs.existsSync(jsScorer)) {
+    run('node', [jsScorer]);
+  } else {
+    fail(`No scorer script found for ${date} ${period} (.ts or .js)`);
+  }
   await verifyPgi(date);
   await verifyGai(date);
 
