@@ -6,15 +6,22 @@
 import { getTier, type TierDefinition } from "./subscription-tiers";
 
 export interface ProfileSubscription {
+  id?: string | null;
   subscription_status: string | null;
   subscription_tier: string | null;
   subscription_period_end: string | null;
 }
 
+// Test-only bypass. Scoped to one immutable owner profile UUID.
+// Remove this block when Test Company is moved to a real subscription
+// or when a dedicated is_test_account flag is added to profiles.
+const TEST_COMPANY_OWNER_ID = "c60e8ee4-8a11-4e60-9844-bd0e07d5e4d2";
+
 /**
  * Check if a user's subscription is currently active (active or trialing).
  */
 export function isSubscriptionActive(profile: ProfileSubscription): boolean {
+  if (profile.id === TEST_COMPANY_OWNER_ID) return true;
   const status = profile.subscription_status;
   return status === "active" || status === "trialing";
 }
