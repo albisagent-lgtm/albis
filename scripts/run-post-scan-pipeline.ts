@@ -215,7 +215,7 @@ async function verifySnapshot(date: string) {
   console.log(`✅ Verified site_snapshot updated for briefing_date=${date}`);
 }
 
-function maybeCommitAndPushCodeChanges() {
+function logCodeChangeStatus() {
   const status = spawnSync('git', ['status', '--porcelain'], { cwd: process.cwd(), env: process.env, encoding: 'utf8' });
   const changed = (status.stdout || '')
     .split('\n')
@@ -223,13 +223,11 @@ function maybeCommitAndPushCodeChanges() {
     .filter(Boolean)
     .filter((l) => !l.includes('content/blog/'));
   if (!changed.length) {
-    console.log('ℹ️ No code changes to commit');
+    console.log('ℹ️ No code changes pending');
     return;
   }
-  run('git', ['add', '.']);
-  run('git', ['commit', '-m', 'chore: update pipeline code']);
-  run('git', ['push', 'origin', 'main']);
-  console.log('✅ Code changes committed and pushed');
+  console.log('ℹ️ Code changes detected locally but will not be auto-committed by the article pipeline:');
+  for (const line of changed) console.log(`   ${line}`);
 }
 
 async function main() {
@@ -265,7 +263,7 @@ async function main() {
   run('npx', ['tsx', 'scripts/write-site-snapshot.ts']);
   await verifySnapshot(date);
 
-  maybeCommitAndPushCodeChanges();
+  logCodeChangeStatus();
   console.log('🎉 Post-scan pipeline completed successfully');
 }
 
