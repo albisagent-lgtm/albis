@@ -4,6 +4,12 @@
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-04-16",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  // Smart placement: once Cloudflare learns the Worker's subrequest pattern,
+  // it relocates the isolate close to the hottest origin — for us that's
+  // Supabase's PostgREST endpoint. Origin sits in APAC (cf-ray returned AKL
+  // for UK requests), so without placement every DB call cost ~500ms RTT.
+  // With placement, Supabase round-trips drop to ~20–50ms intra-region.
+  "placement": { "mode": "smart" },
   // Plain-text vars live here so `wrangler deploy` does not treat
   // Dashboard-set values as drift and wipe them. Secrets (service role key,
   // Stripe keys, Resend key, SCAN_INGEST_KEY, PEXELS_API_KEY) stay in the
@@ -26,6 +32,15 @@
     {
       "binding": "WORKER_SELF_REFERENCE",
       "service": "albis"
+    }
+  ],
+  // KV-backed incremental cache. Makes `revalidate = N` actually refresh.
+  // Binding name is dictated by @opennextjs/cloudflare's kv-incremental-cache
+  // override (BINDING_NAME = "NEXT_INC_CACHE_KV"). Don't rename.
+  "kv_namespaces": [
+    {
+      "binding": "NEXT_INC_CACHE_KV",
+      "id": "7dd33d8d4ce24c76904c2054e85a7e87"
     }
   ]
 }

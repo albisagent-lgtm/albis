@@ -6,6 +6,10 @@ export interface RelatedPost {
   title: string;
   description: string;
   date: string;
+  image: string;
+  category: string;
+  readingTime: number;
+  tags: string[];
 }
 
 export interface RelatedLink {
@@ -46,6 +50,10 @@ export async function getRelatedPosts(
     title: post.title,
     description: post.description,
     date: post.date,
+    image: post.image,
+    category: post.category,
+    readingTime: post.readingTime,
+    tags: post.tags,
   }));
 }
 
@@ -91,5 +99,9 @@ export async function getBlogPostsForTopic(topicSlug: string, limit = 5): Promis
       title: post.title,
       description: post.description,
       date: post.date,
+      image: post.image,
+      category: post.category,
+      readingTime: post.readingTime,
+      tags: post.tags,
     }));
 }
