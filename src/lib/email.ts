@@ -1,7 +1,11 @@
 import { Resend } from "resend";
 import { createAdminClient } from "./supabase/admin";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResendClient() {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) throw new Error("Missing RESEND_API_KEY");
+  return new Resend(key);
+}
 
 const FROM_ADDRESS = "Albis Daily <harry@albis.news>";
 
@@ -14,6 +18,7 @@ export async function sendEmail({
   subject: string;
   html: string;
 }) {
+  const resend = getResendClient();
   const { data, error } = await resend.emails.send({
     from: FROM_ADDRESS,
     to,
@@ -115,6 +120,7 @@ export async function sendBulkEmail({
     html,
   }));
 
+  const resend = getResendClient();
   const { error } = await resend.batch.send(batch);
   if (error) throw new Error(`Resend batch error: ${error.message}`);
 

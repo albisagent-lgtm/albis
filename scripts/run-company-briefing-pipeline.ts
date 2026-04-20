@@ -33,6 +33,7 @@ type CompanyBriefingRow = {
   status: string;
   delivery_status: string | null;
   briefing_content: BriefingContent | null;
+  delivered_at?: string | null;
 };
 
 const FROM_ADDRESS = 'Albis Briefing <briefing@albis.news>';
@@ -142,11 +143,16 @@ async function deliverBriefing(
   profile: CompanyProfile,
   briefing: CompanyBriefingRow,
   content: BriefingContent,
-  forceAll = true
+  forceAll = false,
+  forceDeliver = false
 ) {
   if (!profile.email_enabled) return { status: 'skipped', reason: 'email_disabled' };
   const recipients = profile.email_recipients || [];
   if (recipients.length === 0) return { status: 'skipped', reason: 'no_recipients' };
+
+  if (briefing.delivery_status === 'sent' && !forceDeliver) {
+    return { status: 'already_delivered', recipients, delivered_at: briefing.delivered_at || null };
+  }
 
   if (!forceAll) {
     const now = new Date();
@@ -192,7 +198,7 @@ async function deliverBriefing(
 
   if (updateErr) throw new Error(updateErr.message);
 
-  return { status: 'sent', recipients };
+  return { status: 'sent', recipients, delivered_at: deliveredAt };
 }
 
 async function main() {
@@ -200,6 +206,9 @@ async function main() {
   const supabase = createAdminClient();
   const resend = new Resend(process.env.RESEND_API_KEY);
   if (!process.env.RESEND_API_KEY) fail('Missing RESEND_API_KEY');
+
+  const forceDeliver = process.argv.includes('--force-deliver');
+  const forceAll = process.argv.includes('--force-all');
 
   console.log(`🚀 Running company briefing pipeline for ${scanDate}`);
 
@@ -285,7 +294,7 @@ async function main() {
         },
         { onConflict: 'company_profile_id,briefing_date' }
       )
-      .select('id, company_profile_id, briefing_date, status, delivery_status, briefing_content')
+      .select('id, company_profile_id, briefing_date, status, delivery_status, briefing_content, delivered_at')
       .single();
     if (upsertErr || !scoringBriefing) fail(`Failed to upsert company_briefings row: ${upsertErr?.message || 'missing row'}`);
     console.log(`✅ Upserted company_briefings row ${scoringBriefing.id} (scoring_complete)`);
@@ -296,16 +305,16 @@ async function main() {
       .update({
         briefing_content: briefingContent,
         status: 'generated',
-        delivery_status: 'pending',
+        delivery_status: scoringBriefing.delivery_status === 'sent' ? 'sent' : 'pending',
         generated_at: new Date().toISOString(),
       })
       .eq('id', scoringBriefing.id)
-      .select('id, company_profile_id, briefing_date, status, delivery_status, briefing_content')
+      .select('id, company_profile_id, briefing_date, status, delivery_status, briefing_content, delivered_at')
       .single();
     if (generatedErr || !generatedBriefing) fail(`Failed to mark briefing generated: ${generatedErr?.message || 'missing row'}`);
     console.log(`✅ Generated briefing content (${briefingContent.what_changed.length} what_changed items)`);
 
-    const delivery = await deliverBriefing(supabase, resend, rawProfile, generatedBriefing as CompanyBriefingRow, briefingContent, true);
+    const delivery = await deliverBriefing(supabase, resend, rawProfile, generatedBriefing as CompanyBriefingRow, briefingContent, forceAll, forceDeliver);
     console.log(`✅ Delivery status: ${JSON.stringify(delivery)}`);
 
     results.push({
@@ -319,7 +328,7 @@ async function main() {
   }
 
   console.log('\n🎉 Company briefing pipeline complete');
-  console.log(JSON.stringify({ scan_date: scanDate, results }, null, 2));
+  console.log(JSON.stringify({ scan_date: scanDate, forceDeliver, forceAll, results }, null, 2));
 }
 
 main().catch((err) => fail(err instanceof Error ? err.message : String(err)));
