@@ -1,11 +1,8 @@
 #!/usr/bin/env tsx
 import path from 'path';
-
-process.on('unhandledRejection', (err) => { console.error('UNHANDLED:', err); process.exit(1); });
 import dotenv from 'dotenv';
 import { Resend } from 'resend';
 import { createAdminClient } from '../src/lib/supabase/admin';
-import { generateDailyDigestHtml } from '../src/lib/email-templates/daily-digest';
 import { getSubscriberEmails } from '../src/lib/email';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
@@ -76,6 +73,39 @@ function buildBriefingFromScan(briefingDate: string, items: any[]) {
   };
 }
 
+function generateSimpleDigestHtml(briefing: any, briefingDate: string): string {
+  const title = briefing?.title || `Albis Daily — ${briefingDate}`;
+  const content = String(briefing?.content_md || '').trim();
+  const topStories = Array.isArray(briefing?.top_stories) ? briefing.top_stories : [];
+  const topStoriesHtml = topStories.length
+    ? `<ul style="padding-left:20px;margin:16px 0;">${topStories.map((story: any) => `<li style="margin-bottom:8px;"><strong>${story?.headline || 'Untitled story'}</strong>${story?.region ? ` — ${story.region}` : ''}</li>`).join('')}</ul>`
+    : '';
+  const contentHtml = content
+    ? content.split('\n').filter(Boolean).map((line) => `<p style="font-size:15px;line-height:1.7;color:#374151;margin:0 0 14px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${line.replace(/^[-*]\s*/, '')}</p>`).join('')
+    : '<p style="font-size:15px;line-height:1.7;color:#374151;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">No briefing content available.</p>';
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>${title}</title>
+</head>
+<body style="margin:0;padding:0;background:#ffffff;color:#111827;">
+  <table cellpadding="0" cellspacing="0" style="width:100%;max-width:680px;margin:0 auto;padding:32px 24px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">
+    <tr><td>
+      <div style="font-size:32px;font-weight:800;letter-spacing:2px;color:#1a1a2e;margin-bottom:8px;">ALBIS</div>
+      <div style="font-size:13px;color:#6b7280;margin-bottom:24px;">Daily Briefing · ${briefingDate}</div>
+      <h1 style="font-size:28px;line-height:1.25;color:#1a1a2e;margin:0 0 20px;">${title}</h1>
+      ${contentHtml}
+      ${topStoriesHtml ? `<h2 style="font-size:18px;color:#1a1a2e;margin:28px 0 12px;">Top stories</h2>${topStoriesHtml}` : ''}
+      <div style="margin-top:32px;font-size:13px;color:#6b7280;">See clearly. — Albis</div>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
 async function loadOrCreateBriefingPayload(supabase: ReturnType<typeof createAdminClient>, briefingDate: string) {
   let { data: briefing, error } = await supabase
     .from('briefings')
@@ -102,16 +132,7 @@ async function loadOrCreateBriefingPayload(supabase: ReturnType<typeof createAdm
     briefing = upsert.data;
   }
 
-  const html = generateDailyDigestHtml({
-    date: briefing.date,
-    title: briefing.title,
-    openingLine: briefing.title,
-    mood: briefing.mood,
-    content: briefing.content_md || '',
-    pgiScore: briefing.pgi_score || null,
-    storyCount: briefing.story_count || 0,
-    topStories: briefing.top_stories || [],
-  } as any);
+  const html = generateSimpleDigestHtml(briefing, briefingDate);
 
   const subject = `ALBIS DAILY — ${briefingDate}`;
   return { briefing, html, subject, noScan: false };
@@ -132,8 +153,8 @@ async function alreadyDeliveredDate(supabase: ReturnType<typeof createAdminClien
 async function markBriefingStatus(supabase: ReturnType<typeof createAdminClient>, briefingId: string, status: string) {
   const patch: any = { delivery_status: status };
   if (status === 'sent') patch.delivered_at = new Date().toISOString();
-  const { error } = await supabase.from('briefings').update(patch).eq('id', briefingId);
-  if (error) throw new Error(`Failed to update briefing status: ${error.message}`);
+  const result = await supabase.from('briefings').update(patch).eq('id', briefingId).select('id,date,delivery_status,delivered_at');
+  if (result.error) throw new Error(`Failed to update briefing status: ${result.error.message}`);
 }
 
 async function loadSentEmailsForDate(supabase: ReturnType<typeof createAdminClient>, briefingDate: string) {
@@ -155,10 +176,10 @@ async function recordDelivery(supabase: ReturnType<typeof createAdminClient>, ro
   error?: string | null;
   run_id?: string;
 }) {
-  const { error } = await supabase.from('briefing_deliveries').upsert(row, {
+  const result = await supabase.from('briefing_deliveries').upsert(row, {
     onConflict: 'briefing_date,subscriber_email',
-  });
-  if (error) throw new Error(`Failed to record delivery for ${row.subscriber_email}: ${error.message}`);
+  }).select('*');
+  if (result.error) throw new Error(`Failed to record delivery for ${row.subscriber_email}: ${result.error.message}`);
 }
 
 async function sendOne(resend: Resend, to: string, subject: string, html: string) {
@@ -256,6 +277,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error(err);
+  console.error(err instanceof Error ? err.stack || err.message : err);
   process.exit(1);
 });

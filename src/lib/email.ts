@@ -34,20 +34,15 @@ export async function getSubscriberEmails(): Promise<string[]> {
   const supabase = createAdminClient();
   const { data, error } = await supabase
     .from("subscribers")
-    .select("email")
-    .eq("subscribed", true);
+    .select("email");
 
   if (error) {
-    console.error("Failed to fetch subscribers:", error.message);
-    // Fallback: try without the subscribed filter (column might not exist yet)
-    const { data: allData, error: allError } = await supabase
-      .from("subscribers")
-      .select("email");
-    if (allError) throw new Error(`Supabase error: ${allError.message}`);
-    return (allData || []).map((s: { email: string }) => s.email);
+    throw new Error(`Supabase error: ${error.message}`);
   }
 
-  return (data || []).map((s: { email: string }) => s.email);
+  return (data || [])
+    .map((s: { email: string | null }) => s.email)
+    .filter((email): email is string => Boolean(email));
 }
 
 /**
@@ -58,23 +53,13 @@ export async function getSubscriberEmails(): Promise<string[]> {
 export async function getSubscriberEmailsByLocalHour(targetHour: number): Promise<string[]> {
   const supabase = createAdminClient();
 
-  // Prefer the subscribed=true filter; fall back if the column doesn't exist
-  // (matches the pattern used by getSubscriberEmails).
-  let data: { email: string; timezone: string | null }[] | null = null;
-  const filtered = await supabase
+  const { data, error } = await supabase
     .from("subscribers")
-    .select("email, timezone")
-    .eq("subscribed", true);
+    .select("email, timezone");
 
-  if (filtered.error) {
-    const fallback = await supabase.from("subscribers").select("email, timezone");
-    if (fallback.error) {
-      console.error("Failed to fetch subscribers:", fallback.error.message);
-      return [];
-    }
-    data = fallback.data;
-  } else {
-    data = filtered.data;
+  if (error) {
+    console.error("Failed to fetch subscribers:", error.message);
+    return [];
   }
 
   if (!data || data.length === 0) return [];
