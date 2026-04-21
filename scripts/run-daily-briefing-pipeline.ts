@@ -1,5 +1,7 @@
 #!/usr/bin/env tsx
 import path from 'path';
+
+process.on('unhandledRejection', (err) => { console.error('UNHANDLED:', err); process.exit(1); });
 import dotenv from 'dotenv';
 import { Resend } from 'resend';
 import { createAdminClient } from '../src/lib/supabase/admin';
@@ -24,10 +26,15 @@ function getNzDate() {
 
 function parseArgs() {
   const explicitDate = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv[2] : undefined;
+  const onlyEmailIndex = process.argv.indexOf('--only-email');
+  const onlyEmail = onlyEmailIndex !== -1 && process.argv[onlyEmailIndex + 1]
+    ? process.argv[onlyEmailIndex + 1]
+    : undefined;
   return {
     briefingDate: explicitDate || getNzDate(),
     forceDeliver: process.argv.includes('--force-deliver'),
     dryRun: process.argv.includes('--dry-run'),
+    onlyEmail,
   };
 }
 
@@ -52,7 +59,7 @@ async function loadScanItems(supabase: ReturnType<typeof createAdminClient>, bri
 }
 
 function buildBriefingFromScan(briefingDate: string, items: any[]) {
-  const sigOrder: Record<string, number> = { high: 3, medium: 2, low: 1 };
+  const sigOrder: Record<string, number> = { critical: 4, high: 3, medium: 2, low: 1 };
   const sorted = [...items].sort((a, b) => (sigOrder[b.significance] || 0) - (sigOrder[a.significance] || 0));
   const top = sorted.slice(0, 6);
   const title = top[0]?.connection || top[0]?.headline || `Albis Daily — ${briefingDate}`;
@@ -165,19 +172,13 @@ async function sendOne(resend: Resend, to: string, subject: string, html: string
 }
 
 async function main() {
-  const { briefingDate, forceDeliver, dryRun } = parseArgs();
+  const { briefingDate, forceDeliver, dryRun, onlyEmail } = parseArgs();
   const supabase = createAdminClient();
   const runId = `briefing-${briefingDate}-${Date.now()}`;
 
   if (!process.env.RESEND_API_KEY && !dryRun) fail('Missing RESEND_API_KEY');
 
-  console.log(`🚀 Running daily briefing pipeline for ${briefingDate} ${dryRun ? '(dry-run)' : ''}`);
-
-  const dateAlreadySent = await alreadyDeliveredDate(supabase, briefingDate);
-  if (dateAlreadySent && !forceDeliver) {
-    console.log(`↷ Briefing ${briefingDate} already marked sent; skipping full delivery`);
-    return;
-  }
+  console.log(`🚀 Running daily briefing pipeline for ${briefingDate} ${dryRun ? '(dry-run)' : ''}${onlyEmail ? ` [only ${onlyEmail}]` : ''}`);
 
   const payload = await loadOrCreateBriefingPayload(supabase, briefingDate);
   if (payload.noScan) {
@@ -185,7 +186,17 @@ async function main() {
     return;
   }
   const { briefing, html, subject } = payload;
-  const subscribers = await getSubscriberEmails();
+
+  const dateAlreadySent = await alreadyDeliveredDate(supabase, briefingDate);
+  if (dateAlreadySent && !forceDeliver) {
+    console.log(`↷ Briefing ${briefingDate} already marked sent; skipping full delivery`);
+    return;
+  }
+
+  let subscribers = await getSubscriberEmails();
+  if (onlyEmail) {
+    subscribers = subscribers.filter((email) => email.toLowerCase() === onlyEmail.toLowerCase());
+  }
   const sentEmails = await loadSentEmailsForDate(supabase, briefingDate);
 
   let sent = 0;
@@ -236,6 +247,7 @@ async function main() {
     briefing_date: briefingDate,
     dryRun,
     forceDeliver,
+    onlyEmail: onlyEmail || null,
     subscribers_checked: subscribers.length,
     sent,
     skipped,
@@ -243,4 +255,7 @@ async function main() {
   }, null, 2));
 }
 
-main().catch((err) => fail(err instanceof Error ? err.message : String(err)));
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
