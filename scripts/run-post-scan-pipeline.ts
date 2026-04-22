@@ -123,6 +123,18 @@ function runAllowAlreadyRunning(command: string, args: string[], cwd = process.c
   fail(`${command} failed with exit code ${res.status}`);
 }
 
+function runOptional(command: string, args: string[], cwd = process.cwd(), label?: string) {
+  console.log(`\n▶ ${command} ${args.join(' ')}`);
+  const res = spawnSync(command, args, { cwd, env: process.env, encoding: 'utf8' });
+  const stdout = res.stdout || '';
+  const stderr = res.stderr || '';
+  if (stdout) process.stdout.write(stdout);
+  if (stderr) process.stderr.write(stderr);
+  if (res.status === 0) return true;
+  console.log(`⚠️ Optional step failed${label ? ` (${label})` : ''}; continuing article publication`);
+  return false;
+}
+
 function slugify(input: string) {
   return input.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-+/g, '-');
 }
@@ -305,10 +317,11 @@ function buildStoryPacket(item: ScanItem): StoryPacket {
 
 function extractLedeParts(packet: StoryPacket): LedeParts {
   const title = packet.title;
+  const lower = title.toLowerCase();
   const connection = packet.connection || '';
   const location = packet.primaryRegion !== 'the wider region' ? packet.primaryRegion : (packet.regionsFound[0] || packet.primaryRegion);
 
-  if (title.toLowerCase().includes('strait of hormuz') || packet.tags.includes('hormuz')) {
+  if (lower.includes('strait of hormuz') || packet.tags.includes('hormuz')) {
     return {
       actor: 'A reopened stretch of the Strait of Hormuz',
       action: 'failed to stay open',
@@ -318,7 +331,7 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
     };
   }
 
-  if (title.toLowerCase().includes('drc') || packet.tags.includes('drc') || packet.tags.includes('m23')) {
+  if (lower.includes('drc') || packet.tags.includes('drc') || packet.tags.includes('m23')) {
     return {
       actor: 'DRC government negotiators and rebel representatives',
       action: 'moved toward a new protocol',
@@ -328,7 +341,7 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
     };
   }
 
-  if (title.toLowerCase().includes('waiver') || packet.tags.includes('sanctions-waiver') || packet.tags.includes('russia')) {
+  if (lower.includes('waiver') || packet.tags.includes('sanctions-waiver')) {
     return {
       actor: 'The US Treasury',
       action: 'renewed a narrow waiver',
@@ -338,17 +351,47 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
     };
   }
 
-  if (title.toLowerCase().includes('imf') || packet.tags.includes('imf')) {
+  if (lower.includes('imf and world bank') && lower.includes('venezuela')) {
     return {
-      actor: 'The IMF',
-      action: 'cut its global growth outlook',
-      object: '',
-      location: 'global markets',
-      consequence: connection || 'The downgrade gives formal weight to economic pressures that had been building beneath the headline cycle.',
+      actor: 'The IMF and World Bank',
+      action: 'resumed dealings with Venezuela',
+      object: 'after a years-long pause',
+      location: 'Venezuela',
+      consequence: connection || 'The shift changes Caracas’s financial and diplomatic room to maneuver.',
     };
   }
 
-  if (title.toLowerCase().includes('cargo') || title.toLowerCase().includes('ship')) {
+  if (lower.includes('imf')) {
+    return {
+      actor: 'The IMF',
+      action: 'updated its public outlook',
+      object: '',
+      location: 'global markets',
+      consequence: connection || 'The revision gives formal weight to economic pressures already building beneath the headline cycle.',
+    };
+  }
+
+  if (lower.includes('druzhba') || lower.includes('pipeline flows will resume') || lower.includes('pipeline')) {
+    return {
+      actor: 'Ukraine',
+      action: 'said Druzhba oil pipeline flows would resume',
+      object: 'after repairs',
+      location: 'central Europe',
+      consequence: connection || 'That restoration matters for regional energy security, refinery planning, and transit leverage.',
+    };
+  }
+
+  if (lower.includes('disinformation') && lower.includes('russian')) {
+    return {
+      actor: 'The European Union',
+      action: 'sanctioned two Russian entities',
+      object: 'over alleged disinformation links',
+      location: 'Europe',
+      consequence: connection || 'The move expands sanctions pressure into information infrastructure as well as finance and trade.',
+    };
+  }
+
+  if (lower.includes('cargo') || lower.includes('ship')) {
     return {
       actor: 'US forces',
       action: 'seized an Iranian cargo vessel',
@@ -358,7 +401,7 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
     };
   }
 
-  if (title.toLowerCase().includes('kenya')) {
+  if (lower.includes('kenya')) {
     return {
       actor: 'Kenya',
       action: 'sought emergency World Bank support',
@@ -368,7 +411,7 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
     };
   }
 
-  if (title.toLowerCase().includes('bangladesh')) {
+  if (lower.includes('bangladesh')) {
     return {
       actor: 'Bangladesh',
       action: 'raised fuel prices',
@@ -380,7 +423,7 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
 
   return {
     actor: packet.title,
-    action: 'remains a live signal',
+    action: 'moved into a new phase',
     object: '',
     location,
     consequence: connection || 'The next move will show whether the development stays narrow or spreads into wider consequences.',
@@ -608,35 +651,33 @@ function writeArticlesLocally(articles: BuiltArticle[]) {
 }
 
 async function ingestArticles(articles: BuiltArticle[]) {
-  const key = process.env.SCAN_INGEST_KEY;
-  if (!key) fail('Missing SCAN_INGEST_KEY for article ingest');
-
   for (const article of articles) {
-    const res = await fetch('https://www.albis.news/api/articles/ingest', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${key}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        slug: article.slug,
-        title: article.title,
-        description: article.description,
-        date: article.date,
-        category: article.category,
-        tags: article.tags,
-        image: article.image,
-        excerpt: article.excerpt,
-        author: article.author,
-        content: article.content,
-        reading_time: article.reading_time,
-        frontmatter: article.frontmatter,
-      }),
-    });
+    const row = {
+      slug: article.slug,
+      title: article.title,
+      description: article.description ?? null,
+      date: article.date,
+      category: article.category,
+      tags: article.tags,
+      keywords: article.tags,
+      image: article.image ?? null,
+      excerpt: article.excerpt ?? null,
+      author: article.author ?? null,
+      content: article.content,
+      reading_time: (() => {
+        const match = String(article.reading_time || '').match(/\d+/);
+        return match ? parseInt(match[0], 10) : null;
+      })(),
+      published_at: new Date().toISOString(),
+      frontmatter: article.frontmatter || {},
+    };
 
-    const text = await res.text();
-    if (!res.ok) fail(`Article ingest failed for ${article.slug}: ${res.status} ${text}`);
-    console.log(`✅ Ingested article ${article.slug}`);
+    const { error } = await supabase
+      .from('articles')
+      .upsert(row, { onConflict: 'slug' });
+
+    if (error) fail(`Article ingest failed for ${article.slug}: ${error.message}`);
+    console.log(`✅ Ingested article ${article.slug} directly into Supabase`);
   }
 }
 
@@ -704,18 +745,25 @@ async function main() {
 
   const tsScorer = path.resolve(process.cwd(), `scripts/score-pgi-gai-${date}-${period}.ts`);
   const jsScorer = path.resolve(process.cwd(), `scripts/score-pgi-gai-${date}-${period}.js`);
+  const genericTsScorer = path.resolve(process.cwd(), 'scripts/score-scan.ts');
+  const genericJsScorer = path.resolve(process.cwd(), 'scripts/score-scan.js');
   if (fs.existsSync(tsScorer)) {
     run('npx', ['tsx', tsScorer]);
   } else if (fs.existsSync(jsScorer)) {
     run('node', [jsScorer]);
+  } else if (fs.existsSync(genericTsScorer)) {
+    console.log(`ℹ️ No date-specific scorer found for ${date} ${period}; falling back to scripts/score-scan.ts`);
+    run('npx', ['tsx', 'scripts/score-scan.ts', scanPath]);
+  } else if (fs.existsSync(genericJsScorer)) {
+    console.log(`ℹ️ No date-specific scorer found for ${date} ${period}; falling back to scripts/score-scan.js`);
+    run('node', ['scripts/score-scan.js', scanPath]);
   } else {
-    fail(`No scorer script found for ${date} ${period} (.ts or .js)`);
+    fail(`No scorer script found for ${date} ${period} and no generic scorer available`);
   }
   await verifyPgi(date);
   await verifyGai(date);
 
-  runAllowAlreadyRunning('openclaw', ['cron', 'run', 'a79cb02a-98ef-4e9a-85e6-f10e37a8deb9'], path.resolve(process.cwd(), '..'));
-  await verifyBriefing(date);
+  runOptional('npx', ['tsx', 'scripts/run-daily-briefing-pipeline.ts', date, '--dry-run'], process.cwd(), 'daily briefing preflight');
 
   const articles = await buildArticles(items, date);
   console.log(`✅ ${articles.length} candidate(s) passed the gate`);

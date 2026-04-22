@@ -240,8 +240,12 @@ export default async function Home() {
     getPostsBySection("perspectives"),
   ]);
 
-  // Today's top stories: latest 5
-  const topStories = allPosts.slice(0, 5);
+  // Today's top stories: strongly prefer posts matching the current snapshot date
+  // so the homepage hero cannot drift behind the fresh scan/snapshot state.
+  const snapshotDatedPosts = snapshot.scanDate
+    ? allPosts.filter((post) => post.date?.split('T')[0] === snapshot.scanDate)
+    : [];
+  const topStories = (snapshotDatedPosts.length > 0 ? snapshotDatedPosts : allPosts).slice(0, 5);
   const leadStory = topStories[0];
   const secondaryStories = topStories.slice(1, 5);
 
