@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { Resend } from 'resend';
 import { createAdminClient } from '../src/lib/supabase/admin';
 import { loadScanItems } from '../src/lib/scan-loader';
+import { requireCompanyBriefingRows, requireStoryScores } from '../src/lib/pipeline-db';
 import {
   scoreStoriesForCompany,
   getSelectedStories,
@@ -144,7 +145,8 @@ async function deliverBriefing(
   briefing: CompanyBriefingRow,
   content: BriefingContent,
   forceAll = false,
-  forceDeliver = false
+  forceDeliver = false,
+  dryRun = false
 ) {
   if (!profile.email_enabled) return { status: 'skipped', reason: 'email_disabled' };
   const recipients = profile.email_recipients || [];
@@ -174,6 +176,10 @@ async function deliverBriefing(
   const html = generateCompanyBriefingHtml(content);
   const subject = generateBriefingSubject(content.header.company_name, content.header.date);
   const batch = recipients.map((to) => ({ from: FROM_ADDRESS, to, subject, html }));
+
+  if (dryRun) {
+    return { status: 'dry_run', recipients, subject, html_length: html.length };
+  }
 
   if (batch.length <= 100) {
     const { error } = await resend.batch.send(batch);
@@ -209,12 +215,15 @@ async function main() {
 
   const forceDeliver = process.argv.includes('--force-deliver');
   const forceAll = process.argv.includes('--force-all');
+  const dryRun = process.argv.includes('--dry-run');
 
-  console.log(`🚀 Running company briefing pipeline for ${scanDate}`);
+  console.log(`🚀 Running company briefing pipeline for ${scanDate}${dryRun ? ' (dry-run)' : ''}`);
 
   const allItems = await loadScanItems(supabase, scanDate);
   if (allItems.length === 0) fail(`No scan items found for ${scanDate}`);
-  console.log(`✅ Loaded ${allItems.length} scan items`);
+  const scoreStatus = await requireStoryScores(supabase, scanDate);
+  console.log(`✅ Loaded ${allItems.length} verified scan items from DB truth`);
+  console.log(`✅ Verified PGI/GAI rows (${scoreStatus.pgiCount} PGI, ${scoreStatus.gaiCount} GAI)`);
 
   const { data: profiles, error: profileErr } = await supabase
     .from('company_profiles')
@@ -314,7 +323,7 @@ async function main() {
     if (generatedErr || !generatedBriefing) fail(`Failed to mark briefing generated: ${generatedErr?.message || 'missing row'}`);
     console.log(`✅ Generated briefing content (${briefingContent.what_changed.length} what_changed items)`);
 
-    const delivery = await deliverBriefing(supabase, resend, rawProfile, generatedBriefing as CompanyBriefingRow, briefingContent, forceAll, forceDeliver);
+    const delivery = await deliverBriefing(supabase, resend, rawProfile, generatedBriefing as CompanyBriefingRow, briefingContent, forceAll, forceDeliver, dryRun);
     console.log(`✅ Delivery status: ${JSON.stringify(delivery)}`);
 
     results.push({
@@ -327,8 +336,11 @@ async function main() {
     });
   }
 
+  const briefingRows = await requireCompanyBriefingRows(supabase, scanDate);
+  console.log(`✅ Verified ${briefingRows.length} company_briefings row(s)`);
+
   console.log('\n🎉 Company briefing pipeline complete');
-  console.log(JSON.stringify({ scan_date: scanDate, forceDeliver, forceAll, results }, null, 2));
+  console.log(JSON.stringify({ scan_date: scanDate, forceDeliver, forceAll, dryRun, results }, null, 2));
 }
 
 main().catch((err) => fail(err instanceof Error ? err.message : String(err)));

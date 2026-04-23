@@ -361,17 +361,26 @@ export async function getLatestScan(): Promise<ParsedScan | null> {
 }
 
 export async function getScanByDate(date: string): Promise<ParsedScan | null> {
-  // Try Supabase first if available
   if (supabase && (isVercel || !isLocal)) {
     return await getSupabaseScan(date);
   }
 
-  // Fallback to local filesystem
   if (!isLocal) return null;
-  
-  const filePath = path.join(SCANS_DIR, `${date}.md`);
-  if (!fs.existsSync(filePath)) return null;
-  return parseScanFile(filePath);
+
+  const candidates = [
+    path.join(SCANS_DIR, `${date}-pm.md`),
+    path.join(SCANS_DIR, `${date}-midday.md`),
+    path.join(SCANS_DIR, `${date}-am.md`),
+    path.join(SCANS_DIR, `${date}.md`),
+  ];
+
+  for (const filePath of candidates) {
+    if (!fs.existsSync(filePath)) continue;
+    const parsed = parseScanFile(filePath);
+    if (parsed && parsed.items.length > 0) return parsed;
+  }
+
+  return null;
 }
 
 /**

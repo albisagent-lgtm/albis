@@ -6,6 +6,7 @@ import matter from 'gray-matter';
 import readingTime from 'reading-time';
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
+import { loadVerifiedScanItems, requireScanRows, requireScanItemsAvailability, requireSnapshotForDate, requireStoryScores } from '../src/lib/pipeline-db';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -167,6 +168,27 @@ function readScanFile(scanPath: string) {
   return md;
 }
 
+function availableDatePeriods(date: string): Period[] {
+  const ordered: Period[] = ['am', 'midday', 'pm'];
+  return ordered.filter((candidate) => fs.existsSync(path.resolve(process.cwd(), `../memory/scans/${date}-${candidate}.md`)));
+}
+
+function runScoreForPeriod(date: string, period: Period) {
+  const tsScorer = path.resolve(process.cwd(), `scripts/score-pgi-gai-${date}-${period}.ts`);
+  const jsScorer = path.resolve(process.cwd(), `scripts/score-pgi-gai-${date}-${period}.js`);
+  const dbScorer = path.resolve(process.cwd(), 'scripts/score-verified-scan.ts');
+  if (fs.existsSync(tsScorer)) {
+    run('npx', ['tsx', tsScorer]);
+  } else if (fs.existsSync(jsScorer)) {
+    run('node', [jsScorer]);
+  } else if (fs.existsSync(dbScorer)) {
+    console.log(`ℹ️ No date-specific scorer found for ${date} ${period}; using DB-truth scorer`);
+    run('npx', ['tsx', 'scripts/score-verified-scan.ts', date, period]);
+  } else {
+    fail(`No scorer script found for ${date} ${period}`);
+  }
+}
+
 function extractItems(md: string): ScanItem[] {
   const matches = [...md.matchAll(/```json\s*\n([\s\S]*?)```/g)];
   for (const m of matches) {
@@ -178,40 +200,6 @@ function extractItems(md: string): ScanItem[] {
   fail('Could not extract structured JSON items from scan markdown');
 }
 
-async function verifyScan(date: string, period: Period) {
-  const { data, error } = await supabase
-    .from('scans')
-    .select('scan_date,scan_time,items,raw_markdown')
-    .eq('scan_date', date)
-    .eq('scan_time', period)
-    .limit(1);
-  if (error) fail(`Scan verify failed: ${error.message}`);
-  if (!data || !data.length) fail(`No scans row found for ${date} ${period}`);
-  const row = data[0] as any;
-  if (!Array.isArray(row.items) || row.items.length === 0) fail(`Scans row for ${date} ${period} has empty items`);
-  console.log(`✅ Verified scan row for ${date} ${period} with ${row.items.length} items`);
-}
-
-async function verifyPgi(date: string) {
-  const { data, error } = await supabase.from('pgi_story_scores').select('id').eq('scan_date', date).limit(1);
-  if (error) fail(`PGI verify failed: ${error.message}`);
-  if (!data || !data.length) fail(`No PGI rows found for ${date}`);
-  console.log('✅ Verified PGI rows');
-}
-
-async function verifyGai(date: string) {
-  const { data, error } = await supabase.from('gai_story_scores').select('id').eq('scan_date', date).limit(1);
-  if (error) fail(`GAI verify failed: ${error.message}`);
-  if (!data || !data.length) fail(`No GAI rows found for ${date}`);
-  console.log('✅ Verified GAI rows');
-}
-
-async function verifyBriefing(date: string) {
-  const { data, error } = await supabase.from('briefings').select('date,title').eq('date', date).limit(1);
-  if (error) fail(`Briefing verify failed: ${error.message}`);
-  if (!data || !data.length) fail(`No briefing row found for ${date}`);
-  console.log(`✅ Verified briefing row for ${date}`);
-}
 
 function titleFromHeadline(headline: string) {
   return headline
@@ -699,12 +687,6 @@ async function verifyArticles(articles: BuiltArticle[]) {
   console.log(`✅ Verified ${data.length} article row(s) in Supabase with no banned phrases, concrete openings, low headline overlap, and all above ${MIN_WORD_COUNT} words`);
 }
 
-async function verifySnapshot(date: string, period: Period) {
-  const { data, error } = await supabase.from('site_snapshot').select('updated_at,scan_date').eq('id', 1).single();
-  if (error) fail(`Snapshot verify failed: ${error.message}`);
-  if (!data || data.scan_date !== date) fail(`Snapshot scan_date not updated to ${date} after ${period} run`);
-  console.log(`✅ Verified site_snapshot updated for scan_date=${date}`);
-}
 
 function logCodeChangeStatus() {
   const status = spawnSync('git', ['status', '--porcelain'], { cwd: process.cwd(), env: process.env, encoding: 'utf8' });
@@ -738,32 +720,26 @@ async function main() {
   const scanPath = path.resolve(process.cwd(), `../memory/scans/${date}-${period}.md`);
   console.log(`🚀 Starting post-scan pipeline for ${date} ${period}`);
   const md = readScanFile(scanPath);
-  const items = extractItems(md);
+  const fileItems = extractItems(md);
+  console.log(`✅ File check passed for ${path.basename(scanPath)} with ${fileItems.length} extracted items`);
 
-  run('node', ['scripts/push-scan-to-supabase.js', `${date}-${period}`]);
-  await verifyScan(date, period);
-
-  const tsScorer = path.resolve(process.cwd(), `scripts/score-pgi-gai-${date}-${period}.ts`);
-  const jsScorer = path.resolve(process.cwd(), `scripts/score-pgi-gai-${date}-${period}.js`);
-  const genericTsScorer = path.resolve(process.cwd(), 'scripts/score-scan.ts');
-  const genericJsScorer = path.resolve(process.cwd(), 'scripts/score-scan.js');
-  if (fs.existsSync(tsScorer)) {
-    run('npx', ['tsx', tsScorer]);
-  } else if (fs.existsSync(jsScorer)) {
-    run('node', [jsScorer]);
-  } else if (fs.existsSync(genericTsScorer)) {
-    console.log(`ℹ️ No date-specific scorer found for ${date} ${period}; falling back to scripts/score-scan.ts`);
-    run('npx', ['tsx', 'scripts/score-scan.ts', scanPath]);
-  } else if (fs.existsSync(genericJsScorer)) {
-    console.log(`ℹ️ No date-specific scorer found for ${date} ${period}; falling back to scripts/score-scan.js`);
-    run('node', ['scripts/score-scan.js', scanPath]);
-  } else {
-    fail(`No scorer script found for ${date} ${period} and no generic scorer available`);
+  for (const candidatePeriod of availableDatePeriods(date)) {
+    run('node', ['scripts/push-scan-to-supabase.js', `${date}-${candidatePeriod}`]);
   }
-  await verifyPgi(date);
-  await verifyGai(date);
+  const scanRows = await requireScanRows(supabase, date, period);
+  const mirroredCount = await requireScanItemsAvailability(supabase, scanRows);
+  console.log(`✅ Verified scans row and ${mirroredCount} mirrored scan_items rows for ${date} ${period}`);
+
+  for (const candidatePeriod of availableDatePeriods(date)) {
+    runScoreForPeriod(date, candidatePeriod);
+  }
+  const scoreStatus = await requireStoryScores(supabase, date, period);
+  console.log(`✅ Verified PGI/GAI rows for ${date} ${period} (${scoreStatus.pgiCount} PGI, ${scoreStatus.gaiCount} GAI)`);
 
   runOptional('npx', ['tsx', 'scripts/run-daily-briefing-pipeline.ts', date, '--dry-run'], process.cwd(), 'daily briefing preflight');
+
+  const items = await loadVerifiedScanItems(supabase, date, period);
+  console.log(`✅ Loaded ${items.length} verified scan items from DB truth for article generation`);
 
   const articles = await buildArticles(items, date);
   console.log(`✅ ${articles.length} candidate(s) passed the gate`);
@@ -771,8 +747,9 @@ async function main() {
   await ingestArticles(articles);
   await verifyArticles(articles);
 
-  run('npx', ['tsx', 'scripts/write-site-snapshot.ts']);
-  await verifySnapshot(date, period);
+  run('npx', ['tsx', 'scripts/write-site-snapshot.ts', date]);
+  await requireSnapshotForDate(supabase, date);
+  console.log(`✅ Verified site_snapshot updated for scan_date=${date}`);
 
   console.log('Published articles summary:');
   for (const article of articles) {

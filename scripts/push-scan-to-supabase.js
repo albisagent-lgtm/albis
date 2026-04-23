@@ -126,10 +126,42 @@ function findScanTimeSpans(md) {
   return [...byTime.values()].sort((a, b) => a.start - b.start);
 }
 
+async function mirrorScanItems(scanId, items) {
+  const { error: deleteError } = await supabase
+    .from('scan_items')
+    .delete()
+    .eq('scan_id', scanId);
+
+  if (deleteError) throw new Error(`scan_items delete failed: ${deleteError.message}`);
+
+  const itemRows = (items || [])
+    .filter((item) => item?.headline && item?.category)
+    .map((item) => ({
+      scan_id: scanId,
+      headline: item.headline,
+      category: typeof item.category === 'string' ? item.category.replace(/-/g, '_') : item.category,
+      regions: Array.isArray(item.regions) ? item.regions : [],
+      tags: Array.isArray(item.tags) ? item.tags : [],
+      patterns: Array.isArray(item.patterns) ? item.patterns : [],
+      significance: item.significance || null,
+      connection: item.connection || null,
+    }));
+
+  if (!itemRows.length) return 0;
+
+  const { error: insertError } = await supabase
+    .from('scan_items')
+    .insert(itemRows);
+
+  if (insertError) throw new Error(`scan_items insert failed: ${insertError.message}`);
+  return itemRows.length;
+}
+
 async function upsertScan(scanDate, scanTime, data, fullMarkdown) {
+  const normalisedScanTime = typeof scanTime === 'string' ? scanTime.trim().toLowerCase() : scanTime;
   const body = {
     scan_date: scanDate,
-    scan_time: scanTime,
+    scan_time: normalisedScanTime,
     human_summary: data.humanSummary || null,
     mood: data.mood || null,
     top_theme: data.topTheme || null,
@@ -145,7 +177,20 @@ async function upsertScan(scanDate, scanTime, data, fullMarkdown) {
 
   if (error) throw new Error(`Supabase upsert failed: ${error.message}`);
 
-  console.log(`✅ Upserted ${scanDate} ${scanTime} — ${body.items.length} items, mood=${body.mood || '—'}`);
+  const { data: scanRow, error: scanLookupError } = await supabase
+    .from('scans')
+    .select('id')
+    .eq('scan_date', scanDate)
+    .eq('scan_time', normalisedScanTime)
+    .single();
+
+  if (scanLookupError || !scanRow?.id) {
+    throw new Error(`Supabase scan lookup failed after upsert: ${scanLookupError?.message || 'missing row'}`);
+  }
+
+  const mirroredCount = await mirrorScanItems(scanRow.id, body.items);
+
+  console.log(`✅ Upserted ${scanDate} ${normalisedScanTime} — ${body.items.length} items, mirrored ${mirroredCount} scan_items rows, mood=${body.mood || '—'}`);
 }
 
 function parseArg(arg) {

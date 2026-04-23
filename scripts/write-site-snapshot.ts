@@ -93,10 +93,14 @@ const supabase: SupabaseClient = createClient(SUPABASE_URL, SERVICE_KEY);
 // ---------------------------------------------------------------------------
 
 function todayInNZ(): string {
-  // NZST = UTC+13. Matches the convention used in src/lib/scan-parser.ts:294.
   const now = new Date();
   const nz = new Date(now.getTime() + 13 * 60 * 60 * 1000);
   return nz.toISOString().split("T")[0];
+}
+
+function parseExplicitDate(): string | null {
+  const dateArg = process.argv.find((arg) => /^\d{4}-\d{2}-\d{2}$/.test(arg));
+  return dateArg || null;
 }
 
 // ---------------------------------------------------------------------------
@@ -114,12 +118,12 @@ interface BriefingSource {
   pgi_score: number | null;
 }
 
-async function fetchLatestBriefing(): Promise<BriefingSource | null> {
-  // Same select as src/app/page.tsx:262-269 (with summary added, since the
-  // snapshot has a briefing_summary column).
-  const { data, error } = await supabase
+async function fetchLatestBriefing(targetDate?: string): Promise<BriefingSource | null> {
+  let query = supabase
     .from("briefings")
-    .select("date, title, summary, top_stories, story_count, pgi_score")
+    .select("date, title, summary, top_stories, story_count, pgi_score");
+  if (targetDate) query = query.eq("date", targetDate);
+  const { data, error } = await query
     .order("date", { ascending: false })
     .limit(1)
     .maybeSingle();
@@ -140,11 +144,10 @@ interface PgiSource {
   top_story_slug: string | null;
 }
 
-async function fetchTopPgi(): Promise<PgiSource | null> {
-  // Daily aggregate from pgi_daily (per plan § D and user direction).
-  const { data: daily } = await supabase
-    .from("pgi_daily")
-    .select("daily_pgi")
+async function fetchTopPgi(targetDate?: string): Promise<PgiSource | null> {
+  let dailyQuery = supabase.from("pgi_daily").select("daily_pgi");
+  if (targetDate) dailyQuery = dailyQuery.eq("date", targetDate);
+  const { data: daily } = await dailyQuery
     .order("date", { ascending: false })
     .limit(1)
     .maybeSingle();
@@ -152,13 +155,13 @@ async function fetchTopPgi(): Promise<PgiSource | null> {
   // Headline/slug come from pgi_story_scores (pgi_daily has no per-story
   // fields). Best-effort: if this table is empty the headline stays null
   // and we still record the aggregate score.
-  const { data: story } = await supabase
+  let storyQuery = supabase
     .from("pgi_story_scores")
     .select("story_headline, story_slug")
-    .eq("is_latest", true)
-    .order("story_pgi", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+    .order("story_pgi", { ascending: false });
+  if (targetDate) storyQuery = storyQuery.eq("scan_date", targetDate);
+  else storyQuery = storyQuery.eq("is_latest", true);
+  const { data: story } = await storyQuery.limit(1).maybeSingle();
 
   if (!daily && !story) return null;
   return {
@@ -174,13 +177,12 @@ interface GaiSource {
   top_story_gai: number | null;
 }
 
-async function fetchTopGai(): Promise<GaiSource | null> {
-  // gai_daily natively carries `most_invisible_story` + `most_invisible_gai`
-  // (see supabase/migrations/20260302_create_gai_tables.sql:36-39), so a
-  // single read gives us both the aggregate and the top headline.
-  const { data } = await supabase
+async function fetchTopGai(targetDate?: string): Promise<GaiSource | null> {
+  let query = supabase
     .from("gai_daily")
-    .select("daily_gai, most_invisible_story, most_invisible_gai")
+    .select("daily_gai, most_invisible_story, most_invisible_gai");
+  if (targetDate) query = query.eq("date", targetDate);
+  const { data } = await query
     .order("date", { ascending: false })
     .limit(1)
     .maybeSingle();
@@ -250,30 +252,35 @@ async function logToPipelineRuns(
 // ---------------------------------------------------------------------------
 
 async function main() {
-  const today = todayInNZ();
+  const today = parseExplicitDate() || todayInNZ();
   const skipped: string[] = [];
 
   console.log(`[write-site-snapshot] starting (today=${today}, dryRun=${DRY_RUN})`);
 
-  // Dynamic import AFTER dotenv.config() has populated env. src/lib/scan-parser
-  // reads process.env at module-load time to build its internal Supabase
-  // client — a static import would evaluate too early.
-  const { getTodayScan } = await import("../src/lib/scan-parser");
+  const { getTodayScan, getScanByDate } = await import("../src/lib/scan-parser");
 
-  // Step 1: fetch all sources in parallel — each is independent, none block
-  // the others. Scan is treated like every other source: if it's missing we
-  // proceed with null scan fields, we don't fail here.
   const hasScanItems = (s: Awaited<ReturnType<typeof getTodayScan>>) =>
     !!s && Array.isArray(s.items) && s.items.length > 0;
 
-  const [scanRaw, briefing, pgi, gai, breaking] = await Promise.all([
-    getTodayScan().catch((err) => {
+  const loadRequestedScan = async () => {
+    const explicitDate = parseExplicitDate();
+    if (explicitDate) {
+      return await getScanByDate(explicitDate).catch((err) => {
+        console.warn("[write-site-snapshot] getScanByDate threw:", err);
+        return null;
+      });
+    }
+    return await getTodayScan().catch((err) => {
       console.warn("[write-site-snapshot] getTodayScan threw:", err);
       return null;
-    }),
-    fetchLatestBriefing(),
-    fetchTopPgi(),
-    fetchTopGai(),
+    });
+  };
+
+  const [scanRaw, briefing, pgi, gai, breaking] = await Promise.all([
+    loadRequestedScan(),
+    fetchLatestBriefing(today),
+    fetchTopPgi(today),
+    fetchTopGai(today),
     fetchActiveBreaking(),
   ]);
 

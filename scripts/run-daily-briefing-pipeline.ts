@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { Resend } from 'resend';
 import { createAdminClient } from '../src/lib/supabase/admin';
 import { getSubscriberEmails } from '../src/lib/email';
+import { loadVerifiedScanItems, requireBriefingRow, requireStoryScores } from '../src/lib/pipeline-db';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -33,26 +34,6 @@ function parseArgs() {
     dryRun: process.argv.includes('--dry-run'),
     onlyEmail,
   };
-}
-
-async function loadScanItems(supabase: ReturnType<typeof createAdminClient>, briefingDate: string) {
-  const { data, error } = await supabase
-    .from('scans')
-    .select('items, scan_time')
-    .eq('scan_date', briefingDate)
-    .order('scan_time', { ascending: false });
-  if (error) throw new Error(`Failed to load scan rows: ${error.message}`);
-  const items: any[] = [];
-  for (const row of data || []) {
-    if (Array.isArray(row.items)) items.push(...row.items);
-  }
-  const seen = new Set();
-  return items.filter((item) => {
-    const key = String(item.headline || '').toLowerCase();
-    if (!key || seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
 }
 
 function buildBriefingFromScan(briefingDate: string, items: any[]) {
@@ -118,7 +99,7 @@ async function loadOrCreateBriefingPayload(supabase: ReturnType<typeof createAdm
   if (error) throw new Error(`Failed to load briefing row: ${error.message}`);
 
   if (!briefing) {
-    const items = await loadScanItems(supabase, briefingDate);
+    const items = await loadVerifiedScanItems(supabase, briefingDate);
     if (!items.length) {
       return { briefing: null, html: null, subject: null, noScan: true };
     }
@@ -201,12 +182,19 @@ async function main() {
 
   console.log(`🚀 Running daily briefing pipeline for ${briefingDate} ${dryRun ? '(dry-run)' : ''}${onlyEmail ? ` [only ${onlyEmail}]` : ''}`);
 
+  const verifiedItems = await loadVerifiedScanItems(supabase, briefingDate);
+  const scoreStatus = await requireStoryScores(supabase, briefingDate);
+  console.log(`✅ Verified ${verifiedItems.length} scan items from DB truth`);
+  console.log(`✅ Verified PGI/GAI rows (${scoreStatus.pgiCount} PGI, ${scoreStatus.gaiCount} GAI)`);
+
   const payload = await loadOrCreateBriefingPayload(supabase, briefingDate);
   if (payload.noScan) {
     console.log(`No scan data for ${briefingDate} yet, would generate and send when scan runs.`);
     return;
   }
   const { briefing, html, subject } = payload;
+  await requireBriefingRow(supabase, briefingDate);
+  console.log('✅ Verified briefing row in Supabase');
 
   const dateAlreadySent = await alreadyDeliveredDate(supabase, briefingDate);
   if (dateAlreadySent && !forceDeliver) {
