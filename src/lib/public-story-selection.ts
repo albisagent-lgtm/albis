@@ -9,6 +9,7 @@ export interface PublicStorySelection {
   duplicateKey: string;
   specificity: number;
   why: string[];
+  lane: string;
 }
 
 const GENERIC_TAGS = new Set([
@@ -47,9 +48,19 @@ const SYSTEM_CATEGORIES = new Set([
   'economic-flows', 'climate-energy', 'energy', 'governance', 'logistics-shipping', 'manufacturing', 'construction-infra'
 ]);
 
+const NARROW_SYSTEM_CATEGORIES = new Set([
+  'conflict', 'sanctions', 'economic-flows', 'energy', 'logistics-shipping'
+]);
+
+const DIVERSITY_PRIORITY_CATEGORIES = new Set([
+  'health', 'life-systems', 'food-agriculture', 'food', 'water', 'migration-demographics', 'science-space', 'tech-ai',
+  'natural-world', 'grassroots', 'culture', 'governance', 'climate-energy'
+]);
+
 const HUMAN_TAGS = ['aid', 'refugee', 'vaccine', 'measles', 'meningitis', 'civilian', 'children', 'health', 'food', 'water', 'hospital', 'clinic', 'school', 'hunger', 'malnutrition', 'displacement'];
 const OFFBEAT_TAGS = ['wildlife', 'satellite', 'coffee', 'solar', 'deforestation', 'garment', 'fisheries', 'bees', 'penguin', 'reef', 'orchard', 'volcano'];
 const SYSTEM_TAGS = ['shipping', 'insurance', 'inflation', 'supply-chain', 'energy', 'sanctions', 'migration', 'ai', 'infrastructure', 'port', 'grid', 'pipeline', 'cable', 'corridor', 'rail'];
+const NARROW_SYSTEM_TAGS = ['shipping', 'insurance', 'inflation', 'supply-chain', 'sanctions', 'tariff', 'freight', 'oil', 'lng', 'commodity', 'macro', 'market'];
 const CURIOSITY_TAGS = ['island', 'village', 'mosquito', 'grain', 'mine', 'dam', 'reef', 'clinic', 'prison', 'orchard', 'bridge', 'school'];
 const TOPIC_STOPWORDS = new Set(['global', 'energy', 'shipping', 'insurance', 'sanctions', 'migration', 'health', 'markets', 'conflict', 'diplomacy', 'economic']);
 
@@ -118,6 +129,16 @@ function countTagHits(item: ScanItemInput, tags: string[]): number {
   return tags.filter((tag) => haystack.includes(tag)).length;
 }
 
+function laneKey(category: string): string {
+  if (NARROW_SYSTEM_CATEGORIES.has(category)) return 'war-system';
+  if (HUMAN_CATEGORIES.has(category)) return 'human';
+  if (OFFBEAT_CATEGORIES.has(category)) return 'offbeat';
+  if (category === 'tech-ai' || category === 'science-space') return 'tech-science';
+  if (category === 'governance') return 'governance';
+  if (category === 'climate-energy' || category === 'natural-world') return 'climate';
+  return 'general';
+}
+
 function specificityScore(item: ScanItemInput): number {
   const specific = extractSpecificTokens(item);
   const headline = String(item.headline || '');
@@ -131,11 +152,12 @@ function specificityScore(item: ScanItemInput): number {
   return Math.min(2.4, score);
 }
 
-export function scorePublicInterest(item: ScanItemInput): { score: number; why: string[]; specificity: number } {
+export function scorePublicInterest(item: ScanItemInput): { score: number; why: string[]; specificity: number; lane: string } {
   const why: string[] = [];
   let score = significanceScore(item.significance);
 
   const category = normalisePublicCategory(item.category);
+  const lane = laneKey(category);
   if (HUMAN_CATEGORIES.has(category)) {
     score += 1.35;
     why.push('human-impact');
@@ -145,8 +167,13 @@ export function scorePublicInterest(item: ScanItemInput): { score: number; why: 
     why.push('offbeat-angle');
   }
   if (SYSTEM_CATEGORIES.has(category)) {
-    score += 0.45;
+    score += 0.35;
     why.push('system-angle');
+  }
+
+  if (DIVERSITY_PRIORITY_CATEGORIES.has(category)) {
+    score += 0.35;
+    why.push('diversity-lane');
   }
 
   const humanHits = countTagHits(item, HUMAN_TAGS);
@@ -163,14 +190,21 @@ export function scorePublicInterest(item: ScanItemInput): { score: number; why: 
 
   const systemsHits = countTagHits(item, SYSTEM_TAGS);
   if (systemsHits > 0) {
-    score += Math.min(1.0, systemsHits * 0.24);
+    score += Math.min(0.75, systemsHits * 0.18);
     why.push('system-flow');
   }
+
+  const narrowSystemHits = countTagHits(item, NARROW_SYSTEM_TAGS);
 
   const curiosityHits = countTagHits(item, CURIOSITY_TAGS);
   if (curiosityHits > 0) {
     score += Math.min(0.8, curiosityHits * 0.25);
     why.push('curiosity-hook');
+  }
+
+  if (NARROW_SYSTEM_CATEGORIES.has(category) && narrowSystemHits >= 2 && humanHits === 0 && offbeatHits === 0 && curiosityHits === 0) {
+    score -= 0.7;
+    why.push('narrow-system-penalty');
   }
 
   const specificity = specificityScore(item);
@@ -187,13 +221,13 @@ export function scorePublicInterest(item: ScanItemInput): { score: number; why: 
     why.push('clear-consequence');
   }
 
-  return { score, why, specificity };
+  return { score, why, specificity, lane };
 }
 
 export function rankPublicStories(items: ScanItemInput[]): PublicStorySelection[] {
   return items
     .map((item) => {
-      const { score, why, specificity } = scorePublicInterest(item);
+      const { score, why, specificity, lane } = scorePublicInterest(item);
       return {
         item,
         score,
@@ -202,7 +236,8 @@ export function rankPublicStories(items: ScanItemInput[]): PublicStorySelection[
         categoryKey: normalisePublicCategory(item.category),
         duplicateKey: deriveDuplicateKey(item),
         specificity,
-        why,
+        why: lane === 'war-system' && !why.includes('narrow-system-penalty') ? [...why, 'war-system'] : why,
+        lane,
       } satisfies PublicStorySelection;
     })
     .sort((a, b) => {
@@ -241,23 +276,28 @@ function choosePass(
   target: number,
   opts: {
     requireNewCategory?: boolean;
+    requirePriorityLane?: boolean;
     relaxedDuplicates?: boolean;
     relaxedCategoryCap?: boolean;
+    relaxedLaneCap?: boolean;
   }
 ) {
   const categories = new Map<string, number>();
+  const lanes = new Map<string, number>();
   const clusters = new Set<string>();
   const topics = new Set<string>();
   const duplicates: PublicStorySelection[] = [];
 
   for (const entry of selected) {
     categories.set(entry.categoryKey, (categories.get(entry.categoryKey) || 0) + 1);
+    lanes.set((entry as any).lane || laneKey(entry.categoryKey), (lanes.get((entry as any).lane || laneKey(entry.categoryKey)) || 0) + 1);
     clusters.add(entry.clusterKey);
     topics.add(entry.topicKey);
     duplicates.push(entry);
   }
 
   const cap = opts.relaxedCategoryCap ? Math.max(2, categoryCap(target)) : categoryCap(target);
+  const warSystemCap = opts.relaxedLaneCap ? Math.max(3, Math.ceil(target / 2)) : (target >= 6 ? 2 : 1);
 
   for (const entry of pool) {
     if (selected.length >= target) break;
@@ -265,10 +305,14 @@ function choosePass(
     if (topics.has(entry.topicKey)) continue;
     if (!opts.relaxedDuplicates && duplicates.some((picked) => isNearDuplicate(entry, picked))) continue;
     if (opts.requireNewCategory && categories.has(entry.categoryKey)) continue;
+    if (opts.requirePriorityLane && !DIVERSITY_PRIORITY_CATEGORIES.has(entry.categoryKey) && !HUMAN_CATEGORIES.has(entry.categoryKey) && !OFFBEAT_CATEGORIES.has(entry.categoryKey)) continue;
+    const lane = (entry as any).lane || laneKey(entry.categoryKey);
+    if (lane === 'war-system' && (lanes.get(lane) || 0) >= warSystemCap) continue;
     if ((categories.get(entry.categoryKey) || 0) >= cap) continue;
 
     selected.push(entry);
     categories.set(entry.categoryKey, (categories.get(entry.categoryKey) || 0) + 1);
+    lanes.set(lane, (lanes.get(lane) || 0) + 1);
     clusters.add(entry.clusterKey);
     topics.add(entry.topicKey);
     duplicates.push(entry);
@@ -280,10 +324,11 @@ export function selectPublicStories(items: ScanItemInput[], target: number, maxC
   const shortlistCount = Math.max(1, Math.max(target, maxCount));
   const selected: PublicStorySelection[] = [];
 
-  choosePass(ranked, selected, shortlistCount, { requireNewCategory: true, relaxedDuplicates: false, relaxedCategoryCap: false });
-  if (selected.length < shortlistCount) choosePass(ranked, selected, shortlistCount, { requireNewCategory: false, relaxedDuplicates: false, relaxedCategoryCap: false });
-  if (selected.length < shortlistCount) choosePass(ranked, selected, shortlistCount, { requireNewCategory: false, relaxedDuplicates: true, relaxedCategoryCap: false });
-  if (selected.length < shortlistCount) choosePass(ranked, selected, shortlistCount, { requireNewCategory: false, relaxedDuplicates: true, relaxedCategoryCap: true });
+  choosePass(ranked, selected, shortlistCount, { requireNewCategory: true, requirePriorityLane: true, relaxedDuplicates: false, relaxedCategoryCap: false, relaxedLaneCap: false });
+  if (selected.length < shortlistCount) choosePass(ranked, selected, shortlistCount, { requireNewCategory: true, requirePriorityLane: false, relaxedDuplicates: false, relaxedCategoryCap: false, relaxedLaneCap: false });
+  if (selected.length < shortlistCount) choosePass(ranked, selected, shortlistCount, { requireNewCategory: false, requirePriorityLane: false, relaxedDuplicates: false, relaxedCategoryCap: false, relaxedLaneCap: false });
+  if (selected.length < shortlistCount) choosePass(ranked, selected, shortlistCount, { requireNewCategory: false, requirePriorityLane: false, relaxedDuplicates: true, relaxedCategoryCap: false, relaxedLaneCap: false });
+  if (selected.length < shortlistCount) choosePass(ranked, selected, shortlistCount, { requireNewCategory: false, requirePriorityLane: false, relaxedDuplicates: true, relaxedCategoryCap: true, relaxedLaneCap: true });
 
   return selected.slice(0, shortlistCount);
 }
