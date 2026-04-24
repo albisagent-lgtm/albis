@@ -6,7 +6,7 @@ import matter from 'gray-matter';
 import readingTime from 'reading-time';
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
-import { loadVerifiedScanItems, requireScanRows, requireScanItemsAvailability, requireSnapshotForDate, requireStoryScores } from '../src/lib/pipeline-db';
+import { loadVerifiedScanItems, requireIndexDailyRows, requireScanRows, requireScanItemsAvailability, requireSnapshotForDate, requireStoryScores } from '../src/lib/pipeline-db';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -158,7 +158,11 @@ function parseArgs() {
   if (!date || !period || !['am', 'midday', 'pm'].includes(period)) {
     fail('Usage: npx tsx scripts/run-post-scan-pipeline.ts YYYY-MM-DD <am|midday|pm>');
   }
-  return { date, period } as { date: string; period: Period };
+  return {
+    date,
+    period,
+    skipBriefing: process.argv.includes('--skip-briefing'),
+  } as { date: string; period: Period; skipBriefing: boolean };
 }
 
 function readScanFile(scanPath: string) {
@@ -704,7 +708,7 @@ function logCodeChangeStatus() {
 }
 
 async function main() {
-  const { date, period } = parseArgs();
+  const { date, period, skipBriefing } = parseArgs();
   console.log('Implementation checklist:');
   console.log('1. Build story packet from scan JSON');
   console.log('2. Extract actor, action, object, location, consequence');
@@ -736,7 +740,17 @@ async function main() {
   const scoreStatus = await requireStoryScores(supabase, date, period);
   console.log(`✅ Verified PGI/GAI rows for ${date} ${period} (${scoreStatus.pgiCount} PGI, ${scoreStatus.gaiCount} GAI)`);
 
-  runOptional('npx', ['tsx', 'scripts/run-daily-briefing-pipeline.ts', date, '--dry-run'], process.cwd(), 'daily briefing preflight');
+  run('npx', ['tsx', 'scripts/aggregate-index-dailies.ts', date]);
+  const dailyStatus = await requireIndexDailyRows(supabase, date);
+  console.log(`✅ Verified pgi_daily=${dailyStatus.pgi.daily_pgi} and gai_daily=${dailyStatus.gai.daily_gai} for ${date}`);
+
+  const shouldRunLiveBriefing = period === 'am' && !skipBriefing;
+
+  if (shouldRunLiveBriefing) {
+    console.log('ℹ️ AM pipeline owns the subscriber daily briefing send after DB verification.');
+  } else {
+    runOptional('npx', ['tsx', 'scripts/run-daily-briefing-pipeline.ts', date, '--dry-run'], process.cwd(), 'daily briefing preflight');
+  }
 
   const items = await loadVerifiedScanItems(supabase, date, period);
   console.log(`✅ Loaded ${items.length} verified scan items from DB truth for article generation`);
@@ -750,6 +764,11 @@ async function main() {
   run('npx', ['tsx', 'scripts/write-site-snapshot.ts', date]);
   await requireSnapshotForDate(supabase, date);
   console.log(`✅ Verified site_snapshot updated for scan_date=${date}`);
+
+  if (shouldRunLiveBriefing) {
+    run('npx', ['tsx', 'scripts/run-daily-briefing-pipeline.ts', date]);
+    console.log(`✅ Verified daily briefing pipeline completed under AM owner flow for ${date}`);
+  }
 
   console.log('Published articles summary:');
   for (const article of articles) {

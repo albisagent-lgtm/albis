@@ -39,6 +39,76 @@ function significanceToNumeric(sig: string) {
   return 1;
 }
 
+const REGION_ALIASES: Record<string, string> = {
+  us: 'us',
+  'united states': 'us',
+  eu: 'europe',
+  europe: 'europe',
+  'middle east': 'middle-east',
+  'middle-east': 'middle-east',
+  middle_east: 'middle-east',
+  'south asia': 'south-asia',
+  'south-asia': 'south-asia',
+  south_asia: 'south-asia',
+  'east & se asia': 'east-se-asia',
+  'east and se asia': 'east-se-asia',
+  'east & southeast asia': 'east-se-asia',
+  'east-se-asia': 'east-se-asia',
+  east_se_asia: 'east-se-asia',
+  'asia-pacific': 'pacific',
+  'asia pacific': 'pacific',
+  asia_pacific: 'pacific',
+  pacific: 'pacific',
+  africa: 'africa',
+  'latin america': 'latin-america',
+  'latin-america': 'latin-america',
+  latin_america: 'latin-america',
+  latam: 'latin-america',
+  caribbean: 'caribbean',
+  'central asia': 'central-asia',
+  'central-asia': 'central-asia',
+  central_asia: 'central-asia',
+  global: 'global',
+};
+
+const GAI_REGION_UNIVERSE = [
+  'us',
+  'europe',
+  'middle-east',
+  'south-asia',
+  'east-se-asia',
+  'africa',
+  'latin-america',
+  'pacific',
+  'caribbean',
+  'central-asia',
+];
+
+const REGION_POP: Record<string, number> = {
+  us: 380,
+  europe: 750,
+  'middle-east': 680,
+  africa: 1300,
+  'south-asia': 2000,
+  'east-se-asia': 2400,
+  'latin-america': 660,
+  pacific: 50,
+  caribbean: 45,
+  'central-asia': 80,
+};
+
+const WORLD_POP = Object.values(REGION_POP).reduce((sum, n) => sum + n, 0);
+
+function uniq<T>(items: T[]) {
+  return [...new Set(items)];
+}
+
+function normRegion(region: string | null | undefined) {
+  if (!region) return null;
+  const key = String(region).trim().toLowerCase().replace(/_/g, ' ');
+  return REGION_ALIASES[key] || REGION_ALIASES[key.replace(/\s+/g, '-')] || key.replace(/\s+/g, '-');
+}
+
 const REGION_DISTANCE: Record<string, number> = {
   'middle-east|us': 0.4,
   'middle-east|europe': 0.1,
@@ -85,18 +155,25 @@ function scorePgi(item: Awaited<ReturnType<typeof loadVerifiedScanItems>>[number
 }
 
 function scoreGai(item: Awaited<ReturnType<typeof loadVerifiedScanItems>>[number]) {
-  const coverage = item.coverage_breadth ?? clamp((Math.max(0, 7 - item.regions.length) / 6) * 9 + 1);
-  const significanceSeverity = clamp(item.significance === 'high' ? 8.5 : item.significance === 'medium' ? 7.1 : 5.8);
-  const d2 = clamp(4 + Math.max(0, 5 - item.regions.length) * 0.9);
-  const d3 = clamp(4 + Math.max(0, 5 - item.regions.length) * 0.8);
-  const story_gai = avg([coverage, d2, d3, significanceSeverity]);
+  const found = uniq((item.regions || []).map(normRegion).filter(Boolean) as string[]).filter((r) => r !== 'global');
+  const absent = GAI_REGION_UNIVERSE.filter((region) => !found.includes(region));
+  const covered = item.coverage_breadth || found.length || 1;
+  const significance = significanceToNumeric(item.significance);
+  const d1 = clamp(8 - covered);
+  const d2 = clamp(2 + absent.length * 0.6);
+  const missingPop = absent.reduce((sum, region) => sum + (REGION_POP[region] || 0), 0);
+  const d3 = clamp(1 + (missingPop / WORLD_POP) * 9);
+  const d4 = clamp(1 + ((significance - 1) / 3) * 6 + ((GAI_REGION_UNIVERSE.length - covered) / GAI_REGION_UNIVERSE.length) * 2);
+  const story_gai = avg([d1, d2, d3, d4]);
 
   return {
-    coverage_breadth: coverage,
-    d1_coverage_breadth: coverage,
+    regions_found: found,
+    regions_absent: absent,
+    coverage_breadth: covered,
+    d1_coverage_breadth: d1,
     d2_prominence_disparity: d2,
     d3_population_exposure: d3,
-    d4_significance_severity: significanceSeverity,
+    d4_significance_severity: d4,
     story_gai,
   };
 }
@@ -161,14 +238,14 @@ async function main() {
       story_slug: slugify(item.headline),
       story_headline: item.headline,
       category: item.category,
-      regions_found: item.regions,
-      regions_absent: [],
+      regions_found: gai.regions_found,
+      regions_absent: gai.regions_absent,
       coverage_breadth: gai.coverage_breadth,
       d1_coverage_breadth: gai.d1_coverage_breadth,
       d2_prominence_disparity: gai.d2_prominence_disparity,
       d3_population_exposure: gai.d3_population_exposure,
       d4_significance_severity: gai.d4_significance_severity,
-      
+      story_gai: gai.story_gai,
       significance: significanceToNumeric(item.significance),
       scoring_rationale: `DB-truth-first scorer using verified scan items for ${date} ${period}`,
       is_latest: true,

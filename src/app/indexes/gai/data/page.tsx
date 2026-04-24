@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+import { GAI_TRIBUTARIES, readGaiTributaryValue } from '@/lib/index-daily'
 
 export const metadata: Metadata = {
   title: 'GAI Data | Albis',
@@ -16,27 +17,20 @@ export const revalidate = 3600
 interface DailyGAI {
   date: string
   daily_gai: number
-  gai_gp: number | null
-  gai_iw: number | null
-  gai_wr: number | null
-  gai_ec: number | null
-  gai_te: number | null
-  gai_he: number | null
-  gai_cl: number | null
+  tributaries?: Record<string, { gai: number | null; tier: string; story_count: number; most_invisible: string | null }> | null
 }
 
 interface GAIStory {
   story_headline: string
   story_gai: number
   category: string
-  regions_covering: string[]
-  regions_missing: string[]
-  region_count: number
-  total_regions: number
+  regions_found: string[]
+  regions_absent: string[]
+  coverage_breadth: number
   d1_coverage_breadth: number
-  d2_placement_prominence: number
-  d3_source_diversity: number
-  d4_temporal_persistence: number
+  d2_prominence_disparity: number
+  d3_population_exposure: number
+  d4_significance_severity: number
   scan_date: string
 }
 
@@ -71,28 +65,24 @@ export default async function GAIDataPage() {
 
   const { data: storiesData } = await supabase
     .from('gai_story_scores')
-    .select('story_headline, story_gai, category, regions_covering, regions_missing, region_count, total_regions, d1_coverage_breadth, d2_placement_prominence, d3_source_diversity, d4_temporal_persistence, scan_date')
+    .select('story_headline, story_gai, category, regions_found, regions_absent, coverage_breadth, d1_coverage_breadth, d2_prominence_disparity, d3_population_exposure, d4_significance_severity, scan_date')
     .gte('scan_date', new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0])
     .order('story_gai', { ascending: false })
     .limit(15)
 
   const stories: GAIStory[] = storiesData || []
 
-  const tributaries = [
-    { code: 'GP', name: 'Geopolitical', value: daily?.gai_gp },
-    { code: 'IW', name: 'Information Warfare', value: daily?.gai_iw },
-    { code: 'WR', name: "Women's Rights", value: daily?.gai_wr },
-    { code: 'EC', name: 'Economics', value: daily?.gai_ec },
-    { code: 'TE', name: 'Technology & Ethics', value: daily?.gai_te },
-    { code: 'HE', name: 'Health & Environment', value: daily?.gai_he },
-    { code: 'CL', name: 'Climate', value: daily?.gai_cl },
-  ]
+  const tributaries = GAI_TRIBUTARIES.map((t) => ({
+    code: t.code,
+    name: t.name,
+    value: readGaiTributaryValue(daily?.tributaries, t.key),
+  }))
 
   // Compute region blindness from stories
   const regionBlindness: Record<string, number> = {}
   for (const s of stories) {
-    if (s.regions_missing) {
-      for (const r of s.regions_missing) {
+    if (s.regions_absent) {
+      for (const r of s.regions_absent) {
         regionBlindness[r] = (regionBlindness[r] || 0) + 1
       }
     }
@@ -205,15 +195,15 @@ export default async function GAIDataPage() {
                       <div className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 mb-2">
                         <span>{story.category}</span>
                         <span>•</span>
-                        <span>{story.region_count} of {story.total_regions} regions</span>
+                        <span>{story.coverage_breadth} regions covering</span>
                         <span>•</span>
                         <span>{formatDate(story.scan_date)}</span>
                       </div>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs text-zinc-500 dark:text-zinc-400">
                         <span>D1 Breadth: {story.d1_coverage_breadth?.toFixed(1) ?? '\u2014'}</span>
-                        <span>D2 Prominence: {story.d2_placement_prominence?.toFixed(1) ?? '\u2014'}</span>
-                        <span>D3 Sources: {story.d3_source_diversity?.toFixed(1) ?? '\u2014'}</span>
-                        <span>D4 Persistence: {story.d4_temporal_persistence?.toFixed(1) ?? '\u2014'}</span>
+                        <span>D2 Prominence: {story.d2_prominence_disparity?.toFixed(1) ?? '\u2014'}</span>
+                        <span>D3 Exposure: {story.d3_population_exposure?.toFixed(1) ?? '\u2014'}</span>
+                        <span>D4 Severity: {story.d4_significance_severity?.toFixed(1) ?? '\u2014'}</span>
                       </div>
                     </div>
                     <div className="text-2xl font-bold text-[#0f0f0f] dark:text-[#f0efec]">

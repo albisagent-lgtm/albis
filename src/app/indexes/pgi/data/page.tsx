@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+import { PGI_TRIBUTARIES, readPgiTributaryValue } from '@/lib/index-daily'
 
 export const metadata: Metadata = {
   title: 'PGI Data | Albis',
@@ -16,13 +17,7 @@ export const revalidate = 3600
 interface DailyPGI {
   date: string
   daily_pgi: number
-  pgi_gp: number | null
-  pgi_iw: number | null
-  pgi_wr: number | null
-  pgi_ec: number | null
-  pgi_te: number | null
-  pgi_he: number | null
-  pgi_cl: number | null
+  category_pgis?: Record<string, number | null> | null
 }
 
 interface StoryScore {
@@ -86,15 +81,11 @@ export default async function PGIDataPage() {
 
   const pairs: RegionPair[] = pairsData || []
 
-  const tributaries = [
-    { code: 'GP', name: 'Geopolitical', value: daily?.pgi_gp },
-    { code: 'IW', name: 'Information Warfare', value: daily?.pgi_iw },
-    { code: 'WR', name: "Women's Rights", value: daily?.pgi_wr },
-    { code: 'EC', name: 'Economics', value: daily?.pgi_ec },
-    { code: 'TE', name: 'Technology & Ethics', value: daily?.pgi_te },
-    { code: 'HE', name: 'Health & Environment', value: daily?.pgi_he },
-    { code: 'CL', name: 'Climate', value: daily?.pgi_cl },
-  ]
+  const tributaries = PGI_TRIBUTARIES.map((t) => ({
+    code: t.code,
+    name: t.name,
+    value: readPgiTributaryValue(daily?.category_pgis, t.key),
+  }))
 
   return (
     <div className="min-h-screen bg-[#f8f7f4] dark:bg-[#0f0f0f]">

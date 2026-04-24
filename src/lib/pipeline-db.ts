@@ -190,3 +190,17 @@ export async function requireSnapshotForDate(supabase: SupabaseClient, scanDate:
   }
   return data;
 }
+
+export async function requireIndexDailyRows(supabase: SupabaseClient, scanDate: string) {
+  const [{ data: pgi, error: pgiError }, { data: gai, error: gaiError }] = await Promise.all([
+    supabase.from('pgi_daily').select('date, daily_pgi').eq('date', scanDate).maybeSingle(),
+    supabase.from('gai_daily').select('date, daily_gai').eq('date', scanDate).maybeSingle(),
+  ]);
+
+  if (pgiError) fail(`pgi_daily verify failed: ${pgiError.message}`);
+  if (gaiError) fail(`gai_daily verify failed: ${gaiError.message}`);
+  if (!pgi) fail(`No pgi_daily row found for ${scanDate}`);
+  if (!gai) fail(`No gai_daily row found for ${scanDate}`);
+
+  return { pgi, gai };
+}

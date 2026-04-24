@@ -6,12 +6,14 @@ This file records the current production automation paths for Albis after the Ap
 
 ### 1) Daily briefing email
 - Script: `scripts/run-daily-briefing-pipeline.ts`
-- Cron job: `a79cb02a-98ef-4e9a-85e6-f10e37a8deb9`
+- Primary owner path: invoked by `scripts/run-post-scan-pipeline.ts` during the **AM** article cycle after DB verification + snapshot refresh
+- Standalone cron: `a79cb02a-98ef-4e9a-85e6-f10e37a8deb9` is now backup/manual only and should stay disabled unless explicitly needed for recovery
 - Purpose: build/load daily briefing, send subscriber emails, write `briefing_deliveries`, update `briefings.delivery_status`
 - Notes:
   - supports `--dry-run`
   - supports `--force-deliver`
   - supports `--only-email` for safe single-recipient testing
+  - `scripts/run-post-scan-pipeline.ts YYYY-MM-DD am` is now the canonical morning owner flow for public output + subscriber delivery
 
 ### 2) Article publication cycles
 - Script: `scripts/run-post-scan-pipeline.ts`

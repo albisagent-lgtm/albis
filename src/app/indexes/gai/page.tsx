@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { SeriesArticleFeed, type TaggedArticle } from "@/components/SeriesArticleFeed";
+import { GAI_TRIBUTARIES, readGaiTributaryValue } from "@/lib/index-daily";
 import {
   AreaChart,
   Area,
@@ -23,13 +24,7 @@ import {
 interface GAIDaily {
   date: string;
   daily_gai: number;
-  gai_gp: number | null;
-  gai_iw: number | null;
-  gai_wr: number | null;
-  gai_ec: number | null;
-  gai_te: number | null;
-  gai_he: number | null;
-  gai_cl: number | null;
+  tributaries?: Record<string, { gai: number | null; tier: string; story_count: number; most_invisible: string | null }> | null;
 }
 
 interface GAIStoryScore {
@@ -67,15 +62,7 @@ function formatDate(dateStr: string) {
   });
 }
 
-const TRIBUTARIES = [
-  { code: "GP", name: "Geopolitical", key: "gai_gp" },
-  { code: "IW", name: "Information Warfare", key: "gai_iw" },
-  { code: "WR", name: "Women's Rights", key: "gai_wr" },
-  { code: "EC", name: "Economics", key: "gai_ec" },
-  { code: "TE", name: "Technology & Ethics", key: "gai_te" },
-  { code: "HE", name: "Health & Environment", key: "gai_he" },
-  { code: "CL", name: "Climate", key: "gai_cl" },
-];
+const TRIBUTARIES = GAI_TRIBUTARIES;
 
 // ── Blind Spots ────────────────────────────────────────────────────
 
@@ -172,8 +159,7 @@ function GAIPageInner() {
         setDaily({
           date: storiesData[0].scan_date,
           daily_gai: liveGai,
-          gai_gp: null, gai_iw: null, gai_wr: null,
-          gai_ec: null, gai_te: null, gai_he: null, gai_cl: null,
+          tributaries: null,
         });
       }
     }
@@ -439,7 +425,7 @@ function GAIPageInner() {
         </p>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {TRIBUTARIES.map((t) => {
-            const val = daily ? Number((daily as unknown as Record<string, unknown>)[t.key] ?? 0) : null;
+            const val = daily ? readGaiTributaryValue(daily.tributaries, t.key) : null;
             const tierInfo = val !== null && val > 0 ? getGAITier(val) : null;
             return (
               <div
@@ -661,11 +647,11 @@ function GAIPageInner() {
             <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
               {TRIBUTARIES.map((t) => {
                 const latestVal = gaiHistory.length > 0
-                  ? Number((gaiHistory[gaiHistory.length - 1] as unknown as Record<string, unknown>)[t.key] ?? 0)
+                  ? (readGaiTributaryValue(gaiHistory[gaiHistory.length - 1].tributaries, t.key) ?? 0)
                   : 0;
                 const tierInfo = latestVal > 0 ? getGAITier(latestVal) : null;
                 const hasAnyData = gaiHistory.some(
-                  (d) => Number((d as unknown as Record<string, unknown>)[t.key] ?? 0) > 0
+                  (d) => (readGaiTributaryValue(d.tributaries, t.key) ?? 0) > 0
                 );
                 return (
                   <div
@@ -689,7 +675,7 @@ function GAIPageInner() {
                           <LineChart data={gaiHistory} margin={{ top: 2, right: 2, left: 2, bottom: 2 }}>
                             <Line
                               type="monotone"
-                              dataKey={t.key}
+                              dataKey={(row: GAIDaily) => readGaiTributaryValue(row.tributaries, t.key) ?? null}
                               stroke={tierInfo ? tierInfo.color : "#a1a1aa"}
                               strokeWidth={1.5}
                               dot={false}
