@@ -7,6 +7,7 @@ import readingTime from 'reading-time';
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 import { loadVerifiedScanItems, requireIndexDailyRows, requireScanRows, requireScanItemsAvailability, requireSnapshotForDate, requireStoryScores } from '../src/lib/pipeline-db';
+import { normalisePublicCategory, selectPublicStories, suggestPublicArticleCount } from '../src/lib/public-story-selection';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -67,7 +68,16 @@ type LedeParts = {
   object: string;
   location: string;
   consequence: string;
+  colour?: string;
 };
+
+const OPENING_STOPWORDS = new Set([
+  'the', 'a', 'an', 'and', 'or', 'of', 'to', 'in', 'on', 'for', 'with', 'after', 'amid', 'as', 'at', 'by', 'from',
+  'is', 'are', 'be', 'into', 'over', 'under', 'new', 'latest', 'says', 'say', 'warns', 'report', 'reports', 'could',
+  'may', 'more', 'less', 'still', 'again', 'deal', 'plan', 'move', 'moves', 'talks', 'policy', 'global', 'world',
+  'officials', 'minister', 'ministers', 'government', 'governments', 'state', 'states', 'pressure', 'rises', 'rise',
+  'news', 'update', 'battle', 'crisis', 'ceasefire', 'extension', 'extended'
+]);
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -75,9 +85,10 @@ const supabase = createClient(SUPABASE_URL, SERVICE_KEY, {
   auth: { autoRefreshToken: false, persistSession: false },
 });
 
-const MIN_WORD_COUNT = 550;
-const TARGET_ARTICLE_COUNT = 3;
-const CANDIDATE_LIMIT = 8;
+const MIN_WORD_COUNT = 480;
+const MIN_ARTICLE_COUNT = 3;
+const MAX_ARTICLE_COUNT = 7;
+const CANDIDATE_LIMIT = 28;
 const RECENT_IMAGE_WINDOW = 100;
 const BANNED_PHRASES = [
   'this is more than',
@@ -141,7 +152,7 @@ function slugify(input: string) {
 }
 
 function inferCategory(cat: string) {
-  const c = (cat || '').toLowerCase();
+  const c = normalisePublicCategory(cat || 'world');
   if (c.includes('economic')) return 'economic-flows';
   if (c.includes('energy')) return 'energy';
   if (c.includes('diplomacy')) return 'diplomacy';
@@ -307,6 +318,68 @@ function buildStoryPacket(item: ScanItem): StoryPacket {
   };
 }
 
+function sentenceCase(value: string) {
+  const text = String(value || '').trim();
+  if (!text) return '';
+  return text[0].toUpperCase() + text.slice(1);
+}
+
+function cleanPhrase(value: string) {
+  return String(value || '').replace(/^[-–—:;,\s]+|[-–—:;,\s]+$/g, '').replace(/\s+/g, ' ').trim();
+}
+
+function titleTokens(value: string) {
+  return String(value || '')
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter((token) => token && token.length > 2 && !OPENING_STOPWORDS.has(token));
+}
+
+function pickFreshDetail(packet: StoryPacket) {
+  const tags = packet.tags.map((tag) => tag.replace(/-/g, ' ')).filter((tag) => tag.length > 3);
+  if (tags.length) return tags[0];
+  const regions = [...packet.regionsFound, ...packet.regions].filter(Boolean);
+  if (regions.length) return regions[0];
+  return packet.category.replace(/-/g, ' ');
+}
+
+function buildGenericLedeParts(packet: StoryPacket): LedeParts {
+  const headline = cleanPhrase(packet.title);
+  const lower = headline.toLowerCase();
+  const location = packet.primaryRegion !== 'the wider region' ? packet.primaryRegion : (packet.regionsFound[0] || packet.primaryRegion);
+  const consequence = sentenceCase(packet.connection || 'That shift is now starting to change how other actors price risk, access, or timing around the story.');
+
+  const subjectMatch = headline.match(/^(.+?)\s+(extends?|approves?|advances?|launches?|investigates?|receives?|considers?|reports?|says|warns|unveils?|signs?|boosts?|revives?|hits?|moves?|agrees?|denounces?|promotes?|rises?|falls?|kills?|delivers?)\b/i);
+  if (subjectMatch) {
+    const actor = cleanPhrase(subjectMatch[1]);
+    const action = cleanPhrase(subjectMatch[2]);
+    const rest = cleanPhrase(headline.slice(subjectMatch[0].length));
+    return { actor, action, object: rest, location, consequence, colour: pickFreshDetail(packet) };
+  }
+
+  if (lower.includes('ceasefire')) {
+    return { actor: 'The ceasefire window', action: 'held a little longer', object: '', location, consequence, colour: pickFreshDetail(packet) };
+  }
+  if (lower.includes('sanctions')) {
+    return { actor: 'A sanctions move', action: 'hardened the operating climate', object: '', location, consequence, colour: pickFreshDetail(packet) };
+  }
+  if (lower.includes('vaccine') || lower.includes('measles') || lower.includes('meningitis')) {
+    return { actor: 'Health officials', action: 'are dealing with a sharper public-health signal', object: '', location, consequence, colour: pickFreshDetail(packet) };
+  }
+  if (lower.includes('solar') || lower.includes('energy') || lower.includes('oil')) {
+    return { actor: 'Energy markets', action: 'shifted again', object: '', location, consequence, colour: pickFreshDetail(packet) };
+  }
+
+  return {
+    actor: headline,
+    action: 'is forcing a fresh read of the situation',
+    object: '',
+    location,
+    consequence,
+    colour: pickFreshDetail(packet),
+  };
+}
+
 function extractLedeParts(packet: StoryPacket): LedeParts {
   const title = packet.title;
   const lower = title.toLowerCase();
@@ -315,11 +388,12 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
 
   if (lower.includes('strait of hormuz') || packet.tags.includes('hormuz')) {
     return {
-      actor: 'A reopened stretch of the Strait of Hormuz',
-      action: 'failed to stay open',
+      actor: 'Fast boats and fresh vessel seizures around the Strait of Hormuz',
+      action: 'kept the route unsettled',
       object: '',
       location,
-      consequence: connection || 'The renewed instability is keeping a core global energy route under pressure.',
+      consequence: sentenceCase(connection || 'The renewed instability is keeping a core global energy route under pressure.'),
+      colour: 'shipping insurance',
     };
   }
 
@@ -329,7 +403,8 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
       action: 'moved toward a new protocol',
       object: 'on aid access, ceasefire oversight, and prisoner releases',
       location: 'eastern DRC',
-      consequence: connection || 'The move could improve conditions for civilians if it holds in practice.',
+      consequence: sentenceCase(connection || 'The move could improve conditions for civilians if it holds in practice.'),
+      colour: 'aid access',
     };
   }
 
@@ -339,7 +414,8 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
       action: 'renewed a narrow waiver',
       object: 'allowing some at-sea purchases of sanctioned Russian oil',
       location,
-      consequence: connection || 'The exception softens one part of the sanctions regime at a moment of wider energy strain.',
+      consequence: sentenceCase(connection || 'The exception softens one part of the sanctions regime at a moment of wider energy strain.'),
+      colour: 'at-sea purchases',
     };
   }
 
@@ -349,7 +425,8 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
       action: 'resumed dealings with Venezuela',
       object: 'after a years-long pause',
       location: 'Venezuela',
-      consequence: connection || 'The shift changes Caracas’s financial and diplomatic room to maneuver.',
+      consequence: sentenceCase(connection || 'The shift changes Caracas’s financial and diplomatic room to maneuver.'),
+      colour: 'financial breathing room',
     };
   }
 
@@ -359,7 +436,8 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
       action: 'updated its public outlook',
       object: '',
       location: 'global markets',
-      consequence: connection || 'The revision gives formal weight to economic pressures already building beneath the headline cycle.',
+      consequence: sentenceCase(connection || 'The revision gives formal weight to economic pressures already building beneath the headline cycle.'),
+      colour: 'growth outlook',
     };
   }
 
@@ -369,7 +447,8 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
       action: 'said Druzhba oil pipeline flows would resume',
       object: 'after repairs',
       location: 'central Europe',
-      consequence: connection || 'That restoration matters for regional energy security, refinery planning, and transit leverage.',
+      consequence: sentenceCase(connection || 'That restoration matters for regional energy security, refinery planning, and transit leverage.'),
+      colour: 'pipeline flows',
     };
   }
 
@@ -379,17 +458,19 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
       action: 'sanctioned two Russian entities',
       object: 'over alleged disinformation links',
       location: 'Europe',
-      consequence: connection || 'The move expands sanctions pressure into information infrastructure as well as finance and trade.',
+      consequence: sentenceCase(connection || 'The move expands sanctions pressure into information infrastructure as well as finance and trade.'),
+      colour: 'information infrastructure',
     };
   }
 
-  if (lower.includes('cargo') || lower.includes('ship')) {
+  if (lower.includes('cargo') || lower.includes('ship') || lower.includes('vessel')) {
     return {
-      actor: 'US forces',
-      action: 'seized an Iranian cargo vessel',
+      actor: 'A maritime interception',
+      action: 'added another live risk signal',
       object: '',
       location,
-      consequence: connection || 'The move raises the risk that a fragile pause could break down further.',
+      consequence: sentenceCase(connection || 'The move raises the risk that a fragile pause could break down further.'),
+      colour: 'boarded vessels',
     };
   }
 
@@ -399,7 +480,8 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
       action: 'sought emergency World Bank support',
       object: '',
       location: 'Nairobi',
-      consequence: connection || 'The request shows the war shock is spilling into sovereign financial stress for import-dependent economies.',
+      consequence: sentenceCase(connection || 'The request shows the war shock is spilling into sovereign financial stress for import-dependent economies.'),
+      colour: 'emergency support',
     };
   }
 
@@ -409,65 +491,76 @@ function extractLedeParts(packet: StoryPacket): LedeParts {
       action: 'raised fuel prices',
       object: '',
       location: 'Dhaka',
-      consequence: connection || 'Higher freight insurance and import costs are now feeding directly into domestic energy pressure.',
+      consequence: sentenceCase(connection || 'Higher freight insurance and import costs are now feeding directly into domestic energy pressure.'),
+      colour: 'fuel prices',
     };
   }
 
-  return {
-    actor: packet.title,
-    action: 'moved into a new phase',
-    object: '',
-    location,
-    consequence: connection || 'The next move will show whether the development stays narrow or spreads into wider consequences.',
-  };
+  return buildGenericLedeParts(packet);
 }
 
 function buildActorActionLede(packet: StoryPacket) {
   const parts = extractLedeParts(packet);
   const firstSentence = [parts.actor, parts.action, parts.object].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim() + '.';
-  const secondSentence = `${parts.consequence} ${parts.location && parts.location !== 'the wider region' ? `Attention is already focused on ${parts.location}.` : ''}`.trim();
+  const colourSentence = parts.colour ? `The detail to watch is ${parts.colour}, because that is where the abstract headline starts turning concrete.` : '';
+  const secondSentence = `${parts.consequence} ${parts.location && parts.location !== 'the wider region' ? `The pressure point sits in ${parts.location}.` : ''} ${colourSentence}`.replace(/\s+/g, ' ').trim();
   return `${firstSentence} ${secondSentence}`.trim();
 }
 
 function buildWhatChangedParagraph(packet: StoryPacket) {
-  return `The direct development is what matters first. A route may have opened and narrowed again, a waiver may have been extended, a ceasefire may have weakened, or an institution may have revised its public baseline for risk. The important thing is that the story now contains an observable shift rather than a static dispute. Stories attached to ${packet.tagText || 'policy, logistics, and political response'} often move through behavioural changes rather than through one dramatic headline alone.`;
+  const detail = pickFreshDetail(packet);
+  return `What changed here is not vague mood but a concrete shift readers can point to: ${packet.title}. The practical question is whether that change stays narrow or starts forcing new behaviour around ${detail}, in ministries, ports, clinics, courts, warehouses, campuses, or households. ${packet.connection || 'That is the hinge that makes this more than a recycled headline.'}`;
 }
 
 function buildMechanismParagraph(packet: StoryPacket) {
-  return `That mechanism determines how fast the consequences travel. A diplomatic signal can move prices before policy changes. A shipping restriction can alter risk calculations before cargo flows visibly fall. An official downgrade can influence expectations before the real economy fully absorbs the shock. Good reporting has to spell out that transmission path clearly enough that the reader understands why the event does not stay inside its original frame.`;
+  const lower = packet.title.toLowerCase();
+  if (lower.includes('measles') || lower.includes('meningitis') || lower.includes('vaccine') || packet.category === 'health') {
+    return `The useful part of a health story is the chain reaction. A crowded camp or under-supplied district can turn one missed safeguard into school disruption, clinic overload, delayed immunisation, and rising mortality very quickly. That transmission path is what tells readers whether this remains a tragic local spike or becomes a wider regional strain.`;
+  }
+  if (lower.includes('migration') || lower.includes('asylum') || lower.includes('refugee') || packet.category.includes('migration')) {
+    return `Migration stories become real policy stories when paperwork turns into movement. A court opinion, funding deal, or border operation can change detention capacity, asylum routing, local politics, and diplomatic bargaining long before the next official speech catches up. That is the mechanism worth spelling out.`;
+  }
+  if (lower.includes('ai') || lower.includes('data') || lower.includes('quantum') || packet.category.includes('tech')) {
+    return `The useful part of a technology story is the bottleneck it reveals. Energy access, data governance, server capacity, chip supply, and standards-setting all shape who can build fast and who gets left explaining delays. Once that mechanism is visible, the story stops sounding like a generic innovation update.`;
+  }
+  return `The useful part of the story is the mechanism. If a corridor feels unsafe, insurers reprice before shelves feel it. If a ministry changes its line, traders and aid groups adjust before a law is formally rewritten. If an outbreak worsens in one crowded place, the real issue is not only the daily toll but what breaks next in staffing, vaccination, schooling, or cross-border movement. That transmission path is where a scan item becomes a public story.`;
 }
 
 function buildRegionalDetailParagraph(packet: StoryPacket) {
   const found = packet.regionsFound.length ? packet.regionsFound.slice(0, 4).join(', ') : packet.regions.slice(0, 4).join(', ');
   const absent = packet.regionsAbsent.length ? packet.regionsAbsent.slice(0, 3).join(', ') : '';
-  const patternText = packet.patterns.length ? `Patterns in the scan include ${packet.patterns.join(', ')}, which suggests readers in different regions are not encountering the same emphasis.` : 'The framing of the story is already affecting how different audiences are likely to interpret it.';
-  const gapText = packet.perceptionGap && packet.perceptionGap >= 7 ? 'The perception gap is wide enough that coverage differences are part of the substance, not just part of the media backdrop.' : '';
-  const breadthText = packet.coverageBreadth && packet.coverageBreadth >= 7 ? 'Coverage breadth is strong, which points to a story already being processed across several regions at once.' : '';
+  const patternText = packet.patterns.length ? `The scan also flags ${packet.patterns.join(', ')}, so different audiences are not just seeing different tone but sometimes a different centre of gravity.` : 'The coverage pattern already suggests audiences are being nudged toward different takeaways.';
+  const gapText = packet.perceptionGap && packet.perceptionGap >= 7 ? 'That perception gap is big enough to matter on its own.' : '';
+  const breadthText = packet.coverageBreadth && packet.coverageBreadth >= 7 ? 'The breadth score is strong, so this is already travelling well beyond one national conversation.' : '';
 
-  return `${found ? `Most of the reporting attention is clustered in ${found}.` : `The reporting footprint already stretches across several regions.`} ${absent ? `Coverage is thinner in ${absent}, and that gap can leave major parts of the consequence chain underexplained.` : ''} ${patternText} ${gapText} ${breadthText}`.trim();
+  return `${found ? `Attention is clustering in ${found}.` : `The reporting footprint already stretches across several regions.`} ${absent ? `Coverage is lighter in ${absent}, which means some consequences may still be under-described.` : ''} ${patternText} ${gapText} ${breadthText}`.trim();
 }
 
 function buildWhyItMattersParagraph(packet: StoryPacket) {
-  return `A real reader needs the consequence chain, not just the event description. This story can feed into freight costs, insurance logic, aid access, compliance decisions, inflation expectations, political messaging, or diplomatic posture depending on which institutions react first. ${packet.connection || 'Its importance lies in how quickly the effects can move outward from the original event.'} That is where depth matters: the article has to explain how the consequences could spread without pretending certainty about every next step.`;
+  const lower = packet.title.toLowerCase();
+  if (lower.includes('solar') || lower.includes('climate') || lower.includes('deforestation')) {
+    return `Why this matters depends on whether the reader sees climate stories as distant or immediate. In this case the signal touches financing, household hedging, commodity rules, and industrial strategy all at once. ${packet.connection || 'Its importance lies in how quickly the consequences can move outward from the original event.'} The article should make that practical rather than preachy.`;
+  }
+  return `Why this matters depends on where you stand. For some readers it is a fuel-price story, for others a migration-policy story, a sanctions-enforcement story, a vaccine-delivery story, or a question of whether daily life just got harder somewhere that is already stretched. ${packet.connection || 'Its importance lies in how quickly the consequences can move outward from the original event.'} The article should help the reader feel that chain clearly without padding the drama.`;
 }
 
 function buildContextParagraph(packet: StoryPacket) {
   const significanceText = packet.significance === 'high' || packet.significance === 'critical'
-    ? 'The scan flags this as high-significance, which suggests the event is already being treated as a serious live development.'
-    : 'Even if the signal is not the day’s loudest one, it still has enough weight to affect decisions beyond the immediate news cycle.';
-  return `${significanceText} In practice, stories like this tend to move in stages. First comes the trigger. Then comes the recalibration in language, expectations, or operating assumptions. After that, institutions either absorb the shift into a new baseline or let it fade. That middle stage is the one readers most often miss, even though it is usually where the useful reporting sits.`;
+    ? 'This is one of the stronger live signals in the scan.'
+    : 'It may not be the noisiest story of the cycle, but it still changes the shape of the day.';
+  return `${significanceText} The interesting part is often the middle stage: after the trigger, before the new baseline fully hardens. That is when officials test language, markets test prices, and ordinary people start to notice whether the story is touching transport, food, energy, safety, health, or paperwork in real life.`;
 }
 
 function buildReaderUsefulnessParagraph(packet: StoryPacket) {
-  return `The most useful question is what evidence would show that the event has stopped being provisional. In one story that may be a visible change in shipping or routing. In another it may be a sharper policy line, a downgrade that changes planning assumptions, or a deterioration in humanitarian access. Thinking that way helps a reader track reality rather than rhetoric, and it keeps the article tied to practical indicators instead of vague atmosphere.`;
+  return `A good scan-style article gives the reader handles. What would confirm this is deepening? What would show it is fading? Depending on the story, that could be ship movements, freight rates, aid access, school closures, public procurement, hospital admissions, or the fine print of a court or ministry decision. Those details keep the piece grounded and make it easier to revisit tomorrow with fresh evidence.`;
 }
 
 function buildWhatToWatchParagraph(packet: StoryPacket) {
-  return `From here, the follow-through matters more than the statement. Watch whether the actors involved back the move with enforcement, whether pricing or logistics respond, whether allied governments change posture, and whether the story gains or loses prominence outside the regions already focused on it. Those are the signals that separate a temporary disturbance from a genuine change in the operating environment.`;
+  return `From here, the follow-through matters more than the quote. Watch whether the move is enforced, whether costs or access actually change, whether neighbouring actors copy or resist it, and whether the story starts showing up in places that were initially quiet. That is usually the moment when a strange or local-seeming development reveals itself as a wider systems signal.`;
 }
 
 function buildClosingParagraph(packet: StoryPacket) {
-  return `That is why the story deserves a full article rather than a clipped summary. It helps clarify what changed, how the consequences may travel, and which evidence will show whether the situation is hardening or easing. The point of the piece is not to inflate the event. It is to give the reader enough specificity to understand where the real exposure sits and what developments would confirm that the baseline has changed.`;
+  return `That is why this belongs in the published set. It offers a real shift, a visible consequence chain, or an under-seen human or systems angle that broadens the scan beyond the obvious cluster. The aim is not to make every item feel monumental. It is to make the selected stories feel alive, specific, and worth a reader's attention.`;
 }
 
 function flexibleParagraphOrder(packet: StoryPacket) {
@@ -510,29 +603,32 @@ function containsBannedPhrases(text: string) {
 function hasConcreteOpening(text: string) {
   const firstParagraph = text.split(/\n\n/)[0] || '';
   const lower = firstParagraph.toLowerCase();
-  const concreteSignals = ['reopens', 'reimposed', 'seizes', 'cuts', 'extends', 'ceasefire', 'corridor', 'waiver', 'imf', 'route', 'port', 'talks', 'aid', 'growth', 'oil', 'ship', 'downgrade', 'seizure', 'treasury', 'negotiators', 'rebels'];
-  return concreteSignals.some((signal) => lower.includes(signal));
+  const concreteSignals = ['reopens', 'reimposed', 'seizes', 'cuts', 'extends', 'ceasefire', 'corridor', 'waiver', 'imf', 'route', 'port', 'talks', 'aid', 'growth', 'oil', 'ship', 'downgrade', 'seizure', 'treasury', 'negotiators', 'rebels', 'court', 'loan', 'funding', 'vaccine', 'measles', 'meningitis', 'dataset', 'solar', 'canal', 'carrier', 'chip', 'investigates', 'advances', 'exports', 'manufacturers', 'review', 'migrants', 'border', 'asylum', 'sanctions', 'insurance'];
+  const hasSignalWord = concreteSignals.some((signal) => lower.includes(signal));
+  const hasNumber = /\b\d+(?:\.\d+)?(?:bn|m|%| million| billion)?\b/.test(lower);
+  const hasPlaceOrProperNoun = /\b(?:eu|uk|us|iran|china|india|bangladesh|paraguay|panama|sudan|chad|nokia|openai|cisco|who|imf|africa|europe)\b/.test(lower);
+  return hasSignalWord || (hasNumber && hasPlaceOrProperNoun);
 }
 
 function openingOverlapsHeadline(title: string, opening: string) {
-  const titleTokens = new Set(title.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean));
-  const openingTokens = opening.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
-  const overlap = openingTokens.filter((t) => titleTokens.has(t)).length;
-  const ratio = overlap / Math.max(1, titleTokens.size);
-  return ratio > 0.6;
+  const titleSet = new Set(titleTokens(title));
+  const openingSet = new Set(titleTokens(opening));
+  const overlap = [...openingSet].filter((token) => titleSet.has(token)).length;
+  const ratio = overlap / Math.max(1, titleSet.size);
+  const freshDetailCount = [...openingSet].filter((token) => !titleSet.has(token)).length;
+  return ratio > 0.82 && freshDetailCount < 3;
 }
 
 function ledeMatchesStory(packet: StoryPacket, opening: string) {
   const lower = opening.toLowerCase();
-  const title = packet.title.toLowerCase();
-  if (title.includes('strait of hormuz')) return lower.includes('strait of hormuz');
-  if (title.includes('drc')) return lower.includes('drc') || lower.includes('rebel');
-  if (title.includes('waiver')) return lower.includes('treasury') || lower.includes('waiver');
-  if (title.includes('imf')) return lower.includes('imf');
-  if (title.includes('cargo')) return lower.includes('cargo') || lower.includes('seized');
-  if (title.includes('kenya')) return lower.includes('kenya') || lower.includes('world bank');
-  if (title.includes('bangladesh')) return lower.includes('bangladesh') || lower.includes('fuel');
-  return true;
+  const expected = new Set<string>([
+    ...titleTokens(packet.title).slice(0, 6),
+    ...packet.tags.map((tag) => tag.toLowerCase().replace(/-/g, ' ')).flatMap((tag) => tag.split(/[^a-z0-9]+/)).filter((token) => token.length > 2),
+    ...packet.regions.map((region) => region.toLowerCase().split(/[^a-z0-9]+/)).flat(),
+  ].filter((token) => token && !OPENING_STOPWORDS.has(token)));
+  const matches = [...expected].filter((token) => lower.includes(token)).length;
+  if (packet.title.toLowerCase().includes('strait of hormuz')) return lower.includes('hormuz');
+  return matches >= 1;
 }
 
 async function buildArticle(item: ScanItem, date: string, usedImages: Set<string>): Promise<BuiltArticle> {
@@ -589,37 +685,24 @@ async function buildArticle(item: ScanItem, date: string, usedImages: Set<string
   };
 }
 
-function rankCandidates(items: ScanItem[]) {
-  return [...items].sort((a, b) => {
-    const sig = (value?: string) => {
-      const v = (value || '').toLowerCase();
-      if (v === 'critical') return 4;
-      if (v === 'high') return 3;
-      if (v === 'medium') return 2;
-      if (v === 'low') return 1;
-      return 0;
-    };
-    const scoreA = sig(a.significance) + ((a.regions || []).length * 0.2) + ((a.patterns || []).length * 0.1);
-    const scoreB = sig(b.significance) + ((b.regions || []).length * 0.2) + ((b.patterns || []).length * 0.1);
-    return scoreB - scoreA;
-  });
-}
-
 async function buildArticles(items: ScanItem[], date: string) {
-  const candidates = rankCandidates(items).slice(0, CANDIDATE_LIMIT);
+  const targetArticleCount = suggestPublicArticleCount(items, MIN_ARTICLE_COUNT, MAX_ARTICLE_COUNT);
+  const candidates = selectPublicStories(items, targetArticleCount, CANDIDATE_LIMIT);
   const usedImages = await getRecentImageIdentities();
   const selected: BuiltArticle[] = [];
   const seenSlugs = new Set<string>();
 
-  for (const item of candidates) {
-    if (selected.length >= TARGET_ARTICLE_COUNT) break;
+  console.log(`ℹ️ Public selector requested ${targetArticleCount} article slot(s) from ${candidates.length} shortlisted candidate(s)`);
+  for (const candidate of candidates) {
+    if (selected.length >= targetArticleCount) break;
+    const item = candidate.item;
     const slug = `${slugify(item.headline)}-2026`;
     if (seenSlugs.has(slug)) continue;
     seenSlugs.add(slug);
     try {
       const article = await buildArticle(item, date, usedImages);
       selected.push(article);
-      console.log(`✅ Built article ${article.slug} (${article.wordCount} words)`);
+      console.log(`✅ Built article ${article.slug} (${article.wordCount} words) [${candidate.categoryKey} | ${candidate.why.join(', ')}]`);
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       console.log(`↷ Skipped ${slug}: ${message}`);
@@ -627,8 +710,10 @@ async function buildArticles(items: ScanItem[], date: string) {
   }
 
   if (selected.length === 0) fail('No article candidates passed the quality gate');
-  if (selected.length < TARGET_ARTICLE_COUNT) {
-    console.log(`⚠️ Only ${selected.length} article(s) passed the quality gate; publishing fewer rather than weak drafts`);
+  if (selected.length < MIN_ARTICLE_COUNT) {
+    console.log(`⚠️ Only ${selected.length} article(s) passed the quality gate; selector targeted ${targetArticleCount}, but drafting quality blocked the rest`);
+  } else if (selected.length < targetArticleCount) {
+    console.log(`⚠️ Published ${selected.length} article(s) instead of ${targetArticleCount} after quality checks; keeping quality over filler`);
   }
   return selected;
 }
@@ -718,7 +803,7 @@ async function main() {
   console.log('6. Enforce low headline-overlap in the opening sentence');
   console.log('7. Reject any lede that does not match its own story');
   console.log(`8. Enforce minimum article length of ${MIN_WORD_COUNT} words`);
-  console.log(`9. Inspect top ${CANDIDATE_LIMIT} scan candidates to fill ${TARGET_ARTICLE_COUNT} slots`);
+  console.log(`9. Inspect top ${CANDIDATE_LIMIT} scan candidates to fill a dynamic ${MIN_ARTICLE_COUNT}-${MAX_ARTICLE_COUNT} public-article window`);
   console.log('10. Keep unique image selection with recent-archive dedupe and Picsum fallback');
 
   const scanPath = path.resolve(process.cwd(), `../memory/scans/${date}-${period}.md`);

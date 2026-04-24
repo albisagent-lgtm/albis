@@ -5,6 +5,7 @@ import { Resend } from 'resend';
 import { createAdminClient } from '../src/lib/supabase/admin';
 import { getSubscriberEmails } from '../src/lib/email';
 import { loadVerifiedScanItems, requireBriefingRow, requireStoryScores } from '../src/lib/pipeline-db';
+import { normalisePublicCategory, selectPublicStories } from '../src/lib/public-story-selection';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -36,20 +37,41 @@ function parseArgs() {
   };
 }
 
+function formatBriefingLine(item: any) {
+  const category = normalisePublicCategory(item.category || 'current-events').replace(/-/g, ' ');
+  const region = (item.regions || [])[0] || 'global';
+  const connection = String(item.connection || '').trim();
+  const trimmed = connection.length > 150 ? `${connection.slice(0, 147).trimEnd()}...` : connection;
+  return `- ${item.headline} (${category}${region ? ` · ${region}` : ''}) — ${trimmed || 'Worth watching for what changes next.'}`;
+}
+
+function buildBriefingTitle(top: any[], briefingDate: string) {
+  if (!top.length) return `Albis Daily — ${briefingDate}`;
+  const lead = top[0];
+  const second = top[1];
+  if (!second) return lead.connection || lead.headline || `Albis Daily — ${briefingDate}`;
+  const firstHook = lead.connection || lead.headline;
+  const secondHook = second.headline;
+  const joined = `${firstHook}; ${secondHook}`;
+  return joined.length <= 140 ? joined : (lead.connection || lead.headline || `Albis Daily — ${briefingDate}`);
+}
+
 function buildBriefingFromScan(briefingDate: string, items: any[]) {
-  const sigOrder: Record<string, number> = { critical: 4, high: 3, medium: 2, low: 1 };
-  const sorted = [...items].sort((a, b) => (sigOrder[b.significance] || 0) - (sigOrder[a.significance] || 0));
-  const top = sorted.slice(0, 6);
-  const title = top[0]?.connection || top[0]?.headline || `Albis Daily — ${briefingDate}`;
-  const contentMd = top.map((item: any) => `- ${item.headline} — ${item.connection || ''}`.trim()).join('\n');
-  const topStories = top.slice(0, 4).map((item: any) => ({ region: (item.regions || [])[0] || 'global', headline: item.headline }));
+  const top = selectPublicStories(items, 4, 6).map((entry) => entry.item);
+  const title = buildBriefingTitle(top, briefingDate);
+  const contentMd = top.map((item: any) => formatBriefingLine(item)).join('\n');
+  const topStories = top.slice(0, 4).map((item: any) => ({
+    region: (item.regions || [])[0] || 'global',
+    headline: item.headline,
+    category: normalisePublicCategory(item.category || 'current-events'),
+  }));
   return {
     date: briefingDate,
     title,
     content_md: contentMd,
     mood: null,
     pgi_score: null,
-    story_count: sorted.length,
+    story_count: items.length,
     top_stories: topStories,
   };
 }
