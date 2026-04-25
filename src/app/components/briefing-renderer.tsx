@@ -1,13 +1,72 @@
 "use client";
 
+import { useState } from "react";
 import type {
   BriefingContent,
   BriefingStory,
   BriefingWatchItem,
+  MatchReason,
 } from "@/lib/email-templates/company-briefing";
 
 // Re-export so pages can use the type without reaching into email-templates
 export type { BriefingContent };
+
+const MATCH_REASON_LABEL: Record<MatchReason["type"], string> = {
+  geography: "Geography",
+  sector: "Sector",
+  tracked_theme: "Tracked themes",
+  watchlist_entity: "Watchlist entities",
+  supply_chain: "Supply chain",
+  risk_priority: "Risk priorities",
+  urgency: "Urgency signal",
+  significance: "Story significance",
+};
+
+function WhyMatched({ reasons }: { reasons: MatchReason[] }) {
+  const [open, setOpen] = useState(false);
+  if (!reasons || reasons.length === 0) return null;
+  return (
+    <div className="mt-2">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="inline-flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-zinc-400 hover:text-[#c8922a] dark:text-zinc-500 dark:hover:text-[#c8922a]"
+        aria-expanded={open}
+      >
+        <svg
+          width="9"
+          height="9"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`transition-transform ${open ? "rotate-90" : ""}`}
+        >
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+        Why this matched
+      </button>
+      {open && (
+        <ul className="mt-2 space-y-1.5 border-l border-black/[0.07] pl-3 dark:border-white/[0.07]">
+          {reasons.map((r, i) => (
+            <li key={i} className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                {MATCH_REASON_LABEL[r.type] || r.type}
+              </span>
+              {r.matched.length > 0 && (
+                <span className="text-zinc-500 dark:text-zinc-400">
+                  : {r.matched.join(", ")}
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Signal level badge
@@ -110,18 +169,7 @@ export function BriefingRenderer({
               <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                 {story.summary}
               </p>
-              {story.relevance_tags.length > 0 && (
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                  {story.relevance_tags.map((tag: string) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-[10px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
+              {story.match_reasons && <WhyMatched reasons={story.match_reasons} />}
             </div>
           ))}
         </div>

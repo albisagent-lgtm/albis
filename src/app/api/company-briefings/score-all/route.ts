@@ -127,6 +127,7 @@ export async function POST(req: NextRequest) {
         urgency_score: s.urgency_score,
         significance_score: s.significance_score,
         relevance_score: s.relevance_score,
+        match_reasons: s.match_reasons,
         selected_for_briefing: s.selected_for_briefing,
       }));
 
@@ -150,26 +151,16 @@ export async function POST(req: NextRequest) {
         .select("id")
         .single();
 
-      // Build relevance tags for each selected story
-      const selectedWithTags = selected.map(s => {
-        const tags: string[] = [];
-        if (s.geography_score > 0.3) tags.push("geography match");
-        if (s.sector_score > 0.3) tags.push("sector match");
-        if (s.theme_score > 0.3) tags.push("tracked theme");
-        if (s.entity_score > 0.3) tags.push("watchlist entity");
-        if (s.supply_chain_score > 0.3) tags.push("supply chain");
-        if (s.risk_score > 0.3) tags.push("risk priority");
-        return {
-          headline: s.headline,
-          summary: s.connection,
-          category: s.category,
-          regions: s.regions,
-          tags: s.tags,
-          significance: s.significance,
-          relevance_score: Math.round(s.relevance_score * 1000) / 1000,
-          relevance_tags: tags,
-        };
-      });
+      const selectedStories = selected.map(s => ({
+        headline: s.headline,
+        summary: s.connection,
+        category: s.category,
+        regions: s.regions,
+        tags: s.tags,
+        significance: s.significance,
+        relevance_score: Math.round(s.relevance_score * 1000) / 1000,
+        match_reasons: s.match_reasons,
+      }));
 
       results.push({
         company_profile_id: profile.id,
@@ -177,7 +168,7 @@ export async function POST(req: NextRequest) {
         briefing_id: briefing?.id || null,
         signal_level: signalLevel,
         stories_selected: selected.length,
-        selected_stories: selectedWithTags,
+        selected_stories: selectedStories,
         profile_summary: {
           company_name: profile.company_name,
           sector: profile.sector,

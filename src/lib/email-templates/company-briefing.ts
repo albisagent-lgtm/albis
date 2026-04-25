@@ -26,10 +26,30 @@ export interface BriefingContentHeader {
   signal_level: "low" | "moderate" | "elevated" | "high";
 }
 
+export type MatchReasonType =
+  | "geography"
+  | "sector"
+  | "tracked_theme"
+  | "watchlist_entity"
+  | "supply_chain"
+  | "risk_priority"
+  | "urgency"
+  | "significance";
+
+export interface MatchReason {
+  type: MatchReasonType;
+  matched: string[];
+  score: number;
+  explanation: string;
+}
+
 export interface BriefingStory {
   headline: string;
   summary: string;
-  relevance_tags: string[];
+  // Persisted at scoring time. Optional so legacy briefing_content rows
+  // (written before pkg 2) still type-check; the dashboard renderer
+  // gracefully omits the expander when absent.
+  match_reasons?: MatchReason[];
 }
 
 export interface BriefingWatchItem {
@@ -85,6 +105,9 @@ export function generateCompanyBriefingHtml(content: BriefingContent): string {
   const displayDate = formatDate(header.date);
 
   // --- WHAT CHANGED ---
+  // Email body is intentionally clean: headline + 2-sentence summary only.
+  // No inline match tags or chips — match reasoning lives on the dashboard
+  // (see footer link).
   const storiesHtml = what_changed
     .map(
       (story, i) => `
@@ -92,16 +115,9 @@ export function generateCompanyBriefingHtml(content: BriefingContent): string {
         <p style="font-size:16px;color:${NAVY};line-height:1.4;margin:0 0 6px;font-weight:700;font-family:-apple-system,sans-serif;">
           ${i + 1}. ${esc(story.headline)}
         </p>
-        <p style="font-size:15px;color:${BODY};line-height:1.65;margin:0 0 6px;font-family:-apple-system,sans-serif;">
+        <p style="font-size:15px;color:${BODY};line-height:1.65;margin:0;font-family:-apple-system,sans-serif;">
           ${esc(story.summary)}
         </p>
-        ${
-          story.relevance_tags.length > 0
-            ? `<p style="font-size:11px;color:${GRAY};margin:0;font-family:-apple-system,sans-serif;">
-                ${story.relevance_tags.map((t) => `<span style="display:inline-block;padding:2px 8px;background:#f3f4f6;margin-right:4px;margin-bottom:2px;">${esc(t)}</span>`).join("")}
-              </p>`
-            : ""
-        }
       </div>`
     )
     .join("");
@@ -193,12 +209,10 @@ export function generateCompanyBriefingHtml(content: BriefingContent): string {
 
       ${divider()}
 
-      <!-- CTAs -->
-      <div style="text-align:center;margin-bottom:8px;">
-        <a href="${SITE}/dashboard/briefing/today" style="display:inline-block;padding:13px 36px;background:${NAVY};color:${WHITE};text-decoration:none;font-family:-apple-system,sans-serif;font-size:14px;font-weight:700;letter-spacing:0.5px;">View on dashboard</a>
-      </div>
-      <div style="text-align:center;margin-top:12px;">
-        <a href="${SITE}/dashboard/profile" style="font-size:13px;color:${GRAY};font-family:-apple-system,sans-serif;">Manage preferences</a>
+      <!-- Single subtle link to the dashboard, where each signal's
+           "Why this matched" reasoning lives. -->
+      <div style="text-align:center;">
+        <a href="${SITE}/dashboard/briefing/today" style="font-size:13px;color:${GRAY};font-family:-apple-system,sans-serif;text-decoration:underline;">View reasoning on dashboard →</a>
       </div>
 
     </td></tr>

@@ -27,7 +27,7 @@ const INGEST_KEY = process.env.SCAN_INGEST_KEY;
  *       what_changed: [{
  *         headline: string,
  *         summary: string,
- *         relevance_tags: string[]
+ *         match_reasons: Array<{ type: string, matched: string[], score: number, explanation: string }>
  *       }],
  *       why_it_matters: string,
  *       what_to_watch: [{
@@ -150,7 +150,14 @@ export async function GET() {
           {
             headline: "string",
             summary: "2-3 sentences",
-            relevance_tags: ["geography match", "tracked theme"],
+            match_reasons: [
+              {
+                type: "geography | sector | tracked_theme | watchlist_entity | supply_chain | risk_priority | urgency | significance",
+                matched: ["company-side terms that overlapped"],
+                score: "0..1",
+                explanation: "short human-readable why-string",
+              },
+            ],
           },
         ],
         why_it_matters: "2-4 sentences connecting developments to this company",

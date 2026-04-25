@@ -64,24 +64,6 @@ function buildScanFocus(stories: ReturnType<typeof getSelectedStories>): string 
   return topCategories.join(', ') || 'Global risk movement';
 }
 
-function buildRelevanceTags(story: {
-  geography_score: number;
-  sector_score: number;
-  theme_score: number;
-  entity_score: number;
-  supply_chain_score: number;
-  risk_score: number;
-}, profile: CompanyProfile): string[] {
-  const tags: string[] = [];
-  if (story.geography_score > 0.3 && profile.regions.length > 0) tags.push('geography match');
-  if (story.sector_score > 0.3 && profile.sector) tags.push('sector match');
-  if (story.theme_score > 0.3 && profile.tracked_themes.length > 0) tags.push('tracked theme');
-  if (story.entity_score > 0.3 && profile.watchlist_entities.length > 0) tags.push('watchlist entity');
-  if (story.supply_chain_score > 0.3 && profile.supply_chain_exposure.length > 0) tags.push('supply chain');
-  if (story.risk_score > 0.3 && profile.risk_priorities.length > 0) tags.push('risk priority');
-  return tags;
-}
-
 function buildWhyItMatters(profile: CompanyProfile, stories: ReturnType<typeof getSelectedStories>): string {
   const sector = profile.sector?.replace(/-/g, ' ') || 'operations';
   const regions = profile.regions.slice(0, 3).join(', ');
@@ -130,7 +112,7 @@ function buildBriefingContent(
     what_changed: stories.slice(0, 8).map((story) => ({
       headline: story.headline,
       summary: story.connection,
-      relevance_tags: buildRelevanceTags(story, profile),
+      match_reasons: story.match_reasons,
     })),
     why_it_matters: buildWhyItMatters(profile, stories),
     what_to_watch: buildWhatToWatch(profile, stories),
@@ -317,6 +299,7 @@ async function main() {
       urgency_score: s.urgency_score,
       significance_score: s.significance_score,
       relevance_score: s.relevance_score,
+      match_reasons: s.match_reasons,
       selected_for_briefing: s.selected_for_briefing,
     }));
 

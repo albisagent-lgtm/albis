@@ -10,6 +10,23 @@ import type { CompanyProfile } from "./company-profile";
 // Types
 // ---------------------------------------------------------------------------
 
+export type MatchReasonType =
+  | "geography"
+  | "sector"
+  | "tracked_theme"
+  | "watchlist_entity"
+  | "supply_chain"
+  | "risk_priority"
+  | "urgency"
+  | "significance";
+
+export interface MatchReason {
+  type: MatchReasonType;
+  matched: string[];
+  score: number;
+  explanation: string;
+}
+
 export interface ScoredStory {
   headline: string;
   category: string;
@@ -31,6 +48,10 @@ export interface ScoredStory {
 
   // Final weighted score
   relevance_score: number;
+
+  // Structured why-matched, persisted as company_story_scores.match_reasons
+  // and embedded into briefing_content.what_changed[i].match_reasons.
+  match_reasons: MatchReason[];
 
   // Whether selected for briefing
   selected_for_briefing: boolean;
@@ -242,6 +263,39 @@ function fuzzyTagOverlap(storyTags: string[], companyTerms: string[]): number {
 }
 
 /**
+ * Sub-scorer result: a numeric score plus the company-side terms that
+ * actually contributed to the match. `matched` may be empty when the
+ * scorer fired on a non-list signal (e.g. urgency boost from significance).
+ */
+interface SubScore {
+  score: number;
+  matched: string[];
+}
+
+/**
+ * Fuzzy-overlap variant that returns both the score and which company
+ * terms were responsible for the match.
+ */
+function fuzzyTagOverlapWithMatches(
+  storyTags: string[],
+  companyTerms: string[]
+): SubScore {
+  if (storyTags.length === 0 || companyTerms.length === 0) {
+    return { score: 0, matched: [] };
+  }
+  const normalised = storyTags.map((t) => t.toLowerCase());
+  const matched: string[] = [];
+  for (const term of companyTerms) {
+    const lower = term.toLowerCase();
+    const found = normalised.some(
+      (tag) => tag === lower || tag.includes(lower) || lower.includes(tag)
+    );
+    if (found) matched.push(term);
+  }
+  return { score: matched.length / companyTerms.length, matched };
+}
+
+/**
  * Score geography overlap between a scan item and a company profile.
  * Considers both region-level and country-level matches.
  */
@@ -249,9 +303,11 @@ function scoreGeography(
   storyRegions: string[],
   companyRegions: string[],
   companyCountries: string[]
-): number {
-  if (storyRegions.length === 0) return 0;
-  if (companyRegions.length === 0 && companyCountries.length === 0) return 0;
+): SubScore {
+  if (storyRegions.length === 0) return { score: 0, matched: [] };
+  if (companyRegions.length === 0 && companyCountries.length === 0) {
+    return { score: 0, matched: [] };
+  }
 
   // Map scan regions to company region keys
   const mappedScanRegions: string[] = [];
@@ -264,39 +320,38 @@ function scoreGeography(
     }
   }
 
-  // Region-level overlap
-  const regionScore = overlapScore(mappedScanRegions, companyRegions);
+  const scanRegionSet = new Set(mappedScanRegions.map((r) => r.toLowerCase()));
+  const matched = companyRegions.filter((r) => scanRegionSet.has(r.toLowerCase()));
 
-  // Country-level: check if story tags/regions mention any country slugs
-  // This is a weaker signal since scan items use region keys not country slugs,
-  // but some tags do contain country names
-  // For now, region score is the primary geography signal
-  return Math.min(1, regionScore);
+  const regionScore = overlapScore(mappedScanRegions, companyRegions);
+  return { score: Math.min(1, regionScore), matched };
 }
 
 /**
  * Score sector match between a scan item category and a company sector.
  */
-function scoreSector(storyCategory: string, companySector: string | null): number {
-  if (!companySector || !storyCategory) return 0;
+function scoreSector(storyCategory: string, companySector: string | null): SubScore {
+  if (!companySector || !storyCategory) return { score: 0, matched: [] };
 
-  // Direct category match
   const mappedSectors = CATEGORY_TO_SECTORS[storyCategory] || [];
-  if (mappedSectors.includes(companySector)) return 1.0;
+  if (mappedSectors.includes(companySector)) {
+    return { score: 1.0, matched: [companySector] };
+  }
 
-  // Check if the category name partially matches the sector
   const catLower = storyCategory.toLowerCase();
   const sectorLower = companySector.toLowerCase();
-  if (catLower.includes(sectorLower) || sectorLower.includes(catLower)) return 0.5;
+  if (catLower.includes(sectorLower) || sectorLower.includes(catLower)) {
+    return { score: 0.5, matched: [companySector] };
+  }
 
-  return 0;
+  return { score: 0, matched: [] };
 }
 
 /**
  * Score theme match: fuzzy overlap between story tags and company tracked themes.
  */
-function scoreThemes(storyTags: string[], trackedThemes: string[]): number {
-  return fuzzyTagOverlap(storyTags, trackedThemes);
+function scoreThemes(storyTags: string[], trackedThemes: string[]): SubScore {
+  return fuzzyTagOverlapWithMatches(storyTags, trackedThemes);
 }
 
 /**
@@ -306,60 +361,56 @@ function scoreEntities(
   storyTags: string[],
   storyHeadline: string,
   watchlistEntities: string[]
-): number {
-  if (watchlistEntities.length === 0) return 0;
+): SubScore {
+  if (watchlistEntities.length === 0) return { score: 0, matched: [] };
 
   const headlineLower = storyHeadline.toLowerCase();
-  const tagsLower = storyTags.map(t => t.toLowerCase());
-  let matches = 0;
+  const tagsLower = storyTags.map((t) => t.toLowerCase());
+  const matched: string[] = [];
 
   for (const entity of watchlistEntities) {
     const lower = entity.toLowerCase();
-    // Check headline
     if (headlineLower.includes(lower)) {
-      matches++;
+      matched.push(entity);
       continue;
     }
-    // Check tags
-    if (tagsLower.some(tag => tag === lower || tag.includes(lower) || lower.includes(tag))) {
-      matches++;
+    if (tagsLower.some((tag) => tag === lower || tag.includes(lower) || lower.includes(tag))) {
+      matched.push(entity);
     }
   }
 
-  return matches / watchlistEntities.length;
+  return { score: matched.length / watchlistEntities.length, matched };
 }
 
 /**
  * Score supply chain match: fuzzy overlap between story tags and supply chain exposure terms.
  */
-function scoreSupplyChain(storyTags: string[], supplyChainExposure: string[]): number {
-  return fuzzyTagOverlap(storyTags, supplyChainExposure);
+function scoreSupplyChain(storyTags: string[], supplyChainExposure: string[]): SubScore {
+  return fuzzyTagOverlapWithMatches(storyTags, supplyChainExposure);
 }
 
 /**
  * Score risk match: map story tags to risk types and check overlap with company risk priorities.
  */
-function scoreRisk(storyTags: string[], storyCategory: string, riskPriorities: string[]): number {
-  if (riskPriorities.length === 0) return 0;
+function scoreRisk(
+  storyTags: string[],
+  storyCategory: string,
+  riskPriorities: string[]
+): SubScore {
+  if (riskPriorities.length === 0) return { score: 0, matched: [] };
 
-  // Collect all risk types implied by the story
   const storyRisks = new Set<string>();
   for (const tag of storyTags) {
     const risks = TAG_TO_RISK[tag.toLowerCase()];
-    if (risks) {
-      for (const r of risks) storyRisks.add(r);
-    }
+    if (risks) for (const r of risks) storyRisks.add(r);
   }
-  // Also check category
   const catRisks = TAG_TO_RISK[storyCategory];
-  if (catRisks) {
-    for (const r of catRisks) storyRisks.add(r);
-  }
+  if (catRisks) for (const r of catRisks) storyRisks.add(r);
 
-  if (storyRisks.size === 0) return 0;
+  if (storyRisks.size === 0) return { score: 0, matched: [] };
 
-  const matches = riskPriorities.filter(r => storyRisks.has(r)).length;
-  return matches / riskPriorities.length;
+  const matched = riskPriorities.filter((r) => storyRisks.has(r));
+  return { score: matched.length / riskPriorities.length, matched };
 }
 
 /**
@@ -391,6 +442,109 @@ function urgencyBoost(patterns: string[], significance: string): number {
 // ---------------------------------------------------------------------------
 
 /**
+ * Build the structured why-matched array from sub-score results.
+ * Inclusion rule: dimensions with at least one matched term are always
+ * included; urgency/significance are included only when the boost is
+ * non-trivial (score > 0.3) since they have no list-of-terms to show.
+ */
+function buildMatchReasons(opts: {
+  geo: SubScore;
+  sec: SubScore;
+  thm: SubScore;
+  ent: SubScore;
+  sup: SubScore;
+  rsk: SubScore;
+  urg: number;
+  sig: number;
+  significance: string;
+  patterns: string[];
+}): MatchReason[] {
+  const { geo, sec, thm, ent, sup, rsk, urg, sig, significance, patterns } = opts;
+  const reasons: MatchReason[] = [];
+
+  if (geo.matched.length > 0) {
+    reasons.push({
+      type: "geography",
+      matched: geo.matched,
+      score: geo.score,
+      explanation:
+        geo.matched.length === 1
+          ? "Story regions overlap your operating region"
+          : "Story regions overlap your operating regions",
+    });
+  }
+  if (sec.matched.length > 0) {
+    reasons.push({
+      type: "sector",
+      matched: sec.matched,
+      score: sec.score,
+      explanation: "Story category aligns with your sector",
+    });
+  }
+  if (thm.matched.length > 0) {
+    reasons.push({
+      type: "tracked_theme",
+      matched: thm.matched,
+      score: thm.score,
+      explanation:
+        thm.matched.length === 1
+          ? "Matches one of your tracked themes"
+          : `Matches ${thm.matched.length} of your tracked themes`,
+    });
+  }
+  if (ent.matched.length > 0) {
+    reasons.push({
+      type: "watchlist_entity",
+      matched: ent.matched,
+      score: ent.score,
+      explanation:
+        ent.matched.length === 1
+          ? "Mentions an entity on your watchlist"
+          : `Mentions ${ent.matched.length} entities on your watchlist`,
+    });
+  }
+  if (sup.matched.length > 0) {
+    reasons.push({
+      type: "supply_chain",
+      matched: sup.matched,
+      score: sup.score,
+      explanation: "Touches your supply chain exposure",
+    });
+  }
+  if (rsk.matched.length > 0) {
+    reasons.push({
+      type: "risk_priority",
+      matched: rsk.matched,
+      score: rsk.score,
+      explanation:
+        rsk.matched.length === 1
+          ? "Hits a risk you prioritise"
+          : `Hits ${rsk.matched.length} risks you prioritise`,
+    });
+  }
+  if (urg > 0.3) {
+    const triggers = ["escalation", "breaking", "framing"].filter((p) => patterns.includes(p));
+    if (significance === "high") triggers.unshift("high significance");
+    reasons.push({
+      type: "urgency",
+      matched: triggers,
+      score: urg,
+      explanation: "Urgency signal in the story itself",
+    });
+  }
+  if (sig > 0.3) {
+    reasons.push({
+      type: "significance",
+      matched: [significance],
+      score: sig,
+      explanation: "Story marked as significant by the upstream scan",
+    });
+  }
+
+  return reasons;
+}
+
+/**
  * Score all scan items against a company profile.
  * Returns scored stories sorted by relevance (highest first).
  */
@@ -409,14 +563,27 @@ export function scoreStoriesForCompany(
     const sig = significanceToScore(item.significance);
 
     const relevance =
-      WEIGHTS.geography * geo +
-      WEIGHTS.sector * sec +
-      WEIGHTS.theme * thm +
-      WEIGHTS.entity * ent +
-      WEIGHTS.supply_chain * sup +
-      WEIGHTS.risk * rsk +
+      WEIGHTS.geography * geo.score +
+      WEIGHTS.sector * sec.score +
+      WEIGHTS.theme * thm.score +
+      WEIGHTS.entity * ent.score +
+      WEIGHTS.supply_chain * sup.score +
+      WEIGHTS.risk * rsk.score +
       WEIGHTS.urgency * urg +
       WEIGHTS.significance * sig;
+
+    const match_reasons = buildMatchReasons({
+      geo,
+      sec,
+      thm,
+      ent,
+      sup,
+      rsk,
+      urg,
+      sig,
+      significance: item.significance,
+      patterns: item.patterns,
+    });
 
     return {
       headline: item.headline,
@@ -426,15 +593,16 @@ export function scoreStoriesForCompany(
       patterns: item.patterns,
       significance: item.significance,
       connection: item.connection,
-      geography_score: geo,
-      sector_score: sec,
-      theme_score: thm,
-      entity_score: ent,
-      supply_chain_score: sup,
-      risk_score: rsk,
+      geography_score: geo.score,
+      sector_score: sec.score,
+      theme_score: thm.score,
+      entity_score: ent.score,
+      supply_chain_score: sup.score,
+      risk_score: rsk.score,
       urgency_score: urg,
       significance_score: sig,
       relevance_score: relevance,
+      match_reasons,
       selected_for_briefing: false,
     };
   });
