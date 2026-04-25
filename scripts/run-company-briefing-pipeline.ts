@@ -207,6 +207,42 @@ async function deliverBriefing(
   return { status: 'sent', recipients, delivered_at: deliveredAt };
 }
 
+async function recordPipelineRunCompletion(
+  supabase: ReturnType<typeof createAdminClient>,
+  scanDate: string,
+  results: Array<Record<string, unknown>>
+) {
+  const generated = results.filter((r) => r.status !== 'skipped').length;
+  const deliveries = results
+    .map((r) => r.delivery as { status?: string } | undefined)
+    .filter((d): d is { status: string } => !!d && typeof d.status === 'string');
+  const sent = deliveries.filter((d) => d.status === 'sent').length;
+  const failed = deliveries.filter((d) => d.status === 'failed' || d.status === 'error').length;
+
+  let status: 'completed' | 'partial_failure' | 'failed';
+  if (generated === 0) status = 'failed';
+  else if (failed > 0) status = 'partial_failure';
+  else status = 'completed';
+
+  const completedAt = new Date().toISOString();
+  const { error } = await supabase
+    .from('pipeline_runs')
+    .upsert(
+      {
+        run_date: scanDate,
+        generation_completed_at: completedAt,
+        delivery_completed_at: completedAt,
+        generation_companies_count: generated,
+        delivery_sent_count: sent,
+        delivery_failures: failed,
+        status,
+      },
+      { onConflict: 'run_date' }
+    );
+  if (error) throw new Error(error.message);
+  console.log(`✅ pipeline_runs marked ${status} (generated=${generated}, sent=${sent}, failed=${failed})`);
+}
+
 async function main() {
   const scanDate = parseArgs();
   const supabase = createAdminClient();
@@ -338,6 +374,14 @@ async function main() {
 
   const briefingRows = await requireCompanyBriefingRows(supabase, scanDate);
   console.log(`✅ Verified ${briefingRows.length} company_briefings row(s)`);
+
+  if (!dryRun) {
+    try {
+      await recordPipelineRunCompletion(supabase, scanDate, results);
+    } catch (err) {
+      console.warn(`⚠️ pipeline_runs completion tracking failed (non-fatal): ${err instanceof Error ? err.message : String(err)}`);
+    }
+  }
 
   console.log('\n🎉 Company briefing pipeline complete');
   console.log(JSON.stringify({ scan_date: scanDate, forceDeliver, forceAll, dryRun, results }, null, 2));
