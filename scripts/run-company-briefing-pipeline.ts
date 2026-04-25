@@ -17,6 +17,7 @@ import {
   generateBriefingSubject,
   type BriefingContent,
 } from '../src/lib/email-templates/company-briefing';
+import { buildCoverageSummary } from '../src/lib/coverage-builder';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -344,6 +345,28 @@ async function main() {
 
     const delivery = await deliverBriefing(supabase, resend, rawProfile, generatedBriefing as CompanyBriefingRow, briefingContent, forceAll, forceDeliver, dryRun);
     console.log(`✅ Delivery status: ${JSON.stringify(delivery)}`);
+
+    try {
+      const coverage = await buildCoverageSummary(supabase, rawProfile, scored, allItems, scanDate);
+      const { error: coverageErr } = await supabase
+        .from('company_coverage_summaries')
+        .upsert(
+          {
+            company_profile_id: rawProfile.id,
+            coverage_date: scanDate,
+            tracked_items_checked: coverage.tracked_items_checked,
+            sources_inspected: coverage.sources_inspected,
+            early_signals: coverage.early_signals,
+            silent_items: coverage.silent_items,
+            summary_text: coverage.summary_text,
+          },
+          { onConflict: 'company_profile_id,coverage_date' }
+        );
+      if (coverageErr) throw new Error(coverageErr.message);
+      console.log(`✅ Wrote coverage summary (${coverage.tracked_items_checked.length} tracked, ${coverage.silent_items.length} silent, ${coverage.early_signals.length} early)`);
+    } catch (err) {
+      console.warn(`⚠️ coverage summary failed (non-fatal): ${err instanceof Error ? err.message : String(err)}`);
+    }
 
     results.push({
       company_name: rawProfile.company_name,
