@@ -1,13 +1,20 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
-const supabase = createClient(
-  "https://wguydvzpxwsgrhvojpnk.supabase.co",
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ""
-);
-
 // GET /api/pgi/alert — returns stories with PGI >= 7.0 from the last 24 hours
 export async function GET() {
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!serviceKey) {
+    return NextResponse.json(
+      { error: "SUPABASE_SERVICE_ROLE_KEY is not configured" },
+      { status: 500 }
+    );
+  }
+
+  const supabase = createClient(
+    "https://wguydvzpxwsgrhvojpnk.supabase.co",
+    serviceKey
+  );
   const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
 
   const { data, error } = await supabase
