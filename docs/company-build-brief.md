@@ -210,3 +210,4 @@ Before merging `company-build` → `main` (end of Package 7 or 8), and before op
 3. Only then `git pull` on openclaw.
 
 The public article rebuild is happening on a separate branch during the company build. Both rejoin main at the end. Coordinated check at that point.
+- **Pkg 7 e2e test step 7 failure to investigate.** Test profile didn't appear in runCompanySignalPipeline results despite having trialing status and onboarding_completed=true. Steps 1-6 pass cleanly (user → trial → preview briefing). Step 7 failure means a fresh signup may not appear in the *next* batch pipeline run — they still get their preview from Step 6. Investigate in Package 8 when pipeline gets tuned. Possible causes: profile-loading filter excludes brand-new profiles, dry-run path doesn't return all profiles, or cache/timing issue.

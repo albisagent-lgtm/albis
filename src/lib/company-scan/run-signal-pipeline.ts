@@ -243,6 +243,7 @@ export async function processProfileSignals(
     );
     return {
       company_name: rawProfile.company_name,
+      company_profile_id: rawProfile.id,
       signals_considered: signals.length,
       signals_selected: selected.length,
       signal_level: signalLevel,
