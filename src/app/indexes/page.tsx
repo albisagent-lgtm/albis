@@ -30,8 +30,9 @@ interface MatrixStory {
 }
 
 async function fetchMatrixData(): Promise<{ quadrants: MatrixStory[][]; scanDate: string | null }> {
-  const supabase = createAdminClient();
-  const [pgiDates, gaiDates] = await Promise.all([
+  try {
+    const supabase = createAdminClient();
+    const [pgiDates, gaiDates] = await Promise.all([
     supabase.from("pgi_story_scores").select("scan_date").order("scan_date", { ascending: false }).limit(100),
     supabase.from("gai_story_scores").select("scan_date").order("scan_date", { ascending: false }).limit(100),
   ]);
@@ -69,12 +70,17 @@ async function fetchMatrixData(): Promise<{ quadrants: MatrixStory[][]; scanDate
     else if (highPgi && highGai) quadrants[2].push(s);
     else quadrants[3].push(s);
   }
-  return { quadrants, scanDate: commonDate };
+    return { quadrants, scanDate: commonDate };
+  } catch (e) {
+    console.error("Matrix data fetch failed:", e);
+    return { quadrants: [[], [], [], []], scanDate: null };
+  }
 }
 
 async function fetchIndexData() {
-  const supabase = createAdminClient();
-  const [pgiRes, gaiRes] = await Promise.all([
+  try {
+    const supabase = createAdminClient();
+    const [pgiRes, gaiRes] = await Promise.all([
     supabase.from("pgi_daily").select("date, daily_pgi").order("date", { ascending: true }),
     supabase.from("gai_daily").select("date, daily_gai").order("date", { ascending: true }),
   ]);
@@ -96,7 +102,11 @@ async function fetchIndexData() {
   for (const g of gaiData) dateMap.set(g.date, { ...dateMap.get(g.date), gai: g.daily_gai });
   const combinedData = Array.from(dateMap.entries()).sort(([a], [b]) => a.localeCompare(b)).map(([date, vals]) => ({ date, ...vals }));
 
-  return { pgiData, gaiData, combinedData };
+    return { pgiData, gaiData, combinedData };
+  } catch (e) {
+    console.error("Index data fetch failed:", e);
+    return { pgiData: [], gaiData: [], combinedData: [] };
+  }
 }
 
 // Fetch latest PGI with trend for PgiHero + PgiBar
