@@ -102,7 +102,7 @@ export function BriefingRenderer({
       <section>
         <p className={sectionLabel}>What Changed</p>
         <div className="mt-4 space-y-5">
-          {what_changed.map((story: BriefingStory, i: number) => (
+          {(what_changed ?? []).map((story: BriefingStory, i: number) => (
             <div key={i}>
               <p className="text-[15px] font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
                 {i + 1}. {story.headline}
@@ -110,9 +110,9 @@ export function BriefingRenderer({
               <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                 {story.summary}
               </p>
-              {story.relevance_tags.length > 0 && (
+              {(story.relevance_tags ?? []).length > 0 && (
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  {story.relevance_tags.map((tag: string) => (
+                  {(story.relevance_tags ?? []).map((tag: string) => (
                     <span
                       key={tag}
                       className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-[10px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
@@ -157,7 +157,7 @@ export function BriefingRenderer({
       <section>
         <p className={sectionLabel}>What to Watch Next</p>
         <div className="mt-4 space-y-3">
-          {what_to_watch.map((item: BriefingWatchItem, i: number) => (
+          {(what_to_watch ?? []).map((item: BriefingWatchItem, i: number) => (
             <div key={i} className="flex items-start gap-2.5">
               <span className="mt-0.5 text-[#c8922a]">
                 <svg
