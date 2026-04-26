@@ -1,4 +1,16 @@
 #!/usr/bin/env tsx
+/**
+ * DEPRECATED — replaced by scripts/run-company-signal-pipeline.ts.
+ *
+ * This pipeline reads from the public scan pool (scans / scan_items /
+ * pgi_story_scores / gai_story_scores) and is no longer the primary
+ * path for company-side briefings. Kept for one release cycle as a
+ * fallback in case the new typed-signals path needs to be backed out.
+ *
+ * Do NOT invoke from cron after Package 6 cutover. Update any
+ * openclaw cron entries (or other schedulers) to point at
+ * scripts/run-company-scan-cycle.sh — see docs/company-scan-cron-setup.md.
+ */
 import path from 'path';
 import dotenv from 'dotenv';
 import { Resend } from 'resend';
@@ -165,6 +177,10 @@ async function recordPipelineRunCompletion(
 }
 
 async function main() {
+  console.warn(
+    '[DEPRECATED] run-company-briefing-pipeline.ts is the legacy public-pool pipeline. ' +
+      'Use run-company-signal-pipeline.ts (or scripts/run-company-scan-cycle.sh for the full cycle) instead.'
+  );
   const scanDate = parseArgs();
   const supabase = createAdminClient();
   const resend = new Resend(process.env.RESEND_API_KEY);
