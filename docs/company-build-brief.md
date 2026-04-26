@@ -200,3 +200,13 @@ During the context-loading audit before Package 1 started, Claude Code raised 5 
 
 - **Canonical ambiguity tiebreaker (~20 profiles).** When a raw value matches multiple canonicals, fall back to type-priority instead of skipping. Watchlist_entities → prefer entity over route over region. Supply_chain_exposure → prefer commodity over theme. Cheap, deterministic, fixes ~80% of skipped values without LLM cost. ~30 min Claude Code work.
 - **Multi-language alias auto-extraction.** When the resolver creates a new canonical, optionally call OpenAI to suggest translations and common abbreviations to seed the alias table. Costs ~$0.001 per new canonical. Massively boosts multi-language coverage without manual seeding. Best wired in alongside Package 8's LLM work.
+
+## Pre-merge integration check (deferred)
+
+Before merging `company-build` → `main` (end of Package 7 or 8), and before openclaw `git pull`s the merged main:
+
+1. Send a discovery prompt to Claude Code on the merged branch covering: shared files (`relevance-engine.ts`, `scan-parser.ts`, `pipeline-db.ts`, email templates), schema changes that landed on main during the company build, any cron entries on openclaw pointing at deprecated scripts.
+2. Get a full integration report. Resolve conflicts before going live.
+3. Only then `git pull` on openclaw.
+
+The public article rebuild is happening on a separate branch during the company build. Both rejoin main at the end. Coordinated check at that point.
