@@ -32,6 +32,16 @@ function slugify(input: string) {
   return input.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-+/g, '-');
 }
 
+function buildStableStorySlugs(items: Awaited<ReturnType<typeof loadVerifiedScanItems>>) {
+  const seen = new Map<string, number>();
+  return items.map((item) => {
+    const base = slugify(item.headline) || 'story';
+    const count = seen.get(base) || 0;
+    seen.set(base, count + 1);
+    return count === 0 ? base : `${base}-${count + 1}`;
+  });
+}
+
 function significanceToNumeric(sig: string) {
   if (sig === 'critical') return 4;
   if (sig === 'high') return 3;
@@ -195,23 +205,39 @@ async function main() {
   const { date, period } = parseArgs();
   const supabase = createAdminClient();
   const items = await loadVerifiedScanItems(supabase, date, period);
+  const storySlugs = buildStableStorySlugs(items);
+  const desiredSlugs = new Set(storySlugs);
 
-  const { data: oldPgi } = await supabase
+  const { data: existingPgiRows, error: existingPgiError } = await supabase
     .from('pgi_story_scores')
-    .select('id')
+    .select('id, story_slug')
     .eq('scan_date', date)
     .eq('scan_period', period);
-  const oldIds = (oldPgi || []).map((row: any) => row.id).filter(Boolean);
-  if (oldIds.length) {
-    await supabase.from('pgi_region_pairs').delete().in('story_score_id', oldIds);
-  }
-  await supabase.from('pgi_story_scores').delete().eq('scan_date', date).eq('scan_period', period);
-  await supabase.from('gai_story_scores').delete().eq('scan_date', date).eq('scan_period', period);
+  if (existingPgiError) fail(`Existing PGI lookup failed: ${existingPgiError.message}`);
 
-  const pgiRows = items.map((item) => {
+  const stalePgiIds = (existingPgiRows || [])
+    .filter((row: any) => !desiredSlugs.has(row.story_slug))
+    .map((row: any) => row.id)
+    .filter(Boolean);
+  if (stalePgiIds.length) {
+    const { error: stalePairDeleteError } = await supabase.from('pgi_region_pairs').delete().in('story_score_id', stalePgiIds);
+    if (stalePairDeleteError) fail(`Stale PGI pair cleanup failed: ${stalePairDeleteError.message}`);
+    const { error: stalePgiDeleteError } = await supabase.from('pgi_story_scores').delete().in('id', stalePgiIds);
+    if (stalePgiDeleteError) fail(`Stale PGI cleanup failed: ${stalePgiDeleteError.message}`);
+  }
+
+  const { error: staleGaiDeleteError } = await supabase
+    .from('gai_story_scores')
+    .delete()
+    .eq('scan_date', date)
+    .eq('scan_period', period)
+    .not('story_slug', 'in', `(${storySlugs.map((slug) => `"${slug}"`).join(',')})`);
+  if (staleGaiDeleteError && storySlugs.length > 0) fail(`Stale GAI cleanup failed: ${staleGaiDeleteError.message}`);
+
+  const pgiRows = items.map((item, index) => {
     const pgi = scorePgi(item);
     return {
-      story_slug: slugify(item.headline),
+      story_slug: storySlugs[index],
       story_headline: item.headline,
       category: item.category,
       regions_covered: item.regions,
@@ -230,12 +256,12 @@ async function main() {
     };
   });
 
-  const gaiRows = items.map((item) => {
+  const gaiRows = items.map((item, index) => {
     const gai = scoreGai(item);
     return {
       scan_date: date,
       scan_period: period,
-      story_slug: slugify(item.headline),
+      story_slug: storySlugs[index],
       story_headline: item.headline,
       category: item.category,
       regions_found: gai.regions_found,
@@ -245,15 +271,30 @@ async function main() {
       d2_prominence_disparity: gai.d2_prominence_disparity,
       d3_population_exposure: gai.d3_population_exposure,
       d4_significance_severity: gai.d4_significance_severity,
-      story_gai: gai.story_gai,
       significance: significanceToNumeric(item.significance),
       scoring_rationale: `DB-truth-first scorer using verified scan items for ${date} ${period}`,
       is_latest: true,
     };
   });
 
-  const { data: insertedPgi, error: pgiError } = await supabase.from('pgi_story_scores').insert(pgiRows).select('id, story_slug, story_pgi, regions_covered');
+  const { error: pgiError } = await supabase
+    .from('pgi_story_scores')
+    .upsert(pgiRows, { onConflict: 'story_slug,scan_date,scan_period', ignoreDuplicates: false });
   if (pgiError) fail(`PGI insert failed: ${pgiError.message}`);
+
+  const { data: insertedPgi, error: insertedPgiError } = await supabase
+    .from('pgi_story_scores')
+    .select('id, story_slug, story_pgi, regions_covered')
+    .eq('scan_date', date)
+    .eq('scan_period', period)
+    .in('story_slug', storySlugs);
+  if (insertedPgiError) fail(`PGI verification lookup failed: ${insertedPgiError.message}`);
+
+  const currentPgiIds = (insertedPgi || []).map((row: any) => row.id).filter(Boolean);
+  if (currentPgiIds.length) {
+    const { error: pairResetError } = await supabase.from('pgi_region_pairs').delete().in('story_score_id', currentPgiIds);
+    if (pairResetError) fail(`PGI pair reset failed: ${pairResetError.message}`);
+  }
 
   const pairRows = (insertedPgi || []).flatMap((row: any) =>
     buildPairScores(row.story_pgi, Array.isArray(row.regions_covered) ? row.regions_covered : []).map((pair) => ({
@@ -265,11 +306,15 @@ async function main() {
     }))
   );
   if (pairRows.length) {
-    const { error: pairError } = await supabase.from('pgi_region_pairs').insert(pairRows);
+    const { error: pairError } = await supabase
+      .from('pgi_region_pairs')
+      .upsert(pairRows, { onConflict: 'story_score_id,region_a,region_b', ignoreDuplicates: false });
     if (pairError) fail(`PGI pair insert failed: ${pairError.message}`);
   }
 
-  const { error: gaiError } = await supabase.from('gai_story_scores').insert(gaiRows);
+  const { error: gaiError } = await supabase
+    .from('gai_story_scores')
+    .upsert(gaiRows, { onConflict: 'scan_date,scan_period,story_slug', ignoreDuplicates: false });
   if (gaiError) fail(`GAI insert failed: ${gaiError.message}`);
 
   console.log(JSON.stringify({ ok: true, date, period, items: items.length, pgiRows: pgiRows.length, gaiRows: gaiRows.length, pairRows: pairRows.length }, null, 2));

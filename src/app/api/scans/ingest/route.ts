@@ -57,25 +57,36 @@ export async function POST(req: NextRequest) {
       .single();
 
     if (scanRow?.id) {
-      await supabase.from("scan_items").delete().eq("scan_id", scanRow.id);
-      if (Array.isArray(items) && items.length > 0) {
-        const itemRows = items
-          .filter((item: any) => item?.headline && item?.category)
-          .map((item: any) => ({
-            scan_id: scanRow.id,
-            headline: item.headline,
-            category: typeof item.category === "string" ? item.category.replace(/-/g, "_") : item.category,
-            regions: Array.isArray(item.regions) ? item.regions : [],
-            tags: Array.isArray(item.tags) ? item.tags : [],
-            patterns: Array.isArray(item.patterns) ? item.patterns : [],
-            significance: item.significance || null,
-            connection: item.connection || null,
-          }));
-        if (itemRows.length > 0) {
-          const { error: itemError } = await supabase.from("scan_items").insert(itemRows);
-          if (itemError) {
-            console.error("scan_items insert error:", itemError);
-          }
+      const rawItemRows = Array.isArray(items)
+        ? items
+            .filter((item: any) => item?.headline && item?.category)
+            .map((item: any) => ({
+              scan_id: scanRow.id,
+              headline: String(item.headline).trim(),
+              category: typeof item.category === "string" ? item.category.replace(/-/g, "_") : item.category,
+              regions: Array.isArray(item.regions) ? item.regions : [],
+              tags: Array.isArray(item.tags) ? item.tags : [],
+              patterns: Array.isArray(item.patterns) ? item.patterns : [],
+              significance: item.significance || null,
+              connection: item.connection || null,
+            }))
+        : [];
+
+      const seenHeadlines = new Set<string>();
+      const itemRows = rawItemRows.filter((row) => {
+        const key = String(row.headline).trim().toLowerCase();
+        if (!key || seenHeadlines.has(key)) return false;
+        seenHeadlines.add(key);
+        return true;
+      });
+
+      const { error: deleteError } = await supabase.from("scan_items").delete().eq("scan_id", scanRow.id);
+      if (deleteError) {
+        console.error("scan_items delete error:", deleteError);
+      } else if (itemRows.length > 0) {
+        const { error: itemError } = await supabase.from("scan_items").insert(itemRows);
+        if (itemError) {
+          console.error("scan_items insert error:", itemError);
         }
       }
     }

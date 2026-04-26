@@ -1,36 +1,34 @@
 ---
-title: Human-rights groups issue US travel advisory ahead of the 2026 World Cup
+title: US immigration detention pressure rises after long-held family is released
 description: >-
-  A major global sporting event is being reframed through rights and
-  border-enforcement risk rather than tourism alone.
+  Judicial intervention in prolonged family detention highlights the legal and
+  humanitarian limits of hardline migration policy.
 date: '2026-04-26T21:59:00+12:00'
 category: migration-demographics
 tags:
-  - world-cup-2026
-  - travel-advisory
-  - detention
-  - deportation
-  - human-rights
+  - ice
+  - family-detention
+  - migration
+  - court-order
 image: >-
-  https://images.pexels.com/photos/8899175/pexels-photo-8899175.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+  https://images.pexels.com/photos/34969793/pexels-photo-34969793.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 excerpt: >-
-  A major global sporting event is being reframed through rights and
-  border-enforcement risk rather than tourism alone.
+  Judicial intervention in prolonged family detention highlights the legal and
+  humanitarian limits of hardline migration policy.
 author: Albis
 article_form: framing-map
 article_opportunity: compare how the story is being told and what each frame reveals
 article_signals:
   coreFact: >-
-    A major global sporting event is being reframed through rights and
-    border-enforcement risk rather than tourism alone.
+    Judicial intervention in prolonged family detention highlights the legal and
+    humanitarian limits of hardline migration policy.
   keyNumber: null
   mainActors:
-    - Human
     - US
-    - World Cup
+    - Judicial
   primaryLocation: US
-  humanStake: direct lived consequences
-  mechanism: state change with second-order effects
+  humanStake: family impact
+  mechanism: policy and rules shift
   novelty: offers unusually concrete detail for a scan item
   framingTension: 'official reassurance in the lead, household or clinic pressure underneath'
   articleFormHint: 'lead with competing frames, then show what each frame obscures'
@@ -43,19 +41,19 @@ article_signals:
     - cross-region footprint
     - named actors
 ---
-In one telling, the story turns on Human. In another, that is not the story at all. Official reassurance in the lead, household or clinic pressure underneath Human and US sit near the centre of that divide.
+In one telling, the story turns on US. In another, that is not the story at all. Official reassurance in the lead, household or clinic pressure underneath US and Judicial sit near the centre of that divide.
 
 Official reassurance in the lead, household or clinic pressure underneath. In practice, one audience may be reading a sanctions story while another is reading a prices story, or one may hear diplomacy while another never looks away from enforcement, displacement, or fallout. It also connects cleanly to system-shift or framing-map follow-up coverage.
 
-State change with second-order effects is the route by which the pressure moves. Official reassurance in the lead, household or clinic pressure underneath. A major global sporting event is being reframed through rights and border-enforcement risk rather than tourism alone.
+Policy and rules shift is the route by which the pressure moves. Official reassurance in the lead, household or clinic pressure underneath. Judicial intervention in prolonged family detention highlights the legal and humanitarian limits of hardline migration policy.
 
-Coverage is clustering in US, Europe, Latin America, Global. Across that spread, the scan flags framing, divergence, suggesting audiences are not just getting different tone but often a different centre of gravity. The perception gap is large enough to shape what people think the story is really about. The footprint is wide, so this is no longer sitting inside one national conversation.
+Coverage is clustering in US, Latin America. Across that spread, the scan flags state-change, framing, suggesting audiences are not just getting different tone but often a different centre of gravity. The perception gap is large enough to shape what people think the story is really about.
 
-Direct lived consequences is where the story stops being abstract. A major global sporting event is being reframed through rights and border-enforcement risk rather than tourism alone. What stands out is that it offers unusually concrete detail for a scan item.
+Family impact is where the story stops being abstract. Judicial intervention in prolonged family detention highlights the legal and humanitarian limits of hardline migration policy. What stands out is that it offers unusually concrete detail for a scan item.
 
 The next check is practical: what would confirm that this is deepening, and what would show it fading? Depending on the story, that could mean ship movements, freight rates, aid access, school closures, public procurement, hospital admissions, crop stress, or the fine print of a court or ministry decision. The evidence already comes with clear consequence line, multi-pattern signal, cross-region footprint, named actors. It also opens naturally into system-shift or framing-map follow-up coverage.
 
-From here, the follow-through matters more than the quote. Watch whether Human actually changes on the ground, whether neighbouring actors copy or resist the move, and whether the story starts showing up in places that were initially quiet. That is usually the moment when a local-seeming development reveals itself as a wider systems signal.
+From here, the follow-through matters more than the quote. Watch whether US actually changes on the ground, whether neighbouring actors copy or resist the move, and whether the story starts showing up in places that were initially quiet. That is usually the moment when a local-seeming development reveals itself as a wider systems signal.
 
 This is one of the stronger live signals in the scan. The decisive stage is often the middle one: after the trigger, before the new baseline hardens. That is when officials test language, markets test prices, and ordinary people begin noticing whether the story is touching transport, food, energy, safety, health, or paperwork in real life.
 

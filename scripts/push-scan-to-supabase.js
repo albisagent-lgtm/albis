@@ -127,18 +127,11 @@ function findScanTimeSpans(md) {
 }
 
 async function mirrorScanItems(scanId, items) {
-  const { error: deleteError } = await supabase
-    .from('scan_items')
-    .delete()
-    .eq('scan_id', scanId);
-
-  if (deleteError) throw new Error(`scan_items delete failed: ${deleteError.message}`);
-
   const itemRows = (items || [])
     .filter((item) => item?.headline && item?.category)
     .map((item) => ({
       scan_id: scanId,
-      headline: item.headline,
+      headline: String(item.headline).trim(),
       category: typeof item.category === 'string' ? item.category.replace(/-/g, '_') : item.category,
       regions: Array.isArray(item.regions) ? item.regions : [],
       tags: Array.isArray(item.tags) ? item.tags : [],
@@ -147,14 +140,25 @@ async function mirrorScanItems(scanId, items) {
       connection: item.connection || null,
     }));
 
-  if (!itemRows.length) return 0;
+  const dedupedRows = [];
+  const seenHeadlines = new Set();
+  for (const row of itemRows) {
+    const key = row.headline.trim().toLowerCase();
+    if (!key || seenHeadlines.has(key)) continue;
+    seenHeadlines.add(key);
+    dedupedRows.push(row);
+  }
 
-  const { error: insertError } = await supabase
-    .from('scan_items')
-    .insert(itemRows);
+  const { error: deleteError } = await supabase.from('scan_items').delete().eq('scan_id', scanId);
+  if (deleteError) throw new Error(`scan_items delete failed: ${deleteError.message}`);
 
+  if (!dedupedRows.length) {
+    return 0;
+  }
+
+  const { error: insertError } = await supabase.from('scan_items').insert(dedupedRows);
   if (insertError) throw new Error(`scan_items insert failed: ${insertError.message}`);
-  return itemRows.length;
+  return dedupedRows.length;
 }
 
 async function upsertScan(scanDate, scanTime, data, fullMarkdown) {
