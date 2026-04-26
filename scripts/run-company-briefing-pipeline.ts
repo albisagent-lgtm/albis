@@ -58,10 +58,14 @@ function unique<T>(values: T[]): T[] {
 
 function buildScanFocus(stories: ReturnType<typeof getSelectedStories>): string {
   if (!stories.length) return 'No material change';
-  const topTags = unique(stories.flatMap((s) => s.tags)).slice(0, 3);
-  if (topTags.length > 0) return topTags.join(', ');
+  const concreteTags = unique(
+    stories
+      .flatMap((s) => s.tags)
+      .filter((tag) => !['oil', 'shipping', 'sanctions', 'markets', 'trade', 'policy', 'energy'].includes(tag.toLowerCase()))
+  ).slice(0, 3);
+  if (concreteTags.length > 0) return concreteTags.join(', ');
   const topCategories = unique(stories.map((s) => s.category)).slice(0, 2);
-  return topCategories.join(', ') || 'Global risk movement';
+  return topCategories.join(', ') || 'Cross-regional change';
 }
 
 function buildRelevanceTags(story: {
@@ -89,20 +93,40 @@ function buildWhyItMatters(profile: CompanyProfile, stories: ReturnType<typeof g
   if (!dominant) {
     return `Nothing in today's scan crossed Albis's relevance threshold strongly enough to justify a custom alert for ${profile.company_name}, but the system remains active and watching for changes that affect ${sector}.`;
   }
-  return `${dominant.headline} is the clearest signal for ${profile.company_name} because it touches ${sector}${regions ? ` across ${regions}` : ''}. The main implication is not just the event itself, but the knock-on effect on supply continuity, cost pressure, and strategic planning over the next few days.`;
+  const connection = String(dominant.connection || '').trim();
+  const practicalLens = dominant.human_score > 0.28
+    ? 'staffing, customer conditions, and real-world operating stress'
+    : dominant.concreteness_score > 0.45
+      ? 'specific routes, facilities, contracts, or regulatory steps'
+      : 'timing, exposure, and decision quality over the next few days';
+  return `${dominant.headline} is the clearest signal for ${profile.company_name} because it touches ${sector}${regions ? ` across ${regions}` : ''}. ${connection || 'The key question is whether this change stays contained or starts forcing second-order moves.'} For your team, the useful lens is ${practicalLens}, not abstract macro mood.`;
 }
 
 function buildRegionalFraming(stories: ReturnType<typeof getSelectedStories>): string | undefined {
   const story = stories.find((s) => s.regions.length > 1);
   if (!story) return undefined;
-  return `Coverage is spread across ${story.regions.slice(0, 4).join(', ')}, which suggests this is being treated as a cross-regional systems story rather than a narrow local event.`;
+  const lane = story.human_score > 0.25 ? 'human consequence' : story.broad_war_economy_penalty > 0.3 ? 'systems spillover' : 'live operational change';
+  return `Coverage is spread across ${story.regions.slice(0, 4).join(', ')}, but the useful read is where the emphasis lands: some outlets are treating it as ${lane}, while quieter regions may still be underplaying the direct consequence described in the scan.`;
+}
+
+function naturalHeadlineLead(headline: string): string {
+  const text = String(headline || '').trim();
+  if (!text) return 'this story';
+  return text;
 }
 
 function buildWhatToWatch(profile: CompanyProfile, stories: ReturnType<typeof getSelectedStories>) {
-  const watch = stories.slice(0, 3).map((story) => ({
-    monitor_point: `Watch whether ${story.headline.charAt(0).toLowerCase() + story.headline.slice(1)} produces a second-order move in pricing, routing, policy, or availability.`,
-    timeframe: 'next 24-72 hours',
-  }));
+  const watch = stories.slice(0, 3).map((story) => {
+    const hook = String(story.connection || '').trim();
+    const lead = naturalHeadlineLead(story.headline);
+    const monitorPoint = hook
+      ? `Watch whether ${lead} moves from headline to proof point: ${hook}`
+      : `Watch whether ${lead} produces a visible follow-through in policy, access, staffing, routing, or cost.`;
+    return {
+      monitor_point: monitorPoint,
+      timeframe: story.urgency_score > 0.5 ? 'next 24-48 hours' : 'next 24-72 hours',
+    };
+  });
 
   if (watch.length === 0) {
     watch.push({
@@ -129,7 +153,7 @@ function buildBriefingContent(
     },
     what_changed: stories.slice(0, 8).map((story) => ({
       headline: story.headline,
-      summary: story.connection,
+      summary: String(story.connection || '').trim() || `${story.headline} is now showing up as a concrete signal in ${story.regions.slice(0, 2).join(', ') || 'the scan'}.`,
       relevance_tags: buildRelevanceTags(story, profile),
     })),
     why_it_matters: buildWhyItMatters(profile, stories),

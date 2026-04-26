@@ -1,0 +1,2318 @@
+{
+  "pgiStories": [
+    {
+      "story_slug": "trump-cancels-us-envoys-trip-to-pakistan-for-iran-war-talks",
+      "story_headline": "Trump cancels US envoys’ trip to Pakistan for Iran war talks",
+      "category": "diplomacy",
+      "regions_covered": [
+        "us",
+        "eu",
+        "middle_east",
+        "south_asia"
+      ],
+      "region_count": 4,
+      "d1_factual": 9,
+      "d2_causal": 10,
+      "d3_framing": 9.6,
+      "d4_emotional": 8,
+      "d5_actor_context": 8.6,
+      "d6_cui_bono": 8.6,
+      "significance": 5,
+      "scoring_rationale": "The cancellation is a direct state-change signal that the most visible diplomatic off-ramp in the Iran war has hit immediate turbulence. PGI 8.97 reflects strongest divergence in framing/causal attribution across us, eu, middle_east, south_asia, while GAI 4.75 reflects coverage present in 4 region(s) and absent in 5 (africa, latin_americas, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "irans-foreign-minister-meets-pakistan-leadership-as-mediation-channel-stays-open",
+      "story_headline": "Iran’s foreign minister meets Pakistan leadership as mediation channel stays open",
+      "category": "diplomacy",
+      "regions_covered": [
+        "middle_east",
+        "south_asia",
+        "eu"
+      ],
+      "region_count": 3,
+      "d1_factual": 5,
+      "d2_causal": 6.8,
+      "d3_framing": 5.2,
+      "d4_emotional": 5,
+      "d5_actor_context": 5.3,
+      "d6_cui_bono": 5.8,
+      "significance": 4,
+      "scoring_rationale": "Pakistan’s continued role as intermediary means the diplomatic architecture around the conflict has weakened but not disappeared. PGI 5.52 reflects strongest divergence in framing/causal attribution across middle_east, south_asia, eu, while GAI 5.00 reflects coverage present in 3 region(s) and absent in 5 (africa, latin_americas, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "shaky-iran-us-ceasefire-framework-remains-unresolved-despite-earlier-extension",
+      "story_headline": "Shaky Iran-US ceasefire framework remains unresolved despite earlier extension",
+      "category": "conflict",
+      "regions_covered": [
+        "us",
+        "eu",
+        "middle_east",
+        "south_asia"
+      ],
+      "region_count": 4,
+      "d1_factual": 9.5,
+      "d2_causal": 9.2,
+      "d3_framing": 8,
+      "d4_emotional": 9,
+      "d5_actor_context": 8.6,
+      "d6_cui_bono": 8.6,
+      "significance": 5,
+      "scoring_rationale": "Whether the temporary truce survives will shape military, diplomatic and economic risk calculations across multiple regions. PGI 8.82 reflects strongest divergence in framing/causal attribution across us, eu, middle_east, south_asia, global, while GAI 3.75 reflects coverage present in 5 region(s) and absent in 2 (caribbean, pacific).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "iran-resumes-commercial-flights-from-tehrans-main-airport",
+      "story_headline": "Iran resumes commercial flights from Tehran’s main airport",
+      "category": "infrastructure",
+      "regions_covered": [
+        "middle_east",
+        "south_asia",
+        "eu"
+      ],
+      "region_count": 3,
+      "d1_factual": 3,
+      "d2_causal": 4,
+      "d3_framing": 3.2,
+      "d4_emotional": 3,
+      "d5_actor_context": 3.3,
+      "d6_cui_bono": 3.8,
+      "significance": 4,
+      "scoring_rationale": "Civilian flights returning are a concrete operational sign that parts of the conflict environment are easing even as diplomacy remains fragile. PGI 3.38 reflects strongest divergence in framing/causal attribution across middle_east, south_asia, eu, while GAI 5.75 reflects coverage present in 3 region(s) and absent in 6 (africa, latin_americas, us, pacific, caribbean).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "us-says-it-is-hunting-explosive-mines-in-the-strait-of-hormuz",
+      "story_headline": "US says it is hunting explosive mines in the Strait of Hormuz",
+      "category": "security",
+      "regions_covered": [
+        "us",
+        "middle_east",
+        "eu"
+      ],
+      "region_count": 3,
+      "d1_factual": 7.5,
+      "d2_causal": 7,
+      "d3_framing": 8.6,
+      "d4_emotional": 8,
+      "d5_actor_context": 7,
+      "d6_cui_bono": 8.6,
+      "significance": 5,
+      "scoring_rationale": "Maritime clearance operations in Hormuz affect shipping access, military signalling, and crisis stability well beyond the Gulf. PGI 7.78 reflects strongest divergence in framing/causal attribution across us, middle_east, eu, global, while GAI 5.25 reflects coverage present in 4 region(s) and absent in 4 (africa, latin_americas, pacific, caribbean).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "us-sanctions-a-china-based-refinery-and-about-40-shippers-over-iranian-oil",
+      "story_headline": "US sanctions a China-based refinery and about 40 shippers over Iranian oil",
+      "category": "sanctions",
+      "regions_covered": [
+        "us",
+        "eu",
+        "middle_east",
+        "east_se_asia"
+      ],
+      "region_count": 4,
+      "d1_factual": 5,
+      "d2_causal": 6.8,
+      "d3_framing": 5.2,
+      "d4_emotional": 5,
+      "d5_actor_context": 5.3,
+      "d6_cui_bono": 6.8,
+      "significance": 4,
+      "scoring_rationale": "The move extends pressure from the battlefield into energy trade enforcement and deepens the internationalisation of the Iran crisis. PGI 5.68 reflects strongest divergence in framing/causal attribution across us, eu, middle_east, east_se_asia, global, while GAI 3.50 reflects coverage present in 5 region(s) and absent in 2 (caribbean, pacific).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "hezbollah-says-the-extended-lebanon-ceasefire-is-meaningless",
+      "story_headline": "Hezbollah says the extended Lebanon ceasefire is meaningless",
+      "category": "conflict",
+      "regions_covered": [
+        "middle_east",
+        "us",
+        "eu"
+      ],
+      "region_count": 3,
+      "d1_factual": 8.5,
+      "d2_causal": 8.2,
+      "d3_framing": 7,
+      "d4_emotional": 8,
+      "d5_actor_context": 7.6,
+      "d6_cui_bono": 7.6,
+      "significance": 4,
+      "scoring_rationale": "A ceasefire publicly disowned by a central armed actor becomes harder to stabilise and easier to collapse. PGI 7.82 reflects strongest divergence in framing/causal attribution across middle_east, us, eu, while GAI 5.00 reflects coverage present in 3 region(s) and absent in 5 (africa, latin_americas, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "israeli-strikes-continue-in-lebanon-with-four-reported-killed-in-one-cycle-of-raids",
+      "story_headline": "Israeli strikes continue in Lebanon, with four reported killed in one cycle of raids",
+      "category": "conflict",
+      "regions_covered": [
+        "middle_east",
+        "eu"
+      ],
+      "region_count": 2,
+      "d1_factual": 4.5,
+      "d2_causal": 5,
+      "d3_framing": 4.2,
+      "d4_emotional": 5,
+      "d5_actor_context": 4.3,
+      "d6_cui_bono": 4.8,
+      "significance": 4,
+      "scoring_rationale": "Continued killings during an extended ceasefire show that formal de-escalation language is not yet matching conditions on the ground. PGI 4.63 reflects strongest divergence in framing/causal attribution across middle_east, eu, while GAI 6.50 reflects coverage present in 2 region(s) and absent in 6 (us, africa, latin_americas, pacific, caribbean).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "palestinians-vote-in-local-elections-in-the-west-bank-and-in-deir-el-balah-in-gaza",
+      "story_headline": "Palestinians vote in local elections in the West Bank and in Deir el-Balah in Gaza",
+      "category": "governance",
+      "regions_covered": [
+        "middle_east",
+        "eu"
+      ],
+      "region_count": 2,
+      "d1_factual": 7,
+      "d2_causal": 7,
+      "d3_framing": 7.7,
+      "d4_emotional": 7,
+      "d5_actor_context": 7.8,
+      "d6_cui_bono": 7.6,
+      "significance": 4,
+      "scoring_rationale": "Balloting under war conditions offers a rare institutional continuity signal in a conflict space dominated by military reporting. PGI 7.35 reflects strongest divergence in framing/causal attribution across middle_east, eu, global, while GAI 6.50 reflects coverage present in 3 region(s) and absent in 5 (us, africa, latin_americas, pacific, caribbean).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "gaza-sees-its-first-local-vote-since-2006-in-deir-el-balah",
+      "story_headline": "Gaza sees its first local vote since 2006 in Deir el-Balah",
+      "category": "governance",
+      "regions_covered": [
+        "middle_east",
+        "eu"
+      ],
+      "region_count": 2,
+      "d1_factual": 8,
+      "d2_causal": 8,
+      "d3_framing": 8.7,
+      "d4_emotional": 8,
+      "d5_actor_context": 8.8,
+      "d6_cui_bono": 8.6,
+      "significance": 4,
+      "scoring_rationale": "Even limited voting in Gaza matters globally because it touches questions of representation and civilian political life after years of interruption. PGI 8.35 reflects strongest divergence in framing/causal attribution across middle_east, eu, while GAI 6.75 reflects coverage present in 2 region(s) and absent in 6 (us, africa, latin_americas, pacific, caribbean).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "pope-urges-the-us-and-iran-to-return-to-peace-talks-and-condemns-capital-punishment",
+      "story_headline": "Pope urges the US and Iran to return to peace talks and condemns capital punishment",
+      "category": "diplomacy",
+      "regions_covered": [
+        "eu",
+        "us",
+        "middle_east"
+      ],
+      "region_count": 3,
+      "d1_factual": 3,
+      "d2_causal": 4.8,
+      "d3_framing": 3.2,
+      "d4_emotional": 3,
+      "d5_actor_context": 3.3,
+      "d6_cui_bono": 3.2,
+      "significance": 3,
+      "scoring_rationale": "The Vatican’s intervention adds soft-power pressure for diplomacy at a moment when hard-power signalling is crowding it out. PGI 3.42 reflects strongest divergence in framing/causal attribution across eu, us, middle_east, while GAI 4.75 reflects coverage present in 3 region(s) and absent in 5 (africa, latin_americas, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "mali-faces-coordinated-armed-attacks-across-bamako-kidal-and-elsewhere",
+      "story_headline": "Mali faces coordinated armed attacks across Bamako, Kidal and elsewhere",
+      "category": "security",
+      "regions_covered": [
+        "africa",
+        "eu",
+        "middle_east"
+      ],
+      "region_count": 3,
+      "d1_factual": 4.5,
+      "d2_causal": 5,
+      "d3_framing": 4.2,
+      "d4_emotional": 5,
+      "d5_actor_context": 4.3,
+      "d6_cui_bono": 5.8,
+      "significance": 4,
+      "scoring_rationale": "The attacks signal growing operational reach by armed groups and sharpen concerns about state control in the Sahel. PGI 4.80 reflects strongest divergence in framing/causal attribution across africa, eu, middle_east, while GAI 5.50 reflects coverage present in 3 region(s) and absent in 5 (us, latin_americas, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "bbc-describes-mali-assault-as-one-of-the-largest-jihadist-attacks-in-years",
+      "story_headline": "BBC describes Mali assault as one of the largest jihadist attacks in years",
+      "category": "conflict",
+      "regions_covered": [
+        "africa",
+        "eu"
+      ],
+      "region_count": 2,
+      "d1_factual": 3.5,
+      "d2_causal": 4,
+      "d3_framing": 4.8,
+      "d4_emotional": 4,
+      "d5_actor_context": 3.3,
+      "d6_cui_bono": 3.8,
+      "significance": 4,
+      "scoring_rationale": "The scale framing matters because it elevates the attacks from routine instability to a major regional threat indicator. PGI 3.90 reflects strongest divergence in framing/causal attribution across africa, eu, while GAI 6.25 reflects coverage present in 2 region(s) and absent in 5 (us, latin_americas, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "tunisia-suspends-the-tunisian-league-for-human-rights-for-one-month",
+      "story_headline": "Tunisia suspends the Tunisian League for Human Rights for one month",
+      "category": "legal",
+      "regions_covered": [
+        "africa",
+        "eu",
+        "us"
+      ],
+      "region_count": 3,
+      "d1_factual": 5,
+      "d2_causal": 6.8,
+      "d3_framing": 5.2,
+      "d4_emotional": 5,
+      "d5_actor_context": 6.1,
+      "d6_cui_bono": 5.8,
+      "significance": 4,
+      "scoring_rationale": "The suspension marks an institutional rollback against civil society in a country once seen as a democratic outlier in the region. PGI 5.65 reflects strongest divergence in framing/causal attribution across africa, eu, us, while GAI 5.00 reflects coverage present in 3 region(s) and absent in 4 (latin_americas, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "tanzania-inquiry-officially-acknowledges-at-least-518-deaths-in-2025-election-violence",
+      "story_headline": "Tanzania inquiry officially acknowledges at least 518 deaths in 2025 election violence",
+      "category": "governance",
+      "regions_covered": [
+        "africa",
+        "eu"
+      ],
+      "region_count": 2,
+      "d1_factual": 6,
+      "d2_causal": 7,
+      "d3_framing": 6.9,
+      "d4_emotional": 6,
+      "d5_actor_context": 7.1,
+      "d6_cui_bono": 6.8,
+      "significance": 4,
+      "scoring_rationale": "An official death-toll acknowledgment changes the political record and could reshape domestic and international accountability demands. PGI 6.63 reflects strongest divergence in framing/causal attribution across africa, eu, global, while GAI 6.50 reflects coverage present in 3 region(s) and absent in 5 (us, latin_americas, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "mexico-says-two-reported-cia-linked-americans-killed-in-a-crash-were-not-authorised-to-ope",
+      "story_headline": "Mexico says two reported CIA-linked Americans killed in a crash were not authorised to operate there",
+      "category": "security",
+      "regions_covered": [
+        "latin_americas",
+        "us",
+        "eu"
+      ],
+      "region_count": 3,
+      "d1_factual": 9.5,
+      "d2_causal": 9.2,
+      "d3_framing": 9.6,
+      "d4_emotional": 9,
+      "d5_actor_context": 8.6,
+      "d6_cui_bono": 9.6,
+      "significance": 4,
+      "scoring_rationale": "The incident raises sovereignty and operational-control questions inside one of the world’s most important cross-border security relationships. PGI 9.25 reflects strongest divergence in framing/causal attribution across latin_americas, us, eu, while GAI 4.75 reflects coverage present in 3 region(s) and absent in 4 (africa, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "colombias-president-blames-rebels-for-a-highway-bombing-that-killed-14",
+      "story_headline": "Colombia’s president blames rebels for a highway bombing that killed 14",
+      "category": "conflict",
+      "regions_covered": [
+        "latin_americas",
+        "eu"
+      ],
+      "region_count": 2,
+      "d1_factual": 4.5,
+      "d2_causal": 5,
+      "d3_framing": 4.2,
+      "d4_emotional": 5,
+      "d5_actor_context": 4.3,
+      "d6_cui_bono": 4.8,
+      "significance": 4,
+      "scoring_rationale": "Deadly rebel violence ahead of an election can destabilise democratic processes and alter regional risk perceptions. PGI 4.63 reflects strongest divergence in framing/causal attribution across latin_americas, eu, while GAI 6.00 reflects coverage present in 2 region(s) and absent in 5 (us, africa, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "venezuelas-prisoner-release-scheme-is-reportedly-nearing-its-end-with-more-than-500-politi",
+      "story_headline": "Venezuela’s prisoner-release scheme is reportedly nearing its end, with more than 500 political prisoners still jailed",
+      "category": "legal",
+      "regions_covered": [
+        "latin_americas",
+        "eu"
+      ],
+      "region_count": 2,
+      "d1_factual": 7,
+      "d2_causal": 8,
+      "d3_framing": 6.7,
+      "d4_emotional": 6,
+      "d5_actor_context": 7.4,
+      "d6_cui_bono": 6,
+      "significance": 3,
+      "scoring_rationale": "The narrowing of the release scheme indicates that the opening in Venezuela’s rights environment may be stalling or reversing. PGI 6.85 reflects strongest divergence in framing/causal attribution across latin_americas, eu, while GAI 6.00 reflects coverage present in 2 region(s) and absent in 5 (us, africa, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "guatemala-protests-demand-release-of-indigenous-leaders-accused-of-terrorism",
+      "story_headline": "Guatemala protests demand release of Indigenous leaders accused of terrorism",
+      "category": "social",
+      "regions_covered": [
+        "latin_americas"
+      ],
+      "region_count": 1,
+      "d1_factual": 8,
+      "d2_causal": 8.2,
+      "d3_framing": 8.6,
+      "d4_emotional": 7,
+      "d5_actor_context": 7.6,
+      "d6_cui_bono": 7,
+      "significance": 3,
+      "scoring_rationale": "The protests expose ongoing struggles over who gets criminalised and how Indigenous political action is framed by the state. PGI 7.73 reflects strongest divergence in framing/causal attribution across latin_americas, global, while GAI 7.00 reflects coverage present in 2 region(s) and absent in 6 (us, eu, africa, pacific, caribbean).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "viktor-orb-n-steps-down-from-the-hungarian-parliament-after-a-landslide-defeat",
+      "story_headline": "Viktor Orbán steps down from the Hungarian parliament after a landslide defeat",
+      "category": "governance",
+      "regions_covered": [
+        "eu",
+        "us"
+      ],
+      "region_count": 2,
+      "d1_factual": 5,
+      "d2_causal": 6,
+      "d3_framing": 5.2,
+      "d4_emotional": 5,
+      "d5_actor_context": 6.1,
+      "d6_cui_bono": 5.8,
+      "significance": 4,
+      "scoring_rationale": "Orbán’s withdrawal marks a clear personnel and power-structure shift inside a country central to recent EU ideological battles. PGI 5.52 reflects strongest divergence in framing/causal attribution across eu, us, while GAI 5.75 reflects coverage present in 2 region(s) and absent in 5 (africa, latin_americas, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "seven-people-are-reported-killed-in-a-major-russian-attack-on-ukraine",
+      "story_headline": "Seven people are reported killed in a major Russian attack on Ukraine",
+      "category": "conflict",
+      "regions_covered": [
+        "eu",
+        "us"
+      ],
+      "region_count": 2,
+      "d1_factual": 3.5,
+      "d2_causal": 4,
+      "d3_framing": 3.2,
+      "d4_emotional": 4,
+      "d5_actor_context": 3.3,
+      "d6_cui_bono": 3.8,
+      "significance": 4,
+      "scoring_rationale": "The Ukraine war remains an active mass-casualty front that still shapes European security and global strategic attention. PGI 3.63 reflects strongest divergence in framing/causal attribution across eu, us, global, while GAI 5.00 reflects coverage present in 3 region(s) and absent in 2 (caribbean, pacific).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "europe-marks-40-years-since-chernobyl-as-the-ukraine-war-revives-nuclear-risk-anxieties",
+      "story_headline": "Europe marks 40 years since Chernobyl as the Ukraine war revives nuclear-risk anxieties",
+      "category": "climate",
+      "regions_covered": [
+        "eu"
+      ],
+      "region_count": 1,
+      "d1_factual": 2,
+      "d2_causal": 3,
+      "d3_framing": 3.8,
+      "d4_emotional": 2,
+      "d5_actor_context": 2.3,
+      "d6_cui_bono": 2.2,
+      "significance": 3,
+      "scoring_rationale": "The anniversary is globally resonant because current war conditions make nuclear vulnerability feel present, not historical. PGI 2.55 reflects strongest divergence in framing/causal attribution across eu, global, while GAI 6.75 reflects coverage present in 2 region(s) and absent in 6 (us, africa, latin_americas, pacific, caribbean).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "new-eu-sanctions-will-ban-condensate-imports-from-yamal-lng-and-related-russian-projects-f",
+      "story_headline": "New EU sanctions will ban condensate imports from Yamal LNG and related Russian projects from 2027",
+      "category": "sanctions",
+      "regions_covered": [
+        "eu"
+      ],
+      "region_count": 1,
+      "d1_factual": 3,
+      "d2_causal": 4.8,
+      "d3_framing": 3.2,
+      "d4_emotional": 3,
+      "d5_actor_context": 3.3,
+      "d6_cui_bono": 4.8,
+      "significance": 4,
+      "scoring_rationale": "The future import ban is a concrete regulatory shift in Europe’s energy disengagement from Russia. PGI 3.68 reflects strongest divergence in framing/causal attribution across eu, global, while GAI 7.00 reflects coverage present in 2 region(s) and absent in 6 (us, africa, latin_americas, pacific, caribbean).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "rights-groups-warn-world-cup-visitors-to-the-us-may-face-arbitrary-detention-or-deportatio",
+      "story_headline": "Rights groups warn World Cup visitors to the US may face arbitrary detention or deportation abuses",
+      "category": "migration",
+      "regions_covered": [
+        "us",
+        "eu",
+        "latin_americas"
+      ],
+      "region_count": 3,
+      "d1_factual": 9,
+      "d2_causal": 9.2,
+      "d3_framing": 9.6,
+      "d4_emotional": 9,
+      "d5_actor_context": 8.6,
+      "d6_cui_bono": 8,
+      "significance": 3,
+      "scoring_rationale": "Warnings tied to the World Cup push migration enforcement into the realm of global mobility, tourism and national reputation. PGI 8.90 reflects strongest divergence in framing/causal attribution across us, eu, latin_americas, while GAI 4.50 reflects coverage present in 3 region(s) and absent in 4 (africa, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "a-us-appeals-court-rules-trumps-asylum-ban-at-the-border-is-illegal",
+      "story_headline": "A US appeals court rules Trump’s asylum ban at the border is illegal",
+      "category": "legal",
+      "regions_covered": [
+        "us",
+        "latin_americas"
+      ],
+      "region_count": 2,
+      "d1_factual": 8,
+      "d2_causal": 9,
+      "d3_framing": 7,
+      "d4_emotional": 7,
+      "d5_actor_context": 8.4,
+      "d6_cui_bono": 7.6,
+      "significance": 4,
+      "scoring_rationale": "The ruling is a direct institutional constraint on executive migration policy with consequences for asylum access across the hemisphere. PGI 7.83 reflects strongest divergence in framing/causal attribution across us, latin_americas, while GAI 6.00 reflects coverage present in 2 region(s) and absent in 5 (eu, africa, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "at-least-17-immigrants-have-died-in-us-immigration-detention-this-year-reuters-reports",
+      "story_headline": "At least 17 immigrants have died in US immigration detention this year, Reuters reports",
+      "category": "migration",
+      "regions_covered": [
+        "us",
+        "latin_americas"
+      ],
+      "region_count": 2,
+      "d1_factual": 6,
+      "d2_causal": 7,
+      "d3_framing": 6.9,
+      "d4_emotional": 7,
+      "d5_actor_context": 6.3,
+      "d6_cui_bono": 6.8,
+      "significance": 4,
+      "scoring_rationale": "Deaths in detention turn migration enforcement into a cross-border human-rights issue rather than a purely domestic policy debate. PGI 6.67 reflects strongest divergence in framing/causal attribution across us, latin_americas, while GAI 6.25 reflects coverage present in 2 region(s) and absent in 5 (eu, africa, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "china-plans-to-require-approval-before-top-tech-firms-and-ai-startups-accept-us-capital",
+      "story_headline": "China plans to require approval before top tech firms and AI startups accept US capital",
+      "category": "tech-ai",
+      "regions_covered": [
+        "east_se_asia",
+        "us",
+        "eu"
+      ],
+      "region_count": 3,
+      "d1_factual": 5,
+      "d2_causal": 6,
+      "d3_framing": 5.2,
+      "d4_emotional": 5,
+      "d5_actor_context": 6.1,
+      "d6_cui_bono": 6.8,
+      "significance": 4,
+      "scoring_rationale": "Restrictions on foreign capital into AI and advanced tech firms deepen the structural decoupling between the US and China innovation systems. PGI 5.68 reflects strongest divergence in framing/causal attribution across east_se_asia, us, eu, while GAI 5.00 reflects coverage present in 3 region(s) and absent in 5 (africa, latin_americas, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "samsung-chip-output-drops-during-worker-pay-protest-in-south-korea",
+      "story_headline": "Samsung chip output drops during worker pay protest in South Korea",
+      "category": "economic-flows",
+      "regions_covered": [
+        "east_se_asia",
+        "eu"
+      ],
+      "region_count": 2,
+      "d1_factual": 3,
+      "d2_causal": 4,
+      "d3_framing": 3.2,
+      "d4_emotional": 3,
+      "d5_actor_context": 3.3,
+      "d6_cui_bono": 4.8,
+      "significance": 4,
+      "scoring_rationale": "Semiconductor labour disruption in South Korea matters globally because chips remain a strategic production choke point. PGI 3.55 reflects strongest divergence in framing/causal attribution across east_se_asia, eu, global, while GAI 6.50 reflects coverage present in 3 region(s) and absent in 6 (us, africa, latin_americas, pacific, caribbean).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "humanoid-robots-run-alongside-humans-in-a-chinese-half-marathon",
+      "story_headline": "Humanoid robots run alongside humans in a Chinese half-marathon",
+      "category": "tech-ai",
+      "regions_covered": [
+        "east_se_asia"
+      ],
+      "region_count": 1,
+      "d1_factual": 4,
+      "d2_causal": 5,
+      "d3_framing": 5.8,
+      "d4_emotional": 4,
+      "d5_actor_context": 5.1,
+      "d6_cui_bono": 5.2,
+      "significance": 3,
+      "scoring_rationale": "Public robotics demonstrations help shape legitimacy, expectations and soft power around automation leadership. PGI 4.85 reflects strongest divergence in framing/causal attribution across east_se_asia, global, while GAI 7.25 reflects coverage present in 2 region(s) and absent in 7 (us, eu, africa, latin_americas, pacific).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "washington-state-hotline-callers-press-2-for-spanish-and-receive-accented-ai-english-inste",
+      "story_headline": "Washington state hotline callers press 2 for Spanish and receive accented AI English instead",
+      "category": "tech-ai",
+      "regions_covered": [
+        "us"
+      ],
+      "region_count": 1,
+      "d1_factual": 7,
+      "d2_causal": 7.2,
+      "d3_framing": 7.6,
+      "d4_emotional": 6,
+      "d5_actor_context": 7.4,
+      "d6_cui_bono": 7,
+      "significance": 3,
+      "scoring_rationale": "This is a concrete example of AI deployment degrading public access in a basic government service workflow. PGI 7.03 reflects strongest divergence in framing/causal attribution across us, while GAI 7.50 reflects coverage present in 1 region(s) and absent in 8 (eu, africa, latin_americas, middle_east, east_se_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "new-study-warns-ai-systems-are-giving-flattering-but-bad-advice-to-users",
+      "story_headline": "New study warns AI systems are giving flattering but bad advice to users",
+      "category": "tech-ai",
+      "regions_covered": [
+        "us",
+        "eu"
+      ],
+      "region_count": 2,
+      "d1_factual": 4,
+      "d2_causal": 5,
+      "d3_framing": 5.8,
+      "d4_emotional": 4,
+      "d5_actor_context": 5.1,
+      "d6_cui_bono": 5.2,
+      "significance": 3,
+      "scoring_rationale": "If AI systems optimise for pleasing users over accuracy, they can distort judgement across health, finance and civic decision-making. PGI 4.85 reflects strongest divergence in framing/causal attribution across us, eu, global, while GAI 5.50 reflects coverage present in 3 region(s) and absent in 5 (africa, latin_americas, pacific, caribbean, central_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "fda-plans-ultra-fast-review-of-three-psychedelic-drugs-following-a-trump-directive",
+      "story_headline": "FDA plans ultra-fast review of three psychedelic drugs following a Trump directive",
+      "category": "health",
+      "regions_covered": [
+        "us"
+      ],
+      "region_count": 1,
+      "d1_factual": 8,
+      "d2_causal": 8.2,
+      "d3_framing": 7,
+      "d4_emotional": 7,
+      "d5_actor_context": 7.6,
+      "d6_cui_bono": 7.6,
+      "significance": 4,
+      "scoring_rationale": "Accelerated psychedelic reviews could reset expectations for psychiatric treatment development and regulatory behaviour internationally. PGI 7.57 reflects strongest divergence in framing/causal attribution across us, global, while GAI 7.00 reflects coverage present in 2 region(s) and absent in 6 (eu, africa, latin_americas, pacific, caribbean).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "california-now-requires-corn-tortillas-to-contain-folic-acid-with-other-states-watching",
+      "story_headline": "California now requires corn tortillas to contain folic acid, with other states watching",
+      "category": "health",
+      "regions_covered": [
+        "us",
+        "latin_americas"
+      ],
+      "region_count": 2,
+      "d1_factual": 3,
+      "d2_causal": 4,
+      "d3_framing": 3.2,
+      "d4_emotional": 3,
+      "d5_actor_context": 3.3,
+      "d6_cui_bono": 3.2,
+      "significance": 3,
+      "scoring_rationale": "Nutrition standards applied to a staple food can influence public-health policy debates across migrant and low-income food systems. PGI 3.28 reflects strongest divergence in framing/causal attribution across us, latin_americas, while GAI 6.75 reflects coverage present in 2 region(s) and absent in 7 (eu, africa, middle_east, east_se_asia, pacific).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "tick-season-appears-to-be-starting-fast-with-experts-warning-about-future-illness-risks",
+      "story_headline": "Tick season appears to be starting fast, with experts warning about future illness risks",
+      "category": "health",
+      "regions_covered": [
+        "us"
+      ],
+      "region_count": 1,
+      "d1_factual": 2,
+      "d2_causal": 3,
+      "d3_framing": 3.8,
+      "d4_emotional": 2,
+      "d5_actor_context": 2.3,
+      "d6_cui_bono": 2.2,
+      "significance": 3,
+      "scoring_rationale": "Vector-borne disease expansion is a climate-linked health systems story that can spread across regions over time. PGI 2.55 reflects strongest divergence in framing/causal attribution across us, global, while GAI 7.50 reflects coverage present in 2 region(s) and absent in 8 (eu, africa, latin_americas, middle_east, east_se_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "more-than-3-000-people-are-evacuated-as-firefighters-battle-wildfires-in-northern-japan",
+      "story_headline": "More than 3,000 people are evacuated as firefighters battle wildfires in northern Japan",
+      "category": "climate",
+      "regions_covered": [
+        "east_se_asia"
+      ],
+      "region_count": 1,
+      "d1_factual": 3,
+      "d2_causal": 4,
+      "d3_framing": 3.2,
+      "d4_emotional": 3,
+      "d5_actor_context": 3.3,
+      "d6_cui_bono": 3.8,
+      "significance": 4,
+      "scoring_rationale": "Large wildfire evacuations in Japan show climate-linked fire risk reaching densely populated, infrastructure-rich settings. PGI 3.38 reflects strongest divergence in framing/causal attribution across east_se_asia, global, while GAI 7.50 reflects coverage present in 2 region(s) and absent in 7 (us, eu, africa, latin_americas, pacific).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "georgia-declares-an-emergency-as-wildfires-destroy-dozens-of-homes",
+      "story_headline": "Georgia declares an emergency as wildfires destroy dozens of homes",
+      "category": "climate",
+      "regions_covered": [
+        "us"
+      ],
+      "region_count": 1,
+      "d1_factual": 2,
+      "d2_causal": 3,
+      "d3_framing": 2.2,
+      "d4_emotional": 2,
+      "d5_actor_context": 2.3,
+      "d6_cui_bono": 2.8,
+      "significance": 4,
+      "scoring_rationale": "Emergency declarations are hard governance signals that environmental hazards have crossed into acute public-system strain. PGI 2.38 reflects strongest divergence in framing/causal attribution across us, global, while GAI 7.75 reflects coverage present in 2 region(s) and absent in 8 (eu, africa, latin_americas, middle_east, east_se_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "world-press-photos-2026-winning-imagery-centres-war-trauma-climate-change-and-hope",
+      "story_headline": "World Press Photo’s 2026 winning imagery centres war, trauma, climate change and hope",
+      "category": "media",
+      "regions_covered": [
+        "eu"
+      ],
+      "region_count": 1,
+      "d1_factual": 4,
+      "d2_causal": 5,
+      "d3_framing": 5.8,
+      "d4_emotional": 4,
+      "d5_actor_context": 4.3,
+      "d6_cui_bono": 4.2,
+      "significance": 3,
+      "scoring_rationale": "Prestige photo selection helps define which human experiences become globally legible and emotionally salient. PGI 4.55 reflects strongest divergence in framing/causal attribution across eu, global, while GAI 7.50 reflects coverage present in 2 region(s) and absent in 8 (us, africa, latin_americas, middle_east, east_se_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    },
+    {
+      "story_slug": "a-17th-century-astrolabe-once-owned-by-indian-royalty-heads-for-auction",
+      "story_headline": "A 17th-century astrolabe once owned by Indian royalty heads for auction",
+      "category": "culture",
+      "regions_covered": [
+        "south_asia",
+        "eu"
+      ],
+      "region_count": 2,
+      "d1_factual": 4,
+      "d2_causal": 4,
+      "d3_framing": 6.3,
+      "d4_emotional": 4,
+      "d5_actor_context": 4,
+      "d6_cui_bono": 4,
+      "significance": 2,
+      "scoring_rationale": "Heritage circulation stories still matter because they expose enduring questions about ownership, prestige and historical power. PGI 4.38 reflects strongest divergence in framing/causal attribution across south_asia, eu, while GAI 7.00 reflects coverage present in 2 region(s) and absent in 8 (us, africa, latin_americas, middle_east, east_se_asia).",
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "is_latest": true
+    }
+  ],
+  "pairRows": [
+    {
+      "story_score_id": "ff4a6259-d96c-49c1-8586-4de67f94ac39",
+      "region_a": "eu",
+      "region_b": "middle_east",
+      "pair_pgi": 10,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "ff4a6259-d96c-49c1-8586-4de67f94ac39",
+      "region_a": "eu",
+      "region_b": "south_asia",
+      "pair_pgi": 9.87,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "ff4a6259-d96c-49c1-8586-4de67f94ac39",
+      "region_a": "eu",
+      "region_b": "us",
+      "pair_pgi": 10,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "ff4a6259-d96c-49c1-8586-4de67f94ac39",
+      "region_a": "middle_east",
+      "region_b": "south_asia",
+      "pair_pgi": 10,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "ff4a6259-d96c-49c1-8586-4de67f94ac39",
+      "region_a": "middle_east",
+      "region_b": "us",
+      "pair_pgi": 10,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "ff4a6259-d96c-49c1-8586-4de67f94ac39",
+      "region_a": "south_asia",
+      "region_b": "us",
+      "pair_pgi": 9.87,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "afaab16f-f0d2-404a-859c-b7d679fe530a",
+      "region_a": "eu",
+      "region_b": "middle_east",
+      "pair_pgi": 6.32,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "afaab16f-f0d2-404a-859c-b7d679fe530a",
+      "region_a": "eu",
+      "region_b": "south_asia",
+      "pair_pgi": 5.52,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "afaab16f-f0d2-404a-859c-b7d679fe530a",
+      "region_a": "middle_east",
+      "region_b": "south_asia",
+      "pair_pgi": 6.22,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "60b2af34-53a3-4241-82b2-c1b806d2ad85",
+      "region_a": "eu",
+      "region_b": "middle_east",
+      "pair_pgi": 10,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "60b2af34-53a3-4241-82b2-c1b806d2ad85",
+      "region_a": "eu",
+      "region_b": "south_asia",
+      "pair_pgi": 9.72,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "60b2af34-53a3-4241-82b2-c1b806d2ad85",
+      "region_a": "eu",
+      "region_b": "us",
+      "pair_pgi": 10,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "60b2af34-53a3-4241-82b2-c1b806d2ad85",
+      "region_a": "middle_east",
+      "region_b": "south_asia",
+      "pair_pgi": 10,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "60b2af34-53a3-4241-82b2-c1b806d2ad85",
+      "region_a": "middle_east",
+      "region_b": "us",
+      "pair_pgi": 10,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "60b2af34-53a3-4241-82b2-c1b806d2ad85",
+      "region_a": "south_asia",
+      "region_b": "us",
+      "pair_pgi": 9.72,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "0be6159e-6112-4553-950e-2ec5d08e6339",
+      "region_a": "eu",
+      "region_b": "middle_east",
+      "pair_pgi": 4.18,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "0be6159e-6112-4553-950e-2ec5d08e6339",
+      "region_a": "eu",
+      "region_b": "south_asia",
+      "pair_pgi": 3.38,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "0be6159e-6112-4553-950e-2ec5d08e6339",
+      "region_a": "middle_east",
+      "region_b": "south_asia",
+      "pair_pgi": 4.08,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "84fd775a-920c-42ce-8d09-a737dbf9cd85",
+      "region_a": "eu",
+      "region_b": "middle_east",
+      "pair_pgi": 9.38,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "84fd775a-920c-42ce-8d09-a737dbf9cd85",
+      "region_a": "eu",
+      "region_b": "us",
+      "pair_pgi": 8.98,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "84fd775a-920c-42ce-8d09-a737dbf9cd85",
+      "region_a": "middle_east",
+      "region_b": "us",
+      "pair_pgi": 9.78,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "77a9db49-2bf4-4c92-8a95-99fdaefea645",
+      "region_a": "east_se_asia",
+      "region_b": "eu",
+      "pair_pgi": 5.68,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "77a9db49-2bf4-4c92-8a95-99fdaefea645",
+      "region_a": "east_se_asia",
+      "region_b": "middle_east",
+      "pair_pgi": 5.68,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "77a9db49-2bf4-4c92-8a95-99fdaefea645",
+      "region_a": "east_se_asia",
+      "region_b": "us",
+      "pair_pgi": 5.68,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "77a9db49-2bf4-4c92-8a95-99fdaefea645",
+      "region_a": "eu",
+      "region_b": "middle_east",
+      "pair_pgi": 6.48,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "77a9db49-2bf4-4c92-8a95-99fdaefea645",
+      "region_a": "eu",
+      "region_b": "us",
+      "pair_pgi": 6.08,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "77a9db49-2bf4-4c92-8a95-99fdaefea645",
+      "region_a": "middle_east",
+      "region_b": "us",
+      "pair_pgi": 6.88,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "184ef7d4-c6a6-4be5-9551-6e15d8931c20",
+      "region_a": "eu",
+      "region_b": "middle_east",
+      "pair_pgi": 9.52,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "184ef7d4-c6a6-4be5-9551-6e15d8931c20",
+      "region_a": "eu",
+      "region_b": "us",
+      "pair_pgi": 9.12,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "184ef7d4-c6a6-4be5-9551-6e15d8931c20",
+      "region_a": "middle_east",
+      "region_b": "us",
+      "pair_pgi": 9.92,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "bb5a48df-400f-4234-854b-73f8e598bf81",
+      "region_a": "eu",
+      "region_b": "middle_east",
+      "pair_pgi": 5.83,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "f8b5b756-abd4-482d-8b42-a3488190b857",
+      "region_a": "eu",
+      "region_b": "middle_east",
+      "pair_pgi": 8.45,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "deab6379-fd83-4820-b0d5-cd4b699a689b",
+      "region_a": "eu",
+      "region_b": "middle_east",
+      "pair_pgi": 9.45,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "7e8d74a9-c571-472c-b107-8c8528d2e025",
+      "region_a": "eu",
+      "region_b": "middle_east",
+      "pair_pgi": 4.22,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "7e8d74a9-c571-472c-b107-8c8528d2e025",
+      "region_a": "eu",
+      "region_b": "us",
+      "pair_pgi": 3.82,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "7e8d74a9-c571-472c-b107-8c8528d2e025",
+      "region_a": "middle_east",
+      "region_b": "us",
+      "pair_pgi": 4.62,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "7c637ab2-daf6-4ff2-a9dd-25c57db05e55",
+      "region_a": "africa",
+      "region_b": "eu",
+      "pair_pgi": 5.2,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "7c637ab2-daf6-4ff2-a9dd-25c57db05e55",
+      "region_a": "africa",
+      "region_b": "middle_east",
+      "pair_pgi": 5.2,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "7c637ab2-daf6-4ff2-a9dd-25c57db05e55",
+      "region_a": "eu",
+      "region_b": "middle_east",
+      "pair_pgi": 6,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "beed9275-1ddd-4cb9-bc29-2f339aefee22",
+      "region_a": "africa",
+      "region_b": "eu",
+      "pair_pgi": 4.7,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "cda2607c-c4a4-4741-9e4b-1d7b7514887e",
+      "region_a": "africa",
+      "region_b": "eu",
+      "pair_pgi": 5.65,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "cda2607c-c4a4-4741-9e4b-1d7b7514887e",
+      "region_a": "africa",
+      "region_b": "us",
+      "pair_pgi": 5.65,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "cda2607c-c4a4-4741-9e4b-1d7b7514887e",
+      "region_a": "eu",
+      "region_b": "us",
+      "pair_pgi": 6.05,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "26173c70-5133-41da-91e4-ac6f21546ce2",
+      "region_a": "africa",
+      "region_b": "eu",
+      "pair_pgi": 6.93,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "1ce9d655-9b08-4fe6-b138-420e3239643d",
+      "region_a": "eu",
+      "region_b": "latin_americas",
+      "pair_pgi": 10,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "1ce9d655-9b08-4fe6-b138-420e3239643d",
+      "region_a": "eu",
+      "region_b": "us",
+      "pair_pgi": 10,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "1ce9d655-9b08-4fe6-b138-420e3239643d",
+      "region_a": "latin_americas",
+      "region_b": "us",
+      "pair_pgi": 10,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "45fab85c-31d6-4112-9118-c5cca7b41958",
+      "region_a": "eu",
+      "region_b": "latin_americas",
+      "pair_pgi": 5.03,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "b596c6fc-e3d8-4b8e-ae44-fd6399d50791",
+      "region_a": "eu",
+      "region_b": "latin_americas",
+      "pair_pgi": 7.65,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "161c9ea0-be33-4ec6-9367-24f5eb9c536b",
+      "region_a": "eu",
+      "region_b": "us",
+      "pair_pgi": 5.92,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "48c8ec50-8552-4144-8d86-cac1cf37583e",
+      "region_a": "eu",
+      "region_b": "us",
+      "pair_pgi": 4.43,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "b8e1124e-d2c9-4e99-a9ae-1b30669b7a83",
+      "region_a": "eu",
+      "region_b": "latin_americas",
+      "pair_pgi": 9.8,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "b8e1124e-d2c9-4e99-a9ae-1b30669b7a83",
+      "region_a": "eu",
+      "region_b": "us",
+      "pair_pgi": 10,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "b8e1124e-d2c9-4e99-a9ae-1b30669b7a83",
+      "region_a": "latin_americas",
+      "region_b": "us",
+      "pair_pgi": 10,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "3212897c-8213-4731-a08b-dc920e6ff552",
+      "region_a": "latin_americas",
+      "region_b": "us",
+      "pair_pgi": 9.33,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "c18d2423-a301-417d-ad38-5d1f22869435",
+      "region_a": "latin_americas",
+      "region_b": "us",
+      "pair_pgi": 7.97,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "6ca6f39d-ec99-4d53-a94d-b0d9627905f1",
+      "region_a": "east_se_asia",
+      "region_b": "eu",
+      "pair_pgi": 5.68,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "6ca6f39d-ec99-4d53-a94d-b0d9627905f1",
+      "region_a": "east_se_asia",
+      "region_b": "us",
+      "pair_pgi": 5.68,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "6ca6f39d-ec99-4d53-a94d-b0d9627905f1",
+      "region_a": "eu",
+      "region_b": "us",
+      "pair_pgi": 6.08,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "e7195851-5310-4965-99fe-168efd4f72ba",
+      "region_a": "east_se_asia",
+      "region_b": "eu",
+      "pair_pgi": 3.55,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "94ad20d9-fe33-486d-a068-1dc1300b2be1",
+      "region_a": "eu",
+      "region_b": "us",
+      "pair_pgi": 5.65,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "1a740caa-0168-47d4-837d-55da1b14a8ba",
+      "region_a": "latin_americas",
+      "region_b": "us",
+      "pair_pgi": 4.28,
+      "scan_date": "2026-04-26"
+    },
+    {
+      "story_score_id": "e09acb5d-be35-4539-a4d2-c3d621ed43dd",
+      "region_a": "eu",
+      "region_b": "south_asia",
+      "pair_pgi": 5.08,
+      "scan_date": "2026-04-26"
+    }
+  ],
+  "gaiStories": [
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "trump-cancels-us-envoys-trip-to-pakistan-for-iran-war-talks",
+      "story_headline": "Trump cancels US envoys’ trip to Pakistan for Iran war talks",
+      "category": "diplomacy",
+      "regions_found": [
+        "us",
+        "eu",
+        "middle_east",
+        "south_asia"
+      ],
+      "regions_absent": [
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 4,
+      "d1_coverage_breadth": 4,
+      "d2_prominence_disparity": 6,
+      "d3_population_exposure": 3,
+      "d4_significance_severity": 6,
+      "story_gai": 4.75,
+      "significance": 5,
+      "scoring_rationale": "The cancellation is a direct state-change signal that the most visible diplomatic off-ramp in the Iran war has hit immediate turbulence. PGI 8.97 reflects strongest divergence in framing/causal attribution across us, eu, middle_east, south_asia, while GAI 4.75 reflects coverage present in 4 region(s) and absent in 5 (africa, latin_americas, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "irans-foreign-minister-meets-pakistan-leadership-as-mediation-channel-stays-open",
+      "story_headline": "Iran’s foreign minister meets Pakistan leadership as mediation channel stays open",
+      "category": "diplomacy",
+      "regions_found": [
+        "middle_east",
+        "south_asia",
+        "eu"
+      ],
+      "regions_absent": [
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 3,
+      "d1_coverage_breadth": 5,
+      "d2_prominence_disparity": 6,
+      "d3_population_exposure": 3,
+      "d4_significance_severity": 6,
+      "story_gai": 5,
+      "significance": 4,
+      "scoring_rationale": "Pakistan’s continued role as intermediary means the diplomatic architecture around the conflict has weakened but not disappeared. PGI 5.52 reflects strongest divergence in framing/causal attribution across middle_east, south_asia, eu, while GAI 5.00 reflects coverage present in 3 region(s) and absent in 5 (africa, latin_americas, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "shaky-iran-us-ceasefire-framework-remains-unresolved-despite-earlier-extension",
+      "story_headline": "Shaky Iran-US ceasefire framework remains unresolved despite earlier extension",
+      "category": "conflict",
+      "regions_found": [
+        "us",
+        "eu",
+        "middle_east",
+        "south_asia",
+        "global"
+      ],
+      "regions_absent": [
+        "caribbean",
+        "pacific"
+      ],
+      "coverage_breadth": 4,
+      "d1_coverage_breadth": 4,
+      "d2_prominence_disparity": 3,
+      "d3_population_exposure": 2,
+      "d4_significance_severity": 6,
+      "story_gai": 3.75,
+      "significance": 5,
+      "scoring_rationale": "Whether the temporary truce survives will shape military, diplomatic and economic risk calculations across multiple regions. PGI 8.82 reflects strongest divergence in framing/causal attribution across us, eu, middle_east, south_asia, global, while GAI 3.75 reflects coverage present in 5 region(s) and absent in 2 (caribbean, pacific).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "iran-resumes-commercial-flights-from-tehrans-main-airport",
+      "story_headline": "Iran resumes commercial flights from Tehran’s main airport",
+      "category": "infrastructure",
+      "regions_found": [
+        "middle_east",
+        "south_asia",
+        "eu"
+      ],
+      "regions_absent": [
+        "africa",
+        "latin_americas",
+        "us",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 3,
+      "d1_coverage_breadth": 5,
+      "d2_prominence_disparity": 7,
+      "d3_population_exposure": 5,
+      "d4_significance_severity": 6,
+      "story_gai": 5.75,
+      "significance": 4,
+      "scoring_rationale": "Civilian flights returning are a concrete operational sign that parts of the conflict environment are easing even as diplomacy remains fragile. PGI 3.38 reflects strongest divergence in framing/causal attribution across middle_east, south_asia, eu, while GAI 5.75 reflects coverage present in 3 region(s) and absent in 6 (africa, latin_americas, us, pacific, caribbean).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "us-says-it-is-hunting-explosive-mines-in-the-strait-of-hormuz",
+      "story_headline": "US says it is hunting explosive mines in the Strait of Hormuz",
+      "category": "security",
+      "regions_found": [
+        "us",
+        "middle_east",
+        "eu",
+        "global"
+      ],
+      "regions_absent": [
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean"
+      ],
+      "coverage_breadth": 3,
+      "d1_coverage_breadth": 5,
+      "d2_prominence_disparity": 6,
+      "d3_population_exposure": 3,
+      "d4_significance_severity": 7,
+      "story_gai": 5.25,
+      "significance": 5,
+      "scoring_rationale": "Maritime clearance operations in Hormuz affect shipping access, military signalling, and crisis stability well beyond the Gulf. PGI 7.78 reflects strongest divergence in framing/causal attribution across us, middle_east, eu, global, while GAI 5.25 reflects coverage present in 4 region(s) and absent in 4 (africa, latin_americas, pacific, caribbean).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "us-sanctions-a-china-based-refinery-and-about-40-shippers-over-iranian-oil",
+      "story_headline": "US sanctions a China-based refinery and about 40 shippers over Iranian oil",
+      "category": "sanctions",
+      "regions_found": [
+        "us",
+        "eu",
+        "middle_east",
+        "east_se_asia",
+        "global"
+      ],
+      "regions_absent": [
+        "caribbean",
+        "pacific"
+      ],
+      "coverage_breadth": 4,
+      "d1_coverage_breadth": 4,
+      "d2_prominence_disparity": 3,
+      "d3_population_exposure": 2,
+      "d4_significance_severity": 5,
+      "story_gai": 3.5,
+      "significance": 4,
+      "scoring_rationale": "The move extends pressure from the battlefield into energy trade enforcement and deepens the internationalisation of the Iran crisis. PGI 5.68 reflects strongest divergence in framing/causal attribution across us, eu, middle_east, east_se_asia, global, while GAI 3.50 reflects coverage present in 5 region(s) and absent in 2 (caribbean, pacific).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "hezbollah-says-the-extended-lebanon-ceasefire-is-meaningless",
+      "story_headline": "Hezbollah says the extended Lebanon ceasefire is meaningless",
+      "category": "conflict",
+      "regions_found": [
+        "middle_east",
+        "us",
+        "eu"
+      ],
+      "regions_absent": [
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 3,
+      "d1_coverage_breadth": 5,
+      "d2_prominence_disparity": 6,
+      "d3_population_exposure": 3,
+      "d4_significance_severity": 6,
+      "story_gai": 5,
+      "significance": 4,
+      "scoring_rationale": "A ceasefire publicly disowned by a central armed actor becomes harder to stabilise and easier to collapse. PGI 7.82 reflects strongest divergence in framing/causal attribution across middle_east, us, eu, while GAI 5.00 reflects coverage present in 3 region(s) and absent in 5 (africa, latin_americas, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "israeli-strikes-continue-in-lebanon-with-four-reported-killed-in-one-cycle-of-raids",
+      "story_headline": "Israeli strikes continue in Lebanon, with four reported killed in one cycle of raids",
+      "category": "conflict",
+      "regions_found": [
+        "middle_east",
+        "eu"
+      ],
+      "regions_absent": [
+        "us",
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 8,
+      "d3_population_exposure": 5,
+      "d4_significance_severity": 7,
+      "story_gai": 6.5,
+      "significance": 4,
+      "scoring_rationale": "Continued killings during an extended ceasefire show that formal de-escalation language is not yet matching conditions on the ground. PGI 4.63 reflects strongest divergence in framing/causal attribution across middle_east, eu, while GAI 6.50 reflects coverage present in 2 region(s) and absent in 6 (us, africa, latin_americas, pacific, caribbean).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "palestinians-vote-in-local-elections-in-the-west-bank-and-in-deir-el-balah-in-gaza",
+      "story_headline": "Palestinians vote in local elections in the West Bank and in Deir el-Balah in Gaza",
+      "category": "governance",
+      "regions_found": [
+        "middle_east",
+        "eu",
+        "global"
+      ],
+      "regions_absent": [
+        "us",
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 8,
+      "d3_population_exposure": 5,
+      "d4_significance_severity": 7,
+      "story_gai": 6.5,
+      "significance": 4,
+      "scoring_rationale": "Balloting under war conditions offers a rare institutional continuity signal in a conflict space dominated by military reporting. PGI 7.35 reflects strongest divergence in framing/causal attribution across middle_east, eu, global, while GAI 6.50 reflects coverage present in 3 region(s) and absent in 5 (us, africa, latin_americas, pacific, caribbean).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "gaza-sees-its-first-local-vote-since-2006-in-deir-el-balah",
+      "story_headline": "Gaza sees its first local vote since 2006 in Deir el-Balah",
+      "category": "governance",
+      "regions_found": [
+        "middle_east",
+        "eu"
+      ],
+      "regions_absent": [
+        "us",
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 9,
+      "d3_population_exposure": 5,
+      "d4_significance_severity": 7,
+      "story_gai": 6.75,
+      "significance": 4,
+      "scoring_rationale": "Even limited voting in Gaza matters globally because it touches questions of representation and civilian political life after years of interruption. PGI 8.35 reflects strongest divergence in framing/causal attribution across middle_east, eu, while GAI 6.75 reflects coverage present in 2 region(s) and absent in 6 (us, africa, latin_americas, pacific, caribbean).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "pope-urges-the-us-and-iran-to-return-to-peace-talks-and-condemns-capital-punishment",
+      "story_headline": "Pope urges the US and Iran to return to peace talks and condemns capital punishment",
+      "category": "diplomacy",
+      "regions_found": [
+        "eu",
+        "us",
+        "middle_east"
+      ],
+      "regions_absent": [
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 3,
+      "d1_coverage_breadth": 5,
+      "d2_prominence_disparity": 6,
+      "d3_population_exposure": 3,
+      "d4_significance_severity": 5,
+      "story_gai": 4.75,
+      "significance": 3,
+      "scoring_rationale": "The Vatican’s intervention adds soft-power pressure for diplomacy at a moment when hard-power signalling is crowding it out. PGI 3.42 reflects strongest divergence in framing/causal attribution across eu, us, middle_east, while GAI 4.75 reflects coverage present in 3 region(s) and absent in 5 (africa, latin_americas, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "mali-faces-coordinated-armed-attacks-across-bamako-kidal-and-elsewhere",
+      "story_headline": "Mali faces coordinated armed attacks across Bamako, Kidal and elsewhere",
+      "category": "security",
+      "regions_found": [
+        "africa",
+        "eu",
+        "middle_east"
+      ],
+      "regions_absent": [
+        "us",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 3,
+      "d1_coverage_breadth": 5,
+      "d2_prominence_disparity": 6,
+      "d3_population_exposure": 5,
+      "d4_significance_severity": 6,
+      "story_gai": 5.5,
+      "significance": 4,
+      "scoring_rationale": "The attacks signal growing operational reach by armed groups and sharpen concerns about state control in the Sahel. PGI 4.80 reflects strongest divergence in framing/causal attribution across africa, eu, middle_east, while GAI 5.50 reflects coverage present in 3 region(s) and absent in 5 (us, latin_americas, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "bbc-describes-mali-assault-as-one-of-the-largest-jihadist-attacks-in-years",
+      "story_headline": "BBC describes Mali assault as one of the largest jihadist attacks in years",
+      "category": "conflict",
+      "regions_found": [
+        "africa",
+        "eu"
+      ],
+      "regions_absent": [
+        "us",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 7,
+      "d3_population_exposure": 5,
+      "d4_significance_severity": 7,
+      "story_gai": 6.25,
+      "significance": 4,
+      "scoring_rationale": "The scale framing matters because it elevates the attacks from routine instability to a major regional threat indicator. PGI 3.90 reflects strongest divergence in framing/causal attribution across africa, eu, while GAI 6.25 reflects coverage present in 2 region(s) and absent in 5 (us, latin_americas, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "tunisia-suspends-the-tunisian-league-for-human-rights-for-one-month",
+      "story_headline": "Tunisia suspends the Tunisian League for Human Rights for one month",
+      "category": "legal",
+      "regions_found": [
+        "africa",
+        "eu",
+        "us"
+      ],
+      "regions_absent": [
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 3,
+      "d1_coverage_breadth": 5,
+      "d2_prominence_disparity": 6,
+      "d3_population_exposure": 3,
+      "d4_significance_severity": 6,
+      "story_gai": 5,
+      "significance": 4,
+      "scoring_rationale": "The suspension marks an institutional rollback against civil society in a country once seen as a democratic outlier in the region. PGI 5.65 reflects strongest divergence in framing/causal attribution across africa, eu, us, while GAI 5.00 reflects coverage present in 3 region(s) and absent in 4 (latin_americas, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "tanzania-inquiry-officially-acknowledges-at-least-518-deaths-in-2025-election-violence",
+      "story_headline": "Tanzania inquiry officially acknowledges at least 518 deaths in 2025 election violence",
+      "category": "governance",
+      "regions_found": [
+        "africa",
+        "eu",
+        "global"
+      ],
+      "regions_absent": [
+        "us",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 8,
+      "d3_population_exposure": 5,
+      "d4_significance_severity": 7,
+      "story_gai": 6.5,
+      "significance": 4,
+      "scoring_rationale": "An official death-toll acknowledgment changes the political record and could reshape domestic and international accountability demands. PGI 6.63 reflects strongest divergence in framing/causal attribution across africa, eu, global, while GAI 6.50 reflects coverage present in 3 region(s) and absent in 5 (us, latin_americas, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "mexico-says-two-reported-cia-linked-americans-killed-in-a-crash-were-not-authorised-to-ope",
+      "story_headline": "Mexico says two reported CIA-linked Americans killed in a crash were not authorised to operate there",
+      "category": "security",
+      "regions_found": [
+        "latin_americas",
+        "us",
+        "eu"
+      ],
+      "regions_absent": [
+        "africa",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 3,
+      "d1_coverage_breadth": 5,
+      "d2_prominence_disparity": 6,
+      "d3_population_exposure": 2,
+      "d4_significance_severity": 6,
+      "story_gai": 4.75,
+      "significance": 4,
+      "scoring_rationale": "The incident raises sovereignty and operational-control questions inside one of the world’s most important cross-border security relationships. PGI 9.25 reflects strongest divergence in framing/causal attribution across latin_americas, us, eu, while GAI 4.75 reflects coverage present in 3 region(s) and absent in 4 (africa, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "colombias-president-blames-rebels-for-a-highway-bombing-that-killed-14",
+      "story_headline": "Colombia’s president blames rebels for a highway bombing that killed 14",
+      "category": "conflict",
+      "regions_found": [
+        "latin_americas",
+        "eu"
+      ],
+      "regions_absent": [
+        "us",
+        "africa",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 7,
+      "d3_population_exposure": 4,
+      "d4_significance_severity": 7,
+      "story_gai": 6,
+      "significance": 4,
+      "scoring_rationale": "Deadly rebel violence ahead of an election can destabilise democratic processes and alter regional risk perceptions. PGI 4.63 reflects strongest divergence in framing/causal attribution across latin_americas, eu, while GAI 6.00 reflects coverage present in 2 region(s) and absent in 5 (us, africa, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "venezuelas-prisoner-release-scheme-is-reportedly-nearing-its-end-with-more-than-500-politi",
+      "story_headline": "Venezuela’s prisoner-release scheme is reportedly nearing its end, with more than 500 political prisoners still jailed",
+      "category": "legal",
+      "regions_found": [
+        "latin_americas",
+        "eu"
+      ],
+      "regions_absent": [
+        "us",
+        "africa",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 8,
+      "d3_population_exposure": 4,
+      "d4_significance_severity": 6,
+      "story_gai": 6,
+      "significance": 3,
+      "scoring_rationale": "The narrowing of the release scheme indicates that the opening in Venezuela’s rights environment may be stalling or reversing. PGI 6.85 reflects strongest divergence in framing/causal attribution across latin_americas, eu, while GAI 6.00 reflects coverage present in 2 region(s) and absent in 5 (us, africa, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "guatemala-protests-demand-release-of-indigenous-leaders-accused-of-terrorism",
+      "story_headline": "Guatemala protests demand release of Indigenous leaders accused of terrorism",
+      "category": "social",
+      "regions_found": [
+        "latin_americas",
+        "global"
+      ],
+      "regions_absent": [
+        "us",
+        "eu",
+        "africa",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 1,
+      "d1_coverage_breadth": 7,
+      "d2_prominence_disparity": 9,
+      "d3_population_exposure": 6,
+      "d4_significance_severity": 6,
+      "story_gai": 7,
+      "significance": 3,
+      "scoring_rationale": "The protests expose ongoing struggles over who gets criminalised and how Indigenous political action is framed by the state. PGI 7.73 reflects strongest divergence in framing/causal attribution across latin_americas, global, while GAI 7.00 reflects coverage present in 2 region(s) and absent in 6 (us, eu, africa, pacific, caribbean).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "viktor-orb-n-steps-down-from-the-hungarian-parliament-after-a-landslide-defeat",
+      "story_headline": "Viktor Orbán steps down from the Hungarian parliament after a landslide defeat",
+      "category": "governance",
+      "regions_found": [
+        "eu",
+        "us"
+      ],
+      "regions_absent": [
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 7,
+      "d3_population_exposure": 3,
+      "d4_significance_severity": 7,
+      "story_gai": 5.75,
+      "significance": 4,
+      "scoring_rationale": "Orbán’s withdrawal marks a clear personnel and power-structure shift inside a country central to recent EU ideological battles. PGI 5.52 reflects strongest divergence in framing/causal attribution across eu, us, while GAI 5.75 reflects coverage present in 2 region(s) and absent in 5 (africa, latin_americas, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "seven-people-are-reported-killed-in-a-major-russian-attack-on-ukraine",
+      "story_headline": "Seven people are reported killed in a major Russian attack on Ukraine",
+      "category": "conflict",
+      "regions_found": [
+        "eu",
+        "us",
+        "global"
+      ],
+      "regions_absent": [
+        "caribbean",
+        "pacific"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 5,
+      "d3_population_exposure": 2,
+      "d4_significance_severity": 7,
+      "story_gai": 5,
+      "significance": 4,
+      "scoring_rationale": "The Ukraine war remains an active mass-casualty front that still shapes European security and global strategic attention. PGI 3.63 reflects strongest divergence in framing/causal attribution across eu, us, global, while GAI 5.00 reflects coverage present in 3 region(s) and absent in 2 (caribbean, pacific).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "europe-marks-40-years-since-chernobyl-as-the-ukraine-war-revives-nuclear-risk-anxieties",
+      "story_headline": "Europe marks 40 years since Chernobyl as the Ukraine war revives nuclear-risk anxieties",
+      "category": "climate",
+      "regions_found": [
+        "eu",
+        "global"
+      ],
+      "regions_absent": [
+        "us",
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 1,
+      "d1_coverage_breadth": 7,
+      "d2_prominence_disparity": 9,
+      "d3_population_exposure": 5,
+      "d4_significance_severity": 6,
+      "story_gai": 6.75,
+      "significance": 3,
+      "scoring_rationale": "The anniversary is globally resonant because current war conditions make nuclear vulnerability feel present, not historical. PGI 2.55 reflects strongest divergence in framing/causal attribution across eu, global, while GAI 6.75 reflects coverage present in 2 region(s) and absent in 6 (us, africa, latin_americas, pacific, caribbean).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "new-eu-sanctions-will-ban-condensate-imports-from-yamal-lng-and-related-russian-projects-f",
+      "story_headline": "New EU sanctions will ban condensate imports from Yamal LNG and related Russian projects from 2027",
+      "category": "sanctions",
+      "regions_found": [
+        "eu",
+        "global"
+      ],
+      "regions_absent": [
+        "us",
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 1,
+      "d1_coverage_breadth": 7,
+      "d2_prominence_disparity": 9,
+      "d3_population_exposure": 5,
+      "d4_significance_severity": 7,
+      "story_gai": 7,
+      "significance": 4,
+      "scoring_rationale": "The future import ban is a concrete regulatory shift in Europe’s energy disengagement from Russia. PGI 3.68 reflects strongest divergence in framing/causal attribution across eu, global, while GAI 7.00 reflects coverage present in 2 region(s) and absent in 6 (us, africa, latin_americas, pacific, caribbean).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "rights-groups-warn-world-cup-visitors-to-the-us-may-face-arbitrary-detention-or-deportatio",
+      "story_headline": "Rights groups warn World Cup visitors to the US may face arbitrary detention or deportation abuses",
+      "category": "migration",
+      "regions_found": [
+        "us",
+        "eu",
+        "latin_americas"
+      ],
+      "regions_absent": [
+        "africa",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 3,
+      "d1_coverage_breadth": 5,
+      "d2_prominence_disparity": 6,
+      "d3_population_exposure": 2,
+      "d4_significance_severity": 5,
+      "story_gai": 4.5,
+      "significance": 3,
+      "scoring_rationale": "Warnings tied to the World Cup push migration enforcement into the realm of global mobility, tourism and national reputation. PGI 8.90 reflects strongest divergence in framing/causal attribution across us, eu, latin_americas, while GAI 4.50 reflects coverage present in 3 region(s) and absent in 4 (africa, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "a-us-appeals-court-rules-trumps-asylum-ban-at-the-border-is-illegal",
+      "story_headline": "A US appeals court rules Trump’s asylum ban at the border is illegal",
+      "category": "legal",
+      "regions_found": [
+        "us",
+        "latin_americas"
+      ],
+      "regions_absent": [
+        "eu",
+        "africa",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 7,
+      "d3_population_exposure": 4,
+      "d4_significance_severity": 7,
+      "story_gai": 6,
+      "significance": 4,
+      "scoring_rationale": "The ruling is a direct institutional constraint on executive migration policy with consequences for asylum access across the hemisphere. PGI 7.83 reflects strongest divergence in framing/causal attribution across us, latin_americas, while GAI 6.00 reflects coverage present in 2 region(s) and absent in 5 (eu, africa, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "at-least-17-immigrants-have-died-in-us-immigration-detention-this-year-reuters-reports",
+      "story_headline": "At least 17 immigrants have died in US immigration detention this year, Reuters reports",
+      "category": "migration",
+      "regions_found": [
+        "us",
+        "latin_americas"
+      ],
+      "regions_absent": [
+        "eu",
+        "africa",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 8,
+      "d3_population_exposure": 4,
+      "d4_significance_severity": 7,
+      "story_gai": 6.25,
+      "significance": 4,
+      "scoring_rationale": "Deaths in detention turn migration enforcement into a cross-border human-rights issue rather than a purely domestic policy debate. PGI 6.67 reflects strongest divergence in framing/causal attribution across us, latin_americas, while GAI 6.25 reflects coverage present in 2 region(s) and absent in 5 (eu, africa, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "china-plans-to-require-approval-before-top-tech-firms-and-ai-startups-accept-us-capital",
+      "story_headline": "China plans to require approval before top tech firms and AI startups accept US capital",
+      "category": "tech-ai",
+      "regions_found": [
+        "east_se_asia",
+        "us",
+        "eu"
+      ],
+      "regions_absent": [
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 3,
+      "d1_coverage_breadth": 5,
+      "d2_prominence_disparity": 6,
+      "d3_population_exposure": 3,
+      "d4_significance_severity": 6,
+      "story_gai": 5,
+      "significance": 4,
+      "scoring_rationale": "Restrictions on foreign capital into AI and advanced tech firms deepen the structural decoupling between the US and China innovation systems. PGI 5.68 reflects strongest divergence in framing/causal attribution across east_se_asia, us, eu, while GAI 5.00 reflects coverage present in 3 region(s) and absent in 5 (africa, latin_americas, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "samsung-chip-output-drops-during-worker-pay-protest-in-south-korea",
+      "story_headline": "Samsung chip output drops during worker pay protest in South Korea",
+      "category": "economic-flows",
+      "regions_found": [
+        "east_se_asia",
+        "eu",
+        "global"
+      ],
+      "regions_absent": [
+        "us",
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 8,
+      "d3_population_exposure": 5,
+      "d4_significance_severity": 7,
+      "story_gai": 6.5,
+      "significance": 4,
+      "scoring_rationale": "Semiconductor labour disruption in South Korea matters globally because chips remain a strategic production choke point. PGI 3.55 reflects strongest divergence in framing/causal attribution across east_se_asia, eu, global, while GAI 6.50 reflects coverage present in 3 region(s) and absent in 6 (us, africa, latin_americas, pacific, caribbean).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "humanoid-robots-run-alongside-humans-in-a-chinese-half-marathon",
+      "story_headline": "Humanoid robots run alongside humans in a Chinese half-marathon",
+      "category": "tech-ai",
+      "regions_found": [
+        "east_se_asia",
+        "global"
+      ],
+      "regions_absent": [
+        "us",
+        "eu",
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 1,
+      "d1_coverage_breadth": 7,
+      "d2_prominence_disparity": 9,
+      "d3_population_exposure": 7,
+      "d4_significance_severity": 6,
+      "story_gai": 7.25,
+      "significance": 3,
+      "scoring_rationale": "Public robotics demonstrations help shape legitimacy, expectations and soft power around automation leadership. PGI 4.85 reflects strongest divergence in framing/causal attribution across east_se_asia, global, while GAI 7.25 reflects coverage present in 2 region(s) and absent in 7 (us, eu, africa, latin_americas, pacific).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "washington-state-hotline-callers-press-2-for-spanish-and-receive-accented-ai-english-inste",
+      "story_headline": "Washington state hotline callers press 2 for Spanish and receive accented AI English instead",
+      "category": "tech-ai",
+      "regions_found": [
+        "us"
+      ],
+      "regions_absent": [
+        "eu",
+        "africa",
+        "latin_americas",
+        "middle_east",
+        "east_se_asia",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 1,
+      "d1_coverage_breadth": 7,
+      "d2_prominence_disparity": 9,
+      "d3_population_exposure": 8,
+      "d4_significance_severity": 6,
+      "story_gai": 7.5,
+      "significance": 3,
+      "scoring_rationale": "This is a concrete example of AI deployment degrading public access in a basic government service workflow. PGI 7.03 reflects strongest divergence in framing/causal attribution across us, while GAI 7.50 reflects coverage present in 1 region(s) and absent in 8 (eu, africa, latin_americas, middle_east, east_se_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "new-study-warns-ai-systems-are-giving-flattering-but-bad-advice-to-users",
+      "story_headline": "New study warns AI systems are giving flattering but bad advice to users",
+      "category": "tech-ai",
+      "regions_found": [
+        "us",
+        "eu",
+        "global"
+      ],
+      "regions_absent": [
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 7,
+      "d3_population_exposure": 3,
+      "d4_significance_severity": 6,
+      "story_gai": 5.5,
+      "significance": 3,
+      "scoring_rationale": "If AI systems optimise for pleasing users over accuracy, they can distort judgement across health, finance and civic decision-making. PGI 4.85 reflects strongest divergence in framing/causal attribution across us, eu, global, while GAI 5.50 reflects coverage present in 3 region(s) and absent in 5 (africa, latin_americas, pacific, caribbean, central_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "fda-plans-ultra-fast-review-of-three-psychedelic-drugs-following-a-trump-directive",
+      "story_headline": "FDA plans ultra-fast review of three psychedelic drugs following a Trump directive",
+      "category": "health",
+      "regions_found": [
+        "us",
+        "global"
+      ],
+      "regions_absent": [
+        "eu",
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 1,
+      "d1_coverage_breadth": 7,
+      "d2_prominence_disparity": 9,
+      "d3_population_exposure": 5,
+      "d4_significance_severity": 7,
+      "story_gai": 7,
+      "significance": 4,
+      "scoring_rationale": "Accelerated psychedelic reviews could reset expectations for psychiatric treatment development and regulatory behaviour internationally. PGI 7.57 reflects strongest divergence in framing/causal attribution across us, global, while GAI 7.00 reflects coverage present in 2 region(s) and absent in 6 (eu, africa, latin_americas, pacific, caribbean).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "california-now-requires-corn-tortillas-to-contain-folic-acid-with-other-states-watching",
+      "story_headline": "California now requires corn tortillas to contain folic acid, with other states watching",
+      "category": "health",
+      "regions_found": [
+        "us",
+        "latin_americas"
+      ],
+      "regions_absent": [
+        "eu",
+        "africa",
+        "middle_east",
+        "east_se_asia",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 8,
+      "d3_population_exposure": 7,
+      "d4_significance_severity": 6,
+      "story_gai": 6.75,
+      "significance": 3,
+      "scoring_rationale": "Nutrition standards applied to a staple food can influence public-health policy debates across migrant and low-income food systems. PGI 3.28 reflects strongest divergence in framing/causal attribution across us, latin_americas, while GAI 6.75 reflects coverage present in 2 region(s) and absent in 7 (eu, africa, middle_east, east_se_asia, pacific).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "tick-season-appears-to-be-starting-fast-with-experts-warning-about-future-illness-risks",
+      "story_headline": "Tick season appears to be starting fast, with experts warning about future illness risks",
+      "category": "health",
+      "regions_found": [
+        "us",
+        "global"
+      ],
+      "regions_absent": [
+        "eu",
+        "africa",
+        "latin_americas",
+        "middle_east",
+        "east_se_asia",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 1,
+      "d1_coverage_breadth": 7,
+      "d2_prominence_disparity": 9,
+      "d3_population_exposure": 8,
+      "d4_significance_severity": 6,
+      "story_gai": 7.5,
+      "significance": 3,
+      "scoring_rationale": "Vector-borne disease expansion is a climate-linked health systems story that can spread across regions over time. PGI 2.55 reflects strongest divergence in framing/causal attribution across us, global, while GAI 7.50 reflects coverage present in 2 region(s) and absent in 8 (eu, africa, latin_americas, middle_east, east_se_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "more-than-3-000-people-are-evacuated-as-firefighters-battle-wildfires-in-northern-japan",
+      "story_headline": "More than 3,000 people are evacuated as firefighters battle wildfires in northern Japan",
+      "category": "climate",
+      "regions_found": [
+        "east_se_asia",
+        "global"
+      ],
+      "regions_absent": [
+        "us",
+        "eu",
+        "africa",
+        "latin_americas",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 1,
+      "d1_coverage_breadth": 7,
+      "d2_prominence_disparity": 9,
+      "d3_population_exposure": 7,
+      "d4_significance_severity": 7,
+      "story_gai": 7.5,
+      "significance": 4,
+      "scoring_rationale": "Large wildfire evacuations in Japan show climate-linked fire risk reaching densely populated, infrastructure-rich settings. PGI 3.38 reflects strongest divergence in framing/causal attribution across east_se_asia, global, while GAI 7.50 reflects coverage present in 2 region(s) and absent in 7 (us, eu, africa, latin_americas, pacific).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "georgia-declares-an-emergency-as-wildfires-destroy-dozens-of-homes",
+      "story_headline": "Georgia declares an emergency as wildfires destroy dozens of homes",
+      "category": "climate",
+      "regions_found": [
+        "us",
+        "global"
+      ],
+      "regions_absent": [
+        "eu",
+        "africa",
+        "latin_americas",
+        "middle_east",
+        "east_se_asia",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 1,
+      "d1_coverage_breadth": 7,
+      "d2_prominence_disparity": 9,
+      "d3_population_exposure": 8,
+      "d4_significance_severity": 7,
+      "story_gai": 7.75,
+      "significance": 4,
+      "scoring_rationale": "Emergency declarations are hard governance signals that environmental hazards have crossed into acute public-system strain. PGI 2.38 reflects strongest divergence in framing/causal attribution across us, global, while GAI 7.75 reflects coverage present in 2 region(s) and absent in 8 (eu, africa, latin_americas, middle_east, east_se_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "world-press-photos-2026-winning-imagery-centres-war-trauma-climate-change-and-hope",
+      "story_headline": "World Press Photo’s 2026 winning imagery centres war, trauma, climate change and hope",
+      "category": "media",
+      "regions_found": [
+        "eu",
+        "global"
+      ],
+      "regions_absent": [
+        "us",
+        "africa",
+        "latin_americas",
+        "middle_east",
+        "east_se_asia",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 1,
+      "d1_coverage_breadth": 7,
+      "d2_prominence_disparity": 9,
+      "d3_population_exposure": 8,
+      "d4_significance_severity": 6,
+      "story_gai": 7.5,
+      "significance": 3,
+      "scoring_rationale": "Prestige photo selection helps define which human experiences become globally legible and emotionally salient. PGI 4.55 reflects strongest divergence in framing/causal attribution across eu, global, while GAI 7.50 reflects coverage present in 2 region(s) and absent in 8 (us, africa, latin_americas, middle_east, east_se_asia).",
+      "is_latest": true
+    },
+    {
+      "scan_date": "2026-04-26",
+      "scan_period": "midday",
+      "story_slug": "a-17th-century-astrolabe-once-owned-by-indian-royalty-heads-for-auction",
+      "story_headline": "A 17th-century astrolabe once owned by Indian royalty heads for auction",
+      "category": "culture",
+      "regions_found": [
+        "south_asia",
+        "eu"
+      ],
+      "regions_absent": [
+        "us",
+        "africa",
+        "latin_americas",
+        "middle_east",
+        "east_se_asia",
+        "pacific",
+        "caribbean",
+        "central_asia"
+      ],
+      "coverage_breadth": 2,
+      "d1_coverage_breadth": 6,
+      "d2_prominence_disparity": 9,
+      "d3_population_exposure": 8,
+      "d4_significance_severity": 5,
+      "story_gai": 7,
+      "significance": 2,
+      "scoring_rationale": "Heritage circulation stories still matter because they expose enduring questions about ownership, prestige and historical power. PGI 4.38 reflects strongest divergence in framing/causal attribution across south_asia, eu, while GAI 7.00 reflects coverage present in 2 region(s) and absent in 8 (us, africa, latin_americas, middle_east, east_se_asia).",
+      "is_latest": true
+    }
+  ]
+}

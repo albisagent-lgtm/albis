@@ -57,12 +57,14 @@ const DIVERSITY_PRIORITY_CATEGORIES = new Set([
   'natural-world', 'grassroots', 'culture', 'governance', 'climate-energy'
 ]);
 
-const HUMAN_TAGS = ['aid', 'refugee', 'vaccine', 'measles', 'meningitis', 'civilian', 'children', 'health', 'food', 'water', 'hospital', 'clinic', 'school', 'hunger', 'malnutrition', 'displacement'];
-const OFFBEAT_TAGS = ['wildlife', 'satellite', 'coffee', 'solar', 'deforestation', 'garment', 'fisheries', 'bees', 'penguin', 'reef', 'orchard', 'volcano'];
+const HUMAN_TAGS = ['aid', 'refugee', 'vaccine', 'measles', 'meningitis', 'civilian', 'children', 'health', 'food', 'water', 'hospital', 'clinic', 'school', 'hunger', 'malnutrition', 'displacement', 'teacher', 'student', 'farmer', 'patient', 'worker', 'family'];
+const OFFBEAT_TAGS = ['wildlife', 'satellite', 'coffee', 'solar', 'deforestation', 'garment', 'fisheries', 'bees', 'penguin', 'reef', 'orchard', 'volcano', 'battery', 'aging', 'fusion', 'robot', 'gene', 'tutor'];
 const SYSTEM_TAGS = ['shipping', 'insurance', 'inflation', 'supply-chain', 'energy', 'sanctions', 'migration', 'ai', 'infrastructure', 'port', 'grid', 'pipeline', 'cable', 'corridor', 'rail'];
-const NARROW_SYSTEM_TAGS = ['shipping', 'insurance', 'inflation', 'supply-chain', 'sanctions', 'tariff', 'freight', 'oil', 'lng', 'commodity', 'macro', 'market'];
-const CURIOSITY_TAGS = ['island', 'village', 'mosquito', 'grain', 'mine', 'dam', 'reef', 'clinic', 'prison', 'orchard', 'bridge', 'school'];
+const NARROW_SYSTEM_TAGS = ['shipping', 'insurance', 'inflation', 'supply-chain', 'sanctions', 'tariff', 'freight', 'oil', 'lng', 'commodity', 'macro', 'market', 'crude', 'diesel'];
+const CURIOSITY_TAGS = ['island', 'village', 'mosquito', 'grain', 'mine', 'dam', 'reef', 'clinic', 'prison', 'orchard', 'bridge', 'school', 'factory', 'battery', 'robot', 'teacher'];
 const TOPIC_STOPWORDS = new Set(['global', 'energy', 'shipping', 'insurance', 'sanctions', 'migration', 'health', 'markets', 'conflict', 'diplomacy', 'economic']);
+const BROAD_WAR_ECONOMY_WORDS = ['oil', 'shipping', 'insurance', 'sanctions', 'macro', 'market', 'markets', 'freight', 'lng', 'commodity', 'crude', 'diesel', 'corridor'];
+const HUMAN_DETAIL_WORDS = ['hospital', 'clinic', 'school', 'teacher', 'student', 'farmer', 'patient', 'refugee', 'migrant', 'family', 'worker', 'village', 'children', 'women'];
 
 function slugBits(input: string): string[] {
   return String(input || '')
@@ -148,8 +150,31 @@ function specificityScore(item: ScanItemInput): number {
   if (/[A-Z]{2,}/.test(headline)) score += 0.2;
   if (headline.includes(':') || headline.includes(';')) score += 0.1;
   if ((item.connection || '').length > 110) score += 0.2;
+  if (/\b(?:in|at|near|outside|inside)\s+[A-Z][a-z]+/.test(String(item.connection || ''))) score += 0.15;
 
-  return Math.min(2.4, score);
+  return Math.min(2.6, score);
+}
+
+function concreteDetailScore(item: ScanItemInput): number {
+  const text = `${item.headline} ${item.connection || ''}`;
+  let score = 0;
+  if (/\b\d+(?:\.\d+)?(?:%| million| billion|m|bn)?\b/i.test(text)) score += 0.45;
+  if (/\b(?:port|clinic|hospital|school|camp|court|factory|mine|dam|bridge|airport|pipeline|district|province|town|village)\b/i.test(text)) score += 0.4;
+  if (/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2}\b/.test(String(item.connection || ''))) score += 0.2;
+  return Math.min(1.1, score);
+}
+
+function humanProximityScore(item: ScanItemInput): number {
+  return Math.min(1, countTagHits(item, HUMAN_DETAIL_WORDS) * 0.32);
+}
+
+function broadWarEconomyPenalty(item: ScanItemInput, category: string): number {
+  const text = `${item.headline} ${(item.tags || []).join(' ')} ${item.connection || ''}`.toLowerCase();
+  const broadHits = BROAD_WAR_ECONOMY_WORDS.filter((word) => text.includes(word)).length;
+  const humanHits = HUMAN_DETAIL_WORDS.filter((word) => text.includes(word)).length;
+  const categoryPenalty = NARROW_SYSTEM_CATEGORIES.has(category) ? 0.45 : 0;
+  if (broadHits < 2) return 0;
+  return Math.max(0, Math.min(1.4, categoryPenalty + broadHits * 0.16 - humanHits * 0.18));
 }
 
 export function scorePublicInterest(item: ScanItemInput): { score: number; why: string[]; specificity: number; lane: string } {
@@ -202,9 +227,27 @@ export function scorePublicInterest(item: ScanItemInput): { score: number; why: 
     why.push('curiosity-hook');
   }
 
+  const humanProximity = humanProximityScore(item);
+  if (humanProximity > 0) {
+    score += humanProximity;
+    why.push('human-detail');
+  }
+
+  const concreteDetail = concreteDetailScore(item);
+  if (concreteDetail > 0) {
+    score += concreteDetail;
+    why.push('concrete-detail');
+  }
+
   if (NARROW_SYSTEM_CATEGORIES.has(category) && narrowSystemHits >= 2 && humanHits === 0 && offbeatHits === 0 && curiosityHits === 0) {
     score -= 0.7;
     why.push('narrow-system-penalty');
+  }
+
+  const warPenalty = broadWarEconomyPenalty(item, category);
+  if (warPenalty > 0) {
+    score -= warPenalty;
+    why.push('broad-war-economy-penalty');
   }
 
   const specificity = specificityScore(item);
@@ -297,7 +340,7 @@ function choosePass(
   }
 
   const cap = opts.relaxedCategoryCap ? Math.max(2, categoryCap(target)) : categoryCap(target);
-  const warSystemCap = opts.relaxedLaneCap ? Math.max(3, Math.ceil(target / 2)) : (target >= 6 ? 2 : 1);
+  const warSystemCap = opts.relaxedLaneCap ? Math.max(2, Math.ceil(target / 3)) : 1;
 
   for (const entry of pool) {
     if (selected.length >= target) break;

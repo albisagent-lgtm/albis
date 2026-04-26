@@ -41,8 +41,9 @@ function formatBriefingLine(item: any) {
   const category = normalisePublicCategory(item.category || 'current-events').replace(/-/g, ' ');
   const region = (item.regions || [])[0] || 'global';
   const connection = String(item.connection || '').trim();
-  const trimmed = connection.length > 150 ? `${connection.slice(0, 147).trimEnd()}...` : connection;
-  return `- ${item.headline} (${category}${region ? ` · ${region}` : ''}) — ${trimmed || 'Worth watching for what changes next.'}`;
+  const trimmed = connection.length > 170 ? `${connection.slice(0, 167).trimEnd()}...` : connection;
+  const consequence = trimmed || 'Worth watching for what changes next.';
+  return `- ${item.headline} (${category}${region ? ` · ${region}` : ''}) — ${consequence}`;
 }
 
 function buildBriefingTitle(top: any[], briefingDate: string) {
@@ -51,13 +52,13 @@ function buildBriefingTitle(top: any[], briefingDate: string) {
   const second = top[1];
   if (!second) return lead.connection || lead.headline || `Albis Daily — ${briefingDate}`;
   const firstHook = lead.connection || lead.headline;
-  const secondHook = second.headline;
+  const secondHook = second.connection || second.headline;
   const joined = `${firstHook}; ${secondHook}`;
-  return joined.length <= 140 ? joined : (lead.connection || lead.headline || `Albis Daily — ${briefingDate}`);
+  return joined.length <= 140 ? joined : (lead.headline || lead.connection || `Albis Daily — ${briefingDate}`);
 }
 
 function buildBriefingFromScan(briefingDate: string, items: any[]) {
-  const top = selectPublicStories(items, 4, 6).map((entry) => entry.item);
+  const top = selectPublicStories(items, 5, 7).map((entry) => entry.item);
   const title = buildBriefingTitle(top, briefingDate);
   const contentMd = top.map((item: any) => formatBriefingLine(item)).join('\n');
   const topStories = top.slice(0, 4).map((item: any) => ({

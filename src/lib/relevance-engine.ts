@@ -28,6 +28,9 @@ export interface ScoredStory {
   risk_score: number;
   urgency_score: number;
   significance_score: number;
+  concreteness_score: number;
+  human_score: number;
+  broad_war_economy_penalty: number;
 
   // Final weighted score
   relevance_score: number;
@@ -53,14 +56,16 @@ export interface ScanItemInput {
 // ---------------------------------------------------------------------------
 
 const WEIGHTS = {
-  geography: 0.20,
-  sector: 0.20,
-  theme: 0.15,
-  entity: 0.15,
-  supply_chain: 0.10,
+  geography: 0.18,
+  sector: 0.18,
+  theme: 0.14,
+  entity: 0.14,
+  supply_chain: 0.08,
   risk: 0.10,
   urgency: 0.05,
   significance: 0.05,
+  concreteness: 0.05,
+  human: 0.03,
 };
 
 // ---------------------------------------------------------------------------
@@ -386,6 +391,34 @@ function urgencyBoost(patterns: string[], significance: string): number {
   return Math.min(1, score);
 }
 
+function scoreConcreteness(headline: string, connection: string, tags: string[]): number {
+  const text = `${headline} ${connection} ${tags.join(' ')}`;
+  let score = 0;
+  if (/\b\d+(?:\.\d+)?(?:%| million| billion|m|bn)?\b/i.test(text)) score += 0.4;
+  if (/\b(?:port|clinic|hospital|school|camp|court|factory|mine|dam|bridge|airport|pipeline|district|province|village|town)\b/i.test(text)) score += 0.35;
+  if (/\b(?:seizes?|cuts?|extends?|approves?|launches?|reopens?|halts?|resumes?|orders?|bans?|funds?|evacuates?)\b/i.test(headline)) score += 0.25;
+  if (connection && connection.length > 90) score += 0.15;
+  return Math.min(1, score);
+}
+
+function scoreHumanImpact(category: string, tags: string[], headline: string, connection: string): number {
+  const text = `${headline} ${connection} ${tags.join(' ')} ${category}`.toLowerCase();
+  const hits = ['health', 'clinic', 'hospital', 'school', 'children', 'refugee', 'farmer', 'patient', 'worker', 'family', 'hunger', 'water', 'aid', 'civilian']
+    .filter((term) => text.includes(term)).length;
+  return Math.min(1, hits * 0.16);
+}
+
+function broadWarEconomyPenalty(category: string, tags: string[], headline: string, connection: string): number {
+  const text = `${headline} ${connection} ${tags.join(' ')} ${category}`.toLowerCase();
+  const broadHits = ['oil', 'shipping', 'insurance', 'sanctions', 'freight', 'macro', 'market', 'markets', 'commodity', 'lng', 'diesel', 'crude']
+    .filter((term) => text.includes(term)).length;
+  const humanHits = ['clinic', 'hospital', 'school', 'children', 'refugee', 'patient', 'family', 'worker', 'farmer']
+    .filter((term) => text.includes(term)).length;
+  if (broadHits < 2) return 0;
+  const categoryPenalty = ['conflict', 'economic-flows', 'energy', 'logistics-shipping'].includes(category) ? 0.25 : 0;
+  return Math.max(0, Math.min(1, categoryPenalty + broadHits * 0.12 - humanHits * 0.15));
+}
+
 // ---------------------------------------------------------------------------
 // Main scoring function
 // ---------------------------------------------------------------------------
@@ -407,6 +440,9 @@ export function scoreStoriesForCompany(
     const rsk = scoreRisk(item.tags, item.category, profile.risk_priorities);
     const urg = urgencyBoost(item.patterns, item.significance);
     const sig = significanceToScore(item.significance);
+    const cnc = scoreConcreteness(item.headline, item.connection, item.tags);
+    const hum = scoreHumanImpact(item.category, item.tags, item.headline, item.connection);
+    const broadPenalty = broadWarEconomyPenalty(item.category, item.tags, item.headline, item.connection);
 
     const relevance =
       WEIGHTS.geography * geo +
@@ -416,7 +452,10 @@ export function scoreStoriesForCompany(
       WEIGHTS.supply_chain * sup +
       WEIGHTS.risk * rsk +
       WEIGHTS.urgency * urg +
-      WEIGHTS.significance * sig;
+      WEIGHTS.significance * sig +
+      WEIGHTS.concreteness * cnc +
+      WEIGHTS.human * hum -
+      0.08 * broadPenalty;
 
     return {
       headline: item.headline,
@@ -434,6 +473,9 @@ export function scoreStoriesForCompany(
       risk_score: rsk,
       urgency_score: urg,
       significance_score: sig,
+      concreteness_score: cnc,
+      human_score: hum,
+      broad_war_economy_penalty: broadPenalty,
       relevance_score: relevance,
       selected_for_briefing: false,
     };
@@ -459,9 +501,29 @@ export function scoreStoriesForCompany(
     }
   }
 
-  for (let i = 0; i < selectedCount; i++) {
-    if (scored[i].relevance_score >= SCORE_THRESHOLD) {
-      scored[i].selected_for_briefing = true;
+  const preliminary = scored.filter((story) => story.relevance_score >= SCORE_THRESHOLD).slice(0, Math.max(selectedCount + 3, MAX_STORIES));
+  const selected: ScoredStory[] = [];
+  const categoryCounts = new Map<string, number>();
+  let broadWarEconomyCount = 0;
+
+  for (const story of preliminary) {
+    if (selected.length >= selectedCount) break;
+    const categoryCount = categoryCounts.get(story.category) || 0;
+    const isBroadWarEconomy = story.broad_war_economy_penalty >= 0.35 && story.human_score < 0.2 && story.concreteness_score < 0.45;
+    if (categoryCount >= 2) continue;
+    if (isBroadWarEconomy && broadWarEconomyCount >= 1) continue;
+    story.selected_for_briefing = true;
+    selected.push(story);
+    categoryCounts.set(story.category, categoryCount + 1);
+    if (isBroadWarEconomy) broadWarEconomyCount += 1;
+  }
+
+  if (selected.length < Math.min(MIN_STORIES, scored.length)) {
+    for (const story of scored) {
+      if (selected.length >= Math.min(MIN_STORIES, scored.length)) break;
+      if (story.selected_for_briefing || story.relevance_score < SCORE_THRESHOLD) continue;
+      story.selected_for_briefing = true;
+      selected.push(story);
     }
   }
 

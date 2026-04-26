@@ -336,7 +336,10 @@ function titleTokens(value: string) {
 }
 
 function pickFreshDetail(packet: StoryPacket) {
-  const tags = packet.tags.map((tag) => tag.replace(/-/g, ' ')).filter((tag) => tag.length > 3);
+  const tags = packet.tags
+    .map((tag) => tag.replace(/-/g, ' '))
+    .filter((tag) => tag.length > 3)
+    .filter((tag) => !['global', 'markets', 'policy', 'trade', 'energy', 'conflict', 'shipping', 'sanctions'].includes(tag.toLowerCase()));
   if (tags.length) return tags[0];
   const regions = [...packet.regionsFound, ...packet.regions].filter(Boolean);
   if (regions.length) return regions[0];
@@ -509,7 +512,8 @@ function buildActorActionLede(packet: StoryPacket) {
 
 function buildWhatChangedParagraph(packet: StoryPacket) {
   const detail = pickFreshDetail(packet);
-  return `What changed here is not vague mood but a concrete shift readers can point to: ${packet.title}. The practical question is whether that change stays narrow or starts forcing new behaviour around ${detail}, in ministries, ports, clinics, courts, warehouses, campuses, or households. ${packet.connection || 'That is the hinge that makes this more than a recycled headline.'}`;
+  const places = [...packet.regionsFound, ...packet.regions].filter(Boolean).slice(0, 2).join(' and ');
+  return `${packet.title} is the visible shift. The practical question now is whether it stays contained or starts changing behaviour around ${detail}${places ? ` in ${places}` : ''}, in ministries, ports, clinics, courts, warehouses, campuses, or households. ${packet.connection || 'That consequence chain is what gives the headline real weight.'}`;
 }
 
 function buildMechanismParagraph(packet: StoryPacket) {
@@ -539,9 +543,10 @@ function buildRegionalDetailParagraph(packet: StoryPacket) {
 function buildWhyItMattersParagraph(packet: StoryPacket) {
   const lower = packet.title.toLowerCase();
   if (lower.includes('solar') || lower.includes('climate') || lower.includes('deforestation')) {
-    return `Why this matters depends on whether the reader sees climate stories as distant or immediate. In this case the signal touches financing, household hedging, commodity rules, and industrial strategy all at once. ${packet.connection || 'Its importance lies in how quickly the consequences can move outward from the original event.'} The article should make that practical rather than preachy.`;
+    return `Why this matters depends on whether the reader sees climate stories as distant or immediate. In this case the signal touches financing, household hedging, commodity rules, and industrial strategy at the same time. ${packet.connection || 'Its importance lies in how quickly the consequences can move outward from the original event.'} The article should make that practical rather than preachy.`;
   }
-  return `Why this matters depends on where you stand. For some readers it is a fuel-price story, for others a migration-policy story, a sanctions-enforcement story, a vaccine-delivery story, or a question of whether daily life just got harder somewhere that is already stretched. ${packet.connection || 'Its importance lies in how quickly the consequences can move outward from the original event.'} The article should help the reader feel that chain clearly without padding the drama.`;
+  const detail = pickFreshDetail(packet);
+  return `Why this matters depends on where you stand. For some readers it is about ${detail}; for others it is about whether daily life just got harder somewhere already stretched. ${packet.connection || 'Its importance lies in how quickly the consequences can move outward from the original event.'} The article should help the reader feel that chain clearly without padding the drama.`;
 }
 
 function buildContextParagraph(packet: StoryPacket) {
@@ -556,7 +561,8 @@ function buildReaderUsefulnessParagraph(packet: StoryPacket) {
 }
 
 function buildWhatToWatchParagraph(packet: StoryPacket) {
-  return `From here, the follow-through matters more than the quote. Watch whether the move is enforced, whether costs or access actually change, whether neighbouring actors copy or resist it, and whether the story starts showing up in places that were initially quiet. That is usually the moment when a strange or local-seeming development reveals itself as a wider systems signal.`;
+  const detail = pickFreshDetail(packet);
+  return `From here, the follow-through matters more than the quote. Watch whether ${detail} actually changes on the ground, whether neighbouring actors copy or resist the move, and whether the story starts showing up in places that were initially quiet. That is usually the moment when a local-seeming development reveals itself as a wider systems signal.`;
 }
 
 function buildClosingParagraph(packet: StoryPacket) {
