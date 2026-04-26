@@ -44,7 +44,6 @@ export default function CheckoutClient() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             priceId: getPriceId(tierSlug, billing),
-            userId: user.id,
           }),
         });
 
