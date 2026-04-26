@@ -4,15 +4,25 @@ import { createAdminClient } from "@/lib/supabase/admin";
 export const revalidate = 1800; // 30 min cache
 
 export async function GET() {
-  const supabase = createAdminClient();
-  const { data } = await supabase
-    .from("pgi_daily")
-    .select("date, daily_pgi")
-    .order("date", { ascending: false })
-    .limit(1);
+  let pgi = 5.0;
+  let date = new Date().toISOString().split("T")[0];
 
-  const pgi = data?.[0]?.daily_pgi ?? 5.0;
-  const date = data?.[0]?.date ?? new Date().toISOString().split("T")[0];
+  try {
+    const supabase = createAdminClient();
+    const { data } = await supabase
+      .from("pgi_daily")
+      .select("date, daily_pgi")
+      .order("date", { ascending: false })
+      .limit(1);
+
+    pgi = data?.[0]?.daily_pgi ?? pgi;
+    date = data?.[0]?.date ?? date;
+  } catch (error) {
+    console.warn(
+      "[api/embed/pgi] using fallback PGI because Supabase is unavailable:",
+      error instanceof Error ? error.message : error
+    );
+  }
 
   function getTier(p: number) {
     if (p <= 2) return { name: "Global Consensus", color: "#22c55e" };
