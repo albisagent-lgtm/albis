@@ -11,6 +11,8 @@ export {
   extractCanonicalsFromText,
 } from "./signal-parser";
 export { resolveSignalToCanonicals } from "./signal-resolver";
-export { retrieveForTarget } from "./retrieval-stub";
+export { retrieveForTarget } from "./retrieval-brave";
 export { runCompanyScan } from "./scan-engine";
 export type { ScanRunSummary } from "./scan-engine";
+export { buildUnionWatchGraph } from "./watch-graph-builder";
+export type { WatchGraphSummary } from "./watch-graph-builder";

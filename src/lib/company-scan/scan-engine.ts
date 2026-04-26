@@ -16,7 +16,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { loadCanonicalAliasIndex, type CanonicalAliasIndex } from "./canonical-alias-index";
 import { parseSignalFromArticle } from "./signal-parser";
 import { resolveSignalToCanonicals } from "./signal-resolver";
-import { retrieveForTarget } from "./retrieval-stub";
+import { retrieveForTarget } from "./retrieval-brave";
 import type {
   CompanyScanRun,
   ScanRunStatus,
@@ -106,11 +106,35 @@ async function loadActiveScanTargets(supabase: SupabaseClient): Promise<ScanTarg
 }
 
 /**
- * Dedupe key for a SignalDraft. Prefers source_url; falls back to a
- * stable headline+date composite.
+ * Normalise a URL for cross-target dedupe inside a single scan run.
+ * Strips query strings, fragments, and trailing slashes. Lowercases
+ * the host. Different retrieval providers (or the same provider via
+ * different queries) often surface the same article URL with extra
+ * tracking params — normalising prevents one article from becoming
+ * two signals within the same run.
+ */
+function normaliseUrl(rawUrl: string): string {
+  try {
+    const u = new URL(rawUrl);
+    u.search = "";
+    u.hash = "";
+    let pathname = u.pathname;
+    if (pathname.length > 1 && pathname.endsWith("/")) {
+      pathname = pathname.slice(0, -1);
+    }
+    return `${u.protocol}//${u.host.toLowerCase()}${pathname}`;
+  } catch {
+    return rawUrl.trim().toLowerCase();
+  }
+}
+
+/**
+ * Dedupe key for a SignalDraft. Prefers normalised source_url; falls
+ * back to a stable headline+date composite. Aggregate dedupe across
+ * scan runs is intentionally NOT done here — that's Package 8 work.
  */
 function dedupeKey(draft: SignalDraft): string {
-  if (draft.source_url) return `url::${draft.source_url}`;
+  if (draft.source_url) return `url::${normaliseUrl(draft.source_url)}`;
   return `hl::${draft.signal_date}::${draft.headline.toLowerCase()}`;
 }
 

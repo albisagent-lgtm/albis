@@ -1,13 +1,10 @@
 // ---------------------------------------------------------------------------
 // Retrieval stub — Package 5 placeholder.
 //
-// Intentionally returns an empty array. Package 6 wires up real retrieval
-// (NewsAPI / Bing News / RSS / source-specific scrapers). This stub lets
-// the scan engine, signal parser, signal resolver, and downstream
-// scoring pipeline be built and exercised end-to-end without picking a
-// retrieval provider yet.
-//
-// Provider selection is a separate decision and is not made in Package 5.
+// DEPRECATED as of Package 6 — retrieval-brave.ts is the live path. This
+// file is retained as a fallback for unit testing the scan engine
+// without hitting a real network and for any future provider-swap work.
+// Do not import in production code paths.
 // ---------------------------------------------------------------------------
 import type { RawArticle, ScanTarget } from "./types";
 
