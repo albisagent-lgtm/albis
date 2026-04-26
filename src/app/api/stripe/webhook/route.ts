@@ -23,11 +23,18 @@ function verifySignature(payload: string, sig: string, secret: string): boolean 
   return crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(v1));
 }
 
-async function stripeGet(path: string): Promise<any> {
+type StripeSubscriptionPayload = {
+  status?: string;
+  customer?: string;
+  current_period_end?: number;
+  items?: { data?: Array<{ price?: { id?: string } }> };
+};
+
+async function stripeGet(path: string): Promise<StripeSubscriptionPayload> {
   const res = await fetch(`https://api.stripe.com/v1${path}`, {
     headers: { Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}` },
   });
-  return res.json();
+  return (await res.json()) as StripeSubscriptionPayload;
 }
 
 export async function POST(req: NextRequest) {
