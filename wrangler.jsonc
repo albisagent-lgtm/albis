@@ -43,4 +43,30 @@
       "id": "7dd33d8d4ce24c76904c2054e85a7e87"
     }
   ]
+
+  // ---------------------------------------------------------------------------
+  // Package 6 — Cloudflare scheduled cron triggers for the company scan.
+  // INTENTIONALLY COMMENTED OUT. See docs/company-scan-cron-setup.md for the
+  // two activation paths (CF cron via a separate scheduled-event worker that
+  // fetch()es /api/cron/company-scan, OR openclaw-side cron via
+  // scripts/run-company-scan-cycle.sh).
+  //
+  // Note: OpenNext's Worker bundle is the Next.js handler — it does not by
+  // itself respond to CF "scheduled" events. To use these cron triggers in
+  // place, deploy a thin companion Worker that wires a scheduled handler to
+  // an authenticated GET to https://www.albis.news/api/cron/company-scan.
+  //
+  // Times are UTC. They map to US Eastern thus:
+  //   11 UTC = 07:00 EDT / 06:00 EST
+  //   17 UTC = 13:00 EDT / 12:00 EST
+  //   23 UTC = 19:00 EDT / 18:00 EST
+  // 1-hour winter drift is acceptable for v1.
+  //
+  // "triggers": {
+  //   "crons": [
+  //     "0 11 * * *",
+  //     "0 17 * * *",
+  //     "0 23 * * *"
+  //   ]
+  // }
 }
