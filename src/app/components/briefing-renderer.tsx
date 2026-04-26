@@ -50,18 +50,35 @@ function WhyMatched({ reasons }: { reasons: MatchReason[] }) {
       </button>
       {open && (
         <ul className="mt-2 space-y-1.5 border-l border-black/[0.07] pl-3 dark:border-white/[0.07]">
-          {reasons.map((r, i) => (
-            <li key={i} className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
-              <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-                {MATCH_REASON_LABEL[r.type] || r.type}
-              </span>
-              {r.matched.length > 0 && (
-                <span className="text-zinc-500 dark:text-zinc-400">
-                  : {r.matched.join(", ")}
+          {reasons.map((r, i) => {
+            // Surface canonical alias relationship when every matched term
+            // resolved to a single canonical AND that canonical's label
+            // differs from what the user actually has tracked. Suppresses
+            // the "(via canonical X)" suffix when matched IS the canonical.
+            const matchedSet = new Set(r.matched.map((m) => m.toLowerCase()));
+            const showCanonical =
+              !!r.canonical_label &&
+              r.canonical_topic_id &&
+              !matchedSet.has(r.canonical_label.toLowerCase());
+            return (
+              <li key={i} className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
+                <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                  {MATCH_REASON_LABEL[r.type] || r.type}
                 </span>
-              )}
-            </li>
-          ))}
+                {r.matched.length > 0 && (
+                  <span className="text-zinc-500 dark:text-zinc-400">
+                    : {r.matched.join(", ")}
+                  </span>
+                )}
+                {showCanonical && (
+                  <span className="text-zinc-400 dark:text-zinc-500">
+                    {" "}
+                    (via {r.canonical_label})
+                  </span>
+                )}
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>

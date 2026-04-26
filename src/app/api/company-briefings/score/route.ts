@@ -7,6 +7,7 @@ import {
 } from "@/lib/relevance-engine";
 import { loadScanItems } from "@/lib/scan-loader";
 import { shouldGenerateBriefing } from "@/lib/tier-enforcement";
+import { loadCanonicalIndexForProfile, emptyCanonicalIndex } from "@/lib/canonical-index";
 import type { CompanyProfile } from "@/lib/company-profile";
 
 const INGEST_KEY = process.env.SCAN_INGEST_KEY;
@@ -101,8 +102,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 3. Score all stories against this company profile
-    const scored = scoreStoriesForCompany(allItems, profile as CompanyProfile);
+    // 3. Score all stories against this company profile (with canonical alias expansion)
+    let canonicalIndex;
+    try {
+      canonicalIndex = await loadCanonicalIndexForProfile(supabase, company_profile_id);
+    } catch (err) {
+      console.warn("Canonical index load failed, using raw fallback:", err);
+      canonicalIndex = emptyCanonicalIndex();
+    }
+    const scored = scoreStoriesForCompany(allItems, profile as CompanyProfile, canonicalIndex);
     const selected = getSelectedStories(scored);
     const signalLevel = determineSignalLevel(selected);
 

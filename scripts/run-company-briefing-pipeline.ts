@@ -18,6 +18,7 @@ import {
   type BriefingContent,
 } from '../src/lib/email-templates/company-briefing';
 import { buildCoverageSummary } from '../src/lib/coverage-builder';
+import { loadCanonicalIndexForProfile, emptyCanonicalIndex } from '../src/lib/canonical-index';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -272,7 +273,14 @@ async function main() {
     }
 
     console.log(`\n▶ Processing ${rawProfile.company_name}`);
-    const scored = scoreStoriesForCompany(allItems, rawProfile);
+    let canonicalIndex;
+    try {
+      canonicalIndex = await loadCanonicalIndexForProfile(supabase, rawProfile.id);
+    } catch (err) {
+      console.warn(`⚠️ canonical index load failed (using raw fallback): ${err instanceof Error ? err.message : String(err)}`);
+      canonicalIndex = emptyCanonicalIndex();
+    }
+    const scored = scoreStoriesForCompany(allItems, rawProfile, canonicalIndex);
     const selected = getSelectedStories(scored);
     const signalLevel = determineSignalLevel(selected);
 

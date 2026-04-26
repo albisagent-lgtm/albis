@@ -41,6 +41,11 @@ export interface MatchReason {
   matched: string[];
   score: number;
   explanation: string;
+  // Optional canonical_topic_id (Package 4). Present when every matched
+  // term in this reason resolved to the same canonical via the alias
+  // registry; null/absent on raw-string fallback or multi-canonical hits.
+  canonical_topic_id?: string | null;
+  canonical_label?: string | null;
 }
 
 export interface BriefingStory {

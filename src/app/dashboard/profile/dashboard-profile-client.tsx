@@ -270,6 +270,12 @@ export default function DashboardProfileClient() {
       } else {
         setSuccessSection(section);
         setTimeout(() => setSuccessSection(null), 3000);
+        // Fire-and-forget canonical resolution. Failures here are silent —
+        // the profile save itself succeeded, and resolution is idempotent
+        // so the next save (or the daily pipeline) will retry.
+        fetch("/api/company-canonical-mappings/resolve", {
+          method: "POST",
+        }).catch(() => {});
       }
     } catch {
       setErrorSection(section);
@@ -539,6 +545,9 @@ export default function DashboardProfileClient() {
           {/* ── Tracking ── */}
           <div className={cardClass}>
             <h2 className={sectionHeader}>What to track</h2>
+            <p className="mt-2 text-[11px] text-zinc-400 dark:text-zinc-500">
+              We'll match related terms automatically.
+            </p>
             <div className="mt-5 space-y-5">
               <TaxonomyCombobox
                 label="Tracked themes"
