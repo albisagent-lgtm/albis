@@ -60,7 +60,9 @@ export async function POST(req: NextRequest) {
 
       const subscription = await stripeGet(`/subscriptions/${session.subscription}`);
       const priceId = subscription.items?.data?.[0]?.price?.id;
-      const tierInfo = PRICE_TO_TIER[priceId] || { tier: "standard", period: "monthly" };
+      const tierInfo = priceId
+        ? PRICE_TO_TIER[priceId] || { tier: "standard", period: "monthly" }
+        : { tier: "standard", period: "monthly" };
       const periodEnd = subscription.current_period_end;
 
       await supabase.from("profiles").upsert(
@@ -82,7 +84,9 @@ export async function POST(req: NextRequest) {
       const subscription = event.data.object;
       const customerId = subscription.customer;
       const priceId = subscription.items?.data?.[0]?.price?.id;
-      const tierInfo = PRICE_TO_TIER[priceId] || { tier: "standard", period: "monthly" };
+      const tierInfo = priceId
+        ? PRICE_TO_TIER[priceId] || { tier: "standard", period: "monthly" }
+        : { tier: "standard", period: "monthly" };
       const periodEnd = subscription.current_period_end;
 
       await supabase
