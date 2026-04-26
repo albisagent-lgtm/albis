@@ -1,14 +1,17 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
-const supabase = createClient(
-  "https://wguydvzpxwsgrhvojpnk.supabase.co",
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ""
-);
+function getSupabase() {
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!serviceKey) return null;
+  return createClient("https://wguydvzpxwsgrhvojpnk.supabase.co", serviceKey);
+}
 
 // POST /api/quiz/submit — log quiz results for analytics
 export async function POST(request: Request) {
   try {
+    const supabase = getSupabase();
+    if (!supabase) return NextResponse.json({ ok: true, stored: false });
     const body = await request.json();
     const {
       score,          // number 0-5
@@ -46,6 +49,16 @@ export async function POST(request: Request) {
 
 // GET /api/quiz/stats — aggregate quiz stats (public)
 export async function GET() {
+  const supabase = getSupabase();
+  if (!supabase) {
+    return NextResponse.json({
+      total_attempts: 0,
+      average_score: 0,
+      share_rate: 0,
+      message: "Quiz stats unavailable",
+    });
+  }
+
   const { data, error } = await supabase
     .from("quiz_results")
     .select("score, total, shared, share_platform, created_at");

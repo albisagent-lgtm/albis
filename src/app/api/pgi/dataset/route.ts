@@ -1,14 +1,22 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
-const supabase = createClient(
-  "https://wguydvzpxwsgrhvojpnk.supabase.co",
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ""
-);
+function getSupabase() {
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!serviceKey) return null;
+  return createClient("https://wguydvzpxwsgrhvojpnk.supabase.co", serviceKey);
+}
 
 // GET /api/pgi/dataset — public PGI dataset for researchers
 // Query params: ?days=30&format=json (default) or ?format=csv
 export async function GET(request: Request) {
+  const supabase = getSupabase();
+  if (!supabase) {
+    return NextResponse.json(
+      { error: "SUPABASE_SERVICE_ROLE_KEY is not configured" },
+      { status: 500 }
+    );
+  }
   const url = new URL(request.url);
   const days = Math.min(parseInt(url.searchParams.get("days") || "30"), 90);
   const format = url.searchParams.get("format") || "json";
