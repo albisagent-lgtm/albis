@@ -266,7 +266,7 @@ export default async function Home() {
 
   // Briefing taster — reconstructed from snapshot fields so the JSX below
   // (existing shape: { title, top_stories, story_count, date }) is unchanged.
-  const briefing: { title: string; top_stories: Array<{ region: string; headline: string }>; story_count: number; date: string } | null =
+  const briefing: { title: string; top_stories: Array<{ region: string; headline: string; laneLabel?: string }>; story_count: number; date: string } | null =
     snapshot.briefingTitle && snapshot.briefingDate
       ? {
           title: snapshot.briefingTitle,
@@ -342,6 +342,11 @@ export default async function Home() {
                   <span className="mr-2 font-[family-name:var(--font-inter)] text-[10px] font-semibold uppercase tracking-wider text-[#c8922a]">
                     {story.region}
                   </span>
+                  {story.laneLabel ? (
+                    <span className="mr-2 font-[family-name:var(--font-inter)] text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                      {story.laneLabel}
+                    </span>
+                  ) : null}
                   {story.headline}
                 </li>
               ))}

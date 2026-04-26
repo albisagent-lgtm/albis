@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+/public/edition-qa/*.json
 
 # debug
 npm-debug.log*

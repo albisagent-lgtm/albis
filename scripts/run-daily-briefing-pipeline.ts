@@ -5,7 +5,13 @@ import { Resend } from 'resend';
 import { createAdminClient } from '../src/lib/supabase/admin';
 import { getSubscriberEmails } from '../src/lib/email';
 import { loadVerifiedScanItems, requireBriefingRow, requireStoryScores } from '../src/lib/pipeline-db';
-import { normalisePublicCategory, selectPublicStories } from '../src/lib/public-story-selection';
+import { buildDailyBriefingPackage, type DailyBriefingSectionItem } from '../src/lib/public-daily-briefing';
+import type { PublicEditionArticleEntry, PublicEditionScorecard } from '../src/lib/public-edition-scorecard';
+import {
+  buildPublicEditionRunReport,
+  formatPublicEditionRunReportLine,
+  writePublicEditionRunReport,
+} from '../src/lib/public-edition-run-report';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -37,72 +43,127 @@ function parseArgs() {
   };
 }
 
-function formatBriefingLine(item: any) {
-  const category = normalisePublicCategory(item.category || 'current-events').replace(/-/g, ' ');
-  const region = (item.regions || [])[0] || 'global';
-  const connection = String(item.connection || '').trim();
-  const trimmed = connection.length > 170 ? `${connection.slice(0, 167).trimEnd()}...` : connection;
-  const consequence = trimmed || 'Worth watching for what changes next.';
-  return `- ${item.headline} (${category}${region ? ` · ${region}` : ''}) — ${consequence}`;
+function esc(value: string | null | undefined) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
 }
 
-function buildBriefingTitle(top: any[], briefingDate: string) {
-  if (!top.length) return `Albis Daily — ${briefingDate}`;
-  const lead = top[0];
-  const second = top[1];
-  if (!second) return lead.connection || lead.headline || `Albis Daily — ${briefingDate}`;
-  const firstHook = lead.connection || lead.headline;
-  const secondHook = second.connection || second.headline;
-  const joined = `${firstHook}; ${secondHook}`;
-  return joined.length <= 140 ? joined : (lead.headline || lead.connection || `Albis Daily — ${briefingDate}`);
+function titleCase(value: string | null | undefined) {
+  return String(value || 'global')
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-function buildBriefingFromScan(briefingDate: string, items: any[]) {
-  const top = selectPublicStories(items, 5, 7).map((entry) => entry.item);
-  const title = buildBriefingTitle(top, briefingDate);
-  const contentMd = top.map((item: any) => formatBriefingLine(item)).join('\n');
-  const topStories = top.slice(0, 4).map((item: any) => ({
-    region: (item.regions || [])[0] || 'global',
-    headline: item.headline,
-    category: normalisePublicCategory(item.category || 'current-events'),
-  }));
+function categoryLabel(value: string | null | undefined) {
+  return String(value || 'current-events').replace(/-/g, ' ');
+}
+
+function renderSectionItem(item: DailyBriefingSectionItem) {
+  return `<div style="margin:0 0 18px;">
+    <p style="font-size:16px;line-height:1.55;color:#1a1a2e;margin:0 0 6px;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(item.headline)}</p>
+    <p style="font-size:12px;line-height:1.5;color:#6b7280;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.08em;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(categoryLabel(item.category))} · ${esc(titleCase(item.region))} · ${esc(item.laneLabel || item.lane || 'signal')}</p>
+    <p style="font-size:15px;line-height:1.7;color:#374151;margin:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(item.summary)}</p>
+  </div>`;
+}
+
+function sectionBlock(label: string, body: string) {
+  if (!body) return '';
+  return `<div style="margin-top:30px;">
+    <div style="font-size:11px;color:#c8922a;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.18em;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(label)}</div>
+    ${body}
+  </div>`;
+}
+
+function stableJson(value: unknown): string {
+  if (Array.isArray(value)) return `[${value.map((item) => stableJson(item)).join(',')}]`;
+  if (value && typeof value === 'object') {
+    const entries = Object.entries(value as Record<string, unknown>)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([key, entry]) => `${JSON.stringify(key)}:${stableJson(entry)}`);
+    return `{${entries.join(',')}}`;
+  }
+  return JSON.stringify(value ?? null);
+}
+
+function needsPackageRefresh(briefing: any, draft: any) {
+  if (!briefing?.content_md || !String(briefing.content_md).includes('## Lead thesis')) return true;
+  if (!Array.isArray(briefing?.top_stories) || briefing.top_stories.length === 0) return true;
+  if (!briefing?.edition_scorecard?.metrics?.length) return true;
+  return (
+    String(briefing.content_md || '') !== String(draft.content_md || '') ||
+    stableJson(briefing.top_stories) !== stableJson(draft.top_stories) ||
+    stableJson(briefing.edition_scorecard) !== stableJson(draft.edition_scorecard)
+  );
+}
+
+function buildBriefingFromScan(briefingDate: string, items: any[], articleEntries: PublicEditionArticleEntry[] = []) {
+  const pkg = buildDailyBriefingPackage(briefingDate, items, articleEntries);
   return {
     date: briefingDate,
-    title,
-    content_md: contentMd,
+    title: pkg.title,
+    content_md: pkg.contentMd,
     mood: null,
     pgi_score: null,
     story_count: items.length,
-    top_stories: topStories,
+    top_stories: pkg.topStories,
+    edition_scorecard: pkg.scorecard,
   };
 }
 
 function generateSimpleDigestHtml(briefing: any, briefingDate: string): string {
   const title = briefing?.title || `Albis Daily — ${briefingDate}`;
-  const content = String(briefing?.content_md || '').trim();
   const topStories = Array.isArray(briefing?.top_stories) ? briefing.top_stories : [];
-  const topStoriesHtml = topStories.length
-    ? `<ul style="padding-left:20px;margin:16px 0;">${topStories.map((story: any) => `<li style="margin-bottom:8px;"><strong>${story?.headline || 'Untitled story'}</strong>${story?.region ? ` — ${story.region}` : ''}</li>`).join('')}</ul>`
+  const leadThesis = String(briefing?.content_md || '').match(/## Lead thesis\n([\s\S]*?)\n\n## Must-know signals/);
+  const doctrineLine = String(briefing?.content_md || '').match(/- Lane mix: (.*)/);
+  const thesisText = leadThesis?.[1]?.trim() || 'No briefing content available.';
+  const doctrineText = doctrineLine?.[1]?.trim() || '';
+  const mustKnow = topStories.filter((item: DailyBriefingSectionItem) => item?.slot === 'must-know');
+  const underseen = topStories.find((item: DailyBriefingSectionItem) => item?.slot === 'underseen');
+  const perceptionGap = topStories.find((item: DailyBriefingSectionItem) => item?.slot === 'perception-gap');
+  const watchpoint = Array.isArray(briefing?.top_stories) ? briefing.top_stories.find((item: DailyBriefingSectionItem) => item?.slot === 'watchpoint') : null;
+  const scorecard = briefing?.edition_scorecard;
+  const scorecardHtml = scorecard?.metrics?.length
+    ? sectionBlock(
+        'Edition scorecard',
+        `<div style="font-size:14px;line-height:1.7;color:#374151;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">
+          <p style="margin:0 0 10px;"><strong>${esc(scorecard.summary || '')}</strong></p>
+          ${(scorecard.metrics || []).map((metric: any) => `<p style="margin:0 0 8px;"><strong>${esc(metric.label)}:</strong> ${esc(metric.summary)} <span style="color:#6b7280;">(${esc(metric.status)})</span></p>`).join('')}
+        </div>`
+      )
     : '';
-  const contentHtml = content
-    ? content.split('\n').filter(Boolean).map((line) => `<p style="font-size:15px;line-height:1.7;color:#374151;margin:0 0 14px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${line.replace(/^[-*]\s*/, '')}</p>`).join('')
-    : '<p style="font-size:15px;line-height:1.7;color:#374151;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">No briefing content available.</p>';
+
+  const mustKnowHtml = mustKnow.map((item: DailyBriefingSectionItem) => renderSectionItem(item)).join('');
+  const underseenHtml = underseen ? renderSectionItem(underseen) : '';
+  const perceptionGapHtml = perceptionGap ? renderSectionItem(perceptionGap) : '';
+  const watchpointHtml = watchpoint
+    ? `<div style="margin:0;">
+        <p style="font-size:16px;line-height:1.55;color:#1a1a2e;margin:0 0 6px;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(watchpoint.headline)}</p>
+        <p style="font-size:15px;line-height:1.7;color:#374151;margin:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(watchpoint.why || watchpoint.summary)}</p>
+      </div>`
+    : '';
 
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>${title}</title>
+  <title>${esc(title)}</title>
 </head>
 <body style="margin:0;padding:0;background:#ffffff;color:#111827;">
   <table cellpadding="0" cellspacing="0" style="width:100%;max-width:680px;margin:0 auto;padding:32px 24px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">
     <tr><td>
       <div style="font-size:32px;font-weight:800;letter-spacing:2px;color:#1a1a2e;margin-bottom:8px;">ALBIS</div>
-      <div style="font-size:13px;color:#6b7280;margin-bottom:24px;">Daily Briefing · ${briefingDate}</div>
-      <h1 style="font-size:28px;line-height:1.25;color:#1a1a2e;margin:0 0 20px;">${title}</h1>
-      ${contentHtml}
-      ${topStoriesHtml ? `<h2 style="font-size:18px;color:#1a1a2e;margin:28px 0 12px;">Top stories</h2>${topStoriesHtml}` : ''}
+      <div style="font-size:13px;color:#6b7280;margin-bottom:24px;">Daily Briefing · ${esc(briefingDate)}</div>
+      <h1 style="font-size:28px;line-height:1.25;color:#1a1a2e;margin:0 0 18px;">${esc(title)}</h1>
+      ${sectionBlock('Lead thesis', `<p style="font-size:16px;line-height:1.8;color:#374151;margin:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(thesisText)}</p>`) }
+      ${doctrineText ? sectionBlock('Lane mix', `<p style="font-size:14px;line-height:1.7;color:#6b7280;margin:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(doctrineText)}</p>`) : ''}
+      ${sectionBlock('Must-know signals', mustKnowHtml)}
+      ${sectionBlock('Underseen signal', underseenHtml)}
+      ${sectionBlock('Perception gap', perceptionGapHtml)}
+      ${sectionBlock('Watchpoint', watchpointHtml)}
+      ${scorecardHtml}
       <div style="margin-top:32px;font-size:13px;color:#6b7280;">See clearly. — Albis</div>
     </td></tr>
   </table>
@@ -110,7 +171,20 @@ function generateSimpleDigestHtml(briefing: any, briefingDate: string): string {
 </html>`;
 }
 
-async function loadOrCreateBriefingPayload(supabase: ReturnType<typeof createAdminClient>, briefingDate: string) {
+async function loadEditionArticles(supabase: ReturnType<typeof createAdminClient>, briefingDate: string): Promise<PublicEditionArticleEntry[]> {
+  const { data, error } = await supabase
+    .from('articles')
+    .select('title,frontmatter,date')
+    .eq('date', briefingDate);
+  if (error) throw new Error(`Failed to load public articles for scorecard: ${error.message}`);
+  return (data || []).map((row: any) => ({
+    headline: row?.title || row?.frontmatter?.title || '',
+    doctrineLane: row?.frontmatter?.public_doctrine_lane || null,
+    articleForm: row?.frontmatter?.article_form || null,
+  }));
+}
+
+async function loadOrCreateBriefingPayload(supabase: ReturnType<typeof createAdminClient>, briefingDate: string, options: { dryRun: boolean }) {
   let { data: briefing, error } = await supabase
     .from('briefings')
     .select('*')
@@ -121,25 +195,54 @@ async function loadOrCreateBriefingPayload(supabase: ReturnType<typeof createAdm
 
   if (error) throw new Error(`Failed to load briefing row: ${error.message}`);
 
+  const items = await loadVerifiedScanItems(supabase, briefingDate);
+  if (!items.length) {
+    return { briefing: null, html: null, subject: null, noScan: true, createdOrUpdated: false };
+  }
+  const articleEntries = await loadEditionArticles(supabase, briefingDate);
+  const draft = buildBriefingFromScan(briefingDate, items, articleEntries);
+
   if (!briefing) {
-    const items = await loadVerifiedScanItems(supabase, briefingDate);
-    if (!items.length) {
-      return { briefing: null, html: null, subject: null, noScan: true };
+    if (options.dryRun) {
+      console.log('DRY RUN: would create briefing row with regenerated Phase 5-8 package fields');
+      briefing = { ...draft, id: 'dry-run-briefing' };
+    } else {
+      const upsert = await supabase
+        .from('briefings')
+        .upsert(draft, { onConflict: 'date' })
+        .select('*')
+        .single();
+      if (upsert.error || !upsert.data) throw new Error(`Failed to create briefing row: ${upsert.error?.message || 'missing row'}`);
+      briefing = upsert.data;
     }
-    const draft = buildBriefingFromScan(briefingDate, items);
-    const upsert = await supabase
-      .from('briefings')
-      .upsert(draft, { onConflict: 'date' })
-      .select('*')
-      .single();
-    if (upsert.error || !upsert.data) throw new Error(`Failed to create briefing row: ${upsert.error?.message || 'missing row'}`);
-    briefing = upsert.data;
+  } else if (needsPackageRefresh(briefing, draft)) {
+    const patch = {
+      title: draft.title,
+      content_md: draft.content_md,
+      story_count: draft.story_count,
+      top_stories: draft.top_stories,
+      edition_scorecard: draft.edition_scorecard,
+    };
+    if (options.dryRun) {
+      console.log(`DRY RUN: would refresh briefing ${briefing.id} Phase 5-8 package fields`);
+      briefing = { ...briefing, ...patch };
+    } else {
+      const update = await supabase
+        .from('briefings')
+        .update(patch)
+        .eq('id', briefing.id)
+        .select('*')
+        .single();
+      if (update.error || !update.data) throw new Error(`Failed to refresh briefing package fields: ${update.error?.message || 'missing row'}`);
+      briefing = update.data;
+      console.log(`↻ Refreshed briefing ${briefing.id} Phase 5-8 package fields`);
+    }
   }
 
   const html = generateSimpleDigestHtml(briefing, briefingDate);
 
   const subject = `ALBIS DAILY — ${briefingDate}`;
-  return { briefing, html, subject, noScan: false };
+  return { briefing, html, subject, noScan: false, createdOrUpdated: true };
 }
 
 async function alreadyDeliveredDate(supabase: ReturnType<typeof createAdminClient>, briefingDate: string) {
@@ -196,6 +299,36 @@ async function sendOne(resend: Resend, to: string, subject: string, html: string
   if (error) throw new Error(error.message);
 }
 
+async function recordDailyEditionReport(input: {
+  supabase: ReturnType<typeof createAdminClient>;
+  briefingDate: string;
+  briefing: any;
+  verifiedItems: any[];
+  runId: string;
+}) {
+  try {
+    const articleEntries = await loadEditionArticles(input.supabase, input.briefingDate);
+    const scorecard: PublicEditionScorecard = input.briefing?.edition_scorecard || buildDailyBriefingPackage(
+      input.briefingDate,
+      input.verifiedItems,
+      articleEntries,
+    ).scorecard;
+    const report = buildPublicEditionRunReport({
+      date: input.briefingDate,
+      source: 'daily-briefing',
+      scorecard,
+      articleEntries,
+      runId: input.runId,
+    });
+    const files = await writePublicEditionRunReport(report);
+    console.log(`📊 ${formatPublicEditionRunReportLine(report)}`);
+    for (const warning of report.warnings) console.log(`   ⚠️ ${warning}`);
+    console.log(`🧾 Edition QA report: ${path.relative(process.cwd(), files.dateLatestFile)}`);
+  } catch (err) {
+    console.warn(`⚠️ Edition QA report skipped: ${err instanceof Error ? err.message : String(err)}`);
+  }
+}
+
 async function main() {
   const { briefingDate, forceDeliver, dryRun, onlyEmail } = parseArgs();
   const supabase = createAdminClient();
@@ -210,14 +343,19 @@ async function main() {
   console.log(`✅ Verified ${verifiedItems.length} scan items from DB truth`);
   console.log(`✅ Verified PGI/GAI rows (${scoreStatus.pgiCount} PGI, ${scoreStatus.gaiCount} GAI)`);
 
-  const payload = await loadOrCreateBriefingPayload(supabase, briefingDate);
+  const payload = await loadOrCreateBriefingPayload(supabase, briefingDate, { dryRun });
   if (payload.noScan) {
     console.log(`No scan data for ${briefingDate} yet, would generate and send when scan runs.`);
     return;
   }
   const { briefing, html, subject } = payload;
-  await requireBriefingRow(supabase, briefingDate);
-  console.log('✅ Verified briefing row in Supabase');
+  if (dryRun && briefing?.id === 'dry-run-briefing') {
+    console.log('DRY RUN: briefing row not created; skipping Supabase row verification');
+  } else {
+    await requireBriefingRow(supabase, briefingDate);
+    console.log('✅ Verified briefing row in Supabase');
+  }
+  await recordDailyEditionReport({ supabase, briefingDate, briefing, verifiedItems, runId });
 
   const dateAlreadySent = await alreadyDeliveredDate(supabase, briefingDate);
   if (dateAlreadySent && !forceDeliver) {

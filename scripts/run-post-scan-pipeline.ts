@@ -7,7 +7,16 @@ import readingTime from 'reading-time';
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 import { loadVerifiedScanItems, requireIndexDailyRows, requireScanRows, requireScanItemsAvailability, requireSnapshotForDate, requireStoryScores } from '../src/lib/pipeline-db';
-import { normalisePublicCategory, selectPublicStories, suggestPublicArticleCount, type ArticleSignals, type PublicStorySelection } from '../src/lib/public-story-selection';
+import { normalisePublicCategory, selectPublicStories, suggestPublicArticleCount, type ArticleForm, type ArticleSignals, type PublicStorySelection } from '../src/lib/public-story-selection';
+import { PUBLIC_EDITORIAL_DOCTRINE_VERSION, getPublicDoctrineLaneSpec, type PublicDoctrineLane } from '../src/lib/public-editorial-doctrine';
+import { buildStoryPlan, type OpeningMode, type StoryPlan } from '../src/lib/public-story-planner';
+import { buildDailyBriefingPackage } from '../src/lib/public-daily-briefing';
+import type { PublicEditionArticleEntry } from '../src/lib/public-edition-scorecard';
+import {
+  buildPublicEditionRunReport,
+  formatPublicEditionRunReportLine,
+  writePublicEditionRunReport,
+} from '../src/lib/public-edition-run-report';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -60,8 +69,10 @@ type StoryPacket = {
   coverageBreadth: number | null;
   primaryRegion: string;
   tagText: string;
+  lane: string | null;
+  doctrineLane: PublicDoctrineLane | null;
   articleSignals: ArticleSignals | null;
-  articleForm: string | null;
+  articleForm: ArticleForm | null;
   articleOpportunity: string | null;
 };
 
@@ -304,7 +315,7 @@ async function chooseUniqueImage(item: ScanItem, slug: string, category: string,
   return fallback;
 }
 
-function buildStoryPacket(item: ScanItem, selection?: Pick<PublicStorySelection, 'articleSignals' | 'articleForm' | 'articleOpportunity'>): StoryPacket {
+function buildStoryPacket(item: ScanItem, selection?: Pick<PublicStorySelection, 'lane' | 'doctrineLane' | 'articleSignals' | 'articleForm' | 'articleOpportunity'>): StoryPacket {
   const title = titleFromHeadline(item.headline);
   const tags = Array.isArray(item.tags) ? item.tags : [];
   const regions = Array.isArray(item.regions) ? item.regions : [];
@@ -324,6 +335,8 @@ function buildStoryPacket(item: ScanItem, selection?: Pick<PublicStorySelection,
     coverageBreadth: typeof item.coverage_breadth === 'number' ? item.coverage_breadth : null,
     primaryRegion: selection?.articleSignals?.primaryLocation || regions[0] || 'the wider region',
     tagText: tags.slice(0, 5).map((t) => t.replace(/-/g, ' ')).join(', '),
+    lane: selection?.lane || null,
+    doctrineLane: selection?.doctrineLane || null,
     articleSignals: selection?.articleSignals || null,
     articleForm: selection?.articleForm || null,
     articleOpportunity: selection?.articleOpportunity || null,
@@ -835,7 +848,7 @@ function buildOffbeatSignalBody(packet: StoryPacket) {
   return { lede, body: paragraphs.join('\n\n') };
 }
 
-function buildArticleBody(packet: StoryPacket) {
+function buildLegacyArticleBody(packet: StoryPacket) {
   switch (packet.articleForm) {
     case 'framing-map':
       return buildFramingMapBody(packet);
@@ -851,6 +864,334 @@ function buildArticleBody(packet: StoryPacket) {
     default:
       return buildTurningPointBody(packet);
   }
+}
+
+function planStory(packet: StoryPacket): StoryPlan {
+  return buildStoryPlan({
+    title: packet.title,
+    category: packet.category,
+    connection: packet.connection,
+    significance: packet.significance,
+    lane: packet.lane,
+    articleForm: packet.articleForm,
+    articleOpportunity: packet.articleOpportunity,
+    articleSignals: packet.articleSignals,
+    primaryRegion: packet.primaryRegion,
+    regions: packet.regions,
+    tags: packet.tags,
+  });
+}
+
+type DraftPath = 'legacy' | 'plan-driven-v1';
+
+type BuiltStoryDraft = {
+  lede: string;
+  body: string;
+  plan: StoryPlan;
+  draftPath: DraftPath;
+  draftForm: StoryPlan['storyKind'] | 'legacy';
+};
+
+function joinSentences(...parts: Array<string | null | undefined>) {
+  return parts
+    .map((part) => String(part || '').replace(/\s+/g, ' ').trim())
+    .filter(Boolean)
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function ensurePeriod(text: string) {
+  const value = String(text || '').trim();
+  if (!value) return '';
+  return /[.!?]$/.test(value) ? value : `${value}.`;
+}
+
+function buildPlanDrivenNutGraf(packet: StoryPacket, plan: StoryPlan) {
+  const fact = sentenceCase(packet.articleSignals?.coreFact || packet.connection || packet.title);
+  const promise = ensurePeriod(plan.nutGrafPromise);
+  const tension = ensurePeriod(plan.mainTension);
+  return joinSentences(fact, promise, tension);
+}
+
+function buildPlanDrivenTurningPointConsequence(packet: StoryPacket) {
+  const connection = ensurePeriod(sentenceCase(packet.connection || 'The state of play has changed enough that other actors now have to make decisions against a different backdrop.'));
+  const detail = pickFreshDetail(packet);
+  const stake = packet.articleSignals?.humanStake ? `${sentenceCase(packet.articleSignals.humanStake)} is one of the first places that shift becomes visible.` : '';
+  return joinSentences(
+    connection,
+    `The practical test now is whether the move around ${detail} stays narrow or forces a wider reset in timing, pricing, routing, access, or political room to manoeuvre.`,
+    stake,
+  );
+}
+
+function buildPlanDrivenTurningPointWatch(packet: StoryPacket, plan: StoryPlan) {
+  const location = packet.articleSignals?.primaryLocation || packet.primaryRegion;
+  const actors = packet.articleSignals?.mainActors?.slice(0, 2).join(' and ');
+  return joinSentences(
+    `The next phase is less about the announcement than about follow-through in ${location}.`,
+    actors ? `${actors} are now part of the watch list because their next choices will show whether this turn hardens into a new baseline or remains a short-lived jolt.` : 'The next choices on the ground will show whether this turn hardens into a new baseline or remains a short-lived jolt.',
+    ensurePeriod(plan.walkaway),
+  );
+}
+
+function buildPlanDrivenHumanBridge(packet: StoryPacket, plan: StoryPlan) {
+  const stake = packet.articleSignals?.humanStake || 'lived consequences';
+  const place = packet.articleSignals?.primaryLocation || packet.primaryRegion;
+  const connection = ensurePeriod(sentenceCase(packet.connection || 'The local pressure point is carrying a wider system signal.'));
+  return joinSentences(
+    `That is the point of entry: in ${place}, ${stake} is already concrete enough to read as operating reality rather than future risk.`,
+    connection,
+    ensurePeriod(plan.nutGrafPromise),
+  );
+}
+
+function buildPlanDrivenHumanMechanism(packet: StoryPacket) {
+  const mechanism = packet.articleSignals?.mechanism && packet.articleSignals.mechanism !== 'state change with second-order effects'
+    ? sentenceCase(packet.articleSignals.mechanism)
+    : 'The wider mechanism is now visible in everyday pressure';
+  return joinSentences(
+    `${mechanism} is what connects the local strain to the larger story.`,
+    buildStorySpecificCascade(packet),
+    buildStorySpecificStakes(packet),
+  );
+}
+
+function buildPlanDrivenHumanReturn(packet: StoryPacket) {
+  const stake = packet.articleSignals?.humanStake || 'that pressure';
+  const number = packet.articleSignals?.keyNumber ? `${packet.articleSignals.keyNumber} is one clue that the burden is becoming measurable.` : '';
+  return joinSentences(
+    `${sentenceCase(stake)} matters because it tells readers where the abstract shift starts landing in ordinary life.`,
+    number,
+    `If the signal keeps building, the consequences will show up not just in headlines but in access, waiting time, household budgets, and institutional capacity.`,
+  );
+}
+
+function buildPlanDrivenFramingContrast(packet: StoryPacket, plan: StoryPlan) {
+  const framing = sentenceCase(packet.articleSignals?.framingTension || plan.mainTension);
+  const pairWith = packet.articleSignals?.pairWith?.length ? `That split also opens into ${packet.articleSignals.pairWith.join(' or ')} as the next layer of coverage.` : '';
+  return joinSentences(
+    `${framing} That matters because audiences can leave the same event with different ideas about what the story is actually about.`,
+    pairWith,
+  );
+}
+
+function buildPlanDrivenFramingMechanism(packet: StoryPacket) {
+  const mechanism = packet.articleSignals?.mechanism && packet.articleSignals.mechanism !== 'state change with second-order effects'
+    ? sentenceCase(packet.articleSignals.mechanism)
+    : 'The underlying mechanism is doing more work than the loudest frame admits';
+  const connection = ensurePeriod(sentenceCase(packet.connection || 'The gap between frame and operating reality is part of the story.'));
+  return joinSentences(
+    `${mechanism} is the hinge.`,
+    connection,
+    `Once that hinge comes into view, the difference between rhetoric, emphasis, and downstream consequence becomes easier to read.`,
+  );
+}
+
+function buildPlanDrivenFramingWhy(packet: StoryPacket, plan: StoryPlan) {
+  const found = packet.regionsFound.length ? packet.regionsFound.slice(0, 3).join(', ') : packet.regions.slice(0, 3).join(', ');
+  const gapText = packet.perceptionGap && packet.perceptionGap >= 7
+    ? 'The perception gap is already wide enough that readers in different places may think they are tracking different central facts.'
+    : 'Even a narrower gap can still change what readers notice first and what they ignore.';
+  return joinSentences(
+    found ? `That split is visible across coverage clustered in ${found}.` : 'That split is already visible across the reporting footprint.',
+    gapText,
+    ensurePeriod(plan.walkaway),
+  );
+}
+
+function buildPlanDrivenNumbersBridge(packet: StoryPacket, plan: StoryPlan) {
+  const number = packet.articleSignals?.keyNumber || pickFreshDetail(packet);
+  const novelty = packet.articleSignals?.novelty ? `${sentenceCase(packet.articleSignals.novelty)}.` : '';
+  return joinSentences(
+    `${number} is the hinge in this story because it tells readers where the pressure stops sounding ambient and starts becoming measurable.`,
+    ensurePeriod(plan.nutGrafPromise),
+    novelty,
+  );
+}
+
+function buildPlanDrivenNumbersMeaning(packet: StoryPacket) {
+  const number = packet.articleSignals?.keyNumber || 'The operative metric';
+  return joinSentences(
+    `${number} matters only if it redraws what other actors now have to plan around.`,
+    buildNumberMeaningParagraph(packet),
+    buildStorySpecificStakes(packet),
+  );
+}
+
+function buildPlanDrivenNumbersWatch(packet: StoryPacket, plan: StoryPlan) {
+  const detail = pickFreshDetail(packet);
+  return joinSentences(
+    `The useful test now is whether ${detail} keeps moving in the same direction or forces officials, operators, or households to accept a different baseline.`,
+    ensurePeriod(plan.walkaway),
+  );
+}
+
+function buildPlanDrivenSystemBridge(packet: StoryPacket, plan: StoryPlan) {
+  const mechanism = packet.articleSignals?.mechanism || 'the operative bottleneck';
+  return joinSentences(
+    `${sentenceCase(mechanism)} is the engine here, not a side note.`,
+    ensurePeriod(plan.nutGrafPromise),
+    ensurePeriod(plan.mainTension),
+  );
+}
+
+function buildPlanDrivenSystemCascade(packet: StoryPacket) {
+  return joinSentences(
+    buildMechanismParagraph(packet),
+    buildSystemRippleParagraph(packet),
+    buildStorySpecificCascade(packet),
+  );
+}
+
+function buildPlanDrivenSystemWhy(packet: StoryPacket, plan: StoryPlan) {
+  const detail = pickFreshDetail(packet);
+  return joinSentences(
+    `That is why ${detail} matters more than the headline temperature: it is one of the first places the reroute, shortage, waiver, or constraint starts altering real decisions.`,
+    buildStorySpecificStakes(packet),
+    ensurePeriod(plan.walkaway),
+  );
+}
+
+function buildPlanDrivenOffbeatBridge(packet: StoryPacket, plan: StoryPlan) {
+  const detail = pickFreshDetail(packet);
+  return joinSentences(
+    `${sentenceCase(detail)} is not just colour; it is the cleanest route into the larger pattern.`,
+    ensurePeriod(plan.nutGrafPromise),
+    buildOffbeatBridgeParagraph(packet),
+  );
+}
+
+function buildPlanDrivenOffbeatWhy(packet: StoryPacket, plan: StoryPlan) {
+  const novelty = packet.articleSignals?.novelty ? `${sentenceCase(packet.articleSignals.novelty)}.` : '';
+  return joinSentences(
+    buildWhyItMattersParagraph(packet),
+    novelty,
+    ensurePeriod(plan.walkaway),
+  );
+}
+
+function buildPlanDrivenDraft(packet: StoryPacket, plan: StoryPlan): BuiltStoryDraft | null {
+  const regional = buildRegionalDetailParagraph(packet);
+  const watch = buildWhatToWatchParagraph(packet);
+  const closing = buildClosingParagraph(packet);
+
+  switch (plan.storyKind) {
+    case 'turning-point': {
+      const lede = buildActorActionLede(packet);
+      const paragraphs = [
+        lede,
+        buildPlanDrivenNutGraf(packet, plan),
+        buildPlanDrivenTurningPointConsequence(packet, plan),
+        buildMechanismParagraph(packet),
+        regional,
+        buildContextParagraph(packet),
+        buildPlanDrivenTurningPointWatch(packet, plan),
+        watch,
+        closing,
+      ];
+      return { lede, body: paragraphs.join('\n\n'), plan, draftPath: 'plan-driven-v1', draftForm: plan.storyKind };
+    }
+    case 'human-fallout': {
+      const lede = buildHumanGroundLede(packet);
+      const paragraphs = [
+        lede,
+        buildPlanDrivenHumanBridge(packet, plan),
+        buildWhatChangedParagraph(packet),
+        buildPlanDrivenHumanMechanism(packet, plan),
+        regional,
+        buildPlanDrivenHumanReturn(packet, plan),
+        watch,
+        closing,
+      ];
+      return { lede, body: paragraphs.join('\n\n'), plan, draftPath: 'plan-driven-v1', draftForm: plan.storyKind };
+    }
+    case 'framing-battle': {
+      const lede = buildFramingMapLede(packet);
+      const paragraphs = [
+        lede,
+        buildPlanDrivenNutGraf(packet, plan),
+        buildPlanDrivenFramingContrast(packet, plan),
+        buildPlanDrivenFramingMechanism(packet, plan),
+        regional,
+        buildPlanDrivenFramingWhy(packet, plan),
+        watch,
+        closing,
+      ];
+      return { lede, body: paragraphs.join('\n\n'), plan, draftPath: 'plan-driven-v1', draftForm: plan.storyKind };
+    }
+    case 'numbers-reset': {
+      const lede = buildNumbersWatchLede(packet);
+      const paragraphs = [
+        lede,
+        buildPlanDrivenNumbersBridge(packet, plan),
+        buildPlanDrivenNumbersMeaning(packet, plan),
+        buildWhatChangedParagraph(packet),
+        buildMechanismParagraph(packet),
+        regional,
+        buildPlanDrivenNumbersWatch(packet, plan),
+        watch,
+        closing,
+      ];
+      return { lede, body: paragraphs.join('\n\n'), plan, draftPath: 'plan-driven-v1', draftForm: plan.storyKind };
+    }
+    case 'system-ripple': {
+      const lede = buildSystemShiftLede(packet);
+      const paragraphs = [
+        lede,
+        buildPlanDrivenSystemBridge(packet, plan),
+        buildPlanDrivenSystemCascade(packet, plan),
+        buildWhatChangedParagraph(packet),
+        regional,
+        buildPlanDrivenSystemWhy(packet, plan),
+        watch,
+        closing,
+      ];
+      return { lede, body: paragraphs.join('\n\n'), plan, draftPath: 'plan-driven-v1', draftForm: plan.storyKind };
+    }
+    case 'offbeat-window': {
+      const lede = buildOffbeatSignalLede(packet);
+      const paragraphs = [
+        lede,
+        buildPlanDrivenOffbeatBridge(packet, plan),
+        buildWhatChangedParagraph(packet),
+        buildMechanismParagraph(packet),
+        regional,
+        buildPlanDrivenOffbeatWhy(packet, plan),
+        watch,
+        closing,
+      ];
+      return { lede, body: paragraphs.join('\n\n'), plan, draftPath: 'plan-driven-v1', draftForm: plan.storyKind };
+    }
+    default:
+      return null;
+  }
+}
+
+function selectLegacyBodyFromPlan(packet: StoryPacket, plan: StoryPlan) {
+  switch (plan.openingMode as OpeningMode) {
+    case 'contrast':
+      return buildFramingMapBody(packet);
+    case 'human-proximity':
+      return buildHumanGroundBody(packet);
+    case 'number':
+      return buildNumbersWatchBody(packet);
+    case 'odd-detail':
+      return buildOffbeatSignalBody(packet);
+    case 'pressure-point':
+      return packet.articleForm === 'turning-point' ? buildTurningPointBody(packet) : buildSystemShiftBody(packet);
+    case 'direct-factual':
+    default:
+      return packet.articleForm === 'system-shift' ? buildSystemShiftBody(packet) : buildTurningPointBody(packet);
+  }
+}
+
+function buildPlannedArticleBody(packet: StoryPacket) {
+  const plan = planStory(packet);
+  const planned = buildPlanDrivenDraft(packet, plan);
+  if (planned) return planned;
+  const built = selectLegacyBodyFromPlan(packet, plan);
+  return { ...built, plan, draftPath: 'legacy' as const, draftForm: 'legacy' as const };
 }
 
 function containsBannedPhrases(text: string) {
@@ -1044,7 +1385,7 @@ function assessArticleQuality(packet: StoryPacket, body: string) {
 async function buildArticle(selection: PublicStorySelection, date: string, usedImages: Set<string>): Promise<BuiltArticle> {
   const item = selection.item as ScanItem;
   const packet = buildStoryPacket(item, selection);
-  const built = buildArticleBody(packet);
+  const built = buildPlannedArticleBody(packet);
   const opening = built.lede.trim();
   let body = built.body;
   let quality = assessArticleQuality(packet, body);
@@ -1065,6 +1406,7 @@ async function buildArticle(selection: PublicStorySelection, date: string, usedI
   const wordCount = quality.diagnostics.wordCount;
   const image = await chooseUniqueImage(item, packet.slug, packet.category, usedImages);
   const excerpt = packet.connection || packet.title;
+  const doctrine = packet.doctrineLane ? getPublicDoctrineLaneSpec(packet.doctrineLane) : null;
   const frontmatter = {
     title: packet.title,
     description: excerpt,
@@ -1075,8 +1417,15 @@ async function buildArticle(selection: PublicStorySelection, date: string, usedI
     excerpt,
     author: 'Albis',
     article_form: packet.articleForm,
+    public_doctrine_version: PUBLIC_EDITORIAL_DOCTRINE_VERSION,
+    public_doctrine_lane: packet.doctrineLane,
+    public_doctrine_label: doctrine?.label || null,
+    public_doctrine_behavior: doctrine?.articleBehavior || null,
     article_opportunity: packet.articleOpportunity,
     article_signals: packet.articleSignals,
+    story_plan: built.plan,
+    story_draft_path: built.draftPath,
+    story_draft_form: built.draftForm,
   };
   const markdown = matter.stringify(body, frontmatter);
   return {
@@ -1115,7 +1464,7 @@ async function buildArticles(items: ScanItem[], date: string) {
     try {
       const article = await buildArticle(candidate, date, usedImages);
       selected.push(article);
-      console.log(`✅ Built article ${article.slug} (${article.wordCount} words) [${candidate.categoryKey} | ${candidate.articleForm} | writeability ${candidate.writeabilityScore.toFixed(2)} | ${candidate.why.join(', ')}]`);
+      console.log(`✅ Built article ${article.slug} (${article.wordCount} words) [${candidate.categoryKey} | ${candidate.doctrineLane} | ${candidate.articleForm} | writeability ${candidate.writeabilityScore.toFixed(2)} | draft ${(article.frontmatter.story_draft_path as string) || 'legacy'} | ${candidate.why.join(', ')}]`);
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       console.log(`↷ Skipped ${slug}: ${message}`);
@@ -1193,6 +1542,14 @@ async function verifyArticles(articles: BuiltArticle[]) {
 }
 
 
+function toEditionArticleEntry(article: BuiltArticle): PublicEditionArticleEntry {
+  return {
+    headline: article.title,
+    doctrineLane: (article.frontmatter.public_doctrine_lane as PublicDoctrineLane | null) || null,
+    articleForm: (article.frontmatter.article_form as ArticleForm | null) || null,
+  };
+}
+
 function logCodeChangeStatus() {
   const status = spawnSync('git', ['status', '--porcelain'], { cwd: process.cwd(), env: process.env, encoding: 'utf8' });
   const changed = (status.stdout || '')
@@ -1258,6 +1615,40 @@ async function main() {
 
   const articles = await buildArticles(items, date);
   console.log(`✅ ${articles.length} candidate(s) passed the gate`);
+
+  const articleEntries = articles.map((article) => toEditionArticleEntry(article));
+  const editionScorecard = buildDailyBriefingPackage(
+    date,
+    items,
+    articleEntries,
+  ).scorecard;
+  const editionReport = buildPublicEditionRunReport({
+    date,
+    source: 'post-scan',
+    scorecard: editionScorecard,
+    articleEntries,
+    runId: `post-scan-${date}-${period}-${Date.now()}`,
+  });
+  for (const article of articles) {
+    article.frontmatter.public_edition_scorecard_version = editionScorecard.version;
+    article.frontmatter.public_edition_scorecard_summary = editionScorecard.summary;
+    article.frontmatter.public_edition_scorecard = editionScorecard;
+    article.frontmatter.public_edition_run_report_version = editionReport.version;
+    article.frontmatter.public_edition_run_report_status = editionReport.status;
+    article.frontmatter.public_edition_run_report = editionReport;
+  }
+  console.log(`📊 ${formatPublicEditionRunReportLine(editionReport)}`);
+  for (const metric of editionScorecard.metrics) {
+    console.log(`   - ${metric.label}: ${metric.summary} [${metric.status}]`);
+  }
+  for (const warning of editionReport.warnings) console.log(`   ⚠️ ${warning}`);
+  try {
+    const files = await writePublicEditionRunReport(editionReport);
+    console.log(`🧾 Edition QA report: ${path.relative(process.cwd(), files.dateLatestFile)}`);
+  } catch (err) {
+    console.warn(`⚠️ Edition QA report artifact skipped: ${err instanceof Error ? err.message : String(err)}`);
+  }
+
   writeArticlesLocally(articles);
   await ingestArticles(articles);
   await verifyArticles(articles);

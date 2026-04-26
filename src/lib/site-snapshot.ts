@@ -33,6 +33,7 @@ import type { ScanItem, PatternOfDay } from "@/lib/scan-types";
 export interface BriefingTopStory {
   region: string;
   headline: string;
+  laneLabel?: string;
 }
 
 export interface SiteSnapshot {

@@ -1,4 +1,5 @@
 import type { ScanItemInput } from './relevance-engine';
+import { derivePublicDoctrineLane, type PublicDoctrineLane } from './public-editorial-doctrine';
 
 export interface ArticleSignals {
   coreFact: string;
@@ -25,6 +26,7 @@ export interface PublicStorySelection {
   specificity: number;
   why: string[];
   lane: string;
+  doctrineLane: PublicDoctrineLane;
   articleForm: ArticleForm;
   articleOpportunity: string;
   articleSignals: ArticleSignals;
@@ -719,6 +721,7 @@ export function rankPublicStories(items: ScanItemInput[]): PublicStorySelection[
       const { score, why, specificity, lane } = scorePublicInterest(item);
       const categoryKey = normalisePublicCategory(item.category);
       const articleForm = articleFormFromItem(item, categoryKey, lane);
+      const doctrineLane = derivePublicDoctrineLane({ articleForm, lane, category: categoryKey });
       const writeability = scoreWriteability(item, categoryKey, articleForm, specificity);
       return {
         item,
@@ -733,6 +736,7 @@ export function rankPublicStories(items: ScanItemInput[]): PublicStorySelection[
           ? [...why, ...writeability.why, 'war-system']
           : [...why, ...writeability.why],
         lane,
+        doctrineLane,
         articleForm,
         articleOpportunity: describeArticleOpportunity(articleForm),
         articleSignals: buildArticleSignals(item, categoryKey, lane, articleForm, specificity),
@@ -783,6 +787,7 @@ function choosePass(
 ) {
   const categories = new Map<string, number>();
   const lanes = new Map<string, number>();
+  const doctrineLanes = new Map<PublicDoctrineLane, number>();
   const clusters = new Set<string>();
   const topics = new Set<string>();
   const duplicates: PublicStorySelection[] = [];
@@ -795,11 +800,13 @@ function choosePass(
     topics.add(entry.topicKey);
     duplicates.push(entry);
     forms.set(entry.articleForm, (forms.get(entry.articleForm) || 0) + 1);
+    doctrineLanes.set(entry.doctrineLane, (doctrineLanes.get(entry.doctrineLane) || 0) + 1);
   }
 
   const cap = opts.relaxedCategoryCap ? Math.max(2, categoryCap(target)) : categoryCap(target);
   const warSystemCap = opts.relaxedLaneCap ? Math.max(2, Math.ceil(target / 3)) : 1;
   const formCap = opts.relaxedCategoryCap ? 2 : 1;
+  const doctrineCap = opts.relaxedCategoryCap ? 2 : 1;
 
   for (const entry of pool) {
     if (selected.length >= target) break;
@@ -812,6 +819,7 @@ function choosePass(
     if (lane === 'war-system' && (lanes.get(lane) || 0) >= warSystemCap) continue;
     if ((categories.get(entry.categoryKey) || 0) >= cap) continue;
     if ((forms.get(entry.articleForm) || 0) >= formCap) continue;
+    if ((doctrineLanes.get(entry.doctrineLane) || 0) >= doctrineCap) continue;
 
     selected.push(entry);
     categories.set(entry.categoryKey, (categories.get(entry.categoryKey) || 0) + 1);
@@ -820,6 +828,7 @@ function choosePass(
     topics.add(entry.topicKey);
     duplicates.push(entry);
     forms.set(entry.articleForm, (forms.get(entry.articleForm) || 0) + 1);
+    doctrineLanes.set(entry.doctrineLane, (doctrineLanes.get(entry.doctrineLane) || 0) + 1);
   }
 }
 
