@@ -195,3 +195,8 @@ During the context-loading audit before Package 1 started, Claude Code raised 5 
 - No is_test_account column on profiles. TEST_COMPANY_OWNER_ID in tier-enforcement.ts is the current workaround. Package 7 adds the column.
 
 - scans_v2 table exists (migration 00002) but is unused. Ignore unless a cleanup package specifically targets it.
+
+- **Canonical self-organisation (post Package 8).** Today the registry auto-creates new canonicals from user input but doesn't link related ones. A future package should add co-occurrence learning (companies tracking X also track Y → propose alias) or LLM clustering, with confidence thresholds and optional human review before auto-merge. Real product moat. Best done once there's enough usage data — probably after 20–50 active companies. Architecture supports this today; just needs the learning layer.
+
+- **Canonical ambiguity tiebreaker (~20 profiles).** When a raw value matches multiple canonicals, fall back to type-priority instead of skipping. Watchlist_entities → prefer entity over route over region. Supply_chain_exposure → prefer commodity over theme. Cheap, deterministic, fixes ~80% of skipped values without LLM cost. ~30 min Claude Code work.
+- **Multi-language alias auto-extraction.** When the resolver creates a new canonical, optionally call OpenAI to suggest translations and common abbreviations to seed the alias table. Costs ~$0.001 per new canonical. Massively boosts multi-language coverage without manual seeding. Best wired in alongside Package 8's LLM work.
