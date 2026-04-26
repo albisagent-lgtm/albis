@@ -357,6 +357,16 @@ export default function CompanyOnboardingClient() {
         .from("company_profiles")
         .upsert(data, { onConflict: "owner_id" });
       if (upsertError) { setError(upsertError.message); setSaving(false); return; }
+
+      // Trial assignment + preview-briefing generation. Non-blocking — if
+      // the server step fails the user still lands on the dashboard and the
+      // trial can be back-filled later by support.
+      try {
+        await fetch("/api/onboarding/complete", { method: "POST" });
+      } catch (err) {
+        console.warn("onboarding/complete POST failed (non-fatal)", err);
+      }
+
       router.push("/dashboard/profile");
     } catch {
       setError("Failed to save profile. Please try again.");
