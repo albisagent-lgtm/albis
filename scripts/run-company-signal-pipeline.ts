@@ -264,15 +264,17 @@ async function main() {
     }
 
     try {
-      // Coverage-builder still uses the legacy ScanItemInput signature
-      // here. Checkpoint 4 extends it with a signals-aware option that
-      // populates by_language / by_region from real signal metadata.
+      // Pass the raw signals[] alongside adapted ScanItemInput[] so
+      // coverage-builder populates by_language / by_region from real
+      // signal source metadata. The adapted[] arg stays for legacy
+      // compatibility but is unused on this code path.
       const coverage = await buildCoverageSummary(
         supabase,
         rawProfile,
         scored,
         adapted,
-        scanDate
+        scanDate,
+        { signals }
       );
       const { error: coverageErr } = await supabase
         .from('company_coverage_summaries')

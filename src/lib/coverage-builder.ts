@@ -12,6 +12,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { CompanyProfile } from "./company-profile";
 import type { ScoredStory, ScanItemInput, MatchReason } from "./relevance-engine";
+import type { Signal } from "./company-scan/types";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -200,14 +201,32 @@ async function annotateLastMovement(
 }
 
 function buildSourcesInspected(scanItems: ScanItemInput[]): SourcesInspected {
-  // TODO(pkg-5): scan_items currently carries no language or source-URL
-  // metadata. Once the upstream scan tags each item with language + source
-  // domain, populate by_language and by_region from those fields. Until
-  // then we ship total only — never invent breakdowns.
+  // Public scan_items carry no language or source-URL metadata, so the
+  // legacy code path ships total only — never invent breakdowns. The
+  // signals-aware variant below populates by_language / by_region from
+  // real signal source metadata.
   return {
     total: scanItems.length,
     by_language: {},
     by_region: {},
+  };
+}
+
+function buildSourcesInspectedFromSignals(signals: Signal[]): SourcesInspected {
+  const by_language: Record<string, number> = {};
+  const by_region: Record<string, number> = {};
+  for (const sig of signals) {
+    if (sig.source_language) {
+      by_language[sig.source_language] = (by_language[sig.source_language] || 0) + 1;
+    }
+    if (sig.source_region) {
+      by_region[sig.source_region] = (by_region[sig.source_region] || 0) + 1;
+    }
+  }
+  return {
+    total: signals.length,
+    by_language,
+    by_region,
   };
 }
 
@@ -288,13 +307,22 @@ function buildSummaryText(
  *
  * Throws if the Supabase history read fails. Pipeline call sites must wrap
  * this in try/catch so a coverage failure cannot kill the briefing run.
+ *
+ * Dual-mode at v1: when `options.signals` is provided (the new typed
+ * pipeline), sources_inspected.by_language and by_region come from real
+ * signal source metadata. When only `scanItems` is provided (the legacy
+ * public-pool pipeline), we ship total only because public scan_items
+ * carry no language / source metadata. This dual mode is temporary —
+ * once all briefings come from the signal pipeline (post pkg 6 cutover),
+ * the scanItems path can be removed.
  */
 export async function buildCoverageSummary(
   supabase: SupabaseClient,
   profile: CompanyProfile,
   scoredStories: ScoredStory[],
   scanItems: ScanItemInput[],
-  scanDate: string
+  scanDate: string,
+  options: { signals?: Signal[] } = {}
 ): Promise<CoverageSummary> {
   const items = collectTrackedItems(profile);
   countTodayMatches(items, scoredStories);
@@ -304,7 +332,9 @@ export async function buildCoverageSummary(
     .filter((i) => i.matched_signal_count === 0)
     .map((i) => ({ type: i.type, value: i.value }));
 
-  const sources_inspected = buildSourcesInspected(scanItems);
+  const sources_inspected = options.signals
+    ? buildSourcesInspectedFromSignals(options.signals)
+    : buildSourcesInspected(scanItems);
   const early_signals = buildEarlySignals(scoredStories);
   const summary_text = buildSummaryText(scanDate, items, silent, sources_inspected);
 
