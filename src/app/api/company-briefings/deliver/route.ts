@@ -8,7 +8,6 @@ import {
 } from "@/lib/email-templates/company-briefing";
 
 const INGEST_KEY = process.env.SCAN_INGEST_KEY;
-const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM_ADDRESS = "Albis Briefing <briefing@albis.news>";
 
 /**
@@ -76,6 +75,15 @@ export async function POST(req: NextRequest) {
         message: "No pending briefings to deliver",
       });
     }
+
+    const resendApiKey = process.env.RESEND_API_KEY;
+    if (!resendApiKey) {
+      return NextResponse.json(
+        { error: "RESEND_API_KEY is not configured" },
+        { status: 500 }
+      );
+    }
+    const resend = new Resend(resendApiKey);
 
     // 2. Fetch company profiles for these briefings
     const profileIds = briefings.map((b) => b.company_profile_id);
