@@ -360,14 +360,18 @@ export default function CompanyOnboardingClient() {
 
       // Trial assignment + preview-briefing generation. Non-blocking — if
       // the server step fails the user still lands on the dashboard and the
-      // trial can be back-filled later by support.
+      // trial can be back-filled later by support. We DO await this so the
+      // briefing exists by the time the dashboard fetches it.
       try {
         await fetch("/api/onboarding/complete", { method: "POST" });
       } catch (err) {
         console.warn("onboarding/complete POST failed (non-fatal)", err);
       }
 
-      router.push("/dashboard/profile");
+      // Land on the briefing dashboard so the user sees the preview
+      // immediately. The profile editor lives one click away at
+      // /dashboard/profile.
+      router.push("/dashboard");
     } catch {
       setError("Failed to save profile. Please try again.");
     } finally {
