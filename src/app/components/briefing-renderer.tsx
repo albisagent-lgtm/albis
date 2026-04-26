@@ -75,6 +75,8 @@ export function BriefingRenderer({
 }) {
   const { header, what_changed, why_it_matters, what_to_watch, regional_framing } =
     content;
+  const stories = what_changed ?? [];
+  const watchItems = what_to_watch ?? [];
 
   return (
     <div className="space-y-0">
@@ -102,7 +104,7 @@ export function BriefingRenderer({
       <section>
         <p className={sectionLabel}>What Changed</p>
         <div className="mt-4 space-y-5">
-          {(what_changed ?? []).map((story: BriefingStory, i: number) => (
+          {stories.map((story: BriefingStory, i: number) => (
             <div key={i}>
               <p className="text-[15px] font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
                 {i + 1}. {story.headline}
@@ -157,7 +159,7 @@ export function BriefingRenderer({
       <section>
         <p className={sectionLabel}>What to Watch Next</p>
         <div className="mt-4 space-y-3">
-          {(what_to_watch ?? []).map((item: BriefingWatchItem, i: number) => (
+          {watchItems.map((item: BriefingWatchItem, i: number) => (
             <div key={i} className="flex items-start gap-2.5">
               <span className="mt-0.5 text-[#c8922a]">
                 <svg
