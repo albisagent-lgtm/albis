@@ -167,7 +167,7 @@ export default function DashboardProfileClient() {
       // Fetch subscription from profiles table
       const { data: userProfile } = await supabase
         .from("profiles")
-        .select("subscription_status, subscription_tier, subscription_period_end")
+        .select("subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at")
         .eq("id", user.id)
         .single();
       if (userProfile) {
@@ -175,6 +175,8 @@ export default function DashboardProfileClient() {
           subscription_status: userProfile.subscription_status,
           subscription_tier: userProfile.subscription_tier,
           subscription_period_end: userProfile.subscription_period_end,
+          is_test_account: userProfile.is_test_account,
+          trial_end_at: userProfile.trial_end_at,
         });
       }
 

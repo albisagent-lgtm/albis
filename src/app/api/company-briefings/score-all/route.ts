@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
     const ownerIds = [...new Set(profiles.map((p) => p.owner_id))];
     const { data: ownerProfiles } = await supabase
       .from("profiles")
-      .select("id, subscription_status, subscription_tier, subscription_period_end")
+      .select("id, subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at")
       .in("id", ownerIds);
 
     const ownerMap = new Map(

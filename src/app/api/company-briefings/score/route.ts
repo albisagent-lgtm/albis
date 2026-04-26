@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
     // Gate: only score for active/trialing subscriptions
     const { data: ownerProfile } = await supabase
       .from("profiles")
-      .select("subscription_status, subscription_tier, subscription_period_end")
+      .select("subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at")
       .eq("id", profile.owner_id)
       .single();
 

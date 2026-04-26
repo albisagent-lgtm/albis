@@ -45,7 +45,7 @@ export default async function DashboardPage() {
   const [profileRes, companyRes] = await Promise.all([
     supabase
       .from("profiles")
-      .select("subscription_status, subscription_tier, subscription_period_end")
+      .select("subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at")
       .eq("id", user.id)
       .single(),
     supabase
@@ -59,6 +59,8 @@ export default async function DashboardPage() {
     subscription_status: profileRes.data?.subscription_status ?? null,
     subscription_tier: profileRes.data?.subscription_tier ?? null,
     subscription_period_end: profileRes.data?.subscription_period_end ?? null,
+    is_test_account: profileRes.data?.is_test_account ?? null,
+    trial_end_at: profileRes.data?.trial_end_at ?? null,
   };
 
   const profile = companyRes.data;

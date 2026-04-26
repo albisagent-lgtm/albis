@@ -144,7 +144,7 @@ export async function runCompanySignalPipeline(
   const ownerIds = unique(profiles.map((p) => p.owner_id));
   const { data: ownerProfiles, error: ownerErr } = await supabase
     .from("profiles")
-    .select("id, subscription_status, subscription_tier, subscription_period_end")
+    .select("id, subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at")
     .in("id", ownerIds);
   if (ownerErr) throw new Error(`Failed to load owner profiles: ${ownerErr.message}`);
   const ownerMap = new Map(

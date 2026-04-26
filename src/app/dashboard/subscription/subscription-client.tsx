@@ -37,7 +37,7 @@ export default function SubscriptionClient() {
       const { data: profileData } = await supabase
         .from("profiles")
         .select(
-          "subscription_status, subscription_tier, subscription_period_end, stripe_customer_id"
+          "subscription_status, subscription_tier, subscription_period_end, stripe_customer_id, is_test_account, trial_end_at"
         )
         .eq("id", user.id)
         .single();

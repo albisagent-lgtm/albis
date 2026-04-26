@@ -10,20 +10,44 @@ export interface ProfileSubscription {
   subscription_status: string | null;
   subscription_tier: string | null;
   subscription_period_end: string | null;
+  is_test_account?: boolean | null;
+  trial_end_at?: string | null;
 }
-
-// Test-only bypass. Scoped to one immutable owner profile UUID.
-// Remove this block when Test Company is moved to a real subscription
-// or when a dedicated is_test_account flag is added to profiles.
-const TEST_COMPANY_OWNER_ID = "c60e8ee4-8a11-4e60-9844-bd0e07d5e4d2";
 
 /**
  * Check if a user's subscription is currently active (active or trialing).
+ * is_test_account profiles always return true (replaces the legacy
+ * hardcoded TEST_COMPANY_OWNER_ID bypass — Package 7 migration).
  */
 export function isSubscriptionActive(profile: ProfileSubscription): boolean {
-  if (profile.id === TEST_COMPANY_OWNER_ID) return true;
+  if (profile.is_test_account === true) return true;
   const status = profile.subscription_status;
   return status === "active" || status === "trialing";
+}
+
+/**
+ * True iff the profile is currently in its 7-day free trial window.
+ * Read-only helper for dashboard display — the gate for briefing
+ * generation is `isSubscriptionActive` (which already returns true for
+ * status='trialing').
+ */
+export function isTrialing(profile: ProfileSubscription): boolean {
+  if (profile.subscription_status !== "trialing") return false;
+  if (!profile.trial_end_at) return false;
+  return new Date(profile.trial_end_at).getTime() > Date.now();
+}
+
+/**
+ * Whole days remaining until trial_end_at, or null if not in a trial.
+ * Rounded up so a trial expiring in 30 minutes still reads as "1 day left."
+ */
+export function daysRemainingInTrial(
+  profile: ProfileSubscription
+): number | null {
+  if (!isTrialing(profile)) return null;
+  const ms = new Date(profile.trial_end_at!).getTime() - Date.now();
+  if (ms <= 0) return 0;
+  return Math.ceil(ms / (24 * 60 * 60 * 1000));
 }
 
 /**
