@@ -71,7 +71,7 @@ export function SourceTransparency({ sources, confidence }: SourceTransparencyPr
     );
   }
 
-  const conf = CONFIDENCE_CONFIG[confidence];
+  const conf = CONFIDENCE_CONFIG[confidence] ?? CONFIDENCE_CONFIG.developing;
   const uniqueRegions = [...new Set(sources.map((s) => s.region).filter(Boolean))] as string[];
 
   return (
