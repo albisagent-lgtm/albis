@@ -2,9 +2,12 @@ import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
-// Makes Cloudflare bindings available to `next dev`. Safe to call
-// unconditionally — no-op outside Cloudflare dev flows.
-initOpenNextCloudflareForDev();
+// Makes Cloudflare bindings available to `next dev` only. Starting the
+// Cloudflare dev runtime during production builds can leave workerd/SQLite
+// state locked on local machines.
+if (process.env.NODE_ENV === "development") {
+  initOpenNextCloudflareForDev();
+}
 
 const nextConfig: NextConfig = {
   images: {
