@@ -91,10 +91,13 @@ export async function resolveValue(
   if (!trimmed) return { canonical_topic_id: null, created_new: false, ambiguous: false };
   const dryRun = options.dryRun === true;
 
-  // Step 1: case-insensitive alias lookup
+  // Step 1: case-insensitive alias lookup. Join to active topics so
+  // Package 7.5 folded/deactivated orphan canonicals do not keep creating
+  // ambiguous alias hits.
   const { data: aliasHits } = await supabase
     .from("canonical_topic_aliases")
-    .select("canonical_topic_id, alias")
+    .select("canonical_topic_id, alias, canonical_topics!inner(id, is_active)")
+    .eq("canonical_topics.is_active", true)
     .ilike("alias", trimmed);
 
   if (aliasHits && aliasHits.length > 0) {
@@ -107,10 +110,11 @@ export async function resolveValue(
     return { canonical_topic_id: distinct[0], created_new: false, ambiguous: false };
   }
 
-  // Step 2: case-insensitive canonical_label lookup
+  // Step 2: case-insensitive canonical_label lookup, active only.
   const { data: labelHits } = await supabase
     .from("canonical_topics")
     .select("id")
+    .eq("is_active", true)
     .ilike("canonical_label", trimmed);
 
   if (labelHits && labelHits.length > 0) {

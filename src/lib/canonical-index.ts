@@ -88,7 +88,8 @@ export async function loadCanonicalIndexForProfile(
     supabase
       .from("canonical_topics")
       .select("id, canonical_label")
-      .in("id", canonicalIds),
+      .in("id", canonicalIds)
+      .eq("is_active", true),
     supabase
       .from("canonical_topic_aliases")
       .select("canonical_topic_id, alias")

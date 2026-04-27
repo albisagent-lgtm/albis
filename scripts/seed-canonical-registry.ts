@@ -27,6 +27,7 @@ import {
   type TaxonomyOption,
 } from '../src/lib/onboarding-taxonomy';
 import { RISK_PRIORITIES } from '../src/lib/company-profile';
+import { PACKAGE_7_5_CANONICAL_UPSERTS } from '../src/lib/company-scan/canonical-quality-package-7-5';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -321,6 +322,7 @@ const ALL_SEEDS: CanonicalSeed[] = [
   ...watchlistSeed,
   ...supplyChainSeed,
   ...curatedSeed,
+  ...PACKAGE_7_5_CANONICAL_UPSERTS,
 ];
 
 // ---------------------------------------------------------------------------
