@@ -10,6 +10,7 @@
 //   - dedupe selected profile arrays
 //   - emit a canonical health report for before/after QA
 // ---------------------------------------------------------------------------
+import fs from "fs";
 import path from "path";
 import dotenv from "dotenv";
 import type { SupabaseClient } from "@supabase/supabase-js";
@@ -422,6 +423,30 @@ async function main() {
   log(`🚀 Package 7.5 canonical quality ${dryRun ? "dry-run" : "APPLY"}`);
 
   const before = await healthReport(supabase);
+  if (!dryRun) {
+    const backupDir = path.resolve(process.cwd(), "reports/canonical-quality");
+    fs.mkdirSync(backupDir, { recursive: true });
+    const backupPath = path.join(
+      backupDir,
+      `package-7-5-backup-${new Date().toISOString().replace(/[:.]/g, "-")}.json`
+    );
+    fs.writeFileSync(
+      backupPath,
+      JSON.stringify(
+        {
+          created_at: new Date().toISOString(),
+          purpose: "Pre-apply backup for Package 7.5 canonical quality migration",
+          folds: PACKAGE_7_5_CANONICAL_FOLDS,
+          profile_dedupes: PACKAGE_7_5_PROFILE_DEDUPES,
+          health_before: before,
+        },
+        null,
+        2
+      )
+    );
+    log(`🧾 Wrote pre-apply backup: ${backupPath}`);
+  }
+
   const upserts = await upsertCanonicalPack(supabase);
   const folds = await foldOrphans(supabase);
   const profileDedupe = await dedupeProfiles(supabase);
