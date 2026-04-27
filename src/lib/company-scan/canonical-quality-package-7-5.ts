@@ -26,6 +26,9 @@ export interface CanonicalUpsertSpec {
   topic_type: CanonicalTopicType;
   short_description?: string;
   priority_tier?: 1 | 2 | 3;
+  /** Optional broader context. Customer-requested terms keep direct scan identity; parent_id adds context. */
+  parent_label?: string;
+  parent_type?: CanonicalTopicType;
   aliases: CanonicalAliasSpec[];
 }
 
@@ -242,6 +245,102 @@ export const PACKAGE_7_5_CANONICAL_UPSERTS: CanonicalUpsertSpec[] = [
       { alias: "advertising", language: "en", type: "synonym" },
     ],
   },
+
+  {
+    canonical_label: "Wang Yi",
+    topic_type: "entity",
+    short_description: "Chinese foreign-policy official tracked as a direct entity, with China as parent context.",
+    priority_tier: 2,
+    parent_label: "China",
+    parent_type: "entity",
+    aliases: [
+      { alias: "Wang Yi", language: "en", type: "synonym" },
+      { alias: "王毅", language: "zh", type: "translation" },
+      { alias: "Chinese foreign minister", language: "en", type: "related_entity", confidence: 0.76 },
+      { alias: "Foreign Minister Wang", language: "en", type: "related_entity", confidence: 0.76 },
+    ],
+  },
+  {
+    canonical_label: "Kim Il Sung",
+    topic_type: "entity",
+    short_description: "North Korean leadership/historical figure preserved as a direct tracked entity with North Korea parent context.",
+    priority_tier: 3,
+    parent_label: "North Korea",
+    parent_type: "entity",
+    aliases: [
+      { alias: "Kim Il Sung", language: "en", type: "synonym" },
+      { alias: "김일성", language: "ko", type: "translation" },
+      { alias: "金日成", language: "zh", type: "translation" },
+    ],
+  },
+  {
+    canonical_label: "Kim Jong Il",
+    topic_type: "entity",
+    short_description: "North Korean leadership/historical figure preserved as a direct tracked entity with North Korea parent context.",
+    priority_tier: 3,
+    parent_label: "North Korea",
+    parent_type: "entity",
+    aliases: [
+      { alias: "Kim Jong Il", language: "en", type: "synonym" },
+      { alias: "김정일", language: "ko", type: "translation" },
+      { alias: "金正日", language: "zh", type: "translation" },
+    ],
+  },
+  {
+    canonical_label: "Kim Yo Jong",
+    topic_type: "entity",
+    short_description: "North Korean political figure preserved as a direct tracked entity with North Korea parent context.",
+    priority_tier: 2,
+    parent_label: "North Korea",
+    parent_type: "entity",
+    aliases: [
+      { alias: "Kim Yo Jong", language: "en", type: "synonym" },
+      { alias: "김여정", language: "ko", type: "translation" },
+      { alias: "金与正", language: "zh", type: "translation" },
+    ],
+  },
+  {
+    canonical_label: "Kim Yong Nam",
+    topic_type: "entity",
+    short_description: "North Korean political figure preserved as a direct tracked entity with North Korea parent context.",
+    priority_tier: 3,
+    parent_label: "North Korea",
+    parent_type: "entity",
+    aliases: [
+      { alias: "Kim Yong Nam", language: "en", type: "synonym" },
+      { alias: "김영남", language: "ko", type: "translation" },
+    ],
+  },
+  {
+    canonical_label: "Container shortages",
+    topic_type: "theme",
+    short_description: "Container availability, imbalance, repositioning, TEU shortages, and box shortage signals preserved as direct customer intent.",
+    priority_tier: 2,
+    parent_label: "Shipping disruption",
+    parent_type: "theme",
+    aliases: [
+      { alias: "container shortages", language: "en", type: "synonym" },
+      { alias: "container shortage", language: "en", type: "synonym" },
+      { alias: "container imbalance", language: "en", type: "synonym" },
+      { alias: "container repositioning", language: "en", type: "synonym" },
+      { alias: "box shortage", language: "en", type: "synonym" },
+      { alias: "TEU shortage", language: "en", type: "synonym" },
+    ],
+  },
+  {
+    canonical_label: "Blockages",
+    topic_type: "theme",
+    short_description: "Operational blockages preserved as direct customer shorthand, with Shipping disruption as parent context.",
+    priority_tier: 3,
+    parent_label: "Shipping disruption",
+    parent_type: "theme",
+    aliases: [
+      { alias: "blockages", language: "en", type: "synonym" },
+      { alias: "shipping blockages", language: "en", type: "synonym", confidence: 0.82 },
+      { alias: "logistics blockages", language: "en", type: "synonym", confidence: 0.78 },
+    ],
+  },
+
   {
     canonical_label: "China",
     topic_type: "entity",
@@ -278,23 +377,9 @@ export const PACKAGE_7_5_CANONICAL_UPSERTS: CanonicalUpsertSpec[] = [
 ];
 
 export const PACKAGE_7_5_CANONICAL_FOLDS: CanonicalFoldSpec[] = [
-  { from_label: "kim il sung", to_label: "North Korea", to_type: "entity", alias_type: "related_entity", confidence: 0.74, reason: "North Korean leadership orphan should enrich North Korea cluster" },
-  { from_label: "kim jong il", to_label: "North Korea", to_type: "entity", alias_type: "related_entity", confidence: 0.74, reason: "North Korean leadership orphan should enrich North Korea cluster" },
-  { from_label: "kim yo jong", to_label: "North Korea", to_type: "entity", alias_type: "related_entity", confidence: 0.76, reason: "North Korean leadership orphan should enrich North Korea cluster" },
-  { from_label: "kim yong nam", to_label: "North Korea", to_type: "entity", alias_type: "related_entity", confidence: 0.7, reason: "North Korean leadership orphan should enrich North Korea cluster" },
-  { from_label: "korea", to_label: "North Korea", to_type: "entity", alias_type: "synonym", confidence: 0.58, reason: "Existing customer intent was North Korea tracking; low confidence prevents over-weighting" },
-  { from_label: "dprk", to_label: "North Korea", to_type: "entity", alias_type: "abbreviation", confidence: 1, reason: "DPRK is the direct abbreviation for North Korea" },
-  { from_label: "pyongyang", to_label: "North Korea", to_type: "entity", alias_type: "related_entity", confidence: 0.88, reason: "Capital/seat of government belongs in North Korea cluster" },
-  { from_label: "wang yi", to_label: "China", to_type: "entity", alias_type: "related_entity", confidence: 0.72, reason: "Chinese foreign policy actor should enrich China cluster for v1" },
-  { from_label: "li qiang", to_label: "China", to_type: "entity", alias_type: "related_entity", confidence: 0.72, reason: "Chinese leadership actor should enrich China cluster for v1" },
-  { from_label: "han zheng", to_label: "China", to_type: "entity", alias_type: "related_entity", confidence: 0.7, reason: "Chinese leadership actor should enrich China cluster for v1" },
-  { from_label: "kremlin", to_label: "Russia", to_type: "entity", alias_type: "related_entity", confidence: 0.88, reason: "Kremlin is a Russia state actor alias" },
-  { from_label: "putin", to_label: "Russia", to_type: "entity", alias_type: "related_entity", confidence: 0.8, reason: "Putin is a Russia leadership alias" },
-  { from_label: "lavrov", to_label: "Russia", to_type: "entity", alias_type: "related_entity", confidence: 0.74, reason: "Lavrov is a Russia foreign policy alias" },
-  { from_label: "container shortages", to_label: "Shipping disruption", to_type: "theme", alias_type: "synonym", confidence: 0.95, reason: "Container shortages are a shipping disruption subtype, not standalone v1 canonical" },
-  { from_label: "container shortage", to_label: "Shipping disruption", to_type: "theme", alias_type: "synonym", confidence: 0.95, reason: "Container shortage is a shipping disruption subtype, not standalone v1 canonical" },
-  { from_label: "blockages", to_label: "Shipping disruption", to_type: "theme", alias_type: "synonym", confidence: 0.7, reason: "Generic customer shorthand should resolve into shipping disruption" },
-  { from_label: "shipping blockages", to_label: "Shipping disruption", to_type: "theme", alias_type: "synonym", confidence: 0.82, reason: "Customer shorthand should resolve into shipping disruption" },
+  // Intentionally empty after the direct-intent revision.
+  // Customer-requested terms keep their own active canonical rows and gain
+  // parent context via parent_id instead of being folded/deactivated.
 ];
 
 export const PACKAGE_7_5_PROFILE_DEDUPES = [

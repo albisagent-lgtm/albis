@@ -108,10 +108,15 @@ async function findOrCreateCanonical(
   spec: CanonicalUpsertSpec
 ): Promise<{ topic: TopicRow | null; created: boolean; wouldCreate: boolean }> {
   const existing = await findCanonical(supabase, spec.canonical_label, spec.topic_type);
+  const parent = spec.parent_label && spec.parent_type
+    ? await findCanonical(supabase, spec.parent_label, spec.parent_type, true)
+    : null;
+
   if (existing) {
-    if (!dryRun && (!existing.is_active || spec.short_description)) {
+    if (!dryRun && (!existing.is_active || spec.short_description || parent?.id)) {
       const patch: Record<string, unknown> = { is_active: true };
       if (spec.short_description) patch.short_description = spec.short_description;
+      if (parent?.id) patch.parent_id = parent.id;
       const { error } = await supabase.from("canonical_topics").update(patch).eq("id", existing.id);
       if (error) throw new Error(error.message);
     }
@@ -126,6 +131,7 @@ async function findOrCreateCanonical(
       canonical_label: spec.canonical_label,
       topic_type: spec.topic_type,
       short_description: spec.short_description ?? null,
+      parent_id: parent?.id ?? null,
       is_active: true,
     })
     .select("id, canonical_label, topic_type, is_active, active_company_count")
