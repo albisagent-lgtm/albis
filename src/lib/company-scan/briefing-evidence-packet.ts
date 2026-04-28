@@ -157,6 +157,8 @@ export function buildEvidencePacket(input: BuildEvidencePacketInput): CompanyBri
       "perception_gap_check",
       "source_quality_check",
       "policy_limit_check",
+      "editorial_coherence_check",
+      "editor_pass_check",
     ],
     audit: {
       built_by: "company_scan_funnel",
@@ -202,8 +204,8 @@ function mapWatchEntityType(t: string): EvidencePacketCompanyContext["watch_enti
 function buildDefaultPolicy(): CompanyBriefingPolicy {
   return {
     tone: "calm_concise_useful_non_alarmist",
-    max_email_items: 8,
-    max_words_total: 1100,
+    max_email_items: 30,
+    max_words_total: 3200,
     max_words_per_item: 120,
     no_inference_beyond_evidence: true,
     allow_no_send: true,
@@ -298,6 +300,7 @@ function buildEvidenceEmailItem(
     conflicts,
     source_summary: sourceSummary,
     perception_gap: perceptionGap,
+    retrieval_provenance: candidate.retrieval_provenance,
   };
 }
 

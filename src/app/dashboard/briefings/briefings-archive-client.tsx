@@ -5,13 +5,14 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { BriefingEmpty } from "@/app/components/briefing-renderer";
 import type { BriefingContent } from "@/lib/email-templates/company-briefing";
+import type { CompanyBriefingGenerationOutput } from "@/lib/company-scan/types";
 
 interface ArchiveEntry {
   id: string;
   briefing_date: string;
   status: string;
   stories_selected: number;
-  briefing_content: BriefingContent | null;
+  briefing_content: BriefingContent | CompanyBriefingGenerationOutput | null;
 }
 
 const SIGNAL_DOT: Record<string, string> = {
@@ -39,7 +40,6 @@ export default function BriefingsArchiveClient() {
 
   useEffect(() => {
     loadBriefings(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function loadBriefings(pageNum: number) {
@@ -119,12 +119,30 @@ export default function BriefingsArchiveClient() {
 
       <div className="mt-6 space-y-2">
         {briefings.map((b) => {
+          const scannerReport =
+            b.briefing_content && "scanner_report" in b.briefing_content
+              ? b.briefing_content.scanner_report
+              : undefined;
           const signal =
-            b.briefing_content?.header?.signal_level || "moderate";
+            b.briefing_content && "header" in b.briefing_content
+              ? b.briefing_content.header?.signal_level || "moderate"
+              : "moderate";
           const focus =
-            b.briefing_content?.header?.scan_focus || "";
+            scannerReport?.enabled
+              ? `${scannerReport.scan_area_count || 0} watched areas`
+              : b.briefing_content && "header" in b.briefing_content
+                ? b.briefing_content.header?.scan_focus || ""
+                : "";
           const storyCount =
-            b.briefing_content?.what_changed?.length || b.stories_selected || 0;
+            scannerReport?.main_findings_count ||
+            (b.briefing_content && "what_changed" in b.briefing_content
+              ? b.briefing_content.what_changed?.length
+              : 0) ||
+            b.stories_selected ||
+            0;
+          const countLabel = scannerReport?.enabled
+            ? `finding${storyCount === 1 ? "" : "s"}`
+            : `stor${storyCount === 1 ? "y" : "ies"}`;
 
           return (
             <Link
@@ -144,9 +162,7 @@ export default function BriefingsArchiveClient() {
                   <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">
                     {SIGNAL_LABEL[signal] || "Moderate"} signal
                     {focus ? ` \u00B7 ${focus}` : ""}
-                    {storyCount > 0
-                      ? ` \u00B7 ${storyCount} stor${storyCount === 1 ? "y" : "ies"}`
-                      : ""}
+                    {storyCount > 0 ? ` \u00B7 ${storyCount} ${countLabel}` : ""}
                   </p>
                 </div>
               </div>

@@ -41,9 +41,11 @@ import type {
   EvidenceEmailItem,
   EvidenceArticleSupport,
   GeneratedBriefingItem,
+  GeneratedText,
+  CompanyBriefingEditorPass,
 } from "./types";
 
-import { lintBriefingStyle, type StyleLintResult } from "./company-briefing-style-lint";
+import { lintBriefingStyle } from "./company-briefing-style-lint";
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -54,6 +56,8 @@ export interface QAGateOptions {
   dryRun?: boolean;
   /** If true, auto-revisions are attempted for fixable warnings. */
   autoRevise?: boolean;
+  /** Optional Package 9.3B editor audit. QA runs after the editor. */
+  editorPass?: CompanyBriefingEditorPass;
 }
 
 export interface QAGateResult {
@@ -72,7 +76,7 @@ export function runQAGates(
   output: CompanyBriefingGenerationOutput,
   options: QAGateOptions = {},
 ): QAGateResult {
-  const { dryRun = false } = options;
+  const { dryRun = false, editorPass } = options;
   const now = new Date().toISOString();
 
   const blockingFailures: QAFailure[] = [];
@@ -243,6 +247,48 @@ export function runQAGates(
         suggested_fix: issue.suggested_fix,
       });
     }
+  }
+
+  // --- 8.5. Package 9.2 depth checks ---
+  const depthFailures = checkDepthRequirements(packet, output);
+  for (const failure of depthFailures) {
+    if (failure.severity === "blocking") blockingFailures.push(failure);
+    else warnings.push(failure);
+  }
+
+  // --- 8.6. Package 9.3A editorial/usefulness checks ---
+  const editorialFailures = checkEditorialRequirements(packet, output);
+  for (const failure of editorialFailures) {
+    if (failure.severity === "blocking") blockingFailures.push(failure);
+    else warnings.push(failure);
+  }
+
+  // --- 8.7. Package 9.3B editor-pass safety checks ---
+  const editorFailures = checkEditorPass(editorPass);
+  for (const failure of editorFailures) {
+    if (failure.severity === "blocking") blockingFailures.push(failure);
+    else warnings.push(failure);
+  }
+
+  // --- 8.8. Package 9.3 confidence/evidence-language checks ---
+  const confidenceFailures = checkConfidenceLanguage(output);
+  for (const failure of confidenceFailures) {
+    if (failure.severity === "blocking") blockingFailures.push(failure);
+    else warnings.push(failure);
+  }
+
+  // --- 8.9. Package 10 company-specific retrieval provenance checks ---
+  const retrievalFailures = checkCompanySpecificRetrieval(packet);
+  for (const failure of retrievalFailures) {
+    if (failure.severity === "blocking") blockingFailures.push(failure);
+    else warnings.push(failure);
+  }
+
+  // --- 8.10. Package 10C scanner-report breadth / anti-compression checks ---
+  const scannerReportFailures = checkScannerReportLayout(packet, output);
+  for (const failure of scannerReportFailures) {
+    if (failure.severity === "blocking") blockingFailures.push(failure);
+    else warnings.push(failure);
   }
 
   // --- 8. Policy checks ---
@@ -832,7 +878,7 @@ function checkPolicies(
 
   // Max email items
   const generatedItemCount = getGeneratedItemCount(output);
-  const maxItems = policy.max_email_items ?? 8;
+  const maxItems = policy.max_email_items ?? 30;
   checks.push({
     policy: "max_email_items",
     passed: generatedItemCount <= maxItems,
@@ -904,6 +950,537 @@ function getAllGeneratedItems(output: CompanyBriefingGenerationOutput): Generate
 
 function getGeneratedItemCount(output: CompanyBriefingGenerationOutput): number {
   return getAllGeneratedItems(output).length;
+}
+
+function checkEditorPass(editorPass?: CompanyBriefingEditorPass): QAFailure[] {
+  const failures: QAFailure[] = [];
+  if (!editorPass?.enabled) return failures;
+
+  if (editorPass.blocked) {
+    failures.push({
+      code: "EDITOR_BLOCKED",
+      severity: "blocking",
+      message: editorPass.blocked_reason || "Package 9.3B editor pass blocked its own output.",
+    });
+  }
+
+  for (const audit of editorPass.field_audits || []) {
+    if (!audit.support_refs_unchanged) {
+      failures.push({
+        code: "EDITOR_CHANGED_SUPPORT_STRUCTURE",
+        severity: "blocking",
+        generated_text_path: audit.path,
+        message: "Package 9.3B editor must not change support refs or evidence structure.",
+      });
+    }
+
+    if (!audit.after_text.trim()) {
+      failures.push({
+        code: "EDITOR_OUTPUT_EMPTY",
+        severity: "blocking",
+        generated_text_path: audit.path,
+        message: "Package 9.3B editor produced empty customer-facing text.",
+      });
+    }
+
+    if (audit.added_numbers.length > 0) {
+      failures.push({
+        code: "EDITOR_ADDED_UNSUPPORTED_NUMBER",
+        severity: "blocking",
+        generated_text_path: audit.path,
+        message: `Package 9.3B editor introduced number(s) not present in the draft field: ${audit.added_numbers.join(", ")}`,
+      });
+    }
+
+    if (audit.added_entities.length > 0) {
+      failures.push({
+        code: "EDITOR_ADDED_UNSUPPORTED_ENTITY",
+        severity: "warning",
+        generated_text_path: audit.path,
+        message: `Package 9.3B editor introduced possible new entity/entities: ${audit.added_entities.join(", ")}`,
+      });
+    }
+
+    if (audit.path.includes("perception_gap") && /view:|The gap:|Why it matters:/i.test(audit.before_text)) {
+      const labelsStillPresent = /view:/i.test(audit.after_text) && /The gap:/i.test(audit.after_text) && /Why it matters:/i.test(audit.after_text);
+      if (!labelsStillPresent) {
+        failures.push({
+          code: "EDITOR_LABEL_FORMAT_BROKEN",
+          severity: "blocking",
+          generated_text_path: audit.path,
+          message: "Package 9.3B editor broke the labelled Perception Gap format.",
+        });
+      }
+    }
+  }
+
+  return failures;
+}
+
+function generatedTextSegments(output: CompanyBriefingGenerationOutput): Array<{ path: string; value: GeneratedText }> {
+  return [
+    { path: "today_brief.top_line", value: output.today_brief.top_line },
+    ...output.today_brief.bullets.map((value, i) => ({ path: `today_brief.bullets[${i}]`, value })),
+    ...output.main_briefing.sections.flatMap((section, sectionIndex) =>
+      section.items.flatMap((item, itemIndex) => [
+        { path: `main_briefing.sections[${sectionIndex}].items[${itemIndex}].title`, value: item.title },
+        { path: `main_briefing.sections[${sectionIndex}].items[${itemIndex}].body`, value: item.body },
+        ...(item.uncertainty_line ? [{ path: `main_briefing.sections[${sectionIndex}].items[${itemIndex}].uncertainty_line`, value: item.uncertainty_line }] : []),
+        ...(item.source_attribution ? [{ path: `main_briefing.sections[${sectionIndex}].items[${itemIndex}].source_attribution`, value: item.source_attribution }] : []),
+      ]),
+    ),
+    ...output.perception_gap.notes.map((note, i) => ({ path: `perception_gap.notes[${i}].note`, value: note.note })),
+    ...output.useful_observations.observations.map((value, i) => ({ path: `useful_observations.observations[${i}]`, value })),
+    { path: "source_notes.text", value: output.source_notes.text },
+  ];
+}
+
+function confidenceLanguagePresent(text: string, kind: string): boolean {
+  if (kind === "estimate_or_forecast") return /\b(estimate|estimated|directional|up to|forecast|reported)\b/i.test(text);
+  if (kind === "early_signal") return /\b(early|not proof|does not prove|rather than proof|if it repeats|later scans?)\b/i.test(text);
+  if (kind === "single_source" || kind === "reported_claim") return /\b(one report|one source|reported|said|cited|according to)\b/i.test(text);
+  if (kind === "regional_frame") return /\b(view:|frame|framed|coverage|source|gap|why it matters)\b/i.test(text);
+  if (kind === "multi_source_signal") return /\b(several|multiple|two reports|sources?|scan|selected evidence)\b/i.test(text);
+  return true;
+}
+
+function checkConfidenceLanguage(output: CompanyBriefingGenerationOutput): QAFailure[] {
+  const failures: QAFailure[] = [];
+  const segments = generatedTextSegments(output).filter((segment) =>
+    !segment.path.endsWith(".title")
+    && !segment.path.endsWith(".source_attribution")
+    && !segment.path.endsWith(".uncertainty_line")
+    && segment.path !== "source_notes.text",
+  );
+
+  for (const segment of segments) {
+    const label = segment.value.evidence_confidence;
+    if (!label) {
+      failures.push({
+        code: "CONFIDENCE_LABEL_MISSING",
+        severity: "warning",
+        generated_text_path: segment.path,
+        message: "Package 9.3 confidence/evidence language metadata is missing from customer-facing text.",
+      });
+      continue;
+    }
+
+    if (!confidenceLanguagePresent(segment.value.text, label.kind)) {
+      failures.push({
+        code: "CONFIDENCE_LANGUAGE_MISSING",
+        severity: label.kind === "estimate_or_forecast" || label.kind === "early_signal" ? "blocking" : "warning",
+        generated_text_path: segment.path,
+        message: `Package 9.3 ${label.kind} text should carry natural confidence/evidence language: ${label.customer_phrase}`,
+      });
+    }
+  }
+
+  return failures;
+}
+
+function checkCompanySpecificRetrieval(packet: CompanyBriefingEvidencePacket): QAFailure[] {
+  const failures: QAFailure[] = [];
+  const items = packet.email_items || [];
+  const provenanceItems = items.filter((item) => item.retrieval_provenance);
+  if (items.length === 0 || provenanceItems.length === 0) return failures;
+
+  const companyId = packet.company.company_id;
+  const broadOnlyTerms = new Set(["china", "russia", "iran", "india", "korea", "united states", "european union", "ai", "media", "policy", "market"]);
+
+  for (const item of items) {
+    const provenance = item.retrieval_provenance;
+    const path = `item:${item.item_id}.retrieval_provenance`;
+    if (!provenance) {
+      failures.push({
+        code: "RETRIEVAL_PROVENANCE_MISSING",
+        severity: "blocking",
+        generated_text_path: path,
+        message: "Company-specific briefing item is missing retrieval provenance.",
+      });
+      continue;
+    }
+
+    if (provenance.company_profile_id !== companyId) {
+      failures.push({
+        code: "RETRIEVAL_WRONG_COMPANY",
+        severity: "blocking",
+        generated_text_path: path,
+        message: "Company-specific briefing item provenance points to a different company profile.",
+      });
+    }
+
+    if (provenance.mode !== "company_specific_retrieval" && provenance.mode !== "company_deep_dive_retrieval") {
+      failures.push({
+        code: "RETRIEVAL_MODE_NOT_COMPANY_SPECIFIC",
+        severity: "blocking",
+        generated_text_path: path,
+        message: "Company-specific briefing item came from a non-company-specific retrieval mode.",
+      });
+    }
+
+    if ((provenance.query_ids || []).length === 0 || (provenance.query_labels || []).length === 0) {
+      failures.push({
+        code: "RETRIEVAL_QUERY_TRACE_MISSING",
+        severity: "blocking",
+        generated_text_path: path,
+        message: "Company-specific briefing item is missing query trace IDs/labels.",
+      });
+    }
+
+    if ((provenance.matched_context_terms || []).length === 0) {
+      failures.push({
+        code: "RETRIEVAL_CONTEXT_MISSING",
+        severity: "blocking",
+        generated_text_path: path,
+        message: "Company-specific briefing item has no matched company context terms.",
+      });
+    }
+
+    const matchedQueryTerms = (provenance.matched_query_terms || []).map((term) => term.toLowerCase());
+    const scanAreaIds = provenance.scan_area_ids || [];
+    const watchlistOnly = scanAreaIds.length > 0 && scanAreaIds.every((id) => id === "watchlist-entities");
+    if (watchlistOnly && matchedQueryTerms.length === 0) {
+      failures.push({
+        code: "RETRIEVAL_WATCHLIST_ANCHOR_MISSING",
+        severity: "blocking",
+        generated_text_path: path,
+        message: "Watchlist-only item must match the watched entity/query term in the article text.",
+      });
+    }
+
+    if (matchedQueryTerms.length > 0 && matchedQueryTerms.every((term) => broadOnlyTerms.has(term))) {
+      failures.push({
+        code: "RETRIEVAL_BROAD_ONLY_ANCHOR",
+        severity: "warning",
+        generated_text_path: path,
+        message: "Company-specific item appears anchored only by broad terms; review for scatter/noise.",
+      });
+    }
+  }
+
+  const sectionCount = new Set(items.flatMap((item) => item.section_ids || [])).size;
+  if (items.length >= 6 && sectionCount >= 6) {
+    failures.push({
+      code: "RETRIEVAL_SCATTER_SCORE_HIGH",
+      severity: "warning",
+      message: "Briefing has a wide spread of singleton sections; review for scattered/non-coherent company narrative.",
+    });
+  }
+
+  return failures;
+}
+
+function checkScannerReportLayout(
+  packet: CompanyBriefingEvidencePacket,
+  output: CompanyBriefingGenerationOutput,
+): QAFailure[] {
+  const failures: QAFailure[] = [];
+  const selectedCount = packet.email_items.length;
+  const generatedMainFindings = output.main_briefing.sections.flatMap((section) => section.items).length;
+  const scanner = output.scanner_report;
+  const generatedText = JSON.stringify(output).toLowerCase();
+  const bannedInternalPhrases = [
+    "datapoint was useful",
+    "route access and route confidence",
+    "the comparison is whether",
+    "the relevance is",
+    "the useful distinction is",
+    "company-specific scan",
+    "registered against",
+  ];
+
+  if (selectedCount >= 8 && !scanner?.enabled) {
+    failures.push({
+      code: "SCANNER_REPORT_MISSING",
+      severity: "blocking",
+      message: "Company scan selected many findings but output did not use the Package 10C scanner-report layout.",
+    });
+  }
+
+  if (scanner?.enabled) {
+    const coverageRatio = selectedCount > 0 ? generatedMainFindings / selectedCount : 1;
+    if (selectedCount >= 8 && coverageRatio < 0.8) {
+      failures.push({
+        code: "SCANNER_REPORT_OVER_COMPRESSED",
+        severity: "blocking",
+        message: `Scanner report selected ${selectedCount} item(s) but rendered only ${generatedMainFindings} main finding(s).`,
+        suggested_fix: "Render useful selected findings in Main Findings instead of compressing them into a few bundled paragraphs.",
+      });
+    }
+
+    if ((scanner.deeper_reads || []).length < Math.min(3, selectedCount)) {
+      failures.push({
+        code: "SCANNER_REPORT_DEEPER_READ_MISSING",
+        severity: "warning",
+        message: "Scanner report should include up to three deeper reads for the most useful daily findings.",
+      });
+    }
+  }
+
+  for (const phrase of bannedInternalPhrases) {
+    if (generatedText.includes(phrase)) {
+      failures.push({
+        code: "CUSTOMER_COPY_INTERNAL_RAIL",
+        severity: "blocking",
+        message: `Customer-facing copy contains internal scanner/analyst wording: "${phrase}".`,
+      });
+    }
+  }
+
+  return failures;
+}
+
+function checkDepthRequirements(
+  packet: CompanyBriefingEvidencePacket,
+  output: CompanyBriefingGenerationOutput,
+): QAFailure[] {
+  const failures: QAFailure[] = [];
+  const items = getAllGeneratedItems(output);
+  if (items.length === 0) return failures;
+
+  const countWords = (text: string) => text.split(/\s+/).filter(Boolean).length;
+  const firstSentence = (text: string) => splitTextSentences(text)[0] || text.trim();
+  const hasConcreteEvidenceTerm = (text: string) => /\b(Hormuz|Suez|Red Sea|Bab el-Mandeb|traffic|freight|rates?|vessel|ports?|corridors?|routes?|rail|LNG|transport|disruption|estimate|report|cost|\d+\s?%|\$\d+|million|weeks?|sources?|scan|coverage|insurance)\b/i.test(text);
+  const hasMeaningLanguage = (text: string) => /\b(separates?|shows?|showed|distinction|pattern|evidence|reported|report|datapoint|not proof|not yet|confidence|access|cost|risk|source|frame|coverage|practical|concrete|marker|useful|read)\b/i.test(text);
+  const hasNumber = (text: string) => /(\d+\s?%|\$\d+|\d+\s?(million|billion|days|weeks|months|years)|pre-war)/i.test(text);
+  const rawCount = packet.input_summary.raw_articles_count;
+  const sourceNoteText = output.source_notes?.text?.text || "";
+  const sourceNoteMentionsScanDepth = rawCount > 0 && sourceNoteText.includes(String(rawCount)) && /scanned items/i.test(sourceNoteText);
+
+  if (!sourceNoteMentionsScanDepth) {
+    failures.push({
+      code: "DEPTH_SOURCE_NOTE_THIN",
+      severity: "warning",
+      message: "Package 9.2 source note should state scan depth and point to the evidence/dashboard layer.",
+    });
+  }
+
+  const topFirst = firstSentence(output.today_brief.top_line.text);
+  if (!hasConcreteEvidenceTerm(topFirst) || !hasMeaningLanguage(topFirst)) {
+    failures.push({
+      code: "EDITORIAL_FIRST_SENTENCE_WEAK",
+      severity: "warning",
+      generated_text_path: "today_brief.top_line",
+      message: "Package 9.3A opening sentence should carry a concrete evidence point, not warm-up wording.",
+    });
+  }
+
+  // Concise sections are intentional: the customer-facing briefing should
+  // present findings cleanly, not pad for length. Keep the gate only for
+  // genuinely underdeveloped items.
+  const thinItems = items.filter((item) => countWords(item.body.text) < 24);
+  for (const item of thinItems) {
+    failures.push({
+      code: "DEPTH_SECTION_TOO_THIN",
+      severity: "blocking",
+      generated_text_path: `item:${item.generated_item_id}.body`,
+      message: `Package 9.2 section is too thin (${countWords(item.body.text)} words): ${item.title.text}`,
+    });
+  }
+
+  const paragraphThinItems = items.filter((item) => !item.body.text.includes("\n\n"));
+  for (const item of paragraphThinItems) {
+    failures.push({
+      code: "DEPTH_SECTION_SINGLE_PARAGRAPH",
+      severity: "warning",
+      generated_text_path: `item:${item.generated_item_id}.body`,
+      message: `Package 9.2 section should usually include a short evidence paragraph and a short context paragraph: ${item.title.text}`,
+    });
+  }
+
+  for (const item of items) {
+    const opening = firstSentence(item.body.text);
+    if (!hasConcreteEvidenceTerm(opening) || !hasMeaningLanguage(opening)) {
+      failures.push({
+        code: "EDITORIAL_ITEM_OPENING_WEAK",
+        severity: "warning",
+        generated_text_path: `item:${item.generated_item_id}.body`,
+        message: `Package 9.3A item opening should carry the evidence point and why the item belongs: ${item.title.text}`,
+      });
+    }
+
+    if (hasNumber(item.body.text) && !hasMeaningLanguage(item.body.text)) {
+      failures.push({
+        code: "EDITORIAL_NUMBER_UNEXPLAINED",
+        severity: "warning",
+        generated_text_path: `item:${item.generated_item_id}.body`,
+        message: `Package 9.3A number/statistic needs an evidence-to-meaning explanation: ${item.title.text}`,
+      });
+    }
+  }
+
+  const observationCount = output.useful_observations?.observations?.length ?? 0;
+  if (observationCount < Math.min(3, items.length)) {
+    failures.push({
+      code: "DEPTH_OBSERVATIONS_THIN",
+      severity: "blocking",
+      message: `Package 9.2 needs analyst-grade observations. Found ${observationCount}; expected at least ${Math.min(3, items.length)}.`,
+    });
+  }
+
+  const observations = output.useful_observations?.observations ?? [];
+  for (let i = 0; i < observations.length; i++) {
+    const text = observations[i].text;
+    if (!hasMeaningLanguage(text) || /\b(could|may|might)\s+have\s+(important|significant|material)?\s*implications\b/i.test(text)) {
+      failures.push({
+        code: "EDITORIAL_OBSERVATION_GENERIC",
+        severity: "warning",
+        generated_text_path: `useful_observations.observations[${i}]`,
+        message: "Package 9.3A observations should be classified insight: hidden distinction, boundary, source-frame insight, quiet widening, or evidence-quality insight.",
+      });
+    }
+  }
+
+  const pgEligibleCount = packet.email_items.filter((item) => item.perception_gap?.eligible && item.perception_gap.show_recommendation === "show").length;
+  const pgCount = output.perception_gap?.notes?.length ?? 0;
+  if (pgEligibleCount > 0 && pgCount === 0) {
+    failures.push({
+      code: "DEPTH_PG_MISSING",
+      severity: "blocking",
+      message: "Package 9.2 has eligible Perception Gap evidence but no Perception Gap output.",
+    });
+  }
+
+  for (let i = 0; i < (output.perception_gap?.notes ?? []).length; i++) {
+    const note = output.perception_gap.notes[i].note.text;
+    const hasStandardLabels = /view:/i.test(note) && /\bThe gap:/i.test(note) && /\bWhy it matters:/i.test(note);
+    const hasReaderRisk = /\b(make|makes|look|misread|miss|separates?|only see|one frame|before)\b/i.test(note);
+    const knownSector = /logistics|shipping|maritime|freight|port|energy|oil|gas|lng|agriculture|food|finance|bank|market|technology|software|semiconductor|telecom|ai|cyber/i.test(packet.company.industry || "");
+    const genericKnownSectorFrame = knownSector && /\b(Operational view|Policy\/regional view|Sources differed mainly)\b/i.test(note);
+    if (!hasStandardLabels) {
+      failures.push({
+        code: "EDITORIAL_PG_FORMAT_WEAK",
+        severity: "blocking",
+        generated_text_path: `perception_gap.notes[${i}]`,
+        message: "Package 9.3A Perception Gap must use labelled view/gap/why-it-matters format.",
+      });
+    } else if (genericKnownSectorFrame) {
+      failures.push({
+        code: "EDITORIAL_PG_SECTOR_FRAME_GENERIC",
+        severity: "warning",
+        generated_text_path: `perception_gap.notes[${i}]`,
+        message: "Package 9.3 Perception Gap should use sector-adaptive frame labels for known company sectors, not generic frame language.",
+      });
+    } else if (!hasReaderRisk) {
+      failures.push({
+        code: "EDITORIAL_PG_READER_RISK_MISSING",
+        severity: "warning",
+        generated_text_path: `perception_gap.notes[${i}]`,
+        message: "Package 9.3A Perception Gap should name what a reader could misread if they saw only one frame.",
+      });
+    }
+  }
+
+  return failures;
+}
+
+function checkEditorialRequirements(
+  packet: CompanyBriefingEvidencePacket,
+  output: CompanyBriefingGenerationOutput,
+): QAFailure[] {
+  const failures: QAFailure[] = [];
+  const packetClaimIds = new Set(packet.email_items.flatMap((item) => item.facts.map((fact) => fact.claim_id)));
+  const packetItemIds = new Set(packet.email_items.map((item) => item.item_id));
+  const allGeneratedTexts: Array<{ path: string; text: GeneratedText; itemId?: string }> = [
+    { path: "today_brief.top_line", text: output.today_brief.top_line },
+    ...output.today_brief.bullets.map((text, i) => ({ path: `today_brief.bullets[${i}]`, text })),
+    ...output.perception_gap.notes.map((note, i) => ({ path: `perception_gap.notes[${i}]`, text: note.note, itemId: note.packet_item_id })),
+    ...output.useful_observations.observations.map((text, i) => ({ path: `useful_observations.observations[${i}]`, text })),
+    { path: "source_notes.text", text: output.source_notes.text },
+  ];
+
+  for (const segment of allGeneratedTexts) {
+    if (!segment.text.supported_by?.length) {
+      failures.push({
+        code: "EDITORIAL_TEXT_UNSUPPORTED",
+        severity: segment.path === "source_notes.text" ? "warning" : "blocking",
+        generated_text_path: segment.path,
+        item_id: segment.itemId,
+        message: "Package 9.3A customer-facing editorial text needs support references, not unsupported synthesis.",
+      });
+      continue;
+    }
+
+    const claimRefs = segment.text.supported_by.filter((ref) => ref.type === "claim_id").map((ref) => ref.id);
+    const invalidClaimRefs = claimRefs.filter((id) => !packetClaimIds.has(id));
+    if (invalidClaimRefs.length > 0) {
+      failures.push({
+        code: "EDITORIAL_INVALID_CLAIM_REF",
+        severity: "blocking",
+        generated_text_path: segment.path,
+        item_id: segment.itemId,
+        message: `Package 9.3A editorial text references unknown claim IDs: ${invalidClaimRefs.join(", ")}`,
+      });
+    }
+  }
+
+  const topLine = output.today_brief.top_line.text;
+  const topLineLooksHardcoded = /\bHormuz\b/i.test(topLine)
+    && !packet.email_items.some((item) => /\bHormuz\b/i.test(`${item.canonical_event_name} ${item.facts.map((fact) => fact.text).join(" ")}`));
+  if (topLineLooksHardcoded) {
+    failures.push({
+      code: "EDITORIAL_HARDCODED_CONTEXT",
+      severity: "blocking",
+      generated_text_path: "today_brief.top_line",
+      message: "Package 9.3A top line appears to use hardcoded topic context that is not supported by selected evidence.",
+    });
+  }
+
+  const nonLogisticsIndustry = !/logistics|shipping|maritime|freight|port|supply-chain|transport/i.test(packet.company.industry || "");
+  const generatedAllText = JSON.stringify(output);
+  if (nonLogisticsIndustry && /\b(weak shipping confidence|global logistics|freight markets|vessel traffic, insurance cover|carriers, insurers|route-confidence story)\b/i.test(generatedAllText)) {
+    failures.push({
+      code: "EDITORIAL_SECTOR_LEAKAGE",
+      severity: "blocking",
+      message: "Company briefing appears to leak logistics/Test Company framing into a non-logistics company output.",
+    });
+  }
+
+  for (const section of output.main_briefing.sections) {
+    for (const item of section.items) {
+      if (!packetItemIds.has(item.packet_item_id)) continue;
+      const packetItem = packet.email_items.find((candidate) => candidate.item_id === item.packet_item_id);
+      const sectionLabel = packet.company.selected_scan_areas.find((area) => area.area_id === section.section_id)?.label || section.heading;
+      const bodyAndTitle = `${item.title.text} ${item.body.text}`.toLowerCase();
+      const sectionTerms = sectionLabel.toLowerCase().split(/[^a-z0-9]+/).filter((word) => word.length > 4);
+      const coherent = sectionTerms.length === 0 || sectionTerms.some((term) => bodyAndTitle.includes(term)) || packetItem?.section_ids.includes(section.section_id);
+      if (!coherent) {
+        failures.push({
+          code: "EDITORIAL_SECTION_COHERENCE_WEAK",
+          severity: "warning",
+          item_id: item.packet_item_id,
+          generated_text_path: `item:${item.generated_item_id}`,
+          message: `Package 9.3A section heading/body coherence is weak for heading "${section.heading}".`,
+        });
+      }
+    }
+  }
+
+  for (let i = 0; i < output.perception_gap.notes.length; i++) {
+    const note = output.perception_gap.notes[i];
+    const packetItem = packet.email_items.find((item) => item.item_id === note.packet_item_id);
+    const credibleFrames = packetItem?.perception_gap?.frames?.filter((frame) => frame.source_grade === "A" || frame.source_grade === "B") ?? [];
+    const distinctFrameBases = new Set(credibleFrames.map((frame) => `${frame.source_region}:${frame.evidence_type}:${frame.summary}`));
+    if (distinctFrameBases.size < 2) {
+      failures.push({
+        code: "EDITORIAL_PG_DISTINCT_EVIDENCE_WEAK",
+        severity: "warning",
+        item_id: note.packet_item_id,
+        generated_text_path: `perception_gap.notes[${i}]`,
+        message: "Package 9.3A Perception Gap should rest on at least two distinct credible frame bases before saying frames differ.",
+      });
+    }
+  }
+
+  if (/\bwatch\s+next\b/i.test(JSON.stringify(output))) {
+    failures.push({
+      code: "EDITORIAL_WATCH_NEXT_DEFAULT_BLOCKED",
+      severity: "blocking",
+      message: "Package 9.3A should not output a standalone generic Watch Next section by default.",
+    });
+  }
+
+  return failures;
 }
 
 function estimateTotalWords(output: CompanyBriefingGenerationOutput): number {

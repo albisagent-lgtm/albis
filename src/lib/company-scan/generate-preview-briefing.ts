@@ -5,10 +5,9 @@
 // is upserted. Generates a single briefing for that company using the most
 // recent 24h of signals already in the pool — no fresh scan triggered.
 //
-// Cost target: ~$0.03 per signup (per the brief). Today the pipeline still
-// uses the templated buildBriefingContent helpers (no LLM), so the actual
-// cost is effectively zero — Package 8 swaps in OpenAI generation and the
-// per-signup cost lands at the documented figure.
+// Package 10C note: preview generation must use the scanner-report path. It
+// must not fall back to the retired templated `what_changed` / `what_to_watch`
+// mini-briefing shape.
 //
 // Entitlement gate is intentionally skipped here: a brand-new user might
 // land on this code path before the trial-state write has propagated, and
@@ -23,7 +22,7 @@ import {
 import type { CompanyProfile } from "../company-profile";
 
 export interface PreviewBriefingResult {
-  status: "generated" | "skipped_no_signals" | "skipped_no_profile";
+  status: "generated" | "skipped_no_signals" | "skipped_no_profile" | "skipped_write_gated" | "skipped_qa_blocked";
   briefing_id?: string | null;
   signals_considered?: number;
   signals_selected?: number;
@@ -72,12 +71,28 @@ export async function generatePreviewBriefing(
     profile as CompanyProfile,
     signals,
     scanDate,
-    {}
+    {
+      usePackage8Preview: true,
+      writeBriefingRows: true,
+      useCompanySpecificRetrieval: process.env.COMPANY_SPECIFIC_RETRIEVAL_ENABLED === "1",
+      enableDeepDiveRetrieval: process.env.COMPANY_DEEP_DIVE_RETRIEVAL_ENABLED === "1",
+      lookbackHours: PREVIEW_LOOKBACK_HOURS,
+    }
   );
+
+  if (!result.briefing_id) {
+    return {
+      status: result.reason === "package8_qa_blocked" ? "skipped_qa_blocked" : "skipped_write_gated",
+      briefing_id: null,
+      signals_considered: result.signals_considered,
+      signals_selected: result.signals_selected,
+      reason: result.reason || "scanner report preview did not write a briefing row",
+    };
+  }
 
   return {
     status: "generated",
-    briefing_id: result.briefing_id ?? null,
+    briefing_id: result.briefing_id,
     signals_considered: result.signals_considered,
     signals_selected: result.signals_selected,
   };

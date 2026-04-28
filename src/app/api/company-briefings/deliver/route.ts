@@ -7,7 +7,7 @@ import {
 } from "@/lib/email-templates/company-briefing-v2";
 import {
   getCompanyBriefingContentVersion,
-  isCompanyBriefingV2Content,
+  isCompanyScannerReportContent,
 } from "@/lib/company-briefing-content-version";
 import { shouldGenerateBriefing } from "@/lib/tier-enforcement";
 
@@ -25,10 +25,10 @@ function getResendClient() {
 /**
  * POST /api/company-briefings/deliver
  *
- * Sends Package 8/v2 company briefings only. Legacy `what_changed` /
- * `what_to_watch` content is deliberately not deliverable after the cleanup:
- * it can remain readable for history, but it must not leave the system as a
- * customer email.
+ * Sends Package 10C scanner-report company briefings only. Legacy
+ * `what_changed` / `what_to_watch` content and compressed v2 mini-briefings are
+ * deliberately not deliverable after the cleanup: they can remain readable for
+ * history, but they must not leave the system as customer email.
  *
  * Body (optional):
  *   {
@@ -53,6 +53,17 @@ export async function POST(req: NextRequest) {
     const briefingDate = body.briefing_date || nzDate.toISOString().split("T")[0];
     const forceAll = body.force_all === true;
     const dryRun = body.dry_run === true;
+
+    if (!dryRun && process.env.COMPANY_EMAIL_DELIVERY_ENABLED !== "1") {
+      return NextResponse.json(
+        {
+          error: "company_email_delivery_disabled",
+          message:
+            "Company email delivery is disabled. Set COMPANY_EMAIL_DELIVERY_ENABLED=1 only after Package 8 QA and launch approval.",
+        },
+        { status: 423 }
+      );
+    }
 
     const { data: briefings, error: bErr } = await supabase
       .from("company_briefings")
@@ -114,11 +125,13 @@ export async function POST(req: NextRequest) {
       }
 
       const contentVersion = getCompanyBriefingContentVersion(briefing.briefing_content);
-      if (!isCompanyBriefingV2Content(briefing.briefing_content)) {
+      if (!isCompanyScannerReportContent(briefing.briefing_content)) {
         const errMsg =
           contentVersion === "legacy_what_changed"
             ? "legacy_content_not_deliverable"
-            : "invalid_company_briefing_content";
+            : contentVersion === "company_briefing_v2"
+              ? "compressed_v2_content_not_deliverable"
+              : "invalid_company_briefing_content";
 
         details.push({
           company_name: profile.company_name,

@@ -7,6 +7,7 @@ import type {
   BriefingWatchItem,
   MatchReason,
 } from "@/lib/email-templates/company-briefing";
+import type { CompanyBriefingGenerationOutput } from "@/lib/company-scan/types";
 
 // Re-export so pages can use the type without reaching into email-templates
 export type { BriefingContent };
@@ -15,7 +16,7 @@ const MATCH_REASON_LABEL: Record<MatchReason["type"], string> = {
   geography: "Geography",
   sector: "Sector",
   tracked_theme: "Tracked themes",
-  watchlist_entity: "Watchlist entities",
+  watchlist_entity: "Named entities",
   supply_chain: "Supply chain",
   risk_priority: "Risk priorities",
   urgency: "Urgency signal",
@@ -146,9 +147,13 @@ export function BriefingRenderer({
   content,
   compact = false,
 }: {
-  content: BriefingContent;
+  content: BriefingContent | CompanyBriefingGenerationOutput;
   compact?: boolean;
 }) {
+  if (isScannerReportContent(content)) {
+    return <ScannerReportRenderer content={content} compact={compact} />;
+  }
+
   const { header, what_changed, why_it_matters, what_to_watch, regional_framing } =
     content;
 
@@ -248,6 +253,111 @@ export function BriefingRenderer({
           ))}
         </div>
       </section>
+    </div>
+  );
+}
+
+function isScannerReportContent(content: BriefingContent | CompanyBriefingGenerationOutput): content is CompanyBriefingGenerationOutput {
+  return (content as CompanyBriefingGenerationOutput).output_version === "company_briefing_generation_v1";
+}
+
+function ScannerReportRenderer({
+  content,
+  compact = false,
+}: {
+  content: CompanyBriefingGenerationOutput;
+  compact?: boolean;
+}) {
+  const scanner = content.scanner_report;
+  return (
+    <div className="space-y-0">
+      {!compact && (
+        <div className="mb-8">
+          <p className="text-sm text-zinc-400 dark:text-zinc-500">Daily scan</p>
+          <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+            Company Scanner Report
+          </h2>
+          {scanner?.enabled && (
+            <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
+              {scanner.main_findings_count} main findings across {scanner.scan_area_count} watched areas
+            </p>
+          )}
+        </div>
+      )}
+
+      {scanner?.overview?.text && (
+        <section>
+          <p className={sectionLabel}>Today&apos;s Scan</p>
+          <p className="mt-4 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+            {scanner.overview.text}
+          </p>
+        </section>
+      )}
+
+      <div className="my-7 h-px bg-black/[0.07] dark:bg-white/[0.07]" />
+
+      <section>
+        <p className={sectionLabel}>Main Findings</p>
+        <div className="mt-5 space-y-8">
+          {content.main_briefing.sections.map((section) => (
+            <div key={section.section_id}>
+              <h3 className="text-base font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                {section.heading}
+              </h3>
+              <div className="mt-3 space-y-4">
+                {section.items.map((item, i) => (
+                  <article key={item.generated_item_id || i}>
+                    <p className="text-[15px] font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+                      {item.title.text}
+                    </p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                      {item.body.text}
+                    </p>
+                    {item.uncertainty_line?.text && (
+                      <p className="mt-1 text-xs leading-relaxed text-zinc-400 dark:text-zinc-500">
+                        {item.uncertainty_line.text}
+                      </p>
+                    )}
+                  </article>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {(scanner?.deeper_reads?.length || 0) > 0 && (
+        <>
+          <div className="my-7 h-px bg-black/[0.07] dark:bg-white/[0.07]" />
+          <section>
+            <p className={sectionLabel}>Deeper Read</p>
+            <div className="mt-4 space-y-5">
+              {scanner?.deeper_reads.map((item, i) => (
+                <article key={item.generated_item_id || i}>
+                  <p className="text-[15px] font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+                    {item.title.text}
+                  </p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                    {item.body.text}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
+        </>
+      )}
+
+      {(scanner?.also_seen?.length || 0) > 0 && (
+        <>
+          <div className="my-7 h-px bg-black/[0.07] dark:bg-white/[0.07]" />
+          <section>
+            <p className={sectionLabel}>Also Seen</p>
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              {scanner?.also_seen.map((item, i) => <li key={i}>{item.text}</li>)}
+            </ul>
+          </section>
+        </>
+      )}
     </div>
   );
 }

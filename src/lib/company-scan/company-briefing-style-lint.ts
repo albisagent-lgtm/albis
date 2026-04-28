@@ -15,8 +15,6 @@
 
 import type {
   CompanyBriefingGenerationOutput,
-  GeneratedBriefingItem,
-  GeneratedText,
 } from "./types";
 
 // ---------------------------------------------------------------------------
@@ -71,6 +69,18 @@ const BANNED_PHRASES_BLOCKING: Array<{ pattern: RegExp; label: string }> = [
   { pattern: /\bwill\s+definitely\b/i, label: "will definitely" },
   { pattern: /\bignored\s+by\s+(the\s+)?(western\s+)?media\b/i, label: "ignored by the media" },
   { pattern: /\bmainstream\s+media\s+won'?t\s+tell\b/i, label: "mainstream media won't tell" },
+  { pattern: /\bregistered\s+against\s+the\s+watchlist\b/i, label: "internal watchlist rail" },
+  { pattern: /\bmatched\s+(the\s+)?selected\s+watch\s+areas?\b/i, label: "internal selected-watch-area rail" },
+  { pattern: /\bled\s+this\s+company[- ]specific\s+scan\b/i, label: "internal scan rail" },
+  { pattern: /\bselected\s+company\s+watch\s+areas?\b/i, label: "internal company watch-area rail" },
+  { pattern: /\bwatchlist\s+entities\b/i, label: "internal watchlist section label" },
+  { pattern: /\bdatapoint\s+was\s+useful\b/i, label: "internal datapoint rail" },
+  { pattern: /\broute\s+access\s+and\s+route\s+confidence\b/i, label: "internal route-confidence rail" },
+  { pattern: /\bthe\s+comparison\s+is\s+whether\b/i, label: "internal comparison rail" },
+  { pattern: /\bthe\s+relevance\s+is\b/i, label: "internal relevance rail" },
+  { pattern: /\bthe\s+useful\s+distinction\s+is\b/i, label: "internal distinction rail" },
+  { pattern: /\bsignal\s+showed\s+up\b/i, label: "internal signal rail" },
+  { pattern: /\bcompany[- ]specific\s+scan\b/i, label: "internal scan rail" },
   { pattern: /\bshocking\b/i, label: "shocking" },
   { pattern: /\bexplosive\b/i, label: "explosive" },
   { pattern: /\bbombshell\b/i, label: "bombshell" },
@@ -132,7 +142,10 @@ const PROMPT_LEAKAGE_PATTERNS: RegExp[] = [
 // ---------------------------------------------------------------------------
 
 const SENTENCE_LENGTH_WARN = 28;
+const SENTENCE_LENGTH_PREMIUM_WARN = 32;
 const SENTENCE_LENGTH_BLOCK = 45;
+const AVERAGE_SENTENCE_LENGTH_WARN = 22;
+const PARAGRAPH_WORD_WARN = 95;
 
 // ---------------------------------------------------------------------------
 // Generic observation patterns — warning
@@ -144,6 +157,42 @@ const GENERIC_OBSERVATION_PATTERNS: RegExp[] = [
   /\b(going\s+forward|moving\s+forward|looking\s+ahead),?\s+(it\s+will\s+be\s+)?(important|crucial|critical|essential)\s+to\b/i,
   /\bthe\s+situation\s+(continues\s+to\s+)?evolve\b/i,
   /\btime\s+will\s+tell\b/i,
+];
+
+const ADVICE_BOUNDARY_PATTERNS: Array<{ pattern: RegExp; label: string }> = [
+  { pattern: /\b(companies|businesses|operators|executives|stakeholders|leaders)\s+(should|must|need\s+to|have\s+to|are\s+required\s+to)\b/i, label: "advice to reader group" },
+  { pattern: /\b(the\s+)?recommended\s+action\s+is\b/i, label: "recommended action" },
+  { pattern: /\bthis\s+means\s+you\s+should\b/i, label: "this means you should" },
+  { pattern: /\bthe\s+next\s+thing\s+to\s+watch\b/i, label: "next thing to watch" },
+];
+
+const FILLER_OPENING_PATTERNS: Array<{ pattern: RegExp; label: string }> = [
+  { pattern: /^\s*amid\b/i, label: "Amid" },
+  { pattern: /^\s*against\s+the\s+backdrop\b/i, label: "Against the backdrop" },
+  { pattern: /^\s*in\s+the\s+context\s+of\b/i, label: "In the context of" },
+  { pattern: /^\s*as\s+the\s+world\b/i, label: "As the world" },
+];
+
+const AMBIGUOUS_SIGNAL_PATTERNS: Array<{ pattern: RegExp; label: string }> = [
+  { pattern: /\bstrongest\s+signal\b/i, label: "strongest signal" },
+  { pattern: /\bnotable\s+signal\b/i, label: "notable signal" },
+  { pattern: /\bimportant\s+development\b/i, label: "important development" },
+  { pattern: /\binteresting\s+development\b/i, label: "interesting development" },
+];
+
+const VAGUE_INTELLIGENCE_PATTERNS: Array<{ pattern: RegExp; label: string }> = [
+  { pattern: /\bcould\s+have\s+implications\b/i, label: "could have implications" },
+  { pattern: /\bmaterial\s+implications\b/i, label: "material implications" },
+  { pattern: /\bstrategic\s+implications\b/i, label: "strategic implications" },
+  { pattern: /\bbroader\s+implications\b/i, label: "broader implications" },
+  { pattern: /\bit\s+matters\s+because\b/i, label: "it matters because" },
+  { pattern: /\bthat\s+figure\s+matters\b/i, label: "that figure matters" },
+];
+
+const UNSUPPORTED_TREND_WORDS: Array<{ pattern: RegExp; label: string }> = [
+  { pattern: /\bincreasingly\b/i, label: "increasingly" },
+  { pattern: /\bwidening\b/i, label: "widening" },
+  { pattern: /\bescalating\b/i, label: "escalating" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -214,10 +263,12 @@ export function lintBriefingStyle(output: CompanyBriefingGenerationOutput): Styl
   }
 
   // --- Check sentence length ---
+  const allSentenceWordCounts: number[] = [];
   for (const seg of segments) {
     const sentences = splitSentences(seg.text);
     for (const sentence of sentences) {
       const wordCount = countWords(sentence);
+      allSentenceWordCounts.push(wordCount);
       if (wordCount >= SENTENCE_LENGTH_BLOCK) {
         issues.push({
           code: "SENTENCE_TOO_LONG",
@@ -225,6 +276,14 @@ export function lintBriefingStyle(output: CompanyBriefingGenerationOutput): Styl
           location: seg.path,
           text: sentence.slice(0, 120) + (sentence.length > 120 ? "..." : ""),
           message: `Sentence has ${wordCount} words (max ${SENTENCE_LENGTH_BLOCK}). Split into shorter sentences.`,
+        });
+      } else if (wordCount > SENTENCE_LENGTH_PREMIUM_WARN) {
+        issues.push({
+          code: "SENTENCE_PREMIUM_LONG",
+          severity: "warning",
+          location: seg.path,
+          text: sentence.slice(0, 120) + (sentence.length > 120 ? "..." : ""),
+          message: `Sentence has ${wordCount} words. Package 9.3A target is ${SENTENCE_LENGTH_PREMIUM_WARN} or fewer unless the sentence clearly needs the length.`,
         });
       } else if (wordCount > SENTENCE_LENGTH_WARN) {
         issues.push({
@@ -235,6 +294,32 @@ export function lintBriefingStyle(output: CompanyBriefingGenerationOutput): Styl
           message: `Sentence has ${wordCount} words (target: ${SENTENCE_LENGTH_WARN} or fewer).`,
         });
       }
+    }
+
+    for (const paragraph of seg.text.split(/\n\n+/).map((p) => p.trim()).filter(Boolean)) {
+      const paragraphWords = countWords(paragraph);
+      if (paragraphWords > PARAGRAPH_WORD_WARN) {
+        issues.push({
+          code: "PARAGRAPH_TOO_DENSE",
+          severity: "warning",
+          location: seg.path,
+          text: paragraph.slice(0, 120) + (paragraph.length > 120 ? "..." : ""),
+          message: `Paragraph has ${paragraphWords} words. Package 9.3A target is ${PARAGRAPH_WORD_WARN} or fewer.`,
+        });
+      }
+    }
+  }
+
+  if (allSentenceWordCounts.length > 0) {
+    const averageSentenceLength = allSentenceWordCounts.reduce((sum, count) => sum + count, 0) / allSentenceWordCounts.length;
+    if (averageSentenceLength > AVERAGE_SENTENCE_LENGTH_WARN) {
+      issues.push({
+        code: "AVERAGE_SENTENCE_LENGTH_HIGH",
+        severity: "warning",
+        location: "briefing.customer_facing_text",
+        text: averageSentenceLength.toFixed(1),
+        message: `Average sentence length is ${averageSentenceLength.toFixed(1)} words. Package 9.3A target is ${AVERAGE_SENTENCE_LENGTH_WARN} or fewer.`,
+      });
     }
   }
 
@@ -249,6 +334,75 @@ export function lintBriefingStyle(output: CompanyBriefingGenerationOutput): Styl
           location: seg.path,
           text: match?.[0] ?? seg.text.slice(0, 80),
           message: "Generic observation detected. Replace with specific, evidence-supported insight.",
+        });
+      }
+    }
+  }
+
+  // --- Package 9.3A: advice boundary, vague intelligence language, and filler openings ---
+  for (const seg of segments) {
+    for (const { pattern, label } of ADVICE_BOUNDARY_PATTERNS) {
+      if (pattern.test(seg.text)) {
+        const match = seg.text.match(pattern);
+        issues.push({
+          code: "ADVICE_BOUNDARY",
+          severity: "blocking",
+          location: seg.path,
+          text: match?.[0] ?? label,
+          message: `Advice-like wording detected: "${label}". Albis should clarify evidence, not tell companies what to do.`,
+          suggested_fix: "Use decision-usefulness language such as 'The evidence supports...' or 'The useful distinction is...'.",
+        });
+      }
+    }
+
+    for (const { pattern, label } of FILLER_OPENING_PATTERNS) {
+      if (pattern.test(seg.text)) {
+        const match = seg.text.match(pattern);
+        issues.push({
+          code: "FILLER_OPENING",
+          severity: "warning",
+          location: seg.path,
+          text: match?.[0] ?? label,
+          message: `Filler opening detected: "${label}". Start with concrete evidence or the point.`,
+        });
+      }
+    }
+
+    for (const { pattern, label } of AMBIGUOUS_SIGNAL_PATTERNS) {
+      if (pattern.test(seg.text)) {
+        const match = seg.text.match(pattern);
+        issues.push({
+          code: "AMBIGUOUS_SIGNAL_LANGUAGE",
+          severity: label === "strongest signal" ? "blocking" : "warning",
+          location: seg.path,
+          text: match?.[0] ?? label,
+          message: `Ambiguous signal language detected: "${label}". Say what registered and why it belongs here.`,
+        });
+      }
+    }
+
+    for (const { pattern, label } of VAGUE_INTELLIGENCE_PATTERNS) {
+      if (pattern.test(seg.text)) {
+        const match = seg.text.match(pattern);
+        issues.push({
+          code: "VAGUE_INTELLIGENCE_LANGUAGE",
+          severity: "warning",
+          location: seg.path,
+          text: match?.[0] ?? label,
+          message: `Vague intelligence phrase detected: "${label}". Replace with the specific mechanism or distinction.`,
+        });
+      }
+    }
+
+    for (const { pattern, label } of UNSUPPORTED_TREND_WORDS) {
+      if (pattern.test(seg.text) && !/(again|repeated|more than one|later scans|trend|pattern|source spread|across)/i.test(seg.text)) {
+        const match = seg.text.match(pattern);
+        issues.push({
+          code: "UNSUPPORTED_TREND_LANGUAGE",
+          severity: "warning",
+          location: seg.path,
+          text: match?.[0] ?? label,
+          message: `Trend word "${label}" needs visible evidence or a softer phrasing.`,
         });
       }
     }
@@ -310,7 +464,7 @@ export function lintBriefingStyle(output: CompanyBriefingGenerationOutput): Styl
 
   // Reading load: check total word count
   const totalWords = segments.reduce((sum, seg) => sum + countWords(seg.text), 0);
-  const readingLoadOk = totalWords <= 1500; // generous limit for email
+  const readingLoadOk = totalWords <= (output.scanner_report?.enabled ? 3500 : 1500); // scanner reports are intentionally fuller
 
   return {
     calm_tone: blockingIssues.filter((i) => i.code === "BANNED_PHRASE").length === 0,
@@ -347,6 +501,18 @@ function extractTextSegments(output: CompanyBriefingGenerationOutput): TextSegme
   }
   for (let i = 0; i < output.today_brief.bullets.length; i++) {
     segments.push({ path: `today_brief.bullets[${i}]`, text: output.today_brief.bullets[i].text });
+  }
+
+  if (output.scanner_report?.enabled) {
+    segments.push({ path: "scanner_report.overview", text: output.scanner_report.overview.text });
+    for (let i = 0; i < output.scanner_report.deeper_reads.length; i++) {
+      const item = output.scanner_report.deeper_reads[i];
+      segments.push({ path: `scanner_report.deeper_reads[${i}].title`, text: item.title.text });
+      segments.push({ path: `scanner_report.deeper_reads[${i}].body`, text: item.body.text });
+    }
+    for (let i = 0; i < output.scanner_report.also_seen.length; i++) {
+      segments.push({ path: `scanner_report.also_seen[${i}]`, text: output.scanner_report.also_seen[i].text });
+    }
   }
 
   // Main Briefing

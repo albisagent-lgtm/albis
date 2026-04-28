@@ -67,6 +67,17 @@ async function handle(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const overrideWindow = searchParams.get("window") as ScanRunWindow | null;
   const overrideDate = searchParams.get("date");
+  const companyProfileId = searchParams.get("company_profile_id") || undefined;
+  const companyName = searchParams.get("company_name") || undefined;
+  const useCompanySpecificRetrieval =
+    process.env.COMPANY_SPECIFIC_RETRIEVAL_ENABLED === "1" ||
+    searchParams.get("company_specific_retrieval") === "1";
+  const enableDeepDiveRetrieval =
+    process.env.COMPANY_DEEP_DIVE_RETRIEVAL_ENABLED === "1" ||
+    searchParams.get("deep_dive_retrieval") === "1";
+  const writeBriefings =
+    process.env.COMPANY_BRIEFINGS_WRITE_ENABLED === "1" &&
+    searchParams.get("write_briefings") === "1";
 
   const now = new Date();
   const utcHour = now.getUTCHours();
@@ -95,6 +106,15 @@ async function handle(req: NextRequest) {
     const pipeline = await runCompanySignalPipeline(supabase, {
       scanDate: runDate,
       lookbackHours: 24,
+      // Company cron should use the Package 8/v2 path only. It remains
+      // preview/no-write by default; writing rows requires both the env gate
+      // above and an explicit query flag.
+      usePackage8Preview: true,
+      writeBriefingRows: writeBriefings,
+      companyProfileId,
+      companyName,
+      useCompanySpecificRetrieval,
+      enableDeepDiveRetrieval,
     });
 
     return NextResponse.json({
@@ -104,6 +124,13 @@ async function handle(req: NextRequest) {
       watch_graph: watchGraph,
       scan,
       pipeline,
+      production_preview: {
+        package8_preview: true,
+        company_specific_retrieval: useCompanySpecificRetrieval,
+        deep_dive_retrieval: enableDeepDiveRetrieval,
+        write_briefings: writeBriefings,
+        email_delivery_enabled: process.env.COMPANY_EMAIL_DELIVERY_ENABLED === "1",
+      },
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);

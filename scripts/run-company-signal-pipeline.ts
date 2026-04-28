@@ -23,11 +23,25 @@ interface ParsedArgs {
   scanDate: string;
   lookbackHours: number;
   dryRun: boolean;
+  package8Preview: boolean;
+  legacy: boolean;
+  writeBriefingRows: boolean;
+  companySpecificRetrieval: boolean;
+  deepDiveRetrieval: boolean;
+  companyName?: string;
+  companyProfileId?: string;
 }
 
 function parseArgs(): ParsedArgs {
   const argv = process.argv.slice(2);
   const dryRun = argv.includes('--dry-run');
+  const legacy = argv.includes('--legacy');
+  const package8Preview = !legacy;
+  const writeBriefingRows = argv.includes('--write-briefing-rows');
+  const companySpecificRetrieval = argv.includes('--company-specific-retrieval');
+  const deepDiveRetrieval = argv.includes('--deep-dive-retrieval');
+  const companyName = argv.find((a) => a.startsWith('--company='))?.split('=')[1];
+  const companyProfileId = argv.find((a) => a.startsWith('--company-profile-id='))?.split('=')[1];
   const explicitDate = argv.find((a) => /^\d{4}-\d{2}-\d{2}$/.test(a));
   const lookbackArg = argv.find((a) => a.startsWith('--lookback-hours='));
   const lookbackHours = lookbackArg
@@ -38,22 +52,31 @@ function parseArgs(): ParsedArgs {
     const nzDate = new Date(now.getTime() + 13 * 60 * 60 * 1000);
     return nzDate.toISOString().split('T')[0];
   })();
-  return { scanDate, lookbackHours, dryRun };
+  return { scanDate, lookbackHours, dryRun, package8Preview, legacy, writeBriefingRows, companySpecificRetrieval, deepDiveRetrieval, companyName, companyProfileId };
 }
 
 async function main() {
-  const { scanDate, lookbackHours, dryRun } = parseArgs();
+  const { scanDate, lookbackHours, dryRun, package8Preview, legacy, writeBriefingRows, companySpecificRetrieval, deepDiveRetrieval, companyName, companyProfileId } = parseArgs();
+  if (legacy && process.env.ALLOW_LEGACY_COMPANY_PIPELINE !== '1') {
+    throw new Error('--legacy requires ALLOW_LEGACY_COMPANY_PIPELINE=1. Package 10C scanner report is the default path.');
+  }
   const supabase = createAdminClient();
 
   const summary = await runCompanySignalPipeline(supabase, {
     scanDate,
     lookbackHours,
     dryRun,
+    usePackage8Preview: package8Preview,
+    writeBriefingRows,
+    useCompanySpecificRetrieval: companySpecificRetrieval,
+    enableDeepDiveRetrieval: deepDiveRetrieval,
+    companyName,
+    companyProfileId,
     log: (m) => console.log(m),
     warn: (m) => console.warn(m),
   });
 
-  if (!dryRun && !summary.skipped_no_signals) {
+  if (!dryRun && writeBriefingRows && !summary.skipped_no_signals) {
     const briefingRows = await requireCompanyBriefingRows(supabase, scanDate);
     console.log(`✅ Verified ${briefingRows.length} company_briefings row(s) for ${scanDate}`);
   }

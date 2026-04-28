@@ -1072,6 +1072,22 @@ export interface EmailCandidateItem {
     anchor: { source: string; grade: QualityGrade; url: string; article_id: string };
     supporting: Array<{ source: string; grade: string; url: string; article_id: string }>;
   };
+  retrieval_provenance?: CompanyRetrievalProvenance;
+}
+
+export interface CompanyRetrievalProvenance {
+  mode: "company_specific_retrieval" | "company_deep_dive_retrieval" | "shared_signal_pool";
+  company_profile_id?: string;
+  company_name?: string;
+  intent?: string;
+  query_ids: string[];
+  query_labels: string[];
+  scan_area_ids: string[];
+  retrieval_reasons: string[];
+  matched_query_terms: string[];
+  matched_context_terms: string[];
+  parent_signal_ids?: string[];
+  parent_headlines?: string[];
 }
 
 // --- 8C pipeline output ---
@@ -1241,6 +1257,7 @@ export interface EvidenceEmailItem {
   source_summary: EvidenceSourceSummary;
   perception_gap?: EvidencePerceptionGapBlock;
   generation_hints?: EvidenceGenerationHints;
+  retrieval_provenance?: CompanyRetrievalProvenance;
 }
 
 export interface EvidenceEventTuple {
@@ -1389,7 +1406,9 @@ export type QARequirement =
   | "perception_gap_check"
   | "prompt_injection_check"
   | "source_quality_check"
-  | "policy_limit_check";
+  | "policy_limit_check"
+  | "editorial_coherence_check"
+  | "editor_pass_check";
 
 export interface EvidencePacketAudit {
   built_by: "company_scan_funnel";
@@ -1414,8 +1433,19 @@ export interface CompanyBriefingGenerationOutput {
   main_briefing: GeneratedMainBriefing;
   perception_gap: GeneratedPerceptionGap;
   useful_observations: GeneratedUsefulObservations;
+  scanner_report?: GeneratedScannerReport;
   source_notes: GeneratedSourceNotes;
   trace: GenerationTrace;
+}
+
+export interface GeneratedScannerReport {
+  enabled: true;
+  layout_version: "package10c_scanner_report_v1";
+  overview: GeneratedText;
+  main_findings_count: number;
+  scan_area_count: number;
+  deeper_reads: GeneratedBriefingItem[];
+  also_seen: GeneratedText[];
 }
 
 export interface GeneratedTodayBrief {
@@ -1450,6 +1480,29 @@ export interface GeneratedBriefingItem {
 export interface GeneratedText {
   text: string;
   supported_by: EvidenceSupportRef[];
+  evidence_confidence?: EvidenceConfidenceLabel;
+}
+
+export type EvidenceConfidenceKind =
+  | "confirmed_fact"
+  | "reported_claim"
+  | "single_source"
+  | "multi_source_signal"
+  | "early_signal"
+  | "repeated_pattern"
+  | "estimate_or_forecast"
+  | "regional_frame"
+  | "conflicting_reports"
+  | "watch_item";
+
+export interface EvidenceConfidenceLabel {
+  kind: EvidenceConfidenceKind;
+  label: string;
+  customer_phrase: string;
+  confidence: "high" | "medium" | "low";
+  reason: string;
+  source_count: number;
+  source_quality: "A" | "B" | "C" | "mixed";
 }
 
 export interface GeneratedClaimMap {
@@ -1490,6 +1543,29 @@ export interface GenerationTrace {
   packet_item_ids_omitted: string[];
   dashboard_items_used_in_email: string[];
   excluded_items_used_in_email: string[];
+}
+
+export type CompanyBriefingEditorMode = "premium_readability";
+
+export interface CompanyBriefingEditorFieldAudit {
+  path: string;
+  before_text: string;
+  after_text: string;
+  support_refs_unchanged: boolean;
+  added_numbers: string[];
+  added_entities: string[];
+}
+
+export interface CompanyBriefingEditorPass {
+  enabled: boolean;
+  mode: CompanyBriefingEditorMode;
+  deterministic: boolean;
+  model_used?: string;
+  changed_paths: string[];
+  warnings: string[];
+  blocked: boolean;
+  blocked_reason?: string;
+  field_audits: CompanyBriefingEditorFieldAudit[];
 }
 
 // ---------------------------------------------------------------------------

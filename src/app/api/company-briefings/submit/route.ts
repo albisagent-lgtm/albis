@@ -3,7 +3,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import {
   allowLegacyCompanyPipeline,
   getCompanyBriefingContentVersion,
-  isCompanyBriefingV2Content,
+  isCompanyScannerReportContent,
 } from "@/lib/company-briefing-content-version";
 
 const INGEST_KEY = process.env.SCAN_INGEST_KEY;
@@ -11,10 +11,11 @@ const INGEST_KEY = process.env.SCAN_INGEST_KEY;
 /**
  * POST /api/company-briefings/submit
  *
- * Stores generated company briefing content. After the Package 8 cleanup,
- * this endpoint accepts only the v2 Package 8 generation output by default.
- * The old `what_changed` / `what_to_watch` shape is rejected unless the
- * explicit emergency flag ALLOW_LEGACY_COMPANY_PIPELINE=1 is set.
+ * Stores generated company briefing content. After the Package 10C cleanup,
+ * this endpoint accepts only the scanner-report output by default. The old
+ * compressed v2 shape and the older `what_changed` / `what_to_watch` shape are
+ * rejected unless the explicit emergency flag ALLOW_LEGACY_COMPANY_PIPELINE=1
+ * is set for legacy history repair.
  *
  * This endpoint stores content only. It does not send email.
  */
@@ -34,7 +35,7 @@ export async function POST(req: NextRequest) {
     }
 
     const contentVersion = getCompanyBriefingContentVersion(briefing_content);
-    if (!isCompanyBriefingV2Content(briefing_content)) {
+    if (!isCompanyScannerReportContent(briefing_content)) {
       if (contentVersion === "legacy_what_changed" && allowLegacyCompanyPipeline()) {
         // Emergency compatibility only. Normal production generation must not
         // rely on this branch.
@@ -44,7 +45,7 @@ export async function POST(req: NextRequest) {
             error: "unsupported_company_briefing_content_version",
             content_version: contentVersion,
             message:
-              "Company briefing submit now expects Package 8 v2 content. Legacy what_changed/what_to_watch content is not accepted by default.",
+              "Company briefing submit now expects Package 10C scanner-report content. Legacy what_changed/what_to_watch and compressed v2 mini-briefing content are not accepted by default.",
           },
           { status: 422 }
         );
@@ -104,9 +105,9 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
   return NextResponse.json({
-    description: "Submit a Package 8 v2 generated company briefing. POST with Bearer auth.",
-    accepted_content_version: "company_briefing_generation_v1",
-    legacy_content: "Rejected unless ALLOW_LEGACY_COMPANY_PIPELINE=1 is set for emergency compatibility.",
+    description: "Submit a Package 10C scanner-report company briefing. POST with Bearer auth.",
+    accepted_content_version: "company_scanner_report_v1",
+    legacy_content: "Legacy and compressed mini-briefing content is rejected unless ALLOW_LEGACY_COMPANY_PIPELINE=1 is set for emergency compatibility.",
     sends_email: false,
   });
 }

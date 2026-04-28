@@ -1,7 +1,7 @@
 import type { BriefingContent } from "./email-templates/company-briefing";
 import type { CompanyBriefingGenerationOutput } from "./company-scan/types";
 
-export type CompanyBriefingContentVersion = "company_briefing_v2" | "legacy_what_changed" | "unknown";
+export type CompanyBriefingContentVersion = "company_scanner_report_v1" | "company_briefing_v2" | "legacy_what_changed" | "unknown";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -21,6 +21,20 @@ export function isCompanyBriefingV2Content(
   );
 }
 
+export function isCompanyScannerReportContent(
+  content: unknown
+): content is CompanyBriefingGenerationOutput {
+  if (!isCompanyBriefingV2Content(content)) return false;
+  const scannerReport = content.scanner_report;
+  return (
+    isRecord(scannerReport) &&
+    scannerReport.enabled === true &&
+    scannerReport.layout_version === "package10c_scanner_report_v1" &&
+    typeof scannerReport.main_findings_count === "number" &&
+    Array.isArray(scannerReport.deeper_reads)
+  );
+}
+
 export function isLegacyCompanyBriefingContent(
   content: unknown
 ): content is BriefingContent {
@@ -36,6 +50,7 @@ export function isLegacyCompanyBriefingContent(
 export function getCompanyBriefingContentVersion(
   content: unknown
 ): CompanyBriefingContentVersion {
+  if (isCompanyScannerReportContent(content)) return "company_scanner_report_v1";
   if (isCompanyBriefingV2Content(content)) return "company_briefing_v2";
   if (isLegacyCompanyBriefingContent(content)) return "legacy_what_changed";
   return "unknown";
