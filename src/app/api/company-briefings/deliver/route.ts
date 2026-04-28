@@ -6,9 +6,18 @@ import {
   generateBriefingSubject,
   type BriefingContent,
 } from "@/lib/email-templates/company-briefing";
+import { shouldGenerateBriefing } from "@/lib/tier-enforcement";
 
 const INGEST_KEY = process.env.SCAN_INGEST_KEY;
 const FROM_ADDRESS = "Albis Briefing <briefing@albis.news>";
+
+function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error("Missing RESEND_API_KEY");
+  }
+  return new Resend(apiKey);
+}
 
 /**
  * POST /api/company-briefings/deliver
@@ -43,6 +52,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => ({}));
     const supabase = createAdminClient();
+    const resend = getResendClient();
 
     // Determine date
     const now = new Date();
@@ -76,21 +86,12 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const resendApiKey = process.env.RESEND_API_KEY;
-    if (!resendApiKey) {
-      return NextResponse.json(
-        { error: "RESEND_API_KEY is not configured" },
-        { status: 500 }
-      );
-    }
-    const resend = new Resend(resendApiKey);
-
     // 2. Fetch company profiles for these briefings
     const profileIds = briefings.map((b) => b.company_profile_id);
     const { data: profiles, error: pErr } = await supabase
       .from("company_profiles")
       .select(
-        "id, company_name, email_enabled, email_recipients, preferred_delivery_time, timezone"
+        "id, owner_id, company_name, email_enabled, email_recipients, preferred_delivery_time, timezone"
       )
       .in("id", profileIds);
 
@@ -100,6 +101,21 @@ export async function POST(req: NextRequest) {
 
     const profileMap = new Map(
       (profiles || []).map((p) => [p.id, p])
+    );
+
+    // 2b. Batch-fetch owner subscription state for entitlement gate
+    const ownerIds = [...new Set((profiles || []).map((p) => p.owner_id).filter(Boolean))];
+    const { data: ownerProfiles } = ownerIds.length
+      ? await supabase
+          .from("profiles")
+          .select(
+            "id, subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at"
+          )
+          .in("id", ownerIds)
+      : { data: [] as Array<{ id: string; subscription_status: string | null; subscription_tier: string | null; subscription_period_end: string | null; is_test_account: boolean | null; trial_end_at: string | null }> };
+
+    const ownerMap = new Map(
+      (ownerProfiles || []).map((o) => [o.id, o])
     );
 
     // 3. For each briefing, check if it's time to deliver
@@ -119,6 +135,23 @@ export async function POST(req: NextRequest) {
           company_name: "Unknown",
           status: "skipped",
           error: "Profile not found",
+        });
+        continue;
+      }
+
+      // Entitlement gate: only deliver to active/trialing subscriptions
+      // (or is_test_account profiles). Mirrors the score-route gate so a
+      // briefing generated during a trial that has since lapsed is not
+      // emailed out.
+      const owner = ownerMap.get(profile.owner_id);
+      if (!owner || !shouldGenerateBriefing(owner)) {
+        console.log(
+          `[deliver] Skipping ${profile.company_name}: subscription_inactive`
+        );
+        details.push({
+          company_name: profile.company_name,
+          status: "skipped",
+          error: "subscription_inactive",
         });
         continue;
       }

@@ -167,7 +167,7 @@ export default function DashboardProfileClient() {
       // Fetch subscription from profiles table
       const { data: userProfile } = await supabase
         .from("profiles")
-        .select("subscription_status, subscription_tier, subscription_period_end")
+        .select("subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at")
         .eq("id", user.id)
         .single();
       if (userProfile) {
@@ -175,6 +175,8 @@ export default function DashboardProfileClient() {
           subscription_status: userProfile.subscription_status,
           subscription_tier: userProfile.subscription_tier,
           subscription_period_end: userProfile.subscription_period_end,
+          is_test_account: userProfile.is_test_account,
+          trial_end_at: userProfile.trial_end_at,
         });
       }
 
@@ -270,6 +272,12 @@ export default function DashboardProfileClient() {
       } else {
         setSuccessSection(section);
         setTimeout(() => setSuccessSection(null), 3000);
+        // Fire-and-forget canonical resolution. Failures here are silent —
+        // the profile save itself succeeded, and resolution is idempotent
+        // so the next save (or the daily pipeline) will retry.
+        fetch("/api/company-canonical-mappings/resolve", {
+          method: "POST",
+        }).catch(() => {});
       }
     } catch {
       setErrorSection(section);
@@ -539,6 +547,9 @@ export default function DashboardProfileClient() {
           {/* ── Tracking ── */}
           <div className={cardClass}>
             <h2 className={sectionHeader}>What to track</h2>
+            <p className="mt-2 text-[11px] text-zinc-400 dark:text-zinc-500">
+              We'll match related terms automatically.
+            </p>
             <div className="mt-5 space-y-5">
               <TaxonomyCombobox
                 label="Tracked themes"

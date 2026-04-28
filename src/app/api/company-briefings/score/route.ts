@@ -7,6 +7,7 @@ import {
 } from "@/lib/relevance-engine";
 import { loadScanItems } from "@/lib/scan-loader";
 import { shouldGenerateBriefing } from "@/lib/tier-enforcement";
+import { loadCanonicalIndexForProfile, emptyCanonicalIndex } from "@/lib/canonical-index";
 import type { CompanyProfile } from "@/lib/company-profile";
 
 const INGEST_KEY = process.env.SCAN_INGEST_KEY;
@@ -29,7 +30,7 @@ const INGEST_KEY = process.env.SCAN_INGEST_KEY;
  *   {
  *     company_profile_id, company_name, scan_date, signal_level,
  *     stories_considered, stories_selected,
- *     selected_stories: [{ headline, summary, category, regions, relevance_score, relevance_tags }],
+ *     selected_stories: [{ headline, summary, category, regions, relevance_score, match_reasons }],
  *     profile_summary: { sector, regions, tracked_themes, risk_priorities, ... },
  *     briefing_id
  *   }
@@ -75,7 +76,7 @@ export async function POST(req: NextRequest) {
     // Gate: only score for active/trialing subscriptions
     const { data: ownerProfile } = await supabase
       .from("profiles")
-      .select("subscription_status, subscription_tier, subscription_period_end")
+      .select("subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at")
       .eq("id", profile.owner_id)
       .single();
 
@@ -101,8 +102,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 3. Score all stories against this company profile
-    const scored = scoreStoriesForCompany(allItems, profile as CompanyProfile);
+    // 3. Score all stories against this company profile (with canonical alias expansion)
+    let canonicalIndex;
+    try {
+      canonicalIndex = await loadCanonicalIndexForProfile(supabase, company_profile_id);
+    } catch (err) {
+      console.warn("Canonical index load failed, using raw fallback:", err);
+      canonicalIndex = emptyCanonicalIndex();
+    }
+    const scored = scoreStoriesForCompany(allItems, profile as CompanyProfile, canonicalIndex);
     const selected = getSelectedStories(scored);
     const signalLevel = determineSignalLevel(selected);
 
@@ -132,6 +140,7 @@ export async function POST(req: NextRequest) {
       urgency_score: s.urgency_score,
       significance_score: s.significance_score,
       relevance_score: s.relevance_score,
+      match_reasons: s.match_reasons,
       selected_for_briefing: s.selected_for_briefing,
     }));
 
@@ -185,7 +194,7 @@ export async function POST(req: NextRequest) {
         tags: s.tags,
         significance: s.significance,
         relevance_score: Math.round(s.relevance_score * 1000) / 1000,
-        relevance_tags: buildRelevanceTags(s, profile as CompanyProfile),
+        match_reasons: s.match_reasons,
       })),
 
       // Company profile context for the LLM prompt
@@ -209,34 +218,3 @@ export async function POST(req: NextRequest) {
   }
 }
 
-/**
- * Build human-readable relevance tags explaining why a story was selected.
- * Used in the briefing and for Phase 7 explainability.
- */
-function buildRelevanceTags(
-  story: { geography_score: number; sector_score: number; theme_score: number; entity_score: number; supply_chain_score: number; risk_score: number },
-  profile: CompanyProfile
-): string[] {
-  const tags: string[] = [];
-
-  if (story.geography_score > 0.3 && profile.regions.length > 0) {
-    tags.push("geography match");
-  }
-  if (story.sector_score > 0.3 && profile.sector) {
-    tags.push("sector match");
-  }
-  if (story.theme_score > 0.3 && profile.tracked_themes.length > 0) {
-    tags.push("tracked theme");
-  }
-  if (story.entity_score > 0.3 && profile.watchlist_entities.length > 0) {
-    tags.push("watchlist entity");
-  }
-  if (story.supply_chain_score > 0.3 && profile.supply_chain_exposure.length > 0) {
-    tags.push("supply chain");
-  }
-  if (story.risk_score > 0.3 && profile.risk_priorities.length > 0) {
-    tags.push("risk priority");
-  }
-
-  return tags;
-}

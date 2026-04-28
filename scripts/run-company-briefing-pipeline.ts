@@ -1,4 +1,16 @@
 #!/usr/bin/env tsx
+/**
+ * DEPRECATED — replaced by scripts/run-company-signal-pipeline.ts.
+ *
+ * This pipeline reads from the public scan pool (scans / scan_items /
+ * pgi_story_scores / gai_story_scores) and is no longer the primary
+ * path for company-side briefings. Kept for one release cycle as a
+ * fallback in case the new typed-signals path needs to be backed out.
+ *
+ * Do NOT invoke from cron after Package 6 cutover. Update any
+ * openclaw cron entries (or other schedulers) to point at
+ * scripts/run-company-scan-cycle.sh — see docs/company-scan-cron-setup.md.
+ */
 import path from 'path';
 import dotenv from 'dotenv';
 import { Resend } from 'resend';
@@ -17,6 +29,9 @@ import {
   generateBriefingSubject,
   type BriefingContent,
 } from '../src/lib/email-templates/company-briefing';
+import { buildCoverageSummary } from '../src/lib/coverage-builder';
+import { loadCanonicalIndexForProfile, emptyCanonicalIndex } from '../src/lib/canonical-index';
+import { buildBriefingContent } from '../src/lib/company-briefing-templating';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -54,112 +69,6 @@ function parseArgs() {
 
 function unique<T>(values: T[]): T[] {
   return [...new Set(values)];
-}
-
-function buildScanFocus(stories: ReturnType<typeof getSelectedStories>): string {
-  if (!stories.length) return 'No material change';
-  const concreteTags = unique(
-    stories
-      .flatMap((s) => s.tags)
-      .filter((tag) => !['oil', 'shipping', 'sanctions', 'markets', 'trade', 'policy', 'energy'].includes(tag.toLowerCase()))
-  ).slice(0, 3);
-  if (concreteTags.length > 0) return concreteTags.join(', ');
-  const topCategories = unique(stories.map((s) => s.category)).slice(0, 2);
-  return topCategories.join(', ') || 'Cross-regional change';
-}
-
-function buildRelevanceTags(story: {
-  geography_score: number;
-  sector_score: number;
-  theme_score: number;
-  entity_score: number;
-  supply_chain_score: number;
-  risk_score: number;
-}, profile: CompanyProfile): string[] {
-  const tags: string[] = [];
-  if (story.geography_score > 0.3 && profile.regions.length > 0) tags.push('geography match');
-  if (story.sector_score > 0.3 && profile.sector) tags.push('sector match');
-  if (story.theme_score > 0.3 && profile.tracked_themes.length > 0) tags.push('tracked theme');
-  if (story.entity_score > 0.3 && profile.watchlist_entities.length > 0) tags.push('watchlist entity');
-  if (story.supply_chain_score > 0.3 && profile.supply_chain_exposure.length > 0) tags.push('supply chain');
-  if (story.risk_score > 0.3 && profile.risk_priorities.length > 0) tags.push('risk priority');
-  return tags;
-}
-
-function buildWhyItMatters(profile: CompanyProfile, stories: ReturnType<typeof getSelectedStories>): string {
-  const sector = profile.sector?.replace(/-/g, ' ') || 'operations';
-  const regions = profile.regions.slice(0, 3).join(', ');
-  const dominant = stories[0];
-  if (!dominant) {
-    return `Nothing in today's scan crossed Albis's relevance threshold strongly enough to justify a custom alert for ${profile.company_name}, but the system remains active and watching for changes that affect ${sector}.`;
-  }
-  const connection = String(dominant.connection || '').trim();
-  const practicalLens = dominant.human_score > 0.28
-    ? 'staffing, customer conditions, and real-world operating stress'
-    : dominant.concreteness_score > 0.45
-      ? 'specific routes, facilities, contracts, or regulatory steps'
-      : 'timing, exposure, and decision quality over the next few days';
-  return `${dominant.headline} is the clearest signal for ${profile.company_name} because it touches ${sector}${regions ? ` across ${regions}` : ''}. ${connection || 'The key question is whether this change stays contained or starts forcing second-order moves.'} For your team, the useful lens is ${practicalLens}, not abstract macro mood.`;
-}
-
-function buildRegionalFraming(stories: ReturnType<typeof getSelectedStories>): string | undefined {
-  const story = stories.find((s) => s.regions.length > 1);
-  if (!story) return undefined;
-  const lane = story.human_score > 0.25 ? 'human consequence' : story.broad_war_economy_penalty > 0.3 ? 'systems spillover' : 'live operational change';
-  return `Coverage is spread across ${story.regions.slice(0, 4).join(', ')}, but the useful read is where the emphasis lands: some outlets are treating it as ${lane}, while quieter regions may still be underplaying the direct consequence described in the scan.`;
-}
-
-function naturalHeadlineLead(headline: string): string {
-  const text = String(headline || '').trim();
-  if (!text) return 'this story';
-  return text;
-}
-
-function buildWhatToWatch(profile: CompanyProfile, stories: ReturnType<typeof getSelectedStories>) {
-  const watch = stories.slice(0, 3).map((story) => {
-    const hook = String(story.connection || '').trim();
-    const lead = naturalHeadlineLead(story.headline);
-    const monitorPoint = hook
-      ? `Watch whether ${lead} moves from headline to proof point: ${hook}`
-      : `Watch whether ${lead} produces a visible follow-through in policy, access, staffing, routing, or cost.`;
-    return {
-      monitor_point: monitorPoint,
-      timeframe: story.urgency_score > 0.5 ? 'next 24-48 hours' : 'next 24-72 hours',
-    };
-  });
-
-  if (watch.length === 0) {
-    watch.push({
-      monitor_point: `Watch for fresh stories affecting ${profile.company_name}'s tracked themes: ${profile.tracked_themes.slice(0, 3).join(', ') || 'core operations'}.`,
-      timeframe: 'this week',
-    });
-  }
-
-  return watch;
-}
-
-function buildBriefingContent(
-  profile: CompanyProfile,
-  scanDate: string,
-  signalLevel: ReturnType<typeof determineSignalLevel>,
-  stories: ReturnType<typeof getSelectedStories>
-): BriefingContent {
-  return {
-    header: {
-      company_name: profile.company_name,
-      date: scanDate,
-      scan_focus: buildScanFocus(stories),
-      signal_level: signalLevel,
-    },
-    what_changed: stories.slice(0, 8).map((story) => ({
-      headline: story.headline,
-      summary: String(story.connection || '').trim() || `${story.headline} is now showing up as a concrete signal in ${story.regions.slice(0, 2).join(', ') || 'the scan'}.`,
-      relevance_tags: buildRelevanceTags(story, profile),
-    })),
-    why_it_matters: buildWhyItMatters(profile, stories),
-    what_to_watch: buildWhatToWatch(profile, stories),
-    regional_framing: buildRegionalFraming(stories),
-  };
 }
 
 async function deliverBriefing(
@@ -231,7 +140,47 @@ async function deliverBriefing(
   return { status: 'sent', recipients, delivered_at: deliveredAt };
 }
 
+async function recordPipelineRunCompletion(
+  supabase: ReturnType<typeof createAdminClient>,
+  scanDate: string,
+  results: Array<Record<string, unknown>>
+) {
+  const generated = results.filter((r) => r.status !== 'skipped').length;
+  const deliveries = results
+    .map((r) => r.delivery as { status?: string } | undefined)
+    .filter((d): d is { status: string } => !!d && typeof d.status === 'string');
+  const sent = deliveries.filter((d) => d.status === 'sent').length;
+  const failed = deliveries.filter((d) => d.status === 'failed' || d.status === 'error').length;
+
+  let status: 'completed' | 'partial_failure' | 'failed';
+  if (generated === 0) status = 'failed';
+  else if (failed > 0) status = 'partial_failure';
+  else status = 'completed';
+
+  const completedAt = new Date().toISOString();
+  const { error } = await supabase
+    .from('pipeline_runs')
+    .upsert(
+      {
+        run_date: scanDate,
+        generation_completed_at: completedAt,
+        delivery_completed_at: completedAt,
+        generation_companies_count: generated,
+        delivery_sent_count: sent,
+        delivery_failures: failed,
+        status,
+      },
+      { onConflict: 'run_date' }
+    );
+  if (error) throw new Error(error.message);
+  console.log(`✅ pipeline_runs marked ${status} (generated=${generated}, sent=${sent}, failed=${failed})`);
+}
+
 async function main() {
+  console.warn(
+    '[DEPRECATED] run-company-briefing-pipeline.ts is the legacy public-pool pipeline. ' +
+      'Use run-company-signal-pipeline.ts (or scripts/run-company-scan-cycle.sh for the full cycle) instead.'
+  );
   const scanDate = parseArgs();
   const supabase = createAdminClient();
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -277,7 +226,14 @@ async function main() {
     }
 
     console.log(`\n▶ Processing ${rawProfile.company_name}`);
-    const scored = scoreStoriesForCompany(allItems, rawProfile);
+    let canonicalIndex;
+    try {
+      canonicalIndex = await loadCanonicalIndexForProfile(supabase, rawProfile.id);
+    } catch (err) {
+      console.warn(`⚠️ canonical index load failed (using raw fallback): ${err instanceof Error ? err.message : String(err)}`);
+      canonicalIndex = emptyCanonicalIndex();
+    }
+    const scored = scoreStoriesForCompany(allItems, rawProfile, canonicalIndex);
     const selected = getSelectedStories(scored);
     const signalLevel = determineSignalLevel(selected);
 
@@ -305,6 +261,7 @@ async function main() {
       urgency_score: s.urgency_score,
       significance_score: s.significance_score,
       relevance_score: s.relevance_score,
+      match_reasons: s.match_reasons,
       selected_for_briefing: s.selected_for_briefing,
     }));
 
@@ -350,6 +307,28 @@ async function main() {
     const delivery = await deliverBriefing(supabase, resend, rawProfile, generatedBriefing as CompanyBriefingRow, briefingContent, forceAll, forceDeliver, dryRun);
     console.log(`✅ Delivery status: ${JSON.stringify(delivery)}`);
 
+    try {
+      const coverage = await buildCoverageSummary(supabase, rawProfile, scored, allItems, scanDate);
+      const { error: coverageErr } = await supabase
+        .from('company_coverage_summaries')
+        .upsert(
+          {
+            company_profile_id: rawProfile.id,
+            coverage_date: scanDate,
+            tracked_items_checked: coverage.tracked_items_checked,
+            sources_inspected: coverage.sources_inspected,
+            early_signals: coverage.early_signals,
+            silent_items: coverage.silent_items,
+            summary_text: coverage.summary_text,
+          },
+          { onConflict: 'company_profile_id,coverage_date' }
+        );
+      if (coverageErr) throw new Error(coverageErr.message);
+      console.log(`✅ Wrote coverage summary (${coverage.tracked_items_checked.length} tracked, ${coverage.silent_items.length} silent, ${coverage.early_signals.length} early)`);
+    } catch (err) {
+      console.warn(`⚠️ coverage summary failed (non-fatal): ${err instanceof Error ? err.message : String(err)}`);
+    }
+
     results.push({
       company_name: rawProfile.company_name,
       company_profile_id: rawProfile.id,
@@ -362,6 +341,14 @@ async function main() {
 
   const briefingRows = await requireCompanyBriefingRows(supabase, scanDate);
   console.log(`✅ Verified ${briefingRows.length} company_briefings row(s)`);
+
+  if (!dryRun) {
+    try {
+      await recordPipelineRunCompletion(supabase, scanDate, results);
+    } catch (err) {
+      console.warn(`⚠️ pipeline_runs completion tracking failed (non-fatal): ${err instanceof Error ? err.message : String(err)}`);
+    }
+  }
 
   console.log('\n🎉 Company briefing pipeline complete');
   console.log(JSON.stringify({ scan_date: scanDate, forceDeliver, forceAll, dryRun, results }, null, 2));

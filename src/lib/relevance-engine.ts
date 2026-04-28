@@ -5,10 +5,37 @@
 // ---------------------------------------------------------------------------
 
 import type { CompanyProfile } from "./company-profile";
+import type { CanonicalIndex } from "./canonical-index";
+import { emptyCanonicalIndex } from "./canonical-index";
 
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
+
+export type MatchReasonType =
+  | "geography"
+  | "sector"
+  | "tracked_theme"
+  | "watchlist_entity"
+  | "supply_chain"
+  | "risk_priority"
+  | "urgency"
+  | "significance";
+
+export interface MatchReason {
+  type: MatchReasonType;
+  matched: string[];
+  score: number;
+  explanation: string;
+  /**
+   * Canonical topic id when the matched terms in this reason all resolved
+   * through the canonical registry (Package 4). Null when the match used
+   * raw-string fallback or when matched terms spanned multiple canonicals.
+   */
+  canonical_topic_id?: string | null;
+  /** Display label of the canonical topic (paired with canonical_topic_id). */
+  canonical_label?: string | null;
+}
 
 export interface ScoredStory {
   headline: string;
@@ -28,12 +55,13 @@ export interface ScoredStory {
   risk_score: number;
   urgency_score: number;
   significance_score: number;
-  concreteness_score: number;
-  human_score: number;
-  broad_war_economy_penalty: number;
 
   // Final weighted score
   relevance_score: number;
+
+  // Structured why-matched, persisted as company_story_scores.match_reasons
+  // and embedded into briefing_content.what_changed[i].match_reasons.
+  match_reasons: MatchReason[];
 
   // Whether selected for briefing
   selected_for_briefing: boolean;
@@ -56,16 +84,14 @@ export interface ScanItemInput {
 // ---------------------------------------------------------------------------
 
 const WEIGHTS = {
-  geography: 0.18,
-  sector: 0.18,
-  theme: 0.14,
-  entity: 0.14,
-  supply_chain: 0.08,
+  geography: 0.20,
+  sector: 0.20,
+  theme: 0.15,
+  entity: 0.15,
+  supply_chain: 0.10,
   risk: 0.10,
   urgency: 0.05,
   significance: 0.05,
-  concreteness: 0.05,
-  human: 0.03,
 };
 
 // ---------------------------------------------------------------------------
@@ -247,18 +273,103 @@ function fuzzyTagOverlap(storyTags: string[], companyTerms: string[]): number {
 }
 
 /**
+ * Sub-scorer result: a numeric score plus the company-side terms that
+ * actually contributed to the match. `matched` may be empty when the
+ * scorer fired on a non-list signal (e.g. urgency boost from significance).
+ *
+ * `canonical_topic_ids` runs parallel to `matched` (same length): the
+ * canonical_topic_id that resolved each matched term, or null if matching
+ * fell back to raw-string overlap (no canonical mapping yet).
+ */
+interface SubScore {
+  score: number;
+  matched: string[];
+  canonical_topic_ids: (string | null)[];
+  canonical_labels: (string | null)[];
+}
+
+const EMPTY_SUB_SCORE: SubScore = {
+  score: 0,
+  matched: [],
+  canonical_topic_ids: [],
+  canonical_labels: [],
+};
+
+function tagFuzzyMatchesAny(storyTagsLower: string[], term: string): boolean {
+  if (!term) return false;
+  return storyTagsLower.some(
+    (tag) => tag === term || tag.includes(term) || term.includes(tag)
+  );
+}
+
+type CanonicalBucket = Map<string, { canonical_topic_id: string; canonical_label: string; terms: string[] }>;
+
+/**
+ * Look up the expanded term set for a company-side value, falling back to
+ * just the raw value (lowercased) when no canonical mapping exists.
+ */
+function expandedTerms(
+  companyTerm: string,
+  bucket: CanonicalBucket | undefined
+): { terms: string[]; canonicalId: string | null; canonicalLabel: string | null } {
+  const lower = companyTerm.toLowerCase();
+  const entry = bucket?.get(lower);
+  if (entry) {
+    return {
+      terms: entry.terms,
+      canonicalId: entry.canonical_topic_id,
+      canonicalLabel: entry.canonical_label,
+    };
+  }
+  return { terms: [lower], canonicalId: null, canonicalLabel: null };
+}
+
+/**
+ * Fuzzy-overlap variant that returns the score, which company terms were
+ * responsible, and (when available) their canonical topic ids.
+ */
+function fuzzyTagOverlapWithMatches(
+  storyTags: string[],
+  companyTerms: string[],
+  bucket?: CanonicalBucket
+): SubScore {
+  if (storyTags.length === 0 || companyTerms.length === 0) return EMPTY_SUB_SCORE;
+  const normalised = storyTags.map((t) => t.toLowerCase());
+  const matched: string[] = [];
+  const canonicalIds: (string | null)[] = [];
+  const canonicalLabels: (string | null)[] = [];
+  for (const term of companyTerms) {
+    const { terms, canonicalId, canonicalLabel } = expandedTerms(term, bucket);
+    if (terms.some((t) => tagFuzzyMatchesAny(normalised, t))) {
+      matched.push(term);
+      canonicalIds.push(canonicalId);
+      canonicalLabels.push(canonicalLabel);
+    }
+  }
+  return {
+    score: matched.length / companyTerms.length,
+    matched,
+    canonical_topic_ids: canonicalIds,
+    canonical_labels: canonicalLabels,
+  };
+}
+
+/**
  * Score geography overlap between a scan item and a company profile.
- * Considers both region-level and country-level matches.
+ * Considers both region-level and country-level matches. Geography uses a
+ * fixed scan-region → company-region mapping rather than the canonical
+ * alias surface — Package 5/6 may revisit if multilingual region tagging
+ * starts arriving on scan_items.
  */
 function scoreGeography(
   storyRegions: string[],
   companyRegions: string[],
-  companyCountries: string[]
-): number {
-  if (storyRegions.length === 0) return 0;
-  if (companyRegions.length === 0 && companyCountries.length === 0) return 0;
+  companyCountries: string[],
+  bucket?: CanonicalBucket
+): SubScore {
+  if (storyRegions.length === 0) return EMPTY_SUB_SCORE;
+  if (companyRegions.length === 0 && companyCountries.length === 0) return EMPTY_SUB_SCORE;
 
-  // Map scan regions to company region keys
   const mappedScanRegions: string[] = [];
   for (const r of storyRegions) {
     const mapped = SCAN_REGION_TO_COMPANY_REGION[r];
@@ -269,102 +380,170 @@ function scoreGeography(
     }
   }
 
-  // Region-level overlap
-  const regionScore = overlapScore(mappedScanRegions, companyRegions);
+  const scanRegionSet = new Set(mappedScanRegions.map((r) => r.toLowerCase()));
+  const matched: string[] = [];
+  const canonicalIds: (string | null)[] = [];
+  const canonicalLabels: (string | null)[] = [];
+  for (const r of companyRegions) {
+    if (scanRegionSet.has(r.toLowerCase())) {
+      matched.push(r);
+      const entry = bucket?.get(r.toLowerCase());
+      canonicalIds.push(entry?.canonical_topic_id ?? null);
+      canonicalLabels.push(entry?.canonical_label ?? null);
+    }
+  }
 
-  // Country-level: check if story tags/regions mention any country slugs
-  // This is a weaker signal since scan items use region keys not country slugs,
-  // but some tags do contain country names
-  // For now, region score is the primary geography signal
-  return Math.min(1, regionScore);
+  const regionScore = overlapScore(mappedScanRegions, companyRegions);
+  return {
+    score: Math.min(1, regionScore),
+    matched,
+    canonical_topic_ids: canonicalIds,
+    canonical_labels: canonicalLabels,
+  };
 }
 
 /**
  * Score sector match between a scan item category and a company sector.
  */
-function scoreSector(storyCategory: string, companySector: string | null): number {
-  if (!companySector || !storyCategory) return 0;
+function scoreSector(
+  storyCategory: string,
+  companySector: string | null,
+  bucket?: CanonicalBucket
+): SubScore {
+  if (!companySector || !storyCategory) return EMPTY_SUB_SCORE;
 
-  // Direct category match
+  const entry = bucket?.get(companySector.toLowerCase());
+  const canonicalId = entry?.canonical_topic_id ?? null;
+  const canonicalLabel = entry?.canonical_label ?? null;
   const mappedSectors = CATEGORY_TO_SECTORS[storyCategory] || [];
-  if (mappedSectors.includes(companySector)) return 1.0;
+  if (mappedSectors.includes(companySector)) {
+    return {
+      score: 1.0,
+      matched: [companySector],
+      canonical_topic_ids: [canonicalId],
+      canonical_labels: [canonicalLabel],
+    };
+  }
 
-  // Check if the category name partially matches the sector
   const catLower = storyCategory.toLowerCase();
   const sectorLower = companySector.toLowerCase();
-  if (catLower.includes(sectorLower) || sectorLower.includes(catLower)) return 0.5;
+  if (catLower.includes(sectorLower) || sectorLower.includes(catLower)) {
+    return {
+      score: 0.5,
+      matched: [companySector],
+      canonical_topic_ids: [canonicalId],
+      canonical_labels: [canonicalLabel],
+    };
+  }
 
-  return 0;
+  return EMPTY_SUB_SCORE;
 }
 
 /**
- * Score theme match: fuzzy overlap between story tags and company tracked themes.
+ * Score theme match: fuzzy overlap between story tags and company tracked
+ * themes, expanded through canonical aliases when available.
  */
-function scoreThemes(storyTags: string[], trackedThemes: string[]): number {
-  return fuzzyTagOverlap(storyTags, trackedThemes);
+function scoreThemes(
+  storyTags: string[],
+  trackedThemes: string[],
+  bucket?: CanonicalBucket
+): SubScore {
+  return fuzzyTagOverlapWithMatches(storyTags, trackedThemes, bucket);
 }
 
 /**
- * Score entity match: fuzzy overlap between story tags/headline and watchlist entities.
+ * Score entity match: fuzzy overlap between story tags/headline and
+ * watchlist entities, expanded through canonical aliases when available.
  */
 function scoreEntities(
   storyTags: string[],
   storyHeadline: string,
-  watchlistEntities: string[]
-): number {
-  if (watchlistEntities.length === 0) return 0;
+  watchlistEntities: string[],
+  bucket?: CanonicalBucket
+): SubScore {
+  if (watchlistEntities.length === 0) return EMPTY_SUB_SCORE;
 
   const headlineLower = storyHeadline.toLowerCase();
-  const tagsLower = storyTags.map(t => t.toLowerCase());
-  let matches = 0;
+  const tagsLower = storyTags.map((t) => t.toLowerCase());
+  const matched: string[] = [];
+  const canonicalIds: (string | null)[] = [];
+  const canonicalLabels: (string | null)[] = [];
 
   for (const entity of watchlistEntities) {
-    const lower = entity.toLowerCase();
-    // Check headline
-    if (headlineLower.includes(lower)) {
-      matches++;
-      continue;
+    const { terms, canonicalId, canonicalLabel } = expandedTerms(entity, bucket);
+    let hit = false;
+    for (const t of terms) {
+      if (!t) continue;
+      if (headlineLower.includes(t)) { hit = true; break; }
+      if (tagsLower.some((tag) => tag === t || tag.includes(t) || t.includes(tag))) {
+        hit = true; break;
+      }
     }
-    // Check tags
-    if (tagsLower.some(tag => tag === lower || tag.includes(lower) || lower.includes(tag))) {
-      matches++;
+    if (hit) {
+      matched.push(entity);
+      canonicalIds.push(canonicalId);
+      canonicalLabels.push(canonicalLabel);
     }
   }
 
-  return matches / watchlistEntities.length;
+  return {
+    score: matched.length / watchlistEntities.length,
+    matched,
+    canonical_topic_ids: canonicalIds,
+    canonical_labels: canonicalLabels,
+  };
 }
 
 /**
- * Score supply chain match: fuzzy overlap between story tags and supply chain exposure terms.
+ * Score supply chain match: fuzzy overlap between story tags and supply
+ * chain exposure, expanded through canonical aliases when available.
  */
-function scoreSupplyChain(storyTags: string[], supplyChainExposure: string[]): number {
-  return fuzzyTagOverlap(storyTags, supplyChainExposure);
+function scoreSupplyChain(
+  storyTags: string[],
+  supplyChainExposure: string[],
+  bucket?: CanonicalBucket
+): SubScore {
+  return fuzzyTagOverlapWithMatches(storyTags, supplyChainExposure, bucket);
 }
 
 /**
  * Score risk match: map story tags to risk types and check overlap with company risk priorities.
  */
-function scoreRisk(storyTags: string[], storyCategory: string, riskPriorities: string[]): number {
-  if (riskPriorities.length === 0) return 0;
+function scoreRisk(
+  storyTags: string[],
+  storyCategory: string,
+  riskPriorities: string[],
+  bucket?: CanonicalBucket
+): SubScore {
+  if (riskPriorities.length === 0) return EMPTY_SUB_SCORE;
 
-  // Collect all risk types implied by the story
   const storyRisks = new Set<string>();
   for (const tag of storyTags) {
     const risks = TAG_TO_RISK[tag.toLowerCase()];
-    if (risks) {
-      for (const r of risks) storyRisks.add(r);
+    if (risks) for (const r of risks) storyRisks.add(r);
+  }
+  const catRisks = TAG_TO_RISK[storyCategory];
+  if (catRisks) for (const r of catRisks) storyRisks.add(r);
+
+  if (storyRisks.size === 0) return EMPTY_SUB_SCORE;
+
+  const matched: string[] = [];
+  const canonicalIds: (string | null)[] = [];
+  const canonicalLabels: (string | null)[] = [];
+  for (const r of riskPriorities) {
+    if (storyRisks.has(r)) {
+      matched.push(r);
+      const entry = bucket?.get(r.toLowerCase());
+      canonicalIds.push(entry?.canonical_topic_id ?? null);
+      canonicalLabels.push(entry?.canonical_label ?? null);
     }
   }
-  // Also check category
-  const catRisks = TAG_TO_RISK[storyCategory];
-  if (catRisks) {
-    for (const r of catRisks) storyRisks.add(r);
-  }
-
-  if (storyRisks.size === 0) return 0;
-
-  const matches = riskPriorities.filter(r => storyRisks.has(r)).length;
-  return matches / riskPriorities.length;
+  return {
+    score: matched.length / riskPriorities.length,
+    matched,
+    canonical_topic_ids: canonicalIds,
+    canonical_labels: canonicalLabels,
+  };
 }
 
 /**
@@ -391,71 +570,202 @@ function urgencyBoost(patterns: string[], significance: string): number {
   return Math.min(1, score);
 }
 
-function scoreConcreteness(headline: string, connection: string, tags: string[]): number {
-  const text = `${headline} ${connection} ${tags.join(' ')}`;
-  let score = 0;
-  if (/\b\d+(?:\.\d+)?(?:%| million| billion|m|bn)?\b/i.test(text)) score += 0.4;
-  if (/\b(?:port|clinic|hospital|school|camp|court|factory|mine|dam|bridge|airport|pipeline|district|province|village|town)\b/i.test(text)) score += 0.35;
-  if (/\b(?:seizes?|cuts?|extends?|approves?|launches?|reopens?|halts?|resumes?|orders?|bans?|funds?|evacuates?)\b/i.test(headline)) score += 0.25;
-  if (connection && connection.length > 90) score += 0.15;
-  return Math.min(1, score);
-}
-
-function scoreHumanImpact(category: string, tags: string[], headline: string, connection: string): number {
-  const text = `${headline} ${connection} ${tags.join(' ')} ${category}`.toLowerCase();
-  const hits = ['health', 'clinic', 'hospital', 'school', 'children', 'refugee', 'farmer', 'patient', 'worker', 'family', 'hunger', 'water', 'aid', 'civilian']
-    .filter((term) => text.includes(term)).length;
-  return Math.min(1, hits * 0.16);
-}
-
-function broadWarEconomyPenalty(category: string, tags: string[], headline: string, connection: string): number {
-  const text = `${headline} ${connection} ${tags.join(' ')} ${category}`.toLowerCase();
-  const broadHits = ['oil', 'shipping', 'insurance', 'sanctions', 'freight', 'macro', 'market', 'markets', 'commodity', 'lng', 'diesel', 'crude']
-    .filter((term) => text.includes(term)).length;
-  const humanHits = ['clinic', 'hospital', 'school', 'children', 'refugee', 'patient', 'family', 'worker', 'farmer']
-    .filter((term) => text.includes(term)).length;
-  if (broadHits < 2) return 0;
-  const categoryPenalty = ['conflict', 'economic-flows', 'energy', 'logistics-shipping'].includes(category) ? 0.25 : 0;
-  return Math.max(0, Math.min(1, categoryPenalty + broadHits * 0.12 - humanHits * 0.15));
-}
-
 // ---------------------------------------------------------------------------
 // Main scoring function
 // ---------------------------------------------------------------------------
 
 /**
+ * Build the structured why-matched array from sub-score results.
+ * Inclusion rule: dimensions with at least one matched term are always
+ * included; urgency/significance are included only when the boost is
+ * non-trivial (score > 0.3) since they have no list-of-terms to show.
+ */
+/**
+ * Pick a canonical_topic_id + label for a match reason whose underlying
+ * SubScore may have multiple matched terms. We collapse to a single id
+ * only when every matched term resolved to the same canonical — otherwise
+ * null, so the dashboard can render raw matched terms without misleading
+ * "alias of" annotations.
+ */
+function pickReasonCanonical(sub: SubScore): { id: string | null; label: string | null } {
+  const ids = sub.canonical_topic_ids.filter((id) => id != null);
+  if (ids.length === 0) return { id: null, label: null };
+  if (ids.length !== sub.matched.length) return { id: null, label: null };
+  const first = ids[0];
+  if (!ids.every((id) => id === first)) return { id: null, label: null };
+  const label = sub.canonical_labels[0] ?? null;
+  return { id: first, label };
+}
+
+function buildMatchReasons(opts: {
+  geo: SubScore;
+  sec: SubScore;
+  thm: SubScore;
+  ent: SubScore;
+  sup: SubScore;
+  rsk: SubScore;
+  urg: number;
+  sig: number;
+  significance: string;
+  patterns: string[];
+}): MatchReason[] {
+  const { geo, sec, thm, ent, sup, rsk, urg, sig, significance, patterns } = opts;
+  const reasons: MatchReason[] = [];
+
+  if (geo.matched.length > 0) {
+    const c = pickReasonCanonical(geo);
+    reasons.push({
+      type: "geography",
+      matched: geo.matched,
+      score: geo.score,
+      explanation:
+        geo.matched.length === 1
+          ? "Story regions overlap your operating region"
+          : "Story regions overlap your operating regions",
+      canonical_topic_id: c.id,
+      canonical_label: c.label,
+    });
+  }
+  if (sec.matched.length > 0) {
+    const c = pickReasonCanonical(sec);
+    reasons.push({
+      type: "sector",
+      matched: sec.matched,
+      score: sec.score,
+      explanation: "Story category aligns with your sector",
+      canonical_topic_id: c.id,
+      canonical_label: c.label,
+    });
+  }
+  if (thm.matched.length > 0) {
+    const c = pickReasonCanonical(thm);
+    reasons.push({
+      type: "tracked_theme",
+      matched: thm.matched,
+      score: thm.score,
+      explanation:
+        thm.matched.length === 1
+          ? "Matches one of your tracked themes"
+          : `Matches ${thm.matched.length} of your tracked themes`,
+      canonical_topic_id: c.id,
+      canonical_label: c.label,
+    });
+  }
+  if (ent.matched.length > 0) {
+    const c = pickReasonCanonical(ent);
+    reasons.push({
+      type: "watchlist_entity",
+      matched: ent.matched,
+      score: ent.score,
+      explanation:
+        ent.matched.length === 1
+          ? "Mentions an entity on your watchlist"
+          : `Mentions ${ent.matched.length} entities on your watchlist`,
+      canonical_topic_id: c.id,
+      canonical_label: c.label,
+    });
+  }
+  if (sup.matched.length > 0) {
+    const c = pickReasonCanonical(sup);
+    reasons.push({
+      type: "supply_chain",
+      matched: sup.matched,
+      score: sup.score,
+      explanation: "Touches your supply chain exposure",
+      canonical_topic_id: c.id,
+      canonical_label: c.label,
+    });
+  }
+  if (rsk.matched.length > 0) {
+    const c = pickReasonCanonical(rsk);
+    reasons.push({
+      type: "risk_priority",
+      matched: rsk.matched,
+      score: rsk.score,
+      explanation:
+        rsk.matched.length === 1
+          ? "Hits a risk you prioritise"
+          : `Hits ${rsk.matched.length} risks you prioritise`,
+      canonical_topic_id: c.id,
+      canonical_label: c.label,
+    });
+  }
+  if (urg > 0.3) {
+    const triggers = ["escalation", "breaking", "framing"].filter((p) => patterns.includes(p));
+    if (significance === "high") triggers.unshift("high significance");
+    reasons.push({
+      type: "urgency",
+      matched: triggers,
+      score: urg,
+      explanation: "Urgency signal in the story itself",
+      canonical_topic_id: null,
+    });
+  }
+  if (sig > 0.3) {
+    reasons.push({
+      type: "significance",
+      matched: [significance],
+      score: sig,
+      explanation: "Story marked as significant by the upstream scan",
+      canonical_topic_id: null,
+    });
+  }
+
+  return reasons;
+}
+
+/**
  * Score all scan items against a company profile.
  * Returns scored stories sorted by relevance (highest first).
+ *
+ * `canonicalIndex` is optional. When provided, the engine matches against
+ * the canonical alias surface (Package 4) for any value the index covers
+ * and falls back to raw-string overlap for values not yet mapped. Pass
+ * `undefined` (or omit) to keep the original raw-only behavior — used in
+ * tests and during early rollout before profiles are migrated.
+ *
+ * TODO(post-rollout): once every existing profile is fully mapped to the
+ * canonical registry, the raw-string fallback inside the sub-scorers can
+ * be removed and `canonicalIndex` made required.
  */
 export function scoreStoriesForCompany(
   items: ScanItemInput[],
-  profile: CompanyProfile
+  profile: CompanyProfile,
+  canonicalIndex?: CanonicalIndex
 ): ScoredStory[] {
+  const idx = canonicalIndex ?? emptyCanonicalIndex();
   const scored: ScoredStory[] = items.map(item => {
-    const geo = scoreGeography(item.regions, profile.regions, profile.countries);
-    const sec = scoreSector(item.category, profile.sector);
-    const thm = scoreThemes(item.tags, profile.tracked_themes);
-    const ent = scoreEntities(item.tags, item.headline, profile.watchlist_entities);
-    const sup = scoreSupplyChain(item.tags, profile.supply_chain_exposure);
-    const rsk = scoreRisk(item.tags, item.category, profile.risk_priorities);
+    const geo = scoreGeography(item.regions, profile.regions, profile.countries, idx.regions);
+    const sec = scoreSector(item.category, profile.sector, idx.sectors);
+    const thm = scoreThemes(item.tags, profile.tracked_themes, idx.tracked_themes);
+    const ent = scoreEntities(item.tags, item.headline, profile.watchlist_entities, idx.watchlist_entities);
+    const sup = scoreSupplyChain(item.tags, profile.supply_chain_exposure, idx.supply_chain_exposure);
+    const rsk = scoreRisk(item.tags, item.category, profile.risk_priorities, idx.risk_priorities);
     const urg = urgencyBoost(item.patterns, item.significance);
     const sig = significanceToScore(item.significance);
-    const cnc = scoreConcreteness(item.headline, item.connection, item.tags);
-    const hum = scoreHumanImpact(item.category, item.tags, item.headline, item.connection);
-    const broadPenalty = broadWarEconomyPenalty(item.category, item.tags, item.headline, item.connection);
 
     const relevance =
-      WEIGHTS.geography * geo +
-      WEIGHTS.sector * sec +
-      WEIGHTS.theme * thm +
-      WEIGHTS.entity * ent +
-      WEIGHTS.supply_chain * sup +
-      WEIGHTS.risk * rsk +
+      WEIGHTS.geography * geo.score +
+      WEIGHTS.sector * sec.score +
+      WEIGHTS.theme * thm.score +
+      WEIGHTS.entity * ent.score +
+      WEIGHTS.supply_chain * sup.score +
+      WEIGHTS.risk * rsk.score +
       WEIGHTS.urgency * urg +
-      WEIGHTS.significance * sig +
-      WEIGHTS.concreteness * cnc +
-      WEIGHTS.human * hum -
-      0.08 * broadPenalty;
+      WEIGHTS.significance * sig;
+
+    const match_reasons = buildMatchReasons({
+      geo,
+      sec,
+      thm,
+      ent,
+      sup,
+      rsk,
+      urg,
+      sig,
+      significance: item.significance,
+      patterns: item.patterns,
+    });
 
     return {
       headline: item.headline,
@@ -465,18 +775,16 @@ export function scoreStoriesForCompany(
       patterns: item.patterns,
       significance: item.significance,
       connection: item.connection,
-      geography_score: geo,
-      sector_score: sec,
-      theme_score: thm,
-      entity_score: ent,
-      supply_chain_score: sup,
-      risk_score: rsk,
+      geography_score: geo.score,
+      sector_score: sec.score,
+      theme_score: thm.score,
+      entity_score: ent.score,
+      supply_chain_score: sup.score,
+      risk_score: rsk.score,
       urgency_score: urg,
       significance_score: sig,
-      concreteness_score: cnc,
-      human_score: hum,
-      broad_war_economy_penalty: broadPenalty,
       relevance_score: relevance,
+      match_reasons,
       selected_for_briefing: false,
     };
   });
@@ -501,29 +809,9 @@ export function scoreStoriesForCompany(
     }
   }
 
-  const preliminary = scored.filter((story) => story.relevance_score >= SCORE_THRESHOLD).slice(0, Math.max(selectedCount + 3, MAX_STORIES));
-  const selected: ScoredStory[] = [];
-  const categoryCounts = new Map<string, number>();
-  let broadWarEconomyCount = 0;
-
-  for (const story of preliminary) {
-    if (selected.length >= selectedCount) break;
-    const categoryCount = categoryCounts.get(story.category) || 0;
-    const isBroadWarEconomy = story.broad_war_economy_penalty >= 0.35 && story.human_score < 0.2 && story.concreteness_score < 0.45;
-    if (categoryCount >= 2) continue;
-    if (isBroadWarEconomy && broadWarEconomyCount >= 1) continue;
-    story.selected_for_briefing = true;
-    selected.push(story);
-    categoryCounts.set(story.category, categoryCount + 1);
-    if (isBroadWarEconomy) broadWarEconomyCount += 1;
-  }
-
-  if (selected.length < Math.min(MIN_STORIES, scored.length)) {
-    for (const story of scored) {
-      if (selected.length >= Math.min(MIN_STORIES, scored.length)) break;
-      if (story.selected_for_briefing || story.relevance_score < SCORE_THRESHOLD) continue;
-      story.selected_for_briefing = true;
-      selected.push(story);
+  for (let i = 0; i < selectedCount; i++) {
+    if (scored[i].relevance_score >= SCORE_THRESHOLD) {
+      scored[i].selected_for_briefing = true;
     }
   }
 

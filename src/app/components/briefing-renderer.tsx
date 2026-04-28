@@ -1,13 +1,89 @@
 "use client";
 
+import { useState } from "react";
 import type {
   BriefingContent,
   BriefingStory,
   BriefingWatchItem,
+  MatchReason,
 } from "@/lib/email-templates/company-briefing";
 
 // Re-export so pages can use the type without reaching into email-templates
 export type { BriefingContent };
+
+const MATCH_REASON_LABEL: Record<MatchReason["type"], string> = {
+  geography: "Geography",
+  sector: "Sector",
+  tracked_theme: "Tracked themes",
+  watchlist_entity: "Watchlist entities",
+  supply_chain: "Supply chain",
+  risk_priority: "Risk priorities",
+  urgency: "Urgency signal",
+  significance: "Story significance",
+};
+
+function WhyMatched({ reasons }: { reasons: MatchReason[] }) {
+  const [open, setOpen] = useState(false);
+  if (!reasons || reasons.length === 0) return null;
+  return (
+    <div className="mt-2">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="inline-flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-zinc-400 hover:text-[#c8922a] dark:text-zinc-500 dark:hover:text-[#c8922a]"
+        aria-expanded={open}
+      >
+        <svg
+          width="9"
+          height="9"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`transition-transform ${open ? "rotate-90" : ""}`}
+        >
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+        Why this matched
+      </button>
+      {open && (
+        <ul className="mt-2 space-y-1.5 border-l border-black/[0.07] pl-3 dark:border-white/[0.07]">
+          {reasons.map((r, i) => {
+            // Surface canonical alias relationship when every matched term
+            // resolved to a single canonical AND that canonical's label
+            // differs from what the user actually has tracked. Suppresses
+            // the "(via canonical X)" suffix when matched IS the canonical.
+            const matchedSet = new Set(r.matched.map((m) => m.toLowerCase()));
+            const showCanonical =
+              !!r.canonical_label &&
+              r.canonical_topic_id &&
+              !matchedSet.has(r.canonical_label.toLowerCase());
+            return (
+              <li key={i} className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
+                <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                  {MATCH_REASON_LABEL[r.type] || r.type}
+                </span>
+                {r.matched.length > 0 && (
+                  <span className="text-zinc-500 dark:text-zinc-400">
+                    : {r.matched.join(", ")}
+                  </span>
+                )}
+                {showCanonical && (
+                  <span className="text-zinc-400 dark:text-zinc-500">
+                    {" "}
+                    (via {r.canonical_label})
+                  </span>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Signal level badge
@@ -75,8 +151,6 @@ export function BriefingRenderer({
 }) {
   const { header, what_changed, why_it_matters, what_to_watch, regional_framing } =
     content;
-  const stories = what_changed ?? [];
-  const watchItems = what_to_watch ?? [];
 
   return (
     <div className="space-y-0">
@@ -104,7 +178,7 @@ export function BriefingRenderer({
       <section>
         <p className={sectionLabel}>What Changed</p>
         <div className="mt-4 space-y-5">
-          {stories.map((story: BriefingStory, i: number) => (
+          {what_changed.map((story: BriefingStory, i: number) => (
             <div key={i}>
               <p className="text-[15px] font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
                 {i + 1}. {story.headline}
@@ -112,18 +186,7 @@ export function BriefingRenderer({
               <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                 {story.summary}
               </p>
-              {(story.relevance_tags ?? []).length > 0 && (
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                  {(story.relevance_tags ?? []).map((tag: string) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-[10px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
+              {story.match_reasons && <WhyMatched reasons={story.match_reasons} />}
             </div>
           ))}
         </div>
@@ -159,7 +222,7 @@ export function BriefingRenderer({
       <section>
         <p className={sectionLabel}>What to Watch Next</p>
         <div className="mt-4 space-y-3">
-          {watchItems.map((item: BriefingWatchItem, i: number) => (
+          {what_to_watch.map((item: BriefingWatchItem, i: number) => (
             <div key={i} className="flex items-start gap-2.5">
               <span className="mt-0.5 text-[#c8922a]">
                 <svg

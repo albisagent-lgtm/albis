@@ -159,7 +159,7 @@ export default function CompanyOnboardingClient() {
 
       const { data: userProfile } = await supabase
         .from("profiles")
-        .select("subscription_status, subscription_tier, subscription_period_end")
+        .select("subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at")
         .eq("id", user.id)
         .single();
       if (userProfile) {
@@ -167,6 +167,8 @@ export default function CompanyOnboardingClient() {
           subscription_status: userProfile.subscription_status,
           subscription_tier: userProfile.subscription_tier,
           subscription_period_end: userProfile.subscription_period_end,
+          is_test_account: userProfile.is_test_account,
+          trial_end_at: userProfile.trial_end_at,
         });
       }
 
@@ -355,7 +357,21 @@ export default function CompanyOnboardingClient() {
         .from("company_profiles")
         .upsert(data, { onConflict: "owner_id" });
       if (upsertError) { setError(upsertError.message); setSaving(false); return; }
-      router.push("/dashboard/profile");
+
+      // Trial assignment + preview-briefing generation. Non-blocking — if
+      // the server step fails the user still lands on the dashboard and the
+      // trial can be back-filled later by support. We DO await this so the
+      // briefing exists by the time the dashboard fetches it.
+      try {
+        await fetch("/api/onboarding/complete", { method: "POST" });
+      } catch (err) {
+        console.warn("onboarding/complete POST failed (non-fatal)", err);
+      }
+
+      // Land on the briefing dashboard so the user sees the preview
+      // immediately. The profile editor lives one click away at
+      // /dashboard/profile.
+      router.push("/dashboard");
     } catch {
       setError("Failed to save profile. Please try again.");
     } finally {
