@@ -146,10 +146,11 @@ steps in the local shell. Logs to `logs/company-scan-cycle/<UTC>.log`.
 
 ## Recommended: Option B for v1
 
-Start with **Option B** — same cron infrastructure as the public scan,
+Start with **Option B** only after the Package 8/v2 activation checklist is approved — same cron infrastructure as the public scan,
 trivial to activate, easy to back out. Migrate to Option A after the
-new pipeline has run reliably for a couple of weeks and the legacy
-pipeline can be retired.
+new pipeline has run reliably for a couple of weeks.
+
+Legacy note: the old Phase 4 company cron prompts and public-scan-pool `what_changed` / `what_to_watch` pipeline are retired. Do not import or run them.
 
 ## Required env vars
 
@@ -158,8 +159,7 @@ Both paths read these:
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `BRAVE_API_KEY`
-- `RESEND_API_KEY` (for the legacy delivery path; not yet wired into
-  the new pipeline but expected to be present in env)
+- `RESEND_API_KEY` (only for the Package 8/v2 delivery path once explicitly activated; not needed for dry-runs)
 
 Option A additionally requires:
 

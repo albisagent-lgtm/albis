@@ -1,6 +1,7 @@
 // ---------------------------------------------------------------------------
-// Company Briefing Email Template — Phase 4
-// Renders a company_briefings.briefing_content JSONB into branded HTML email.
+// Company Briefing Email Template — legacy Phase 4 compatibility
+// Renders the retired what_changed / what_to_watch shape. Do not use for
+// new customer delivery; Package 8/v2 delivery uses company-briefing-v2.ts.
 // ---------------------------------------------------------------------------
 
 const SITE = "https://www.albis.news";

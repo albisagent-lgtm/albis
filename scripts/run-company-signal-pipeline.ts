@@ -7,8 +7,8 @@
 // directly without spawning a script.
 //
 // Reads from the typed signals layer instead of the public scan_items
-// pool. Skips delivery — legacy run-company-briefing-pipeline.ts retains
-// that responsibility until full cutover. If zero signals exist for the
+// pool. Skips delivery; Package 8/v2 delivery remains separately gated.
+// If zero signals exist for the
 // window, exits cleanly without touching company_briefings.
 // ---------------------------------------------------------------------------
 import path from 'path';

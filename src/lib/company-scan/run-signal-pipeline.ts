@@ -8,8 +8,8 @@
 // Behavior summary:
 //   1. Load signals from the company pool for (scanDate - lookbackHours)
 //      to end of scanDate.
-//   2. If zero signals: return early without touching company_briefings —
-//      the legacy public-pool pipeline keeps responsibility for the day.
+//   2. If zero signals: return early without touching company_briefings.
+//      No legacy company fallback is active after Package 8 cleanup.
 //   3. For every onboarded company_profile:
 //      - load canonical index
 //      - score adapted signals via the existing relevance engine
@@ -119,7 +119,7 @@ export async function runCompanySignalPipeline(
   if (signals.length === 0) {
     log(
       "↷ No signals in window — Package 6 will populate. " +
-        "Skipping briefing generation; legacy pipeline retains responsibility for today."
+        "Skipping briefing generation. No legacy company pipeline fallback is active."
     );
     return {
       scan_date: scanDate,
@@ -315,7 +315,7 @@ export async function processProfileSignals(
     );
   }
   log(
-    `✅ Upserted company_briefings row ${briefingRow.id} (generated, delivery deferred to legacy)`
+    `✅ Upserted company_briefings row ${briefingRow.id} (generated, delivery remains Package 8/v2 gated)`
   );
 
   const selectedSignalIds = matchRows

@@ -1,48 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import {
+  allowLegacyCompanyPipeline,
+  getCompanyBriefingContentVersion,
+  isCompanyBriefingV2Content,
+} from "@/lib/company-briefing-content-version";
 
 const INGEST_KEY = process.env.SCAN_INGEST_KEY;
 
 /**
  * POST /api/company-briefings/submit
  *
- * Accepts a generated briefing from OpenClaw and stores it in the database.
- * This is the endpoint OpenClaw calls after generating briefing text from
- * the scored stories returned by /api/company-briefings/score.
+ * Stores generated company briefing content. After the Package 8 cleanup,
+ * this endpoint accepts only the v2 Package 8 generation output by default.
+ * The old `what_changed` / `what_to_watch` shape is rejected unless the
+ * explicit emergency flag ALLOW_LEGACY_COMPANY_PIPELINE=1 is set.
  *
- * Auth: Bearer token (SCAN_INGEST_KEY)
- *
- * Body:
- *   {
- *     briefing_id?: string,           // UUID from the score response (preferred)
- *     company_profile_id?: string,     // alternative: identify by profile + date
- *     briefing_date?: string,          // required if using company_profile_id
- *     briefing_content: {
- *       header: {
- *         company_name: string,
- *         date: string,
- *         scan_focus: string,
- *         signal_level: "low" | "moderate" | "elevated" | "high"
- *       },
- *       what_changed: [{
- *         headline: string,
- *         summary: string,
- *         match_reasons: Array<{ type: string, matched: string[], score: number, explanation: string }>
- *       }],
- *       why_it_matters: string,
- *       what_to_watch: [{
- *         monitor_point: string,
- *         timeframe: string
- *       }],
- *       regional_framing?: string
- *     }
- *   }
- *
- * Response:
- *   { ok: true, briefing_id: string }
+ * This endpoint stores content only. It does not send email.
  */
 export async function POST(req: NextRequest) {
-  // Auth
   const authHeader = req.headers.get("authorization");
   const token = authHeader?.replace("Bearer ", "");
   if (!INGEST_KEY || token !== INGEST_KEY) {
@@ -53,19 +29,28 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { briefing_id, company_profile_id, briefing_date, briefing_content } = body;
 
-    // Validate briefing content
     if (!briefing_content) {
       return NextResponse.json({ error: "briefing_content required" }, { status: 400 });
     }
 
-    if (!briefing_content.what_changed || !briefing_content.why_it_matters) {
-      return NextResponse.json(
-        { error: "briefing_content must include what_changed and why_it_matters" },
-        { status: 400 }
-      );
+    const contentVersion = getCompanyBriefingContentVersion(briefing_content);
+    if (!isCompanyBriefingV2Content(briefing_content)) {
+      if (contentVersion === "legacy_what_changed" && allowLegacyCompanyPipeline()) {
+        // Emergency compatibility only. Normal production generation must not
+        // rely on this branch.
+      } else {
+        return NextResponse.json(
+          {
+            error: "unsupported_company_briefing_content_version",
+            content_version: contentVersion,
+            message:
+              "Company briefing submit now expects Package 8 v2 content. Legacy what_changed/what_to_watch content is not accepted by default.",
+          },
+          { status: 422 }
+        );
+      }
     }
 
-    // Must identify the briefing by either briefing_id or company_profile_id+date
     if (!briefing_id && (!company_profile_id || !briefing_date)) {
       return NextResponse.json(
         { error: "Provide either briefing_id or both company_profile_id and briefing_date" },
@@ -74,52 +59,42 @@ export async function POST(req: NextRequest) {
     }
 
     const supabase = createAdminClient();
+    const payload = {
+      briefing_content,
+      status: "generated",
+      delivery_status: "pending",
+      generated_at: new Date().toISOString(),
+    };
 
     if (briefing_id) {
-      // Update existing briefing row by ID
       const { data, error } = await supabase
         .from("company_briefings")
-        .update({
-          briefing_content,
-          status: "generated",
-          generated_at: new Date().toISOString(),
-        })
+        .update(payload)
         .eq("id", briefing_id)
         .select("id")
         .single();
 
-      if (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
-      }
+      if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      if (!data) return NextResponse.json({ error: "Briefing not found" }, { status: 404 });
 
-      if (!data) {
-        return NextResponse.json({ error: "Briefing not found" }, { status: 404 });
-      }
-
-      return NextResponse.json({ ok: true, briefing_id: data.id });
-    } else {
-      // Upsert by company_profile_id + briefing_date
-      const { data, error } = await supabase
-        .from("company_briefings")
-        .upsert(
-          {
-            company_profile_id,
-            briefing_date,
-            briefing_content,
-            status: "generated",
-            generated_at: new Date().toISOString(),
-          },
-          { onConflict: "company_profile_id,briefing_date" }
-        )
-        .select("id")
-        .single();
-
-      if (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
-      }
-
-      return NextResponse.json({ ok: true, briefing_id: data.id });
+      return NextResponse.json({ ok: true, briefing_id: data.id, content_version: contentVersion });
     }
+
+    const { data, error } = await supabase
+      .from("company_briefings")
+      .upsert(
+        {
+          company_profile_id,
+          briefing_date,
+          ...payload,
+        },
+        { onConflict: "company_profile_id,briefing_date" }
+      )
+      .select("id")
+      .single();
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ ok: true, briefing_id: data.id, content_version: contentVersion });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Unknown error";
     console.error("Submit error:", message);
@@ -127,48 +102,11 @@ export async function POST(req: NextRequest) {
   }
 }
 
-/**
- * GET /api/company-briefings/submit
- *
- * Returns the expected briefing_content schema for documentation purposes.
- */
 export async function GET() {
   return NextResponse.json({
-    description: "Submit a generated company briefing. POST with Bearer auth.",
-    expected_body: {
-      briefing_id: "UUID (from score response, preferred)",
-      company_profile_id: "UUID (alternative, with briefing_date)",
-      briefing_date: "YYYY-MM-DD (required if using company_profile_id)",
-      briefing_content: {
-        header: {
-          company_name: "string",
-          date: "YYYY-MM-DD",
-          scan_focus: "top theme label",
-          signal_level: "low | moderate | elevated | high",
-        },
-        what_changed: [
-          {
-            headline: "string",
-            summary: "2-3 sentences",
-            match_reasons: [
-              {
-                type: "geography | sector | tracked_theme | watchlist_entity | supply_chain | risk_priority | urgency | significance",
-                matched: ["company-side terms that overlapped"],
-                score: "0..1",
-                explanation: "short human-readable why-string",
-              },
-            ],
-          },
-        ],
-        why_it_matters: "2-4 sentences connecting developments to this company",
-        what_to_watch: [
-          {
-            monitor_point: "string",
-            timeframe: "this week | next 30 days",
-          },
-        ],
-        regional_framing: "optional 1-2 sentences",
-      },
-    },
+    description: "Submit a Package 8 v2 generated company briefing. POST with Bearer auth.",
+    accepted_content_version: "company_briefing_generation_v1",
+    legacy_content: "Rejected unless ALLOW_LEGACY_COMPANY_PIPELINE=1 is set for emergency compatibility.",
+    sends_email: false,
   });
 }

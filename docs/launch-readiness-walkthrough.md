@@ -79,8 +79,9 @@ Option A — Cloudflare native cron:
 - [ ] `wrangler secret put COMPANY_SCAN_CRON_KEY` set on the companion worker.
 - [ ] Same `COMPANY_SCAN_CRON_KEY` set in the main app's environment.
 
-Option B — openclaw cron (recommended for v1):
-- [ ] `phase4-cron-jobs.json` imported into openclaw, all three jobs enabled.
+Option B — openclaw cron (recommended for v1 after explicit activation approval):
+- [ ] Confirm the retired Phase 4 company cron jobs are not enabled in OpenClaw/Gateway.
+- [ ] Create/enable only Package 8/v2 company scan-cycle jobs when approved.
 - [ ] `scripts/run-company-scan-cycle.sh` is `chmod +x` on the openclaw box.
 - [ ] Test invocation: trigger one job manually, watch
       `logs/company-scan-cycle/<date>.log` for a clean run.

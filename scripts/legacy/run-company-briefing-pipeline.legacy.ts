@@ -14,26 +14,33 @@
 import path from 'path';
 import dotenv from 'dotenv';
 import { Resend } from 'resend';
-import { createAdminClient } from '../src/lib/supabase/admin';
-import { loadScanItems } from '../src/lib/scan-loader';
-import { requireCompanyBriefingRows, requireStoryScores } from '../src/lib/pipeline-db';
+import { createAdminClient } from '../../src/lib/supabase/admin';
+import { loadScanItems } from '../../src/lib/scan-loader';
+import { requireCompanyBriefingRows, requireStoryScores } from '../../src/lib/pipeline-db';
 import {
   scoreStoriesForCompany,
   getSelectedStories,
   determineSignalLevel,
-} from '../src/lib/relevance-engine';
-import { shouldGenerateBriefing } from '../src/lib/tier-enforcement';
-import type { CompanyProfile } from '../src/lib/company-profile';
+} from '../../src/lib/relevance-engine';
+import { shouldGenerateBriefing } from '../../src/lib/tier-enforcement';
+import type { CompanyProfile } from '../../src/lib/company-profile';
 import {
   generateCompanyBriefingHtml,
   generateBriefingSubject,
   type BriefingContent,
-} from '../src/lib/email-templates/company-briefing';
-import { buildCoverageSummary } from '../src/lib/coverage-builder';
-import { loadCanonicalIndexForProfile, emptyCanonicalIndex } from '../src/lib/canonical-index';
-import { buildBriefingContent } from '../src/lib/company-briefing-templating';
+} from '../../src/lib/email-templates/company-briefing';
+import { buildCoverageSummary } from '../../src/lib/coverage-builder';
+import { loadCanonicalIndexForProfile, emptyCanonicalIndex } from '../../src/lib/canonical-index';
+import { buildBriefingContent } from '../../src/lib/company-briefing-templating';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
+if (process.env.ALLOW_LEGACY_COMPANY_PIPELINE !== "1") {
+  console.error(
+    "❌ The legacy company briefing pipeline is retired. Use Package 8/v2 company scan + QA flow instead. Set ALLOW_LEGACY_COMPANY_PIPELINE=1 only for emergency forensic use."
+  );
+  process.exit(1);
+}
+
 
 type OwnerProfile = {
   id: string;

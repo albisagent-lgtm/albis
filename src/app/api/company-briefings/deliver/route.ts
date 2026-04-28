@@ -2,10 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { Resend } from "resend";
 import {
-  generateCompanyBriefingHtml,
-  generateBriefingSubject,
-  type BriefingContent,
-} from "@/lib/email-templates/company-briefing";
+  generateCompanyBriefingHtmlV2,
+  generateBriefingSubjectV2,
+} from "@/lib/email-templates/company-briefing-v2";
+import {
+  getCompanyBriefingContentVersion,
+  isCompanyBriefingV2Content,
+} from "@/lib/company-briefing-content-version";
 import { shouldGenerateBriefing } from "@/lib/tier-enforcement";
 
 const INGEST_KEY = process.env.SCAN_INGEST_KEY;
@@ -22,24 +25,16 @@ function getResendClient() {
 /**
  * POST /api/company-briefings/deliver
  *
- * Sends generated briefing emails to companies whose preferred delivery time
- * matches the current hour. Called hourly by the OpenClaw delivery cron.
- *
- * Auth: Bearer token (SCAN_INGEST_KEY)
+ * Sends Package 8/v2 company briefings only. Legacy `what_changed` /
+ * `what_to_watch` content is deliberately not deliverable after the cleanup:
+ * it can remain readable for history, but it must not leave the system as a
+ * customer email.
  *
  * Body (optional):
  *   {
- *     briefing_date?: string,    // YYYY-MM-DD, defaults to today NZST
- *     force_all?: boolean        // Send to all companies regardless of time (for testing)
- *   }
- *
- * Response:
- *   {
- *     briefing_date: string,
- *     companies_checked: number,
- *     emails_sent: number,
- *     emails_failed: number,
- *     details: [{ company_name, status, recipients?, error? }]
+ *     briefing_date?: string,
+ *     force_all?: boolean,
+ *     dry_run?: boolean
  *   }
  */
 export async function POST(req: NextRequest) {
@@ -52,32 +47,26 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => ({}));
     const supabase = createAdminClient();
-    const resend = getResendClient();
 
-    // Determine date
     const now = new Date();
     const nzDate = new Date(now.getTime() + 13 * 60 * 60 * 1000);
-    const briefingDate =
-      body.briefing_date || nzDate.toISOString().split("T")[0];
+    const briefingDate = body.briefing_date || nzDate.toISOString().split("T")[0];
     const forceAll = body.force_all === true;
+    const dryRun = body.dry_run === true;
 
-    // 1. Fetch all generated briefings for today that haven't been delivered
     const { data: briefings, error: bErr } = await supabase
       .from("company_briefings")
-      .select(
-        "id, company_profile_id, briefing_content, briefing_date, delivery_status"
-      )
+      .select("id, company_profile_id, briefing_content, briefing_date, delivery_status")
       .eq("briefing_date", briefingDate)
       .eq("status", "generated")
       .in("delivery_status", ["pending"]);
 
-    if (bErr) {
-      return NextResponse.json({ error: bErr.message }, { status: 500 });
-    }
+    if (bErr) return NextResponse.json({ error: bErr.message }, { status: 500 });
 
     if (!briefings || briefings.length === 0) {
       return NextResponse.json({
         briefing_date: briefingDate,
+        dry_run: dryRun,
         companies_checked: 0,
         emails_sent: 0,
         emails_failed: 0,
@@ -86,39 +75,25 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // 2. Fetch company profiles for these briefings
     const profileIds = briefings.map((b) => b.company_profile_id);
     const { data: profiles, error: pErr } = await supabase
       .from("company_profiles")
-      .select(
-        "id, owner_id, company_name, email_enabled, email_recipients, preferred_delivery_time, timezone"
-      )
+      .select("id, owner_id, company_name, email_enabled, email_recipients, preferred_delivery_time, timezone")
       .in("id", profileIds);
 
-    if (pErr) {
-      return NextResponse.json({ error: pErr.message }, { status: 500 });
-    }
+    if (pErr) return NextResponse.json({ error: pErr.message }, { status: 500 });
 
-    const profileMap = new Map(
-      (profiles || []).map((p) => [p.id, p])
-    );
-
-    // 2b. Batch-fetch owner subscription state for entitlement gate
+    const profileMap = new Map((profiles || []).map((p) => [p.id, p]));
     const ownerIds = [...new Set((profiles || []).map((p) => p.owner_id).filter(Boolean))];
     const { data: ownerProfiles } = ownerIds.length
       ? await supabase
           .from("profiles")
-          .select(
-            "id, subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at"
-          )
+          .select("id, subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at")
           .in("id", ownerIds)
       : { data: [] as Array<{ id: string; subscription_status: string | null; subscription_tier: string | null; subscription_period_end: string | null; is_test_account: boolean | null; trial_end_at: string | null }> };
 
-    const ownerMap = new Map(
-      (ownerProfiles || []).map((o) => [o.id, o])
-    );
+    const ownerMap = new Map((ownerProfiles || []).map((o) => [o.id, o]));
 
-    // 3. For each briefing, check if it's time to deliver
     let emailsSent = 0;
     let emailsFailed = 0;
     const details: Array<{
@@ -126,58 +101,74 @@ export async function POST(req: NextRequest) {
       status: string;
       recipients?: string[];
       error?: string;
+      content_version?: string;
     }> = [];
+
+    let resend: Resend | null = null;
 
     for (const briefing of briefings) {
       const profile = profileMap.get(briefing.company_profile_id);
       if (!profile) {
-        details.push({
-          company_name: "Unknown",
-          status: "skipped",
-          error: "Profile not found",
-        });
+        details.push({ company_name: "Unknown", status: "skipped", error: "Profile not found" });
         continue;
       }
 
-      // Entitlement gate: only deliver to active/trialing subscriptions
-      // (or is_test_account profiles). Mirrors the score-route gate so a
-      // briefing generated during a trial that has since lapsed is not
-      // emailed out.
+      const contentVersion = getCompanyBriefingContentVersion(briefing.briefing_content);
+      if (!isCompanyBriefingV2Content(briefing.briefing_content)) {
+        const errMsg =
+          contentVersion === "legacy_what_changed"
+            ? "legacy_content_not_deliverable"
+            : "invalid_company_briefing_content";
+
+        details.push({
+          company_name: profile.company_name,
+          status: "blocked",
+          error: errMsg,
+          content_version: contentVersion,
+        });
+
+        if (!dryRun) {
+          await supabase
+            .from("company_briefings")
+            .update({ delivery_status: "failed", delivery_error: errMsg })
+            .eq("id", briefing.id);
+        }
+        emailsFailed++;
+        continue;
+      }
+
       const owner = ownerMap.get(profile.owner_id);
       if (!owner || !shouldGenerateBriefing(owner)) {
-        console.log(
-          `[deliver] Skipping ${profile.company_name}: subscription_inactive`
-        );
         details.push({
           company_name: profile.company_name,
           status: "skipped",
           error: "subscription_inactive",
+          content_version: contentVersion,
         });
         continue;
       }
 
-      // Check email enabled
       if (!profile.email_enabled) {
         details.push({
           company_name: profile.company_name,
           status: "skipped",
           error: "Email delivery disabled",
+          content_version: contentVersion,
         });
         continue;
       }
 
-      // Check if recipients exist
       const recipients: string[] = profile.email_recipients || [];
       if (recipients.length === 0) {
         details.push({
           company_name: profile.company_name,
           status: "skipped",
           error: "No email recipients configured",
+          content_version: contentVersion,
         });
         continue;
       }
 
-      // Check delivery time unless force_all
       if (!forceAll) {
         const tz = profile.timezone || "UTC";
         const preferredTime = profile.preferred_delivery_time || "07:00";
@@ -193,7 +184,6 @@ export async function POST(req: NextRequest) {
             }).format(now)
           );
         } catch {
-          // Invalid timezone, default to UTC
           currentLocalHour = now.getUTCHours();
         }
 
@@ -202,52 +192,41 @@ export async function POST(req: NextRequest) {
             company_name: profile.company_name,
             status: "waiting",
             error: `Not yet delivery time (current: ${currentLocalHour}:00, preferred: ${preferredHour}:00 ${tz})`,
+            content_version: contentVersion,
           });
           continue;
         }
       }
 
-      // 4. Generate email HTML
-      const content = briefing.briefing_content as BriefingContent;
-      if (!content || !content.header || !content.what_changed) {
+      const html = generateCompanyBriefingHtmlV2(
+        briefing.briefing_content,
+        profile.company_name,
+        briefing.briefing_date
+      );
+      const subject = generateBriefingSubjectV2(
+        profile.company_name,
+        briefing.briefing_date,
+        briefing.briefing_content.today_brief.top_line.text
+      );
+
+      if (dryRun) {
         details.push({
           company_name: profile.company_name,
-          status: "failed",
-          error: "Invalid briefing content",
+          status: "would_send",
+          recipients,
+          content_version: contentVersion,
         });
-
-        await supabase
-          .from("company_briefings")
-          .update({
-            delivery_status: "failed",
-            delivery_error: "Invalid briefing content",
-          })
-          .eq("id", briefing.id);
-
-        emailsFailed++;
         continue;
       }
 
-      const html = generateCompanyBriefingHtml(content);
-      const subject = generateBriefingSubject(
-        content.header.company_name,
-        content.header.date
-      );
-
-      // 5. Send to all recipients
       try {
-        const batch = recipients.map((to) => ({
-          from: FROM_ADDRESS,
-          to,
-          subject,
-          html,
-        }));
+        resend ||= getResendClient();
+        const batch = recipients.map((to) => ({ from: FROM_ADDRESS, to, subject, html }));
 
         if (batch.length <= 100) {
           const { error: sendErr } = await resend.batch.send(batch);
           if (sendErr) throw new Error(sendErr.message);
         } else {
-          // Send in batches of 100
           for (let i = 0; i < batch.length; i += 100) {
             const chunk = batch.slice(i, i + 100);
             const { error: sendErr } = await resend.batch.send(chunk);
@@ -255,7 +234,6 @@ export async function POST(req: NextRequest) {
           }
         }
 
-        // Mark as delivered
         await supabase
           .from("company_briefings")
           .update({
@@ -270,18 +248,13 @@ export async function POST(req: NextRequest) {
           company_name: profile.company_name,
           status: "sent",
           recipients,
+          content_version: contentVersion,
         });
       } catch (sendError: unknown) {
-        const errMsg =
-          sendError instanceof Error ? sendError.message : "Unknown send error";
-
-        // Mark as failed
+        const errMsg = sendError instanceof Error ? sendError.message : "Unknown send error";
         await supabase
           .from("company_briefings")
-          .update({
-            delivery_status: "failed",
-            delivery_error: errMsg,
-          })
+          .update({ delivery_status: "failed", delivery_error: errMsg })
           .eq("id", briefing.id);
 
         emailsFailed++;
@@ -290,12 +263,14 @@ export async function POST(req: NextRequest) {
           status: "failed",
           recipients,
           error: errMsg,
+          content_version: contentVersion,
         });
       }
     }
 
     return NextResponse.json({
       briefing_date: briefingDate,
+      dry_run: dryRun,
       companies_checked: briefings.length,
       emails_sent: emailsSent,
       emails_failed: emailsFailed,

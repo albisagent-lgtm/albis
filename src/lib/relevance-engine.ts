@@ -59,8 +59,8 @@ export interface ScoredStory {
   // Final weighted score
   relevance_score: number;
 
-  // Structured why-matched, persisted as company_story_scores.match_reasons
-  // and embedded into briefing_content.what_changed[i].match_reasons.
+  // Structured why-matched, persisted for audit/coverage and retained for
+  // legacy briefing compatibility when needed.
   match_reasons: MatchReason[];
 
   // Whether selected for briefing

@@ -1,15 +1,12 @@
 // ---------------------------------------------------------------------------
-// Company briefing templating — shared helpers.
+// Company briefing templating — legacy compatibility helpers.
 //
-// Used by both run-company-briefing-pipeline.ts (legacy public-pool path)
-// and run-company-signal-pipeline.ts (Package 5 typed-signals path) so
-// briefing content stays consistent across both pipelines until Package 8
-// replaces all of this with a single OpenAI call.
+// Produces the retired `what_changed` / `what_to_watch` shape. Keep this
+// only while old dashboard/history rows need a readable representation.
+// New customer-facing generation must use the Package 8 evidence packet,
+// QA gates, and v2 briefing output.
 //
 // Pure functions. No Supabase. No network.
-//
-// TODO(pkg-8): the LLM-only briefing path retires every helper in this
-// file. Keep the function names the same so the swap is mechanical.
 // ---------------------------------------------------------------------------
 import type { CompanyProfile } from "./company-profile";
 import type { ScoredStory } from "./relevance-engine";

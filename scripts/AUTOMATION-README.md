@@ -29,9 +29,11 @@ This file records the current production automation paths for Albis after the Ap
   - article jobs deliberately run later than scans to reduce scan-file/write races
 
 ### 3) Company briefing delivery
-- Script: `scripts/run-company-briefing-pipeline.ts`
-- Cron job: `736be084-f4f2-4735-9ea2-745788ce654e`
-- Purpose: score company relevance, generate company briefing, send company email, update `company_briefings`
+- Status: **not live / activation pending**
+- Intended path: Package 8 company scan + evidence packet + QA + v2 briefing flow
+- Legacy script archived at `scripts/legacy/run-company-briefing-pipeline.legacy.ts`
+- Legacy cron job `736be084-f4f2-4735-9ea2-745788ce654e` must remain disabled/removed before activation
+- Do not use the old `what_changed` / `what_to_watch` company pipeline for production
 
 ### 4) Snapshot writer
 - Script: `scripts/write-site-snapshot.ts`
