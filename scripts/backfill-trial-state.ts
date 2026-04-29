@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 // ---------------------------------------------------------------------------
-// One-off backfill: assign 7-day trials to existing onboarded users who have
+// One-off backfill: assign 3-day trials to existing onboarded users who have
 // no subscription_status yet — Package 7.
 //
 // Run AFTER the 20260426_add_test_account_and_trial.sql migration has been
@@ -31,7 +31,7 @@ async function main() {
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!supabaseUrl || !serviceKey) {
     console.error(
-      "Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env.local"
+      "Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env.local",
     );
     process.exit(1);
   }
@@ -40,7 +40,7 @@ async function main() {
 
   console.log(
     `🔍 Backfill trial state — ${apply ? "APPLY mode" : "dry-run"} ` +
-      `(trial duration: ${TRIAL_DURATION_DAYS} days)\n`
+      `(trial duration: ${TRIAL_DURATION_DAYS} days)\n`,
   );
 
   // Eligible owners: have an onboarded company profile.
@@ -60,9 +60,7 @@ async function main() {
   const ownerIds = [...new Set(companies.map((c) => c.owner_id))];
   const { data: profiles, error: pErr } = await supabase
     .from("profiles")
-    .select(
-      "id, email, subscription_status, is_test_account, trial_end_at"
-    )
+    .select("id, email, subscription_status, is_test_account, trial_end_at")
     .in("id", ownerIds);
   if (pErr) {
     console.error(`failed to load profiles: ${pErr.message}`);
@@ -77,15 +75,17 @@ async function main() {
   }
 
   const eligible = (profiles || []).filter(
-    (p) => p.subscription_status === null && !p.is_test_account
+    (p) => p.subscription_status === null && !p.is_test_account,
   );
   const skipped = (profiles || []).filter(
-    (p) => p.subscription_status !== null || p.is_test_account
+    (p) => p.subscription_status !== null || p.is_test_account,
   );
 
   console.log(`Found ${profiles?.length ?? 0} onboarded owner profiles:`);
   console.log(`  • ${eligible.length} eligible for trial backfill`);
-  console.log(`  • ${skipped.length} skipped (already-statused or test-acct)\n`);
+  console.log(
+    `  • ${skipped.length} skipped (already-statused or test-acct)\n`,
+  );
 
   if (skipped.length > 0) {
     console.log("Skipped:");
@@ -95,7 +95,7 @@ async function main() {
         : `status=${p.subscription_status}`;
       console.log(
         `  - ${p.email ?? p.id} → ${reason} ` +
-          `[${(ownerToCompanies.get(p.id) || []).join(", ")}]`
+          `[${(ownerToCompanies.get(p.id) || []).join(", ")}]`,
       );
     }
     console.log();
@@ -110,7 +110,7 @@ async function main() {
   for (const p of eligible) {
     console.log(
       `  + ${p.email ?? p.id} ` +
-        `[${(ownerToCompanies.get(p.id) || []).join(", ")}]`
+        `[${(ownerToCompanies.get(p.id) || []).join(", ")}]`,
     );
   }
   console.log();
@@ -130,18 +130,18 @@ async function main() {
     }
     if (result.assigned) {
       assigned++;
-      console.log(
-        `  ✓ ${p.email ?? p.id} — trial ends ${result.trialEndAt}`
-      );
+      console.log(`  ✓ ${p.email ?? p.id} — trial ends ${result.trialEndAt}`);
     } else {
       noop++;
       console.log(
-        `  · ${p.email ?? p.id} — no-op (status changed since dry-run)`
+        `  · ${p.email ?? p.id} — no-op (status changed since dry-run)`,
       );
     }
   }
 
-  console.log(`\n✅ Assigned trials to ${assigned} profile(s) (${noop} no-op).`);
+  console.log(
+    `\n✅ Assigned trials to ${assigned} profile(s) (${noop} no-op).`,
+  );
 }
 
 main().catch((err) => {

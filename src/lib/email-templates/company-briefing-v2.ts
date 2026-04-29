@@ -41,17 +41,17 @@ function esc(s: string | undefined | null): string {
 }
 
 function escAttr(s: string | undefined | null): string {
-  return esc(s)
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
+  return esc(s).replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 }
 
 function safeDashboardLink(link: string | undefined | null): string {
   if (!link) return `${SITE}/dashboard/briefing/today`;
   try {
     const url = new URL(link, SITE);
-    if (url.protocol !== "https:" && url.protocol !== "http:") return `${SITE}/dashboard/briefing/today`;
-    if (url.hostname !== "www.albis.news" && url.hostname !== "albis.news") return `${SITE}/dashboard/briefing/today`;
+    if (url.protocol !== "https:" && url.protocol !== "http:")
+      return `${SITE}/dashboard/briefing/today`;
+    if (url.hostname !== "www.albis.news" && url.hostname !== "albis.news")
+      return `${SITE}/dashboard/briefing/today`;
     return url.toString();
   } catch {
     return `${SITE}/dashboard/briefing/today`;
@@ -118,7 +118,7 @@ export function generateCompanyBriefingHtmlV2(
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>${esc(companyName)} Daily Briefing — ${esc(displayDate)}</title>
+  <title>${esc(companyName)} Daily Scan — ${esc(displayDate)}</title>
   <style>
     body,table,td{font-family:Georgia,'Times New Roman',serif;}
     a{color:${NAVY};text-decoration:none;}
@@ -132,7 +132,7 @@ export function generateCompanyBriefingHtmlV2(
 <body style="margin:0;padding:0;background:${WHITE};-webkit-font-smoothing:antialiased;">
 
   <!-- Preheader -->
-  <div style="display:none;max-height:0;overflow:hidden;">Daily briefing for ${esc(companyName)} — ${esc(displayDate)}</div>
+  <div style="display:none;max-height:0;overflow:hidden;">Daily scan for ${esc(companyName)} — ${esc(displayDate)}</div>
 
   <table cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;margin:0 auto;background:${WHITE};">
 
@@ -141,7 +141,7 @@ export function generateCompanyBriefingHtmlV2(
       <table cellpadding="0" cellspacing="0" style="width:100%;">
         <tr>
           <td>
-            <div style="font-size:24px;font-weight:800;color:${NAVY};letter-spacing:1px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(companyName)} Daily Briefing</div>
+            <div style="font-size:24px;font-weight:800;color:${NAVY};letter-spacing:1px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(companyName)} Daily Scan</div>
             <div style="font-size:11px;color:${GRAY};letter-spacing:2px;margin:4px 0 0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;text-transform:uppercase;">Prepared by Albis</div>
           </td>
           <td style="text-align:right;vertical-align:top;">
@@ -203,7 +203,11 @@ function renderMainBriefing(output: CompanyBriefingGenerationOutput): string {
     }
 
     for (const item of section.items) {
-      html += renderBriefingItem(item, section.heading, section.items.length === 1);
+      html += renderBriefingItem(
+        item,
+        section.heading,
+        section.items.length === 1,
+      );
     }
 
     html += `</div>`;
@@ -212,12 +216,21 @@ function renderMainBriefing(output: CompanyBriefingGenerationOutput): string {
   return html;
 }
 
-function renderBriefingItem(item: GeneratedBriefingItem, sectionHeading?: string, hideTitle = false): string {
+function renderBriefingItem(
+  item: GeneratedBriefingItem,
+  sectionHeading?: string,
+  hideTitle = false,
+): string {
   let html = `<div style="margin-bottom:20px;">`;
 
   // Title. Most company sections currently contain one item, so avoid
   // repeating the same text twice (section heading + item title).
-  if (!hideTitle && (!sectionHeading || item.title.text.trim().toLowerCase() !== sectionHeading.trim().toLowerCase())) {
+  if (
+    !hideTitle &&
+    (!sectionHeading ||
+      item.title.text.trim().toLowerCase() !==
+        sectionHeading.trim().toLowerCase())
+  ) {
     html += `<p style="font-size:16px;color:${NAVY};line-height:1.4;margin:0 0 6px;font-weight:700;font-family:-apple-system,sans-serif;">${esc(item.title.text)}</p>`;
   }
 
@@ -239,13 +252,14 @@ function renderBriefingItem(item: GeneratedBriefingItem, sectionHeading?: string
 
 function renderTodayScan(output: CompanyBriefingGenerationOutput): string {
   if (!output.scanner_report?.enabled) return "";
-  let html = sectionLabel("Today's Scan");
+  let html = sectionLabel("Your Daily Scan");
   html += `<div style="padding:14px 16px;background:${QUIET_BG};border-left:3px solid ${AMBER};margin-bottom:14px;">`;
   html += `<p style="font-size:15px;color:${BODY};line-height:1.65;margin:0;font-family:-apple-system,sans-serif;">${textHtml(output.scanner_report.overview.text)}</p>`;
   html += `</div>`;
   if (output.today_brief.bullets.length) {
     html += `<ul style="padding-left:18px;margin:0;color:${BODY};font-family:-apple-system,sans-serif;font-size:14px;line-height:1.55;">`;
-    for (const bullet of output.today_brief.bullets) html += `<li style="margin-bottom:6px;">${esc(bullet.text)}</li>`;
+    for (const bullet of output.today_brief.bullets)
+      html += `<li style="margin-bottom:6px;">${esc(bullet.text)}</li>`;
     html += `</ul>`;
   }
   return html;
@@ -254,7 +268,7 @@ function renderTodayScan(output: CompanyBriefingGenerationOutput): string {
 function renderDeeperRead(output: CompanyBriefingGenerationOutput): string {
   const reads = output.scanner_report?.deeper_reads || [];
   if (reads.length === 0) return "";
-  let html = sectionLabel("Deeper Read");
+  let html = sectionLabel("Context");
   for (const item of reads.slice(0, 3)) {
     html += `<div style="margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid ${BORDER};">`;
     html += `<p style="font-size:16px;color:${NAVY};line-height:1.4;margin:0 0 6px;font-weight:700;font-family:-apple-system,sans-serif;">${esc(item.title.text)}</p>`;
@@ -279,7 +293,9 @@ function renderPerceptionGap(output: CompanyBriefingGenerationOutput): string {
   return html;
 }
 
-function renderUsefulObservations(output: CompanyBriefingGenerationOutput): string {
+function renderUsefulObservations(
+  output: CompanyBriefingGenerationOutput,
+): string {
   const obs = output.useful_observations.observations;
   if (obs.length === 0) return "";
 
@@ -300,7 +316,7 @@ function renderSourceNotes(output: CompanyBriefingGenerationOutput): string {
     const dashboardLink = safeDashboardLink(sn.dashboard_link);
     html += `<a href="${escAttr(dashboardLink)}" style="font-size:14px;color:${NAVY};font-weight:700;font-family:-apple-system,sans-serif;text-decoration:underline;">View source trail on Albis →</a>`;
   } else {
-    html += `<p style="font-size:12px;color:${GRAY};font-family:-apple-system,sans-serif;margin:0;">Source trail available in the dashboard after this briefing is saved.</p>`;
+    html += `<p style="font-size:12px;color:${GRAY};font-family:-apple-system,sans-serif;margin:0;">Source trail available in the dashboard after this daily scan is saved.</p>`;
   }
   html += `</div>`;
   return html;
@@ -319,5 +335,5 @@ export function generateBriefingSubjectV2(
   if (topLine && topLine.length <= 60) {
     return `Albis — ${companyName} — ${topLine}`;
   }
-  return `${companyName} Daily Briefing — ${displayDate}`;
+  return `${companyName} Daily Scan — ${displayDate}`;
 }

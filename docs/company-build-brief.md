@@ -31,9 +31,9 @@ The public albis.news site stays **completely separate** — different scan engi
 ## Locked-in decisions for V1
 
 - **LLM provider: OpenAI** for all company-build LLM calls (signal tagging, briefing generation, any classification). Don't change existing Claude calls in the public side. All new company-build code uses OpenAI.
-- **Scan cadence: 3x daily at 7am / 1pm / 7pm US Eastern** for the company scan. Globally optimal — catches US, EU, and Asia business cycles at sensible points. Public scan cadence (also 3x daily) is independent and unchanged.
+- **Scan cadence: 2x daily at 7am / 7pm US Eastern** for the company scan during V1 cost-control launch. Public scan cadence is independent and unchanged.
 - **Briefing cadence: once per customer per day** at their preferred local delivery time (stored with timezone in `company_profiles.timezone` + `preferred_delivery_time`). System does timezone maths; briefing drawn from most recent scan(s) before their delivery time.
-- **Free trial: 7 days**, auto-assigned on onboarding completion. No hard signup cap — cost-monitored instead.
+- **Free trial: 3 days**, auto-assigned on onboarding completion. No hard signup cap at this stage, but cost should be monitored closely.
 - **First-briefing experience: preview-on-signup.** Generate a briefing immediately at end of onboarding using existing pool data (not a fresh scan). Costs roughly $0.03 per signup. Crucial for conversion — customer sees value before the wait-until-tomorrow pattern sets in.
 - **Profile removal: clean removal.** If a company removes "DPRK" from their watchlist and no other company tracks it, it drops from scan targets automatically on the next union watch graph rebuild. Past briefings remain as historical record.
 - **Signal unit: one row per discrete signal**, clustered from source articles at scan time. Richer metadata than public `scan_items` — more entity tagging, theme tagging, regional tagging, confidence scores.
@@ -71,7 +71,7 @@ Each package is a separate Claude Code session. Each commits to the `company-bui
 
 **Package 6 — Union watch graph + retrieval expansion.** Aggregate company demand generates the daily retrieval target bundle. Company scan reads this bundle. No per-company brute-force scans; shared clusters drive the actual retrieval.
 
-**Package 7 — Entitlement activation + end-to-end launch test.** Stripe wiring completion. Auto-trial assignment (7 days) on onboarding. Preview-on-signup briefing. Retire `TEST_COMPANY_OWNER_ID` bypass. Fresh signup → onboarding → first briefing → email delivery tested end-to-end.
+**Package 7 — Entitlement activation + end-to-end launch test.** Stripe wiring completion. Auto-trial assignment (3 days) on onboarding. Preview-on-signup briefing. Retire `TEST_COMPANY_OWNER_ID` bypass. Fresh signup → onboarding → first briefing → email delivery tested end-to-end.
 
 **Package 8 — Briefing content design + tone + template.** Last. Retire templated briefing helpers. Build OpenAI-based generation prompt. Iterate on tone and density using real signals from live scans. Ship the final briefing format.
 
@@ -120,7 +120,7 @@ Each package is a separate Claude Code session. Each commits to the `company-bui
 
 ## Business context (for reference, not implementation)
 
-- Pricing tiers: Pro $39/mo, Team $79/mo, Company Intelligence $159/mo, Enterprise custom.
+- Pricing tiers: Pro $49/mo ($39/mo billed annually), Team $99/mo ($79/mo billed annually), Company Intelligence $199/mo ($159/mo billed annually), Enterprise custom.
 - Per-company monthly cost estimated $5–15 at v1, dropping to $3–8 as clustering kicks in.
 - Margin is healthy at all paid tiers.
 - First paying customer unknown — build for generic onboarding. Don't optimise for any specific industry.
@@ -150,26 +150,31 @@ If reading this doc in a Claude Code session: the next step is to confirm you've
 During the context-loading audit before Package 1 started, Claude Code raised 5 questions about the plan. All have been answered. Recorded here so future sessions don't re-ask.
 
 ### Q1 — Package 1 scope
+
 **Question:** Does Package 1 (a) fix tracking in the existing public pipeline, or (b) add new company-pipeline-specific tracking that gets wired up in Package 5?
 
 **Answer:** (a). Fix the existing `pipeline_runs` table so historical runs reflect reality. Company-pipeline-specific tracking is added later in Package 5 when the separate company scan pipeline is built.
 
 ### Q2 — Package 4 vs Package 5 sequencing
+
 **Question:** Should canonical registry (Package 4) land before pipeline separation (Package 5)?
 
 **Answer:** Yes. Order stays 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8. Canonical registry lands first so Package 5's scoring uses the registry from day one.
 
 ### Q3 — Public vs company separation depth
+
 **Question:** For Package 5, do we build parallel tables or a typed schema?
 
 **Answer:** Typed schema. Package 5 implements: canonical_topics, retrieval_clusters, scan_targets, company_scan_runs, signals, company_signal_matches. Data unit is "signals" (discrete atomic business-relevant changes), not "stories."
 
 ### Q4 — Briefing generation path
+
 **Question:** Keep the templated briefing helpers or switch to LLM?
 
 **Answer:** LLM-only in Package 8. Retire buildBriefingContent / buildWhyItMatters / buildWhatToWatch. Switch to OpenAI-based generation. The /api/company-briefings/submit endpoint stays available but is not the primary path.
 
 ### Q5 — TEST_COMPANY_OWNER_ID
+
 **Question:** Retire the hardcoded bypass early or wait for Package 7?
 
 **Answer:** Wait for Package 7. Don't touch tier-enforcement.ts in Packages 1-6 unless strictly necessary.
@@ -210,4 +215,5 @@ Before merging `company-build` → `main` (end of Package 7 or 8), and before op
 3. Only then `git pull` on openclaw.
 
 The public article rebuild is happening on a separate branch during the company build. Both rejoin main at the end. Coordinated check at that point.
-- **Pkg 7 e2e test step 7 failure to investigate.** Test profile didn't appear in runCompanySignalPipeline results despite having trialing status and onboarding_completed=true. Steps 1-6 pass cleanly (user → trial → preview briefing). Step 7 failure means a fresh signup may not appear in the *next* batch pipeline run — they still get their preview from Step 6. Investigate in Package 8 when pipeline gets tuned. Possible causes: profile-loading filter excludes brand-new profiles, dry-run path doesn't return all profiles, or cache/timing issue.
+
+- **Pkg 7 e2e test step 7 failure to investigate.** Test profile didn't appear in runCompanySignalPipeline results despite having trialing status and onboarding_completed=true. Steps 1-6 pass cleanly (user → trial → preview briefing). Step 7 failure means a fresh signup may not appear in the _next_ batch pipeline run — they still get their preview from Step 6. Investigate in Package 8 when pipeline gets tuned. Possible causes: profile-loading filter excludes brand-new profiles, dry-run path doesn't return all profiles, or cache/timing issue.

@@ -16,7 +16,7 @@ const MATCH_REASON_LABEL: Record<MatchReason["type"], string> = {
   geography: "Geography",
   sector: "Sector",
   tracked_theme: "Tracked themes",
-  watchlist_entity: "Named entities",
+  watchlist_entity: "Tracked entities",
   supply_chain: "Supply chain",
   risk_priority: "Risk priorities",
   urgency: "Urgency signal",
@@ -379,7 +379,7 @@ function ScannerReportRenderer({
           <>
             <div className="my-7 h-px bg-black/[0.07] dark:bg-white/[0.07]" />
             <section>
-              <p className={sectionLabel}>Deeper Read</p>
+              <p className={sectionLabel}>Context</p>
               <div className="mt-4 space-y-5">
                 {scanner?.deeper_reads.map((item, i) => (
                   <article key={item.generated_item_id || i}>

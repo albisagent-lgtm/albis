@@ -26,7 +26,7 @@ export function isSubscriptionActive(profile: ProfileSubscription): boolean {
 }
 
 /**
- * True iff the profile is currently in its 7-day free trial window.
+ * True iff the profile is currently in its 3-day free trial window.
  * Read-only helper for dashboard display — the gate for briefing
  * generation is `isSubscriptionActive` (which already returns true for
  * status='trialing').
@@ -42,7 +42,7 @@ export function isTrialing(profile: ProfileSubscription): boolean {
  * Rounded up so a trial expiring in 30 minutes still reads as "1 day left."
  */
 export function daysRemainingInTrial(
-  profile: ProfileSubscription
+  profile: ProfileSubscription,
 ): number | null {
   if (!isTrialing(profile)) return null;
   const ms = new Date(profile.trial_end_at!).getTime() - Date.now();
@@ -81,7 +81,9 @@ export function getEffectiveTier(profile: ProfileSubscription): TierDefinition {
  * in "preview mode" — their profile is saved but briefings don't generate
  * until they subscribe (shouldGenerateBriefing is the real gate).
  */
-export function getOnboardingTier(profile: ProfileSubscription): TierDefinition {
+export function getOnboardingTier(
+  profile: ProfileSubscription,
+): TierDefinition {
   if (isSubscriptionActive(profile) || isInGracePeriod(profile)) {
     return getTier(profile.subscription_tier);
   }
@@ -93,7 +95,7 @@ export function getOnboardingTier(profile: ProfileSubscription): TierDefinition 
  */
 export function canAddTheme(
   profile: ProfileSubscription,
-  currentCount: number
+  currentCount: number,
 ): boolean {
   const tier = getEffectiveTier(profile);
   return currentCount < tier.maxTrackedThemes;
@@ -104,7 +106,7 @@ export function canAddTheme(
  */
 export function canAddEntity(
   profile: ProfileSubscription,
-  currentCount: number
+  currentCount: number,
 ): boolean {
   const tier = getEffectiveTier(profile);
   return currentCount < tier.maxWatchlistEntities;
@@ -115,7 +117,7 @@ export function canAddEntity(
  */
 export function canAddRecipient(
   profile: ProfileSubscription,
-  currentCount: number
+  currentCount: number,
 ): boolean {
   const tier = getEffectiveTier(profile);
   return currentCount < tier.maxEmailRecipients;
@@ -126,7 +128,7 @@ export function canAddRecipient(
  */
 export function getUpgradeReason(
   profile: ProfileSubscription,
-  limitType: "themes" | "entities" | "recipients"
+  limitType: "themes" | "entities" | "recipients",
 ): string {
   const tier = getEffectiveTier(profile);
   switch (limitType) {

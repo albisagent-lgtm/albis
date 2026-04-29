@@ -11,7 +11,7 @@ export interface TierDefinition {
   maxEmailRecipients: number;
   features: string[];
   monthlyPrice: number | null; // null = not self-serve (enterprise)
-  annualPrice: number | null;  // null = not self-serve
+  annualPrice: number | null; // null = not self-serve
   highlighted?: boolean;
 }
 
@@ -34,16 +34,18 @@ export const TIERS: Record<string, TierDefinition> = {
   pro: {
     id: "pro",
     label: "Pro",
-    description: "For solo founders, analysts, and consultants",
+    description: "For one person monitoring a focused set of risks",
     maxTrackedThemes: 10,
     maxWatchlistEntities: 10,
     maxEmailRecipients: 1,
     features: [
       "1 company profile",
-      "Daily personalised briefing",
-      "Email delivery (1 recipient)",
-      "Dashboard + briefing archive",
-      "Up to 10 tracked themes",
+      "Daily Company Scan",
+      "Email delivery to 1 recipient",
+      "Dashboard + scan archive",
+      "Open source link per finding",
+      "Source trail for saved scans",
+      "Up to 10 monitored topics",
       "Up to 10 watchlist entities",
     ],
     monthlyPrice: 49,
@@ -53,18 +55,19 @@ export const TIERS: Record<string, TierDefinition> = {
   team: {
     id: "team",
     label: "Team",
-    description: "For small teams who need shared intelligence",
+    description: "For teams who need the same scan in front of everyone",
     maxTrackedThemes: 15,
     maxWatchlistEntities: 15,
     maxEmailRecipients: 5,
     features: [
-      "1 company profile",
-      "Daily personalised briefing",
-      "Email delivery (up to 5 recipients)",
-      "Dashboard + briefing archive",
-      "Up to 15 tracked themes",
+      "Everything in Pro",
+      "Email delivery to up to 5 recipients",
+      "Shared dashboard + scan archive",
+      "Source trail for verification",
+      "More topic and entity capacity",
+      "Up to 15 monitored topics",
       "Up to 15 watchlist entities",
-      "Weekly summary briefing",
+      "Weekly scan summary",
     ],
     monthlyPrice: 99,
     annualPrice: 79,
@@ -72,19 +75,20 @@ export const TIERS: Record<string, TierDefinition> = {
   company_intelligence: {
     id: "company_intelligence",
     label: "Company Intelligence",
-    description: "For organisations with serious exposure",
+    description: "For organisations with wider exposure and more moving parts",
     maxTrackedThemes: 25,
     maxWatchlistEntities: 25,
     maxEmailRecipients: 10,
     features: [
-      "1 expanded company profile",
-      "Daily personalised briefing",
-      "Email delivery (up to 10 recipients)",
-      "Dashboard + briefing archive",
-      "Up to 25 tracked themes",
-      "Up to 25 watchlist entities",
-      "Weekly summary briefing",
+      "Everything in Team",
+      "Expanded company profile",
+      "Email delivery to up to 10 recipients",
+      "Full source trail and coverage notes",
+      "Perception Gap tracking",
       "Priority support",
+      "Up to 25 monitored topics",
+      "Up to 25 watchlist entities",
+      "Weekly scan summary",
     ],
     monthlyPrice: 199,
     annualPrice: 159,
@@ -92,13 +96,15 @@ export const TIERS: Record<string, TierDefinition> = {
   enterprise: {
     id: "enterprise",
     label: "Enterprise",
-    description: "Custom intelligence for large organisations",
+    description: "For large organisations that need custom monitoring",
     maxTrackedThemes: 999,
     maxWatchlistEntities: 999,
     maxEmailRecipients: 999,
     features: [
-      "Multiple briefing streams",
+      "Multiple daily scan streams",
+      "Multiple profiles or business units",
       "Unlimited recipients",
+      "Custom source and topic setup",
       "Custom integrations",
       "Dedicated onboarding",
       "Priority support",
@@ -109,10 +115,20 @@ export const TIERS: Record<string, TierDefinition> = {
 };
 
 // Ordered list for pricing page display
-export const TIER_ORDER = ["free", "pro", "team", "company_intelligence", "enterprise"] as const;
+export const TIER_ORDER = [
+  "free",
+  "pro",
+  "team",
+  "company_intelligence",
+  "enterprise",
+] as const;
 
 // Tiers that can be purchased via Stripe checkout
-export const PURCHASABLE_TIERS = ["pro", "team", "company_intelligence"] as const;
+export const PURCHASABLE_TIERS = [
+  "pro",
+  "team",
+  "company_intelligence",
+] as const;
 
 /**
  * Get the tier definition for a given tier ID.

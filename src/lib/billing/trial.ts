@@ -2,7 +2,7 @@
 // Free-trial assignment — Package 7.
 //
 // Called from /api/onboarding/complete (and from scripts/backfill-trial-state.ts)
-// to flip a brand-new user into the 7-day trial state. Stripe is NOT involved
+// to flip a brand-new user into the 3-day trial state. Stripe is NOT involved
 // here — no Customer or Subscription is created. The user only enters Stripe
 // when they upgrade via /api/stripe/checkout.
 //
@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-export const TRIAL_DURATION_DAYS = 7;
+export const TRIAL_DURATION_DAYS = 3;
 export const TRIAL_DEFAULT_TIER = "pro";
 
 export interface AssignTrialResult {
@@ -25,7 +25,7 @@ export interface AssignTrialResult {
 }
 
 /**
- * Assign a 7-day trial to a user if they have no subscription_status yet.
+ * Assign a 3-day trial to a user if they have no subscription_status yet.
  *
  * `supabase` MUST be an admin (service-role) client — the RLS policy on
  * profiles only allows users to update their own row, but we don't want
@@ -34,7 +34,7 @@ export interface AssignTrialResult {
  */
 export async function assignFreeTrial(
   supabase: SupabaseClient,
-  userId: string
+  userId: string,
 ): Promise<AssignTrialResult> {
   const trialEnd = new Date();
   trialEnd.setDate(trialEnd.getDate() + TRIAL_DURATION_DAYS);

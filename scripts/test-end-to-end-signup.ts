@@ -7,7 +7,7 @@
 //   2. verify profile auto-created by handle_new_user trigger
 //   3. insert company_profile (onboarding_completed=false) with sample data
 //   4. mark onboarding_completed=true
-//   5. assignFreeTrial — verify subscription_status='trialing', trial_end_at ≈ now + 7d
+//   5. assignFreeTrial — verify subscription_status='trialing', trial_end_at ≈ now + 3d
 //   6. generatePreviewBriefing — verify briefing exists in company_briefings
 //      (or accept skipped_no_signals as a valid outcome on idle DBs)
 //   7. runCompanySignalPipeline (dry-run) against most recent signal_date —
@@ -38,7 +38,7 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 if (!supabaseUrl || !serviceKey) {
   console.error(
-    "Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env.local"
+    "Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env.local",
   );
   process.exit(1);
 }
@@ -72,7 +72,7 @@ async function preflight() {
     ) {
       throw new Error(
         "Pkg 7 migration not applied. Run 20260426_add_test_account_and_trial.sql " +
-          "against the live DB, then re-run this test."
+          "against the live DB, then re-run this test.",
       );
     }
     throw new Error(`preflight profile probe: ${error.message}`);
@@ -98,18 +98,20 @@ async function main() {
   log(`[2/8] verifying profile auto-created by handle_new_user trigger`);
   const { data: profile, error: pErr } = await supabase
     .from("profiles")
-    .select("id, email, subscription_status, subscription_tier, is_test_account")
+    .select(
+      "id, email, subscription_status, subscription_tier, is_test_account",
+    )
     .eq("id", userId)
     .maybeSingle();
   if (pErr) throw new Error(`profile lookup: ${pErr.message}`);
   if (!profile) {
     throw new Error(
-      "profile row not auto-created — handle_new_user trigger missing or broken"
+      "profile row not auto-created — handle_new_user trigger missing or broken",
     );
   }
   if (profile.subscription_status !== null) {
     throw new Error(
-      `expected fresh profile.subscription_status=null, got ${profile.subscription_status}`
+      `expected fresh profile.subscription_status=null, got ${profile.subscription_status}`,
     );
   }
   log(`     ✓ profile exists, subscription_status=null (fresh)`);
@@ -140,7 +142,7 @@ async function main() {
     .single();
   if (cpErr || !cp) {
     throw new Error(
-      `company_profile insert failed: ${cpErr?.message ?? "no row"}`
+      `company_profile insert failed: ${cpErr?.message ?? "no row"}`,
     );
   }
   companyProfileId = cp.id;
@@ -159,7 +161,7 @@ async function main() {
   if (trial.error) throw new Error(`assignFreeTrial: ${trial.error}`);
   if (!trial.assigned) {
     throw new Error(
-      `assignFreeTrial returned assigned=false (unexpected for fresh user)`
+      `assignFreeTrial returned assigned=false (unexpected for fresh user)`,
     );
   }
   const { data: postTrial, error: ptErr } = await supabase
@@ -167,25 +169,26 @@ async function main() {
     .select("subscription_status, subscription_tier, trial_end_at")
     .eq("id", userId)
     .single();
-  if (ptErr || !postTrial) throw new Error(`post-trial read: ${ptErr?.message}`);
+  if (ptErr || !postTrial)
+    throw new Error(`post-trial read: ${ptErr?.message}`);
   if (postTrial.subscription_status !== "trialing") {
     throw new Error(
-      `expected subscription_status='trialing', got ${postTrial.subscription_status}`
+      `expected subscription_status='trialing', got ${postTrial.subscription_status}`,
     );
   }
   if (!postTrial.trial_end_at) {
     throw new Error("trial_end_at not set");
   }
   const trialEndMs = new Date(postTrial.trial_end_at).getTime();
-  const sevenDaysMs = 7 * 24 * 3600 * 1000;
-  const driftMs = Math.abs(trialEndMs - (Date.now() + sevenDaysMs));
+  const threeDaysMs = 3 * 24 * 3600 * 1000;
+  const driftMs = Math.abs(trialEndMs - (Date.now() + threeDaysMs));
   if (driftMs > 5 * 60_000) {
     throw new Error(
-      `trial_end_at not ~7 days out (drift=${Math.round(driftMs / 1000)}s): ${postTrial.trial_end_at}`
+      `trial_end_at not ~3 days out (drift=${Math.round(driftMs / 1000)}s): ${postTrial.trial_end_at}`,
     );
   }
   log(
-    `     ✓ trialing, tier=${postTrial.subscription_tier}, ends ${postTrial.trial_end_at}`
+    `     ✓ trialing, tier=${postTrial.subscription_tier}, ends ${postTrial.trial_end_at}`,
   );
 
   log(`[6/8] calling generatePreviewBriefing`);
@@ -202,7 +205,7 @@ async function main() {
       .single();
     if (bfErr || !brief) {
       throw new Error(
-        `preview returned id ${preview.briefing_id} but row not found: ${bfErr?.message}`
+        `preview returned id ${preview.briefing_id} but row not found: ${bfErr?.message}`,
       );
     }
     if (brief.company_profile_id !== companyProfileId) {
@@ -210,11 +213,11 @@ async function main() {
     }
     log(
       `     ✓ briefing ${brief.id} (${brief.status}) for ${brief.briefing_date}, ` +
-        `signals_considered=${preview.signals_considered}, signals_selected=${preview.signals_selected}`
+        `signals_considered=${preview.signals_considered}, signals_selected=${preview.signals_selected}`,
     );
   } else if (preview.status === "skipped_no_signals") {
     log(
-      `     ↷ no signals in last 24h — preview deferred (acceptable on idle DB)`
+      `     ↷ no signals in last 24h — preview deferred (acceptable on idle DB)`,
     );
   } else {
     throw new Error(`unexpected preview status: ${preview.status}`);
@@ -239,19 +242,19 @@ async function main() {
     });
     log(`     pipeline loaded ${summary.signals_loaded} signals`);
     const ours = summary.results.find(
-      (r) => r.company_profile_id === companyProfileId
+      (r) => r.company_profile_id === companyProfileId,
     );
     if (summary.signals_loaded === 0) {
       log(`     ↷ window had 0 signals — accepted`);
     } else if (!ours) {
       throw new Error(
-        `our profile ${companyProfileId} not present in pipeline results`
+        `our profile ${companyProfileId} not present in pipeline results`,
       );
     } else if (ours.status === "skipped") {
       throw new Error(`pipeline skipped our profile: ${ours.reason}`);
     } else {
       log(
-        `     ✓ profile processed: signals_selected=${ours.signals_selected}, signal_level=${ours.signal_level}`
+        `     ✓ profile processed: signals_selected=${ours.signals_selected}, signal_level=${ours.signal_level}`,
       );
     }
   }
@@ -260,7 +263,7 @@ async function main() {
   const { data: ownerNow, error: onErr } = await supabase
     .from("profiles")
     .select(
-      "id, subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at"
+      "id, subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at",
     )
     .eq("id", userId)
     .single();
@@ -270,7 +273,7 @@ async function main() {
   const ent = shouldGenerateBriefing(ownerNow);
   if (!ent) {
     throw new Error(
-      `shouldGenerateBriefing returned false unexpectedly: ${JSON.stringify(ownerNow)}`
+      `shouldGenerateBriefing returned false unexpectedly: ${JSON.stringify(ownerNow)}`,
     );
   }
   log(`     ✓ shouldGenerateBriefing = true`);
@@ -297,7 +300,8 @@ async function cleanup() {
         .from("company_profiles")
         .delete()
         .eq("owner_id", userId);
-      if (error) log(`  ⚠ company_profiles by owner_id delete: ${error.message}`);
+      if (error)
+        log(`  ⚠ company_profiles by owner_id delete: ${error.message}`);
     }
 
     // profiles → auth.users FK has no ON DELETE rule; delete explicitly so

@@ -21,18 +21,18 @@
     "NEXT_PUBLIC_SUPABASE_URL": "https://wguydvzpxwsgrhvojpnk.supabase.co",
     "NEXT_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_TijRtvYeJ-iL8HhhS8NpMg_zbla_orj",
     "NEXT_PUBLIC_SITE_URL": "https://www.albis.news",
-    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51T3pZSBBaDpCgoIE0bOEDtYZzwLoXsdu6pLZVYharZCiBmLy4ZBgWjDARf4AXWKCIHJCYaq3XbCl4K3mXkWaNwoT00twbVX3oS",
-    "NODE_ENV": "production"
+    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51TLeiCLUymhPvjeE5e19STeNLtAUCvXNaUbWGEQ60uwz0vmYOyMxfZ7ithN8C6o4vI5st9We62AEPgZVw4Bsk9xO00BeNZ2MY6",
+    "NODE_ENV": "production",
   },
   "assets": {
     "directory": ".open-next/assets",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
   },
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
-      "service": "albis"
-    }
+      "service": "albis",
+    },
   ],
   // KV-backed incremental cache. Makes `revalidate = N` actually refresh.
   // Binding name is dictated by @opennextjs/cloudflare's kv-incremental-cache
@@ -40,7 +40,7 @@
   "kv_namespaces": [
     {
       "binding": "NEXT_INC_CACHE_KV",
-      "id": "7dd33d8d4ce24c76904c2054e85a7e87"
-    }
-  ]
+      "id": "7dd33d8d4ce24c76904c2054e85a7e87",
+    },
+  ],
 }

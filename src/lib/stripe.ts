@@ -9,51 +9,53 @@ export function getStripe() {
 }
 
 // ---------------------------------------------------------------------------
-// Price ID → Tier mapping
-// PLACEHOLDER PRICE IDs — replace with real ones from Stripe Dashboard.
-// Create products in Stripe for: Pro, Team, Company Intelligence
-// Each with monthly and annual price variants.
-// After creating them, replace the price_xxx IDs below.
+// Price ID → Tier mapping.
+//
+// Current live Company Daily Scan prices in Stripe:
+// - Pro: $49/mo or $468/year
+// - Team: $99/mo or $948/year
+// - Company Intelligence: $199/mo or $1,908/year
 // ---------------------------------------------------------------------------
-export const PRICE_TO_TIER: Record<string, { tier: string; period: "monthly" | "annual" }> = {
-  // Pro tier — $49/mo, $39/mo billed annually
-  // TODO: Replace with real Stripe price IDs
-  price_pro_monthly_placeholder: { tier: "pro", period: "monthly" },
-  price_pro_annual_placeholder: { tier: "pro", period: "annual" },
+export const PRICE_TO_TIER: Record<
+  string,
+  { tier: string; period: "monthly" | "annual" }
+> = {
+  // Pro tier
+  price_1TRg8BLUymhPvjeE6lDEif43: { tier: "pro", period: "monthly" },
+  price_1TRg91LUymhPvjeE06NDZx4Z: { tier: "pro", period: "annual" },
 
-  // Team tier — $99/mo, $79/mo billed annually
-  // TODO: Replace with real Stripe price IDs
-  price_team_monthly_placeholder: { tier: "team", period: "monthly" },
-  price_team_annual_placeholder: { tier: "team", period: "annual" },
+  // Team tier
+  price_1TRgAYLUymhPvjeEZm0jbUVy: { tier: "team", period: "monthly" },
+  price_1TRgBKLUymhPvjeEhLfPFhXx: { tier: "team", period: "annual" },
 
-  // Company Intelligence tier — $199/mo, $159/mo billed annually
-  // TODO: Replace with real Stripe price IDs
-  price_ci_monthly_placeholder: { tier: "company_intelligence", period: "monthly" },
-  price_ci_annual_placeholder: { tier: "company_intelligence", period: "annual" },
-
-  // Legacy price IDs (keep for existing subscribers)
-  price_1T3plsBBaDpCgoIEzQaADPMx: { tier: "pro", period: "monthly" },
-  price_1T3ppVBBaDpCgoIEN4TExI9d: { tier: "pro", period: "annual" },
-  price_1T3pnpBBaDpCgoIEpUy5Eb7p: { tier: "pro", period: "monthly" },
-  price_1T3ppqBBaDpCgoIEOdikNJNx: { tier: "pro", period: "annual" },
+  // Company Intelligence tier
+  price_1TRgDyLUymhPvjeEqiNElMkV: {
+    tier: "company_intelligence",
+    period: "monthly",
+  },
+  price_1TRgDyLUymhPvjeEgcU7dC8s: {
+    tier: "company_intelligence",
+    period: "annual",
+  },
 };
 
 // ---------------------------------------------------------------------------
-// Tier → Price ID mapping (for checkout — maps tier slug to Stripe price ID)
-// PLACEHOLDER — replace with real Stripe price IDs matching the above.
+// Tier → Price ID mapping for checkout.
 // ---------------------------------------------------------------------------
-export const TIER_TO_PRICE: Record<string, { monthly: string; annual: string }> = {
-  // TODO: Replace with real Stripe price IDs
+export const TIER_TO_PRICE: Record<
+  string,
+  { monthly: string; annual: string }
+> = {
   pro: {
-    monthly: "price_pro_monthly_placeholder",
-    annual: "price_pro_annual_placeholder",
+    monthly: "price_1TRg8BLUymhPvjeE6lDEif43",
+    annual: "price_1TRg91LUymhPvjeE06NDZx4Z",
   },
   team: {
-    monthly: "price_team_monthly_placeholder",
-    annual: "price_team_annual_placeholder",
+    monthly: "price_1TRgAYLUymhPvjeEZm0jbUVy",
+    annual: "price_1TRgBKLUymhPvjeEhLfPFhXx",
   },
   company_intelligence: {
-    monthly: "price_ci_monthly_placeholder",
-    annual: "price_ci_annual_placeholder",
+    monthly: "price_1TRgDyLUymhPvjeEqiNElMkV",
+    annual: "price_1TRgDyLUymhPvjeEgcU7dC8s",
   },
 };

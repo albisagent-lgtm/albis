@@ -9,6 +9,7 @@ import {
   getCompanyBriefingContentVersion,
   isCompanyScannerReportContent,
 } from "@/lib/company-briefing-content-version";
+import { validateCompanyBriefingForDelivery } from "@/lib/company-scan/company-briefing-delivery-safety";
 import { shouldGenerateBriefing } from "@/lib/tier-enforcement";
 
 const INGEST_KEY = process.env.SCAN_INGEST_KEY;
@@ -50,7 +51,8 @@ export async function POST(req: NextRequest) {
 
     const now = new Date();
     const nzDate = new Date(now.getTime() + 13 * 60 * 60 * 1000);
-    const briefingDate = body.briefing_date || nzDate.toISOString().split("T")[0];
+    const briefingDate =
+      body.briefing_date || nzDate.toISOString().split("T")[0];
     const forceAll = body.force_all === true;
     const dryRun = body.dry_run === true;
 
@@ -61,18 +63,21 @@ export async function POST(req: NextRequest) {
           message:
             "Company email delivery is disabled. Set COMPANY_EMAIL_DELIVERY_ENABLED=1 only after Package 8 QA and launch approval.",
         },
-        { status: 423 }
+        { status: 423 },
       );
     }
 
     const { data: briefings, error: bErr } = await supabase
       .from("company_briefings")
-      .select("id, company_profile_id, briefing_content, briefing_date, delivery_status")
+      .select(
+        "id, company_profile_id, briefing_content, briefing_date, delivery_status",
+      )
       .eq("briefing_date", briefingDate)
       .eq("status", "generated")
       .in("delivery_status", ["pending"]);
 
-    if (bErr) return NextResponse.json({ error: bErr.message }, { status: 500 });
+    if (bErr)
+      return NextResponse.json({ error: bErr.message }, { status: 500 });
 
     if (!briefings || briefings.length === 0) {
       return NextResponse.json({
@@ -89,19 +94,35 @@ export async function POST(req: NextRequest) {
     const profileIds = briefings.map((b) => b.company_profile_id);
     const { data: profiles, error: pErr } = await supabase
       .from("company_profiles")
-      .select("id, owner_id, company_name, email_enabled, email_recipients, preferred_delivery_time, timezone")
+      .select(
+        "id, owner_id, company_name, email_enabled, email_recipients, preferred_delivery_time, timezone",
+      )
       .in("id", profileIds);
 
-    if (pErr) return NextResponse.json({ error: pErr.message }, { status: 500 });
+    if (pErr)
+      return NextResponse.json({ error: pErr.message }, { status: 500 });
 
     const profileMap = new Map((profiles || []).map((p) => [p.id, p]));
-    const ownerIds = [...new Set((profiles || []).map((p) => p.owner_id).filter(Boolean))];
+    const ownerIds = [
+      ...new Set((profiles || []).map((p) => p.owner_id).filter(Boolean)),
+    ];
     const { data: ownerProfiles } = ownerIds.length
       ? await supabase
           .from("profiles")
-          .select("id, subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at")
+          .select(
+            "id, subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at",
+          )
           .in("id", ownerIds)
-      : { data: [] as Array<{ id: string; subscription_status: string | null; subscription_tier: string | null; subscription_period_end: string | null; is_test_account: boolean | null; trial_end_at: string | null }> };
+      : {
+          data: [] as Array<{
+            id: string;
+            subscription_status: string | null;
+            subscription_tier: string | null;
+            subscription_period_end: string | null;
+            is_test_account: boolean | null;
+            trial_end_at: string | null;
+          }>,
+        };
 
     const ownerMap = new Map((ownerProfiles || []).map((o) => [o.id, o]));
 
@@ -113,6 +134,7 @@ export async function POST(req: NextRequest) {
       recipients?: string[];
       error?: string;
       content_version?: string;
+      warnings?: string[];
     }> = [];
 
     let resend: Resend | null = null;
@@ -120,11 +142,17 @@ export async function POST(req: NextRequest) {
     for (const briefing of briefings) {
       const profile = profileMap.get(briefing.company_profile_id);
       if (!profile) {
-        details.push({ company_name: "Unknown", status: "skipped", error: "Profile not found" });
+        details.push({
+          company_name: "Unknown",
+          status: "skipped",
+          error: "Profile not found",
+        });
         continue;
       }
 
-      const contentVersion = getCompanyBriefingContentVersion(briefing.briefing_content);
+      const contentVersion = getCompanyBriefingContentVersion(
+        briefing.briefing_content,
+      );
       if (!isCompanyScannerReportContent(briefing.briefing_content)) {
         const errMsg =
           contentVersion === "legacy_what_changed"
@@ -133,6 +161,28 @@ export async function POST(req: NextRequest) {
               ? "compressed_v2_content_not_deliverable"
               : "invalid_company_briefing_content";
 
+        details.push({
+          company_name: profile.company_name,
+          status: "blocked",
+          error: errMsg,
+          content_version: contentVersion,
+        });
+
+        if (!dryRun) {
+          await supabase
+            .from("company_briefings")
+            .update({ delivery_status: "failed", delivery_error: errMsg })
+            .eq("id", briefing.id);
+        }
+        emailsFailed++;
+        continue;
+      }
+
+      const safety = validateCompanyBriefingForDelivery(
+        briefing.briefing_content,
+      );
+      if (!safety.ok) {
+        const errMsg = `delivery_safety_blocked:${safety.errors.slice(0, 3).join("|")}`;
         details.push({
           company_name: profile.company_name,
           status: "blocked",
@@ -194,7 +244,7 @@ export async function POST(req: NextRequest) {
               hour: "numeric",
               hour12: false,
               timeZone: tz,
-            }).format(now)
+            }).format(now),
           );
         } catch {
           currentLocalHour = now.getUTCHours();
@@ -214,12 +264,12 @@ export async function POST(req: NextRequest) {
       const html = generateCompanyBriefingHtmlV2(
         briefing.briefing_content,
         profile.company_name,
-        briefing.briefing_date
+        briefing.briefing_date,
       );
       const subject = generateBriefingSubjectV2(
         profile.company_name,
         briefing.briefing_date,
-        briefing.briefing_content.today_brief.top_line.text
+        briefing.briefing_content.today_brief.top_line.text,
       );
 
       if (dryRun) {
@@ -228,13 +278,19 @@ export async function POST(req: NextRequest) {
           status: "would_send",
           recipients,
           content_version: contentVersion,
+          warnings: safety.warnings,
         });
         continue;
       }
 
       try {
         resend ||= getResendClient();
-        const batch = recipients.map((to) => ({ from: FROM_ADDRESS, to, subject, html }));
+        const batch = recipients.map((to) => ({
+          from: FROM_ADDRESS,
+          to,
+          subject,
+          html,
+        }));
 
         if (batch.length <= 100) {
           const { error: sendErr } = await resend.batch.send(batch);
@@ -262,9 +318,11 @@ export async function POST(req: NextRequest) {
           status: "sent",
           recipients,
           content_version: contentVersion,
+          warnings: safety.warnings,
         });
       } catch (sendError: unknown) {
-        const errMsg = sendError instanceof Error ? sendError.message : "Unknown send error";
+        const errMsg =
+          sendError instanceof Error ? sendError.message : "Unknown send error";
         await supabase
           .from("company_briefings")
           .update({ delivery_status: "failed", delivery_error: errMsg })

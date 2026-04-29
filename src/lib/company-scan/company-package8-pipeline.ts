@@ -9,13 +9,35 @@
 
 import { adaptSignalToScoringInput } from "../scoring-adapters";
 import { scoreStoriesForCompany } from "../relevance-engine";
-import { loadCanonicalIndexForProfile, emptyCanonicalIndex } from "../canonical-index";
+import {
+  loadCanonicalIndexForProfile,
+  emptyCanonicalIndex,
+} from "../canonical-index";
+import { RISK_PRIORITIES } from "../company-profile";
+import {
+  COMPANY_REGIONS,
+  SUPPLY_CHAIN_CATALOG,
+  THEME_CATALOG,
+  WATCHLIST_CATALOG,
+} from "../onboarding-taxonomy";
 import { buildEvidencePacket } from "./briefing-evidence-packet";
 import { generateCompanyBriefing } from "./company-briefing-generator";
 import { runQAGates } from "./company-briefing-qa";
 import { editCompanyBriefingForReadability } from "./company-briefing-editor";
-import { generateCompanyBriefingHtmlV2, generateBriefingSubjectV2 } from "../email-templates/company-briefing-v2";
+import {
+  generateCompanyBriefingHtmlV2,
+  generateBriefingSubjectV2,
+} from "../email-templates/company-briefing-v2";
 import { runCompanyDeepDiveRetrieval } from "./company-deep-dive-retrieval";
+import {
+  emptyDedupeSummary,
+  evaluateDedupe,
+  loadCompanySentScanHistory,
+  recordDedupeBlock,
+  type DedupeSummary,
+  type SentScanHistoryItem,
+} from "./company-scan-dedupe";
+import { evaluateSourceHygiene } from "./company-source-hygiene";
 import { applyScannerReportLayout } from "./company-scanner-report";
 import {
   applyIntelligenceDepthToBriefing,
@@ -31,6 +53,8 @@ export interface CompanyPackage8PipelineOptions {
   dryRun?: boolean;
   dashboardLink?: string;
   maxItems?: number;
+  enableHistoryDedupe?: boolean;
+  dedupeHistoryDays?: number;
   enableDeepDiveRetrieval?: boolean;
   log?: (message: string) => void;
 }
@@ -52,6 +76,7 @@ export interface CompanyPackage8PipelineResult {
   intelligence_depth_bundles?: any[];
   evidence_document?: any;
   deep_dive_retrieval?: any;
+  dedupe_summary?: DedupeSummary;
   editor_pass?: any;
   qa_report: any;
   dry_run_metadata: any;
@@ -60,7 +85,13 @@ export interface CompanyPackage8PipelineResult {
 }
 
 function slugify(s: string): string {
-  return String(s || "item").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80) || "item";
+  return (
+    String(s || "item")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 80) || "item"
+  );
 }
 
 function uniq<T>(values: T[]): T[] {
@@ -72,13 +103,20 @@ function escapeRegExp(value: string): string {
 }
 
 function normaliseTerm(value: string): string {
-  return String(value || "").toLowerCase().replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim();
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[-_]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function textMatchesTerm(text: string, term: string): boolean {
   const t = normaliseTerm(term);
   if (!t || t.length < 2) return false;
-  if (t.length <= 3) return new RegExp(`(^|[^a-z0-9])${escapeRegExp(t)}([^a-z0-9]|$)`, "i").test(text);
+  if (t.length <= 3)
+    return new RegExp(`(^|[^a-z0-9])${escapeRegExp(t)}([^a-z0-9]|$)`, "i").test(
+      text,
+    );
   return text.includes(t);
 }
 
@@ -89,15 +127,26 @@ function sourceDisplay(domain: string | null | undefined): string {
 
 function sourceGrade(domain: string | null | undefined): "A" | "B" | "C" {
   const d = String(domain || "").toLowerCase();
-  if (/(reuters|apnews|associatedpress|bbc|ft\.com|financialtimes|bloomberg|wsj|nytimes|guardian|aljazeera|nikkei|scmp|straitstimes)/.test(d)) return "A";
-  if (/(lloydslist|maritime|shipping|freight|port|journal|trade|business|economist|forbes|cnbc|dw|france24|arabnews|thenationalnews)/.test(d)) return "B";
+  if (
+    /(reuters|apnews|associatedpress|bbc|ft\.com|financialtimes|bloomberg|wsj|nytimes|guardian|aljazeera|nikkei|scmp|straitstimes)/.test(
+      d,
+    )
+  )
+    return "A";
+  if (
+    /(lloydslist|maritime|shipping|freight|port|journal|trade|business|economist|forbes|cnbc|dw|france24|arabnews|thenationalnews)/.test(
+      d,
+    )
+  )
+    return "B";
   return "B";
 }
 
 function sourceType(domain: string | null | undefined): string {
   const d = String(domain || "").toLowerCase();
   if (/(reuters|apnews|associatedpress|bbc|bloomberg)/.test(d)) return "wire";
-  if (/(lloydslist|maritime|shipping|freight|port|trade)/.test(d)) return "trade";
+  if (/(lloydslist|maritime|shipping|freight|port|trade)/.test(d))
+    return "trade";
   return "major_outlet";
 }
 
@@ -118,39 +167,70 @@ function signalStatus(headline: string, signalType: string): string {
   const h = headline.toLowerCase();
   if (/propos|plan|may |could |consider/.test(h)) return "proposed";
   if (/alleg|claim/.test(h)) return "alleged";
-  if (/warn|develop|ongoing|clash|strike|attack|disrupt|delay|block/.test(h)) return "developing";
+  if (/warn|develop|ongoing|clash|strike|attack|disrupt|delay|block/.test(h))
+    return "developing";
   if (/announce|confirm|approve|sign|launch/.test(h)) return "confirmed";
   if (signalType === "statement") return "reported";
   return "reported";
 }
 
 function cleanOneSentenceFact(signal: any): string {
-  const raw = String(signal.summary || signal.headline || "").replace(/\s+/g, " ").trim();
+  const raw = String(signal.summary || signal.headline || "")
+    .replace(/\s+/g, " ")
+    .trim();
   const withoutEllipses = raw.replace(/\.{2,}/g, ",").replace(/[!?]+/g, ",");
   const firstSentence = withoutEllipses.split(/\.\s+/)[0] || withoutEllipses;
-  const cleaned = firstSentence.replace(/\s+,/g, ",").replace(/,+/g, ",").replace(/[.;:,\s]+$/g, "").trim();
-  const fallback = String(signal.headline || "Signal reported").replace(/[.!?]+/g, "").trim();
+  const cleaned = firstSentence
+    .replace(/\s+,/g, ",")
+    .replace(/,+/g, ",")
+    .replace(/[.;:,\s]+$/g, "")
+    .trim();
+  const fallback = String(signal.headline || "Signal reported")
+    .replace(/[.!?]+/g, "")
+    .trim();
   const words = (cleaned || fallback).split(/\s+/).filter(Boolean);
-  return words.length > 34 ? `${words.slice(0, 34).join(" ")}` : words.join(" ");
+  return words.length > 34
+    ? `${words.slice(0, 34).join(" ")}`
+    : words.join(" ");
 }
 
 function categoryForArea(value: string): string {
   const v = value.toLowerCase();
-  if (/(media|press|journalis|publish|broadcast|content|platform|audience|disinformation|misinformation|narrative|reputation)/.test(v)) return "media_comms";
-  if (/(cyber|technology|ai|software|data|platform)/.test(v)) return "technology";
-  if (/(route|freight|port|container|suez|red|hormuz|block|supply)/.test(v)) return "supply_chain";
-  if (/(geopolitic|conflict|sanction|tariff|trade)/.test(v)) return "geopolitics";
+  if (
+    /(media|press|journalis|publish|broadcast|content|platform|audience|disinformation|misinformation|narrative|reputation)/.test(
+      v,
+    )
+  )
+    return "media_comms";
+  if (/(cyber|technology|ai|software|data|platform)/.test(v))
+    return "technology";
+  if (/(route|freight|port|container|suez|red|hormuz|block|supply)/.test(v))
+    return "supply_chain";
+  if (/(geopolitic|conflict|sanction|tariff|trade)/.test(v))
+    return "geopolitics";
   if (/(climate|environment|weather)/.test(v)) return "climate";
   return "custom";
 }
 
 function sectorKey(profile: any): string {
   const value = String(profile.sector || profile.industry || "").toLowerCase();
-  if (/media|comms|communications|publishing|broadcast|news|journalism|content/.test(value)) return "media_comms";
-  if (/logistics|shipping|maritime|freight|port|supply-chain|transport/.test(value)) return "logistics_shipping";
-  if (/tech|software|ai|cyber|platform|telecom|semiconductor/.test(value)) return "technology";
+  if (
+    /media|comms|communications|publishing|broadcast|news|journalism|content/.test(
+      value,
+    )
+  )
+    return "media_comms";
+  if (
+    /logistics|shipping|maritime|freight|port|supply-chain|transport/.test(
+      value,
+    )
+  )
+    return "logistics_shipping";
+  if (/tech|software|ai|cyber|platform|telecom|semiconductor/.test(value))
+    return "technology";
   if (/energy|oil|gas|lng|power|utility/.test(value)) return "energy";
-  if (/finance|bank|market|investment|insurance/.test(value)) return "finance_markets";
+  if (/finance|bank|market|investment|insurance/.test(value))
+    return "finance_markets";
   if (/agriculture|food|farm|grocery/.test(value)) return "agriculture_food";
   return "default";
 }
@@ -159,26 +239,194 @@ function isSectorMismatchedArea(value: string, profile: any): boolean {
   const sector = sectorKey(profile);
   const category = categoryForArea(value);
   if (sector === "media_comms") {
-    return category === "supply_chain" && !/(media|press|platform|audience|information|narrative|disinformation|sanction|censor|access)/i.test(value);
+    return (
+      category === "supply_chain" &&
+      !/(media|press|platform|audience|information|narrative|disinformation|sanction|censor|access)/i.test(
+        value,
+      )
+    );
   }
   return false;
 }
 
-function profileToPackage8Profile(profile: any) {
-  const tracked = Array.isArray(profile.tracked_themes) ? profile.tracked_themes : [];
-  const risks = Array.isArray(profile.risk_priorities) ? profile.risk_priorities : [];
-  const exposures = Array.isArray(profile.supply_chain_exposure) ? profile.supply_chain_exposure : [];
+const themeByValue = new Map(
+  THEME_CATALOG.map((option) => [option.value, option]),
+);
+const supplyByValue = new Map(
+  SUPPLY_CHAIN_CATALOG.map((option) => [option.value, option]),
+);
+const watchlistByValue = new Map(
+  WATCHLIST_CATALOG.map((option) => [option.value, option]),
+);
+const riskByValue: Map<string, (typeof RISK_PRIORITIES)[number]> = new Map(
+  RISK_PRIORITIES.map((option) => [option.id, option]),
+);
+const regionByValue: Map<string, (typeof COMPANY_REGIONS)[number]> = new Map(
+  COMPANY_REGIONS.map((option) => [option.id, option]),
+);
+
+function displayLabel(
+  value: string,
+  kind: "theme" | "risk" | "supply" | "watchlist" | "region" = "theme",
+): string {
+  const raw = String(value || "").trim();
+  if (!raw) return "General";
+  const option =
+    kind === "theme"
+      ? themeByValue.get(raw)
+      : kind === "risk"
+        ? riskByValue.get(raw)
+        : kind === "supply"
+          ? supplyByValue.get(raw)
+          : kind === "watchlist"
+            ? watchlistByValue.get(raw)
+            : regionByValue.get(raw);
+  return (
+    option?.label ||
+    raw.replace(/[-_]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+  );
+}
+
+function scanKeywords(
+  value: string,
+  kind: "theme" | "risk" | "supply" | "watchlist",
+): string[] {
+  const raw = String(value || "").trim();
+  const label = displayLabel(raw, kind);
+  const option =
+    kind === "theme"
+      ? themeByValue.get(raw)
+      : kind === "supply"
+        ? supplyByValue.get(raw)
+        : kind === "watchlist"
+          ? watchlistByValue.get(raw)
+          : null;
+  const tags = option && "scanTags" in option ? option.scanTags || [] : [];
+  const riskExpansions: Record<string, string[]> = {
+    "supply-chain-disruption": [
+      "supply chain",
+      "shortage",
+      "disruption",
+      "logistics",
+      "shipping",
+    ],
+    "commodity-price-volatility": [
+      "commodity",
+      "price",
+      "market",
+      "volatility",
+      "input cost",
+    ],
+    "geopolitical-conflict": [
+      "geopolitics",
+      "conflict",
+      "war",
+      "sanctions",
+      "military",
+    ],
+    "regulatory-policy": [
+      "regulation",
+      "policy",
+      "law",
+      "compliance",
+      "government",
+    ],
+    "trade-tariff-sanctions": [
+      "trade",
+      "tariff",
+      "sanctions",
+      "export control",
+      "import restriction",
+    ],
+    "currency-financial": [
+      "currency",
+      "financial market",
+      "rates",
+      "capital",
+      "banking",
+    ],
+    "climate-environmental": [
+      "climate",
+      "weather",
+      "environment",
+      "flood",
+      "drought",
+    ],
+    "cyber-technology": [
+      "cyber",
+      "technology",
+      "AI",
+      "data breach",
+      "platform",
+    ],
+    "reputation-narrative": [
+      "reputation",
+      "narrative",
+      "media",
+      "misinformation",
+      "public trust",
+    ],
+    "energy-price": ["energy", "oil", "gas", "power", "fuel"],
+    "food-water-security": [
+      "food security",
+      "water",
+      "famine",
+      "agriculture",
+      "supply",
+    ],
+    "labour-workforce": [
+      "labour",
+      "workforce",
+      "strike",
+      "employment",
+      "wages",
+    ],
+  };
+  return uniq(
+    [
+      raw,
+      label,
+      ...tags,
+      ...(kind === "risk" ? riskExpansions[raw] || [] : []),
+    ].map(normaliseTerm),
+  );
+}
+
+export function profileToPackage8Profile(profile: any) {
+  const tracked = Array.isArray(profile.tracked_themes)
+    ? profile.tracked_themes
+    : [];
+  const risks = Array.isArray(profile.risk_priorities)
+    ? profile.risk_priorities
+    : [];
+  const exposures = Array.isArray(profile.supply_chain_exposure)
+    ? profile.supply_chain_exposure
+    : [];
+  const regions = Array.isArray(profile.regions) ? profile.regions : [];
+  const countries = Array.isArray(profile.countries) ? profile.countries : [];
+  const regionLabels = regions.map((region: string) =>
+    displayLabel(region, "region"),
+  );
   const selected = [...tracked, ...risks]
     .filter((value: string) => !isSectorMismatchedArea(value, profile))
     .map((value: string) => ({
-    area_id: slugify(value),
-    label: value.replace(/[-_]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
-    category: categoryForArea(value),
-    priority: tracked.includes(value) ? "high" : "medium",
-    regions: profile.regions || [],
-    keywords: [value],
-    description: `Company-selected scan area: ${value}`,
-  }));
+      area_id: slugify(value),
+      label: tracked.includes(value)
+        ? displayLabel(value, "theme")
+        : displayLabel(value, "risk"),
+      category: categoryForArea(value),
+      priority: tracked.includes(value) ? "high" : "medium",
+      regions,
+      countries,
+      keywords: uniq(
+        [
+          ...scanKeywords(value, tracked.includes(value) ? "theme" : "risk"),
+          ...regionLabels,
+          ...countries,
+        ].map(normaliseTerm),
+      ),
+      description: `Company-selected ${tracked.includes(value) ? "topic" : "risk priority"}: ${tracked.includes(value) ? displayLabel(value, "theme") : displayLabel(value, "risk")}`,
+    }));
 
   for (const value of exposures) {
     if (!value || isSectorMismatchedArea(value, profile)) continue;
@@ -186,24 +434,43 @@ function profileToPackage8Profile(profile: any) {
     if (selected.some((area: any) => area.area_id === areaId)) continue;
     selected.push({
       area_id: areaId,
-      label: value.replace(/[-_]+/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase()),
+      label: displayLabel(value, "supply"),
       category: "supply_chain",
       priority: "high",
-      regions: profile.regions || [],
-      keywords: [value, "supply chain", "input cost", "availability"],
-      description: `Company-selected supply-chain exposure: ${value}`,
+      regions,
+      countries,
+      keywords: uniq(
+        [
+          ...scanKeywords(value, "supply"),
+          "supply chain",
+          "input cost",
+          "availability",
+          ...regionLabels,
+          ...countries,
+        ].map(normaliseTerm),
+      ),
+      description: `Company-selected supply-chain exposure: ${displayLabel(value, "supply")}`,
     });
   }
 
-  if ((profile.watchlist_entities || []).length > 0 && !selected.some((area: any) => area.area_id === "watchlist-entities")) {
+  if (
+    (profile.watchlist_entities || []).length > 0 &&
+    !selected.some((area: any) => area.area_id === "watchlist-entities")
+  ) {
     selected.push({
       area_id: "watchlist-entities",
-      label: "Watchlist Entities",
+      label: "Tracked Entities",
       category: "watchlist",
       priority: "medium",
-      regions: profile.regions || [],
-      keywords: profile.watchlist_entities || [],
-      description: "Company-selected people, places, organisations, or terms to monitor.",
+      regions,
+      countries,
+      keywords: uniq(
+        (profile.watchlist_entities || []).flatMap((entity: string) =>
+          scanKeywords(entity, "watchlist"),
+        ),
+      ),
+      description:
+        "Company-selected people, places, organisations, or terms to monitor.",
     });
   }
 
@@ -212,14 +479,24 @@ function profileToPackage8Profile(profile: any) {
     display_name: profile.company_name,
     industry: profile.sector || "Company",
     sub_industries: [profile.sub_sector].filter(Boolean),
-    operating_regions: profile.regions || [],
-    customer_regions: profile.countries || [],
+    operating_regions: regions,
+    operating_region_labels: regionLabels,
+    customer_regions: countries,
     supplier_regions: profile.supply_chain_exposure || [],
-    regulatory_regions: profile.countries || [],
-    selected_scan_areas: selected.length ? selected : [{ area_id: "general", label: "General", category: "custom", priority: "medium" }],
+    regulatory_regions: countries,
+    selected_scan_areas: selected.length
+      ? selected
+      : [
+          {
+            area_id: "general",
+            label: "General",
+            category: "custom",
+            priority: "medium",
+          },
+        ],
     watch_entities: (profile.watchlist_entities || []).map((name: string) => ({
       entity_id: slugify(name),
-      name: name.replace(/[-_]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+      name: displayLabel(name, "watchlist"),
       type: "other",
     })),
     risk_priorities: risks,
@@ -228,28 +505,48 @@ function profileToPackage8Profile(profile: any) {
 }
 
 function matchSectionIds(scored: any, p8Profile: any, signal?: any): string[] {
-  const traceAreaIds = Array.isArray(signal?.company_retrieval?.scan_area_ids) ? signal.company_retrieval.scan_area_ids : [];
-  const validTraceAreas = traceAreaIds.filter((id: string) =>
-    id !== "watchlist-entities"
-    && !id.startsWith("intent-")
-    && p8Profile.selected_scan_areas.some((a: any) => a.area_id === id),
+  const traceAreaIds = Array.isArray(signal?.company_retrieval?.scan_area_ids)
+    ? signal.company_retrieval.scan_area_ids
+    : [];
+  const validTraceAreas = traceAreaIds.filter(
+    (id: string) =>
+      id !== "watchlist-entities" &&
+      !id.startsWith("intent-") &&
+      p8Profile.selected_scan_areas.some((a: any) => a.area_id === id),
   );
   if (validTraceAreas.length) return validTraceAreas.slice(0, 2);
 
-  const hay = normaliseTerm(`${scored.headline} ${scored.category} ${scored.connection} ${(scored.tags || []).join(" ")} ${(scored.match_reasons || []).flatMap((r: any) => r.matched || []).join(" ")}`);
+  const hay = normaliseTerm(
+    `${scored.headline} ${scored.category} ${scored.connection} ${(scored.tags || []).join(" ")} ${(scored.match_reasons || []).flatMap((r: any) => r.matched || []).join(" ")}`,
+  );
   const matches = p8Profile.selected_scan_areas
-    .filter((a: any) => textMatchesTerm(hay, a.label) || textMatchesTerm(hay, a.area_id.replace(/-/g, " ")) || (a.keywords || []).some((k: string) => textMatchesTerm(hay, k)))
+    .filter(
+      (a: any) =>
+        textMatchesTerm(hay, a.label) ||
+        textMatchesTerm(hay, a.area_id.replace(/-/g, " ")) ||
+        (a.keywords || []).some((k: string) => textMatchesTerm(hay, k)),
+    )
     .map((a: any) => a.area_id);
   if (matches.length) {
     const uniqueMatches = uniq<string>(matches);
     return uniqueMatches
-      .sort((a, b) => (a === "watchlist-entities" ? 1 : 0) - (b === "watchlist-entities" ? 1 : 0))
+      .sort(
+        (a, b) =>
+          (a === "watchlist-entities" ? 1 : 0) -
+          (b === "watchlist-entities" ? 1 : 0),
+      )
       .slice(0, 3);
   }
-  const bestReason = (scored.match_reasons || []).find((r: any) => r.type === "tracked_theme" || r.type === "risk_priority" || r.type === "supply_chain");
+  const bestReason = (scored.match_reasons || []).find(
+    (r: any) =>
+      r.type === "tracked_theme" ||
+      r.type === "risk_priority" ||
+      r.type === "supply_chain",
+  );
   if (bestReason?.matched?.[0]) {
     const id = slugify(bestReason.matched[0]);
-    if (p8Profile.selected_scan_areas.some((a: any) => a.area_id === id)) return [id];
+    if (p8Profile.selected_scan_areas.some((a: any) => a.area_id === id))
+      return [id];
   }
   return [p8Profile.selected_scan_areas[0].area_id];
 }
@@ -264,20 +561,46 @@ function retrievalProvenance(signal: any) {
     intent: trace.intent,
     query_ids: Array.isArray(trace.query_ids) ? trace.query_ids : [],
     query_labels: Array.isArray(trace.query_labels) ? trace.query_labels : [],
-    scan_area_ids: Array.isArray(trace.scan_area_ids) ? trace.scan_area_ids : [],
-    retrieval_reasons: Array.isArray(trace.retrieval_reasons) ? trace.retrieval_reasons : [],
-    matched_query_terms: Array.isArray(trace.matched_query_terms) ? trace.matched_query_terms : [],
-    matched_context_terms: Array.isArray(trace.matched_context_terms) ? trace.matched_context_terms : [],
-    parent_signal_ids: Array.isArray(trace.parent_signal_ids) ? trace.parent_signal_ids : undefined,
-    parent_headlines: Array.isArray(trace.parent_headlines) ? trace.parent_headlines : undefined,
+    scan_area_ids: Array.isArray(trace.scan_area_ids)
+      ? trace.scan_area_ids
+      : [],
+    retrieval_reasons: Array.isArray(trace.retrieval_reasons)
+      ? trace.retrieval_reasons
+      : [],
+    matched_query_terms: Array.isArray(trace.matched_query_terms)
+      ? trace.matched_query_terms
+      : [],
+    matched_context_terms: Array.isArray(trace.matched_context_terms)
+      ? trace.matched_context_terms
+      : [],
+    parent_signal_ids: Array.isArray(trace.parent_signal_ids)
+      ? trace.parent_signal_ids
+      : undefined,
+    parent_headlines: Array.isArray(trace.parent_headlines)
+      ? trace.parent_headlines
+      : undefined,
   };
 }
 
-function sourceAccess(domain: string | null | undefined): "open" | "paywalled" | "blocked" {
-  const d = String(domain || "").toLowerCase().replace(/^www\./, "");
+function sourceAccess(
+  domain: string | null | undefined,
+): "open" | "paywalled" | "blocked" {
+  const d = String(domain || "")
+    .toLowerCase()
+    .replace(/^www\./, "");
   if (!d) return "blocked";
-  if (/(bloomberg\.com|ft\.com|financialtimes\.com|wsj\.com|nytimes\.com|economist\.com|heavyliftpfi\.com|lloydslist\.com|tradewindsnews\.com|theinformation\.com|politico\.com\/pro)/.test(d)) return "paywalled";
-  if (/(pravda|marketbeat|koimoi|tipranks|stocktitan|markets\.businessinsider|travelandtourworld|knowerx|jagranjosh|prnewswire|globenewswire|businesswire|townhall|themountainpress|ibtimes|openthemagazine|pjmedia|businessstory|economictimes\.indiatimes|timesofindia\.indiatimes)/.test(d)) return "blocked";
+  if (
+    /(bloomberg\.com|ft\.com|financialtimes\.com|wsj\.com|nytimes\.com|economist\.com|heavyliftpfi\.com|lloydslist\.com|tradewindsnews\.com|theinformation\.com|politico\.com\/pro)/.test(
+      d,
+    )
+  )
+    return "paywalled";
+  if (
+    /(pravda|marketbeat|koimoi|tipranks|stocktitan|markets\.businessinsider|travelandtourworld|knowerx|jagranjosh|prnewswire|globenewswire|businesswire|townhall|themountainpress|ibtimes|openthemagazine|pjmedia|businessstory|economictimes\.indiatimes|timesofindia\.indiatimes)/.test(
+      d,
+    )
+  )
+    return "blocked";
   return "open";
 }
 
@@ -289,26 +612,69 @@ function sourceAllowed(domain: string | null | undefined): boolean {
 }
 
 function profileKeywordScore(signal: any, profile: any): number {
-  const text = normaliseTerm(`${signal.headline} ${signal.summary} ${(signal.themes || []).join(" ")} ${(signal.entities || []).join(" ")} ${(signal.regions || []).join(" ")}`);
+  const text = normaliseTerm(
+    `${signal.headline} ${signal.summary} ${(signal.themes || []).join(" ")} ${(signal.entities || []).join(" ")} ${(signal.regions || []).join(" ")}`,
+  );
   const sector = sectorKey(profile);
   const retrievalTrace = signal.company_retrieval;
-  const expandedRiskTerms = (profile.risk_priorities || []).flatMap((term: string) => {
-    const t = normaliseTerm(term);
-    if (t === "geopolitical conflict") return ["war", "conflict", "ceasefire", "military", "missile", "sanctions"];
-    if (t === "reputation narrative") return ["narrative", "reputation", "misinformation", "disinformation", "propaganda"];
-    if (t === "cyber technology") return ["cyber", "hack", "data breach", "platform", "ai", "artificial intelligence"];
-    if (t === "regulatory policy") return ["regulation", "policy", "censorship", "ban", "law"];
-    if (t === "trade tariff sanctions") return ["sanction", "tariff", "trade restriction", "export control"];
-    return [];
-  });
-  const topicTerms = uniq([
-    ...(profile.tracked_themes || []),
-    ...(profile.risk_priorities || []),
-    ...(profile.supply_chain_exposure || []),
-    ...expandedRiskTerms,
-  ].map(normaliseTerm));
-  const entityTerms = uniq([...(profile.watchlist_entities || [])].map(normaliseTerm));
-  const broadEntities = new Set(["united states", "european union", "china", "russia", "india", "united kingdom", "uk", "korea", "iran"]);
+  const expandedRiskTerms = (profile.risk_priorities || []).flatMap(
+    (term: string) => {
+      const t = normaliseTerm(term);
+      if (t === "geopolitical conflict")
+        return [
+          "war",
+          "conflict",
+          "ceasefire",
+          "military",
+          "missile",
+          "sanctions",
+        ];
+      if (t === "reputation narrative")
+        return [
+          "narrative",
+          "reputation",
+          "misinformation",
+          "disinformation",
+          "propaganda",
+        ];
+      if (t === "cyber technology")
+        return [
+          "cyber",
+          "hack",
+          "data breach",
+          "platform",
+          "ai",
+          "artificial intelligence",
+        ];
+      if (t === "regulatory policy")
+        return ["regulation", "policy", "censorship", "ban", "law"];
+      if (t === "trade tariff sanctions")
+        return ["sanction", "tariff", "trade restriction", "export control"];
+      return [];
+    },
+  );
+  const topicTerms = uniq(
+    [
+      ...(profile.tracked_themes || []),
+      ...(profile.risk_priorities || []),
+      ...(profile.supply_chain_exposure || []),
+      ...expandedRiskTerms,
+    ].map(normaliseTerm),
+  );
+  const entityTerms = uniq(
+    [...(profile.watchlist_entities || [])].map(normaliseTerm),
+  );
+  const broadEntities = new Set([
+    "united states",
+    "european union",
+    "china",
+    "russia",
+    "india",
+    "united kingdom",
+    "uk",
+    "korea",
+    "iran",
+  ]);
   let score = 0;
   let topicMatched = false;
   let specificEntityMatched = false;
@@ -329,39 +695,79 @@ function profileKeywordScore(signal: any, profile: any): number {
     }
   }
   if (sector === "media_comms") {
-    const mediaContext = /\b(media|press|journalis|publish|broadcast|platform|audience|disinformation|misinformation|propaganda|narrative|censor|ai|artificial intelligence|cyber|deepfake|information warfare|election|sanction|war|conflict|ceasefire|official|state media)\b/i.test(text);
+    const mediaContext =
+      /\b(media|press|journalis|publish|broadcast|platform|audience|disinformation|misinformation|propaganda|narrative|censor|ai|artificial intelligence|cyber|deepfake|information warfare|election|sanction|war|conflict|ceasefire|official|state media)\b/i.test(
+        text,
+      );
     if (!topicMatched && !specificEntityMatched) return 0;
     if (broadEntityMatched && !topicMatched && !mediaContext) return 0;
   }
-  if ((retrievalTrace?.mode === "company_specific_retrieval" || retrievalTrace?.mode === "company_deep_dive_retrieval") && retrievalTrace.company_profile_id === profile.id) {
-    const labels = Array.isArray(retrievalTrace.query_labels) ? retrievalTrace.query_labels : [];
-    const contexts = Array.isArray(retrievalTrace.matched_context_terms) ? retrievalTrace.matched_context_terms : [];
+  if (
+    (retrievalTrace?.mode === "company_specific_retrieval" ||
+      retrievalTrace?.mode === "company_deep_dive_retrieval") &&
+    retrievalTrace.company_profile_id === profile.id
+  ) {
+    const labels = Array.isArray(retrievalTrace.query_labels)
+      ? retrievalTrace.query_labels
+      : [];
+    const contexts = Array.isArray(retrievalTrace.matched_context_terms)
+      ? retrievalTrace.matched_context_terms
+      : [];
     score += Math.min(5, Math.max(2, labels.length + contexts.length));
     topicMatched = true;
   }
   return score;
 }
 
-function companyRetrievalTraceAllowed(signal: any, profile: any, companySpecificInput: boolean): boolean {
+function companyRetrievalTraceAllowed(
+  signal: any,
+  profile: any,
+  companySpecificInput: boolean,
+): boolean {
   if (!companySpecificInput) return true;
   const trace = signal.company_retrieval;
-  if (!trace || (trace.mode !== "company_specific_retrieval" && trace.mode !== "company_deep_dive_retrieval")) return false;
+  if (
+    !trace ||
+    (trace.mode !== "company_specific_retrieval" &&
+      trace.mode !== "company_deep_dive_retrieval")
+  )
+    return false;
   if (trace.company_profile_id !== profile.id) return false;
-  const queryLabels = Array.isArray(trace.query_labels) ? trace.query_labels : [];
-  const scanAreaIds = Array.isArray(trace.scan_area_ids) ? trace.scan_area_ids : [];
-  const matchedContext = Array.isArray(trace.matched_context_terms) ? trace.matched_context_terms : [];
-  const matchedQueryTerms = Array.isArray(trace.matched_query_terms) ? trace.matched_query_terms : [];
-  const watchlistOnly = scanAreaIds.length > 0 && scanAreaIds.every((id: string) => id === "watchlist-entities");
+  const queryLabels = Array.isArray(trace.query_labels)
+    ? trace.query_labels
+    : [];
+  const scanAreaIds = Array.isArray(trace.scan_area_ids)
+    ? trace.scan_area_ids
+    : [];
+  const matchedContext = Array.isArray(trace.matched_context_terms)
+    ? trace.matched_context_terms
+    : [];
+  const matchedQueryTerms = Array.isArray(trace.matched_query_terms)
+    ? trace.matched_query_terms
+    : [];
+  const watchlistOnly =
+    scanAreaIds.length > 0 &&
+    scanAreaIds.every((id: string) => id === "watchlist-entities");
   if (watchlistOnly && matchedQueryTerms.length === 0) return false;
-  return (queryLabels.length > 0 || scanAreaIds.length > 0) && matchedContext.length > 0;
+  return (
+    (queryLabels.length > 0 || scanAreaIds.length > 0) &&
+    matchedContext.length > 0
+  );
 }
 
 function sectorSignalAllowed(signal: any, profile: any): boolean {
   const sector = sectorKey(profile);
-  const text = `${signal.headline || ""} ${signal.summary || ""} ${(signal.themes || []).join(" ")}`.toLowerCase();
+  const text =
+    `${signal.headline || ""} ${signal.summary || ""} ${(signal.themes || []).join(" ")}`.toLowerCase();
   if (sector === "media_comms") {
-    const operationalLogistics = /\b(hormuz shipping|shipping traffic|freight rates?|vessel availability|sailors? stuck|tanker|port congestion|container|maritime|lng cargo|shipping route|shipping routes|transport corridor|trade corridor|freight corridor)\b/i.test(text);
-    const mediaOrNarrativeUse = /\b(media|press|journalist|publisher|broadcast|platform|audience|disinformation|misinformation|propaganda|narrative|reputation|censor|information access|sanction|sanctioned|state media|kremlin|pyongyang|tehran)\b/i.test(text);
+    const operationalLogistics =
+      /\b(hormuz shipping|shipping traffic|freight rates?|vessel availability|sailors? stuck|tanker|port congestion|container|maritime|lng cargo|shipping route|shipping routes|transport corridor|trade corridor|freight corridor)\b/i.test(
+        text,
+      );
+    const mediaOrNarrativeUse =
+      /\b(media|press|journalist|publisher|broadcast|platform|audience|disinformation|misinformation|propaganda|narrative|reputation|censor|information access|sanction|sanctioned|state media|kremlin|pyongyang|tehran)\b/i.test(
+        text,
+      );
     if (operationalLogistics && !mediaOrNarrativeUse) return false;
   }
   return true;
@@ -380,8 +786,12 @@ function refreshEditedClaimMaps(output: any): any {
           .map((sentence: string) => sentence.trim())
           .filter(Boolean);
         const bodyRefs = item.body?.supported_by || [];
-        const claimIds = bodyRefs.filter((ref: any) => ref.type === "claim_id").map((ref: any) => ref.id);
-        const supportRefs = item.source_attribution?.supported_by?.length ? item.source_attribution.supported_by : bodyRefs;
+        const claimIds = bodyRefs
+          .filter((ref: any) => ref.type === "claim_id")
+          .map((ref: any) => ref.id);
+        const supportRefs = item.source_attribution?.supported_by?.length
+          ? item.source_attribution.supported_by
+          : bodyRefs;
         return {
           ...item,
           claim_map: sentences.map((sentence: string, index: number) => ({
@@ -397,32 +807,77 @@ function refreshEditedClaimMaps(output: any): any {
   return refreshed;
 }
 
-function selectionReasonForSignal(signal: any, scored: any, sectionIds: string[], p8Profile: any): string {
+function selectionReasonForSignal(
+  signal: any,
+  scored: any,
+  sectionIds: string[],
+  p8Profile: any,
+): string {
   const text = `${signal.headline} ${signal.summary}`.toLowerCase();
   const sections = sectionIds
-    .map((id: string) => p8Profile.selected_scan_areas.find((a: any) => a.area_id === id)?.label || id)
+    .map(
+      (id: string) =>
+        p8Profile.selected_scan_areas.find((a: any) => a.area_id === id)
+          ?.label || id,
+    )
     .join(", ");
   const sector = String(p8Profile.industry || "").toLowerCase();
   const trace = signal.company_retrieval;
-  if (trace?.mode === "company_specific_retrieval" || trace?.mode === "company_deep_dive_retrieval") {
-    const labels = Array.isArray(trace.query_labels) ? trace.query_labels.slice(0, 3).join(", ") : "company retrieval plan";
+  if (
+    trace?.mode === "company_specific_retrieval" ||
+    trace?.mode === "company_deep_dive_retrieval"
+  ) {
+    const labels = Array.isArray(trace.query_labels)
+      ? trace.query_labels.slice(0, 3).join(", ")
+      : "company retrieval plan";
     return `retrieved by company-specific scan plan (${labels}) and matched to ${sections}`;
   }
   if (/logistics|shipping|maritime|freight|transport/.test(sector)) {
-    if (/hormuz|strait of hormuz/.test(text)) return `chokepoint route-confidence signal matched to ${sections}`;
-    if (/suez|red sea|bab el-mandeb/.test(text)) return `connected chokepoint signal matched to ${sections}`;
-    if (/corridor|morocco|egypt|alternative route|alternative corridor/.test(text)) return `alternative-route planning signal matched to ${sections}`;
-    if (/\$|cost|loss|freight|rail|port disruption|container/.test(text)) return `concrete transport-cost or disruption signal matched to ${sections}`;
+    if (/hormuz|strait of hormuz/.test(text))
+      return `chokepoint route-confidence signal matched to ${sections}`;
+    if (/suez|red sea|bab el-mandeb/.test(text))
+      return `connected chokepoint signal matched to ${sections}`;
+    if (
+      /corridor|morocco|egypt|alternative route|alternative corridor/.test(text)
+    )
+      return `alternative-route planning signal matched to ${sections}`;
+    if (/\$|cost|loss|freight|rail|port disruption|container/.test(text))
+      return `concrete transport-cost or disruption signal matched to ${sections}`;
   }
   return `company-relevant signal matched to ${sections} with relevance score ${Math.round(Number(scored.relevance_score || 0))}`;
 }
 
 function enrichSignal(signal: any, scored: any, keywordScore: number) {
-  const relevance = Math.max(0, Math.min(1, (Number(scored.relevance_score || 0) + keywordScore * 8) / 100));
+  const relevance = Math.max(
+    0,
+    Math.min(1, (Number(scored.relevance_score || 0) + keywordScore * 8) / 100),
+  );
   const directness = Math.min(1, keywordScore / 8);
-  const urgency = Math.max(Number(signal.urgency || 0), Math.min(1, 0.42 + relevance * 0.28 + directness * 0.22 + Number(scored.urgency_score || 0) * 0.08));
-  const significance = Math.max(Number(signal.significance || 0), Math.min(1, 0.42 + relevance * 0.24 + directness * 0.26 + Number(scored.significance_score || 0) * 0.08));
-  const themes = uniq([...(signal.themes || []), ...(scored.tags || []), ...(scored.match_reasons || []).flatMap((r: any) => r.matched || [])]).slice(0, 12);
+  const urgency = Math.max(
+    Number(signal.urgency || 0),
+    Math.min(
+      1,
+      0.42 +
+        relevance * 0.28 +
+        directness * 0.22 +
+        Number(scored.urgency_score || 0) * 0.08,
+    ),
+  );
+  const significance = Math.max(
+    Number(signal.significance || 0),
+    Math.min(
+      1,
+      0.42 +
+        relevance * 0.24 +
+        directness * 0.26 +
+        Number(scored.significance_score || 0) * 0.08,
+    ),
+  );
+  const themes = uniq([
+    ...(signal.themes || []),
+    ...(scored.tags || []),
+    ...(scored.match_reasons || []).flatMap((r: any) => r.matched || []),
+  ]).slice(0, 12);
   return {
     urgency: Number(urgency.toFixed(2)),
     significance: Number(significance.toFixed(2)),
@@ -434,7 +889,12 @@ function enrichSignal(signal: any, scored: any, keywordScore: number) {
   };
 }
 
-function buildNormalizedArticle(signal: any, runId: string, articleId: string, enrichment: any) {
+function buildNormalizedArticle(
+  signal: any,
+  runId: string,
+  articleId: string,
+  enrichment: any,
+) {
   const domain = signal.source_domain || "unknown";
   const factText = cleanOneSentenceFact(signal);
   const grade = sourceGrade(domain);
@@ -467,7 +927,9 @@ function buildNormalizedArticle(signal: any, runId: string, articleId: string, e
       language: signal.source_language || "en",
       translated_from: null,
       author: { type: "unknown", confidence: 0.3 },
-      published_at: signal.signal_date ? `${signal.signal_date}T00:00:00Z` : signal.created_at,
+      published_at: signal.signal_date
+        ? `${signal.signal_date}T00:00:00Z`
+        : signal.created_at,
       updated_at: null,
       retrieved_at: signal.created_at || now,
       dateline: null,
@@ -475,7 +937,8 @@ function buildNormalizedArticle(signal: any, runId: string, articleId: string, e
     quality: {
       seo_sludge_score: 5,
       article_quality_score: grade === "A" ? 88 : 78,
-      evidence_action: grade === "A" || grade === "B" ? "email_anchor" : "email_support",
+      evidence_action:
+        grade === "A" || grade === "B" ? "email_anchor" : "email_support",
       email_evidence_eligible: true,
       extraction_confidence: 0.72,
       prompt_injection_flags: [],
@@ -491,18 +954,27 @@ function buildNormalizedArticle(signal: any, runId: string, articleId: string, e
     },
     normalized_content: {
       summary_1_sentence: factText,
-      factual_claims: [{
-        claim_id: claimId,
-        article_id: articleId,
-        text: factText,
-        claim_type: "fact",
-        entities: signal.entities || [],
-        confidence: 0.72,
-        requires_attribution: true,
-        uncertainty_flags: [],
-      }],
+      factual_claims: [
+        {
+          claim_id: claimId,
+          article_id: articleId,
+          text: factText,
+          claim_type: "fact",
+          entities: signal.entities || [],
+          confidence: 0.72,
+          requires_attribution: true,
+          uncertainty_flags: [],
+        },
+      ],
       quotes: [],
-      entities: [...(signal.entities || []), ...(signal.regions || [])].map((name: string) => ({ name, type: "other", role: "mentioned", confidence: 0.6 })),
+      entities: [...(signal.entities || []), ...(signal.regions || [])].map(
+        (name: string) => ({
+          name,
+          type: "other",
+          role: "mentioned",
+          confidence: 0.6,
+        }),
+      ),
       topics: enrichment.themes,
       region_scope: signal.regions || [],
       raw_text_ref: `signals:${signal.id}`,
@@ -510,10 +982,15 @@ function buildNormalizedArticle(signal: any, runId: string, articleId: string, e
     event_extraction: {
       event_tuples: [],
       primary_event_tuple_id: null,
-      event_extraction_notes: ["Adapted from real typed signal for Package 8 dry-run verification."],
+      event_extraction_notes: [
+        "Adapted from real typed signal for Package 8 dry-run verification.",
+      ],
     },
     dedupe_features: {
-      normalized_title_tokens: signal.headline.toLowerCase().split(/\W+/).filter(Boolean),
+      normalized_title_tokens: signal.headline
+        .toLowerCase()
+        .split(/\W+/)
+        .filter(Boolean),
       title_fingerprint: slugify(signal.headline),
       entity_key: (signal.entities || []).join("|") || "unknown",
       time_bucket: signal.signal_date,
@@ -530,12 +1007,20 @@ function buildNormalizedArticle(signal: any, runId: string, articleId: string, e
   };
 }
 
-function buildCluster(signal: any, scored: any, articleId: string, enrichment: any, runId: string) {
+function buildCluster(
+  signal: any,
+  scored: any,
+  articleId: string,
+  enrichment: any,
+  runId: string,
+) {
   const clusterId = `real_${signal.id}`;
   const factText = cleanOneSentenceFact(signal);
   const status = signalStatus(signal.headline, signal.signal_type);
   const claimId = `claim_${articleId}`;
-  const regions = signal.regions?.length ? signal.regions : [signal.source_region].filter(Boolean);
+  const regions = signal.regions?.length
+    ? signal.regions
+    : [signal.source_region].filter(Boolean);
   return {
     cluster_id: clusterId,
     schema_version: "event_cluster_v1",
@@ -547,12 +1032,24 @@ function buildCluster(signal: any, scored: any, articleId: string, enrichment: a
     primary_event_tuple: {
       event_tuple_id: `tuple_${signal.id}`,
       article_id: articleId,
-      actor: { name: signal.entities?.[0] || sourceDisplay(signal.source_domain), type: "org" },
-      action: { raw: signal.signal_type || "reported", lemma: signal.signal_type || "report", action_class: signalActionClass(signal.signal_type) },
+      actor: {
+        name: signal.entities?.[0] || sourceDisplay(signal.source_domain),
+        type: "org",
+      },
+      action: {
+        raw: signal.signal_type || "reported",
+        lemma: signal.signal_type || "report",
+        action_class: signalActionClass(signal.signal_type),
+      },
       object: { name: signal.headline, type: "other" },
-      affected_entities: (signal.entities || []).slice(1, 4).map((name: string) => ({ name, type: "other" })),
+      affected_entities: (signal.entities || [])
+        .slice(1, 4)
+        .map((name: string) => ({ name, type: "other" })),
       place: regions.map((name: string) => ({ name, type: "region" })),
-      event_time: { date: signal.signal_date || signal.created_at?.slice(0, 10), granularity: "day" },
+      event_time: {
+        date: signal.signal_date || signal.created_at?.slice(0, 10),
+        granularity: "day",
+      },
       status,
       confidence: 0.72,
       support_claim_ids: [claimId],
@@ -569,7 +1066,13 @@ function buildCluster(signal: any, scored: any, articleId: string, enrichment: a
       excluded_article_ids: [],
     },
     source_mix: {
-      counts_by_grade: { A: sourceGrade(signal.source_domain) === "A" ? 1 : 0, B: sourceGrade(signal.source_domain) === "B" ? 1 : 0, C: 0, D: 0, Block: 0 },
+      counts_by_grade: {
+        A: sourceGrade(signal.source_domain) === "A" ? 1 : 0,
+        B: sourceGrade(signal.source_domain) === "B" ? 1 : 0,
+        C: 0,
+        D: 0,
+        Block: 0,
+      },
       counts_by_type: { [sourceType(signal.source_domain)]: 1 },
       independent_source_count: 1,
       syndicated_copy_count: 0,
@@ -619,7 +1122,10 @@ function buildCluster(signal: any, scored: any, articleId: string, enrichment: a
     },
     decision_trace: {
       merge_method: ["validator"],
-      reason_codes: ["real_signal_single_article_cluster", enrichment.enrichment_method],
+      reason_codes: [
+        "real_signal_single_article_cluster",
+        enrichment.enrichment_method,
+      ],
       thresholds_hit: { relevance_score: scored.relevance_score },
       split_warnings: [],
       review_required: false,
@@ -633,8 +1139,17 @@ function buildCluster(signal: any, scored: any, articleId: string, enrichment: a
   };
 }
 
-function buildDecision(signal: any, scored: any, sectionIds: string[], p8Profile: any, enrichment: any, scanDate: string) {
-  const relevanceScore = Math.round(Math.max(0, Math.min(100, Number(scored.relevance_score || 0))));
+function buildDecision(
+  signal: any,
+  scored: any,
+  sectionIds: string[],
+  p8Profile: any,
+  enrichment: any,
+  scanDate: string,
+) {
+  const relevanceScore = Math.round(
+    Math.max(0, Math.min(100, Number(scored.relevance_score || 0))),
+  );
   const materiality = Math.max(8, Math.round(relevanceScore * 0.2));
   return {
     cluster_id: `real_${signal.id}`,
@@ -652,10 +1167,17 @@ function buildDecision(signal: any, scored: any, sectionIds: string[], p8Profile
       novelty: 4,
     },
     matched_scan_areas: sectionIds.map((id: string) => {
-      const area = p8Profile.selected_scan_areas.find((a: any) => a.area_id === id);
+      const area = p8Profile.selected_scan_areas.find(
+        (a: any) => a.area_id === id,
+      );
       return {
         area_id: id,
-        match_strength: relevanceScore >= 70 ? "strong" : relevanceScore >= 45 ? "medium" : "weak",
+        match_strength:
+          relevanceScore >= 70
+            ? "strong"
+            : relevanceScore >= 45
+              ? "medium"
+              : "weak",
         match_type: ["topic_semantic"],
         evidence: enrichment.themes.slice(0, 5),
         explanation: `Matched through real signal tags/match reasons for ${area?.label || id}.`,
@@ -663,15 +1185,28 @@ function buildDecision(signal: any, scored: any, sectionIds: string[], p8Profile
     }),
     materiality: {
       score: materiality,
-      categories: sectionIds.map((id: string) => p8Profile.selected_scan_areas.find((a: any) => a.area_id === id)?.category || "custom"),
-      impact_pathways: [{ category: "company_watch_area", pathway: `Potential relevance to monitored company scan areas: ${sectionIds.map((id: string) => p8Profile.selected_scan_areas.find((a: any) => a.area_id === id)?.label || id).join(", ")}.`, supported_by: [`claim_art_${signal.id}`], confidence: 0.62 }],
+      categories: sectionIds.map(
+        (id: string) =>
+          p8Profile.selected_scan_areas.find((a: any) => a.area_id === id)
+            ?.category || "custom",
+      ),
+      impact_pathways: [
+        {
+          category: "company_watch_area",
+          pathway: `Potential relevance to monitored company scan areas: ${sectionIds.map((id: string) => p8Profile.selected_scan_areas.find((a: any) => a.area_id === id)?.label || id).join(", ")}.`,
+          supported_by: [`claim_art_${signal.id}`],
+          confidence: 0.62,
+        },
+      ],
     },
     geography: {
       affected_regions: signal.regions || [],
       source_regions: [signal.source_region].filter(Boolean),
       company_relevant_regions: p8Profile.operating_regions || [],
       geography_fit_score: Math.round((scored.geography_score || 0) * 10),
-      geography_reason: signal.regions?.length ? `Signal regions: ${signal.regions.join(", ")}` : "No explicit region metadata in signal.",
+      geography_reason: signal.regions?.length
+        ? `Signal regions: ${signal.regions.join(", ")}`
+        : "No explicit region metadata in signal.",
     },
     time: {
       published_window: "last_24h",
@@ -679,18 +1214,29 @@ function buildDecision(signal: any, scored: any, sectionIds: string[], p8Profile
       last_seen_at: signal.created_at || `${scanDate}T23:59:59Z`,
       freshness: "today",
     },
-    novelty: { seen_before: false, novelty_score: 4, novelty_reason: "Fresh signal from current 24h scan window." },
-    weak_match: { flag: relevanceScore < 40, reasons: relevanceScore < 40 ? ["low relevance score"] : [] },
+    novelty: {
+      seen_before: false,
+      novelty_score: 4,
+      novelty_reason: "Fresh signal from current 24h scan window.",
+    },
+    weak_match: {
+      flag: relevanceScore < 40,
+      reasons: relevanceScore < 40 ? ["low relevance score"] : [],
+    },
     decision_reasons: [
-      ...((scored.match_reasons || []).map((r: any) => `${r.type}:${(r.matched || []).join("|")}`)),
-      ...((signal.company_retrieval?.mode === "company_specific_retrieval" || signal.company_retrieval?.mode === "company_deep_dive_retrieval")
-        ? [`${signal.company_retrieval.mode}:${(signal.company_retrieval.query_labels || []).join("|")}`]
+      ...(scored.match_reasons || []).map(
+        (r: any) => `${r.type}:${(r.matched || []).join("|")}`,
+      ),
+      ...(signal.company_retrieval?.mode === "company_specific_retrieval" ||
+      signal.company_retrieval?.mode === "company_deep_dive_retrieval"
+        ? [
+            `${signal.company_retrieval.mode}:${(signal.company_retrieval.query_labels || []).join("|")}`,
+          ]
         : []),
     ].slice(0, 8),
     confidence_notes: [enrichment.enrichment_method],
   };
 }
-
 
 export async function runCompanyPackage8PipelineForProfile(
   supabase: any,
@@ -701,8 +1247,35 @@ export async function runCompanyPackage8PipelineForProfile(
   const scanDate = options.scanDate;
   const lookbackHours = options.lookbackHours ?? 24;
   const maxItems = options.maxItems ?? 24;
+  const enableHistoryDedupe = options.enableHistoryDedupe ?? true;
   const endTs = new Date(`${scanDate}T23:59:59Z`).toISOString();
-  const startTs = new Date(new Date(`${scanDate}T00:00:00Z`).getTime() - lookbackHours * 60 * 60 * 1000).toISOString();
+  const startTs = new Date(
+    new Date(`${scanDate}T00:00:00Z`).getTime() -
+      lookbackHours * 60 * 60 * 1000,
+  ).toISOString();
+
+  let sentHistory: SentScanHistoryItem[] = [];
+  let dedupeSummary = emptyDedupeSummary();
+  if (enableHistoryDedupe) {
+    try {
+      sentHistory = await loadCompanySentScanHistory(
+        supabase,
+        profile.id,
+        scanDate,
+        {
+          days: options.dedupeHistoryDays,
+        },
+      );
+      dedupeSummary = emptyDedupeSummary(sentHistory.length);
+      options.log?.(
+        `  ↳ loaded ${sentHistory.length} prior visible scan item(s) for no-repeat checks`,
+      );
+    } catch (err) {
+      options.log?.(
+        `  ↳ no-repeat history unavailable: ${err instanceof Error ? err.message : String(err)}`,
+      );
+    }
+  }
 
   let canonicalIndex;
   try {
@@ -712,33 +1285,79 @@ export async function runCompanyPackage8PipelineForProfile(
   }
 
   const selectCandidates = (inputSignals: any[]) => {
-    const adapted = (inputSignals || []).map((s: any) => adaptSignalToScoringInput(s));
+    const adapted = (inputSignals || []).map((s: any) =>
+      adaptSignalToScoringInput(s),
+    );
     const scored = scoreStoriesForCompany(adapted, profile, canonicalIndex);
-    const companySpecificInput = (inputSignals || []).some((signal: any) =>
-      signal.company_retrieval?.mode === "company_specific_retrieval"
-      || signal.company_retrieval?.mode === "company_deep_dive_retrieval"
+    const companySpecificInput = (inputSignals || []).some(
+      (signal: any) =>
+        signal.company_retrieval?.mode === "company_specific_retrieval" ||
+        signal.company_retrieval?.mode === "company_deep_dive_retrieval",
     );
 
-    return (inputSignals || []).map((signal: any, idx: number) => {
-      const st = scored[idx];
-      const keywordScore = profileKeywordScore(signal, profile);
-      const sourceOk = sourceAllowed(signal.source_domain);
-      const sectorOk = sectorSignalAllowed(signal, profile);
-      const traceOk = companyRetrievalTraceAllowed(signal, profile, companySpecificInput);
-      const retrievalBonus = companySpecificInput && traceOk ? 25 : 0;
-      const deepDiveBonus = signal.company_retrieval?.mode === "company_deep_dive_retrieval" ? 8 : 0;
-      return {
-        signal,
-        scored: st,
-        keywordScore,
-        sourceOk,
-        sectorOk,
-        traceOk,
-        package8SelectionScore: keywordScore * 10 + Number(st?.relevance_score || 0) + retrievalBonus + deepDiveBonus,
-      };
-    })
-      .filter((p: any) => p.scored && p.sourceOk && p.sectorOk && p.traceOk && p.keywordScore >= 2)
-      .sort((a: any, b: any) => b.package8SelectionScore - a.package8SelectionScore)
+    return (inputSignals || [])
+      .map((signal: any, idx: number) => {
+        const st = scored[idx];
+        const keywordScore = profileKeywordScore(signal, profile);
+        const sourceOk = sourceAllowed(signal.source_domain);
+        const hygieneDecision = evaluateSourceHygiene({
+          domain: signal.source_domain,
+          url: signal.source_url,
+          title: signal.headline,
+          summary: signal.summary,
+        });
+        const sectorOk = sectorSignalAllowed(signal, profile);
+        const traceOk = companyRetrievalTraceAllowed(
+          signal,
+          profile,
+          companySpecificInput,
+        );
+        const dedupeDecision = evaluateDedupe(
+          {
+            source_url: signal.source_url,
+            headline: signal.headline,
+            summary: signal.summary,
+            cluster_id: `real_${signal.id}`,
+          },
+          sentHistory,
+        );
+        if (!dedupeDecision.allowed) {
+          recordDedupeBlock(dedupeSummary, dedupeDecision);
+        }
+        const retrievalBonus = companySpecificInput && traceOk ? 25 : 0;
+        const deepDiveBonus =
+          signal.company_retrieval?.mode === "company_deep_dive_retrieval"
+            ? 8
+            : 0;
+        return {
+          signal,
+          scored: st,
+          keywordScore,
+          sourceOk,
+          hygieneDecision,
+          sectorOk,
+          traceOk,
+          dedupeDecision,
+          package8SelectionScore:
+            keywordScore * 10 +
+            Number(st?.relevance_score || 0) +
+            retrievalBonus +
+            deepDiveBonus,
+        };
+      })
+      .filter(
+        (p: any) =>
+          p.scored &&
+          p.sourceOk &&
+          p.hygieneDecision.emailVisibleAllowed &&
+          p.sectorOk &&
+          p.traceOk &&
+          p.dedupeDecision.allowed &&
+          p.keywordScore >= 2,
+      )
+      .sort(
+        (a: any, b: any) => b.package8SelectionScore - a.package8SelectionScore,
+      )
       .slice(0, maxItems);
   };
 
@@ -751,7 +1370,12 @@ export async function runCompanyPackage8PipelineForProfile(
       supabase,
       profile,
       candidates.map((candidate: any) => candidate.signal),
-      { signalDate: scanDate, log: options.log, maxCandidates: Math.min(5, candidates.length), maxQueries: 12 },
+      {
+        signalDate: scanDate,
+        log: options.log,
+        maxCandidates: Math.min(5, candidates.length),
+        maxQueries: 12,
+      },
     );
     deepDiveRetrieval = {
       queries: deepDive.queries,
@@ -760,9 +1384,15 @@ export async function runCompanyPackage8PipelineForProfile(
       sources_consulted: deepDive.sources_consulted,
     };
     if (deepDive.signals.length > 0) {
-      const seen = new Set(workingSignals.map((signal: any) => signal.source_url || `${signal.headline}:${signal.source_domain}`));
+      const seen = new Set(
+        workingSignals.map(
+          (signal: any) =>
+            signal.source_url || `${signal.headline}:${signal.source_domain}`,
+        ),
+      );
       const additions = deepDive.signals.filter((signal: any) => {
-        const key = signal.source_url || `${signal.headline}:${signal.source_domain}`;
+        const key =
+          signal.source_url || `${signal.headline}:${signal.source_domain}`;
         if (seen.has(key)) return false;
         seen.add(key);
         return true;
@@ -785,8 +1415,20 @@ export async function runCompanyPackage8PipelineForProfile(
     const enrichment = enrichSignal(signal, scored, keywordScore);
     const sectionIds = matchSectionIds(scored, p8Profile, signal);
     const cluster = buildCluster(signal, scored, articleId, enrichment, runId);
-    const article = buildNormalizedArticle(signal, runId, articleId, enrichment);
-    const decision = buildDecision(signal, scored, sectionIds, p8Profile, enrichment, scanDate);
+    const article = buildNormalizedArticle(
+      signal,
+      runId,
+      articleId,
+      enrichment,
+    );
+    const decision = buildDecision(
+      signal,
+      scored,
+      sectionIds,
+      p8Profile,
+      enrichment,
+      scanDate,
+    );
     clusters.push(cluster);
     normalizedArticles.push(article);
     selectedForDepth.push({
@@ -796,7 +1438,12 @@ export async function runCompanyPackage8PipelineForProfile(
       section_ids: sectionIds,
       selection_score: keywordScore * 10 + Number(scored.relevance_score || 0),
       keyword_match_score: keywordScore,
-      selected_because: selectionReasonForSignal(signal, scored, sectionIds, p8Profile),
+      selected_because: selectionReasonForSignal(
+        signal,
+        scored,
+        sectionIds,
+        p8Profile,
+      ),
     });
     emailItems.push({
       item_id: `item_${signal.id}`,
@@ -807,12 +1454,23 @@ export async function runCompanyPackage8PipelineForProfile(
       short_summary_facts: [cleanOneSentenceFact(signal)],
       why_it_matters: {
         text: `Relevant to ${profile.company_name}'s selected scan areas because it matched ${sectionIds.map((id: string) => p8Profile.selected_scan_areas.find((a: any) => a.area_id === id)?.label || id).join(", ")}.`,
-        supported_by: [`claim_${articleId}`, ...sectionIds.map((id: string) => `scan_area:${id}`)],
+        supported_by: [
+          `claim_${articleId}`,
+          ...sectionIds.map((id: string) => `scan_area:${id}`),
+        ],
       },
-      uncertainty: cluster.status === "developing" ? ["This is a developing signal and details may change."] : [],
+      uncertainty:
+        cluster.status === "developing"
+          ? ["This is a developing signal and details may change."]
+          : [],
       relevance_decision: decision,
       source_summary: {
-        anchor: { source: sourceDisplay(signal.source_domain), grade: sourceGrade(signal.source_domain), url: signal.source_url || "", article_id: articleId },
+        anchor: {
+          source: sourceDisplay(signal.source_domain),
+          grade: sourceGrade(signal.source_domain),
+          url: signal.source_url || "",
+          article_id: articleId,
+        },
         supporting: [],
       },
       retrieval_provenance: retrievalProvenance(signal),
@@ -822,7 +1480,8 @@ export async function runCompanyPackage8PipelineForProfile(
       headline: signal.headline,
       source_domain: signal.source_domain,
       relevance_score: scored.relevance_score,
-      package8_selection_score: keywordScore * 10 + Number(scored.relevance_score || 0),
+      package8_selection_score:
+        keywordScore * 10 + Number(scored.relevance_score || 0),
       keyword_match_score: keywordScore,
       company_retrieval: signal.company_retrieval || null,
       original_urgency: signal.urgency,
@@ -835,7 +1494,9 @@ export async function runCompanyPackage8PipelineForProfile(
     });
   }
 
-  const sectionIdsWithItems = new Set(emailItems.flatMap((i: any) => i.section_ids));
+  const sectionIdsWithItems = new Set(
+    emailItems.flatMap((i: any) => i.section_ids),
+  );
   const noFindings = p8Profile.selected_scan_areas
     .filter((area: any) => !sectionIdsWithItems.has(area.area_id))
     .map((area: any) => ({
@@ -874,12 +1535,36 @@ export async function runCompanyPackage8PipelineForProfile(
   // Production generation remains behind the adapter boundary. Until the
   // internal OpenClaw generation writer is plugged in, this path uses the
   // deterministic Package 8 generator and marks itself as dry-run/preview.
-  const evidenceDashboardLink = options.dashboardLink || (options.dryRun ? undefined : `https://www.albis.news/dashboard/company/${profile.id}/briefings/${scanDate}/evidence`);
-  const generation = generateCompanyBriefing(packet, { dryRun: true, dashboardLink: evidenceDashboardLink });
-  const intelligence_depth_bundles = buildIntelligenceDepthBundles(packet, selectedForDepth, workingSignals || []);
-  const depthPacket = applyIntelligenceDepthToPacket(packet, intelligence_depth_bundles);
-  const evidenceDocument = buildCompanyBriefingEvidenceDocument(depthPacket, intelligence_depth_bundles, workingSignals || [], selectedForDepth, scanDate);
-  const depthOutput = applyIntelligenceDepthToBriefing(generation.output, depthPacket, intelligence_depth_bundles);
+  const evidenceDashboardLink =
+    options.dashboardLink ||
+    (options.dryRun
+      ? undefined
+      : `https://www.albis.news/dashboard/company/${profile.id}/briefings/${scanDate}/evidence`);
+  const generation = generateCompanyBriefing(packet, {
+    dryRun: true,
+    dashboardLink: evidenceDashboardLink,
+  });
+  const intelligence_depth_bundles = buildIntelligenceDepthBundles(
+    packet,
+    selectedForDepth,
+    workingSignals || [],
+  );
+  const depthPacket = applyIntelligenceDepthToPacket(
+    packet,
+    intelligence_depth_bundles,
+  );
+  const evidenceDocument = buildCompanyBriefingEvidenceDocument(
+    depthPacket,
+    intelligence_depth_bundles,
+    workingSignals || [],
+    selectedForDepth,
+    scanDate,
+  );
+  const depthOutput = applyIntelligenceDepthToBriefing(
+    generation.output,
+    depthPacket,
+    intelligence_depth_bundles,
+  );
   const draftOutput = applyScannerReportLayout({
     output: depthOutput,
     packet: depthPacket,
@@ -892,9 +1577,20 @@ export async function runCompanyPackage8PipelineForProfile(
     mode: "premium_readability",
   });
   const finalOutput = refreshEditedClaimMaps(editorResult.output);
-  const qa = runQAGates(depthPacket, finalOutput, { dryRun: true, editorPass: editorResult.edit_report });
-  const subject = generateBriefingSubjectV2(profile.company_name, scanDate, finalOutput.today_brief?.top_line?.text);
-  const html = generateCompanyBriefingHtmlV2(finalOutput, profile.company_name, scanDate);
+  const qa = runQAGates(depthPacket, finalOutput, {
+    dryRun: true,
+    editorPass: editorResult.edit_report,
+  });
+  const subject = generateBriefingSubjectV2(
+    profile.company_name,
+    scanDate,
+    finalOutput.today_brief?.top_line?.text,
+  );
+  const html = generateCompanyBriefingHtmlV2(
+    finalOutput,
+    profile.company_name,
+    scanDate,
+  );
 
   return {
     run_id: runId,
@@ -906,13 +1602,15 @@ export async function runCompanyPackage8PipelineForProfile(
     selected_signals: enrichedSignals,
     package8_generation_wired_for_dry_run: true,
     package8_llm_enrichment_wired: false,
-    package8_note: "Package 8 evidence packet, deterministic generator, and QA gates against real DB signals. No email send occurs here.",
+    package8_note:
+      "Package 8 evidence packet, deterministic generator, and QA gates against real DB signals. No email send occurs here.",
     briefing_content: finalOutput,
     draft_briefing_content: draftOutput,
     generation_metadata: generation.metadata,
     intelligence_depth_bundles,
     evidence_document: evidenceDocument,
     deep_dive_retrieval: deepDiveRetrieval,
+    dedupe_summary: dedupeSummary,
     editor_pass: editorResult.edit_report,
     qa_report: qa.report,
     dry_run_metadata: qa.dryRunMetadata,

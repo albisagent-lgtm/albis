@@ -26,7 +26,10 @@ export interface RetrievalCluster {
   updated_at: string;
 }
 
-export type ScanTargetType = "canonical_topic" | "keyword_query" | "source_domain";
+export type ScanTargetType =
+  | "canonical_topic"
+  | "keyword_query"
+  | "source_domain";
 
 export interface ScanTarget {
   id: string;
@@ -39,8 +42,12 @@ export interface ScanTarget {
   created_at: string;
 }
 
-export type ScanRunWindow = "07-00" | "13-00" | "19-00";
-export type ScanRunStatus = "running" | "completed" | "partial_failure" | "failed";
+export type ScanRunWindow = "07-00" | "19-00";
+export type ScanRunStatus =
+  | "running"
+  | "completed"
+  | "partial_failure"
+  | "failed";
 
 export interface CompanyScanRun {
   id: string;
@@ -96,7 +103,10 @@ export interface Signal {
  * created_at are DB-assigned. company_scan_run_id is set by the scan
  * engine before insert.
  */
-export type SignalDraft = Omit<Signal, "id" | "created_at" | "company_scan_run_id">;
+export type SignalDraft = Omit<
+  Signal,
+  "id" | "created_at" | "company_scan_run_id"
+>;
 
 /**
  * Raw article input the parser turns into a SignalDraft. Shaped to match
@@ -146,7 +156,13 @@ export type SourceType =
   | "newsletter"
   | "unknown";
 
-export type AuthorType = "named" | "staff" | "wire" | "official" | "none" | "unknown";
+export type AuthorType =
+  | "named"
+  | "staff"
+  | "wire"
+  | "official"
+  | "none"
+  | "unknown";
 
 export type SludgeSignal =
   | "missing_author"
@@ -292,7 +308,15 @@ export interface ScoredCompanyArticleEvidence {
     fact_id: string;
     text: string;
     entities: string[];
-    claim_type: "event" | "number" | "quote" | "policy" | "filing" | "context" | "impact" | "unknown";
+    claim_type:
+      | "event"
+      | "number"
+      | "quote"
+      | "policy"
+      | "filing"
+      | "context"
+      | "impact"
+      | "unknown";
     evidence_url: string;
     attribution_required: boolean;
     confidence: number;
@@ -469,7 +493,12 @@ export interface FactualClaim {
     | "background"
     | "analysis";
   entities: string[];
-  numeric_values?: { label: string; value: number; unit?: string; raw: string }[];
+  numeric_values?: {
+    label: string;
+    value: number;
+    unit?: string;
+    raw: string;
+  }[];
   time_refs?: string[];
   confidence: number;
   requires_attribution: boolean;
@@ -528,7 +557,12 @@ export interface EventTuple {
   };
   status: EventStatus;
   polarity?: "positive" | "negative" | "neutral" | "mixed" | null;
-  material_numbers?: { label: string; value: number; unit?: string; raw: string }[];
+  material_numbers?: {
+    label: string;
+    value: number;
+    unit?: string;
+    raw: string;
+  }[];
   confidence: number;
   support_claim_ids: string[];
 }
@@ -688,7 +722,12 @@ export interface ClusterFrame {
   secondary_stakeholders_mentioned: string[];
   evidence_basis: string[];
   tone_intensity: "low" | "medium" | "high";
-  sentiment_toward_actor?: "positive" | "neutral" | "negative" | "mixed" | "unclear";
+  sentiment_toward_actor?:
+    | "positive"
+    | "neutral"
+    | "negative"
+    | "mixed"
+    | "unclear";
   frame_summary: string;
   supporting_claim_ids: string[];
   confidence: number;
@@ -719,7 +758,13 @@ export interface EventCluster {
   };
 
   source_mix: {
-    counts_by_grade: { A: number; B: number; C: number; D: number; Block: number };
+    counts_by_grade: {
+      A: number;
+      B: number;
+      C: number;
+      D: number;
+      Block: number;
+    };
     counts_by_type: Record<string, number>;
     independent_source_count: number;
     syndicated_copy_count: number;
@@ -782,7 +827,12 @@ export interface NormalizationClusteringReport {
   normalized_article_count: number;
   blocked_count: number;
   failed_extraction_count: number;
-  duplicate_pairs: { article_a: string; article_b: string; reason: string; confidence: number }[];
+  duplicate_pairs: {
+    article_a: string;
+    article_b: string;
+    reason: string;
+    confidence: number;
+  }[];
   cluster_count: number;
   clusters_email_eligible: number;
   clusters_dashboard_only: number;
@@ -838,7 +888,15 @@ export interface SelectedScanArea {
 export interface WatchEntity {
   entity_id: string;
   name: string;
-  type: "competitor" | "supplier" | "regulator" | "customer" | "partner" | "market" | "product" | "other";
+  type:
+    | "competitor"
+    | "supplier"
+    | "regulator"
+    | "customer"
+    | "partner"
+    | "market"
+    | "product"
+    | "other";
   aliases?: string[];
 }
 
@@ -928,14 +986,23 @@ export interface TimeMetadata {
 export interface NoveltySignals {
   seen_before: boolean;
   previous_cluster_id?: string;
-  new_development_type?: "new_fact" | "official_confirmation" | "regional_angle" | "impact_update" | "none";
+  new_development_type?:
+    | "new_fact"
+    | "official_confirmation"
+    | "regional_angle"
+    | "impact_update"
+    | "none";
   novelty_score: number;
   novelty_reason: string;
 }
 
 // --- Relevance decision ---
 
-export type RelevanceDecisionType = "email" | "email_caution" | "dashboard" | "exclude";
+export type RelevanceDecisionType =
+  | "email"
+  | "email_caution"
+  | "dashboard"
+  | "exclude";
 
 export interface RelevanceDimensionScores {
   selected_area_fit: number;
@@ -1069,14 +1136,27 @@ export interface EmailCandidateItem {
   relevance_decision: RelevanceDecision;
   perception_gap?: PerceptionGapDecision;
   source_summary: {
-    anchor: { source: string; grade: QualityGrade; url: string; article_id: string };
-    supporting: Array<{ source: string; grade: string; url: string; article_id: string }>;
+    anchor: {
+      source: string;
+      grade: QualityGrade;
+      url: string;
+      article_id: string;
+    };
+    supporting: Array<{
+      source: string;
+      grade: string;
+      url: string;
+      article_id: string;
+    }>;
   };
   retrieval_provenance?: CompanyRetrievalProvenance;
 }
 
 export interface CompanyRetrievalProvenance {
-  mode: "company_specific_retrieval" | "company_deep_dive_retrieval" | "shared_signal_pool";
+  mode:
+    | "company_specific_retrieval"
+    | "company_deep_dive_retrieval"
+    | "shared_signal_pool";
   company_profile_id?: string;
   company_name?: string;
   intent?: string;
@@ -1189,7 +1269,16 @@ export interface EvidencePacketScanArea {
 export interface EvidencePacketWatchEntity {
   entity_id?: string;
   name: string;
-  type: "company" | "competitor" | "supplier" | "customer" | "regulator" | "market" | "technology" | "place" | "other";
+  type:
+    | "company"
+    | "competitor"
+    | "supplier"
+    | "customer"
+    | "regulator"
+    | "market"
+    | "technology"
+    | "place"
+    | "other";
   relationship?: string;
 }
 
@@ -1218,7 +1307,13 @@ export type AttributionTrigger =
   | "official_document";
 
 export interface RequiredQualifierRule {
-  condition: "proposed" | "alleged" | "single_source" | "developing" | "conflicting_reports" | "low_confidence";
+  condition:
+    | "proposed"
+    | "alleged"
+    | "single_source"
+    | "developing"
+    | "conflicting_reports"
+    | "low_confidence";
   qualifier_examples: string[];
 }
 
@@ -1266,7 +1361,14 @@ export interface EvidenceEventTuple {
   object?: string;
   place?: string;
   event_time?: string;
-  status: "announced" | "reported" | "rumored" | "confirmed" | "denied" | "proposed" | "analysis";
+  status:
+    | "announced"
+    | "reported"
+    | "rumored"
+    | "confirmed"
+    | "denied"
+    | "proposed"
+    | "analysis";
 }
 
 export interface EvidenceSupportedText {
@@ -1276,14 +1378,26 @@ export interface EvidenceSupportedText {
 }
 
 export interface EvidenceSupportRef {
-  type: "claim_id" | "company_profile_field" | "scan_area" | "source_id" | "frame_id";
+  type:
+    | "claim_id"
+    | "company_profile_field"
+    | "scan_area"
+    | "source_id"
+    | "frame_id";
   id: string;
 }
 
 export interface EvidenceClaim {
   claim_id: string;
   text: string;
-  claim_type: "fact" | "quote" | "stat" | "forecast" | "allegation" | "analysis" | "official_statement";
+  claim_type:
+    | "fact"
+    | "quote"
+    | "stat"
+    | "forecast"
+    | "allegation"
+    | "analysis"
+    | "official_statement";
   supported_by: EvidenceArticleSupport[];
   confidence: number;
   attribution_required: boolean;
@@ -1298,7 +1412,12 @@ export interface EvidenceArticleSupport {
   source_grade: QualityGrade;
   source_type: SourceType;
   url: string;
-  role: "anchor" | "supporting" | "local_context" | "official_primary" | "contradicting";
+  role:
+    | "anchor"
+    | "supporting"
+    | "local_context"
+    | "official_primary"
+    | "contradicting";
   published_at?: string;
   evidence_action?: EvidenceAction;
   email_evidence_eligible?: boolean;
@@ -1307,7 +1426,14 @@ export interface EvidenceArticleSupport {
 
 export interface EvidenceUncertaintyNote {
   uncertainty_id: string;
-  type: "single_source" | "developing" | "proposed" | "alleged" | "unclear_timing" | "low_confidence" | "limited_detail";
+  type:
+    | "single_source"
+    | "developing"
+    | "proposed"
+    | "alleged"
+    | "unclear_timing"
+    | "low_confidence"
+    | "limited_detail";
   text: string;
   applies_to_claim_ids: string[];
   must_mention: boolean;
@@ -1322,7 +1448,11 @@ export interface EvidenceConflictNote {
     position_text: string;
     confidence: number;
   }>;
-  resolution?: "unresolved" | "official_source_preferred" | "newer_source_preferred" | "manual_reviewed";
+  resolution?:
+    | "unresolved"
+    | "official_source_preferred"
+    | "newer_source_preferred"
+    | "manual_reviewed";
   must_mention: boolean;
 }
 
@@ -1354,7 +1484,14 @@ export interface EvidencePerceptionFrame {
   frame_labels: string[];
   primary_stakeholders_mentioned: string[];
   tone_intensity: "low" | "medium" | "high";
-  evidence_type: "official" | "expert" | "local" | "market" | "opinion" | "wire" | "company";
+  evidence_type:
+    | "official"
+    | "expert"
+    | "local"
+    | "market"
+    | "opinion"
+    | "wire"
+    | "company";
   summary: string;
   source_grade: QualityGrade;
 }
@@ -1368,7 +1505,14 @@ export interface EvidenceGenerationHints {
 export interface EvidencePacketDashboardItem {
   cluster_id: string;
   canonical_event_name: string;
-  reason: "low_materiality" | "medium_confidence" | "single_source" | "not_time_sensitive" | "watchlist_signal" | "thin_relevance" | "manual_review_needed";
+  reason:
+    | "low_materiality"
+    | "medium_confidence"
+    | "single_source"
+    | "not_time_sensitive"
+    | "watchlist_signal"
+    | "thin_relevance"
+    | "manual_review_needed";
   relevance_score: number;
   cluster_confidence: number;
   allowed_in_email_generation: false;
@@ -1440,7 +1584,11 @@ export interface CompanyBriefingGenerationOutput {
 
 export interface GeneratedScannerReport {
   enabled: true;
-  layout_version: "package10c_scanner_report_v1" | "package10d_full_scan_report_v1" | "package10e_weighted_findings_v1" | "company_daily_scan_v1";
+  layout_version:
+    | "package10c_scanner_report_v1"
+    | "package10d_full_scan_report_v1"
+    | "package10e_weighted_findings_v1"
+    | "company_daily_scan_v1";
   overview: GeneratedText;
   main_findings_count: number;
   scan_area_count: number;
@@ -1455,7 +1603,12 @@ export interface GeneratedScannerReport {
 export interface GeneratedScannerReportArea {
   area_id: string;
   label: string;
-  status: "active" | "quiet" | "no_direct_signal" | "related_signal_elsewhere" | "context_only_signal";
+  status:
+    | "active"
+    | "quiet"
+    | "no_direct_signal"
+    | "related_signal_elsewhere"
+    | "context_only_signal";
   finding_count: number;
   direct_source_count: number;
   summary: GeneratedText;
@@ -1592,7 +1745,12 @@ export interface CompanyBriefingEditorPass {
 // calm, and safe before send.
 // ---------------------------------------------------------------------------
 
-export type QAStatus = "send" | "hold" | "dashboard_only" | "manual_review" | "dry_run_only";
+export type QAStatus =
+  | "send"
+  | "hold"
+  | "dashboard_only"
+  | "manual_review"
+  | "dry_run_only";
 
 export interface CompanyBriefingQAReport {
   qa_report_version: "company_briefing_qa_v1";

@@ -25,12 +25,19 @@ import crypto from "crypto";
 // internal /api/onboarding/complete bootstrap).
 // ---------------------------------------------------------------------------
 
-function verifySignature(payload: string, sig: string, secret: string): boolean {
-  const parts = sig.split(",").reduce((acc, part) => {
-    const [key, value] = part.split("=");
-    acc[key.trim()] = value;
-    return acc;
-  }, {} as Record<string, string>);
+function verifySignature(
+  payload: string,
+  sig: string,
+  secret: string,
+): boolean {
+  const parts = sig.split(",").reduce(
+    (acc, part) => {
+      const [key, value] = part.split("=");
+      acc[key.trim()] = value;
+      return acc;
+    },
+    {} as Record<string, string>,
+  );
 
   const timestamp = parts["t"];
   const v1 = parts["v1"];
@@ -67,8 +74,8 @@ function tsToIso(seconds: number | null | undefined): string | null {
 }
 
 function tierForPriceId(priceId: string | undefined) {
-  if (!priceId) return { tier: "standard", period: "monthly" as const };
-  return PRICE_TO_TIER[priceId] || { tier: "standard", period: "monthly" as const };
+  if (!priceId) return null;
+  return PRICE_TO_TIER[priceId] || null;
 }
 
 type AdminClient = ReturnType<typeof createAdminClient>;
@@ -76,16 +83,24 @@ type AdminClient = ReturnType<typeof createAdminClient>;
 async function applySubscriptionToProfile(
   supabase: AdminClient,
   subscription: StripeSubscription,
-  opts: { userId?: string | null } = {}
+  opts: { userId?: string | null } = {},
 ) {
   const priceId = subscription.items?.data?.[0]?.price?.id;
   const tierInfo = tierForPriceId(priceId);
   const periodEnd = tsToIso(subscription.current_period_end);
   const trialEnd = tsToIso(subscription.trial_end);
 
+  if (!tierInfo) {
+    console.error("Stripe subscription used an unmapped price ID", {
+      subscription_id: subscription.id,
+      customer: subscription.customer,
+      price_id: priceId || null,
+    });
+  }
+
   const update = {
     subscription_status: subscription.status,
-    subscription_tier: tierInfo.tier,
+    ...(tierInfo ? { subscription_tier: tierInfo.tier } : {}),
     subscription_period_end: periodEnd,
     trial_end_at: trialEnd,
   };
@@ -99,7 +114,7 @@ async function applySubscriptionToProfile(
         stripe_customer_id: subscription.customer,
         ...update,
       },
-      { onConflict: "id" }
+      { onConflict: "id" },
     );
   } else {
     await supabase
@@ -114,7 +129,10 @@ export async function POST(req: NextRequest) {
   const sig = req.headers.get("stripe-signature");
 
   if (!sig || !process.env.STRIPE_WEBHOOK_SECRET) {
-    return NextResponse.json({ error: "Missing signature or secret" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Missing signature or secret" },
+      { status: 400 },
+    );
   }
 
   if (!verifySignature(body, sig, process.env.STRIPE_WEBHOOK_SECRET)) {
@@ -131,7 +149,7 @@ export async function POST(req: NextRequest) {
       if (!userId || !session.subscription) break;
 
       const subscription = (await stripeGet(
-        `/subscriptions/${session.subscription}`
+        `/subscriptions/${session.subscription}`,
       )) as unknown as StripeSubscription;
       await applySubscriptionToProfile(supabase, subscription, { userId });
       break;
@@ -164,14 +182,17 @@ export async function POST(req: NextRequest) {
       const invoice = event.data.object as { subscription?: string | null };
       if (!invoice.subscription) break;
       const subscription = (await stripeGet(
-        `/subscriptions/${invoice.subscription}`
+        `/subscriptions/${invoice.subscription}`,
       )) as unknown as StripeSubscription;
       await applySubscriptionToProfile(supabase, subscription);
       break;
     }
 
     case "invoice.payment_failed": {
-      const invoice = event.data.object as { subscription?: string | null; customer?: string };
+      const invoice = event.data.object as {
+        subscription?: string | null;
+        customer?: string;
+      };
       if (!invoice.customer) break;
       // Stripe will normally also send a subscription.updated with
       // status='past_due', but writing it explicitly here means the grace

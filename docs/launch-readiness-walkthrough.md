@@ -54,7 +54,7 @@ manually. Idempotent.
 ### 1.3 Trial backfill
 
 Existing onboarded users (pre-Pkg-7) have `subscription_status=null`. Run
-the backfill so they enter the 7-day trial state cleanly:
+the backfill so they enter the 3-day trial state cleanly:
 
 ```bash
 npx tsx scripts/backfill-trial-state.ts            # dry-run, prints plan
@@ -141,7 +141,7 @@ Stripe.
 After the final step the client posts to `/api/onboarding/complete`. The
 server runs:
 - `assignFreeTrial(admin, userId)` → `profiles.subscription_status =
-  'trialing'`, `trial_end_at = now() + 7 days`
+  'trialing'`, `trial_end_at = now() + 3 days`
 - `generatePreviewBriefing(admin, companyProfileId)` → if any signals exist
   in the last 24h, a `company_briefings` row lands with status='generated'.
 
@@ -151,7 +151,7 @@ server runs:
       shows the profile with `onboarding_completed = true`.
 - [ ] `select * from profiles where id = '<your user id>'` shows
       `subscription_status='trialing'`, `subscription_tier='pro'`,
-      `trial_end_at` ~7 days out.
+      `trial_end_at` ~3 days out.
 - [ ] If signals exist: `select id, status, briefing_date from
       company_briefings where company_profile_id = '<id>'` shows a row.
 - [ ] If no signals: status returned as `skipped_no_signals`. Acceptable —
@@ -163,7 +163,7 @@ server runs:
 2. Confirm you can see the briefing (if generated), the trial banner with
    days remaining, and the company profile editor.
 
-- [ ] Trial countdown reads ~7 days.
+- [ ] Trial countdown reads ~3 days.
 - [ ] Briefings tab shows the preview if it generated, or "no briefings yet"
       otherwise.
 - [ ] Coverage tab loads without errors.
@@ -185,7 +185,7 @@ https://stripe.com/docs/testing#cards.)
 2. The browser POSTs to `/api/stripe/checkout` with the price ID.
 3. `/api/stripe/checkout` reads `auth.getUser()` (never trusts a body-supplied
    userId), reuses any existing `stripe_customer_id`, and adds
-   `subscription_data[trial_period_days]=7` for trialing/null users.
+   `subscription_data[trial_period_days]=3` for trialing/null users.
 4. You land on Stripe Checkout. Pay with `4242 4242 4242 4242`.
 5. Stripe redirects you to `/account?session_id=…`.
 
@@ -285,7 +285,7 @@ Run these after the happy path in §2-4 passes.
 
 ### 5.2 Expired trial
 
-Forge an expired trial without waiting 7 days:
+Forge an expired trial without waiting 3 days:
 
 ```sql
 update profiles

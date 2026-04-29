@@ -107,7 +107,13 @@ function formatDate(dateStr: string): string {
 }
 
 export function generateCompanyBriefingHtml(content: BriefingContent): string {
-  const { header, what_changed, why_it_matters, what_to_watch, regional_framing } = content;
+  const {
+    header,
+    what_changed,
+    why_it_matters,
+    what_to_watch,
+    regional_framing,
+  } = content;
   const displayDate = formatDate(header.date);
 
   // --- WHAT CHANGED ---
@@ -124,7 +130,7 @@ export function generateCompanyBriefingHtml(content: BriefingContent): string {
         <p style="font-size:15px;color:${BODY};line-height:1.65;margin:0;font-family:-apple-system,sans-serif;">
           ${esc(story.summary)}
         </p>
-      </div>`
+      </div>`,
     )
     .join("");
 
@@ -136,7 +142,7 @@ export function generateCompanyBriefingHtml(content: BriefingContent): string {
         <span style="color:${AMBER};font-weight:700;">&#x25B6;</span>&nbsp;
         ${esc(w.monitor_point)}
         ${w.timeframe ? `<span style="color:${GRAY};font-size:12px;"> (${esc(w.timeframe)})</span>` : ""}
-      </p>`
+      </p>`,
     )
     .join("");
 
@@ -159,7 +165,7 @@ export function generateCompanyBriefingHtml(content: BriefingContent): string {
 <body style="margin:0;padding:0;background:${WHITE};-webkit-font-smoothing:antialiased;">
 
   <!-- Preheader -->
-  <div style="display:none;max-height:0;overflow:hidden;">Daily briefing for ${esc(header.company_name)} — ${esc(displayDate)}</div>
+  <div style="display:none;max-height:0;overflow:hidden;">Daily scan for ${esc(header.company_name)} — ${esc(displayDate)}</div>
 
   <table cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;margin:0 auto;background:${WHITE};">
 
@@ -169,7 +175,7 @@ export function generateCompanyBriefingHtml(content: BriefingContent): string {
         <tr>
           <td>
             <div style="font-size:28px;font-weight:900;color:${NAVY};letter-spacing:3px;text-transform:uppercase;">ALBIS</div>
-            <div style="font-size:11px;color:${GRAY};letter-spacing:2px;margin:4px 0 0;font-family:-apple-system,sans-serif;text-transform:uppercase;">Daily Briefing</div>
+            <div style="font-size:11px;color:${GRAY};letter-spacing:2px;margin:4px 0 0;font-family:-apple-system,sans-serif;text-transform:uppercase;">Company Daily Scan</div>
           </td>
           <td style="text-align:right;vertical-align:top;">
             <div style="font-size:11px;color:${GRAY};letter-spacing:1px;font-family:-apple-system,sans-serif;text-transform:uppercase;">${esc(displayDate)}</div>
@@ -188,24 +194,28 @@ export function generateCompanyBriefingHtml(content: BriefingContent): string {
     <!-- MAIN CONTENT -->
     <tr><td class="wrap" style="padding:32px 40px 40px;">
 
-      <!-- WHAT CHANGED -->
-      ${sectionLabel("What Changed")}
+      <!-- DAILY SCAN -->
+      ${sectionLabel("Your Daily Scan")}
       ${storiesHtml}
 
       ${divider()}
 
-      <!-- WHY IT MATTERS TO YOU -->
-      ${sectionLabel("Why It Matters to You")}
+      <!-- CONTEXT -->
+      ${sectionLabel("Context")}
       <p style="font-size:15px;color:${BODY};line-height:1.7;margin:0;font-family:-apple-system,sans-serif;">
         ${esc(why_it_matters)}
       </p>
 
-      ${regional_framing ? `
+      ${
+        regional_framing
+          ? `
       <div style="margin-top:16px;padding:12px 16px;background:#faf9f7;border-left:3px solid ${AMBER};">
         <p style="font-size:14px;color:${BODY};line-height:1.6;margin:0;font-family:-apple-system,sans-serif;">
           <strong style="color:${NAVY};">Regional framing:</strong> ${esc(regional_framing)}
         </p>
-      </div>` : ""}
+      </div>`
+          : ""
+      }
 
       ${divider()}
 
@@ -218,7 +228,7 @@ export function generateCompanyBriefingHtml(content: BriefingContent): string {
       <!-- Single subtle link to the dashboard, where each signal's
            "Why this matched" reasoning lives. -->
       <div style="text-align:center;">
-        <a href="${SITE}/dashboard/briefing/today" style="font-size:13px;color:${GRAY};font-family:-apple-system,sans-serif;text-decoration:underline;">View reasoning on dashboard →</a>
+        <a href="${SITE}/dashboard/briefing/today" style="font-size:13px;color:${GRAY};font-family:-apple-system,sans-serif;text-decoration:underline;">View scan on dashboard →</a>
       </div>
 
     </td></tr>
@@ -243,7 +253,7 @@ export function generateCompanyBriefingHtml(content: BriefingContent): string {
  */
 export function generateBriefingSubject(
   companyName: string,
-  date: string
+  date: string,
 ): string {
-  return `Albis Daily Briefing — ${companyName} — ${formatDate(date)}`;
+  return `Albis Daily Scan — ${companyName} — ${formatDate(date)}`;
 }

@@ -3,7 +3,8 @@ import RegisterClient from "./register-client";
 
 export const metadata: Metadata = {
   title: "Create Account",
-  description: "Create your Albis account to access personalised intelligence briefings.",
+  description:
+    "Create your Albis account to access your company daily scan and dashboard.",
 };
 
 export default function RegisterPage() {

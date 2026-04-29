@@ -11,14 +11,17 @@ export default function CheckoutClient() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const tierSlug = params.tier as string;
-  const billing = searchParams.get("billing") === "annual" ? "annual" : "monthly";
+  const billing =
+    searchParams.get("billing") === "annual" ? "annual" : "monthly";
 
   const [loading, setLoading] = useState(true);
   const [redirecting, setRedirecting] = useState(false);
   const [error, setError] = useState("");
 
   const tier = TIERS[tierSlug];
-  const isPurchasable = (PURCHASABLE_TIERS as readonly string[]).includes(tierSlug);
+  const isPurchasable = (PURCHASABLE_TIERS as readonly string[]).includes(
+    tierSlug,
+  );
 
   useEffect(() => {
     if (!tier || !isPurchasable) {
@@ -30,7 +33,9 @@ export default function CheckoutClient() {
     const supabase = createClient();
     supabase.auth.getUser().then(async ({ data: { user } }) => {
       if (!user) {
-        router.push(`/register?redirect=/checkout/${tierSlug}?billing=${billing}`);
+        router.push(
+          `/register?redirect=/checkout/${tierSlug}?billing=${billing}`,
+        );
         return;
       }
 
@@ -43,7 +48,8 @@ export default function CheckoutClient() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            priceId: getPriceId(tierSlug, billing),
+            tier: tierSlug,
+            billing,
           }),
         });
 
@@ -95,30 +101,4 @@ export default function CheckoutClient() {
   }
 
   return null;
-}
-
-/**
- * Map tier slug + billing period to a Stripe price ID.
- * Uses the TIER_TO_PRICE mapping from stripe.ts.
- * Imported dynamically to avoid pulling Stripe server code into the client bundle.
- */
-function getPriceId(tier: string, billing: "monthly" | "annual"): string {
-  // These must match the TIER_TO_PRICE keys in src/lib/stripe.ts
-  // TODO: Replace placeholder IDs with real Stripe price IDs
-  const mapping: Record<string, Record<string, string>> = {
-    pro: {
-      monthly: "price_pro_monthly_placeholder",
-      annual: "price_pro_annual_placeholder",
-    },
-    team: {
-      monthly: "price_team_monthly_placeholder",
-      annual: "price_team_annual_placeholder",
-    },
-    company_intelligence: {
-      monthly: "price_ci_monthly_placeholder",
-      annual: "price_ci_annual_placeholder",
-    },
-  };
-
-  return mapping[tier]?.[billing] || "";
 }

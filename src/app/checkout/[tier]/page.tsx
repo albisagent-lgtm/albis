@@ -1,7 +1,7 @@
 import CheckoutClient from "./checkout-client";
 
 export const metadata = {
-  title: "Checkout — Albis Intelligence",
+  title: "Checkout — Albis Company Daily Scan",
 };
 
 export default function CheckoutPage() {

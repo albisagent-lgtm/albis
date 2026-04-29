@@ -147,7 +147,7 @@ export default function CompanyBriefingEvidenceClient() {
       <main className="mx-auto max-w-3xl px-6 py-10">
         <div className="rounded-2xl border border-black/[0.07] bg-white p-8 text-center dark:border-white/[0.07] dark:bg-white/[0.03]">
           <h1 className="text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-            Evidence trail not available
+            Source trail not available
           </h1>
           <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
             This daily scan has not been saved with a source trail yet, or you
@@ -174,7 +174,7 @@ export default function CompanyBriefingEvidenceClient() {
       </Link>
 
       <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
-        Albis evidence trail
+        Albis source trail
       </p>
       <h1 className="mt-2 text-3xl font-black tracking-tight text-[#0f0f0f] dark:text-[#f0efec]">
         {doc.company_name} — {doc.scan_date}
@@ -389,7 +389,18 @@ export default function CompanyBriefingEvidenceClient() {
               {doc.key_sources_detail.slice(0, 60).map((source) => (
                 <tr key={source.source_id}>
                   <td className="border-b border-black/[0.05] py-2 pr-3 dark:border-white/[0.05]">
-                    {source.source_display_name}
+                    {source.url ? (
+                      <a
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#c8922a] hover:underline"
+                      >
+                        {source.source_display_name}
+                      </a>
+                    ) : (
+                      source.source_display_name
+                    )}
                   </td>
                   <td className="border-b border-black/[0.05] py-2 pr-3 dark:border-white/[0.05]">
                     {source.source_grade}

@@ -16,14 +16,13 @@ The full company-side cycle is three steps that must run in order:
 Cycle wall time at v1 (60 scan_targets, 3 onboarded profiles): ~10–20s.
 Brave + Supabase round-trips dominate.
 
-Schedule: 3x daily, fired at fixed UTC hours that align with US Eastern
-business cycles. Year-round drift between EDT and EST is one hour; this
-is acceptable for v1.
+Schedule: 2x daily for v1 cost control, fired at fixed UTC hours that
+align with US Eastern morning and evening business cycles. Year-round
+drift between EDT and EST is one hour; this is acceptable for v1.
 
 | UTC | EDT (summer) | EST (winter) | run_window |
 |-----|--------------|--------------|------------|
 | 11  | 07:00        | 06:00        | `07-00`    |
-| 17  | 13:00        | 12:00        | `13-00`    |
 | 23  | 19:00        | 18:00        | `19-00`    |
 
 ## Option A — Cloudflare scheduled trigger (HTTP fan-in)
@@ -36,7 +35,7 @@ Authorization: Bearer <COMPANY_SCAN_CRON_KEY>
 ```
 
 `run_window` is auto-derived from the current UTC hour. Optional
-overrides: `?window=07-00|13-00|19-00`, `?date=YYYY-MM-DD`.
+overrides: `?window=07-00|19-00`, `?date=YYYY-MM-DD`.
 
 To activate via Cloudflare's native cron triggers, you need a thin
 **companion Worker** that responds to `scheduled` events and fetches
@@ -67,7 +66,7 @@ export default {
   "main": "src/index.js",
   "compatibility_date": "2026-04-16",
   "triggers": {
-    "crons": ["0 11 * * *", "0 17 * * *", "0 23 * * *"]
+    "crons": ["0 11 * * *", "0 23 * * *"]
   }
 }
 ```
@@ -120,10 +119,9 @@ steps in the local shell. Logs to `logs/company-scan-cycle/<UTC>.log`.
    (or wherever it lives) and the `.env.local` has the four required
    keys: `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`,
    `BRAVE_API_KEY`, `RESEND_API_KEY`.
-3. Add three crontab entries (`crontab -e`):
+3. Add two crontab entries (`crontab -e`):
    ```
    0 11 * * * cd /Users/treelight/.openclaw/workspace/albis-app && bash scripts/run-company-scan-cycle.sh
-   0 17 * * * cd /Users/treelight/.openclaw/workspace/albis-app && bash scripts/run-company-scan-cycle.sh
    0 23 * * * cd /Users/treelight/.openclaw/workspace/albis-app && bash scripts/run-company-scan-cycle.sh
    ```
    The script also `cd`s to its repo root, so the `cd` is belt-and-braces.
@@ -171,7 +169,7 @@ Both paths can be tested ad-hoc:
 
 ```sh
 # Option A — local fetch (replace HOST + KEY)
-curl -X POST 'https://www.albis.news/api/cron/company-scan?window=13-00' \
+curl -X POST 'https://www.albis.news/api/cron/company-scan?window=07-00' \
   -H "Authorization: Bearer $COMPANY_SCAN_CRON_KEY"
 
 # Option B — local shell

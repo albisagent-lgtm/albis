@@ -18,6 +18,8 @@ export default function BriefingDateClient() {
     BriefingContent | CompanyBriefingGenerationOutput | null
   >(null);
   const [notFound, setNotFound] = useState(false);
+  const [companyId, setCompanyId] = useState<string | null>(null);
+  const [hasSourceTrail, setHasSourceTrail] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -31,6 +33,7 @@ export default function BriefingDateClient() {
         .single();
 
       if (!profile) return;
+      setCompanyId(profile.id);
 
       const { data: briefing } = await supabase
         .from("company_briefings")
@@ -44,10 +47,18 @@ export default function BriefingDateClient() {
         (briefing.status === "generated" || briefing.status === "delivered") &&
         briefing.briefing_content
       ) {
-        setContent(
-          briefing.briefing_content as
-            | BriefingContent
-            | CompanyBriefingGenerationOutput,
+        const briefingContent = briefing.briefing_content as
+          | BriefingContent
+          | CompanyBriefingGenerationOutput;
+        setContent(briefingContent);
+        setHasSourceTrail(
+          Boolean(
+            (
+              briefingContent as CompanyBriefingGenerationOutput & {
+                evidence_document?: unknown;
+              }
+            ).evidence_document,
+          ),
         );
       } else {
         setNotFound(true);
@@ -111,6 +122,14 @@ export default function BriefingDateClient() {
         </svg>
         All daily scans
       </Link>
+      {hasSourceTrail && companyId ? (
+        <Link
+          href={`/dashboard/company/${companyId}/briefings/${dateParam}/evidence`}
+          className="mb-4 inline-flex rounded-full border border-[#ead7ad] bg-[#fff8e8] px-4 py-2 text-sm font-semibold text-[#8a6018] transition hover:bg-[#fff2d0]"
+        >
+          View source trail →
+        </Link>
+      ) : null}
       <div className={cardClass}>
         {content && <BriefingRenderer content={content} />}
       </div>

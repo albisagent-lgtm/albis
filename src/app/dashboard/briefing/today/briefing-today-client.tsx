@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import {
   BriefingRenderer,
@@ -16,6 +17,9 @@ export default function BriefingTodayClient() {
     BriefingContent | CompanyBriefingGenerationOutput | null
   >(null);
   const [status, setStatus] = useState<string | null>(null);
+  const [companyId, setCompanyId] = useState<string | null>(null);
+  const [briefingDate, setBriefingDate] = useState<string | null>(null);
+  const [hasSourceTrail, setHasSourceTrail] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -29,11 +33,12 @@ export default function BriefingTodayClient() {
         .single();
 
       if (!profile) return;
+      setCompanyId(profile.id);
 
       // Get most recent daily scan
       const { data: briefing } = await supabase
         .from("company_briefings")
-        .select("status, briefing_content")
+        .select("status, briefing_date, briefing_content")
         .eq("company_profile_id", profile.id)
         .order("briefing_date", { ascending: false })
         .limit(1)
@@ -41,15 +46,24 @@ export default function BriefingTodayClient() {
 
       if (briefing) {
         setStatus(briefing.status);
+        setBriefingDate(briefing.briefing_date);
         if (
           (briefing.status === "generated" ||
             briefing.status === "delivered") &&
           briefing.briefing_content
         ) {
-          setContent(
-            briefing.briefing_content as
-              | BriefingContent
-              | CompanyBriefingGenerationOutput,
+          const briefingContent = briefing.briefing_content as
+            | BriefingContent
+            | CompanyBriefingGenerationOutput;
+          setContent(briefingContent);
+          setHasSourceTrail(
+            Boolean(
+              (
+                briefingContent as CompanyBriefingGenerationOutput & {
+                  evidence_document?: unknown;
+                }
+              ).evidence_document,
+            ),
           );
         }
       }
@@ -71,6 +85,14 @@ export default function BriefingTodayClient() {
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-10">
+      {hasSourceTrail && companyId && briefingDate ? (
+        <Link
+          href={`/dashboard/company/${companyId}/briefings/${briefingDate}/evidence`}
+          className="mb-4 inline-flex rounded-full border border-[#ead7ad] bg-[#fff8e8] px-4 py-2 text-sm font-semibold text-[#8a6018] transition hover:bg-[#fff2d0]"
+        >
+          View source trail →
+        </Link>
+      ) : null}
       <div className={cardClass}>
         {content ? (
           <BriefingRenderer content={content} />

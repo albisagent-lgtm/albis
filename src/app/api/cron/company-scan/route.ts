@@ -14,9 +14,8 @@
 //
 // run_window is determined from the current UTC hour:
 //   11 UTC → '07-00'  (7am US Eastern in EDT, 6am EST)
-//   17 UTC → '13-00'  (1pm US Eastern in EDT, 12pm EST)
 //   23 UTC → '19-00'  (7pm US Eastern in EDT, 6pm EST)
-// Anything else returns 422 — the caller should only fire at the three
+// Anything else returns 422 — the caller should only fire at the two
 // scheduled hours. Manual override available via ?window=07-00 query.
 //
 // NOT activated by wrangler.jsonc cron triggers in this commit. Both
@@ -33,7 +32,7 @@ import type { ScanRunWindow } from "@/lib/company-scan/types";
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-const VALID_WINDOWS: ScanRunWindow[] = ["07-00", "13-00", "19-00"];
+const VALID_WINDOWS: ScanRunWindow[] = ["07-00", "19-00"];
 
 function getAdminClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -46,7 +45,6 @@ function getAdminClient() {
 
 function windowFromUtcHour(hour: number): ScanRunWindow | null {
   if (hour === 11) return "07-00";
-  if (hour === 17) return "13-00";
   if (hour === 23) return "19-00";
   return null;
 }
@@ -81,18 +79,19 @@ async function handle(req: NextRequest) {
 
   const now = new Date();
   const utcHour = now.getUTCHours();
-  const window = overrideWindow && VALID_WINDOWS.includes(overrideWindow)
-    ? overrideWindow
-    : windowFromUtcHour(utcHour);
+  const window =
+    overrideWindow && VALID_WINDOWS.includes(overrideWindow)
+      ? overrideWindow
+      : windowFromUtcHour(utcHour);
 
   if (!window) {
     return NextResponse.json(
       {
         error: "no_window_for_hour",
         utc_hour: utcHour,
-        hint: "fire only at 11/17/23 UTC, or pass ?window=07-00|13-00|19-00",
+        hint: "fire only at 11/23 UTC, or pass ?window=07-00|19-00",
       },
-      { status: 422 }
+      { status: 422 },
     );
   }
 
@@ -129,7 +128,8 @@ async function handle(req: NextRequest) {
         company_specific_retrieval: useCompanySpecificRetrieval,
         deep_dive_retrieval: enableDeepDiveRetrieval,
         write_briefings: writeBriefings,
-        email_delivery_enabled: process.env.COMPANY_EMAIL_DELIVERY_ENABLED === "1",
+        email_delivery_enabled:
+          process.env.COMPANY_EMAIL_DELIVERY_ENABLED === "1",
       },
     });
   } catch (err) {

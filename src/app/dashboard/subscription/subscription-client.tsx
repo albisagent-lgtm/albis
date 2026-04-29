@@ -15,6 +15,7 @@ interface ProfileData {
   subscription_tier: string | null;
   subscription_period_end: string | null;
   stripe_customer_id: string | null;
+  trial_end_at?: string | null;
 }
 
 interface CompanyData {
@@ -97,6 +98,15 @@ export default function SubscriptionClient() {
         day: "numeric",
       })
     : null;
+  const trialEnd = sub.trial_end_at
+    ? new Date(sub.trial_end_at).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : null;
+  const noCardTrial =
+    sub.subscription_status === "trialing" && !sub.stripe_customer_id;
 
   const themes = company?.tracked_themes?.length || 0;
   const entities = company?.watchlist_entities?.length || 0;
@@ -149,6 +159,12 @@ export default function SubscriptionClient() {
             </p>
           )}
 
+          {!periodEnd && trialEnd && sub.subscription_status === "trialing" && (
+            <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+              Trial ends {trialEnd}
+            </p>
+          )}
+
           <p className="mt-2 text-sm text-zinc-400 dark:text-zinc-500">
             {tierDef.description}
           </p>
@@ -169,8 +185,29 @@ export default function SubscriptionClient() {
                 View plans
               </Link>
             )}
+            {noCardTrial && (
+              <Link href="/pricing" className={btnPrimary}>
+                Add payment to continue
+              </Link>
+            )}
           </div>
         </div>
+
+        {noCardTrial && (
+          <div className="rounded-2xl border border-[#c8922a]/20 bg-[#c8922a]/5 p-6 dark:bg-[#c8922a]/10">
+            <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+              Keep your daily scans running
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+              Your 3-day no-card trial does not auto-charge. Choose a paid plan
+              and add payment details to keep receiving Company Daily Scans
+              after the trial ends.
+            </p>
+            <Link href="/pricing" className={`${btnPrimary} mt-4`}>
+              Choose a plan
+            </Link>
+          </div>
+        )}
 
         {/* Usage */}
         {(active || grace) && (
@@ -248,7 +285,7 @@ export default function SubscriptionClient() {
             </h3>
             <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
               Monitor the topics, entities, and regions that matter to your
-              business. Start with a free trial.
+              business. Start with a 3-day trial.
             </p>
             <Link
               href="/pricing"

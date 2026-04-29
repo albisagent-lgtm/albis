@@ -72,7 +72,10 @@ export interface SignalPipelineProfileResult {
   signals_selected?: number;
   signal_level?: ReturnType<typeof determineSignalLevel>;
   briefing_id?: string | null;
-  content_version?: "company_scanner_report_v1" | "company_briefing_v2" | "legacy_what_changed";
+  content_version?:
+    | "company_scanner_report_v1"
+    | "company_briefing_v2"
+    | "legacy_what_changed";
   qa_status?: string;
   qa_blocking_failures?: number;
   dry_run_would_have_status?: string;
@@ -101,11 +104,12 @@ function unique<T>(values: T[]): T[] {
 async function loadSignalsForWindow(
   supabase: SupabaseClient,
   scanDate: string,
-  lookbackHours: number
+  lookbackHours: number,
 ): Promise<Signal[]> {
   const endTs = new Date(`${scanDate}T23:59:59Z`).toISOString();
   const startTs = new Date(
-    new Date(`${scanDate}T00:00:00Z`).getTime() - lookbackHours * 60 * 60 * 1000
+    new Date(`${scanDate}T00:00:00Z`).getTime() -
+      lookbackHours * 60 * 60 * 1000,
   ).toISOString();
 
   const { data, error } = await supabase
@@ -121,21 +125,25 @@ async function loadSignalsForWindow(
 
 export async function runCompanySignalPipeline(
   supabase: SupabaseClient,
-  options: RunSignalPipelineOptions
+  options: RunSignalPipelineOptions,
 ): Promise<SignalPipelineSummary> {
   const { scanDate } = options;
   const lookbackHours = options.lookbackHours ?? 24;
   const dryRun = options.dryRun ?? false;
   const usePackage8Preview = options.usePackage8Preview ?? true;
-  const useCompanySpecificRetrieval = options.useCompanySpecificRetrieval ?? process.env.COMPANY_SPECIFIC_RETRIEVAL_ENABLED === "1";
-  const enableDeepDiveRetrieval = options.enableDeepDiveRetrieval ?? process.env.COMPANY_DEEP_DIVE_RETRIEVAL_ENABLED === "1";
+  const useCompanySpecificRetrieval =
+    options.useCompanySpecificRetrieval ??
+    process.env.COMPANY_SPECIFIC_RETRIEVAL_ENABLED === "1";
+  const enableDeepDiveRetrieval =
+    options.enableDeepDiveRetrieval ??
+    process.env.COMPANY_DEEP_DIVE_RETRIEVAL_ENABLED === "1";
   const writeBriefingRows = options.writeBriefingRows ?? false;
   const log = options.log || (() => undefined);
   const warn = options.warn || ((m: string) => console.warn(m));
 
   log(
     `🚀 Running company SIGNAL pipeline for ${scanDate}` +
-      ` (lookback=${lookbackHours}h${dryRun ? ", dry-run" : ""})`
+      ` (lookback=${lookbackHours}h${dryRun ? ", dry-run" : ""})`,
   );
 
   const signals = await loadSignalsForWindow(supabase, scanDate, lookbackHours);
@@ -144,7 +152,7 @@ export async function runCompanySignalPipeline(
   if (signals.length === 0 && !useCompanySpecificRetrieval) {
     log(
       "↷ No signals in window — Package 6 will populate. " +
-        "Skipping briefing generation. No legacy company pipeline fallback is active."
+        "Skipping briefing generation. No legacy company pipeline fallback is active.",
     );
     return {
       scan_date: scanDate,
@@ -160,13 +168,16 @@ export async function runCompanySignalPipeline(
     .from("company_profiles")
     .select("*")
     .eq("onboarding_completed", true);
-  if (profileErr) throw new Error(`Failed to load company profiles: ${profileErr.message}`);
+  if (profileErr)
+    throw new Error(`Failed to load company profiles: ${profileErr.message}`);
   if (!profiles || profiles.length === 0) {
     throw new Error("No onboarding-complete company profiles found");
   }
   const filteredProfiles = profiles.filter((profile) => {
-    if (options.companyProfileId && profile.id !== options.companyProfileId) return false;
-    if (options.companyName && profile.company_name !== options.companyName) return false;
+    if (options.companyProfileId && profile.id !== options.companyProfileId)
+      return false;
+    if (options.companyName && profile.company_name !== options.companyName)
+      return false;
     return true;
   });
   if (filteredProfiles.length === 0) {
@@ -177,11 +188,14 @@ export async function runCompanySignalPipeline(
   const ownerIds = unique(filteredProfiles.map((p) => p.owner_id));
   const { data: ownerProfiles, error: ownerErr } = await supabase
     .from("profiles")
-    .select("id, subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at")
+    .select(
+      "id, subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at",
+    )
     .in("id", ownerIds);
-  if (ownerErr) throw new Error(`Failed to load owner profiles: ${ownerErr.message}`);
+  if (ownerErr)
+    throw new Error(`Failed to load owner profiles: ${ownerErr.message}`);
   const ownerMap = new Map(
-    (ownerProfiles || []).map((o: OwnerProfile) => [o.id, o])
+    (ownerProfiles || []).map((o: OwnerProfile) => [o.id, o]),
   );
 
   const results: SignalPipelineProfileResult[] = [];
@@ -212,7 +226,7 @@ export async function runCompanySignalPipeline(
         lookbackHours,
         useCompanySpecificRetrieval,
         enableDeepDiveRetrieval,
-      }
+      },
     );
     results.push(result);
   }
@@ -251,12 +265,13 @@ export async function processProfileSignals(
   rawProfile: CompanyProfile,
   signals: Signal[],
   scanDate: string,
-  options: ProcessProfileSignalsOptions = {}
+  options: ProcessProfileSignalsOptions = {},
 ): Promise<SignalPipelineProfileResult> {
   const dryRun = options.dryRun ?? false;
   const usePackage8Preview = options.usePackage8Preview ?? true;
   const writeBriefingRows = options.writeBriefingRows ?? false;
-  const useCompanySpecificRetrieval = options.useCompanySpecificRetrieval ?? false;
+  const useCompanySpecificRetrieval =
+    options.useCompanySpecificRetrieval ?? false;
   const enableDeepDiveRetrieval = options.enableDeepDiveRetrieval ?? false;
   const writeEnabled = process.env.COMPANY_BRIEFINGS_WRITE_ENABLED === "1";
   const log = options.log || (() => undefined);
@@ -266,12 +281,15 @@ export async function processProfileSignals(
 
   let canonicalIndex;
   try {
-    canonicalIndex = await loadCanonicalIndexForProfile(supabase, rawProfile.id);
+    canonicalIndex = await loadCanonicalIndexForProfile(
+      supabase,
+      rawProfile.id,
+    );
   } catch (err) {
     warn(
       `⚠️ canonical index load failed (using raw fallback): ${
         err instanceof Error ? err.message : String(err)
-      }`
+      }`,
     );
     canonicalIndex = emptyCanonicalIndex();
   }
@@ -285,10 +303,14 @@ export async function processProfileSignals(
   } = { mode: "shared_signal_pool", signals_loaded: signals.length };
 
   if (usePackage8Preview && useCompanySpecificRetrieval) {
-    const retrieval = await retrieveCompanySpecificSignals(supabase, rawProfile, {
-      signalDate: scanDate,
-      log,
-    });
+    const retrieval = await retrieveCompanySpecificSignals(
+      supabase,
+      rawProfile,
+      {
+        signalDate: scanDate,
+        log,
+      },
+    );
     profileSignals = retrieval.signals;
     retrievalSummary = {
       mode: "company_specific_retrieval",
@@ -298,7 +320,7 @@ export async function processProfileSignals(
     };
     log(
       `  Package 10 company-specific retrieval loaded ${retrieval.signals.length} signal(s) ` +
-        `from ${retrieval.queries.length} query/queries (${retrieval.intent})`
+        `from ${retrieval.queries.length} query/queries (${retrieval.intent})`,
     );
   }
 
@@ -318,13 +340,13 @@ export async function processProfileSignals(
         dryRun: true,
         enableDeepDiveRetrieval,
         log,
-      }
+      },
     );
 
     const blockingFailures = package8.qa_report?.blocking_failures?.length ?? 0;
     log(
       `  Package 8 preview selected ${package8.selected_count} item(s); ` +
-        `QA=${package8.qa_report?.status || "unknown"}, blockers=${blockingFailures}`
+        `QA=${package8.qa_report?.status || "unknown"}, blockers=${blockingFailures}`,
     );
 
     if (dryRun || !writeBriefingRows) {
@@ -407,16 +429,17 @@ export async function processProfileSignals(
             evidence_document: package8.evidence_document,
             retrieval_summary: retrievalSummary,
             deep_dive_retrieval: package8.deep_dive_retrieval,
+            dedupe_summary: package8.dedupe_summary,
           },
           generated_at: new Date().toISOString(),
         },
-        { onConflict: "company_profile_id,briefing_date" }
+        { onConflict: "company_profile_id,briefing_date" },
       )
       .select("id")
       .single();
     if (briefingErr || !briefingRow) {
       throw new Error(
-        `Failed to upsert Package 8 company_briefings: ${briefingErr?.message || "no row"}`
+        `Failed to upsert Package 8 company_briefings: ${briefingErr?.message || "no row"}`,
       );
     }
 
@@ -458,7 +481,7 @@ export async function processProfileSignals(
 
   warn(
     "⚠️ ALLOW_LEGACY_COMPANY_PIPELINE=1 is set; using retired what_changed/what_to_watch path. " +
-      "This is emergency compatibility only and is not deliverable."
+      "This is emergency compatibility only and is not deliverable.",
   );
 
   const remaining = new Set(signals.map((s) => s.id));
@@ -471,7 +494,7 @@ export async function processProfileSignals(
 
   if (dryRun) {
     log(
-      `  (dry-run) would write ${scored.length} company_signal_matches rows (${selected.length} selected)`
+      `  (dry-run) would write ${scored.length} company_signal_matches rows (${selected.length} selected)`,
     );
     return {
       company_name: rawProfile.company_name,
@@ -510,18 +533,20 @@ export async function processProfileSignals(
       .from("company_signal_matches")
       .upsert(matchRows, { onConflict: "company_profile_id,signal_id" });
     if (upsertErr) {
-      throw new Error(`Failed to upsert company_signal_matches: ${upsertErr.message}`);
+      throw new Error(
+        `Failed to upsert company_signal_matches: ${upsertErr.message}`,
+      );
     }
   }
   log(
-    `✅ Wrote ${matchRows.length} company_signal_matches rows (${selected.length} selected)`
+    `✅ Wrote ${matchRows.length} company_signal_matches rows (${selected.length} selected)`,
   );
 
   const briefingContent: BriefingContent = buildBriefingContent(
     rawProfile,
     scanDate,
     signalLevel,
-    selected
+    selected,
   );
 
   const { data: briefingRow, error: briefingErr } = await supabase
@@ -537,17 +562,17 @@ export async function processProfileSignals(
         briefing_content: briefingContent,
         generated_at: new Date().toISOString(),
       },
-      { onConflict: "company_profile_id,briefing_date" }
+      { onConflict: "company_profile_id,briefing_date" },
     )
     .select("id")
     .single();
   if (briefingErr || !briefingRow) {
     throw new Error(
-      `Failed to upsert company_briefings: ${briefingErr?.message || "no row"}`
+      `Failed to upsert company_briefings: ${briefingErr?.message || "no row"}`,
     );
   }
   log(
-    `✅ Upserted company_briefings row ${briefingRow.id} (generated, delivery remains Package 8/v2 gated)`
+    `✅ Upserted company_briefings row ${briefingRow.id} (generated, delivery remains Package 8/v2 gated)`,
   );
 
   const selectedSignalIds = matchRows
@@ -560,7 +585,9 @@ export async function processProfileSignals(
       .eq("company_profile_id", rawProfile.id)
       .in("signal_id", selectedSignalIds);
     if (stampErr) {
-      warn(`⚠️ failed to stamp briefing_id on signal matches: ${stampErr.message}`);
+      warn(
+        `⚠️ failed to stamp briefing_id on signal matches: ${stampErr.message}`,
+      );
     }
   }
 
@@ -571,7 +598,7 @@ export async function processProfileSignals(
       scored,
       adapted,
       scanDate,
-      { signals }
+      { signals },
     );
     const { error: coverageErr } = await supabase
       .from("company_coverage_summaries")
@@ -585,18 +612,18 @@ export async function processProfileSignals(
           silent_items: coverage.silent_items,
           summary_text: coverage.summary_text,
         },
-        { onConflict: "company_profile_id,coverage_date" }
+        { onConflict: "company_profile_id,coverage_date" },
       );
     if (coverageErr) throw new Error(coverageErr.message);
     log(
       `✅ Wrote coverage summary (${coverage.tracked_items_checked.length} tracked, ` +
-        `${coverage.silent_items.length} silent, ${coverage.early_signals.length} early)`
+        `${coverage.silent_items.length} silent, ${coverage.early_signals.length} early)`,
     );
   } catch (err) {
     warn(
       `⚠️ coverage summary failed (non-fatal): ${
         err instanceof Error ? err.message : String(err)
-      }`
+      }`,
     );
   }
 

@@ -25,12 +25,17 @@ export default function PricingClient() {
             Pricing
           </p>
           <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-bold tracking-tight text-[#0f0f0f] dark:text-[#f0efec] md:text-4xl">
-            Decision intelligence in 2 minutes
+            Know what moved before it becomes noise
           </h1>
-          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
-            Every morning, your team gets a personalised briefing connecting
-            global developments to your business. No noise. No irrelevant
-            headlines. Just what matters.
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+            Albis scans the topics, entities, regions, and exposures your
+            company cares about, then sends the useful findings only — organized
+            by topic, linked to open sources, and backed by a dashboard source
+            trail when you need to verify the wider picture.
+          </p>
+          <p className="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-zinc-400 dark:text-zinc-500">
+            Built for founders, analysts, operators, and teams who need global
+            monitoring without spending every morning sorting through headlines.
           </p>
         </div>
 
@@ -82,19 +87,32 @@ export default function PricingClient() {
                 key={tierId}
                 tier={tier}
                 annual={annual}
-                isPurchasable={
-                  (PURCHASABLE_TIERS as readonly string[]).includes(tierId)
-                }
+                isPurchasable={(
+                  PURCHASABLE_TIERS as readonly string[]
+                ).includes(tierId)}
               />
             );
           })}
         </div>
 
+        {/* Paid plan baseline */}
+        <div className="mx-auto mt-12 max-w-4xl rounded-2xl border border-black/[0.07] bg-white/70 p-5 dark:border-white/[0.07] dark:bg-white/[0.03]">
+          <p className="text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
+            Every paid plan includes
+          </p>
+          <div className="mt-4 grid gap-3 text-sm text-zinc-600 dark:text-zinc-400 sm:grid-cols-2 lg:grid-cols-4">
+            <MiniFeature text="Daily topic-by-topic company scan" />
+            <MiniFeature text="Open-web source link per finding" />
+            <MiniFeature text="Dashboard archive and source trail" />
+            <MiniFeature text="Perception Gap context where useful" />
+          </div>
+        </div>
+
         {/* Free tier note */}
-        <div className="mt-12 text-center">
+        <div className="mt-10 text-center">
           <p className="text-sm text-zinc-400 dark:text-zinc-500">
-            Already reading albis.news? Your free access to global intelligence
-            continues.{" "}
+            Already reading albis.news? Your free access to public global news
+            intelligence continues.{" "}
             <Link
               href="/register"
               className="font-medium text-[#c8922a] hover:underline"
@@ -108,20 +126,29 @@ export default function PricingClient() {
         <div className="mx-auto mt-16 max-w-3xl">
           <div className="grid gap-8 sm:grid-cols-3">
             <ValueProp
-              title="Personalised"
-              text="Your briefing is built from your sector, geography, tracked themes, and risk priorities. No two briefings are alike."
+              title="Finds movement"
+              text="The scan is built to surface concrete developments in your monitored areas, not summarize the whole news cycle."
             />
             <ValueProp
-              title="Concise"
-              text="2 minutes to read. What changed, why it matters to you, what to watch next. No filler."
+              title="Reduces repeat noise"
+              text="The product direction is daily monitoring with deduplication, so the same old story does not keep coming back as new."
             />
             <ValueProp
-              title="Daily"
-              text="Delivered to your inbox every morning at your preferred time. Also viewable on your dashboard."
+              title="Shows the gap"
+              text="Perception Gap notes highlight when regions or sources are seeing the same issue differently, without turning the scan into an essay."
             />
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function MiniFeature({ text }: { text: string }) {
+  return (
+    <div className="flex items-start gap-2 rounded-xl bg-[#f8f7f4] px-3 py-2 dark:bg-white/[0.04]">
+      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c8922a]" />
+      <span>{text}</span>
     </div>
   );
 }
@@ -202,7 +229,7 @@ function TierCard({
                 : "bg-[#0f0f0f] text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
             }`}
           >
-            Start free trial
+            Start 3-day trial
           </Link>
         ) : (
           <a
@@ -231,9 +258,7 @@ function TierCard({
             >
               <polyline points="20 6 9 17 4 12" />
             </svg>
-            <span className="text-zinc-600 dark:text-zinc-400">
-              {feature}
-            </span>
+            <span className="text-zinc-600 dark:text-zinc-400">{feature}</span>
           </li>
         ))}
       </ul>

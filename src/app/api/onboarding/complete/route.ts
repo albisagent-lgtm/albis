@@ -4,7 +4,7 @@
 // Called by the company-onboarding client immediately after it upserts the
 // company_profile with onboarding_completed=true. Server-side responsibilities:
 //
-//   1. Auto-assign the 7-day free trial (idempotent).
+//   1. Auto-assign the 3-day free trial (idempotent).
 //   2. Generate the preview-on-signup briefing from the most recent 24h
 //      of pooled signals (CP4).
 //
@@ -47,7 +47,7 @@ export async function POST() {
   const trial = await assignFreeTrial(admin, user.id);
   if (trial.error) {
     console.warn(
-      `[onboarding-complete] assignFreeTrial failed for ${user.id}: ${trial.error}`
+      `[onboarding-complete] assignFreeTrial failed for ${user.id}: ${trial.error}`,
     );
   }
 
@@ -75,7 +75,7 @@ export async function POST() {
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.warn(
-      `[onboarding-complete] preview briefing failed for ${user.id}: ${message}`
+      `[onboarding-complete] preview briefing failed for ${user.id}: ${message}`,
     );
     previewResult.status = "failed";
     previewResult.error = message;
