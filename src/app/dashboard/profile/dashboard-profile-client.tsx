@@ -35,11 +35,13 @@ import { TaxonomyCombobox } from "@/app/components/taxonomy-combobox";
 const COLOR_CLASSES: Record<string, { idle: string; active: string }> = {
   blue: {
     idle: "border-blue-500/20 text-blue-400/60 hover:border-blue-500/40",
-    active: "border-blue-500 bg-blue-500/15 text-blue-300 ring-1 ring-blue-500/30",
+    active:
+      "border-blue-500 bg-blue-500/15 text-blue-300 ring-1 ring-blue-500/30",
   },
   violet: {
     idle: "border-violet-500/20 text-violet-400/60 hover:border-violet-500/40",
-    active: "border-violet-500 bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30",
+    active:
+      "border-violet-500 bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30",
   },
   sky: {
     idle: "border-sky-500/20 text-sky-400/60 hover:border-sky-500/40",
@@ -47,44 +49,54 @@ const COLOR_CLASSES: Record<string, { idle: string; active: string }> = {
   },
   fuchsia: {
     idle: "border-fuchsia-500/20 text-fuchsia-400/60 hover:border-fuchsia-500/40",
-    active: "border-fuchsia-500 bg-fuchsia-500/15 text-fuchsia-300 ring-1 ring-fuchsia-500/30",
+    active:
+      "border-fuchsia-500 bg-fuchsia-500/15 text-fuchsia-300 ring-1 ring-fuchsia-500/30",
   },
   emerald: {
     idle: "border-emerald-500/20 text-emerald-400/60 hover:border-emerald-500/40",
-    active: "border-emerald-500 bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/30",
+    active:
+      "border-emerald-500 bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/30",
   },
   cyan: {
     idle: "border-cyan-500/20 text-cyan-400/60 hover:border-cyan-500/40",
-    active: "border-cyan-500 bg-cyan-500/15 text-cyan-300 ring-1 ring-cyan-500/30",
+    active:
+      "border-cyan-500 bg-cyan-500/15 text-cyan-300 ring-1 ring-cyan-500/30",
   },
   zinc: {
     idle: "border-zinc-500/20 text-zinc-400/60 hover:border-zinc-500/40",
-    active: "border-zinc-400 bg-zinc-500/15 text-zinc-300 ring-1 ring-zinc-400/30",
+    active:
+      "border-zinc-400 bg-zinc-500/15 text-zinc-300 ring-1 ring-zinc-400/30",
   },
   amber: {
     idle: "border-amber-500/20 text-amber-400/60 hover:border-amber-500/40",
-    active: "border-amber-500 bg-amber-500/15 text-amber-300 ring-1 ring-amber-500/30",
+    active:
+      "border-amber-500 bg-amber-500/15 text-amber-300 ring-1 ring-amber-500/30",
   },
   lime: {
     idle: "border-lime-500/20 text-lime-400/60 hover:border-lime-500/40",
-    active: "border-lime-500 bg-lime-500/15 text-lime-300 ring-1 ring-lime-500/30",
+    active:
+      "border-lime-500 bg-lime-500/15 text-lime-300 ring-1 ring-lime-500/30",
   },
   rose: {
     idle: "border-rose-500/20 text-rose-400/60 hover:border-rose-500/40",
-    active: "border-rose-500 bg-rose-500/15 text-rose-300 ring-1 ring-rose-500/30",
+    active:
+      "border-rose-500 bg-rose-500/15 text-rose-300 ring-1 ring-rose-500/30",
   },
   teal: {
     idle: "border-teal-500/20 text-teal-400/60 hover:border-teal-500/40",
-    active: "border-teal-500 bg-teal-500/15 text-teal-300 ring-1 ring-teal-500/30",
+    active:
+      "border-teal-500 bg-teal-500/15 text-teal-300 ring-1 ring-teal-500/30",
   },
   orange: {
     idle: "border-orange-500/20 text-orange-400/60 hover:border-orange-500/40",
-    active: "border-orange-500 bg-orange-500/15 text-orange-300 ring-1 ring-orange-500/30",
+    active:
+      "border-orange-500 bg-orange-500/15 text-orange-300 ring-1 ring-orange-500/30",
   },
 };
 
 const REGION_IDLE = "border-zinc-700/50 text-zinc-400 hover:border-zinc-600";
-const REGION_ACTIVE = "border-zinc-400 bg-zinc-800 text-zinc-200 ring-1 ring-zinc-500/30";
+const REGION_ACTIVE =
+  "border-zinc-400 bg-zinc-800 text-zinc-200 ring-1 ring-zinc-500/30";
 
 // ---------------------------------------------------------------------------
 // Shared CSS
@@ -167,7 +179,9 @@ export default function DashboardProfileClient() {
       // Fetch subscription from profiles table
       const { data: userProfile } = await supabase
         .from("profiles")
-        .select("subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at")
+        .select(
+          "subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at",
+        )
         .eq("id", user.id)
         .single();
       if (userProfile) {
@@ -219,15 +233,20 @@ export default function DashboardProfileClient() {
     list: string[],
     setList: (v: string[]) => void,
     setInput: (v: string) => void,
-    max: number
+    max: number,
   ) {
     const trimmed = value.trim();
-    if (!trimmed || list.length >= max || list.includes(trimmed.toLowerCase())) return;
+    if (!trimmed || list.length >= max || list.includes(trimmed.toLowerCase()))
+      return;
     setList([...list, trimmed.toLowerCase()]);
     setInput("");
   }
 
-  function removeTag(value: string, list: string[], setList: (v: string[]) => void) {
+  function removeTag(
+    value: string,
+    list: string[],
+    setList: (v: string[]) => void,
+  ) {
     setList(list.filter((t) => t !== value));
   }
 
@@ -237,7 +256,7 @@ export default function DashboardProfileClient() {
     list: string[],
     setList: (v: string[]) => void,
     setInput: (v: string) => void,
-    max: number
+    max: number,
   ) {
     if (e.key === "Enter" || e.key === ",") {
       e.preventDefault();
@@ -294,7 +313,7 @@ export default function DashboardProfileClient() {
   const countriesByRegion = getCountriesByRegion();
   const filteredCountries = countrySearch.trim()
     ? COUNTRIES.filter((c) =>
-        c.name.toLowerCase().includes(countrySearch.toLowerCase())
+        c.name.toLowerCase().includes(countrySearch.toLowerCase()),
       )
     : null;
 
@@ -323,7 +342,8 @@ export default function DashboardProfileClient() {
               Company Profile
             </h1>
             <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-              Manage your profile and briefing preferences. Changes take effect from the next day&apos;s briefing.
+              Manage your profile and daily scan preferences. Changes take
+              effect from the next daily scan.
             </p>
           </div>
           <Link
@@ -337,8 +357,11 @@ export default function DashboardProfileClient() {
         {isPreview && (
           <div className="mt-8 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#c8922a]/30 bg-[#c8922a]/5 px-5 py-3 dark:bg-[#c8922a]/10">
             <p className="text-sm text-zinc-700 dark:text-zinc-300">
-              <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">Preview mode.</span>{" "}
-              Your profile is saved, but briefings don&apos;t generate until you subscribe.
+              <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                Preview mode.
+              </span>{" "}
+              Your profile is saved, but daily scans don&apos;t run until you
+              subscribe.
             </p>
             <Link
               href="/pricing"
@@ -395,8 +418,12 @@ export default function DashboardProfileClient() {
                 />
               </div>
 
-              {successSection === "basics" && <div className={successMsg}>Changes saved.</div>}
-              {errorSection === "basics" && <div className={errorMsgClass}>{errorMessage}</div>}
+              {successSection === "basics" && (
+                <div className={successMsg}>Changes saved.</div>
+              )}
+              {errorSection === "basics" && (
+                <div className={errorMsgClass}>{errorMessage}</div>
+              )}
               <button
                 onClick={() =>
                   saveSection("basics", {
@@ -429,7 +456,7 @@ export default function DashboardProfileClient() {
                           setSelectedRegions((prev) =>
                             prev.includes(region.id)
                               ? prev.filter((r) => r !== region.id)
-                              : [...prev, region.id]
+                              : [...prev, region.id],
                           )
                         }
                         className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all ${
@@ -467,13 +494,25 @@ export default function DashboardProfileClient() {
                         <button
                           key={slug}
                           onClick={() =>
-                            setSelectedCountries((prev) => prev.filter((c) => c !== slug))
+                            setSelectedCountries((prev) =>
+                              prev.filter((c) => c !== slug),
+                            )
                           }
                           className="inline-flex items-center gap-1 rounded-full border border-[#c8922a]/30 bg-[#c8922a]/10 px-2.5 py-0.5 text-xs font-medium text-[#c8922a] hover:bg-[#c8922a]/20"
                         >
                           {country.flag} {country.name}
-                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                          <svg
+                            width="10"
+                            height="10"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
                           </svg>
                         </button>
                       );
@@ -484,7 +523,9 @@ export default function DashboardProfileClient() {
                 <div className="mt-2 max-h-40 overflow-y-auto rounded-xl border border-black/[0.07] dark:border-white/[0.07]">
                   {filteredCountries ? (
                     filteredCountries.length === 0 ? (
-                      <p className="px-4 py-3 text-sm text-zinc-400">No countries found.</p>
+                      <p className="px-4 py-3 text-sm text-zinc-400">
+                        No countries found.
+                      </p>
                     ) : (
                       filteredCountries.map((c) => (
                         <CountryRow
@@ -495,40 +536,46 @@ export default function DashboardProfileClient() {
                             setSelectedCountries((prev) =>
                               prev.includes(c.slug)
                                 ? prev.filter((x) => x !== c.slug)
-                                : [...prev, c.slug]
+                                : [...prev, c.slug],
                             )
                           }
                         />
                       ))
                     )
                   ) : (
-                    Object.entries(countriesByRegion).map(([region, countries]) => (
-                      <div key={region}>
-                        <div className="sticky top-0 bg-[#f8f7f4] px-4 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:bg-[#0f0f0f] dark:text-zinc-600">
-                          {region}
+                    Object.entries(countriesByRegion).map(
+                      ([region, countries]) => (
+                        <div key={region}>
+                          <div className="sticky top-0 bg-[#f8f7f4] px-4 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:bg-[#0f0f0f] dark:text-zinc-600">
+                            {region}
+                          </div>
+                          {countries.map((c) => (
+                            <CountryRow
+                              key={c.slug}
+                              country={c}
+                              isSelected={selectedCountries.includes(c.slug)}
+                              onToggle={() =>
+                                setSelectedCountries((prev) =>
+                                  prev.includes(c.slug)
+                                    ? prev.filter((x) => x !== c.slug)
+                                    : [...prev, c.slug],
+                                )
+                              }
+                            />
+                          ))}
                         </div>
-                        {countries.map((c) => (
-                          <CountryRow
-                            key={c.slug}
-                            country={c}
-                            isSelected={selectedCountries.includes(c.slug)}
-                            onToggle={() =>
-                              setSelectedCountries((prev) =>
-                                prev.includes(c.slug)
-                                  ? prev.filter((x) => x !== c.slug)
-                                  : [...prev, c.slug]
-                              )
-                            }
-                          />
-                        ))}
-                      </div>
-                    ))
+                      ),
+                    )
                   )}
                 </div>
               </div>
 
-              {successSection === "geography" && <div className={successMsg}>Changes saved.</div>}
-              {errorSection === "geography" && <div className={errorMsgClass}>{errorMessage}</div>}
+              {successSection === "geography" && (
+                <div className={successMsg}>Changes saved.</div>
+              )}
+              {errorSection === "geography" && (
+                <div className={errorMsgClass}>{errorMessage}</div>
+              )}
               <button
                 onClick={() =>
                   saveSection("geography", {
@@ -553,7 +600,7 @@ export default function DashboardProfileClient() {
             <div className="mt-5 space-y-5">
               <TaxonomyCombobox
                 label="Tracked themes"
-                helpText="Topics your briefing should prioritise."
+                helpText="Topics your daily scan should prioritise."
                 value={trackedThemes}
                 onChange={setTrackedThemes}
                 catalog={THEME_CATALOG}
@@ -587,8 +634,12 @@ export default function DashboardProfileClient() {
                 customPlaceholder="Add custom exposure"
               />
 
-              {successSection === "tracking" && <div className={successMsg}>Changes saved.</div>}
-              {errorSection === "tracking" && <div className={errorMsgClass}>{errorMessage}</div>}
+              {successSection === "tracking" && (
+                <div className={successMsg}>Changes saved.</div>
+              )}
+              {errorSection === "tracking" && (
+                <div className={errorMsgClass}>{errorMessage}</div>
+              )}
               <button
                 onClick={() =>
                   saveSection("tracking", {
@@ -610,7 +661,9 @@ export default function DashboardProfileClient() {
             <h2 className={sectionHeader}>Risk priorities</h2>
             <div className="mt-5 space-y-4">
               <div className="flex items-baseline justify-between">
-                <label className={labelClass}>Select up to {MAX_RISK_PRIORITIES}</label>
+                <label className={labelClass}>
+                  Select up to {MAX_RISK_PRIORITIES}
+                </label>
                 <span className="text-xs text-zinc-400 dark:text-zinc-600">
                   {riskPriorities.length}/{MAX_RISK_PRIORITIES}
                 </span>
@@ -618,8 +671,10 @@ export default function DashboardProfileClient() {
               <div className="flex flex-wrap gap-2">
                 {RISK_PRIORITIES.map((risk) => {
                   const isActive = riskPriorities.includes(risk.id);
-                  const colors = COLOR_CLASSES[risk.color] || COLOR_CLASSES.zinc;
-                  const atLimit = riskPriorities.length >= MAX_RISK_PRIORITIES && !isActive;
+                  const colors =
+                    COLOR_CLASSES[risk.color] || COLOR_CLASSES.zinc;
+                  const atLimit =
+                    riskPriorities.length >= MAX_RISK_PRIORITIES && !isActive;
                   return (
                     <button
                       key={risk.id}
@@ -628,8 +683,8 @@ export default function DashboardProfileClient() {
                           prev.includes(risk.id)
                             ? prev.filter((r) => r !== risk.id)
                             : prev.length >= MAX_RISK_PRIORITIES
-                            ? prev
-                            : [...prev, risk.id]
+                              ? prev
+                              : [...prev, risk.id],
                         )
                       }
                       disabled={atLimit}
@@ -637,8 +692,8 @@ export default function DashboardProfileClient() {
                         isActive
                           ? colors.active
                           : atLimit
-                          ? "border-zinc-800/30 text-zinc-600/40 cursor-not-allowed"
-                          : colors.idle
+                            ? "border-zinc-800/30 text-zinc-600/40 cursor-not-allowed"
+                            : colors.idle
                       }`}
                     >
                       {risk.label}
@@ -647,8 +702,12 @@ export default function DashboardProfileClient() {
                 })}
               </div>
 
-              {successSection === "risks" && <div className={successMsg}>Changes saved.</div>}
-              {errorSection === "risks" && <div className={errorMsgClass}>{errorMessage}</div>}
+              {successSection === "risks" && (
+                <div className={successMsg}>Changes saved.</div>
+              )}
+              {errorSection === "risks" && (
+                <div className={errorMsgClass}>{errorMessage}</div>
+              )}
               <button
                 onClick={() =>
                   saveSection("risks", { risk_priorities: riskPriorities })
@@ -667,7 +726,7 @@ export default function DashboardProfileClient() {
             <div className="mt-5 space-y-5">
               {/* Depth */}
               <div>
-                <label className={labelClass}>Briefing depth</label>
+                <label className={labelClass}>Scan detail</label>
                 <div className="mt-2 space-y-2">
                   {BRIEFING_DEPTHS.map((depth) => (
                     <button
@@ -713,7 +772,9 @@ export default function DashboardProfileClient() {
                     className={inputClass}
                   >
                     {DELIVERY_TIMES.map((t) => (
-                      <option key={t} value={t}>{t}</option>
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -725,7 +786,9 @@ export default function DashboardProfileClient() {
                     className={inputClass}
                   >
                     {Intl.supportedValuesOf("timeZone").map((tz) => (
-                      <option key={tz} value={tz}>{tz.replace(/_/g, " ")}</option>
+                      <option key={tz} value={tz}>
+                        {tz.replace(/_/g, " ")}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -738,7 +801,9 @@ export default function DashboardProfileClient() {
                   <button
                     onClick={() => setEmailEnabled(!emailEnabled)}
                     className={`relative h-6 w-11 rounded-full transition-colors ${
-                      emailEnabled ? "bg-[#c8922a]" : "bg-zinc-300 dark:bg-zinc-700"
+                      emailEnabled
+                        ? "bg-[#c8922a]"
+                        : "bg-zinc-300 dark:bg-zinc-700"
                     }`}
                   >
                     <span
@@ -758,16 +823,34 @@ export default function DashboardProfileClient() {
                       placeholder="Add email address"
                       onAdd={(v) => {
                         if (v.includes("@"))
-                          addTag(v, emailRecipients, setEmailRecipients, setEmailInput, maxRecipients);
+                          addTag(
+                            v,
+                            emailRecipients,
+                            setEmailRecipients,
+                            setEmailInput,
+                            maxRecipients,
+                          );
                       }}
-                      onRemove={(v) => removeTag(v, emailRecipients, setEmailRecipients)}
+                      onRemove={(v) =>
+                        removeTag(v, emailRecipients, setEmailRecipients)
+                      }
                       onKeyDown={(e) => {
                         if (e.key === "Enter" || e.key === ",") {
                           e.preventDefault();
                           if (emailInput.includes("@"))
-                            addTag(emailInput, emailRecipients, setEmailRecipients, setEmailInput, maxRecipients);
+                            addTag(
+                              emailInput,
+                              emailRecipients,
+                              setEmailRecipients,
+                              setEmailInput,
+                              maxRecipients,
+                            );
                         }
-                        if (e.key === "Backspace" && !emailInput && emailRecipients.length > 0) {
+                        if (
+                          e.key === "Backspace" &&
+                          !emailInput &&
+                          emailRecipients.length > 0
+                        ) {
                           setEmailRecipients(emailRecipients.slice(0, -1));
                         }
                       }}
@@ -776,12 +859,17 @@ export default function DashboardProfileClient() {
                 )}
               </div>
 
-              {successSection === "delivery" && <div className={successMsg}>Changes saved.</div>}
-              {errorSection === "delivery" && <div className={errorMsgClass}>{errorMessage}</div>}
+              {successSection === "delivery" && (
+                <div className={successMsg}>Changes saved.</div>
+              )}
+              {errorSection === "delivery" && (
+                <div className={errorMsgClass}>{errorMessage}</div>
+              )}
               <button
                 onClick={() =>
                   saveSection("delivery", {
-                    preferred_briefing_depth: briefingDepth as CompanyProfile["preferred_briefing_depth"],
+                    preferred_briefing_depth:
+                      briefingDepth as CompanyProfile["preferred_briefing_depth"],
                     preferred_delivery_time: deliveryTime,
                     timezone,
                     email_enabled: emailEnabled,
@@ -837,8 +925,18 @@ function TagInput({
               onClick={() => onRemove(tag)}
               className="ml-0.5 text-zinc-400 hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300"
             >
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </button>
           </span>
@@ -849,7 +947,9 @@ function TagInput({
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={onKeyDown}
-            onBlur={() => { if (input.trim()) onAdd(input); }}
+            onBlur={() => {
+              if (input.trim()) onAdd(input);
+            }}
             placeholder={tags.length === 0 ? placeholder : ""}
             className="min-w-[120px] flex-1 border-0 bg-transparent py-1 text-sm text-[#0f0f0f] placeholder:text-zinc-400 focus:outline-none dark:text-[#f0efec] dark:placeholder:text-zinc-600"
           />
@@ -884,7 +984,17 @@ function CountryRow({
       <span className="text-base">{country.flag}</span>
       <span className="flex-1">{country.name}</span>
       {isSelected && (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#c8922a]">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-[#c8922a]"
+        >
           <polyline points="20 6 9 17 4 12" />
         </svg>
       )}

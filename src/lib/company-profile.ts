@@ -52,17 +52,57 @@ export {
 // ---------------------------------------------------------------------------
 
 export const RISK_PRIORITIES = [
-  { id: "supply-chain-disruption", label: "Supply chain disruption", color: "amber" },
-  { id: "commodity-price-volatility", label: "Commodity price volatility", color: "orange" },
-  { id: "geopolitical-conflict", label: "Geopolitical / conflict risk", color: "rose" },
-  { id: "regulatory-policy", label: "Regulatory / policy change", color: "blue" },
-  { id: "trade-tariff-sanctions", label: "Trade / tariff / sanctions risk", color: "violet" },
-  { id: "currency-financial", label: "Currency / financial market risk", color: "emerald" },
-  { id: "climate-environmental", label: "Climate / weather / environmental risk", color: "teal" },
+  {
+    id: "supply-chain-disruption",
+    label: "Supply chain disruption",
+    color: "amber",
+  },
+  {
+    id: "commodity-price-volatility",
+    label: "Commodity price volatility",
+    color: "orange",
+  },
+  {
+    id: "geopolitical-conflict",
+    label: "Geopolitical / conflict risk",
+    color: "rose",
+  },
+  {
+    id: "regulatory-policy",
+    label: "Regulatory / policy change",
+    color: "blue",
+  },
+  {
+    id: "trade-tariff-sanctions",
+    label: "Trade / tariff / sanctions risk",
+    color: "violet",
+  },
+  {
+    id: "currency-financial",
+    label: "Currency / financial market risk",
+    color: "emerald",
+  },
+  {
+    id: "climate-environmental",
+    label: "Climate / weather / environmental risk",
+    color: "teal",
+  },
   { id: "cyber-technology", label: "Cyber / technology risk", color: "cyan" },
-  { id: "reputation-narrative", label: "Reputation / narrative risk", color: "fuchsia" },
-  { id: "energy-price", label: "Energy price / availability risk", color: "amber" },
-  { id: "food-water-security", label: "Food / water security risk", color: "lime" },
+  {
+    id: "reputation-narrative",
+    label: "Reputation / narrative risk",
+    color: "fuchsia",
+  },
+  {
+    id: "energy-price",
+    label: "Energy price / availability risk",
+    color: "amber",
+  },
+  {
+    id: "food-water-security",
+    label: "Food / water security risk",
+    color: "lime",
+  },
   { id: "labour-workforce", label: "Labour / workforce risk", color: "sky" },
 ] as const;
 
@@ -71,13 +111,25 @@ export type RiskPriorityId = (typeof RISK_PRIORITIES)[number]["id"];
 export const MAX_RISK_PRIORITIES = 5;
 
 // ---------------------------------------------------------------------------
-// Briefing depth options
+// Daily scan detail options
 // ---------------------------------------------------------------------------
 
 export const BRIEFING_DEPTHS = [
-  { id: "executive_summary", label: "Executive Summary", description: "Key headlines only, under 200 words" },
-  { id: "standard", label: "Standard", description: "Full briefing with context, ~500 words" },
-  { id: "detailed", label: "Detailed", description: "In-depth analysis with regional framing, ~800 words" },
+  {
+    id: "executive_summary",
+    label: "Compact",
+    description: "Key findings only",
+  },
+  {
+    id: "standard",
+    label: "Standard",
+    description: "Topic-by-topic daily scan",
+  },
+  {
+    id: "detailed",
+    label: "Detailed",
+    description: "More findings and source-trail context",
+  },
 ] as const;
 
 // ---------------------------------------------------------------------------
@@ -85,6 +137,15 @@ export const BRIEFING_DEPTHS = [
 // ---------------------------------------------------------------------------
 
 export const DELIVERY_TIMES = [
-  "05:00", "05:30", "06:00", "06:30", "07:00", "07:30",
-  "08:00", "08:30", "09:00", "09:30", "10:00",
+  "05:00",
+  "05:30",
+  "06:00",
+  "06:30",
+  "07:00",
+  "07:30",
+  "08:00",
+  "08:30",
+  "09:00",
+  "09:30",
+  "10:00",
 ] as const;

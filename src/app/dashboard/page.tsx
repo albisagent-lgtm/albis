@@ -7,6 +7,7 @@ import {
   BriefingEmpty,
   type BriefingContent,
 } from "@/app/components/briefing-renderer";
+import type { CompanyBriefingGenerationOutput } from "@/lib/company-scan/types";
 import {
   isSubscriptionActive,
   isInGracePeriod,
@@ -15,7 +16,7 @@ import {
 
 export const metadata = {
   title: "Dashboard — Albis",
-  description: "Your personalised intelligence dashboard.",
+  description: "Your company daily scan dashboard.",
 };
 
 // Auth-gated. Middleware refreshes the session; rendering pulls the current
@@ -28,9 +29,16 @@ interface Briefing {
   id: string;
   briefing_date: string;
   status: string;
-  briefing_content: BriefingContent | null;
+  briefing_content: BriefingContent | CompanyBriefingGenerationOutput | null;
   stories_considered: number;
   stories_selected: number;
+}
+
+interface CompanyProfileSummary {
+  id: string;
+  created_at: string;
+  tracked_themes: string[] | null;
+  watchlist_entities: string[] | null;
 }
 
 export default async function DashboardPage() {
@@ -45,12 +53,14 @@ export default async function DashboardPage() {
   const [profileRes, companyRes] = await Promise.all([
     supabase
       .from("profiles")
-      .select("subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at")
+      .select(
+        "subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at",
+      )
       .eq("id", user.id)
       .single(),
     supabase
       .from("company_profiles")
-      .select("id, created_at")
+      .select("id, created_at, tracked_themes, watchlist_entities")
       .eq("owner_id", user.id)
       .single(),
   ]);
@@ -63,7 +73,7 @@ export default async function DashboardPage() {
     trial_end_at: profileRes.data?.trial_end_at ?? null,
   };
 
-  const profile = companyRes.data;
+  const profile = companyRes.data as CompanyProfileSummary | null;
 
   // Without a company profile there's nothing briefing-shaped to render —
   // fall through to the empty state. Used to be an early `return` inside the
@@ -80,7 +90,7 @@ export default async function DashboardPage() {
       supabase
         .from("company_briefings")
         .select(
-          "id, briefing_date, status, briefing_content, stories_considered, stories_selected"
+          "id, briefing_date, status, briefing_content, stories_considered, stories_selected",
         )
         .eq("company_profile_id", profile.id)
         .order("briefing_date", { ascending: false })
@@ -117,7 +127,7 @@ export default async function DashboardPage() {
   const daysSinceSignup = profile
     ? Math.floor(
         (Date.now() - new Date(profile.created_at).getTime()) /
-          (1000 * 60 * 60 * 24)
+          (1000 * 60 * 60 * 24),
       )
     : 0;
 
@@ -135,10 +145,10 @@ export default async function DashboardPage() {
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#c8922a]/30 bg-[#c8922a]/5 p-5 dark:bg-[#c8922a]/10">
           <div>
             <p className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-              Subscribe to activate your daily briefing
+              Subscribe to activate your daily scan
             </p>
             <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-              Your profile is saved in preview mode. Briefings start generating
+              Your profile is saved in preview mode. Daily scans start running
               the day after you subscribe.
             </p>
           </div>
@@ -153,21 +163,22 @@ export default async function DashboardPage() {
 
       <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
         <StatCard label="Days active" value={String(daysSinceSignup)} />
-        <StatCard label="Briefings" value={String(briefingsReceived)} />
+        <StatCard label="Daily scans" value={String(briefingsReceived)} />
         <StatCard
-          label="Stories scored"
+          label="Topics monitored"
           value={
-            briefing?.stories_considered
-              ? String(briefing.stories_considered)
+            profile
+              ? String(
+                  (profile.tracked_themes?.length || 0) +
+                    (profile.watchlist_entities?.length || 0),
+                )
               : "—"
           }
         />
         <StatCard
-          label="Stories selected"
+          label="Findings today"
           value={
-            briefing?.stories_selected
-              ? String(briefing.stories_selected)
-              : "—"
+            briefing?.stories_selected ? String(briefing.stories_selected) : "—"
           }
         />
       </div>
@@ -175,7 +186,7 @@ export default async function DashboardPage() {
       {topThemes.length > 0 && (
         <div className="mb-8">
           <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
-            Top themes this week
+            Active topics this week
           </p>
           <div className="mt-2 flex flex-wrap gap-2">
             {topThemes.map((theme) => (
@@ -206,14 +217,14 @@ export default async function DashboardPage() {
             href={`/dashboard/briefing/${briefing?.briefing_date}`}
             className="text-sm text-zinc-400 transition-colors hover:text-[#0f0f0f] dark:text-zinc-500 dark:hover:text-[#f0efec]"
           >
-            View full briefing
+            View full scan
           </Link>
         )}
         <Link
           href="/dashboard/briefings"
           className="text-sm text-zinc-400 transition-colors hover:text-[#0f0f0f] dark:text-zinc-500 dark:hover:text-[#f0efec]"
         >
-          Briefing archive
+          Scan archive
         </Link>
         <Link
           href="/dashboard/profile"

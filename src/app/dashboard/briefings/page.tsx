@@ -1,8 +1,8 @@
 import BriefingsArchiveClient from "./briefings-archive-client";
 
 export const metadata = {
-  title: "Briefing Archive — Albis",
-  description: "Browse your past intelligence briefings.",
+  title: "Daily Scan Archive — Albis",
+  description: "Browse your past company daily scans.",
 };
 
 export default function BriefingsArchivePage() {

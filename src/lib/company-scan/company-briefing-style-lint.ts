@@ -86,6 +86,17 @@ const BANNED_PHRASES_BLOCKING: Array<{ pattern: RegExp; label: string }> = [
   { pattern: /\bthe\s+useful\s+distinction\s+is\b/i, label: "internal distinction rail" },
   { pattern: /\bsignal\s+showed\s+up\b/i, label: "internal signal rail" },
   { pattern: /\bcompany[- ]specific\s+scan\b/i, label: "internal scan rail" },
+  { pattern: /\bthe\s+scan\s+picked\s+up\b/i, label: "internal scan reasoning" },
+  { pattern: /\bpicked\s+up\b/i, label: "internal scan reasoning" },
+  { pattern: /\bit\s+belongs\s+here\b/i, label: "internal scan reasoning" },
+  { pattern: /\bbelongs\s+here\s+because\b/i, label: "internal scan reasoning" },
+  { pattern: /\brelevant\s+because\b/i, label: "internal relevance reasoning" },
+  { pattern: /\bselected\s+because\b/i, label: "internal selection reasoning" },
+  { pattern: /\bmatched\s+scan\s+area\b/i, label: "internal matching reasoning" },
+  { pattern: /\bthis\s+item\s+was\s+selected\b/i, label: "internal selection reasoning" },
+  { pattern: /\boperational\s+exposure\b/i, label: "consultant filler" },
+  { pattern: /\bmaterial\s+implications\b/i, label: "consultant filler" },
+  { pattern: /\bthis\s+matters\s+because\b/i, label: "generated analysis rail" },
   { pattern: /\bshocking\b/i, label: "shocking" },
   { pattern: /\bexplosive\b/i, label: "explosive" },
   { pattern: /\bbombshell\b/i, label: "bombshell" },
@@ -447,13 +458,17 @@ export function lintBriefingStyle(output: CompanyBriefingGenerationOutput): Styl
     for (let ii = 0; ii < section.items.length; ii++) {
       const item = section.items[ii];
       if (item.title?.text && item.body?.text && textLooksRepeated(item.title.text, item.body.text)) {
+        const bodyWordCount = countWords(item.body.text);
+        const hasConcreteDetail = /\b(Hormuz|Suez|Red Sea|Bab el-Mandeb|traffic|freight|rates?|vessel|ports?|corridors?|routes?|LNG|disruption|insurance|sanction|tariff|policy|regulator|state media|foreign minister|Putin|Iran|Russia|North Korea|Kim|deepfake|arrested|charged|law|Monday|Tuesday|Wednesday|Thursday|Friday|\d+\s?%|\$\d+|million|weeks?|months?|pre-war)\b/i.test(item.body.text);
+        const dailyScan = output.scanner_report?.layout_version === "company_daily_scan_v1";
+        const genuinelyRepeatedOnly = dailyScan ? bodyWordCount < 14 || !hasConcreteDetail : bodyWordCount < 22 || !hasConcreteDetail;
         issues.push({
           code: "SCANNER_REPEATED_TITLE_BODY",
-          severity: output.scanner_report?.enabled ? "blocking" : "warning",
+          severity: output.scanner_report?.enabled && genuinelyRepeatedOnly ? "blocking" : "warning",
           location: `sections[${si}].items[${ii}].body`,
           text: item.body.text.slice(0, 140),
           message: "Scanner finding body repeats the title/headline instead of adding the useful fact and scan-area reason.",
-          suggested_fix: "Write the body as: what registered, the concrete useful fact, and why it belongs in this scan area.",
+          suggested_fix: "Present the source-grounded finding directly. Do not add internal scan reasoning."
         });
       }
     }

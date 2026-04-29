@@ -1,10 +1,10 @@
 // ---------------------------------------------------------------------------
-// Package 10E — Weighted company scan-area intelligence report.
+// Company Daily Scan V1 — topic-first monitoring presentation.
 //
-// Albis is a scanner first. This layout makes every requested scan area visible,
-// keeps generic industry explanation out of customer copy, writes fact-rich
-// findings from evidence, gives three cross-area deeper reads, and keeps the
-// full source trail in the dashboard. No external calls and no side effects.
+// The scan is the product. Customer copy presents what was found, grouped by
+// the company's selected topics. Internal scanner reasoning stays internal; no
+// relevance explanations, generated analysis, or source trails appear in item
+// bodies. No external calls and no side effects.
 // ---------------------------------------------------------------------------
 
 import type {
@@ -204,48 +204,46 @@ function extractUsefulFacts(packetItem: EvidenceEmailItem | undefined, signal: S
 
 function sourceUrlLine(packetItem: EvidenceEmailItem | undefined, signal: Signal): string {
   const source = packetItem?.source_summary.anchor?.source_display_name || sourceName(signal.source_domain);
-  return `Source trail: ${source}.`;
-}
-
-function usefulMeaning(sectionLabel: string, facts: string[], signal: Signal): string {
-  const combined = `${facts.join(" ")} ${signal.headline} ${signal.summary}`.toLowerCase();
-  if (/tender|urea|fertili[sz]er|ammonia|potash|phosphate/.test(combined)) {
-    return "It belongs here because buying, export policy, or input costs can change fertiliser availability and pricing.";
-  }
-  if (/insurance|freight|rate|traffic|vessel|port call|shipping|hormuz|suez|red sea|corridor/.test(combined)) {
-    return "It belongs here because practical route use can move differently from political access claims.";
-  }
-  if (/sanction|tariff|export|restriction|quota|policy|regulator/.test(combined)) {
-    return "It belongs here because the policy constraint changes who can trade, ship, or finance the activity.";
-  }
-  if (/deepfake|ai|misinformation|disinformation|censor|press|media|journalis/.test(combined)) {
-    return "It belongs here because it changes trust, publication, identity, or distribution conditions.";
-  }
-  return `It belongs in ${sectionLabel} because it adds a current fact to the scan, not background industry knowledge.`;
+  const language = signal.source_language ? signal.source_language.toUpperCase() : "";
+  const region = signal.source_region || (signal.regions || [])[0] || "";
+  const date = signal.signal_date || signal.created_at || "";
+  return [source, region, language, date].map(cleanText).filter(Boolean).join(" · ");
 }
 
 function findingBody(packet: CompanyBriefingEvidencePacket, selected: SelectedSignalForDepth, packetItem: EvidenceEmailItem | undefined): string {
   const signal = selected.signal;
-  const sectionLabel = labelForSection(packet, selected.section_ids[0]);
   const headline = titleForSignal(signal);
   const rawHeadline = cleanText(signal.headline || "");
   const facts = extractUsefulFacts(packetItem, signal);
   const summary = cleanText(signal.summary || "");
   const fallbackFact = summary && !isNearDuplicate(headline, summary) && !isNearDuplicate(rawHeadline, summary)
-    ? sentence(trimWords(summary, 28))
-    : `A selected source reported a current ${sectionLabel} development.`;
+    ? sentence(trimWords(summary, 32))
+    : sentence(headline);
   const factLine = facts.length ? facts.map(sentence).join(" ") : fallbackFact;
-  const meaning = usefulMeaning(sectionLabel, facts, signal);
-  const regions = (signal.regions || []).slice(0, 3).join(", ");
-  const context = regions ? `Region noted: ${regions}.` : "";
-  const opening = factLine ? `The scan picked up ${factLine.charAt(0).toLowerCase()}${factLine.slice(1)}` : `The scan picked up a current ${sectionLabel} development.`;
-  return cleanText(`${opening} ${meaning} ${sourceUrlLine(packetItem, signal)} ${context}`);
+  const regions = uniq([...(signal.regions || []), signal.source_region || ""]).slice(0, 3).join(", ");
+  const regionLine = regions ? `Regions: ${regions}.` : "";
+  return cleanText(`${factLine} ${regionLine}`);
 }
 
 function titleForFinding(packet: CompanyBriefingEvidencePacket, selected: SelectedSignalForDepth): string {
   const label = labelForSection(packet, selected.section_ids[0]);
   const title = titleForSignal(selected.signal);
-  return trimWords(`${label}: ${title}`, 20);
+  return trimWords(title || label, 20);
+}
+
+function isBrokenFindingBody(text: string, title = ""): boolean {
+  const clean = cleanText(text);
+  const wordCount = clean.split(/\s+/).filter(Boolean).length;
+  const normalizedBody = clean.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  const normalizedTitle = cleanText(title).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  if (wordCount < 10) return true;
+  if (wordCount < 16 && normalizedTitle && (normalizedTitle.includes(normalizedBody) || normalizedBody.includes(normalizedTitle))) return true;
+  // Preserve small useful gems, but hold back malformed fragments where the
+  // source snippet ended mid-thought before the daily scan body could become useful.
+  if (wordCount < 24 && /(?:—|–|-|,)\s*(?:typically|usually|averaging|including|with|and|or)?\.?\s*$/i.test(clean)) return true;
+  if (/\b(?:obstr|incl|interr|approxim|averag)\.$/i.test(clean)) return true;
+  if (/\b(?:home|read more|click here)\b/i.test(clean) && wordCount < 28) return true;
+  return false;
 }
 
 function buildFindingItem(
@@ -267,6 +265,7 @@ function buildFindingItem(
     body: { text: bodyText, supported_by: refs, evidence_confidence: confidence },
     uncertainty_line: uncertaintyText ? { text: cleanText(uncertaintyText), supported_by: refs, evidence_confidence: confidence } : undefined,
     source_attribution: { text: sourceUrlLine(packetItem, selected.signal), supported_by: refs, evidence_confidence: confidence },
+    source_url: selected.signal.source_url || undefined,
     claim_map: claimMapForItem(selected.item_id, bodyText, refs),
   };
 }
@@ -276,18 +275,15 @@ type ScanAreaCoverageState = "active" | "no_direct_signal" | "related_signal_els
 function coverageLineForArea(areaLabel: string, areaId: string, state: ScanAreaCoverageState, relatedLabels: string[] = []): string {
   const lower = `${areaLabel} ${areaId}`.toLowerCase();
   if (state === "related_signal_elsewhere") {
-    return `${areaLabel} did not need a separate Main Findings item today; the related evidence is covered under ${relatedLabels.slice(0, 3).join(", ") || "another active scan area"}.`;
+    return `No separate major coverage found today. Related coverage appears under ${relatedLabels.slice(0, 3).join(", ") || "another active topic"}.`;
   }
   if (state === "context_only_signal") {
-    return `${areaLabel} had background evidence today, but no separate direct item was clearer than the Main Findings already shown. The source trail keeps the context available.`;
+    return "No major movement found in the last 24 hours.";
   }
-  if (/fertili[sz]er|urea|ammonia|potash|phosphate/.test(lower)) {
-    return "Fertiliser was scanned today. The source trail did not contain a separate direct tender, export-policy, price, gas-input, or trade-flow item clear enough to add to Main Findings.";
+  if (/fertili[sz]er|urea|ammonia|potash|phosphate|semiconductor|chip/.test(lower)) {
+    return "No major coverage found in the last 24 hours.";
   }
-  if (/semiconductor|chip/.test(lower)) {
-    return "Semiconductors were scanned today. The source trail did not contain a separate direct supply, tariff, export-control, capacity, or shipping item clear enough to add to Main Findings.";
-  }
-  return `${areaLabel} was scanned today. The source trail did not contain a separate direct item clear enough to add to Main Findings.`;
+  return "No major coverage found in the last 24 hours.";
 }
 
 function buildScanAreaSummary(
@@ -303,24 +299,8 @@ function buildScanAreaSummary(
   const factSignals = selected
     .map((item) => cleanText(`${item.signal.headline} ${item.signal.summary}`))
     .filter((text) => FACT_KEYWORDS.test(text)).length;
-  const text = `${items.length} finding${items.length === 1 ? "" : "s"} appeared in Main Findings. ${factSignals} included concrete data, policy, route, rate, tender, traffic, or operational detail. Source trail includes ${sources.join(", ")}.`;
+  const text = `${items.length} finding${items.length === 1 ? "" : "s"} found. ${factSignals} included concrete data, policy, route, rate, tender, traffic, or operational detail. Sources include ${sources.join(", ")}.`;
   return { text, supported_by: items.flatMap((item) => item.body.supported_by).slice(0, 12) };
-}
-
-function buildDeeperReadFromBundle(bundle: IntelligenceDepthBundle): GeneratedBriefingItem {
-  const refs = bundle.claim_ids.length ? bundle.claim_ids.map((id) => ({ type: "claim_id", id } as EvidenceSupportRef)) : bundle.source_refs;
-  const confidence = bundle.evidence_confidence;
-  const sourceLine = bundle.source_names.length ? `Source trail includes ${bundle.source_names.slice(0, 4).join(", ")}.` : "Based on selected scan evidence.";
-  const body = cleanText(`${sentence(bundle.what_happened[0]?.text || bundle.heading)} ${sentence(bundle.what_is_changing[0]?.text || "")} ${sentence(bundle.analyst_observation.body)} ${sourceLine}`);
-  return {
-    generated_item_id: `pkg10e_deeper_${bundle.bundle_id}`,
-    packet_item_id: bundle.anchor_item_id,
-    cluster_id: bundle.anchor_cluster_id,
-    title: { text: bundle.heading, supported_by: refs, evidence_confidence: confidence },
-    body: { text: body, supported_by: refs, evidence_confidence: confidence },
-    source_attribution: { text: sourceLine, supported_by: refs, evidence_confidence: confidence },
-    claim_map: claimMapForItem(bundle.anchor_item_id, body, refs),
-  };
 }
 
 function buildOverview(
@@ -330,12 +310,11 @@ function buildOverview(
 ): GeneratedText {
   const active = scanAreas.filter((area) => area.status === "active");
   const nonActive = scanAreas.filter((area) => area.status !== "active");
-  const activeLabels = active.map((area) => area.label).slice(0, 8);
   const nonActiveLabels = nonActive.map((area) => area.label).slice(0, 6);
-  const coverageLine = nonActive.length ? `Coverage notes for ${nonActiveLabels.join(", ")}${nonActive.length > nonActiveLabels.length ? ` and ${nonActive.length - nonActiveLabels.length} more` : ""} stay on the dashboard.` : "Every requested area produced a Main Findings item.";
+  const coverageLine = nonActive.length ? `${nonActive.length} topic${nonActive.length === 1 ? "" : "s"} were quiet: ${nonActiveLabels.join(", ")}${nonActive.length > nonActiveLabels.length ? ` and ${nonActive.length - nonActiveLabels.length} more` : ""}.` : "Every tracked topic had coverage.";
   const text = selected.length
-    ? `Albis scanned ${packet.company.selected_scan_areas.length} requested areas and ${packet.input_summary.raw_articles_count} items for ${packet.company.display_name}. ${active.length} areas produced concrete Main Findings: ${activeLabels.join(", ")}. ${coverageLine} The report shows selected source references and keeps the full source trail on the dashboard.`
-    : `Albis scanned ${packet.company.selected_scan_areas.length} requested areas and ${packet.input_summary.raw_articles_count} items for ${packet.company.display_name}. The scan did not find a separate direct item clear enough for Main Findings today; selected source references and the full source trail remain available on the dashboard.`;
+    ? `${packet.company.selected_scan_areas.length} tracked topics checked. ${active.length} had coverage. ${coverageLine} ${packet.input_summary.raw_articles_count} source items were considered.`
+    : `${packet.company.selected_scan_areas.length} tracked topics checked. No major coverage was found in the last 24 hours. ${packet.input_summary.raw_articles_count} source items were considered.`;
   const refs = selected.flatMap(supportRefsForSelected).slice(0, 12);
   return { text, supported_by: refs };
 }
@@ -385,14 +364,6 @@ function buildScannerAreas(
   });
 }
 
-function buildObservations(bundles: IntelligenceDepthBundle[]): GeneratedText[] {
-  return bundles.slice(0, 3).map((bundle) => ({
-    text: cleanText(bundle.analyst_observation.body),
-    supported_by: bundle.claim_ids.map((id) => ({ type: "claim_id", id })),
-    evidence_confidence: bundle.evidence_confidence,
-  }));
-}
-
 function completeObservations(
   observations: GeneratedText[],
   scanAreas: GeneratedScannerReportArea[],
@@ -406,13 +377,13 @@ function completeObservations(
   const additions: GeneratedText[] = [];
   if (activeLabels.length) {
     additions.push({
-      text: cleanText(`The scan is concentrated in ${activeLabels.join(", ")}. That points to live route and operating-condition evidence rather than a broad all-category shift across every requested area.`),
+      text: cleanText(`Watch ${activeLabels.join(", ")} for follow-up coverage over the next 24–72 hours.`),
       supported_by: refs,
     });
   }
   if (coverageLabels.length) {
     additions.push({
-      text: cleanText(`${coverageLabels.join(", ")} stayed in dashboard coverage notes. That does not mean they were ignored; it means the scan did not find a separate direct item stronger than the Main Findings already shown.`),
+      text: cleanText(`${coverageLabels.join(", ")} were quiet today; any new coverage there may stand out tomorrow.`),
       supported_by: refs,
     });
   }
@@ -425,7 +396,7 @@ export function applyScannerReportLayout(input: {
   selected: SelectedSignalForDepth[];
   bundles: IntelligenceDepthBundle[];
 }): CompanyBriefingGenerationOutput {
-  const { output, packet, selected, bundles } = input;
+  const { output, packet, selected } = input;
   if (packet.company.selected_scan_areas.length === 0) return output;
   const selectedForReport = sortFindingsByPriority(dedupeSelected(selected));
   const packetItems = itemMap(packet);
@@ -469,23 +440,29 @@ export function applyScannerReportLayout(input: {
 
   const sections: GeneratedBriefingSection[] = packet.company.selected_scan_areas.map((area) => {
     const areaItems = sortFindingsByPriority(dedupeSelected(selectedByArea.get(area.area_id) || []));
-    const generatedItems = areaItems.map((item) => buildFindingItem(packet, { ...item, section_ids: [area.area_id] }, packetItems));
+    const generatedItems = areaItems
+      .map((item) => buildFindingItem(packet, { ...item, section_ids: [area.area_id] }, packetItems))
+      .filter((item) => !isBrokenFindingBody(item.body.text, item.title.text));
     return {
       section_id: area.area_id,
       heading: labelForSection(packet, area.area_id),
       items: generatedItems,
+      no_material_signal_line: generatedItems.length
+        ? undefined
+        : { text: "No major coverage found in the last 24 hours.", supported_by: [{ type: "scan_area", id: area.area_id }] },
     };
-  }).filter((section) => section.items.length > 0);
+  });
 
   const scanAreas = buildScannerAreas(packet, sections, selectedByArea, allSelectedByArea, weakPacketItemsByArea);
   const activeSections = sections.filter((section) => section.items.length > 0);
+  const emailSections = sections.filter((section) => section.items.length > 0);
   const nonActiveAreas = scanAreas.filter((area) => area.status !== "active");
   const overview = buildOverview(packet, selectedForReport, scanAreas);
-  const deeperReads = bundles.slice(0, 3).map((bundle) => buildDeeperReadFromBundle(bundle));
+  const deeperReads: GeneratedBriefingItem[] = [];
   const areaRefs = scanAreaRefs(packet);
   const topRefs = selectedForReport.slice(0, 8).flatMap(supportRefsForSelected).slice(0, 20);
   const dashboardLink = output.source_notes.dashboard_link;
-  const observations = completeObservations(buildObservations(bundles), scanAreas, topRefs.length ? topRefs : areaRefs);
+  const observations = completeObservations([], scanAreas, topRefs.length ? topRefs : areaRefs);
 
   return {
     ...output,
@@ -493,23 +470,23 @@ export function applyScannerReportLayout(input: {
       top_line: overview,
       bullets: [
         {
-          text: `Active scan areas: ${activeSections.map((section) => section.heading).slice(0, 8).join(", ") || "none"}.`,
+          text: `Active topics: ${activeSections.map((section) => section.heading).slice(0, 8).join(", ") || "none"}.`,
           supported_by: activeSections.flatMap((section) => section.items.flatMap((item) => item.body.supported_by)).slice(0, 12),
         },
         {
-          text: `Dashboard coverage notes: ${nonActiveAreas.map((area) => area.label).slice(0, 8).join(", ") || "none"}.`,
+          text: `Quiet topics: ${nonActiveAreas.map((area) => area.label).slice(0, 8).join(", ") || "none"}.`,
           supported_by: areaRefs,
         },
         {
-          text: `Selected source references are shown here; the full source trail and coverage notes are available on the dashboard.`,
+          text: `The full source trail and coverage notes are available on the dashboard.`,
           supported_by: topRefs.length ? topRefs : areaRefs,
         },
       ],
     },
-    main_briefing: { sections },
+    main_briefing: { sections: emailSections },
     scanner_report: {
       enabled: true,
-      layout_version: "package10e_weighted_findings_v1",
+      layout_version: "company_daily_scan_v1",
       overview,
       main_findings_count: sections.reduce((sum, section) => sum + section.items.length, 0),
       scan_area_count: packet.company.selected_scan_areas.length,
@@ -526,7 +503,7 @@ export function applyScannerReportLayout(input: {
     source_notes: {
       ...output.source_notes,
       text: {
-        text: `Built from ${packet.input_summary.raw_articles_count} scanned items across ${packet.company.selected_scan_areas.length} requested areas. The email shows concrete scan findings with selected source references; the dashboard keeps the full Wikipedia-style source trail, topic evidence, coverage notes, and excluded noise.`,
+        text: `Built from ${packet.input_summary.raw_articles_count} source items across ${packet.company.selected_scan_areas.length} tracked topics. The email shows the clean daily scan; the dashboard keeps the full source trail, topic evidence, and excluded noise.`,
         supported_by: topRefs.length ? topRefs : areaRefs,
       },
       scanned_count: packet.input_summary.raw_articles_count,
@@ -535,7 +512,7 @@ export function applyScannerReportLayout(input: {
     },
     trace: {
       ...output.trace,
-      generator_version: `${output.trace.generator_version}+package10e_weighted_findings_v1`,
+      generator_version: `${output.trace.generator_version}+company_daily_scan_v1`,
     },
   };
 }

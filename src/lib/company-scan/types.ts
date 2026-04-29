@@ -1440,7 +1440,7 @@ export interface CompanyBriefingGenerationOutput {
 
 export interface GeneratedScannerReport {
   enabled: true;
-  layout_version: "package10c_scanner_report_v1" | "package10d_full_scan_report_v1" | "package10e_weighted_findings_v1";
+  layout_version: "package10c_scanner_report_v1" | "package10d_full_scan_report_v1" | "package10e_weighted_findings_v1" | "company_daily_scan_v1";
   overview: GeneratedText;
   main_findings_count: number;
   scan_area_count: number;
@@ -1489,6 +1489,7 @@ export interface GeneratedBriefingItem {
   uncertainty_line?: GeneratedText;
   perception_gap_note?: GeneratedText;
   source_attribution?: GeneratedText;
+  source_url?: string;
   claim_map: GeneratedClaimMap[];
 }
 

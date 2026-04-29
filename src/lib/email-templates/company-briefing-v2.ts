@@ -192,7 +192,7 @@ function renderMainBriefing(output: CompanyBriefingGenerationOutput): string {
   if (sections.length === 0) return "";
 
   const scanner = output.scanner_report?.enabled;
-  let html = sectionLabel(scanner ? "Main Findings" : "Main Briefing");
+  let html = sectionLabel(scanner ? "Your Daily Scan" : "Main Briefing");
 
   for (const section of sections) {
     html += `<div style="margin-bottom:24px;">`;
@@ -224,9 +224,13 @@ function renderBriefingItem(item: GeneratedBriefingItem, sectionHeading?: string
   // Body
   html += `<p style="font-size:15px;color:${BODY};line-height:1.65;margin:0 0 6px;font-family:-apple-system,sans-serif;">${textHtml(item.body.text)}</p>`;
 
-  // Uncertainty
-  if (item.uncertainty_line?.text) {
-    html += `<p style="font-size:14px;color:${GRAY};line-height:1.6;margin:0 0 6px;font-family:-apple-system,sans-serif;font-style:italic;">${textHtml(item.uncertainty_line.text)}</p>`;
+  if (item.source_attribution?.text) {
+    const sourceText = esc(item.source_attribution.text);
+    if (item.source_url) {
+      html += `<p style="font-size:12px;color:${GRAY};line-height:1.5;margin:0;font-family:-apple-system,sans-serif;"><a href="${escAttr(item.source_url)}" style="color:${GRAY};text-decoration:underline;">${sourceText}</a></p>`;
+    } else {
+      html += `<p style="font-size:12px;color:${GRAY};line-height:1.5;margin:0;font-family:-apple-system,sans-serif;">${sourceText}</p>`;
+    }
   }
 
   html += `</div>`;
@@ -279,7 +283,7 @@ function renderUsefulObservations(output: CompanyBriefingGenerationOutput): stri
   const obs = output.useful_observations.observations;
   if (obs.length === 0) return "";
 
-  let html = sectionLabel("Observations");
+  let html = sectionLabel("Watch Next");
   for (const o of obs) {
     html += `<p style="font-size:15px;color:${BODY};line-height:1.65;margin:0 0 10px;font-family:-apple-system,sans-serif;">
       <span style="color:${AMBER};font-weight:700;">&#x25B6;</span>&nbsp;${esc(o.text)}
@@ -290,18 +294,14 @@ function renderUsefulObservations(output: CompanyBriefingGenerationOutput): stri
 
 function renderSourceNotes(output: CompanyBriefingGenerationOutput): string {
   const sn = output.source_notes;
-  const sectionSources = output.main_briefing.sections
-    .flatMap((section) => section.items)
-    .map((item) => item.source_attribution?.text?.replace(/^Sources:\s*/i, "").replace(/\.$/, ""))
-    .filter((text): text is string => Boolean(text));
-  const uniqueSources = [...new Set(sectionSources.flatMap((text) => text.split(/;\s*/).filter(Boolean)))];
   let html = `<div style="text-align:center;">`;
-  html += `<p style="font-size:13px;color:${GRAY};font-family:-apple-system,sans-serif;margin:0 0 8px;">${esc(sn.text.text)}</p>`;
-  if (uniqueSources.length > 0) {
-    html += `<p style="font-size:12px;color:${GRAY};font-family:-apple-system,sans-serif;margin:0 0 10px;line-height:1.6;"><strong>Sources:</strong> ${esc(uniqueSources.join("; "))}</p>`;
+  html += `<p style="font-size:13px;color:${GRAY};font-family:-apple-system,sans-serif;margin:0 0 10px;">${esc(sn.text.text)}</p>`;
+  if (sn.dashboard_link) {
+    const dashboardLink = safeDashboardLink(sn.dashboard_link);
+    html += `<a href="${escAttr(dashboardLink)}" style="font-size:14px;color:${NAVY};font-weight:700;font-family:-apple-system,sans-serif;text-decoration:underline;">View source trail on Albis →</a>`;
+  } else {
+    html += `<p style="font-size:12px;color:${GRAY};font-family:-apple-system,sans-serif;margin:0;">Source trail available in the dashboard after this briefing is saved.</p>`;
   }
-  const dashboardLink = safeDashboardLink(sn.dashboard_link);
-  html += `<a href="${escAttr(dashboardLink)}" style="font-size:13px;color:${GRAY};font-family:-apple-system,sans-serif;text-decoration:underline;">View full source trail on dashboard →</a>`;
   html += `</div>`;
   return html;
 }

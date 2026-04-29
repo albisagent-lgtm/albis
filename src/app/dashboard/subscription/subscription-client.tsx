@@ -37,7 +37,7 @@ export default function SubscriptionClient() {
       const { data: profileData } = await supabase
         .from("profiles")
         .select(
-          "subscription_status, subscription_tier, subscription_period_end, stripe_customer_id, is_test_account, trial_end_at"
+          "subscription_status, subscription_tier, subscription_period_end, stripe_customer_id, is_test_account, trial_end_at",
         )
         .eq("id", user.id)
         .single();
@@ -144,8 +144,8 @@ export default function SubscriptionClient() {
               {sub.subscription_status === "trialing"
                 ? `Trial ends ${periodEnd}`
                 : active
-                ? `Renews ${periodEnd}`
-                : `Access until ${periodEnd}`}
+                  ? `Renews ${periodEnd}`
+                  : `Access until ${periodEnd}`}
             </p>
           )}
 
@@ -197,56 +197,58 @@ export default function SubscriptionClient() {
         )}
 
         {/* Upgrade options */}
-        {active && sub.subscription_tier && sub.subscription_tier !== "company_intelligence" && (
-          <div className={cardClass}>
-            <h3 className={sectionHeader}>Upgrade</h3>
-            <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
-              Need more capacity? Upgrade to unlock higher limits and additional
-              features.
-            </p>
-            <div className="mt-4 space-y-2">
-              {(PURCHASABLE_TIERS as readonly string[])
-                .filter((t) => {
-                  const order = ["pro", "team", "company_intelligence"];
-                  return (
-                    order.indexOf(t) > order.indexOf(sub.subscription_tier!)
-                  );
-                })
-                .map((tierId) => {
-                  const t = TIERS[tierId];
-                  return (
-                    <Link
-                      key={tierId}
-                      href={`/checkout/${tierId}`}
-                      className="flex items-center justify-between rounded-xl border border-black/[0.07] px-4 py-3 transition-colors hover:bg-black/[0.02] dark:border-white/[0.07] dark:hover:bg-white/[0.03]"
-                    >
-                      <div>
-                        <p className="text-sm font-medium text-[#0f0f0f] dark:text-[#f0efec]">
-                          {t.label}
-                        </p>
-                        <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                          {t.description}
-                        </p>
-                      </div>
-                      <span className="text-sm font-semibold text-[#c8922a]">
-                        ${t.monthlyPrice}/mo
-                      </span>
-                    </Link>
-                  );
-                })}
+        {active &&
+          sub.subscription_tier &&
+          sub.subscription_tier !== "company_intelligence" && (
+            <div className={cardClass}>
+              <h3 className={sectionHeader}>Upgrade</h3>
+              <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
+                Need more capacity? Upgrade to unlock higher limits and
+                additional features.
+              </p>
+              <div className="mt-4 space-y-2">
+                {(PURCHASABLE_TIERS as readonly string[])
+                  .filter((t) => {
+                    const order = ["pro", "team", "company_intelligence"];
+                    return (
+                      order.indexOf(t) > order.indexOf(sub.subscription_tier!)
+                    );
+                  })
+                  .map((tierId) => {
+                    const t = TIERS[tierId];
+                    return (
+                      <Link
+                        key={tierId}
+                        href={`/checkout/${tierId}`}
+                        className="flex items-center justify-between rounded-xl border border-black/[0.07] px-4 py-3 transition-colors hover:bg-black/[0.02] dark:border-white/[0.07] dark:hover:bg-white/[0.03]"
+                      >
+                        <div>
+                          <p className="text-sm font-medium text-[#0f0f0f] dark:text-[#f0efec]">
+                            {t.label}
+                          </p>
+                          <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                            {t.description}
+                          </p>
+                        </div>
+                        <span className="text-sm font-semibold text-[#c8922a]">
+                          ${t.monthlyPrice}/mo
+                        </span>
+                      </Link>
+                    );
+                  })}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
         {/* Not subscribed prompt */}
         {!active && !grace && (
           <div className="rounded-2xl border border-[#c8922a]/20 bg-[#c8922a]/5 p-7 dark:bg-[#c8922a]/10">
             <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-              Start your intelligence briefing
+              Start your company daily scan
             </h3>
             <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-              Get a personalised daily briefing connecting global developments
-              to your business. Start with a free trial.
+              Monitor the topics, entities, and regions that matter to your
+              business. Start with a free trial.
             </p>
             <Link
               href="/pricing"

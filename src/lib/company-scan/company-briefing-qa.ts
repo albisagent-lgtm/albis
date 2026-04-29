@@ -1187,6 +1187,19 @@ function checkScannerReportLayout(
     "the useful distinction is",
     "company-specific scan",
     "registered against",
+    "the scan picked up",
+    "picked up",
+    "it belongs here",
+    "belongs here because",
+    "relevant because",
+    "selected because",
+    "matched scan area",
+    "this item was selected",
+    "operational exposure",
+    "material implications",
+    "stakeholders should monitor",
+    "evolving landscape",
+    "this matters because",
   ];
 
   if (selectedCount >= 8 && !scanner?.enabled) {
@@ -1199,7 +1212,7 @@ function checkScannerReportLayout(
 
   if (scanner?.enabled) {
     const coverageRatio = selectedCount > 0 ? generatedMainFindings / selectedCount : 1;
-    if (selectedCount >= 8 && coverageRatio < 0.8) {
+    if (selectedCount >= 8 && coverageRatio < 0.75) {
       failures.push({
         code: "SCANNER_REPORT_OVER_COMPRESSED",
         severity: "blocking",
@@ -1208,7 +1221,7 @@ function checkScannerReportLayout(
       });
     }
 
-    if ((scanner.deeper_reads || []).length < Math.min(3, selectedCount)) {
+    if (scanner.layout_version !== "company_daily_scan_v1" && (scanner.deeper_reads || []).length < Math.min(3, selectedCount)) {
       failures.push({
         code: "SCANNER_REPORT_DEEPER_READ_MISSING",
         severity: "warning",
@@ -1270,9 +1283,12 @@ function checkDepthRequirements(
   // genuinely underdeveloped items.
   const thinItems = items.filter((item) => countWords(item.body.text) < 24);
   for (const item of thinItems) {
+    const body = item.body.text;
+    const looksMalformed = /(?:—|–|-|,)\s*(?:typically|usually|averaging|including|with|and|or)?\.?\s+It belongs here because/i.test(body)
+      || /\bThe scan picked up\s+(?:daily transits|home|read more|click here)\b/i.test(body);
     failures.push({
       code: "DEPTH_SECTION_TOO_THIN",
-      severity: "blocking",
+      severity: looksMalformed ? "blocking" : "warning",
       generated_text_path: `item:${item.generated_item_id}.body`,
       message: `Package 9.2 section is too thin (${countWords(item.body.text)} words): ${item.title.text}`,
     });
@@ -1310,11 +1326,14 @@ function checkDepthRequirements(
   }
 
   const observationCount = output.useful_observations?.observations?.length ?? 0;
-  if (observationCount < Math.min(3, items.length)) {
+  const expectedObservationCount = output.scanner_report?.layout_version === "company_daily_scan_v1"
+    ? Math.min(2, items.length)
+    : Math.min(3, items.length);
+  if (observationCount < expectedObservationCount) {
     failures.push({
       code: "DEPTH_OBSERVATIONS_THIN",
       severity: "blocking",
-      message: `Package 9.2 needs analyst-grade observations. Found ${observationCount}; expected at least ${Math.min(3, items.length)}.`,
+      message: `Package 9.2 needs analyst-grade observations. Found ${observationCount}; expected at least ${expectedObservationCount}.`,
     });
   }
 

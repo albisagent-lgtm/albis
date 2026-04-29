@@ -67,9 +67,7 @@ export default function BriefingsArchiveClient() {
 
     const { data } = await supabase
       .from("company_briefings")
-      .select(
-        "id, briefing_date, status, stories_selected, briefing_content"
-      )
+      .select("id, briefing_date, status, stories_selected, briefing_content")
       .eq("company_profile_id", profile.id)
       .in("status", ["generated", "delivered"])
       .order("briefing_date", { ascending: false })
@@ -111,10 +109,10 @@ export default function BriefingsArchiveClient() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-10">
       <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-        Briefing Archive
+        Daily Scan Archive
       </h2>
       <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-        {briefings.length} briefing{briefings.length === 1 ? "" : "s"}
+        {briefings.length} daily scan{briefings.length === 1 ? "" : "s"}
       </p>
 
       <div className="mt-6 space-y-2">
@@ -127,12 +125,11 @@ export default function BriefingsArchiveClient() {
             b.briefing_content && "header" in b.briefing_content
               ? b.briefing_content.header?.signal_level || "moderate"
               : "moderate";
-          const focus =
-            scannerReport?.enabled
-              ? `${scannerReport.scan_area_count || 0} watched areas`
-              : b.briefing_content && "header" in b.briefing_content
-                ? b.briefing_content.header?.scan_focus || ""
-                : "";
+          const focus = scannerReport?.enabled
+            ? `${scannerReport.scan_area_count || 0} monitored topic${scannerReport.scan_area_count === 1 ? "" : "s"}`
+            : b.briefing_content && "header" in b.briefing_content
+              ? b.briefing_content.header?.scan_focus || ""
+              : "";
           const storyCount =
             scannerReport?.main_findings_count ||
             (b.briefing_content && "what_changed" in b.briefing_content
@@ -142,7 +139,7 @@ export default function BriefingsArchiveClient() {
             0;
           const countLabel = scannerReport?.enabled
             ? `finding${storyCount === 1 ? "" : "s"}`
-            : `stor${storyCount === 1 ? "y" : "ies"}`;
+            : `item${storyCount === 1 ? "" : "s"}`;
 
           return (
             <Link
@@ -160,9 +157,13 @@ export default function BriefingsArchiveClient() {
                     {formatDate(b.briefing_date)}
                   </p>
                   <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">
-                    {SIGNAL_LABEL[signal] || "Moderate"} signal
+                    {scannerReport?.enabled
+                      ? "Daily scan"
+                      : `${SIGNAL_LABEL[signal] || "Moderate"} activity`}
                     {focus ? ` \u00B7 ${focus}` : ""}
-                    {storyCount > 0 ? ` \u00B7 ${storyCount} ${countLabel}` : ""}
+                    {storyCount > 0
+                      ? ` \u00B7 ${storyCount} ${countLabel}`
+                      : ""}
                   </p>
                 </div>
               </div>

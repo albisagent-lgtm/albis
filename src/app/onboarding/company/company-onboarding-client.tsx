@@ -58,28 +58,79 @@ import { BriefingPreview } from "@/app/components/briefing-preview";
 // ---------------------------------------------------------------------------
 
 const COLOR_CLASSES: Record<string, { idle: string; active: string }> = {
-  blue: { idle: "border-blue-500/20 text-blue-400/60 hover:border-blue-500/40", active: "border-blue-500 bg-blue-500/15 text-blue-300 ring-1 ring-blue-500/30" },
-  violet: { idle: "border-violet-500/20 text-violet-400/60 hover:border-violet-500/40", active: "border-violet-500 bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30" },
-  sky: { idle: "border-sky-500/20 text-sky-400/60 hover:border-sky-500/40", active: "border-sky-500 bg-sky-500/15 text-sky-300 ring-1 ring-sky-500/30" },
-  fuchsia: { idle: "border-fuchsia-500/20 text-fuchsia-400/60 hover:border-fuchsia-500/40", active: "border-fuchsia-500 bg-fuchsia-500/15 text-fuchsia-300 ring-1 ring-fuchsia-500/30" },
-  emerald: { idle: "border-emerald-500/20 text-emerald-400/60 hover:border-emerald-500/40", active: "border-emerald-500 bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/30" },
-  cyan: { idle: "border-cyan-500/20 text-cyan-400/60 hover:border-cyan-500/40", active: "border-cyan-500 bg-cyan-500/15 text-cyan-300 ring-1 ring-cyan-500/30" },
-  zinc: { idle: "border-zinc-500/20 text-zinc-400/60 hover:border-zinc-500/40", active: "border-zinc-400 bg-zinc-500/15 text-zinc-300 ring-1 ring-zinc-400/30" },
-  amber: { idle: "border-amber-500/20 text-amber-400/60 hover:border-amber-500/40", active: "border-amber-500 bg-amber-500/15 text-amber-300 ring-1 ring-amber-500/30" },
-  lime: { idle: "border-lime-500/20 text-lime-400/60 hover:border-lime-500/40", active: "border-lime-500 bg-lime-500/15 text-lime-300 ring-1 ring-lime-500/30" },
-  rose: { idle: "border-rose-500/20 text-rose-400/60 hover:border-rose-500/40", active: "border-rose-500 bg-rose-500/15 text-rose-300 ring-1 ring-rose-500/30" },
-  teal: { idle: "border-teal-500/20 text-teal-400/60 hover:border-teal-500/40", active: "border-teal-500 bg-teal-500/15 text-teal-300 ring-1 ring-teal-500/30" },
-  orange: { idle: "border-orange-500/20 text-orange-400/60 hover:border-orange-500/40", active: "border-orange-500 bg-orange-500/15 text-orange-300 ring-1 ring-orange-500/30" },
+  blue: {
+    idle: "border-blue-500/20 text-blue-400/60 hover:border-blue-500/40",
+    active:
+      "border-blue-500 bg-blue-500/15 text-blue-300 ring-1 ring-blue-500/30",
+  },
+  violet: {
+    idle: "border-violet-500/20 text-violet-400/60 hover:border-violet-500/40",
+    active:
+      "border-violet-500 bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30",
+  },
+  sky: {
+    idle: "border-sky-500/20 text-sky-400/60 hover:border-sky-500/40",
+    active: "border-sky-500 bg-sky-500/15 text-sky-300 ring-1 ring-sky-500/30",
+  },
+  fuchsia: {
+    idle: "border-fuchsia-500/20 text-fuchsia-400/60 hover:border-fuchsia-500/40",
+    active:
+      "border-fuchsia-500 bg-fuchsia-500/15 text-fuchsia-300 ring-1 ring-fuchsia-500/30",
+  },
+  emerald: {
+    idle: "border-emerald-500/20 text-emerald-400/60 hover:border-emerald-500/40",
+    active:
+      "border-emerald-500 bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/30",
+  },
+  cyan: {
+    idle: "border-cyan-500/20 text-cyan-400/60 hover:border-cyan-500/40",
+    active:
+      "border-cyan-500 bg-cyan-500/15 text-cyan-300 ring-1 ring-cyan-500/30",
+  },
+  zinc: {
+    idle: "border-zinc-500/20 text-zinc-400/60 hover:border-zinc-500/40",
+    active:
+      "border-zinc-400 bg-zinc-500/15 text-zinc-300 ring-1 ring-zinc-400/30",
+  },
+  amber: {
+    idle: "border-amber-500/20 text-amber-400/60 hover:border-amber-500/40",
+    active:
+      "border-amber-500 bg-amber-500/15 text-amber-300 ring-1 ring-amber-500/30",
+  },
+  lime: {
+    idle: "border-lime-500/20 text-lime-400/60 hover:border-lime-500/40",
+    active:
+      "border-lime-500 bg-lime-500/15 text-lime-300 ring-1 ring-lime-500/30",
+  },
+  rose: {
+    idle: "border-rose-500/20 text-rose-400/60 hover:border-rose-500/40",
+    active:
+      "border-rose-500 bg-rose-500/15 text-rose-300 ring-1 ring-rose-500/30",
+  },
+  teal: {
+    idle: "border-teal-500/20 text-teal-400/60 hover:border-teal-500/40",
+    active:
+      "border-teal-500 bg-teal-500/15 text-teal-300 ring-1 ring-teal-500/30",
+  },
+  orange: {
+    idle: "border-orange-500/20 text-orange-400/60 hover:border-orange-500/40",
+    active:
+      "border-orange-500 bg-orange-500/15 text-orange-300 ring-1 ring-orange-500/30",
+  },
 };
 
 const REGION_IDLE = "border-zinc-700/50 text-zinc-400 hover:border-zinc-600";
-const REGION_ACTIVE = "border-zinc-400 bg-zinc-800 text-zinc-200 ring-1 ring-zinc-500/30";
+const REGION_ACTIVE =
+  "border-zinc-400 bg-zinc-800 text-zinc-200 ring-1 ring-zinc-500/30";
 
 // Shared classes
-const inputClass = "h-11 w-full rounded-xl border border-black/[0.1] bg-[#f8f7f4] px-3.5 text-sm text-[#0f0f0f] placeholder:text-zinc-400 focus:border-[#c8922a] focus:outline-none focus:ring-2 focus:ring-[#c8922a]/15 dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-[#f0efec] dark:placeholder:text-zinc-600 dark:focus:border-[#c8922a] dark:focus:ring-[#c8922a]/15";
+const inputClass =
+  "h-11 w-full rounded-xl border border-black/[0.1] bg-[#f8f7f4] px-3.5 text-sm text-[#0f0f0f] placeholder:text-zinc-400 focus:border-[#c8922a] focus:outline-none focus:ring-2 focus:ring-[#c8922a]/15 dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-[#f0efec] dark:placeholder:text-zinc-600 dark:focus:border-[#c8922a] dark:focus:ring-[#c8922a]/15";
 const labelClass = "text-xs font-medium text-zinc-600 dark:text-zinc-400";
-const sectionLabel = "text-xs font-medium uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500";
-const errorMsg = "rounded-xl border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-700 dark:border-amber-900/50 dark:bg-amber-950/30 dark:text-amber-400";
+const sectionLabel =
+  "text-xs font-medium uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500";
+const errorMsg =
+  "rounded-xl border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-700 dark:border-amber-900/50 dark:bg-amber-950/30 dark:text-amber-400";
 
 // ---------------------------------------------------------------------------
 // Steps
@@ -112,7 +163,9 @@ export default function CompanyOnboardingClient() {
   const [subSector, setSubSector] = useState("");
   const [concernText, setConcernText] = useState(""); // Other-only
   const [sectorTouched, setSectorTouched] = useState(false); // whether bundle has been auto-applied
-  const [pendingSector, setPendingSector] = useState<SectorId | "" | null>(null); // for confirm prompt
+  const [pendingSector, setPendingSector] = useState<SectorId | "" | null>(
+    null,
+  ); // for confirm prompt
 
   // Step 2 — Geography
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
@@ -145,7 +198,8 @@ export default function CompanyOnboardingClient() {
   const maxThemes = onboardingTier.maxTrackedThemes;
   const maxEntities = onboardingTier.maxWatchlistEntities;
   const maxRecipients = onboardingTier.maxEmailRecipients;
-  const isPreview = !isSubscriptionActive(subscription) && !isInGracePeriod(subscription);
+  const isPreview =
+    !isSubscriptionActive(subscription) && !isInGracePeriod(subscription);
 
   // Auth + init
   useEffect(() => {
@@ -159,7 +213,9 @@ export default function CompanyOnboardingClient() {
 
       const { data: userProfile } = await supabase
         .from("profiles")
-        .select("subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at")
+        .select(
+          "subscription_status, subscription_tier, subscription_period_end, is_test_account, trial_end_at",
+        )
         .eq("id", user.id)
         .single();
       if (userProfile) {
@@ -266,14 +322,20 @@ export default function CompanyOnboardingClient() {
 
   const countriesByRegion = getCountriesByRegion();
   const filteredCountries = countrySearch.trim()
-    ? COUNTRIES.filter((c) => c.name.toLowerCase().includes(countrySearch.toLowerCase()))
+    ? COUNTRIES.filter((c) =>
+        c.name.toLowerCase().includes(countrySearch.toLowerCase()),
+      )
     : null;
 
   function toggleCountry(slug: string) {
-    setSelectedCountries((prev) => (prev.includes(slug) ? prev.filter((c) => c !== slug) : [...prev, slug]));
+    setSelectedCountries((prev) =>
+      prev.includes(slug) ? prev.filter((c) => c !== slug) : [...prev, slug],
+    );
   }
   function toggleRegion(id: string) {
-    setSelectedRegions((prev) => (prev.includes(id) ? prev.filter((r) => r !== id) : [...prev, id]));
+    setSelectedRegions((prev) =>
+      prev.includes(id) ? prev.filter((r) => r !== id) : [...prev, id],
+    );
   }
   function toggleRisk(id: string) {
     setRiskPriorities((prev) => {
@@ -287,7 +349,11 @@ export default function CompanyOnboardingClient() {
   function addEmailTag(v: string) {
     const trimmed = v.trim();
     if (!trimmed || !trimmed.includes("@")) return;
-    if (emailRecipients.includes(trimmed) || emailRecipients.length >= maxRecipients) return;
+    if (
+      emailRecipients.includes(trimmed) ||
+      emailRecipients.length >= maxRecipients
+    )
+      return;
     setEmailRecipients([...emailRecipients, trimmed]);
     setEmailInput("");
   }
@@ -303,26 +369,43 @@ export default function CompanyOnboardingClient() {
         if (!sector) return "Please select a sector.";
         return null;
       case 1:
-        if (selectedCountries.length === 0 && selectedRegions.length === 0) return "Please select at least one country or region.";
+        if (selectedCountries.length === 0 && selectedRegions.length === 0)
+          return "Please select at least one country or region.";
         return null;
       case 2:
-        if (trackedThemes.length === 0) return "Please add at least one tracked theme.";
+        if (trackedThemes.length === 0)
+          return "Please add at least one tracked theme.";
         return null;
       case 3:
-        if (riskPriorities.length === 0) return "Please select at least one risk priority.";
+        if (riskPriorities.length === 0)
+          return "Please select at least one risk priority.";
         return null;
       default:
         return null;
     }
-  }, [step, companyName, sector, selectedCountries, selectedRegions, trackedThemes, riskPriorities]);
+  }, [
+    step,
+    companyName,
+    sector,
+    selectedCountries,
+    selectedRegions,
+    trackedThemes,
+    riskPriorities,
+  ]);
 
   function handleNext() {
     const err = validateStep();
-    if (err) { setError(err); return; }
+    if (err) {
+      setError(err);
+      return;
+    }
     setError("");
     setStep((s) => Math.min(s + 1, STEPS.length - 1));
   }
-  function handleBack() { setError(""); setStep((s) => Math.max(s - 1, 0)); }
+  function handleBack() {
+    setError("");
+    setStep((s) => Math.max(s - 1, 0));
+  }
 
   // ---------------------------------------------------------------------------
   // Save
@@ -356,7 +439,11 @@ export default function CompanyOnboardingClient() {
       const { error: upsertError } = await supabase
         .from("company_profiles")
         .upsert(data, { onConflict: "owner_id" });
-      if (upsertError) { setError(upsertError.message); setSaving(false); return; }
+      if (upsertError) {
+        setError(upsertError.message);
+        setSaving(false);
+        return;
+      }
 
       // Trial assignment + preview-briefing generation. Non-blocking — if
       // the server step fails the user still lands on the dashboard and the
@@ -399,14 +486,18 @@ export default function CompanyOnboardingClient() {
       <div className="relative mx-auto max-w-2xl px-6 py-12 md:py-20">
         {/* Header */}
         <div className="mb-10 text-center">
-          <Link href="/" className="font-[family-name:var(--font-playfair)] text-2xl italic font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+          <Link
+            href="/"
+            className="font-[family-name:var(--font-playfair)] text-2xl italic font-semibold text-[#0f0f0f] dark:text-[#f0efec]"
+          >
             Albis
           </Link>
           <h1 className="mt-6 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec] md:text-3xl">
             Set up your company profile
           </h1>
           <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-            Pick your sector and we&apos;ll pre-fill sensible defaults. Edit anything, or use the fast path.
+            Pick your sector and we&apos;ll pre-fill sensible defaults. Edit
+            anything, or use the fast path.
           </p>
         </div>
 
@@ -414,10 +505,16 @@ export default function CompanyOnboardingClient() {
         {isPreview && (
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#c8922a]/30 bg-[#c8922a]/5 px-5 py-3 dark:bg-[#c8922a]/10">
             <p className="text-sm text-zinc-700 dark:text-zinc-300">
-              <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">Preview mode.</span>{" "}
-              Your profile will be saved, but briefings don&apos;t generate until you subscribe.
+              <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                Preview mode.
+              </span>{" "}
+              Your profile will be saved, but daily scans don&apos;t run until
+              you subscribe.
             </p>
-            <Link href="/pricing" className="shrink-0 rounded-full bg-[#c8922a] px-4 py-1.5 text-xs font-semibold text-white shadow-[0_2px_8px_rgb(200,146,42,0.3)] hover:bg-[#b17f24]">
+            <Link
+              href="/pricing"
+              className="shrink-0 rounded-full bg-[#c8922a] px-4 py-1.5 text-xs font-semibold text-white shadow-[0_2px_8px_rgb(200,146,42,0.3)] hover:bg-[#b17f24]"
+            >
               View plans
             </Link>
           </div>
@@ -429,28 +526,51 @@ export default function CompanyOnboardingClient() {
             {STEPS.map((s, i) => (
               <div key={s.label} className="flex flex-1 items-center">
                 <button
-                  onClick={() => { if (i < step) { setError(""); setStep(i); } }}
+                  onClick={() => {
+                    if (i < step) {
+                      setError("");
+                      setStep(i);
+                    }
+                  }}
                   className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold transition-all ${
-                    i < step ? "bg-[#c8922a] text-white cursor-pointer"
-                      : i === step ? "bg-[#c8922a]/15 text-[#c8922a] ring-2 ring-[#c8922a]/30"
-                      : "bg-zinc-100 text-zinc-400 dark:bg-zinc-800 dark:text-zinc-500"
+                    i < step
+                      ? "bg-[#c8922a] text-white cursor-pointer"
+                      : i === step
+                        ? "bg-[#c8922a]/15 text-[#c8922a] ring-2 ring-[#c8922a]/30"
+                        : "bg-zinc-100 text-zinc-400 dark:bg-zinc-800 dark:text-zinc-500"
                   }`}
                 >
                   {i < step ? (
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                  ) : i + 1}
+                  ) : (
+                    i + 1
+                  )}
                 </button>
                 {i < STEPS.length - 1 && (
-                  <div className={`mx-2 h-px flex-1 transition-colors ${i < step ? "bg-[#c8922a]" : "bg-zinc-200 dark:bg-zinc-800"}`} />
+                  <div
+                    className={`mx-2 h-px flex-1 transition-colors ${i < step ? "bg-[#c8922a]" : "bg-zinc-200 dark:bg-zinc-800"}`}
+                  />
                 )}
               </div>
             ))}
           </div>
           <div className="mt-3 flex justify-between">
             {STEPS.map((s, i) => (
-              <span key={s.label} className={`text-[10px] font-medium uppercase tracking-wider ${i === step ? "text-[#c8922a]" : "text-zinc-400 dark:text-zinc-600"}`}>
+              <span
+                key={s.label}
+                className={`text-[10px] font-medium uppercase tracking-wider ${i === step ? "text-[#c8922a]" : "text-zinc-400 dark:text-zinc-600"}`}
+              >
                 <span className="hidden sm:inline">{s.label}</span>
                 <span className="sm:hidden">{s.short}</span>
               </span>
@@ -460,7 +580,6 @@ export default function CompanyOnboardingClient() {
 
         {/* Step content */}
         <div className="animate-step-fade-in rounded-2xl border border-black/[0.07] bg-white p-7 shadow-[0_4px_24px_rgb(0,0,0,0.06)] dark:border-white/[0.07] dark:bg-white/[0.04] dark:shadow-none md:p-8">
-
           {/* STEP 1 — Basics */}
           {step === 0 && (
             <div className="space-y-6">
@@ -468,13 +587,20 @@ export default function CompanyOnboardingClient() {
 
               <div className="flex flex-col gap-1.5">
                 <label className={labelClass}>Company name</label>
-                <input type="text" value={companyName} onChange={(e) => setCompanyName(e.target.value)} placeholder="e.g. Meridian Logistics" className={inputClass} />
+                <input
+                  type="text"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  placeholder="e.g. Meridian Logistics"
+                  className={inputClass}
+                />
               </div>
 
               <div className="flex flex-col gap-1.5">
                 <label className={labelClass}>Sector</label>
                 <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                  Picking a sector pre-fills themes, watchlist, and risks with sensible defaults. You can edit anything.
+                  Picking a sector pre-fills themes, watchlist, and risks with
+                  sensible defaults. You can edit anything.
                 </p>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {SECTORS.map((s) => {
@@ -496,15 +622,21 @@ export default function CompanyOnboardingClient() {
               {/* Other/Custom concern prompt */}
               {sector === "other" && (
                 <div className="flex flex-col gap-1.5">
-                  <label className={labelClass}>What&apos;s your #1 concern right now?</label>
+                  <label className={labelClass}>
+                    What&apos;s your #1 concern right now?
+                  </label>
                   <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                    Tell us in plain English — we&apos;ll turn this into tracked themes you can adjust on the next step.
+                    Tell us in plain English — we&apos;ll turn this into tracked
+                    themes you can adjust on the next step.
                   </p>
                   <input
                     type="text"
                     value={concernText}
                     onChange={(e) => setConcernText(e.target.value)}
-                    placeholder={getSectorDefinition("other")?.concernPlaceholder || "e.g. supply chain disruption, Iran conflict exposure"}
+                    placeholder={
+                      getSectorDefinition("other")?.concernPlaceholder ||
+                      "e.g. supply chain disruption, Iran conflict exposure"
+                    }
                     className={inputClass}
                   />
                 </div>
@@ -512,7 +644,13 @@ export default function CompanyOnboardingClient() {
 
               <div className="flex flex-col gap-1.5">
                 <label className={labelClass}>Sub-sector (optional)</label>
-                <input type="text" value={subSector} onChange={(e) => setSubSector(e.target.value)} placeholder="e.g. Cold chain logistics, Dry bulk shipping" className={inputClass} />
+                <input
+                  type="text"
+                  value={subSector}
+                  onChange={(e) => setSubSector(e.target.value)}
+                  placeholder="e.g. Cold chain logistics, Dry bulk shipping"
+                  className={inputClass}
+                />
               </div>
 
               {/* Fast path CTA */}
@@ -522,14 +660,28 @@ export default function CompanyOnboardingClient() {
                     Use recommended defaults?
                   </p>
                   <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
-                    Skip to delivery setup with the recommended bundle for {getSectorDefinition(sector)?.label}. You can always customise later.
+                    Skip to delivery setup with the recommended bundle for{" "}
+                    {getSectorDefinition(sector)?.label}. You can always
+                    customise later.
                   </p>
                   <button
-                    onClick={() => { if (sector === "other") applyOtherConcernToThemes(); startFastPath(); }}
+                    onClick={() => {
+                      if (sector === "other") applyOtherConcernToThemes();
+                      startFastPath();
+                    }}
                     className="mt-3 inline-flex h-9 items-center gap-1.5 rounded-full bg-[#c8922a] px-4 text-xs font-semibold text-white shadow-[0_2px_8px_rgb(200,146,42,0.3)] hover:bg-[#b17f24]"
                   >
                     Use recommended defaults
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <polyline points="9 18 15 12 9 6" />
                     </svg>
                   </button>
@@ -548,7 +700,11 @@ export default function CompanyOnboardingClient() {
                   {COMPANY_REGIONS.map((region) => {
                     const isActive = selectedRegions.includes(region.id);
                     return (
-                      <button key={region.id} onClick={() => toggleRegion(region.id)} className={`rounded-full border px-4 py-2 text-sm font-medium transition-all ${isActive ? REGION_ACTIVE : REGION_IDLE}`}>
+                      <button
+                        key={region.id}
+                        onClick={() => toggleRegion(region.id)}
+                        className={`rounded-full border px-4 py-2 text-sm font-medium transition-all ${isActive ? REGION_ACTIVE : REGION_IDLE}`}
+                      >
                         {region.label}
                       </button>
                     );
@@ -559,19 +715,42 @@ export default function CompanyOnboardingClient() {
               <div>
                 <div className="flex items-baseline justify-between">
                   <label className={labelClass}>Countries of operation</label>
-                  <span className="text-xs text-zinc-400 dark:text-zinc-600">{selectedCountries.length} selected</span>
+                  <span className="text-xs text-zinc-400 dark:text-zinc-600">
+                    {selectedCountries.length} selected
+                  </span>
                 </div>
-                <input type="text" value={countrySearch} onChange={(e) => setCountrySearch(e.target.value)} placeholder="Search countries..." className={`mt-3 ${inputClass}`} />
+                <input
+                  type="text"
+                  value={countrySearch}
+                  onChange={(e) => setCountrySearch(e.target.value)}
+                  placeholder="Search countries..."
+                  className={`mt-3 ${inputClass}`}
+                />
                 {selectedCountries.length > 0 && (
                   <div className="mt-3 flex flex-wrap gap-2">
                     {selectedCountries.map((slug) => {
                       const c = COUNTRIES.find((x) => x.slug === slug);
                       if (!c) return null;
                       return (
-                        <button key={slug} onClick={() => toggleCountry(slug)} className="inline-flex items-center gap-1.5 rounded-full border border-[#c8922a]/30 bg-[#c8922a]/10 px-3 py-1 text-xs font-medium text-[#c8922a] transition-colors hover:bg-[#c8922a]/20">
-                          <span>{c.flag}</span><span>{c.name}</span>
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                        <button
+                          key={slug}
+                          onClick={() => toggleCountry(slug)}
+                          className="inline-flex items-center gap-1.5 rounded-full border border-[#c8922a]/30 bg-[#c8922a]/10 px-3 py-1 text-xs font-medium text-[#c8922a] transition-colors hover:bg-[#c8922a]/20"
+                        >
+                          <span>{c.flag}</span>
+                          <span>{c.name}</span>
+                          <svg
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
                           </svg>
                         </button>
                       );
@@ -581,18 +760,38 @@ export default function CompanyOnboardingClient() {
                 <div className="mt-3 max-h-52 overflow-y-auto rounded-xl border border-black/[0.07] dark:border-white/[0.07]">
                   {filteredCountries ? (
                     filteredCountries.length === 0 ? (
-                      <p className="px-4 py-3 text-sm text-zinc-400">No countries found.</p>
-                    ) : filteredCountries.map((c) => (
-                      <CountryRow key={c.slug} country={c} isSelected={selectedCountries.includes(c.slug)} onToggle={() => toggleCountry(c.slug)} />
-                    ))
-                  ) : Object.entries(countriesByRegion).map(([region, countries]) => (
-                    <div key={region}>
-                      <div className="sticky top-0 bg-[#f8f7f4] px-4 py-2 text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:bg-[#0f0f0f] dark:text-zinc-600">{region}</div>
-                      {countries.map((c) => (
-                        <CountryRow key={c.slug} country={c} isSelected={selectedCountries.includes(c.slug)} onToggle={() => toggleCountry(c.slug)} />
-                      ))}
-                    </div>
-                  ))}
+                      <p className="px-4 py-3 text-sm text-zinc-400">
+                        No countries found.
+                      </p>
+                    ) : (
+                      filteredCountries.map((c) => (
+                        <CountryRow
+                          key={c.slug}
+                          country={c}
+                          isSelected={selectedCountries.includes(c.slug)}
+                          onToggle={() => toggleCountry(c.slug)}
+                        />
+                      ))
+                    )
+                  ) : (
+                    Object.entries(countriesByRegion).map(
+                      ([region, countries]) => (
+                        <div key={region}>
+                          <div className="sticky top-0 bg-[#f8f7f4] px-4 py-2 text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:bg-[#0f0f0f] dark:text-zinc-600">
+                            {region}
+                          </div>
+                          {countries.map((c) => (
+                            <CountryRow
+                              key={c.slug}
+                              country={c}
+                              isSelected={selectedCountries.includes(c.slug)}
+                              onToggle={() => toggleCountry(c.slug)}
+                            />
+                          ))}
+                        </div>
+                      ),
+                    )
+                  )}
                 </div>
               </div>
             </div>
@@ -605,7 +804,7 @@ export default function CompanyOnboardingClient() {
 
               <TaxonomyCombobox
                 label="Tracked themes"
-                helpText="Topics your briefing should prioritise."
+                helpText="Topics your daily scan should prioritise."
                 value={trackedThemes}
                 onChange={setTrackedThemes}
                 catalog={THEME_CATALOG}
@@ -646,19 +845,31 @@ export default function CompanyOnboardingClient() {
             <div className="space-y-6">
               <p className={sectionLabel}>Risk priorities</p>
               <div className="flex items-baseline justify-between">
-                <label className={labelClass}>Select up to {MAX_RISK_PRIORITIES}</label>
-                <span className="text-xs text-zinc-400 dark:text-zinc-600">{riskPriorities.length}/{MAX_RISK_PRIORITIES} selected</span>
+                <label className={labelClass}>
+                  Select up to {MAX_RISK_PRIORITIES}
+                </label>
+                <span className="text-xs text-zinc-400 dark:text-zinc-600">
+                  {riskPriorities.length}/{MAX_RISK_PRIORITIES} selected
+                </span>
               </div>
               <p className="-mt-3 text-xs text-zinc-400 dark:text-zinc-500">
-                Pre-selected based on your sector. Adjust to match your actual exposure.
+                Pre-selected based on your sector. Adjust to match your actual
+                exposure.
               </p>
               <div className="flex flex-wrap gap-2.5">
                 {RISK_PRIORITIES.map((risk) => {
                   const isActive = riskPriorities.includes(risk.id);
-                  const colors = COLOR_CLASSES[risk.color] || COLOR_CLASSES.zinc;
-                  const atLimit = riskPriorities.length >= MAX_RISK_PRIORITIES && !isActive;
+                  const colors =
+                    COLOR_CLASSES[risk.color] || COLOR_CLASSES.zinc;
+                  const atLimit =
+                    riskPriorities.length >= MAX_RISK_PRIORITIES && !isActive;
                   return (
-                    <button key={risk.id} onClick={() => toggleRisk(risk.id)} disabled={atLimit} className={`rounded-full border px-4 py-2 text-sm font-medium transition-all ${isActive ? colors.active : atLimit ? "border-zinc-800/30 text-zinc-600/40 cursor-not-allowed" : colors.idle}`}>
+                    <button
+                      key={risk.id}
+                      onClick={() => toggleRisk(risk.id)}
+                      disabled={atLimit}
+                      className={`rounded-full border px-4 py-2 text-sm font-medium transition-all ${isActive ? colors.active : atLimit ? "border-zinc-800/30 text-zinc-600/40 cursor-not-allowed" : colors.idle}`}
+                    >
                       {risk.label}
                     </button>
                   );
@@ -682,16 +893,28 @@ export default function CompanyOnboardingClient() {
               />
 
               <div>
-                <label className={labelClass}>Briefing depth</label>
+                <label className={labelClass}>Scan detail</label>
                 <div className="mt-3 space-y-2">
                   {BRIEFING_DEPTHS.map((depth) => (
-                    <button key={depth.id} onClick={() => setBriefingDepth(depth.id)} className={`flex w-full items-start gap-3 rounded-xl border p-4 text-left transition-all ${briefingDepth === depth.id ? "border-[#c8922a]/50 bg-[#c8922a]/5 ring-1 ring-[#c8922a]/20" : "border-black/[0.07] hover:border-black/[0.15] dark:border-white/[0.07] dark:hover:border-white/[0.12]"}`}>
-                      <div className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${briefingDepth === depth.id ? "border-[#c8922a] bg-[#c8922a]" : "border-zinc-300 dark:border-zinc-600"}`}>
-                        {briefingDepth === depth.id && <div className="h-2 w-2 rounded-full bg-white" />}
+                    <button
+                      key={depth.id}
+                      onClick={() => setBriefingDepth(depth.id)}
+                      className={`flex w-full items-start gap-3 rounded-xl border p-4 text-left transition-all ${briefingDepth === depth.id ? "border-[#c8922a]/50 bg-[#c8922a]/5 ring-1 ring-[#c8922a]/20" : "border-black/[0.07] hover:border-black/[0.15] dark:border-white/[0.07] dark:hover:border-white/[0.12]"}`}
+                    >
+                      <div
+                        className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${briefingDepth === depth.id ? "border-[#c8922a] bg-[#c8922a]" : "border-zinc-300 dark:border-zinc-600"}`}
+                      >
+                        {briefingDepth === depth.id && (
+                          <div className="h-2 w-2 rounded-full bg-white" />
+                        )}
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-[#0f0f0f] dark:text-[#f0efec]">{depth.label}</p>
-                        <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">{depth.description}</p>
+                        <p className="text-sm font-medium text-[#0f0f0f] dark:text-[#f0efec]">
+                          {depth.label}
+                        </p>
+                        <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">
+                          {depth.description}
+                        </p>
                       </div>
                     </button>
                   ))}
@@ -701,14 +924,30 @@ export default function CompanyOnboardingClient() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="flex flex-col gap-1.5">
                   <label className={labelClass}>Preferred delivery time</label>
-                  <select value={deliveryTime} onChange={(e) => setDeliveryTime(e.target.value)} className={inputClass}>
-                    {DELIVERY_TIMES.map((t) => <option key={t} value={t}>{t}</option>)}
+                  <select
+                    value={deliveryTime}
+                    onChange={(e) => setDeliveryTime(e.target.value)}
+                    className={inputClass}
+                  >
+                    {DELIVERY_TIMES.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label className={labelClass}>Timezone</label>
-                  <select value={timezone} onChange={(e) => setTimezone(e.target.value)} className={inputClass}>
-                    {Intl.supportedValuesOf("timeZone").map((tz) => <option key={tz} value={tz}>{tz.replace(/_/g, " ")}</option>)}
+                  <select
+                    value={timezone}
+                    onChange={(e) => setTimezone(e.target.value)}
+                    className={inputClass}
+                  >
+                    {Intl.supportedValuesOf("timeZone").map((tz) => (
+                      <option key={tz} value={tz}>
+                        {tz.replace(/_/g, " ")}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -716,22 +955,49 @@ export default function CompanyOnboardingClient() {
               <div>
                 <div className="flex items-center justify-between">
                   <label className={labelClass}>Email delivery</label>
-                  <button onClick={() => setEmailEnabled(!emailEnabled)} className={`relative h-6 w-11 rounded-full transition-colors ${emailEnabled ? "bg-[#c8922a]" : "bg-zinc-300 dark:bg-zinc-700"}`}>
-                    <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${emailEnabled ? "left-[22px]" : "left-0.5"}`} />
+                  <button
+                    onClick={() => setEmailEnabled(!emailEnabled)}
+                    className={`relative h-6 w-11 rounded-full transition-colors ${emailEnabled ? "bg-[#c8922a]" : "bg-zinc-300 dark:bg-zinc-700"}`}
+                  >
+                    <span
+                      className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${emailEnabled ? "left-[22px]" : "left-0.5"}`}
+                    />
                   </button>
                 </div>
                 {emailEnabled && (
                   <div className="mt-3">
                     <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                      Briefings will be sent to these addresses. {maxRecipients} recipient{maxRecipients === 1 ? "" : "s"} max on your plan.
+                      Daily scans will be sent to these addresses.{" "}
+                      {maxRecipients} recipient{maxRecipients === 1 ? "" : "s"}{" "}
+                      max on your plan.
                     </p>
                     <div className="mt-2 flex flex-wrap items-center gap-2 rounded-xl border border-black/[0.1] bg-[#f8f7f4] px-3 py-2 dark:border-white/[0.1] dark:bg-white/[0.04]">
                       {emailRecipients.map((r) => (
-                        <span key={r} className="inline-flex items-center gap-1 rounded-full bg-zinc-200/70 px-2.5 py-1 text-xs font-medium text-zinc-700 dark:bg-zinc-700/50 dark:text-zinc-300">
+                        <span
+                          key={r}
+                          className="inline-flex items-center gap-1 rounded-full bg-zinc-200/70 px-2.5 py-1 text-xs font-medium text-zinc-700 dark:bg-zinc-700/50 dark:text-zinc-300"
+                        >
                           {r}
-                          <button onClick={() => setEmailRecipients(emailRecipients.filter((x) => x !== r))} className="ml-0.5 text-zinc-400 hover:text-zinc-600">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                          <button
+                            onClick={() =>
+                              setEmailRecipients(
+                                emailRecipients.filter((x) => x !== r),
+                              )
+                            }
+                            className="ml-0.5 text-zinc-400 hover:text-zinc-600"
+                          >
+                            <svg
+                              width="12"
+                              height="12"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <line x1="18" y1="6" x2="6" y2="18" />
+                              <line x1="6" y1="6" x2="18" y2="18" />
                             </svg>
                           </button>
                         </span>
@@ -742,16 +1008,29 @@ export default function CompanyOnboardingClient() {
                           value={emailInput}
                           onChange={(e) => setEmailInput(e.target.value)}
                           onKeyDown={(e) => {
-                            if ((e.key === "Enter" || e.key === ",") && emailInput.trim()) {
+                            if (
+                              (e.key === "Enter" || e.key === ",") &&
+                              emailInput.trim()
+                            ) {
                               e.preventDefault();
                               addEmailTag(emailInput);
                             }
-                            if (e.key === "Backspace" && !emailInput && emailRecipients.length > 0) {
+                            if (
+                              e.key === "Backspace" &&
+                              !emailInput &&
+                              emailRecipients.length > 0
+                            ) {
                               setEmailRecipients(emailRecipients.slice(0, -1));
                             }
                           }}
-                          onBlur={() => emailInput.trim() && addEmailTag(emailInput)}
-                          placeholder={emailRecipients.length === 0 ? "Add email address" : ""}
+                          onBlur={() =>
+                            emailInput.trim() && addEmailTag(emailInput)
+                          }
+                          placeholder={
+                            emailRecipients.length === 0
+                              ? "Add email address"
+                              : ""
+                          }
                           className="min-w-[140px] flex-1 border-0 bg-transparent py-1 text-sm text-[#0f0f0f] placeholder:text-zinc-400 focus:outline-none dark:text-[#f0efec] dark:placeholder:text-zinc-600"
                         />
                       )}
@@ -777,27 +1056,68 @@ export default function CompanyOnboardingClient() {
 
               <ConfirmSection label="Company">
                 <ConfirmItem label="Name" value={companyName} />
-                <ConfirmItem label="Sector" value={getSectorDefinition(sector)?.label || sector} />
-                {subSector && <ConfirmItem label="Sub-sector" value={subSector} />}
+                <ConfirmItem
+                  label="Sector"
+                  value={getSectorDefinition(sector)?.label || sector}
+                />
+                {subSector && (
+                  <ConfirmItem label="Sub-sector" value={subSector} />
+                )}
               </ConfirmSection>
 
               <ConfirmSection label="Geography">
                 {selectedRegions.length > 0 && (
-                  <ConfirmItem label="Regions" value={selectedRegions.map((r) => COMPANY_REGIONS.find((cr) => cr.id === r)?.label || r).join(", ")} />
+                  <ConfirmItem
+                    label="Regions"
+                    value={selectedRegions
+                      .map(
+                        (r) =>
+                          COMPANY_REGIONS.find((cr) => cr.id === r)?.label || r,
+                      )
+                      .join(", ")}
+                  />
                 )}
                 {selectedCountries.length > 0 && (
-                  <ConfirmItem label="Countries" value={selectedCountries.map((s) => COUNTRIES.find((c) => c.slug === s)?.name || s).join(", ")} />
+                  <ConfirmItem
+                    label="Countries"
+                    value={selectedCountries
+                      .map(
+                        (s) => COUNTRIES.find((c) => c.slug === s)?.name || s,
+                      )
+                      .join(", ")}
+                  />
                 )}
               </ConfirmSection>
 
               <ConfirmSection label="Tracking">
-                <ConfirmItem label="Themes" value={`${trackedThemes.length} selected`} />
-                {watchlistEntities.length > 0 && <ConfirmItem label="Watchlist" value={`${watchlistEntities.length} entities`} />}
-                {supplyChainExposure.length > 0 && <ConfirmItem label="Supply chain" value={`${supplyChainExposure.length} items`} />}
+                <ConfirmItem
+                  label="Themes"
+                  value={`${trackedThemes.length} selected`}
+                />
+                {watchlistEntities.length > 0 && (
+                  <ConfirmItem
+                    label="Watchlist"
+                    value={`${watchlistEntities.length} entities`}
+                  />
+                )}
+                {supplyChainExposure.length > 0 && (
+                  <ConfirmItem
+                    label="Supply chain"
+                    value={`${supplyChainExposure.length} items`}
+                  />
+                )}
               </ConfirmSection>
 
               <ConfirmSection label="Risk priorities">
-                <ConfirmItem label="Priorities" value={riskPriorities.map((r) => RISK_PRIORITIES.find((rp) => rp.id === r)?.label || r).join(", ")} />
+                <ConfirmItem
+                  label="Priorities"
+                  value={riskPriorities
+                    .map(
+                      (r) =>
+                        RISK_PRIORITIES.find((rp) => rp.id === r)?.label || r,
+                    )
+                    .join(", ")}
+                />
               </ConfirmSection>
             </div>
           )}
@@ -808,23 +1128,53 @@ export default function CompanyOnboardingClient() {
           {/* Navigation */}
           <div className="mt-8 flex items-center justify-between">
             {step > 0 ? (
-              <button onClick={handleBack} className="inline-flex h-10 items-center gap-1.5 rounded-full px-5 text-sm font-medium text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <button
+                onClick={handleBack}
+                className="inline-flex h-10 items-center gap-1.5 rounded-full px-5 text-sm font-medium text-zinc-500 transition-colors hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <polyline points="15 18 9 12 15 6" />
                 </svg>
                 Back
               </button>
-            ) : <div />}
+            ) : (
+              <div />
+            )}
 
             {step < STEPS.length - 1 ? (
-              <button onClick={handleNext} className="inline-flex h-10 items-center gap-1.5 rounded-full bg-[#c8922a] px-6 text-sm font-medium text-white shadow-[0_2px_8px_rgb(200,146,42,0.3)] transition-all hover:bg-[#b17f24]">
+              <button
+                onClick={handleNext}
+                className="inline-flex h-10 items-center gap-1.5 rounded-full bg-[#c8922a] px-6 text-sm font-medium text-white shadow-[0_2px_8px_rgb(200,146,42,0.3)] transition-all hover:bg-[#b17f24]"
+              >
                 Continue
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <polyline points="9 18 15 12 9 6" />
                 </svg>
               </button>
             ) : (
-              <button onClick={handleSave} disabled={saving} className="inline-flex h-10 items-center gap-1.5 rounded-full bg-[#c8922a] px-6 text-sm font-medium text-white shadow-[0_2px_8px_rgb(200,146,42,0.3)] transition-all hover:bg-[#b17f24] disabled:opacity-50">
+              <button
+                onClick={handleSave}
+                disabled={saving}
+                className="inline-flex h-10 items-center gap-1.5 rounded-full bg-[#c8922a] px-6 text-sm font-medium text-white shadow-[0_2px_8px_rgb(200,146,42,0.3)] transition-all hover:bg-[#b17f24] disabled:opacity-50"
+              >
                 {saving ? "Saving…" : "Complete setup"}
               </button>
             )}
@@ -840,16 +1190,27 @@ export default function CompanyOnboardingClient() {
               Change sector to {getSectorDefinition(pendingSector)?.label}?
             </h3>
             <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-              You can replace your current themes, watchlist, and risks with the new sector&apos;s recommended defaults, or keep your current selections.
+              You can replace your current themes, watchlist, and risks with the
+              new sector&apos;s recommended defaults, or keep your current
+              selections.
             </p>
             <div className="mt-5 flex flex-wrap items-center justify-end gap-2">
-              <button onClick={cancelSectorChange} className="inline-flex h-9 items-center rounded-full px-4 text-sm text-zinc-500 hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]">
+              <button
+                onClick={cancelSectorChange}
+                className="inline-flex h-9 items-center rounded-full px-4 text-sm text-zinc-500 hover:text-[#0f0f0f] dark:text-zinc-400 dark:hover:text-[#f0efec]"
+              >
                 Cancel
               </button>
-              <button onClick={confirmSectorKeep} className="inline-flex h-9 items-center rounded-full border border-black/[0.1] px-4 text-sm font-medium text-zinc-700 hover:bg-black/[0.03] dark:border-white/[0.1] dark:text-zinc-200 dark:hover:bg-white/[0.04]">
+              <button
+                onClick={confirmSectorKeep}
+                className="inline-flex h-9 items-center rounded-full border border-black/[0.1] px-4 text-sm font-medium text-zinc-700 hover:bg-black/[0.03] dark:border-white/[0.1] dark:text-zinc-200 dark:hover:bg-white/[0.04]"
+              >
                 Keep my selections
               </button>
-              <button onClick={confirmSectorReplace} className="inline-flex h-9 items-center rounded-full bg-[#c8922a] px-4 text-sm font-semibold text-white hover:bg-[#b17f24]">
+              <button
+                onClick={confirmSectorReplace}
+                className="inline-flex h-9 items-center rounded-full bg-[#c8922a] px-4 text-sm font-semibold text-white hover:bg-[#b17f24]"
+              >
                 Replace with defaults
               </button>
             </div>
@@ -864,13 +1225,34 @@ export default function CompanyOnboardingClient() {
 // Helpers
 // ---------------------------------------------------------------------------
 
-function CountryRow({ country, isSelected, onToggle }: { country: { name: string; slug: string; flag: string }; isSelected: boolean; onToggle: () => void }) {
+function CountryRow({
+  country,
+  isSelected,
+  onToggle,
+}: {
+  country: { name: string; slug: string; flag: string };
+  isSelected: boolean;
+  onToggle: () => void;
+}) {
   return (
-    <button onClick={onToggle} className={`flex w-full items-center gap-3 px-4 py-2 text-left text-sm transition-colors hover:bg-black/[0.03] dark:hover:bg-white/[0.03] ${isSelected ? "text-[#0f0f0f] dark:text-[#f0efec]" : "text-zinc-500 dark:text-zinc-400"}`}>
+    <button
+      onClick={onToggle}
+      className={`flex w-full items-center gap-3 px-4 py-2 text-left text-sm transition-colors hover:bg-black/[0.03] dark:hover:bg-white/[0.03] ${isSelected ? "text-[#0f0f0f] dark:text-[#f0efec]" : "text-zinc-500 dark:text-zinc-400"}`}
+    >
       <span className="text-base">{country.flag}</span>
       <span className="flex-1">{country.name}</span>
       {isSelected && (
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#c8922a]">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-[#c8922a]"
+        >
           <polyline points="20 6 9 17 4 12" />
         </svg>
       )}
@@ -878,10 +1260,18 @@ function CountryRow({ country, isSelected, onToggle }: { country: { name: string
   );
 }
 
-function ConfirmSection({ label, children }: { label: string; children: React.ReactNode }) {
+function ConfirmSection({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="rounded-xl border border-black/[0.07] p-4 dark:border-white/[0.07]">
-      <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-600">{label}</p>
+      <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-600">
+        {label}
+      </p>
       <div className="mt-2 space-y-1.5">{children}</div>
     </div>
   );
@@ -890,7 +1280,9 @@ function ConfirmSection({ label, children }: { label: string; children: React.Re
 function ConfirmItem({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex gap-3 text-sm">
-      <span className="shrink-0 text-zinc-400 dark:text-zinc-500">{label}:</span>
+      <span className="shrink-0 text-zinc-400 dark:text-zinc-500">
+        {label}:
+      </span>
       <span className="text-[#0f0f0f] dark:text-[#f0efec]">{value}</span>
     </div>
   );

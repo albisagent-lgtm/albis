@@ -65,7 +65,9 @@ function todayIso(): string {
 function prettifyId(id: string): string {
   return id
     .split(/[-_]/)
-    .map((part) => (part.length > 0 ? part[0].toUpperCase() + part.slice(1) : part))
+    .map((part) =>
+      part.length > 0 ? part[0].toUpperCase() + part.slice(1) : part,
+    )
     .join(" ");
 }
 
@@ -107,7 +109,7 @@ function formatRelative(iso: string | null): string {
     const today = new Date();
     today.setHours(12, 0, 0, 0);
     const days = Math.round(
-      (today.getTime() - d.getTime()) / (1000 * 60 * 60 * 24)
+      (today.getTime() - d.getTime()) / (1000 * 60 * 60 * 24),
     );
     if (days <= 0) return "Today";
     if (days === 1) return "Yesterday";
@@ -156,7 +158,7 @@ export default function CoverageClient() {
     supabase
       .from("company_coverage_summaries")
       .select(
-        "id, coverage_date, tracked_items_checked, sources_inspected, early_signals, silent_items, summary_text"
+        "id, coverage_date, tracked_items_checked, sources_inspected, early_signals, silent_items, summary_text",
       )
       .eq("company_profile_id", companyProfileId)
       .eq("coverage_date", date)
@@ -177,7 +179,7 @@ export default function CoverageClient() {
   const silent = useMemo(() => {
     if (!coverage) return [];
     return [...(coverage.silent_items || [])].sort((a, b) =>
-      labelFor(a.type, a.value).localeCompare(labelFor(b.type, b.value))
+      labelFor(a.type, a.value).localeCompare(labelFor(b.type, b.value)),
     );
   }, [coverage]);
 
@@ -237,7 +239,7 @@ export default function CoverageClient() {
         <div className={cardClass}>
           <p className="text-sm text-zinc-500 dark:text-zinc-400">
             {date === todayIso()
-              ? "Today's coverage is being assembled. Check back after your briefing arrives."
+              ? "Today's coverage is being assembled. Check back after your daily scan arrives."
               : "No coverage record for this date."}
           </p>
         </div>
@@ -302,9 +304,9 @@ export default function CoverageClient() {
                             <Link
                               href={`/dashboard/briefing/${coverage.coverage_date}`}
                               className="text-[#c8922a] hover:underline"
-                              aria-label={`View briefing for ${labelFor(
+                              aria-label={`View daily scan for ${labelFor(
                                 item.type,
-                                item.value
+                                item.value,
                               )}`}
                             >
                               →
@@ -328,7 +330,7 @@ export default function CoverageClient() {
                     <ul className="mt-3 space-y-2">
                       {silent.map((item, idx) => {
                         const last = coverage.tracked_items_checked.find(
-                          (t) => t.type === item.type && t.value === item.value
+                          (t) => t.type === item.type && t.value === item.value,
                         );
                         return (
                           <li
@@ -373,23 +375,27 @@ export default function CoverageClient() {
                   <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
                     By language
                   </p>
-                  <SourceBreakdown breakdown={coverage.sources_inspected.by_language} />
+                  <SourceBreakdown
+                    breakdown={coverage.sources_inspected.by_language}
+                  />
                 </section>
                 <section>
                   <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
                     By region
                   </p>
-                  <SourceBreakdown breakdown={coverage.sources_inspected.by_region} />
+                  <SourceBreakdown
+                    breakdown={coverage.sources_inspected.by_region}
+                  />
                 </section>
               </div>
             )}
           </div>
 
-          {/* D. Early signals (only if non-empty) */}
+          {/* D. Early source-trail items (only if non-empty) */}
           {coverage.early_signals.length > 0 && (
             <div className={cardClass}>
               <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
-                Signals from outside mainstream English coverage
+                Items from outside mainstream English coverage
               </p>
               <ul className="mt-4 space-y-3">
                 {coverage.early_signals.map((sig, idx) => (

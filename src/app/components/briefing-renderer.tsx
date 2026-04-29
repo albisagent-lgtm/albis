@@ -62,7 +62,10 @@ function WhyMatched({ reasons }: { reasons: MatchReason[] }) {
               r.canonical_topic_id &&
               !matchedSet.has(r.canonical_label.toLowerCase());
             return (
-              <li key={i} className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <li
+                key={i}
+                className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400"
+              >
                 <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
                   {MATCH_REASON_LABEL[r.type] || r.type}
                 </span>
@@ -154,8 +157,13 @@ export function BriefingRenderer({
     return <ScannerReportRenderer content={content} compact={compact} />;
   }
 
-  const { header, what_changed, why_it_matters, what_to_watch, regional_framing } =
-    content;
+  const {
+    header,
+    what_changed,
+    why_it_matters,
+    what_to_watch,
+    regional_framing,
+  } = content;
 
   return (
     <div className="space-y-0">
@@ -166,7 +174,7 @@ export function BriefingRenderer({
             {formatDate(header.date)}
           </p>
           <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-            Daily Briefing
+            Company Daily Scan
           </h2>
           <div className="mt-3 flex flex-wrap items-center gap-3">
             <SignalBadge level={header.signal_level} />
@@ -179,9 +187,9 @@ export function BriefingRenderer({
         </div>
       )}
 
-      {/* What Changed */}
+      {/* Main scan */}
       <section>
-        <p className={sectionLabel}>What Changed</p>
+        <p className={sectionLabel}>Your Daily Scan</p>
         <div className="mt-4 space-y-5">
           {what_changed.map((story: BriefingStory, i: number) => (
             <div key={i}>
@@ -191,7 +199,9 @@ export function BriefingRenderer({
               <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                 {story.summary}
               </p>
-              {story.match_reasons && <WhyMatched reasons={story.match_reasons} />}
+              {story.match_reasons && (
+                <WhyMatched reasons={story.match_reasons} />
+              )}
             </div>
           ))}
         </div>
@@ -200,16 +210,18 @@ export function BriefingRenderer({
       {/* Divider */}
       <div className="my-7 h-px bg-black/[0.07] dark:bg-white/[0.07]" />
 
-      {/* Why It Matters */}
+      {/* Context */}
       <section>
-        <p className={sectionLabel}>Why It Matters to You</p>
+        <p className={sectionLabel}>Context</p>
         <p className="mt-4 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
           {why_it_matters}
         </p>
 
         {regional_framing && (
-          <div className="mt-4 border-l-3 border-[#c8922a] bg-[#c8922a]/5 px-4 py-3 dark:bg-[#c8922a]/10"
-               style={{ borderLeftWidth: "3px", borderLeftColor: "#c8922a" }}>
+          <div
+            className="mt-4 border-l-3 border-[#c8922a] bg-[#c8922a]/5 px-4 py-3 dark:bg-[#c8922a]/10"
+            style={{ borderLeftWidth: "3px", borderLeftColor: "#c8922a" }}
+          >
             <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
               <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
                 Regional framing:
@@ -257,8 +269,13 @@ export function BriefingRenderer({
   );
 }
 
-function isScannerReportContent(content: BriefingContent | CompanyBriefingGenerationOutput): content is CompanyBriefingGenerationOutput {
-  return (content as CompanyBriefingGenerationOutput).output_version === "company_briefing_generation_v1";
+function isScannerReportContent(
+  content: BriefingContent | CompanyBriefingGenerationOutput,
+): content is CompanyBriefingGenerationOutput {
+  return (
+    (content as CompanyBriefingGenerationOutput).output_version ===
+    "company_briefing_generation_v1"
+  );
 }
 
 function ScannerReportRenderer({
@@ -269,17 +286,25 @@ function ScannerReportRenderer({
   compact?: boolean;
 }) {
   const scanner = content.scanner_report;
+  const visibleSections = content.main_briefing.sections.filter(
+    (section) => section.items.length > 0,
+  );
   return (
     <div className="space-y-0">
       {!compact && (
         <div className="mb-8">
-          <p className="text-sm text-zinc-400 dark:text-zinc-500">Daily scan</p>
+          <p className="text-sm text-zinc-400 dark:text-zinc-500">
+            Company Daily Scan
+          </p>
           <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-            Company Scanner Report
+            Your Daily Scan
           </h2>
           {scanner?.enabled && (
             <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
-              {scanner.main_findings_count} main findings across {scanner.scan_area_count} watched areas
+              {scanner.main_findings_count} finding
+              {scanner.main_findings_count === 1 ? "" : "s"} across{" "}
+              {scanner.scan_area_count} monitored topic
+              {scanner.scan_area_count === 1 ? "" : "s"}
             </p>
           )}
         </div>
@@ -287,7 +312,7 @@ function ScannerReportRenderer({
 
       {scanner?.overview?.text && (
         <section>
-          <p className={sectionLabel}>Today&apos;s Scan</p>
+          <p className={sectionLabel}>Today</p>
           <p className="mt-4 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
             {scanner.overview.text}
           </p>
@@ -297,9 +322,9 @@ function ScannerReportRenderer({
       <div className="my-7 h-px bg-black/[0.07] dark:bg-white/[0.07]" />
 
       <section>
-        <p className={sectionLabel}>Main Findings</p>
+        <p className={sectionLabel}>Your Daily Scan</p>
         <div className="mt-5 space-y-8">
-          {content.main_briefing.sections.map((section) => (
+          {visibleSections.map((section) => (
             <div key={section.section_id}>
               <h3 className="text-base font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
                 {section.heading}
@@ -318,6 +343,29 @@ function ScannerReportRenderer({
                         {item.uncertainty_line.text}
                       </p>
                     )}
+                    {item.source_attribution?.text && (
+                      <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
+                        Source:{" "}
+                        {item.source_url ? (
+                          <a
+                            href={item.source_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline decoration-zinc-300 underline-offset-2 transition-colors hover:text-[#c8922a] dark:decoration-zinc-700"
+                          >
+                            {item.source_attribution.text.replace(
+                              /^Source:\s*/i,
+                              "",
+                            )}
+                          </a>
+                        ) : (
+                          item.source_attribution.text.replace(
+                            /^Source:\s*/i,
+                            "",
+                          )
+                        )}
+                      </p>
+                    )}
                   </article>
                 ))}
               </div>
@@ -326,27 +374,27 @@ function ScannerReportRenderer({
         </div>
       </section>
 
-      {(scanner?.deeper_reads?.length || 0) > 0 && (
-        <>
-          <div className="my-7 h-px bg-black/[0.07] dark:bg-white/[0.07]" />
-          <section>
-            <p className={sectionLabel}>Deeper Read</p>
-            <div className="mt-4 space-y-5">
-              {scanner?.deeper_reads.map((item, i) => (
-                <article key={item.generated_item_id || i}>
-                  <p className="text-[15px] font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
-                    {item.title.text}
-                  </p>
-                  <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-                    {item.body.text}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </section>
-        </>
-      )}
-
+      {scanner?.layout_version !== "company_daily_scan_v1" &&
+        (scanner?.deeper_reads?.length || 0) > 0 && (
+          <>
+            <div className="my-7 h-px bg-black/[0.07] dark:bg-white/[0.07]" />
+            <section>
+              <p className={sectionLabel}>Deeper Read</p>
+              <div className="mt-4 space-y-5">
+                {scanner?.deeper_reads.map((item, i) => (
+                  <article key={item.generated_item_id || i}>
+                    <p className="text-[15px] font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+                      {item.title.text}
+                    </p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                      {item.body.text}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </section>
+          </>
+        )}
     </div>
   );
 }
@@ -394,11 +442,11 @@ export function BriefingPending() {
         </svg>
       </div>
       <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-        Your briefing is being prepared
+        Your daily scan is being prepared
       </h3>
       <p className="mt-2 max-w-xs text-sm text-zinc-500 dark:text-zinc-400">
-        Your personalised intelligence briefing will be ready shortly. Check
-        back soon or wait for your email delivery.
+        Your monitored topics are being checked. Check back soon or wait for
+        your email delivery.
       </p>
     </div>
   );
@@ -424,11 +472,11 @@ export function BriefingEmpty() {
         </svg>
       </div>
       <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-        No briefings yet
+        No daily scans yet
       </h3>
       <p className="mt-2 max-w-xs text-sm text-zinc-500 dark:text-zinc-400">
-        Your first personalised briefing will arrive based on your delivery
-        schedule. You can review it here once it&apos;s generated.
+        Your first company daily scan will arrive based on your delivery
+        schedule. You can review it here once it&apos;s ready.
       </p>
     </div>
   );

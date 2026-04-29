@@ -1,8 +1,8 @@
 import BriefingDateClient from "./briefing-date-client";
 
 export const metadata = {
-  title: "Briefing — Albis",
-  description: "Past intelligence briefing.",
+  title: "Daily Scan — Albis",
+  description: "Past company daily scan.",
 };
 
 export default function BriefingDatePage() {

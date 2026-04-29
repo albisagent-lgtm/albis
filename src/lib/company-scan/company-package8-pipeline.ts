@@ -273,14 +273,19 @@ function retrievalProvenance(signal: any) {
   };
 }
 
+function sourceAccess(domain: string | null | undefined): "open" | "paywalled" | "blocked" {
+  const d = String(domain || "").toLowerCase().replace(/^www\./, "");
+  if (!d) return "blocked";
+  if (/(bloomberg\.com|ft\.com|financialtimes\.com|wsj\.com|nytimes\.com|economist\.com|heavyliftpfi\.com|lloydslist\.com|tradewindsnews\.com|theinformation\.com|politico\.com\/pro)/.test(d)) return "paywalled";
+  if (/(pravda|marketbeat|koimoi|tipranks|stocktitan|markets\.businessinsider|travelandtourworld|knowerx|jagranjosh|prnewswire|globenewswire|businesswire|townhall|themountainpress|ibtimes|openthemagazine|pjmedia|businessstory|economictimes\.indiatimes|timesofindia\.indiatimes)/.test(d)) return "blocked";
+  return "open";
+}
+
 function sourceAllowed(domain: string | null | undefined): boolean {
-  const d = String(domain || "").toLowerCase();
-  if (!d) return false;
-  // Basic Package 8-style source hygiene for this verifier. This is not the
-  // full 8A source-quality model, but it prevents obvious sludge/propaganda
-  // from being promoted in the real dry-run evidence packet.
-  if (/(pravda|marketbeat|koimoi|tipranks|stocktitan|markets\.businessinsider|travelandtourworld|knowerx|jagranjosh|prnewswire|globenewswire|businesswire|townhall|themountainpress|ibtimes|openthemagazine|pjmedia|businessstory|economictimes\.indiatimes|timesofindia\.indiatimes)/.test(d)) return false;
-  return true;
+  // V1 email rule: visible findings must use open, direct source links.
+  // Paywalled sources can remain useful for discovery/source-trail evidence,
+  // but they should not be promoted as customer email links.
+  return sourceAccess(domain) === "open";
 }
 
 function profileKeywordScore(signal: any, profile: any): number {
@@ -869,7 +874,7 @@ export async function runCompanyPackage8PipelineForProfile(
   // Production generation remains behind the adapter boundary. Until the
   // internal OpenClaw generation writer is plugged in, this path uses the
   // deterministic Package 8 generator and marks itself as dry-run/preview.
-  const evidenceDashboardLink = options.dashboardLink || `https://www.albis.news/dashboard/company/${profile.id}/briefings/${scanDate}/evidence`;
+  const evidenceDashboardLink = options.dashboardLink || (options.dryRun ? undefined : `https://www.albis.news/dashboard/company/${profile.id}/briefings/${scanDate}/evidence`);
   const generation = generateCompanyBriefing(packet, { dryRun: true, dashboardLink: evidenceDashboardLink });
   const intelligence_depth_bundles = buildIntelligenceDepthBundles(packet, selectedForDepth, workingSignals || []);
   const depthPacket = applyIntelligenceDepthToPacket(packet, intelligence_depth_bundles);

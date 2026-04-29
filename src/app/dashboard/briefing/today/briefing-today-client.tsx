@@ -8,10 +8,13 @@ import {
   BriefingEmpty,
   type BriefingContent,
 } from "@/app/components/briefing-renderer";
+import type { CompanyBriefingGenerationOutput } from "@/lib/company-scan/types";
 
 export default function BriefingTodayClient() {
   const [loading, setLoading] = useState(true);
-  const [content, setContent] = useState<BriefingContent | null>(null);
+  const [content, setContent] = useState<
+    BriefingContent | CompanyBriefingGenerationOutput | null
+  >(null);
   const [status, setStatus] = useState<string | null>(null);
 
   useEffect(() => {
@@ -27,7 +30,7 @@ export default function BriefingTodayClient() {
 
       if (!profile) return;
 
-      // Get most recent briefing
+      // Get most recent daily scan
       const { data: briefing } = await supabase
         .from("company_briefings")
         .select("status, briefing_content")
@@ -39,10 +42,15 @@ export default function BriefingTodayClient() {
       if (briefing) {
         setStatus(briefing.status);
         if (
-          (briefing.status === "generated" || briefing.status === "delivered") &&
+          (briefing.status === "generated" ||
+            briefing.status === "delivered") &&
           briefing.briefing_content
         ) {
-          setContent(briefing.briefing_content as BriefingContent);
+          setContent(
+            briefing.briefing_content as
+              | BriefingContent
+              | CompanyBriefingGenerationOutput,
+          );
         }
       }
 

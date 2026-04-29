@@ -8,12 +8,15 @@ import {
   BriefingRenderer,
   type BriefingContent,
 } from "@/app/components/briefing-renderer";
+import type { CompanyBriefingGenerationOutput } from "@/lib/company-scan/types";
 
 export default function BriefingDateClient() {
   const params = useParams();
   const dateParam = params.date as string;
   const [loading, setLoading] = useState(true);
-  const [content, setContent] = useState<BriefingContent | null>(null);
+  const [content, setContent] = useState<
+    BriefingContent | CompanyBriefingGenerationOutput | null
+  >(null);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
@@ -41,7 +44,11 @@ export default function BriefingDateClient() {
         (briefing.status === "generated" || briefing.status === "delivered") &&
         briefing.briefing_content
       ) {
-        setContent(briefing.briefing_content as BriefingContent);
+        setContent(
+          briefing.briefing_content as
+            | BriefingContent
+            | CompanyBriefingGenerationOutput,
+        );
       } else {
         setNotFound(true);
       }
@@ -67,16 +74,16 @@ export default function BriefingDateClient() {
         <div className={cardClass}>
           <div className="py-12 text-center">
             <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-              Briefing not found
+              Daily scan not found
             </h3>
             <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-              No briefing was found for {dateParam}.
+              No daily scan was found for {dateParam}.
             </p>
             <Link
               href="/dashboard/briefings"
               className="mt-4 inline-block text-sm font-medium text-[#c8922a] hover:underline"
             >
-              View all briefings
+              View all daily scans
             </Link>
           </div>
         </div>
@@ -102,7 +109,7 @@ export default function BriefingDateClient() {
         >
           <polyline points="15 18 9 12 15 6" />
         </svg>
-        All briefings
+        All daily scans
       </Link>
       <div className={cardClass}>
         {content && <BriefingRenderer content={content} />}
