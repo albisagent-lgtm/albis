@@ -70,6 +70,11 @@ const BANNED_PHRASES_BLOCKING: Array<{ pattern: RegExp; label: string }> = [
   { pattern: /\bignored\s+by\s+(the\s+)?(western\s+)?media\b/i, label: "ignored by the media" },
   { pattern: /\bmainstream\s+media\s+won'?t\s+tell\b/i, label: "mainstream media won't tell" },
   { pattern: /\bregistered\s+against\s+the\s+watchlist\b/i, label: "internal watchlist rail" },
+  { pattern: /\bweak\s+signal\b/i, label: "internal weak-signal label" },
+  { pattern: /\bindirect\s+or\s+weak\b/i, label: "internal weak-signal label" },
+  { pattern: /\bpassed\s+(the\s+)?threshold\b/i, label: "internal threshold label" },
+  { pattern: /\bdid\s+not\s+meet\s+(the\s+)?email\s+threshold\b/i, label: "internal threshold label" },
+  { pattern: /\bno\s+material\s+finding\b/i, label: "internal no-material-finding label" },
   { pattern: /\bmatched\s+(the\s+)?selected\s+watch\s+areas?\b/i, label: "internal selected-watch-area rail" },
   { pattern: /\bled\s+this\s+company[- ]specific\s+scan\b/i, label: "internal scan rail" },
   { pattern: /\bselected\s+company\s+watch\s+areas?\b/i, label: "internal company watch-area rail" },
@@ -436,6 +441,24 @@ export function lintBriefingStyle(output: CompanyBriefingGenerationOutput): Styl
     });
   }
 
+  // --- Package 10E: finding bodies must not simply repeat the title/headline ---
+  for (let si = 0; si < output.main_briefing.sections.length; si++) {
+    const section = output.main_briefing.sections[si];
+    for (let ii = 0; ii < section.items.length; ii++) {
+      const item = section.items[ii];
+      if (item.title?.text && item.body?.text && textLooksRepeated(item.title.text, item.body.text)) {
+        issues.push({
+          code: "SCANNER_REPEATED_TITLE_BODY",
+          severity: output.scanner_report?.enabled ? "blocking" : "warning",
+          location: `sections[${si}].items[${ii}].body`,
+          text: item.body.text.slice(0, 140),
+          message: "Scanner finding body repeats the title/headline instead of adding the useful fact and scan-area reason.",
+          suggested_fix: "Write the body as: what registered, the concrete useful fact, and why it belongs in this scan area.",
+        });
+      }
+    }
+  }
+
   // --- Check source-name clutter ---
   const sourceClutterPattern = /\b(Reuters|WSJ|Bloomberg|Financial Times|BBC|AP|CNN|CNBC|FT)\s*:\s/g;
   for (const seg of segments) {
@@ -509,9 +532,6 @@ function extractTextSegments(output: CompanyBriefingGenerationOutput): TextSegme
       const item = output.scanner_report.deeper_reads[i];
       segments.push({ path: `scanner_report.deeper_reads[${i}].title`, text: item.title.text });
       segments.push({ path: `scanner_report.deeper_reads[${i}].body`, text: item.body.text });
-    }
-    for (let i = 0; i < output.scanner_report.also_seen.length; i++) {
-      segments.push({ path: `scanner_report.also_seen[${i}]`, text: output.scanner_report.also_seen[i].text });
     }
   }
 
@@ -608,6 +628,19 @@ function detectRepeatedPhrasing(segments: TextSegment[]): RepeatedPhrase[] {
   }
 
   return results.sort((a, b) => b.count - a.count).slice(0, 5);
+}
+
+function textLooksRepeated(title: string, body: string): boolean {
+  const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
+  const titleNorm = normalize(title);
+  const firstSentence = normalize(splitSentences(body)[0] || body);
+  if (!titleNorm || !firstSentence) return false;
+  if (firstSentence.includes(titleNorm) || titleNorm.includes(firstSentence)) return true;
+  const titleWords = new Set(titleNorm.split(/\s+/).filter((word) => word.length > 3));
+  const bodyWords = firstSentence.split(/\s+/).filter((word) => word.length > 3);
+  if (titleWords.size < 4 || bodyWords.length < 4) return false;
+  const overlap = bodyWords.filter((word) => titleWords.has(word)).length;
+  return overlap / Math.max(Math.min(titleWords.size, bodyWords.length), 1) >= 0.75;
 }
 
 function isCommonPhrase(phrase: string): boolean {

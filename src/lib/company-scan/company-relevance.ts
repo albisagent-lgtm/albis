@@ -1138,7 +1138,7 @@ function computeSectionNoFindings(
         suggested_email_line:
           dashboardDecisions.length > 0
             ? `We scanned ${area.label}; useful signals saved to dashboard but nothing strong enough for email today.`
-            : `No material new signal found today in ${area.label}.`,
+            : `${area.label} was scanned today, but no separate direct item was clear enough for the main email.`,
       });
     }
   }

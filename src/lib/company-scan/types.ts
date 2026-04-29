@@ -1440,12 +1440,27 @@ export interface CompanyBriefingGenerationOutput {
 
 export interface GeneratedScannerReport {
   enabled: true;
-  layout_version: "package10c_scanner_report_v1";
+  layout_version: "package10c_scanner_report_v1" | "package10d_full_scan_report_v1" | "package10e_weighted_findings_v1";
   overview: GeneratedText;
   main_findings_count: number;
   scan_area_count: number;
+  active_scan_area_count?: number;
+  quiet_scan_area_count?: number;
+  scan_areas?: GeneratedScannerReportArea[];
   deeper_reads: GeneratedBriefingItem[];
-  also_seen: GeneratedText[];
+  also_seen?: GeneratedText[];
+  evidence_dashboard_link?: string;
+}
+
+export interface GeneratedScannerReportArea {
+  area_id: string;
+  label: string;
+  status: "active" | "quiet" | "no_direct_signal" | "related_signal_elsewhere" | "context_only_signal";
+  finding_count: number;
+  direct_source_count: number;
+  summary: GeneratedText;
+  related_area_ids?: string[];
+  coverage_note?: GeneratedText;
 }
 
 export interface GeneratedTodayBrief {

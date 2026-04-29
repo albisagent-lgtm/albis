@@ -157,6 +157,7 @@ export interface CompanyBriefingEvidenceDocument {
     source_grade: string;
     source_type: string;
     role: string;
+    url?: string;
   }>;
   source_quality_summary: {
     source_mix: { A: number; B: number; C: number; D: number; Block: number };
@@ -985,6 +986,7 @@ function sourceDetailsForPacket(packet: CompanyBriefingEvidencePacket): CompanyB
         source_grade: support.source_grade,
         source_type: support.source_type,
         role: support.role,
+        url: support.url,
       });
     }
   }

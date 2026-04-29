@@ -39,6 +39,13 @@ export interface CompanyRetrievalQuery {
   scan_area_id?: string;
   required_context: string[];
   priority: "high" | "medium" | "low";
+  local_language_expansion?: LocalLanguageExpansionTrace[];
+}
+
+export interface LocalLanguageExpansionTrace {
+  language: string;
+  terms: string[];
+  matched_context: string[];
 }
 
 export interface CompanySpecificRetrievalResult {
@@ -80,6 +87,77 @@ function orGroup(terms: string[], limit = 5): string {
     .join(" OR ");
 }
 
+type LocalLanguageRule = {
+  language: string;
+  triggers: string[];
+  terms: string[];
+};
+
+const LOCAL_LANGUAGE_RULES: LocalLanguageRule[] = [
+  { language: "Arabic", triggers: ["hormuz", "strait of hormuz"], terms: ["مضيق هرمز"] },
+  { language: "Farsi", triggers: ["hormuz", "strait of hormuz"], terms: ["تنگه هرمز"] },
+  { language: "Arabic", triggers: ["persian gulf", "gulf shipping", "gulf maritime"], terms: ["الخليج"] },
+  { language: "Farsi", triggers: ["persian gulf", "iran", "iranian", "tehran"], terms: ["خلیج فارس", "ایران"] },
+  { language: "Arabic", triggers: ["suez", "suez canal"], terms: ["قناة السويس"] },
+  { language: "Arabic", triggers: ["red sea"], terms: ["البحر الأحمر"] },
+  { language: "Korean", triggers: ["north korea", "dprk", "north korean"], terms: ["북한", "조선민주주의인민공화국"] },
+  { language: "Korean", triggers: ["pyongyang", "kim jong", "korean peninsula"], terms: ["평양", "대북 제재"] },
+  { language: "Chinese", triggers: ["china", "beijing", "shenzhen"], terms: ["中国"] },
+  { language: "Chinese", triggers: ["taiwan"], terms: ["台湾"] },
+  { language: "Chinese", triggers: ["south china sea"], terms: ["南海"] },
+  { language: "Chinese", triggers: ["semiconductor", "semiconductors", "chip", "chips"], terms: ["半导体", "芯片"] },
+  { language: "Russian", triggers: ["russia", "russian", "moscow"], terms: ["Россия", "Москва"] },
+  { language: "Ukrainian", triggers: ["ukraine", "ukrainian", "kyiv"], terms: ["Україна", "Київ"] },
+  { language: "Russian", triggers: ["black sea"], terms: ["Россия", "Украина"] },
+  { language: "Ukrainian", triggers: ["black sea"], terms: ["Україна", "Росія"] },
+  { language: "Hindi", triggers: ["india", "indian", "new delhi"], terms: ["भारत", "नई दिल्ली"] },
+  { language: "Urdu", triggers: ["pakistan", "pakistani", "islamabad"], terms: ["پاکستان", "اسلام آباد"] },
+  { language: "Hindi", triggers: ["south asia"], terms: ["भारत", "पाकिस्तान"] },
+  { language: "Urdu", triggers: ["south asia"], terms: ["پاکستان", "بھارت"] },
+];
+
+function termInText(text: string, term: string): boolean {
+  const t = cleanTerm(term).toLowerCase();
+  if (!t) return false;
+  return new RegExp(`(^|[^a-z0-9])${t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^a-z0-9]|$)`, "i").test(text);
+}
+
+function profileExpansionContext(profile: CompanyProfile): string {
+  return [
+    profile.company_name,
+    profile.sector,
+    profile.sub_sector,
+    ...(profile.tracked_themes || []),
+    ...(profile.risk_priorities || []),
+    ...(profile.watchlist_entities || []),
+    ...(profile.regions || []),
+    ...(profile.countries || []),
+    ...(profile.supply_chain_exposure || []),
+  ].map(cleanTerm).join(" ").toLowerCase();
+}
+
+function localLanguageExpansionFor(profile: CompanyProfile, queryTerms: string[], maxTerms = 5): LocalLanguageExpansionTrace[] {
+  const cleanQueryTerms = queryTerms.map(cleanTerm).filter(Boolean);
+  const hay = (cleanQueryTerms.length ? cleanQueryTerms.join(" ") : profileExpansionContext(profile)).toLowerCase();
+  const traces: LocalLanguageExpansionTrace[] = [];
+  let remaining = maxTerms;
+
+  for (const rule of LOCAL_LANGUAGE_RULES) {
+    if (remaining <= 0) break;
+    const matchedContext = rule.triggers.filter((trigger) => termInText(hay, trigger));
+    if (!matchedContext.length) continue;
+    const terms = rule.terms.slice(0, remaining);
+    traces.push({ language: rule.language, terms, matched_context: matchedContext.slice(0, 3) });
+    remaining -= terms.length;
+  }
+
+  return traces;
+}
+
+function expandWithLocalLanguageTerms(terms: string[], expansion: LocalLanguageExpansionTrace[]): string[] {
+  return uniq([...terms, ...expansion.flatMap((trace) => trace.terms)]);
+}
+
 function slugify(value: string): string {
   return String(value || "query")
     .toLowerCase()
@@ -114,7 +192,8 @@ function intentForProfile(profile: CompanyProfile): CompanyRetrievalIntent {
 
 function profileTerms(profile: CompanyProfile) {
   return {
-    themes: uniq([...(profile.tracked_themes || []), ...(profile.risk_priorities || []), ...(profile.supply_chain_exposure || [])].map(cleanTerm).filter(Boolean)),
+    themes: uniq([...(profile.tracked_themes || []), ...(profile.risk_priorities || [])].map(cleanTerm).filter(Boolean)),
+    exposures: uniq((profile.supply_chain_exposure || []).map(cleanTerm).filter(Boolean)),
     entities: uniq((profile.watchlist_entities || []).map(cleanTerm).filter(Boolean)),
     regions: uniq([...(profile.regions || []), ...(profile.countries || [])].map(cleanTerm).filter(Boolean)),
   };
@@ -125,7 +204,7 @@ function addQuery(
   label: string,
   query: string,
   reason: string,
-  options: { scanAreaId?: string; requiredContext?: string[]; priority?: "high" | "medium" | "low" } = {},
+  options: { scanAreaId?: string; requiredContext?: string[]; priority?: "high" | "medium" | "low"; localLanguageExpansion?: LocalLanguageExpansionTrace[] } = {},
 ) {
   const normalized = query.replace(/\s+/g, " ").trim();
   if (!normalized || queries.some((q) => q.query === normalized)) return;
@@ -137,6 +216,7 @@ function addQuery(
     scan_area_id: options.scanAreaId,
     required_context: uniq((options.requiredContext || []).map(cleanTerm).filter(Boolean)),
     priority: options.priority || "medium",
+    ...(options.localLanguageExpansion?.length ? { local_language_expansion: options.localLanguageExpansion } : {}),
   });
 }
 
@@ -196,12 +276,35 @@ function themeQueryTerm(theme: string, intent: CompanyRetrievalIntent): { term: 
   return { term: cleanTerm(theme), context: intentWords(intent), priority: "medium" };
 }
 
+function exposureQueryTerm(exposure: string, intent: CompanyRetrievalIntent): { term: string; context: string[]; priority: "high" | "medium" | "low" } {
+  const t = cleanTerm(exposure).toLowerCase();
+  if (/fertili[sz]er|urea|ammonia|potash|phosphate/.test(t)) {
+    return {
+      term: cleanTerm(exposure),
+      context: ["tender", "export restrictions", "price", "supply", "India", "China", "gas", "shipping"],
+      priority: "high",
+    };
+  }
+  if (/semiconductor|chip/.test(t)) {
+    return {
+      term: cleanTerm(exposure),
+      context: ["export controls", "tariff", "capacity", "Taiwan", "China", "supply", "shipping", "AI chips"],
+      priority: "high",
+    };
+  }
+  return {
+    term: cleanTerm(exposure),
+    context: uniq(["supply", "shortage", "price", "export", "import", "shipping", ...intentWords(intent).slice(0, 4)]),
+    priority: "high",
+  };
+}
+
 export function buildCompanyRetrievalPlan(profile: CompanyProfile): {
   intent: CompanyRetrievalIntent;
   queries: CompanyRetrievalQuery[];
 } {
   const intent = intentForProfile(profile);
-  const { themes, entities, regions } = profileTerms(profile);
+  const { themes, exposures, entities, regions } = profileTerms(profile);
   const queries: CompanyRetrievalQuery[] = [];
   const specificEntities = entities.filter((entity) => !isBroadEntity(entity));
   const broadContextEntities = entities.filter(isBroadEntity);
@@ -209,10 +312,26 @@ export function buildCompanyRetrievalPlan(profile: CompanyProfile): {
   const regionGroup = orGroup(regions.filter((region) => !isBroadEntity(region)), 3);
   const intentGroup = orGroup(intentWords(intent), 6);
 
+  for (const exposure of exposures.slice(0, 6)) {
+    const mapped = exposureQueryTerm(exposure, intent);
+    const context = uniq([...mapped.context, ...specificEntities.slice(0, 2)]);
+    const localLanguageExpansion = localLanguageExpansionFor(profile, [mapped.term, ...regions]);
+    const contextGroup = orGroup(expandWithLocalLanguageTerms(context, localLanguageExpansion), 9) || intentGroup;
+    const parts = [quote(mapped.term)];
+    if (contextGroup) parts.push(`(${contextGroup})`);
+    addQuery(queries, mapped.term, parts.join(" "), "company supply-chain exposure", {
+      scanAreaId: slugify(exposure),
+      requiredContext: context,
+      priority: mapped.priority,
+      localLanguageExpansion,
+    });
+  }
+
   for (const theme of themes.slice(0, 10)) {
     const mapped = themeQueryTerm(theme, intent);
     const context = uniq([...mapped.context, ...specificEntities.slice(0, 3)]);
-    const contextGroup = orGroup(context, 6) || intentGroup;
+    const localLanguageExpansion = localLanguageExpansionFor(profile, [mapped.term, ...specificEntities.slice(0, 3), ...regions]);
+    const contextGroup = orGroup(expandWithLocalLanguageTerms(context, localLanguageExpansion), 8) || intentGroup;
     const parts = [quote(mapped.term)];
     if (contextGroup) parts.push(`(${contextGroup})`);
     // Regions are useful when specific, but broad region labels like
@@ -223,24 +342,33 @@ export function buildCompanyRetrievalPlan(profile: CompanyProfile): {
       scanAreaId: slugify(theme),
       requiredContext: context,
       priority: mapped.priority,
+      localLanguageExpansion,
     });
   }
 
   // Entity-only queries are still useful for high-value people/places, but
   // pair them with intent words so broad names do not drag in general noise.
   for (const entity of specificEntities.slice(0, 10)) {
-    addQuery(queries, entity, `${quote(entity)} (${intentGroup})`, "company watchlist entity with company-intent context", {
+    const context = intentWords(intent);
+    const localLanguageExpansion = localLanguageExpansionFor(profile, [entity]);
+    const entityContextGroup = orGroup(expandWithLocalLanguageTerms(context, localLanguageExpansion), 8) || intentGroup;
+    addQuery(queries, entity, `${quote(entity)} (${entityContextGroup})`, "company watchlist entity with company-intent context", {
       scanAreaId: "watchlist-entities",
-      requiredContext: intentWords(intent),
+      requiredContext: context,
       priority: "high",
+      localLanguageExpansion,
     });
   }
 
   if (intent === "geopolitical_media") {
-    addQuery(queries, "geopolitical media environment", `(${orGroup(["press freedom", "censorship", "disinformation", "state media", "sanctions"], 5)}) ${entityGroup ? `(${entityGroup})` : ""}`.trim(), "media/information-environment intent", {
+    const context = ["press freedom", "censorship", "disinformation", "state media", "sanctions"];
+    const localLanguageExpansion = localLanguageExpansionFor(profile, [...specificEntities, ...broadContextEntities, ...regions]);
+    const mediaContextGroup = orGroup(expandWithLocalLanguageTerms(context, localLanguageExpansion), 8);
+    addQuery(queries, "geopolitical media environment", `(${mediaContextGroup}) ${entityGroup ? `(${entityGroup})` : ""}`.trim(), "media/information-environment intent", {
       scanAreaId: "intent-geopolitical-media",
-      requiredContext: ["press freedom", "censorship", "disinformation", "state media", "sanctions"],
+      requiredContext: context,
       priority: "high",
+      localLanguageExpansion,
     });
   }
   if (intent === "ai_memory_integrity") {
@@ -251,10 +379,13 @@ export function buildCompanyRetrievalPlan(profile: CompanyProfile): {
     });
   }
   if (intent === "logistics_routes") {
-    addQuery(queries, "route confidence", `(${orGroup(["Hormuz", "Suez", "Red Sea", "freight rates", "vessel traffic", "marine insurance"], 6)})`, "route-confidence intent", {
+    const routeTerms = ["Hormuz", "Suez", "Red Sea", "freight rates", "vessel traffic", "marine insurance"];
+    const localLanguageExpansion = localLanguageExpansionFor(profile, []);
+    addQuery(queries, "route confidence", `(${orGroup(expandWithLocalLanguageTerms(routeTerms, localLanguageExpansion), 10)})`, "route-confidence intent", {
       scanAreaId: "intent-logistics-routes",
       requiredContext: ["shipping", "freight", "route", "vessel", "insurance"],
       priority: "high",
+      localLanguageExpansion,
     });
   }
 
@@ -366,6 +497,7 @@ export async function retrieveCompanySpecificSignals(
         retrieval_reasons: queryMatches.map((query) => query.reason),
         matched_query_terms: matchedQueryTerms,
         matched_context_terms: matchedContext,
+        local_language_expansion: uniq(queryMatches.flatMap((query) => query.local_language_expansion || [])),
       },
       created_at: new Date().toISOString(),
     } as Signal & { company_retrieval: Record<string, unknown> });

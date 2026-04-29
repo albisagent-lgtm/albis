@@ -29,7 +29,9 @@ export function isCompanyScannerReportContent(
   return (
     isRecord(scannerReport) &&
     scannerReport.enabled === true &&
-    scannerReport.layout_version === "package10c_scanner_report_v1" &&
+    (scannerReport.layout_version === "package10c_scanner_report_v1" ||
+      scannerReport.layout_version === "package10d_full_scan_report_v1" ||
+      scannerReport.layout_version === "package10e_weighted_findings_v1") &&
     typeof scannerReport.main_findings_count === "number" &&
     Array.isArray(scannerReport.deeper_reads)
   );

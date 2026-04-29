@@ -167,6 +167,7 @@ function isSectorMismatchedArea(value: string, profile: any): boolean {
 function profileToPackage8Profile(profile: any) {
   const tracked = Array.isArray(profile.tracked_themes) ? profile.tracked_themes : [];
   const risks = Array.isArray(profile.risk_priorities) ? profile.risk_priorities : [];
+  const exposures = Array.isArray(profile.supply_chain_exposure) ? profile.supply_chain_exposure : [];
   const selected = [...tracked, ...risks]
     .filter((value: string) => !isSectorMismatchedArea(value, profile))
     .map((value: string) => ({
@@ -178,6 +179,21 @@ function profileToPackage8Profile(profile: any) {
     keywords: [value],
     description: `Company-selected scan area: ${value}`,
   }));
+
+  for (const value of exposures) {
+    if (!value || isSectorMismatchedArea(value, profile)) continue;
+    const areaId = slugify(value);
+    if (selected.some((area: any) => area.area_id === areaId)) continue;
+    selected.push({
+      area_id: areaId,
+      label: value.replace(/[-_]+/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase()),
+      category: "supply_chain",
+      priority: "high",
+      regions: profile.regions || [],
+      keywords: [value, "supply chain", "input cost", "availability"],
+      description: `Company-selected supply-chain exposure: ${value}`,
+    });
+  }
 
   if ((profile.watchlist_entities || []).length > 0 && !selected.some((area: any) => area.area_id === "watchlist-entities")) {
     selected.push({
@@ -824,7 +840,7 @@ export async function runCompanyPackage8PipelineForProfile(
       no_material_findings: true,
       top_excluded_reasons: [],
       email_line_allowed: true,
-      suggested_email_line: `No material email-level signal found for ${area.label} in this scan window.`,
+      suggested_email_line: `${area.label} was scanned in this window, but no separate direct item was clear enough for the main email.`,
     }));
 
   const relevanceResult: any = {

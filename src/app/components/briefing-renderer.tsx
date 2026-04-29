@@ -347,17 +347,6 @@ function ScannerReportRenderer({
         </>
       )}
 
-      {(scanner?.also_seen?.length || 0) > 0 && (
-        <>
-          <div className="my-7 h-px bg-black/[0.07] dark:bg-white/[0.07]" />
-          <section>
-            <p className={sectionLabel}>Also Seen</p>
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-              {scanner?.also_seen.map((item, i) => <li key={i}>{item.text}</li>)}
-            </ul>
-          </section>
-        </>
-      )}
     </div>
   );
 }

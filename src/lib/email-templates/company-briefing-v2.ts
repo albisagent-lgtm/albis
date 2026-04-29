@@ -104,9 +104,6 @@ export function generateCompanyBriefingHtmlV2(
   // --- DEEPER READ ---
   const deeperReadHtml = renderDeeperRead(output);
 
-  // --- ALSO SEEN ---
-  const alsoSeenHtml = renderAlsoSeen(output);
-
   // --- PERCEPTION GAP ---
   const perceptionGapHtml = renderPerceptionGap(output);
 
@@ -164,7 +161,6 @@ export function generateCompanyBriefingHtmlV2(
       ${todayScanHtml ? divider() : ""}
       ${mainBriefingHtml}
       ${deeperReadHtml ? divider() + deeperReadHtml : ""}
-      ${alsoSeenHtml ? divider() + alsoSeenHtml : ""}
       ${perceptionGapHtml ? divider() + perceptionGapHtml : ""}
       ${observationsHtml ? divider() + observationsHtml : ""}
       ${divider()}
@@ -264,16 +260,6 @@ function renderDeeperRead(output: CompanyBriefingGenerationOutput): string {
   return html;
 }
 
-function renderAlsoSeen(output: CompanyBriefingGenerationOutput): string {
-  const alsoSeen = output.scanner_report?.also_seen || [];
-  if (alsoSeen.length === 0) return "";
-  let html = sectionLabel("Also Seen");
-  html += `<ul style="padding-left:18px;margin:0;color:${BODY};font-family:-apple-system,sans-serif;font-size:14px;line-height:1.55;">`;
-  for (const item of alsoSeen) html += `<li style="margin-bottom:7px;">${esc(item.text)}</li>`;
-  html += `</ul>`;
-  return html;
-}
-
 function renderPerceptionGap(output: CompanyBriefingGenerationOutput): string {
   const notes = output.perception_gap.notes;
   if (notes.length === 0) return "";
@@ -315,7 +301,7 @@ function renderSourceNotes(output: CompanyBriefingGenerationOutput): string {
     html += `<p style="font-size:12px;color:${GRAY};font-family:-apple-system,sans-serif;margin:0 0 10px;line-height:1.6;"><strong>Sources:</strong> ${esc(uniqueSources.join("; "))}</p>`;
   }
   const dashboardLink = safeDashboardLink(sn.dashboard_link);
-  html += `<a href="${escAttr(dashboardLink)}" style="font-size:13px;color:${GRAY};font-family:-apple-system,sans-serif;text-decoration:underline;">View full sources on dashboard →</a>`;
+  html += `<a href="${escAttr(dashboardLink)}" style="font-size:13px;color:${GRAY};font-family:-apple-system,sans-serif;text-decoration:underline;">View full source trail on dashboard →</a>`;
   html += `</div>`;
   return html;
 }

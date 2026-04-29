@@ -98,7 +98,6 @@ function listEditableFields(output: CompanyBriefingGenerationOutput): EditableFi
       { path: `scanner_report.deeper_reads[${itemIndex}].title`, value: item.title },
       { path: `scanner_report.deeper_reads[${itemIndex}].body`, value: item.body },
     ]),
-    ...(output.scanner_report?.also_seen || []).map((value, i) => ({ path: `scanner_report.also_seen[${i}]`, value })),
     ...output.perception_gap.notes.map((note, i) => ({ path: `perception_gap.notes[${i}].note`, value: note.note })),
     ...output.useful_observations.observations.map((value, i) => ({ path: `useful_observations.observations[${i}]`, value })),
     { path: "source_notes.text", value: output.source_notes.text },

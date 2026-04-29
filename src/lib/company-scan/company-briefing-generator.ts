@@ -179,7 +179,7 @@ function generateTodayBrief(packet: CompanyBriefingEvidencePacket): GeneratedTod
   if (items.length === 0) {
     return {
       top_line: {
-        text: `No material new signal found today across ${company}'s selected scan areas.`,
+        text: `The scan ran today across ${company}'s selected areas, but did not find a separate direct item clear enough for the main email.`,
         supported_by: [],
       },
       bullets: [
@@ -424,7 +424,7 @@ function generateUsefulObservations(
 
   if (items.length === 0) {
     observations.push({
-      text: "No material signals today. Dashboard may contain lower-priority items worth reviewing if time allows.",
+      text: "The scan ran normally today. The dashboard may contain background context if you want the full trail.",
       supported_by: [],
     });
     return { observations };
@@ -467,7 +467,7 @@ function generateUsefulObservations(
   // Observation 4: dashboard overflow
   if (packet.dashboard_only_items.length > 0) {
     observations.push({
-      text: `${packet.dashboard_only_items.length} additional signal${packet.dashboard_only_items.length > 1 ? "s" : ""} did not meet the email threshold but ${packet.dashboard_only_items.length > 1 ? "are" : "is"} available on the dashboard.`,
+      text: `${packet.dashboard_only_items.length} additional context item${packet.dashboard_only_items.length > 1 ? "s are" : " is"} available on the dashboard source trail.`,
       supported_by: [],
     });
   }
