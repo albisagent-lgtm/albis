@@ -3,6 +3,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { createAdminClient } from '../src/lib/supabase/admin';
 import { loadVerifiedScanItems, type ScanPeriod } from '../src/lib/pipeline-db';
+import { upsertPublicScanPgiEvidence } from '../src/lib/pgi-evidence';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -323,7 +324,14 @@ async function main() {
     .upsert(gaiRows, { onConflict: 'scan_date,scan_period,story_slug', ignoreDuplicates: false });
   if (gaiError) fail(`GAI insert failed: ${gaiError.message}`);
 
-  console.log(JSON.stringify({ ok: true, date, period, items: items.length, pgiRows: pgiRows.length, gaiRows: gaiRows.length, pairRows: pairRows.length }, null, 2));
+  const evidenceRows = await upsertPublicScanPgiEvidence(supabase, {
+    scanDate: date,
+    scanPeriod: period,
+    items,
+    storySlugs,
+  });
+
+  console.log(JSON.stringify({ ok: true, date, period, items: items.length, pgiRows: pgiRows.length, gaiRows: gaiRows.length, pairRows: pairRows.length, evidenceRows }, null, 2));
 }
 
 main().catch((err) => fail(err instanceof Error ? err.message : String(err)));

@@ -37,6 +37,7 @@ import type { Signal } from "./types";
 import { runCompanyPackage8PipelineForProfile } from "./company-package8-pipeline";
 import { retrieveCompanySpecificSignals } from "./company-specific-retrieval";
 import { allowLegacyCompanyPipeline } from "../company-briefing-content-version";
+import { upsertCompanyProfilePgiEvidence, upsertCompanySignalPgiEvidence } from "../pgi-evidence";
 
 type OwnerProfile = {
   id: string;
@@ -443,6 +444,18 @@ export async function processProfileSignals(
       );
     }
 
+    const selectedHeadlines = new Set(selected.map((story) => story.headline));
+    const selectedSignalIds = profileSignals
+      .filter((signal) => selectedHeadlines.has(signal.headline))
+      .map((signal) => signal.id);
+    const evidenceRows = await upsertCompanyProfilePgiEvidence(supabase, {
+      evidenceDate: scanDate,
+      companyProfileId: rawProfile.id,
+      signals: profileSignals,
+      selectedSignalIds,
+    });
+    log(`✅ Upserted ${evidenceRows} PGI evidence row(s) for ${rawProfile.company_name}`);
+
     return {
       company_name: rawProfile.company_name,
       company_profile_id: rawProfile.id,
@@ -541,6 +554,15 @@ export async function processProfileSignals(
   log(
     `✅ Wrote ${matchRows.length} company_signal_matches rows (${selected.length} selected)`,
   );
+
+  const runs = unique(signals.map((signal) => signal.company_scan_run_id).filter(Boolean));
+  if (runs.length === 1) {
+    const evidenceRows = await upsertCompanySignalPgiEvidence(supabase, {
+      run: { id: runs[0], run_date: scanDate },
+      signals,
+    });
+    log(`✅ Upserted ${evidenceRows} PGI evidence row(s) for ${rawProfile.company_name}`);
+  }
 
   const briefingContent: BriefingContent = buildBriefingContent(
     rawProfile,
