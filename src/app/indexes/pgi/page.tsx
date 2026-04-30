@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { createAnonClient } from "@/lib/supabase/anon";
 import { PGIClient } from "./pgi-client";
 import { PgiShareBar } from "./share-bar";
 import { PgiTimeline } from "@/app/components/pgi-timeline";
@@ -11,7 +11,7 @@ export const revalidate = 3600;
 
 async function getLatestPgi() {
   try {
-    const supabase = createAdminClient();
+    const supabase = createAnonClient();
     const { data } = await supabase
       .from("pgi_daily")
       .select("date, daily_pgi")
@@ -48,7 +48,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 async function getAllReports() {
   try {
-    const supabase = createAdminClient();
+    const supabase = createAnonClient();
     const { data } = await supabase
       .from("pgi_signature_pieces")
       .select("date, daily_pgi, tier, word_count, story_count, region_count")
@@ -76,7 +76,7 @@ function getTierColor(pgi: number) {
 
 async function getLast14Days() {
   try {
-    const supabase = createAdminClient();
+    const supabase = createAnonClient();
     const fourteenDaysAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000)
       .toISOString()
       .split("T")[0];
@@ -99,7 +99,7 @@ export default async function PGIPage() {
   const allReports = await getAllReports();
 
   // Fetch available dates for archive
-  const supabase = createAdminClient();
+  const supabase = createAnonClient();
   const { data: dates } = await supabase
     .from("pgi_daily")
     .select("date, daily_pgi")

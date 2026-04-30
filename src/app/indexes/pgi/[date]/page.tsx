@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { createAnonClient } from "@/lib/supabase/anon";
 
 export const revalidate = 86400;
 
 export async function generateStaticParams() {
   try {
-    const supabase = createAdminClient();
+    const supabase = createAnonClient();
     const { data } = await supabase
       .from("pgi_signature_pieces")
       .select("date")
@@ -38,7 +38,7 @@ interface SignaturePiece {
 }
 
 async function getReport(date: string): Promise<SignaturePiece | null> {
-  const supabase = createAdminClient();
+  const supabase = createAnonClient();
   const { data } = await supabase
     .from("pgi_signature_pieces")
     .select("*")
@@ -48,7 +48,7 @@ async function getReport(date: string): Promise<SignaturePiece | null> {
 }
 
 async function getAdjacentDates(date: string) {
-  const supabase = createAdminClient();
+  const supabase = createAnonClient();
   const [prevRes, nextRes] = await Promise.all([
     supabase
       .from("pgi_signature_pieces")

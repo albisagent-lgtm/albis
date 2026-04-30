@@ -44,6 +44,24 @@ export default function AboutPage() {
           </div>
         </div>
 
+        {/* Why this matters */}
+        <div className="mt-12 border-t border-black/5 pt-12 md:mt-16 md:pt-16 dark:border-white/5">
+          <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
+            Why this matters
+          </h2>
+          <div className="space-y-5 font-[family-name:var(--font-source-serif)] text-lg leading-[1.8] text-zinc-600 dark:text-zinc-400">
+            <p>
+              Press freedom is under pressure worldwide. Reporters Without Borders reported in 2026 that global press freedom had fallen to its lowest level in 25 years, with journalism increasingly criminalised, restricted, or made unsafe in many countries.
+            </p>
+            <p>
+              Albis is not a press freedom NGO. Its role is different: to help readers see what information reaches the public, what gets missed, and how the same event changes shape as it moves across languages, regions, governments, outlets, and platforms.
+            </p>
+            <p>
+              In a world where journalists are targeted, access is restricted, and attention is manipulated, the public right to understand reality becomes fragile. Albis exists to protect that awareness: not by telling readers what to think, but by showing them more of what the world is seeing — and not seeing.
+            </p>
+          </div>
+        </div>
+
         {/* Perception Gap Index */}
         <div className="mt-12 border-t border-black/5 pt-12 md:mt-16 md:pt-16 dark:border-white/5">
           <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
