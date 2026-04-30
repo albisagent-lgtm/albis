@@ -21,7 +21,10 @@ CREATE TABLE IF NOT EXISTS public.pgi_evidence (
   company_profile_id UUID REFERENCES public.company_profiles(id) ON DELETE CASCADE,
   company_scan_run_id UUID REFERENCES public.company_scan_runs(id) ON DELETE CASCADE,
   signal_id UUID REFERENCES public.signals(id) ON DELETE CASCADE,
-  scan_item_id UUID REFERENCES public.scan_items(id) ON DELETE SET NULL,
+  -- Stored as text because production scan_items.id has changed shape across
+  -- migrations/environments (bigint in prod, uuid in older local history).
+  -- source_record_id remains the stable provenance key used by the app.
+  scan_item_id TEXT,
   source_record_id TEXT NOT NULL,
 
   -- Source / stakeholder context.
