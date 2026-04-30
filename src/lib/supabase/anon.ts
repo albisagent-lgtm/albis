@@ -13,15 +13,47 @@
 // for privileged writes (use ./admin.ts).
 import { createClient } from "@supabase/supabase-js";
 
-export function createAnonClient() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+type AnonClient = ReturnType<typeof createClient>;
+
+function createUnavailableClient(): AnonClient {
+  const result = Promise.resolve({
+    data: null,
+    error: { message: "Supabase environment is not configured" },
+  });
+
+  const chain = new Proxy(
+    {},
     {
-      auth: {
-        persistSession: false,
-        autoRefreshToken: false,
+      get(_target, prop) {
+        if (prop === "then") return result.then.bind(result);
+        if (prop === "catch") return result.catch.bind(result);
+        if (prop === "finally") return result.finally.bind(result);
+        return () => chain;
       },
-    }
+    },
   );
+
+  return new Proxy(
+    {},
+    {
+      get(_target, prop) {
+        if (prop === "from" || prop === "rpc") return () => chain;
+        return chain;
+      },
+    },
+  ) as AnonClient;
+}
+
+export function createAnonClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!url || !anonKey) return createUnavailableClient();
+
+  return createClient(url, anonKey, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+    },
+  });
 }
