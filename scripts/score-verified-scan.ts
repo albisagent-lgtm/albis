@@ -138,20 +138,26 @@ const REGION_DISTANCE: Record<string, number> = {
 };
 
 function scorePgi(item: Awaited<ReturnType<typeof loadVerifiedScanItems>>[number]) {
-  const base = item.perception_gap ?? 5;
-  const regionCount = item.regions.length;
-  const scarcityBoost = regionCount <= 2 ? 0.5 : regionCount === 3 ? 0.2 : 0;
-  const sigBoost = item.significance === 'high' ? 0.2 : item.significance === 'medium' ? 0.05 : 0;
-  const h = item.headline.toLowerCase();
-  const techBoost = /(ai|chip|cloud|compute|data)/.test(h) ? 0.2 : 0;
-  const humanBoost = /(aid|civilian|food|fuel|inflation|migration|ceasefire|shipping)/.test(h) ? 0.2 : 0;
+  const regions = uniq((item.regions || []).map(normRegion).filter(Boolean) as string[]).filter((r) => r !== 'global');
+  const regionCount = regions.length;
+  const rawBase = item.perception_gap ?? 4.6;
+  // PGI is narrative distance. A single-region item can be important or invisible,
+  // but it should not become “Competing Realities” without a second frame base.
+  const evidenceCap = regionCount <= 1 ? 4.2 : regionCount === 2 ? 7.4 : 10;
+  const base = Math.min(rawBase, evidenceCap);
+  const sigBoost = item.significance === 'high' ? 0.15 : item.significance === 'medium' ? 0.05 : 0;
+  const h = `${item.headline} ${item.connection || ''}`.toLowerCase();
+  const techBoost = /(ai|chip|cloud|compute|data|semiconductor|platform)/.test(h) ? 0.15 : 0;
+  const humanBoost = /(aid|civilian|hospital|food|fuel|inflation|migration|ceasefire|shipping|dead|killed|displaced)/.test(h) ? 0.2 : 0;
+  const factualConflictBoost = /(denies|denied|disputed|conflicting|death toll|massacre|genocide|alleged|claims?)/.test(h) ? 0.45 : 0;
+  const powerConflictBoost = /(war|strike|sanction|tariff|court|election|sovereignty|terror|resistance|refugee|invasion)/.test(h) ? 0.25 : 0;
 
-  const d1 = clamp(base - 0.4 + scarcityBoost * 0.2);
-  const d2 = clamp(base - 0.1 + scarcityBoost * 0.2 + sigBoost);
-  const d3 = clamp(base + 0.3 + techBoost * 0.3 + humanBoost * 0.2);
-  const d4 = clamp(base + 0.1 + humanBoost + (item.significance === 'high' ? 0.2 : 0));
-  const d5 = clamp(base - 0.1 + techBoost * 0.2 + humanBoost * 0.1);
-  const d6 = clamp(base + 0.2 + sigBoost + humanBoost * 0.1);
+  const d1 = clamp(Math.min(evidenceCap, base - 0.65 + factualConflictBoost));
+  const d2 = clamp(Math.min(evidenceCap, base - 0.05 + sigBoost + powerConflictBoost));
+  const d3 = clamp(Math.min(evidenceCap, base + 0.25 + techBoost + humanBoost + powerConflictBoost * 0.4));
+  const d4 = clamp(Math.min(evidenceCap, base - 0.05 + humanBoost + (item.significance === 'high' ? 0.15 : 0)));
+  const d5 = clamp(Math.min(evidenceCap, base + 0.05 + powerConflictBoost + humanBoost * 0.2));
+  const d6 = clamp(Math.min(evidenceCap, base + 0.15 + sigBoost + powerConflictBoost));
 
   return {
     d1_factual: d1,
@@ -249,7 +255,7 @@ async function main() {
       d5_actor_context: pgi.d5_actor_context,
       d6_cui_bono: pgi.d6_cui_bono,
       significance: significanceToNumeric(item.significance),
-      scoring_rationale: `DB-truth-first scorer using verified scan items for ${date} ${period}`,
+      scoring_rationale: `${item.connection || item.headline} PGI is scored from D1 factual completeness, D2 causal attribution, D3 narrative framing, D4 emotional valence, D5 actor portrayal, and D6 cui-bono divergence. Region count ${item.regions.length}; single-region evidence is capped because PGI requires more than importance alone.`,
       scan_date: date,
       scan_period: period,
       is_latest: true,
@@ -272,7 +278,7 @@ async function main() {
       d3_population_exposure: gai.d3_population_exposure,
       d4_significance_severity: gai.d4_significance_severity,
       significance: significanceToNumeric(item.significance),
-      scoring_rationale: `DB-truth-first scorer using verified scan items for ${date} ${period}`,
+      scoring_rationale: `${item.connection || item.headline} GAI reflects which regions saw the story, which regions missed it, likely population exposure, and the story's real-world significance.`,
       is_latest: true,
     };
   });

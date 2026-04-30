@@ -1,0 +1,1124 @@
+{
+  "run_id": "company_pkg8_2026-04-30_2f4255d8-e1bb-48fd-8282-ee5c03f10ea2",
+  "company_profile_id": "2f4255d8-e1bb-48fd-8282-ee5c03f10ea2",
+  "company_name": "Evidence & Echoes Genealogy",
+  "scan_date": "2026-04-30",
+  "scan_summary": {
+    "total_signals_loaded": 52,
+    "selected_for_email": 24,
+    "dashboard_only_count": 0,
+    "excluded_count": 0,
+    "key_source_domains_count": 11,
+    "all_source_domains_count": 43,
+    "regions_represented": [
+      "Africa"
+    ],
+    "languages_represented": [
+      "unknown"
+    ],
+    "selected_sections": [
+      "Cybersecurity",
+      "AI",
+      "Journalism"
+    ],
+    "scan_window": {
+      "from": "2026-04-29T00:00:00.000Z",
+      "to": "2026-04-30T23:59:59.000Z"
+    }
+  },
+  "briefing_sections": [
+    {
+      "heading": "AI falsehoods are becoming a credibility risk for public memory",
+      "section_label": "Cybersecurity",
+      "signal_ids": [
+        "2ef006b498b5c1df3e1ffb3f"
+      ],
+      "source_names": [
+        "pakistantoday.com.pk"
+      ],
+      "statistics": [
+        {
+          "stat_id": "disinformation_source_spread",
+          "label": "Selected source spread",
+          "value_text": "1 source in today's selected evidence",
+          "explanation": "A small source-spread marker showing how much of the selected briefing item rests on one report versus repeated coverage.",
+          "confidence": "low",
+          "source_refs": [
+            {
+              "type": "source_id",
+              "id": "domain:pakistantoday.com.pk"
+            }
+          ],
+          "claim_ids": [
+            "claim_art_2ef006b498b5c1df3e1ffb3f_headline",
+            "claim_art_2ef006b498b5c1df3e1ffb3f_summary"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim_art_2ef006b498b5c1df3e1ffb3f_headline",
+          "text": "Pakistan Urges UN Action Against Disinformation - Pakistan Today - Pakistan Today",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_2ef006b498b5c1df3e1ffb3f_summary",
+          "text": "Pakistan calls on the UN to curb disinformation, hate speech and AI-driven misinformation",
+          "claim_type": "fact",
+          "confidence": 0.72
+        }
+      ],
+      "selection_reason": "retrieved by company-specific scan plan (cybersecurity) and matched to Cybersecurity",
+      "evidence_class": "single_source_signal",
+      "evidence_confidence": {
+        "kind": "single_source",
+        "label": "Single-source signal",
+        "customer_phrase": "One selected source reported this signal.",
+        "confidence": "medium",
+        "reason": "The bundle is anchored mainly in one selected source.",
+        "source_count": 1,
+        "source_quality": "B"
+      },
+      "source_quality": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0,
+        "Block": 0
+      }
+    },
+    {
+      "heading": "Voice, image and deepfake protection moved into the evidence trail",
+      "section_label": "AI",
+      "signal_ids": [
+        "8332280bb5fd9d158f154a5e",
+        "c6a2e5916c50ba7af4142470",
+        "f0a49550c9cf763dfb0bb158",
+        "09331e968b2e476f35f03d5d",
+        "13ec8dd28e7bd193726ee9f2",
+        "f4c258aa7a116b7a88f97166",
+        "0ab42abaf0316e7102f27ee4",
+        "fa8678a22604670f176786ce",
+        "9958be8f866b698ecd2b82a7",
+        "b5541faf2c30edc5799b8441",
+        "ea08dff5a4988507cdd6ee91",
+        "ce21784eb97a7ecdeea298db",
+        "80405e25da8264550e5505b6",
+        "08401253162a794e0fcceecf",
+        "bb330eddc700eb26b570995b",
+        "e99c7a67aef69d5c95fa95ba"
+      ],
+      "source_names": [
+        "upr.org",
+        "wdam.com",
+        "mk.co.kr",
+        "english.bombaysamachar.com"
+      ],
+      "statistics": [
+        {
+          "stat_id": "cyber_technology_source_spread",
+          "label": "Selected source spread",
+          "value_text": "15 sources in today's selected evidence",
+          "explanation": "A small source-spread marker showing how much of the selected briefing item rests on one report versus repeated coverage.",
+          "confidence": "medium",
+          "source_refs": [
+            {
+              "type": "source_id",
+              "id": "domain:upr.org"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:wdam.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:mk.co.kr"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:english.bombaysamachar.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:moneycontrol.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:sochfactcheck.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:ndtv.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:madhyamamonline.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:indiatoday.in"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:navbharattimes.indiatimes.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:prokerala.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:www.republicworld.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:sanfordherald.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:convergence-now.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:thehackernews.com"
+            }
+          ],
+          "claim_ids": [
+            "claim_art_8332280bb5fd9d158f154a5e_headline",
+            "claim_art_8332280bb5fd9d158f154a5e_summary",
+            "claim_art_c6a2e5916c50ba7af4142470_headline",
+            "claim_art_c6a2e5916c50ba7af4142470_summary",
+            "claim_art_f0a49550c9cf763dfb0bb158_headline",
+            "claim_art_f0a49550c9cf763dfb0bb158_summary",
+            "claim_art_09331e968b2e476f35f03d5d_headline",
+            "claim_art_09331e968b2e476f35f03d5d_summary",
+            "claim_art_13ec8dd28e7bd193726ee9f2_headline",
+            "claim_art_13ec8dd28e7bd193726ee9f2_summary",
+            "claim_art_f4c258aa7a116b7a88f97166_headline",
+            "claim_art_f4c258aa7a116b7a88f97166_summary",
+            "claim_art_0ab42abaf0316e7102f27ee4_headline",
+            "claim_art_0ab42abaf0316e7102f27ee4_summary",
+            "claim_art_fa8678a22604670f176786ce_headline",
+            "claim_art_fa8678a22604670f176786ce_summary",
+            "claim_art_9958be8f866b698ecd2b82a7_headline",
+            "claim_art_9958be8f866b698ecd2b82a7_summary",
+            "claim_art_b5541faf2c30edc5799b8441_headline",
+            "claim_art_b5541faf2c30edc5799b8441_summary",
+            "claim_art_ea08dff5a4988507cdd6ee91_headline",
+            "claim_art_ea08dff5a4988507cdd6ee91_summary",
+            "claim_art_ce21784eb97a7ecdeea298db_headline",
+            "claim_art_ce21784eb97a7ecdeea298db_summary",
+            "claim_art_80405e25da8264550e5505b6_headline",
+            "claim_art_80405e25da8264550e5505b6_summary",
+            "claim_art_08401253162a794e0fcceecf_headline",
+            "claim_art_08401253162a794e0fcceecf_summary",
+            "claim_art_bb330eddc700eb26b570995b_headline",
+            "claim_art_bb330eddc700eb26b570995b_summary",
+            "claim_art_e99c7a67aef69d5c95fa95ba_headline",
+            "claim_art_e99c7a67aef69d5c95fa95ba_summary"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim_art_8332280bb5fd9d158f154a5e_headline",
+          "text": "Utah targets explicit deepfakes with new takedown law | Utah Public Radio",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_8332280bb5fd9d158f154a5e_summary",
+          "text": "A new Utah law requires platforms to let users report AI-generated intimate images made without consent",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_c6a2e5916c50ba7af4142470_headline",
+          "text": "Corinth deepfake trial highlights challenges in regulating AI-generated content",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_c6a2e5916c50ba7af4142470_summary",
+          "text": "A federal trial this week involving a former Corinth superintendent tied to a deepfake case has highlighted concerns about artificial intelligence and how quickly the law can keep up",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_f0a49550c9cf763dfb0bb158_headline",
+          "text": "While deepfake sex crimes and fake news using artificial intelligence (AI) technology have emerged a, - MK",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_f0a49550c9cf763dfb0bb158_summary",
+          "text": "While deepfake sex crimes and fake news using artificial intelligence (AI) technology have emerged as national social problems, the government and private companies have put their heads together to te",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_09331e968b2e476f35f03d5d_headline",
+          "text": "Ahmedabad Gang Uses AI Deepfakes To Bypass Aadhaar Checks, 4 Arrested 4 In Connection With Racket | English Bombay Samachar",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_09331e968b2e476f35f03d5d_summary",
+          "text": "The Ahmedabad Police Cyber Crime Branch on Wednesday arrested four men who allegedly used artificial intelligence, including Google’s Gemini AI tool, to create deepfake videos of a businessman and bypass Aadhaar biometric verification",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_13ec8dd28e7bd193726ee9f2_headline",
+          "text": "Delhi HC directs platforms to remove deepfake content targeting Bhuvan Bam, grants interim relief- Moneycontrol.com",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_13ec8dd28e7bd193726ee9f2_summary",
+          "text": "Delhi High Court grants interim relief to Bhuvan Bam, ordering removal of deepfake content misusing his identity and protecting users from online scams",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_f4c258aa7a116b7a88f97166_headline",
+          "text": "Viral videos of Pakistani and Iranian female soldiers commenting on the Israel-US war with Iran are AI-generated",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_f4c258aa7a116b7a88f97166_summary",
+          "text": "Claim: Videos show Iranian and Pakistani female soldiers commenting on the Israel-US war with Iran · Fact: An analysis found that the clips were generated using Sora by OpenAI",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_0ab42abaf0316e7102f27ee4_headline",
+          "text": "Gemini To Meta: How A Deepfake Gang Used AI To Hijack Identities In Gujarat",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_0ab42abaf0316e7102f27ee4_summary",
+          "text": "The gang is accused of executing a complex scheme where they acquired victim data and used AI platforms, such as Gemini AI and Meta AI, to generate high-quality deepfake videos featuring \"eye-blink\" animations",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_fa8678a22604670f176786ce_headline",
+          "text": "Four arrested in Gujarat for using AI deepfakes to commit Aadhaar and banking fraud",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_fa8678a22604670f176786ce_summary",
+          "text": "The group also secured personal loans through lending platforms, including RKBansal, True Credits, and EarlySalary, leaving victims burdened with debt",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_9958be8f866b698ecd2b82a7_headline",
+          "text": "No OTP, no problem: Ahmedabad gang uses AI deepfakes to bypass Aadhaar checks - India Today",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_9958be8f866b698ecd2b82a7_summary",
+          "text": "The case came to light after an Ahmedabad businessman noticed he had stopped receiving OTPs from his bank for two days",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_b5541faf2c30edc5799b8441_headline",
+          "text": "Opinion: पूरी दुनिया की नींद उड़ाने वाले AI model से क्या सीख सकता है भारत, - india can learn from ai ​​model like mythos transform the economics of cybersecurity - Navbharat Times",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_b5541faf2c30edc5799b8441_summary",
+          "text": "एंथ्रोपिक अमेरिकी सरकार की भी नहीं सुनती। Mythos किसके पास जाएगा, यह एक प्राइवेट कंपनी तय करेगी। यही असली चिंता है।",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_ea08dff5a4988507cdd6ee91_headline",
+          "text": "Four arrested in Gujarat for using AI deepfakes to commit Aadhaar and banking fraud",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_ea08dff5a4988507cdd6ee91_summary",
+          "text": "The group also secured personal loans through lending platforms, including RKBansal, True Credits, and EarlySalary, leaving victims burdened with debt",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_ce21784eb97a7ecdeea298db_headline",
+          "text": "Deepfakes, online violence driving women from public life: Study",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_ce21784eb97a7ecdeea298db_summary",
+          "text": "A team of global researchers on Thursday said that deepfakes, AI-assisted rape and unwanted advances are pushing women out of public life.The report b",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_80405e25da8264550e5505b6_headline",
+          "text": "Google Gemini Misused in AI Deepfake Loan Scam: Ahmedabad Police Expose Aadhaar OTP Bypass | Republic World",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_80405e25da8264550e5505b6_summary",
+          "text": "Ahmedabad Police have arrested four men for allegedly misusing AI tools, including Google Gemini, to create deepfake videos and bypass Aadhaar OTP verification in a loan scam",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_08401253162a794e0fcceecf_headline",
+          "text": "AI fakes of accused US press gala gunman flood social media | News | sanfordherald.com",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_08401253162a794e0fcceecf_summary",
+          "text": "Facebook has been overrun with low-effort AI fakes inventing biographical details and celebrity connections for the man charged with trying to assassinate Donald Trump at a Washington press gala Saturday",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_bb330eddc700eb26b570995b_headline",
+          "text": "Ahmedabad AI Deepfake Aadhaar Fraud: Four Arrested in Biometric Bypass Loan Scam",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_bb330eddc700eb26b570995b_summary",
+          "text": "Ahmedabad police arrest four in AI deepfake Aadhaar fraud case involving biometric bypass and fake loan approvals, exposing risks in digital KYC systems",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_e99c7a67aef69d5c95fa95ba_headline",
+          "text": "New Wave of DPRK Attacks Uses AI-Inserted npm Malware, Fake Firms, and RATs",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_e99c7a67aef69d5c95fa95ba_summary",
+          "text": "Claude Opus commit added malicious npm dependency in Feb 2026, enabling crypto theft and persistent RAT access",
+          "claim_type": "fact",
+          "confidence": 0.72
+        }
+      ],
+      "selection_reason": "retrieved by company-specific scan plan (artificial intelligence, trump, AI and public memory) and matched to AI, Cybersecurity",
+      "evidence_class": "source_frame",
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The selected evidence supports comparing trade/operational framing with regional/security framing.",
+        "source_count": 4,
+        "source_quality": "B"
+      },
+      "source_quality": {
+        "A": 0,
+        "B": 15,
+        "C": 0,
+        "D": 0,
+        "Block": 0
+      }
+    },
+    {
+      "heading": "Censorship rules are changing who can preserve and publish records",
+      "section_label": "Journalism",
+      "signal_ids": [
+        "853f692f3559e23b68ada643",
+        "bbc12213b803c7324cfaf273",
+        "476cbbcb9675a1593908cc8a",
+        "b0a14d6c4e5cf6eeee0c454a",
+        "6a8536d3303ad36985ffbf27"
+      ],
+      "source_names": [
+        "allafrica.com",
+        "theconversation.com",
+        "news.abplive.com",
+        "unn.ua"
+      ],
+      "statistics": [
+        {
+          "stat_id": "media_regulation_source_spread",
+          "label": "Selected source spread",
+          "value_text": "5 sources in today's selected evidence",
+          "explanation": "A small source-spread marker showing how much of the selected briefing item rests on one report versus repeated coverage.",
+          "confidence": "medium",
+          "source_refs": [
+            {
+              "type": "source_id",
+              "id": "domain:allafrica.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:theconversation.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:news.abplive.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:unn.ua"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:www.arise.tv"
+            }
+          ],
+          "claim_ids": [
+            "claim_art_853f692f3559e23b68ada643_headline",
+            "claim_art_853f692f3559e23b68ada643_summary",
+            "claim_art_bbc12213b803c7324cfaf273_headline",
+            "claim_art_bbc12213b803c7324cfaf273_summary",
+            "claim_art_476cbbcb9675a1593908cc8a_headline",
+            "claim_art_476cbbcb9675a1593908cc8a_summary",
+            "claim_art_b0a14d6c4e5cf6eeee0c454a_headline",
+            "claim_art_b0a14d6c4e5cf6eeee0c454a_summary",
+            "claim_art_6a8536d3303ad36985ffbf27_headline",
+            "claim_art_6a8536d3303ad36985ffbf27_summary"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim_art_853f692f3559e23b68ada643_headline",
+          "text": "South Africa's AI Policy Cited Fake Research, Created By AI - What Lessons Need to Be Learned - allAfrica.com",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_853f692f3559e23b68ada643_summary",
+          "text": "Analysis - South Africa's first attempt to establish a binding artificial intelligence (AI) policy framework came to an abrupt halt just 16 days after it was officially gazetted",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_bbc12213b803c7324cfaf273_headline",
+          "text": "South Africa’s AI policy cited fake research, created by AI: what lessons need to be learned",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_bbc12213b803c7324cfaf273_summary",
+          "text": "The incident is being treated as an embarrassment",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_476cbbcb9675a1593908cc8a_headline",
+          "text": "South Africa Pulled Its AI Policy Because The Research In It Was Fake",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_476cbbcb9675a1593908cc8a_summary",
+          "text": "South Africa scrapped its national AI policy after six of its academic citations turned out to be completely fabricated, generated by AI and never verified by anyone",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_b0a14d6c4e5cf6eeee0c454a_headline",
+          "text": "South Africa withdrew its AI policy after it was discovered to have been written by AI | УНН",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_b0a14d6c4e5cf6eeee0c454a_summary",
+          "text": "УНН News of the World ✎ South Africa has withdrawn a draft AI strategy following the discovery of six citations fabricated by a neural network",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_6a8536d3303ad36985ffbf27_headline",
+          "text": "South Africa Pulls AI Policy Draft After Fake References Found In Document – Arise News",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_6a8536d3303ad36985ffbf27_summary",
+          "text": "South Africa withdraws AI policy after fake citations are found in draft, prompting review of drafting process",
+          "claim_type": "fact",
+          "confidence": 0.72
+        }
+      ],
+      "selection_reason": "retrieved by company-specific scan plan (journalism) and matched to Journalism",
+      "evidence_class": "source_frame",
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The selected evidence supports comparing trade/operational framing with regional/security framing.",
+        "source_count": 4,
+        "source_quality": "B"
+      },
+      "source_quality": {
+        "A": 0,
+        "B": 5,
+        "C": 0,
+        "D": 0,
+        "Block": 0
+      }
+    },
+    {
+      "heading": "Geopolitical narratives are spilling into public memory",
+      "section_label": "AI",
+      "signal_ids": [
+        "9074ff49e77461976a5aa09d",
+        "2508c92b81c47d73040a8136"
+      ],
+      "source_names": [
+        "navbharattimes.indiatimes.com",
+        "amarujala.com"
+      ],
+      "statistics": [
+        {
+          "stat_id": "geopolitics_source_spread",
+          "label": "Selected source spread",
+          "value_text": "2 sources in today's selected evidence",
+          "explanation": "A small source-spread marker showing how much of the selected briefing item rests on one report versus repeated coverage.",
+          "confidence": "medium",
+          "source_refs": [
+            {
+              "type": "source_id",
+              "id": "domain:navbharattimes.indiatimes.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:www.amarujala.com"
+            }
+          ],
+          "claim_ids": [
+            "claim_art_9074ff49e77461976a5aa09d_headline",
+            "claim_art_9074ff49e77461976a5aa09d_summary",
+            "claim_art_2508c92b81c47d73040a8136_headline",
+            "claim_art_2508c92b81c47d73040a8136_summary"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim_art_9074ff49e77461976a5aa09d_headline",
+          "text": "Us Iran Hormuz Blockade Update,होर्मुज में नाकेबंदी जारी रखने के प्‍लान में ट्रंप, तेल के स्‍टोरेज खेल में फंसा ईरान, अमेरिका को देगा नया ऑफर - trump plans to maintain blockade in strait of",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_9074ff49e77461976a5aa09d_summary",
+          "text": "US Iran War: ईरान पाकिस्तान के रास्ते अमेरिका को नये प्रस्ताव सौंप सकता है ताकि तनाव को कम किया जा सके। सीएनएन के मुताबिक",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_2508c92b81c47d73040a8136_headline",
+          "text": "Donald Trump:ट्रंप का दावा- ईरान समझौता करने को बेताब; भारत-pak संघर्ष और नोबेल पुरस्कार पर कही ये बात - Donald Trump Claims Iran Want To Make Deal Us President Remarks On India Pakistan Conflict",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_2508c92b81c47d73040a8136_summary",
+          "text": "Donald Trump: ट्रंप का दावा- ईरान समझौता करने को बेताब; भारत-PAK संघर्ष और नोबेल पुरस्कार पर कही ये बात Donald Trump claims Iran want to make deal US President",
+          "claim_type": "fact",
+          "confidence": 0.72
+        }
+      ],
+      "selection_reason": "retrieved by company-specific scan plan (artificial intelligence) and matched to AI",
+      "evidence_class": "source_frame",
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The selected evidence supports comparing trade/operational framing with regional/security framing.",
+        "source_count": 2,
+        "source_quality": "B"
+      },
+      "source_quality": {
+        "A": 0,
+        "B": 2,
+        "C": 0,
+        "D": 0,
+        "Block": 0
+      }
+    }
+  ],
+  "perception_gap_frames": [
+    {
+      "topic": "Voice, image and deepfake protection moved into the evidence trail",
+      "frame_text": "Media/comms view: upr.org and wdam.com focused on information access, audience exposure, platform effects, press freedom, and narrative spread.\nState/policy view: wider regional and policy coverage focused more on official positioning, regulation, sanctions, security claims, and state interests.\nThe gap: one frame shows how information may reach or shape audiences; the other shows how authorities or institutions are trying to define the event.\nWhy it matters: a reader who only sees the official frame may miss how the story is being distributed, restricted, or reframed for audiences.",
+      "source_names": [
+        "upr.org",
+        "wdam.com",
+        "mk.co.kr",
+        "english.bombaysamachar.com"
+      ],
+      "claim_ids": [
+        "claim_art_8332280bb5fd9d158f154a5e_headline",
+        "claim_art_8332280bb5fd9d158f154a5e_summary",
+        "claim_art_c6a2e5916c50ba7af4142470_headline",
+        "claim_art_c6a2e5916c50ba7af4142470_summary",
+        "claim_art_f0a49550c9cf763dfb0bb158_headline",
+        "claim_art_f0a49550c9cf763dfb0bb158_summary",
+        "claim_art_09331e968b2e476f35f03d5d_headline",
+        "claim_art_09331e968b2e476f35f03d5d_summary",
+        "claim_art_13ec8dd28e7bd193726ee9f2_headline",
+        "claim_art_13ec8dd28e7bd193726ee9f2_summary",
+        "claim_art_f4c258aa7a116b7a88f97166_headline",
+        "claim_art_f4c258aa7a116b7a88f97166_summary",
+        "claim_art_0ab42abaf0316e7102f27ee4_headline",
+        "claim_art_0ab42abaf0316e7102f27ee4_summary",
+        "claim_art_fa8678a22604670f176786ce_headline",
+        "claim_art_fa8678a22604670f176786ce_summary",
+        "claim_art_9958be8f866b698ecd2b82a7_headline",
+        "claim_art_9958be8f866b698ecd2b82a7_summary",
+        "claim_art_b5541faf2c30edc5799b8441_headline",
+        "claim_art_b5541faf2c30edc5799b8441_summary",
+        "claim_art_ea08dff5a4988507cdd6ee91_headline",
+        "claim_art_ea08dff5a4988507cdd6ee91_summary",
+        "claim_art_ce21784eb97a7ecdeea298db_headline",
+        "claim_art_ce21784eb97a7ecdeea298db_summary",
+        "claim_art_80405e25da8264550e5505b6_headline",
+        "claim_art_80405e25da8264550e5505b6_summary",
+        "claim_art_08401253162a794e0fcceecf_headline",
+        "claim_art_08401253162a794e0fcceecf_summary",
+        "claim_art_bb330eddc700eb26b570995b_headline",
+        "claim_art_bb330eddc700eb26b570995b_summary",
+        "claim_art_e99c7a67aef69d5c95fa95ba_headline",
+        "claim_art_e99c7a67aef69d5c95fa95ba_summary"
+      ],
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The Perception Gap compares supported source frames from the selected evidence.",
+        "source_count": 4,
+        "source_quality": "B"
+      }
+    },
+    {
+      "topic": "Censorship rules are changing who can preserve and publish records",
+      "frame_text": "Media/comms view: allafrica.com and theconversation.com focused on information access, audience exposure, platform effects, press freedom, and narrative spread.\nState/policy view: wider regional and policy coverage focused more on official positioning, regulation, sanctions, security claims, and state interests.\nThe gap: one frame shows how information may reach or shape audiences; the other shows how authorities or institutions are trying to define the event.\nWhy it matters: a reader who only sees the official frame may miss how the story is being distributed, restricted, or reframed for audiences.",
+      "source_names": [
+        "allafrica.com",
+        "theconversation.com",
+        "news.abplive.com",
+        "unn.ua"
+      ],
+      "claim_ids": [
+        "claim_art_853f692f3559e23b68ada643_headline",
+        "claim_art_853f692f3559e23b68ada643_summary",
+        "claim_art_bbc12213b803c7324cfaf273_headline",
+        "claim_art_bbc12213b803c7324cfaf273_summary",
+        "claim_art_476cbbcb9675a1593908cc8a_headline",
+        "claim_art_476cbbcb9675a1593908cc8a_summary",
+        "claim_art_b0a14d6c4e5cf6eeee0c454a_headline",
+        "claim_art_b0a14d6c4e5cf6eeee0c454a_summary",
+        "claim_art_6a8536d3303ad36985ffbf27_headline",
+        "claim_art_6a8536d3303ad36985ffbf27_summary"
+      ],
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The Perception Gap compares supported source frames from the selected evidence.",
+        "source_count": 4,
+        "source_quality": "B"
+      }
+    },
+    {
+      "topic": "Geopolitical narratives are spilling into public memory",
+      "frame_text": "Media/comms view: navbharattimes.indiatimes.com and amarujala.com focused on information access, audience exposure, platform effects, press freedom, and narrative spread.\nState/policy view: wider regional and policy coverage focused more on official positioning, regulation, sanctions, security claims, and state interests.\nThe gap: one frame shows how information may reach or shape audiences; the other shows how authorities or institutions are trying to define the event.\nWhy it matters: a reader who only sees the official frame may miss how the story is being distributed, restricted, or reframed for audiences.",
+      "source_names": [
+        "navbharattimes.indiatimes.com",
+        "amarujala.com"
+      ],
+      "claim_ids": [
+        "claim_art_9074ff49e77461976a5aa09d_headline",
+        "claim_art_9074ff49e77461976a5aa09d_summary",
+        "claim_art_2508c92b81c47d73040a8136_headline",
+        "claim_art_2508c92b81c47d73040a8136_summary"
+      ],
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The Perception Gap compares supported source frames from the selected evidence.",
+        "source_count": 2,
+        "source_quality": "B"
+      }
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "obs_disinformation_pakistan-urges-un-action-against-disinformation-pakistan-today-pakistan-today",
+      "type": "source_frame_insight",
+      "title": "Narrative risk depends on spread",
+      "body": "The useful distinction is false output versus durable record. AI falsehoods matter when they enter search, archives, family history, or institutional memory — places where later readers may treat them as evidence.",
+      "evidence_refs": [
+        {
+          "type": "source_id",
+          "id": "domain:pakistantoday.com.pk"
+        }
+      ],
+      "confidence": "medium"
+    },
+    {
+      "observation_id": "obs_cyber_technology_utah-targets-explicit-deepfakes-with-new-takedown-law-utah-public-radio",
+      "type": "evidence_quality_insight",
+      "title": "Platform exposure changes information access",
+      "body": "The useful distinction is identity as content versus identity as evidence. Voice, image, and likeness protection matters when synthetic media can blur the chain between source, subject, and record.",
+      "evidence_refs": [
+        {
+          "type": "source_id",
+          "id": "domain:upr.org"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:wdam.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:mk.co.kr"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:english.bombaysamachar.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:moneycontrol.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:sochfactcheck.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:ndtv.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:madhyamamonline.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:indiatoday.in"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:navbharattimes.indiatimes.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:prokerala.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:www.republicworld.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:sanfordherald.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:convergence-now.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:thehackernews.com"
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "observation_id": "obs_media_regulation_south-africa-s-ai-policy-cited-fake-research-created-by-ai-what-lessons-need-to-",
+      "type": "hidden_distinction",
+      "title": "Regulation matters when it changes reach",
+      "body": "The useful distinction is content moderation versus preservation. Censorship or access rules matter when they decide which records remain visible, searchable, or usable later.",
+      "evidence_refs": [
+        {
+          "type": "source_id",
+          "id": "domain:allafrica.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:theconversation.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:news.abplive.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:unn.ua"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:www.arise.tv"
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "observation_id": "obs_geopolitics_us-iran-hormuz-blockade-update-trump-plans-to-maintain-blockade-in-strait-of-hor",
+      "type": "hidden_distinction",
+      "title": "Geopolitics can become an information-environment story",
+      "body": "The useful distinction is geopolitical event versus information environment. The same story can matter differently depending on whether it changes audience risk, narrative pressure, or access.",
+      "evidence_refs": [
+        {
+          "type": "source_id",
+          "id": "domain:navbharattimes.indiatimes.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:www.amarujala.com"
+        }
+      ],
+      "confidence": "high"
+    }
+  ],
+  "key_sources": [
+    "allafrica.com",
+    "amarujala.com",
+    "english.bombaysamachar.com",
+    "mk.co.kr",
+    "navbharattimes.indiatimes.com",
+    "news.abplive.com",
+    "pakistantoday.com.pk",
+    "theconversation.com",
+    "unn.ua",
+    "upr.org",
+    "wdam.com"
+  ],
+  "key_sources_detail": [
+    {
+      "source_display_name": "allafrica.com",
+      "source_id": "domain:allafrica.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://allafrica.com/stories/202604300002.html"
+    },
+    {
+      "source_display_name": "amarujala.com",
+      "source_id": "domain:www.amarujala.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://www.amarujala.com/world/donald-trump-claims-iran-want-to-make-deal-us-president-remarks-on-india-pakistan-conflict-nobel-peace-prize-2026-05-01"
+    },
+    {
+      "source_display_name": "arise.tv",
+      "source_id": "domain:www.arise.tv",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://www.arise.tv/south-africa-pulls-ai-policy-draft-after-fake-references-found-in-document/"
+    },
+    {
+      "source_display_name": "convergence-now.com",
+      "source_id": "domain:convergence-now.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://convergence-now.com/artificial-intelligence/ai-deepfake-aadhaar-fraud-ahmedabad-biometric-bypass-loan-scam"
+    },
+    {
+      "source_display_name": "english.bombaysamachar.com",
+      "source_id": "domain:english.bombaysamachar.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://english.bombaysamachar.com/top-news/ahmedabad-gang-uses-ai-deepfakes-to-bypass-aadhaar-checks-cyber-crime-branch-arrested-4"
+    },
+    {
+      "source_display_name": "indiatoday.in",
+      "source_id": "domain:indiatoday.in",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://indiatoday.in/india/story/aadhaar-fraud-ahmedabad-police-arrest-four-ai-deepfake-video-biometric-bypass-loan-2903506-2026-04-29"
+    },
+    {
+      "source_display_name": "madhyamamonline.com",
+      "source_id": "domain:madhyamamonline.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://madhyamamonline.com/india/four-arrested-in-gujarat-for-using-ai-deepfakes-to-commit-aadhaar-and-banking-fraud-1515605"
+    },
+    {
+      "source_display_name": "mk.co.kr",
+      "source_id": "domain:mk.co.kr",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://mk.co.kr/en/it/12032146"
+    },
+    {
+      "source_display_name": "moneycontrol.com",
+      "source_id": "domain:moneycontrol.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://moneycontrol.com/entertainment/delhi-hc-directs-platforms-to-remove-deepfake-content-targeting-bhuvan-bam-grants-interim-relief-article-13905008.html"
+    },
+    {
+      "source_display_name": "navbharattimes.indiatimes.com",
+      "source_id": "domain:navbharattimes.indiatimes.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://navbharattimes.indiatimes.com/india/india-can-learn-from-ai-model-like-mythos-transform-the-economics-of-cybersecurity/articleshow/130624137.cms"
+    },
+    {
+      "source_display_name": "ndtv.com",
+      "source_id": "domain:ndtv.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://ndtv.com/india-news/gemini-to-meta-how-a-deepfake-gang-used-ai-to-hijack-identities-in-gujarat-11425026"
+    },
+    {
+      "source_display_name": "news.abplive.com",
+      "source_id": "domain:news.abplive.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://news.abplive.com/technology/south-africa-government-ai-policy-withdrawn-fake-research-citations-hallucinations-1839628"
+    },
+    {
+      "source_display_name": "pakistantoday.com.pk",
+      "source_id": "domain:pakistantoday.com.pk",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://pakistantoday.com.pk/2026/04/29/pakistan-urges-un-action-against-disinformation-amid-rising-global-conflicts"
+    },
+    {
+      "source_display_name": "prokerala.com",
+      "source_id": "domain:prokerala.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://prokerala.com/news/articles/a1757077.html"
+    },
+    {
+      "source_display_name": "republicworld.com",
+      "source_id": "domain:www.republicworld.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://www.republicworld.com/tech/artificial-intelligence/google-gemini-misused-in-ai-deepfake-loan-scam-ahmedabad-police-expose-aadhaar-otp-bypass"
+    },
+    {
+      "source_display_name": "sanfordherald.com",
+      "source_id": "domain:sanfordherald.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://sanfordherald.com/news/national/ai-fakes-of-accused-us-press-gala-gunman-flood-social-media/article_c70f8026-bbd3-5c73-9ea1-acbd3854cc1a.html"
+    },
+    {
+      "source_display_name": "sochfactcheck.com",
+      "source_id": "domain:sochfactcheck.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://sochfactcheck.com/viral-videos-of-pakistani-and-iranian-female-soldiers-commenting-on-the-israel-us-war-with-iran-are-ai-generated"
+    },
+    {
+      "source_display_name": "theconversation.com",
+      "source_id": "domain:theconversation.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://theconversation.com/south-africas-ai-policy-cited-fake-research-created-by-ai-what-lessons-need-to-be-learned-281671"
+    },
+    {
+      "source_display_name": "thehackernews.com",
+      "source_id": "domain:thehackernews.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://thehackernews.com/2026/04/new-wave-of-dprk-attacks-uses-ai.html"
+    },
+    {
+      "source_display_name": "unn.ua",
+      "source_id": "domain:unn.ua",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://unn.ua/en/news/south-africa-withdrew-its-ai-policy-after-it-was-discovered-to-have-been-written-by-ai"
+    },
+    {
+      "source_display_name": "upr.org",
+      "source_id": "domain:upr.org",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://upr.org/politics/2026-04-29/utah-deepfake-explicit-images"
+    },
+    {
+      "source_display_name": "wdam.com",
+      "source_id": "domain:wdam.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://wdam.com/2026/04/29/corinth-deepfake-trial-highlights-challenges-regulating-ai-generated-content"
+    }
+  ],
+  "source_quality_summary": {
+    "source_mix": {
+      "A": 0,
+      "B": 22,
+      "C": 0,
+      "D": 0,
+      "Block": 0
+    },
+    "concentration_risk": "low",
+    "note": "Selected evidence is not concentrated in a single source."
+  },
+  "dashboard_only_items": [],
+  "lower_priority_sample": [
+    {
+      "signal_id": "a6eefe24b6a3210b41a6aadc",
+      "headline": "Chabahar Port: खतरे में भारत का चाबहार बंदरगाह, क्या डूब जाएगा मोदी सरकार का सबसे बड़ा रणनीतिक प्रोजेक्ट? - is india chabahar port dream in iran dead due to us sanctions - Navbharat Times",
+      "source_domain": "navbharattimes.indiatimes.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "7b3575fbed78b562e58a04ac",
+      "headline": "Hormuz Blockade: होर्मुज स्ट्रेट की नाकेबंदी पर भड़के ईरानी राष्ट्रपति, ट्रंप को चेताा, US बना रहा नया गठबंधन - iran president masoud pezeshkian says us hormuz blockade doomed to fail amid donald trump threat - Navbharat Times",
+      "source_domain": "navbharattimes.indiatimes.com",
+      "signal_type": "disruption"
+    },
+    {
+      "signal_id": "1b649ace44adf32710d209a9",
+      "headline": "Trump Threatens Iran With Gun-Toting AI Meme As Hormuz Remains Blockaded",
+      "source_domain": "www.forbes.com",
+      "signal_type": "disruption"
+    }
+  ],
+  "excluded_summary": {
+    "counts_by_reason": {},
+    "notable_exclusions": []
+  }
+}

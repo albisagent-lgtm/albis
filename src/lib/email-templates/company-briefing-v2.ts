@@ -67,7 +67,31 @@ function divider(): string {
 }
 
 function textHtml(s: string | undefined | null): string {
-  return esc(s).replace(/\n\n/g, "<br><br>").replace(/\n/g, "<br>");
+  return esc(customerEnglishText(s)).replace(/\n\n/g, "<br><br>").replace(/\n/g, "<br>");
+}
+
+// The scanner can find useful local-language sources, but the customer email
+// is English-facing. This is a final rendering guard so raw non-Latin snippets
+// never appear in delivered emails, even for already-generated briefing rows.
+const NON_ENGLISH_VISIBLE_SCRIPT =
+  /[\u0400-\u04ff\u0590-\u05ff\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff\u0900-\u097f\u0980-\u09ff\u0a00-\u0a7f\u0a80-\u0aff\u0b00-\u0b7f\u0b80-\u0bff\u0c00-\u0c7f\u0c80-\u0cff\u0d00-\u0d7f\u0e00-\u0e7f\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uac00-\ud7af]/g;
+
+function customerEnglishText(value: string | undefined | null): string {
+  const raw = String(value || "")
+    .replace(/\s+/g, " ")
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .trim();
+  if (!raw || !NON_ENGLISH_VISIBLE_SCRIPT.test(raw)) return raw;
+  const stripped = raw
+    .replace(NON_ENGLISH_VISIBLE_SCRIPT, " ")
+    .replace(/\s+/g, " ")
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .replace(/^[,.;:!\-–—\s]+|[,.;:!\-–—\s]+$/g, "")
+    .trim();
+  const words = stripped.split(/\s+/).filter(Boolean).length;
+  const latinChars = (stripped.match(/[A-Za-z0-9]/g) || []).length;
+  if (words >= 4 || latinChars >= 18) return stripped;
+  return "Local-language source matched this scan area; source attribution is included below.";
 }
 
 function formatDate(dateStr: string): string {
@@ -228,10 +252,10 @@ function renderBriefingItem(
   if (
     !hideTitle &&
     (!sectionHeading ||
-      item.title.text.trim().toLowerCase() !==
+      customerEnglishText(item.title.text).trim().toLowerCase() !==
         sectionHeading.trim().toLowerCase())
   ) {
-    html += `<p style="font-size:16px;color:${NAVY};line-height:1.4;margin:0 0 6px;font-weight:700;font-family:-apple-system,sans-serif;">${esc(item.title.text)}</p>`;
+    html += `<p style="font-size:16px;color:${NAVY};line-height:1.4;margin:0 0 6px;font-weight:700;font-family:-apple-system,sans-serif;">${esc(customerEnglishText(item.title.text))}</p>`;
   }
 
   // Body
@@ -259,7 +283,7 @@ function renderTodayScan(output: CompanyBriefingGenerationOutput): string {
   if (output.today_brief.bullets.length) {
     html += `<ul style="padding-left:18px;margin:0;color:${BODY};font-family:-apple-system,sans-serif;font-size:14px;line-height:1.55;">`;
     for (const bullet of output.today_brief.bullets)
-      html += `<li style="margin-bottom:6px;">${esc(bullet.text)}</li>`;
+      html += `<li style="margin-bottom:6px;">${esc(customerEnglishText(bullet.text))}</li>`;
     html += `</ul>`;
   }
   return html;
@@ -271,7 +295,7 @@ function renderDeeperRead(output: CompanyBriefingGenerationOutput): string {
   let html = sectionLabel("Context");
   for (const item of reads.slice(0, 3)) {
     html += `<div style="margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid ${BORDER};">`;
-    html += `<p style="font-size:16px;color:${NAVY};line-height:1.4;margin:0 0 6px;font-weight:700;font-family:-apple-system,sans-serif;">${esc(item.title.text)}</p>`;
+    html += `<p style="font-size:16px;color:${NAVY};line-height:1.4;margin:0 0 6px;font-weight:700;font-family:-apple-system,sans-serif;">${esc(customerEnglishText(item.title.text))}</p>`;
     html += `<p style="font-size:15px;color:${BODY};line-height:1.65;margin:0;font-family:-apple-system,sans-serif;">${textHtml(item.body.text)}</p>`;
     html += `</div>`;
   }
@@ -302,7 +326,7 @@ function renderUsefulObservations(
   let html = sectionLabel("Watch Next");
   for (const o of obs) {
     html += `<p style="font-size:15px;color:${BODY};line-height:1.65;margin:0 0 10px;font-family:-apple-system,sans-serif;">
-      <span style="color:${AMBER};font-weight:700;">&#x25B6;</span>&nbsp;${esc(o.text)}
+      <span style="color:${AMBER};font-weight:700;">&#x25B6;</span>&nbsp;${esc(customerEnglishText(o.text))}
     </p>`;
   }
   return html;

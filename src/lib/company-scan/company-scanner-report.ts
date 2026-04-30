@@ -15,6 +15,7 @@ import type {
   GeneratedBriefingItem,
   GeneratedBriefingSection,
   GeneratedClaimMap,
+  GeneratedPerceptionGapNote,
   GeneratedScannerReportArea,
   GeneratedText,
   CompanyBriefingGenerationOutput,
@@ -71,6 +72,44 @@ function cleanText(value: unknown): string {
   return text.replace(/\s+/g, " ").trim();
 }
 
+// Customer-facing briefings are English-language products even when the scan
+// deliberately searches local-language sources. Keep the source trail global,
+// but never leak raw non-Latin headlines/snippets into the email body.
+const NON_ENGLISH_VISIBLE_SCRIPT =
+  /[\u0400-\u04ff\u0590-\u05ff\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff\u0900-\u097f\u0980-\u09ff\u0a00-\u0a7f\u0a80-\u0aff\u0b00-\u0b7f\u0b80-\u0bff\u0c00-\u0c7f\u0c80-\u0cff\u0d00-\u0d7f\u0e00-\u0e7f\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uac00-\ud7af]/g;
+
+function containsNonEnglishVisibleScript(value: string): boolean {
+  return NON_ENGLISH_VISIBLE_SCRIPT.test(value);
+}
+
+function englishFacingText(value: unknown, fallback: string): string {
+  const clean = cleanText(value);
+  const safeFallback = cleanText(fallback);
+  if (!clean) return safeFallback;
+  if (!containsNonEnglishVisibleScript(clean)) return clean;
+
+  // Do not expose half-translated mixed-script headlines like
+  // "US Iran Hormuz Blockade Update, ...". Unless an upstream translation
+  // exists, customer copy should use the source/section fallback instead of
+  // stripping foreign-script words and leaving broken English.
+  const stripped = cleanText(
+    clean
+      .replace(NON_ENGLISH_VISIBLE_SCRIPT, " ")
+      .replace(/\s+([,.;:!?])/g, "$1")
+      .replace(/^[,.;:!\-–—\s]+|[,.;:!\-–—\s]+$/g, ""),
+  );
+  const strippedWords = stripped.split(/\s+/).filter(Boolean);
+  const originalWords = clean.split(/\s+/).filter(Boolean);
+  const latinShare = strippedWords.length / Math.max(originalWords.length, 1);
+  const looksLikeFragment =
+    latinShare < 0.7 ||
+    /,\s*$/.test(stripped) ||
+    /\b(update|case|opinion|report)\s*[,:-]?\s*$/i.test(stripped) ||
+    strippedWords.length < 6;
+  if (looksLikeFragment) return safeFallback;
+  return stripped;
+}
+
 function trimWords(value: string, maxWords: number): string {
   const words = cleanText(value).split(/\s+/).filter(Boolean);
   if (words.length <= maxWords) return words.join(" ");
@@ -84,6 +123,16 @@ function sentence(value: string): string {
 
 function sourceName(domain: string | null | undefined): string {
   return String(domain || "selected source").replace(/^www\./, "");
+}
+
+function humanList(values: string[], max = 3): string {
+  const items = uniq(values.map(sourceName).map(cleanText).filter(Boolean)).slice(
+    0,
+    max,
+  );
+  if (items.length <= 1) return items[0] || "selected sources";
+  if (items.length === 2) return `${items[0]} and ${items[1]}`;
+  return `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
 }
 
 function confidenceForSignal(
@@ -168,9 +217,9 @@ function claimMapForItem(
   }));
 }
 
-function titleForSignal(signal: Signal): string {
+function titleForSignal(signal: Signal, fallback = "Reported signal"): string {
   return trimWords(
-    cleanText(signal.headline)
+    englishFacingText(signal.headline, fallback)
       .replace(/\s+\|\s+[^|]+$/g, "")
       .replace(/\s+-\s+[^-]{2,40}$/g, ""),
     17,
@@ -323,10 +372,13 @@ function findingBody(
   packetItem: EvidenceEmailItem | undefined,
 ): string {
   const signal = selected.signal;
-  const headline = titleForSignal(signal);
+  const headline = titleForSignal(
+    signal,
+    `${labelForSection(packet, selected.section_ids[0])} report from ${sourceName(signal.source_domain)}`,
+  );
   const rawHeadline = cleanText(signal.headline || "");
   const facts = extractUsefulFacts(packetItem, signal);
-  const summary = cleanText(signal.summary || "");
+  const summary = englishFacingText(signal.summary || "", headline);
   const fallbackFact =
     summary &&
     !isNearDuplicate(headline, summary) &&
@@ -338,7 +390,7 @@ function findingBody(
     .slice(0, 3)
     .join(", ");
   const regionLine = regions ? `Regions: ${regions}.` : "";
-  return cleanText(`${factLine} ${regionLine}`);
+  return englishFacingText(`${factLine} ${regionLine}`, sentence(headline));
 }
 
 function titleForFinding(
@@ -346,7 +398,10 @@ function titleForFinding(
   selected: SelectedSignalForDepth,
 ): string {
   const label = labelForSection(packet, selected.section_ids[0]);
-  const title = titleForSignal(selected.signal);
+  const title = titleForSignal(
+    selected.signal,
+    `${label} report from ${sourceName(selected.signal.source_domain)}`,
+  );
   return trimWords(title || label, 20);
 }
 
@@ -578,17 +633,31 @@ function completeObservations(
   observations: GeneratedText[],
   scanAreas: GeneratedScannerReportArea[],
   refs: EvidenceSupportRef[],
+  selectedByArea?: Map<string, SelectedSignalForDepth[]>,
 ): GeneratedText[] {
   if (observations.length >= 3) return observations.slice(0, 3);
   const active = scanAreas.filter((area) => area.status === "active");
   const coverage = scanAreas.filter((area) => area.status !== "active");
-  const activeLabels = active.map((area) => area.label).slice(0, 4);
   const coverageLabels = coverage.map((area) => area.label).slice(0, 4);
   const additions: GeneratedText[] = [];
-  if (activeLabels.length) {
+  const topActive = active[0];
+  if (topActive) {
+    const selected = selectedByArea?.get(topActive.area_id) || [];
+    const domains = uniq(
+      selected.map((item) => sourceName(item.signal.source_domain)),
+    ).slice(0, 3);
+    const regions = uniq(
+      selected.flatMap((item) => item.signal.regions || []).map(cleanText),
+    ).slice(0, 3);
+    const sourcePhrase = domains.length
+      ? `, led by ${domains.join(" and ")}`
+      : "";
+    const spreadPhrase = regions.length
+      ? ` beyond ${regions.join(" and ")}`
+      : " into another credible region or source type";
     additions.push({
       text: cleanText(
-        `Watch ${activeLabels.join(", ")} for follow-up coverage over the next 24–72 hours.`,
+        `Watch ${topActive.label}${sourcePhrase}: the useful follow-up test is whether coverage spreads${spreadPhrase}, or turns into an official, platform, or customer-facing response.`,
       ),
       supported_by: refs,
     });
@@ -596,12 +665,130 @@ function completeObservations(
   if (coverageLabels.length) {
     additions.push({
       text: cleanText(
-        `${coverageLabels.join(", ")} were quiet today; any new coverage there may stand out tomorrow.`,
+        `${coverageLabels.join(", ")} stayed below the evidence threshold today; treat that as no source-backed movement in this scan window, not proof that the risk is gone.`,
       ),
       supported_by: refs,
     });
   }
   return [...observations, ...additions].slice(0, 3);
+}
+
+function pgiTier(score: number): string {
+  if (score <= 4) return "Broad Alignment";
+  if (score <= 6) return "Diverging Narratives";
+  if (score <= 8) return "Split Realities";
+  return "Parallel Realities";
+}
+
+function companyPgiDimensions(bundle: IntelligenceDepthBundle): {
+  score: number;
+  strongest: string;
+} {
+  const sourceCount = Math.max(1, bundle.source_names.length);
+  const confidenceBoost =
+    bundle.confidence === "high"
+      ? 0.45
+      : bundle.confidence === "medium"
+        ? 0.25
+        : 0;
+  const frameBoost = bundle.source_frames.length ? 0.45 : 0;
+  const classBoost = bundle.evidence_class === "source_frame" ? 0.35 : 0;
+  const cappedSources = Math.min(sourceCount, 4);
+  const dims = {
+    factual: Math.min(10, 3.2 + cappedSources * 0.2),
+    causal: Math.min(10, 4.6 + frameBoost + confidenceBoost),
+    framing: Math.min(10, 5.4 + cappedSources * 0.35 + frameBoost + classBoost),
+    emotional: Math.min(10, 4.2 + frameBoost + confidenceBoost),
+    actor_context: Math.min(10, 5.2 + cappedSources * 0.35 + frameBoost),
+    cui_bono: Math.min(10, 4.9 + frameBoost + classBoost + confidenceBoost),
+  };
+  const entries = Object.entries(dims);
+  const score = Number(
+    (entries.reduce((sum, [, value]) => sum + value, 0) / entries.length).toFixed(1),
+  );
+  const strongest = entries.sort((a, b) => b[1] - a[1])[0]?.[0] || "framing";
+  return { score, strongest: strongest.replace(/_/g, "/") };
+}
+
+function companyPgiTest(bundle: IntelligenceDepthBundle): string {
+  const kind = String(bundle.signal_kind);
+  if (["media_regulation", "disinformation", "press_freedom", "reputation_narrative"].includes(kind)) {
+    return "look for a named platform, regulator, publisher, legal filing, or audience-impact datapoint before calling it a real narrative split";
+  }
+  if (kind === "cyber_technology") {
+    return "look for a named affected system, regulator, vendor response, customer impact, or security disclosure before treating it as business exposure";
+  }
+  if (["hormuz", "corridors", "suez", "supply_chain"].includes(kind)) {
+    return "look for rates, delays, insurance, port calls, rerouting, or cargo movement rather than only strategic language";
+  }
+  if (kind === "sanctions" || kind === "geopolitics") {
+    return "look for named entities, enforcement dates, counterparty exposure, market reaction, or an official response";
+  }
+  return "look for a second source type, named stakeholder response, concrete consequence, or clearly different regional framing";
+}
+
+function sourceFrameEvidence(bundle: IntelligenceDepthBundle): string[] {
+  return bundle.source_frames
+    .map((frame) => cleanText(frame.text.replace(/\n+/g, " ")))
+    .filter(Boolean)
+    .filter((text) => !/wider regional and policy coverage/i.test(text))
+    .slice(0, 2);
+}
+
+function buildCompanyPerceptionGapNotes(
+  bundles: IntelligenceDepthBundle[],
+  packet: CompanyBriefingEvidencePacket,
+): GeneratedPerceptionGapNote[] {
+  const notes: GeneratedPerceptionGapNote[] = [];
+  const seen = new Set<string>();
+  let thinEvidenceNoteAdded = false;
+  for (const bundle of bundles) {
+    if (bundle.source_names.length < 2) continue;
+    const frameEvidence = sourceFrameEvidence(bundle);
+    const score = companyPgiDimensions(bundle);
+    const sources = humanList(bundle.source_names, 3);
+    const section = cleanText(
+      bundle.section_label || labelForSection(packet, bundle.section_id),
+    );
+    const key = `${section}:${sources}:${bundle.signal_kind}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    if (!frameEvidence.length && thinEvidenceNoteAdded) continue;
+    const refs: EvidenceSupportRef[] = uniq([
+      ...bundle.source_refs,
+      ...bundle.claim_ids.map((id) => ({ type: "claim_id" as const, id })),
+    ]).slice(0, 20);
+    const text = frameEvidence.length
+      ? cleanText(
+          `PGI read — ${section} (${score.score.toFixed(1)}, ${pgiTier(score.score)}; strongest dimension: ${score.strongest}). ${frameEvidence.join(" ")} For ${packet.company.display_name}, the useful question is not just what happened, but which audience would misunderstand the source trail if it saw only one frame. Next test: ${companyPgiTest(bundle)}.`,
+        )
+      : cleanText(
+          `PGI check: no material perception gap cleared the email threshold today. The scan found source spread across ${sources}, but not two distinct, source-backed frames on the same event. For ${packet.company.display_name}, that means monitor the topic without presenting narrative divergence as a finding. Next test: ${companyPgiTest(bundle)}.`,
+        );
+    if (!frameEvidence.length) thinEvidenceNoteAdded = true;
+    notes.push({
+      packet_item_id: bundle.anchor_item_id,
+      cluster_id: bundle.anchor_cluster_id,
+      note: {
+        text,
+        supported_by: refs,
+        evidence_confidence: {
+          kind: "regional_frame",
+          label: "Company PGI frame comparison",
+          customer_phrase: "This compares source frames; it is not a separate factual claim.",
+          confidence: bundle.confidence === "low" ? "medium" : bundle.confidence,
+          reason: "Adapted from Albis PGI dimensions: factual, causal, framing, emotional, actor-context, and cui-bono divergence.",
+          source_count: bundle.source_names.length,
+          source_quality: "B",
+        },
+      },
+      frame_ids: bundle.source_frames.length
+        ? bundle.source_frames.flatMap((frame) => frame.source_ids).slice(0, 4)
+        : bundle.source_refs.map((ref) => ref.id).slice(0, 4),
+    });
+    if (notes.length >= 2) break;
+  }
+  return notes;
 }
 
 export function applyScannerReportLayout(input: {
@@ -610,7 +797,7 @@ export function applyScannerReportLayout(input: {
   selected: SelectedSignalForDepth[];
   bundles: IntelligenceDepthBundle[];
 }): CompanyBriefingGenerationOutput {
-  const { output, packet, selected } = input;
+  const { output, packet, selected, bundles } = input;
   if (packet.company.selected_scan_areas.length === 0) return output;
   const selectedForReport = sortFindingsByPriority(dedupeSelected(selected));
   const packetItems = itemMap(packet);
@@ -719,7 +906,9 @@ export function applyScannerReportLayout(input: {
     [],
     scanAreas,
     topRefs.length ? topRefs : areaRefs,
+    selectedByArea,
   );
+  const perceptionGapNotes = buildCompanyPerceptionGapNotes(bundles, packet);
 
   return {
     ...output,
@@ -770,6 +959,9 @@ export function applyScannerReportLayout(input: {
       deeper_reads: deeperReads,
       also_seen: [],
       evidence_dashboard_link: dashboardLink,
+    },
+    perception_gap: {
+      notes: perceptionGapNotes,
     },
     useful_observations: {
       observations,

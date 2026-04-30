@@ -5,7 +5,7 @@ import { Resend } from 'resend';
 import { createAdminClient } from '../src/lib/supabase/admin';
 import { getSubscriberEmails } from '../src/lib/email';
 import { loadVerifiedScanItems, requireBriefingRow, requireStoryScores } from '../src/lib/pipeline-db';
-import { buildDailyBriefingPackage, type DailyBriefingSectionItem } from '../src/lib/public-daily-briefing';
+import { buildDailyBriefingPackage, type DailyBriefingSectionItem, type PublicIndexScoreInputs } from '../src/lib/public-daily-briefing';
 import type { PublicEditionArticleEntry, PublicEditionScorecard } from '../src/lib/public-edition-scorecard';
 import {
   buildPublicEditionRunReport,
@@ -60,11 +60,24 @@ function categoryLabel(value: string | null | undefined) {
   return String(value || 'current-events').replace(/-/g, ' ');
 }
 
+function renderAnalysis(value: string | null | undefined) {
+  const lines = String(value || '').split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+  if (!lines.length) return '';
+  return `<div style="margin-top:12px;padding:12px 14px;background:#f8f7f4;border-left:3px solid #c8922a;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">
+    ${lines.map((line) => {
+      const cleaned = line.replace(/^-\s*/, '').replace(/\*\*(.*?)\*\*/g, '$1');
+      return `<p style="font-size:14px;line-height:1.65;color:#374151;margin:0 0 8px;">${esc(cleaned)}</p>`;
+    }).join('')}
+  </div>`;
+}
+
 function renderSectionItem(item: DailyBriefingSectionItem) {
+  const metaParts = [categoryLabel(item.category), titleCase(item.region), item.score ? `PGI ${Number(item.score).toFixed(1)}${item.tier ? ` — ${item.tier}` : ''}` : item.laneLabel || item.lane || 'signal'];
   return `<div style="margin:0 0 18px;">
     <p style="font-size:16px;line-height:1.55;color:#1a1a2e;margin:0 0 6px;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(item.headline)}</p>
-    <p style="font-size:12px;line-height:1.5;color:#6b7280;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.08em;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(categoryLabel(item.category))} · ${esc(titleCase(item.region))} · ${esc(item.laneLabel || item.lane || 'signal')}</p>
+    <p style="font-size:12px;line-height:1.5;color:#6b7280;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.08em;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(metaParts.filter(Boolean).join(' · '))}</p>
     <p style="font-size:15px;line-height:1.7;color:#374151;margin:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(item.summary)}</p>
+    ${item.slot === 'perception-gap' ? renderAnalysis(item.analysis) : ''}
   </div>`;
 }
 
@@ -98,8 +111,8 @@ function needsPackageRefresh(briefing: any, draft: any) {
   );
 }
 
-function buildBriefingFromScan(briefingDate: string, items: any[], articleEntries: PublicEditionArticleEntry[] = []) {
-  const pkg = buildDailyBriefingPackage(briefingDate, items, articleEntries);
+function buildBriefingFromScan(briefingDate: string, items: any[], articleEntries: PublicEditionArticleEntry[] = [], indexScores: PublicIndexScoreInputs = {}) {
+  const pkg = buildDailyBriefingPackage(briefingDate, items, articleEntries, indexScores);
   return {
     date: briefingDate,
     title: pkg.title,
@@ -184,6 +197,26 @@ async function loadEditionArticles(supabase: ReturnType<typeof createAdminClient
   }));
 }
 
+async function loadPublicIndexScores(supabase: ReturnType<typeof createAdminClient>, briefingDate: string): Promise<PublicIndexScoreInputs> {
+  const [pgiResult, gaiResult] = await Promise.all([
+    supabase
+      .from('pgi_story_scores')
+      .select('story_slug,story_headline,category,regions_covered,region_count,story_pgi,d1_factual,d2_causal,d3_framing,d4_emotional,d5_actor_context,d6_cui_bono,significance,scoring_rationale')
+      .eq('scan_date', briefingDate)
+      .order('story_pgi', { ascending: false })
+      .limit(80),
+    supabase
+      .from('gai_story_scores')
+      .select('story_slug,story_headline,category,regions_found,regions_absent,story_gai,coverage_breadth,d1_coverage_breadth,d2_prominence_disparity,d3_population_exposure,d4_significance_severity,significance,scoring_rationale')
+      .eq('scan_date', briefingDate)
+      .order('story_gai', { ascending: false })
+      .limit(80),
+  ]);
+  if (pgiResult.error) throw new Error(`Failed to load PGI scores: ${pgiResult.error.message}`);
+  if (gaiResult.error) throw new Error(`Failed to load GAI scores: ${gaiResult.error.message}`);
+  return { pgi: pgiResult.data || [], gai: gaiResult.data || [] };
+}
+
 async function loadOrCreateBriefingPayload(supabase: ReturnType<typeof createAdminClient>, briefingDate: string, options: { dryRun: boolean }) {
   let { data: briefing, error } = await supabase
     .from('briefings')
@@ -200,7 +233,8 @@ async function loadOrCreateBriefingPayload(supabase: ReturnType<typeof createAdm
     return { briefing: null, html: null, subject: null, noScan: true, createdOrUpdated: false };
   }
   const articleEntries = await loadEditionArticles(supabase, briefingDate);
-  const draft = buildBriefingFromScan(briefingDate, items, articleEntries);
+  const indexScores = await loadPublicIndexScores(supabase, briefingDate);
+  const draft = buildBriefingFromScan(briefingDate, items, articleEntries, indexScores);
 
   if (!briefing) {
     if (options.dryRun) {
