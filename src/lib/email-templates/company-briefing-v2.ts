@@ -305,6 +305,9 @@ function renderDeeperRead(output: CompanyBriefingGenerationOutput): string {
 }
 
 function renderPerceptionGap(output: CompanyBriefingGenerationOutput): string {
+  const structured = getStructuredPgiRead(output);
+  if (structured) return renderStructuredPerceptionGap(structured);
+
   const notes = output.perception_gap.notes;
   if (notes.length === 0) return "";
 
@@ -316,6 +319,81 @@ function renderPerceptionGap(output: CompanyBriefingGenerationOutput): string {
     html += `</div>`;
   }
 
+  return html;
+}
+
+type StructuredPgiRead = {
+  headline?: string;
+  read?: string;
+  what_appeared?: string[];
+  comparison_mode?: "two_frames" | "single_gap";
+  frames?: Array<{ label?: string; text?: string }>;
+  gap_summary?: string;
+  what_this_helps_us_notice?: string;
+  why_it_matters?: string;
+  evidence_note?: string;
+};
+
+function isObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+function getStructuredPgiRead(
+  output: CompanyBriefingGenerationOutput,
+): StructuredPgiRead | null {
+  if (!isObject(output.understanding)) return null;
+  const report = output.understanding.company_pgi_v2;
+  if (!isObject(report)) return null;
+  const read = report.customer_read;
+  if (!isObject(read) || typeof read.read !== "string") return null;
+  return read as StructuredPgiRead;
+}
+
+function pgiBlock(label: string, body: string): string {
+  return `<div style="margin:0 0 14px;">
+    <div style="font-size:11px;color:${AMBER};text-transform:uppercase;letter-spacing:1.4px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-weight:800;margin-bottom:5px;">${esc(label)}</div>
+    <p style="font-size:15px;color:${BODY};line-height:1.55;margin:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${textHtml(body)}</p>
+  </div>`;
+}
+
+function renderStructuredPerceptionGap(read: StructuredPgiRead): string {
+  let html = sectionLabel("Perception Gap");
+  html += `<div style="padding:16px 18px;background:${QUIET_BG};border-left:3px solid ${AMBER};">`;
+  if (read.headline) {
+    html += `<p style="font-size:16px;color:${NAVY};line-height:1.35;margin:0 0 10px;font-weight:750;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(customerEnglishText(read.headline))}</p>`;
+  }
+  if (read.read) html += pgiBlock("The read", read.read);
+
+  const appeared = (read.what_appeared || []).filter(Boolean).slice(0, 3);
+  if (appeared.length) {
+    html += `<div style="margin:0 0 14px;">
+      <div style="font-size:11px;color:${AMBER};text-transform:uppercase;letter-spacing:1.4px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-weight:800;margin-bottom:5px;">What appeared</div>
+      <ul style="padding-left:18px;margin:0;color:${BODY};font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;line-height:1.55;">`;
+    for (const item of appeared) {
+      html += `<li style="margin-bottom:5px;">${esc(customerEnglishText(item))}</li>`;
+    }
+    html += `</ul></div>`;
+  }
+
+  if (read.comparison_mode === "two_frames" && read.frames?.length) {
+    html += `<div style="margin:0 0 14px;">
+      <div style="font-size:11px;color:${AMBER};text-transform:uppercase;letter-spacing:1.4px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-weight:800;margin-bottom:6px;">How it is being seen</div>`;
+    for (const frame of read.frames.slice(0, 2)) {
+      html += `<p style="font-size:14px;color:${BODY};line-height:1.55;margin:0 0 6px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;"><strong style="color:${NAVY};">${esc(customerEnglishText(frame.label || "Frame"))}:</strong> ${esc(customerEnglishText(frame.text || ""))}</p>`;
+    }
+    html += `</div>`;
+  } else if (read.gap_summary) {
+    html += pgiBlock("The gap", read.gap_summary);
+  }
+
+  if (read.what_this_helps_us_notice)
+    html += pgiBlock("What this helps us notice", read.what_this_helps_us_notice);
+  if (read.why_it_matters)
+    html += pgiBlock("Why it matters", read.why_it_matters);
+  if (read.evidence_note) {
+    html += `<p style="font-size:12px;color:${GRAY};line-height:1.45;margin:2px 0 0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${esc(customerEnglishText(read.evidence_note))}</p>`;
+  }
+  html += `</div>`;
   return html;
 }
 

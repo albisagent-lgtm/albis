@@ -108,6 +108,7 @@ export interface CompanyPgiV2Report {
   company_name: string;
   date: string;
   email_read: string;
+  customer_read?: CompanyPgiCustomerRead;
   dashboard_read: {
     headline: string;
     score: number;
@@ -131,4 +132,16 @@ export interface CompanyPgiV2Report {
     supported_by: Array<{ type: string; id: string }>;
   }>;
   understanding_notes: UnderstandingNote[];
+}
+
+export interface CompanyPgiCustomerRead {
+  headline: string;
+  read: string;
+  what_appeared: string[];
+  comparison_mode: "two_frames" | "single_gap";
+  frames?: Array<{ label: string; text: string }>;
+  gap_summary?: string;
+  what_this_helps_us_notice: string;
+  why_it_matters: string;
+  evidence_note?: string;
 }

@@ -13,7 +13,7 @@ import type {
   IntelligenceDepthBundle,
   SelectedSignalForDepth,
 } from "../company-scan/intelligence-depth";
-import type { UnderstandingConfidence } from "./types";
+import type { CompanyPgiCustomerRead, UnderstandingConfidence } from "./types";
 
 export type CompanyPgiArcType =
   | "main_arc"
@@ -86,6 +86,7 @@ export interface CompanyPgiStoryArcResult {
   supporting_streams: CompanyPgiStoryArc[];
   suppressed_repeats: CompanyPgiStoryExample[];
   email_read?: string;
+  customer_read?: CompanyPgiCustomerRead;
   observations: Array<{ text: string; supported_by: EvidenceSupportRef[] }>;
 }
 
@@ -114,6 +115,19 @@ function humanList(values: string[], max = 3): string {
   if (items.length <= 1) return items[0] || "the scan";
   if (items.length === 2) return `${items[0]} and ${items[1]}`;
   return `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
+}
+
+function sentence(value: string): string {
+  const cleaned = clean(value);
+  if (!cleaned) return "";
+  return /[.!?]$/.test(cleaned) ? cleaned : `${cleaned}.`;
+}
+
+function shorten(value: string, maxWords = 24): string {
+  const cleaned = clean(value);
+  const words = cleaned.split(/\s+/).filter(Boolean);
+  if (words.length <= maxWords) return sentence(cleaned);
+  return sentence(`${words.slice(0, maxWords).join(" ")}…`);
 }
 
 function slugify(value: string): string {
@@ -352,22 +366,6 @@ function frameLanesForArc(
     `${bundle.heading} ${bundle.body_text} ${examples.map((e) => e.title).join(" ")}`,
   ).toLowerCase();
   const lanes: CompanyPgiFrameLane[] = [];
-  if (/hormuz|shipping|freight|suez|route|port|red sea|maritime/.test(text)) {
-    return [
-      {
-        label: "formal access",
-        description:
-          "One lane treats route status as open or closed based on official or visible movement.",
-        examples: examples.slice(0, 3).map((e) => e.title),
-      },
-      {
-        label: "market confidence",
-        description:
-          "The other lane asks whether insurers, carriers, prices, and traffic behave as if risk has really cleared.",
-        examples: examples.slice(0, 3).map((e) => e.title),
-      },
-    ];
-  }
   if (
     /press freedom|journalist|censorship|media freedom|rsf|reporters without borders/.test(
       text,
@@ -408,6 +406,22 @@ function frameLanesForArc(
         .map((e) => e.title),
     });
     return lanes;
+  }
+  if (/hormuz|shipping|freight|suez|route|port|red sea|maritime/.test(text)) {
+    return [
+      {
+        label: "formal route access",
+        description:
+          "One view treats a route as less constrained once visible movement resumes.",
+        examples: examples.slice(0, 3).map((e) => e.title),
+      },
+      {
+        label: "market confidence",
+        description:
+          "The other asks whether insurers, carriers, prices, and traffic behave as if risk has really cleared.",
+        examples: examples.slice(0, 3).map((e) => e.title),
+      },
+    ];
   }
   if (/deepfake|synthetic|ai|cyber|identity|video|voice/.test(text)) {
     return [
@@ -643,7 +657,75 @@ export function buildCompanyPgiStoryArcs(input: {
     email_read: mainArc
       ? summariseStoryArcForEmail(packet, mainArc, supporting)
       : undefined,
+    customer_read: mainArc
+      ? buildCustomerPgiRead(packet, mainArc, supporting)
+      : undefined,
     observations,
+  };
+}
+
+export function buildCustomerPgiRead(
+  packet: CompanyBriefingEvidencePacket,
+  mainArc: CompanyPgiStoryArc,
+  supporting: CompanyPgiStoryArc[] = [],
+): CompanyPgiCustomerRead {
+  const company = packet.company.display_name;
+  const lanes = mainArc.perception_split.frame_lanes.filter(
+    (lane) =>
+      lane.label &&
+      lane.description &&
+      !/^(event view|operating-climate view)$/i.test(lane.label),
+  );
+  const useTwoFrames = lanes.length === 2;
+  const exampleLine = (arc: CompanyPgiStoryArc): string => {
+    const area = humanList(arc.source_scan_areas, 2).toLowerCase();
+    const title = trimTitle(arc.story_examples[0]?.title || arc.title, 9);
+    return `The scan found coverage around ${area}, including ${title}.`;
+  };
+  const whatAppeared = [exampleLine(mainArc), supporting[0] && exampleLine(supporting[0])]
+    .filter(Boolean)
+    .map((text) => shorten(text, 24))
+    .slice(0, 2);
+
+  const titleText = `${mainArc.title} ${mainArc.source_scan_areas.join(" ")}`.toLowerCase();
+  const read = useTwoFrames
+    ? /route|shipping|freight|hormuz|suez|blockage/.test(titleText)
+      ? `The gap is between visible route access and whether the wider market behaves as if risk has cleared.`
+      : /synthetic|identity|deepfake|ai/.test(titleText)
+        ? `The gap is between treating synthetic media as content and treating it as evidence.`
+        : `The gap is between ${lanes[0].label} and ${lanes[1].label}.`
+    : /press freedom|journalist|censorship|media freedom|reputation/.test(
+          titleText,
+        )
+      ? `The useful gap is that press freedom is not only a rights story; for media companies, it also shapes operating conditions.`
+      : mainArc.learning.company_read;
+
+  return {
+    headline: mainArc.title,
+    read: shorten(read, 28),
+    what_appeared: whatAppeared.length
+      ? whatAppeared
+      : [shorten(mainArc.finding_summary, 26)],
+    comparison_mode: useTwoFrames ? "two_frames" : "single_gap",
+    frames: useTwoFrames
+      ? lanes.slice(0, 2).map((lane) => ({
+          label: clean(lane.label),
+          text: shorten(lane.description, 22),
+        }))
+      : undefined,
+    gap_summary: useTwoFrames
+      ? undefined
+      : shorten(mainArc.perception_split.missing_connection, 28),
+    what_this_helps_us_notice: shorten(mainArc.learning.broader_pattern, 30),
+    why_it_matters: shorten(
+      mainArc.learning.company_read.replace(/^For [^,]+,\s*/i, `For ${company}, `),
+      30,
+    ),
+    evidence_note: mainArc.source_domains.length
+      ? `Based on ${mainArc.source_domains.slice(0, 3).join(", ")}${
+          mainArc.source_domains.length > 3 ? " and other scanned sources" : ""
+        }.`
+      : undefined,
   };
 }
 
@@ -652,22 +734,15 @@ export function summariseStoryArcForEmail(
   mainArc: CompanyPgiStoryArc,
   supporting: CompanyPgiStoryArc[] = [],
 ): string {
-  const exampleNames = mainArc.story_examples
-    .slice(0, 3)
-    .map((example) => example.title);
+  const structured = buildCustomerPgiRead(packet, mainArc, supporting);
   const supportingLine = supporting.length
     ? ` Related streams also appeared around ${humanList(
         supporting.map((arc) => arc.source_scan_areas[0] || arc.title),
         2,
       )}.`
     : "";
-  const firstExamples = humanList(
-    exampleNames.map((title) => trimTitle(title, 8)),
-    2,
-  );
-  const scanAreas = humanList(mainArc.source_scan_areas, 3);
   return clean(
-    `View: ${mainArc.finding_summary} The clearest read is that ${scanAreas.toLowerCase()} is now part of one connected story. The gap: ${mainArc.perception_split.plain_summary} ${mainArc.perception_split.missing_connection} Why it matters: ${mainArc.learning.company_read}${supportingLine} Do not read ${firstExamples} as isolated headlines. Read them as part of the same perception gap around ${scanAreas}.`,
+    `View: ${structured.read} What appeared: ${structured.what_appeared.join(" ")} The gap: ${structured.gap_summary || structured.frames?.map((frame) => `${frame.label}: ${frame.text}`).join(" ") || "The scan shows two different reads of the same story."} What this helps us notice: ${structured.what_this_helps_us_notice} Why it matters: ${structured.why_it_matters}${supportingLine}`,
   );
 }
 

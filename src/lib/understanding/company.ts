@@ -311,6 +311,7 @@ export function buildCompanyPgiV2Report(input: {
     company_name: company,
     date,
     email_read: emailRead,
+    customer_read: storyArcResult.customer_read,
     dashboard_read: {
       headline: `${company}: where today's coverage splits`,
       score,
