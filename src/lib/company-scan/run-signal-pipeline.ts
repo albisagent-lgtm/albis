@@ -38,6 +38,7 @@ import { runCompanyPackage8PipelineForProfile } from "./company-package8-pipelin
 import { retrieveCompanySpecificSignals } from "./company-specific-retrieval";
 import { allowLegacyCompanyPipeline } from "../company-briefing-content-version";
 import { upsertCompanyProfilePgiEvidence, upsertCompanySignalPgiEvidence } from "../pgi-evidence";
+import { persistResearchedUnderstandingLayer } from "./researched-understanding-persistence";
 
 type OwnerProfile = {
   id: string;
@@ -451,6 +452,19 @@ export async function processProfileSignals(
     if (briefingErr || !briefingRow) {
       throw new Error(
         `Failed to upsert Package 8 company_briefings: ${briefingErr?.message || "no row"}`,
+      );
+    }
+
+    const researchPersistence = await persistResearchedUnderstandingLayer(
+      supabase,
+      package8.briefing_content.understanding?.researched_understanding_v1,
+      briefingRow.id,
+    );
+    if (researchPersistence.enabled) {
+      log(
+        `✅ Persisted researched understanding for ${rawProfile.company_name}: ` +
+          `${researchPersistence.clusters} cluster(s), ${researchPersistence.sources} source(s), ` +
+          `${researchPersistence.notes} note(s), ${researchPersistence.findings} finding(s)`,
       );
     }
 
