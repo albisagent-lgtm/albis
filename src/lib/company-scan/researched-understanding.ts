@@ -25,6 +25,7 @@ import type {
   SourceType,
   Signal,
 } from "./types";
+import { articleTextMaxFetches, fetchArticleText } from "./article-text-cache";
 import type { IntelligenceDepthBundle, SelectedSignalForDepth } from "./intelligence-depth";
 
 interface ResearchProfileContext {
@@ -171,6 +172,16 @@ function extractActors(signals: Signal[]): string[] {
   return uniq(signals.flatMap((signal) => signal.entities || [])).slice(0, 10);
 }
 
+function observationFromSource(source: ResearchSource): ResearchSourceObservation | null {
+  if (!source.extracted_excerpt) return null;
+  return {
+    source_id: source.id,
+    what_it_reports: trimWords(source.extracted_excerpt, 40),
+    what_it_emphasises: source.source_type || source.region || "reported development",
+    useful_detail: trimWords(source.extracted_title || source.title, 24),
+  };
+}
+
 function observationForSignal(
   clusterId: string,
   signal: Signal,
@@ -250,7 +261,37 @@ function makeResearchSourceFromSignal(
   };
 }
 
-export function buildResearchedUnderstandingLayer({
+async function enrichSourcesWithArticleText(
+  sources: ResearchSource[],
+  fetchBudget: { remaining: number },
+): Promise<void> {
+  const seenUrls = new Set<string>();
+  for (const source of sources) {
+    if (!source.url || seenUrls.has(source.url)) continue;
+    seenUrls.add(source.url);
+    if (fetchBudget.remaining <= 0) {
+      source.text_cache_status = "skipped_budget_exhausted";
+      continue;
+    }
+    fetchBudget.remaining -= 1;
+    const result = await fetchArticleText(source.url);
+    source.text_cache_status = result.status;
+    source.text_cache_path = result.cache_path;
+    if ((result.status === "read" || result.status === "cache_hit") && result.text) {
+      source.read_status = "read";
+      source.extracted_title = result.title;
+      source.extracted_excerpt = result.excerpt || result.text.slice(0, 700);
+      source.extracted_word_count = result.word_count;
+      source.reliability_note = `Article text ${result.status === "cache_hit" ? "loaded from cache" : "fetched and cached"}; extracted ${result.word_count || 0} words for the research dossier.`;
+    } else if (result.status === "failed") {
+      source.reliability_note = `Article text fetch failed: ${result.error || "unknown error"}. Falling back to scan evidence.`;
+    } else if (result.status === "cache_miss" || result.status === "disabled") {
+      source.reliability_note = "Article text was not fetched in this mode. Falling back to scan evidence.";
+    }
+  }
+}
+
+export async function buildResearchedUnderstandingLayer({
   packet,
   profile,
   scanDate,
@@ -259,21 +300,38 @@ export function buildResearchedUnderstandingLayer({
   bundles = [],
   generatedAt = new Date().toISOString(),
   maxClusters = 8,
-}: BuildResearchedUnderstandingOptions): CompanyResearchedUnderstandingLayer {
+}: BuildResearchedUnderstandingOptions): Promise<CompanyResearchedUnderstandingLayer> {
   const itemMap = packetItemById(packet);
   const totalSignalsAvailable = signals.length;
   const chosenBundles = bundles.slice(0, maxClusters);
+  const defaultSectionId = packet.company.selected_scan_areas[0]?.area_id || "general";
   const fallbackSelected = selected.slice(0, Math.max(5, maxClusters));
+  const selectedSignalIds = new Set(selected.map((item) => item.signal.id));
+  const rawSignalSupplemental: SelectedSignalForDepth[] = signals
+    .filter((signal) => !selectedSignalIds.has(signal.id))
+    .slice(0, Math.max(0, maxClusters - fallbackSelected.length))
+    .map((signal, index) => ({
+      signal,
+      item_id: `supplemental_${signal.id}`,
+      cluster_id: `supplemental_${signal.id}`,
+      section_ids: [defaultSectionId],
+      selection_score: Math.max(1, Number(signal.significance || 0) + Number(signal.urgency || 0) - index),
+      keyword_match_score: 0,
+      selected_because: "supplemental research-depth cluster added so the dossier reaches the 5-8 researched-cluster target",
+    }));
+  const expandedFallbackSelected = [...fallbackSelected, ...rawSignalSupplemental];
 
   const bundledInputs = chosenBundles.map((bundle) => ({
     bundle,
     selected: selectedForBundle(bundle, selected),
   }));
-  const usedItemIds = new Set(
-    bundledInputs.flatMap((input) => input.selected.map((item) => item.item_id)),
+  const usedAnchorItemIds = new Set(
+    bundledInputs
+      .map((input) => input.selected[0]?.item_id)
+      .filter((itemId): itemId is string => Boolean(itemId)),
   );
-  const supplementalInputs = fallbackSelected
-    .filter((item) => !usedItemIds.has(item.item_id))
+  const supplementalInputs = expandedFallbackSelected
+    .filter((item) => !usedAnchorItemIds.has(item.item_id))
     .map((item) => ({ bundle: undefined, selected: [item] }));
   const clusterInputs = [...bundledInputs, ...supplementalInputs];
 
@@ -282,10 +340,11 @@ export function buildResearchedUnderstandingLayer({
   const notes: ResearchNote[] = [];
   const findings: AlbisFinding[] = [];
   const sourceDedupe = new Set<string>();
+  const fetchBudget = { remaining: articleTextMaxFetches() };
 
-  clusterInputs.slice(0, maxClusters).forEach((input, index) => {
-    const anchorSelected = input.selected[0] || fallbackSelected[index];
-    if (!anchorSelected) return;
+  for (const [index, input] of clusterInputs.slice(0, maxClusters).entries()) {
+    const anchorSelected = input.selected[0] || expandedFallbackSelected[index];
+    if (!anchorSelected) continue;
     const anchorSignal = anchorSelected.signal;
     const packetItem = itemMap.get(anchorSelected.item_id);
     const clusterId = `research_${scanDate}_${profile.id}_${slugify(input.bundle?.heading || anchorSignal.headline)}`;
@@ -319,12 +378,27 @@ export function buildResearchedUnderstandingLayer({
       clusterSources.push(source);
     });
 
+    await enrichSourcesWithArticleText(clusterSources, fetchBudget);
+
     const evidenceSources = clusterSources.filter((source) =>
       ["email", "evidence", "research"].includes(source.trail_role),
     );
-    const allText = relatedSignals.map((signal) => `${signal.headline}. ${signal.summary}`).join(" ");
+    if (evidenceSources.length === 0) continue;
+
+    const fullTextEvidence = clusterSources
+      .map((source) => source.extracted_excerpt || "")
+      .filter(Boolean)
+      .join(" ");
+    const allText = [
+      relatedSignals.map((signal) => `${signal.headline}. ${signal.summary}`).join(" "),
+      fullTextEvidence,
+    ].join(" ");
     const keyFacts = uniq([
       ...(packetItem?.facts || []).map((fact) => fact.text),
+      ...clusterSources
+        .map((source) => source.extracted_excerpt)
+        .filter(Boolean)
+        .map((excerpt) => trimWords(excerpt || "", 32)),
       ...relatedSignals.map((signal) => trimWords(signal.summary || signal.headline, 28)),
     ])
       .filter(Boolean)
@@ -338,14 +412,23 @@ export function buildResearchedUnderstandingLayer({
       title: input.bundle?.heading || anchorSignal.headline,
       status: evidenceSources.length >= 2 ? "ready" : "weak",
       importance: importanceFor(index, relatedSignals.length),
-      confidence: confidenceFor(evidenceSources.length, true),
+      confidence: confidenceFor(
+        evidenceSources.length,
+        evidenceSources.every((source) => source.read_status === "snippet_only"),
+      ),
       created_at: generatedAt,
       updated_at: generatedAt,
     };
 
-    const observations = relatedSignals
-      .slice(0, 8)
-      .map((signal, observationIndex) => observationForSignal(clusterId, signal, observationIndex));
+    const sourceObservations = clusterSources
+      .map((source) => observationFromSource(source))
+      .filter((observation): observation is ResearchSourceObservation => Boolean(observation));
+    const observations = [
+      ...sourceObservations,
+      ...relatedSignals
+        .slice(0, 8)
+        .map((signal, observationIndex) => observationForSignal(clusterId, signal, observationIndex)),
+    ].slice(0, 12);
     const differences = reportingDifferences(clusterId, relatedSignals);
     const possibleGap = differences.length >= 2
       ? {
@@ -378,7 +461,9 @@ export function buildResearchedUnderstandingLayer({
       source_observations: observations,
       differences_in_reporting: differences,
       what_is_unclear: [
-        "V1 has preserved the research trail from scan evidence, but full article-text reading/extraction is still required before marking the cluster high confidence.",
+        evidenceSources.some((source) => source.read_status === "read")
+          ? "Some sources were read/extracted, but further source expansion may still be needed before treating this as a complete 10-20 source dossier."
+          : "The research trail is preserved, but article-text reading/extraction did not complete for this cluster; treat as lower confidence.",
       ],
       possible_perception_gap: possibleGap,
       company_relevance: trimWords(input.bundle?.company_read?.text || packetItem?.why_it_matters?.text || "Relevant to the company’s monitored topics because it appeared in the selected company scan evidence.", 48),
@@ -405,7 +490,7 @@ export function buildResearchedUnderstandingLayer({
     clusters.push(cluster);
     notes.push(note);
     findings.push(finding);
-  });
+  }
 
   const blockers: string[] = [];
   const warnings: string[] = [];

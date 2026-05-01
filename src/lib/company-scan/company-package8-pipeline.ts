@@ -1566,7 +1566,7 @@ export async function runCompanyPackage8PipelineForProfile(
     depthPacket,
     intelligence_depth_bundles,
   );
-  const researchedUnderstanding = buildResearchedUnderstandingLayer({
+  const researchedUnderstanding = await buildResearchedUnderstandingLayer({
     packet: depthPacket,
     profile,
     scanDate,

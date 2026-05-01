@@ -1390,7 +1390,14 @@ function checkScannerReportLayout(
     (section) => section.items,
   ).length;
   const scanner = output.scanner_report;
-  const generatedText = JSON.stringify(output).toLowerCase();
+  const customerFacingOutput = {
+    today_brief: output.today_brief,
+    main_briefing: output.main_briefing,
+    scanner_report: output.scanner_report,
+    perception_gap: output.perception_gap,
+    source_notes: output.source_notes,
+  };
+  const generatedText = JSON.stringify(customerFacingOutput).toLowerCase();
   const bannedInternalPhrases = [
     "datapoint was useful",
     "route access and route confidence",

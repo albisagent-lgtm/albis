@@ -18,6 +18,7 @@ import dotenv from "dotenv";
 import { createAdminClient } from "../src/lib/supabase/admin";
 import { loadSignalsForWindow } from "../src/lib/company-scan/run-signal-pipeline";
 import { runCompanyPackage8PipelineForProfile } from "../src/lib/company-scan/company-package8-pipeline";
+import { retrieveCompanySpecificSignals } from "../src/lib/company-scan/company-specific-retrieval";
 import type { CompanyProfile } from "../src/lib/company-profile";
 
 dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
@@ -27,6 +28,7 @@ type Args = {
   lookbackHours: number;
   companyName?: string;
   companyProfileId?: string;
+  companySpecificRetrieval: boolean;
   deepDiveRetrieval: boolean;
   outDir: string;
 };
@@ -46,6 +48,7 @@ function parseArgs(): Args {
     lookbackHours: lookbackArg ? parseInt(lookbackArg.split("=")[1], 10) || 24 : 24,
     companyName,
     companyProfileId,
+    companySpecificRetrieval: argv.includes("--company-specific-retrieval"),
     deepDiveRetrieval: argv.includes("--deep-dive-retrieval"),
     outDir,
   };
@@ -63,7 +66,7 @@ function slugify(value: string): string {
 async function main() {
   const args = parseArgs();
   const supabase = createAdminClient();
-  const signals = await loadSignalsForWindow(supabase, args.scanDate, args.lookbackHours);
+  const sharedSignals = await loadSignalsForWindow(supabase, args.scanDate, args.lookbackHours);
 
   const { data: profiles, error } = await supabase
     .from("company_profiles")
@@ -82,7 +85,22 @@ async function main() {
   await fs.mkdir(dateDir, { recursive: true });
 
   for (const profile of filtered) {
-    const result = await runCompanyPackage8PipelineForProfile(supabase, profile, signals, {
+    let profileSignals = sharedSignals;
+    let retrievalSummary = null;
+    if (args.companySpecificRetrieval) {
+      const retrieval = await retrieveCompanySpecificSignals(supabase, profile, {
+        signalDate: args.scanDate,
+        log: (message) => console.log(message),
+      });
+      profileSignals = retrieval.signals;
+      retrievalSummary = {
+        intent: retrieval.intent,
+        queries: retrieval.queries.length,
+        signals: retrieval.signals.length,
+      };
+    }
+
+    const result = await runCompanyPackage8PipelineForProfile(supabase, profile, profileSignals, {
       scanDate: args.scanDate,
       lookbackHours: args.lookbackHours,
       dryRun: true,
@@ -97,6 +115,7 @@ async function main() {
       no_db_write: true,
       company_name: profile.company_name,
       scan_date: args.scanDate,
+      retrieval: retrievalSummary,
       summary: {
         clusters: layer.clusters.length,
         findings: layer.findings.length,

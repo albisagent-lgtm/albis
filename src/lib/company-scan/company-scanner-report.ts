@@ -762,9 +762,15 @@ function buildCompanyPerceptionGapNotes(
       ),
     ).slice(0, 24);
     const topBundle = bundles[0];
+    const eligiblePacketItem = packet.email_items.find(
+      (item) =>
+        item.perception_gap?.eligible &&
+        item.perception_gap.show_recommendation === "show",
+    );
+    if (!eligiblePacketItem) return [];
     return [
       {
-        packet_item_id: topBundle?.anchor_item_id || "company_pgi_v2",
+        packet_item_id: eligiblePacketItem.item_id,
         cluster_id:
           companyPgiV2.understanding_notes[0]?.cluster_id ||
           topBundle?.anchor_cluster_id ||

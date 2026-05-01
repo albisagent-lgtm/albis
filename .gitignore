@@ -51,3 +51,4 @@ next-env.d.ts
 # Generated local report previews
 reports/final-copy-email-preview-*/
 .artifacts/
+.cache/

@@ -649,7 +649,7 @@ function buildWhatHappened(kind: SignalKind, signals: Signal[]): string {
     const hasFivePct = signals.some((s) => /5\s?%|5 percent|five percent/i.test(`${s.headline} ${s.summary}`));
     const detail = hasFivePct ? "One report said Hormuz traffic was running at about 5% of pre-war levels." : `${numbers[0] || "Reports pointed to reduced movement around Hormuz"}.`;
     const freight = signals.find((s) => /freight|rate|vessel|ballast|tanker/i.test(`${s.headline} ${s.summary}`));
-    return `${detail} The datapoint was useful because the story was not route closure; it was damaged shipping confidence around the strait. ${freight ? `Freight coverage also pointed to uneven rates and limited vessel availability.` : ""}`;
+    return `${detail} The useful point is that the story was not route closure; it was damaged shipping confidence around the strait. ${freight ? `Freight coverage also pointed to uneven rates and limited vessel availability.` : ""}`;
   }
   if (kind === "corridors") {
     return `Egypt-corridor and Morocco-port coverage made alternative Gulf routing a practical planning signal, not just a theory. One report focused on Egypt's Europe-Gulf corridor, while another said instability around Hormuz is pushing more attention toward Moroccan ports.`;
@@ -663,8 +663,8 @@ function buildWhatHappened(kind: SignalKind, signals: Signal[]): string {
       ? "A Canadian agricultural transport report put a concrete cost marker on disruption. It cited an Agriculture Transport Coalition estimate for one week of rail and port disruption during peak export season. The estimate was up to $540 million in unrecoverable export sales."
       : numbers.find((p) => /\$/.test(p)) || numbers[0];
     return cost
-      ? (cost.endsWith(".") ? cost : `The scan also picked up a concrete disruption-cost signal: ${cost.replace(/[.!?]$/g, "")}.`)
-      : `The scan also picked up supply-chain disruption reporting outside the Gulf, focused on port, rail, freight, or LNG exposure.`;
+      ? (cost.endsWith(".") ? cost : `The scan also found a concrete disruption-cost signal: ${cost.replace(/[.!?]$/g, "")}.`)
+      : `The scan also found supply-chain disruption reporting outside the Gulf, focused on port, rail, freight, or LNG exposure.`;
   }
   const sentenceLead = leadSummary.replace(/[.!?]+$/g, "");
   if (kind === "media_regulation") return `${sentenceLead}.${secondLine}`;
@@ -692,12 +692,12 @@ function buildWhatChanging(kind: SignalKind): string {
   }
   if (["media_regulation", "disinformation", "press_freedom", "reputation_narrative", "cyber_technology", "sanctions", "geopolitics"].includes(kind)) {
     if (kind === "disinformation") return "The risk is whether false or state-shaped material becomes searchable, repeatable, or treated as evidence later.";
-    if (kind === "press_freedom") return "The relevance is access: who can publish, who is suppressed, and whether enforcement spills beyond its stated target.";
-    if (kind === "media_regulation") return "The relevance is visibility: what remains publishable, searchable, monetisable, or safe to distribute.";
+    if (kind === "press_freedom") return "The practical point is access: who can publish, who is suppressed, and whether enforcement spills beyond its stated target.";
+    if (kind === "media_regulation") return "The practical point is visibility: what remains publishable, searchable, monetisable, or safe to distribute.";
     if (kind === "reputation_narrative") return "The risk is repetition. A narrative matters more when the same frame starts appearing across sources and audiences.";
-    if (kind === "cyber_technology") return "The relevance is trust in identity, source material, and distribution systems.";
-    if (kind === "sanctions") return "The relevance is practical access: who can publish, transact, travel, or distribute information under changing rules.";
-    if (kind === "geopolitics") return "The relevance is the information environment around the event: which actors are named, which claims repeat, and which audiences are being shaped.";
+    if (kind === "cyber_technology") return "The practical point is trust in identity, source material, and distribution systems.";
+    if (kind === "sanctions") return "The practical point is access: who can publish, transact, travel, or distribute information under changing rules.";
+    if (kind === "geopolitics") return "The practical point is the information environment around the event: which actors are named, which claims repeat, and which audiences are being shaped.";
   }
   return "This is worth noting today, but it should be compared with the next scan window before treating it as a wider pattern.";
 }
@@ -711,8 +711,8 @@ function buildBodyText(
   if (kind === "hormuz") {
     const statLine = stats.find((s) => s.stat_id === "hormuz_traffic_5pct")
       ? "That number separates formal access from real commercial recovery."
-      : "Route access and route confidence can move at different speeds.";
-    return `${happened} ${statLine}\n\n${changing} The comparison is whether vessel traffic, insurance cover, and rates recover together, or whether only the political headline improves.`;
+      : "Formal access and market confidence can move at different speeds.";
+    return `${happened} ${statLine}\n\n${changing} The practical test is whether vessel traffic, insurance cover, and rates recover together, or whether only the political headline improves.`;
   }
 
   if (kind === "corridors") {
@@ -743,18 +743,18 @@ function buildCompanyRead(kind: SignalKind, intent: CompanyBriefingIntentKey): s
   if (kind === "corridors") return "Alternative-route coverage is an early signal, not a conclusion. Egypt-corridor and Morocco-port stories do not prove a major route shift. They show practical contingency language entering the coverage, which would matter more if it repeats across later scans.";
   if (kind === "suez") return "Reported Hormuz, Suez, Red Sea, and Bab el-Mandeb coverage is appearing as one connected route story. The pattern is whether stress in one chokepoint starts changing confidence around the others.";
   if (kind === "supply_chain") return "Cost examples separate real risk from background noise. The Canada rail and port estimate is not a Gulf story, but it shows how quickly transport disruption can become unrecoverable sales loss.";
-  if (intent === "ai_memory_integrity" && kind === "disinformation") return "The useful distinction is false output versus durable record. AI falsehoods matter when they enter search, archives, family history, or institutional memory — places where later readers may treat them as evidence.";
-  if (intent === "ai_memory_integrity" && kind === "cyber_technology") return "The useful distinction is identity as content versus identity as evidence. Voice, image, and likeness protection matters when synthetic media can blur the chain between source, subject, and record.";
-  if (intent === "ai_memory_integrity" && kind === "media_regulation") return "The useful distinction is content moderation versus preservation. Censorship or access rules matter when they decide which records remain visible, searchable, or usable later.";
-  if (intent === "geopolitical_media" && kind === "disinformation") return "The useful distinction is claim versus channel. A false or state-linked narrative matters more when it moves across platforms or audiences, not just because one outlet names it.";
-  if (intent === "geopolitical_media" && kind === "geopolitics") return "The useful distinction is event coverage versus narrative pressure. Russia, North Korea, Iran, and sanctions stories matter when they shift the information environment around audiences, platforms, or reputation.";
-  if (kind === "media_regulation") return "The useful distinction is regulation versus reach. A media-regulation story matters most when it changes who can publish, distribute, monetise, or access information.";
-  if (kind === "disinformation") return "The useful distinction is claim versus spread. A narrative-risk signal matters more if it repeats across sources or reaches a new audience, not just because one outlet names it.";
-  if (kind === "press_freedom") return "The useful distinction is incident versus operating climate. A press-freedom signal matters when it suggests a change in access, safety, censorship, or legal pressure.";
-  if (kind === "reputation_narrative") return "The useful distinction is coverage versus narrative movement. The signal matters if language, blame, or audience framing begins to repeat across sources.";
-  if (kind === "cyber_technology") return "The useful distinction is technical incident versus information access. Platform or cyber signals matter when they affect distribution, trust, or visibility.";
-  if (kind === "sanctions") return "The useful distinction is official action versus practical information access. Sanctions coverage matters when it changes who can operate, publish, transact, or distribute.";
-  if (kind === "geopolitics") return "The useful distinction is geopolitical event versus information environment. The same story can matter differently depending on whether it changes audience risk, narrative pressure, or access.";
+  if (intent === "ai_memory_integrity" && kind === "disinformation") return "The practical difference is false output versus durable record. AI falsehoods matter when they enter search, archives, family history, or institutional memory — places where later readers may treat them as evidence.";
+  if (intent === "ai_memory_integrity" && kind === "cyber_technology") return "The practical difference is identity as content versus identity as evidence. Voice, image, and likeness protection matters when synthetic media can blur the chain between source, subject, and record.";
+  if (intent === "ai_memory_integrity" && kind === "media_regulation") return "The practical difference is content moderation versus preservation. Censorship or access rules matter when they decide which records remain visible, searchable, or usable later.";
+  if (intent === "geopolitical_media" && kind === "disinformation") return "The practical difference is claim versus channel. A false or state-linked narrative matters more when it moves across platforms or audiences, not just because one outlet names it.";
+  if (intent === "geopolitical_media" && kind === "geopolitics") return "The practical difference is event coverage versus narrative pressure. Russia, North Korea, Iran, and sanctions stories matter when they shift the information environment around audiences, platforms, or reputation.";
+  if (kind === "media_regulation") return "The practical difference is regulation versus reach. A media-regulation story matters most when it changes who can publish, distribute, monetise, or access information.";
+  if (kind === "disinformation") return "The practical difference is claim versus spread. A narrative-risk signal matters more if it repeats across sources or reaches a new audience, not just because one outlet names it.";
+  if (kind === "press_freedom") return "The practical difference is incident versus operating climate. A press-freedom signal matters when it suggests a change in access, safety, censorship, or legal pressure.";
+  if (kind === "reputation_narrative") return "The practical difference is coverage versus narrative movement. The signal matters if language, blame, or audience framing begins to repeat across sources.";
+  if (kind === "cyber_technology") return "The practical difference is technical incident versus information access. Platform or cyber signals matter when they affect distribution, trust, or visibility.";
+  if (kind === "sanctions") return "The practical difference is official action versus practical information access. Sanctions coverage matters when it changes who can operate, publish, transact, or distribute.";
+  if (kind === "geopolitics") return "The practical difference is geopolitical event versus information environment. The same story can matter differently depending on whether it changes audience risk, narrative pressure, or access.";
   return "This is worth noting, but it needs more evidence before it should be treated as a trend.";
 }
 

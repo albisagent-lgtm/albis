@@ -1618,6 +1618,11 @@ export interface ResearchSource {
   trail_role: ResearchTrailRole;
   relevance_score?: number;
   reliability_note?: string;
+  extracted_title?: string;
+  extracted_excerpt?: string;
+  extracted_word_count?: number;
+  text_cache_status?: string;
+  text_cache_path?: string;
 }
 
 export interface ResearchSourceObservation {
