@@ -33,9 +33,18 @@ LOG_FILE="${LOG_DIR}/${TIMESTAMP}.log"
 
 exec > >(tee -a "${LOG_FILE}") 2>&1
 
+SCAN_DATE="${COMPANY_SCAN_DATE:-$(date -u +%F)}"
+
+if [[ -n "${COMPANY_SCAN_WINDOW:-}" ]]; then
+  WINDOW_ARG="--window=${COMPANY_SCAN_WINDOW}"
+else
+  WINDOW_ARG=""
+fi
+
 echo "=== company scan cycle ${TIMESTAMP} (UTC) ==="
 echo "repo: ${REPO_ROOT}"
 echo "log:  ${LOG_FILE}"
+echo "scan_date: ${SCAN_DATE}"
 
 # Pick npx vs explicit binary — fall back gracefully.
 NPX="${NPX:-npx}"
@@ -46,11 +55,15 @@ ${NPX} tsx scripts/build-watch-graph.ts
 
 echo
 echo "[2/3] run-company-scan"
-${NPX} tsx scripts/run-company-scan.ts
+${NPX} tsx scripts/run-company-scan.ts --date="${SCAN_DATE}" ${WINDOW_ARG}
 
 echo
 echo "[3/3] run-company-signal-pipeline"
-${NPX} tsx scripts/run-company-signal-pipeline.ts
+COMPANY_BRIEFINGS_WRITE_ENABLED="${COMPANY_BRIEFINGS_WRITE_ENABLED:-1}" \
+  ${NPX} tsx scripts/run-company-signal-pipeline.ts "${SCAN_DATE}" \
+    --write-briefing-rows \
+    --company-specific-retrieval \
+    --deep-dive-retrieval
 
 echo
 echo "=== cycle complete ==="

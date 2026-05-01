@@ -710,21 +710,22 @@ function companyPgiDimensions(bundle: IntelligenceDepthBundle): {
   return { score, strongest: strongest.replace(/_/g, "/") };
 }
 
-function companyPgiTest(bundle: IntelligenceDepthBundle): string {
+function quietPgiRead(bundle: IntelligenceDepthBundle, packet: CompanyBriefingEvidencePacket): string {
   const kind = String(bundle.signal_kind);
+  const company = packet.company.display_name;
   if (["media_regulation", "disinformation", "press_freedom", "reputation_narrative"].includes(kind)) {
-    return "look for a named platform, regulator, publisher, legal filing, or audience-impact datapoint before calling it a real narrative split";
+    return `For ${company}, the useful signal is that the trust story is still fragmented: platforms, publishers, regulators, and audiences are not yet arguing over one shared event. Keep watching for the moment those lanes converge around a named platform, legal filing, publisher decision, or audience-impact datapoint.`;
   }
   if (kind === "cyber_technology") {
-    return "look for a named affected system, regulator, vendor response, customer impact, or security disclosure before treating it as business exposure";
+    return `For ${company}, this is still an early technical-risk signal rather than a public narrative split. It becomes more important when a named system, vendor, regulator, customer group, or disclosure turns the issue into a shared reference point.`;
   }
   if (["hormuz", "corridors", "suez", "supply_chain"].includes(kind)) {
-    return "look for rates, delays, insurance, port calls, rerouting, or cargo movement rather than only strategic language";
+    return `For ${company}, the story is still moving more as background pressure than as a contested public account. The shift to watch is when rates, delays, insurance, port calls, rerouting, or cargo movement make one version of the risk visible to customers and another visible to operators.`;
   }
   if (kind === "sanctions" || kind === "geopolitics") {
-    return "look for named entities, enforcement dates, counterparty exposure, market reaction, or an official response";
+    return `For ${company}, this is not yet a clean split between competing public realities. It becomes one when named entities, enforcement dates, counterparties, market reaction, or official responses force different audiences to explain the same event differently.`;
   }
-  return "look for a second source type, named stakeholder response, concrete consequence, or clearly different regional framing";
+  return `For ${company}, the quiet signal is that coverage has not yet formed into competing public realities. Watch for a second source type, named stakeholder response, concrete consequence, or clearly different regional framing.`;
 }
 
 function sourceFrameEvidence(bundle: IntelligenceDepthBundle): string[] {
@@ -760,10 +761,10 @@ function buildCompanyPerceptionGapNotes(
     ]).slice(0, 20);
     const text = frameEvidence.length
       ? cleanText(
-          `PGI read — ${section} (${score.score.toFixed(1)}, ${pgiTier(score.score)}; strongest dimension: ${score.strongest}). ${frameEvidence.join(" ")} For ${packet.company.display_name}, the useful question is not just what happened, but which audience would misunderstand the source trail if it saw only one frame. Next test: ${companyPgiTest(bundle)}.`,
+          `View: ${section} is showing a ${pgiTier(score.score).toLowerCase()} perception gap (${score.score.toFixed(1)}), with the strongest pressure in ${score.strongest}. ${frameEvidence.join(" ")} The gap: different readers could only see the part of the source trail that confirms their existing view of who is responsible and who is exposed. Why it matters: for ${packet.company.display_name}, the risk is not just what happened, but what customers, partners, regulators, or audiences could misread if they only see one side of the evidence trail.`,
         )
       : cleanText(
-          `PGI check: no material perception gap cleared the email threshold today. The scan found source spread across ${sources}, but not two distinct, source-backed frames on the same event. For ${packet.company.display_name}, that means monitor the topic without presenting narrative divergence as a finding. Next test: ${companyPgiTest(bundle)}.`,
+          `View: today's scan did not find a strong public split over the same ${section.toLowerCase()} event. Coverage is spread across ${sources}, but it has not yet formed into two competing public accounts. The gap: different audiences could still only see separate fragments of the issue, rather than one shared story they are openly arguing over. Why it matters: ${quietPgiRead(bundle, packet)}`,
         );
     if (!frameEvidence.length) thinEvidenceNoteAdded = true;
     notes.push({

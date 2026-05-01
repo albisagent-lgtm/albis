@@ -394,26 +394,11 @@ export async function processProfileSignals(
       };
     }
 
-    if (blockingFailures > 0) {
-      return {
-        company_name: rawProfile.company_name,
-        company_profile_id: rawProfile.id,
-        signals_considered: profileSignals.length,
-        signals_selected: package8.selected_count,
-        signal_level: signalLevel,
-        status: "skipped",
-        reason: "package8_qa_blocked",
-        content_version: "company_scanner_report_v1",
-        qa_status: package8.qa_report?.status,
-        qa_blocking_failures: blockingFailures,
-        dry_run_would_have_status: package8.dry_run_metadata?.would_have_status,
-        retrieval_mode: retrievalSummary.mode,
-        retrieval_intent: retrievalSummary.intent,
-        retrieval_queries: retrievalSummary.queries,
-        retrieval_signals_loaded: retrievalSummary.signals_loaded,
-        deep_dive_signals_added: package8.deep_dive_retrieval?.signals_added,
-      };
-    }
+    // Persist reviewable briefing artifacts even when QA says hold. QA should
+    // block delivery, not erase the evidence we need to inspect and improve.
+    // Rows with blockers stay status='pending', so the delivery endpoint will
+    // not pick them up even if email delivery is later enabled.
+    const briefingStatus = blockingFailures > 0 ? "pending" : "generated";
 
     const { data: briefingRow, error: briefingErr } = await supabase
       .from("company_briefings")
@@ -421,7 +406,7 @@ export async function processProfileSignals(
         {
           company_profile_id: rawProfile.id,
           briefing_date: scanDate,
-          status: "generated",
+          status: briefingStatus,
           delivery_status: "pending",
           stories_considered: profileSignals.length,
           stories_selected: package8.selected_count,
@@ -431,6 +416,8 @@ export async function processProfileSignals(
             retrieval_summary: retrievalSummary,
             deep_dive_retrieval: package8.deep_dive_retrieval,
             dedupe_summary: package8.dedupe_summary,
+            qa_report: package8.qa_report,
+            review_status: blockingFailures > 0 ? "hold" : "ready_for_delivery_review",
           },
           generated_at: new Date().toISOString(),
         },
