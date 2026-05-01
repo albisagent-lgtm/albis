@@ -1,0 +1,128 @@
+=== company scan cycle 20260430T230014Z (UTC) ===
+repo: /Users/treelight/.openclaw/workspace/albis-app
+log:  /Users/treelight/.openclaw/workspace/albis-app/logs/company-scan-cycle/20260430T230014Z.log
+
+[1/3] build-watch-graph
+◇ injected env (10) from .env.local // tip: ⌁ auth for agents [www.vestauth.com]
+🔧 Building union watch graph
+✅ Done
+{
+  "clusters_built": 6,
+  "scan_targets_upserted": 60,
+  "scan_targets_deactivated": 0,
+  "cluster_breakdown": {
+    "entity_cluster": {
+      "canonicals": 15,
+      "companies": 3
+    },
+    "theme_cluster": {
+      "canonicals": 22,
+      "companies": 3
+    },
+    "region_cluster": {
+      "canonicals": 11,
+      "companies": 3
+    },
+    "sector_cluster": {
+      "canonicals": 3,
+      "companies": 3
+    },
+    "commodity_cluster": {
+      "canonicals": 1,
+      "companies": 1
+    },
+    "risk_cluster": {
+      "canonicals": 8,
+      "companies": 3
+    }
+  }
+}
+
+[2/3] run-company-scan
+◇ injected env (10) from .env.local // tip: ◈ secrets for agents [www.dotenvx.com]
+▶ Running company scan: 2026-04-30 window=19-00
+{
+  "scan_run_id": "7300cfdd-05a5-455e-9c52-3935e6b4d337",
+  "run_date": "2026-04-30",
+  "run_window": "19-00",
+  "status": "completed",
+  "targets_inspected": 60,
+  "signals_extracted": 618,
+  "sources_consulted": 550,
+  "error_summary": null
+}
+
+[3/3] run-company-signal-pipeline
+◇ injected env (10) from .env.local // tip: ◈ secrets for agents [www.dotenvx.com]
+🚀 Running company SIGNAL pipeline for 2026-05-01 (lookback=24h)
+  ↳ loaded 1000 signals
+✅ Loaded 3 company profiles
+
+▶ Processing Lindell Media
+  ↳ loaded 8 prior visible scan item(s) for no-repeat checks
+  Package 8 preview selected 24 item(s); QA=dry_run_only, blockers=2
+
+▶ Processing Evidence & Echoes Genealogy
+  ↳ loaded 28 prior visible scan item(s) for no-repeat checks
+  Package 8 preview selected 24 item(s); QA=dry_run_only, blockers=2
+
+▶ Processing Test Company
+  ↳ loaded 61 prior visible scan item(s) for no-repeat checks
+  Package 8 preview selected 24 item(s); QA=dry_run_only, blockers=3
+
+🎉 Company signal pipeline complete
+{
+  "scan_date": "2026-05-01",
+  "lookback_hours": 24,
+  "dry_run": false,
+  "signals_loaded": 1000,
+  "results": [
+    {
+      "company_name": "Lindell Media",
+      "company_profile_id": "2fcda41e-dbb9-40be-9c86-4ba4659d2e77",
+      "signals_considered": 1000,
+      "signals_selected": 24,
+      "signal_level": "moderate",
+      "status": "dry_run",
+      "reason": "package8_preview_write_not_requested",
+      "content_version": "company_scanner_report_v1",
+      "qa_status": "dry_run_only",
+      "qa_blocking_failures": 2,
+      "dry_run_would_have_status": "hold",
+      "retrieval_mode": "shared_signal_pool",
+      "retrieval_signals_loaded": 1000
+    },
+    {
+      "company_name": "Evidence & Echoes Genealogy",
+      "company_profile_id": "2f4255d8-e1bb-48fd-8282-ee5c03f10ea2",
+      "signals_considered": 1000,
+      "signals_selected": 24,
+      "signal_level": "moderate",
+      "status": "dry_run",
+      "reason": "package8_preview_write_not_requested",
+      "content_version": "company_scanner_report_v1",
+      "qa_status": "dry_run_only",
+      "qa_blocking_failures": 2,
+      "dry_run_would_have_status": "hold",
+      "retrieval_mode": "shared_signal_pool",
+      "retrieval_signals_loaded": 1000
+    },
+    {
+      "company_name": "Test Company",
+      "company_profile_id": "6330ca52-2e75-49db-8c9a-5d97ad38a28a",
+      "signals_considered": 1000,
+      "signals_selected": 24,
+      "signal_level": "moderate",
+      "status": "dry_run",
+      "reason": "package8_preview_write_not_requested",
+      "content_version": "company_scanner_report_v1",
+      "qa_status": "dry_run_only",
+      "qa_blocking_failures": 3,
+      "dry_run_would_have_status": "hold",
+      "retrieval_mode": "shared_signal_pool",
+      "retrieval_signals_loaded": 1000
+    }
+  ]
+}
+
+=== cycle complete ===
