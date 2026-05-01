@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { CompanyBriefingEvidenceDocument } from "@/lib/company-scan/intelligence-depth";
+import type { CompanyResearchedUnderstandingLayer } from "@/lib/company-scan/types";
 
 type LoadState = "loading" | "ready" | "not_found" | "unauthorized" | "error";
 
@@ -70,6 +71,8 @@ export default function CompanyBriefingEvidenceClient() {
   const date = params.date as string;
   const [state, setState] = useState<LoadState>("loading");
   const [doc, setDoc] = useState<CompanyBriefingEvidenceDocument | null>(null);
+  const [researchedLayer, setResearchedLayer] =
+    useState<CompanyResearchedUnderstandingLayer | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -109,6 +112,9 @@ export default function CompanyBriefingEvidenceClient() {
 
       const content = briefing.briefing_content as {
         evidence_document?: CompanyBriefingEvidenceDocument;
+        understanding?: {
+          researched_understanding_v1?: CompanyResearchedUnderstandingLayer;
+        };
       };
       if (!content.evidence_document) {
         if (!cancelled) setState("not_found");
@@ -117,6 +123,9 @@ export default function CompanyBriefingEvidenceClient() {
 
       if (!cancelled) {
         setDoc(content.evidence_document);
+        setResearchedLayer(
+          content.understanding?.researched_understanding_v1 ?? null,
+        );
         setState("ready");
       }
     }
@@ -133,6 +142,11 @@ export default function CompanyBriefingEvidenceClient() {
     () => doc?.source_quality_summary.source_mix,
     [doc],
   );
+  const researchSourceById = useMemo(() => {
+    return new Map(
+      (researchedLayer?.sources || []).map((source) => [source.id, source]),
+    );
+  }, [researchedLayer]);
 
   if (state === "loading") {
     return (
@@ -323,6 +337,122 @@ export default function CompanyBriefingEvidenceClient() {
           )}
         </div>
       </Panel>
+
+      {researchedLayer ? (
+        <Panel title="Researched understanding trail">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+            <StatCard
+              label="Research clusters"
+              value={researchedLayer.clusters.length}
+              note="Story dossiers behind the scan"
+            />
+            <StatCard
+              label="Full-text reads"
+              value={researchedLayer.source_trail_summary.full_text_sources}
+            />
+            <StatCard
+              label="Email trail"
+              value={researchedLayer.source_trail_summary.email_sources}
+            />
+            <StatCard
+              label="Evidence trail"
+              value={researchedLayer.source_trail_summary.evidence_sources}
+            />
+            <StatCard
+              label="Research trail"
+              value={researchedLayer.source_trail_summary.research_sources}
+            />
+          </div>
+          <p className="mt-4 text-sm leading-7 text-zinc-500 dark:text-zinc-400">
+            These are Albis-written findings produced after the research layer
+            grouped sources into story dossiers. External articles are evidence;
+            the finding is the product.
+          </p>
+          <div className="mt-6 space-y-6">
+            {researchedLayer.findings.slice(0, 8).map((finding) => {
+              const note = researchedLayer.notes.find(
+                (entry) => entry.cluster_id === finding.cluster_id,
+              );
+              const evidenceSources = finding.evidence_source_ids
+                .map((sourceId) => researchSourceById.get(sourceId))
+                .filter(Boolean);
+              return (
+                <article
+                  key={finding.id}
+                  className="border-t border-black/[0.07] pt-5 first:border-t-0 first:pt-0 dark:border-white/[0.07]"
+                >
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="text-base font-bold text-[#0f0f0f] dark:text-[#f0efec]">
+                      {finding.title}
+                    </h3>
+                    <Badge>{finding.confidence}</Badge>
+                    <Badge>{finding.placement.replace(/_/g, " ")}</Badge>
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-zinc-600 dark:text-zinc-300">
+                    {finding.body}
+                  </p>
+                  {note ? (
+                    <div className="mt-3 rounded-xl border-l-4 border-[#c8922a] bg-[#faf9f7] p-4 text-sm leading-7 text-zinc-700 dark:bg-white/[0.04] dark:text-zinc-300">
+                      <p>
+                        <strong>What changed:</strong> {note.what_changed_today}
+                      </p>
+                      {note.possible_perception_gap?.gap ? (
+                        <p className="mt-2">
+                          <strong>Possible perception gap:</strong>{" "}
+                          {note.possible_perception_gap.gap}
+                        </p>
+                      ) : null}
+                      {note.what_is_unclear.length ? (
+                        <p className="mt-2 text-zinc-500 dark:text-zinc-400">
+                          <strong>Unclear:</strong> {note.what_is_unclear[0]}
+                        </p>
+                      ) : null}
+                    </div>
+                  ) : null}
+                  <details className="mt-3">
+                    <summary className="cursor-pointer text-sm font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                      Research sources ({evidenceSources.length})
+                    </summary>
+                    <ul className="mt-2 space-y-3 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
+                      {evidenceSources.slice(0, 10).map((source) => (
+                        <li key={source!.id} className="border-l border-black/10 pl-3 dark:border-white/10">
+                          {source!.url ? (
+                            <a
+                              href={source!.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="font-medium text-[#c8922a] hover:underline"
+                            >
+                              {source!.extracted_title || source!.title}
+                            </a>
+                          ) : (
+                            <span className="font-medium">
+                              {source!.extracted_title || source!.title}
+                            </span>
+                          )}
+                          <div className="text-xs leading-5 text-zinc-500 dark:text-zinc-400">
+                            {source!.source_domain} · {source!.trail_role} ·{" "}
+                            {source!.read_status}
+                            {source!.extracted_word_count
+                              ? ` · ${source!.extracted_word_count} words read`
+                              : ""}
+                          </div>
+                          {source!.extracted_excerpt ? (
+                            <p className="mt-1 text-xs leading-5 text-zinc-500 dark:text-zinc-400">
+                              {source!.extracted_excerpt.slice(0, 260)}
+                              {source!.extracted_excerpt.length > 260 ? "…" : ""}
+                            </p>
+                          ) : null}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                </article>
+              );
+            })}
+          </div>
+        </Panel>
+      ) : null}
 
       <Panel title="Dashboard-only source trail">
         {doc.dashboard_only_items.length ? (
