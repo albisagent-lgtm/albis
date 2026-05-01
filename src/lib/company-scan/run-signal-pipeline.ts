@@ -61,6 +61,8 @@ export interface RunSignalPipelineOptions {
   useCompanySpecificRetrieval?: boolean;
   /** Package 10B preview path: run deep-dive retrieval after first-pass selection. */
   enableDeepDiveRetrieval?: boolean;
+  /** Optional company_scan_runs.id to attach provenance for review evidence rows. */
+  companyScanRunId?: string | null;
   /** Optional logger; defaults to console-style noop on non-script paths. */
   log?: (msg: string) => void;
   warn?: (msg: string) => void;
@@ -124,6 +126,21 @@ async function loadSignalsForWindow(
   return (data || []) as Signal[];
 }
 
+async function loadLatestCompanyScanRunId(
+  supabase: SupabaseClient,
+  scanDate: string,
+): Promise<string | null> {
+  const { data, error } = await supabase
+    .from("company_scan_runs")
+    .select("id")
+    .eq("run_date", scanDate)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (error) throw new Error(`failed to load company scan run: ${error.message}`);
+  return data?.id || null;
+}
+
 export async function runCompanySignalPipeline(
   supabase: SupabaseClient,
   options: RunSignalPipelineOptions,
@@ -146,6 +163,10 @@ export async function runCompanySignalPipeline(
     `🚀 Running company SIGNAL pipeline for ${scanDate}` +
       ` (lookback=${lookbackHours}h${dryRun ? ", dry-run" : ""})`,
   );
+
+  const companyScanRunId =
+    options.companyScanRunId ?? (await loadLatestCompanyScanRunId(supabase, scanDate));
+  if (companyScanRunId) log(`  ↳ evidence provenance run: ${companyScanRunId}`);
 
   const signals = await loadSignalsForWindow(supabase, scanDate, lookbackHours);
   log(`  ↳ loaded ${signals.length} signals`);
@@ -227,6 +248,7 @@ export async function runCompanySignalPipeline(
         lookbackHours,
         useCompanySpecificRetrieval,
         enableDeepDiveRetrieval,
+        companyScanRunId,
       },
     );
     results.push(result);
@@ -257,6 +279,7 @@ export interface ProcessProfileSignalsOptions {
   useCompanySpecificRetrieval?: boolean;
   enableDeepDiveRetrieval?: boolean;
   lookbackHours?: number;
+  companyScanRunId?: string | null;
   log?: (msg: string) => void;
   warn?: (msg: string) => void;
 }
@@ -440,6 +463,7 @@ export async function processProfileSignals(
       companyProfileId: rawProfile.id,
       signals: profileSignals,
       selectedSignalIds,
+      companyScanRunId: options.companyScanRunId,
     });
     log(`✅ Upserted ${evidenceRows} PGI evidence row(s) for ${rawProfile.company_name}`);
 

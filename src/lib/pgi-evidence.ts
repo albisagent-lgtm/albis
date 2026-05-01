@@ -198,6 +198,7 @@ export async function upsertCompanyProfilePgiEvidence(
     companyProfileId: string;
     signals: Signal[];
     selectedSignalIds?: string[];
+    companyScanRunId?: string | null;
   },
 ): Promise<number> {
   const selected = new Set(params.selectedSignalIds || []);
@@ -210,7 +211,11 @@ export async function upsertCompanyProfilePgiEvidence(
       privacy_level: isSelected ? "private_customer" : "aggregate_only",
       allowed_audience: isSelected ? "company_private" : "aggregate",
       company_profile_id: params.companyProfileId,
-      company_scan_run_id: isUuid(signal.company_scan_run_id) ? signal.company_scan_run_id : null,
+      company_scan_run_id: isUuid(signal.company_scan_run_id)
+        ? signal.company_scan_run_id
+        : isUuid(params.companyScanRunId)
+          ? params.companyScanRunId
+          : null,
       signal_id: isUuid(signal.id) ? signal.id : null,
       source_record_id: `company:${params.evidenceDate}:${params.companyProfileId}:${signal.id}`,
       source_url: signal.source_url,

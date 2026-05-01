@@ -33,7 +33,7 @@ const INTERNAL_PHRASES: Array<[RegExp, string]> = [
     "A route can reopen before the market trusts it again",
   ],
   [/\bThe comparison is whether\b/gi, "The useful test is whether"],
-  [/\bThe relevance is\b/gi, "This matters because"],
+  [/\bThe relevance is\b/gi, "The practical point is"],
   [/\bThe useful distinction is\b/gi, "The practical difference is"],
   [/\bshowed up in coverage\b/gi, "appeared in the scan"],
   [/\bcompany-specific scan\b/gi, "scan"],
@@ -65,6 +65,12 @@ function cleanText(value: unknown): string {
       "$1 may",
     )
     .replace(/\bleverage\b/gi, "influence")
+    .replace(/\brobust\b/gi, "well-supported")
+    .replace(/\bchaos\b/gi, "disruption")
+    .replace(/\bpanic\b/gi, "concern")
+    .replace(/\bexplosive\b/gi, "significant")
+    .replace(/\bbombshell\b/gi, "major")
+    .replace(/\bshocking\b/gi, "notable")
     .replace(/\bguarantees\b/gi, "assurances")
     .replace(/&amp;/gi, "and")
     .replace(/\bwatchlist entities\b/gi, "named entities")
@@ -800,7 +806,11 @@ export function applyScannerReportLayout(input: {
 }): CompanyBriefingGenerationOutput {
   const { output, packet, selected, bundles } = input;
   if (packet.company.selected_scan_areas.length === 0) return output;
-  const selectedForReport = sortFindingsByPriority(dedupeSelected(selected));
+  // Keep enough useful selected findings visible in the customer scan. We only
+  // dedupe within each displayed topic below; global dedupe was hiding the same
+  // public event when it mattered to more than one tracked topic, which made the
+  // report look artificially compressed.
+  const selectedForReport = sortFindingsByPriority(selected);
   const packetItems = itemMap(packet);
 
   const selectedByArea = new Map<string, SelectedSignalForDepth[]>();
