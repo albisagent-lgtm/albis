@@ -15,9 +15,10 @@ import type { CompanyProfile } from "../company-profile";
 import { loadCanonicalAliasIndex } from "./canonical-alias-index";
 import { parseSignalFromArticle } from "./signal-parser";
 import type { RawArticle, Signal } from "./types";
+import { cachedRetrieval, envNumber } from "./retrieval-cache";
 
 const BRAVE_NEWS_ENDPOINT = "https://api.search.brave.com/res/v1/news/search";
-const RESULTS_PER_QUERY = 8;
+const DEFAULT_RESULTS_PER_QUERY = 8;
 const PER_CALL_SLEEP_MS = 80;
 const DEFAULT_MAX_CANDIDATES = 5;
 const DEFAULT_MAX_QUERIES = 12;
@@ -126,8 +127,12 @@ export function buildCompanyDeepDiveQueries(
   candidateSignals: Signal[],
   options: { maxCandidates?: number; maxQueries?: number } = {},
 ): CompanyDeepDiveQuery[] {
-  const maxCandidates = options.maxCandidates ?? DEFAULT_MAX_CANDIDATES;
-  const maxQueries = options.maxQueries ?? DEFAULT_MAX_QUERIES;
+  const maxCandidates =
+    options.maxCandidates ??
+    envNumber("COMPANY_DEEP_DIVE_MAX_CANDIDATES", DEFAULT_MAX_CANDIDATES);
+  const maxQueries =
+    options.maxQueries ??
+    envNumber("COMPANY_DEEP_DIVE_MAX_QUERIES", DEFAULT_MAX_QUERIES);
   const queries: CompanyDeepDiveQuery[] = [];
 
   for (const signal of candidateSignals.slice(0, maxCandidates)) {
@@ -164,42 +169,52 @@ export function buildCompanyDeepDiveQueries(
   return queries;
 }
 
-async function fetchBraveNews(query: CompanyDeepDiveQuery): Promise<RawArticle[]> {
+async function fetchBraveNews(query: CompanyDeepDiveQuery, signalDate: string, log?: (message: string) => void): Promise<RawArticle[]> {
   const apiKey = process.env.BRAVE_API_KEY;
   if (!apiKey) throw new Error("BRAVE_API_KEY not set in environment");
 
+  const resultsPerQuery = envNumber("COMPANY_DEEP_DIVE_RESULTS_PER_QUERY", DEFAULT_RESULTS_PER_QUERY);
   const url = new URL(BRAVE_NEWS_ENDPOINT);
   url.searchParams.set("q", query.query);
-  url.searchParams.set("count", String(RESULTS_PER_QUERY));
+  url.searchParams.set("count", String(resultsPerQuery));
   url.searchParams.set("freshness", "pd");
   url.searchParams.set("text_decorations", "false");
 
-  await sleep(PER_CALL_SLEEP_MS);
-  const response = await fetch(url.toString(), {
-    headers: {
-      Accept: "application/json",
-      "Accept-Encoding": "gzip",
-      "X-Subscription-Token": apiKey,
+  return cachedRetrieval({
+    namespace: "company-deep-dive",
+    signalDate,
+    query: query.query,
+    count: resultsPerQuery,
+    log,
+    fetchLive: async () => {
+      await sleep(PER_CALL_SLEEP_MS);
+      const response = await fetch(url.toString(), {
+        headers: {
+          Accept: "application/json",
+          "Accept-Encoding": "gzip",
+          "X-Subscription-Token": apiKey,
+        },
+      });
+      if (!response.ok) {
+        const body = await response.text().catch(() => "");
+        console.warn(`[company-deep-dive-retrieval] ${response.status} for ${query.reason}: ${body.slice(0, 160)}`);
+        return [];
+      }
+
+      const data = await response.json() as { results?: Array<{ url?: string; title?: string; description?: string; page_age?: string; meta_url?: { hostname?: string }; language?: string }> };
+      return (data.results || [])
+        .filter((result) => result.url && result.title)
+        .map((result) => ({
+          url: result.url || "",
+          headline: result.title || "",
+          body: result.description || "",
+          source_domain: result.meta_url?.hostname || null,
+          source_language: result.language || null,
+          source_region: null,
+          published_at: result.page_age || null,
+        }));
     },
   });
-  if (!response.ok) {
-    const body = await response.text().catch(() => "");
-    console.warn(`[company-deep-dive-retrieval] ${response.status} for ${query.reason}: ${body.slice(0, 160)}`);
-    return [];
-  }
-
-  const data = await response.json() as { results?: Array<{ url?: string; title?: string; description?: string; page_age?: string; meta_url?: { hostname?: string }; language?: string }> };
-  return (data.results || [])
-    .filter((result) => result.url && result.title)
-    .map((result) => ({
-      url: result.url || "",
-      headline: result.title || "",
-      body: result.description || "",
-      source_domain: result.meta_url?.hostname || null,
-      source_language: result.language || null,
-      source_region: null,
-      published_at: result.page_age || null,
-    }));
 }
 
 export async function runCompanyDeepDiveRetrieval(
@@ -217,7 +232,7 @@ export async function runCompanyDeepDiveRetrieval(
 
   log(`  ↳ deep-dive retrieval: ${queries.length} follow-up queries`);
   for (const query of queries) {
-    const articles = await fetchBraveNews(query);
+    const articles = await fetchBraveNews(query, options.signalDate, log);
     log(`    • ${query.reason}: ${articles.length} result(s)`);
     for (const article of articles) {
       if (!article.url) continue;

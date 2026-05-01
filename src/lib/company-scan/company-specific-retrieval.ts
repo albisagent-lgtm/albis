@@ -18,10 +18,11 @@ import type { CompanyProfile } from "../company-profile";
 import { loadCanonicalAliasIndex } from "./canonical-alias-index";
 import { parseSignalFromArticle } from "./signal-parser";
 import type { RawArticle, Signal } from "./types";
+import { cachedRetrieval, envNumber } from "./retrieval-cache";
 
 const BRAVE_NEWS_ENDPOINT = "https://api.search.brave.com/res/v1/news/search";
-const RESULTS_PER_QUERY = 12;
-const MAX_QUERIES = 18;
+const DEFAULT_RESULTS_PER_QUERY = 12;
+const DEFAULT_MAX_QUERIES = 18;
 const PER_CALL_SLEEP_MS = 80;
 
 export type CompanyRetrievalIntent =
@@ -393,7 +394,7 @@ export function buildCompanyRetrievalPlan(profile: CompanyProfile): {
     intent,
     queries: queries
       .sort((a, b) => ({ high: 0, medium: 1, low: 2 }[a.priority] - { high: 0, medium: 1, low: 2 }[b.priority]))
-      .slice(0, MAX_QUERIES),
+      .slice(0, envNumber("COMPANY_SPECIFIC_MAX_QUERIES", DEFAULT_MAX_QUERIES)),
   };
 }
 
@@ -407,41 +408,51 @@ function textMatchesAny(text: string, terms: string[]): string[] {
   });
 }
 
-async function fetchBraveNews(query: CompanyRetrievalQuery): Promise<RawArticle[]> {
+async function fetchBraveNews(query: CompanyRetrievalQuery, signalDate: string, log?: (message: string) => void): Promise<RawArticle[]> {
   const apiKey = process.env.BRAVE_API_KEY;
   if (!apiKey) throw new Error("BRAVE_API_KEY not set in environment");
 
+  const resultsPerQuery = envNumber("COMPANY_SPECIFIC_RESULTS_PER_QUERY", DEFAULT_RESULTS_PER_QUERY);
   const url = new URL(BRAVE_NEWS_ENDPOINT);
   url.searchParams.set("q", query.query);
-  url.searchParams.set("count", String(RESULTS_PER_QUERY));
+  url.searchParams.set("count", String(resultsPerQuery));
   url.searchParams.set("freshness", "pd");
   url.searchParams.set("text_decorations", "false");
 
-  await sleep(PER_CALL_SLEEP_MS);
-  const response = await fetch(url.toString(), {
-    headers: {
-      Accept: "application/json",
-      "Accept-Encoding": "gzip",
-      "X-Subscription-Token": apiKey,
+  return cachedRetrieval({
+    namespace: "company-specific",
+    signalDate,
+    query: query.query,
+    count: resultsPerQuery,
+    log,
+    fetchLive: async () => {
+      await sleep(PER_CALL_SLEEP_MS);
+      const response = await fetch(url.toString(), {
+        headers: {
+          Accept: "application/json",
+          "Accept-Encoding": "gzip",
+          "X-Subscription-Token": apiKey,
+        },
+      });
+      if (!response.ok) {
+        const body = await response.text().catch(() => "");
+        console.warn(`[company-specific-retrieval] ${response.status} for ${query.label}: ${body.slice(0, 160)}`);
+        return [];
+      }
+      const data = await response.json() as { results?: Array<{ url?: string; title?: string; description?: string; page_age?: string; meta_url?: { hostname?: string }; language?: string }> };
+      return (data.results || [])
+        .filter((result) => result.url && result.title)
+        .map((result) => ({
+          url: result.url || "",
+          headline: result.title || "",
+          body: result.description || "",
+          source_domain: result.meta_url?.hostname || null,
+          source_language: result.language || null,
+          source_region: null,
+          published_at: result.page_age || null,
+        }));
     },
   });
-  if (!response.ok) {
-    const body = await response.text().catch(() => "");
-    console.warn(`[company-specific-retrieval] ${response.status} for ${query.label}: ${body.slice(0, 160)}`);
-    return [];
-  }
-  const data = await response.json() as { results?: Array<{ url?: string; title?: string; description?: string; page_age?: string; meta_url?: { hostname?: string }; language?: string }> };
-  return (data.results || [])
-    .filter((result) => result.url && result.title)
-    .map((result) => ({
-      url: result.url || "",
-      headline: result.title || "",
-      body: result.description || "",
-      source_domain: result.meta_url?.hostname || null,
-      source_language: result.language || null,
-      source_region: null,
-      published_at: result.page_age || null,
-    }));
 }
 
 export async function retrieveCompanySpecificSignals(
@@ -458,7 +469,7 @@ export async function retrieveCompanySpecificSignals(
 
   log(`  ↳ company-specific retrieval: ${plan.queries.length} queries (${plan.intent})`);
   for (const query of plan.queries) {
-    const articles = await fetchBraveNews(query);
+    const articles = await fetchBraveNews(query, options.signalDate, log);
     log(`    • ${query.label}: ${articles.length} result(s)`);
     for (const article of articles) {
       if (!article.url) continue;
