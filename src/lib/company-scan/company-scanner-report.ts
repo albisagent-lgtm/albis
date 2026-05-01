@@ -678,11 +678,21 @@ function completeObservations(
   return [...observations, ...additions].slice(0, 3);
 }
 
-function pgiTier(score: number): string {
-  if (score <= 4) return "Broad Alignment";
-  if (score <= 6) return "Diverging Narratives";
-  if (score <= 8) return "Split Realities";
-  return "Parallel Realities";
+function plainPgiLevel(score: number): string {
+  if (score <= 4) return "mostly aligned";
+  if (score <= 6) return "starting to split";
+  if (score <= 8) return "clearly split";
+  return "moving in separate worlds";
+}
+
+function plainPgiDriver(value: string): string {
+  const key = cleanText(value).toLowerCase();
+  if (key.includes("causal")) return "why people think it is happening";
+  if (key.includes("actor")) return "who looks responsible";
+  if (key.includes("cui")) return "who seems to benefit";
+  if (key.includes("emotional")) return "how serious it feels";
+  if (key.includes("factual")) return "which facts are being emphasised";
+  return "how the story is being framed";
 }
 
 function companyPgiDimensions(bundle: IntelligenceDepthBundle): {
@@ -771,17 +781,16 @@ function buildCompanyPerceptionGapNotes(
   );
   const maxScore = top.score.score;
   const combinedScore = Number(((avgScore + maxScore) / 2).toFixed(1));
-  const tier = pgiTier(combinedScore);
-  const strongestDimensions = uniq(
-    scored.map((entry) => entry.score.strongest),
-  ).slice(0, 2);
+  const strongestDimensions = uniq(scored.map((entry) => entry.score.strongest))
+    .map(plainPgiDriver)
+    .slice(0, 2);
   const strongestSections = activeSections.slice(0, 3);
   const quietPhrase = quietSections.length
-    ? ` The attention shadow is also useful: ${humanList(quietSections, 3)} stayed comparatively quiet inside this scan.`
+    ? ` Also worth noticing: ${humanList(quietSections, 3)} stayed quiet. That does not mean nothing is happening; it means today's public coverage did not give us much to work with there.`
     : "";
   const framePhrase = frameEvidence.length
     ? ` ${frameEvidence.join(" ")}`
-    : ` The scan found coverage across ${humanList(sourceNames, 4)}, but the public story has not yet hardened into a single contested event.`;
+    : ` Sources such as ${humanList(sourceNames, 4)} are covering pieces of the picture, but they are not yet telling one clear shared story.`;
   const refs: EvidenceSupportRef[] = uniq([
     ...pool.flatMap((entry) => entry.source_refs),
     ...pool.flatMap((entry) =>
@@ -790,7 +799,7 @@ function buildCompanyPerceptionGapNotes(
   ]).slice(0, 24);
 
   const text = cleanText(
-    `View: ${company}'s scan shows ${tier.toLowerCase()} PGI pressure (${combinedScore.toFixed(1)}) across ${humanList(strongestSections, 3) || "the tracked topics"}, driven mainly by ${humanList(strongestDimensions, 2)}. The gap: this scan universe is not producing one shared public story; coverage is separating into different lanes of risk, responsibility, and visibility.${framePhrase}${quietPhrase} Why it matters: this is the company-level PGI read — not a verdict on one article, but a map of where customers, partners, regulators, or audiences could start interpreting ${company}'s world differently based on which scan lane they see first.`,
+    `View: The things ${company} is tracking are ${plainPgiLevel(combinedScore)} today (${combinedScore.toFixed(1)}/10). The clearest movement is around ${humanList(strongestSections, 3) || "the tracked topics"}, especially ${humanList(strongestDimensions, 2)}. The gap: people are not all being shown the same picture.${framePhrase}${quietPhrase} Why it matters: if someone only sees one lane of coverage, they may come away with a different sense of what matters, who is responsible, or what ${company} should watch next.`,
   );
 
   const notes: GeneratedPerceptionGapNote[] = [
@@ -834,7 +843,7 @@ function buildCompanyPerceptionGapNotes(
       cluster_id: top.bundle.anchor_cluster_id,
       note: {
         text: cleanText(
-          `View: the sharpest local fracture sits in ${section} (${top.score.score.toFixed(1)}, ${pgiTier(top.score.score).toLowerCase()}). ${sharpestFrames.slice(0, 2).join(" ")} The gap: each lane makes a different actor feel central. Why it matters: for ${company}, this is the part of today's scan most likely to change how a reader assigns risk, trust, or responsibility.`,
+          `View: the clearest split inside the scan is in ${section} (${top.score.score.toFixed(1)}/10, ${plainPgiLevel(top.score.score)}). ${sharpestFrames.slice(0, 2).join(" ")} The gap: each version puts a different person, institution, or risk at the centre. Why it matters: for ${company}, this is the part of today's scan most likely to change how a reader thinks about trust, responsibility, or what to watch next.`,
         ),
         supported_by: uniq([
           ...top.bundle.source_refs,
