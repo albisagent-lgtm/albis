@@ -9,9 +9,114 @@ import type { CompanyResearchedUnderstandingLayer } from "@/lib/company-scan/typ
 
 type LoadState = "loading" | "ready" | "not_found" | "unauthorized" | "error";
 
+type PersistedResearchSource = CompanyResearchedUnderstandingLayer["sources"][number];
+type PersistedResearchNote = CompanyResearchedUnderstandingLayer["notes"][number];
+type PersistedAlbisFinding = CompanyResearchedUnderstandingLayer["findings"][number];
+
+interface PersistedResearchRows {
+  sources: PersistedResearchSource[];
+  notes: PersistedResearchNote[];
+  findings: PersistedAlbisFinding[];
+}
+
 function pct(value: number): string {
   if (!Number.isFinite(value)) return "—";
   return `${Math.round(value * 100)}%`;
+}
+
+function sourceFromDbRow(row: Record<string, unknown>): PersistedResearchSource {
+  return {
+    id: String(row.id || ""),
+    cluster_id: String(row.cluster_id || ""),
+    url: String(row.url || ""),
+    source_domain: String(row.source_domain || ""),
+    title: String(row.title || ""),
+    published_at: typeof row.published_at === "string" ? row.published_at : null,
+    source_type: row.source_type as PersistedResearchSource["source_type"],
+    region: typeof row.region === "string" ? row.region : null,
+    language: typeof row.language === "string" ? row.language : null,
+    read_status: row.read_status as PersistedResearchSource["read_status"],
+    trail_role: row.trail_role as PersistedResearchSource["trail_role"],
+    relevance_score:
+      typeof row.relevance_score === "number" ? row.relevance_score : undefined,
+    reliability_note:
+      typeof row.reliability_note === "string" ? row.reliability_note : undefined,
+    extracted_title:
+      typeof row.extracted_title === "string" ? row.extracted_title : undefined,
+    extracted_excerpt:
+      typeof row.extracted_excerpt === "string" ? row.extracted_excerpt : undefined,
+    extracted_word_count:
+      typeof row.extracted_word_count === "number"
+        ? row.extracted_word_count
+        : undefined,
+    text_cache_status:
+      typeof row.text_cache_status === "string" ? row.text_cache_status : undefined,
+    text_cache_path:
+      typeof row.text_cache_path === "string" ? row.text_cache_path : undefined,
+  };
+}
+
+function noteFromDbRow(row: Record<string, unknown>): PersistedResearchNote {
+  return {
+    id: String(row.id || ""),
+    cluster_id: String(row.cluster_id || ""),
+    summary: String(row.summary || ""),
+    what_happened: String(row.what_happened || ""),
+    what_changed_today: String(row.what_changed_today || ""),
+    key_actors: Array.isArray(row.key_actors) ? row.key_actors.map(String) : [],
+    key_facts: Array.isArray(row.key_facts) ? row.key_facts.map(String) : [],
+    key_numbers: Array.isArray(row.key_numbers) ? row.key_numbers.map(String) : [],
+    named_places: Array.isArray(row.named_places) ? row.named_places.map(String) : [],
+    causes_or_drivers: Array.isArray(row.causes_or_drivers)
+      ? row.causes_or_drivers.map(String)
+      : [],
+    consequences: Array.isArray(row.consequences)
+      ? row.consequences.map(String)
+      : [],
+    source_observations: Array.isArray(row.source_observations)
+      ? (row.source_observations as PersistedResearchNote["source_observations"])
+      : [],
+    differences_in_reporting: Array.isArray(row.differences_in_reporting)
+      ? (row.differences_in_reporting as PersistedResearchNote["differences_in_reporting"])
+      : [],
+    what_is_unclear: Array.isArray(row.what_is_unclear)
+      ? row.what_is_unclear.map(String)
+      : [],
+    possible_perception_gap:
+      row.possible_perception_gap && typeof row.possible_perception_gap === "object"
+        ? (row.possible_perception_gap as PersistedResearchNote["possible_perception_gap"])
+        : undefined,
+    company_relevance:
+      typeof row.company_relevance === "string" ? row.company_relevance : undefined,
+    albis_learning: String(row.albis_learning || ""),
+  };
+}
+
+function findingFromDbRow(row: Record<string, unknown>): PersistedAlbisFinding {
+  return {
+    id: String(row.id || ""),
+    cluster_id: String(row.cluster_id || ""),
+    date: String(row.research_date || ""),
+    scope: row.scope as PersistedAlbisFinding["scope"],
+    company_profile_id:
+      typeof row.company_profile_id === "string" ? row.company_profile_id : undefined,
+    title: String(row.title || ""),
+    body: String(row.body || ""),
+    why_it_matters:
+      typeof row.why_it_matters === "string" ? row.why_it_matters : undefined,
+    uncertainty: typeof row.uncertainty === "string" ? row.uncertainty : undefined,
+    confidence: row.confidence as PersistedAlbisFinding["confidence"],
+    email_source_ids: Array.isArray(row.email_source_ids)
+      ? row.email_source_ids.map(String)
+      : [],
+    evidence_source_ids: Array.isArray(row.evidence_source_ids)
+      ? row.evidence_source_ids.map(String)
+      : [],
+    dashboard_source_ids: Array.isArray(row.dashboard_source_ids)
+      ? row.dashboard_source_ids.map(String)
+      : [],
+    placement: row.placement as PersistedAlbisFinding["placement"],
+  };
 }
 
 function Badge({ children }: { children: React.ReactNode }) {
@@ -121,11 +226,85 @@ export default function CompanyBriefingEvidenceClient() {
         return;
       }
 
+      let layer = content.understanding?.researched_understanding_v1 ?? null;
+
+      if (layer) {
+        const [sourcesResult, notesResult, findingsResult] = await Promise.all([
+          supabase
+            .from("research_sources")
+            .select("*")
+            .eq("company_profile_id", companyId)
+            .eq("research_date", date),
+          supabase
+            .from("research_notes")
+            .select("*")
+            .eq("company_profile_id", companyId)
+            .eq("research_date", date),
+          supabase
+            .from("albis_findings")
+            .select("*")
+            .eq("company_profile_id", companyId)
+            .eq("research_date", date),
+        ]);
+
+        const persistedRows: PersistedResearchRows = {
+          sources: sourcesResult.error
+            ? []
+            : ((sourcesResult.data || []) as Record<string, unknown>[]).map(
+                sourceFromDbRow,
+              ),
+          notes: notesResult.error
+            ? []
+            : ((notesResult.data || []) as Record<string, unknown>[]).map(
+                noteFromDbRow,
+              ),
+          findings: findingsResult.error
+            ? []
+            : ((findingsResult.data || []) as Record<string, unknown>[]).map(
+                findingFromDbRow,
+              ),
+        };
+
+        if (
+          persistedRows.sources.length > 0 ||
+          persistedRows.notes.length > 0 ||
+          persistedRows.findings.length > 0
+        ) {
+          layer = {
+            ...layer,
+            sources: persistedRows.sources.length
+              ? persistedRows.sources
+              : layer.sources,
+            notes: persistedRows.notes.length ? persistedRows.notes : layer.notes,
+            findings: persistedRows.findings.length
+              ? persistedRows.findings
+              : layer.findings,
+            source_trail_summary: persistedRows.sources.length
+              ? {
+                  research_sources: persistedRows.sources.filter(
+                    (source) => source.trail_role === "research",
+                  ).length,
+                  evidence_sources: persistedRows.sources.filter(
+                    (source) => source.trail_role === "evidence",
+                  ).length,
+                  email_sources: persistedRows.sources.filter(
+                    (source) => source.trail_role === "email",
+                  ).length,
+                  snippet_only_sources: persistedRows.sources.filter(
+                    (source) => source.read_status === "snippet_only",
+                  ).length,
+                  full_text_sources: persistedRows.sources.filter(
+                    (source) => source.read_status === "read",
+                  ).length,
+                }
+              : layer.source_trail_summary,
+          };
+        }
+      }
+
       if (!cancelled) {
         setDoc(content.evidence_document);
-        setResearchedLayer(
-          content.understanding?.researched_understanding_v1 ?? null,
-        );
+        setResearchedLayer(layer);
         setState("ready");
       }
     }
