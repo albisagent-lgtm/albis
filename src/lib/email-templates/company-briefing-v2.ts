@@ -67,7 +67,9 @@ function divider(): string {
 }
 
 function textHtml(s: string | undefined | null): string {
-  return esc(customerEnglishText(s)).replace(/\n\n/g, "<br><br>").replace(/\n/g, "<br>");
+  return esc(customerEnglishText(s))
+    .replace(/\n\n/g, "<br><br>")
+    .replace(/\n/g, "<br>");
 }
 
 // The scanner can find useful local-language sources, but the customer email
@@ -323,7 +325,7 @@ function renderUsefulObservations(
   const obs = output.useful_observations.observations;
   if (obs.length === 0) return "";
 
-  let html = sectionLabel("Watch Next");
+  let html = sectionLabel("Observations");
   for (const o of obs) {
     html += `<p style="font-size:15px;color:${BODY};line-height:1.65;margin:0 0 10px;font-family:-apple-system,sans-serif;">
       <span style="color:${AMBER};font-weight:700;">&#x25B6;</span>&nbsp;${esc(customerEnglishText(o.text))}

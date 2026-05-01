@@ -26,6 +26,7 @@ import type {
   SelectedSignalForDepth,
 } from "./intelligence-depth";
 import { buildCompanyPgiV2Report } from "../understanding/company";
+import { storyIdentityKey } from "../understanding/company-pgi-story-arc";
 import type { CompanyPgiV2Report } from "../understanding/types";
 
 const INTERNAL_PHRASES: Array<[RegExp, string]> = [
@@ -998,11 +999,18 @@ export function applyScannerReportLayout(input: {
     }
   }
 
+  const globalStoryKeys = new Set<string>();
   const sections: GeneratedBriefingSection[] =
     packet.company.selected_scan_areas.map((area) => {
       const areaItems = sortFindingsByPriority(
         dedupeSelected(selectedByArea.get(area.area_id) || []),
-      );
+      ).filter((item) => {
+        const key = storyIdentityKey(titleForSignal(item.signal));
+        if (!key) return true;
+        if (globalStoryKeys.has(key)) return false;
+        globalStoryKeys.add(key);
+        return true;
+      });
       const generatedItems = areaItems
         .map((item) =>
           buildFindingItem(
@@ -1011,9 +1019,15 @@ export function applyScannerReportLayout(input: {
             packetItems,
           ),
         )
-        .filter(
-          (item) => !isBrokenFindingBody(item.body.text, item.title.text),
-        );
+        .filter((item) => {
+          if (isBrokenFindingBody(item.body.text, item.title.text))
+            return false;
+          const key = storyIdentityKey(item.title.text);
+          if (!key) return true;
+          if (globalStoryKeys.has(`generated:${key}`)) return false;
+          globalStoryKeys.add(`generated:${key}`);
+          return true;
+        });
       return {
         section_id: area.area_id,
         heading: labelForSection(packet, area.area_id),
@@ -1054,6 +1068,7 @@ export function applyScannerReportLayout(input: {
   const companyPgiV2 = buildCompanyPgiV2Report({
     packet,
     bundles,
+    selected: selectedForReport,
     date: packet.input_summary.scan_window.to.slice(0, 10),
   });
   const perceptionGapNotes = buildCompanyPerceptionGapNotes(
@@ -1116,7 +1131,25 @@ export function applyScannerReportLayout(input: {
       notes: perceptionGapNotes,
     },
     useful_observations: {
-      observations,
+      observations: companyPgiV2?.pgi_observations?.length
+        ? companyPgiV2.pgi_observations.map((observation) => ({
+            text: observation.text,
+            supported_by: observation.supported_by.flatMap(
+              (ref): EvidenceSupportRef[] => {
+                if (
+                  ref.type === "claim_id" ||
+                  ref.type === "source_id" ||
+                  ref.type === "scan_area" ||
+                  ref.type === "frame_id" ||
+                  ref.type === "company_profile_field"
+                ) {
+                  return [{ type: ref.type, id: ref.id }];
+                }
+                return [];
+              },
+            ),
+          }))
+        : observations,
     },
     understanding: companyPgiV2
       ? {

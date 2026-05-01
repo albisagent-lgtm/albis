@@ -10,13 +10,17 @@ import type {
   CompanyBriefingEvidencePacket,
   EvidenceSupportRef,
 } from "../company-scan/types";
-import type { IntelligenceDepthBundle } from "../company-scan/intelligence-depth";
+import type {
+  IntelligenceDepthBundle,
+  SelectedSignalForDepth,
+} from "../company-scan/intelligence-depth";
 import type {
   CompanyPgiV2Report,
   UnderstandingCandidateCluster,
   UnderstandingNote,
   UnderstandingRoute,
 } from "./types";
+import { buildCompanyPgiStoryArcs } from "./company-pgi-story-arc";
 import { runHumanVoiceQa } from "./voice-qa";
 
 function clean(value: unknown): string {
@@ -255,8 +259,9 @@ export function buildCompanyPgiV2Report(input: {
   packet: CompanyBriefingEvidencePacket;
   bundles: IntelligenceDepthBundle[];
   date: string;
+  selected?: SelectedSignalForDepth[];
 }): CompanyPgiV2Report | null {
-  const { packet, bundles, date } = input;
+  const { packet, bundles, date, selected = [] } = input;
   if (!bundles.length) return null;
   const notes = buildCompanyUnderstandingNotes(input);
   const usableNotes = notes.filter(
@@ -285,11 +290,19 @@ export function buildCompanyPgiV2Report(input: {
   const missing = uniq(
     usableNotes.flatMap((note) => note.what_is_missing_or_undercovered),
   ).slice(0, 4);
+  const storyArcResult = buildCompanyPgiStoryArcs({
+    packet,
+    bundles,
+    selected,
+    scanDate: date,
+  });
   const mainSplit = clean(
-    `${humanList(sections, 3)} is ${level}; the same day of coverage can make the issue look like a risk story, a responsibility story, or background noise.`,
+    storyArcResult.main_arc?.perception_split.plain_summary ||
+      `${humanList(sections, 3)} is ${level}; the same day of coverage can make the issue look like a risk story, a responsibility story, or background noise.`,
   );
   const emailRead = clean(
-    `View: ${company}'s tracked world is ${level} today (${score.toFixed(1)}/10). The clearest split is around ${humanList(sections, 3)}. The gap: a reader who only sees one lane of coverage may miss what is disputed, quiet, or still unproven. Why it matters: ${top.note.company_relevance}`,
+    storyArcResult.email_read ||
+      `What appeared: ${humanList(sections, 3)} surfaced in today's scan. How it is being seen: ${mainSplit} What we learned: ${top.note.company_relevance}`,
   );
   return {
     version: "company_pgi_v2",
@@ -315,7 +328,11 @@ export function buildCompanyPgiV2Report(input: {
         regions: [],
       })),
       notes_used: usableNotes.map((note) => note.note_id),
+      story_arcs: storyArcResult.arcs,
+      suppressed_repeats: storyArcResult.suppressed_repeats,
     },
+    story_arcs: storyArcResult.arcs,
+    pgi_observations: storyArcResult.observations,
     understanding_notes: usableNotes,
   };
 }

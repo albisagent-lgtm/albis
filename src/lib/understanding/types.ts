@@ -7,6 +7,11 @@
 // who sees it differently, and what the clean thesis is.
 // ---------------------------------------------------------------------------
 
+import type {
+  CompanyPgiStoryArc,
+  CompanyPgiStoryExample,
+} from "./company-pgi-story-arc";
+
 export type UnderstandingScope = "public" | "company";
 
 export type UnderstandingRoute =
@@ -117,6 +122,13 @@ export interface CompanyPgiV2Report {
       regions: string[];
     }>;
     notes_used: string[];
+    story_arcs?: CompanyPgiStoryArc[];
+    suppressed_repeats?: CompanyPgiStoryExample[];
   };
+  story_arcs?: CompanyPgiStoryArc[];
+  pgi_observations?: Array<{
+    text: string;
+    supported_by: Array<{ type: string; id: string }>;
+  }>;
   understanding_notes: UnderstandingNote[];
 }

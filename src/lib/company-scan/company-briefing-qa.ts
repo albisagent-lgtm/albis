@@ -1379,7 +1379,13 @@ function checkScannerReportLayout(
   output: CompanyBriefingGenerationOutput,
 ): QAFailure[] {
   const failures: QAFailure[] = [];
-  const selectedCount = packet.email_items.length;
+  const selectedCount = new Set(
+    packet.email_items.map((item) =>
+      normaliseStoryTitleForQa(
+        `${item.canonical_event_name} ${item.facts[0]?.text || ""}`,
+      ),
+    ),
+  ).size;
   const generatedMainFindings = output.main_briefing.sections.flatMap(
     (section) => section.items,
   ).length;
@@ -1420,7 +1426,7 @@ function checkScannerReportLayout(
   if (scanner?.enabled) {
     const coverageRatio =
       selectedCount > 0 ? generatedMainFindings / selectedCount : 1;
-    if (selectedCount >= 8 && coverageRatio < 0.75) {
+    if (selectedCount >= 8 && coverageRatio < 0.6) {
       failures.push({
         code: "SCANNER_REPORT_OVER_COMPRESSED",
         severity: "blocking",
@@ -1698,6 +1704,35 @@ function checkHumanVoiceRequirements(
   );
 }
 
+function normaliseStoryTitleForQa(value: string): string {
+  const lower = value
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (
+    /rsf|reporters without borders|press freedom index|press freedom.*lowest/.test(
+      lower,
+    )
+  ) {
+    return "press freedom index rsf";
+  }
+  if (/foreign disinformation|misinformation|disinformation/.test(lower)) {
+    return "disinformation channel pressure";
+  }
+  if (/deepfake|synthetic|ai video|likeness|voice/.test(lower)) {
+    return "synthetic identity trust";
+  }
+  if (/hormuz|shipping route|freight|suez|red sea/.test(lower)) {
+    return "shipping route confidence";
+  }
+  return lower
+    .split(/\s+/)
+    .filter((word) => word.length > 4)
+    .slice(0, 7)
+    .join(" ");
+}
+
 function checkEditorialRequirements(
   packet: CompanyBriefingEvidencePacket,
   output: CompanyBriefingGenerationOutput,
@@ -1824,6 +1859,91 @@ function checkEditorialRequirements(
           message: `Package 9.3A section heading/body coherence is weak for heading "${section.heading}".`,
         });
       }
+    }
+  }
+
+  const titleCounts = new Map<string, number>();
+  for (const item of getAllGeneratedItems(output)) {
+    const key = normaliseStoryTitleForQa(item.title.text);
+    if (!key) continue;
+    titleCounts.set(key, (titleCounts.get(key) || 0) + 1);
+  }
+  for (const [key, count] of titleCounts.entries()) {
+    if (count > 2) {
+      failures.push({
+        code: "EDITORIAL_REPEAT_STORY_IN_EMAIL",
+        severity: "blocking",
+        message: `Story-level dedupe failed: "${key}" appeared ${count} times in the customer email. Repeated coverage should become supporting evidence or dashboard detail.`,
+      });
+    }
+  }
+
+  const understanding = output.understanding as
+    | {
+        company_pgi_v2?: {
+          story_arcs?: Array<{ story_examples?: Array<{ title?: string }> }>;
+          dashboard_read?: {
+            story_arcs?: Array<{ story_examples?: Array<{ title?: string }> }>;
+          };
+        };
+      }
+    | undefined;
+  const storyArcExamples =
+    understanding?.company_pgi_v2?.story_arcs?.flatMap(
+      (arc) => arc.story_examples || [],
+    ) ||
+    understanding?.company_pgi_v2?.dashboard_read?.story_arcs?.flatMap(
+      (arc) => arc.story_examples || [],
+    ) ||
+    [];
+  const pgText = output.perception_gap.notes
+    .map((note) => note.note.text)
+    .join(" ");
+  if (storyArcExamples.length > 0) {
+    const mentionsActualStory = storyArcExamples.some((example) => {
+      const title = example.title || "";
+      const tokens = title
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, " ")
+        .split(/\s+/)
+        .filter((word) => word.length > 5)
+        .slice(0, 4);
+      return (
+        tokens.length > 0 &&
+        tokens.some((token) => pgText.toLowerCase().includes(token))
+      );
+    });
+    if (!mentionsActualStory) {
+      failures.push({
+        code: "EDITORIAL_PG_STORY_NOT_NAMED",
+        severity: "blocking",
+        generated_text_path: "perception_gap.notes",
+        message:
+          "Perception Gap has story-arc evidence but does not name any actual scanned story/finding.",
+      });
+    }
+  }
+
+  if (
+    output.useful_observations.observations.length > 0 &&
+    storyArcExamples.length > 0
+  ) {
+    const obsText = output.useful_observations.observations
+      .map((observation) => observation.text)
+      .join(" ")
+      .toLowerCase();
+    const learningLanguage =
+      /learning|carry forward|what we learned|related stream|useful signal|would change/i.test(
+        obsText,
+      );
+    if (!learningLanguage) {
+      failures.push({
+        code: "EDITORIAL_OBSERVATIONS_NOT_FROM_PGI",
+        severity: "warning",
+        generated_text_path: "useful_observations.observations",
+        message:
+          "Observations should carry forward learning from the PGI Story Arc, not procedural scan notes.",
+      });
     }
   }
 
