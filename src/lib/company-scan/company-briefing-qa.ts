@@ -46,6 +46,7 @@ import type {
 } from "./types";
 
 import { lintBriefingStyle } from "./company-briefing-style-lint";
+import { runHumanVoiceQa } from "../understanding/voice-qa";
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -102,16 +103,24 @@ export function runQAGates(
   for (const sc of sourceChecks) {
     if (sc.result === "block") {
       blockingFailures.push({
-        code: sc.blocked_source_used ? "BLOCKED_SOURCE_USED" :
-              sc.seo_sludge_used ? "SEO_SLUDGE_USED" :
-              !sc.email_safe_anchor ? "NO_AB_ANCHOR" : "SOURCE_CHECK_FAILED",
+        code: sc.blocked_source_used
+          ? "BLOCKED_SOURCE_USED"
+          : sc.seo_sludge_used
+            ? "SEO_SLUDGE_USED"
+            : !sc.email_safe_anchor
+              ? "NO_AB_ANCHOR"
+              : "SOURCE_CHECK_FAILED",
         severity: "blocking",
         item_id: sc.item_id,
-        message: `Source check failed for item ${sc.item_id}: ` +
-          (sc.blocked_source_used ? "Block-grade source used in email evidence" :
-           sc.seo_sludge_used ? "SEO sludge source used in email evidence" :
-           !sc.email_safe_anchor ? `Anchor source grade ${sc.anchor_grade} is not email-safe (need A/B)` :
-           "Source check failed"),
+        message:
+          `Source check failed for item ${sc.item_id}: ` +
+          (sc.blocked_source_used
+            ? "Block-grade source used in email evidence"
+            : sc.seo_sludge_used
+              ? "SEO sludge source used in email evidence"
+              : !sc.email_safe_anchor
+                ? `Anchor source grade ${sc.anchor_grade} is not email-safe (need A/B)`
+                : "Source check failed"),
       });
     } else if (sc.result === "warn") {
       warnings.push({
@@ -128,19 +137,28 @@ export function runQAGates(
   for (const cc of claimChecks) {
     if (cc.result === "block") {
       blockingFailures.push({
-        code: cc.contradiction_found ? "CLAIM_CONTRADICTION" :
-              !cc.supported ? "UNSUPPORTED_CLAIM" :
-              (cc.attribution_required && !cc.attribution_present) ? "MISSING_ATTRIBUTION" :
-              (cc.uncertainty_required && !cc.uncertainty_present) ? "MISSING_UNCERTAINTY" :
-              "CLAIM_CHECK_FAILED",
+        code: cc.contradiction_found
+          ? "CLAIM_CONTRADICTION"
+          : !cc.supported
+            ? "UNSUPPORTED_CLAIM"
+            : cc.attribution_required && !cc.attribution_present
+              ? "MISSING_ATTRIBUTION"
+              : cc.uncertainty_required && !cc.uncertainty_present
+                ? "MISSING_UNCERTAINTY"
+                : "CLAIM_CHECK_FAILED",
         severity: "blocking",
         generated_text_path: cc.generated_text_path,
-        message: `Claim check failed: "${cc.draft_claim.slice(0, 80)}..." — ` +
-          (!cc.supported ? "no packet claim support" :
-           cc.contradiction_found ? "contradicts packet facts" :
-           (cc.attribution_required && !cc.attribution_present) ? "attribution required but missing" :
-           (cc.uncertainty_required && !cc.uncertainty_present) ? "mandatory uncertainty note missing" :
-           "claim check failed"),
+        message:
+          `Claim check failed: "${cc.draft_claim.slice(0, 80)}..." — ` +
+          (!cc.supported
+            ? "no packet claim support"
+            : cc.contradiction_found
+              ? "contradicts packet facts"
+              : cc.attribution_required && !cc.attribution_present
+                ? "attribution required but missing"
+                : cc.uncertainty_required && !cc.uncertainty_present
+                  ? "mandatory uncertainty note missing"
+                  : "claim check failed"),
       });
     } else if (cc.result === "warn") {
       warnings.push({
@@ -157,11 +175,15 @@ export function runQAGates(
   for (const rc of relevanceChecks) {
     if (rc.result === "block") {
       blockingFailures.push({
-        code: rc.weak_match_detected ? "WEAK_MATCH_PROMOTED" :
-              !rc.why_it_matters_supported ? "UNSUPPORTED_WHY_IT_MATTERS" :
-              !rc.scan_area_supported ? "NO_SCAN_AREA_MATCH" :
-              rc.decision !== "email" ? "DASHBOARD_ITEM_PROMOTED" :
-              "RELEVANCE_CHECK_FAILED",
+        code: rc.weak_match_detected
+          ? "WEAK_MATCH_PROMOTED"
+          : !rc.why_it_matters_supported
+            ? "UNSUPPORTED_WHY_IT_MATTERS"
+            : !rc.scan_area_supported
+              ? "NO_SCAN_AREA_MATCH"
+              : rc.decision !== "email"
+                ? "DASHBOARD_ITEM_PROMOTED"
+                : "RELEVANCE_CHECK_FAILED",
         severity: "blocking",
         item_id: rc.item_id,
         message: `Relevance check failed for item ${rc.item_id}: ${rc.reason}`,
@@ -199,10 +221,13 @@ export function runQAGates(
   for (const pg of pgChecks) {
     if (pg.result === "block") {
       blockingFailures.push({
-        code: !pg.eligible_in_packet ? "PG_NOT_ELIGIBLE" :
-              !pg.supported ? "PG_UNSUPPORTED" :
-              !pg.neutral_wording ? "PG_NOT_NEUTRAL" :
-              "PG_CHECK_FAILED",
+        code: !pg.eligible_in_packet
+          ? "PG_NOT_ELIGIBLE"
+          : !pg.supported
+            ? "PG_UNSUPPORTED"
+            : !pg.neutral_wording
+              ? "PG_NOT_NEUTRAL"
+              : "PG_CHECK_FAILED",
         severity: "blocking",
         item_id: pg.item_id,
         message: `Perception Gap check failed for item ${pg.item_id}: ${pg.reason ?? "check failed"}`,
@@ -258,6 +283,11 @@ export function runQAGates(
 
   // --- 8.6. Package 9.3A editorial/usefulness checks ---
   const editorialFailures = checkEditorialRequirements(packet, output);
+  const voiceFailures = checkHumanVoiceRequirements(output);
+  for (const failure of voiceFailures) {
+    if (failure.severity === "blocking") blockingFailures.push(failure);
+    else warnings.push(failure);
+  }
   for (const failure of editorialFailures) {
     if (failure.severity === "blocking") blockingFailures.push(failure);
     else warnings.push(failure);
@@ -315,11 +345,12 @@ export function runQAGates(
 
   if (dryRun) {
     status = "dry_run_only";
-    finalReason = blockingFailures.length > 0
-      ? `Dry-run: would hold — ${blockingFailures.length} blocking failure(s).`
-      : warnings.length > 0
-        ? `Dry-run: would send with ${warnings.length} warning(s).`
-        : "Dry-run: would send — all QA gates passed.";
+    finalReason =
+      blockingFailures.length > 0
+        ? `Dry-run: would hold — ${blockingFailures.length} blocking failure(s).`
+        : warnings.length > 0
+          ? `Dry-run: would send with ${warnings.length} warning(s).`
+          : "Dry-run: would send — all QA gates passed.";
   } else if (blockingFailures.length > 0) {
     // Check if it's a manual-review case or hard hold.
     // These are blocking failures, but a human editor can usually fix them
@@ -332,8 +363,8 @@ export function runQAGates(
       "POLICY_MAX_EMAIL_ITEMS",
       "POLICY_MAX_WORDS_PER_ITEM",
     ]);
-    const allBlockersAreReviewable = blockingFailures.every(
-      (f) => manualReviewCodes.has(f.code),
+    const allBlockersAreReviewable = blockingFailures.every((f) =>
+      manualReviewCodes.has(f.code),
     );
     if (allBlockersAreReviewable && blockingFailures.length <= 2) {
       status = "manual_review";
@@ -347,9 +378,10 @@ export function runQAGates(
     finalReason = "No email-safe items generated. Dashboard-only briefing.";
   } else {
     status = "send";
-    finalReason = warnings.length > 0
-      ? `Send with ${warnings.length} warning(s) recorded.`
-      : "All pre-send QA gates passed.";
+    finalReason =
+      warnings.length > 0
+        ? `Send with ${warnings.length} warning(s) recorded.`
+        : "All pre-send QA gates passed.";
   }
 
   // --- Build report ---
@@ -369,12 +401,14 @@ export function runQAGates(
       excluded_items: packet.input_summary.excluded_count,
     },
     filters: {
-      blocked_sources: (packet.excluded_summary.counts_by_reason?.source_blocked ?? 0),
-      seo_sludge: (packet.excluded_summary.counts_by_reason?.seo_sludge ?? 0),
-      duplicates: (packet.excluded_summary.counts_by_reason?.duplicate ?? 0),
-      weak_matches: (packet.excluded_summary.counts_by_reason?.weak_match ?? 0),
-      prompt_injection: (packet.excluded_summary.counts_by_reason?.prompt_injection ?? 0),
-      stale: (packet.excluded_summary.counts_by_reason?.stale ?? 0),
+      blocked_sources:
+        packet.excluded_summary.counts_by_reason?.source_blocked ?? 0,
+      seo_sludge: packet.excluded_summary.counts_by_reason?.seo_sludge ?? 0,
+      duplicates: packet.excluded_summary.counts_by_reason?.duplicate ?? 0,
+      weak_matches: packet.excluded_summary.counts_by_reason?.weak_match ?? 0,
+      prompt_injection:
+        packet.excluded_summary.counts_by_reason?.prompt_injection ?? 0,
+      stale: packet.excluded_summary.counts_by_reason?.stale ?? 0,
     },
     schema_checks: schemaChecks,
     source_checks: sourceChecks,
@@ -395,9 +429,14 @@ export function runQAGates(
   if (dryRun) {
     result.dryRunMetadata = {
       dry_run: true,
-      would_have_sent: blockingFailures.length === 0 && getGeneratedItemCount(output) > 0,
-      would_have_status: blockingFailures.length > 0 ? "hold" :
-        getGeneratedItemCount(output) === 0 ? "dashboard_only" : "send",
+      would_have_sent:
+        blockingFailures.length === 0 && getGeneratedItemCount(output) > 0,
+      would_have_status:
+        blockingFailures.length > 0
+          ? "hold"
+          : getGeneratedItemCount(output) === 0
+            ? "dashboard_only"
+            : "send",
       external_delivery_suppressed: true,
     };
   }
@@ -421,18 +460,28 @@ function checkSchemas(
     packetErrors.push(`Invalid packet_version: ${packet.packet_version}`);
   }
   if (!packet.run_id) packetErrors.push("Missing run_id");
-  if (!packet.company?.company_id) packetErrors.push("Missing company.company_id");
+  if (!packet.company?.company_id)
+    packetErrors.push("Missing company.company_id");
   if (packet.pipeline?.generation_route !== "internal_openclaw_cron") {
-    packetErrors.push(`Invalid generation_route: ${packet.pipeline?.generation_route}`);
+    packetErrors.push(
+      `Invalid generation_route: ${packet.pipeline?.generation_route}`,
+    );
   }
-  if (!Array.isArray(packet.email_items)) packetErrors.push("email_items is not an array");
+  if (!Array.isArray(packet.email_items))
+    packetErrors.push("email_items is not an array");
   // Validate dashboard items have correct flag
   for (const di of packet.dashboard_only_items) {
     if (di.allowed_in_email_generation !== false) {
-      packetErrors.push(`Dashboard item ${di.cluster_id} has allowed_in_email_generation !== false`);
+      packetErrors.push(
+        `Dashboard item ${di.cluster_id} has allowed_in_email_generation !== false`,
+      );
     }
   }
-  checks.push({ target: "packet", valid: packetErrors.length === 0, errors: packetErrors });
+  checks.push({
+    target: "packet",
+    valid: packetErrors.length === 0,
+    errors: packetErrors,
+  });
 
   // Output schema
   const outputErrors: string[] = [];
@@ -440,21 +489,30 @@ function checkSchemas(
     outputErrors.push(`Invalid output_version: ${output.output_version}`);
   }
   if (output.run_id !== packet.run_id) {
-    outputErrors.push(`run_id mismatch: output=${output.run_id}, packet=${packet.run_id}`);
+    outputErrors.push(
+      `run_id mismatch: output=${output.run_id}, packet=${packet.run_id}`,
+    );
   }
   if (output.company_id !== packet.company.company_id) {
-    outputErrors.push(`company_id mismatch: output=${output.company_id}, packet=${packet.company.company_id}`);
+    outputErrors.push(
+      `company_id mismatch: output=${output.company_id}, packet=${packet.company.company_id}`,
+    );
   }
   if (output.source_packet_version !== "company_briefing_evidence_v1") {
-    outputErrors.push(`Invalid source_packet_version: ${output.source_packet_version}`);
+    outputErrors.push(
+      `Invalid source_packet_version: ${output.source_packet_version}`,
+    );
   }
   if (output.trace?.generator_route !== "internal_openclaw_cron") {
-    outputErrors.push(`Invalid generator_route in trace: ${output.trace?.generator_route}`);
+    outputErrors.push(
+      `Invalid generator_route in trace: ${output.trace?.generator_route}`,
+    );
   }
   if (!output.today_brief) outputErrors.push("Missing today_brief");
   if (!output.main_briefing) outputErrors.push("Missing main_briefing");
   if (!output.perception_gap) outputErrors.push("Missing perception_gap");
-  if (!output.useful_observations) outputErrors.push("Missing useful_observations");
+  if (!output.useful_observations)
+    outputErrors.push("Missing useful_observations");
   if (!output.source_notes) outputErrors.push("Missing source_notes");
 
   // Trace integrity
@@ -464,7 +522,11 @@ function checkSchemas(
   if (output.trace?.excluded_items_used_in_email?.length > 0) {
     outputErrors.push("Excluded items used in email generation");
   }
-  checks.push({ target: "generation_output", valid: outputErrors.length === 0, errors: outputErrors });
+  checks.push({
+    target: "generation_output",
+    valid: outputErrors.length === 0,
+    errors: outputErrors,
+  });
 
   return checks;
 }
@@ -481,7 +543,9 @@ function checkSources(
   const generatedItems = getAllGeneratedItems(output);
 
   for (const genItem of generatedItems) {
-    const packetItem = packet.email_items.find((e) => e.item_id === genItem.packet_item_id);
+    const packetItem = packet.email_items.find(
+      (e) => e.item_id === genItem.packet_item_id,
+    );
     if (!packetItem) {
       checks.push({
         item_id: genItem.packet_item_id,
@@ -500,14 +564,20 @@ function checkSources(
     const anchorGrade = anchor.source_grade;
     const emailSafe = anchorGrade === "A" || anchorGrade === "B";
     const allSupports = collectEvidenceSupports(packetItem);
-    const blockedUsed = allSupports.some((s) => s.source_grade === "Block" || s.email_evidence_eligible === false);
+    const blockedUsed = allSupports.some(
+      (s) => s.source_grade === "Block" || s.email_evidence_eligible === false,
+    );
     const sludgeUsed = allSupports.some((s) => (s.seo_sludge_score ?? 0) >= 60);
 
     let result: "pass" | "warn" | "block" = "pass";
     if (blockedUsed) result = "block";
     else if (sludgeUsed) result = "block";
     else if (!emailSafe) result = "block";
-    else if (anchorGrade === "B" && packetItem.source_summary.source_mix.A === 0) result = "warn";
+    else if (
+      anchorGrade === "B" &&
+      packetItem.source_summary.source_mix.A === 0
+    )
+      result = "warn";
 
     checks.push({
       item_id: genItem.packet_item_id,
@@ -549,7 +619,8 @@ function checkClaims(
     if (!genItem.body.text.trim() || genItem.claim_map.length === 0) {
       checks.push({
         generated_text_path: `main_briefing.item.${genItem.generated_item_id}.body`,
-        draft_claim: genItem.body.text.slice(0, 200) || "Generated item body is empty.",
+        draft_claim:
+          genItem.body.text.slice(0, 200) || "Generated item body is empty.",
         claim_ids: [],
         supported: false,
         source_ids: [],
@@ -564,7 +635,9 @@ function checkClaims(
 
     // Check claim_map entries
     for (const cm of genItem.claim_map) {
-      const claimIdsSupported = cm.claim_ids.every((id) => packetClaimIds.has(id));
+      const claimIdsSupported = cm.claim_ids.every((id) =>
+        packetClaimIds.has(id),
+      );
       const hasClaims = cm.claim_ids.length > 0;
 
       // Check if attribution is required for any referenced claim
@@ -578,7 +651,10 @@ function checkClaims(
           if (fact?.attribution_required) attributionRequired = true;
           // Check if any uncertainty note with must_mention applies
           for (const unc of packetItem.uncertainty) {
-            if (unc.must_mention && unc.applies_to_claim_ids.includes(claimId)) {
+            if (
+              unc.must_mention &&
+              unc.applies_to_claim_ids.includes(claimId)
+            ) {
               uncertaintyRequired = true;
             }
           }
@@ -618,7 +694,9 @@ function checkClaims(
       });
     }
 
-    const packetItem = packet.email_items.find((e) => e.item_id === genItem.packet_item_id);
+    const packetItem = packet.email_items.find(
+      (e) => e.item_id === genItem.packet_item_id,
+    );
     const bodySentenceCount = splitTextSentences(genItem.body.text).length;
     if (bodySentenceCount > genItem.claim_map.length) {
       checks.push({
@@ -636,7 +714,8 @@ function checkClaims(
       });
     }
 
-    const mustMentionUncertainty = packetItem?.uncertainty?.some((u) => u.must_mention) ?? false;
+    const mustMentionUncertainty =
+      packetItem?.uncertainty?.some((u) => u.must_mention) ?? false;
     if (mustMentionUncertainty && !genItem.uncertainty_line?.text) {
       checks.push({
         generated_text_path: `main_briefing.item.${genItem.generated_item_id}.uncertainty_line`,
@@ -668,7 +747,9 @@ function checkRelevance(
   const checks: QARelevanceCheck[] = [];
   const generatedItems = getAllGeneratedItems(output);
   const packetItemIds = new Set(packet.email_items.map((e) => e.item_id));
-  const dashboardItemIds = new Set(packet.dashboard_only_items.map((d) => d.cluster_id));
+  const dashboardItemIds = new Set(
+    packet.dashboard_only_items.map((d) => d.cluster_id),
+  );
 
   for (const genItem of generatedItems) {
     // Check item exists in packet email_items
@@ -702,7 +783,9 @@ function checkRelevance(
       continue;
     }
 
-    const packetItem = packet.email_items.find((e) => e.item_id === genItem.packet_item_id)!;
+    const packetItem = packet.email_items.find(
+      (e) => e.item_id === genItem.packet_item_id,
+    )!;
     const hasWhy = !!packetItem.why_it_matters?.text;
     const hasSupport = packetItem.why_it_matters?.supported_by?.length > 0;
     const hasScanArea = packetItem.section_ids.length > 0;
@@ -720,7 +803,8 @@ function checkRelevance(
       reason = "why_it_matters lacks evidence support";
     } else if (!hasClaimSupport || !hasScanAreaSupport) {
       result = "warn";
-      reason = "why_it_matters support could be stronger (missing claim or scan area ref)";
+      reason =
+        "why_it_matters support could be stronger (missing claim or scan area ref)";
     }
 
     checks.push({
@@ -743,7 +827,9 @@ function checkRelevance(
 // 5. Duplicate checks
 // ---------------------------------------------------------------------------
 
-function checkDuplicates(output: CompanyBriefingGenerationOutput): QADuplicateCheck[] {
+function checkDuplicates(
+  output: CompanyBriefingGenerationOutput,
+): QADuplicateCheck[] {
   const checks: QADuplicateCheck[] = [];
   const items = getAllGeneratedItems(output);
 
@@ -793,7 +879,9 @@ function checkPerceptionGap(
   const checks: QAPerceptionGapCheck[] = [];
 
   for (const pgNote of output.perception_gap.notes) {
-    const packetItem = packet.email_items.find((e) => e.item_id === pgNote.packet_item_id);
+    const packetItem = packet.email_items.find(
+      (e) => e.item_id === pgNote.packet_item_id,
+    );
 
     if (!packetItem) {
       checks.push({
@@ -813,9 +901,10 @@ function checkPerceptionGap(
     const pg = packetItem.perception_gap;
     const eligible = pg?.eligible && pg?.show_recommendation === "show";
     const frameCount = pg?.frames?.length ?? 0;
-    const credibleFrameCount = pg?.frames?.filter((f) =>
-      f.source_grade === "A" || f.source_grade === "B",
-    ).length ?? 0;
+    const credibleFrameCount =
+      pg?.frames?.filter(
+        (f) => f.source_grade === "A" || f.source_grade === "B",
+      ).length ?? 0;
 
     // Check neutral wording: no accusatory patterns
     const noteText = pgNote.note.text.toLowerCase();
@@ -883,19 +972,24 @@ function checkPolicies(
     policy: "max_email_items",
     passed: generatedItemCount <= maxItems,
     result: generatedItemCount <= maxItems ? "pass" : "block",
-    detail: generatedItemCount > maxItems
-      ? `Generated ${generatedItemCount} items, max is ${maxItems}`
-      : undefined,
+    detail:
+      generatedItemCount > maxItems
+        ? `Generated ${generatedItemCount} items, max is ${maxItems}`
+        : undefined,
   });
 
   // Generation route
   checks.push({
     policy: "internal_openclaw_cron_generation",
     passed: output.trace.generator_route === "internal_openclaw_cron",
-    result: output.trace.generator_route === "internal_openclaw_cron" ? "pass" : "block",
-    detail: output.trace.generator_route !== "internal_openclaw_cron"
-      ? `Wrong generation route: ${output.trace.generator_route}`
-      : undefined,
+    result:
+      output.trace.generator_route === "internal_openclaw_cron"
+        ? "pass"
+        : "block",
+    detail:
+      output.trace.generator_route !== "internal_openclaw_cron"
+        ? `Wrong generation route: ${output.trace.generator_route}`
+        : undefined,
   });
 
   // Total word count (if policy sets a limit)
@@ -905,7 +999,11 @@ function checkPolicies(
     checks.push({
       policy: "max_words_total",
       passed: withinLimit,
-      result: withinLimit ? "pass" : totalWords <= policy.max_words_total * 1.2 ? "warn" : "block",
+      result: withinLimit
+        ? "pass"
+        : totalWords <= policy.max_words_total * 1.2
+          ? "warn"
+          : "block",
       detail: !withinLimit
         ? `Total words: ${totalWords}, limit: ${policy.max_words_total}`
         : undefined,
@@ -926,9 +1024,12 @@ function checkPolicies(
 // Helpers
 // ---------------------------------------------------------------------------
 
-function collectEvidenceSupports(item: EvidenceEmailItem): EvidenceArticleSupport[] {
+function collectEvidenceSupports(
+  item: EvidenceEmailItem,
+): EvidenceArticleSupport[] {
   const supports = new Map<string, EvidenceArticleSupport>();
-  const add = (support: EvidenceArticleSupport) => supports.set(`${support.article_id}:${support.source_id}`, support);
+  const add = (support: EvidenceArticleSupport) =>
+    supports.set(`${support.article_id}:${support.source_id}`, support);
   add(item.source_summary.anchor);
   for (const support of item.source_summary.supporting) add(support);
   for (const fact of item.facts) {
@@ -944,11 +1045,15 @@ function splitTextSentences(text: string): string[] {
     .filter((s) => s.length > 0);
 }
 
-function getAllGeneratedItems(output: CompanyBriefingGenerationOutput): GeneratedBriefingItem[] {
+function getAllGeneratedItems(
+  output: CompanyBriefingGenerationOutput,
+): GeneratedBriefingItem[] {
   return output.main_briefing.sections.flatMap((s) => s.items);
 }
 
-function getGeneratedItemCount(output: CompanyBriefingGenerationOutput): number {
+function getGeneratedItemCount(
+  output: CompanyBriefingGenerationOutput,
+): number {
   return getAllGeneratedItems(output).length;
 }
 
@@ -960,7 +1065,9 @@ function checkEditorPass(editorPass?: CompanyBriefingEditorPass): QAFailure[] {
     failures.push({
       code: "EDITOR_BLOCKED",
       severity: "blocking",
-      message: editorPass.blocked_reason || "Package 9.3B editor pass blocked its own output.",
+      message:
+        editorPass.blocked_reason ||
+        "Package 9.3B editor pass blocked its own output.",
     });
   }
 
@@ -970,7 +1077,8 @@ function checkEditorPass(editorPass?: CompanyBriefingEditorPass): QAFailure[] {
         code: "EDITOR_CHANGED_SUPPORT_STRUCTURE",
         severity: "blocking",
         generated_text_path: audit.path,
-        message: "Package 9.3B editor must not change support refs or evidence structure.",
+        message:
+          "Package 9.3B editor must not change support refs or evidence structure.",
       });
     }
 
@@ -1001,14 +1109,21 @@ function checkEditorPass(editorPass?: CompanyBriefingEditorPass): QAFailure[] {
       });
     }
 
-    if (audit.path.includes("perception_gap") && /view:|The gap:|Why it matters:/i.test(audit.before_text)) {
-      const labelsStillPresent = /view:/i.test(audit.after_text) && /The gap:/i.test(audit.after_text) && /Why it matters:/i.test(audit.after_text);
+    if (
+      audit.path.includes("perception_gap") &&
+      /view:|The gap:|Why it matters:/i.test(audit.before_text)
+    ) {
+      const labelsStillPresent =
+        /view:/i.test(audit.after_text) &&
+        /The gap:/i.test(audit.after_text) &&
+        /Why it matters:/i.test(audit.after_text);
       if (!labelsStillPresent) {
         failures.push({
           code: "EDITOR_LABEL_FORMAT_BROKEN",
           severity: "blocking",
           generated_text_path: audit.path,
-          message: "Package 9.3B editor broke the labelled Perception Gap format.",
+          message:
+            "Package 9.3B editor broke the labelled Perception Gap format.",
         });
       }
     }
@@ -1017,40 +1132,89 @@ function checkEditorPass(editorPass?: CompanyBriefingEditorPass): QAFailure[] {
   return failures;
 }
 
-function generatedTextSegments(output: CompanyBriefingGenerationOutput): Array<{ path: string; value: GeneratedText }> {
+function generatedTextSegments(
+  output: CompanyBriefingGenerationOutput,
+): Array<{ path: string; value: GeneratedText }> {
   return [
     { path: "today_brief.top_line", value: output.today_brief.top_line },
-    ...output.today_brief.bullets.map((value, i) => ({ path: `today_brief.bullets[${i}]`, value })),
+    ...output.today_brief.bullets.map((value, i) => ({
+      path: `today_brief.bullets[${i}]`,
+      value,
+    })),
     ...output.main_briefing.sections.flatMap((section, sectionIndex) =>
       section.items.flatMap((item, itemIndex) => [
-        { path: `main_briefing.sections[${sectionIndex}].items[${itemIndex}].title`, value: item.title },
-        { path: `main_briefing.sections[${sectionIndex}].items[${itemIndex}].body`, value: item.body },
-        ...(item.uncertainty_line ? [{ path: `main_briefing.sections[${sectionIndex}].items[${itemIndex}].uncertainty_line`, value: item.uncertainty_line }] : []),
-        ...(item.source_attribution ? [{ path: `main_briefing.sections[${sectionIndex}].items[${itemIndex}].source_attribution`, value: item.source_attribution }] : []),
+        {
+          path: `main_briefing.sections[${sectionIndex}].items[${itemIndex}].title`,
+          value: item.title,
+        },
+        {
+          path: `main_briefing.sections[${sectionIndex}].items[${itemIndex}].body`,
+          value: item.body,
+        },
+        ...(item.uncertainty_line
+          ? [
+              {
+                path: `main_briefing.sections[${sectionIndex}].items[${itemIndex}].uncertainty_line`,
+                value: item.uncertainty_line,
+              },
+            ]
+          : []),
+        ...(item.source_attribution
+          ? [
+              {
+                path: `main_briefing.sections[${sectionIndex}].items[${itemIndex}].source_attribution`,
+                value: item.source_attribution,
+              },
+            ]
+          : []),
       ]),
     ),
-    ...output.perception_gap.notes.map((note, i) => ({ path: `perception_gap.notes[${i}].note`, value: note.note })),
-    ...output.useful_observations.observations.map((value, i) => ({ path: `useful_observations.observations[${i}]`, value })),
+    ...output.perception_gap.notes.map((note, i) => ({
+      path: `perception_gap.notes[${i}].note`,
+      value: note.note,
+    })),
+    ...output.useful_observations.observations.map((value, i) => ({
+      path: `useful_observations.observations[${i}]`,
+      value,
+    })),
     { path: "source_notes.text", value: output.source_notes.text },
   ];
 }
 
 function confidenceLanguagePresent(text: string, kind: string): boolean {
-  if (kind === "estimate_or_forecast") return /\b(estimate|estimated|directional|up to|forecast|reported)\b/i.test(text);
-  if (kind === "early_signal") return /\b(early|not proof|does not prove|rather than proof|if it repeats|later scans?)\b/i.test(text);
-  if (kind === "single_source" || kind === "reported_claim") return /\b(one report|one source|reported|said|cited|according to)\b/i.test(text);
-  if (kind === "regional_frame") return /\b(view:|frame|framed|coverage|source|gap|why it matters)\b/i.test(text);
-  if (kind === "multi_source_signal") return /\b(several|multiple|two reports|sources?|scan|selected evidence)\b/i.test(text);
+  if (kind === "estimate_or_forecast")
+    return /\b(estimate|estimated|directional|up to|forecast|reported)\b/i.test(
+      text,
+    );
+  if (kind === "early_signal")
+    return /\b(early|not proof|does not prove|rather than proof|if it repeats|later scans?)\b/i.test(
+      text,
+    );
+  if (kind === "single_source" || kind === "reported_claim")
+    return /\b(one report|one source|reported|said|cited|according to)\b/i.test(
+      text,
+    );
+  if (kind === "regional_frame")
+    return /\b(view:|frame|framed|coverage|source|gap|why it matters)\b/i.test(
+      text,
+    );
+  if (kind === "multi_source_signal")
+    return /\b(several|multiple|two reports|sources?|scan|selected evidence)\b/i.test(
+      text,
+    );
   return true;
 }
 
-function checkConfidenceLanguage(output: CompanyBriefingGenerationOutput): QAFailure[] {
+function checkConfidenceLanguage(
+  output: CompanyBriefingGenerationOutput,
+): QAFailure[] {
   const failures: QAFailure[] = [];
-  const segments = generatedTextSegments(output).filter((segment) =>
-    !segment.path.endsWith(".title")
-    && !segment.path.endsWith(".source_attribution")
-    && !segment.path.endsWith(".uncertainty_line")
-    && segment.path !== "source_notes.text",
+  const segments = generatedTextSegments(output).filter(
+    (segment) =>
+      !segment.path.endsWith(".title") &&
+      !segment.path.endsWith(".source_attribution") &&
+      !segment.path.endsWith(".uncertainty_line") &&
+      segment.path !== "source_notes.text",
   );
 
   for (const segment of segments) {
@@ -1060,7 +1224,8 @@ function checkConfidenceLanguage(output: CompanyBriefingGenerationOutput): QAFai
         code: "CONFIDENCE_LABEL_MISSING",
         severity: "warning",
         generated_text_path: segment.path,
-        message: "Package 9.3 confidence/evidence language metadata is missing from customer-facing text.",
+        message:
+          "Package 9.3 confidence/evidence language metadata is missing from customer-facing text.",
       });
       continue;
     }
@@ -1068,7 +1233,10 @@ function checkConfidenceLanguage(output: CompanyBriefingGenerationOutput): QAFai
     if (!confidenceLanguagePresent(segment.value.text, label.kind)) {
       failures.push({
         code: "CONFIDENCE_LANGUAGE_MISSING",
-        severity: label.kind === "estimate_or_forecast" || label.kind === "early_signal" ? "blocking" : "warning",
+        severity:
+          label.kind === "estimate_or_forecast" || label.kind === "early_signal"
+            ? "blocking"
+            : "warning",
         generated_text_path: segment.path,
         message: `Package 9.3 ${label.kind} text should carry natural confidence/evidence language: ${label.customer_phrase}`,
       });
@@ -1078,14 +1246,28 @@ function checkConfidenceLanguage(output: CompanyBriefingGenerationOutput): QAFai
   return failures;
 }
 
-function checkCompanySpecificRetrieval(packet: CompanyBriefingEvidencePacket): QAFailure[] {
+function checkCompanySpecificRetrieval(
+  packet: CompanyBriefingEvidencePacket,
+): QAFailure[] {
   const failures: QAFailure[] = [];
   const items = packet.email_items || [];
   const provenanceItems = items.filter((item) => item.retrieval_provenance);
   if (items.length === 0 || provenanceItems.length === 0) return failures;
 
   const companyId = packet.company.company_id;
-  const broadOnlyTerms = new Set(["china", "russia", "iran", "india", "korea", "united states", "european union", "ai", "media", "policy", "market"]);
+  const broadOnlyTerms = new Set([
+    "china",
+    "russia",
+    "iran",
+    "india",
+    "korea",
+    "united states",
+    "european union",
+    "ai",
+    "media",
+    "policy",
+    "market",
+  ]);
 
   for (const item of items) {
     const provenance = item.retrieval_provenance;
@@ -1095,7 +1277,8 @@ function checkCompanySpecificRetrieval(packet: CompanyBriefingEvidencePacket): Q
         code: "RETRIEVAL_PROVENANCE_MISSING",
         severity: "blocking",
         generated_text_path: path,
-        message: "Company-specific briefing item is missing retrieval provenance.",
+        message:
+          "Company-specific briefing item is missing retrieval provenance.",
       });
       continue;
     }
@@ -1105,25 +1288,34 @@ function checkCompanySpecificRetrieval(packet: CompanyBriefingEvidencePacket): Q
         code: "RETRIEVAL_WRONG_COMPANY",
         severity: "blocking",
         generated_text_path: path,
-        message: "Company-specific briefing item provenance points to a different company profile.",
+        message:
+          "Company-specific briefing item provenance points to a different company profile.",
       });
     }
 
-    if (provenance.mode !== "company_specific_retrieval" && provenance.mode !== "company_deep_dive_retrieval") {
+    if (
+      provenance.mode !== "company_specific_retrieval" &&
+      provenance.mode !== "company_deep_dive_retrieval"
+    ) {
       failures.push({
         code: "RETRIEVAL_MODE_NOT_COMPANY_SPECIFIC",
         severity: "blocking",
         generated_text_path: path,
-        message: "Company-specific briefing item came from a non-company-specific retrieval mode.",
+        message:
+          "Company-specific briefing item came from a non-company-specific retrieval mode.",
       });
     }
 
-    if ((provenance.query_ids || []).length === 0 || (provenance.query_labels || []).length === 0) {
+    if (
+      (provenance.query_ids || []).length === 0 ||
+      (provenance.query_labels || []).length === 0
+    ) {
       failures.push({
         code: "RETRIEVAL_QUERY_TRACE_MISSING",
         severity: "blocking",
         generated_text_path: path,
-        message: "Company-specific briefing item is missing query trace IDs/labels.",
+        message:
+          "Company-specific briefing item is missing query trace IDs/labels.",
       });
     }
 
@@ -1132,38 +1324,50 @@ function checkCompanySpecificRetrieval(packet: CompanyBriefingEvidencePacket): Q
         code: "RETRIEVAL_CONTEXT_MISSING",
         severity: "blocking",
         generated_text_path: path,
-        message: "Company-specific briefing item has no matched company context terms.",
+        message:
+          "Company-specific briefing item has no matched company context terms.",
       });
     }
 
-    const matchedQueryTerms = (provenance.matched_query_terms || []).map((term) => term.toLowerCase());
+    const matchedQueryTerms = (provenance.matched_query_terms || []).map(
+      (term) => term.toLowerCase(),
+    );
     const scanAreaIds = provenance.scan_area_ids || [];
-    const watchlistOnly = scanAreaIds.length > 0 && scanAreaIds.every((id) => id === "watchlist-entities");
+    const watchlistOnly =
+      scanAreaIds.length > 0 &&
+      scanAreaIds.every((id) => id === "watchlist-entities");
     if (watchlistOnly && matchedQueryTerms.length === 0) {
       failures.push({
         code: "RETRIEVAL_WATCHLIST_ANCHOR_MISSING",
         severity: "blocking",
         generated_text_path: path,
-        message: "Watchlist-only item must match the watched entity/query term in the article text.",
+        message:
+          "Watchlist-only item must match the watched entity/query term in the article text.",
       });
     }
 
-    if (matchedQueryTerms.length > 0 && matchedQueryTerms.every((term) => broadOnlyTerms.has(term))) {
+    if (
+      matchedQueryTerms.length > 0 &&
+      matchedQueryTerms.every((term) => broadOnlyTerms.has(term))
+    ) {
       failures.push({
         code: "RETRIEVAL_BROAD_ONLY_ANCHOR",
         severity: "warning",
         generated_text_path: path,
-        message: "Company-specific item appears anchored only by broad terms; review for scatter/noise.",
+        message:
+          "Company-specific item appears anchored only by broad terms; review for scatter/noise.",
       });
     }
   }
 
-  const sectionCount = new Set(items.flatMap((item) => item.section_ids || [])).size;
+  const sectionCount = new Set(items.flatMap((item) => item.section_ids || []))
+    .size;
   if (items.length >= 6 && sectionCount >= 6) {
     failures.push({
       code: "RETRIEVAL_SCATTER_SCORE_HIGH",
       severity: "warning",
-      message: "Briefing has a wide spread of singleton sections; review for scattered/non-coherent company narrative.",
+      message:
+        "Briefing has a wide spread of singleton sections; review for scattered/non-coherent company narrative.",
     });
   }
 
@@ -1176,7 +1380,9 @@ function checkScannerReportLayout(
 ): QAFailure[] {
   const failures: QAFailure[] = [];
   const selectedCount = packet.email_items.length;
-  const generatedMainFindings = output.main_briefing.sections.flatMap((section) => section.items).length;
+  const generatedMainFindings = output.main_briefing.sections.flatMap(
+    (section) => section.items,
+  ).length;
   const scanner = output.scanner_report;
   const generatedText = JSON.stringify(output).toLowerCase();
   const bannedInternalPhrases = [
@@ -1206,26 +1412,33 @@ function checkScannerReportLayout(
     failures.push({
       code: "SCANNER_REPORT_MISSING",
       severity: "blocking",
-      message: "Company scan selected many findings but output did not use the Package 10C scanner-report layout.",
+      message:
+        "Company scan selected many findings but output did not use the Package 10C scanner-report layout.",
     });
   }
 
   if (scanner?.enabled) {
-    const coverageRatio = selectedCount > 0 ? generatedMainFindings / selectedCount : 1;
+    const coverageRatio =
+      selectedCount > 0 ? generatedMainFindings / selectedCount : 1;
     if (selectedCount >= 8 && coverageRatio < 0.75) {
       failures.push({
         code: "SCANNER_REPORT_OVER_COMPRESSED",
         severity: "blocking",
         message: `Scanner report selected ${selectedCount} item(s) but rendered only ${generatedMainFindings} main finding(s).`,
-        suggested_fix: "Render useful selected findings in Main Findings instead of compressing them into a few bundled paragraphs.",
+        suggested_fix:
+          "Render useful selected findings in Main Findings instead of compressing them into a few bundled paragraphs.",
       });
     }
 
-    if (scanner.layout_version !== "company_daily_scan_v1" && (scanner.deeper_reads || []).length < Math.min(3, selectedCount)) {
+    if (
+      scanner.layout_version !== "company_daily_scan_v1" &&
+      (scanner.deeper_reads || []).length < Math.min(3, selectedCount)
+    ) {
       failures.push({
         code: "SCANNER_REPORT_DEEPER_READ_MISSING",
         severity: "warning",
-        message: "Scanner report should include up to three deeper reads for the most useful daily findings.",
+        message:
+          "Scanner report should include up to three deeper reads for the most useful daily findings.",
       });
     }
   }
@@ -1252,19 +1465,33 @@ function checkDepthRequirements(
   if (items.length === 0) return failures;
 
   const countWords = (text: string) => text.split(/\s+/).filter(Boolean).length;
-  const firstSentence = (text: string) => splitTextSentences(text)[0] || text.trim();
-  const hasConcreteEvidenceTerm = (text: string) => /\b(Hormuz|Suez|Red Sea|Bab el-Mandeb|traffic|freight|rates?|vessel|ports?|corridors?|routes?|rail|LNG|transport|disruption|estimate|report|cost|\d+\s?%|\$\d+|million|weeks?|sources?|scan|coverage|insurance)\b/i.test(text);
-  const hasMeaningLanguage = (text: string) => /\b(separates?|shows?|showed|distinction|pattern|evidence|reported|report|datapoint|not proof|not yet|confidence|access|cost|risk|source|frame|coverage|practical|concrete|marker|useful|read)\b/i.test(text);
-  const hasNumber = (text: string) => /(\d+\s?%|\$\d+|\d+\s?(million|billion|days|weeks|months|years)|pre-war)/i.test(text);
+  const firstSentence = (text: string) =>
+    splitTextSentences(text)[0] || text.trim();
+  const hasConcreteEvidenceTerm = (text: string) =>
+    /\b(Hormuz|Suez|Red Sea|Bab el-Mandeb|traffic|freight|rates?|vessel|ports?|corridors?|routes?|rail|LNG|transport|disruption|estimate|report|cost|\d+\s?%|\$\d+|million|weeks?|sources?|scan|coverage|insurance)\b/i.test(
+      text,
+    );
+  const hasMeaningLanguage = (text: string) =>
+    /\b(separates?|shows?|showed|distinction|pattern|evidence|reported|report|datapoint|not proof|not yet|confidence|access|cost|risk|source|frame|coverage|practical|concrete|marker|useful|read)\b/i.test(
+      text,
+    );
+  const hasNumber = (text: string) =>
+    /(\d+\s?%|\$\d+|\d+\s?(million|billion|days|weeks|months|years)|pre-war)/i.test(
+      text,
+    );
   const rawCount = packet.input_summary.raw_articles_count;
   const sourceNoteText = output.source_notes?.text?.text || "";
-  const sourceNoteMentionsScanDepth = rawCount > 0 && sourceNoteText.includes(String(rawCount)) && /scanned items/i.test(sourceNoteText);
+  const sourceNoteMentionsScanDepth =
+    rawCount > 0 &&
+    sourceNoteText.includes(String(rawCount)) &&
+    /scanned items/i.test(sourceNoteText);
 
   if (!sourceNoteMentionsScanDepth) {
     failures.push({
       code: "DEPTH_SOURCE_NOTE_THIN",
       severity: "warning",
-      message: "Package 9.2 source note should state scan depth and point to the evidence/dashboard layer.",
+      message:
+        "Package 9.2 source note should state scan depth and point to the evidence/dashboard layer.",
     });
   }
 
@@ -1274,7 +1501,8 @@ function checkDepthRequirements(
       code: "EDITORIAL_FIRST_SENTENCE_WEAK",
       severity: "warning",
       generated_text_path: "today_brief.top_line",
-      message: "Package 9.3A opening sentence should carry a concrete evidence point, not warm-up wording.",
+      message:
+        "Package 9.3A opening sentence should carry a concrete evidence point, not warm-up wording.",
     });
   }
 
@@ -1284,8 +1512,13 @@ function checkDepthRequirements(
   const thinItems = items.filter((item) => countWords(item.body.text) < 24);
   for (const item of thinItems) {
     const body = item.body.text;
-    const looksMalformed = /(?:—|–|-|,)\s*(?:typically|usually|averaging|including|with|and|or)?\.?\s+It belongs here because/i.test(body)
-      || /\bThe scan picked up\s+(?:daily transits|home|read more|click here)\b/i.test(body);
+    const looksMalformed =
+      /(?:—|–|-|,)\s*(?:typically|usually|averaging|including|with|and|or)?\.?\s+It belongs here because/i.test(
+        body,
+      ) ||
+      /\bThe scan picked up\s+(?:daily transits|home|read more|click here)\b/i.test(
+        body,
+      );
     failures.push({
       code: "DEPTH_SECTION_TOO_THIN",
       severity: looksMalformed ? "blocking" : "warning",
@@ -1294,7 +1527,9 @@ function checkDepthRequirements(
     });
   }
 
-  const paragraphThinItems = items.filter((item) => !item.body.text.includes("\n\n"));
+  const paragraphThinItems = items.filter(
+    (item) => !item.body.text.includes("\n\n"),
+  );
   for (const item of paragraphThinItems) {
     failures.push({
       code: "DEPTH_SECTION_SINGLE_PARAGRAPH",
@@ -1325,10 +1560,12 @@ function checkDepthRequirements(
     }
   }
 
-  const observationCount = output.useful_observations?.observations?.length ?? 0;
-  const expectedObservationCount = output.scanner_report?.layout_version === "company_daily_scan_v1"
-    ? Math.min(2, items.length)
-    : Math.min(3, items.length);
+  const observationCount =
+    output.useful_observations?.observations?.length ?? 0;
+  const expectedObservationCount =
+    output.scanner_report?.layout_version === "company_daily_scan_v1"
+      ? Math.min(2, items.length)
+      : Math.min(3, items.length);
   if (observationCount < expectedObservationCount) {
     failures.push({
       code: "DEPTH_OBSERVATIONS_THIN",
@@ -1340,52 +1577,79 @@ function checkDepthRequirements(
   const observations = output.useful_observations?.observations ?? [];
   for (let i = 0; i < observations.length; i++) {
     const text = observations[i].text;
-    if (!hasMeaningLanguage(text) || /\b(could|may|might)\s+have\s+(important|significant|material)?\s*implications\b/i.test(text)) {
+    if (
+      !hasMeaningLanguage(text) ||
+      /\b(could|may|might)\s+have\s+(important|significant|material)?\s*implications\b/i.test(
+        text,
+      )
+    ) {
       failures.push({
         code: "EDITORIAL_OBSERVATION_GENERIC",
         severity: "warning",
         generated_text_path: `useful_observations.observations[${i}]`,
-        message: "Package 9.3A observations should be classified insight: hidden distinction, boundary, source-frame insight, quiet widening, or evidence-quality insight.",
+        message:
+          "Package 9.3A observations should be classified insight: hidden distinction, boundary, source-frame insight, quiet widening, or evidence-quality insight.",
       });
     }
   }
 
-  const pgEligibleCount = packet.email_items.filter((item) => item.perception_gap?.eligible && item.perception_gap.show_recommendation === "show").length;
+  const pgEligibleCount = packet.email_items.filter(
+    (item) =>
+      item.perception_gap?.eligible &&
+      item.perception_gap.show_recommendation === "show",
+  ).length;
   const pgCount = output.perception_gap?.notes?.length ?? 0;
   if (pgEligibleCount > 0 && pgCount === 0) {
     failures.push({
       code: "DEPTH_PG_MISSING",
       severity: "blocking",
-      message: "Package 9.2 has eligible Perception Gap evidence but no Perception Gap output.",
+      message:
+        "Package 9.2 has eligible Perception Gap evidence but no Perception Gap output.",
     });
   }
 
   for (let i = 0; i < (output.perception_gap?.notes ?? []).length; i++) {
     const note = output.perception_gap.notes[i].note.text;
-    const hasStandardLabels = /view:/i.test(note) && /\bThe gap:/i.test(note) && /\bWhy it matters:/i.test(note);
-    const hasReaderRisk = /\b(make|makes|look|misread|miss|separates?|only see|one frame|before)\b/i.test(note);
-    const knownSector = /logistics|shipping|maritime|freight|port|energy|oil|gas|lng|agriculture|food|finance|bank|market|technology|software|semiconductor|telecom|ai|cyber/i.test(packet.company.industry || "");
-    const genericKnownSectorFrame = knownSector && /\b(Operational view|Policy\/regional view|Sources differed mainly)\b/i.test(note);
+    const hasStandardLabels =
+      /view:/i.test(note) &&
+      /\bThe gap:/i.test(note) &&
+      /\bWhy it matters:/i.test(note);
+    const hasReaderRisk =
+      /\b(make|makes|look|misread|miss|separates?|only see|one frame|before)\b/i.test(
+        note,
+      );
+    const knownSector =
+      /logistics|shipping|maritime|freight|port|energy|oil|gas|lng|agriculture|food|finance|bank|market|technology|software|semiconductor|telecom|ai|cyber/i.test(
+        packet.company.industry || "",
+      );
+    const genericKnownSectorFrame =
+      knownSector &&
+      /\b(Operational view|Policy\/regional view|Sources differed mainly)\b/i.test(
+        note,
+      );
     if (!hasStandardLabels) {
       failures.push({
         code: "EDITORIAL_PG_FORMAT_WEAK",
         severity: "blocking",
         generated_text_path: `perception_gap.notes[${i}]`,
-        message: "Package 9.3A Perception Gap must use labelled view/gap/why-it-matters format.",
+        message:
+          "Package 9.3A Perception Gap must use labelled view/gap/why-it-matters format.",
       });
     } else if (genericKnownSectorFrame) {
       failures.push({
         code: "EDITORIAL_PG_SECTOR_FRAME_GENERIC",
         severity: "warning",
         generated_text_path: `perception_gap.notes[${i}]`,
-        message: "Package 9.3 Perception Gap should use sector-adaptive frame labels for known company sectors, not generic frame language.",
+        message:
+          "Package 9.3 Perception Gap should use sector-adaptive frame labels for known company sectors, not generic frame language.",
       });
     } else if (!hasReaderRisk) {
       failures.push({
         code: "EDITORIAL_PG_READER_RISK_MISSING",
         severity: "warning",
         generated_text_path: `perception_gap.notes[${i}]`,
-        message: "Package 9.3A Perception Gap should name what a reader could misread if they saw only one frame.",
+        message:
+          "Package 9.3A Perception Gap should name what a reader could misread if they saw only one frame.",
       });
     }
   }
@@ -1393,18 +1657,77 @@ function checkDepthRequirements(
   return failures;
 }
 
+function checkHumanVoiceRequirements(
+  output: CompanyBriefingGenerationOutput,
+): QAFailure[] {
+  const texts: string[] = [
+    output.today_brief.top_line.text,
+    ...output.today_brief.bullets.map((bullet) => bullet.text),
+    ...output.main_briefing.sections.flatMap((section) =>
+      section.items.flatMap((item) => [
+        item.title.text,
+        item.body.text,
+        item.why_it_matters?.text,
+        item.uncertainty_line?.text,
+        item.perception_gap_note?.text,
+      ]),
+    ),
+    ...output.perception_gap.notes.map((note) => note.note.text),
+    ...output.useful_observations.observations.map(
+      (observation) => observation.text,
+    ),
+    output.source_notes.text.text,
+  ].filter(Boolean) as string[];
+
+  const understanding = output.understanding as
+    | { company_pgi_v2?: { email_read?: string; dashboard_read?: unknown } }
+    | undefined;
+  if (understanding?.company_pgi_v2?.email_read) {
+    texts.push(understanding.company_pgi_v2.email_read);
+  }
+
+  return runHumanVoiceQa(texts).map(
+    (issue): QAFailure => ({
+      code: issue.code,
+      severity: issue.severity,
+      message: `Human voice QA: ${issue.message}`,
+      generated_text_path: "human_voice_qa",
+      suggested_fix:
+        "Rewrite as a direct, specific explanation a human teammate would say out loud.",
+    }),
+  );
+}
+
 function checkEditorialRequirements(
   packet: CompanyBriefingEvidencePacket,
   output: CompanyBriefingGenerationOutput,
 ): QAFailure[] {
   const failures: QAFailure[] = [];
-  const packetClaimIds = new Set(packet.email_items.flatMap((item) => item.facts.map((fact) => fact.claim_id)));
+  const packetClaimIds = new Set(
+    packet.email_items.flatMap((item) =>
+      item.facts.map((fact) => fact.claim_id),
+    ),
+  );
   const packetItemIds = new Set(packet.email_items.map((item) => item.item_id));
-  const allGeneratedTexts: Array<{ path: string; text: GeneratedText; itemId?: string }> = [
+  const allGeneratedTexts: Array<{
+    path: string;
+    text: GeneratedText;
+    itemId?: string;
+  }> = [
     { path: "today_brief.top_line", text: output.today_brief.top_line },
-    ...output.today_brief.bullets.map((text, i) => ({ path: `today_brief.bullets[${i}]`, text })),
-    ...output.perception_gap.notes.map((note, i) => ({ path: `perception_gap.notes[${i}]`, text: note.note, itemId: note.packet_item_id })),
-    ...output.useful_observations.observations.map((text, i) => ({ path: `useful_observations.observations[${i}]`, text })),
+    ...output.today_brief.bullets.map((text, i) => ({
+      path: `today_brief.bullets[${i}]`,
+      text,
+    })),
+    ...output.perception_gap.notes.map((note, i) => ({
+      path: `perception_gap.notes[${i}]`,
+      text: note.note,
+      itemId: note.packet_item_id,
+    })),
+    ...output.useful_observations.observations.map((text, i) => ({
+      path: `useful_observations.observations[${i}]`,
+      text,
+    })),
     { path: "source_notes.text", text: output.source_notes.text },
   ];
 
@@ -1415,12 +1738,15 @@ function checkEditorialRequirements(
         severity: segment.path === "source_notes.text" ? "warning" : "blocking",
         generated_text_path: segment.path,
         item_id: segment.itemId,
-        message: "Package 9.3A customer-facing editorial text needs support references, not unsupported synthesis.",
+        message:
+          "Package 9.3A customer-facing editorial text needs support references, not unsupported synthesis.",
       });
       continue;
     }
 
-    const claimRefs = segment.text.supported_by.filter((ref) => ref.type === "claim_id").map((ref) => ref.id);
+    const claimRefs = segment.text.supported_by
+      .filter((ref) => ref.type === "claim_id")
+      .map((ref) => ref.id);
     const invalidClaimRefs = claimRefs.filter((id) => !packetClaimIds.has(id));
     if (invalidClaimRefs.length > 0) {
       failures.push({
@@ -1434,35 +1760,61 @@ function checkEditorialRequirements(
   }
 
   const topLine = output.today_brief.top_line.text;
-  const topLineLooksHardcoded = /\bHormuz\b/i.test(topLine)
-    && !packet.email_items.some((item) => /\bHormuz\b/i.test(`${item.canonical_event_name} ${item.facts.map((fact) => fact.text).join(" ")}`));
+  const topLineLooksHardcoded =
+    /\bHormuz\b/i.test(topLine) &&
+    !packet.email_items.some((item) =>
+      /\bHormuz\b/i.test(
+        `${item.canonical_event_name} ${item.facts.map((fact) => fact.text).join(" ")}`,
+      ),
+    );
   if (topLineLooksHardcoded) {
     failures.push({
       code: "EDITORIAL_HARDCODED_CONTEXT",
       severity: "blocking",
       generated_text_path: "today_brief.top_line",
-      message: "Package 9.3A top line appears to use hardcoded topic context that is not supported by selected evidence.",
+      message:
+        "Package 9.3A top line appears to use hardcoded topic context that is not supported by selected evidence.",
     });
   }
 
-  const nonLogisticsIndustry = !/logistics|shipping|maritime|freight|port|supply-chain|transport/i.test(packet.company.industry || "");
+  const nonLogisticsIndustry =
+    !/logistics|shipping|maritime|freight|port|supply-chain|transport/i.test(
+      packet.company.industry || "",
+    );
   const generatedAllText = JSON.stringify(output);
-  if (nonLogisticsIndustry && /\b(weak shipping confidence|global logistics|freight markets|vessel traffic, insurance cover|carriers, insurers|route-confidence story)\b/i.test(generatedAllText)) {
+  if (
+    nonLogisticsIndustry &&
+    /\b(weak shipping confidence|global logistics|freight markets|vessel traffic, insurance cover|carriers, insurers|route-confidence story)\b/i.test(
+      generatedAllText,
+    )
+  ) {
     failures.push({
       code: "EDITORIAL_SECTOR_LEAKAGE",
       severity: "blocking",
-      message: "Company briefing appears to leak logistics/Test Company framing into a non-logistics company output.",
+      message:
+        "Company briefing appears to leak logistics/Test Company framing into a non-logistics company output.",
     });
   }
 
   for (const section of output.main_briefing.sections) {
     for (const item of section.items) {
       if (!packetItemIds.has(item.packet_item_id)) continue;
-      const packetItem = packet.email_items.find((candidate) => candidate.item_id === item.packet_item_id);
-      const sectionLabel = packet.company.selected_scan_areas.find((area) => area.area_id === section.section_id)?.label || section.heading;
+      const packetItem = packet.email_items.find(
+        (candidate) => candidate.item_id === item.packet_item_id,
+      );
+      const sectionLabel =
+        packet.company.selected_scan_areas.find(
+          (area) => area.area_id === section.section_id,
+        )?.label || section.heading;
       const bodyAndTitle = `${item.title.text} ${item.body.text}`.toLowerCase();
-      const sectionTerms = sectionLabel.toLowerCase().split(/[^a-z0-9]+/).filter((word) => word.length > 4);
-      const coherent = sectionTerms.length === 0 || sectionTerms.some((term) => bodyAndTitle.includes(term)) || packetItem?.section_ids.includes(section.section_id);
+      const sectionTerms = sectionLabel
+        .toLowerCase()
+        .split(/[^a-z0-9]+/)
+        .filter((word) => word.length > 4);
+      const coherent =
+        sectionTerms.length === 0 ||
+        sectionTerms.some((term) => bodyAndTitle.includes(term)) ||
+        packetItem?.section_ids.includes(section.section_id);
       if (!coherent) {
         failures.push({
           code: "EDITORIAL_SECTION_COHERENCE_WEAK",
@@ -1477,16 +1829,27 @@ function checkEditorialRequirements(
 
   for (let i = 0; i < output.perception_gap.notes.length; i++) {
     const note = output.perception_gap.notes[i];
-    const packetItem = packet.email_items.find((item) => item.item_id === note.packet_item_id);
-    const credibleFrames = packetItem?.perception_gap?.frames?.filter((frame) => frame.source_grade === "A" || frame.source_grade === "B") ?? [];
-    const distinctFrameBases = new Set(credibleFrames.map((frame) => `${frame.source_region}:${frame.evidence_type}:${frame.summary}`));
+    const packetItem = packet.email_items.find(
+      (item) => item.item_id === note.packet_item_id,
+    );
+    const credibleFrames =
+      packetItem?.perception_gap?.frames?.filter(
+        (frame) => frame.source_grade === "A" || frame.source_grade === "B",
+      ) ?? [];
+    const distinctFrameBases = new Set(
+      credibleFrames.map(
+        (frame) =>
+          `${frame.source_region}:${frame.evidence_type}:${frame.summary}`,
+      ),
+    );
     if (distinctFrameBases.size < 2) {
       failures.push({
         code: "EDITORIAL_PG_DISTINCT_EVIDENCE_WEAK",
         severity: "warning",
         item_id: note.packet_item_id,
         generated_text_path: `perception_gap.notes[${i}]`,
-        message: "Package 9.3A Perception Gap should rest on at least two distinct credible frame bases before saying frames differ.",
+        message:
+          "Package 9.3A Perception Gap should rest on at least two distinct credible frame bases before saying frames differ.",
       });
     }
   }
@@ -1495,7 +1858,8 @@ function checkEditorialRequirements(
     failures.push({
       code: "EDITORIAL_WATCH_NEXT_DEFAULT_BLOCKED",
       severity: "blocking",
-      message: "Package 9.3A should not output a standalone generic Watch Next section by default.",
+      message:
+        "Package 9.3A should not output a standalone generic Watch Next section by default.",
     });
   }
 
@@ -1504,7 +1868,8 @@ function checkEditorialRequirements(
 
 function estimateTotalWords(output: CompanyBriefingGenerationOutput): number {
   let total = 0;
-  const count = (t: string) => t.split(/\s+/).filter((w) => w.length > 0).length;
+  const count = (t: string) =>
+    t.split(/\s+/).filter((w) => w.length > 0).length;
 
   total += count(output.today_brief.top_line.text);
   for (const b of output.today_brief.bullets) total += count(b.text);
@@ -1514,8 +1879,10 @@ function estimateTotalWords(output: CompanyBriefingGenerationOutput): number {
       total += count(item.title.text);
       total += count(item.body.text);
       if (item.why_it_matters?.text) total += count(item.why_it_matters.text);
-      if (item.uncertainty_line?.text) total += count(item.uncertainty_line.text);
-      if (item.perception_gap_note?.text) total += count(item.perception_gap_note.text);
+      if (item.uncertainty_line?.text)
+        total += count(item.uncertainty_line.text);
+      if (item.perception_gap_note?.text)
+        total += count(item.perception_gap_note.text);
     }
   }
 

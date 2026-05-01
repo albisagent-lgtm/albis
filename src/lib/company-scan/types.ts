@@ -1578,6 +1578,8 @@ export interface CompanyBriefingGenerationOutput {
   perception_gap: GeneratedPerceptionGap;
   useful_observations: GeneratedUsefulObservations;
   scanner_report?: GeneratedScannerReport;
+  /** Shared Understanding Layer artifacts. Present when a writer proved the read before writing. */
+  understanding?: unknown;
   source_notes: GeneratedSourceNotes;
   trace: GenerationTrace;
 }

@@ -25,9 +25,12 @@ import type {
   IntelligenceDepthBundle,
   SelectedSignalForDepth,
 } from "./intelligence-depth";
+import { buildCompanyPgiV2Report } from "../understanding/company";
+import type { CompanyPgiV2Report } from "../understanding/types";
 
 const INTERNAL_PHRASES: Array<[RegExp, string]> = [
   [/\bThe datapoint was useful because\b/gi, "The useful point is"],
+  [/\bdatapoint was useful\b/gi, "point matters"],
   [
     /\bRoute access and route confidence can move at different speeds\b/gi,
     "A route can reopen before the market trusts it again",
@@ -738,7 +741,58 @@ function sourceFrameEvidence(bundle: IntelligenceDepthBundle): string[] {
 function buildCompanyPerceptionGapNotes(
   bundles: IntelligenceDepthBundle[],
   packet: CompanyBriefingEvidencePacket,
+  companyPgiV2?: CompanyPgiV2Report | null,
 ): GeneratedPerceptionGapNote[] {
+  if (companyPgiV2) {
+    const refs: EvidenceSupportRef[] = uniq(
+      companyPgiV2.understanding_notes.flatMap((note) =>
+        note.support_refs.flatMap((ref): EvidenceSupportRef[] => {
+          if (
+            ref.type === "claim_id" ||
+            ref.type === "source_id" ||
+            ref.type === "scan_area" ||
+            ref.type === "frame_id" ||
+            ref.type === "company_profile_field"
+          ) {
+            return [{ type: ref.type, id: ref.id }];
+          }
+          return [];
+        }),
+      ),
+    ).slice(0, 24);
+    const topBundle = bundles[0];
+    return [
+      {
+        packet_item_id: topBundle?.anchor_item_id || "company_pgi_v2",
+        cluster_id:
+          companyPgiV2.understanding_notes[0]?.cluster_id ||
+          topBundle?.anchor_cluster_id ||
+          "company_pgi_v2",
+        note: {
+          text: companyPgiV2.email_read,
+          supported_by: refs,
+          evidence_confidence: {
+            kind: "regional_frame",
+            label: "Company PGI v2 read",
+            customer_phrase:
+              "This read is written from an Understanding Note across the company's selected scan areas.",
+            confidence: "medium",
+            reason:
+              "The scan produced an Understanding Layer note before generating the PGI copy.",
+            source_count:
+              companyPgiV2.dashboard_read.evidence.flatMap(
+                (entry) => entry.source_domains,
+              ).length || 1,
+            source_quality: "B",
+          },
+        },
+        frame_ids: companyPgiV2.understanding_notes
+          .flatMap((note) => note.support_refs.map((ref) => ref.id))
+          .slice(0, 8),
+      },
+    ];
+  }
+
   const eligible = bundles.filter((bundle) => bundle.source_names.length >= 2);
   const pool = eligible.length
     ? eligible
@@ -799,7 +853,7 @@ function buildCompanyPerceptionGapNotes(
   ]).slice(0, 24);
 
   const text = cleanText(
-    `View: The things ${company} is tracking are ${plainPgiLevel(combinedScore)} today (${combinedScore.toFixed(1)}/10). The clearest movement is around ${humanList(strongestSections, 3) || "the tracked topics"}, especially ${humanList(strongestDimensions, 2)}. The gap: people are not all being shown the same picture.${framePhrase}${quietPhrase} Why it matters: if someone only sees one lane of coverage, they may come away with a different sense of what matters, who is responsible, or what ${company} should watch next.`,
+    `View: The things ${company} is tracking are ${plainPgiLevel(combinedScore)} today (${combinedScore.toFixed(1)}/10). The clearest movement is around ${humanList(strongestSections, 3) || "the tracked topics"}, especially ${humanList(strongestDimensions, 2)}. The gap: people are not all being shown the same picture.${framePhrase}${quietPhrase} Why it matters: if someone only sees one lane of coverage, they may come away with a different sense of what matters, who is responsible, or what deserves attention first.`,
   );
 
   const notes: GeneratedPerceptionGapNote[] = [
@@ -843,7 +897,7 @@ function buildCompanyPerceptionGapNotes(
       cluster_id: top.bundle.anchor_cluster_id,
       note: {
         text: cleanText(
-          `View: the clearest split inside the scan is in ${section} (${top.score.score.toFixed(1)}/10, ${plainPgiLevel(top.score.score)}). ${sharpestFrames.slice(0, 2).join(" ")} The gap: each version puts a different person, institution, or risk at the centre. Why it matters: for ${company}, this is the part of today's scan most likely to change how a reader thinks about trust, responsibility, or what to watch next.`,
+          `View: the clearest split inside the scan is in ${section} (${top.score.score.toFixed(1)}/10, ${plainPgiLevel(top.score.score)}). ${sharpestFrames.slice(0, 2).join(" ")} The gap: each version puts a different person, institution, or risk at the centre. Why it matters: for ${company}, this is the part of today's scan most likely to change how a reader thinks about trust, responsibility, or what deserves attention first.`,
         ),
         supported_by: uniq([
           ...top.bundle.source_refs,
@@ -997,7 +1051,16 @@ export function applyScannerReportLayout(input: {
     topRefs.length ? topRefs : areaRefs,
     selectedByArea,
   );
-  const perceptionGapNotes = buildCompanyPerceptionGapNotes(bundles, packet);
+  const companyPgiV2 = buildCompanyPgiV2Report({
+    packet,
+    bundles,
+    date: packet.input_summary.scan_window.to.slice(0, 10),
+  });
+  const perceptionGapNotes = buildCompanyPerceptionGapNotes(
+    bundles,
+    packet,
+    companyPgiV2,
+  );
 
   return {
     ...output,
@@ -1055,6 +1118,12 @@ export function applyScannerReportLayout(input: {
     useful_observations: {
       observations,
     },
+    understanding: companyPgiV2
+      ? {
+          company_pgi_v2: companyPgiV2,
+          notes: companyPgiV2.understanding_notes,
+        }
+      : output.understanding,
     source_notes: {
       ...output.source_notes,
       text: {

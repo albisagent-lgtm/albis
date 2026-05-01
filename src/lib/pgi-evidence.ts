@@ -3,8 +3,14 @@ import type { ScanItemInput } from "./relevance-engine";
 import type { CompanyScanRun, Signal } from "./company-scan/types";
 
 export type PgiEvidenceOrigin = "public_scan" | "company_scan";
-export type PgiEvidencePrivacyLevel = "public_safe" | "aggregate_only" | "private_customer";
-export type PgiEvidenceAllowedAudience = "public" | "aggregate" | "company_private";
+export type PgiEvidencePrivacyLevel =
+  | "public_safe"
+  | "aggregate_only"
+  | "private_customer";
+export type PgiEvidenceAllowedAudience =
+  | "public"
+  | "aggregate"
+  | "company_private";
 
 export interface PgiEvidenceRow {
   evidence_date: string;
@@ -39,7 +45,9 @@ export interface PgiEvidenceRow {
 }
 
 function clean(value: unknown): string {
-  return String(value || "").replace(/\s+/g, " ").trim();
+  return String(value || "")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function slugify(input: string): string {
@@ -51,10 +59,14 @@ function slugify(input: string): string {
 }
 
 function normaliseCategory(category: string | null | undefined): string {
-  return clean(category || "current-events").toLowerCase().replace(/_/g, "-");
+  return clean(category || "current-events")
+    .toLowerCase()
+    .replace(/_/g, "-");
 }
 
-export function tributaryForCategory(category: string | null | undefined): string {
+export function tributaryForCategory(
+  category: string | null | undefined,
+): string {
   const key = normaliseCategory(category);
   const map: Record<string, string> = {
     geopolitics: "PGI-GP",
@@ -77,35 +89,59 @@ export function tributaryForCategory(category: string | null | undefined): strin
     "climate-energy": "PGI-CL",
     "womens-rights": "PGI-WR",
   };
-  return map[key] || (key.includes("tech") ? "PGI-TE" : key.includes("climate") ? "PGI-CL" : key.includes("health") ? "PGI-HE" : key.includes("media") || key.includes("cyber") ? "PGI-IW" : "PGI-GP");
+  return (
+    map[key] ||
+    (key.includes("tech")
+      ? "PGI-TE"
+      : key.includes("climate")
+        ? "PGI-CL"
+        : key.includes("health")
+          ? "PGI-HE"
+          : key.includes("media") || key.includes("cyber")
+            ? "PGI-IW"
+            : "PGI-GP")
+  );
 }
 
 function isUuid(value: string | null | undefined): boolean {
-  return !!value && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
+  return (
+    !!value &&
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+      value,
+    )
+  );
 }
 
 function inferStakeholderType(signal: Signal): string {
   const type = signal.signal_type;
   if (type === "regulatory" || type === "policy") return "regulator";
   if (type === "market") return "investor_market";
-  if (type === "statement" || type === "announcement") return "company_or_institution";
+  if (type === "statement" || type === "announcement")
+    return "company_or_institution";
   return "media";
 }
 
 function inferFrame(text: string): string {
   const lower = text.toLowerCase();
-  if (/court|law|lawsuit|regulat|compliance|policy|sanction/.test(lower)) return "governance and compliance frame";
-  if (/market|price|rate|stock|investor|demand|supply|cost/.test(lower)) return "market and operating-cost frame";
-  if (/attack|war|strike|security|cyber|risk|threat/.test(lower)) return "security and risk frame";
-  if (/customer|consumer|patient|worker|community|civilian/.test(lower)) return "human impact frame";
+  if (/court|law|lawsuit|regulat|compliance|policy|sanction/.test(lower))
+    return "governance and compliance frame";
+  if (/market|price|rate|stock|investor|demand|supply|cost/.test(lower))
+    return "market and operating-cost frame";
+  if (/attack|war|strike|security|cyber|risk|threat/.test(lower))
+    return "security and risk frame";
+  if (/customer|consumer|patient|worker|community|civilian/.test(lower))
+    return "human impact frame";
   return "early signal frame";
 }
 
 function inferCuiBono(text: string): string {
   const lower = text.toLowerCase();
-  if (/regulat|court|law|compliance|policy/.test(lower)) return "Public institutions benefit from leading with accountability and rule-setting; affected firms benefit from leading with implementation complexity.";
-  if (/market|price|rate|investor|cost/.test(lower)) return "Market actors benefit from treating the event as a pricing signal, while affected communities may see the same event as a stability or access issue.";
-  if (/security|cyber|attack|war|strike/.test(lower)) return "Security actors benefit from leading with threat and response; affected actors may benefit from leading with harm, restraint, or responsibility.";
+  if (/regulat|court|law|compliance|policy/.test(lower))
+    return "Public institutions benefit from leading with accountability and rule-setting; affected firms benefit from leading with implementation complexity.";
+  if (/market|price|rate|investor|cost/.test(lower))
+    return "Market actors benefit from treating the event as a pricing signal, while affected communities may see the same event as a stability or access issue.";
+  if (/security|cyber|attack|war|strike/.test(lower))
+    return "Security actors benefit from leading with threat and response; affected actors may benefit from leading with harm, restraint, or responsibility.";
   return "The useful test is which facts are made central, which are left secondary, and whose decisions that ordering supports.";
 }
 
@@ -127,12 +163,10 @@ async function upsertPgiEvidence(
   logPrefix: string,
 ): Promise<number> {
   if (!rows.length) return 0;
-  const { error } = await supabase
-    .from("pgi_evidence")
-    .upsert(safeRows(rows), {
-      onConflict: "source_record_id",
-      ignoreDuplicates: false,
-    });
+  const { error } = await supabase.from("pgi_evidence").upsert(safeRows(rows), {
+    onConflict: "source_record_id",
+    ignoreDuplicates: false,
+  });
   if (error) {
     // Migration may not be applied in every environment yet. Fail soft so
     // scans/briefings do not break while the evidence layer is being rolled out.
@@ -230,8 +264,16 @@ export async function upsertCompanyProfilePgiEvidence(
       causal_claim: signal.summary || null,
       frame: inferFrame(text),
       actor_portrayal: null,
-      emotional_valence: signal.urgency >= 0.75 ? "high urgency" : signal.urgency >= 0.5 ? "moderate urgency" : "low urgency",
-      emphasis: [...(signal.entities || []), ...(signal.themes || [])].slice(0, 8),
+      emotional_valence:
+        signal.urgency >= 0.75
+          ? "high urgency"
+          : signal.urgency >= 0.5
+            ? "moderate urgency"
+            : "low urgency",
+      emphasis: [...(signal.entities || []), ...(signal.themes || [])].slice(
+        0,
+        8,
+      ),
       omissions: [],
       cui_bono_signal: inferCuiBono(text),
       tributary: tributaryForCategory(signal.signal_type),
@@ -247,10 +289,17 @@ export async function upsertCompanyProfilePgiEvidence(
         source_region: signal.source_region,
         source_language: signal.source_language,
       },
-      confidence: Math.max(0.5, Math.min(0.95, Number(signal.confidence || 0.7))),
+      confidence: Math.max(
+        0.5,
+        Math.min(0.95, Number(signal.confidence || 0.7)),
+      ),
     };
   });
-  return upsertPgiEvidence(supabase, rows, "company profile PGI evidence upsert");
+  return upsertPgiEvidence(
+    supabase,
+    rows,
+    "company profile PGI evidence upsert",
+  );
 }
 
 export async function upsertCompanySignalPgiEvidence(
@@ -264,9 +313,12 @@ export async function upsertCompanySignalPgiEvidence(
   const signalIds = params.signals.map((signal) => signal.id);
   const { data: matches, error } = await supabase
     .from("company_signal_matches")
-    .select("company_profile_id, signal_id, relevance_score, selected_for_briefing, match_reasons")
+    .select(
+      "company_profile_id, signal_id, relevance_score, selected_for_briefing, match_reasons",
+    )
     .in("signal_id", signalIds);
-  if (error) throw new Error(`company PGI evidence match lookup: ${error.message}`);
+  if (error)
+    throw new Error(`company PGI evidence match lookup: ${error.message}`);
 
   type CompanySignalMatchEvidence = {
     company_profile_id: string;
@@ -278,14 +330,20 @@ export async function upsertCompanySignalPgiEvidence(
   const typedMatches = (matches || []) as CompanySignalMatchEvidence[];
   const rows: PgiEvidenceRow[] = [];
   for (const signal of params.signals) {
-    const signalMatches = typedMatches.filter((match) => match.signal_id === signal.id);
+    const signalMatches = typedMatches.filter(
+      (match) => match.signal_id === signal.id,
+    );
     for (const match of signalMatches) {
       const text = `${signal.headline}. ${signal.summary || ""}`;
       rows.push({
         evidence_date: params.run.run_date,
         origin: "company_scan",
-        privacy_level: match.selected_for_briefing ? "private_customer" : "aggregate_only",
-        allowed_audience: match.selected_for_briefing ? "company_private" : "aggregate",
+        privacy_level: match.selected_for_briefing
+          ? "private_customer"
+          : "aggregate_only",
+        allowed_audience: match.selected_for_briefing
+          ? "company_private"
+          : "aggregate",
         company_profile_id: match.company_profile_id,
         company_scan_run_id: params.run.id,
         signal_id: signal.id,
@@ -302,8 +360,16 @@ export async function upsertCompanySignalPgiEvidence(
         causal_claim: signal.summary || null,
         frame: inferFrame(text),
         actor_portrayal: null,
-        emotional_valence: signal.urgency >= 0.75 ? "high urgency" : signal.urgency >= 0.5 ? "moderate urgency" : "low urgency",
-        emphasis: [...(signal.entities || []), ...(signal.themes || [])].slice(0, 8),
+        emotional_valence:
+          signal.urgency >= 0.75
+            ? "high urgency"
+            : signal.urgency >= 0.5
+              ? "moderate urgency"
+              : "low urgency",
+        emphasis: [...(signal.entities || []), ...(signal.themes || [])].slice(
+          0,
+          8,
+        ),
         omissions: [],
         cui_bono_signal: inferCuiBono(text),
         tributary: tributaryForCategory(signal.signal_type),
@@ -320,9 +386,137 @@ export async function upsertCompanySignalPgiEvidence(
           source_region: signal.source_region,
           source_language: signal.source_language,
         },
-        confidence: Math.max(0.5, Math.min(0.95, Number(signal.confidence || 0.7))),
+        confidence: Math.max(
+          0.5,
+          Math.min(0.95, Number(signal.confidence || 0.7)),
+        ),
       });
     }
   }
   return upsertPgiEvidence(supabase, rows, "company PGI evidence upsert");
+}
+
+export interface PgiEvidenceQuery {
+  evidenceDate?: string;
+  origin?: PgiEvidenceOrigin;
+  companyProfileId?: string;
+  companyScanRunId?: string;
+  allowedAudience?: PgiEvidenceAllowedAudience;
+  privacyLevel?: PgiEvidencePrivacyLevel;
+  limit?: number;
+}
+
+export async function loadPgiEvidence(
+  supabase: SupabaseClient,
+  query: PgiEvidenceQuery,
+): Promise<PgiEvidenceRow[]> {
+  let request = supabase
+    .from("pgi_evidence")
+    .select("*")
+    .order("evidence_date", { ascending: false })
+    .limit(query.limit ?? 500);
+  if (query.evidenceDate)
+    request = request.eq("evidence_date", query.evidenceDate);
+  if (query.origin) request = request.eq("origin", query.origin);
+  if (query.companyProfileId)
+    request = request.eq("company_profile_id", query.companyProfileId);
+  if (query.companyScanRunId)
+    request = request.eq("company_scan_run_id", query.companyScanRunId);
+  if (query.allowedAudience)
+    request = request.eq("allowed_audience", query.allowedAudience);
+  if (query.privacyLevel)
+    request = request.eq("privacy_level", query.privacyLevel);
+
+  const { data, error } = await request;
+  if (error) throw new Error(`PGI evidence query failed: ${error.message}`);
+  return (data || []) as PgiEvidenceRow[];
+}
+
+export async function loadCompanyPgiEvidence(
+  supabase: SupabaseClient,
+  params: {
+    companyProfileId: string;
+    evidenceDate?: string;
+    companyScanRunId?: string;
+    includeAggregate?: boolean;
+    limit?: number;
+  },
+): Promise<PgiEvidenceRow[]> {
+  const privateRows = await loadPgiEvidence(supabase, {
+    evidenceDate: params.evidenceDate,
+    origin: "company_scan",
+    companyProfileId: params.companyProfileId,
+    companyScanRunId: params.companyScanRunId,
+    allowedAudience: "company_private",
+    limit: params.limit ?? 500,
+  });
+  if (!params.includeAggregate) return privateRows;
+  const aggregateRows = await loadPgiEvidence(supabase, {
+    evidenceDate: params.evidenceDate,
+    origin: "company_scan",
+    companyProfileId: params.companyProfileId,
+    companyScanRunId: params.companyScanRunId,
+    allowedAudience: "aggregate",
+    limit: params.limit ?? 500,
+  });
+  return [...privateRows, ...aggregateRows];
+}
+
+export async function loadPublicSafePgiEvidence(
+  supabase: SupabaseClient,
+  params: { evidenceDate?: string; limit?: number } = {},
+): Promise<PgiEvidenceRow[]> {
+  return loadPgiEvidence(supabase, {
+    evidenceDate: params.evidenceDate,
+    origin: "public_scan",
+    allowedAudience: "public",
+    privacyLevel: "public_safe",
+    limit: params.limit ?? 500,
+  });
+}
+
+export interface PgiEvidenceAggregate {
+  row_count: number;
+  source_domains: string[];
+  source_regions: string[];
+  languages: string[];
+  tributaries: Record<string, number>;
+  frames: Record<string, number>;
+  event_topics: Record<string, number>;
+}
+
+function increment(
+  map: Record<string, number>,
+  key: string | null | undefined,
+): void {
+  const cleaned = clean(key || "unknown");
+  map[cleaned] = (map[cleaned] || 0) + 1;
+}
+
+export function aggregatePgiEvidence(
+  rows: PgiEvidenceRow[],
+): PgiEvidenceAggregate {
+  const tributaries: Record<string, number> = {};
+  const frames: Record<string, number> = {};
+  const eventTopics: Record<string, number> = {};
+  for (const row of rows) {
+    increment(tributaries, row.tributary);
+    increment(frames, row.frame);
+    increment(eventTopics, row.event_topic);
+  }
+  return {
+    row_count: rows.length,
+    source_domains: [
+      ...new Set(rows.map((row) => clean(row.source_domain)).filter(Boolean)),
+    ],
+    source_regions: [
+      ...new Set(rows.map((row) => clean(row.source_region)).filter(Boolean)),
+    ],
+    languages: [
+      ...new Set(rows.map((row) => clean(row.source_language)).filter(Boolean)),
+    ],
+    tributaries,
+    frames,
+    event_topics: eventTopics,
+  };
 }
