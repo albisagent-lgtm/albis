@@ -132,10 +132,9 @@ function sourceName(domain: string | null | undefined): string {
 }
 
 function humanList(values: string[], max = 3): string {
-  const items = uniq(values.map(sourceName).map(cleanText).filter(Boolean)).slice(
-    0,
-    max,
-  );
+  const items = uniq(
+    values.map(sourceName).map(cleanText).filter(Boolean),
+  ).slice(0, max);
   if (items.length <= 1) return items[0] || "selected sources";
   if (items.length === 2) return `${items[0]} and ${items[1]}`;
   return `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
@@ -710,28 +709,12 @@ function companyPgiDimensions(bundle: IntelligenceDepthBundle): {
   };
   const entries = Object.entries(dims);
   const score = Number(
-    (entries.reduce((sum, [, value]) => sum + value, 0) / entries.length).toFixed(1),
+    (
+      entries.reduce((sum, [, value]) => sum + value, 0) / entries.length
+    ).toFixed(1),
   );
   const strongest = entries.sort((a, b) => b[1] - a[1])[0]?.[0] || "framing";
   return { score, strongest: strongest.replace(/_/g, "/") };
-}
-
-function quietPgiRead(bundle: IntelligenceDepthBundle, packet: CompanyBriefingEvidencePacket): string {
-  const kind = String(bundle.signal_kind);
-  const company = packet.company.display_name;
-  if (["media_regulation", "disinformation", "press_freedom", "reputation_narrative"].includes(kind)) {
-    return `For ${company}, the useful signal is that the trust story is still fragmented: platforms, publishers, regulators, and audiences are not yet arguing over one shared event. Keep watching for the moment those lanes converge around a named platform, legal filing, publisher decision, or audience-impact datapoint.`;
-  }
-  if (kind === "cyber_technology") {
-    return `For ${company}, this is still an early technical-risk signal rather than a public narrative split. It becomes more important when a named system, vendor, regulator, customer group, or disclosure turns the issue into a shared reference point.`;
-  }
-  if (["hormuz", "corridors", "suez", "supply_chain"].includes(kind)) {
-    return `For ${company}, the story is still moving more as background pressure than as a contested public account. The shift to watch is when rates, delays, insurance, port calls, rerouting, or cargo movement make one version of the risk visible to customers and another visible to operators.`;
-  }
-  if (kind === "sanctions" || kind === "geopolitics") {
-    return `For ${company}, this is not yet a clean split between competing public realities. It becomes one when named entities, enforcement dates, counterparties, market reaction, or official responses force different audiences to explain the same event differently.`;
-  }
-  return `For ${company}, the quiet signal is that coverage has not yet formed into competing public realities. Watch for a second source type, named stakeholder response, concrete consequence, or clearly different regional framing.`;
 }
 
 function sourceFrameEvidence(bundle: IntelligenceDepthBundle): string[] {
@@ -746,55 +729,141 @@ function buildCompanyPerceptionGapNotes(
   bundles: IntelligenceDepthBundle[],
   packet: CompanyBriefingEvidencePacket,
 ): GeneratedPerceptionGapNote[] {
-  const notes: GeneratedPerceptionGapNote[] = [];
-  const seen = new Set<string>();
-  let thinEvidenceNoteAdded = false;
-  for (const bundle of bundles) {
-    if (bundle.source_names.length < 2) continue;
-    const frameEvidence = sourceFrameEvidence(bundle);
-    const score = companyPgiDimensions(bundle);
-    const sources = humanList(bundle.source_names, 3);
-    const section = cleanText(
-      bundle.section_label || labelForSection(packet, bundle.section_id),
-    );
-    const key = `${section}:${sources}:${bundle.signal_kind}`;
-    if (seen.has(key)) continue;
-    seen.add(key);
-    if (!frameEvidence.length && thinEvidenceNoteAdded) continue;
-    const refs: EvidenceSupportRef[] = uniq([
-      ...bundle.source_refs,
-      ...bundle.claim_ids.map((id) => ({ type: "claim_id" as const, id })),
-    ]).slice(0, 20);
-    const text = frameEvidence.length
-      ? cleanText(
-          `View: ${section} is showing a ${pgiTier(score.score).toLowerCase()} perception gap (${score.score.toFixed(1)}), with the strongest pressure in ${score.strongest}. ${frameEvidence.join(" ")} The gap: different readers could only see the part of the source trail that confirms their existing view of who is responsible and who is exposed. Why it matters: for ${packet.company.display_name}, the risk is not just what happened, but what customers, partners, regulators, or audiences could misread if they only see one side of the evidence trail.`,
-        )
-      : cleanText(
-          `View: today's scan did not find a strong public split over the same ${section.toLowerCase()} event. Coverage is spread across ${sources}, but it has not yet formed into two competing public accounts. The gap: different audiences could still only see separate fragments of the issue, rather than one shared story they are openly arguing over. Why it matters: ${quietPgiRead(bundle, packet)}`,
-        );
-    if (!frameEvidence.length) thinEvidenceNoteAdded = true;
-    notes.push({
-      packet_item_id: bundle.anchor_item_id,
-      cluster_id: bundle.anchor_cluster_id,
+  const eligible = bundles.filter((bundle) => bundle.source_names.length >= 2);
+  const pool = eligible.length
+    ? eligible
+    : bundles.filter((bundle) => bundle.source_names.length > 0);
+  if (!pool.length) return [];
+
+  const scored = pool
+    .map((bundle) => ({ bundle, score: companyPgiDimensions(bundle) }))
+    .sort((a, b) => b.score.score - a.score.score);
+  const top = scored[0];
+  if (!top) return [];
+
+  const company = packet.company.display_name;
+  const activeSections = uniq(
+    pool
+      .map((entry) =>
+        cleanText(
+          entry.section_label || labelForSection(packet, entry.section_id),
+        ),
+      )
+      .filter(Boolean),
+  );
+  const activeSectionSet = new Set(
+    pool.map((entry) => entry.section_id).filter(Boolean),
+  );
+  const quietSections = packet.company.selected_scan_areas
+    .filter((area) => !activeSectionSet.has(area.area_id))
+    .map((area) => cleanText(area.label || area.area_id))
+    .filter(Boolean)
+    .slice(0, 3);
+  const sourceNames = uniq(pool.flatMap((entry) => entry.source_names)).slice(
+    0,
+    5,
+  );
+  const frameEvidence = uniq(pool.flatMap(sourceFrameEvidence)).slice(0, 3);
+  const avgScore = Number(
+    (
+      scored.reduce((sum, entry) => sum + entry.score.score, 0) / scored.length
+    ).toFixed(1),
+  );
+  const maxScore = top.score.score;
+  const combinedScore = Number(((avgScore + maxScore) / 2).toFixed(1));
+  const tier = pgiTier(combinedScore);
+  const strongestDimensions = uniq(
+    scored.map((entry) => entry.score.strongest),
+  ).slice(0, 2);
+  const strongestSections = activeSections.slice(0, 3);
+  const quietPhrase = quietSections.length
+    ? ` The attention shadow is also useful: ${humanList(quietSections, 3)} stayed comparatively quiet inside this scan.`
+    : "";
+  const framePhrase = frameEvidence.length
+    ? ` ${frameEvidence.join(" ")}`
+    : ` The scan found coverage across ${humanList(sourceNames, 4)}, but the public story has not yet hardened into a single contested event.`;
+  const refs: EvidenceSupportRef[] = uniq([
+    ...pool.flatMap((entry) => entry.source_refs),
+    ...pool.flatMap((entry) =>
+      entry.claim_ids.map((id) => ({ type: "claim_id" as const, id })),
+    ),
+  ]).slice(0, 24);
+
+  const text = cleanText(
+    `View: ${company}'s scan shows ${tier.toLowerCase()} PGI pressure (${combinedScore.toFixed(1)}) across ${humanList(strongestSections, 3) || "the tracked topics"}, driven mainly by ${humanList(strongestDimensions, 2)}. The gap: this scan universe is not producing one shared public story; coverage is separating into different lanes of risk, responsibility, and visibility.${framePhrase}${quietPhrase} Why it matters: this is the company-level PGI read — not a verdict on one article, but a map of where customers, partners, regulators, or audiences could start interpreting ${company}'s world differently based on which scan lane they see first.`,
+  );
+
+  const notes: GeneratedPerceptionGapNote[] = [
+    {
+      packet_item_id: top.bundle.anchor_item_id,
+      cluster_id: top.bundle.anchor_cluster_id,
       note: {
         text,
         supported_by: refs,
         evidence_confidence: {
           kind: "regional_frame",
-          label: "Company PGI frame comparison",
-          customer_phrase: "This compares source frames; it is not a separate factual claim.",
-          confidence: bundle.confidence === "low" ? "medium" : bundle.confidence,
-          reason: "Adapted from Albis PGI dimensions: factual, causal, framing, emotional, actor-context, and cui-bono divergence.",
-          source_count: bundle.source_names.length,
+          label: "Company daily PGI read",
+          customer_phrase:
+            "This aggregates source frames across the company's selected scan areas.",
+          confidence:
+            top.bundle.confidence === "low" ? "medium" : top.bundle.confidence,
+          reason:
+            "Aggregates the company's selected scan areas into a mini Perception Gap read for the daily briefing.",
+          source_count: sourceNames.length,
           source_quality: "B",
         },
       },
-      frame_ids: bundle.source_frames.length
-        ? bundle.source_frames.flatMap((frame) => frame.source_ids).slice(0, 4)
-        : bundle.source_refs.map((ref) => ref.id).slice(0, 4),
+      frame_ids: uniq(
+        pool.flatMap((entry) =>
+          entry.source_frames.length
+            ? entry.source_frames.flatMap((frame) => frame.source_ids)
+            : entry.source_refs.map((ref) => ref.id),
+        ),
+      ).slice(0, 8),
+    },
+  ];
+
+  const sharpestFrames = sourceFrameEvidence(top.bundle);
+  if (sharpestFrames.length >= 2) {
+    const section = cleanText(
+      top.bundle.section_label ||
+        labelForSection(packet, top.bundle.section_id),
+    );
+    notes.push({
+      packet_item_id: top.bundle.anchor_item_id,
+      cluster_id: top.bundle.anchor_cluster_id,
+      note: {
+        text: cleanText(
+          `View: the sharpest local fracture sits in ${section} (${top.score.score.toFixed(1)}, ${pgiTier(top.score.score).toLowerCase()}). ${sharpestFrames.slice(0, 2).join(" ")} The gap: each lane makes a different actor feel central. Why it matters: for ${company}, this is the part of today's scan most likely to change how a reader assigns risk, trust, or responsibility.`,
+        ),
+        supported_by: uniq([
+          ...top.bundle.source_refs,
+          ...top.bundle.claim_ids.map((id) => ({
+            type: "claim_id" as const,
+            id,
+          })),
+        ]).slice(0, 16),
+        evidence_confidence: {
+          kind: "regional_frame",
+          label: "Strongest local PGI fracture",
+          customer_phrase:
+            "This highlights the highest-pressure frame difference inside the company scan.",
+          confidence:
+            top.bundle.confidence === "low" ? "medium" : top.bundle.confidence,
+          reason:
+            "Highlights the highest-pressure event-level frame difference inside the company scan.",
+          source_count: top.bundle.source_names.length,
+          source_quality: "B",
+        },
+      },
+      frame_ids: top.bundle.source_frames.length
+        ? top.bundle.source_frames
+            .flatMap((frame) => frame.source_ids)
+            .slice(0, 4)
+        : top.bundle.source_refs.map((ref) => ref.id).slice(0, 4),
     });
-    if (notes.length >= 2) break;
   }
+
   return notes;
 }
 
