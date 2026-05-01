@@ -219,22 +219,38 @@ function reportingDifferences(clusterId: string, relatedSignals: Signal[]) {
   }));
 }
 
+function removeLeadSourceTitle(value: string | undefined | null): string {
+  return cleanText(value)
+    .replace(/^.{20,240}\|\s[^.!?]{2,140}[.!?]\s+/i, "")
+    .replace(/^[^.!?]{20,240}[.!?]\s+(?=(The practical point|The risk|The key point|These are early|One vessel|The useful change|The agency|Reported)\b)/i, "")
+    .replace(/^([^.!?]{8,180})\.\s+\1\.\s+/i, "$1. ")
+    .replace(/^([^.!?]{8,180})\.\s+\1/i, "$1")
+    .trim();
+}
+
+function distinctSentences(values: Array<string | undefined | null>, max = 3): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const value of values) {
+    const cleaned = removeLeadSourceTitle(value);
+    if (!cleaned) continue;
+    const key = cleaned.toLowerCase().replace(/[^a-z0-9]+/g, " ").slice(0, 90);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(sentence(cleaned));
+    if (out.length >= max) break;
+  }
+  return out;
+}
+
 function buildFindingBody(note: ResearchNote, sources: ResearchSource[]): string {
-  const evidenceLine = sources.length
-    ? `The evidence trail currently includes ${sources.length} source${sources.length === 1 ? "" : "s"}, with ${sources
-        .slice(0, 3)
-        .map((source) => source.source_domain)
-        .join(", ")} most visible in the email trail.`
-    : "The research trail is not strong enough yet for a customer-facing finding.";
-  return [
-    sentence(note.what_happened),
-    note.what_changed_today ? sentence(note.what_changed_today) : "",
-    note.key_facts[0] ? sentence(note.key_facts[0]) : "",
-    note.company_relevance ? sentence(note.company_relevance) : "",
-    evidenceLine,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const lines = distinctSentences(
+    [note.company_relevance, note.what_changed_today, note.what_happened],
+    3,
+  );
+  if (lines.length) return lines.join(" ");
+  if (sources.length) return "Albis found a relevant development, but the customer-facing read still needs editorial tightening before delivery.";
+  return "The research trail is not strong enough yet for a customer-facing finding.";
 }
 
 function makeResearchSourceFromSignal(
