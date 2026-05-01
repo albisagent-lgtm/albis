@@ -46,6 +46,7 @@ import {
   buildIntelligenceDepthBundles,
   type SelectedSignalForDepth,
 } from "./intelligence-depth";
+import { buildResearchedUnderstandingLayer } from "./researched-understanding";
 
 export interface CompanyPackage8PipelineOptions {
   scanDate: string;
@@ -1565,8 +1566,23 @@ export async function runCompanyPackage8PipelineForProfile(
     depthPacket,
     intelligence_depth_bundles,
   );
+  const researchedUnderstanding = buildResearchedUnderstandingLayer({
+    packet: depthPacket,
+    profile,
+    scanDate,
+    selected: selectedForDepth,
+    signals: workingSignals || [],
+    bundles: intelligence_depth_bundles,
+  });
+  const understoodOutput = {
+    ...depthOutput,
+    understanding: {
+      ...(depthOutput.understanding || {}),
+      researched_understanding_v1: researchedUnderstanding,
+    },
+  };
   const draftOutput = applyScannerReportLayout({
-    output: depthOutput,
+    output: understoodOutput,
     packet: depthPacket,
     selected: selectedForDepth,
     bundles: intelligence_depth_bundles,

@@ -1153,6 +1153,7 @@ export function applyScannerReportLayout(input: {
     },
     understanding: companyPgiV2
       ? {
+          ...(output.understanding || {}),
           company_pgi_v2: companyPgiV2,
           notes: companyPgiV2.understanding_notes,
         }

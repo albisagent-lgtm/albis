@@ -1567,6 +1567,152 @@ export interface EvidencePacketAudit {
 
 // --- Generation Output ---
 
+export type ResearchClusterStatus =
+  | "researching"
+  | "ready"
+  | "weak"
+  | "dashboard_only"
+  | "held";
+
+export type ResearchImportance = "critical" | "high" | "medium" | "low";
+export type ResearchConfidence = "high" | "medium" | "low";
+export type ResearchScope = "company" | "public";
+export type ResearchReadStatus =
+  | "read"
+  | "snippet_only"
+  | "failed"
+  | "duplicate"
+  | "background";
+export type ResearchTrailRole =
+  | "research"
+  | "evidence"
+  | "email"
+  | "background"
+  | "excluded";
+
+export interface ResearchCluster {
+  id: string;
+  date: string;
+  scope: ResearchScope;
+  company_profile_id?: string;
+  scan_area_ids: string[];
+  title: string;
+  status: ResearchClusterStatus;
+  importance: ResearchImportance;
+  confidence: ResearchConfidence;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ResearchSource {
+  id: string;
+  cluster_id: string;
+  url: string;
+  source_domain: string;
+  title: string;
+  published_at?: string | null;
+  source_type?: SourceType;
+  region?: string | null;
+  language?: string | null;
+  read_status: ResearchReadStatus;
+  trail_role: ResearchTrailRole;
+  relevance_score?: number;
+  reliability_note?: string;
+}
+
+export interface ResearchSourceObservation {
+  source_id: string;
+  what_it_reports: string;
+  what_it_emphasises: string;
+  useful_detail: string;
+}
+
+export interface ResearchReportingDifference {
+  label: string;
+  description: string;
+  source_ids: string[];
+}
+
+export interface ResearchPerceptionGapCandidate {
+  strength: "strong" | "medium" | "weak" | "none";
+  gap: string;
+  why_it_matters: string;
+  evidence_source_ids: string[];
+}
+
+export interface ResearchNote {
+  id: string;
+  cluster_id: string;
+  summary: string;
+  what_happened: string;
+  what_changed_today: string;
+  key_actors: string[];
+  key_facts: string[];
+  key_numbers: string[];
+  named_places: string[];
+  causes_or_drivers: string[];
+  consequences: string[];
+  source_observations: ResearchSourceObservation[];
+  differences_in_reporting: ResearchReportingDifference[];
+  what_is_unclear: string[];
+  possible_perception_gap?: ResearchPerceptionGapCandidate;
+  company_relevance?: string;
+  albis_learning: string;
+}
+
+export interface AlbisFinding {
+  id: string;
+  cluster_id: string;
+  date: string;
+  scope: ResearchScope;
+  company_profile_id?: string;
+  title: string;
+  body: string;
+  why_it_matters?: string;
+  uncertainty?: string;
+  confidence: ResearchConfidence;
+  email_source_ids: string[];
+  evidence_source_ids: string[];
+  dashboard_source_ids: string[];
+  placement:
+    | "email_main"
+    | "email_secondary"
+    | "dashboard"
+    | "article_candidate"
+    | "hold";
+}
+
+export interface CompanyResearchedUnderstandingLayer {
+  layer_version: "researched_understanding_v1";
+  generated_at: string;
+  build_doc: "memory/researched-understanding-layer-build-plan.md";
+  company_profile_id: string;
+  company_name: string;
+  scan_date: string;
+  target_cluster_count: { min: 5; max: 8 };
+  research_standard: {
+    principle: "external_articles_are_evidence_albis_findings_are_the_product";
+    no_shallow_reporting_dressed_as_insight: true;
+    source_trail_integrity: true;
+  };
+  clusters: ResearchCluster[];
+  sources: ResearchSource[];
+  notes: ResearchNote[];
+  findings: AlbisFinding[];
+  source_trail_summary: {
+    research_sources: number;
+    evidence_sources: number;
+    email_sources: number;
+    snippet_only_sources: number;
+    full_text_sources: number;
+  };
+  qa: {
+    ready_for_customer_review: boolean;
+    blockers: string[];
+    warnings: string[];
+  };
+}
+
 export interface CompanyBriefingGenerationOutput {
   output_version: "company_briefing_generation_v1";
   run_id: string;
@@ -1579,7 +1725,10 @@ export interface CompanyBriefingGenerationOutput {
   useful_observations: GeneratedUsefulObservations;
   scanner_report?: GeneratedScannerReport;
   /** Shared Understanding Layer artifacts. Present when a writer proved the read before writing. */
-  understanding?: unknown;
+  understanding?: {
+    researched_understanding_v1?: CompanyResearchedUnderstandingLayer;
+    [key: string]: unknown;
+  };
   source_notes: GeneratedSourceNotes;
   trace: GenerationTrace;
 }

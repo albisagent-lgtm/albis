@@ -124,8 +124,11 @@ export function generateCompanyBriefingHtmlV2(
   // --- SCANNER OVERVIEW / MAIN FINDINGS ---
   const todayScanHtml = renderTodayScan(output);
 
+  // --- RESEARCHED DAILY FINDINGS ---
+  const researchedFindingsHtml = renderResearchedFindings(output);
+
   // --- MAIN BRIEFING ---
-  const mainBriefingHtml = renderMainBriefing(output);
+  const mainBriefingHtml = researchedFindingsHtml ? "" : renderMainBriefing(output);
 
   // --- DEEPER READ ---
   const deeperReadHtml = renderDeeperRead(output);
@@ -185,6 +188,8 @@ export function generateCompanyBriefingHtmlV2(
 
       ${todayScanHtml}
       ${todayScanHtml ? divider() : ""}
+      ${researchedFindingsHtml}
+      ${researchedFindingsHtml && mainBriefingHtml ? divider() : ""}
       ${mainBriefingHtml}
       ${deeperReadHtml ? divider() + deeperReadHtml : ""}
       ${perceptionGapHtml ? divider() + perceptionGapHtml : ""}
@@ -212,6 +217,54 @@ export function generateCompanyBriefingHtmlV2(
 // ---------------------------------------------------------------------------
 // Section renderers
 // ---------------------------------------------------------------------------
+
+function renderResearchedFindings(output: CompanyBriefingGenerationOutput): string {
+  const layer = output.understanding?.researched_understanding_v1;
+  const findings = layer?.findings?.filter((finding) =>
+    ["email_main", "email_secondary"].includes(finding.placement),
+  );
+  if (!layer || !findings?.length) return "";
+
+  const sourceById = new Map(layer.sources.map((source) => [source.id, source]));
+  let html = sectionLabel("Daily Findings");
+  html += `<div style="padding:12px 14px;background:${QUIET_BG};border-left:3px solid ${AMBER};margin-bottom:18px;">`;
+  html += `<p style="font-size:14px;color:${BODY};line-height:1.6;margin:0;font-family:-apple-system,sans-serif;">These are Albis-written findings from the researched understanding layer. Source links are evidence trails, not the product itself.</p>`;
+  html += `</div>`;
+
+  for (const finding of findings.slice(0, 8)) {
+    const emailSources = finding.email_source_ids
+      .map((id) => sourceById.get(id))
+      .filter(Boolean)
+      .slice(0, 5);
+    const evidenceCount = finding.evidence_source_ids.length;
+    html += `<div style="margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid ${BORDER};">`;
+    html += `<p style="font-size:16px;color:${NAVY};line-height:1.4;margin:0 0 7px;font-weight:750;font-family:-apple-system,sans-serif;">${esc(customerEnglishText(finding.title))}</p>`;
+    html += `<p style="font-size:15px;color:${BODY};line-height:1.65;margin:0 0 8px;font-family:-apple-system,sans-serif;">${textHtml(finding.body)}</p>`;
+    if (finding.why_it_matters) {
+      html += `<p style="font-size:14px;color:${BODY};line-height:1.55;margin:0 0 8px;font-family:-apple-system,sans-serif;"><strong style="color:${NAVY};">Why it matters:</strong> ${textHtml(finding.why_it_matters)}</p>`;
+    }
+    if (finding.uncertainty) {
+      html += `<p style="font-size:12px;color:${GRAY};line-height:1.45;margin:0 0 8px;font-family:-apple-system,sans-serif;">${esc(customerEnglishText(finding.uncertainty))}</p>`;
+    }
+    if (emailSources.length) {
+      html += `<p style="font-size:12px;color:${GRAY};line-height:1.5;margin:0;font-family:-apple-system,sans-serif;">Source trail: `;
+      html += emailSources
+        .map((source) =>
+          source?.url
+            ? `<a href="${escAttr(source.url)}" style="color:${GRAY};text-decoration:underline;">${esc(source.source_domain)}</a>`
+            : esc(source?.source_domain || "source"),
+        )
+        .join(" · ");
+      if (evidenceCount > emailSources.length) {
+        html += ` · ${evidenceCount - emailSources.length} more in evidence trail`;
+      }
+      html += `</p>`;
+    }
+    html += `</div>`;
+  }
+
+  return html;
+}
 
 function renderMainBriefing(output: CompanyBriefingGenerationOutput): string {
   const sections = output.main_briefing.sections;
