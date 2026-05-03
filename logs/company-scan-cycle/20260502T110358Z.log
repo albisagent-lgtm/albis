@@ -1,0 +1,229 @@
+=== company scan cycle 20260502T110358Z (UTC) ===
+repo: /Users/treelight/.openclaw/workspace/albis-app
+log:  /Users/treelight/.openclaw/workspace/albis-app/logs/company-scan-cycle/20260502T110358Z.log
+scan_date: 2026-05-02
+
+[1/3] build-watch-graph
+◇ injected env (10) from .env.local // tip: ⌘ enable debugging { debug: true }
+🔧 Building union watch graph
+✅ Done
+{
+  "clusters_built": 6,
+  "scan_targets_upserted": 60,
+  "scan_targets_deactivated": 0,
+  "cluster_breakdown": {
+    "entity_cluster": {
+      "canonicals": 15,
+      "companies": 3
+    },
+    "theme_cluster": {
+      "canonicals": 22,
+      "companies": 3
+    },
+    "region_cluster": {
+      "canonicals": 11,
+      "companies": 3
+    },
+    "sector_cluster": {
+      "canonicals": 3,
+      "companies": 3
+    },
+    "commodity_cluster": {
+      "canonicals": 1,
+      "companies": 1
+    },
+    "risk_cluster": {
+      "canonicals": 8,
+      "companies": 3
+    }
+  }
+}
+
+[2/3] run-company-scan
+◇ injected env (10) from .env.local // tip: ⌘ override existing { override: true }
+▶ Running company scan: 2026-05-02 window=07-00
+{
+  "scan_run_id": "1bfde118-b0b0-4c16-b7f7-79f56478b5d8",
+  "run_date": "2026-05-02",
+  "run_window": "07-00",
+  "status": "completed",
+  "targets_inspected": 60,
+  "signals_extracted": 474,
+  "sources_consulted": 421,
+  "error_summary": null
+}
+
+[3/3] run-company-signal-pipeline
+◇ injected env (10) from .env.local // tip: ◈ secrets for agents [www.dotenvx.com]
+🚀 Running company SIGNAL pipeline for 2026-05-02 (lookback=24h)
+  ↳ evidence provenance run: 1bfde118-b0b0-4c16-b7f7-79f56478b5d8
+  ↳ loaded 1000 signals
+✅ Loaded 3 company profiles
+
+▶ Processing Lindell Media
+  ↳ company-specific retrieval: 18 queries (geopolitical_media)
+    • geopolitical conflict: 1 result(s)
+    • reputation narrative: 3 result(s)
+    • kim jong un: 0 result(s)
+    • kim il sung: 1 result(s)
+    • kim yo jong: 0 result(s)
+    • wang yi: 0 result(s)
+    • kim jong il: 0 result(s)
+    • dprk: 0 result(s)
+    • kim yong nam: 0 result(s)
+    • hormuz: 4 result(s)
+    • putin: 1 result(s)
+    • kremlin: 1 result(s)
+    • geopolitical media environment: 0 result(s)
+    • sanctions: 12 result(s)
+    • media regulation: 12 result(s)
+    • disinformation: 12 result(s)
+    • press freedom: 12 result(s)
+    • cyber technology: 10 result(s)
+  Package 10 company-specific retrieval loaded 30 signal(s) from 18 query/queries (geopolitical_media)
+  ↳ loaded 16 prior visible scan item(s) for no-repeat checks
+  ↳ deep-dive retrieval: 12 follow-up queries
+    • confirm_core_fact: 1 result(s)
+    • find_better_sources: 0 result(s)
+    • find_source_frames: 0 result(s)
+    • find_stats_or_official_context: 1 result(s)
+    • confirm_core_fact: 8 result(s)
+    • find_better_sources: 5 result(s)
+    • find_source_frames: 2 result(s)
+    • find_stats_or_official_context: 0 result(s)
+    • find_stats_or_official_context: 1 result(s)
+    • confirm_core_fact: 7 result(s)
+    • find_better_sources: 3 result(s)
+    • find_source_frames: 0 result(s)
+  Package 8 preview selected 24 item(s); QA=dry_run_only, blockers=2
+✅ Upserted 30 PGI evidence row(s) for Lindell Media
+
+▶ Processing Evidence & Echoes Genealogy
+  ↳ company-specific retrieval: 12 queries (ai_memory_integrity)
+    • AI video: 12 result(s)
+    • artificial intelligence: 12 result(s)
+    • trump: 8 result(s)
+    • AI and public memory: 2 result(s)
+    • disinformation: 0 result(s)
+    • deepfake: 0 result(s)
+    • censorship: 0 result(s)
+    • journalism: 0 result(s)
+    • propaganda: 0 result(s)
+    • information warfare: 0 result(s)
+    • cybersecurity: 12 result(s)
+    • election: 12 result(s)
+  Package 10 company-specific retrieval loaded 36 signal(s) from 12 query/queries (ai_memory_integrity)
+  ↳ loaded 39 prior visible scan item(s) for no-repeat checks
+  ↳ deep-dive retrieval: 12 follow-up queries
+    • confirm_core_fact: 0 result(s)
+    • find_better_sources: 8 result(s)
+    • find_source_frames: 1 result(s)
+    • find_stats_or_official_context: 5 result(s)
+    • confirm_core_fact: 8 result(s)
+    • find_better_sources: 8 result(s)
+    • find_source_frames: 0 result(s)
+    • find_stats_or_official_context: 1 result(s)
+    • confirm_core_fact: 3 result(s)
+    • find_better_sources: 8 result(s)
+    • find_source_frames: 0 result(s)
+    • find_stats_or_official_context: 0 result(s)
+  Package 8 preview selected 24 item(s); QA=dry_run_only, blockers=1
+✅ Upserted 36 PGI evidence row(s) for Evidence & Echoes Genealogy
+
+▶ Processing Test Company
+  ↳ company-specific retrieval: 14 queries (logistics_routes)
+    • fertiliser: 12 result(s)
+    • semiconductors: 5 result(s)
+    • saudi arabia: 12 result(s)
+    • route confidence: 12 result(s)
+    • shipping routes: 8 result(s)
+    • freight rates: 5 result(s)
+    • port disruption: 7 result(s)
+    • container shortages: 6 result(s)
+    • Hormuz Strait: 9 result(s)
+    • blockages: 10 result(s)
+    • geopolitics: 7 result(s)
+    • red sea: 7 result(s)
+    • suez canal: 7 result(s)
+    • supply chain disruption: 5 result(s)
+  Package 10 company-specific retrieval loaded 63 signal(s) from 14 query/queries (logistics_routes)
+  ↳ loaded 64 prior visible scan item(s) for no-repeat checks
+  ↳ deep-dive retrieval: 12 follow-up queries
+    • confirm_core_fact: 8 result(s)
+    • find_better_sources: 3 result(s)
+    • find_source_frames: 0 result(s)
+    • find_stats_or_official_context: 1 result(s)
+    • confirm_core_fact: 4 result(s)
+    • find_better_sources: 4 result(s)
+    • find_source_frames: 0 result(s)
+    • find_stats_or_official_context: 3 result(s)
+    • confirm_core_fact: 2 result(s)
+    • find_better_sources: 3 result(s)
+    • find_source_frames: 0 result(s)
+    • find_stats_or_official_context: 3 result(s)
+  Package 8 preview selected 24 item(s); QA=dry_run_only, blockers=0
+✅ Upserted 63 PGI evidence row(s) for Test Company
+✅ Verified 3 company_briefings row(s) for 2026-05-02
+
+🎉 Company signal pipeline complete
+{
+  "scan_date": "2026-05-02",
+  "lookback_hours": 24,
+  "dry_run": false,
+  "signals_loaded": 1000,
+  "results": [
+    {
+      "company_name": "Lindell Media",
+      "company_profile_id": "2fcda41e-dbb9-40be-9c86-4ba4659d2e77",
+      "signals_considered": 30,
+      "signals_selected": 24,
+      "signal_level": "low",
+      "briefing_id": "ce5fb3cc-c1c6-431a-bc40-96b449d42c32",
+      "content_version": "company_scanner_report_v1",
+      "qa_status": "dry_run_only",
+      "qa_blocking_failures": 2,
+      "dry_run_would_have_status": "hold",
+      "retrieval_mode": "company_specific_retrieval",
+      "retrieval_intent": "geopolitical_media",
+      "retrieval_queries": 18,
+      "retrieval_signals_loaded": 30,
+      "deep_dive_signals_added": 21
+    },
+    {
+      "company_name": "Evidence & Echoes Genealogy",
+      "company_profile_id": "2f4255d8-e1bb-48fd-8282-ee5c03f10ea2",
+      "signals_considered": 36,
+      "signals_selected": 24,
+      "signal_level": "low",
+      "briefing_id": "87707e30-b975-4e1a-86ed-2b7eb92b04a9",
+      "content_version": "company_scanner_report_v1",
+      "qa_status": "dry_run_only",
+      "qa_blocking_failures": 1,
+      "dry_run_would_have_status": "hold",
+      "retrieval_mode": "company_specific_retrieval",
+      "retrieval_intent": "ai_memory_integrity",
+      "retrieval_queries": 12,
+      "retrieval_signals_loaded": 36,
+      "deep_dive_signals_added": 24
+    },
+    {
+      "company_name": "Test Company",
+      "company_profile_id": "6330ca52-2e75-49db-8c9a-5d97ad38a28a",
+      "signals_considered": 63,
+      "signals_selected": 24,
+      "signal_level": "low",
+      "briefing_id": "be06299f-8c3d-45d6-af45-979e97f030ed",
+      "content_version": "company_scanner_report_v1",
+      "qa_status": "dry_run_only",
+      "qa_blocking_failures": 0,
+      "dry_run_would_have_status": "send",
+      "retrieval_mode": "company_specific_retrieval",
+      "retrieval_intent": "logistics_routes",
+      "retrieval_queries": 14,
+      "retrieval_signals_loaded": 63,
+      "deep_dive_signals_added": 24
+    }
+  ]
+}
+
+=== cycle complete ===
