@@ -11,6 +11,7 @@
 // launch product.
 // ---------------------------------------------------------------------------
 
+import { editorialModelConfiguredHint, generateEditorialJson } from "../editorial-model-client";
 import type {
   AlbisFinding,
   CompanyBriefingEditorPass,
@@ -212,50 +213,31 @@ function responseSchema() {
   };
 }
 
-async function callOpenAIWriter(promptPacket: unknown): Promise<WriterResponse> {
-  const apiKey = process.env.OPENAI_API_KEY || process.env.ALBIS_OPENAI_API_KEY;
-  if (!apiKey) throw new Error("OPENAI_API_KEY or ALBIS_OPENAI_API_KEY is not configured");
-  const model = process.env.ALBIS_COMPANY_SCAN_EDITORIAL_MODEL || "gpt-4o";
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model,
-      temperature: 0.45,
-      response_format: {
-        type: "json_schema",
-        json_schema: responseSchema(),
+async function callEditorialWriter(promptPacket: unknown): Promise<{ writer: WriterResponse; modelUsed: string }> {
+  const result = await generateEditorialJson<WriterResponse>({
+    modelEnv: "ALBIS_COMPANY_SCAN_EDITORIAL_MODEL",
+    defaultModel: process.env.ALBIS_EDITORIAL_MODEL_PROVIDER?.startsWith("cloudflare") ? "@cf/meta/llama-3.1-70b-instruct" : "gpt-4o",
+    temperature: 0.45,
+    responseSchema: responseSchema(),
+    messages: [
+      {
+        role: "system",
+        content:
+          "You are the Albis editorial writer for Company Daily Scan V1. Write exactly like the approved Lindell Media gold-standard email: reported, evidence-led, precise, human, and useful. Do not sound like an analyst pipeline. Use only the evidence provided. If evidence is thin, choose fewer stronger topics rather than padding. Never invent facts, numbers, sources, or URLs. Return JSON only.",
       },
-      messages: [
-        {
-          role: "system",
-          content:
-            "You are the Albis editorial writer for Company Daily Scan V1. Write exactly like the approved Lindell Media gold-standard email: reported, evidence-led, precise, human, and useful. Do not sound like an analyst pipeline. Use only the evidence provided. If evidence is thin, choose fewer stronger topics rather than padding. Never invent facts, numbers, sources, or URLs.",
-        },
-        {
-          role: "user",
-          content: `${GOLD_STANDARD_REFERENCE}\n\nWrite the customer-ready daily scan from this evidence packet. Return JSON only.\n\n${JSON.stringify(promptPacket, null, 2)}`,
-        },
-      ],
-    }),
+      {
+        role: "user",
+        content: `${GOLD_STANDARD_REFERENCE}\n\nWrite the customer-ready daily scan from this evidence packet. Return JSON only.\n\n${JSON.stringify(promptPacket, null, 2)}`,
+      },
+    ],
   });
-
-  if (!response.ok) {
-    const body = await response.text().catch(() => "");
-    throw new Error(`OpenAI editorial writer failed: ${response.status} ${body.slice(0, 500)}`);
-  }
-  const data = await response.json();
-  const content = data?.choices?.[0]?.message?.content;
-  if (!content) throw new Error("OpenAI editorial writer returned no content");
-  return JSON.parse(content) as WriterResponse;
+  return { writer: result.json, modelUsed: `${result.provider}:${result.model}` };
 }
 
 function applyWriterResponse(
   output: CompanyBriefingGenerationOutput,
   writer: WriterResponse,
+  modelUsed: string,
 ): CompanyBriefingGenerationOutput {
   const next = cloneOutput(output);
   const layer = next.understanding?.researched_understanding_v1;
@@ -347,14 +329,14 @@ function applyWriterResponse(
     ...(next.understanding || {}),
     gold_standard_editorial_writer_v1: {
       enabled: true,
-      model: process.env.ALBIS_COMPANY_SCAN_EDITORIAL_MODEL || "openai:gpt-4o",
+      model: modelUsed,
       applied_at: new Date().toISOString(),
       reference: "approved_lindell_media_daily_scan_v1",
     },
   };
   next.trace = {
     ...next.trace,
-    model_or_agent_label: process.env.ALBIS_COMPANY_SCAN_EDITORIAL_MODEL || "openai:gpt-4o",
+    model_or_agent_label: modelUsed,
   };
   return next;
 }
@@ -386,7 +368,7 @@ export async function applyGoldStandardEditorialWriter(input: {
     enabled: true,
     mode: "gold_standard_editorial_writer" as const,
     deterministic: false,
-    model_used: process.env.ALBIS_COMPANY_SCAN_EDITORIAL_MODEL || "openai:gpt-4o",
+    model_used: process.env.ALBIS_COMPANY_SCAN_EDITORIAL_MODEL || process.env.ALBIS_EDITORIAL_MODEL_PROVIDER || "auto",
     changed_paths: [],
     warnings: [],
     blocked: false,
@@ -418,21 +400,23 @@ export async function applyGoldStandardEditorialWriter(input: {
         ...baseReport,
         blocked: true,
         blocked_reason:
-          "Company Daily Scan V1 requires the gold-standard editorial writer. Set ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER=true and OPENAI_API_KEY/ALBIS_OPENAI_API_KEY before sending.",
+          `Company Daily Scan V1 requires the gold-standard editorial writer. Set ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER=true and configure ${editorialModelConfiguredHint()} before sending.`,
       },
     };
   }
 
   try {
     const promptPacket = buildPromptPacket({ packet: input.packet, output: input.output, layer });
-    const writer = await callOpenAIWriter(promptPacket);
+    const result = await callEditorialWriter(promptPacket);
+    const writer = result.writer;
     const validation = validateWriterResponse(writer);
-    const editedOutput = applyWriterResponse(input.output, writer);
+    const editedOutput = applyWriterResponse(input.output, writer, result.modelUsed);
     return {
       output: editedOutput,
       edited: true,
       edit_report: {
         ...baseReport,
+        model_used: result.modelUsed,
         changed_paths: [
           "understanding.researched_understanding_v1.findings",
           "understanding.researched_understanding_v1.notes",

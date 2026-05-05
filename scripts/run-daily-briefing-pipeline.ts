@@ -12,6 +12,7 @@ import {
   formatPublicEditionRunReportLine,
   writePublicEditionRunReport,
 } from '../src/lib/public-edition-run-report';
+import { applyPublicBriefingEditorialWriter } from '../src/lib/public-briefing-editorial-writer';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -111,9 +112,9 @@ function needsPackageRefresh(briefing: any, draft: any) {
   );
 }
 
-function buildBriefingFromScan(briefingDate: string, items: any[], articleEntries: PublicEditionArticleEntry[] = [], indexScores: PublicIndexScoreInputs = {}) {
+async function buildBriefingFromScan(briefingDate: string, items: any[], articleEntries: PublicEditionArticleEntry[] = [], indexScores: PublicIndexScoreInputs = {}) {
   const pkg = buildDailyBriefingPackage(briefingDate, items, articleEntries, indexScores);
-  return {
+  const draft = {
     date: briefingDate,
     title: pkg.title,
     content_md: pkg.contentMd,
@@ -123,6 +124,16 @@ function buildBriefingFromScan(briefingDate: string, items: any[], articleEntrie
     top_stories: pkg.topStories,
     edition_scorecard: pkg.scorecard,
   };
+  const edited = await applyPublicBriefingEditorialWriter(draft);
+  if (edited.blocked && process.env.ALBIS_REQUIRE_PUBLIC_BRIEFING_EDITORIAL_WRITER === 'true') {
+    fail(`Public briefing editorial writer blocked: ${edited.blocked_reason || 'unknown'}`);
+  }
+  if (edited.edited) {
+    console.log(`✅ Public briefing editorial writer applied (${edited.research.length} researched story packet(s))`);
+  } else if (edited.enabled) {
+    console.log(`⚠️ Public briefing editorial writer did not edit: ${edited.blocked_reason || 'not configured'}`);
+  }
+  return edited.briefing;
 }
 
 function generateSimpleDigestHtml(briefing: any, briefingDate: string): string {
@@ -234,7 +245,7 @@ async function loadOrCreateBriefingPayload(supabase: ReturnType<typeof createAdm
   }
   const articleEntries = await loadEditionArticles(supabase, briefingDate);
   const indexScores = await loadPublicIndexScores(supabase, briefingDate);
-  const draft = buildBriefingFromScan(briefingDate, items, articleEntries, indexScores);
+  const draft = await buildBriefingFromScan(briefingDate, items, articleEntries, indexScores);
 
   if (!briefing) {
     if (options.dryRun) {

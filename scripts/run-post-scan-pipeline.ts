@@ -11,6 +11,8 @@ import { normalisePublicCategory, selectPublicStories, suggestPublicArticleCount
 import { PUBLIC_EDITORIAL_DOCTRINE_VERSION, getPublicDoctrineLaneSpec, type PublicDoctrineLane } from '../src/lib/public-editorial-doctrine';
 import { buildStoryPlan, type OpeningMode, type StoryPlan } from '../src/lib/public-story-planner';
 import { buildDailyBriefingPackage } from '../src/lib/public-daily-briefing';
+import { buildPublicArticleResearchPacket, type PublicArticleResearchPacket } from '../src/lib/public-article-research';
+import { runPublicArticleEditorialWriter } from '../src/lib/public-article-editorial-writer';
 import type { PublicEditionArticleEntry } from '../src/lib/public-edition-scorecard';
 import {
   buildPublicEditionRunReport,
@@ -51,6 +53,7 @@ type BuiltArticle = {
   frontmatter: Record<string, unknown>;
   wordCount: number;
   opening: string;
+  research?: PublicArticleResearchPacket;
 };
 
 type StoryPacket = {
@@ -1386,8 +1389,32 @@ async function buildArticle(selection: PublicStorySelection, date: string, usedI
   const item = selection.item as ScanItem;
   const packet = buildStoryPacket(item, selection);
   const built = buildPlannedArticleBody(packet);
-  const opening = built.lede.trim();
+  let opening = built.lede.trim();
   let body = built.body;
+  const research = await buildPublicArticleResearchPacket({
+    title: packet.title,
+    connection: packet.connection,
+    tags: packet.tags,
+    regions: packet.regions,
+  });
+  const requireResearch = process.env.ALBIS_REQUIRE_PUBLIC_RESEARCHED_ARTICLES === 'true';
+  if (requireResearch && research.sources.length < 2) {
+    throw new Error(`Public article research too thin (${research.sources.length} source(s)); refusing title/snippet-only article`);
+  }
+  const editorial = await runPublicArticleEditorialWriter({
+    packet: { ...packet, storyPlan: built.plan },
+    currentDraft: body,
+    research,
+  });
+  if (editorial.blocked && process.env.ALBIS_REQUIRE_PUBLIC_ARTICLE_EDITORIAL_WRITER === 'true') {
+    throw new Error(`Public article editorial writer blocked: ${editorial.blocked_reason || 'unknown'}`);
+  }
+  if (editorial.edited && editorial.body) {
+    body = editorial.body;
+    opening = (splitBodyParagraphs(body)[0] || opening).trim();
+    if (editorial.title) packet.title = editorial.title;
+    if (editorial.description) packet.connection = editorial.description;
+  }
   let quality = assessArticleQuality(packet, body);
   if (!quality.ok) {
     body = salvageDraft(packet, body, {
@@ -1426,6 +1453,23 @@ async function buildArticle(selection: PublicStorySelection, date: string, usedI
     story_plan: built.plan,
     story_draft_path: built.draftPath,
     story_draft_form: built.draftForm,
+    researched_article_layer: {
+      enabled: research.enabled,
+      query: research.query,
+      source_count: research.sources.length,
+      fetched_source_count: research.sources.filter((source) => source.fetched).length,
+      sources: research.sources.map((source) => ({ title: source.title, url: source.url, domain: source.domain, fetched: source.fetched })),
+      warnings: research.warnings,
+    },
+    public_editorial_writer: {
+      enabled: editorial.enabled,
+      edited: editorial.edited,
+      blocked: editorial.blocked,
+      blocked_reason: editorial.blocked_reason || null,
+      model_used: editorial.model_used || null,
+      warnings: editorial.warnings,
+    },
+    source_note: editorial.source_note || null,
   };
   const markdown = matter.stringify(body, frontmatter);
   return {
@@ -1444,6 +1488,7 @@ async function buildArticle(selection: PublicStorySelection, date: string, usedI
     frontmatter,
     wordCount,
     opening,
+    research,
   };
 }
 

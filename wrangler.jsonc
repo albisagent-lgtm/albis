@@ -34,6 +34,12 @@
       "service": "albis",
     },
   ],
+  // Workers AI binding for Albis editorial writer passes. This lets the
+  // deployed Cloudflare app use Cloudflare's model runtime instead of requiring
+  // an OpenAI key for public/company publishing quality.
+  "ai": {
+    "binding": "AI",
+  },
   // KV-backed incremental cache. Makes `revalidate = N` actually refresh.
   // Binding name is dictated by @opennextjs/cloudflare's kv-incremental-cache
   // override (BINDING_NAME = "NEXT_INC_CACHE_KV"). Don't rename.

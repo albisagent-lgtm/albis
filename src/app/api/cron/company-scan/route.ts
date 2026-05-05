@@ -27,6 +27,7 @@ import { createClient } from "@supabase/supabase-js";
 import { buildUnionWatchGraph } from "@/lib/company-scan/watch-graph-builder";
 import { runCompanyScan } from "@/lib/company-scan/scan-engine";
 import { runCompanySignalPipeline } from "@/lib/company-scan/run-signal-pipeline";
+import { editorialModelConfiguredHint } from "@/lib/editorial-model-client";
 import type { ScanRunWindow } from "@/lib/company-scan/types";
 
 export const dynamic = "force-dynamic";
@@ -58,10 +59,7 @@ function checkAuth(req: NextRequest): boolean {
 }
 
 function companyEditorialWriterConfigured(): boolean {
-  return (
-    process.env.ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER === "true" &&
-    Boolean(process.env.OPENAI_API_KEY || process.env.ALBIS_OPENAI_API_KEY)
-  );
+  return process.env.ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER === "true";
 }
 
 async function runDeliveryStep(req: NextRequest, briefingDate: string) {
@@ -135,7 +133,7 @@ async function handle(req: NextRequest) {
       {
         error: "company_editorial_writer_not_configured",
         message:
-          "Company Daily Scan V1 write/send cron requires ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER=true and OPENAI_API_KEY or ALBIS_OPENAI_API_KEY. This prevents deterministic assembled summaries from becoming customer emails.",
+          `Company Daily Scan V1 write/send cron requires ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER=true and an editorial model provider (${editorialModelConfiguredHint()}). This prevents deterministic assembled summaries from becoming customer emails.`,
       },
       { status: 423 },
     );
