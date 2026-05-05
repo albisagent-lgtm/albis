@@ -235,9 +235,9 @@ export function BriefingRenderer({
       {/* Divider */}
       <div className="my-7 h-px bg-black/[0.07] dark:bg-white/[0.07]" />
 
-      {/* What to Watch */}
+      {/* Observations */}
       <section>
-        <p className={sectionLabel}>What to Watch Next</p>
+        <p className={sectionLabel}>Observations</p>
         <div className="mt-4 space-y-3">
           {what_to_watch.map((item: BriefingWatchItem, i: number) => (
             <div key={i} className="flex items-start gap-2.5">
@@ -395,6 +395,44 @@ function ScannerReportRenderer({
             </section>
           </>
         )}
+
+      {(content.perception_gap?.notes?.length || 0) > 0 && (
+        <>
+          <div className="my-7 h-px bg-black/[0.07] dark:bg-white/[0.07]" />
+          <section>
+            <p className={sectionLabel}>Perception Gap</p>
+            <div className="mt-4 space-y-3">
+              {content.perception_gap.notes.slice(0, 3).map((note, i) => (
+                <p
+                  key={note.packet_item_id || i}
+                  className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300"
+                >
+                  {note.note.text}
+                </p>
+              ))}
+            </div>
+          </section>
+        </>
+      )}
+
+      {(content.useful_observations?.observations?.length || 0) > 0 && (
+        <>
+          <div className="my-7 h-px bg-black/[0.07] dark:bg-white/[0.07]" />
+          <section>
+            <p className={sectionLabel}>Observations</p>
+            <div className="mt-4 space-y-3">
+              {content.useful_observations.observations.slice(0, 4).map((item, i) => (
+                <p
+                  key={i}
+                  className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300"
+                >
+                  {item.text}
+                </p>
+              ))}
+            </div>
+          </section>
+        </>
+      )}
     </div>
   );
 }

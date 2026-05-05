@@ -1870,7 +1870,7 @@ export interface GenerationTrace {
   excluded_items_used_in_email: string[];
 }
 
-export type CompanyBriefingEditorMode = "premium_readability";
+export type CompanyBriefingEditorMode = "premium_readability" | "gold_standard_editorial_writer";
 
 export interface CompanyBriefingEditorFieldAudit {
   path: string;

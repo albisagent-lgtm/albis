@@ -19,8 +19,11 @@
 // ---------------------------------------------------------------------------
 
 import type {
+  AlbisFinding,
   CompanyBriefingGenerationOutput,
   GeneratedBriefingItem,
+  ResearchNote,
+  ResearchSource,
 } from "../company-scan/types";
 
 const SITE = "https://www.albis.news";
@@ -90,8 +93,9 @@ function customerEnglishText(value: string | undefined | null): string {
     .replace(/\s+/g, " ")
     .replace(/\s+([,.;:!?])/g, "$1")
     .trim();
-  if (!raw || !NON_ENGLISH_VISIBLE_SCRIPT.test(raw)) return raw;
-  const stripped = raw
+  const polished = polishCustomerText(raw);
+  if (!polished || !NON_ENGLISH_VISIBLE_SCRIPT.test(polished)) return polished;
+  const stripped = polished
     .replace(NON_ENGLISH_VISIBLE_SCRIPT, " ")
     .replace(/\s+/g, " ")
     .replace(/\s+([,.;:!?])/g, "$1")
@@ -101,6 +105,27 @@ function customerEnglishText(value: string | undefined | null): string {
   const latinChars = (stripped.match(/[A-Za-z0-9]/g) || []).length;
   if (words >= 4 || latinChars >= 18) return stripped;
   return "Local-language source matched this scan area; source attribution is included below.";
+}
+
+function polishCustomerText(value: string): string {
+  return value
+    .replace(/\bpress-freedom signals\b/gi, "press-freedom coverage")
+    .replace(/\bsignals need careful reading\b/gi, "coverage needs careful reading")
+    .replace(/\bearly signals\b/gi, "early reports")
+    .replace(/\bstrong signals?\b/gi, "clear evidence")
+    .replace(/\boperating signal\b/gi, "operating evidence")
+    .replace(/\bmarket signal\b/gi, "market evidence")
+    .replace(/\bthis is the signal\b/gi, "this is the point")
+    .replace(/\bthe useful point is\b/gi, "the point is")
+    .replace(/\bThe practical difference is\b/g, "The difference is")
+    .replace(/\bthe practical difference is\b/g, "the difference is")
+    .replace(/\bThe section is about\b/g, "This coverage concerns")
+    .replace(/\bRelevant to ([^.;]+?)'s selected scan areas because it matched ([^.]+)\./gi, "This item relates to $2.")
+    .replace(/\bRelevant to selected scan areas because it matched ([^.]+)\./gi, "This item relates to $1.")
+    .replace(/\bguarantees\b/gi, "sets out protections for")
+    .replace(/\s+/g, " ")
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .trim();
 }
 
 function formatDate(dateStr: string): string {
@@ -141,7 +166,7 @@ export function generateCompanyBriefingHtmlV2(
   const deeperReadHtml = renderDeeperRead(output);
 
   // --- PERCEPTION GAP ---
-  const perceptionGapHtml = renderPerceptionGap();
+  const perceptionGapHtml = renderPerceptionGap(output);
 
   // --- OBSERVATIONS ---
   const observationsHtml = renderUsefulObservations(output);
@@ -233,36 +258,206 @@ function renderResearchedFindings(output: CompanyBriefingGenerationOutput): stri
   if (!layer || !findings?.length) return "";
 
   const sourceById = new Map(layer.sources.map((source) => [source.id, source]));
-  let html = sectionLabel("What matters today");
-  html += `<p style="font-size:14px;color:${GRAY};line-height:1.55;margin:0 0 16px;font-family:-apple-system,sans-serif;">We looked through the relevant coverage and pulled out the signals worth your attention.</p>`;
+  const noteByClusterId = new Map(layer.notes.map((note) => [note.cluster_id, note]));
+  const goldFindings = findings
+    .map((finding) => ({
+      finding,
+      note: noteByClusterId.get(finding.cluster_id),
+      sources: finding.evidence_source_ids
+        .map((id) => sourceById.get(id))
+        .filter((source): source is ResearchSource => Boolean(source)),
+    }))
+    .filter(({ finding, note, sources }) =>
+      Boolean(note) && sources.length >= 2 && !looksLikeRawSourceTitle(finding.title),
+    )
+    .slice(0, 5);
 
-  for (const finding of findings.slice(0, 6)) {
-    const emailSources = finding.email_source_ids
-      .map((id) => sourceById.get(id))
-      .filter(Boolean)
-      .slice(0, 5);
-    const evidenceCount = finding.evidence_source_ids.length;
-    html += `<div style="margin-bottom:18px;padding:16px 16px 14px;background:${QUIET_BG};border:1px solid ${BORDER};border-radius:12px;">`;
-    html += `<p style="font-size:16px;color:${NAVY};line-height:1.35;margin:0 0 7px;font-weight:750;font-family:-apple-system,sans-serif;">${esc(customerEnglishText(finding.title))}</p>`;
-    html += `<p style="font-size:15px;color:${BODY};line-height:1.6;margin:0 0 10px;font-family:-apple-system,sans-serif;">${textHtml(firstSentences(finding.body, 3))}</p>`;
-    if (emailSources.length) {
-      html += `<p style="font-size:12px;color:${GRAY};line-height:1.5;margin:0;font-family:-apple-system,sans-serif;">Sources: `;
-      html += emailSources
-        .map((source) =>
-          source?.url
-            ? `<a href="${escAttr(source.url)}" style="color:${GRAY};text-decoration:underline;">${esc(source.source_domain)}</a>`
-            : esc(source?.source_domain || "source"),
-        )
-        .join(" · ");
-      if (evidenceCount > emailSources.length) {
-        html += ` · ${evidenceCount - emailSources.length} more in evidence trail`;
-      }
-      html += `</p>`;
+  if (!goldFindings.length) return "";
+
+  let html = sectionLabel("Your Daily Scan");
+
+  for (const { finding, note, sources } of goldFindings) {
+    const topicLabel = topicLabelForFinding(output, finding);
+    const paragraphs = buildGoldStandardParagraphs(note!, sources);
+    if (paragraphs.length < 2) continue;
+    html += `<div style="margin-bottom:28px;">`;
+    if (topicLabel) {
+      html += `<p style="font-size:13px;color:${AMBER};line-height:1.35;margin:0 0 6px;font-weight:750;font-family:-apple-system,sans-serif;text-transform:uppercase;letter-spacing:1px;">${esc(topicLabel)}</p>`;
     }
+    html += `<p style="font-size:17px;color:${NAVY};line-height:1.35;margin:0 0 10px;font-weight:750;font-family:-apple-system,sans-serif;">${esc(goldHeadline(finding, note!))}</p>`;
+    for (const paragraph of paragraphs.slice(0, 4)) {
+      html += `<p style="font-size:15px;color:${BODY};line-height:1.68;margin:0 0 12px;font-family:-apple-system,sans-serif;">${textHtml(paragraph)}</p>`;
+    }
+    html += renderCleanSourceTrail(sources);
     html += `</div>`;
   }
 
   return html;
+}
+
+function looksLikeRawSourceTitle(title: string): boolean {
+  return /\b(press release view|>\s*press release|\|\s*[A-Z]| - [A-Z][A-Za-z]+\s*(Observer|Online|News|Report)|^U\.S\.?$)/i.test(title || "");
+}
+
+function goldHeadline(finding: AlbisFinding, note: ResearchNote): string {
+  const candidates = [finding.title, note.what_happened, note.summary]
+    .map((value) => customerEnglishText(value))
+    .filter(Boolean)
+    .filter((value) => !looksLikeRawSourceTitle(value));
+  return trimHeadline(candidates[0] || finding.title || "Reported development");
+}
+
+function trimHeadline(value: string): string {
+  return value
+    .replace(/\s+-\s+[^-]{2,45}$/g, "")
+    .replace(/\s+\|\s+[^|]{2,45}$/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function buildGoldStandardParagraphs(
+  note: ResearchNote,
+  sources: ResearchSource[],
+): string[] {
+  const facts = note.key_facts
+    .map((fact) => cleanResearchSentence(fact))
+    .filter(Boolean)
+    .filter((fact) => !looksLikeRawSourceTitle(fact));
+  const sourceObservations = note.source_observations
+    .map((observation) => cleanResearchSentence(observation.what_it_reports || observation.useful_detail))
+    .filter(Boolean)
+    .filter((fact) => !looksLikeRawSourceTitle(fact));
+  const numbers = note.key_numbers.filter((number) => /\d/.test(number)).slice(0, 4);
+  const actors = note.key_actors.slice(0, 5);
+  const places = note.named_places.slice(0, 5);
+  const sourceNames = cleanSourceNames(sources).slice(0, 4);
+
+  const paragraphs: string[] = [];
+  const leadParts = [facts[0] || note.what_happened, facts[1], facts[2]]
+    .map(cleanResearchSentence)
+    .filter(Boolean)
+    .slice(0, 3);
+  if (leadParts.length) {
+    paragraphs.push(joinSentences(leadParts));
+  }
+
+  const context: string[] = [];
+  if (numbers.length) context.push(`The source trail includes concrete markers such as ${humanListText(numbers)}.`);
+  if (actors.length) context.push(`The named actors include ${humanListText(actors)}.`);
+  if (places.length) context.push(`The coverage reaches ${humanListText(places)}.`);
+  const relevance = cleanResearchSentence(note.company_relevance || note.consequences[0]);
+  if (relevance) context.push(relevance);
+  if (context.length) paragraphs.push(joinSentences(context.slice(0, 4)));
+
+  const sourceLayer = sourceObservations.slice(0, 3);
+  if (sourceLayer.length >= 2) {
+    paragraphs.push(joinSentences(sourceLayer));
+  }
+
+  if (note.differences_in_reporting.length >= 2) {
+    const differences = note.differences_in_reporting
+      .slice(0, 3)
+      .map((difference) => cleanResearchSentence(difference.description))
+      .filter(Boolean);
+    if (differences.length) {
+      paragraphs.push(`The source contrast matters. ${joinSentences(differences)}`);
+    }
+  } else if (sourceNames.length >= 2) {
+    paragraphs.push(`${sourceNames.join(" and ")} add different layers to the same tracked topic, giving the email more than a single-source summary.`);
+  }
+
+  return paragraphs
+    .map((paragraph) => customerEnglishText(paragraph))
+    .filter((paragraph) => paragraph.split(/\s+/).length >= 18)
+    .slice(0, 4);
+}
+
+function cleanResearchSentence(value: string | undefined | null): string {
+  return customerEnglishText(String(value || ""))
+    .replace(/^[-–—\s]+/g, "")
+    .replace(/\s*[-–—]\s*[-–—\s]+/g, " ")
+    .replace(/\b(By\s+[A-Z][^–—]{2,80}\s+[A-Z][a-z]+,\s+)?May\s+\d{1,2},\s+\d{4}\b/gi, "")
+    .replace(/\bUpdated\s+\d+\s+hour[s]?\s+ago\b/gi, "")
+    .replace(/\bFollow us\b.*$/gi, "")
+    .replace(/\s+/g, " ")
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .replace(/^[,.;:!\-–—\s]+|[,.;:!\-–—\s]+$/g, "")
+    .trim();
+}
+
+function joinSentences(parts: string[]): string {
+  return parts
+    .map((part) => part.replace(/[.!?]+$/g, ""))
+    .filter(Boolean)
+    .map((part) => `${part}.`)
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function humanListText(values: string[]): string {
+  const items = values.map((value) => cleanResearchSentence(value)).filter(Boolean).slice(0, 5);
+  if (items.length <= 1) return items[0] || "the source trail";
+  if (items.length === 2) return `${items[0]} and ${items[1]}`;
+  return `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
+}
+
+function cleanSourceNames(sources: ResearchSource[]): string[] {
+  const names = sources
+    .map((source) => sourceNameForEmail(source))
+    .filter(Boolean);
+  return [...new Set(names)];
+}
+
+function sourceNameForEmail(source: ResearchSource): string {
+  const domain = source.source_domain.replace(/^www\./i, "");
+  const names: Record<string, string> = {
+    "rsf.org": "RSF",
+    "cpj.org": "Committee to Protect Journalists",
+    "unesco.org": "UNESCO",
+    "freedomhouse.org": "Freedom House",
+    "bbc.com": "BBC",
+    "theguardian.com": "The Guardian",
+    "ox.ac.uk": "University of Oxford",
+    "nature.com": "Nature",
+    "hrw.org": "Human Rights Watch",
+    "404media.co": "404 Media",
+  };
+  return names[domain] || domain.replace(/\.(com|org|net|co|news)$/i, "");
+}
+
+function renderCleanSourceTrail(sources: ResearchSource[]): string {
+  const visible = sources
+    .filter((source) => source.url)
+    .filter((source, index, arr) => arr.findIndex((s) => s.source_domain === source.source_domain) === index)
+    .slice(0, 5);
+  if (!visible.length) return "";
+  const links = visible.map((source) =>
+    `<a href="${escAttr(source.url)}" style="color:${GRAY};text-decoration:underline;">${esc(sourceNameForEmail(source))}</a>`,
+  );
+  return `<p style="font-size:13px;color:${GRAY};line-height:1.5;margin:2px 0 0;font-family:-apple-system,sans-serif;">${links.join(" · ")}</p>`;
+}
+
+function topicLabelForFinding(
+  output: CompanyBriefingGenerationOutput,
+  finding: AlbisFinding,
+): string {
+  const section = output.main_briefing.sections.find((candidate) =>
+    candidate.items.some((item) => item.cluster_id === finding.cluster_id),
+  );
+  if (section?.heading) return customerEnglishText(section.heading);
+
+  const cluster = output.understanding?.researched_understanding_v1?.clusters.find(
+    (candidate) => candidate.id === finding.cluster_id,
+  );
+  const firstAreaId = cluster?.scan_area_ids?.[0];
+  if (firstAreaId) {
+    const areaSection = output.main_briefing.sections.find(
+      (candidate) => candidate.section_id === firstAreaId,
+    );
+    if (areaSection?.heading) return customerEnglishText(areaSection.heading);
+  }
+  return "";
 }
 
 function renderMainBriefing(output: CompanyBriefingGenerationOutput): string {
@@ -281,11 +476,7 @@ function renderMainBriefing(output: CompanyBriefingGenerationOutput): string {
     }
 
     for (const item of section.items) {
-      html += renderBriefingItem(
-        item,
-        section.heading,
-        section.items.length === 1,
-      );
+      html += renderBriefingItem(item, section.heading);
     }
 
     html += `</div>`;
@@ -301,8 +492,8 @@ function renderBriefingItem(
 ): string {
   let html = `<div style="margin-bottom:20px;">`;
 
-  // Title. Most company sections currently contain one item, so avoid
-  // repeating the same text twice (section heading + item title).
+  // V1 requires broad tracked topic label + specific scan-based headline.
+  // Only suppress the title if it is genuinely identical to the section label.
   if (
     !hideTitle &&
     (!sectionHeading ||
@@ -356,12 +547,38 @@ function renderDeeperRead(output: CompanyBriefingGenerationOutput): string {
   return html;
 }
 
-function renderPerceptionGap(): string {
-  // Product guard: current generated PGI reads can sound abstract even when the
-  // research layer is stronger. Do not put PGI in customer email until the
-  // writer can state a concrete “X sees it this way / Y sees it that way” gap.
-  // The underlying PGI/research data remains available in the dashboard trail.
-  return "";
+function renderPerceptionGap(output: CompanyBriefingGenerationOutput): string {
+  const rendered = new Set<string>();
+  const lines: string[] = [];
+
+  const generatedNotes = output.perception_gap?.notes || [];
+  for (const note of generatedNotes) {
+    const text = customerEnglishText(note.note.text);
+    if (!text || rendered.has(text.toLowerCase())) continue;
+    rendered.add(text.toLowerCase());
+    lines.push(text);
+  }
+
+  const researchNotes = output.understanding?.researched_understanding_v1?.notes || [];
+  for (const note of researchNotes) {
+    const candidate = note.possible_perception_gap;
+    if (!candidate || candidate.strength === "none" || !candidate.gap) continue;
+    const text = customerEnglishText(
+      candidate.why_it_matters
+        ? `${candidate.gap} ${candidate.why_it_matters}`
+        : candidate.gap,
+    );
+    if (!text || rendered.has(text.toLowerCase())) continue;
+    rendered.add(text.toLowerCase());
+    lines.push(text);
+  }
+
+  if (!lines.length) return "";
+  let html = sectionLabel("Perception Gap");
+  for (const line of lines.slice(0, 3)) {
+    html += `<p style="font-size:15px;color:${BODY};line-height:1.65;margin:0 0 10px;font-family:-apple-system,sans-serif;">${textHtml(line)}</p>`;
+  }
+  return html;
 }
 
 function renderUsefulObservations(

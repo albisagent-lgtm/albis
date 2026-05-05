@@ -649,10 +649,10 @@ function buildWhatHappened(kind: SignalKind, signals: Signal[]): string {
     const hasFivePct = signals.some((s) => /5\s?%|5 percent|five percent/i.test(`${s.headline} ${s.summary}`));
     const detail = hasFivePct ? "One report said Hormuz traffic was running at about 5% of pre-war levels." : `${numbers[0] || "Reports pointed to reduced movement around Hormuz"}.`;
     const freight = signals.find((s) => /freight|rate|vessel|ballast|tanker/i.test(`${s.headline} ${s.summary}`));
-    return `${detail} The useful point is that the story was not route closure; it was damaged shipping confidence around the strait. ${freight ? `Freight coverage also pointed to uneven rates and limited vessel availability.` : ""}`;
+    return `${detail} The story was not simply route closure; it was damaged shipping confidence around the strait. ${freight ? `Freight coverage also pointed to uneven rates and limited vessel availability.` : ""}`;
   }
   if (kind === "corridors") {
-    return `Egypt-corridor and Morocco-port coverage made alternative Gulf routing a practical planning signal, not just a theory. One report focused on Egypt's Europe-Gulf corridor, while another said instability around Hormuz is pushing more attention toward Moroccan ports.`;
+    return `Egypt-corridor and Morocco-port coverage moved alternative Gulf routing from theory into practical planning. One report focused on Egypt's Europe-Gulf corridor, while another said instability around Hormuz is pushing more attention toward Moroccan ports.`;
   }
   if (kind === "suez") {
     return `Suez-linked coverage showed delay evidence entering the Hormuz story. One report said MSC Euribia transited the canal after weeks of delay near the Strait of Hormuz.`;
@@ -663,7 +663,7 @@ function buildWhatHappened(kind: SignalKind, signals: Signal[]): string {
       ? "A Canadian agricultural transport report put a concrete cost marker on disruption. It cited an Agriculture Transport Coalition estimate for one week of rail and port disruption during peak export season. The estimate was up to $540 million in unrecoverable export sales."
       : numbers.find((p) => /\$/.test(p)) || numbers[0];
     return cost
-      ? (cost.endsWith(".") ? cost : `The scan also found a concrete disruption-cost signal: ${cost.replace(/[.!?]$/g, "")}.`)
+      ? (cost.endsWith(".") ? cost : `The scan also found a concrete disruption-cost figure: ${cost.replace(/[.!?]$/g, "")}.`)
       : `The scan also found supply-chain disruption reporting outside the Gulf, focused on port, rail, freight, or LNG exposure.`;
   }
   const sentenceLead = leadSummary.replace(/[.!?]+$/g, "");
@@ -682,7 +682,7 @@ function buildWhatChanging(kind: SignalKind): string {
     return "The key point is simple: open water does not automatically mean normal trade. A route can reopen before carriers, insurers, charterers, and customers are ready to trust it again.";
   }
   if (kind === "corridors") {
-    return "These are early signals, not proof of a major rerouting shift. The useful change is that coverage is moving from immediate disruption toward practical contingency planning: ports, corridors, and alternative gateways.";
+    return "These are early reports, not proof of a major rerouting shift. Coverage is moving from immediate disruption toward practical contingency planning: ports, corridors, and alternative gateways.";
   }
   if (kind === "suez") {
     return "One vessel does not prove traffic has normalised. It does show that delays and route decisions are spreading into the wider chokepoint system.";
@@ -691,15 +691,15 @@ function buildWhatChanging(kind: SignalKind): string {
     return "This is outside the Gulf, but it gives a useful cost reference. The estimate should be treated as directional, not settled fact. It shows how quickly route, rail, or port disruption can move from operational inconvenience to direct commercial loss.";
   }
   if (["media_regulation", "disinformation", "press_freedom", "reputation_narrative", "cyber_technology", "sanctions", "geopolitics"].includes(kind)) {
-    if (kind === "disinformation") return "The risk is whether false or state-shaped material becomes searchable, repeatable, or treated as evidence later.";
-    if (kind === "press_freedom") return "The practical point is access: who can publish, who is suppressed, and whether enforcement spills beyond its stated target.";
-    if (kind === "media_regulation") return "The practical point is visibility: what remains publishable, searchable, monetisable, or safe to distribute.";
-    if (kind === "reputation_narrative") return "The risk is repetition. A narrative matters more when the same frame starts appearing across sources and audiences.";
-    if (kind === "cyber_technology") return "The practical point is trust in identity, source material, and distribution systems.";
-    if (kind === "sanctions") return "The practical point is access: who can publish, transact, travel, or distribute information under changing rules.";
-    if (kind === "geopolitics") return "The practical point is the information environment around the event: which actors are named, which claims repeat, and which audiences are being shaped.";
+    if (kind === "disinformation") return "False or state-shaped material becomes more consequential when it is searchable, repeated across sources, or treated as evidence later.";
+    if (kind === "press_freedom") return "Access is the central issue: who can publish, who is suppressed, and whether enforcement reaches beyond its stated target.";
+    if (kind === "media_regulation") return "Visibility is the central issue: what remains publishable, searchable, monetisable, or safe to distribute.";
+    if (kind === "reputation_narrative") return "Repetition changes the story when the same frame starts appearing across sources and audiences.";
+    if (kind === "cyber_technology") return "The section is about trust in identity, source material, and distribution systems.";
+    if (kind === "sanctions") return "Access is the central issue: who can publish, transact, travel, or distribute information under changing rules.";
+    if (kind === "geopolitics") return "The section is about the information environment around the event: which actors are named, which claims repeat, and which audiences are being shaped.";
   }
-  return "This is worth noting today, but it should be compared with the next scan window before treating it as a wider pattern.";
+  return "The item is included for today, but later scans should show whether it remains isolated or becomes part of a wider pattern.";
 }
 
 function buildBodyText(
@@ -740,7 +740,7 @@ function buildBodyText(
 
 function buildCompanyRead(kind: SignalKind, intent: CompanyBriefingIntentKey): string {
   if (kind === "hormuz") return "The main issue is confidence, not access. If reported Hormuz traffic remains thin while the route is formally open, the market is not behaving as if risk has cleared. That separates political reassurance from shipping reality: traffic recovery, insurance behaviour, and rate movement need to be read together.";
-  if (kind === "corridors") return "Alternative-route coverage is an early signal, not a conclusion. Egypt-corridor and Morocco-port stories do not prove a major route shift. They show practical contingency language entering the coverage, which would matter more if it repeats across later scans.";
+  if (kind === "corridors") return "Alternative-route coverage is early reporting, not a conclusion. Egypt-corridor and Morocco-port stories do not prove a major route shift. They show practical contingency language entering the coverage, which would matter more if it repeats across later scans.";
   if (kind === "suez") return "Reported Hormuz, Suez, Red Sea, and Bab el-Mandeb coverage is appearing as one connected route story. The pattern is whether stress in one chokepoint starts changing confidence around the others.";
   if (kind === "supply_chain") return "Cost examples separate real risk from background noise. The Canada rail and port estimate is not a Gulf story, but it shows how quickly transport disruption can become unrecoverable sales loss.";
   if (intent === "ai_memory_integrity" && kind === "disinformation") return "The practical difference is false output versus durable record. AI falsehoods matter when they enter search, archives, family history, or institutional memory — places where later readers may treat them as evidence.";
@@ -748,14 +748,14 @@ function buildCompanyRead(kind: SignalKind, intent: CompanyBriefingIntentKey): s
   if (intent === "ai_memory_integrity" && kind === "media_regulation") return "The practical difference is content moderation versus preservation. Censorship or access rules matter when they decide which records remain visible, searchable, or usable later.";
   if (intent === "geopolitical_media" && kind === "disinformation") return "The practical difference is claim versus channel. A false or state-linked narrative matters more when it moves across platforms or audiences, not just because one outlet names it.";
   if (intent === "geopolitical_media" && kind === "geopolitics") return "The practical difference is event coverage versus narrative pressure. Russia, North Korea, Iran, and sanctions stories matter when they shift the information environment around audiences, platforms, or reputation.";
-  if (kind === "media_regulation") return "The practical difference is regulation versus reach. A media-regulation story matters most when it changes who can publish, distribute, monetise, or access information.";
-  if (kind === "disinformation") return "The practical difference is claim versus spread. A narrative-risk signal matters more if it repeats across sources or reaches a new audience, not just because one outlet names it.";
-  if (kind === "press_freedom") return "The practical difference is incident versus operating climate. A press-freedom signal matters when it suggests a change in access, safety, censorship, or legal pressure.";
-  if (kind === "reputation_narrative") return "The practical difference is coverage versus narrative movement. The signal matters if language, blame, or audience framing begins to repeat across sources.";
-  if (kind === "cyber_technology") return "The practical difference is technical incident versus information access. Platform or cyber signals matter when they affect distribution, trust, or visibility.";
-  if (kind === "sanctions") return "The practical difference is official action versus practical information access. Sanctions coverage matters when it changes who can operate, publish, transact, or distribute.";
-  if (kind === "geopolitics") return "The practical difference is geopolitical event versus information environment. The same story can matter differently depending on whether it changes audience risk, narrative pressure, or access.";
-  return "This is worth noting, but it needs more evidence before it should be treated as a trend.";
+  if (kind === "media_regulation") return "Regulation becomes a media-company issue when it changes who can publish, distribute, monetise, or access information.";
+  if (kind === "disinformation") return "A false or state-linked claim matters more when it repeats across sources or reaches a new audience, not only because one outlet names it.";
+  if (kind === "press_freedom") return "A press-freedom story becomes part of the operating climate when it changes access, safety, censorship, legal pressure, or source reliability.";
+  if (kind === "reputation_narrative") return "Coverage becomes narrative pressure when language, blame, or audience framing begins to repeat across sources.";
+  if (kind === "cyber_technology") return "Platform or cyber stories matter when they affect distribution, trust, visibility, identity, or source material.";
+  if (kind === "sanctions") return "Sanctions coverage matters when changing rules affect who can operate, publish, transact, travel, or distribute.";
+  if (kind === "geopolitics") return "The same geopolitical story can matter differently depending on whether it changes audience risk, narrative pressure, source access, or platform behaviour.";
+  return "Later scans should show whether this remains isolated or becomes part of a wider pattern.";
 }
 
 function buildAnalystObservation(
@@ -787,11 +787,11 @@ function buildAnalystObservation(
     sanctions: "Sanctions coverage needs practical interpretation",
     media_regulation: "Regulation matters when it changes reach",
     disinformation: "Narrative risk depends on spread",
-    press_freedom: "Press-freedom signals describe operating climate",
+    press_freedom: "Press-freedom coverage describes operating climate",
     reputation_narrative: "Narrative movement is the thing to watch",
     cyber_technology: "Platform exposure changes information access",
     geopolitics: "Geopolitics can become an information-environment story",
-    other: "Treat this as a signal before calling it a trend",
+    other: "Treat this as one report before calling it a trend",
   };
   return {
     observation_id: `obs_${bundleId}`,
@@ -812,22 +812,22 @@ function buildSelectionReason(
   const sourceCount = uniq(sourceNames).length;
   if (kind === "hormuz") {
     return stats.some((stat) => stat.stat_id === "hormuz_traffic_5pct")
-      ? "reported chokepoint traffic datapoint with direct route-confidence relevance"
-      : "shipping-confidence signal tied to a company-selected chokepoint theme";
+      ? "reported chokepoint traffic detail tied to route confidence"
+      : "shipping-confidence development tied to a company-selected chokepoint theme";
   }
-  if (kind === "corridors") return "early alternative-route planning signal across selected logistics evidence";
+  if (kind === "corridors") return "early alternative-route planning detail across selected logistics evidence";
   if (kind === "suez") return "nearby chokepoint movement connected to the same route-confidence story";
-  if (kind === "supply_chain") return "concrete disruption-cost signal relevant to transport and logistics exposure";
-  if (kind === "media_regulation") return "media-regulation signal relevant to the company brief";
-  if (kind === "disinformation") return "disinformation or narrative-risk signal relevant to the company brief";
-  if (kind === "press_freedom") return "press-freedom signal relevant to the company brief";
-  if (kind === "reputation_narrative") return "reputation or narrative signal relevant to the company brief";
-  if (kind === "cyber_technology") return "platform, cyber, or technology signal relevant to the company brief";
-  if (kind === "sanctions") return "sanctions or information-access signal relevant to the company brief";
-  if (kind === "geopolitics") return "geopolitical signal relevant to the company brief";
+  if (kind === "supply_chain") return "concrete disruption-cost detail relevant to transport and logistics exposure";
+  if (kind === "media_regulation") return "media-regulation development relevant to the company brief";
+  if (kind === "disinformation") return "disinformation or narrative-risk development relevant to the company brief";
+  if (kind === "press_freedom") return "press-freedom development relevant to the company brief";
+  if (kind === "reputation_narrative") return "reputation or narrative development relevant to the company brief";
+  if (kind === "cyber_technology") return "platform, cyber, or technology development relevant to the company brief";
+  if (kind === "sanctions") return "sanctions or information-access development relevant to the company brief";
+  if (kind === "geopolitics") return "geopolitical development relevant to the company brief";
   return sourceCount >= 2 || signals.length >= 2
-    ? "multi-source signal relevant to the company brief"
-    : "single-source signal relevant to the company brief";
+    ? "multi-source development relevant to the company brief"
+    : "single-source development relevant to the company brief";
 }
 
 function evidenceClassForBundle(
@@ -873,7 +873,7 @@ function confidenceLabelForBundle(
   if (kind === "corridors") {
     return {
       kind: "early_signal",
-      label: "Early signal",
+      label: "Early reporting",
       customer_phrase: "This is early evidence rather than proof of a settled shift.",
       confidence,
       reason: "Alternative-route coverage appeared in selected evidence, but repeat evidence is needed before calling it a trend.",
@@ -909,8 +909,8 @@ function confidenceLabelForBundle(
   if (sourceCount >= 2) {
     return {
       kind: "multi_source_signal",
-      label: "Multi-source signal",
-      customer_phrase: "Several selected sources pointed to the same broad signal.",
+      label: "Multi-source coverage",
+      customer_phrase: "Several selected sources pointed to the same broad development.",
       confidence,
       reason: "The bundle draws on more than one selected source.",
       source_count: sourceCount,
@@ -920,8 +920,8 @@ function confidenceLabelForBundle(
 
   return {
     kind: "single_source",
-    label: "Single-source signal",
-    customer_phrase: "One selected source reported this signal.",
+    label: "Single-source report",
+    customer_phrase: "One selected source reported this development.",
     confidence,
     reason: "The bundle is anchored mainly in one selected source.",
     source_count: Math.max(1, sourceCount),
@@ -1087,7 +1087,7 @@ export function buildIntelligenceDepthBundles(
       const confidence: IntelligenceDepthConfidence = claimIds.length >= 3 && names.length >= 2 ? "high" : claimIds.length >= 1 ? "medium" : "low";
       const evidenceConfidence = confidenceLabelForBundle(kind, evidenceStats, names, frame, confidence);
 
-      const registeredText = `${signals.length} signal${signals.length === 1 ? "" : "s"} appeared today for ${sectionLabel(packet, sectionId)}, led by ${trimWords(signals[0]?.headline || "the selected signal", 20)}.`;
+      const registeredText = `${signals.length} source item${signals.length === 1 ? "" : "s"} appeared today for ${sectionLabel(packet, sectionId)}, led by ${trimWords(signals[0]?.headline || "the selected report", 20)}.`;
       const body = buildBodyText(kind, happened, changing, evidenceStats);
       const depthScore = Math.min(100, 40 + claimIds.length * 10 + names.length * 6 + extractNumberPhrases(signals).length * 8);
       const bundleId = `${kind}_${slugify(anchor.signal.headline)}`;

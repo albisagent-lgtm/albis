@@ -1,0 +1,177 @@
+=== company scan cycle 20260504T110423Z (UTC) ===
+repo: /Users/treelight/.openclaw/workspace/albis-app
+log:  /Users/treelight/.openclaw/workspace/albis-app/logs/company-scan-cycle/20260504T110423Z.log
+scan_date: 2026-05-04
+
+[1/3] build-watch-graph
+◇ injected env (10) from .env.local // tip: ◈ encrypted .env [www.dotenvx.com]
+🔧 Building union watch graph
+✅ Done
+{
+  "clusters_built": 6,
+  "scan_targets_upserted": 60,
+  "scan_targets_deactivated": 0,
+  "cluster_breakdown": {
+    "entity_cluster": {
+      "canonicals": 15,
+      "companies": 3
+    },
+    "theme_cluster": {
+      "canonicals": 22,
+      "companies": 3
+    },
+    "region_cluster": {
+      "canonicals": 11,
+      "companies": 3
+    },
+    "sector_cluster": {
+      "canonicals": 3,
+      "companies": 3
+    },
+    "commodity_cluster": {
+      "canonicals": 1,
+      "companies": 1
+    },
+    "risk_cluster": {
+      "canonicals": 8,
+      "companies": 3
+    }
+  }
+}
+
+[2/3] run-company-scan
+◇ injected env (10) from .env.local // tip: ⌘ enable debugging { debug: true }
+▶ Running company scan: 2026-05-04 window=07-00
+{
+  "scan_run_id": "b422aa50-64d1-42d6-b040-1e6581518a3f",
+  "run_date": "2026-05-04",
+  "run_window": "07-00",
+  "status": "completed",
+  "targets_inspected": 60,
+  "signals_extracted": 452,
+  "sources_consulted": 378,
+  "error_summary": null
+}
+
+[3/3] run-company-signal-pipeline
+◇ injected env (10) from .env.local // tip: ⌁ auth for agents [www.vestauth.com]
+🚀 Running company SIGNAL pipeline for 2026-05-04 (lookback=24h)
+  ↳ evidence provenance run: b422aa50-64d1-42d6-b040-1e6581518a3f
+  ↳ loaded 1000 signals
+✅ Loaded 3 company profiles
+
+▶ Processing Lindell Media
+  ↳ company-specific retrieval: 18 queries (geopolitical_media)
+    • geopolitical conflict: 1 result(s)
+    • reputation narrative: 1 result(s)
+    • kim jong un: 11 result(s)
+    • kim il sung: 2 result(s)
+    • kim yo jong: 1 result(s)
+    • wang yi: 1 result(s)
+    • kim jong il: 3 result(s)
+    • dprk: 10 result(s)
+    • kim yong nam: 1 result(s)
+    • hormuz: 10 result(s)
+    • putin: 11 result(s)
+    • kremlin: 2 result(s)
+    • geopolitical media environment: 0 result(s)
+    • sanctions: 12 result(s)
+    • media regulation: 12 result(s)
+    • disinformation: 12 result(s)
+    • press freedom: 12 result(s)
+    • cyber technology: 12 result(s)
+  Package 10 company-specific retrieval loaded 46 signal(s) from 18 query/queries (geopolitical_media)
+  ↳ loaded 32 prior visible scan item(s) for no-repeat checks
+  ↳ deep-dive retrieval: 12 follow-up queries
+    • confirm_core_fact: 8 result(s)
+    • find_better_sources: 7 result(s)
+    • find_source_frames: 2 result(s)
+    • find_stats_or_official_context: 1 result(s)
+    • confirm_core_fact: 5 result(s)
+    • find_stats_or_official_context: 4 result(s)
+    • confirm_core_fact: 3 result(s)
+    • find_better_sources: 3 result(s)
+    • find_source_frames: 1 result(s)
+    • find_stats_or_official_context: 8 result(s)
+    • confirm_core_fact: 0 result(s)
+    • find_better_sources: 3 result(s)
+  Package 8 preview selected 24 item(s); QA=dry_run_only, blockers=0
+✅ Upserted 46 PGI evidence row(s) for Lindell Media
+
+▶ Processing Evidence & Echoes Genealogy
+  ↳ company-specific retrieval: 12 queries (ai_memory_integrity)
+      cache hit: company-specific
+    • AI video: 12 result(s)
+      cache hit: company-specific
+    • artificial intelligence: 11 result(s)
+    • trump: 4 result(s)
+    • AI and public memory: 2 result(s)
+    • disinformation: 0 result(s)
+    • deepfake: 0 result(s)
+    • censorship: 0 result(s)
+    • journalism: 0 result(s)
+    • propaganda: 0 result(s)
+    • information warfare: 0 result(s)
+    • cybersecurity: 12 result(s)
+    • election: 12 result(s)
+  Package 10 company-specific retrieval loaded 34 signal(s) from 12 query/queries (ai_memory_integrity)
+  ↳ loaded 39 prior visible scan item(s) for no-repeat checks
+  ↳ deep-dive retrieval: 12 follow-up queries
+      cache hit: company-deep-dive
+    • confirm_core_fact: 5 result(s)
+    • find_better_sources: 4 result(s)
+    • find_source_frames: 0 result(s)
+    • find_stats_or_official_context: 2 result(s)
+    • find_stats_or_official_context: 0 result(s)
+    • confirm_core_fact: 2 result(s)
+    • find_better_sources: 5 result(s)
+    • find_source_frames: 0 result(s)
+    • find_stats_or_official_context: 0 result(s)
+    • confirm_core_fact: 1 result(s)
+    • find_better_sources: 5 result(s)
+    • find_source_frames: 0 result(s)
+  Package 8 preview selected 14 item(s); QA=dry_run_only, blockers=0
+✅ Upserted 34 PGI evidence row(s) for Evidence & Echoes Genealogy
+
+▶ Processing Test Company
+  ↳ company-specific retrieval: 14 queries (logistics_routes)
+      cache hit: company-specific
+    • fertiliser: 5 result(s)
+      cache hit: company-specific
+    • semiconductors: 2 result(s)
+      cache hit: company-specific
+    • saudi arabia: 12 result(s)
+      cache hit: company-specific
+    • route confidence: 12 result(s)
+      cache hit: company-specific
+    • shipping routes: 3 result(s)
+      cache hit: company-specific
+    • freight rates: 2 result(s)
+      cache hit: company-specific
+    • port disruption: 3 result(s)
+      cache hit: company-specific
+    • container shortages: 2 result(s)
+      cache hit: company-specific
+    • Hormuz Strait: 7 result(s)
+    • blockages: 3 result(s)
+    • geopolitics: 3 result(s)
+    • red sea: 7 result(s)
+    • suez canal: 5 result(s)
+    • supply chain disruption: 1 result(s)
+  Package 10 company-specific retrieval loaded 45 signal(s) from 14 query/queries (logistics_routes)
+  ↳ loaded 66 prior visible scan item(s) for no-repeat checks
+  ↳ deep-dive retrieval: 12 follow-up queries
+    • confirm_core_fact: 2 result(s)
+    • find_better_sources: 6 result(s)
+    • find_source_frames: 0 result(s)
+    • find_stats_or_official_context: 0 result(s)
+    • confirm_core_fact: 8 result(s)
+    • find_better_sources: 8 result(s)
+    • find_source_frames: 3 result(s)
+    • find_stats_or_official_context: 2 result(s)
+    • confirm_core_fact: 4 result(s)
+    • find_better_sources: 3 result(s)
+    • find_source_frames: 0 result(s)
+    • find_stats_or_official_context: 2 result(s)
+  Package 8 preview selected 24 item(s); QA=dry_run_only, blockers=0
+✅ Upserted 45 PGI evidence row(s) for Test Company

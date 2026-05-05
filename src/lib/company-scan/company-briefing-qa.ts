@@ -321,6 +321,13 @@ export function runQAGates(
     else warnings.push(failure);
   }
 
+  // --- 8.11. V1 launch gold-standard checks ---
+  const goldStandardFailures = checkCompanyDailyScanV1GoldStandard(output);
+  for (const failure of goldStandardFailures) {
+    if (failure.severity === "blocking") blockingFailures.push(failure);
+    else warnings.push(failure);
+  }
+
   // --- 8. Policy checks ---
   const policyChecks = checkPolicies(packet, output);
   for (const pc of policyChecks) {
@@ -1709,6 +1716,109 @@ function checkHumanVoiceRequirements(
         "Rewrite as a direct, specific explanation a human teammate would say out loud.",
     }),
   );
+}
+
+function checkCompanyDailyScanV1GoldStandard(
+  output: CompanyBriefingGenerationOutput,
+): QAFailure[] {
+  const failures: QAFailure[] = [];
+  if (output.scanner_report?.layout_version !== "company_daily_scan_v1") {
+    return failures;
+  }
+
+  const layer = output.understanding?.researched_understanding_v1;
+  if (!layer) {
+    failures.push({
+      code: "V1_GOLD_RESEARCH_LAYER_MISSING",
+      severity: "blocking",
+      message:
+        "Company Daily Scan V1 requires the researched-understanding layer before customer delivery.",
+    });
+    return failures;
+  }
+
+  const editorialWriter = (output.understanding as any)?.gold_standard_editorial_writer_v1;
+  if (!editorialWriter?.enabled) {
+    failures.push({
+      code: "V1_GOLD_EDITORIAL_WRITER_MISSING",
+      severity: "blocking",
+      message:
+        "Company Daily Scan V1 must pass through the gold-standard editorial writer before customer delivery. Deterministic assembled summaries are not launchable.",
+    });
+  }
+
+  const emailFindings = layer.findings.filter((finding) =>
+    ["email_main", "email_secondary"].includes(finding.placement),
+  );
+  const wordCount = (text: string) => text.split(/\s+/).filter(Boolean).length;
+  const sourceRichFindings = emailFindings.filter(
+    (finding) => finding.evidence_source_ids.length >= 3,
+  );
+  const substantialFindings = emailFindings.filter(
+    (finding) => wordCount(finding.body || "") >= 120,
+  );
+
+  if (emailFindings.length < 4) {
+    failures.push({
+      code: "V1_GOLD_TOO_FEW_EMAIL_SECTIONS",
+      severity: "blocking",
+      message:
+        "Company Daily Scan V1 needs at least four researched email sections, unless the scan is explicitly a quiet-day dashboard-only send.",
+    });
+  }
+
+  if (sourceRichFindings.length < Math.min(4, emailFindings.length)) {
+    failures.push({
+      code: "V1_GOLD_SOURCE_CLUSTERS_TOO_THIN",
+      severity: "blocking",
+      message:
+        "Company Daily Scan V1 email sections must come from source clusters, not single-link findings. Require at least three evidence sources for the main sections.",
+    });
+  }
+
+  if (substantialFindings.length < Math.min(4, emailFindings.length)) {
+    failures.push({
+      code: "V1_GOLD_FINDINGS_TOO_SHORT",
+      severity: "blocking",
+      message:
+        "Company Daily Scan V1 sections are too short. The approved gold standard uses researched multi-paragraph sections, not one-paragraph summaries.",
+    });
+  }
+
+  const badLanguage = /\b(selected scan areas|matched|evidence threshold|source items|more in evidence trail|signals need careful reading|press-freedom signals|this item relates to|belongs in the email|dashboard source trail|generic category summary)\b/i;
+  for (const finding of emailFindings) {
+    const text = `${finding.title}\n${finding.body}\n${finding.why_it_matters || ""}`;
+    if (badLanguage.test(text)) {
+      failures.push({
+        code: "V1_GOLD_INTERNAL_LANGUAGE",
+        severity: "blocking",
+        generated_text_path: `researched_understanding.finding:${finding.id}`,
+        message:
+          "Company Daily Scan V1 contains internal/pipeline language. Customer copy must read like the approved Lindell gold-standard brief.",
+      });
+      break;
+    }
+  }
+
+  const notesWithConcreteGap = layer.notes.filter((note) => {
+    const gap = note.possible_perception_gap;
+    if (!gap || gap.strength === "none") return false;
+    const text = `${gap.gap} ${gap.why_it_matters}`;
+    return (
+      wordCount(text) >= 45 &&
+      !/not yet a full PGI|reviewed before writing|generic category summary|single source/i.test(text)
+    );
+  });
+  if (notesWithConcreteGap.length === 0) {
+    failures.push({
+      code: "V1_GOLD_PERCEPTION_GAP_TOO_ABSTRACT",
+      severity: "blocking",
+      message:
+        "Company Daily Scan V1 needs a concrete Perception Gap in the approved style: where the split appears, why it matters, and how source frames differ.",
+    });
+  }
+
+  return failures;
 }
 
 function normaliseStoryTitleForQa(value: string): string {

@@ -119,6 +119,12 @@ const BANNED_PHRASES_BLOCKING: Array<{ pattern: RegExp; label: string }> = [
     pattern: /\bled\s+this\s+company[- ]specific\s+scan\b/i,
     label: "internal scan rail",
   },
+  { pattern: /\bthe\s+clearest\s+signal\b/i, label: "analyst signal phrasing" },
+  { pattern: /\b(strong|operating|market)\s+signal\b/i, label: "analyst signal phrasing" },
+  { pattern: /\bthis\s+is\s+the\s+signal\b/i, label: "analyst signal phrasing" },
+  { pattern: /\bAlbis\s+reading\b/i, label: "Albis reading label" },
+  { pattern: /\bthe\s+useful\s+point\b/i, label: "generic analyst phrasing" },
+  { pattern: /\bintelligence\s+read\b/i, label: "generic analyst phrasing" },
   {
     pattern: /\bselected\s+company\s+watch\s+areas?\b/i,
     label: "internal company watch-area rail",

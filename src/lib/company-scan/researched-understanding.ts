@@ -244,13 +244,44 @@ function distinctSentences(values: Array<string | undefined | null>, max = 3): s
 }
 
 function buildFindingBody(note: ResearchNote, sources: ResearchSource[]): string {
-  const lines = distinctSentences(
-    [note.company_relevance, note.what_changed_today, note.what_happened],
-    3,
+  const lead = distinctSentences(
+    [note.what_happened, note.what_changed_today, ...note.key_facts],
+    4,
   );
-  if (lines.length) return lines.join(" ");
+  const context = distinctSentences(
+    [
+      note.company_relevance,
+      ...note.consequences,
+      ...note.source_observations.map((observation) => observation.what_it_reports),
+    ],
+    4,
+  );
+  const sourceContrast = note.differences_in_reporting
+    .map((difference) => sentence(difference.description))
+    .slice(0, 3);
+  const paragraphs = [
+    lead.join(" "),
+    context.join(" "),
+    sourceContrast.length
+      ? `The source contrast matters. ${sourceContrast.join(" ")}`
+      : sources.length >= 2
+        ? `${sources.slice(0, 3).map((source) => source.source_domain).join(", ")} add different layers to this tracked topic.`
+        : "",
+  ].filter(Boolean);
+  if (paragraphs.length) return paragraphs.join("\n\n");
   if (sources.length) return "Albis found a relevant development, but the customer-facing read still needs editorial tightening before delivery.";
   return "The research trail is not strong enough yet for a customer-facing finding.";
+}
+
+function polishV1Title(value: string): string {
+  return cleanText(value)
+    .replace(/\bsignals need careful reading\b/gi, "coverage needs careful reading")
+    .replace(/\bpress freedom signals\b/gi, "press freedom coverage")
+    .replace(/\bsignals?\b/gi, "coverage")
+    .replace(/\s+-\s+[^-]{2,50}$/g, "")
+    .replace(/\s+\|\s+[^|]{2,50}$/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function makeResearchSourceFromSignal(
@@ -449,8 +480,11 @@ export async function buildResearchedUnderstandingLayer({
     const possibleGap = differences.length >= 2
       ? {
           strength: differences.length >= 3 ? "medium" as const : "weak" as const,
-          gap: "Coverage is not yet a full PGI, but the research trail shows different emphases across sources or regions that should be reviewed before writing a customer-facing perception gap.",
-          why_it_matters: "This prevents Albis from forcing a perception gap from a single source or generic category summary.",
+          gap: `${differences
+            .slice(0, 3)
+            .map((difference) => `${difference.label} emphasised ${trimWords(difference.description, 24)}`)
+            .join("; ")}.`,
+          why_it_matters: `For ${profile.company_name}, the split matters because the same development can look like a rights, safety, platform, diplomacy, or operating-access story depending on which source frame leads. A single-source read would miss that difference.`,
           evidence_source_ids: differences.flatMap((difference) => difference.source_ids).slice(0, 6),
         }
       : {
@@ -492,7 +526,7 @@ export async function buildResearchedUnderstandingLayer({
       date: scanDate,
       scope: "company",
       company_profile_id: profile.id,
-      title: cluster.title,
+      title: polishV1Title(cluster.title),
       body: buildFindingBody(note, evidenceSources),
       why_it_matters: note.consequences[0],
       uncertainty: note.what_is_unclear[0],

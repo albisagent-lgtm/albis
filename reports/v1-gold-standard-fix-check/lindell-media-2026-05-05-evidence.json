@@ -1,0 +1,1042 @@
+{
+  "run_id": "company_pkg8_2026-05-05_2fcda41e-dbb9-40be-9c86-4ba4659d2e77",
+  "company_profile_id": "2fcda41e-dbb9-40be-9c86-4ba4659d2e77",
+  "company_name": "Lindell Media",
+  "scan_date": "2026-05-05",
+  "scan_summary": {
+    "total_signals_loaded": 1000,
+    "selected_for_email": 24,
+    "dashboard_only_count": 0,
+    "excluded_count": 0,
+    "key_source_domains_count": 9,
+    "all_source_domains_count": 314,
+    "regions_represented": [
+      "Africa",
+      "Caribbean",
+      "Central Asia",
+      "Eastern Europe",
+      "Latin America",
+      "Middle East",
+      "North America",
+      "South Asia",
+      "Western Europe"
+    ],
+    "languages_represented": [
+      "unknown"
+    ],
+    "selected_sections": [
+      "Sanctions",
+      "Regulatory / policy change"
+    ],
+    "scan_window": {
+      "from": "2026-05-03T00:00:00.000Z",
+      "to": "2026-05-05T23:59:59.000Z"
+    }
+  },
+  "briefing_sections": [
+    {
+      "heading": "Press freedom signals need careful reading",
+      "section_label": "Sanctions",
+      "signal_ids": [
+        "d7e0a52a-835f-4f79-aee6-e57fbb79ffb7",
+        "45812a5e-1db5-4c7a-912f-c614f24b5fac",
+        "e188c9b3-4a17-4d0b-b278-f2df2f4dba4e",
+        "ab82595b-ab2c-4bda-a055-2304dcc5b861",
+        "5f614293-5cc5-4333-b76d-36a81a00fa1b",
+        "4021724f-b6fd-4d4d-b8c8-3ee86f7170c7"
+      ],
+      "source_names": [
+        "cbsnews.com",
+        "aljazeera.com",
+        "rappler.com"
+      ],
+      "statistics": [
+        {
+          "stat_id": "press_freedom_source_spread",
+          "label": "Selected source spread",
+          "value_text": "3 sources in today's selected evidence",
+          "explanation": "A small source-spread marker showing how much of the selected briefing item rests on one report versus repeated coverage.",
+          "confidence": "medium",
+          "source_refs": [
+            {
+              "type": "source_id",
+              "id": "domain:www.cbsnews.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:aljazeera.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:rappler.com"
+            }
+          ],
+          "claim_ids": [
+            "claim_art_d7e0a52a-835f-4f79-aee6-e57fbb79ffb7_headline",
+            "claim_art_d7e0a52a-835f-4f79-aee6-e57fbb79ffb7_summary",
+            "claim_art_45812a5e-1db5-4c7a-912f-c614f24b5fac_headline",
+            "claim_art_45812a5e-1db5-4c7a-912f-c614f24b5fac_summary",
+            "claim_art_e188c9b3-4a17-4d0b-b278-f2df2f4dba4e_headline",
+            "claim_art_e188c9b3-4a17-4d0b-b278-f2df2f4dba4e_summary",
+            "claim_art_ab82595b-ab2c-4bda-a055-2304dcc5b861_headline",
+            "claim_art_ab82595b-ab2c-4bda-a055-2304dcc5b861_summary",
+            "claim_art_5f614293-5cc5-4333-b76d-36a81a00fa1b_headline",
+            "claim_art_5f614293-5cc5-4333-b76d-36a81a00fa1b_summary",
+            "claim_art_4021724f-b6fd-4d4d-b8c8-3ee86f7170c7_headline",
+            "claim_art_4021724f-b6fd-4d4d-b8c8-3ee86f7170c7_summary"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim_art_d7e0a52a-835f-4f79-aee6-e57fbb79ffb7_headline",
+          "text": "Pope Leo honors 14 journalists killed in war zones in observance of World Press Freedom Day - CBS Chicago",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_d7e0a52a-835f-4f79-aee6-e57fbb79ffb7_summary",
+          "text": "During his weekly Sunday prayers, the pontiff reminded crowds in St",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_45812a5e-1db5-4c7a-912f-c614f24b5fac_headline",
+          "text": "On World Press Freedom Day, Pope honours journalists killed in war zones | Freedom of the Press News | Al Jazeera",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_45812a5e-1db5-4c7a-912f-c614f24b5fac_summary",
+          "text": "Pope Leo XIV asks faithful to remember journalists who have lost their lives pursuing the truth",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_e188c9b3-4a17-4d0b-b278-f2df2f4dba4e_headline",
+          "text": "Tech regulation, newsroom collaboration keys to journalism’s ‘existential crisis’",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_e188c9b3-4a17-4d0b-b278-f2df2f4dba4e_summary",
+          "text": "For World Press Freedom Day, we discuss how newsrooms can adapt in the age of AI in an episode of the Good As News podcast",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_ab82595b-ab2c-4bda-a055-2304dcc5b861_headline",
+          "text": "Tech regulation, newsroom collaboration keys to journalism’s ‘existential crisis’",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_ab82595b-ab2c-4bda-a055-2304dcc5b861_summary",
+          "text": "For World Press Freedom Day, we discuss how newsrooms can adapt in the age of AI in an episode of the Good As News podcast",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_5f614293-5cc5-4333-b76d-36a81a00fa1b_headline",
+          "text": "On World Press Freedom Day, Pope honours journalists killed in war zones | Freedom of the Press News | Al Jazeera",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_5f614293-5cc5-4333-b76d-36a81a00fa1b_summary",
+          "text": "Pope Leo XIV asks faithful to remember journalists who have lost their lives pursuing the truth",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_4021724f-b6fd-4d4d-b8c8-3ee86f7170c7_headline",
+          "text": "Pope Leo honors 14 journalists killed in war zones in observance of World Press Freedom Day - CBS Chicago",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_4021724f-b6fd-4d4d-b8c8-3ee86f7170c7_summary",
+          "text": "During his weekly Sunday prayers, the pontiff reminded crowds in St",
+          "claim_type": "fact",
+          "confidence": 0.72
+        }
+      ],
+      "selection_reason": "press-freedom development relevant to the company brief",
+      "evidence_class": "source_frame",
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The selected evidence supports comparing trade/operational framing with regional/security framing.",
+        "source_count": 3,
+        "source_quality": "B"
+      },
+      "source_quality": {
+        "A": 1,
+        "B": 2,
+        "C": 0,
+        "D": 0,
+        "Block": 0
+      }
+    },
+    {
+      "heading": "Media regulation changed the publishing environment",
+      "section_label": "Sanctions",
+      "signal_ids": [
+        "1dc0cf17-93ff-4f4d-aeeb-8160ee505d54",
+        "879ac564-5e0c-492b-949e-b6fef9a555ff",
+        "fc39bcb8-adc7-4b25-a68a-98bdb5704193"
+      ],
+      "source_names": [
+        "thedailybeast.com",
+        "moderndiplomacy.eu"
+      ],
+      "statistics": [
+        {
+          "stat_id": "media_regulation_source_spread",
+          "label": "Selected source spread",
+          "value_text": "2 sources in today's selected evidence",
+          "explanation": "A small source-spread marker showing how much of the selected briefing item rests on one report versus repeated coverage.",
+          "confidence": "medium",
+          "source_refs": [
+            {
+              "type": "source_id",
+              "id": "domain:www.thedailybeast.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:moderndiplomacy.eu"
+            }
+          ],
+          "claim_ids": [
+            "claim_art_1dc0cf17-93ff-4f4d-aeeb-8160ee505d54_headline",
+            "claim_art_1dc0cf17-93ff-4f4d-aeeb-8160ee505d54_summary",
+            "claim_art_879ac564-5e0c-492b-949e-b6fef9a555ff_headline",
+            "claim_art_879ac564-5e0c-492b-949e-b6fef9a555ff_summary",
+            "claim_art_fc39bcb8-adc7-4b25-a68a-98bdb5704193_headline",
+            "claim_art_fc39bcb8-adc7-4b25-a68a-98bdb5704193_summary"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim_art_1dc0cf17-93ff-4f4d-aeeb-8160ee505d54_headline",
+          "text": "Donald Trump, 79, Reignites War With ‘Moron’ Bill Maher",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_1dc0cf17-93ff-4f4d-aeeb-8160ee505d54_summary",
+          "text": "Bill Maher accused Gavin Newsom of “imitating” Donald Trump, but Newsom insists that’s the point",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_879ac564-5e0c-492b-949e-b6fef9a555ff_headline",
+          "text": "Donald Trump, 79, Reignites War With ‘Moron’ Bill Maher",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_879ac564-5e0c-492b-949e-b6fef9a555ff_summary",
+          "text": "Bill Maher accused Gavin Newsom of “imitating” Donald Trump, but Newsom insists that’s the point",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_fc39bcb8-adc7-4b25-a68a-98bdb5704193_headline",
+          "text": "Africa and Its External Partners: Evaluation in Today’s Global System - Interview - Modern Diplomacy",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_fc39bcb8-adc7-4b25-a68a-98bdb5704193_summary",
+          "text": "African states exercised real agency during the Cold War, too, from Bandung to the Non-Aligned Movement",
+          "claim_type": "fact",
+          "confidence": 0.72
+        }
+      ],
+      "selection_reason": "media-regulation development relevant to the company brief",
+      "evidence_class": "source_frame",
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The selected evidence supports comparing trade/operational framing with regional/security framing.",
+        "source_count": 2,
+        "source_quality": "B"
+      },
+      "source_quality": {
+        "A": 0,
+        "B": 2,
+        "C": 0,
+        "D": 0,
+        "Block": 0
+      }
+    },
+    {
+      "heading": "State-linked disinformation is moving through public channels",
+      "section_label": "Regulatory / policy change",
+      "signal_ids": [
+        "613dd095-9926-4295-abf5-717843fafab2",
+        "61e83dbe-2810-4742-a9b8-87482505326f"
+      ],
+      "source_names": [
+        "nuclear-news.net"
+      ],
+      "statistics": [
+        {
+          "stat_id": "disinformation_source_spread",
+          "label": "Selected source spread",
+          "value_text": "1 source in today's selected evidence",
+          "explanation": "A small source-spread marker showing how much of the selected briefing item rests on one report versus repeated coverage.",
+          "confidence": "low",
+          "source_refs": [
+            {
+              "type": "source_id",
+              "id": "domain:nuclear-news.net"
+            }
+          ],
+          "claim_ids": [
+            "claim_art_613dd095-9926-4295-abf5-717843fafab2_headline",
+            "claim_art_613dd095-9926-4295-abf5-717843fafab2_summary",
+            "claim_art_61e83dbe-2810-4742-a9b8-87482505326f_headline",
+            "claim_art_61e83dbe-2810-4742-a9b8-87482505326f_summary"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim_art_613dd095-9926-4295-abf5-717843fafab2_headline",
+          "text": "Three Recent Examples Of AI Being Used For Empire Propaganda « nuclear-news",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_613dd095-9926-4295-abf5-717843fafab2_summary",
+          "text": "https://youtu.be/I9oH44ctxYw,t=12 Julian Assange was warning years ago that we could one day expect artificial intelligence to be used in this way, saying that the growing ability of the powerful to manipulate public opinion using",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_61e83dbe-2810-4742-a9b8-87482505326f_headline",
+          "text": "Three Recent Examples Of AI Being Used For Empire Propaganda « nuclear-news",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_61e83dbe-2810-4742-a9b8-87482505326f_summary",
+          "text": "https://youtu.be/I9oH44ctxYw,t=12 Julian Assange was warning years ago that we could one day expect artificial intelligence to be used in this way, saying that the growing ability of the powerful to manipulate public opinion using",
+          "claim_type": "fact",
+          "confidence": 0.72
+        }
+      ],
+      "selection_reason": "disinformation or narrative-risk development relevant to the company brief",
+      "evidence_class": "single_source_signal",
+      "evidence_confidence": {
+        "kind": "single_source",
+        "label": "Single-source report",
+        "customer_phrase": "One selected source reported this development.",
+        "confidence": "medium",
+        "reason": "The bundle is anchored mainly in one selected source.",
+        "source_count": 1,
+        "source_quality": "B"
+      },
+      "source_quality": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0,
+        "Block": 0
+      }
+    },
+    {
+      "heading": "Sanctions and access rules are shaping the information environment",
+      "section_label": "Sanctions",
+      "signal_ids": [
+        "5f11cf29-c9a2-4755-92cd-831ffdaa1a98",
+        "e346ee2a-66c4-45c5-a2c7-745fb3abd9eb",
+        "fde78933-273c-40d1-afb3-72330fd7d949",
+        "84b25439-a172-46c1-808c-a565ed89a273",
+        "a8bc9505-b233-4df1-b3fb-4589d5e54e06",
+        "a8626199-d094-4943-8d4b-0db589239365"
+      ],
+      "source_names": [
+        "thenationonlineng.net",
+        "newkerala.com",
+        "livemint.com"
+      ],
+      "statistics": [
+        {
+          "stat_id": "sanctions_source_spread",
+          "label": "Selected source spread",
+          "value_text": "3 sources in today's selected evidence",
+          "explanation": "A small source-spread marker showing how much of the selected briefing item rests on one report versus repeated coverage.",
+          "confidence": "medium",
+          "source_refs": [
+            {
+              "type": "source_id",
+              "id": "domain:thenationonlineng.net"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:newkerala.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:livemint.com"
+            }
+          ],
+          "claim_ids": [
+            "claim_art_5f11cf29-c9a2-4755-92cd-831ffdaa1a98_headline",
+            "claim_art_5f11cf29-c9a2-4755-92cd-831ffdaa1a98_summary",
+            "claim_art_e346ee2a-66c4-45c5-a2c7-745fb3abd9eb_headline",
+            "claim_art_e346ee2a-66c4-45c5-a2c7-745fb3abd9eb_summary",
+            "claim_art_fde78933-273c-40d1-afb3-72330fd7d949_headline",
+            "claim_art_fde78933-273c-40d1-afb3-72330fd7d949_summary",
+            "claim_art_84b25439-a172-46c1-808c-a565ed89a273_headline",
+            "claim_art_84b25439-a172-46c1-808c-a565ed89a273_summary",
+            "claim_art_a8bc9505-b233-4df1-b3fb-4589d5e54e06_headline",
+            "claim_art_a8bc9505-b233-4df1-b3fb-4589d5e54e06_summary",
+            "claim_art_a8626199-d094-4943-8d4b-0db589239365_headline",
+            "claim_art_a8626199-d094-4943-8d4b-0db589239365_summary"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim_art_5f11cf29-c9a2-4755-92cd-831ffdaa1a98_headline",
+          "text": "Cyberpedia launches AI search engine to tackle misinformation, disinformation - The Nation Newspaper",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_5f11cf29-c9a2-4755-92cd-831ffdaa1a98_summary",
+          "text": "Among its key features is a real-time, names, organisations and URLs against extensive data sources, including domain records, litigation databases, sanctions lists and cyber intelligence feeds",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_e346ee2a-66c4-45c5-a2c7-745fb3abd9eb_headline",
+          "text": "Cyberpedia launches AI search engine to tackle misinformation, disinformation - The Nation Newspaper",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_e346ee2a-66c4-45c5-a2c7-745fb3abd9eb_summary",
+          "text": "Among its key features is a real-time, names, organisations and URLs against extensive data sources, including domain records, litigation databases, sanctions lists and cyber intelligence feeds",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_fde78933-273c-40d1-afb3-72330fd7d949_headline",
+          "text": "China Invokes Blocking Statute Against US Sanctions",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_fde78933-273c-40d1-afb3-72330fd7d949_summary",
+          "text": "The spokesperson criticised the, and trade exchanges between Chinese companies and third countries, as well as their citizens and organisations, in violation of international law and basic norms governing international relations",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_84b25439-a172-46c1-808c-a565ed89a273_headline",
+          "text": "‘Defensive and justified’: China invokes law to block US sanctions, escalates trade tensions | Today News",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_84b25439-a172-46c1-808c-a565ed89a273_summary",
+          "text": "China Daily, a state-affiliated English-language outlet, defended Beijing's decision by describing the move as a ‘defensive and justified response’ to what the government characterises as a clear violation of international law",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_a8bc9505-b233-4df1-b3fb-4589d5e54e06_headline",
+          "text": "‘Defensive and justified’: China invokes law to block US sanctions, escalates trade tensions | Today News",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_a8bc9505-b233-4df1-b3fb-4589d5e54e06_summary",
+          "text": "China Daily, a state-affiliated English-language outlet, defended Beijing's decision by describing the move as a ‘defensive and justified response’ to what the government characterises as a clear violation of international law",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_a8626199-d094-4943-8d4b-0db589239365_headline",
+          "text": "China Invokes Blocking Statute Against US Sanctions",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_a8626199-d094-4943-8d4b-0db589239365_summary",
+          "text": "The spokesperson criticised the, and trade exchanges between Chinese companies and third countries, as well as their citizens and organisations, in violation of international law and basic norms governing international relations",
+          "claim_type": "fact",
+          "confidence": 0.72
+        }
+      ],
+      "selection_reason": "sanctions or information-access development relevant to the company brief",
+      "evidence_class": "source_frame",
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The selected evidence supports comparing trade/operational framing with regional/security framing.",
+        "source_count": 3,
+        "source_quality": "B"
+      },
+      "source_quality": {
+        "A": 0,
+        "B": 3,
+        "C": 0,
+        "D": 0,
+        "Block": 0
+      }
+    }
+  ],
+  "perception_gap_frames": [
+    {
+      "topic": "Press freedom signals need careful reading",
+      "frame_text": "Media/comms view: cbsnews.com and aljazeera.com focused on information access, audience exposure, platform effects, press freedom, and narrative spread.\nState/policy view: wider regional and policy coverage focused more on official positioning, regulation, sanctions, security claims, and state interests.\nThe gap: one frame shows how information may reach or shape audiences; the other shows how authorities or institutions are trying to define the event.\nWhy it matters: a reader who only sees the official frame may miss how the story is being distributed, restricted, or reframed for audiences.",
+      "source_names": [
+        "cbsnews.com",
+        "aljazeera.com",
+        "rappler.com"
+      ],
+      "claim_ids": [
+        "claim_art_d7e0a52a-835f-4f79-aee6-e57fbb79ffb7_headline",
+        "claim_art_d7e0a52a-835f-4f79-aee6-e57fbb79ffb7_summary",
+        "claim_art_45812a5e-1db5-4c7a-912f-c614f24b5fac_headline",
+        "claim_art_45812a5e-1db5-4c7a-912f-c614f24b5fac_summary",
+        "claim_art_e188c9b3-4a17-4d0b-b278-f2df2f4dba4e_headline",
+        "claim_art_e188c9b3-4a17-4d0b-b278-f2df2f4dba4e_summary",
+        "claim_art_ab82595b-ab2c-4bda-a055-2304dcc5b861_headline",
+        "claim_art_ab82595b-ab2c-4bda-a055-2304dcc5b861_summary",
+        "claim_art_5f614293-5cc5-4333-b76d-36a81a00fa1b_headline",
+        "claim_art_5f614293-5cc5-4333-b76d-36a81a00fa1b_summary",
+        "claim_art_4021724f-b6fd-4d4d-b8c8-3ee86f7170c7_headline",
+        "claim_art_4021724f-b6fd-4d4d-b8c8-3ee86f7170c7_summary"
+      ],
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The Perception Gap compares supported source frames from the selected evidence.",
+        "source_count": 3,
+        "source_quality": "B"
+      }
+    },
+    {
+      "topic": "Media regulation changed the publishing environment",
+      "frame_text": "Media/comms view: thedailybeast.com and moderndiplomacy.eu focused on information access, audience exposure, platform effects, press freedom, and narrative spread.\nState/policy view: wider regional and policy coverage focused more on official positioning, regulation, sanctions, security claims, and state interests.\nThe gap: one frame shows how information may reach or shape audiences; the other shows how authorities or institutions are trying to define the event.\nWhy it matters: a reader who only sees the official frame may miss how the story is being distributed, restricted, or reframed for audiences.",
+      "source_names": [
+        "thedailybeast.com",
+        "moderndiplomacy.eu"
+      ],
+      "claim_ids": [
+        "claim_art_1dc0cf17-93ff-4f4d-aeeb-8160ee505d54_headline",
+        "claim_art_1dc0cf17-93ff-4f4d-aeeb-8160ee505d54_summary",
+        "claim_art_879ac564-5e0c-492b-949e-b6fef9a555ff_headline",
+        "claim_art_879ac564-5e0c-492b-949e-b6fef9a555ff_summary",
+        "claim_art_fc39bcb8-adc7-4b25-a68a-98bdb5704193_headline",
+        "claim_art_fc39bcb8-adc7-4b25-a68a-98bdb5704193_summary"
+      ],
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The Perception Gap compares supported source frames from the selected evidence.",
+        "source_count": 2,
+        "source_quality": "B"
+      }
+    },
+    {
+      "topic": "Sanctions and access rules are shaping the information environment",
+      "frame_text": "Media/comms view: thenationonlineng.net and newkerala.com focused on information access, audience exposure, platform effects, press freedom, and narrative spread.\nState/policy view: wider regional and policy coverage focused more on official positioning, regulation, sanctions, security claims, and state interests.\nThe gap: one frame shows how information may reach or shape audiences; the other shows how authorities or institutions are trying to define the event.\nWhy it matters: a reader who only sees the official frame may miss how the story is being distributed, restricted, or reframed for audiences.",
+      "source_names": [
+        "thenationonlineng.net",
+        "newkerala.com",
+        "livemint.com"
+      ],
+      "claim_ids": [
+        "claim_art_5f11cf29-c9a2-4755-92cd-831ffdaa1a98_headline",
+        "claim_art_5f11cf29-c9a2-4755-92cd-831ffdaa1a98_summary",
+        "claim_art_e346ee2a-66c4-45c5-a2c7-745fb3abd9eb_headline",
+        "claim_art_e346ee2a-66c4-45c5-a2c7-745fb3abd9eb_summary",
+        "claim_art_fde78933-273c-40d1-afb3-72330fd7d949_headline",
+        "claim_art_fde78933-273c-40d1-afb3-72330fd7d949_summary",
+        "claim_art_84b25439-a172-46c1-808c-a565ed89a273_headline",
+        "claim_art_84b25439-a172-46c1-808c-a565ed89a273_summary",
+        "claim_art_a8bc9505-b233-4df1-b3fb-4589d5e54e06_headline",
+        "claim_art_a8bc9505-b233-4df1-b3fb-4589d5e54e06_summary",
+        "claim_art_a8626199-d094-4943-8d4b-0db589239365_headline",
+        "claim_art_a8626199-d094-4943-8d4b-0db589239365_summary"
+      ],
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The Perception Gap compares supported source frames from the selected evidence.",
+        "source_count": 3,
+        "source_quality": "B"
+      }
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "obs_press_freedom_pope-leo-honors-14-journalists-killed-in-war-zones-in-observance-of-world-press-",
+      "type": "quiet_widening",
+      "title": "Press-freedom coverage describes operating climate",
+      "body": "A press-freedom story becomes part of the operating climate when it changes access, safety, censorship, legal pressure, or source reliability.",
+      "evidence_refs": [
+        {
+          "type": "source_id",
+          "id": "domain:www.cbsnews.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:aljazeera.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:rappler.com"
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "observation_id": "obs_media_regulation_donald-trump-79-reignites-war-with-moron-bill-maher",
+      "type": "hidden_distinction",
+      "title": "Regulation matters when it changes reach",
+      "body": "Regulation becomes a media-company issue when it changes who can publish, distribute, monetise, or access information.",
+      "evidence_refs": [
+        {
+          "type": "source_id",
+          "id": "domain:www.thedailybeast.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:moderndiplomacy.eu"
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "observation_id": "obs_disinformation_three-recent-examples-of-ai-being-used-for-empire-propaganda-nuclear-news",
+      "type": "source_frame_insight",
+      "title": "Narrative risk depends on spread",
+      "body": "The practical difference is claim versus channel. A false or state-linked narrative matters more when it moves across platforms or audiences, not just because one outlet names it.",
+      "evidence_refs": [
+        {
+          "type": "source_id",
+          "id": "domain:nuclear-news.net"
+        }
+      ],
+      "confidence": "medium"
+    },
+    {
+      "observation_id": "obs_sanctions_cyberpedia-launches-ai-search-engine-to-tackle-misinformation-disinformation-the",
+      "type": "boundary_do_not_overread",
+      "title": "Sanctions coverage needs practical interpretation",
+      "body": "Sanctions coverage matters when changing rules affect who can operate, publish, transact, travel, or distribute.",
+      "evidence_refs": [
+        {
+          "type": "source_id",
+          "id": "domain:thenationonlineng.net"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:newkerala.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:livemint.com"
+        }
+      ],
+      "confidence": "high"
+    }
+  ],
+  "key_sources": [
+    "aljazeera.com",
+    "cbsnews.com",
+    "livemint.com",
+    "moderndiplomacy.eu",
+    "newkerala.com",
+    "nuclear-news.net",
+    "rappler.com",
+    "thedailybeast.com",
+    "thenationonlineng.net"
+  ],
+  "key_sources_detail": [
+    {
+      "source_display_name": "aljazeera.com",
+      "source_id": "domain:aljazeera.com",
+      "source_grade": "A",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://aljazeera.com/news/2026/5/3/pope-honors-journalists-killed-in-war-zones-on-world-press-freedom-day"
+    },
+    {
+      "source_display_name": "cbsnews.com",
+      "source_id": "domain:www.cbsnews.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://www.cbsnews.com/chicago/video/pope-leo-honors-14-journalist-killed-in-war-zones-in-observance-of-world-press-freedom-day/"
+    },
+    {
+      "source_display_name": "channelnewsasia.com",
+      "source_id": "domain:www.channelnewsasia.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://www.channelnewsasia.com/east-asia/north-koreas-kim-casts-youth-vanguard-state-goals-amid-russia-war-6096481"
+    },
+    {
+      "source_display_name": "cnn.com",
+      "source_id": "domain:www.cnn.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://www.cnn.com/2026/05/04/world/live-news/iran-war-hormuz-trump"
+    },
+    {
+      "source_display_name": "dailymail.com",
+      "source_id": "domain:www.dailymail.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://www.dailymail.com/news/article-15787671/Irans-warns-US-intervention-Strait-Hormuz-violate-ceasefire-Trump-offers-humanitarian-gesture.html"
+    },
+    {
+      "source_display_name": "foxnews.com",
+      "source_id": "domain:www.foxnews.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://www.foxnews.com/live-news/trump-iran-war-peace-agreement-israel-may-3"
+    },
+    {
+      "source_display_name": "livemint.com",
+      "source_id": "domain:livemint.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://livemint.com/news/world/defensive-and-justified-china-invokes-law-to-block-us-sanctions-escalates-trade-tensions-11777799225992.html"
+    },
+    {
+      "source_display_name": "moderndiplomacy.eu",
+      "source_id": "domain:moderndiplomacy.eu",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://moderndiplomacy.eu/2026/05/02/africa-and-its-external-partners-evaluation-in-todays-global-system-interview"
+    },
+    {
+      "source_display_name": "newkerala.com",
+      "source_id": "domain:newkerala.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://newkerala.com/news/a/beijing-strikes-back-china-invokes-first-ever-blocking-order-482.htm"
+    },
+    {
+      "source_display_name": "nuclear-news.net",
+      "source_id": "domain:nuclear-news.net",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://nuclear-news.net/2026/05/03/4-b1-three-recent-examples-of-ai-being-used-for-empire-propaganda"
+    },
+    {
+      "source_display_name": "rappler.com",
+      "source_id": "domain:rappler.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://rappler.com/philippines/good-as-news-ai-regulation-news-collaboration-keys-journalism-crisis"
+    },
+    {
+      "source_display_name": "thedailybeast.com",
+      "source_id": "domain:www.thedailybeast.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://www.thedailybeast.com/donald-trump-79-reignites-war-with-moron-bill-maher/"
+    },
+    {
+      "source_display_name": "thenationonlineng.net",
+      "source_id": "domain:thenationonlineng.net",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://thenationonlineng.net/cyberpedia-launches-ai-search-engine-to-tackle-misinformation-disinformation/"
+    }
+  ],
+  "source_quality_summary": {
+    "source_mix": {
+      "A": 1,
+      "B": 12,
+      "C": 0,
+      "D": 0,
+      "Block": 0
+    },
+    "concentration_risk": "low",
+    "note": "Selected evidence is not concentrated in a single source."
+  },
+  "dashboard_only_items": [],
+  "lower_priority_sample": [
+    {
+      "signal_id": "538c625d-ef67-4e8c-a6cd-21375be3d715",
+      "headline": "Trump says the US will 'guide' stranded ships from the Strait of Hormuz, starting on Monday",
+      "source_domain": "apnews.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "edd77abb-70d9-4e98-a0e0-643c17a6f249",
+      "headline": "Trump says US navy will ‘guide’ trapped ships from strait of Hormuz amid ‘very positive’ talks with Iran | US-Israel war on Iran | The Guardian",
+      "source_domain": "www.theguardian.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "ace39bc1-2020-4ca0-bcfd-3539fc19904a",
+      "headline": "Delhi to Howrah in just 15 hours: New high-speed Vande Bharat Express to soon run on Delhi-Howrah route; check trial update and route details",
+      "source_domain": "www.india.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "cdc09591-2db5-4279-a2b1-6b8f5732eb4b",
+      "headline": "Germany Battles Fertiliser Shortage Amid Strait of Hormuz Closure",
+      "source_domain": "www.newsworm.de",
+      "signal_type": "disruption"
+    },
+    {
+      "signal_id": "f263df09-50fe-4072-9cad-1aeadaded093",
+      "headline": "German fertiliser makers struggle with Iran war fallout - Read Qatar Tribune on the go for unrivalled news coverage",
+      "source_domain": "www.qatar-tribune.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "c5fc1a95-ef81-4b77-98f4-a3e5afb68af0",
+      "headline": "UAE fertiliser giant resorts to trucks to shift product out of Gulf",
+      "source_domain": "www.ft.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "ccbfd251-f5a3-4125-a944-b6ba8f845669",
+      "headline": "Thailand seizes on Hormuz fears to push land bridge dream - Asia Times",
+      "source_domain": "asiatimes.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "50934afc-2f2e-439a-a92f-d5e6e07ffc41",
+      "headline": "Tensions Escalate in Gulf as Vessel Attacked Near Strait of Hormuz and Iran Pushes New Terms to End War – [your]NEWS",
+      "source_domain": "yournews.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "d4721cb5-688b-4bf9-8688-4b56041a7268",
+      "headline": "US-led task force tells ships to reroute on first day of new effort to reopen the Strait of Hormuz",
+      "source_domain": "www.koco.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "418c0f9e-ac04-4f81-815b-3c43d39b95d5",
+      "headline": "Cargo ship attacked near Strait of Hormuz as armed boats swarm vessel - World News - News - Daily Express US",
+      "source_domain": "the-express.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "114e77ed-15ad-4274-a42c-2fd82722959a",
+      "headline": "Middle East war latest: Trump pledges to begin freeing ships from Strait of Hormuz from today | World News | Sky News",
+      "source_domain": "translate.google.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "74f183ce-daf3-4f43-85cb-3414c98f0461",
+      "headline": "Trump Announces Plan to \"Guide\" Ships Out of Strait of Hormuz",
+      "source_domain": "maritime-executive.com",
+      "signal_type": "announcement"
+    },
+    {
+      "signal_id": "77578b4a-ba45-40a6-b984-a5b8fa49e84a",
+      "headline": "Donald Trump’s New Initiative Promises Protection but Risks Tension in Hormuz",
+      "source_domain": "www.inquisitr.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "45928a7d-32b7-4ac8-bc8e-4fc07581e600",
+      "headline": "India's 'Sarv Shakti' successfully navigates in Strait of Hormuz",
+      "source_domain": "organiser.org",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "f5c01138-1167-48a6-b3f4-128dd5907c6a",
+      "headline": "Iran threatens to attack US forces in Strait of Hormuz after Trump says military will help stranded ships - BBC News",
+      "source_domain": "www.bbc.co.uk",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "b3b1e471-4bba-4b9a-97b3-732082ba51d6",
+      "headline": "Cargo ship attacked by small craft near Strait of Hormuz, UK maritime agency says",
+      "source_domain": "www.foxnews.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "6773a332-c064-4805-94a6-12a5bc7db3f4",
+      "headline": "Tehran’s Strait of Hormuz Gambit: Desperation Masquerading as Diplomacy - Iran News Update",
+      "source_domain": "irannewsupdate.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "1d86c3e8-bb2a-4ff3-a833-0fce3329d1ef",
+      "headline": "A cargo ship near Strait of Hormuz says it's attacked as Iran makes new peace proposal",
+      "source_domain": "ktnv.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "2aa0889a-6553-4abf-87c8-322625208335",
+      "headline": "US launches Project Freedom to guide ships out of Hormuz - Splash247",
+      "source_domain": "splash247.com",
+      "signal_type": "announcement"
+    },
+    {
+      "signal_id": "ed759e4c-ceb7-415e-985a-ddfe6c32a0c9",
+      "headline": "Trump Launches 'Project Freedom' To Move Stranded Ships From Strait Of Hormuz: Iran Says Measure Will Amo - Benzinga",
+      "source_domain": "www.benzinga.com",
+      "signal_type": "announcement"
+    },
+    {
+      "signal_id": "f7742295-2e7d-4088-8f7c-49e81dbb7919",
+      "headline": "Second vessel attacked near Strait of Hormuz in about 8 hours - UPI.com",
+      "source_domain": "www.upi.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "789d314c-81f3-4193-b479-548491bc0afe",
+      "headline": "Trump says the U.S will 'guide' stranded ships from the Strait of Hormuz : NPR",
+      "source_domain": "npr.org",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "e5137ea6-297f-4c42-9768-9f6b567eae2e",
+      "headline": "\"He wants action\": Trump's frustration with Iran stalemate sparked Hormuz gambit",
+      "source_domain": "www.axios.com",
+      "signal_type": "policy"
+    },
+    {
+      "signal_id": "3a446407-e6fb-4932-8bdc-52bdf1ba118e",
+      "headline": "Trump says U.S. will 'free' ships trapped in Persian Gulf by Strait of Hormuz closure",
+      "source_domain": "www.cnbc.com",
+      "signal_type": "disruption"
+    },
+    {
+      "signal_id": "f3f5b67b-f7c8-40b6-85a1-8db38176e2c2",
+      "headline": "Tensions intensify at Strait: Cargo ship sailing near Hormuz attacked by Iran | India News - The Times of India",
+      "source_domain": "timesofindia.indiatimes.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "da3c6832-9831-4cbf-b563-addd13dee53d",
+      "headline": "'We're Suffocating The Regime': US Treasury Chief Says Iran Unable To Pay Its Soldiers Amid Blockade | World News - News18",
+      "source_domain": "www.news18.com",
+      "signal_type": "disruption"
+    },
+    {
+      "signal_id": "cfe87720-aa68-46d0-8f22-ab3643b140d8",
+      "headline": "Tehran says Trump's plan to support ships through Strait of Hormuz would violate ceasefire — as it happened - ABC News",
+      "source_domain": "www.abc.net.au",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "3cec5bf5-07d7-475c-89e4-8c8e096f0143",
+      "headline": "Iran fired 2 missiles at US Navy vessel after it attempted to pass through Strait of Hormuz - Iranian media | The Times of Israel",
+      "source_domain": "www.timesofisrael.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "a8d69c77-a065-4dc4-98a0-1f5cfdacafb2",
+      "headline": "Live Updates: Iran threatens to attack ships as Trump says U.S. will guide vessels through Strait of Hormuz",
+      "source_domain": "www.cbsnews.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "4509505d-f9c6-4bb9-9f20-82a2fa09cac2",
+      "headline": "Ukraine-Russia war latest: Zelensky meets Starmer as UK to enter talks to join £78bn EU loan scheme for Kyiv | The Independent",
+      "source_domain": "www.the-independent.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "82369008-9996-448f-9365-06e74efa7197",
+      "headline": "New shipping route from Antwerp to the Persian Gulf: ‘Safe alternative to the Strait of Hormuz’ | VRT NWS: news",
+      "source_domain": "www.vrt.be",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "31d132f2-6d10-49f5-b19d-c74397c2fdf6",
+      "headline": "IRGC announces new maritime rules to tighten control over Arabian Gulf and Strait of Hormuz waters - India Shipping News",
+      "source_domain": "indiashippingnews.com",
+      "signal_type": "regulatory"
+    },
+    {
+      "signal_id": "7cd5ecec-453f-45e9-995b-a5773f6345e3",
+      "headline": "Iran Officially Replaces UAE With Pakistan Shipping Route for Most Imports",
+      "source_domain": "propakistani.pk",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "b01521d8-014a-43c6-9c1b-13cdc7dcbb3d",
+      "headline": "Hormuz impasse brings another vital shipping lane into sharper focus. This one’s closer to home",
+      "source_domain": "smh.com.au",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "de6a1352-4cad-475d-b4b8-8332a39f41a5",
+      "headline": "Unilever Capitalizes on Global Supply Chain Disruptions Amid Crude Oil Price Surge | Business",
+      "source_domain": "www.devdiscourse.com",
+      "signal_type": "disruption"
+    },
+    {
+      "signal_id": "429e1f59-7b15-4209-bda3-cbec34c4d719",
+      "headline": "Key Risk Areas in Supply Chain Disruption: How Smart Leaders Stay Ahead. -",
+      "source_domain": "www.supplychaintoday.com",
+      "signal_type": "disruption"
+    },
+    {
+      "signal_id": "7287cc1a-a673-45d3-99ac-f647c0a89a06",
+      "headline": "Spirit Airlines Has Shut Down. Here’s What It Means For Caribbean Travel Right Now. - Caribbean Journal",
+      "source_domain": "www.caribjournal.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "c818435d-6304-4342-a323-45ee387069fc",
+      "headline": "Do you need local currency in Mexico or Caribbean ports?",
+      "source_domain": "travelhost.com",
+      "signal_type": "market"
+    },
+    {
+      "signal_id": "da579335-dd75-462a-a247-5eb553b0a7d8",
+      "headline": "Middle East crisis live: Iran claims it stopped US warship from sailing through strait of Hormuz | US-Israel war on Iran | The Guardian",
+      "source_domain": "www.theguardian.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "ff74f5e0-8315-4585-8a49-4f481ae2a828",
+      "headline": "Iran warns US over Hormuz escort plan, says interference breaks ceasefire | Middle East Eye",
+      "source_domain": "www.middleeasteye.net",
+      "signal_type": "other"
+    }
+  ],
+  "excluded_summary": {
+    "counts_by_reason": {},
+    "notable_exclusions": []
+  }
+}

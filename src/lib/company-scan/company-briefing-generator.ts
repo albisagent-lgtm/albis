@@ -278,7 +278,7 @@ function generateMainBriefing(packet: CompanyBriefingEvidencePacket): GeneratedM
   if (unassigned.length > 0) {
     sections.push({
       section_id: "other",
-      heading: "Other Relevant Signals",
+      heading: "Other Relevant Coverage",
       items: unassigned.map((item) => generateBriefingItem(item, packet)),
     });
   }
@@ -450,7 +450,7 @@ function generateUsefulObservations(
   const developingItems = items.filter((i) => i.item_status === "developing" || i.item_status === "proposed");
   if (developingItems.length > 0) {
     observations.push({
-      text: `${developingItems.length} item${developingItems.length > 1 ? "s are" : " is"} still developing or at proposal stage. Read ${developingItems.length > 1 ? "them" : "it"} as early signal${developingItems.length > 1 ? "s" : ""}, not final fact${developingItems.length > 1 ? "s" : ""}.`,
+      text: `${developingItems.length} item${developingItems.length > 1 ? "s are" : " is"} still developing or at proposal stage. Read ${developingItems.length > 1 ? "them" : "it"} as early reporting, not final fact${developingItems.length > 1 ? "s" : ""}.`,
       supported_by: developingItems.map((i) => ({ type: "claim_id" as const, id: i.facts[0]?.claim_id ?? i.item_id })),
     });
   }

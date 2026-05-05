@@ -47,6 +47,7 @@ import {
   type SelectedSignalForDepth,
 } from "./intelligence-depth";
 import { buildResearchedUnderstandingLayer } from "./researched-understanding";
+import { applyGoldStandardEditorialWriter } from "./company-gold-standard-editorial-writer";
 
 export interface CompanyPackage8PipelineOptions {
   scanDate: string;
@@ -1587,11 +1588,21 @@ export async function runCompanyPackage8PipelineForProfile(
     selected: selectedForDepth,
     bundles: intelligence_depth_bundles,
   });
-  const editorResult = await editCompanyBriefingForReadability({
+
+  // Company Daily Scan V1 must be written by the gold-standard editorial
+  // writer pass — the same process used for the approved Lindell Media test.
+  // If the writer is not configured or the response is too thin, QA holds.
+  const goldWriterResult = await applyGoldStandardEditorialWriter({
     packet: depthPacket,
     output: draftOutput,
-    mode: "premium_readability",
   });
+  const editorResult = goldWriterResult.edit_report.enabled
+    ? goldWriterResult
+    : await editCompanyBriefingForReadability({
+        packet: depthPacket,
+        output: draftOutput,
+        mode: "premium_readability",
+      });
   const finalOutput = refreshEditedClaimMaps(editorResult.output);
   const qa = runQAGates(depthPacket, finalOutput, {
     dryRun: true,

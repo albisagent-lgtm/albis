@@ -30,15 +30,15 @@ import { storyIdentityKey } from "../understanding/company-pgi-story-arc";
 import type { CompanyPgiV2Report } from "../understanding/types";
 
 const INTERNAL_PHRASES: Array<[RegExp, string]> = [
-  [/\bThe datapoint was useful because\b/gi, "The useful point is"],
-  [/\bdatapoint was useful\b/gi, "point matters"],
+  [/\bThe datapoint was useful because\b/gi, "The detail matters because"],
+  [/\bdatapoint was useful\b/gi, "detail matters"],
   [
     /\bRoute access and route confidence can move at different speeds\b/gi,
     "A route can reopen before the market trusts it again",
   ],
-  [/\bThe comparison is whether\b/gi, "The useful test is whether"],
-  [/\bThe relevance is\b/gi, "The practical point is"],
-  [/\bThe useful distinction is\b/gi, "The practical difference is"],
+  [/\bThe comparison is whether\b/gi, "The test is whether"],
+  [/\bThe relevance is\b/gi, "The reason it matters is"],
+  [/\bThe useful distinction is\b/gi, "The difference is"],
   [/\bshowed up in coverage\b/gi, "appeared in the scan"],
   [/\bcompany-specific scan\b/gi, "scan"],
   [/\bregistered against\b/gi, "matched"],
@@ -167,7 +167,7 @@ function labelForSection(
   packet: CompanyBriefingEvidencePacket,
   sectionId: string | undefined,
 ): string {
-  if (!sectionId) return "Other relevant signals";
+  if (!sectionId) return "Other relevant coverage";
   const match = packet.company.selected_scan_areas.find(
     (area) => area.area_id === sectionId,
   );
@@ -226,7 +226,7 @@ function claimMapForItem(
   }));
 }
 
-function titleForSignal(signal: Signal, fallback = "Reported signal"): string {
+function titleForSignal(signal: Signal, fallback = "Reported development"): string {
   return trimWords(
     englishFacingText(signal.headline, fallback)
       .replace(/\s+\|\s+[^|]+$/g, "")
@@ -558,8 +558,8 @@ function buildOverview(
     ? `${nonActive.length} topic${nonActive.length === 1 ? "" : "s"} were quiet: ${nonActiveLabels.join(", ")}${nonActive.length > nonActiveLabels.length ? ` and ${nonActive.length - nonActiveLabels.length} more` : ""}.`
     : "Every tracked topic had coverage.";
   const text = selected.length
-    ? `${packet.company.selected_scan_areas.length} tracked topics checked. ${active.length} had coverage. ${coverageLine} ${packet.input_summary.raw_articles_count} source items were considered.`
-    : `${packet.company.selected_scan_areas.length} tracked topics checked. No major coverage was found in the last 24 hours. ${packet.input_summary.raw_articles_count} source items were considered.`;
+    ? `${packet.company.selected_scan_areas.length} tracked topics checked. ${active.length} had enough coverage for the email briefing. ${coverageLine} ${packet.input_summary.raw_articles_count} sources were reviewed for this scan.`
+    : `${packet.company.selected_scan_areas.length} tracked topics checked. No major coverage was found in the last 24 hours. ${packet.input_summary.raw_articles_count} sources were reviewed for this scan.`;
   const refs = selected.flatMap(supportRefsForSelected).slice(0, 12);
   return { text, supported_by: refs };
 }
@@ -666,7 +666,7 @@ function completeObservations(
       : " into another credible region or source type";
     additions.push({
       text: cleanText(
-        `Watch ${topActive.label}${sourcePhrase}: the useful follow-up test is whether coverage spreads${spreadPhrase}, or turns into an official, platform, or customer-facing response.`,
+        `Watch ${topActive.label}${sourcePhrase}: the next test is whether coverage spreads${spreadPhrase}, or turns into an official, platform, or customer-facing response.`,
       ),
       supported_by: refs,
     });
@@ -674,7 +674,7 @@ function completeObservations(
   if (coverageLabels.length) {
     additions.push({
       text: cleanText(
-        `${coverageLabels.join(", ")} stayed below the evidence threshold today; treat that as no source-backed movement in this scan window, not proof that the risk is gone.`,
+        `${coverageLabels.join(", ")} stayed quiet today; treat that as no source-backed movement in this scan window, not proof that the risk is gone.`,
       ),
       supported_by: refs,
     });

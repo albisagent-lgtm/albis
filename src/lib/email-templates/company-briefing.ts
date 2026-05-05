@@ -219,8 +219,8 @@ export function generateCompanyBriefingHtml(content: BriefingContent): string {
 
       ${divider()}
 
-      <!-- WHAT TO WATCH -->
-      ${sectionLabel("What to Watch Next")}
+      <!-- OBSERVATIONS -->
+      ${sectionLabel("Observations")}
       ${watchHtml}
 
       ${divider()}

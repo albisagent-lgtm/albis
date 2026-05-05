@@ -1,0 +1,827 @@
+{
+  "run_id": "company_pkg8_2026-05-05_2fcda41e-dbb9-40be-9c86-4ba4659d2e77",
+  "company_profile_id": "2fcda41e-dbb9-40be-9c86-4ba4659d2e77",
+  "company_name": "Lindell Media",
+  "scan_date": "2026-05-05",
+  "scan_summary": {
+    "total_signals_loaded": 58,
+    "selected_for_email": 18,
+    "dashboard_only_count": 0,
+    "excluded_count": 0,
+    "key_source_domains_count": 8,
+    "all_source_domains_count": 53,
+    "regions_represented": [
+      "Africa",
+      "Middle East"
+    ],
+    "languages_represented": [
+      "unknown"
+    ],
+    "selected_sections": [
+      "Media Regulation",
+      "Geopolitical / conflict risk"
+    ],
+    "scan_window": {
+      "from": "2026-05-03T00:00:00.000Z",
+      "to": "2026-05-05T23:59:59.000Z"
+    }
+  },
+  "briefing_sections": [
+    {
+      "heading": "Press freedom signals need careful reading",
+      "section_label": "Media Regulation",
+      "signal_ids": [
+        "59c639a61064dc016dc377ff",
+        "3a7ff9a54eef8fd6ec503652",
+        "d5b3f8b4342855474d1fcdcf",
+        "25d0183f22248e65ee1f2551",
+        "39fb45057a4050eb6abfd749",
+        "f03390357124b3ed940759a5",
+        "0329a590abee18a6f9cd19da",
+        "732907821bd9e66c1bde7f04",
+        "c87be7c4e04f916f849e6a6e",
+        "321772d4f9f97d22f39d65ef",
+        "de07958f1fc3f3d64af69d96",
+        "8705a35a53353098f9eed916",
+        "a286aaaa4c51cfa89d37c423"
+      ],
+      "source_names": [
+        "ghanamma.com",
+        "pakobserver.net",
+        "blueprint.ng",
+        "jamaicaobserver.com"
+      ],
+      "statistics": [
+        {
+          "stat_id": "press_freedom_source_spread",
+          "label": "Selected source spread",
+          "value_text": "13 sources in today's selected evidence",
+          "explanation": "A small source-spread marker showing how much of the selected briefing item rests on one report versus repeated coverage.",
+          "confidence": "medium",
+          "source_refs": [
+            {
+              "type": "source_id",
+              "id": "domain:ghanamma.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:pakobserver.net"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:blueprint.ng"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:jamaicaobserver.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:modernghana.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:premiumtimesng.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:mindanews.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:thenationonlineng.net"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:goodauthority.org"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:radiotamazuj.org"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:dabangasudan.org"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:newsday.co.zw"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:allafrica.com"
+            }
+          ],
+          "claim_ids": [
+            "claim_art_59c639a61064dc016dc377ff_headline",
+            "claim_art_59c639a61064dc016dc377ff_summary",
+            "claim_art_3a7ff9a54eef8fd6ec503652_headline",
+            "claim_art_3a7ff9a54eef8fd6ec503652_summary",
+            "claim_art_d5b3f8b4342855474d1fcdcf_headline",
+            "claim_art_d5b3f8b4342855474d1fcdcf_summary",
+            "claim_art_25d0183f22248e65ee1f2551_headline",
+            "claim_art_25d0183f22248e65ee1f2551_summary",
+            "claim_art_39fb45057a4050eb6abfd749_headline",
+            "claim_art_39fb45057a4050eb6abfd749_summary",
+            "claim_art_f03390357124b3ed940759a5_headline",
+            "claim_art_f03390357124b3ed940759a5_summary",
+            "claim_art_0329a590abee18a6f9cd19da_headline",
+            "claim_art_0329a590abee18a6f9cd19da_summary",
+            "claim_art_732907821bd9e66c1bde7f04_headline",
+            "claim_art_732907821bd9e66c1bde7f04_summary",
+            "claim_art_c87be7c4e04f916f849e6a6e_headline",
+            "claim_art_c87be7c4e04f916f849e6a6e_summary",
+            "claim_art_321772d4f9f97d22f39d65ef_headline",
+            "claim_art_321772d4f9f97d22f39d65ef_summary",
+            "claim_art_de07958f1fc3f3d64af69d96_headline",
+            "claim_art_de07958f1fc3f3d64af69d96_summary",
+            "claim_art_8705a35a53353098f9eed916_headline",
+            "claim_art_8705a35a53353098f9eed916_summary",
+            "claim_art_a286aaaa4c51cfa89d37c423_headline",
+            "claim_art_a286aaaa4c51cfa89d37c423_summary"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim_art_59c639a61064dc016dc377ff_headline",
+          "text": "Press freedom without protection: Why Ghana’s journalists still bleed for the story - Ghanamma.com",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_59c639a61064dc016dc377ff_summary",
+          "text": "By Shine Esi Kwawukumey Accra, May 03, GNA – Ghana is often praised as a model for press freedom in West Africa, with a Constitution that guarantees media independence, rejects censorship, and protects journalists",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_3a7ff9a54eef8fd6ec503652_headline",
+          "text": "UNESCO sounds alarm over crumbling Press Freedom amid growing risks to Journalists - Pakistan Observer",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_3a7ff9a54eef8fd6ec503652_summary",
+          "text": "ISLAMABAD – UNESCO raised serious concerns about state of global press freedom, warning that it is steadily declining while risks to journalists continue",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_d5b3f8b4342855474d1fcdcf_headline",
+          "text": "World Press Freedom Day 2026: Ink, blood and the burden of truth - Blueprint Newspapers Limited",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_d5b3f8b4342855474d1fcdcf_summary",
+          "text": "There is something sacred about ink when it refuses to lie",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_25d0183f22248e65ee1f2551_headline",
+          "text": "Anchored in truth: A declaration for World Press Freedom Day - Jamaica Observer",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_25d0183f22248e65ee1f2551_summary",
+          "text": "There are professions that exist simply to serve a market",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_39fb45057a4050eb6abfd749_headline",
+          "text": "Press freedom in a 'deplorable' state worldwide: journalism federation chief",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_39fb45057a4050eb6abfd749_summary",
+          "text": "More than 300 delegates representing journalists' unions and associations from across the world are gathering in Paris for the event from 4 - 7 May, hosted by the IFJ's French trade union affiliates SNJ,",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_f03390357124b3ed940759a5_headline",
+          "text": "World Press Freedom Day 2026: CISLAC, media groups demand stronger safeguards for journalists",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_f03390357124b3ed940759a5_summary",
+          "text": "A free and independent media remains central to governance, transparency and national development, the groups said",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_0329a590abee18a6f9cd19da_headline",
+          "text": "Manifesto for World Press Freedom Day: ‘Let’s build an internet where humans thrive’",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_0329a590abee18a6f9cd19da_summary",
+          "text": "When crisis or conflict strikes, journalists and newsrooms go to the frontlines to bring people the information they need to make crucial decisions",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_732907821bd9e66c1bde7f04_headline",
+          "text": "World Press Freedom Day: Centre urges protection of media independence, ethical journalism - The Nation Newspaper",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_732907821bd9e66c1bde7f04_summary",
+          "text": "The Nation Newspaper World Press Freedom Day: Centre urges protection of media independence, ethical journalism",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_c87be7c4e04f916f849e6a6e_headline",
+          "text": "Africans support media freedom, but often don’t see it",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_c87be7c4e04f916f849e6a6e_summary",
+          "text": "World Press Freedom Day is a reminder that public support for media freedom is essential for defending democracy",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_321772d4f9f97d22f39d65ef_headline",
+          "text": "Press freedom deteriorates further in South Sudan, watchdog says - Radio Tamazuj",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_321772d4f9f97d22f39d65ef_summary",
+          "text": "South Sudan’s press freedom situation has deteriorated further, according to the 2026 World Press Freedom",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_de07958f1fc3f3d64af69d96_headline",
+          "text": "Sudan’s media mark World Press Freedom Day - Dabanga Radio TV Online",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_de07958f1fc3f3d64af69d96_summary",
+          "text": "As the world and Sudanese media mark World Press Freedom Day 2026, Sudan is in",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_8705a35a53353098f9eed916_headline",
+          "text": "Press freedom under siege in southern Africa - The Standard",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_8705a35a53353098f9eed916_summary",
+          "text": "According to the report, this decline is compounded by shrinking civic space, global tensions, and intensified state efforts to control independent information",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_a286aaaa4c51cfa89d37c423_headline",
+          "text": "Africa: Joint Statement On World Press Freedom Day 2026 - allAfrica.com",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_a286aaaa4c51cfa89d37c423_summary",
+          "text": "H.E",
+          "claim_type": "fact",
+          "confidence": 0.72
+        }
+      ],
+      "selection_reason": "retrieved by company-specific scan plan (kim jong un, dprk, media regulation) and matched to Media Regulation, Disinformation",
+      "evidence_class": "source_frame",
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The selected evidence supports comparing trade/operational framing with regional/security framing.",
+        "source_count": 4,
+        "source_quality": "B"
+      },
+      "source_quality": {
+        "A": 0,
+        "B": 13,
+        "C": 0,
+        "D": 0,
+        "Block": 0
+      }
+    },
+    {
+      "heading": "Russia, North Korea and Iran coverage shaped the narrative-risk picture",
+      "section_label": "Geopolitical / conflict risk",
+      "signal_ids": [
+        "3edc199f88d79d2ff6cf40e5",
+        "df6d3a9325acf820cbbe7d81",
+        "71ef730d8c980707bee41b65",
+        "1f5e57f805c9b418819bde6b",
+        "5b052d9848bbeba63666b62e"
+      ],
+      "source_names": [
+        "thediplomat.com",
+        "dailymail.com",
+        "timesofisrael.com",
+        "unn.ua"
+      ],
+      "statistics": [
+        {
+          "stat_id": "geopolitics_source_spread",
+          "label": "Selected source spread",
+          "value_text": "5 sources in today's selected evidence",
+          "explanation": "A small source-spread marker showing how much of the selected briefing item rests on one report versus repeated coverage.",
+          "confidence": "medium",
+          "source_refs": [
+            {
+              "type": "source_id",
+              "id": "domain:thediplomat.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:www.dailymail.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:www.timesofisrael.com"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:unn.ua"
+            },
+            {
+              "type": "source_id",
+              "id": "domain:www.mk.co.kr"
+            }
+          ],
+          "claim_ids": [
+            "claim_art_3edc199f88d79d2ff6cf40e5_headline",
+            "claim_art_3edc199f88d79d2ff6cf40e5_summary",
+            "claim_art_df6d3a9325acf820cbbe7d81_headline",
+            "claim_art_df6d3a9325acf820cbbe7d81_summary",
+            "claim_art_71ef730d8c980707bee41b65_headline",
+            "claim_art_71ef730d8c980707bee41b65_summary",
+            "claim_art_1f5e57f805c9b418819bde6b_headline",
+            "claim_art_1f5e57f805c9b418819bde6b_summary",
+            "claim_art_5b052d9848bbeba63666b62e_headline",
+            "claim_art_5b052d9848bbeba63666b62e_summary"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim_art_3edc199f88d79d2ff6cf40e5_headline",
+          "text": "Kim Jong Un Was Right – and Everyone Else Is Taking Notes",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_3edc199f88d79d2ff6cf40e5_summary",
+          "text": "The war in Iran, alongside the 2022 invasion of Ukraine, has vindicated North Korea’s mantra: nuclear weapons are the only guarantee of sovereignty",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_df6d3a9325acf820cbbe7d81_headline",
+          "text": "Iranian media claims regime forces launched two missiles at US warship after Trump announced plan to help stranded vessels in Strait of Hormuz | Daily Mail Online",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_df6d3a9325acf820cbbe7d81_summary",
+          "text": "It follows Iran's warning to US forces on Monday not to enter the Strait of Hormuz",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_71ef730d8c980707bee41b65_headline",
+          "text": "Iran fired 2 missiles at US Navy vessel after it attempted to pass through Strait of Hormuz - Iranian media | The Times of Israel",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_71ef730d8c980707bee41b65_summary",
+          "text": "Emanuel (Mannie) Fabian is The Times of Israel's military correspondent · Iran fired two missiles at a US Navy vessel after it attempted to pass through the Strait of Hormuz, the semiofficial Fars news",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_1f5e57f805c9b418819bde6b_headline",
+          "text": "Putin is hiding in bunkers, fearing a coup by Russian elites or a drone assassination attempt – media | УНН",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_1f5e57f805c9b418819bde6b_summary",
+          "text": "УНН News of the World ✎ Due to fear of a coup, Putin is hiding in bunkers and has restricted his travel",
+          "claim_type": "fact",
+          "confidence": 0.72
+        },
+        {
+          "claim_id": "claim_art_5b052d9848bbeba63666b62e_headline",
+          "text": "Foreign media reported that Russian President Vladimir Putin, who was threatened with an assassinati, - MK",
+          "claim_type": "fact",
+          "confidence": 0.74
+        },
+        {
+          "claim_id": "claim_art_5b052d9848bbeba63666b62e_summary",
+          "text": "Foreign media reported that Russian President Vladimir Putin, who was threatened with an assassination by a drone attack in Ukraine, is strengthening security by reducing public activities and increas",
+          "claim_type": "fact",
+          "confidence": 0.72
+        }
+      ],
+      "selection_reason": "retrieved by company-specific scan plan (geopolitical conflict, reputation narrative) and matched to Geopolitical / conflict risk, Reputation / narrative risk",
+      "evidence_class": "source_frame",
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The selected evidence supports comparing trade/operational framing with regional/security framing.",
+        "source_count": 4,
+        "source_quality": "B"
+      },
+      "source_quality": {
+        "A": 0,
+        "B": 5,
+        "C": 0,
+        "D": 0,
+        "Block": 0
+      }
+    }
+  ],
+  "perception_gap_frames": [
+    {
+      "topic": "Press freedom signals need careful reading",
+      "frame_text": "Media/comms view: ghanamma.com and pakobserver.net focused on information access, audience exposure, platform effects, press freedom, and narrative spread.\nState/policy view: wider regional and policy coverage focused more on official positioning, regulation, sanctions, security claims, and state interests.\nThe gap: one frame shows how information may reach or shape audiences; the other shows how authorities or institutions are trying to define the event.\nWhy it matters: a reader who only sees the official frame may miss how the story is being distributed, restricted, or reframed for audiences.",
+      "source_names": [
+        "ghanamma.com",
+        "pakobserver.net",
+        "blueprint.ng",
+        "jamaicaobserver.com"
+      ],
+      "claim_ids": [
+        "claim_art_59c639a61064dc016dc377ff_headline",
+        "claim_art_59c639a61064dc016dc377ff_summary",
+        "claim_art_3a7ff9a54eef8fd6ec503652_headline",
+        "claim_art_3a7ff9a54eef8fd6ec503652_summary",
+        "claim_art_d5b3f8b4342855474d1fcdcf_headline",
+        "claim_art_d5b3f8b4342855474d1fcdcf_summary",
+        "claim_art_25d0183f22248e65ee1f2551_headline",
+        "claim_art_25d0183f22248e65ee1f2551_summary",
+        "claim_art_39fb45057a4050eb6abfd749_headline",
+        "claim_art_39fb45057a4050eb6abfd749_summary",
+        "claim_art_f03390357124b3ed940759a5_headline",
+        "claim_art_f03390357124b3ed940759a5_summary",
+        "claim_art_0329a590abee18a6f9cd19da_headline",
+        "claim_art_0329a590abee18a6f9cd19da_summary",
+        "claim_art_732907821bd9e66c1bde7f04_headline",
+        "claim_art_732907821bd9e66c1bde7f04_summary",
+        "claim_art_c87be7c4e04f916f849e6a6e_headline",
+        "claim_art_c87be7c4e04f916f849e6a6e_summary",
+        "claim_art_321772d4f9f97d22f39d65ef_headline",
+        "claim_art_321772d4f9f97d22f39d65ef_summary",
+        "claim_art_de07958f1fc3f3d64af69d96_headline",
+        "claim_art_de07958f1fc3f3d64af69d96_summary",
+        "claim_art_8705a35a53353098f9eed916_headline",
+        "claim_art_8705a35a53353098f9eed916_summary",
+        "claim_art_a286aaaa4c51cfa89d37c423_headline",
+        "claim_art_a286aaaa4c51cfa89d37c423_summary"
+      ],
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The Perception Gap compares supported source frames from the selected evidence.",
+        "source_count": 4,
+        "source_quality": "B"
+      }
+    },
+    {
+      "topic": "Russia, North Korea and Iran coverage shaped the narrative-risk picture",
+      "frame_text": "Media/comms view: thediplomat.com and dailymail.com focused on information access, audience exposure, platform effects, press freedom, and narrative spread.\nState/policy view: wider regional and policy coverage focused more on official positioning, regulation, sanctions, security claims, and state interests.\nThe gap: one frame shows how information may reach or shape audiences; the other shows how authorities or institutions are trying to define the event.\nWhy it matters: a reader who only sees the official frame may miss how the story is being distributed, restricted, or reframed for audiences.",
+      "source_names": [
+        "thediplomat.com",
+        "dailymail.com",
+        "timesofisrael.com",
+        "unn.ua"
+      ],
+      "claim_ids": [
+        "claim_art_3edc199f88d79d2ff6cf40e5_headline",
+        "claim_art_3edc199f88d79d2ff6cf40e5_summary",
+        "claim_art_df6d3a9325acf820cbbe7d81_headline",
+        "claim_art_df6d3a9325acf820cbbe7d81_summary",
+        "claim_art_71ef730d8c980707bee41b65_headline",
+        "claim_art_71ef730d8c980707bee41b65_summary",
+        "claim_art_1f5e57f805c9b418819bde6b_headline",
+        "claim_art_1f5e57f805c9b418819bde6b_summary",
+        "claim_art_5b052d9848bbeba63666b62e_headline",
+        "claim_art_5b052d9848bbeba63666b62e_summary"
+      ],
+      "evidence_confidence": {
+        "kind": "regional_frame",
+        "label": "Source-frame comparison",
+        "customer_phrase": "This is a difference in framing, not a separate factual conclusion.",
+        "confidence": "high",
+        "reason": "The Perception Gap compares supported source frames from the selected evidence.",
+        "source_count": 4,
+        "source_quality": "B"
+      }
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "obs_press_freedom_press-freedom-without-protection-why-ghana-s-journalists-still-bleed-for-the-sto",
+      "type": "quiet_widening",
+      "title": "Press-freedom coverage describes operating climate",
+      "body": "A press-freedom story becomes part of the operating climate when it changes access, safety, censorship, legal pressure, or source reliability.",
+      "evidence_refs": [
+        {
+          "type": "source_id",
+          "id": "domain:ghanamma.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:pakobserver.net"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:blueprint.ng"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:jamaicaobserver.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:modernghana.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:premiumtimesng.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:mindanews.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:thenationonlineng.net"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:goodauthority.org"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:radiotamazuj.org"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:dabangasudan.org"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:newsday.co.zw"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:allafrica.com"
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "observation_id": "obs_geopolitics_kim-jong-un-was-right-and-everyone-else-is-taking-notes",
+      "type": "hidden_distinction",
+      "title": "Geopolitics can become an information-environment story",
+      "body": "The practical difference is event coverage versus narrative pressure. Russia, North Korea, Iran, and sanctions stories matter when they shift the information environment around audiences, platforms, or reputation.",
+      "evidence_refs": [
+        {
+          "type": "source_id",
+          "id": "domain:thediplomat.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:www.dailymail.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:www.timesofisrael.com"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:unn.ua"
+        },
+        {
+          "type": "source_id",
+          "id": "domain:www.mk.co.kr"
+        }
+      ],
+      "confidence": "high"
+    }
+  ],
+  "key_sources": [
+    "blueprint.ng",
+    "dailymail.com",
+    "ghanamma.com",
+    "jamaicaobserver.com",
+    "pakobserver.net",
+    "thediplomat.com",
+    "timesofisrael.com",
+    "unn.ua"
+  ],
+  "key_sources_detail": [
+    {
+      "source_display_name": "allafrica.com",
+      "source_id": "domain:allafrica.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://allafrica.com/stories/202605040048.html"
+    },
+    {
+      "source_display_name": "blueprint.ng",
+      "source_id": "domain:blueprint.ng",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://blueprint.ng/world-press-freedom-day-2026-ink-blood-and-the-burden-of-truth"
+    },
+    {
+      "source_display_name": "dabangasudan.org",
+      "source_id": "domain:dabangasudan.org",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://dabangasudan.org/en/all-news/article/sudans-media-mark-world-press-freedom-day"
+    },
+    {
+      "source_display_name": "dailymail.com",
+      "source_id": "domain:www.dailymail.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://www.dailymail.com/news/article-15788273/Iranian-media-claims-US-warship-struck-two-missiles-Trump-announced-plan-help-stranded-vessels-Strait-Hormuz.html"
+    },
+    {
+      "source_display_name": "ghanamma.com",
+      "source_id": "domain:ghanamma.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://ghanamma.com/2026/05/03/press-freedom-without-protection-why-ghanas-journalists-still-bleed-for-the-story"
+    },
+    {
+      "source_display_name": "goodauthority.org",
+      "source_id": "domain:goodauthority.org",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://goodauthority.org/news/africans-support-media-freedom-but-often-dont-see-it"
+    },
+    {
+      "source_display_name": "jamaicaobserver.com",
+      "source_id": "domain:jamaicaobserver.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://jamaicaobserver.com/2026/05/03/anchored-truth-declaration-world-press-freedom-day"
+    },
+    {
+      "source_display_name": "mindanews.com",
+      "source_id": "domain:mindanews.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://mindanews.com/statements/2026/05/manifesto-for-world-press-freedom-day-lets-build-an-internet-where-humans-thrive"
+    },
+    {
+      "source_display_name": "mk.co.kr",
+      "source_id": "domain:www.mk.co.kr",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://www.mk.co.kr/en/world/12035371"
+    },
+    {
+      "source_display_name": "modernghana.com",
+      "source_id": "domain:modernghana.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://modernghana.com/news/1490592/press-freedom-in-a-deplorable-state-worldwide.html"
+    },
+    {
+      "source_display_name": "newsday.co.zw",
+      "source_id": "domain:newsday.co.zw",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://newsday.co.zw/thestandard/news/article/200054831/press-freedom-under-siege-in-southern-africa"
+    },
+    {
+      "source_display_name": "pakobserver.net",
+      "source_id": "domain:pakobserver.net",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://pakobserver.net/unesco-sounds-alarm-over-crumbling-press-freedom-amid-growing-risks-to-journalists"
+    },
+    {
+      "source_display_name": "premiumtimesng.com",
+      "source_id": "domain:premiumtimesng.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://premiumtimesng.com/news/top-news/876853-world-press-freedom-day-2026-cislac-media-groups-demand-stronger-safeguards-for-journalists.html"
+    },
+    {
+      "source_display_name": "radiotamazuj.org",
+      "source_id": "domain:radiotamazuj.org",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://radiotamazuj.org/en/news/article/press-freedom-deteriorates-further-in-south-sudan-watchdog-says"
+    },
+    {
+      "source_display_name": "thediplomat.com",
+      "source_id": "domain:thediplomat.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://thediplomat.com/2026/05/kim-jong-un-was-right-and-everyone-else-is-taking-notes"
+    },
+    {
+      "source_display_name": "thenationonlineng.net",
+      "source_id": "domain:thenationonlineng.net",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://thenationonlineng.net/world-press-freedom-day-centre-urges-protection-of-media-independence-ethical-journalism"
+    },
+    {
+      "source_display_name": "timesofisrael.com",
+      "source_id": "domain:www.timesofisrael.com",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://www.timesofisrael.com/liveblog_entry/iran-fired-2-missiles-at-us-navy-vessel-after-it-attempted-to-pass-through-strait-of-hormuz-iranian-media/"
+    },
+    {
+      "source_display_name": "unn.ua",
+      "source_id": "domain:unn.ua",
+      "source_grade": "B",
+      "source_type": "major_outlet",
+      "role": "anchor",
+      "url": "https://unn.ua/en/news/putin-is-hiding-more-in-bunkers-fearing-a-coup-by-russian-elites-or-a-drone-assassination-attempt-media"
+    }
+  ],
+  "source_quality_summary": {
+    "source_mix": {
+      "A": 0,
+      "B": 18,
+      "C": 0,
+      "D": 0,
+      "Block": 0
+    },
+    "concentration_risk": "low",
+    "note": "Selected evidence is not concentrated in a single source."
+  },
+  "dashboard_only_items": [],
+  "lower_priority_sample": [
+    {
+      "signal_id": "baaa408709e9841b038620f5",
+      "headline": "U.S. Rejects Claims From Iranian Media That Tehran Forces Hit a Navy Ship Near Strait Of Hormuz | IBTimes",
+      "source_domain": "www.ibtimes.com",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "dd69a8ef070e7f0573c83480",
+      "headline": "Iranian media: Two missiles hit US warship which ignored Iran’s warnings | Middle East Eye",
+      "source_domain": "www.middleeasteye.net",
+      "signal_type": "other"
+    },
+    {
+      "signal_id": "4937cbceeb836fcaf59a3c55",
+      "headline": "Iranian tanker slips past US sanctions with oil worth $220 million",
+      "source_domain": "madhyamamonline.com",
+      "signal_type": "other"
+    }
+  ],
+  "excluded_summary": {
+    "counts_by_reason": {},
+    "notable_exclusions": []
+  }
+}
