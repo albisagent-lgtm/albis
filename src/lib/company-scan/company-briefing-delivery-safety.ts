@@ -88,6 +88,19 @@ export function validateCompanyBriefingForDelivery(
     errors.push("missing_top_line");
   }
 
+  if (content.scanner_report?.layout_version === "company_daily_scan_v1") {
+    const writer = (content.understanding as any)?.gold_standard_editorial_writer_v1;
+    if (!writer?.enabled) {
+      errors.push("missing_gold_standard_editorial_writer");
+    }
+
+    const qaReport = (content as any).qa_report;
+    const blockers = qaReport?.blocking_failures || [];
+    if (Array.isArray(blockers) && blockers.length > 0) {
+      errors.push(`qa_blocking_failures:${blockers.slice(0, 3).map((b: any) => b.code || "blocked").join("|")}`);
+    }
+  }
+
   if (items.length === 0) {
     warnings.push("no_visible_findings_quiet_scan");
   }

@@ -57,6 +57,36 @@ function checkAuth(req: NextRequest): boolean {
   return token === expected;
 }
 
+function companyEditorialWriterConfigured(): boolean {
+  return (
+    process.env.ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER === "true" &&
+    Boolean(process.env.OPENAI_API_KEY || process.env.ALBIS_OPENAI_API_KEY)
+  );
+}
+
+async function runDeliveryStep(req: NextRequest, briefingDate: string) {
+  const key = process.env.SCAN_INGEST_KEY;
+  if (!key) {
+    return {
+      ok: false,
+      skipped: true,
+      reason: "SCAN_INGEST_KEY_missing_for_delivery_endpoint",
+    };
+  }
+
+  const url = new URL("/api/company-briefings/deliver", req.url);
+  const response = await fetch(url.toString(), {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${key}`,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ briefing_date: briefingDate }),
+  });
+  const json = await response.json().catch(() => ({}));
+  return { ok: response.ok, status: response.status, ...json };
+}
+
 async function handle(req: NextRequest) {
   if (!checkAuth(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -76,6 +106,9 @@ async function handle(req: NextRequest) {
   const writeBriefings =
     process.env.COMPANY_BRIEFINGS_WRITE_ENABLED === "1" &&
     searchParams.get("write_briefings") === "1";
+  const deliverBriefings =
+    process.env.COMPANY_SCAN_CRON_DELIVERY_ENABLED === "1" &&
+    searchParams.get("deliver") === "1";
 
   const now = new Date();
   const utcHour = now.getUTCHours();
@@ -97,6 +130,17 @@ async function handle(req: NextRequest) {
 
   const runDate = overrideDate || now.toISOString().slice(0, 10);
 
+  if (writeBriefings && !companyEditorialWriterConfigured()) {
+    return NextResponse.json(
+      {
+        error: "company_editorial_writer_not_configured",
+        message:
+          "Company Daily Scan V1 write/send cron requires ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER=true and OPENAI_API_KEY or ALBIS_OPENAI_API_KEY. This prevents deterministic assembled summaries from becoming customer emails.",
+      },
+      { status: 423 },
+    );
+  }
+
   try {
     const supabase = getAdminClient();
 
@@ -115,6 +159,15 @@ async function handle(req: NextRequest) {
       useCompanySpecificRetrieval,
       enableDeepDiveRetrieval,
     });
+    const delivery =
+      writeBriefings && deliverBriefings
+        ? await runDeliveryStep(req, runDate)
+        : {
+            skipped: true,
+            reason: writeBriefings
+              ? "COMPANY_SCAN_CRON_DELIVERY_ENABLED_not_set_or_deliver_query_missing"
+              : "write_briefings_not_enabled",
+          };
 
     return NextResponse.json({
       ok: true,
@@ -123,11 +176,14 @@ async function handle(req: NextRequest) {
       watch_graph: watchGraph,
       scan,
       pipeline,
+      delivery,
       production_preview: {
         package8_preview: true,
         company_specific_retrieval: useCompanySpecificRetrieval,
         deep_dive_retrieval: enableDeepDiveRetrieval,
         write_briefings: writeBriefings,
+        deliver_briefings: deliverBriefings,
+        gold_standard_editorial_writer: companyEditorialWriterConfigured(),
         email_delivery_enabled:
           process.env.COMPANY_EMAIL_DELIVERY_ENABLED === "1",
       },

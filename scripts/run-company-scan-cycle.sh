@@ -65,5 +65,23 @@ COMPANY_BRIEFINGS_WRITE_ENABLED="${COMPANY_BRIEFINGS_WRITE_ENABLED:-1}" \
     --company-specific-retrieval \
     --deep-dive-retrieval
 
+if [[ "${COMPANY_SCAN_DELIVER_AFTER_GENERATE:-0}" == "1" ]]; then
+  echo
+  echo "[4/4] deliver generated company briefings"
+  if [[ -z "${ALBIS_BASE_URL:-}" || -z "${SCAN_INGEST_KEY:-}" ]]; then
+    echo "❌ COMPANY_SCAN_DELIVER_AFTER_GENERATE=1 requires ALBIS_BASE_URL and SCAN_INGEST_KEY"
+    exit 1
+  fi
+  curl --fail --silent --show-error \
+    -X POST "${ALBIS_BASE_URL%/}/api/company-briefings/deliver" \
+    -H "Authorization: Bearer ${SCAN_INGEST_KEY}" \
+    -H "Content-Type: application/json" \
+    -d "{\"briefing_date\":\"${SCAN_DATE}\"}"
+  echo
+else
+  echo
+  echo "[4/4] delivery skipped (set COMPANY_SCAN_DELIVER_AFTER_GENERATE=1 to send after QA-approved generation)"
+fi
+
 echo
 echo "=== cycle complete ==="

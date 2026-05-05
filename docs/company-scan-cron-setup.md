@@ -3,7 +3,7 @@
 Built in Package 6. Both options below exist in the codebase; **neither
 is activated yet**. Pick one at activation time.
 
-The full company-side cycle is three steps that must run in order:
+The full company-side cycle is now four gated steps that must run in order:
 
 1. `buildUnionWatchGraph` — refresh `retrieval_clusters` + `scan_targets`
    from the latest aggregated company demand.
@@ -12,6 +12,10 @@ The full company-side cycle is three steps that must run in order:
 3. `runCompanySignalPipeline` — score signals against each onboarded
    profile, write `company_signal_matches`, generate briefings, persist
    coverage summaries.
+4. Optional delivery — send only `status='generated'` Package 10C / Company
+   Daily Scan V1 briefings that pass delivery safety. V1 requires the
+   gold-standard editorial writer stamp; deterministic assembled summaries are
+   blocked.
 
 Cycle wall time at v1 (60 scan_targets, 3 onboarded profiles): ~10–20s.
 Brave + Supabase round-trips dominate.
@@ -36,6 +40,21 @@ Authorization: Bearer <COMPANY_SCAN_CRON_KEY>
 
 `run_window` is auto-derived from the current UTC hour. Optional
 overrides: `?window=07-00|19-00`, `?date=YYYY-MM-DD`.
+
+Production write/send activation is deliberately double-gated:
+
+```text
+?write_briefings=1                       plus COMPANY_BRIEFINGS_WRITE_ENABLED=1
+?deliver=1                               plus COMPANY_SCAN_CRON_DELIVERY_ENABLED=1
+COMPANY_EMAIL_DELIVERY_ENABLED=1         required by the delivery endpoint
+ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER=true
+OPENAI_API_KEY or ALBIS_OPENAI_API_KEY   required for V1 writing
+```
+
+If `write_briefings=1` is requested without the editorial writer env, the cron
+route returns `423 company_editorial_writer_not_configured` before running the
+expensive scan. This is intentional: V1 must be written like the approved
+Lindell Media gold-standard email, not assembled from deterministic snippets.
 
 To activate via Cloudflare's native cron triggers, you need a thin
 **companion Worker** that responds to `scheduled` events and fetches
@@ -125,6 +144,16 @@ steps in the local shell. Logs to `logs/company-scan-cycle/<UTC>.log`.
    0 23 * * * cd /Users/treelight/.openclaw/workspace/albis-app && bash scripts/run-company-scan-cycle.sh
    ```
    The script also `cd`s to its repo root, so the `cd` is belt-and-braces.
+   By default it writes QA-approved briefing rows but skips delivery. To send
+   after generation, set:
+   ```sh
+   COMPANY_SCAN_DELIVER_AFTER_GENERATE=1
+   ALBIS_BASE_URL=https://www.albis.news
+   SCAN_INGEST_KEY=<same key used by /api/company-briefings/deliver>
+   COMPANY_EMAIL_DELIVERY_ENABLED=1
+   ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER=true
+   OPENAI_API_KEY=<writer key> # or ALBIS_OPENAI_API_KEY
+   ```
 4. Tail logs to confirm:
    ```sh
    tail -f /Users/treelight/.openclaw/workspace/albis-app/logs/company-scan-cycle/*.log
@@ -158,6 +187,11 @@ Both paths read these:
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `BRAVE_API_KEY`
 - `RESEND_API_KEY` (only for the Package 8/v2 delivery path once explicitly activated; not needed for dry-runs)
+- `ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER=true` for Company Daily Scan V1 writes
+- `OPENAI_API_KEY` or `ALBIS_OPENAI_API_KEY` for the gold-standard editorial writer
+- `COMPANY_BRIEFINGS_WRITE_ENABLED=1` to persist generated briefing rows
+- `COMPANY_EMAIL_DELIVERY_ENABLED=1` to allow email sends
+- `COMPANY_SCAN_CRON_DELIVERY_ENABLED=1` for the HTTP cron route to call delivery after generation
 
 Option A additionally requires:
 
