@@ -435,9 +435,11 @@ function buildGoldStandardParagraphs(
 }
 
 function hasClusterDepth(sources: ResearchSource[]): boolean {
-  const sourceIds = new Set(sources.map((source) => source.id).filter(Boolean));
+  const urls = new Set(sources.map((source) => source.url).filter(Boolean));
   const domains = new Set(sources.map((source) => source.source_domain.replace(/^www\./i, "").toLowerCase()).filter(Boolean));
-  return sourceIds.size >= 2;
+  // Two duplicated records from the same article/domain are not a real cluster.
+  // V1 accepts two-source offbeat stories, but they must be genuinely distinct sources.
+  return urls.size >= 2 && domains.size >= 2;
 }
 
 function cleanResearchSentence(value: string | undefined | null): string {

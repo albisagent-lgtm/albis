@@ -1763,13 +1763,13 @@ function checkCompanyDailyScanV1GoldStandard(
     const sources = finding.evidence_source_ids
       .map((id) => sourceById.get(id))
       .filter(Boolean);
-    const sourceIds = new Set(sources.map((source) => source!.id).filter(Boolean));
+    const urls = new Set(sources.map((source) => source!.url).filter(Boolean));
     const domains = new Set(
       sources
         .map((source) => source!.source_domain.replace(/^www\./i, "").toLowerCase())
         .filter(Boolean),
     );
-    return sourceIds.size >= 2;
+    return urls.size >= 2 && domains.size >= 2;
   };
   const sourceRichFindings = emailFindings.filter(hasSourceClusterDepth);
   const substantialFindings = emailFindings.filter(
@@ -1790,7 +1790,7 @@ function checkCompanyDailyScanV1GoldStandard(
       code: "V1_GOLD_SOURCE_CLUSTERS_TOO_THIN",
       severity: "blocking",
       message:
-        "Company Daily Scan V1 email sections must come from evidence clusters, not single-source summaries. Require at least two evidence sources per story; three is the healthy target."
+        "Company Daily Scan V1 email sections must come from evidence clusters, not single-source summaries. Require at least two distinct sources/domains per story; three sources is the healthy target."
     });
   }
 
