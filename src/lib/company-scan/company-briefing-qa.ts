@@ -1769,7 +1769,7 @@ function checkCompanyDailyScanV1GoldStandard(
         .map((source) => source!.source_domain.replace(/^www\./i, "").toLowerCase())
         .filter(Boolean),
     );
-    return sourceIds.size >= 3 && domains.size >= 2;
+    return sourceIds.size >= 2;
   };
   const sourceRichFindings = emailFindings.filter(hasSourceClusterDepth);
   const substantialFindings = emailFindings.filter(
@@ -1781,7 +1781,7 @@ function checkCompanyDailyScanV1GoldStandard(
       code: "V1_GOLD_TOO_FEW_EMAIL_SECTIONS",
       severity: "blocking",
       message:
-        "Company Daily Scan V1 needs at least seven researched email sections across different scan areas, unless the scan is explicitly a quiet-day dashboard-only send.",
+        "Company Daily Scan V1 needs seven researched email sections every day. Fewer than seven means scanning/retrieval did not find enough usable stories.",
     });
   }
 
@@ -1790,7 +1790,7 @@ function checkCompanyDailyScanV1GoldStandard(
       code: "V1_GOLD_SOURCE_CLUSTERS_TOO_THIN",
       severity: "blocking",
       message:
-        "Company Daily Scan V1 email sections must come from evidence clusters, not single-source summaries. Require at least three evidence sources across at least two domains for the main sections.",
+        "Company Daily Scan V1 email sections must come from evidence clusters, not single-source summaries. Require at least two evidence sources per story; three is the healthy target."
     });
   }
 

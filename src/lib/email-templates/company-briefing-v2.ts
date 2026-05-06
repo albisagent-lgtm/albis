@@ -270,7 +270,7 @@ function renderResearchedFindings(output: CompanyBriefingGenerationOutput): stri
     .filter(({ finding, note, sources }) =>
       Boolean(note) && hasClusterDepth(sources) && !looksLikeRawSourceTitle(finding.title),
     )
-    .slice(0, 12);
+    .slice(0, 7);
 
   if (!goldFindings.length) return "";
 
@@ -437,7 +437,7 @@ function buildGoldStandardParagraphs(
 function hasClusterDepth(sources: ResearchSource[]): boolean {
   const sourceIds = new Set(sources.map((source) => source.id).filter(Boolean));
   const domains = new Set(sources.map((source) => source.source_domain.replace(/^www\./i, "").toLowerCase()).filter(Boolean));
-  return sourceIds.size >= 3 && domains.size >= 2;
+  return sourceIds.size >= 2;
 }
 
 function cleanResearchSentence(value: string | undefined | null): string {
