@@ -388,7 +388,7 @@ function validateWriterResponse(writer: WriterResponse): string[] {
     if (!topic.cluster_id || !topic.headline || !topic.topic_label) blockers.push(`Topic missing required label/headline: ${topic.cluster_id || "unknown"}`);
     if ((topic.paragraphs || []).length < 2) blockers.push(`${topic.cluster_id}: fewer than two paragraphs.`);
     const topicWords = words((topic.paragraphs || []).join(" "));
-    if (topicWords < 95) blockers.push(`${topic.cluster_id}: topic is under 95 words; target 150–250 where possible.`);
+    if (topicWords < 60) blockers.push(`${topic.cluster_id}: topic is under 60 words; 150–250 is only a guide where evidence supports it.`);
     if (topicWords > 260) blockers.push(`${topic.cluster_id}: topic is over 260 words; target 150–250 where possible.`);
     if ((topic.source_ids || []).length < 2) blockers.push(`${topic.cluster_id}: fewer than two source ids.`);
     const bad = /\b(signal|clearest signal|this is the signal|Albis reading|useful point|operating signal|market signal|matched|selected scan areas|evidence threshold|source items|more in evidence trail)\b/i;
