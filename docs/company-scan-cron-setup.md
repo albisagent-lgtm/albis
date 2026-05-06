@@ -1,219 +1,155 @@
-# Company scan cron — activation guide
+# Company scan cron — canonical pipeline activation guide
 
-Built in Package 6. Both options below exist in the codebase; **neither
-is activated yet**. Pick one at activation time.
+## Architecture boundary
 
-The full company-side cycle is now four gated steps that must run in order:
+Company Daily Scan generation is a pipeline/job responsibility, not a Cloudflare
+Workers request-path responsibility.
 
-1. `buildUnionWatchGraph` — refresh `retrieval_clusters` + `scan_targets`
-   from the latest aggregated company demand.
-2. `runCompanyScan` — Brave Search retrieval per scan_target → parsed
-   `signals` rows.
-3. `runCompanySignalPipeline` — score signals against each onboarded
-   profile, write `company_signal_matches`, generate briefings, persist
-   coverage summaries.
-4. Optional delivery — send only `status='generated'` Package 10C / Company
-   Daily Scan V1 briefings that pass delivery safety. V1 requires the
-   gold-standard editorial writer stamp; deterministic assembled summaries are
-   blocked.
+Canonical flow:
 
-Cycle wall time at v1 (60 scan_targets, 3 onboarded profiles): ~10–20s.
-Brave + Supabase round-trips dominate.
+1. Pipeline job runs company scan/retrieval.
+2. Pipeline builds the evidence packet and deterministic draft.
+3. Pipeline runs the gold-standard editorial writer.
+4. Pipeline runs QA/safety gates.
+5. Pipeline writes the completed row to Supabase (`company_briefings` plus
+   evidence/provenance tables).
+6. Cloudflare/OpenNext app reads, displays, and optionally gated-delivers the
+   completed Supabase briefing.
 
-Schedule: 2x daily for v1 cost control, fired at fixed UTC hours that
-align with US Eastern morning and evening business cycles. Year-round
-drift between EDT and EST is one hour; this is acceptable for v1.
+Cloudflare is the app surface. Supabase is the handoff/source of truth. Heavy
+scan/retrieval/editorial generation should stay in the job layer unless Ignatius
+explicitly approves an architecture change.
+
+## Canonical path — OpenClaw-side pipeline cron
+
+The shell script `scripts/run-company-scan-cycle.sh` runs the ordered cycle:
+
+1. `scripts/build-watch-graph.ts` — refresh retrieval clusters + scan targets.
+2. `scripts/run-company-scan.ts` — Brave retrieval → parsed `signals` rows.
+3. `scripts/run-company-signal-pipeline.ts` — company scoring, briefing writing,
+   gold-standard editorial writer, QA, and coverage persistence.
+4. Optional delivery — only after QA-approved generation and explicit env gates.
+
+Logs are written to:
+
+```text
+logs/company-scan-cycle/<UTC-timestamp>.log
+```
+
+Recommended schedule for v1 cost control:
 
 | UTC | EDT (summer) | EST (winter) | run_window |
 |-----|--------------|--------------|------------|
 | 11  | 07:00        | 06:00        | `07-00`    |
 | 23  | 19:00        | 18:00        | `19-00`    |
 
-## Option A — Cloudflare scheduled trigger (HTTP fan-in)
+Cron entries:
 
-The HTTP entry point is already deployed at:
-
-```
-GET/POST https://www.albis.news/api/cron/company-scan
-Authorization: Bearer <COMPANY_SCAN_CRON_KEY>
+```cron
+0 11 * * * cd /Users/treelight/.openclaw/workspace/albis-app && bash scripts/run-company-scan-cycle.sh
+0 23 * * * cd /Users/treelight/.openclaw/workspace/albis-app && bash scripts/run-company-scan-cycle.sh
 ```
 
-`run_window` is auto-derived from the current UTC hour. Optional
-overrides: `?window=07-00|19-00`, `?date=YYYY-MM-DD`.
+## Required env for generation
 
-Production write/send activation is deliberately double-gated:
+The pipeline reads `.env.local` by default. Required for generation:
 
-```text
-?write_briefings=1                       plus COMPANY_BRIEFINGS_WRITE_ENABLED=1
-?deliver=1                               plus COMPANY_SCAN_CRON_DELIVERY_ENABLED=1
-COMPANY_EMAIL_DELIVERY_ENABLED=1         required by the delivery endpoint
+```env
+NEXT_PUBLIC_SUPABASE_URL=...
+SUPABASE_SERVICE_ROLE_KEY=...
+BRAVE_API_KEY=...
+COMPANY_BRIEFINGS_WRITE_ENABLED=1
 ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER=true
-OPENAI_API_KEY or ALBIS_OPENAI_API_KEY   required for V1 writing
+ALBIS_EDITORIAL_MODEL_PROVIDER=cloudflare-workers-ai   # or openrouter/openai
+ALBIS_COMPANY_SCAN_EDITORIAL_MODEL=@cf/meta/llama-3.1-8b-instruct-fp8
 ```
 
-If `write_briefings=1` is requested without the editorial writer env, the cron
-route returns `423 company_editorial_writer_not_configured` before running the
-expensive scan. This is intentional: V1 must be written like the approved
-Lindell Media gold-standard email, not assembled from deterministic snippets.
+For Cloudflare Workers AI from the pipeline/job layer, use REST credentials, not
+the Worker binding:
 
-To activate via Cloudflare's native cron triggers, you need a thin
-**companion Worker** that responds to `scheduled` events and fetches
-the OpenNext-deployed endpoint. OpenNext's worker entry serves Next.js
-HTTP traffic only — it does not handle scheduled events directly.
-
-### Companion Worker (sketch)
-
-```js
-// cron-worker/src/index.js
-export default {
-  async scheduled(event, env, ctx) {
-    const url = "https://www.albis.news/api/cron/company-scan";
-    ctx.waitUntil(
-      fetch(url, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${env.COMPANY_SCAN_CRON_KEY}` },
-      })
-    );
-  },
-};
+```env
+CLOUDFLARE_ACCOUNT_ID=...
+CLOUDFLARE_API_TOKEN=...   # token with Workers AI run access
 ```
 
-```jsonc
-// cron-worker/wrangler.jsonc
-{
-  "name": "albis-cron",
-  "main": "src/index.js",
-  "compatibility_date": "2026-04-16",
-  "triggers": {
-    "crons": ["0 11 * * *", "0 23 * * *"]
-  }
-}
+Alternative providers:
+
+```env
+OPENROUTER_API_KEY=...
+# or
+OPENAI_API_KEY=...
 ```
 
-`COMPANY_SCAN_CRON_KEY` set via `wrangler secret put` against the
-companion worker. Same key set on the main app's environment so the
-route handler can verify it.
+## Required env for optional delivery
 
-### Activation steps
+Delivery is separate and must remain explicitly gated:
 
-1. Generate a random secret and set it on both the main app and the
-   companion worker:
-   ```sh
-   # main app
-   wrangler secret put COMPANY_SCAN_CRON_KEY
-   # companion worker
-   cd cron-worker && wrangler secret put COMPANY_SCAN_CRON_KEY
-   ```
-2. Deploy the companion worker:
-   ```sh
-   cd cron-worker && wrangler deploy
-   ```
-3. Optionally uncomment the `triggers` block in the main repo's
-   `wrangler.jsonc` if you ever want the main worker to also handle
-   scheduled events (no current benefit; documented for completeness).
+```env
+COMPANY_SCAN_DELIVER_AFTER_GENERATE=1
+ALBIS_BASE_URL=https://www.albis.news
+SCAN_INGEST_KEY=...
+COMPANY_EMAIL_DELIVERY_ENABLED=1
+```
 
-### Pros
+Do not enable delivery for real company recipients during validation without
+explicit approval. Lindell Media has a real configured recipient, so validation
+runs must omit delivery unless Ignatius approves.
 
-- All scheduling lives in Cloudflare. Survives openclaw being offline.
-- Logs and execution stats are in the Cloudflare dashboard.
-- No machine-local cron to maintain.
+## Manual safe Lindell test from pipeline
 
-### Cons
-
-- Adds a second worker to deploy and monitor.
-- CF Workers wall-time limits apply (paid plans go to ~15 min, more
-  than enough for the cycle, but watch as scan_targets grows).
-- Brave key must live as a CF secret (already in Dashboard for the
-  main app — the companion worker only needs the cron key).
-
-## Option B — openclaw-side cron (shell script)
-
-The shell script `scripts/run-company-scan-cycle.sh` runs all three
-steps in the local shell. Logs to `logs/company-scan-cycle/<UTC>.log`.
-
-### Activation steps
-
-1. SSH to the openclaw machine.
-2. Confirm the repo is at `/Users/treelight/.openclaw/workspace/albis-app`
-   (or wherever it lives) and the `.env.local` has the four required
-   keys: `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`,
-   `BRAVE_API_KEY`, `RESEND_API_KEY`.
-3. Add two crontab entries (`crontab -e`):
-   ```
-   0 11 * * * cd /Users/treelight/.openclaw/workspace/albis-app && bash scripts/run-company-scan-cycle.sh
-   0 23 * * * cd /Users/treelight/.openclaw/workspace/albis-app && bash scripts/run-company-scan-cycle.sh
-   ```
-   The script also `cd`s to its repo root, so the `cd` is belt-and-braces.
-   By default it writes QA-approved briefing rows but skips delivery. To send
-   after generation, set:
-   ```sh
-   COMPANY_SCAN_DELIVER_AFTER_GENERATE=1
-   ALBIS_BASE_URL=https://www.albis.news
-   SCAN_INGEST_KEY=<same key used by /api/company-briefings/deliver>
-   COMPANY_EMAIL_DELIVERY_ENABLED=1
-   ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER=true
-   OPENAI_API_KEY=<writer key> # or ALBIS_OPENAI_API_KEY
-   ```
-4. Tail logs to confirm:
-   ```sh
-   tail -f /Users/treelight/.openclaw/workspace/albis-app/logs/company-scan-cycle/*.log
-   ```
-
-### Pros
-
-- Zero new infrastructure. Uses the existing openclaw cron we already
-  rely on for the public scan pipeline.
-- Easy to debug — full stack traces in shell logs.
-- No Cloudflare deploy step to land changes; just push the script.
-
-### Cons
-
-- openclaw machine offline = scans skipped. No retry.
-- Logs live on a single machine.
-
-## Recommended: Option B for v1
-
-Start with **Option B** only after the Package 8/v2 activation checklist is approved — same cron infrastructure as the public scan,
-trivial to activate, easy to back out. Migrate to Option A after the
-new pipeline has run reliably for a couple of weeks.
-
-Legacy note: the old Phase 4 company cron prompts and public-scan-pool `what_changed` / `what_to_watch` pipeline are retired. Do not import or run them.
-
-## Required env vars
-
-Both paths read these:
-
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `BRAVE_API_KEY`
-- `RESEND_API_KEY` (only for the Package 8/v2 delivery path once explicitly activated; not needed for dry-runs)
-- `ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER=true` for Company Daily Scan V1 writes
-- `OPENAI_API_KEY` or `ALBIS_OPENAI_API_KEY` for the gold-standard editorial writer
-- `COMPANY_BRIEFINGS_WRITE_ENABLED=1` to persist generated briefing rows
-- `COMPANY_EMAIL_DELIVERY_ENABLED=1` to allow email sends
-- `COMPANY_SCAN_CRON_DELIVERY_ENABLED=1` for the HTTP cron route to call delivery after generation
-
-Option A additionally requires:
-
-- `COMPANY_SCAN_CRON_KEY` (HTTP bearer for the cron route)
-
-## Manual smoke
-
-Both paths can be tested ad-hoc:
+Use the pipeline path, not the Cloudflare Worker cron route:
 
 ```sh
-# Option A — local fetch (replace HOST + KEY)
-curl -X POST 'https://www.albis.news/api/cron/company-scan?window=07-00' \
-  -H "Authorization: Bearer $COMPANY_SCAN_CRON_KEY"
-
-# Option B — local shell
-bash scripts/run-company-scan-cycle.sh
+cd /Users/treelight/.openclaw/workspace/albis-app
+set -a; source .env.local; set +a
+COMPANY_BRIEFINGS_WRITE_ENABLED=1 \
+ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER=true \
+npx tsx scripts/run-company-signal-pipeline.ts "$(date -u +%F)" \
+  --write-briefing-rows \
+  --company-specific-retrieval \
+  --deep-dive-retrieval \
+  --company-profile-id=2fcda41e-dbb9-40be-9c86-4ba4659d2e77
 ```
 
-Both should land:
-- a `company_scan_runs` row with `status='completed'` and non-zero
-  `signals_extracted`
-- new `signals` rows for the run
-- new `company_signal_matches` rows for each onboarded profile
-- one `company_briefings` row per onboarded profile for today
-- one `company_coverage_summaries` row per onboarded profile
+This writes/updates the Supabase briefing row but does not deliver email.
+Inspect QA/status before any delivery test.
+
+## Cloudflare route status
+
+`/api/cron/company-scan` is now a legacy/emergency compatibility route. It is
+fail-closed unless this explicit override is set in the Cloudflare environment:
+
+```env
+ALBIS_ALLOW_WORKER_COMPANY_SCAN_GENERATION=1
+```
+
+Do not set that for normal operation. Do not create Cloudflare scheduled triggers
+for the heavy company scan path by default.
+
+Cloudflare/OpenNext should normally handle:
+
+- dashboard display
+- customer app/API reads
+- delivery endpoint for already completed, QA-safe Supabase rows
+- health/status/admin surfaces
+
+It should not normally handle:
+
+- Brave retrieval
+- full scan target processing
+- gold-standard editorial generation
+- heavy QA/generation loops
+
+## Smoke checks
+
+After a pipeline run, verify:
+
+- `company_scan_runs.status = completed`
+- non-zero new `signals` rows for the scan
+- new `company_signal_matches` rows
+- one `company_briefings` row per active onboarded profile, or a documented hold
+- `company_briefings.status` / QA fields show `ready` only if all delivery gates pass
+- `delivery_status` remains pending/skipped during validation
+
+Legacy note: old public-scan-pool `what_changed` / `what_to_watch` company
+pipeline paths are retired. Do not import or run them.

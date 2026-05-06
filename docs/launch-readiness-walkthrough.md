@@ -69,24 +69,24 @@ npx tsx scripts/backfill-trial-state.ts --apply    # writes
 The backfill is idempotent — re-running is a no-op. The `is_test_account`
 flag is respected (test accounts are skipped).
 
-### 1.4 Cron path chosen
+### 1.4 Company scan pipeline cron chosen
 
-You have two options documented in `docs/company-scan-cron-setup.md`. **Pick
-one**. Both exist in the codebase; neither activates by default.
+Canonical path: use the OpenClaw-side pipeline job documented in
+`docs/company-scan-cron-setup.md`. Heavy Company Daily Scan generation must run
+in the pipeline/job layer, write completed/QA'd rows to Supabase, and let the
+Cloudflare app display/deliver those rows.
 
-Option A — Cloudflare native cron:
-- [ ] Deploy companion worker.
-- [ ] `wrangler secret put COMPANY_SCAN_CRON_KEY` set on the companion worker.
-- [ ] Same `COMPANY_SCAN_CRON_KEY` set in the main app's environment.
-
-Option B — openclaw cron (recommended for v1 after explicit activation approval):
 - [ ] Confirm the retired Phase 4 company cron jobs are not enabled in OpenClaw/Gateway.
 - [ ] Create/enable only Package 8/v2 company scan-cycle jobs when approved.
 - [ ] `scripts/run-company-scan-cycle.sh` is `chmod +x` on the openclaw box.
+- [ ] Confirm pipeline env includes the editorial provider credentials, e.g.
+      `ALBIS_EDITORIAL_MODEL_PROVIDER=cloudflare-workers-ai` plus
+      `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`, or an approved alternate provider.
 - [ ] Test invocation: trigger one job manually, watch
       `logs/company-scan-cycle/<date>.log` for a clean run.
 
-**Do not enable both.** Pick one or you'll double-run the scan.
+Do not activate Cloudflare scheduled triggers for heavy company scan generation
+unless Ignatius explicitly approves a future architecture change.
 
 ### 1.5 Resend working
 

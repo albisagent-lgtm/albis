@@ -39,6 +39,16 @@ async function getCloudflareAiBinding(): Promise<any | null> {
   }
 }
 
+function getCloudflareRestCredentials(): { accountId: string; token: string } | null {
+  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID || process.env.CF_ACCOUNT_ID;
+  const token =
+    process.env.CLOUDFLARE_API_TOKEN ||
+    process.env.CLOUDFLARE_AUTH_TOKEN ||
+    process.env.CF_API_TOKEN;
+  if (!accountId || !token) return null;
+  return { accountId, token };
+}
+
 async function callOpenAI<T>(input: GenerateEditorialJsonInput, key: string): Promise<EditorialModelResult<T>> {
   const model = process.env[input.modelEnv || ""] || input.defaultModel;
   const body: any = {
@@ -94,16 +104,7 @@ function cloudflareResponseFormat(_schema: unknown): unknown {
   return { type: "json_object" };
 }
 
-async function callCloudflareWorkersAi<T>(input: GenerateEditorialJsonInput, ai: any): Promise<EditorialModelResult<T>> {
-  const model = process.env[input.modelEnv || ""] || input.defaultModel || "@cf/meta/llama-3.1-70b-instruct";
-  const messages = input.messages.map((message) => ({ role: message.role, content: message.content }));
-  const result = await ai.run(model, {
-    messages,
-    temperature: input.temperature ?? 0.35,
-    max_tokens: Number(process.env.ALBIS_EDITORIAL_MAX_TOKENS || 4096),
-    response_format: cloudflareResponseFormat(input.responseSchema),
-  });
-
+function parseCloudflareAiResult<T>(result: any, model: string): EditorialModelResult<T> {
   const structured = result?.response ?? result?.result ?? result?.output;
   if (structured && typeof structured === "object" && !Array.isArray(structured)) {
     return { json: structured as T, provider: "cloudflare-workers-ai", model };
@@ -114,15 +115,55 @@ async function callCloudflareWorkersAi<T>(input: GenerateEditorialJsonInput, ai:
   return { json: JSON.parse(extractJsonObject(String(text))) as T, provider: "cloudflare-workers-ai", model };
 }
 
+async function callCloudflareWorkersAi<T>(input: GenerateEditorialJsonInput, ai: any): Promise<EditorialModelResult<T>> {
+  const model = process.env[input.modelEnv || ""] || input.defaultModel || "@cf/meta/llama-3.1-70b-instruct";
+  const messages = input.messages.map((message) => ({ role: message.role, content: message.content }));
+  const result = await ai.run(model, {
+    messages,
+    temperature: input.temperature ?? 0.35,
+    max_tokens: Number(process.env.ALBIS_EDITORIAL_MAX_TOKENS || 4096),
+    response_format: cloudflareResponseFormat(input.responseSchema),
+  });
+  return parseCloudflareAiResult<T>(result, model);
+}
+
+async function callCloudflareWorkersAiRest<T>(input: GenerateEditorialJsonInput, creds: { accountId: string; token: string }): Promise<EditorialModelResult<T>> {
+  const model = process.env[input.modelEnv || ""] || input.defaultModel || "@cf/meta/llama-3.1-8b-instruct-fp8";
+  const messages = input.messages.map((message) => ({ role: message.role, content: message.content }));
+  const response = await fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${creds.accountId}/ai/run/${model}`,
+    {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${creds.token}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        messages,
+        temperature: input.temperature ?? 0.35,
+        max_tokens: Number(process.env.ALBIS_EDITORIAL_MAX_TOKENS || 4096),
+        response_format: cloudflareResponseFormat(input.responseSchema),
+      }),
+    },
+  );
+  const body = await response.json().catch(async () => ({ raw: await response.text().catch(() => "") }));
+  if (!response.ok || body?.success === false) {
+    throw new Error(`cloudflare_workers_ai_editorial_${response.status}:${JSON.stringify(body).slice(0, 300)}`);
+  }
+  return parseCloudflareAiResult<T>(body?.result ?? body, model);
+}
+
 export async function generateEditorialJson<T>(input: GenerateEditorialJsonInput): Promise<EditorialModelResult<T>> {
   const provider = configuredProvider();
   const openAiKey = process.env.OPENAI_API_KEY || process.env.ALBIS_OPENAI_API_KEY;
   const openRouterKey = process.env.OPENROUTER_API_KEY || process.env.ALBIS_OPENROUTER_API_KEY;
   const cloudflareAi = await getCloudflareAiBinding();
+  const cloudflareRest = getCloudflareRestCredentials();
 
   if (provider === "cloudflare" || provider === "cloudflare-workers-ai") {
-    if (!cloudflareAi) throw new Error("Cloudflare Workers AI binding `AI` is not configured");
-    return callCloudflareWorkersAi<T>(input, cloudflareAi);
+    if (cloudflareAi) return callCloudflareWorkersAi<T>(input, cloudflareAi);
+    if (cloudflareRest) return callCloudflareWorkersAiRest<T>(input, cloudflareRest);
+    throw new Error("Cloudflare Workers AI is not configured. Add Worker binding `AI` for app runtime, or CLOUDFLARE_ACCOUNT_ID plus CLOUDFLARE_API_TOKEN for pipeline jobs.");
   }
   if (provider === "openrouter") {
     if (!openRouterKey) throw new Error("OPENROUTER_API_KEY or ALBIS_OPENROUTER_API_KEY is not configured");
@@ -134,12 +175,13 @@ export async function generateEditorialJson<T>(input: GenerateEditorialJsonInput
   }
 
   if (cloudflareAi) return callCloudflareWorkersAi<T>(input, cloudflareAi);
+  if (cloudflareRest) return callCloudflareWorkersAiRest<T>(input, cloudflareRest);
   if (openAiKey) return callOpenAI<T>(input, openAiKey);
   if (openRouterKey) return callOpenRouter<T>(input, openRouterKey);
 
-  throw new Error("No editorial model provider is configured. Add Cloudflare Workers AI binding `AI`, or set OPENAI_API_KEY/ALBIS_OPENAI_API_KEY, or set OPENROUTER_API_KEY/ALBIS_OPENROUTER_API_KEY.");
+  throw new Error("No editorial model provider is configured. Add Cloudflare Workers AI binding `AI`, CLOUDFLARE_ACCOUNT_ID + CLOUDFLARE_API_TOKEN for pipeline jobs, OPENAI_API_KEY/ALBIS_OPENAI_API_KEY, or OPENROUTER_API_KEY/ALBIS_OPENROUTER_API_KEY.");
 }
 
 export function editorialModelConfiguredHint(): string {
-  return "Cloudflare Workers AI binding `AI`, OPENAI_API_KEY/ALBIS_OPENAI_API_KEY, or OPENROUTER_API_KEY/ALBIS_OPENROUTER_API_KEY";
+  return "Cloudflare Workers AI binding `AI`, CLOUDFLARE_ACCOUNT_ID + CLOUDFLARE_API_TOKEN, OPENAI_API_KEY/ALBIS_OPENAI_API_KEY, or OPENROUTER_API_KEY/ALBIS_OPENROUTER_API_KEY";
 }

@@ -1,26 +1,17 @@
 // ---------------------------------------------------------------------------
-// Cron entry point for the company scan cycle — Package 6.
+// Legacy HTTP cron entry point for the company scan cycle.
 //
-// Single HTTP endpoint that runs the full company-side cycle:
-//   1. buildUnionWatchGraph(supabase)
-//   2. runCompanyScan(supabase, runDate, runWindow) [Brave retrieval]
-//   3. runCompanySignalPipeline equivalent — score signals, write
-//      company_signal_matches, generate briefings, persist coverage
+// IMPORTANT ARCHITECTURE BOUNDARY:
+// Heavy Company Daily Scan generation belongs in the pipeline/job layer
+// (`scripts/run-company-scan-cycle.sh`), then writes completed/QA'd rows to
+// Supabase. The Cloudflare/OpenNext app should read, display, and gated-deliver
+// completed briefings; it should not be the default heavy scan/retrieval/editor
+// runner.
 //
-// Auth: Bearer token from Authorization header, must equal env
-// COMPANY_SCAN_CRON_KEY. Mirrors the SCAN_INGEST_KEY pattern in
-// /api/scans/ingest. The endpoint returns 401 with no further detail
-// when the token is missing or wrong.
-//
-// run_window is determined from the current UTC hour:
-//   11 UTC → '07-00'  (7am US Eastern in EDT, 6am EST)
-//   23 UTC → '19-00'  (7pm US Eastern in EDT, 6pm EST)
-// Anything else returns 422 — the caller should only fire at the two
-// scheduled hours. Manual override available via ?window=07-00 query.
-//
-// NOT activated by wrangler.jsonc cron triggers in this commit. Both
-// the Cloudflare scheduled-event path and the openclaw-side curl path
-// can hit this same endpoint — see docs/company-scan-cron-setup.md.
+// This endpoint remains only as an emergency/manual compatibility path and is
+// fail-closed unless ALBIS_ALLOW_WORKER_COMPANY_SCAN_GENERATION=1 is explicitly
+// set. Do not activate Cloudflare scheduled triggers for this route by default.
+// See docs/company-scan-cron-setup.md.
 // ---------------------------------------------------------------------------
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
@@ -88,6 +79,17 @@ async function runDeliveryStep(req: NextRequest, briefingDate: string) {
 async function handle(req: NextRequest) {
   if (!checkAuth(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  if (process.env.ALBIS_ALLOW_WORKER_COMPANY_SCAN_GENERATION !== "1") {
+    return NextResponse.json(
+      {
+        error: "worker_company_scan_generation_disabled",
+        message:
+          "Company Daily Scan generation runs in the pipeline job. Cloudflare app routes only display/deliver completed Supabase briefings by default.",
+      },
+      { status: 410 },
+    );
   }
 
   const { searchParams } = new URL(req.url);
