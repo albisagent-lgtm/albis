@@ -87,6 +87,13 @@ async function callOpenRouter<T>(input: GenerateEditorialJsonInput, key: string)
   return { json: JSON.parse(extractJsonObject(content)) as T, provider: "openrouter", model };
 }
 
+function cloudflareResponseFormat(_schema: unknown): unknown {
+  // Workers AI support for full JSON Schema varies by model/account. Plain
+  // JSON-object mode is the safest portable setting; downstream validation
+  // still enforces the required editorial shape before customer delivery.
+  return { type: "json_object" };
+}
+
 async function callCloudflareWorkersAi<T>(input: GenerateEditorialJsonInput, ai: any): Promise<EditorialModelResult<T>> {
   const model = process.env[input.modelEnv || ""] || input.defaultModel || "@cf/meta/llama-3.1-70b-instruct";
   const messages = input.messages.map((message) => ({ role: message.role, content: message.content }));
@@ -94,10 +101,17 @@ async function callCloudflareWorkersAi<T>(input: GenerateEditorialJsonInput, ai:
     messages,
     temperature: input.temperature ?? 0.35,
     max_tokens: Number(process.env.ALBIS_EDITORIAL_MAX_TOKENS || 4096),
+    response_format: cloudflareResponseFormat(input.responseSchema),
   });
+
+  const structured = result?.response ?? result?.result ?? result?.output;
+  if (structured && typeof structured === "object" && !Array.isArray(structured)) {
+    return { json: structured as T, provider: "cloudflare-workers-ai", model };
+  }
+
   const text = typeof result === "string" ? result : result?.response || result?.text || result?.content || "";
   if (!text) throw new Error("cloudflare_workers_ai_editorial_empty");
-  return { json: JSON.parse(extractJsonObject(text)) as T, provider: "cloudflare-workers-ai", model };
+  return { json: JSON.parse(extractJsonObject(String(text))) as T, provider: "cloudflare-workers-ai", model };
 }
 
 export async function generateEditorialJson<T>(input: GenerateEditorialJsonInput): Promise<EditorialModelResult<T>> {
