@@ -8,7 +8,7 @@ type GenerateEditorialJsonInput = {
   temperature?: number;
 };
 
-export type EditorialModelProvider = "openai" | "openrouter" | "cloudflare-workers-ai";
+export type EditorialModelProvider = "openclaw-system" | "openai" | "openrouter" | "cloudflare-workers-ai";
 
 export type EditorialModelResult<T> = {
   json: T;
@@ -153,6 +153,40 @@ async function callCloudflareWorkersAiRest<T>(input: GenerateEditorialJsonInput,
   return parseCloudflareAiResult<T>(body?.result ?? body, model);
 }
 
+function messagesToOpenClawPrompt(messages: EditorialMessage[], responseSchema?: unknown): string {
+  const body = messages
+    .map((message) => `${message.role.toUpperCase()}:\n${message.content}`)
+    .join("\n\n---\n\n");
+  const schemaHint = responseSchema
+    ? `\n\nReturn valid JSON only. The JSON must satisfy this schema shape:\n${JSON.stringify(responseSchema).slice(0, 12000)}`
+    : "\n\nReturn valid JSON only.";
+  return `${body}${schemaHint}`;
+}
+
+async function callOpenClawSystemModel<T>(input: GenerateEditorialJsonInput): Promise<EditorialModelResult<T>> {
+  const { execFile } = await import("node:child_process");
+  const { promisify } = await import("node:util");
+  const execFileAsync = promisify(execFile);
+  const prompt = messagesToOpenClawPrompt(input.messages, input.responseSchema);
+  const model = process.env[input.modelEnv || ""] || process.env.OPENCLAW_MODEL || "gateway-default";
+  const args = ["capability", "model", "run", "--gateway", "--json", "--prompt", prompt];
+  if (process.env[input.modelEnv || ""] || process.env.OPENCLAW_MODEL) {
+    args.splice(4, 0, "--model", model);
+  }
+  const { stdout } = await execFileAsync("openclaw", args, {
+    timeout: Number(process.env.ALBIS_EDITORIAL_MODEL_TIMEOUT_MS || 600000),
+    maxBuffer: Number(process.env.ALBIS_EDITORIAL_MODEL_MAX_BUFFER || 20 * 1024 * 1024),
+  });
+  const result = JSON.parse(String(stdout || "{}"));
+  const text = result?.outputs?.[0]?.text || result?.text || "";
+  if (!text) throw new Error("openclaw_system_editorial_empty");
+  return {
+    json: JSON.parse(extractJsonObject(text)) as T,
+    provider: "openclaw-system",
+    model: result?.model || model,
+  };
+}
+
 export async function generateEditorialJson<T>(input: GenerateEditorialJsonInput): Promise<EditorialModelResult<T>> {
   const provider = configuredProvider();
   const openAiKey = process.env.OPENAI_API_KEY || process.env.ALBIS_OPENAI_API_KEY;
@@ -160,10 +194,13 @@ export async function generateEditorialJson<T>(input: GenerateEditorialJsonInput
   const cloudflareAi = await getCloudflareAiBinding();
   const cloudflareRest = getCloudflareRestCredentials();
 
+  if (["openclaw", "openclaw-system", "system", "system-model"].includes(provider)) {
+    return callOpenClawSystemModel<T>(input);
+  }
   if (provider === "cloudflare" || provider === "cloudflare-workers-ai") {
     if (cloudflareAi) return callCloudflareWorkersAi<T>(input, cloudflareAi);
     if (cloudflareRest) return callCloudflareWorkersAiRest<T>(input, cloudflareRest);
-    throw new Error("Cloudflare Workers AI is not configured. Add Worker binding `AI` for app runtime, or CLOUDFLARE_ACCOUNT_ID plus CLOUDFLARE_API_TOKEN for pipeline jobs.");
+    throw new Error("Cloudflare Workers AI is not configured for this runtime.");
   }
   if (provider === "openrouter") {
     if (!openRouterKey) throw new Error("OPENROUTER_API_KEY or ALBIS_OPENROUTER_API_KEY is not configured");
@@ -174,14 +211,20 @@ export async function generateEditorialJson<T>(input: GenerateEditorialJsonInput
     return callOpenAI<T>(input, openAiKey);
   }
 
-  if (cloudflareAi) return callCloudflareWorkersAi<T>(input, cloudflareAi);
-  if (cloudflareRest) return callCloudflareWorkersAiRest<T>(input, cloudflareRest);
-  if (openAiKey) return callOpenAI<T>(input, openAiKey);
-  if (openRouterKey) return callOpenRouter<T>(input, openRouterKey);
-
-  throw new Error("No editorial model provider is configured. Add Cloudflare Workers AI binding `AI`, CLOUDFLARE_ACCOUNT_ID + CLOUDFLARE_API_TOKEN for pipeline jobs, OPENAI_API_KEY/ALBIS_OPENAI_API_KEY, or OPENROUTER_API_KEY/ALBIS_OPENROUTER_API_KEY.");
+  // Default for local Albis pipeline jobs: use the same OpenClaw system model
+  // path that powers agent runs, then fall back to explicitly configured API
+  // providers only if a future environment chooses them.
+  try {
+    return await callOpenClawSystemModel<T>(input);
+  } catch (error) {
+    if (cloudflareAi) return callCloudflareWorkersAi<T>(input, cloudflareAi);
+    if (cloudflareRest) return callCloudflareWorkersAiRest<T>(input, cloudflareRest);
+    if (openAiKey) return callOpenAI<T>(input, openAiKey);
+    if (openRouterKey) return callOpenRouter<T>(input, openRouterKey);
+    throw error;
+  }
 }
 
 export function editorialModelConfiguredHint(): string {
-  return "Cloudflare Workers AI binding `AI`, CLOUDFLARE_ACCOUNT_ID + CLOUDFLARE_API_TOKEN, OPENAI_API_KEY/ALBIS_OPENAI_API_KEY, or OPENROUTER_API_KEY/ALBIS_OPENROUTER_API_KEY";
+  return "the local OpenClaw/system model path, or an explicitly configured fallback provider";
 }

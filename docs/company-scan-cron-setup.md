@@ -60,24 +60,19 @@ SUPABASE_SERVICE_ROLE_KEY=...
 BRAVE_API_KEY=...
 COMPANY_BRIEFINGS_WRITE_ENABLED=1
 ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER=true
-ALBIS_EDITORIAL_MODEL_PROVIDER=cloudflare-workers-ai   # or openrouter/openai
-ALBIS_COMPANY_SCAN_EDITORIAL_MODEL=@cf/meta/llama-3.1-8b-instruct-fp8
 ```
 
-For Cloudflare Workers AI from the pipeline/job layer, use REST credentials, not
-the Worker binding:
+The gold-standard editorial writer should use the local OpenClaw/system model
+path by default — the same model route used by local agent/membership work. Do
+not require a separate Cloudflare Workers AI setup for the normal Company Daily
+Scan pipeline.
+
+Optional explicit override, only if a future environment deliberately chooses a
+separate provider:
 
 ```env
-CLOUDFLARE_ACCOUNT_ID=...
-CLOUDFLARE_API_TOKEN=...   # token with Workers AI run access
-```
-
-Alternative providers:
-
-```env
-OPENROUTER_API_KEY=...
-# or
-OPENAI_API_KEY=...
+ALBIS_EDITORIAL_MODEL_PROVIDER=openclaw-system   # default local/system path
+# or an explicitly approved fallback such as openrouter/openai/cloudflare-workers-ai
 ```
 
 ## Required env for optional delivery
