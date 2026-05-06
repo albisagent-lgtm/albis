@@ -534,7 +534,7 @@ export async function buildResearchedUnderstandingLayer({
       email_source_ids: evidenceSources.filter((source) => source.trail_role === "email").map((source) => source.id).slice(0, 5),
       evidence_source_ids: evidenceSources.map((source) => source.id).slice(0, 10),
       dashboard_source_ids: clusterSources.map((source) => source.id).slice(0, 20),
-      placement: index < 7 ? "email_main" : index < 10 ? "email_secondary" : "dashboard",
+      placement: index < 7 ? "email_main" : index < 12 ? "email_secondary" : "dashboard",
     };
 
     clusters.push(cluster);

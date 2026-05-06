@@ -108,7 +108,7 @@ function buildPromptPacket(input: {
 
   const topics = input.layer.findings
     .filter((finding) => ["email_main", "email_secondary"].includes(finding.placement))
-    .slice(0, 7)
+    .slice(0, 12)
     .map((finding) => {
       const cluster = input.layer.clusters.find((candidate) => candidate.id === finding.cluster_id);
       const note = input.layer.notes.find((candidate) => candidate.cluster_id === finding.cluster_id);
@@ -176,7 +176,7 @@ function responseSchema() {
         topics: {
           type: "array",
           minItems: 7,
-          maxItems: 7,
+          maxItems: 12,
           items: {
             type: "object",
             additionalProperties: false,

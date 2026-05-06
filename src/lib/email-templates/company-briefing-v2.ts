@@ -270,7 +270,7 @@ function renderResearchedFindings(output: CompanyBriefingGenerationOutput): stri
     .filter(({ finding, note, sources }) =>
       Boolean(note) && hasClusterDepth(sources) && !looksLikeRawSourceTitle(finding.title),
     )
-    .slice(0, 7);
+    .slice(0, 12);
 
   if (!goldFindings.length) return "";
 
