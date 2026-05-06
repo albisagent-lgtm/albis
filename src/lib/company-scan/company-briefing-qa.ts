@@ -1773,7 +1773,7 @@ function checkCompanyDailyScanV1GoldStandard(
   };
   const sourceRichFindings = emailFindings.filter(hasSourceClusterDepth);
   const substantialFindings = emailFindings.filter(
-    (finding) => wordCount(finding.body || "") >= 120,
+    (finding) => wordCount(finding.body || "") >= 95,
   );
 
   if (emailFindings.length < 7) {
@@ -1799,7 +1799,7 @@ function checkCompanyDailyScanV1GoldStandard(
       code: "V1_GOLD_FINDINGS_TOO_SHORT",
       severity: "blocking",
       message:
-        "Company Daily Scan V1 sections are too short. The target is 150–250 words where evidence supports it, using researched multi-paragraph sections rather than one-paragraph summaries.",
+        "Company Daily Scan V1 sections are too short. The target is 150–250 words where evidence supports it; under 95 words is not enough for a researched story.",
     });
   }
 

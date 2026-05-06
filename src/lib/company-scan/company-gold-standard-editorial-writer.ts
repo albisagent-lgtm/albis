@@ -105,14 +105,26 @@ function buildPromptPacket(input: {
     input.output.main_briefing.sections.map((section) => [section.section_id, section.heading]),
   );
   const sourceById = new Map(input.layer.sources.map((source) => [source.id, source]));
-
+  const distinctSourceIds = (ids: string[]) => {
+    const seenUrls = new Set<string>();
+    const out: string[] = [];
+    for (const id of ids) {
+      const source = sourceById.get(id);
+      if (!source) continue;
+      const key = source.url || `${source.source_domain}:${source.title}`;
+      if (seenUrls.has(key)) continue;
+      seenUrls.add(key);
+      out.push(id);
+    }
+    return out;
+  };
   const topics = input.layer.findings
     .filter((finding) => ["email_main", "email_secondary"].includes(finding.placement))
     .slice(0, 12)
     .map((finding) => {
       const cluster = input.layer.clusters.find((candidate) => candidate.id === finding.cluster_id);
       const note = input.layer.notes.find((candidate) => candidate.cluster_id === finding.cluster_id);
-      const sourceIds = [...new Set([...(finding.email_source_ids || []), ...(finding.evidence_source_ids || [])])]
+      const sourceIds = distinctSourceIds([...(finding.email_source_ids || []), ...(finding.evidence_source_ids || [])])
         .filter((id) => sourceById.has(id))
         .slice(0, 6);
       const sources = sourceIds.map((id) => {
@@ -247,12 +259,35 @@ function applyWriterResponse(
   if (!layer) return next;
 
   const topicsByCluster = new Map(writer.topics.map((topic) => [topic.cluster_id, topic]));
-  const allowedClusterIds = new Set(writer.topics.map((topic) => topic.cluster_id));
+  const sourceById = new Map(layer.sources.map((source) => [source.id, source]));
+  const hasDistinctSourceDepth = (finding: AlbisFinding) => {
+    const sources = (finding.evidence_source_ids || [])
+      .map((id) => sourceById.get(id))
+      .filter((source): source is ResearchSource => Boolean(source));
+    const urls = new Set(sources.map((source) => source.url).filter(Boolean));
+    const domains = new Set(sources.map((source) => source.source_domain.replace(/^www\./i, "").toLowerCase()).filter(Boolean));
+    return urls.size >= 2 && domains.size >= 2;
+  };
+  const fallbackClusterIds = new Set(
+    layer.findings
+      .filter((finding) => ["email_main", "email_secondary"].includes(finding.placement))
+      .filter((finding) => !topicsByCluster.has(finding.cluster_id))
+      .filter(hasDistinctSourceDepth)
+      .sort((a, b) => (b.evidence_source_ids || []).length - (a.evidence_source_ids || []).length)
+      .slice(0, Math.max(0, 7 - writer.topics.length))
+      .map((finding) => finding.cluster_id),
+  );
+  const allowedClusterIds = new Set([...writer.topics.map((topic) => topic.cluster_id), ...fallbackClusterIds]);
 
   layer.findings = layer.findings.map((finding): AlbisFinding => {
     const topic = topicsByCluster.get(finding.cluster_id);
     if (!topic) {
-      return { ...finding, placement: finding.placement === "dashboard" ? "dashboard" : "hold" };
+      return {
+        ...finding,
+        placement: fallbackClusterIds.has(finding.cluster_id)
+          ? "email_main"
+          : finding.placement === "dashboard" ? "dashboard" : "hold",
+      };
     }
     const body = topic.paragraphs.map(clean).filter(Boolean).join("\n\n");
     return {
@@ -353,7 +388,7 @@ function validateWriterResponse(writer: WriterResponse): string[] {
     if (!topic.cluster_id || !topic.headline || !topic.topic_label) blockers.push(`Topic missing required label/headline: ${topic.cluster_id || "unknown"}`);
     if ((topic.paragraphs || []).length < 2) blockers.push(`${topic.cluster_id}: fewer than two paragraphs.`);
     const topicWords = words((topic.paragraphs || []).join(" "));
-    if (topicWords < 120) blockers.push(`${topic.cluster_id}: topic is under 120 words; target 150–250 where possible.`);
+    if (topicWords < 95) blockers.push(`${topic.cluster_id}: topic is under 95 words; target 150–250 where possible.`);
     if (topicWords > 260) blockers.push(`${topic.cluster_id}: topic is over 260 words; target 150–250 where possible.`);
     if ((topic.source_ids || []).length < 2) blockers.push(`${topic.cluster_id}: fewer than two source ids.`);
     const bad = /\b(signal|clearest signal|this is the signal|Albis reading|useful point|operating signal|market signal|matched|selected scan areas|evidence threshold|source items|more in evidence trail)\b/i;

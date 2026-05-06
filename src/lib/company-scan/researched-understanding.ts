@@ -284,6 +284,73 @@ function polishV1Title(value: string): string {
     .trim();
 }
 
+function storyClusterKeyForText(value: string): string {
+  const text = cleanText(value).toLowerCase();
+  if (/meloni|giorgia/.test(text) && /deepfake|fake image|synthetic|ai-generated|ai image/.test(text)) return "meloni-ai-deepfake";
+  if (/defence secretary|rajesh kumar|pakistani propaganda|cyber systems/.test(text) && /deepfake|fake video|jammed/.test(text)) return "india-defence-secretary-deepfake";
+  if (/deepfake|synthetic|ai-generated/.test(text) && /law|police|victim|identity fraud|protection|enforcement/.test(text)) return "deepfake-identity-protection";
+  if (/met gala/.test(text) && /deepfake|ai photo|ai video|synthetic/.test(text)) return "met-gala-ai-deepfake";
+  if (/hormuz|strait/.test(text) && /ais|spoof|jamming|navigation|tracking|location anomal/.test(text)) return "hormuz-navigation-data-risk";
+  if (/hormuz|strait|red sea|suez/.test(text) && /corridor|alternative route|route planning|saudi|uae|turkey|pipeline|rail/.test(text)) return "hormuz-alternative-corridors";
+  if (/hormuz|strait|gulf of oman|persian gulf|blockade|maersk|shipping traffic/.test(text)) return "hormuz-route-status";
+  if (/semiconductor|microchip|\bchip\b|tsmc|taiwan|ai demand|manufacturing capacity/.test(text) && /supply|trade|manufacturing|capacity|export|demand|china|arizona|southeast asia/.test(text)) return "semiconductor-supply-chain-pressure";
+  if (/fertili[sz]er|fertiliser|ammonia|urea|grain/.test(text) && /shipping|freight|supply|subsidy|india|nepal|disruption|cost|shortage/.test(text)) return "fertilizer-supply-chain-pressure";
+  if (/shipping|maritime|vessel|carrier/.test(text) && /net zero|decarbon|ammonia|fuel transition|emissions/.test(text)) return "shipping-decarbonisation";
+  if (/port|container|freight|rail|bottleneck|logistics/.test(text) && /disruption|shortage|delay|reroute|route/.test(text)) return "freight-bottleneck-pressure";
+  if (/georgia/.test(text) && /media freedom coalition|press freedom|journalist|media-freedom/.test(text)) return "georgia-media-freedom";
+  if (/rsf|reporters without borders|press freedom index/.test(text)) return "rsf-press-freedom-index";
+  if (/\brt\b|russia today/.test(text) && /censor|disinformation|misinformation|unesco/.test(text)) return "rt-censorship-disinformation";
+  if (/visa|travel restriction|china|iran|u\.n\.|un /.test(text) && /journalist|access|restriction|sanction/.test(text)) return "diplomatic-access-pressure";
+
+  const stop = new Set(["about", "after", "against", "amid", "from", "into", "over", "says", "said", "that", "their", "there", "this", "with", "will", "would", "could", "should", "report", "reported", "coverage", "update", "latest", "news"]);
+  const tokens = text
+    .replace(/https?:\/\/\S+/g, " ")
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter((token) => token.length > 3 && !stop.has(token))
+    .slice(0, 8);
+  return tokens.slice(0, 5).join("-") || "general-story";
+}
+
+type ResearchClusterInput = {
+  bundle: IntelligenceDepthBundle | undefined;
+  selected: SelectedSignalForDepth[];
+};
+
+function storyClusterKeyForInput(input: ResearchClusterInput): string {
+  const bundleText = input.bundle ? `${input.bundle.heading} ${input.bundle.body_text}` : "";
+  const signalText = input.selected
+    .map((item) => `${item.signal.headline} ${item.signal.summary || ""} ${(item.signal.themes || []).join(" ")}`)
+    .join(" ");
+  return storyClusterKeyForText(`${bundleText} ${signalText}`);
+}
+
+function mergeStoryClusterInputs(inputs: ResearchClusterInput[]): ResearchClusterInput[] {
+  const byKey = new Map<string, ResearchClusterInput>();
+  for (const input of inputs) {
+    const key = storyClusterKeyForInput(input);
+    const existing = byKey.get(key);
+    if (!existing) {
+      byKey.set(key, { bundle: input.bundle, selected: input.selected });
+      continue;
+    }
+    const selectedBySignalId = new Map<string, SelectedSignalForDepth>();
+    for (const item of [...existing.selected, ...input.selected]) {
+      const prior = selectedBySignalId.get(item.signal.id);
+      if (!prior || item.selection_score > prior.selection_score) selectedBySignalId.set(item.signal.id, item);
+    }
+    byKey.set(key, {
+      bundle: existing.bundle || input.bundle,
+      selected: [...selectedBySignalId.values()].sort((a, b) => b.selection_score - a.selection_score).slice(0, 24),
+    });
+  }
+  return [...byKey.values()].sort((a, b) => {
+    const aScore = Math.max(...a.selected.map((item) => item.selection_score), 0) + Math.min(a.selected.length, 8) * 2 + (a.bundle ? 4 : 0);
+    const bScore = Math.max(...b.selected.map((item) => item.selection_score), 0) + Math.min(b.selected.length, 8) * 2 + (b.bundle ? 4 : 0);
+    return bScore - aScore;
+  });
+}
+
 function makeResearchSourceFromSignal(
   clusterId: string,
   signal: Signal,
@@ -346,17 +413,17 @@ export async function buildResearchedUnderstandingLayer({
   signals,
   bundles = [],
   generatedAt = new Date().toISOString(),
-  maxClusters = 8,
+  maxClusters = 12,
 }: BuildResearchedUnderstandingOptions): Promise<CompanyResearchedUnderstandingLayer> {
   const itemMap = packetItemById(packet);
   const totalSignalsAvailable = signals.length;
-  const chosenBundles = bundles.slice(0, maxClusters);
+  const chosenBundles = bundles.slice(0, Math.max(maxClusters, 12));
   const defaultSectionId = packet.company.selected_scan_areas[0]?.area_id || "general";
-  const fallbackSelected = selected.slice(0, Math.max(5, maxClusters));
+  const fallbackSelected = selected.slice(0, Math.max(28, maxClusters * 3));
   const selectedSignalIds = new Set(selected.map((item) => item.signal.id));
   const rawSignalSupplemental: SelectedSignalForDepth[] = signals
     .filter((signal) => !selectedSignalIds.has(signal.id))
-    .slice(0, Math.max(0, maxClusters - fallbackSelected.length))
+    .slice(0, Math.max(24, maxClusters * 3))
     .map((signal, index) => ({
       signal,
       item_id: `supplemental_${signal.id}`,
@@ -364,7 +431,7 @@ export async function buildResearchedUnderstandingLayer({
       section_ids: [defaultSectionId],
       selection_score: Math.max(1, Number(signal.significance || 0) + Number(signal.urgency || 0) - index),
       keyword_match_score: 0,
-      selected_because: "supplemental research-depth cluster added so the dossier reaches the 5-8 researched-cluster target",
+      selected_because: "supplemental research-depth cluster added so the dossier can reach the seven-story daily scan target",
     }));
   const expandedFallbackSelected = [...fallbackSelected, ...rawSignalSupplemental];
 
@@ -380,7 +447,7 @@ export async function buildResearchedUnderstandingLayer({
   const supplementalInputs = expandedFallbackSelected
     .filter((item) => !usedAnchorItemIds.has(item.item_id))
     .map((item) => ({ bundle: undefined, selected: [item] }));
-  const clusterInputs = [...bundledInputs, ...supplementalInputs];
+  const clusterInputs = mergeStoryClusterInputs([...bundledInputs, ...supplementalInputs]);
 
   const clusters: ResearchCluster[] = [];
   const sources: ResearchSource[] = [];
