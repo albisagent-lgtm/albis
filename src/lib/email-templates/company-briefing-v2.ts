@@ -278,7 +278,7 @@ function renderResearchedFindings(output: CompanyBriefingGenerationOutput): stri
 
   for (const { finding, note, sources } of goldFindings) {
     const topicLabel = topicLabelForFinding(output, finding);
-    const paragraphs = buildGoldStandardParagraphs(note!, sources);
+    const paragraphs = buildGoldStandardParagraphs(finding, note!, sources);
     if (paragraphs.length < 2) continue;
     html += `<div style="margin-bottom:28px;">`;
     if (topicLabel) {
@@ -315,10 +315,61 @@ function trimHeadline(value: string): string {
     .trim();
 }
 
+function wordCount(value: string): number {
+  return value.split(/\s+/).filter(Boolean).length;
+}
+
+function splitCleanParagraphs(value: string): string[] {
+  return customerEnglishText(value)
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+    .filter((paragraph, index, all) => {
+      const key = paragraph.toLowerCase().replace(/[^a-z0-9]+/g, " ").slice(0, 140);
+      return all.findIndex((candidate) => candidate.toLowerCase().replace(/[^a-z0-9]+/g, " ").slice(0, 140) === key) === index;
+    });
+}
+
+function capParagraphsToWordTarget(paragraphs: string[], maxWords = 300): string[] {
+  const out: string[] = [];
+  let total = 0;
+  for (const paragraph of paragraphs) {
+    const words = wordCount(paragraph);
+    if (total + words <= maxWords) {
+      out.push(paragraph);
+      total += words;
+      continue;
+    }
+    const remaining = maxWords - total;
+    if (remaining >= 45) {
+      const sentences = paragraph.match(/[^.!?]+[.!?]+/g) || [paragraph];
+      const kept: string[] = [];
+      let keptWords = 0;
+      for (const sentence of sentences) {
+        const sentenceWords = wordCount(sentence);
+        if (keptWords + sentenceWords > remaining) break;
+        kept.push(sentence.trim());
+        keptWords += sentenceWords;
+      }
+      if (kept.length) out.push(joinSentences(kept));
+    }
+    break;
+  }
+  return out;
+}
+
 function buildGoldStandardParagraphs(
+  finding: AlbisFinding,
   note: ResearchNote,
   sources: ResearchSource[],
 ): string[] {
+  const editedParagraphs = splitCleanParagraphs(finding.body || "")
+    .filter((paragraph) => !/^the source trail includes concrete markers/i.test(paragraph))
+    .filter((paragraph) => !/add different layers to the same tracked topic/i.test(paragraph));
+  if (wordCount(editedParagraphs.join(" ")) >= 120) {
+    return capParagraphsToWordTarget(editedParagraphs, 300);
+  }
+
   const facts = note.key_facts
     .map((fact) => cleanResearchSentence(fact))
     .filter(Boolean)
@@ -342,7 +393,6 @@ function buildGoldStandardParagraphs(
   }
 
   const context: string[] = [];
-  if (numbers.length) context.push(`The source trail includes concrete markers such as ${humanListText(numbers)}.`);
   if (actors.length) context.push(`The named actors include ${humanListText(actors)}.`);
   if (places.length) context.push(`The coverage reaches ${humanListText(places)}.`);
   const relevance = cleanResearchSentence(note.company_relevance || note.consequences[0]);
@@ -362,14 +412,14 @@ function buildGoldStandardParagraphs(
     if (differences.length) {
       paragraphs.push(`The source contrast matters. ${joinSentences(differences)}`);
     }
-  } else if (sourceNames.length >= 2) {
-    paragraphs.push(`${sourceNames.join(" and ")} add different layers to the same tracked topic, giving the email more than a single-source summary.`);
   }
 
-  return paragraphs
-    .map((paragraph) => customerEnglishText(paragraph))
-    .filter((paragraph) => paragraph.split(/\s+/).length >= 18)
-    .slice(0, 4);
+  return capParagraphsToWordTarget(
+    paragraphs
+      .map((paragraph) => customerEnglishText(paragraph))
+      .filter((paragraph) => paragraph.split(/\s+/).length >= 18),
+    300,
+  );
 }
 
 function cleanResearchSentence(value: string | undefined | null): string {
