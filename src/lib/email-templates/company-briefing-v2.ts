@@ -320,14 +320,28 @@ function wordCount(value: string): number {
 }
 
 function splitCleanParagraphs(value: string): string[] {
-  return customerEnglishText(value)
+  const rawParagraphs = String(value || "")
     .split(/\n{2,}/)
-    .map((paragraph) => paragraph.trim())
+    .map((paragraph) => customerEnglishText(paragraph).trim())
+    .filter(Boolean);
+
+  const paragraphs = rawParagraphs.length >= 2 ? rawParagraphs : splitLongParagraphForEmail(rawParagraphs[0] || "");
+
+  return paragraphs
     .filter(Boolean)
     .filter((paragraph, index, all) => {
       const key = paragraph.toLowerCase().replace(/[^a-z0-9]+/g, " ").slice(0, 140);
       return all.findIndex((candidate) => candidate.toLowerCase().replace(/[^a-z0-9]+/g, " ").slice(0, 140) === key) === index;
     });
+}
+
+function splitLongParagraphForEmail(value: string): string[] {
+  const cleaned = customerEnglishText(value).trim();
+  if (!cleaned) return [];
+  const sentences = cleaned.match(/[^.!?]+[.!?]+/g)?.map((sentence) => sentence.trim()).filter(Boolean) || [cleaned];
+  if (sentences.length < 3 || wordCount(cleaned) < 90) return [cleaned];
+  const midpoint = Math.ceil(sentences.length / 2);
+  return [joinSentences(sentences.slice(0, midpoint)), joinSentences(sentences.slice(midpoint))].filter(Boolean);
 }
 
 function capParagraphsToWordTarget(paragraphs: string[], maxWords = 250): string[] {
