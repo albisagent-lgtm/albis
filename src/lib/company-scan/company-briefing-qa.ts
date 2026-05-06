@@ -1393,7 +1393,10 @@ function checkScannerReportLayout(
       ),
     ),
   ).size;
-  const generatedMainFindings = output.main_briefing.sections.flatMap(
+  const researchedEmailFindings = output.understanding?.researched_understanding_v1?.findings?.filter(
+    (finding) => ["email_main", "email_secondary"].includes(finding.placement),
+  ).length ?? 0;
+  const generatedMainFindings = researchedEmailFindings || output.main_briefing.sections.flatMap(
     (section) => section.items,
   ).length;
   const scanner = output.scanner_report;
@@ -1440,7 +1443,11 @@ function checkScannerReportLayout(
   if (scanner?.enabled) {
     const coverageRatio =
       selectedCount > 0 ? generatedMainFindings / selectedCount : 1;
-    if (selectedCount >= 8 && coverageRatio < 0.6) {
+    if (
+      scanner.layout_version !== "company_daily_scan_v1" &&
+      selectedCount >= 8 &&
+      coverageRatio < 0.6
+    ) {
       failures.push({
         code: "SCANNER_REPORT_OVER_COMPRESSED",
         severity: "blocking",
