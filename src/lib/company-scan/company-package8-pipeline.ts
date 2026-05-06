@@ -1455,7 +1455,7 @@ export async function runCompanyPackage8PipelineForProfile(
       canonical_event_name: signal.headline,
       short_summary_facts: [cleanOneSentenceFact(signal)],
       why_it_matters: {
-        text: `Relevant to ${profile.company_name}'s selected scan areas because it matched ${sectionIds.map((id: string) => p8Profile.selected_scan_areas.find((a: any) => a.area_id === id)?.label || id).join(", ")}.`,
+        text: `This matters for ${profile.company_name} because it falls under monitored themes: ${sectionIds.map((id: string) => p8Profile.selected_scan_areas.find((a: any) => a.area_id === id)?.label || id).join(", ")}.`,
         supported_by: [
           `claim_${articleId}`,
           ...sectionIds.map((id: string) => `scan_area:${id}`),

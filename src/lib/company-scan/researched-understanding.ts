@@ -506,7 +506,7 @@ export async function buildResearchedUnderstandingLayer({
       named_places: extractPlaces(relatedSignals),
       causes_or_drivers: uniq(relatedSignals.flatMap((signal) => signal.themes || [])).slice(0, 6),
       consequences: [
-        trimWords(input.bundle?.company_read?.text || packetItem?.why_it_matters?.text || `This matched ${profile.company_name}'s selected scan areas and needs a researched read before customer delivery.`, 42),
+        trimWords(input.bundle?.company_read?.text || packetItem?.why_it_matters?.text || `This matters for ${profile.company_name} because it falls under the company's monitored topics and needs a researched read before customer delivery.`, 42),
       ],
       source_observations: observations,
       differences_in_reporting: differences,
@@ -516,7 +516,7 @@ export async function buildResearchedUnderstandingLayer({
           : "The research trail is preserved, but article-text reading/extraction did not complete for this cluster; treat as lower confidence.",
       ],
       possible_perception_gap: possibleGap,
-      company_relevance: trimWords(input.bundle?.company_read?.text || packetItem?.why_it_matters?.text || "Relevant to the company’s monitored topics because it appeared in the selected company scan evidence.", 48),
+      company_relevance: trimWords(input.bundle?.company_read?.text || packetItem?.why_it_matters?.text || "Relevant to the company’s monitored topics because it appeared in the retained company evidence.", 48),
       albis_learning: "This cluster is stored as researched understanding first, so Daily Findings, PGI, dashboard, and article writers can draw from the same evidence trail instead of writing from headlines alone.",
     };
 
