@@ -1758,37 +1758,48 @@ function checkCompanyDailyScanV1GoldStandard(
     ["email_main", "email_secondary"].includes(finding.placement),
   );
   const wordCount = (text: string) => text.split(/\s+/).filter(Boolean).length;
-  const sourceRichFindings = emailFindings.filter(
-    (finding) => finding.evidence_source_ids.length >= 3,
-  );
+  const sourceById = new Map(layer.sources.map((source) => [source.id, source]));
+  const hasSourceClusterDepth = (finding: typeof emailFindings[number]) => {
+    const sources = finding.evidence_source_ids
+      .map((id) => sourceById.get(id))
+      .filter(Boolean);
+    const sourceIds = new Set(sources.map((source) => source!.id).filter(Boolean));
+    const domains = new Set(
+      sources
+        .map((source) => source!.source_domain.replace(/^www\./i, "").toLowerCase())
+        .filter(Boolean),
+    );
+    return sourceIds.size >= 3 && domains.size >= 2;
+  };
+  const sourceRichFindings = emailFindings.filter(hasSourceClusterDepth);
   const substantialFindings = emailFindings.filter(
     (finding) => wordCount(finding.body || "") >= 120,
   );
 
-  if (emailFindings.length < 4) {
+  if (emailFindings.length < 7) {
     failures.push({
       code: "V1_GOLD_TOO_FEW_EMAIL_SECTIONS",
       severity: "blocking",
       message:
-        "Company Daily Scan V1 needs at least four researched email sections, unless the scan is explicitly a quiet-day dashboard-only send.",
+        "Company Daily Scan V1 needs at least seven researched email sections across different scan areas, unless the scan is explicitly a quiet-day dashboard-only send.",
     });
   }
 
-  if (sourceRichFindings.length < Math.min(4, emailFindings.length)) {
+  if (sourceRichFindings.length < Math.min(7, emailFindings.length)) {
     failures.push({
       code: "V1_GOLD_SOURCE_CLUSTERS_TOO_THIN",
       severity: "blocking",
       message:
-        "Company Daily Scan V1 email sections must come from source clusters, not single-link findings. Require at least three evidence sources for the main sections.",
+        "Company Daily Scan V1 email sections must come from evidence clusters, not single-source summaries. Require at least three evidence sources across at least two domains for the main sections.",
     });
   }
 
-  if (substantialFindings.length < Math.min(4, emailFindings.length)) {
+  if (substantialFindings.length < Math.min(7, emailFindings.length)) {
     failures.push({
       code: "V1_GOLD_FINDINGS_TOO_SHORT",
       severity: "blocking",
       message:
-        "Company Daily Scan V1 sections are too short. The approved gold standard uses researched multi-paragraph sections, not one-paragraph summaries.",
+        "Company Daily Scan V1 sections are too short. The target is 150–250 words where evidence supports it, using researched multi-paragraph sections rather than one-paragraph summaries.",
     });
   }
 

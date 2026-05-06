@@ -64,7 +64,9 @@ Your Daily Scan
 Each topic has:
 - broad tracked topic label, e.g. Press Freedom
 - specific scan-based headline, e.g. RSF says global press freedom has fallen to its lowest level in 25 years
-- 250–300 words total where the evidence supports it, usually 2–4 substantial researched paragraphs
+- 150–250 words total where the evidence supports it, usually 2–3 substantial researched paragraphs
+- at least 7 stories when 7 source-rich clusters are available
+- every story must be written from a cluster of evidence, not a single-source summary
 - hard facts, numbers, named countries/actors, mechanisms, source contrast, and business/media relevance
 - no repeated paragraphs, no source-trail metadata, and no filler just to hit length
 - clean source trail, e.g. RSF 2026 Index · Committee to Protect Journalists · UNESCO · Freedom House
@@ -173,8 +175,8 @@ function responseSchema() {
         },
         topics: {
           type: "array",
-          minItems: 4,
-          maxItems: 5,
+          minItems: 7,
+          maxItems: 7,
           items: {
             type: "object",
             additionalProperties: false,
@@ -186,12 +188,12 @@ function responseSchema() {
               paragraphs: {
                 type: "array",
                 minItems: 2,
-                maxItems: 4,
+                maxItems: 3,
                 items: { type: "string" },
               },
               source_ids: {
                 type: "array",
-                minItems: 2,
+                minItems: 3,
                 maxItems: 5,
                 items: { type: "string" },
               },
@@ -344,16 +346,16 @@ function applyWriterResponse(
 
 function validateWriterResponse(writer: WriterResponse): string[] {
   const blockers: string[] = [];
-  if (!Array.isArray(writer.topics) || writer.topics.length < 4) {
-    blockers.push("Editorial writer returned fewer than four topics.");
+  if (!Array.isArray(writer.topics) || writer.topics.length < 7) {
+    blockers.push("Editorial writer returned fewer than seven topics.");
   }
   for (const topic of writer.topics || []) {
     if (!topic.cluster_id || !topic.headline || !topic.topic_label) blockers.push(`Topic missing required label/headline: ${topic.cluster_id || "unknown"}`);
     if ((topic.paragraphs || []).length < 2) blockers.push(`${topic.cluster_id}: fewer than two paragraphs.`);
     const topicWords = words((topic.paragraphs || []).join(" "));
-    if (topicWords < 120) blockers.push(`${topic.cluster_id}: topic is under 120 words.`);
-    if (topicWords > 340) blockers.push(`${topic.cluster_id}: topic is over 340 words; target 250–300 where possible.`);
-    if ((topic.source_ids || []).length < 2) blockers.push(`${topic.cluster_id}: fewer than two source ids.`);
+    if (topicWords < 120) blockers.push(`${topic.cluster_id}: topic is under 120 words; target 150–250 where possible.`);
+    if (topicWords > 260) blockers.push(`${topic.cluster_id}: topic is over 260 words; target 150–250 where possible.`);
+    if ((topic.source_ids || []).length < 3) blockers.push(`${topic.cluster_id}: fewer than three source ids.`);
     const bad = /\b(signal|clearest signal|this is the signal|Albis reading|useful point|operating signal|market signal|matched|selected scan areas|evidence threshold|source items|more in evidence trail)\b/i;
     if (bad.test(`${topic.headline} ${(topic.paragraphs || []).join(" ")}`)) blockers.push(`${topic.cluster_id}: contains banned/internal language.`);
   }

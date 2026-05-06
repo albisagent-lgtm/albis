@@ -268,9 +268,9 @@ function renderResearchedFindings(output: CompanyBriefingGenerationOutput): stri
         .filter((source): source is ResearchSource => Boolean(source)),
     }))
     .filter(({ finding, note, sources }) =>
-      Boolean(note) && sources.length >= 2 && !looksLikeRawSourceTitle(finding.title),
+      Boolean(note) && hasClusterDepth(sources) && !looksLikeRawSourceTitle(finding.title),
     )
-    .slice(0, 5);
+    .slice(0, 7);
 
   if (!goldFindings.length) return "";
 
@@ -330,7 +330,7 @@ function splitCleanParagraphs(value: string): string[] {
     });
 }
 
-function capParagraphsToWordTarget(paragraphs: string[], maxWords = 300): string[] {
+function capParagraphsToWordTarget(paragraphs: string[], maxWords = 250): string[] {
   const out: string[] = [];
   let total = 0;
   for (const paragraph of paragraphs) {
@@ -367,7 +367,7 @@ function buildGoldStandardParagraphs(
     .filter((paragraph) => !/^the source trail includes concrete markers/i.test(paragraph))
     .filter((paragraph) => !/add different layers to the same tracked topic/i.test(paragraph));
   if (wordCount(editedParagraphs.join(" ")) >= 120) {
-    return capParagraphsToWordTarget(editedParagraphs, 300);
+    return capParagraphsToWordTarget(editedParagraphs, 250);
   }
 
   const facts = note.key_facts
@@ -378,10 +378,8 @@ function buildGoldStandardParagraphs(
     .map((observation) => cleanResearchSentence(observation.what_it_reports || observation.useful_detail))
     .filter(Boolean)
     .filter((fact) => !looksLikeRawSourceTitle(fact));
-  const numbers = note.key_numbers.filter((number) => /\d/.test(number)).slice(0, 4);
   const actors = note.key_actors.slice(0, 5);
   const places = note.named_places.slice(0, 5);
-  const sourceNames = cleanSourceNames(sources).slice(0, 4);
 
   const paragraphs: string[] = [];
   const leadParts = [facts[0] || note.what_happened, facts[1], facts[2]]
@@ -418,8 +416,14 @@ function buildGoldStandardParagraphs(
     paragraphs
       .map((paragraph) => customerEnglishText(paragraph))
       .filter((paragraph) => paragraph.split(/\s+/).length >= 18),
-    300,
+    250,
   );
+}
+
+function hasClusterDepth(sources: ResearchSource[]): boolean {
+  const sourceIds = new Set(sources.map((source) => source.id).filter(Boolean));
+  const domains = new Set(sources.map((source) => source.source_domain.replace(/^www\./i, "").toLowerCase()).filter(Boolean));
+  return sourceIds.size >= 3 && domains.size >= 2;
 }
 
 function cleanResearchSentence(value: string | undefined | null): string {
@@ -450,13 +454,6 @@ function humanListText(values: string[]): string {
   if (items.length <= 1) return items[0] || "the source trail";
   if (items.length === 2) return `${items[0]} and ${items[1]}`;
   return `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
-}
-
-function cleanSourceNames(sources: ResearchSource[]): string[] {
-  const names = sources
-    .map((source) => sourceNameForEmail(source))
-    .filter(Boolean);
-  return [...new Set(names)];
 }
 
 function sourceNameForEmail(source: ResearchSource): string {
