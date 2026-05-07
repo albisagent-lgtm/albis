@@ -26,7 +26,19 @@ if [[ -f ".env.local" ]]; then
 fi
 
 BASE_URL="${ALBIS_BASE_URL:-https://www.albis.news}"
-DATE="${COMPANY_DELIVERY_DATE:-$(TZ=Pacific/Auckland date +%F)}"
+if [[ -n "${COMPANY_DELIVERY_DATE:-}" ]]; then
+  DELIVERY_DATES=("${COMPANY_DELIVERY_DATE}")
+else
+  # Company generation currently keys briefing_date by UTC scan date, while
+  # user-facing delivery thinks in recipient local time. Try both UTC and NZ
+  # dates so hourly delivery does not miss rows around the date boundary.
+  UTC_DATE="$(date -u +%F)"
+  NZ_DATE="$(TZ=Pacific/Auckland date +%F)"
+  DELIVERY_DATES=("${UTC_DATE}")
+  if [[ "${NZ_DATE}" != "${UTC_DATE}" ]]; then
+    DELIVERY_DATES+=("${NZ_DATE}")
+  fi
+fi
 
 if [[ -z "${SCAN_INGEST_KEY:-}" ]]; then
   echo "❌ SCAN_INGEST_KEY is required"
@@ -35,17 +47,20 @@ fi
 
 echo "=== company delivery cycle ${TIMESTAMP} (UTC) ==="
 echo "base_url: ${BASE_URL}"
-echo "briefing_date: ${DATE}"
+echo "briefing_dates: ${DELIVERY_DATES[*]}"
 echo "log: ${LOG_FILE}"
 
 echo
 echo "[1/2] deliver eligible company briefings"
-curl --fail --silent --show-error \
-  -X POST "${BASE_URL%/}/api/company-briefings/deliver" \
-  -H "Authorization: Bearer ${SCAN_INGEST_KEY}" \
-  -H "Content-Type: application/json" \
-  -d "{\"briefing_date\":\"${DATE}\"}"
-echo
+for DATE in "${DELIVERY_DATES[@]}"; do
+  echo "-- briefing_date=${DATE}"
+  curl --fail --silent --show-error \
+    -X POST "${BASE_URL%/}/api/company-briefings/deliver" \
+    -H "Authorization: Bearer ${SCAN_INGEST_KEY}" \
+    -H "Content-Type: application/json" \
+    -d "{\"briefing_date\":\"${DATE}\"}"
+  echo
+done
 
 echo
 echo "[2/2] send expired-trial followups"
