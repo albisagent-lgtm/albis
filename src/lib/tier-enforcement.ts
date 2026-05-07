@@ -22,7 +22,9 @@ export interface ProfileSubscription {
 export function isSubscriptionActive(profile: ProfileSubscription): boolean {
   if (profile.is_test_account === true) return true;
   const status = profile.subscription_status;
-  return status === "active" || status === "trialing";
+  if (status === "active") return true;
+  if (status === "trialing") return isTrialing(profile);
+  return false;
 }
 
 /**
