@@ -57,3 +57,5 @@ reports/final-copy-email-preview-*/
 tmp_*
 scripts/tmp_*
 logs/company-scan-cycle/*.log
+logs/company-delivery-cycle/*.log
+logs/company-delivery-cycle/launchd.*.log
