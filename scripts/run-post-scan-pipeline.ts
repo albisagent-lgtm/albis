@@ -1615,6 +1615,20 @@ function logCodeChangeStatus() {
   for (const line of changed) console.log(`   ${line}`);
 }
 
+async function requireSnapshotBriefingForDate(date: string) {
+  const { data, error } = await supabase
+    .from('site_snapshot')
+    .select('briefing_date, briefing_title, briefing_top_stories')
+    .eq('id', 1)
+    .single();
+  if (error) fail(`Snapshot briefing verify failed: ${error.message}`);
+  if (!data || data.briefing_date !== date) fail(`Snapshot briefing_date not updated to ${date}`);
+  if (!data.briefing_title) fail(`Snapshot briefing_title missing for ${date}`);
+  if (!Array.isArray(data.briefing_top_stories) || data.briefing_top_stories.length === 0) {
+    fail(`Snapshot briefing_top_stories missing for ${date}`);
+  }
+}
+
 async function main() {
   const { date, period, skipBriefing } = parseArgs();
   console.log('Implementation checklist:');
@@ -1703,14 +1717,19 @@ async function main() {
   await ingestArticles(articles);
   await verifyArticles(articles);
 
-  run('npx', ['tsx', 'scripts/write-site-snapshot.ts', date]);
-  await requireSnapshotForDate(supabase, date);
-  console.log(`✅ Verified site_snapshot updated for scan_date=${date}`);
-
   if (shouldRunLiveBriefing) {
     run('npx', ['tsx', 'scripts/run-daily-briefing-pipeline.ts', date]);
     console.log(`✅ Verified daily briefing pipeline completed under AM owner flow for ${date}`);
   }
+
+  // Keep this AFTER the AM briefing job. The homepage reads the precomputed
+  // site_snapshot singleton; if we snapshot before the briefing row exists or
+  // refreshes, the public site can show scan/articles while the briefing taster
+  // disappears until a manual snapshot repair.
+  run('npx', ['tsx', 'scripts/write-site-snapshot.ts', date]);
+  await requireSnapshotForDate(supabase, date);
+  if (shouldRunLiveBriefing) await requireSnapshotBriefingForDate(date);
+  console.log(`✅ Verified site_snapshot updated for scan_date=${date}`);
 
   console.log('Published articles summary:');
   for (const article of articles) {
