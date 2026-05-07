@@ -145,6 +145,37 @@ const STEPS = [
   { label: "Confirm", short: "Confirm" },
 ];
 
+const EARLY_ACCESS_PRESETS: Array<{
+  id: string;
+  label: string;
+  sectorId: SectorId;
+  tagline: string;
+  description: string;
+  subSector: string;
+  chips: string[];
+}> = [
+  {
+    id: "logistics-supply-chain",
+    label: "Logistics / Supply Chain",
+    sectorId: "logistics-shipping",
+    tagline: "Routes, tariffs, ports, fuel, suppliers",
+    description:
+      "Best for freight, import/export, procurement, and operations teams exposed to global disruption.",
+    subSector: "Import-export / freight / supply chain risk",
+    chips: ["Route disruption", "Ports", "Tariffs", "Fuel costs"],
+  },
+  {
+    id: "reputation-pr",
+    label: "PR / Reputation",
+    sectorId: "pr-reputation-public-affairs",
+    tagline: "Narratives, deepfakes, scrutiny, public affairs",
+    description:
+      "Best for PR, crisis comms, public affairs, and reputation teams watching perception shifts.",
+    subSector: "Crisis communications / reputation monitoring",
+    chips: ["Narrative shifts", "Deepfakes", "Scrutiny", "Public affairs"],
+  },
+];
+
 // ---------------------------------------------------------------------------
 // Main component
 // ---------------------------------------------------------------------------
@@ -259,6 +290,13 @@ export default function CompanyOnboardingClient() {
     setSupplyChainExposure(bundle.supplyChain.bundle);
     if (def) setRiskPriorities(def.defaultRisks.slice(0, MAX_RISK_PRIORITIES));
     setSectorTouched(true);
+  }
+
+  function applyEarlyAccessPreset(preset: (typeof EARLY_ACCESS_PRESETS)[number]) {
+    setSector(preset.sectorId);
+    if (!subSector.trim()) setSubSector(preset.subSector);
+    applyBundle(preset.sectorId);
+    setError("");
   }
 
   function handleSectorClick(sectorId: SectorId) {
@@ -596,11 +634,79 @@ export default function CompanyOnboardingClient() {
                 />
               </div>
 
+              <div className="rounded-2xl border border-[#c8922a]/20 bg-[#c8922a]/5 p-4 dark:bg-[#c8922a]/10">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                      Start with a ready-made scan type
+                    </p>
+                    <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+                      Two early-access presets built for the first outreach
+                      markets. Pick one, then edit anything.
+                    </p>
+                  </div>
+                  <span className="shrink-0 rounded-full border border-[#c8922a]/25 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#c8922a]">
+                    Beta focus
+                  </span>
+                </div>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {EARLY_ACCESS_PRESETS.map((preset) => {
+                    const isActive = sector === preset.sectorId;
+                    return (
+                      <button
+                        key={preset.id}
+                        onClick={() => applyEarlyAccessPreset(preset)}
+                        className={`rounded-xl border p-4 text-left transition-all ${
+                          isActive
+                            ? "border-[#c8922a]/60 bg-[#c8922a]/10 ring-1 ring-[#c8922a]/25"
+                            : "border-black/[0.07] bg-white/70 hover:border-[#c8922a]/35 dark:border-white/[0.08] dark:bg-white/[0.03]"
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div>
+                            <p className="text-sm font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                              {preset.label}
+                            </p>
+                            <p className="mt-1 text-xs font-medium text-[#c8922a]">
+                              {preset.tagline}
+                            </p>
+                          </div>
+                          <div
+                            className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${
+                              isActive
+                                ? "border-[#c8922a] bg-[#c8922a]"
+                                : "border-zinc-300 dark:border-zinc-600"
+                            }`}
+                          >
+                            {isActive && (
+                              <div className="h-2 w-2 rounded-full bg-white" />
+                            )}
+                          </div>
+                        </div>
+                        <p className="mt-2 text-xs leading-5 text-zinc-500 dark:text-zinc-400">
+                          {preset.description}
+                        </p>
+                        <div className="mt-3 flex flex-wrap gap-1.5">
+                          {preset.chips.map((chip) => (
+                            <span
+                              key={chip}
+                              className="rounded-full bg-zinc-100 px-2 py-1 text-[10px] font-medium text-zinc-500 dark:bg-white/[0.06] dark:text-zinc-400"
+                            >
+                              {chip}
+                            </span>
+                          ))}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
               <div className="flex flex-col gap-1.5">
                 <label className={labelClass}>Sector</label>
                 <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                  Picking a sector pre-fills themes, watchlist, and risks with
-                  sensible defaults. You can edit anything.
+                  Or choose from the full sector list. Picking a sector
+                  pre-fills themes, watchlist, and risks with sensible defaults.
                 </p>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {SECTORS.map((s) => {

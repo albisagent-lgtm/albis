@@ -264,6 +264,18 @@ export const SECTORS: SectorDefinition[] = [
     ],
   },
   {
+    id: "pr-reputation-public-affairs",
+    label: "PR / Reputation / Public Affairs",
+    color: "fuchsia",
+    defaultRisks: [
+      "reputation-narrative",
+      "regulatory-policy",
+      "cyber-technology",
+      "geopolitical-conflict",
+      "trade-tariff-sanctions",
+    ],
+  },
+  {
     id: "government-public",
     label: "Government / Public Sector",
     color: "teal",
@@ -533,6 +545,9 @@ export const THEME_CATALOG: TaxonomyOption[] = [
   { value: "protests", label: "Protests", scanTags: ["protests", "protest", "protest-movement"], category: "Governance" },
 
   // Media & narrative
+  { value: "reputation", label: "Reputation risk", scanTags: ["reputation", "reputation-risk", "brand-risk"], category: "Media" },
+  { value: "public-affairs", label: "Public affairs", scanTags: ["public-affairs", "public affairs", "policy"], category: "Media" },
+  { value: "media-narratives", label: "Media narrative shifts", scanTags: ["media-narrative", "narrative", "framing"], category: "Media" },
   { value: "disinformation", label: "Disinformation", scanTags: ["disinformation", "misinformation"], category: "Media" },
   { value: "censorship", label: "Censorship", scanTags: ["censorship"], category: "Media" },
   { value: "propaganda", label: "Propaganda", scanTags: ["propaganda"], category: "Media" },
@@ -939,6 +954,20 @@ export const SECTOR_BUNDLES: Record<string, SectorBundle> = {
     watchlist: {
       bundle: ["united-states", "european-union", "china", "trump"],
       additional: ["united-kingdom", "russia", "india", "musk"],
+    },
+    supplyChain: {
+      bundle: [],
+      additional: ["cyber-dep"],
+    },
+  },
+  "pr-reputation-public-affairs": {
+    themes: {
+      bundle: ["reputation", "media-narratives", "disinformation", "deepfake", "public-affairs", "regulation"],
+      additional: ["ai-video", "information-warfare", "propaganda", "election", "cybersecurity", "data-breach", "geopolitics", "sanctions"],
+    },
+    watchlist: {
+      bundle: ["united-states", "united-kingdom", "european-union", "trump"],
+      additional: ["china", "russia", "india", "musk", "un", "g7"],
     },
     supplyChain: {
       bundle: [],
