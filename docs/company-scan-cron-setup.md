@@ -84,11 +84,20 @@ COMPANY_SCAN_DELIVER_AFTER_GENERATE=1
 ALBIS_BASE_URL=https://www.albis.news
 SCAN_INGEST_KEY=...
 COMPANY_EMAIL_DELIVERY_ENABLED=1
+COMPANY_EMAIL_DELIVERY_APPROVED_PROFILE_IDS=profile_id_1,profile_id_2
 ```
 
-Do not enable delivery for real company recipients during validation without
-explicit approval. Lindell Media has a real configured recipient, so validation
-runs must omit delivery unless Ignatius approves.
+Delivery now has two required approval layers:
+
+1. Global gate: `COMPANY_EMAIL_DELIVERY_ENABLED=1`.
+2. Per-profile gate: add the company profile id to
+   `COMPANY_EMAIL_DELIVERY_APPROVED_PROFILE_IDS`.
+
+Only after full launch approval, `COMPANY_EMAIL_DELIVERY_APPROVE_ALL=1` may be
+used to bypass the per-profile allow-list. Do not enable delivery for real
+company recipients during validation without explicit approval. Lindell Media
+has a real configured recipient, so validation runs must omit delivery unless
+Ignatius approves.
 
 ## Manual safe Lindell test from pipeline
 
