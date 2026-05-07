@@ -319,10 +319,27 @@ function applyWriterResponse(
   );
   const fallbackClusterIds = new Set(
     layer.findings
-      .filter((finding) => ["email_main", "email_secondary"].includes(finding.placement))
+      // If the model returns fewer than 10 valid topics, backfill from any
+      // source-depth-valid researched finding, not only the pre-email subset.
+      // The 10-story guarantee should fail only when the research layer truly
+      // lacks enough corroborated stories.
       .filter((finding) => !validWriterClusterIds.has(finding.cluster_id))
       .filter(hasDistinctSourceDepth)
-      .sort((a, b) => (b.evidence_source_ids || []).length - (a.evidence_source_ids || []).length)
+      .sort((a, b) => {
+        const placementScore = (finding: AlbisFinding) =>
+          finding.placement === "email_main"
+            ? 3
+            : finding.placement === "email_secondary"
+              ? 2
+              : finding.placement === "dashboard"
+                ? 1
+                : 0;
+        return (
+          placementScore(b) - placementScore(a) ||
+          (b.evidence_source_ids || []).length -
+            (a.evidence_source_ids || []).length
+        );
+      })
       .slice(0, Math.max(0, 10 - validWriterClusterIds.size))
       .map((finding) => finding.cluster_id),
   );
