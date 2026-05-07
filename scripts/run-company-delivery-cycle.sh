@@ -33,9 +33,10 @@ else
   # user-facing delivery thinks in recipient local time. Try both UTC and NZ
   # dates so hourly delivery does not miss rows around the date boundary.
   UTC_DATE="$(date -u +%F)"
+  UTC_YESTERDAY="$(date -u -v-1d +%F 2>/dev/null || date -u -d 'yesterday' +%F)"
   NZ_DATE="$(TZ=Pacific/Auckland date +%F)"
-  DELIVERY_DATES=("${UTC_DATE}")
-  if [[ "${NZ_DATE}" != "${UTC_DATE}" ]]; then
+  DELIVERY_DATES=("${UTC_YESTERDAY}" "${UTC_DATE}")
+  if [[ "${NZ_DATE}" != "${UTC_DATE}" && "${NZ_DATE}" != "${UTC_YESTERDAY}" ]]; then
     DELIVERY_DATES+=("${NZ_DATE}")
   fi
 fi
