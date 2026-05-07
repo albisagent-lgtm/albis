@@ -212,5 +212,5 @@ export async function fetchArticleText(
 }
 
 export function articleTextMaxFetches(): number {
-  return Math.max(0, envNumber("COMPANY_ARTICLE_TEXT_MAX_FETCHES", 40));
+  return Math.max(0, envNumber("COMPANY_ARTICLE_TEXT_MAX_FETCHES", 60));
 }

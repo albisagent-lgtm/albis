@@ -425,7 +425,7 @@ function applyWriterResponse(
   };
 
   if (writer.overview && next.scanner_report?.overview) {
-    next.scanner_report.overview.text = clean(writer.overview);
+    next.scanner_report.overview.text = cleanSentenceSafe(writer.overview);
   }
   if (writer.source_note) {
     next.source_notes.text.text = cleanSentenceSafe(writer.source_note);

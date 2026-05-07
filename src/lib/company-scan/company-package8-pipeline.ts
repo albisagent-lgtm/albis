@@ -1250,7 +1250,7 @@ export async function runCompanyPackage8PipelineForProfile(
   const lookbackHours = options.lookbackHours ?? 24;
   const profileRetrievalText = `${profile.company_name || ""} ${profile.sector || ""} ${profile.sub_sector || ""} ${(profile.tracked_themes || []).join(" ")} ${(profile.risk_priorities || []).join(" ")} ${(profile.watchlist_entities || []).join(" ")} ${(profile.supply_chain_exposure || []).join(" ")}`.toLowerCase();
   const needsWiderCompanyScan = /(logistics|shipping|freight|supply|route|hormuz|deepfake|artificial intelligence|public memory|identity|records)/.test(profileRetrievalText);
-  const maxItems = options.maxItems ?? Number(process.env.COMPANY_PACKAGE8_MAX_ITEMS || (needsWiderCompanyScan ? 48 : 32));
+  const maxItems = options.maxItems ?? Number(process.env.COMPANY_PACKAGE8_MAX_ITEMS || (needsWiderCompanyScan ? 64 : 40));
   const enableHistoryDedupe = options.enableHistoryDedupe ?? true;
   const endTs = new Date(`${scanDate}T23:59:59Z`).toISOString();
   const startTs = new Date(
@@ -1577,7 +1577,7 @@ export async function runCompanyPackage8PipelineForProfile(
     selected: selectedForDepth,
     signals: workingSignals || [],
     bundles: intelligence_depth_bundles,
-    maxClusters: Number(process.env.COMPANY_RESEARCH_MAX_CLUSTERS || (needsWiderCompanyScan ? 22 : 16)),
+    maxClusters: Number(process.env.COMPANY_RESEARCH_MAX_CLUSTERS || (needsWiderCompanyScan ? 32 : 20)),
   });
   const understoodOutput = {
     ...depthOutput,
