@@ -22,20 +22,19 @@ export default function PricingClient() {
         {/* Header */}
         <div className="text-center">
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#c8922a]">
-            Pricing
+            Company Daily Scan
           </p>
           <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-bold tracking-tight text-[#0f0f0f] dark:text-[#f0efec] md:text-4xl">
-            Know what moved before it becomes noise
+            The global picture, translated for your organisation
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
-            Albis scans the topics, entities, regions, and exposures your
-            company cares about, then sends the useful findings only — organized
-            by topic, linked to open sources, and backed by a dashboard source
-            trail when you need to verify the wider picture.
+            Public Albis shows what is happening across the world. These plans
+            turn the same intelligence layer into a private daily scan for your
+            company&apos;s topics, entities, regions, exposures, and decisions.
           </p>
           <p className="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-zinc-400 dark:text-zinc-500">
-            Built for founders, analysts, operators, and teams who need global
-            monitoring without spending every morning sorting through headlines.
+            Start with a 3-day trial. Each email is source-backed, quality gated,
+            and delivered at your chosen local time.
           </p>
         </div>
 
@@ -101,18 +100,18 @@ export default function PricingClient() {
             Every paid plan includes
           </p>
           <div className="mt-4 grid gap-3 text-sm text-zinc-600 dark:text-zinc-400 sm:grid-cols-2 lg:grid-cols-4">
-            <MiniFeature text="Daily topic-by-topic company scan" />
-            <MiniFeature text="Open-web source link per finding" />
-            <MiniFeature text="Dashboard archive and source trail" />
-            <MiniFeature text="Perception Gap context where useful" />
+            <MiniFeature text="10-item Company Daily Scan" />
+            <MiniFeature text="Open-web source links and source trail" />
+            <MiniFeature text="Private dashboard archive" />
+            <MiniFeature text="Perception and coverage gap context" />
           </div>
         </div>
 
         {/* Free tier note */}
         <div className="mt-10 text-center">
           <p className="text-sm text-zinc-400 dark:text-zinc-500">
-            Already reading albis.news? Your free access to public global news
-            intelligence continues.{" "}
+            Already reading albis.news? The public briefing stays free. The
+            company scan is the private layer for organisations.{" "}
             <Link
               href="/register"
               className="font-medium text-[#c8922a] hover:underline"
@@ -126,16 +125,16 @@ export default function PricingClient() {
         <div className="mx-auto mt-16 max-w-3xl">
           <div className="grid gap-8 sm:grid-cols-3">
             <ValueProp
-              title="Finds movement"
-              text="The scan is built to surface concrete developments in your monitored areas, not summarize the whole news cycle."
+              title="Built from the public scan"
+              text="The company product grows out of the same global source layer that powers the open Albis briefing."
             />
             <ValueProp
-              title="Reduces repeat noise"
-              text="The product direction is daily monitoring with deduplication, so the same old story does not keep coming back as new."
+              title="Filtered to your context"
+              text="Sector, geography, supply chain, reputation, policy, and watchlist signals are prioritised over general headlines."
             />
             <ValueProp
               title="Shows the gap"
-              text="Perception Gap notes highlight when regions or sources are seeing the same issue differently, without turning the scan into an essay."
+              text="Perception and coverage notes highlight when regions or source types are seeing an issue differently."
             />
           </div>
         </div>

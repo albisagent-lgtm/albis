@@ -14,6 +14,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/indexes/pgi`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.7 },
     { url: `${base}/indexes/gai`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.7 },
     { url: `${base}/methodology`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.6 },
+    { url: `${base}/company-daily-scan`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 },
+    { url: `${base}/pricing`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.6 },
     { url: `${base}/about`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.5 },
     { url: `${base}/quiz`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.5 },
     { url: `${base}/feed.xml`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.3 },

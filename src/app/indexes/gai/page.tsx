@@ -302,6 +302,21 @@ function GAIPageInner() {
         )}
       </section>
 
+      <section className="mb-16 rounded-2xl border border-[#c8922a]/25 bg-[#c8922a]/[0.04] p-5 text-center dark:bg-[#c8922a]/[0.08]">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
+          Company Daily Scan
+        </p>
+        <h2 className="mx-auto mt-2 max-w-2xl font-[family-name:var(--font-playfair)] text-2xl font-semibold">
+          Coverage gaps matter when they touch your sector, regions, or reputation.
+        </h2>
+        <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+          GAI stays public as an awareness tool. Company scans use the same attention signals to flag what your organisation may be missing.
+        </p>
+        <Link href="/company-daily-scan" className="mt-4 inline-block text-sm font-semibold text-[#c8922a] hover:text-[#b17f24]">
+          See the company layer &rarr;
+        </Link>
+      </section>
+
       {/* ── Your Blind Spots ── */}
       {stories.length > 0 && (
         <section className="mb-16">

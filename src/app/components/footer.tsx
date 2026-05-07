@@ -4,7 +4,7 @@ import { EmailCapture } from "./email-capture";
 export function Footer() {
   return (
     <footer className="border-t border-black/[0.07] bg-[#f8f7f4] dark:border-white/[0.05] dark:bg-[#0f0f0f]">
-      <div className="mx-auto max-w-4xl px-6 py-14 md:py-16">
+      <div className="mx-auto max-w-6xl px-6 py-14 md:py-16">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           {/* Brand */}
           <div className="max-w-xs">
@@ -17,16 +17,16 @@ export function Footer() {
             <p className="mt-3 text-sm leading-relaxed text-zinc-400 dark:text-zinc-500">
               News intelligence, not noise.
             </p>
-            <p className="mt-4 text-xs text-zinc-400 dark:text-zinc-500">
-              Free daily briefing · Zero bias · Unsubscribe anytime
+            <p className="mt-4 text-xs leading-relaxed text-zinc-400 dark:text-zinc-500">
+              Public global briefings, plus private company scans for teams that need the signal in their own context.
             </p>
           </div>
 
           {/* Links */}
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 md:gap-10 max-sm:gap-6">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5 md:gap-10 max-sm:gap-6">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
-                Sections
+                Public Albis
               </p>
               <ul className="mt-4 space-y-2.5">
                 <FooterLink href="/">Today</FooterLink>
@@ -36,15 +36,28 @@ export function Footer() {
                 <FooterLink href="/climate">Climate</FooterLink>
                 <FooterLink href="/life-systems">Life Systems</FooterLink>
                 <FooterLink href="/perspectives">Perspectives</FooterLink>
+                <FooterLink href="/indexes">Indexes</FooterLink>
               </ul>
             </div>
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
-                Explore
+                Company Scan
+              </p>
+              <ul className="mt-4 space-y-2.5">
+                <FooterLink href="/company-daily-scan">How it works</FooterLink>
+                <FooterLink href="/pricing">Pricing</FooterLink>
+                <FooterLink href="/onboarding/company">Set up profile</FooterLink>
+                <FooterLink href="/dashboard">Dashboard</FooterLink>
+              </ul>
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
+                Learn
               </p>
               <ul className="mt-4 space-y-2.5">
                 <FooterLink href="/trending">Trending</FooterLink>
                 <FooterLink href="/about">About</FooterLink>
+                <FooterLink href="/methodology">Methodology</FooterLink>
                 <li>
                   <a
                     href="/feed.xml"
@@ -93,7 +106,7 @@ export function Footer() {
                 Newsletter
               </p>
               <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
-                Daily briefing, free forever.
+                Daily public briefing, free forever.
               </p>
               <div className="mt-3">
                 <EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} source="footer" />

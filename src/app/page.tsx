@@ -298,6 +298,20 @@ export default async function Home() {
           <p className="mx-auto mt-5 max-w-lg font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-500 dark:text-zinc-400 md:text-xl">
             The world&apos;s news in 2&nbsp;minutes. Free.
           </p>
+          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link
+              href="#today"
+              className="inline-flex h-10 items-center justify-center rounded-full bg-[#0f0f0f] px-5 text-sm font-semibold text-white transition-colors hover:bg-zinc-800 dark:bg-[#f0efec] dark:text-[#0f0f0f] dark:hover:bg-white"
+            >
+              Read today&apos;s briefing
+            </Link>
+            <Link
+              href="/company-daily-scan"
+              className="inline-flex h-10 items-center justify-center rounded-full border border-[#c8922a]/35 px-5 text-sm font-semibold text-[#c8922a] transition-colors hover:border-[#c8922a] hover:bg-[#c8922a]/5"
+            >
+              Get a company scan
+            </Link>
+          </div>
           <div className="mx-auto mt-8 max-w-lg">
             <EmailCapture
               variant="hero"
@@ -365,12 +379,59 @@ export default async function Home() {
         </section>
       ) : null}
 
+      <section className="border-t border-black/[0.06] bg-[#f8f7f4] dark:border-white/[0.06] dark:bg-[#0f0f0f]">
+        <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+          <div className="mb-8 text-center">
+            <p className="font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.2em] text-[#c8922a]">
+              One global scan, two uses
+            </p>
+            <h2 className="mx-auto mt-3 max-w-2xl font-[family-name:var(--font-playfair)] text-2xl font-bold leading-tight text-[#0f0f0f] dark:text-[#f0efec] md:text-4xl">
+              The public briefing shows what is happening. The company scan shows what matters to you.
+            </h2>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            <div className="rounded-2xl border border-black/[0.07] bg-white p-6 dark:border-white/[0.07] dark:bg-white/[0.03]">
+              <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.18em] text-zinc-400">
+                Public Albis
+              </p>
+              <h3 className="mt-3 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                The global picture for everyone.
+              </h3>
+              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                <li>Daily public briefing</li>
+                <li>Articles and regional perspectives</li>
+                <li>PGI/GAI indexes and information-awareness tools</li>
+              </ul>
+              <Link href="#today" className="mt-5 inline-block text-sm font-semibold text-[#c8922a] hover:text-[#b17f24]">
+                Explore the public briefing &rarr;
+              </Link>
+            </div>
+            <div className="rounded-2xl border border-[#c8922a]/25 bg-[#c8922a]/[0.04] p-6 dark:bg-[#c8922a]/[0.08]">
+              <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.18em] text-[#c8922a]">
+                Company Daily Scan
+              </p>
+              <h3 className="mt-3 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                The global picture, translated for your organisation.
+              </h3>
+              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                <li>10 source-backed company stories</li>
+                <li>Filtered to your sector, regions, risks, and watchlist</li>
+                <li>Private dashboard and email at your chosen local time</li>
+              </ul>
+              <Link href="/company-daily-scan" className="mt-5 inline-block text-sm font-semibold text-[#c8922a] hover:text-[#b17f24]">
+                See the company scan &rarr;
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <SectionDivider />
 
       {/* ═══════════════════════════════════════════════════════
           2. TODAY'S TOP STORIES
           ═══════════════════════════════════════════════════════ */}
-      <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
+      <section id="today" className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
         <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
           {/* Date header */}
           <div className="mb-8 text-center">
@@ -630,18 +691,26 @@ export default async function Home() {
       <section className="bg-gradient-to-b from-[#c8922a]/[0.06] to-[#c8922a]/[0.02] dark:from-[#c8922a]/[0.08] dark:to-transparent">
         <div className="mx-auto max-w-2xl px-4 py-16 text-center md:py-24">
           <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold text-[#0f0f0f] dark:text-[#f0efec] md:text-3xl">
-            Like what you see?
+            Want the global scan in your own context?
           </h2>
           <p className="mx-auto mt-4 max-w-md font-[family-name:var(--font-source-serif)] text-base leading-relaxed text-zinc-500 dark:text-zinc-400 md:text-lg">
-            Get this delivered every morning. 2&nbsp;minutes. 60&nbsp;countries. Free.
+            Keep reading Albis for free, or turn the same intelligence layer into a daily scan for your company.
           </p>
-          <div className="mx-auto mt-8 max-w-lg">
-            <EmailCapture
-              variant="hero"
-              showSocialProof={false}
-              showYesterdayLink={false}
-              source="homepage-mid"
-            />
+          <div className="mx-auto mt-8 grid max-w-xl gap-3 sm:grid-cols-2">
+            <div>
+              <EmailCapture
+                variant="hero"
+                showSocialProof={false}
+                showYesterdayLink={false}
+                source="homepage-mid"
+              />
+            </div>
+            <Link
+              href="/company-daily-scan"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-[#0f0f0f] px-5 text-sm font-semibold text-white transition-colors hover:bg-zinc-800 dark:bg-[#f0efec] dark:text-[#0f0f0f]"
+            >
+              Company Daily Scan
+            </Link>
           </div>
         </div>
       </section>
@@ -729,12 +798,21 @@ export default async function Home() {
           <p className="mt-4 font-[family-name:var(--font-source-serif)] text-base text-white/40">
             Every region. Every perspective. Every&nbsp;morning.
           </p>
-          <div className="mt-8">
+          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/35">
+            Public briefings for everyone. Company scans for teams who need the global picture translated into their own risks and decisions.
+          </p>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
             <EmailCapture
               showSocialProof={false}
               showYesterdayLink={false}
               source="homepage-footer"
             />
+            <Link
+              href="/company-daily-scan"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-white/15 px-5 text-sm font-semibold text-white/75 transition-colors hover:border-[#c8922a]/50 hover:text-[#c8922a]"
+            >
+              Company scan
+            </Link>
           </div>
           <nav className="mt-14 flex items-center justify-center gap-6 font-[family-name:var(--font-inter)] text-[11px] tracking-wider text-white/20">
             <Link

@@ -136,6 +136,22 @@ export default async function PGIPage() {
         dates={(dates || []).map((d: any) => ({ date: d.date, pgi: Number(d.daily_pgi) }))}
       />
       <PGIClient />
+      <div className="mx-auto max-w-3xl px-6 py-6">
+        <div className="rounded-2xl border border-[#c8922a]/25 bg-[#c8922a]/[0.04] p-5 dark:bg-[#c8922a]/[0.08]">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
+            Company Daily Scan
+          </p>
+          <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold">
+            PGI helps translate global framing into company context.
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+            The public index shows where regions see stories differently. Company scans use that signal to explain what those gaps may mean for your risks, regions, and decisions.
+          </p>
+          <Link href="/company-daily-scan" className="mt-4 inline-block text-sm font-semibold text-[#c8922a] hover:text-[#b17f24]">
+            See how companies use it &rarr;
+          </Link>
+        </div>
+      </div>
       {timelineData.length > 0 && (
         <div className="mx-auto max-w-3xl px-6 py-8">
           <PgiTimeline

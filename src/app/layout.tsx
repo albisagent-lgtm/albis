@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     template: "%s | Albis News",
   },
   description:
-    "Global news scanned from 60 countries, 7 regions, and 16 languages every day. See how the world sees the news.",
+    "Global news scanned from 60 countries, 7 regions, and 16 languages every day — with private company daily scans for organisations that need the global picture translated into their own risks and decisions.",
   keywords: [
     "global news",
     "world news",
@@ -62,6 +62,9 @@ export const metadata: Metadata = {
     "news analysis",
     "media literacy",
     "news intelligence",
+    "company daily briefing",
+    "external risk briefing",
+    "business news intelligence",
   ],
   authors: [{ name: "Albis" }],
   metadataBase: new URL(siteUrl),
@@ -75,7 +78,7 @@ export const metadata: Metadata = {
     siteName: "Albis",
     title: "Albis — Global News From Every Region",
     description:
-      "Global news scanned from 60 countries, 7 regions, and 16 languages every day.",
+      "Global news scanned from 60 countries, 7 regions, and 16 languages every day — plus private company daily scans.",
     images: [
       {
         url: "/og-image.png",
@@ -89,7 +92,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Albis — Global News From Every Region",
-    description: "Global news from 60 countries, 7 regions, and 16 languages. Every day.",
+    description: "Global news from 60 countries, 7 regions, and 16 languages. Every day — with private company daily scans.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -170,6 +173,8 @@ export default function RootLayout({
                 "Geopolitics",
                 "Media literacy",
                 "Perception gap",
+                "External risk monitoring",
+                "Company intelligence briefings",
               ],
               contactPoint: {
                 "@type": "ContactPoint",

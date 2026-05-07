@@ -530,12 +530,14 @@ export default function CompanyOnboardingClient() {
           >
             Albis
           </Link>
-          <h1 className="mt-6 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec] md:text-3xl">
-            Set up your company profile
+          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
+            Company Daily Scan
+          </p>
+          <h1 className="mt-3 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec] md:text-3xl">
+            Translate the global scan into your company context
           </h1>
-          <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-            Pick your sector and we&apos;ll pre-fill sensible defaults. Edit
-            anything, or use the fast path.
+          <p className="mx-auto mt-2 max-w-lg text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+            Tell Albis your sector, regions, risks, and watchlist. Your private scan is built from the same global intelligence layer that powers the public briefing.
           </p>
         </div>
 
@@ -546,8 +548,8 @@ export default function CompanyOnboardingClient() {
               <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
                 Preview mode.
               </span>{" "}
-              Your profile will be saved, but daily scans don&apos;t run until
-              you subscribe.
+              Your profile will be saved, but private company scans don&apos;t run until
+              you start a trial or subscribe.
             </p>
             <Link
               href="/pricing"

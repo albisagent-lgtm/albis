@@ -145,11 +145,10 @@ export default async function DashboardPage() {
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#c8922a]/30 bg-[#c8922a]/5 p-5 dark:bg-[#c8922a]/10">
           <div>
             <p className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-              Subscribe to activate your daily scan
+              Start your trial to activate your company scan
             </p>
             <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-              Your profile is saved in preview mode. Daily scans start running
-              the day after you subscribe.
+              Your profile is saved in preview mode. Private scans start running once you begin a trial or subscribe.
             </p>
           </div>
           <Link

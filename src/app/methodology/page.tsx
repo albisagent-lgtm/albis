@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Methodology — How Albis Measures Perception Gaps | Albis",
@@ -45,6 +46,18 @@ export default function MethodologyPage() {
           </p>
         </div>
 
+        <div className="mt-space-8 rounded-2xl border border-[#c8922a]/20 bg-[#c8922a]/[0.04] p-5 dark:bg-[#c8922a]/[0.08]">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c8922a]">
+            Same engine, private translation
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            These public methods also power the Company Daily Scan, where Albis filters the global picture through a company&apos;s sector, regions, risks, and watchlist.
+          </p>
+          <Link href="/company-daily-scan" className="mt-3 inline-block text-sm font-semibold text-[#c8922a] hover:underline">
+            See how this becomes a company scan &rarr;
+          </Link>
+        </div>
+
         {/* The Problem We Are Solving */}
         <div className="mt-space-16 border-t border-black/5 pt-space-16 dark:border-white/5">
           <h2 className="text-xs font-medium tracking-[0.15em] uppercase text-zinc-400 mb-space-6">
@@ -71,9 +84,9 @@ export default function MethodologyPage() {
             The Perception Gap Index (PGI)
           </h2>
           <p className="mb-space-4 text-sm text-zinc-500 dark:text-zinc-400">
-            <a href="/indexes/pgi" className="text-[#c8922a] hover:underline dark:text-[#c8922a]">
+            <Link href="/indexes/pgi" className="text-[#c8922a] hover:underline dark:text-[#c8922a]">
               What is the PGI? Full explainer →
-            </a>
+            </Link>
           </p>
           <div className="space-y-space-4 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
             <p>

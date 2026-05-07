@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { EmailCapture } from "../components/email-capture";
 
 export const metadata: Metadata = {
@@ -75,6 +76,24 @@ export default function AboutPage() {
               The index is published alongside each story to give readers immediate context on how contested the narrative is worldwide.
             </p>
           </div>
+        </div>
+
+        {/* Public + company layer */}
+        <div className="mt-12 border-t border-black/5 pt-12 md:mt-16 md:pt-16 dark:border-white/5">
+          <h2 className="font-[family-name:var(--font-inter)] text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
+            Public intelligence, company context
+          </h2>
+          <div className="space-y-5 font-[family-name:var(--font-source-serif)] text-lg leading-[1.8] text-zinc-600 dark:text-zinc-400">
+            <p>
+              The public Albis briefing remains open: a daily view of what the world is seeing, missing, and framing differently.
+            </p>
+            <p>
+              The Company Daily Scan is built from the same intelligence layer, then filtered privately to an organisation&apos;s sector, regions, risks, and watchlist.
+            </p>
+          </div>
+          <Link href="/company-daily-scan" className="mt-6 inline-block text-sm font-semibold text-[#c8922a] hover:underline">
+            See the Company Daily Scan &rarr;
+          </Link>
         </div>
 
         {/* Languages */}

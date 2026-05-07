@@ -246,6 +246,21 @@ export async function ArticlePage({ post }: { post: BlogPost }) {
           dangerouslySetInnerHTML={{ __html: html }}
         />
 
+        <div className="my-10 rounded-2xl border border-[#c8922a]/25 bg-[#c8922a]/[0.04] p-5 dark:bg-[#c8922a]/[0.08]">
+          <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8922a]">
+            Company Daily Scan
+          </p>
+          <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+            Track stories like this for your company.
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Albis can turn the same global scan into a private daily briefing for your sector, regions, risks, and watchlist.
+          </p>
+          <Link href="/company-daily-scan" className="mt-4 inline-flex text-sm font-semibold text-[#c8922a] hover:text-[#b17f24]">
+            See how the company scan works &rarr;
+          </Link>
+        </div>
+
         {/* Source Transparency */}
         <SourceTransparency sources={post.sources} confidence={post.confidence} />
 

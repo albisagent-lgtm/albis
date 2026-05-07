@@ -203,6 +203,21 @@ export default async function IndexesPage() {
         </p>
       </section>
 
+      <section className="mb-16 rounded-2xl border border-[#c8922a]/25 bg-[#c8922a]/[0.04] p-6 text-center dark:bg-[#c8922a]/[0.08]">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
+          Public indexes, private relevance
+        </p>
+        <h2 className="mx-auto mt-3 max-w-2xl font-[family-name:var(--font-playfair)] text-2xl font-semibold md:text-3xl">
+          PGI and GAI power both the public briefing and the Company Daily Scan.
+        </h2>
+        <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+          Public readers see the global information patterns. Companies can receive the same signal translated into their sector, regions, risks, and watchlist.
+        </p>
+        <Link href="/company-daily-scan" className="mt-4 inline-block text-sm font-semibold text-[#c8922a] hover:text-[#b17f24]">
+          See the company layer &rarr;
+        </Link>
+      </section>
+
       {/* ━━ Perception Gap Index — Dashboard ━━ */}
       <section className="mb-16">
         <p className="text-center text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">

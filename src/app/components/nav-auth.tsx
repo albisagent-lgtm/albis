@@ -113,10 +113,10 @@ export function NavAuth() {
         Sign up
       </Link>
       <Link
-        href="/signup"
+        href="/company-daily-scan"
         className="rounded-full bg-[#c8922a] px-4 py-1.5 text-sm font-medium text-[#0f0f0f] shadow-[0_2px_8px_rgb(200,146,42,0.3)] transition-all hover:bg-[#b17f24] hover:shadow-[0_3px_10px_rgb(200,146,42,0.4)] dark:shadow-[0_2px_8px_rgb(200,146,42,0.4)]"
       >
-        Subscribe
+        Company scan
       </Link>
     </div>
   );
@@ -131,7 +131,7 @@ const DESKTOP_NAV = [
   { href: "/life-systems", label: "Life Systems" },
   { href: "/perspectives", label: "Perspectives" },
   { href: "/indexes", label: "Indexes" },
-  { href: "/pricing", label: "For Business" },
+  { href: "/company-daily-scan", label: "For Companies" },
 ];
 
 export function NavLinks() {

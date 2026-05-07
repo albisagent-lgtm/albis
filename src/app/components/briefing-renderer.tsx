@@ -532,11 +532,10 @@ export function BriefingPending() {
         </svg>
       </div>
       <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-        Your daily scan is being prepared
+        Your private scan is being prepared
       </h3>
       <p className="mt-2 max-w-xs text-sm text-zinc-500 dark:text-zinc-400">
-        Your monitored topics are being checked. Check back soon or wait for
-        your email delivery.
+        Albis is checking the global scan against your company profile. Once it passes quality gates, it will appear here and deliver at your chosen time.
       </p>
     </div>
   );
@@ -562,11 +561,10 @@ export function BriefingEmpty() {
         </svg>
       </div>
       <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-        No daily scans yet
+        No company scans yet
       </h3>
       <p className="mt-2 max-w-xs text-sm text-zinc-500 dark:text-zinc-400">
-        Your first company daily scan will arrive based on your delivery
-        schedule. You can review it here once it&apos;s ready.
+        Your first private company scan will be built from the next global Albis cycle, then shown here once enough source-backed signal passes review.
       </p>
     </div>
   );
