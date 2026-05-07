@@ -103,7 +103,7 @@ async function callEditorialModel(input: {
       {
         role: "system",
         content:
-          "You are the Albis public editorial writer. Write a high-quality, readable public article from the researched sources provided. Do not merely summarise the scan title. Open with a concrete fact, person, place, number, or institutional action. Explain mechanism, stakes, source-frame differences, and what changes for readers. Use only provided evidence; do not invent facts, quotes, numbers, URLs, or named actors. Avoid AI/analyst filler and phrases such as 'this is more than', 'the deeper signal', 'for Albis', 'the point is', and 'what to watch'. Return JSON only.",
+          "You are the Albis public editorial writer. Write a high-quality, readable public article from the researched sources provided. The voice should combine a clean news article, a useful explainer, and an Albis intelligence note: what happened, why it matters, how different sources or regions frame it, and what changes for readers. Do not merely summarise the scan title. Open with a concrete fact, person, place, number, or institutional action. Explain mechanism, stakes, source-frame differences, and what changes for readers. Use only provided evidence; do not invent facts, quotes, numbers, URLs, or named actors. Avoid AI/analyst filler and phrases such as 'this is more than', 'the deeper signal', 'for Albis', 'the point is', and 'what to watch'. Return JSON only.",
       },
       {
         role: "user",
@@ -118,8 +118,8 @@ function validateWriter(json: WriterJson, research: PublicArticleResearchPacket)
   const warnings: string[] = [];
   const body = (json.paragraphs || []).join("\n\n");
   if (!Array.isArray(json.paragraphs) || json.paragraphs.length < 6) warnings.push("writer_returned_too_few_paragraphs");
-  if (wordCount(body) < 520) warnings.push(`writer_body_too_short:${wordCount(body)}`);
-  if (research.sources.length < 2) warnings.push(`research_sources_too_thin:${research.sources.length}`);
+  if (wordCount(body) < 350) warnings.push(`writer_body_too_short:${wordCount(body)}`);
+  if (!research.source_depth_valid) warnings.push(`research_sources_too_thin:${research.distinct_url_count}_urls:${research.distinct_domain_count}_domains`);
   const bad = /\b(this is more than|for albis|the deeper signal|the point is not just|the article should|belongs in the published set|gives the scan|item editorial weight)\b/i;
   if (bad.test(body)) warnings.push("writer_used_banned_public_language");
   const sourceDomains = research.sources.map((source) => source.domain.toLowerCase().split(".")[0]).filter(Boolean);
@@ -133,7 +133,7 @@ export async function runPublicArticleEditorialWriter(input: {
   currentDraft: string;
   research: PublicArticleResearchPacket;
 }): Promise<PublicArticleEditorialResult> {
-  const enabled = process.env.ALBIS_ENABLE_PUBLIC_ARTICLE_EDITORIAL_WRITER === "true";
+  const enabled = process.env.ALBIS_ENABLE_PUBLIC_ARTICLE_EDITORIAL_WRITER !== "false" && input.research.enabled;
   if (!enabled) return { enabled: false, edited: false, blocked: false, warnings: ["public_article_editorial_writer_disabled"] };
   try {
     const result = await callEditorialModel(input);

@@ -1,4 +1,18 @@
 #!/bin/bash
 cd /Users/treelight/.openclaw/workspace/albis-app
 export $(grep -v '^#' .env.local | xargs)
+
+# Public output now uses a lightweight version of the company-side standard:
+# scan → public-safe research → editorial rewrite → QA gate → publish.
+# Keep this script-owned so scheduled articles/briefings do not fall back to
+# title-only scan summaries.
+export ALBIS_ENABLE_PUBLIC_ARTICLE_RESEARCH=${ALBIS_ENABLE_PUBLIC_ARTICLE_RESEARCH:-true}
+export ALBIS_REQUIRE_PUBLIC_RESEARCHED_ARTICLES=${ALBIS_REQUIRE_PUBLIC_RESEARCHED_ARTICLES:-false}
+export ALBIS_ENABLE_PUBLIC_ARTICLE_EDITORIAL_WRITER=${ALBIS_ENABLE_PUBLIC_ARTICLE_EDITORIAL_WRITER:-true}
+export ALBIS_REQUIRE_PUBLIC_ARTICLE_EDITORIAL_WRITER=${ALBIS_REQUIRE_PUBLIC_ARTICLE_EDITORIAL_WRITER:-false}
+export ALBIS_ENABLE_PUBLIC_BRIEFING_EDITORIAL_WRITER=${ALBIS_ENABLE_PUBLIC_BRIEFING_EDITORIAL_WRITER:-true}
+export ALBIS_REQUIRE_PUBLIC_BRIEFING_RESEARCH=${ALBIS_REQUIRE_PUBLIC_BRIEFING_RESEARCH:-false}
+export ALBIS_REQUIRE_PUBLIC_BRIEFING_EDITORIAL_WRITER=${ALBIS_REQUIRE_PUBLIC_BRIEFING_EDITORIAL_WRITER:-false}
+export ALBIS_EDITORIAL_MODEL_PROVIDER=${ALBIS_EDITORIAL_MODEL_PROVIDER:-openclaw-system}
+
 npx tsx scripts/run-post-scan-pipeline.ts $(TZ=Pacific/Auckland date +%F) "$1"

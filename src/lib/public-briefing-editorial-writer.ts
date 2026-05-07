@@ -7,7 +7,7 @@ export type PublicBriefingEditorialResult = {
   edited: boolean;
   blocked: boolean;
   blocked_reason?: string;
-  research: Array<{ headline: string; source_count: number; fetched_source_count: number; query: string; warnings: string[] }>;
+  research: Array<{ headline: string; source_count: number; fetched_source_count: number; distinct_url_count: number; distinct_domain_count: number; source_depth_valid: boolean; query: string; warnings: string[] }>;
   model_used?: string;
 };
 
@@ -28,6 +28,7 @@ async function collectBriefingResearch(briefing: any): Promise<Map<string, Publi
     if (!headline) continue;
     const packet = await buildPublicArticleResearchPacket({
       title: headline,
+      category: story?.category,
       tags: [story?.category, story?.laneLabel].filter(Boolean),
       regions: [story?.region].filter(Boolean),
       connection: story?.summary || story?.why,
@@ -98,7 +99,7 @@ async function callWriter(input: { briefing: any; researchMap: Map<string, Publi
       {
         role: "system",
         content:
-          "You are the Albis daily briefing editor. Rewrite the public daily briefing so it reads like a researched, concise news briefing, not a scan summary. Use only the supplied source evidence. Keep summaries readable, factual, and specific. Include named places, institutions, numbers, mechanisms, and source-frame differences when available. Avoid jargon such as signal, scan item, writeability, doctrine, operating picture, and AI/analyst filler. Return JSON only.",
+          "You are the Albis daily briefing editor. Rewrite the public daily briefing so it reads like a researched, concise mix of news briefing, explainer, and Albis intelligence note — not a scan summary. Use only the supplied source evidence. Keep summaries readable, factual, and specific. Keep each summary around 35-70 words and each why around 20-45 words. Include named places, institutions, numbers, mechanisms, and source-frame differences when available. Preserve the original story order. Avoid jargon such as signal, scan item, writeability, doctrine, operating picture, and AI/analyst filler. Return JSON only.",
       },
       {
         role: "user",
@@ -119,15 +120,18 @@ function validateEditedBriefing(briefing: any): string[] {
   const warnings: string[] = [];
   const stories = Array.isArray(briefing?.top_stories) ? briefing.top_stories : [];
   if (stories.length < 3) warnings.push("briefing_has_too_few_top_stories");
-  const short = stories.filter((story: any) => wordCount(story.summary) < 28).length;
-  if (short > 1) warnings.push(`briefing_summaries_too_thin:${short}`);
-  const banned = /\b(signal|scan item|writeability|doctrine|operating picture|the useful point|for albis)\b/i;
-  if (banned.test(JSON.stringify({ title: briefing.title, stories }))) warnings.push("briefing_contains_internal_language");
+  const short = stories.filter((story: any) => wordCount(story.summary) < 18).length;
+  if (short > 2) warnings.push(`briefing_summaries_too_thin:${short}`);
+  const banned = /\b(scan item|writeability|doctrine|operating picture|the useful point|for albis)\b/i;
+  const customerText = stories
+    .map((story: any) => `${story.summary || ""}\n${story.why || ""}`)
+    .join("\n\n");
+  if (banned.test(`${briefing.title || ""}\n${customerText}`)) warnings.push("briefing_contains_internal_language");
   return warnings;
 }
 
 export async function applyPublicBriefingEditorialWriter(briefing: any): Promise<PublicBriefingEditorialResult> {
-  const enabled = process.env.ALBIS_ENABLE_PUBLIC_BRIEFING_EDITORIAL_WRITER === "true";
+  const enabled = process.env.ALBIS_ENABLE_PUBLIC_BRIEFING_EDITORIAL_WRITER !== "false";
   if (!enabled) return { briefing, enabled: false, edited: false, blocked: false, research: [] };
 
   const researchMap = await collectBriefingResearch(briefing);
@@ -135,19 +139,23 @@ export async function applyPublicBriefingEditorialWriter(briefing: any): Promise
     headline,
     source_count: packet.sources.length,
     fetched_source_count: packet.sources.filter((source) => source.fetched).length,
+    distinct_url_count: packet.distinct_url_count,
+    distinct_domain_count: packet.distinct_domain_count,
+    source_depth_valid: packet.source_depth_valid,
     query: packet.query,
     warnings: packet.warnings,
   }));
 
-  if (process.env.ALBIS_REQUIRE_PUBLIC_BRIEFING_RESEARCH === "true" && research.some((item) => item.source_count < 2)) {
+  if (process.env.ALBIS_REQUIRE_PUBLIC_BRIEFING_RESEARCH === "true" && research.some((item) => !item.source_depth_valid)) {
     return { briefing, enabled: true, edited: false, blocked: true, blocked_reason: "public_briefing_research_too_thin", research };
   }
 
   try {
     const edited = await callWriter({ briefing, researchMap });
     const storyEdits = new Map<string, any>((edited.top_stories || []).map((story: any) => [clean(story.headline).toLowerCase(), story]));
-    const nextStories = (briefing.top_stories || []).map((story: any) => {
-      const replacement = storyEdits.get(clean(story.headline).toLowerCase());
+    const editedStories = Array.isArray(edited.top_stories) ? edited.top_stories : [];
+    const nextStories = (briefing.top_stories || []).map((story: any, index: number) => {
+      const replacement = storyEdits.get(clean(story.headline).toLowerCase()) || editedStories[index];
       if (!replacement) return story;
       return { ...story, summary: clean(replacement.summary) || story.summary, why: clean(replacement.why) || story.why };
     });

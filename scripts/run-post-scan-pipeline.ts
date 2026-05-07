@@ -1393,13 +1393,14 @@ async function buildArticle(selection: PublicStorySelection, date: string, usedI
   let body = built.body;
   const research = await buildPublicArticleResearchPacket({
     title: packet.title,
+    category: packet.category,
     connection: packet.connection,
     tags: packet.tags,
     regions: packet.regions,
   });
-  const requireResearch = process.env.ALBIS_REQUIRE_PUBLIC_RESEARCHED_ARTICLES === 'true';
-  if (requireResearch && research.sources.length < 2) {
-    throw new Error(`Public article research too thin (${research.sources.length} source(s)); refusing title/snippet-only article`);
+  const requireResearch = process.env.ALBIS_REQUIRE_PUBLIC_RESEARCHED_ARTICLES === 'true' && research.priority_section;
+  if (requireResearch && !research.source_depth_valid) {
+    throw new Error(`Public article research too thin (${research.distinct_url_count} distinct URL(s), ${research.distinct_domain_count} distinct domain(s)); refusing title/snippet-only article`);
   }
   const editorial = await runPublicArticleEditorialWriter({
     packet: { ...packet, storyPlan: built.plan },
@@ -1458,6 +1459,10 @@ async function buildArticle(selection: PublicStorySelection, date: string, usedI
       query: research.query,
       source_count: research.sources.length,
       fetched_source_count: research.sources.filter((source) => source.fetched).length,
+      distinct_url_count: research.distinct_url_count,
+      distinct_domain_count: research.distinct_domain_count,
+      source_depth_valid: research.source_depth_valid,
+      priority_section: research.priority_section,
       sources: research.sources.map((source) => ({ title: source.title, url: source.url, domain: source.domain, fetched: source.fetched })),
       warnings: research.warnings,
     },

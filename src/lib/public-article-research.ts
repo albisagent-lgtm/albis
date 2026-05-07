@@ -20,8 +20,39 @@ export type PublicArticleResearchPacket = {
   enabled: boolean;
   query: string;
   sources: PublicArticleResearchSource[];
+  distinct_url_count: number;
+  distinct_domain_count: number;
+  source_depth_valid: boolean;
+  priority_section: boolean;
   warnings: string[];
 };
+
+const PRIORITY_PUBLIC_CATEGORIES = new Set([
+  // World
+  "current-events",
+  "conflict",
+  "diplomacy",
+  "governance",
+  "sanctions",
+  "migration-demographics",
+  // Money
+  "economic-flows",
+  "markets",
+  "logistics-shipping",
+  // Tech
+  "tech-ai",
+  "science-space",
+  // Climate
+  "climate-energy",
+  "natural-world",
+  // Life Systems
+  "life-systems",
+  "health",
+  "energy",
+  "food",
+  "food-agriculture",
+  "water",
+]);
 
 function cleanText(value: string): string {
   return String(value || "")
@@ -42,6 +73,29 @@ function domainFromUrl(url: string): string {
   } catch {
     return "unknown";
   }
+}
+
+function normaliseCategory(value: string | undefined): string {
+  const key = String(value || "current-events").toLowerCase().replace(/_/g, "-").trim();
+  if (key === "economic") return "economic-flows";
+  if (key === "climate") return "climate-energy";
+  if (key === "social") return "life-systems";
+  return key || "current-events";
+}
+
+function isPriorityPublicCategory(category: string | undefined): boolean {
+  if (process.env.ALBIS_PUBLIC_RESEARCH_ALL_SECTIONS === "true") return true;
+  return PRIORITY_PUBLIC_CATEGORIES.has(normaliseCategory(category));
+}
+
+function sourceDepth(sources: PublicArticleResearchSource[]) {
+  const urls = new Set(sources.map((source) => source.url).filter(Boolean));
+  const domains = new Set(sources.map((source) => source.domain.replace(/^www\./i, "").toLowerCase()).filter(Boolean));
+  return {
+    distinct_url_count: urls.size,
+    distinct_domain_count: domains.size,
+    source_depth_valid: urls.size >= 2 && domains.size >= 2,
+  };
 }
 
 function sourceAllowed(url: string): boolean {
@@ -103,11 +157,13 @@ async function braveSearch(query: string, count: number): Promise<Array<{ title:
 
 export async function buildPublicArticleResearchPacket(input: {
   title: string;
+  category?: string;
   connection?: string;
   tags?: string[];
   regions?: string[];
 }): Promise<PublicArticleResearchPacket> {
-  const enabled = process.env.ALBIS_ENABLE_PUBLIC_ARTICLE_RESEARCH === "true";
+  const prioritySection = isPriorityPublicCategory(input.category);
+  const enabled = process.env.ALBIS_ENABLE_PUBLIC_ARTICLE_RESEARCH !== "false" && prioritySection;
   const query = [
     input.title,
     (input.regions || []).slice(0, 2).join(" "),
@@ -118,7 +174,16 @@ export async function buildPublicArticleResearchPacket(input: {
     .replace(/\s+/g, " ")
     .trim();
 
-  if (!enabled) return { enabled: false, query, sources: [], warnings: ["public_article_research_disabled"] };
+  if (!enabled) {
+    return {
+      enabled: false,
+      query,
+      sources: [],
+      ...sourceDepth([]),
+      priority_section: prioritySection,
+      warnings: [prioritySection ? "public_article_research_disabled" : "public_article_research_not_enabled_for_section"],
+    };
+  }
 
   const warnings: string[] = [];
   const maxSearch = Number(process.env.ALBIS_PUBLIC_ARTICLE_RESEARCH_SEARCH_RESULTS || 6);
@@ -128,7 +193,7 @@ export async function buildPublicArticleResearchPacket(input: {
     results = await braveSearch(query, maxSearch);
   } catch (error) {
     warnings.push(error instanceof Error ? error.message : String(error));
-    return { enabled: true, query, sources: [], warnings };
+    return { enabled: true, query, sources: [], ...sourceDepth([]), priority_section: prioritySection, warnings };
   }
 
   const sources: PublicArticleResearchSource[] = [];
@@ -167,5 +232,8 @@ export async function buildPublicArticleResearchPacket(input: {
     }
   }
 
-  return { enabled: true, query, sources, warnings };
+  const depth = sourceDepth(sources);
+  if (!depth.source_depth_valid) warnings.push(`public_research_source_depth_too_thin:${depth.distinct_url_count}_urls:${depth.distinct_domain_count}_domains`);
+  if (sources.length < 3) warnings.push(`public_research_below_healthy_target:${sources.length}_sources`);
+  return { enabled: true, query, sources, ...depth, priority_section: prioritySection, warnings };
 }
