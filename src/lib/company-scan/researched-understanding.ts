@@ -286,19 +286,29 @@ function polishV1Title(value: string): string {
 
 function storyClusterKeyForText(value: string): string {
   const text = cleanText(value).toLowerCase();
+  if (/media gerrymandering|vox media|murdoch|media bias|local media|national media|news app|news apps/.test(text)) return "media-ownership-trust-platforms";
+  if (/trump|obama|michelle obama|political|election|public frenzy|racist ai video|ape video|truth social|reputation/.test(text) && /ai image|ai video|ai-generated|deepfake|synthetic|fake video|fake image|ape video/.test(text)) return "political-ai-image-record";
   if (/meloni|giorgia/.test(text) && /deepfake|fake image|synthetic|ai-generated|ai image/.test(text)) return "meloni-ai-deepfake";
   if (/defence secretary|rajesh kumar|pakistani propaganda|cyber systems/.test(text) && /deepfake|fake video|jammed/.test(text)) return "india-defence-secretary-deepfake";
-  if (/deepfake|synthetic|ai-generated/.test(text) && /law|police|victim|identity fraud|protection|enforcement/.test(text)) return "deepfake-identity-protection";
-  if (/met gala/.test(text) && /deepfake|ai photo|ai video|synthetic/.test(text)) return "met-gala-ai-deepfake";
+  if (/deepfake|synthetic|ai-generated/.test(text) && /law|police|victim|identity fraud|protection|enforcement|doctor|likeness|scam|detection|ethics committee/.test(text)) return "deepfake-identity-protection";
+  if (/ai model|foundation model|white house|vetting|public release|deepfake detection|reality defender/.test(text) && /ai|safety|release|governance|detection|ethics/.test(text)) return "ai-governance-detection";
+  if (/fake handle|old image|fake image|satellite|operation sindoor|india-pakistan|pakistan/.test(text) && /fake|false|propaganda|claim|image|handle|conflict/.test(text)) return "conflict-record-verification";
+  if (/met gala|red carpet/.test(text) && /deepfake|ai photo|ai video|synthetic|fooled millions|ai-generated/.test(text)) return "met-gala-ai-deepfake";
+  if (/school district|radnor|student|classroom|campus/.test(text) && /deepfake|synthetic|ai-generated|incident|policy|safety|prepare/.test(text)) return "school-deepfake-response";
   if (/hormuz|strait/.test(text) && /ais|spoof|jamming|navigation|tracking|location anomal/.test(text)) return "hormuz-navigation-data-risk";
   if (/hormuz|strait|red sea|suez/.test(text) && /corridor|alternative route|route planning|saudi|uae|turkey|pipeline|rail/.test(text)) return "hormuz-alternative-corridors";
+  if (/cma cgm|vessel attacked|ship attacked|tanker attacked/.test(text) && /hormuz|shipping|vessel|route|gulf/.test(text)) return "hormuz-route-security-incident";
+  if (/shipping firms|whipsawed|changing us policy|policy whipsaw|trade policy/.test(text) && /shipping|freight|trade|tariff|route|policy/.test(text)) return "shipping-policy-volatility";
   if (/hormuz|strait|gulf of oman|persian gulf|blockade|maersk|shipping traffic/.test(text)) return "hormuz-route-status";
   if (/semiconductor|microchip|\bchip\b|tsmc|taiwan|ai demand|manufacturing capacity/.test(text) && /supply|trade|manufacturing|capacity|export|demand|china|arizona|southeast asia/.test(text)) return "semiconductor-supply-chain-pressure";
+  if (/tariff|trade war|customs|import duty|russian oil|oil import|fuel|petrol|gasoline|arab light|energy price|crude|war risk/.test(text) && /price|cost|shortage|export|import|shipping|freight|hormuz|middle east|supply|risk|tracker|numbers/.test(text)) return "trade-energy-cost-pressure";
+  if (/oil|fuel|petrol|gasoline|arab light|energy price|crude|war risk/.test(text) && /price|shortage|export|shipping|freight|hormuz|middle east|supply|risk/.test(text)) return "energy-fuel-shipping-pressure";
   if (/fertili[sz]er|fertiliser|ammonia|urea|grain/.test(text) && /shipping|freight|supply|subsidy|india|nepal|disruption|cost|shortage/.test(text)) return "fertilizer-supply-chain-pressure";
   if (/shipping|maritime|vessel|carrier/.test(text) && /net zero|decarbon|ammonia|fuel transition|emissions/.test(text)) return "shipping-decarbonisation";
   if (/port|container|freight|rail|bottleneck|logistics/.test(text) && /disruption|shortage|delay|reroute|route/.test(text)) return "freight-bottleneck-pressure";
   if (/georgia/.test(text) && /media freedom coalition|press freedom|journalist|media-freedom/.test(text)) return "georgia-media-freedom";
   if (/rsf|reporters without borders|press freedom index/.test(text)) return "rsf-press-freedom-index";
+  if (/press freedom|media freedom|journalist|reporter|newsroom|media sustainability|wars without witnesses|cpj|amnesty|misa/.test(text)) return "press-freedom-conditions";
   if (/\brt\b|russia today/.test(text) && /censor|disinformation|misinformation|unesco/.test(text)) return "rt-censorship-disinformation";
   if (/visa|travel restriction|china|iran|u\.n\.|un /.test(text) && /journalist|access|restriction|sanction/.test(text)) return "diplomatic-access-pressure";
 
@@ -607,6 +617,116 @@ export async function buildResearchedUnderstandingLayer({
     clusters.push(cluster);
     notes.push(note);
     findings.push(finding);
+  }
+
+  const sourceById = new Map(sources.map((source) => [source.id, source]));
+  const findingHasDistinctDepth = (finding: AlbisFinding) => {
+    const findingSources = (finding.evidence_source_ids || []).map((id) => sourceById.get(id)).filter((source): source is ResearchSource => Boolean(source));
+    const urls = new Set(findingSources.map((source) => source.url).filter(Boolean));
+    const domains = new Set(findingSources.map((source) => source.source_domain.replace(/^www\./i, "").toLowerCase()).filter(Boolean));
+    return urls.size >= 2 && domains.size >= 2;
+  };
+  const existingStoryKeys = new Set(
+    findings
+      .filter((finding) => ["email_main", "email_secondary"].includes(finding.placement))
+      .filter(findingHasDistinctDepth)
+      .flatMap((finding) => [storyClusterKeyForText(finding.title), storyClusterKeyForText(`${finding.title} ${finding.body}`)]),
+  );
+  const emailReadyCount = () => findings.filter((finding) => ["email_main", "email_secondary"].includes(finding.placement) && findingHasDistinctDepth(finding)).length;
+  if (emailReadyCount() < 7) {
+    const splitCandidates = new Map<string, ResearchSource[]>();
+    for (const source of sources) {
+      const key = storyClusterKeyForText(`${source.title} ${source.extracted_excerpt || ""}`);
+      if (!key || existingStoryKeys.has(key)) continue;
+      const arr = splitCandidates.get(key) || [];
+      arr.push(source);
+      splitCandidates.set(key, arr);
+    }
+    const orderedSplits = [...splitCandidates.entries()]
+      .map(([key, group]) => {
+        const urls = new Set(group.map((source) => source.url).filter(Boolean));
+        const domains = new Set(group.map((source) => source.source_domain.replace(/^www\./i, "").toLowerCase()).filter(Boolean));
+        return { key, group, urls: urls.size, domains: domains.size };
+      })
+      .filter((item) => item.urls >= 2 && item.domains >= 2)
+      .sort((a, b) => b.domains - a.domains || b.urls - a.urls);
+
+    for (const split of orderedSplits) {
+      if (emailReadyCount() >= 7) break;
+      const baseTitle = polishV1Title(split.group[0]?.title || split.key.replace(/-/g, " "));
+      if (findings.some((finding) => storyClusterKeyForText(finding.title) === split.key || storyClusterKeyForText(`${finding.title} ${finding.body}`) === split.key)) continue;
+      const clusterId = `research_${scanDate}_${profile.id}_${slugify(split.key)}_split`;
+      const clonedSources = split.group.slice(0, 8).map((source, index): ResearchSource => ({
+        ...source,
+        id: `${clusterId}_src_${slugify(source.source_domain || source.id)}_${index + 1}`,
+        cluster_id: clusterId,
+        trail_role: index < 5 ? "evidence" : "research",
+        relevance_score: Math.max(0, 88 - index),
+      }));
+      sources.push(...clonedSources);
+      for (const source of clonedSources) sourceById.set(source.id, source);
+      const note: ResearchNote = {
+        id: `${clusterId}_note`,
+        cluster_id: clusterId,
+        summary: trimWords(baseTitle, 80),
+        what_happened: trimWords(clonedSources[0]?.extracted_excerpt || clonedSources[0]?.title || baseTitle, 42),
+        what_changed_today: trimWords(clonedSources[1]?.extracted_excerpt || clonedSources[1]?.title || baseTitle, 36),
+        key_actors: [],
+        key_facts: clonedSources.map((source) => trimWords(source.extracted_excerpt || source.title, 28)).filter(Boolean).slice(0, 5),
+        key_numbers: extractNumbers(clonedSources.map((source) => `${source.title} ${source.extracted_excerpt || ""}`).join(" ")),
+        named_places: [],
+        causes_or_drivers: [],
+        consequences: [`For ${profile.company_name}, this is a separate source-backed case inside the wider scan rather than a single-source item.`],
+        source_observations: clonedSources.slice(0, 6).map((source) => ({
+          source_id: source.id,
+          what_it_reports: trimWords(source.extracted_excerpt || source.title, 34),
+          what_it_emphasises: source.source_type || "reported development",
+          useful_detail: trimWords(source.title, 24),
+        })),
+        differences_in_reporting: [],
+        what_is_unclear: ["This split cluster was promoted from corroborating source evidence and should be treated as lower confidence than a full-text hand-built dossier."],
+        possible_perception_gap: {
+          strength: "weak",
+          gap: `${clonedSources.slice(0, 3).map((source) => source.source_domain).join(", ")} cover related parts of the same case from different source positions.`,
+          why_it_matters: `For ${profile.company_name}, the useful point is that multiple sources point to the same practical risk without relying on one article.`,
+          evidence_source_ids: clonedSources.map((source) => source.id).slice(0, 6),
+        },
+        company_relevance: `Relevant to ${profile.company_name}'s monitored topics because it adds a distinct corroborated case to the daily scan.`,
+        albis_learning: "Split cluster promoted to keep Company Daily Scan V1 at seven source-backed stories without padding single-source items.",
+      };
+      const cluster: ResearchCluster = {
+        id: clusterId,
+        date: scanDate,
+        scope: "company",
+        company_profile_id: profile.id,
+        scan_area_ids: [defaultSectionId],
+        title: baseTitle,
+        status: "ready",
+        importance: "medium",
+        confidence: confidenceFor(clonedSources.length, clonedSources.every((source) => source.read_status === "snippet_only")),
+        created_at: generatedAt,
+        updated_at: generatedAt,
+      };
+      clusters.push(cluster);
+      notes.push(note);
+      findings.push({
+        id: `${clusterId}_finding`,
+        cluster_id: clusterId,
+        date: scanDate,
+        scope: "company",
+        company_profile_id: profile.id,
+        title: baseTitle,
+        body: buildFindingBody(note, clonedSources),
+        why_it_matters: note.consequences[0],
+        uncertainty: note.what_is_unclear[0],
+        confidence: cluster.confidence,
+        email_source_ids: clonedSources.slice(0, 5).map((source) => source.id),
+        evidence_source_ids: clonedSources.map((source) => source.id).slice(0, 10),
+        dashboard_source_ids: clonedSources.map((source) => source.id),
+        placement: emailReadyCount() < 7 ? "email_secondary" : "dashboard",
+      });
+      existingStoryKeys.add(split.key);
+    }
   }
 
   const blockers: string[] = [];

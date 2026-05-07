@@ -158,7 +158,7 @@ function messagesToOpenClawPrompt(messages: EditorialMessage[], responseSchema?:
     .map((message) => `${message.role.toUpperCase()}:\n${message.content}`)
     .join("\n\n---\n\n");
   const schemaHint = responseSchema
-    ? `\n\nReturn valid JSON only. The JSON must satisfy this schema shape:\n${JSON.stringify(responseSchema).slice(0, 12000)}`
+    ? `\n\nReturn valid JSON only. Required shape: {overview:string, source_note:string, observations:string[2-4], topics: exactly 7 objects with cluster_id, topic_label, headline, paragraphs:string[2-3], source_ids:string[2-5], perception_gap:{view, where_the_split_appears, why_it_matters, score}}. No markdown.`
     : "\n\nReturn valid JSON only.";
   return `${body}${schemaHint}`;
 }

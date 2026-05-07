@@ -118,23 +118,32 @@ function buildPromptPacket(input: {
     }
     return out;
   };
+  const hasDistinctSourceDepth = (finding: AlbisFinding) => {
+    const findingSources = distinctSourceIds([...(finding.email_source_ids || []), ...(finding.evidence_source_ids || [])])
+      .map((id) => sourceById.get(id))
+      .filter((source): source is ResearchSource => Boolean(source));
+    const urls = new Set(findingSources.map((source) => source.url).filter(Boolean));
+    const domains = new Set(findingSources.map((source) => source.source_domain.replace(/^www\./i, "").toLowerCase()).filter(Boolean));
+    return urls.size >= 2 && domains.size >= 2;
+  };
   const topics = input.layer.findings
     .filter((finding) => ["email_main", "email_secondary"].includes(finding.placement))
-    .slice(0, 12)
+    .filter(hasDistinctSourceDepth)
+    .slice(0, 7)
     .map((finding) => {
       const cluster = input.layer.clusters.find((candidate) => candidate.id === finding.cluster_id);
       const note = input.layer.notes.find((candidate) => candidate.cluster_id === finding.cluster_id);
       const sourceIds = distinctSourceIds([...(finding.email_source_ids || []), ...(finding.evidence_source_ids || [])])
         .filter((id) => sourceById.has(id))
         .slice(0, 6);
-      const sources = sourceIds.map((id) => {
+      const sources = sourceIds.slice(0, 5).map((id) => {
         const source = sourceById.get(id) as ResearchSource;
         return {
           id: source.id,
           name: source.source_domain,
           url: source.url,
-          title: clean(source.extracted_title || source.title),
-          excerpt: clean(source.extracted_excerpt).slice(0, 900),
+          title: clean(source.extracted_title || source.title).slice(0, 180),
+          excerpt: clean(source.extracted_excerpt).slice(0, 180),
           region: source.region,
           published_at: source.published_at,
         };
@@ -145,15 +154,23 @@ function buildPromptPacket(input: {
         current_headline: finding.title,
         current_note: note
           ? {
-              summary: note.summary,
-              what_happened: note.what_happened,
-              key_facts: note.key_facts,
-              key_numbers: note.key_numbers,
-              key_actors: note.key_actors,
-              named_places: note.named_places,
-              source_observations: note.source_observations,
-              differences_in_reporting: note.differences_in_reporting,
-              company_relevance: note.company_relevance,
+              summary: clean(note.summary).slice(0, 260),
+              what_happened: clean(note.what_happened).slice(0, 220),
+              key_facts: note.key_facts.slice(0, 3).map((fact) => clean(fact).slice(0, 180)),
+              key_numbers: note.key_numbers.slice(0, 4),
+              key_actors: note.key_actors.slice(0, 5),
+              named_places: note.named_places.slice(0, 5),
+              source_observations: note.source_observations.slice(0, 3).map((observation) => ({
+                source_id: observation.source_id,
+                what_it_reports: clean(observation.what_it_reports).slice(0, 160),
+                useful_detail: clean(observation.useful_detail).slice(0, 120),
+              })),
+              differences_in_reporting: note.differences_in_reporting.slice(0, 2).map((difference) => ({
+                label: clean(difference.label).slice(0, 80),
+                description: clean(difference.description).slice(0, 180),
+                source_ids: difference.source_ids.slice(0, 4),
+              })),
+              company_relevance: clean(note.company_relevance).slice(0, 220),
             }
           : null,
         sources,
@@ -268,20 +285,27 @@ function applyWriterResponse(
     const domains = new Set(sources.map((source) => source.source_domain.replace(/^www\./i, "").toLowerCase()).filter(Boolean));
     return urls.size >= 2 && domains.size >= 2;
   };
+  const validWriterClusterIds = new Set(
+    layer.findings
+      .filter((finding) => topicsByCluster.has(finding.cluster_id))
+      .filter(hasDistinctSourceDepth)
+      .map((finding) => finding.cluster_id),
+  );
   const fallbackClusterIds = new Set(
     layer.findings
       .filter((finding) => ["email_main", "email_secondary"].includes(finding.placement))
-      .filter((finding) => !topicsByCluster.has(finding.cluster_id))
+      .filter((finding) => !validWriterClusterIds.has(finding.cluster_id))
       .filter(hasDistinctSourceDepth)
       .sort((a, b) => (b.evidence_source_ids || []).length - (a.evidence_source_ids || []).length)
-      .slice(0, Math.max(0, 7 - writer.topics.length))
+      .slice(0, Math.max(0, 7 - validWriterClusterIds.size))
       .map((finding) => finding.cluster_id),
   );
-  const allowedClusterIds = new Set([...writer.topics.map((topic) => topic.cluster_id), ...fallbackClusterIds]);
+  const allowedClusterIds = new Set([...validWriterClusterIds, ...fallbackClusterIds]);
 
   layer.findings = layer.findings.map((finding): AlbisFinding => {
     const topic = topicsByCluster.get(finding.cluster_id);
-    if (!topic) {
+    const useWriterTopic = topic && validWriterClusterIds.has(finding.cluster_id);
+    if (!useWriterTopic || !allowedClusterIds.has(finding.cluster_id)) {
       return {
         ...finding,
         placement: fallbackClusterIds.has(finding.cluster_id)

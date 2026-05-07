@@ -21,8 +21,9 @@ import type { RawArticle, Signal } from "./types";
 import { cachedRetrieval, envNumber } from "./retrieval-cache";
 
 const BRAVE_NEWS_ENDPOINT = "https://api.search.brave.com/res/v1/news/search";
+const BRAVE_WEB_ENDPOINT = "https://api.search.brave.com/res/v1/web/search";
 const DEFAULT_RESULTS_PER_QUERY = 12;
-const DEFAULT_MAX_QUERIES = 18;
+const DEFAULT_MAX_QUERIES = 24;
 const PER_CALL_SLEEP_MS = 80;
 
 export type CompanyRetrievalIntent =
@@ -65,6 +66,14 @@ function sleep(ms: number): Promise<void> {
 
 function uniq<T>(values: T[]): T[] {
   return [...new Set(values.filter(Boolean))];
+}
+
+function hostnameFromUrl(value: string | undefined | null): string | null {
+  try {
+    return value ? new URL(value).hostname.replace(/^www\./i, "") : null;
+  } catch {
+    return null;
+  }
 }
 
 function cleanTerm(value: unknown): string {
@@ -378,6 +387,29 @@ export function buildCompanyRetrievalPlan(profile: CompanyProfile): {
       requiredContext: ["AI falsehoods", "deepfake", "public records", "identity", "archives", "genealogy"],
       priority: "high",
     });
+    const aiGapFill: Array<[string, string, string[]]> = [
+      ["deepfake identity fraud", "(deepfake OR \"AI video\" OR \"AI image\") (identity OR fraud OR impersonation OR victim)", ["deepfake", "AI", "identity", "fraud"]],
+      ["deepfake detection guidance", "(deepfake OR \"synthetic media\") (detect OR detection OR verification OR scam OR police)", ["deepfake", "detection", "verification", "scam"]],
+      ["AI misinformation election records", "(AI OR deepfake) (misinformation OR false claims OR election OR records)", ["AI", "misinformation", "election", "records"]],
+      ["AI model safety public release", "(\"AI model\" OR \"foundation model\") (safety OR vetting OR public release OR regulation)", ["AI model", "safety", "regulation"]],
+      ["Trump AI model oversight", "(Trump OR \"White House\") (\"AI oversight\" OR \"AI models\" OR vetting) (Google OR Microsoft OR xAI OR public release)", ["Trump", "White House", "AI oversight", "AI models"]],
+      ["White House AI vetting", "\"White House\" \"vetting AI models\" \"public release\"", ["White House", "vetting", "AI models", "public release"]],
+      ["conflict image verification", "(\"fake image\" OR \"old image\" OR \"AI image\") (conflict OR propaganda OR verification)", ["fake image", "conflict", "propaganda", "verification"]],
+      ["political AI image records", "(\"AI image\" OR \"AI video\" OR deepfake) (Trump OR Obama OR politician OR reputation OR election)", ["AI image", "politician", "reputation", "records"]],
+      ["Obama Trump AI ape video", "(Obama OR Michelle Obama) Trump \"AI\" (ape OR racist OR video OR Truth Social)", ["Obama", "Trump", "AI video", "public record"]],
+      ["synthetic media public figures", "(\"synthetic media\" OR deepfake OR \"AI-generated\") (\"public figure\" OR politician OR celebrity OR institution)", ["synthetic media", "public figure", "institution"]],
+      ["AI archive integrity", "(AI OR deepfake OR \"synthetic media\") (archive OR records OR provenance OR authenticity OR evidence)", ["AI", "archive", "records", "authenticity"]],
+      ["Met Gala AI deepfakes", "(\"Met Gala\" OR \"red carpet\") (\"AI photos\" OR deepfake OR \"AI-generated\") (fooled OR viral OR misinformation)", ["Met Gala", "AI photos", "deepfake", "public memory"]],
+      ["school deepfake readiness", "(school OR district OR campus) (deepfake OR \"AI-generated\") (incident OR policy OR safety OR response)", ["school", "deepfake", "policy", "response"]],
+      ["political reputation deepfake study", "(deepfake OR \"AI video\") (political reputation OR public trust OR viewers OR study)", ["deepfake", "political reputation", "public trust"]],
+    ];
+    for (const [label, query, context] of aiGapFill) {
+      addQuery(queries, label, query, "gap-fill AI/memory cluster discovery", {
+        scanAreaId: "intent-ai-memory-integrity-gap-fill",
+        requiredContext: context,
+        priority: "high",
+      });
+    }
   }
   if (intent === "logistics_routes") {
     const routeTerms = ["Hormuz", "Suez", "Red Sea", "freight rates", "vessel traffic", "marine insurance"];
@@ -388,6 +420,25 @@ export function buildCompanyRetrievalPlan(profile: CompanyProfile): {
       priority: "high",
       localLanguageExpansion,
     });
+    const logisticsGapFill: Array<[string, string, string[]]> = [
+      ["fertilizer shipping costs", "(fertilizer OR fertiliser OR urea OR ammonia) (shipping OR freight OR supply OR subsidy OR prices)", ["fertilizer", "shipping", "freight", "supply"]],
+      ["semiconductor supply chain", "(semiconductor OR chips OR TSMC OR \"AI chips\") (supply chain OR export controls OR capacity OR tariffs)", ["semiconductor", "supply", "export controls", "tariffs"]],
+      ["freight disruption fuel prices", "(freight OR shipping OR logistics) (fuel prices OR oil prices OR disruption OR reroute)", ["freight", "shipping", "fuel", "disruption"]],
+      ["port congestion container shortages", "(port congestion OR container shortages OR shipping delays) (freight OR logistics OR supply chain)", ["port", "container", "freight", "supply chain"]],
+      ["marine insurance middle east", "(marine insurance OR war risk OR vessel insurance) (Middle East OR Hormuz OR Red Sea)", ["marine insurance", "vessel", "Hormuz", "Red Sea"]],
+      ["alternative trade corridors", "(trade corridor OR alternative corridor OR multimodal freight OR rail route) (Saudi OR UAE OR Turkey OR Middle East)", ["trade corridor", "freight", "Saudi", "UAE", "Turkey"]],
+      ["tariff fuel freight costs", "(tariff OR \"trade war\" OR oil OR fuel) (freight OR shipping OR logistics OR import OR supply chain)", ["tariff", "fuel", "freight", "supply chain"]],
+      ["container freight rates", "(container OR freight OR shipping) (rates OR surcharge OR delay OR capacity OR congestion)", ["container", "freight", "rates", "capacity"]],
+      ["shipping policy volatility", "(shipping firms OR freight OR logistics) (policy whipsaw OR changing policy OR tariff uncertainty OR trade policy)", ["shipping", "policy", "tariff", "freight"]],
+      ["Hormuz vessel attack", "(CMA CGM OR vessel OR tanker OR ship) (attacked OR incident OR security) (Hormuz OR Gulf)", ["vessel", "attack", "Hormuz", "security"]],
+    ];
+    for (const [label, query, context] of logisticsGapFill) {
+      addQuery(queries, label, query, "gap-fill logistics cluster discovery", {
+        scanAreaId: "intent-logistics-routes-gap-fill",
+        requiredContext: context,
+        priority: "high",
+      });
+    }
   }
 
   return {
@@ -455,6 +506,57 @@ async function fetchBraveNews(query: CompanyRetrievalQuery, signalDate: string, 
   });
 }
 
+async function fetchBraveWeb(query: CompanyRetrievalQuery, signalDate: string, log?: (message: string) => void): Promise<RawArticle[]> {
+  const apiKey = process.env.BRAVE_API_KEY;
+  if (!apiKey) throw new Error("BRAVE_API_KEY not set in environment");
+
+  const resultsPerQuery = Math.min(envNumber("COMPANY_SPECIFIC_RESULTS_PER_QUERY", DEFAULT_RESULTS_PER_QUERY), 10);
+  const url = new URL(BRAVE_WEB_ENDPOINT);
+  url.searchParams.set("q", query.query);
+  url.searchParams.set("count", String(resultsPerQuery));
+  url.searchParams.set("freshness", "pd");
+  url.searchParams.set("text_decorations", "false");
+
+  return cachedRetrieval({
+    namespace: "company-specific-web",
+    signalDate,
+    query: query.query,
+    count: resultsPerQuery,
+    log,
+    fetchLive: async () => {
+      await sleep(PER_CALL_SLEEP_MS);
+      const response = await fetch(url.toString(), {
+        headers: {
+          Accept: "application/json",
+          "Accept-Encoding": "gzip",
+          "X-Subscription-Token": apiKey,
+        },
+      });
+      if (!response.ok) {
+        const body = await response.text().catch(() => "");
+        console.warn(`[company-specific-retrieval:web] ${response.status} for ${query.label}: ${body.slice(0, 160)}`);
+        return [];
+      }
+      const data = await response.json() as { web?: { results?: Array<{ url?: string; title?: string; description?: string; page_age?: string; profile?: { name?: string }; language?: string }> } };
+      return (data.web?.results || [])
+        .filter((result) => result.url && result.title)
+        .map((result) => ({
+          url: result.url || "",
+          headline: result.title || "",
+          body: result.description || "",
+          source_domain: hostnameFromUrl(result.url) || result.profile?.name || null,
+          source_language: result.language || null,
+          source_region: null,
+          published_at: result.page_age || null,
+        }));
+    },
+  });
+}
+
+function shouldWebGapFill(query: CompanyRetrievalQuery): boolean {
+  return /met gala|school deepfake|political reputation|archive integrity|synthetic media public figures|ai model oversight|ai vetting/i.test(query.label);
+}
+
 export async function retrieveCompanySpecificSignals(
   supabase: SupabaseClient,
   profile: CompanyProfile,
@@ -469,8 +571,12 @@ export async function retrieveCompanySpecificSignals(
 
   log(`  ↳ company-specific retrieval: ${plan.queries.length} queries (${plan.intent})`);
   for (const query of plan.queries) {
-    const articles = await fetchBraveNews(query, options.signalDate, log);
-    log(`    • ${query.label}: ${articles.length} result(s)`);
+    const newsArticles = await fetchBraveNews(query, options.signalDate, log);
+    const webArticles = shouldWebGapFill(query) && newsArticles.length < 3
+      ? await fetchBraveWeb(query, options.signalDate, log)
+      : [];
+    const articles = [...newsArticles, ...webArticles];
+    log(`    • ${query.label}: ${newsArticles.length}${webArticles.length ? ` + ${webArticles.length} web` : ""} result(s)`);
     for (const article of articles) {
       if (!article.url) continue;
       byUrl.set(article.url, article);

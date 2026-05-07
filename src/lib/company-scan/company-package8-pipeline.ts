@@ -1248,7 +1248,9 @@ export async function runCompanyPackage8PipelineForProfile(
 ): Promise<CompanyPackage8PipelineResult> {
   const scanDate = options.scanDate;
   const lookbackHours = options.lookbackHours ?? 24;
-  const maxItems = options.maxItems ?? 24;
+  const profileRetrievalText = `${profile.company_name || ""} ${profile.sector || ""} ${profile.sub_sector || ""} ${(profile.tracked_themes || []).join(" ")} ${(profile.risk_priorities || []).join(" ")} ${(profile.watchlist_entities || []).join(" ")} ${(profile.supply_chain_exposure || []).join(" ")}`.toLowerCase();
+  const needsWiderCompanyScan = /(logistics|shipping|freight|supply|route|hormuz|deepfake|artificial intelligence|public memory|identity|records)/.test(profileRetrievalText);
+  const maxItems = options.maxItems ?? Number(process.env.COMPANY_PACKAGE8_MAX_ITEMS || (needsWiderCompanyScan ? 36 : 24));
   const enableHistoryDedupe = options.enableHistoryDedupe ?? true;
   const endTs = new Date(`${scanDate}T23:59:59Z`).toISOString();
   const startTs = new Date(
@@ -1368,6 +1370,7 @@ export async function runCompanyPackage8PipelineForProfile(
   let deepDiveRetrieval: any = null;
 
   if (options.enableDeepDiveRetrieval && candidates.length > 0) {
+    const needsWiderDeepDive = needsWiderCompanyScan;
     const deepDive = await runCompanyDeepDiveRetrieval(
       supabase,
       profile,
@@ -1375,8 +1378,8 @@ export async function runCompanyPackage8PipelineForProfile(
       {
         signalDate: scanDate,
         log: options.log,
-        maxCandidates: Math.min(5, candidates.length),
-        maxQueries: 12,
+        maxCandidates: Math.min(needsWiderDeepDive ? 7 : 5, candidates.length),
+        maxQueries: needsWiderDeepDive ? 20 : 12,
       },
     );
     deepDiveRetrieval = {
@@ -1574,6 +1577,7 @@ export async function runCompanyPackage8PipelineForProfile(
     selected: selectedForDepth,
     signals: workingSignals || [],
     bundles: intelligence_depth_bundles,
+    maxClusters: Number(process.env.COMPANY_RESEARCH_MAX_CLUSTERS || (needsWiderCompanyScan ? 18 : 12)),
   });
   const understoodOutput = {
     ...depthOutput,
