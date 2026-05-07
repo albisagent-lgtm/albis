@@ -6,7 +6,7 @@ This file records the current production automation paths for Albis after the Ap
 
 ### 1) Daily briefing email
 - Script: `scripts/run-daily-briefing-pipeline.ts`
-- Primary owner path: invoked by `scripts/run-post-scan-pipeline.ts` during the **AM** article cycle after DB verification + snapshot refresh
+- Primary owner path: invoked by `scripts/run-post-scan-pipeline.ts` during the **AM** article cycle after DB verification + article publication, before the final snapshot refresh
 - Standalone cron: `a79cb02a-98ef-4e9a-85e6-f10e37a8deb9` is now backup/manual only and should stay disabled unless explicitly needed for recovery
 - Purpose: build/load daily briefing, regenerate stale/missing Phase 5-8 package fields (`content_md`, `top_stories`, `edition_scorecard`), send subscriber emails, write `briefing_deliveries`, update `briefings.delivery_status`
 - Notes:
@@ -22,10 +22,10 @@ This file records the current production automation paths for Albis after the Ap
   - AM: `04067770-ffc1-4efc-aa9e-7f7b75f7a043` at 07:40 Pacific/Auckland
   - Midday: `3b04f416-054b-4536-a552-70b9f91d3886` at 13:40 Pacific/Auckland
   - PM: `483edec7-fa95-4f5c-976c-c802df8b8a77` at 19:40 Pacific/Auckland
-- Purpose: read scan, run DB-truth PGI/GAI scoring (`scripts/score-verified-scan.ts`), build articles, write markdown backup, ingest into `articles`, aggregate daily indexes (`scripts/aggregate-index-dailies.ts`), refresh snapshot, verify publication
+- Purpose: read scan, run DB-truth PGI/GAI scoring (`scripts/score-verified-scan.ts`), build articles, write markdown backup, ingest into `articles`, aggregate daily indexes (`scripts/aggregate-index-dailies.ts`), run the AM briefing send when applicable, refresh snapshot, verify publication
 - Notes:
   - publication is script-owned, not prompt-owned
-  - snapshot refresh is part of the same flow
+  - snapshot refresh is part of the same flow and runs after the AM briefing job, so homepage briefing fields cannot be snapshotted as null before the briefing row exists
   - article jobs deliberately run later than scans to reduce scan-file/write races
 
 ### 3) Company briefing delivery
