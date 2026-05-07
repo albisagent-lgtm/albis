@@ -43,12 +43,32 @@ Recommended schedule for v1 cost control:
 | 11  | 07:00        | 06:00        | `07-00`    |
 | 23  | 19:00        | 18:00        | `19-00`    |
 
-Cron entries:
+Cron entries, if using traditional cron:
 
 ```cron
 0 11 * * * cd /Users/treelight/.openclaw/workspace/albis-app && bash scripts/run-company-scan-cycle.sh
 0 23 * * * cd /Users/treelight/.openclaw/workspace/albis-app && bash scripts/run-company-scan-cycle.sh
 ```
+
+Current Mac activation uses a LaunchAgent instead of crontab because local
+`crontab` installation was not available from the agent runtime:
+
+```text
+~/Library/LaunchAgents/ai.openclaw.albis-company-scan.plist
+```
+
+It runs at 11:00 and 23:00 local time with:
+
+```env
+COMPANY_BRIEFINGS_WRITE_ENABLED=1
+ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER=true
+ALBIS_EDITORIAL_MODEL_PROVIDER=openclaw-system
+COMPANY_SCAN_DELIVER_AFTER_GENERATE=0
+COMPANY_EMAIL_DELIVERY_ENABLED=0
+```
+
+That means scheduled generation writes dashboard-ready Supabase rows, while
+customer email delivery remains disabled.
 
 ## Required env for generation
 
