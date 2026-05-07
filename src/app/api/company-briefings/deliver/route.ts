@@ -23,6 +23,17 @@ function getResendClient() {
   return new Resend(apiKey);
 }
 
+function profileApprovedForDelivery(profileId: string): boolean {
+  if (process.env.COMPANY_EMAIL_DELIVERY_APPROVE_ALL === "1") return true;
+  const approvedIds = String(
+    process.env.COMPANY_EMAIL_DELIVERY_APPROVED_PROFILE_IDS || "",
+  )
+    .split(",")
+    .map((id) => id.trim())
+    .filter(Boolean);
+  return approvedIds.includes(profileId);
+}
+
 /**
  * POST /api/company-briefings/deliver
  *
@@ -216,6 +227,17 @@ export async function POST(req: NextRequest) {
           company_name: profile.company_name,
           status: "skipped",
           error: "Email delivery disabled",
+          content_version: contentVersion,
+        });
+        continue;
+      }
+
+      if (!profileApprovedForDelivery(profile.id)) {
+        details.push({
+          company_name: profile.company_name,
+          status: "skipped",
+          error:
+            "Email delivery awaiting explicit profile approval. Add the profile id to COMPANY_EMAIL_DELIVERY_APPROVED_PROFILE_IDS, or set COMPANY_EMAIL_DELIVERY_APPROVE_ALL=1 after launch approval.",
           content_version: contentVersion,
         });
         continue;

@@ -286,6 +286,10 @@ function ScannerReportRenderer({
   compact?: boolean;
 }) {
   const scanner = content.scanner_report;
+  const researchedFindings = getCompanyDailyScanV1Findings(content);
+  const isCompanyDailyScanV1 =
+    scanner?.layout_version === "company_daily_scan_v1" &&
+    researchedFindings.length > 0;
   const visibleSections = content.main_briefing.sections.filter(
     (section) => section.items.length > 0,
   );
@@ -323,55 +327,88 @@ function ScannerReportRenderer({
 
       <section>
         <p className={sectionLabel}>Your Daily Scan</p>
-        <div className="mt-5 space-y-8">
-          {visibleSections.map((section) => (
-            <div key={section.section_id}>
-              <h3 className="text-base font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-                {section.heading}
-              </h3>
-              <div className="mt-3 space-y-4">
-                {section.items.map((item, i) => (
-                  <article key={item.generated_item_id || i}>
-                    <p className="text-[15px] font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
-                      {item.title.text}
-                    </p>
-                    <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-                      {item.body.text}
-                    </p>
-                    {item.uncertainty_line?.text && (
-                      <p className="mt-1 text-xs leading-relaxed text-zinc-400 dark:text-zinc-500">
-                        {item.uncertainty_line.text}
+        {isCompanyDailyScanV1 ? (
+          <div className="mt-5 space-y-6">
+            {researchedFindings.map((finding, i) => (
+              <article key={finding.id || finding.cluster_id || i}>
+                <p className="text-[15px] font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+                  {i + 1}. {finding.title}
+                </p>
+                {splitParagraphs(finding.body).map((paragraph, index) => (
+                  <p
+                    key={index}
+                    className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+                {finding.why_it_matters && (
+                  <p className="mt-2 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
+                    <span className="font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                      Why it matters: 
+                    </span>
+                    {finding.why_it_matters}
+                  </p>
+                )}
+                {finding.uncertainty && (
+                  <p className="mt-1 text-xs leading-relaxed text-zinc-400 dark:text-zinc-500">
+                    {finding.uncertainty}
+                  </p>
+                )}
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="mt-5 space-y-8">
+            {visibleSections.map((section) => (
+              <div key={section.section_id}>
+                <h3 className="text-base font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+                  {section.heading}
+                </h3>
+                <div className="mt-3 space-y-4">
+                  {section.items.map((item, i) => (
+                    <article key={item.generated_item_id || i}>
+                      <p className="text-[15px] font-semibold leading-snug text-[#0f0f0f] dark:text-[#f0efec]">
+                        {item.title.text}
                       </p>
-                    )}
-                    {item.source_attribution?.text && (
-                      <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
-                        Source:{" "}
-                        {item.source_url ? (
-                          <a
-                            href={item.source_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="underline decoration-zinc-300 underline-offset-2 transition-colors hover:text-[#c8922a] dark:decoration-zinc-700"
-                          >
-                            {item.source_attribution.text.replace(
+                      <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                        {item.body.text}
+                      </p>
+                      {item.uncertainty_line?.text && (
+                        <p className="mt-1 text-xs leading-relaxed text-zinc-400 dark:text-zinc-500">
+                          {item.uncertainty_line.text}
+                        </p>
+                      )}
+                      {item.source_attribution?.text && (
+                        <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
+                          Source:{" "}
+                          {item.source_url ? (
+                            <a
+                              href={item.source_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="underline decoration-zinc-300 underline-offset-2 transition-colors hover:text-[#c8922a] dark:decoration-zinc-700"
+                            >
+                              {item.source_attribution.text.replace(
+                                /^Source:\s*/i,
+                                "",
+                              )}
+                            </a>
+                          ) : (
+                            item.source_attribution.text.replace(
                               /^Source:\s*/i,
                               "",
-                            )}
-                          </a>
-                        ) : (
-                          item.source_attribution.text.replace(
-                            /^Source:\s*/i,
-                            "",
-                          )
-                        )}
-                      </p>
-                    )}
-                  </article>
-                ))}
+                            )
+                          )}
+                        </p>
+                      )}
+                    </article>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {scanner?.layout_version !== "company_daily_scan_v1" &&
@@ -440,6 +477,21 @@ function ScannerReportRenderer({
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
+function getCompanyDailyScanV1Findings(content: CompanyBriefingGenerationOutput) {
+  const findings =
+    content.understanding?.researched_understanding_v1?.findings || [];
+  return findings.filter((finding) =>
+    ["email_main", "email_secondary"].includes(finding.placement),
+  );
+}
+
+function splitParagraphs(value: string): string[] {
+  return String(value || "")
+    .split(/\n{2,}|\r?\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+}
 
 function formatDate(dateStr: string): string {
   try {

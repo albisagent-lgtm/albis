@@ -130,7 +130,20 @@ export default function BriefingsArchiveClient() {
             : b.briefing_content && "header" in b.briefing_content
               ? b.briefing_content.header?.scan_focus || ""
               : "";
+          const v1ResearchFindings =
+            b.briefing_content &&
+            "understanding" in b.briefing_content &&
+            b.briefing_content.scanner_report?.layout_version ===
+              "company_daily_scan_v1"
+              ? b.briefing_content.understanding?.researched_understanding_v1?.findings?.filter(
+                  (finding) =>
+                    ["email_main", "email_secondary"].includes(
+                      finding.placement,
+                    ),
+                ).length || 0
+              : 0;
           const storyCount =
+            v1ResearchFindings ||
             scannerReport?.main_findings_count ||
             (b.briefing_content && "what_changed" in b.briefing_content
               ? b.briefing_content.what_changed?.length

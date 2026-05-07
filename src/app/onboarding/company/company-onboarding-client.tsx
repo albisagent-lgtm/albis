@@ -184,7 +184,7 @@ export default function CompanyOnboardingClient() {
   const [briefingDepth, setBriefingDepth] = useState("standard");
   const [deliveryTime, setDeliveryTime] = useState("07:00");
   const [timezone, setTimezone] = useState("UTC");
-  const [emailEnabled, setEmailEnabled] = useState(true);
+  const [emailEnabled, setEmailEnabled] = useState(false);
   const [emailRecipients, setEmailRecipients] = useState<string[]>([]);
   const [emailInput, setEmailInput] = useState("");
 
