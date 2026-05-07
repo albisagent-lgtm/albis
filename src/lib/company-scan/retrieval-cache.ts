@@ -11,6 +11,7 @@ import crypto from "crypto";
 export type RetrievalCacheMode = "readwrite" | "readonly" | "off";
 
 const DEFAULT_CACHE_DIR = ".cache/company-retrieval";
+let liveSearchesThisProcess = 0;
 
 function cleanDate(value: string | undefined): string {
   return String(value || new Date().toISOString().slice(0, 10)).replace(/[^0-9-]/g, "");
@@ -25,6 +26,10 @@ function cacheMode(): RetrievalCacheMode {
 
 function liveSearchDisabled(): boolean {
   return process.env.COMPANY_RETRIEVAL_DISABLE_LIVE_SEARCH === "1";
+}
+
+function liveSearchBudget(): number {
+  return envNumber("COMPANY_RETRIEVAL_LIVE_SEARCH_BUDGET_PER_RUN", 80);
 }
 
 function cacheKey(parts: Record<string, unknown>): string {
@@ -105,6 +110,15 @@ export async function cachedRetrieval<T>(input: {
       `Live company retrieval blocked and no cache entry exists for ${input.namespace}: ${input.query}`,
     );
   }
+
+  const budget = liveSearchBudget();
+  if (budget >= 0 && liveSearchesThisProcess >= budget) {
+    throw new Error(
+      `Live company retrieval budget exceeded (${budget} searches/run). Query blocked for ${input.namespace}: ${input.query}`,
+    );
+  }
+
+  liveSearchesThisProcess += 1;
 
   const value = await input.fetchLive();
   if (file && mode === "readwrite") {
