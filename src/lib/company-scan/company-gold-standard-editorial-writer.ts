@@ -59,13 +59,13 @@ Prepared by Albis
 Lindell Media
 
 Your Daily Scan
-10 tracked topics checked. 7 active topics. 3 quiet topics. Coverage note in clear customer language.
+10+ tracked topics checked. At least 10 active stories. Quiet topics noted in the dashboard. Coverage note in clear customer language.
 
 Each topic has:
 - broad tracked topic label, e.g. Press Freedom
 - specific scan-based headline, e.g. RSF says global press freedom has fallen to its lowest level in 25 years
-- 150–250 words total where the evidence supports it, usually 2–3 substantial researched paragraphs
-- exactly 7 stories every day; if the scan cannot support 7, retrieval/scanning must improve rather than sending fewer
+- 100–150 words total where the evidence supports it, usually 1–2 tight researched paragraphs
+- minimum 10 stories every day; if the scan cannot support 10, retrieval/scanning must improve rather than sending fewer
 - every story must be written from a cluster of evidence, not a single-source summary
 - hard facts, numbers, named countries/actors, mechanisms, source contrast, and business/media relevance
 - no repeated paragraphs, no source-trail metadata, and no filler just to hit length
@@ -94,6 +94,32 @@ function clean(value: string | undefined | null): string {
     .replace(/\s+/g, " ")
     .replace(/\s+([,.;:!?])/g, "$1")
     .trim();
+}
+
+function cleanSentenceSafe(value: string | undefined | null, maxSentenceWords = 42): string {
+  const text = clean(value);
+  if (!text) return "";
+  const sentences = text.match(/[^.!?]+[.!?]+/g)?.map((sentence) => sentence.trim()).filter(Boolean) || [text];
+  return sentences
+    .flatMap((sentence) => {
+      if (words(sentence) <= maxSentenceWords) return [sentence];
+      const parts = sentence.split(/,\s+|;\s+|:\s+/).map((part) => part.trim()).filter(Boolean);
+      if (parts.length <= 1) return [sentence];
+      const chunks: string[] = [];
+      let current = "";
+      for (const part of parts) {
+        const next = current ? `${current}, ${part}` : part;
+        if (words(next) > maxSentenceWords && current) {
+          chunks.push(current.replace(/[,.!?;:]*$/, "."));
+          current = part;
+        } else {
+          current = next;
+        }
+      }
+      if (current) chunks.push(current.replace(/[,.!?;:]*$/, "."));
+      return chunks;
+    })
+    .join(" ");
 }
 
 function buildPromptPacket(input: {
@@ -129,7 +155,7 @@ function buildPromptPacket(input: {
   const topics = input.layer.findings
     .filter((finding) => ["email_main", "email_secondary"].includes(finding.placement))
     .filter(hasDistinctSourceDepth)
-    .slice(0, 7)
+    .slice(0, 10)
     .map((finding) => {
       const cluster = input.layer.clusters.find((candidate) => candidate.id === finding.cluster_id);
       const note = input.layer.notes.find((candidate) => candidate.cluster_id === finding.cluster_id);
@@ -204,8 +230,8 @@ function responseSchema() {
         },
         topics: {
           type: "array",
-          minItems: 7,
-          maxItems: 7,
+          minItems: 10,
+          maxItems: 10,
           items: {
             type: "object",
             additionalProperties: false,
@@ -216,8 +242,8 @@ function responseSchema() {
               headline: { type: "string" },
               paragraphs: {
                 type: "array",
-                minItems: 2,
-                maxItems: 3,
+                minItems: 1,
+                maxItems: 2,
                 items: { type: "string" },
               },
               source_ids: {
@@ -255,7 +281,7 @@ async function callEditorialWriter(promptPacket: unknown): Promise<{ writer: Wri
       {
         role: "system",
         content:
-          "You are the Albis editorial writer for Company Daily Scan V1. Write exactly like the approved Lindell Media gold-standard email: reported, evidence-led, precise, human, and useful. Do not sound like an analyst pipeline. Use only the evidence provided. If evidence is thin, choose fewer stronger topics rather than padding. Never invent facts, numbers, sources, or URLs. Return JSON only.",
+          "You are the Albis editorial writer for Company Daily Scan V1. Write exactly like the approved Lindell Media gold-standard email: reported, evidence-led, precise, human, and useful. Do not sound like an analyst pipeline. Use only the evidence provided. Write at least 10 source-backed stories, each 100–150 words where evidence supports it. If evidence is thin, retrieval must improve rather than padding. Never invent facts, numbers, sources, or URLs. Return JSON only.",
       },
       {
         role: "user",
@@ -297,7 +323,7 @@ function applyWriterResponse(
       .filter((finding) => !validWriterClusterIds.has(finding.cluster_id))
       .filter(hasDistinctSourceDepth)
       .sort((a, b) => (b.evidence_source_ids || []).length - (a.evidence_source_ids || []).length)
-      .slice(0, Math.max(0, 7 - validWriterClusterIds.size))
+      .slice(0, Math.max(0, 10 - validWriterClusterIds.size))
       .map((finding) => finding.cluster_id),
   );
   const allowedClusterIds = new Set([...validWriterClusterIds, ...fallbackClusterIds]);
@@ -385,7 +411,7 @@ function applyWriterResponse(
     next.scanner_report.overview.text = clean(writer.overview);
   }
   if (writer.source_note) {
-    next.source_notes.text.text = clean(writer.source_note);
+    next.source_notes.text.text = cleanSentenceSafe(writer.source_note);
   }
   next.understanding = {
     ...(next.understanding || {}),
@@ -405,15 +431,15 @@ function applyWriterResponse(
 
 function validateWriterResponse(writer: WriterResponse): string[] {
   const blockers: string[] = [];
-  if (!Array.isArray(writer.topics) || writer.topics.length < 7) {
-    blockers.push("Editorial writer returned fewer than seven topics.");
+  if (!Array.isArray(writer.topics) || writer.topics.length < 10) {
+    blockers.push("Editorial writer returned fewer than ten topics.");
   }
   for (const topic of writer.topics || []) {
     if (!topic.cluster_id || !topic.headline || !topic.topic_label) blockers.push(`Topic missing required label/headline: ${topic.cluster_id || "unknown"}`);
-    if ((topic.paragraphs || []).length < 2) blockers.push(`${topic.cluster_id}: fewer than two paragraphs.`);
+    if ((topic.paragraphs || []).length < 1) blockers.push(`${topic.cluster_id}: missing paragraph copy.`);
     const topicWords = words((topic.paragraphs || []).join(" "));
-    if (topicWords < 60) blockers.push(`${topic.cluster_id}: topic is under 60 words; 150–250 is only a guide where evidence supports it.`);
-    if (topicWords > 260) blockers.push(`${topic.cluster_id}: topic is over 260 words; target 150–250 where possible.`);
+    if (topicWords < 50) blockers.push(`${topic.cluster_id}: topic is under 50 words; 100–150 is the target where evidence supports it.`);
+    if (topicWords > 170) blockers.push(`${topic.cluster_id}: topic is over 170 words; target 100–150 max where possible.`);
     if ((topic.source_ids || []).length < 2) blockers.push(`${topic.cluster_id}: fewer than two source ids.`);
     const bad = /\b(signal|clearest signal|this is the signal|Albis reading|useful point|operating signal|market signal|matched|selected scan areas|evidence threshold|source items|more in evidence trail)\b/i;
     if (bad.test(`${topic.headline} ${(topic.paragraphs || []).join(" ")}`)) blockers.push(`${topic.cluster_id}: contains banned/internal language.`);

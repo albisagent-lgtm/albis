@@ -423,11 +423,11 @@ export async function buildResearchedUnderstandingLayer({
   signals,
   bundles = [],
   generatedAt = new Date().toISOString(),
-  maxClusters = 12,
+  maxClusters = 16,
 }: BuildResearchedUnderstandingOptions): Promise<CompanyResearchedUnderstandingLayer> {
   const itemMap = packetItemById(packet);
   const totalSignalsAvailable = signals.length;
-  const chosenBundles = bundles.slice(0, Math.max(maxClusters, 12));
+  const chosenBundles = bundles.slice(0, Math.max(maxClusters, 16));
   const defaultSectionId = packet.company.selected_scan_areas[0]?.area_id || "general";
   const fallbackSelected = selected.slice(0, Math.max(28, maxClusters * 3));
   const selectedSignalIds = new Set(selected.map((item) => item.signal.id));
@@ -441,7 +441,7 @@ export async function buildResearchedUnderstandingLayer({
       section_ids: [defaultSectionId],
       selection_score: Math.max(1, Number(signal.significance || 0) + Number(signal.urgency || 0) - index),
       keyword_match_score: 0,
-      selected_because: "supplemental research-depth cluster added so the dossier can reach the seven-story daily scan target",
+      selected_because: "supplemental research-depth cluster added so the dossier can reach the 10-story daily scan target",
     }));
   const expandedFallbackSelected = [...fallbackSelected, ...rawSignalSupplemental];
 
@@ -611,7 +611,7 @@ export async function buildResearchedUnderstandingLayer({
       email_source_ids: evidenceSources.filter((source) => source.trail_role === "email").map((source) => source.id).slice(0, 5),
       evidence_source_ids: evidenceSources.map((source) => source.id).slice(0, 10),
       dashboard_source_ids: clusterSources.map((source) => source.id).slice(0, 20),
-      placement: index < 7 ? "email_main" : index < 12 ? "email_secondary" : "dashboard",
+      placement: index < 10 ? "email_main" : index < 16 ? "email_secondary" : "dashboard",
     };
 
     clusters.push(cluster);
@@ -633,7 +633,7 @@ export async function buildResearchedUnderstandingLayer({
       .flatMap((finding) => [storyClusterKeyForText(finding.title), storyClusterKeyForText(`${finding.title} ${finding.body}`)]),
   );
   const emailReadyCount = () => findings.filter((finding) => ["email_main", "email_secondary"].includes(finding.placement) && findingHasDistinctDepth(finding)).length;
-  if (emailReadyCount() < 7) {
+  if (emailReadyCount() < 10) {
     const splitCandidates = new Map<string, ResearchSource[]>();
     for (const source of sources) {
       const key = storyClusterKeyForText(`${source.title} ${source.extracted_excerpt || ""}`);
@@ -652,7 +652,7 @@ export async function buildResearchedUnderstandingLayer({
       .sort((a, b) => b.domains - a.domains || b.urls - a.urls);
 
     for (const split of orderedSplits) {
-      if (emailReadyCount() >= 7) break;
+      if (emailReadyCount() >= 10) break;
       const baseTitle = polishV1Title(split.group[0]?.title || split.key.replace(/-/g, " "));
       if (findings.some((finding) => storyClusterKeyForText(finding.title) === split.key || storyClusterKeyForText(`${finding.title} ${finding.body}`) === split.key)) continue;
       const clusterId = `research_${scanDate}_${profile.id}_${slugify(split.key)}_split`;
@@ -692,7 +692,7 @@ export async function buildResearchedUnderstandingLayer({
           evidence_source_ids: clonedSources.map((source) => source.id).slice(0, 6),
         },
         company_relevance: `Relevant to ${profile.company_name}'s monitored topics because it adds a distinct corroborated case to the daily scan.`,
-        albis_learning: "Split cluster promoted to keep Company Daily Scan V1 at seven source-backed stories without padding single-source items.",
+        albis_learning: "Split cluster promoted to keep Company Daily Scan V1 at 10 source-backed stories without padding single-source items.",
       };
       const cluster: ResearchCluster = {
         id: clusterId,
@@ -723,7 +723,7 @@ export async function buildResearchedUnderstandingLayer({
         email_source_ids: clonedSources.slice(0, 5).map((source) => source.id),
         evidence_source_ids: clonedSources.map((source) => source.id).slice(0, 10),
         dashboard_source_ids: clonedSources.map((source) => source.id),
-        placement: emailReadyCount() < 7 ? "email_secondary" : "dashboard",
+        placement: emailReadyCount() < 10 ? "email_secondary" : "dashboard",
       });
       existingStoryKeys.add(split.key);
     }
@@ -747,7 +747,7 @@ export async function buildResearchedUnderstandingLayer({
     company_profile_id: profile.id,
     company_name: profile.company_name,
     scan_date: scanDate,
-    target_cluster_count: { min: 5, max: 8 },
+    target_cluster_count: { min: 10, max: 16 },
     research_standard: {
       principle: "external_articles_are_evidence_albis_findings_are_the_product",
       no_shallow_reporting_dressed_as_insight: true,

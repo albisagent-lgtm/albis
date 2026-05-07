@@ -1773,19 +1773,19 @@ function checkCompanyDailyScanV1GoldStandard(
   };
   const sourceRichFindings = emailFindings.filter(hasSourceClusterDepth);
   const substantialFindings = emailFindings.filter(
-    (finding) => wordCount(finding.body || "") >= 60,
+    (finding) => wordCount(finding.body || "") >= 50,
   );
 
-  if (emailFindings.length < 7) {
+  if (emailFindings.length < 10) {
     failures.push({
       code: "V1_GOLD_TOO_FEW_EMAIL_SECTIONS",
       severity: "blocking",
       message:
-        "Company Daily Scan V1 needs seven researched email sections every day. Fewer than seven means scanning/retrieval did not find enough usable stories.",
+        "Company Daily Scan V1 needs at least 10 researched email stories every day. Fewer than 10 means scanning/retrieval did not find enough usable stories.",
     });
   }
 
-  if (sourceRichFindings.length < Math.min(7, emailFindings.length)) {
+  if (sourceRichFindings.length < Math.min(10, emailFindings.length)) {
     failures.push({
       code: "V1_GOLD_SOURCE_CLUSTERS_TOO_THIN",
       severity: "blocking",
@@ -1794,12 +1794,12 @@ function checkCompanyDailyScanV1GoldStandard(
     });
   }
 
-  if (substantialFindings.length < Math.min(7, emailFindings.length)) {
+  if (substantialFindings.length < Math.min(10, emailFindings.length)) {
     failures.push({
       code: "V1_GOLD_FINDINGS_TOO_SHORT",
       severity: "blocking",
       message:
-        "Company Daily Scan V1 sections are too short. The 150–250 word range is a guide, not a hard rule, but under 60 words is not enough for a researched story.",
+        "Company Daily Scan V1 sections are too short. The 100–150 word range is the target, but under 50 words is not enough for a researched story.",
     });
   }
 

@@ -270,7 +270,7 @@ function renderResearchedFindings(output: CompanyBriefingGenerationOutput): stri
     .filter(({ finding, note, sources }) =>
       Boolean(note) && hasClusterDepth(sources) && !looksLikeRawSourceTitle(finding.title),
     )
-    .slice(0, 7);
+    .slice(0, 10);
 
   if (!goldFindings.length) return "";
 
@@ -279,7 +279,7 @@ function renderResearchedFindings(output: CompanyBriefingGenerationOutput): stri
   for (const { finding, note, sources } of goldFindings) {
     const topicLabel = topicLabelForFinding(output, finding);
     const paragraphs = buildGoldStandardParagraphs(finding, note!, sources);
-    if (paragraphs.length < 2) continue;
+    if (paragraphs.length < 1) continue;
     html += `<div style="margin-bottom:28px;">`;
     if (topicLabel) {
       html += `<p style="font-size:13px;color:${AMBER};line-height:1.35;margin:0 0 6px;font-weight:750;font-family:-apple-system,sans-serif;text-transform:uppercase;letter-spacing:1px;">${esc(topicLabel)}</p>`;
@@ -344,7 +344,7 @@ function splitLongParagraphForEmail(value: string): string[] {
   return [joinSentences(sentences.slice(0, midpoint)), joinSentences(sentences.slice(midpoint))].filter(Boolean);
 }
 
-function capParagraphsToWordTarget(paragraphs: string[], maxWords = 250): string[] {
+function capParagraphsToWordTarget(paragraphs: string[], maxWords = 150): string[] {
   const out: string[] = [];
   let total = 0;
   for (const paragraph of paragraphs) {
@@ -380,8 +380,8 @@ function buildGoldStandardParagraphs(
   const editedParagraphs = splitCleanParagraphs(finding.body || "")
     .filter((paragraph) => !/^the source trail includes concrete markers/i.test(paragraph))
     .filter((paragraph) => !/add different layers to the same tracked topic/i.test(paragraph));
-  if (wordCount(editedParagraphs.join(" ")) >= 120) {
-    return capParagraphsToWordTarget(editedParagraphs, 250);
+  if (wordCount(editedParagraphs.join(" ")) >= 80) {
+    return capParagraphsToWordTarget(editedParagraphs, 150);
   }
 
   const facts = note.key_facts
@@ -430,7 +430,7 @@ function buildGoldStandardParagraphs(
     paragraphs
       .map((paragraph) => customerEnglishText(paragraph))
       .filter((paragraph) => paragraph.split(/\s+/).length >= 18),
-    250,
+    150,
   );
 }
 

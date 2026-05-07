@@ -1694,7 +1694,7 @@ export interface CompanyResearchedUnderstandingLayer {
   company_profile_id: string;
   company_name: string;
   scan_date: string;
-  target_cluster_count: { min: 5; max: 8 };
+  target_cluster_count: { min: number; max: number };
   research_standard: {
     principle: "external_articles_are_evidence_albis_findings_are_the_product";
     no_shallow_reporting_dressed_as_insight: true;
