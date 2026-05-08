@@ -443,6 +443,46 @@ export async function processProfileSignals(
       };
     }
 
+    const { data: existingBriefing, error: existingBriefingErr } = await supabase
+      .from("company_briefings")
+      .select("id,status,delivery_status")
+      .eq("company_profile_id", rawProfile.id)
+      .eq("briefing_date", scanDate)
+      .maybeSingle();
+    if (existingBriefingErr) {
+      throw new Error(
+        `Failed to check existing company_briefings row: ${existingBriefingErr.message}`,
+      );
+    }
+
+    const alreadyDelivered =
+      existingBriefing?.status === "delivered" ||
+      existingBriefing?.delivery_status === "sent";
+    if (alreadyDelivered) {
+      log(
+        `  Existing ${scanDate} briefing already delivered for ${rawProfile.company_name}; preserving sent row and skipping rewrite`,
+      );
+      return {
+        company_name: rawProfile.company_name,
+        company_profile_id: rawProfile.id,
+        signals_considered: profileSignals.length,
+        signals_selected: package8.selected_count,
+        signal_level: signalLevel,
+        briefing_id: existingBriefing.id,
+        content_version: "company_scanner_report_v1",
+        status: "already_delivered",
+        reason: "preserved_sent_daily_briefing",
+        qa_status: qaReportForPersistence?.status,
+        qa_blocking_failures: blockingFailures,
+        dry_run_would_have_status: package8.dry_run_metadata?.would_have_status,
+        retrieval_mode: retrievalSummary.mode,
+        retrieval_intent: retrievalSummary.intent,
+        retrieval_queries: retrievalSummary.queries,
+        retrieval_signals_loaded: retrievalSummary.signals_loaded,
+        deep_dive_signals_added: package8.deep_dive_retrieval?.signals_added,
+      };
+    }
+
     // Persist reviewable briefing artifacts even when QA says hold. QA should
     // block delivery, not erase the evidence we need to inspect and improve.
     // Rows with blockers stay status='pending', so the delivery endpoint will
@@ -624,6 +664,27 @@ export async function processProfileSignals(
     signalLevel,
     selected,
   );
+
+  const { data: existingBriefing, error: existingBriefingErr } = await supabase
+    .from("company_briefings")
+    .select("id,status,delivery_status")
+    .eq("company_profile_id", rawProfile.id)
+    .eq("briefing_date", scanDate)
+    .maybeSingle();
+  if (existingBriefingErr) {
+    throw new Error(
+      `Failed to check existing company_briefings row: ${existingBriefingErr.message}`,
+    );
+  }
+  if (
+    existingBriefing?.status === "delivered" ||
+    existingBriefing?.delivery_status === "sent"
+  ) {
+    log(
+      `✅ Existing ${scanDate} briefing already delivered for ${rawProfile.company_name}; preserving sent row`,
+    );
+    return;
+  }
 
   const { data: briefingRow, error: briefingErr } = await supabase
     .from("company_briefings")
