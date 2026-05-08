@@ -8,6 +8,12 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: 'Attention Odds Board — Albis',
   description: 'A daily Albis attention-intelligence board for undercovered stories, coverage momentum, and narrative blind spots. Not betting odds.',
+  alternates: { canonical: 'https://www.albis.news/attention-odds' },
+  openGraph: {
+    title: 'Attention Odds Board — Albis',
+    description: 'A daily attention-intelligence board for undercovered stories and coverage momentum. Not betting odds.',
+    url: 'https://www.albis.news/attention-odds',
+  },
 };
 
 export default async function AttentionOddsPage() {

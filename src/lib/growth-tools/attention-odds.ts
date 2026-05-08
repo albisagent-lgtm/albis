@@ -17,10 +17,15 @@ function label(signal: number) {
 
 export function buildAttentionOddsBoard(items: ScanItem[]): AttentionOddsStory[] {
   return buildMispricedAttention(items)
-    .map((story) => {
-      const pgiBoost = story.perceptionGap ? Math.min(16, story.perceptionGap * 1.8) : 0;
-      const missingBoost = Math.min(18, story.missingFrom.length * 3);
-      const attentionSignal = Math.max(1, Math.min(95, Math.round(story.directionalGapSignal * 0.72 + pgiBoost + missingBoost)));
+    .map((story, index) => {
+      const pgiBoost = story.perceptionGap ? Math.min(12, story.perceptionGap * 1.2) : 0;
+      const missingBoost = Math.min(20, story.missingFrom.length * 2.2);
+      const breadthPenalty = Math.min(14, (story.coverageBreadth ?? 0) * 1.4);
+      const rankTaper = Math.min(10, index * 1.5);
+      const attentionSignal = Math.max(
+        34,
+        Math.min(89, Math.round(story.directionalGapSignal * 0.42 + pgiBoost + missingBoost - breadthPenalty - rankTaper)),
+      );
       return {
         ...story,
         attentionSignal,
@@ -29,7 +34,7 @@ export function buildAttentionOddsBoard(items: ScanItem[]): AttentionOddsStory[]
         confirmSignals: [
           'More regions begin covering the same story or adjacent consequences.',
           'Follow-on reporting connects the story to trade, policy, security, health, or daily-life impacts.',
-          'PGI/GAI signals remain elevated after the next scan cycle.',
+          'PGI/GAI signals remain elevated after the next Albis update.'
         ],
         denySignals: [
           'The story stays local with no wider follow-through.',
