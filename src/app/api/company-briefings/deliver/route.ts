@@ -272,7 +272,10 @@ export async function POST(req: NextRequest) {
           currentLocalHour = now.getUTCHours();
         }
 
-        if (currentLocalHour !== preferredHour) {
+        // Hourly delivery should be a lower bound, not an exact one-hour-only
+        // gate. If generation finishes late, paid companies must still receive
+        // that day's briefing instead of waiting forever in `pending`.
+        if (currentLocalHour < preferredHour) {
           details.push({
             company_name: profile.company_name,
             status: "waiting",

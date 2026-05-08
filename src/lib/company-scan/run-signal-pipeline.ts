@@ -368,10 +368,35 @@ export async function processProfileSignals(
       },
     );
 
-    const blockingFailures = package8.qa_report?.blocking_failures?.length ?? 0;
+    const originalBlockingFailures = package8.qa_report?.blocking_failures || [];
+    const dailySendGuarantee = process.env.COMPANY_DAILY_SEND_GUARANTEE === "1";
+    const downgradableForDailySend = new Set([
+      "V1_GOLD_TOO_FEW_EMAIL_SECTIONS",
+      "V1_GOLD_SOURCE_CLUSTERS_TOO_THIN",
+      "V1_GOLD_FINDINGS_TOO_SHORT",
+      "POLICY_MAX_EMAIL_ITEMS",
+    ]);
+    const deliveryBlockingFailures = dailySendGuarantee
+      ? originalBlockingFailures.filter((failure: any) => !downgradableForDailySend.has(failure?.code))
+      : originalBlockingFailures;
+    const qaReportForPersistence = dailySendGuarantee && deliveryBlockingFailures.length !== originalBlockingFailures.length
+      ? {
+          ...package8.qa_report,
+          blocking_failures: deliveryBlockingFailures,
+          daily_send_guarantee_override: {
+            applied: true,
+            original_blocking_failures: originalBlockingFailures,
+            note: "Downgraded non-safety quality blockers so active companies still receive a daily briefing. Fix retrieval/editorial quality, but do not silently skip delivery.",
+          },
+        }
+      : package8.qa_report;
+    const blockingFailures = deliveryBlockingFailures.length;
     log(
       `  Package 8 preview selected ${package8.selected_count} item(s); ` +
-        `QA=${package8.qa_report?.status || "unknown"}, blockers=${blockingFailures}`,
+        `QA=${package8.qa_report?.status || "unknown"}, blockers=${originalBlockingFailures.length}` +
+        (dailySendGuarantee && blockingFailures !== originalBlockingFailures.length
+          ? `, delivery_blockers=${blockingFailures} (daily-send guarantee)`
+          : ""),
     );
 
     if (dryRun || !writeBriefingRows) {
@@ -440,8 +465,12 @@ export async function processProfileSignals(
             retrieval_summary: retrievalSummary,
             deep_dive_retrieval: package8.deep_dive_retrieval,
             dedupe_summary: package8.dedupe_summary,
-            qa_report: package8.qa_report,
-            review_status: blockingFailures > 0 ? "hold" : "ready_for_delivery_review",
+            qa_report: qaReportForPersistence,
+            review_status: blockingFailures > 0
+              ? "hold"
+              : dailySendGuarantee && originalBlockingFailures.length > 0
+                ? "daily_send_guarantee_override"
+                : "ready_for_delivery_review",
           },
           generated_at: new Date().toISOString(),
         },
@@ -489,7 +518,7 @@ export async function processProfileSignals(
       signal_level: signalLevel,
       briefing_id: briefingRow.id,
       content_version: "company_scanner_report_v1",
-      qa_status: package8.qa_report?.status,
+      qa_status: qaReportForPersistence?.status,
       qa_blocking_failures: blockingFailures,
       dry_run_would_have_status: package8.dry_run_metadata?.would_have_status,
       retrieval_mode: retrievalSummary.mode,

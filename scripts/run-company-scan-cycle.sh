@@ -35,6 +35,13 @@ exec > >(tee -a "${LOG_FILE}") 2>&1
 
 SCAN_DATE="${COMPANY_SCAN_DATE:-$(date -u +%F)}"
 
+# Paid Company Daily Scan reliability defaults. Search spend should be
+# controlled by dedupe/cache and outreach discipline, not by aborting customer
+# daily briefings mid-run. Non-safety QA issues should be logged/escalated, but
+# should not leave active companies without a daily email.
+export COMPANY_RETRIEVAL_LIVE_SEARCH_BUDGET_PER_RUN="${COMPANY_RETRIEVAL_LIVE_SEARCH_BUDGET_PER_RUN:-260}"
+export COMPANY_DAILY_SEND_GUARANTEE="${COMPANY_DAILY_SEND_GUARANTEE:-1}"
+
 if [[ -n "${COMPANY_SCAN_WINDOW:-}" ]]; then
   WINDOW_ARG="--window=${COMPANY_SCAN_WINDOW}"
 else

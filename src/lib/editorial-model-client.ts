@@ -29,6 +29,10 @@ function extractJsonObject(text: string): string {
   throw new Error("editorial_model_no_json_object");
 }
 
+function parseEditorialJsonText<T>(text: string): T {
+  return JSON.parse(extractJsonObject(text)) as T;
+}
+
 async function getCloudflareAiBinding(): Promise<any | null> {
   try {
     const mod = await import("@opennextjs/cloudflare");
@@ -180,11 +184,41 @@ async function callOpenClawSystemModel<T>(input: GenerateEditorialJsonInput): Pr
   const result = JSON.parse(String(stdout || "{}"));
   const text = result?.outputs?.[0]?.text || result?.text || "";
   if (!text) throw new Error("openclaw_system_editorial_empty");
-  return {
-    json: JSON.parse(extractJsonObject(text)) as T,
-    provider: "openclaw-system",
-    model: result?.model || model,
-  };
+  try {
+    return {
+      json: parseEditorialJsonText<T>(text),
+      provider: "openclaw-system",
+      model: result?.model || model,
+    };
+  } catch (parseError) {
+    // The gateway model occasionally returns nearly-valid JSON with a single
+    // malformed string/array despite --json. Repair once with a compact prompt
+    // instead of failing the whole paid company briefing run.
+    const repairPrompt = [
+      "Repair this malformed JSON into valid JSON only. Do not add facts.",
+      "Preserve the intended fields and values as much as possible.",
+      "The expected top-level object has: overview, topics, observations, source_note.",
+      "Return JSON only, no markdown.",
+      "MALFORMED_JSON:",
+      text.slice(0, Number(process.env.ALBIS_EDITORIAL_REPAIR_INPUT_CHARS || 60000)),
+    ].join("\n");
+    const repairArgs = ["capability", "model", "run", "--gateway", "--json", "--prompt", repairPrompt];
+    if (process.env[input.modelEnv || ""] || process.env.OPENCLAW_MODEL) {
+      repairArgs.splice(4, 0, "--model", model);
+    }
+    const repaired = await execFileAsync("openclaw", repairArgs, {
+      timeout: Number(process.env.ALBIS_EDITORIAL_MODEL_TIMEOUT_MS || 600000),
+      maxBuffer: Number(process.env.ALBIS_EDITORIAL_MODEL_MAX_BUFFER || 20 * 1024 * 1024),
+    });
+    const repairResult = JSON.parse(String(repaired.stdout || "{}"));
+    const repairText = repairResult?.outputs?.[0]?.text || repairResult?.text || "";
+    if (!repairText) throw parseError;
+    return {
+      json: parseEditorialJsonText<T>(repairText),
+      provider: "openclaw-system",
+      model: repairResult?.model || result?.model || model,
+    };
+  }
 }
 
 export async function generateEditorialJson<T>(input: GenerateEditorialJsonInput): Promise<EditorialModelResult<T>> {
