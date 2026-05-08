@@ -370,8 +370,22 @@ export async function processProfileSignals(
 
     const originalBlockingFailures = package8.qa_report?.blocking_failures || [];
     const dailySendGuarantee = process.env.COMPANY_DAILY_SEND_GUARANTEE === "1";
+    const minimumCustomerStories = Math.max(
+      1,
+      Number(process.env.COMPANY_DAILY_SEND_MIN_EMAIL_STORIES || 7),
+    );
+    const researchedEmailFindings = package8.briefing_content?.understanding?.researched_understanding_v1?.findings?.filter(
+      (finding: any) => ["email_main", "email_secondary"].includes(finding?.placement),
+    ).length || 0;
+    const mainBriefingItems = package8.briefing_content?.main_briefing?.sections?.reduce(
+      (total: number, section: any) => total + (Array.isArray(section?.items) ? section.items.length : 0),
+      0,
+    ) || 0;
+    const customerEmailStoryCount = researchedEmailFindings || mainBriefingItems;
     const downgradableForDailySend = new Set([
-      "V1_GOLD_TOO_FEW_EMAIL_SECTIONS",
+      ...(customerEmailStoryCount >= minimumCustomerStories
+        ? ["V1_GOLD_TOO_FEW_EMAIL_SECTIONS"]
+        : []),
       "V1_GOLD_SOURCE_CLUSTERS_TOO_THIN",
       "V1_GOLD_FINDINGS_TOO_SHORT",
       "POLICY_MAX_EMAIL_ITEMS",
@@ -386,16 +400,19 @@ export async function processProfileSignals(
           daily_send_guarantee_override: {
             applied: true,
             original_blocking_failures: originalBlockingFailures,
-            note: "Downgraded non-safety quality blockers so active companies still receive a daily briefing. Fix retrieval/editorial quality, but do not silently skip delivery.",
+            minimum_customer_stories: minimumCustomerStories,
+            customer_email_story_count: customerEmailStoryCount,
+            note: "Downgraded non-safety quality blockers so active companies still receive a daily briefing. The too-few-stories blocker is only downgraded when the customer-facing email still has at least the configured minimum story count. Fix retrieval/editorial quality, but do not silently skip delivery.",
           },
         }
       : package8.qa_report;
     const blockingFailures = deliveryBlockingFailures.length;
     log(
       `  Package 8 preview selected ${package8.selected_count} item(s); ` +
-        `QA=${package8.qa_report?.status || "unknown"}, blockers=${originalBlockingFailures.length}` +
+        `QA=${package8.qa_report?.status || "unknown"}, blockers=${originalBlockingFailures.length}, ` +
+        `customer_stories=${customerEmailStoryCount}` +
         (dailySendGuarantee && blockingFailures !== originalBlockingFailures.length
-          ? `, delivery_blockers=${blockingFailures} (daily-send guarantee)`
+          ? `, delivery_blockers=${blockingFailures} (daily-send guarantee, min_stories=${minimumCustomerStories})`
           : ""),
     );
 
