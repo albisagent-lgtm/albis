@@ -53,24 +53,36 @@ echo "log: ${LOG_FILE}"
 
 echo
 echo "[1/2] deliver eligible company briefings"
+DELIVERY_FAILURES=0
 for DATE in "${DELIVERY_DATES[@]}"; do
   echo "-- briefing_date=${DATE}"
-  curl --fail --silent --show-error \
+  if ! curl --fail --silent --show-error \
     -X POST "${BASE_URL%/}/api/company-briefings/deliver" \
     -H "Authorization: Bearer ${SCAN_INGEST_KEY}" \
     -H "Content-Type: application/json" \
-    -d "{\"briefing_date\":\"${DATE}\"}"
+    -d "{\"briefing_date\":\"${DATE}\"}"; then
+    DELIVERY_FAILURES=$((DELIVERY_FAILURES + 1))
+    echo "⚠️ Delivery request failed for briefing_date=${DATE}; continuing so other dates and trial followups still run"
+  fi
   echo
 done
 
 echo
 echo "[2/2] send expired-trial followups"
-curl --fail --silent --show-error \
+FOLLOWUP_FAILURES=0
+if ! curl --fail --silent --show-error \
   -X POST "${BASE_URL%/}/api/trials/send-ended-followups" \
   -H "Authorization: Bearer ${SCAN_INGEST_KEY}" \
   -H "Content-Type: application/json" \
-  -d '{}'
+  -d '{}'; then
+  FOLLOWUP_FAILURES=1
+  echo "⚠️ Trial followup request failed"
+fi
 echo
 
 echo
 echo "=== delivery cycle complete ==="
+if [[ "${DELIVERY_FAILURES}" -gt 0 || "${FOLLOWUP_FAILURES}" -gt 0 ]]; then
+  echo "❌ delivery cycle completed with failures: delivery=${DELIVERY_FAILURES}, followups=${FOLLOWUP_FAILURES}"
+  exit 1
+fi
