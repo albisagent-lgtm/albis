@@ -60,8 +60,11 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          # Public Supabase values are intentionally hardcoded here so the
+          # Next/OpenNext build cannot inline empty strings when optional
+          # GitHub secrets are absent. Runtime also has these in wrangler.jsonc.
+          NEXT_PUBLIC_SUPABASE_URL: https://wguydvzpxwsgrhvojpnk.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: sb_publishable_TijRtvYeJ-iL8HhhS8NpMg_zbla_orj
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
