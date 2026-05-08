@@ -41,6 +41,8 @@ SCAN_DATE="${COMPANY_SCAN_DATE:-$(date -u +%F)}"
 # should not leave active companies without a daily email.
 export COMPANY_RETRIEVAL_LIVE_SEARCH_BUDGET_PER_RUN="${COMPANY_RETRIEVAL_LIVE_SEARCH_BUDGET_PER_RUN:-260}"
 export COMPANY_DAILY_SEND_GUARANTEE="${COMPANY_DAILY_SEND_GUARANTEE:-1}"
+export COMPANY_SCAN_DELIVER_AFTER_GENERATE="${COMPANY_SCAN_DELIVER_AFTER_GENERATE:-1}"
+export ALBIS_BASE_URL="${ALBIS_BASE_URL:-https://www.albis.news}"
 
 if [[ -n "${COMPANY_SCAN_WINDOW:-}" ]]; then
   WINDOW_ARG="--window=${COMPANY_SCAN_WINDOW}"
@@ -72,7 +74,7 @@ COMPANY_BRIEFINGS_WRITE_ENABLED="${COMPANY_BRIEFINGS_WRITE_ENABLED:-1}" \
     --company-specific-retrieval \
     --deep-dive-retrieval
 
-if [[ "${COMPANY_SCAN_DELIVER_AFTER_GENERATE:-0}" == "1" ]]; then
+if [[ "${COMPANY_SCAN_DELIVER_AFTER_GENERATE:-1}" == "1" ]]; then
   echo
   echo "[4/4] deliver generated company briefings"
   if [[ -z "${ALBIS_BASE_URL:-}" || -z "${SCAN_INGEST_KEY:-}" ]]; then
