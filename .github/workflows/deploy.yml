@@ -42,8 +42,8 @@ jobs:
             local name="$1"
             local value="${!name:-}"
             if [ -z "$value" ]; then
-              echo "::error::Missing required GitHub secret: $name"
-              exit 1
+              echo "::warning::Missing GitHub secret: $name; skipping Cloudflare runtime sync for this secret"
+              return 0
             fi
             printf '%s' "$value" | npx wrangler secret put "$name"
           }
