@@ -127,6 +127,18 @@ const BANNED_PHRASES = [
   'belongs in the published set',
   'gives the scan',
   'item editorial weight',
+  'stronger live signal in the scan',
+  'live signal in the scan',
+  'the scan flags',
+  'patterns in the scan',
+  'framing pattern in the scan',
+  'reporting attention is clustered',
+  'coverage is clustering',
+  'broader scan',
+  'published set',
+  'writeability',
+  'draft quality',
+  'the scan does not support',
 ];
 
 function fail(msg: string): never {
@@ -675,27 +687,26 @@ function buildWhyItMattersParagraph(packet: StoryPacket) {
 }
 
 function buildContextParagraph(packet: StoryPacket) {
-  const significanceText = packet.significance === 'high' || packet.significance === 'critical'
-    ? 'This is one of the stronger live signals in the scan.'
-    : 'It may not be the loudest story of the cycle, but it still bends the operating picture.';
   const detail = pickFreshDetail(packet);
-  return `${significanceText} The important phase is usually the stretch after the trigger but before everyone accepts a new baseline. That is when officials test wording, operators test workarounds, and the first real clues appear around ${detail} rather than in the headline itself.`.replace(/\s+/g, ' ').trim();
+  const connection = sentenceCase(packet.connection || 'The development changes the immediate context around the story.');
+  return `${connection} The next test is practical: whether ${detail} changes decisions, routes, budgets, access, legal exposure, or public pressure in ways that outlast the first headline.`.replace(/\s+/g, ' ').trim();
 }
 
 function buildReaderUsefulnessParagraph(packet: StoryPacket) {
-  const texture = packet.articleSignals?.sourceTexture?.length ? `The current evidence already has ${packet.articleSignals.sourceTexture.join(', ')}.` : '';
-  const pairWith = packet.articleSignals?.pairWith?.length ? `If the signal keeps building, it naturally opens into ${packet.articleSignals.pairWith.join(' or ')} follow-up coverage.` : '';
+  const texture = packet.articleSignals?.sourceTexture?.length ? `Current reporting points to ${packet.articleSignals.sourceTexture.join(', ')}.` : '';
+  const pairWith = packet.articleSignals?.pairWith?.length ? `The story may also connect to ${packet.articleSignals.pairWith.join(' or ')} as it develops.` : '';
   const detail = pickFreshDetail(packet);
-  return `For the reader, the useful question is what would make this visibly more real by tomorrow or next week. On this story, that likely shows up in things like ${detail}, access decisions, pricing moves, staffing pressure, or the fine print around the next official step. ${texture} ${pairWith}`.replace(/\s+/g, ' ').trim();
+  return `The useful question now is where the consequences become visible first. For this story, that may be ${detail}, access decisions, pricing moves, staffing pressure, or the fine print around the next official step. ${texture} ${pairWith}`.replace(/\s+/g, ' ').trim();
 }
 
 function buildWhatToWatchParagraph(packet: StoryPacket) {
   const detail = pickFreshDetail(packet);
-  return `From here, the follow-through matters more than the quote. Watch whether ${detail} actually changes on the ground, whether neighbouring actors copy or resist the move, and whether the story starts showing up in places that were initially quiet. That is usually the moment when a local-seeming development reveals itself as a wider systems signal.`;
+  return `The immediate question is whether ${detail} changes on the ground, whether neighbouring actors copy or resist the move, and whether the issue begins appearing in places that were initially quiet.`;
 }
 
 function buildClosingParagraph(packet: StoryPacket) {
-  return `By the end, the shape of the story should feel clearer: a real shift, a traceable consequence chain, or a human or systems angle that disappears if you stay with the broad headline alone. Not every item needs to sound monumental. It does need to leave the reader with something concrete to watch tomorrow.`;
+  const detail = pickFreshDetail(packet);
+  return `For now, ${detail} is the place to keep watching. If the consequences spread beyond the first announcement, the story will stop looking like a single update and start looking like a new baseline.`;
 }
 
 function buildFramingMapLede(packet: StoryPacket) {
@@ -932,8 +943,8 @@ function buildPlanDrivenTurningPointWatch(packet: StoryPacket, plan: StoryPlan) 
   const location = packet.articleSignals?.primaryLocation || packet.primaryRegion;
   const actors = packet.articleSignals?.mainActors?.slice(0, 2).join(' and ');
   return joinSentences(
-    `The next phase is less about the announcement than about follow-through in ${location}.`,
-    actors ? `${actors} are now part of the watch list because their next choices will show whether this turn hardens into a new baseline or remains a short-lived jolt.` : 'The next choices on the ground will show whether this turn hardens into a new baseline or remains a short-lived jolt.',
+    `In ${location}, the test is whether the announcement changes what happens next, not just what gets said next.`,
+    actors ? `${actors} will show through their next moves whether this becomes a durable shift or a short interruption.` : 'The next choices on the ground will show whether this becomes a durable shift or a short interruption.',
     ensurePeriod(plan.walkaway),
   );
 }
