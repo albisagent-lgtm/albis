@@ -14,7 +14,7 @@ export default function TermsPage() {
           Terms of Service
         </h1>
         <p className="mt-3 text-sm text-zinc-400 dark:text-zinc-500">
-          Last updated: 19 February 2026
+          Last updated: 8 May 2026
         </p>
       </header>
 
@@ -28,9 +28,14 @@ export default function TermsPage() {
             algorithms optimised for engagement, without ads.
           </p>
           <p className="mt-3">
-            Albis is not a news publisher. We surface patterns, framing
-            differences, and blind spots across the media landscape to give you
-            a clearer picture of what&apos;s happening in the world.
+            Albis is not a traditional news publisher. We surface patterns,
+            framing differences, and blind spots across the media landscape to
+            give you a clearer picture of what&apos;s happening in the world.
+          </p>
+          <p className="mt-3">
+            Company Daily Scan is a private intelligence layer that filters the
+            Albis scan through an organisation&apos;s sector, regions, risks,
+            exposures, and watchlist.
           </p>
         </Section>
 
@@ -100,6 +105,29 @@ export default function TermsPage() {
           </ul>
         </Section>
 
+        <Section title="Trials">
+          <p>
+            Company Daily Scan trials are intended to let you evaluate the
+            service before subscribing. Unless otherwise stated, trials last for
+            three days. When a trial ends, generation and delivery may stop
+            unless an active paid subscription is in place.
+          </p>
+          <p className="mt-3">
+            We may refuse, suspend, or end a trial if we believe it is being
+            misused, duplicated, or created to avoid payment.
+          </p>
+        </Section>
+
+        <Section title="Company profiles and watchlists">
+          <p>
+            If you provide company profile details, sectors, regions, risks,
+            watchlists, or other business context, you confirm that you have the
+            right to provide that information and use it with Albis. You are
+            responsible for keeping profile details accurate and for reviewing
+            any briefing before acting on it.
+          </p>
+        </Section>
+
         {/* Content & IP */}
         <Section title="Intellectual property">
           <p>
@@ -129,6 +157,10 @@ export default function TermsPage() {
               Our content is not financial, legal, or professional advice.
             </li>
             <li>
+              Company Daily Scan is an intelligence aid, not a decision-making
+              authority.
+            </li>
+            <li>
               We are not liable for decisions made based on information
               presented on Albis.
             </li>
@@ -142,6 +174,15 @@ export default function TermsPage() {
             total liability for any claim arising from your use of the service
             shall not exceed the amount you paid us in the 12 months preceding
             the claim.
+          </p>
+        </Section>
+
+        <Section title="Email and outreach">
+          <p>
+            We may contact organisations or individuals where we reasonably
+            believe Albis may be relevant to their work. We aim to keep outreach
+            respectful, limited, and easy to opt out of. You can unsubscribe or
+            ask us not to contact you again at any time.
           </p>
         </Section>
 

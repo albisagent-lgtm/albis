@@ -14,7 +14,7 @@ export default function PrivacyPage() {
           Privacy Policy
         </h1>
         <p className="mt-3 text-sm text-zinc-400 dark:text-zinc-500">
-          Last updated: 19 February 2026
+          Last updated: 8 May 2026
         </p>
       </header>
 
@@ -56,6 +56,21 @@ export default function PrivacyPage() {
               </strong>{" "}
               — your subscription tier and onboarding selections.
             </li>
+            <li>
+              <strong className="text-zinc-700 dark:text-zinc-300">
+                Company profile data
+              </strong>{" "}
+              — details you provide for Company Daily Scan, such as company
+              name, sector, regions, risks, watchlists, delivery preferences,
+              and recipient emails.
+            </li>
+            <li>
+              <strong className="text-zinc-700 dark:text-zinc-300">
+                Email communication data
+              </strong>{" "}
+              — delivery, bounce, unsubscribe, suppression, and reply metadata
+              needed to operate email responsibly.
+            </li>
           </ul>
           <p className="mt-3">
             We collect only the minimum information needed to deliver and
@@ -70,6 +85,16 @@ export default function PrivacyPage() {
             <li>We do not track you for advertising purposes.</li>
             <li>We do not build behavioural profiles for ad targeting.</li>
             <li>We do not use your reading history to serve ads.</li>
+          </ul>
+        </Section>
+
+        <Section title="How we use your information">
+          <ul className="mt-3 list-inside list-disc space-y-2">
+            <li>To create and deliver public briefings, account features, and Company Daily Scan briefings.</li>
+            <li>To manage subscriptions, trials, billing status, and customer support.</li>
+            <li>To send service emails, briefing emails, trial updates, and requested newsletters.</li>
+            <li>To respect unsubscribe, suppression, and do-not-contact requests.</li>
+            <li>To improve quality, reliability, safety, and abuse prevention.</li>
           </ul>
         </Section>
 
@@ -148,15 +173,21 @@ export default function PrivacyPage() {
             </li>
             <li>
               <strong className="text-zinc-700 dark:text-zinc-300">
-                Vercel
+                Cloudflare
               </strong>{" "}
-              — hosting and deployment.
+              — hosting, delivery, and application infrastructure.
             </li>
             <li>
               <strong className="text-zinc-700 dark:text-zinc-300">
                 Stripe
               </strong>{" "}
               — payment processing (we never store your card details directly).
+            </li>
+            <li>
+              <strong className="text-zinc-700 dark:text-zinc-300">
+                Resend
+              </strong>{" "}
+              — transactional, briefing, and outreach email delivery.
             </li>
           </ul>
         </Section>

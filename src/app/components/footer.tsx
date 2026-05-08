@@ -127,6 +127,9 @@ export function Footer() {
             <Link href="/terms" className="inline-flex min-h-[44px] items-center text-xs text-zinc-400 hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400">
               Terms
             </Link>
+            <Link href="/disclaimer" className="inline-flex min-h-[44px] items-center text-xs text-zinc-400 hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400">
+              Disclaimer
+            </Link>
           </div>
         </div>
       </div>

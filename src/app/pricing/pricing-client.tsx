@@ -119,6 +119,13 @@ export default function PricingClient() {
               Create a free account
             </Link>
           </p>
+          <p className="mx-auto mt-3 max-w-2xl text-xs leading-relaxed text-zinc-400 dark:text-zinc-600">
+            Company Daily Scan is for informational intelligence only. It is not legal, financial, investment, compliance, or professional advice, and does not guarantee complete coverage of every relevant risk or source. See our{" "}
+            <Link href="/disclaimer" className="text-[#c8922a] hover:underline">
+              disclaimer
+            </Link>
+            .
+          </p>
         </div>
 
         {/* Value props */}

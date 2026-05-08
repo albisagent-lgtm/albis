@@ -235,7 +235,9 @@ export function generateCompanyBriefingHtmlV2(
     <tr><td style="padding:20px 40px 32px;text-align:center;border-top:3px solid ${NAVY};">
       <div style="font-size:11px;color:#9ca3af;line-height:1.7;font-family:-apple-system,sans-serif;">
         You're receiving this because your company profile is active on <a href="${escAttr(SITE)}" style="color:#9ca3af;text-decoration:underline;">albis.news</a><br>
+        This briefing is informational intelligence only, not legal, financial, investment, compliance, or professional advice.<br>
         <a href="${escAttr(`${SITE}/dashboard/profile`)}" style="color:#9ca3af;text-decoration:underline;">Update delivery preferences</a>
+        &nbsp;·&nbsp; <a href="${escAttr(`${SITE}/disclaimer`)}" style="color:#9ca3af;text-decoration:underline;">Disclaimer</a>
         &nbsp;·&nbsp; Intelligence, not noise.
       </div>
     </td></tr>

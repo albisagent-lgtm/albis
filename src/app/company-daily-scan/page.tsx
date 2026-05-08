@@ -74,6 +74,9 @@ export default function CompanyDailyScanPage() {
             <p className="mt-4 text-xs leading-relaxed text-zinc-400 dark:text-zinc-500">
               Built from the same intelligence layer that powers the public Albis briefing.
             </p>
+            <p className="mt-3 max-w-xl text-[11px] leading-relaxed text-zinc-400 dark:text-zinc-600">
+              Company Daily Scan is an informational intelligence briefing, not legal, financial, investment, compliance, or professional advice. You remain responsible for decisions made from any briefing.
+            </p>
           </div>
 
           <div className="rounded-3xl border border-black/[0.07] bg-white p-5 shadow-[0_16px_50px_rgb(0,0,0,0.08)] dark:border-white/[0.07] dark:bg-white/[0.04] dark:shadow-none">
@@ -201,6 +204,9 @@ export default function CompanyDailyScanPage() {
             Read today&apos;s public briefing
           </Link>
         </div>
+        <p className="mx-auto mt-5 max-w-xl text-xs leading-relaxed text-zinc-400 dark:text-zinc-500">
+          Albis helps surface source-backed signals and gaps, but no scan can guarantee complete coverage of every risk, source, region, or event. See our <Link href="/disclaimer" className="text-[#c8922a] underline decoration-[#c8922a]/30 underline-offset-2">disclaimer</Link>.
+        </p>
       </section>
     </main>
   );
