@@ -88,7 +88,7 @@ export interface SignalPipelineProfileResult {
   retrieval_queries?: number;
   retrieval_signals_loaded?: number;
   deep_dive_signals_added?: number;
-  status?: "skipped" | "dry_run";
+  status?: "skipped" | "dry_run" | "already_delivered";
   reason?: string;
 }
 
@@ -683,7 +683,17 @@ export async function processProfileSignals(
     log(
       `✅ Existing ${scanDate} briefing already delivered for ${rawProfile.company_name}; preserving sent row`,
     );
-    return;
+    return {
+      company_name: rawProfile.company_name,
+      company_profile_id: rawProfile.id,
+      signals_considered: signals.length,
+      signals_selected: selected.length,
+      signal_level: signalLevel,
+      briefing_id: existingBriefing.id,
+      status: "already_delivered",
+      reason: "preserved_sent_daily_briefing",
+      content_version: "legacy_what_changed",
+    };
   }
 
   const { data: briefingRow, error: briefingErr } = await supabase
