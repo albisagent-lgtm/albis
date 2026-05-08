@@ -308,6 +308,29 @@ export async function POST(req: NextRequest) {
         continue;
       }
 
+      const { data: claimedBriefing, error: claimErr } = await supabase
+        .from("company_briefings")
+        .update({
+          delivery_status: "sending",
+          delivery_attempted_at: new Date().toISOString(),
+        })
+        .eq("id", briefing.id)
+        .eq("delivery_status", "pending")
+        .select("id")
+        .maybeSingle();
+
+      if (claimErr || !claimedBriefing) {
+        details.push({
+          company_name: profile.company_name,
+          status: "skipped",
+          error: claimErr
+            ? `delivery_claim_failed:${claimErr.message}`
+            : "delivery_already_claimed_or_sent",
+          content_version: contentVersion,
+        });
+        continue;
+      }
+
       try {
         resend ||= getResendClient();
         const batch = recipients.map((to) => ({
@@ -351,7 +374,8 @@ export async function POST(req: NextRequest) {
         await supabase
           .from("company_briefings")
           .update({ delivery_status: "failed", delivery_error: errMsg })
-          .eq("id", briefing.id);
+          .eq("id", briefing.id)
+          .eq("delivery_status", "sending");
 
         emailsFailed++;
         details.push({
