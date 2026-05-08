@@ -335,11 +335,17 @@ async function recordDelivery(supabase: ReturnType<typeof createAdminClient>, ro
 }
 
 async function sendOne(resend: Resend, to: string, subject: string, html: string) {
+  const site = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.albis.news';
+  const unsubscribeUrl = `${site}/api/unsubscribe?email=${encodeURIComponent(to)}`;
   const { error } = await resend.emails.send({
     from: FROM_ADDRESS,
     to,
     subject,
-    html,
+    html: html.replaceAll('{{EMAIL}}', encodeURIComponent(to)),
+    headers: {
+      'List-Unsubscribe': `<${unsubscribeUrl}>`,
+      'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+    },
   });
   if (error) throw new Error(error.message);
 }

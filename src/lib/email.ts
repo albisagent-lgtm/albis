@@ -19,11 +19,18 @@ export async function sendEmail({
   html: string;
 }) {
   const resend = getResendClient();
+  const personalizedHtml = html.replaceAll("{{EMAIL}}", encodeURIComponent(to));
+  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://www.albis.news";
+  const unsubscribeUrl = `${site}/api/unsubscribe?email=${encodeURIComponent(to)}`;
   const { data, error } = await resend.emails.send({
     from: FROM_ADDRESS,
     to,
     subject,
-    html,
+    html: personalizedHtml,
+    headers: {
+      "List-Unsubscribe": `<${unsubscribeUrl}>`,
+      "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+    },
   });
 
   if (error) throw new Error(`Resend error: ${error.message}`);
