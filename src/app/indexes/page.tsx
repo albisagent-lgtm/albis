@@ -218,6 +218,19 @@ export default async function IndexesPage() {
         </Link>
       </section>
 
+      <section className="mb-16 grid gap-4 md:grid-cols-3">
+        {[
+          { href: "/indexes/mispriced-attention", label: "Mispriced Attention", text: "See stories where today’s attention looks misaligned with global significance." },
+          { href: "/datasets/perception-gap-index", label: "Public PGI dataset", text: "Download the Perception Gap Index dataset as JSON or CSV for research and citation." },
+          { href: "/tools/undercovered-story-finder", label: "Undercovered Story Finder", text: "Find candidate blind spots: stories detected in some regions but thin in others." },
+        ].map((item) => (
+          <Link key={item.href} href={item.href} className="rounded-2xl border border-black/[0.07] bg-white p-5 transition hover:border-[#c8922a]/40 hover:shadow-sm dark:border-white/[0.07] dark:bg-white/[0.03]">
+            <p className="text-sm font-semibold text-[#c8922a]">{item.label}</p>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">{item.text}</p>
+          </Link>
+        ))}
+      </section>
+
       {/* ━━ Perception Gap Index — Dashboard ━━ */}
       <section className="mb-16">
         <p className="text-center text-xs font-medium tracking-[0.2em] uppercase text-[#c8922a] mb-6">
