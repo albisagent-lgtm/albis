@@ -104,9 +104,9 @@ const supabase = createClient(SUPABASE_URL, SERVICE_KEY, {
 
 const MIN_WORD_COUNT = 420;
 const TARGET_WORD_COUNT = 480;
-const MIN_ARTICLE_COUNT = 7;
-const MAX_ARTICLE_COUNT = 10;
-const CANDIDATE_LIMIT = 45;
+const MIN_ARTICLE_COUNT = 10;
+const MAX_ARTICLE_COUNT = 14;
+const CANDIDATE_LIMIT = 70;
 const RECENT_IMAGE_WINDOW = 100;
 const BANNED_PHRASES = [
   'this is more than',

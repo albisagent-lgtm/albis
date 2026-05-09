@@ -15,6 +15,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/indexes/gai`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.7 },
     { url: `${base}/indexes/mispriced-attention`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 },
     { url: `${base}/attention-odds`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 },
+    { url: `${base}/market-attention`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 },
+    { url: `${base}/market-attention/methodology`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.6 },
     { url: `${base}/datasets/perception-gap-index`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 },
     { url: `${base}/tools/undercovered-story-finder`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 },
     { url: `${base}/what-am-i-missing`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 },
