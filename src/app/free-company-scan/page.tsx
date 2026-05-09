@@ -28,7 +28,7 @@ export default function FreeCompanyScanPage() {
               See the narrative risks normal monitoring misses.
             </h1>
             <p className="mt-5 max-w-xl font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-600 dark:text-zinc-400 md:text-xl">
-              Pick a team type and preview how Albis would turn global coverage, framing gaps, and early signals into a private daily scan.
+              Albis shows how stories are covered differently across regions, what coverage is missing, and what that could mean for your company, client, sector, or issue.
             </p>
             <div className="mt-7 space-y-3">
               {bullets.map((bullet) => (

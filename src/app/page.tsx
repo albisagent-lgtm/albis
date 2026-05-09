@@ -295,8 +295,8 @@ export default async function Home() {
           <h1 className="font-[family-name:var(--font-playfair)] text-3xl font-bold leading-[1.15] tracking-tight text-[#0f0f0f] dark:text-[#f0efec] md:text-[2.75rem] lg:text-5xl">
             We scan 60&nbsp;countries every morning so you don&apos;t miss what&nbsp;matters.
           </h1>
-          <p className="mx-auto mt-5 max-w-lg font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-500 dark:text-zinc-400 md:text-xl">
-            The world&apos;s news in 2&nbsp;minutes. Free.
+          <p className="mx-auto mt-5 max-w-xl font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-500 dark:text-zinc-400 md:text-xl">
+            A daily global news-intelligence system showing how stories are covered differently across regions — and what coverage is missing.
           </p>
           <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
