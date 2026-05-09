@@ -428,6 +428,67 @@ export default async function Home() {
 
       <SectionDivider />
 
+      <section className="bg-[#f8f7f4] dark:bg-[#0f0f0f]">
+        <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+          <div className="mb-8 max-w-2xl">
+            <p className="font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.2em] text-[#c8922a]">
+              Explore the signal
+            </p>
+            <h2 className="mt-3 font-[family-name:var(--font-playfair)] text-2xl font-bold leading-tight text-[#0f0f0f] dark:text-[#f0efec] md:text-4xl">
+              See what your feed is missing before it becomes obvious.
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 md:text-base">
+              Albis turns the daily global scan into public tools you can use, cite, and share — from undercovered stories to perception gaps and attention signals.
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                href: "/attention-odds",
+                label: "Attention Odds Board",
+                text: "Directional attention signals for stories that may be underpriced by ordinary feeds.",
+              },
+              {
+                href: "/tools/undercovered-story-finder",
+                label: "Undercovered Story Finder",
+                text: "Filter candidate stories by region, category, and evidence signal.",
+              },
+              {
+                href: "/what-am-i-missing",
+                label: "What Am I Missing?",
+                text: "A quick lens on stories thinly detected across major regional views.",
+              },
+              {
+                href: "/datasets/perception-gap-index",
+                label: "Public PGI Dataset",
+                text: "Download and cite Albis perception-gap data with methodology caveats.",
+              },
+            ].map((tool) => (
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="group rounded-2xl border border-black/[0.07] bg-white p-5 transition-colors hover:border-[#c8922a]/40 hover:bg-[#c8922a]/[0.035] dark:border-white/[0.08] dark:bg-white/[0.03] dark:hover:bg-[#c8922a]/[0.08]"
+              >
+                <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] transition-colors group-hover:text-[#c8922a] dark:text-[#f0efec]">
+                  {tool.label}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+                  {tool.text}
+                </p>
+                <p className="mt-4 text-sm font-semibold text-[#c8922a]">
+                  Open tool &rarr;
+                </p>
+              </Link>
+            ))}
+          </div>
+          <p className="mt-5 text-xs leading-relaxed text-zinc-400 dark:text-zinc-500">
+            Attention signals are directional editorial/data signals, not betting odds, financial predictions, or certainty claims.
+          </p>
+        </div>
+      </section>
+
+      <SectionDivider />
+
       {/* ═══════════════════════════════════════════════════════
           2. TODAY'S TOP STORIES
           ═══════════════════════════════════════════════════════ */}
