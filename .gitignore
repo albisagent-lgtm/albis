@@ -59,3 +59,7 @@ scripts/tmp_*
 logs/company-scan-cycle/*.log
 logs/company-delivery-cycle/*.log
 logs/company-delivery-cycle/launchd.*.log
+
+# Growth Desk runtime logs
+logs/growth-desk/*.log
+logs/growth-desk/state/

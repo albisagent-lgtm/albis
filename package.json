@@ -11,7 +11,9 @@
     "sync:today": "tsx scripts/sync-scans.ts --today",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "growth:desk": "tsx scripts/run-growth-desk.ts",
+    "growth:report": "tsx scripts/run-growth-desk-daily-report.ts"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
