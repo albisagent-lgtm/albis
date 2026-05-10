@@ -56,6 +56,7 @@ function formatDate(value?: string | null) {
   const date = value ? new Date(value) : new Date();
   if (Number.isNaN(date.getTime())) return "Today";
   return date.toLocaleDateString("en-GB", {
+    timeZone: "Pacific/Auckland",
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -68,10 +69,12 @@ function formatTime(value?: string | null) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "Preparing now";
   return date.toLocaleString("en-GB", {
+    timeZone: "Pacific/Auckland",
     day: "numeric",
     month: "short",
     hour: "2-digit",
     minute: "2-digit",
+    timeZoneName: "short",
   });
 }
 
