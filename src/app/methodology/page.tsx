@@ -48,6 +48,23 @@ export default function MethodologyPage() {
 
         <div className="mt-space-8 rounded-2xl border border-[#c8922a]/20 bg-[#c8922a]/[0.04] p-5 dark:bg-[#c8922a]/[0.08]">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c8922a]">
+            Trust through inspectability
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            We show the working: what we scan, where coverage differs, what may be missing, what is still unclear, and when a correction is needed.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link href="/corrections" className="text-sm font-semibold text-[#c8922a] hover:underline">
+              Corrections & Updates &rarr;
+            </Link>
+            <Link href="/signals/weather-risk" className="text-sm font-semibold text-[#c8922a] hover:underline">
+              Weather & Risk Signals &rarr;
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-space-8 rounded-2xl border border-black/[0.06] bg-white p-5 dark:border-white/[0.08] dark:bg-white/[0.035]">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">
             Same engine, private translation
           </p>
           <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
@@ -56,6 +73,20 @@ export default function MethodologyPage() {
           <Link href="/company-daily-scan" className="mt-3 inline-block text-sm font-semibold text-[#c8922a] hover:underline">
             See how this becomes a company scan &rarr;
           </Link>
+        </div>
+
+        <div className="mt-space-16 border-t border-black/5 pt-space-16 dark:border-white/5">
+          <h2 className="text-xs font-medium tracking-[0.15em] uppercase text-zinc-400 mb-space-6">
+            How Albis Works
+          </h2>
+          <div className="space-y-space-4 font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
+            <p>
+              Albis detects emerging stories, collects coverage across regions and languages, clusters related reporting, compares frames and omissions, then turns the result into a public briefing written in plain language.
+            </p>
+            <p>
+              We do not claim omniscience or replace original reporting. We aim to make the information environment easier to inspect: fact, claim, interpretation, uncertainty, and missing context kept separate.
+            </p>
+          </div>
         </div>
 
         {/* The Problem We Are Solving */}
@@ -345,7 +376,6 @@ export default function MethodologyPage() {
               "All scoring is documented and consistent.",
               "We flag when our own methodology has limitations.",
               "Sources are listed in every article.",
-              "We never fabricate quotes or data.",
             ].map((point) => (
               <div key={point} className="flex gap-3">
                 <span className="text-[#c8922a] mt-1 shrink-0">—</span>
