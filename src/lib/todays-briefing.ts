@@ -75,6 +75,23 @@ function formatTime(value?: string | null) {
   });
 }
 
+function latestDateLabel(...values: Array<string | null | undefined>) {
+  let latest: Date | null = null;
+  let latestRaw: string | null = null;
+
+  for (const value of values) {
+    if (!value) continue;
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) continue;
+    if (!latest || date.getTime() > latest.getTime()) {
+      latest = date;
+      latestRaw = value;
+    }
+  }
+
+  return formatDate(latestRaw);
+}
+
 function regionList(item: ScanItem) {
   const regions = [...new Set((item.regions || []).map(normalizeRegion).filter((r) => r !== "global"))];
   return regions.map((r) => REGION_LABELS[r] || r).slice(0, 4);
@@ -232,11 +249,12 @@ export function buildTodayBriefing(snapshot: SiteSnapshot, posts: BlogPost[]): T
   const attentionStory = stories.find((story) => story.globalAttention === "Low") || stories[stories.length - 1];
 
   return {
-    dateLabel: formatDate(snapshot.briefingDate || snapshot.scanDate || snapshot.updatedAt),
+    dateLabel: latestDateLabel(snapshot.scanDate, snapshot.briefingDate, snapshot.updatedAt),
     summary:
       snapshot.briefingSummary ||
       snapshot.briefingTitle ||
       snapshot.topTheme ||
+      stories[0]?.headline ||
       "A calm two-minute briefing on what happened, how it is being framed, and what may be missing.",
     stories,
     perspectiveGap: {
