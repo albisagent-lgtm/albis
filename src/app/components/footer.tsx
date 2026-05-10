@@ -35,6 +35,7 @@ export function Footer() {
                 <FooterLink href="/tech">Tech</FooterLink>
                 <FooterLink href="/climate">Climate</FooterLink>
                 <FooterLink href="/life-systems">Life Systems</FooterLink>
+                <FooterLink href="/signals/weather-risk">Weather & Risk</FooterLink>
                 <FooterLink href="/perspectives">Perspectives</FooterLink>
                 <FooterLink href="/indexes">Indexes</FooterLink>
               </ul>
@@ -57,7 +58,9 @@ export function Footer() {
               <ul className="mt-4 space-y-2.5">
                 <FooterLink href="/trending">Trending</FooterLink>
                 <FooterLink href="/about">About</FooterLink>
+                <FooterLink href="/editorial">Editorial standards</FooterLink>
                 <FooterLink href="/methodology">Methodology</FooterLink>
+                <FooterLink href="/corrections">Corrections</FooterLink>
                 <li>
                   <a
                     href="/feed.xml"

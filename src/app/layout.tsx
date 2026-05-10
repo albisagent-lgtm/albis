@@ -11,6 +11,7 @@ import { ThemeToggle } from "./components/theme-toggle";
 import { NavAuth, NavLinks } from "./components/nav-auth";
 import { MobileNav } from "./components/mobile-nav";
 import { Footer } from "./components/footer";
+import { AnalyticsEvents } from "./components/analytics-events";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -234,6 +235,8 @@ export default function RootLayout({
 
         {/* Footer */}
         <Footer />
+
+        <AnalyticsEvents />
 
         {/* Mobile bottom navigation */}
         <MobileNav />

@@ -85,6 +85,9 @@ export default async function Home() {
                 <Link href="#top-stories" className="inline-flex h-11 items-center rounded-full bg-[#0f0f0f] px-5 text-sm font-semibold text-white transition hover:bg-zinc-800 dark:bg-[#f0efec] dark:text-[#0f0f0f]">
                   Start briefing
                 </Link>
+                <Link href="/editorial" className="inline-flex h-11 items-center rounded-full border border-black/10 px-5 text-sm font-semibold text-zinc-700 transition hover:border-[#c8922a]/45 hover:text-[#c8922a] dark:border-white/15 dark:text-zinc-300">
+                  How Albis works
+                </Link>
                 <Link href="/archive" className="inline-flex h-11 items-center rounded-full border border-black/10 px-5 text-sm font-semibold text-zinc-700 transition hover:border-[#c8922a]/45 hover:text-[#c8922a] dark:border-white/15 dark:text-zinc-300">
                   Browse archive
                 </Link>
@@ -164,7 +167,10 @@ export default async function Home() {
       <section className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
         <div className="grid gap-5 md:grid-cols-3">
           {[
-            ["How Albis works", "Trust through inspectability: what we scan, what we do not claim, and how corrections work.", "/methodology"],
+            ["Editorial standards", "How Albis scans, writes, holds uncertainty, and corrects public work.", "/editorial"],
+            ["Weather & Risk Signals", "Physical risk first, market-implied signals second, evidence before urgency.", "/signals/weather-risk"],
+            ["Corrections & updates", "A visible record of what changed, why it changed, and what evidence supports it.", "/corrections"],
+            ["Methodology", "PGI, GAI, attention signals, and the limits of what the indexes can claim.", "/methodology"],
             ["Public indexes", "Follow PGI, GAI, and attention signals without treating them as certainty claims.", "/indexes"],
             ["Company Daily Scan", "Translate the same global picture into private risks, sectors, regions, and watchlists.", "/company-daily-scan"],
           ].map(([title, text, href]) => (

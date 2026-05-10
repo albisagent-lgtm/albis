@@ -272,7 +272,7 @@ export function PgiChart({ data }: { data: PgiPoint[] }) {
         <RangeSelector active={range} onChange={setRange} availableRanges={availableRanges} />
       </div>
       <div className="h-80 w-full md:h-96">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
           <AreaChart data={filtered} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
             <defs>
               <linearGradient id="pgiGradFull" x1="0" y1="0" x2="0" y2="1">
@@ -379,7 +379,7 @@ export function GaiChart({ data }: { data: GaiPoint[] }) {
         <RangeSelector active={range} onChange={setRange} availableRanges={availableRanges} />
       </div>
       <div className="h-80 w-full md:h-96">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
           <AreaChart data={filtered} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
             <defs>
               <linearGradient id="gaiGradFull" x1="0" y1="0" x2="0" y2="1">
@@ -493,7 +493,7 @@ export function DivergenceChart({
         <RangeSelector active={range} onChange={setRange} availableRanges={availableRanges} />
       </div>
       <div className="h-80 w-full md:h-[28rem]">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
           <AreaChart data={filtered} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
             <defs>
               <linearGradient id="pgiDivGrad" x1="0" y1="0" x2="0" y2="1">

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { SubscriberCount } from "./subscriber-count";
+import { trackAlbisEvent } from "./analytics-events";
 
 interface EmailCaptureProps {
   variant?: "default" | "hero";
@@ -32,6 +33,7 @@ export function EmailCapture({ variant = "default", showSocialProof = false, sho
     e.preventDefault();
     if (!email.trim()) return;
 
+    trackAlbisEvent("albis_email_signup_submit", { source: source || "unknown", page_path: window.location.pathname });
     setStatus("loading");
     try {
       const res = await fetch("/api/subscribe", {
@@ -49,6 +51,7 @@ export function EmailCapture({ variant = "default", showSocialProof = false, sho
       const data = await res.json();
       if (res.ok) {
         setStatus("success");
+        trackAlbisEvent("albis_email_signup_success", { source: source || "unknown", page_path: window.location.pathname });
         setMessage(data.message || "You're on the list!");
         setEmail("");
       } else {
@@ -103,7 +106,7 @@ export function EmailCapture({ variant = "default", showSocialProof = false, sho
           <input
             type="email"
             value={email}
-            onChange={(e) => { setEmail(e.target.value); setStatus("idle"); }}
+            onChange={(e) => { if (!email) trackAlbisEvent("albis_email_signup_start", { source: source || "unknown", page_path: window.location.pathname }); setEmail(e.target.value); setStatus("idle"); }}
             placeholder="you@example.com"
             required
             className="h-14 flex-1 rounded-full border border-black/10 bg-white px-space-6 text-sm text-[#0f0f0f] placeholder-zinc-400 outline-none focus:border-[#c8922a]/30 focus:ring-1 focus:ring-[#c8922a]/20 dark:border-white/15 dark:bg-white/10 dark:text-white dark:placeholder-white/40 dark:focus:border-white/30 dark:focus:ring-white/20"
@@ -164,7 +167,7 @@ export function EmailCapture({ variant = "default", showSocialProof = false, sho
         <input
           type="email"
           value={email}
-          onChange={(e) => { setEmail(e.target.value); setStatus("idle"); }}
+          onChange={(e) => { if (!email) trackAlbisEvent("albis_email_signup_start", { source: source || "unknown", page_path: window.location.pathname }); setEmail(e.target.value); setStatus("idle"); }}
           placeholder="you@example.com"
           required
           className="h-13 flex-1 rounded-full border border-white/15 bg-white/10 px-5 text-sm text-white placeholder-white/40 outline-none backdrop-blur-sm focus:border-white/30 focus:ring-1 focus:ring-white/20"

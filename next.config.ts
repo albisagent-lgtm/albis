@@ -10,6 +10,9 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    root: process.cwd(),
+  },
   images: {
     // Cloudflare Pages has no default image optimizer; without this every
     // <Image> would 500 on Cloudflare. Addresses § F.6 of the execution plan.
