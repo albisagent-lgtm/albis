@@ -1532,7 +1532,10 @@ async function buildArticles(items: ScanItem[], date: string) {
     }
   }
 
-  if (selected.length === 0) fail('No article candidates passed the quality gate');
+  if (selected.length === 0) {
+    console.log('⚠️ No article candidates passed the quality gate; continuing with briefing + snapshot so the daily public product is not blocked by article drafting');
+    return selected;
+  }
   if (selected.length < MIN_ARTICLE_COUNT) {
     console.log(`⚠️ Only ${selected.length} article(s) passed the quality gate; selector targeted ${targetArticleCount}, but drafting quality blocked the rest`);
   } else if (selected.length < targetArticleCount) {
@@ -1724,9 +1727,13 @@ async function main() {
     console.warn(`⚠️ Edition QA report artifact skipped: ${err instanceof Error ? err.message : String(err)}`);
   }
 
-  writeArticlesLocally(articles);
-  await ingestArticles(articles);
-  await verifyArticles(articles);
+  if (articles.length > 0) {
+    writeArticlesLocally(articles);
+    await ingestArticles(articles);
+    await verifyArticles(articles);
+  } else {
+    console.log('⚠️ Article publication skipped for this cycle; no quality-passing articles were produced');
+  }
 
   if (shouldRunLiveBriefing) {
     run('npx', ['tsx', 'scripts/run-daily-briefing-pipeline.ts', date]);
