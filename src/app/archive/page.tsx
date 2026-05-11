@@ -67,7 +67,7 @@ function formatDate(dateStr: string): string {
   });
 }
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
 export default async function ArchivePage() {
   const briefings = await getBriefings();
