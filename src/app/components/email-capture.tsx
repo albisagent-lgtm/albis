@@ -94,7 +94,7 @@ export function EmailCapture({ variant = "default", showSocialProof = false, sho
             {heading}
           </p>
         )}
-        <form onSubmit={handleSubmit} className="relative flex flex-col gap-space-3 sm:flex-row">
+        <form onSubmit={handleSubmit} className="relative flex flex-col gap-space-3">
           <input
             type="text"
             name="website"
@@ -109,12 +109,12 @@ export function EmailCapture({ variant = "default", showSocialProof = false, sho
             onChange={(e) => { if (!email) trackAlbisEvent("albis_email_signup_start", { source: source || "unknown", page_path: window.location.pathname }); setEmail(e.target.value); setStatus("idle"); }}
             placeholder="you@example.com"
             required
-            className="h-14 flex-1 rounded-full border border-black/10 bg-white px-space-6 text-sm text-[#0f0f0f] placeholder-zinc-400 outline-none focus:border-[#c8922a]/30 focus:ring-1 focus:ring-[#c8922a]/20 dark:border-white/15 dark:bg-white/10 dark:text-white dark:placeholder-white/40 dark:focus:border-white/30 dark:focus:ring-white/20"
+            className="h-14 w-full rounded-full border border-black/10 bg-white px-space-6 text-sm text-[#0f0f0f] placeholder-zinc-400 outline-none focus:border-[#c8922a]/30 focus:ring-1 focus:ring-[#c8922a]/20 dark:border-white/15 dark:bg-white/10 dark:text-white dark:placeholder-white/40 dark:focus:border-white/30 dark:focus:ring-white/20"
           />
           <button
             type="submit"
             disabled={status === "loading"}
-            className="h-14 min-w-[44px] rounded-full bg-[#c8922a] px-10 text-sm font-semibold text-white shadow-[0_4px_16px_rgb(200,146,42,0.3)] hover:bg-[#b17f24] disabled:opacity-70 dark:shadow-[0_4px_16px_rgb(200,146,42,0.5)]"
+            className="h-14 w-full rounded-full bg-[#c8922a] px-6 text-sm font-semibold text-white shadow-[0_4px_16px_rgb(200,146,42,0.3)] hover:bg-[#b17f24] disabled:opacity-70 dark:shadow-[0_4px_16px_rgb(200,146,42,0.5)]"
           >
             {status === "loading" ? "..." : "Get the free briefing"}
           </button>
