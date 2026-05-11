@@ -460,8 +460,10 @@ async function main() {
     }
   }
 
-  if (!dryRun) {
+  if (!dryRun && !onlyEmail) {
     await markBriefingStatus(supabase, briefing.id, failed > 0 ? 'partial' : 'sent');
+  } else if (!dryRun && onlyEmail) {
+    console.log('ℹ️ Single-recipient delivery completed; leaving global briefing delivery_status unchanged');
   }
 
   console.log(JSON.stringify({
