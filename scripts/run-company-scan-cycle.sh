@@ -59,15 +59,32 @@ echo "scan_date: ${SCAN_DATE}"
 NPX="${NPX:-npx}"
 
 echo
-echo "[1/3] build-watch-graph"
+echo "[0/4] check active company scan demand"
+set +e
+${NPX} tsx scripts/check-company-scan-demand.ts
+DEMAND_RC=$?
+set -e
+if [[ "${DEMAND_RC}" -eq 78 ]]; then
+  echo "✅ No real paid/trialing company profiles need scanning; skipping watch graph, live retrieval, briefing generation, and delivery."
+  echo
+  echo "=== cycle complete (skipped: no active company scan demand) ==="
+  exit 0
+fi
+if [[ "${DEMAND_RC}" -ne 0 ]]; then
+  echo "❌ active company scan demand check failed (rc=${DEMAND_RC})"
+  exit "${DEMAND_RC}"
+fi
+
+echo
+echo "[1/4] build-watch-graph"
 ${NPX} tsx scripts/build-watch-graph.ts
 
 echo
-echo "[2/3] run-company-scan"
+echo "[2/4] run-company-scan"
 ${NPX} tsx scripts/run-company-scan.ts --date="${SCAN_DATE}" ${WINDOW_ARG}
 
 echo
-echo "[3/3] run-company-signal-pipeline"
+echo "[3/4] run-company-signal-pipeline"
 COMPANY_BRIEFINGS_WRITE_ENABLED="${COMPANY_BRIEFINGS_WRITE_ENABLED:-1}" \
   ${NPX} tsx scripts/run-company-signal-pipeline.ts "${SCAN_DATE}" \
     --write-briefing-rows \

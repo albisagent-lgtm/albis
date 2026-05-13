@@ -82,6 +82,19 @@ interface MappingRow {
   company_profile_id: string;
 }
 
+interface CompanyProfileRow {
+  id: string;
+  owner_id: string;
+  onboarding_completed: boolean | null;
+}
+
+interface OwnerProfileRow {
+  id: string;
+  subscription_status: string | null;
+  trial_end_at: string | null;
+  is_test_account: boolean | null;
+}
+
 interface RetrievalClusterRow {
   id: string;
   cluster_label: string;
@@ -98,7 +111,21 @@ export interface WatchGraphSummary {
   clusters_built: number;
   scan_targets_upserted: number;
   scan_targets_deactivated: number;
+  eligible_company_profiles: number;
   cluster_breakdown: Record<ClusterType, { canonicals: number; companies: number }>;
+}
+
+function hasBillableCompanyScanAccess(owner: OwnerProfileRow | undefined): boolean {
+  if (!owner) return false;
+  // Test accounts are useful for manual QA, but they must not keep the paid
+  // scanner/search layer alive automatically. Set up an explicit manual run if
+  // we need QA output; scheduled scans should exist only for real trialing/paid
+  // companies.
+  if (owner.is_test_account === true) return false;
+  if (owner.subscription_status === "active") return true;
+  if (owner.subscription_status !== "trialing") return false;
+  if (!owner.trial_end_at) return false;
+  return new Date(owner.trial_end_at).getTime() > Date.now();
 }
 
 /**
@@ -108,14 +135,38 @@ export interface WatchGraphSummary {
 export async function buildUnionWatchGraph(
   supabase: SupabaseClient
 ): Promise<WatchGraphSummary> {
-  // 1) Pull every canonical that has demand and the mappings that drive it.
+  // 1) Pull only demand from real companies that are currently paying or in an
+  // unexpired trial. Expired/non-paying companies and internal test accounts
+  // must not keep scan_targets alive, otherwise the shared retrieval layer keeps
+  // spending money after the trial has ended.
+  const [{ data: profiles, error: profileErr }, { data: ownerProfiles, error: ownerErr }] =
+    await Promise.all([
+      supabase
+        .from("company_profiles")
+        .select("id, owner_id, onboarding_completed")
+        .eq("onboarding_completed", true),
+      supabase
+        .from("profiles")
+        .select("id, subscription_status, trial_end_at, is_test_account"),
+    ]);
+  if (profileErr) throw new Error(`company_profiles load failed: ${profileErr.message}`);
+  if (ownerErr) throw new Error(`profiles load failed: ${ownerErr.message}`);
+
+  const ownersById = new Map(
+    ((ownerProfiles || []) as OwnerProfileRow[]).map((owner) => [owner.id, owner]),
+  );
+  const eligibleCompanyIds = new Set(
+    ((profiles || []) as CompanyProfileRow[])
+      .filter((profile) => hasBillableCompanyScanAccess(ownersById.get(profile.owner_id)))
+      .map((profile) => profile.id),
+  );
+
   const [{ data: canonicals, error: canErr }, { data: mappings, error: mapErr }, { data: aliases, error: aliasErr }] =
     await Promise.all([
       supabase
         .from("canonical_topics")
         .select("id, canonical_label, topic_type, active_company_count")
-        .eq("is_active", true)
-        .gt("active_company_count", 0),
+        .eq("is_active", true),
       supabase
         .from("company_canonical_mappings")
         .select("canonical_topic_id, company_profile_id"),
@@ -128,8 +179,11 @@ export async function buildUnionWatchGraph(
   if (aliasErr) throw new Error(`canonical_topic_aliases load failed: ${aliasErr.message}`);
 
   const canonicalsActive = (canonicals || []) as CanonicalRow[];
-  const mappingRows = (mappings || []) as MappingRow[];
+  const mappingRows = ((mappings || []) as MappingRow[]).filter((mapping) =>
+    eligibleCompanyIds.has(mapping.company_profile_id),
+  );
   const aliasRows = (aliases || []) as AliasRow[];
+  const activeCanonicalIds = new Set(mappingRows.map((mapping) => mapping.canonical_topic_id));
 
   // Companies-by-canonical, used both for cluster counts and for the
   // active-canonical set check.
@@ -150,6 +204,7 @@ export async function buildUnionWatchGraph(
   // 2) Group canonicals into clusters (cluster_type → canonical[]).
   const byClusterType = new Map<ClusterType, CanonicalRow[]>();
   for (const c of canonicalsActive) {
+    if (!activeCanonicalIds.has(c.id)) continue;
     const ct = clusterTypeFor(c.topic_type);
     const list = byClusterType.get(ct) || [];
     list.push(c);
@@ -277,9 +332,7 @@ export async function buildUnionWatchGraph(
     }
   }
 
-  // 5) Deactivate scan_targets whose canonical no longer has demand.
-  //    Active canonical IDs from this build:
-  const activeCanonicalIds = new Set(canonicalsActive.map((c) => c.id));
+  // 5) Deactivate scan_targets whose canonical no longer has billable demand.
   const { data: existingTargets, error: existingErr } = await supabase
     .from("scan_targets")
     .select("id, target_value, is_active")
@@ -304,6 +357,7 @@ export async function buildUnionWatchGraph(
     clusters_built: clustersBuilt,
     scan_targets_upserted: upsertedTargets,
     scan_targets_deactivated: scanTargetsDeactivated,
+    eligible_company_profiles: eligibleCompanyIds.size,
     cluster_breakdown: breakdown,
   };
 }

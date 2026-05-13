@@ -145,6 +145,18 @@ async function handle(req: NextRequest) {
     const supabase = getAdminClient();
 
     const watchGraph = await buildUnionWatchGraph(supabase);
+    if (watchGraph.eligible_company_profiles === 0) {
+      return NextResponse.json({
+        ok: true,
+        skipped: true,
+        reason: "no_active_company_scan_demand",
+        message:
+          "No real paid/trialing company profiles need scanning; skipped live retrieval, briefing generation, and delivery to avoid search spend.",
+        run_date: runDate,
+        run_window: window,
+        watch_graph: watchGraph,
+      });
+    }
     const scan = await runCompanyScan(supabase, runDate, window);
     const pipeline = await runCompanySignalPipeline(supabase, {
       scanDate: runDate,

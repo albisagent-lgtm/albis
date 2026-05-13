@@ -45,6 +45,8 @@ type OwnerProfile = {
   subscription_status: string | null;
   subscription_tier: string | null;
   subscription_period_end: string | null;
+  is_test_account: boolean | null;
+  trial_end_at: string | null;
 };
 
 export interface RunSignalPipelineOptions {
@@ -225,6 +227,15 @@ export async function runCompanySignalPipeline(
 
   for (const rawProfile of filteredProfiles as CompanyProfile[]) {
     const owner = ownerMap.get(rawProfile.owner_id);
+    if (owner?.is_test_account === true && process.env.COMPANY_SCAN_INCLUDE_TEST_ACCOUNTS !== "1") {
+      log(`↷ Skipping ${rawProfile.company_name}: test account excluded from scheduled scanner`);
+      results.push({
+        company_name: rawProfile.company_name,
+        status: "skipped",
+        reason: "test_account_excluded",
+      });
+      continue;
+    }
     if (!owner || !shouldGenerateBriefing(owner)) {
       log(`↷ Skipping ${rawProfile.company_name}: subscription inactive`);
       results.push({
