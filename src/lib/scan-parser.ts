@@ -32,13 +32,13 @@ const SCANS_DIR =
   process.env.SCANS_DIR ||
   "/Users/treelight/.openclaw/workspace/memory/scans";
 
-// Check if we're running on Vercel or in a production environment
-const isVercel = process.env.VERCEL === '1' || process.env.NODE_ENV === 'production';
+// Check if we're running in the hosted production environment (Cloudflare Workers/OpenNext)
+const isHostedProduction = process.env.NODE_ENV === 'production';
 const isLocal = typeof window === 'undefined' && fs.existsSync && fs.existsSync(SCANS_DIR);
 
 // Initialize Supabase client for server-side usage
 let supabase: any = null;
-if ((isVercel || !isLocal) && process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+if ((isHostedProduction || !isLocal) && process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
   supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -51,7 +51,7 @@ if ((isVercel || !isLocal) && process.env.NEXT_PUBLIC_SUPABASE_URL && process.en
 // ---------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------
-// Supabase data fetching (for Vercel/production)
+// Supabase data fetching (for hosted production)
 // ---------------------------------------------------------------------------
 
 async function getSupabaseScan(date: string, scanTime?: string): Promise<ParsedScan | null> {
@@ -295,8 +295,8 @@ export async function getTodayScan(): Promise<ParsedScan | null> {
   const nzDate = new Date(now.getTime() + 13 * 60 * 60 * 1000);
   const today = nzDate.toISOString().split("T")[0];
 
-  // Try Supabase first if we're on Vercel or local files don't exist
-  if (supabase && (isVercel || !isLocal)) {
+  // Try Supabase first if we're in hosted production or local files don't exist
+  if (supabase && (isHostedProduction || !isLocal)) {
     // Try today and the last 2 days as fallback (timezone mismatches, empty items)
     for (let daysBack = 0; daysBack < 3; daysBack++) {
       const d = new Date(nzDate);
@@ -332,7 +332,7 @@ export async function getTodayScan(): Promise<ParsedScan | null> {
 
 export async function getLatestScan(): Promise<ParsedScan | null> {
   // Try Supabase first if available
-  if (supabase && (isVercel || !isLocal)) {
+  if (supabase && (isHostedProduction || !isLocal)) {
     const dates = await getSupabaseAvailableDates();
     if (dates.length > 0) {
       return await getSupabaseScan(dates[0]);
@@ -361,7 +361,7 @@ export async function getLatestScan(): Promise<ParsedScan | null> {
 }
 
 export async function getScanByDate(date: string): Promise<ParsedScan | null> {
-  if (supabase && (isVercel || !isLocal)) {
+  if (supabase && (isHostedProduction || !isLocal)) {
     return await getSupabaseScan(date);
   }
 
@@ -388,7 +388,7 @@ export async function getScanByDate(date: string): Promise<ParsedScan | null> {
  */
 export async function getAvailableDates(): Promise<string[]> {
   // Try Supabase first if available
-  if (supabase && (isVercel || !isLocal)) {
+  if (supabase && (isHostedProduction || !isLocal)) {
     return await getSupabaseAvailableDates();
   }
 
@@ -414,7 +414,7 @@ export async function getRecentScanItems(days: number = 30): Promise<{ items: (S
   cutoff.setDate(cutoff.getDate() - days);
   const cutoffStr = cutoff.toISOString().split("T")[0];
 
-  if (supabase && (isVercel || !isLocal)) {
+  if (supabase && (isHostedProduction || !isLocal)) {
     try {
       const { data, error } = await supabase
         .from('scans')
@@ -480,7 +480,7 @@ export interface FramingComparison {
  */
 export async function getFramingItems(): Promise<FramingComparison[]> {
   // Try Supabase first if available
-  if (supabase && (isVercel || !isLocal)) {
+  if (supabase && (isHostedProduction || !isLocal)) {
     return await getSupabaseFramingItems();
   }
 
