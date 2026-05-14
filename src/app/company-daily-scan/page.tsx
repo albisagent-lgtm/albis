@@ -4,75 +4,118 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Company Daily Scan — Albis",
   description:
-    "A private daily briefing for your organisation, built from the global Albis scan. Track external risk, source gaps, sector movement, regions, and watchlists.",
+    "Daily intelligence for companies, clients, sectors, regions, and risk themes. Source-backed briefings, dashboard depth, demo-led onboarding, and self-serve trials.",
   openGraph: {
     title: "Company Daily Scan — Albis",
     description:
-      "The global picture, translated for your organisation. 10 source-backed stories delivered at your chosen local time.",
+      "A premium daily intelligence layer for teams monitoring clients, sectors, regions, policy, reputation, and geopolitical risk.",
   },
 };
 
+const demoHref =
+  "mailto:harry@albis.news?subject=Company%20Daily%20Scan%20demo&body=Hi%20Harry%2C%0A%0AI%27d%20like%20to%20book%20a%20Company%20Daily%20Scan%20demo.%0A%0ACompany%2Fteam%3A%0AWhat%20we%20monitor%3A%0AUseful%20times%3A%0A";
+
 const sampleItems = [
   {
+    label: "Geopolitical risk",
+    title: "Sanctions language shifts before the formal policy changes",
+    body:
+      "Domestic and regional sources begin repeating the same policy framing, while international coverage still treats the issue as speculative. For a risk team, the useful signal is the narrowing window before formal action.",
+  },
+  {
+    label: "Client monitoring",
+    title: "A local regulatory story starts crossing into sector coverage",
+    body:
+      "The first reports are local, but trade and policy outlets begin connecting the change to firms with cross-border exposure. Albis flags the client relevance before the story becomes a board-level question.",
+  },
+  {
     label: "Supply chain",
-    title: "Port delays widen beyond the headline lane",
+    title: "Route disruption is framed differently across source regions",
     body:
-      "Regional sources connect the disruption to labour pressure and customs backlogs, while English-language coverage focuses mainly on shipping prices. For a logistics team, the useful signal is the route fragility, not the market headline.",
-  },
-  {
-    label: "Policy",
-    title: "New tariff language appears first in domestic outlets",
-    body:
-      "The earliest signal is not a formal rule change yet, but repeated framing from ministry-linked sources. Albis flags it because procurement and pricing teams may need a watch window before the policy hardens.",
-  },
-  {
-    label: "Reputation",
-    title: "A local story begins crossing into international feeds",
-    body:
-      "Coverage is still uneven, but the story has moved from local reporting into regional aggregators. That pattern often matters before the issue reaches major global outlets.",
+      "English-language coverage focuses on prices, while regional reporting points to customs backlogs, labour pressure, and port capacity. The briefing separates headline noise from operational risk.",
   },
 ];
 
 const useCases = [
-  "Founders and operators who need a clean morning read",
-  "PR and reputation teams watching narrative shifts",
-  "Supply-chain teams tracking ports, routes, tariffs, and disruption",
-  "Public affairs teams following policy and regional framing",
-  "Researchers and analysts who need source trails, not noise",
-  "Global organisations exposed to fast-changing regional risk",
+  {
+    title: "Risk intelligence firms",
+    text: "Monitor sanctions, instability, regulatory change, geopolitical shifts, and region-specific signals for client work.",
+  },
+  {
+    title: "Policy and public affairs teams",
+    text: "Track legislation, regulation, government action, public narratives, and coverage gaps across countries.",
+  },
+  {
+    title: "Reputation and comms agencies",
+    text: "Watch emerging narratives, stakeholder-sensitive issues, media framing, and stories that may cross into wider coverage.",
+  },
+  {
+    title: "Logistics and supply-chain teams",
+    text: "Follow tariffs, sanctions, customs disruption, shipping routes, energy, food systems, and regional instability.",
+  },
+  {
+    title: "Consultants and advisory firms",
+    text: "Turn daily public signals into calm, source-backed notes for sectors, markets, clients, or internal briefs.",
+  },
+  {
+    title: "Leadership teams",
+    text: "Receive a concise executive read without losing the source trail and dashboard depth behind each finding.",
+  },
+];
+
+const packages = [
+  {
+    name: "Starter",
+    price: "from £99/mo",
+    audience: "For one company, sector, or risk watchlist.",
+    features: ["Daily email briefing", "Source-backed findings", "Basic dashboard archive", "One focused watchlist"],
+  },
+  {
+    name: "Professional",
+    price: "from £299/mo",
+    audience: "For consultancies, agencies, and small teams.",
+    features: ["Several companies, clients, or sectors", "Risk and region filters", "Multiple recipients", "Weekly summary option"],
+    highlighted: true,
+  },
+  {
+    name: "Intelligence Partner",
+    price: "custom / from £1,000+",
+    audience: "For firms using Albis in client or risk monitoring workflows.",
+    features: ["Custom client/risk watchlists", "White-labelled or client-ready summaries", "Priority setup", "Weekly analyst-style review"],
+  },
 ];
 
 export default function CompanyDailyScanPage() {
   return (
     <main className="min-h-screen bg-[#f8f7f4] text-[#0f0f0f] dark:bg-[#0f0f0f] dark:text-[#f0efec]">
       <section className="border-b border-black/[0.06] bg-gradient-to-b from-[#c8922a]/10 to-transparent dark:border-white/[0.06] dark:from-[#c8922a]/15">
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:py-24 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:py-24 lg:grid-cols-[1.04fr_0.96fr] lg:items-center">
           <div>
             <p className="font-[family-name:var(--font-inter)] text-xs font-semibold uppercase tracking-[0.22em] text-[#c8922a]">
               Company Daily Scan
             </p>
             <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-4xl font-bold leading-[1.08] tracking-tight md:text-6xl">
-              The global picture, translated for your organisation.
+              Daily intelligence for the companies, sectors, and risks your team watches.
             </h1>
             <p className="mt-5 max-w-xl font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-600 dark:text-zinc-400 md:text-xl">
-              Albis scans global news, source frames, and coverage gaps, then turns the useful signals into a private daily briefing for your sector, regions, risks, and watchlist.
+              Albis turns global news and public signals into a concise daily briefing around your clients, markets, regions, regulatory exposure, reputation, and watchlists.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/pricing"
+              <a
+                href={demoHref}
                 className="inline-flex h-11 items-center justify-center rounded-full bg-[#c8922a] px-6 text-sm font-semibold text-white shadow-[0_3px_14px_rgb(200,146,42,0.28)] transition-colors hover:bg-[#b17f24]"
               >
-                Start 3-day trial
-              </Link>
-              <a
-                href="#sample"
+                Book a demo
+              </a>
+              <Link
+                href="/pricing"
                 className="inline-flex h-11 items-center justify-center rounded-full border border-black/[0.12] px-6 text-sm font-semibold text-zinc-700 transition-colors hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-white/[0.12] dark:text-zinc-300"
               >
-                See sample scan
-              </a>
+                View self-serve plans
+              </Link>
             </div>
-            <p className="mt-4 text-xs leading-relaxed text-zinc-400 dark:text-zinc-500">
-              Built from the same intelligence layer that powers the public Albis briefing.
+            <p className="mt-4 text-xs leading-relaxed text-zinc-500 dark:text-zinc-500">
+              Prefer to click through? Companies can still start from the self-serve plans and set up a trial directly.
             </p>
             <p className="mt-3 max-w-xl text-[11px] leading-relaxed text-zinc-400 dark:text-zinc-600">
               Company Daily Scan is an informational intelligence briefing, not legal, financial, investment, compliance, or professional advice. You remain responsible for decisions made from any briefing.
@@ -84,14 +127,14 @@ export default function CompanyDailyScanPage() {
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8922a]">
-                    Private morning scan
+                    Example daily scan
                   </p>
                   <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold">
-                    Meridian Logistics
+                    Risk advisory watchlist
                   </h2>
                 </div>
                 <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
-                  10 signals
+                  8 curated findings
                 </span>
               </div>
               <div className="mt-5 space-y-4">
@@ -110,7 +153,7 @@ export default function CompanyDailyScanPage() {
                 ))}
               </div>
               <p className="mt-5 rounded-xl bg-[#c8922a]/10 p-3 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
-                Each send is gated by source depth, editorial quality, subscription/trial state, and your chosen delivery time.
+                The full scanner can preserve wider dashboard depth. The email stays concise: the strongest source-backed findings, written for decision-makers.
               </p>
             </div>
           </div>
@@ -118,10 +161,18 @@ export default function CompanyDailyScanPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-        <div className="grid gap-6 md:grid-cols-3">
-          <Feature title="10 useful stories" text="Not an alert dump. A concise daily briefing with the company-relevant items that passed quality checks." />
-          <Feature title="Source-backed" text="Open source links, source trails, and regional framing context when the wider picture matters." />
-          <Feature title="Timed to your day" text="Delivered at your chosen local hour, with the dashboard archive waiting whenever you need it." />
+        <div className="mb-8 max-w-2xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
+            Built for business monitoring
+          </p>
+          <h2 className="mt-3 font-[family-name:var(--font-playfair)] text-3xl font-bold md:text-4xl">
+            Know what changed before clients, boards, or leadership ask.
+          </h2>
+        </div>
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {useCases.map((useCase) => (
+            <Feature key={useCase.title} title={useCase.title} text={useCase.text} />
+          ))}
         </div>
       </section>
 
@@ -129,21 +180,21 @@ export default function CompanyDailyScanPage() {
         <div className="mx-auto grid max-w-6xl gap-8 px-6 py-16 md:grid-cols-2 md:py-20">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
-              How it fits Albis
+              Dashboard depth, email clarity
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-playfair)] text-3xl font-bold md:text-4xl">
-              The public briefing shows what is happening. The company scan shows what matters to you.
+              The scanner stays deep. The customer briefing stays sharp.
             </h2>
           </div>
           <div className="space-y-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400 md:text-base">
             <p>
-              Open Albis remains free: today&apos;s briefing, public articles, PGI, GAI, and the wider information-awareness mission.
+              The full scan can hold broader source trails, clusters, and excluded findings for review. That protects the intelligence depth behind the product.
             </p>
             <p>
-              The Company Daily Scan is the private layer: the same global scan filtered through your organisation&apos;s sector, regions, exposures, risks, and watchlist.
+              The daily email is curated separately: usually 7–12 findings that passed source depth, relevance, and editorial quality checks.
             </p>
             <p>
-              That means the business product does not replace the public side. It grows out of it.
+              For serious teams, we can configure the scan around clients, sectors, jurisdictions, risk themes, regions, and recipient groups.
             </p>
           </div>
         </div>
@@ -152,56 +203,65 @@ export default function CompanyDailyScanPage() {
       <section id="sample" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
         <div className="mb-8 max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
-            Sample structure
+            How a scan is shaped
           </p>
           <h2 className="mt-3 font-[family-name:var(--font-playfair)] text-3xl font-bold md:text-4xl">
-            Source signal → company relevance → perception gap → practical implication.
+            Source signal → business relevance → coverage gap → practical implication.
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
-            The scan is written to explain why a story matters for the organisation, not just that a headline exists.
+            The point is not to list headlines. It is to explain what changed, why it matters for the organisation, and where the source picture is uneven.
           </p>
         </div>
         <div className="grid gap-5 lg:grid-cols-4">
           <Step number="01" title="Source signal" text="What credible sources are reporting, and where the signal first appeared." />
-          <Step number="02" title="Company relevance" text="Why this touches your sector, geography, supply chain, reputation, or watchlist." />
+          <Step number="02" title="Business relevance" text="Why this touches your client, sector, geography, supply chain, reputation, or watchlist." />
           <Step number="03" title="Coverage gap" text="Where regions or source types are seeing the story differently — or not seeing it at all." />
-          <Step number="04" title="Implication" text="What to watch next, without overclaiming or turning the scan into noise." />
+          <Step number="04" title="Implication" text="What to monitor next, written carefully without turning the scan into advice or noise." />
         </div>
       </section>
 
       <section className="bg-[#0f0f0f] text-white">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:grid-cols-[0.9fr_1.1fr] md:py-20">
-          <div>
+        <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
+          <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
-              Who it helps
+              Packages
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-playfair)] text-3xl font-bold md:text-4xl">
-              Built for people who need signal before the day fills with noise.
+              Start small, or shape it around a serious intelligence workflow.
             </h2>
+            <p className="mt-3 text-sm leading-relaxed text-white/60">
+              Self-serve plans remain available. Higher-value teams can book a demo and configure watchlists, recipients, regions, and output depth around their actual workflow.
+            </p>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {useCases.map((useCase) => (
-              <div key={useCase} className="rounded-2xl border border-white/[0.08] bg-white/[0.04] p-4 text-sm leading-relaxed text-white/70">
-                {useCase}
-              </div>
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+            {packages.map((pkg) => (
+              <PackageCard key={pkg.name} {...pkg} />
             ))}
+          </div>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href={demoHref} className="inline-flex h-11 items-center justify-center rounded-full bg-[#c8922a] px-6 text-sm font-semibold text-white hover:bg-[#b17f24]">
+              Book a demo
+            </a>
+            <Link href="/pricing" className="inline-flex h-11 items-center justify-center rounded-full border border-white/[0.16] px-6 text-sm font-semibold text-white/80 hover:border-[#c8922a]/50 hover:text-[#c8922a]">
+              Click through to plans
+            </Link>
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-3xl px-6 py-16 text-center md:py-24">
         <h2 className="font-[family-name:var(--font-playfair)] text-3xl font-bold md:text-4xl">
-          Start with three free days.
+          For serious teams, book a demo. For direct setup, click through.
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 md:text-base">
-          Set up your company profile, choose your delivery time, and let Albis prepare the first private daily scan when the next cycle runs.
+          If you want a client, sector, policy, or risk-monitoring workflow, start with a demo. If you already know what you want to track, you can still choose a self-serve plan and begin with a trial.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <Link href="/pricing" className="inline-flex h-11 items-center justify-center rounded-full bg-[#c8922a] px-6 text-sm font-semibold text-white hover:bg-[#b17f24]">
-            View plans
-          </Link>
-          <Link href="/" className="inline-flex h-11 items-center justify-center rounded-full border border-black/[0.12] px-6 text-sm font-semibold text-zinc-700 hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-white/[0.12] dark:text-zinc-300">
-            Read today&apos;s public briefing
+          <a href={demoHref} className="inline-flex h-11 items-center justify-center rounded-full bg-[#c8922a] px-6 text-sm font-semibold text-white hover:bg-[#b17f24]">
+            Request a demo
+          </a>
+          <Link href="/pricing" className="inline-flex h-11 items-center justify-center rounded-full border border-black/[0.12] px-6 text-sm font-semibold text-zinc-700 hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-white/[0.12] dark:text-zinc-300">
+            View self-serve pricing
           </Link>
         </div>
         <p className="mx-auto mt-5 max-w-xl text-xs leading-relaxed text-zinc-400 dark:text-zinc-500">
@@ -227,6 +287,37 @@ function Step({ number, title, text }: { number: string; title: string; text: st
       <p className="text-xs font-bold tracking-[0.18em] text-[#c8922a]">{number}</p>
       <h3 className="mt-3 font-[family-name:var(--font-playfair)] text-lg font-semibold">{title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">{text}</p>
+    </div>
+  );
+}
+
+function PackageCard({
+  name,
+  price,
+  audience,
+  features,
+  highlighted,
+}: {
+  name: string;
+  price: string;
+  audience: string;
+  features: string[];
+  highlighted?: boolean;
+}) {
+  return (
+    <div className={`rounded-2xl border p-6 ${highlighted ? "border-[#c8922a]/45 bg-[#c8922a]/10" : "border-white/[0.1] bg-white/[0.04]"}`}>
+      {highlighted && <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#c8922a]">Best fit for teams</p>}
+      <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold">{name}</h3>
+      <p className="mt-2 text-lg font-semibold text-[#c8922a]">{price}</p>
+      <p className="mt-2 text-sm leading-relaxed text-white/65">{audience}</p>
+      <ul className="mt-5 space-y-2.5 text-sm text-white/70">
+        {features.map((feature) => (
+          <li key={feature} className="flex gap-2">
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c8922a]" />
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

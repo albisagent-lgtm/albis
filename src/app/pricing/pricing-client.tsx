@@ -38,6 +38,35 @@ export default function PricingClient() {
           </p>
         </div>
 
+        {/* Premium demo path */}
+        <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-[#c8922a]/25 bg-[#c8922a]/10 p-5 text-center dark:bg-[#c8922a]/[0.08]">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
+            For consultancies, risk teams, and client-monitoring workflows
+          </p>
+          <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+            Need multiple watchlists, regions, recipients, or client-ready summaries?
+          </h2>
+          <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Book a demo and we can shape the scan around your clients, sectors,
+            risk themes, and reporting workflow. Self-serve plans remain below
+            for companies that want to click through and start directly.
+          </p>
+          <div className="mt-4 flex flex-col justify-center gap-3 sm:flex-row">
+            <a
+              href="mailto:harry@albis.news?subject=Company%20Daily%20Scan%20demo"
+              className="inline-flex h-10 items-center justify-center rounded-full bg-[#c8922a] px-5 text-sm font-semibold text-white hover:bg-[#b17f24]"
+            >
+              Book a demo
+            </a>
+            <Link
+              href="/company-daily-scan"
+              className="inline-flex h-10 items-center justify-center rounded-full border border-black/[0.12] px-5 text-sm font-semibold text-zinc-700 hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-white/[0.12] dark:text-zinc-300"
+            >
+              See premium examples
+            </Link>
+          </div>
+        </div>
+
         {/* Billing toggle */}
         <div className="mt-10 flex items-center justify-center gap-3">
           <span
@@ -111,7 +140,8 @@ export default function PricingClient() {
         <div className="mt-10 text-center">
           <p className="text-sm text-zinc-400 dark:text-zinc-500">
             Already reading albis.news? The public briefing stays free. The
-            company scan is the private layer for organisations.{" "}
+            company scan is the private layer for organisations. Serious teams
+            can book a demo; smaller companies can still click through below.{" "}
             <Link
               href="/register"
               className="font-medium text-[#c8922a] hover:underline"
