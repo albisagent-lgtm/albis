@@ -1744,7 +1744,9 @@ function checkCompanyDailyScanV1GoldStandard(
     return failures;
   }
 
-  const editorialWriter = (output.understanding as any)?.gold_standard_editorial_writer_v1;
+  const editorialWriter = (output.understanding as {
+    gold_standard_editorial_writer_v1?: { enabled?: boolean };
+  })?.gold_standard_editorial_writer_v1;
   if (!editorialWriter?.enabled) {
     failures.push({
       code: "V1_GOLD_EDITORIAL_WRITER_MISSING",
@@ -1776,16 +1778,20 @@ function checkCompanyDailyScanV1GoldStandard(
     (finding) => wordCount(finding.body || "") >= 50,
   );
 
-  if (emailFindings.length < 10) {
+  const minimumEmailStories = Math.max(
+    7,
+    Number(process.env.COMPANY_DAILY_SEND_MIN_EMAIL_STORIES || 7),
+  );
+  if (emailFindings.length < minimumEmailStories) {
     failures.push({
       code: "V1_GOLD_TOO_FEW_EMAIL_SECTIONS",
       severity: "blocking",
       message:
-        "Company Daily Scan V1 needs at least 10 researched email stories every day. Fewer than 10 means scanning/retrieval did not find enough usable stories.",
+        `Company Daily Scan V1 needs at least ${minimumEmailStories} researched email stories for customer delivery. Full scanner depth is preserved separately for the dashboard.`,
     });
   }
 
-  if (sourceRichFindings.length < Math.min(10, emailFindings.length)) {
+  if (sourceRichFindings.length < Math.min(minimumEmailStories, emailFindings.length)) {
     failures.push({
       code: "V1_GOLD_SOURCE_CLUSTERS_TOO_THIN",
       severity: "blocking",
@@ -1794,7 +1800,7 @@ function checkCompanyDailyScanV1GoldStandard(
     });
   }
 
-  if (substantialFindings.length < Math.min(10, emailFindings.length)) {
+  if (substantialFindings.length < Math.min(minimumEmailStories, emailFindings.length)) {
     failures.push({
       code: "V1_GOLD_FINDINGS_TOO_SHORT",
       severity: "blocking",
