@@ -312,7 +312,6 @@ export async function POST(req: NextRequest) {
         .from("company_briefings")
         .update({
           delivery_status: "sending",
-          delivery_attempted_at: new Date().toISOString(),
         })
         .eq("id", briefing.id)
         .eq("delivery_status", "pending")

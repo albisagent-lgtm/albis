@@ -26,6 +26,13 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 cd "${REPO_ROOT}"
 
+if [[ -f ".env.local" ]]; then
+  set -a
+  # shellcheck disable=SC1091
+  source .env.local
+  set +a
+fi
+
 LOG_DIR="${REPO_ROOT}/logs/company-scan-cycle"
 mkdir -p "${LOG_DIR}"
 TIMESTAMP="$(date -u +%Y%m%dT%H%M%SZ)"
