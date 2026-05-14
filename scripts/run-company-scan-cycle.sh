@@ -47,7 +47,14 @@ export ALBIS_BASE_URL="${ALBIS_BASE_URL:-https://www.albis.news}"
 if [[ -n "${COMPANY_SCAN_WINDOW:-}" ]]; then
   WINDOW_ARG="--window=${COMPANY_SCAN_WINDOW}"
 else
-  WINDOW_ARG=""
+  # Launchd/cron fires at fixed UTC hours. The scanner itself expects the
+  # product window label, so map the scheduled UTC hour explicitly instead of
+  # relying on local clock inference that can drift with DST/host timezone.
+  case "$(date -u +%H)" in
+    11) WINDOW_ARG="--window=07-00" ;;
+    23) WINDOW_ARG="--window=19-00" ;;
+    *) WINDOW_ARG="" ;;
+  esac
 fi
 
 echo "=== company scan cycle ${TIMESTAMP} (UTC) ==="

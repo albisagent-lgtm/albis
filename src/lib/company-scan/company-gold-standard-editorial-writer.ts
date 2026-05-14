@@ -168,8 +168,8 @@ function buildPromptPacket(input: {
           id: source.id,
           name: source.source_domain,
           url: source.url,
-          title: clean(source.extracted_title || source.title).slice(0, 180),
-          excerpt: clean(source.extracted_excerpt).slice(0, 180),
+          title: clean(source.extracted_title || source.title).slice(0, 90),
+          excerpt: clean(source.extracted_excerpt).slice(0, 80),
           region: source.region,
           published_at: source.published_at,
         };
@@ -180,39 +180,85 @@ function buildPromptPacket(input: {
         current_headline: finding.title,
         current_note: note
           ? {
-              summary: clean(note.summary).slice(0, 260),
-              what_happened: clean(note.what_happened).slice(0, 220),
-              key_facts: note.key_facts.slice(0, 3).map((fact) => clean(fact).slice(0, 180)),
-              key_numbers: note.key_numbers.slice(0, 4),
-              key_actors: note.key_actors.slice(0, 5),
-              named_places: note.named_places.slice(0, 5),
-              source_observations: note.source_observations.slice(0, 3).map((observation) => ({
+              summary: clean(note.summary).slice(0, 140),
+              what_happened: clean(note.what_happened).slice(0, 120),
+              key_facts: note.key_facts.slice(0, 2).map((fact) => clean(fact).slice(0, 100)),
+              key_numbers: note.key_numbers.slice(0, 3),
+              key_actors: note.key_actors.slice(0, 4),
+              named_places: note.named_places.slice(0, 4),
+              source_observations: note.source_observations.slice(0, 2).map((observation) => ({
                 source_id: observation.source_id,
-                what_it_reports: clean(observation.what_it_reports).slice(0, 160),
-                useful_detail: clean(observation.useful_detail).slice(0, 120),
+                what_it_reports: clean(observation.what_it_reports).slice(0, 90),
+                useful_detail: clean(observation.useful_detail).slice(0, 80),
               })),
-              differences_in_reporting: note.differences_in_reporting.slice(0, 2).map((difference) => ({
-                label: clean(difference.label).slice(0, 80),
-                description: clean(difference.description).slice(0, 180),
-                source_ids: difference.source_ids.slice(0, 4),
+              differences_in_reporting: note.differences_in_reporting.slice(0, 1).map((difference) => ({
+                label: clean(difference.label).slice(0, 60),
+                description: clean(difference.description).slice(0, 100),
+                source_ids: difference.source_ids.slice(0, 3),
               })),
-              company_relevance: clean(note.company_relevance).slice(0, 220),
+              company_relevance: clean(note.company_relevance).slice(0, 120),
             }
           : null,
         sources,
       };
     });
 
-  return {
+  const clusterRefMap: Record<string, string> = {};
+  const sourceRefMap: Record<string, string> = {};
+  const compactTopics = topics.map((topic, topicIndex) => {
+    const clusterRef = `C${topicIndex + 1}`;
+    clusterRefMap[clusterRef] = topic.cluster_id;
+    const sourceIds = topic.sources.map((source: { id: string }, sourceIndex: number) => {
+      const sourceRef = `${clusterRef}S${sourceIndex + 1}`;
+      sourceRefMap[sourceRef] = source.id;
+      return sourceRef;
+    });
+    return {
+      ...topic,
+      cluster_id: clusterRef,
+      current_note: topic.current_note
+        ? {
+            summary: topic.current_note.summary,
+            what_happened: topic.current_note.what_happened,
+            key_facts: topic.current_note.key_facts,
+            key_numbers: topic.current_note.key_numbers,
+            key_actors: topic.current_note.key_actors,
+            named_places: topic.current_note.named_places,
+            company_relevance: topic.current_note.company_relevance,
+          }
+        : null,
+      sources: topic.sources.map((source: {
+        name: string;
+        title: string;
+        excerpt: string;
+        region?: string | null;
+        published_at?: string | null;
+      }, sourceIndex: number) => ({
+        id: sourceIds[sourceIndex],
+        name: source.name,
+        title: source.title,
+        excerpt: source.excerpt,
+        region: source.region,
+        published_at: source.published_at,
+      })),
+    };
+  });
+
+  const promptPacket = {
     company: input.packet.company.display_name,
     scan_date: input.layer.scan_date,
     tracked_topics: input.packet.company.selected_scan_areas.map((area) => area.label),
     current_overview: input.output.scanner_report?.overview?.text || input.output.today_brief.top_line.text,
-    topics,
+    topics: compactTopics,
   };
+  Object.defineProperty(promptPacket, "_refMaps", {
+    enumerable: false,
+    value: { clusterRefMap, sourceRefMap },
+  });
+  return promptPacket;
 }
 
-function responseSchema() {
+function responseSchema(topicCount = 10) {
   return {
     name: "company_daily_scan_gold_standard_editorial",
     schema: {
@@ -230,8 +276,8 @@ function responseSchema() {
         },
         topics: {
           type: "array",
-          minItems: 10,
-          maxItems: 10,
+          minItems: topicCount,
+          maxItems: topicCount,
           items: {
             type: "object",
             additionalProperties: false,
@@ -271,25 +317,96 @@ function responseSchema() {
   };
 }
 
-async function callEditorialWriter(promptPacket: unknown): Promise<{ writer: WriterResponse; modelUsed: string }> {
+async function callEditorialWriterPacket(
+  promptPacket: unknown,
+  topicCount = 10,
+): Promise<{ writer: WriterResponse; modelUsed: string }> {
   const result = await generateEditorialJson<WriterResponse>({
     modelEnv: "ALBIS_COMPANY_SCAN_EDITORIAL_MODEL",
     defaultModel: process.env.ALBIS_EDITORIAL_MODEL_PROVIDER?.startsWith("cloudflare") ? "@cf/meta/llama-3.1-70b-instruct" : "gpt-4o",
     temperature: 0.45,
-    responseSchema: responseSchema(),
+    responseSchema: responseSchema(topicCount),
     messages: [
       {
         role: "system",
         content:
-          "You are the Albis editorial writer for Company Daily Scan V1. Write exactly like the approved Lindell Media gold-standard email: reported, evidence-led, precise, human, and useful. Do not sound like an analyst pipeline. Use only the evidence provided. Write at least 10 source-backed stories, each 100–150 words where evidence supports it. If evidence is thin, retrieval must improve rather than padding. Never invent facts, numbers, sources, or URLs. Return JSON only.",
+          "You are the Albis editorial writer for Company Daily Scan V1. Write exactly like the approved Lindell Media gold-standard email: reported, evidence-led, precise, human, and useful. Do not sound like an analyst pipeline. Use only the evidence provided. Normally write 10 source-backed stories, but if this packet contains fewer corroborated topics, write every supplied topic and do not invent replacements. Each story should be 100–150 words where evidence supports it. If evidence is thin, be precise rather than padding. Never invent facts, numbers, sources, or URLs. Return JSON only.",
       },
       {
         role: "user",
-        content: `${GOLD_STANDARD_REFERENCE}\n\nWrite the customer-ready daily scan from this evidence packet. Return JSON only.\n\n${JSON.stringify(promptPacket, null, 2)}`,
+        content: `${GOLD_STANDARD_REFERENCE}\n\nWrite the customer-ready daily scan from this compact evidence packet. Return JSON only.\n\n${JSON.stringify(promptPacket)}`,
       },
     ],
   });
   return { writer: result.json, modelUsed: `${result.provider}:${result.model}` };
+}
+
+function chunkArray<T>(items: T[], size: number): T[][] {
+  const chunks: T[][] = [];
+  for (let index = 0; index < items.length; index += size) {
+    chunks.push(items.slice(index, index + size));
+  }
+  return chunks;
+}
+
+type WriterPromptPacket = Record<string, unknown> & {
+  topics?: unknown[];
+  current_overview?: string;
+  _refMaps?: {
+    clusterRefMap: Record<string, string>;
+    sourceRefMap: Record<string, string>;
+  };
+};
+
+async function callEditorialWriter(promptPacket: WriterPromptPacket): Promise<{ writer: WriterResponse; modelUsed: string }> {
+  const topics = Array.isArray(promptPacket.topics) ? promptPacket.topics.slice(0, 10) : [];
+  const topicCount = Math.max(1, Math.min(10, topics.length || 10));
+  try {
+    return await callEditorialWriterPacket(promptPacket, topicCount);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    const enableBatchFallback = process.env.ALBIS_COMPANY_EDITORIAL_BATCH_FALLBACK !== "0";
+    if (!enableBatchFallback || topics.length < 2 || !/timeout|buffer|gateway/i.test(message)) throw error;
+
+    const topicChunks = chunkArray(topics, Math.min(5, Math.max(2, Math.ceil(topics.length / 2))));
+    const writers: WriterResponse[] = [];
+    let modelUsed = "";
+    for (const topicChunk of topicChunks) {
+      const result = await callEditorialWriterPacket(
+        {
+          ...promptPacket,
+          current_overview: `${promptPacket.current_overview || ""} This is one half of the same customer email; write only the supplied topics.`,
+          topics: topicChunk,
+        },
+        topicChunk.length,
+      );
+      writers.push(result.writer);
+      modelUsed = modelUsed || result.modelUsed;
+    }
+
+    return {
+      modelUsed: `${modelUsed}+batched`,
+      writer: {
+        overview: writers[0]?.overview || promptPacket.current_overview || "Daily scan prepared from researched evidence.",
+        source_note: writers.map((writer) => writer.source_note).filter(Boolean).join(" ").slice(0, 900),
+        observations: writers.flatMap((writer) => writer.observations || []).slice(0, 4),
+        topics: writers.flatMap((writer) => writer.topics || []).slice(0, 10),
+      },
+    };
+  }
+}
+
+function translateWriterRefs(writer: WriterResponse, promptPacket: WriterPromptPacket): WriterResponse {
+  const maps = promptPacket?._refMaps;
+  if (!maps?.clusterRefMap || !maps?.sourceRefMap) return writer;
+  return {
+    ...writer,
+    topics: (writer.topics || []).map((topic) => ({
+      ...topic,
+      cluster_id: maps.clusterRefMap[topic.cluster_id] || topic.cluster_id,
+      source_ids: (topic.source_ids || []).map((id) => maps.sourceRefMap[id] || id),
+    })),
+  };
 }
 
 function applyWriterResponse(
@@ -377,7 +494,7 @@ function applyWriterResponse(
     const topic = topicsByCluster.get(note.cluster_id);
     if (!topic) return note;
     const paragraphs = topic.paragraphs.map(clean).filter(Boolean);
-    const [first, second, third, fourth] = paragraphs;
+    const [first, second] = paragraphs;
     return {
       ...note,
       summary: clean(topic.headline),
@@ -448,8 +565,9 @@ function applyWriterResponse(
 
 function validateWriterResponse(writer: WriterResponse): string[] {
   const blockers: string[] = [];
-  if (!Array.isArray(writer.topics) || writer.topics.length < 10) {
-    blockers.push("Editorial writer returned fewer than ten topics.");
+  const minTopics = Math.max(7, Number(process.env.COMPANY_DAILY_SEND_MIN_STORIES || 7));
+  if (!Array.isArray(writer.topics) || writer.topics.length < minTopics) {
+    blockers.push(`Editorial writer returned fewer than ${minTopics} topics.`);
   }
   for (const topic of writer.topics || []) {
     if (!topic.cluster_id || !topic.headline || !topic.topic_label) blockers.push(`Topic missing required label/headline: ${topic.cluster_id || "unknown"}`);
@@ -515,7 +633,7 @@ export async function applyGoldStandardEditorialWriter(input: {
   try {
     const promptPacket = buildPromptPacket({ packet: input.packet, output: input.output, layer });
     const result = await callEditorialWriter(promptPacket);
-    const writer = result.writer;
+    const writer = translateWriterRefs(result.writer, promptPacket);
     const validation = validateWriterResponse(writer);
     const editedOutput = applyWriterResponse(input.output, writer, result.modelUsed);
     return {
