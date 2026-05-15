@@ -58,8 +58,10 @@ else
   # product window label, so map the scheduled UTC hour explicitly instead of
   # relying on local clock inference that can drift with DST/host timezone.
   case "$(date -u +%H)" in
-    11) WINDOW_ARG="--window=07-00" ;;
-    23) WINDOW_ARG="--window=19-00" ;;
+    # UK/BST customer delivery target: 07:00 Europe/London = 06:00 UTC
+    # during summer time. Keep 11/23 UTC for older scheduled runners too.
+    06|11) WINDOW_ARG="--window=07-00" ;;
+    18|23) WINDOW_ARG="--window=19-00" ;;
     *) WINDOW_ARG="" ;;
   esac
 fi
