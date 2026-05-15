@@ -3,8 +3,8 @@
 // CLI wrapper around runCompanyScan — Package 6.
 //
 // Auto-detects the run_window from current UTC hour:
-//   11 → '07-00', 23 → '19-00'
-// Override via --window=<07-00|19-00>.
+//   05/06/11 → '07-00', 12/17 → '13-00', 18/23 → '19-00'
+// Override via --window=<07-00|13-00|19-00>.
 // Override the run_date via --date=YYYY-MM-DD (default: today UTC).
 // ---------------------------------------------------------------------------
 import path from "path";
@@ -17,14 +17,15 @@ dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
 
 function pickWindow(argv: string[]): ScanRunWindow {
   const explicit = argv.find((a) => a.startsWith("--window="))?.split("=")[1];
-  if (explicit === "07-00" || explicit === "19-00") {
+  if (explicit === "07-00" || explicit === "13-00" || explicit === "19-00") {
     return explicit;
   }
   const hour = new Date().getUTCHours();
-  if (hour === 11) return "07-00";
-  if (hour === 23) return "19-00";
+  if (hour === 5 || hour === 6 || hour === 11) return "07-00";
+  if (hour === 12 || hour === 17) return "13-00";
+  if (hour === 18 || hour === 23) return "19-00";
   throw new Error(
-    `No window matches current UTC hour ${hour}. Pass --window=07-00|19-00.`,
+    `No window matches current UTC hour ${hour}. Pass --window=07-00|13-00|19-00.`,
   );
 }
 

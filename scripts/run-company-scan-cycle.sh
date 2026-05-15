@@ -13,11 +13,10 @@
 # Designed to be called from cron on the openclaw machine. NOT activated
 # anywhere yet — see docs/company-scan-cron-setup.md to wire up.
 #
-# Cron entries (3x daily at US Eastern times that stay sensible
-# year-round; UTC fixed):
-#   0 11 * * * /path/to/repo/scripts/run-company-scan-cycle.sh   # 07:00 EDT
-#   0 17 * * * /path/to/repo/scripts/run-company-scan-cycle.sh   # 13:00 EDT
-#   0 23 * * * /path/to/repo/scripts/run-company-scan-cycle.sh   # 19:00 EDT
+# Cron entries (UK local time, with COMPANY_SCAN_WINDOW set explicitly):
+#   0 6  * * * Europe/London COMPANY_SCAN_WINDOW=07-00 bash scripts/run-company-scan-cycle.sh
+#   0 13 * * * Europe/London COMPANY_SCAN_WINDOW=13-00 bash scripts/run-company-scan-cycle.sh
+#   0 19 * * * Europe/London COMPANY_SCAN_WINDOW=19-00 bash scripts/run-company-scan-cycle.sh
 # ---------------------------------------------------------------------------
 set -euo pipefail
 
@@ -58,9 +57,10 @@ else
   # product window label, so map the scheduled UTC hour explicitly instead of
   # relying on local clock inference that can drift with DST/host timezone.
   case "$(date -u +%H)" in
-    # UK/BST customer delivery target: 07:00 Europe/London = 06:00 UTC
-    # during summer time. Keep 11/23 UTC for older scheduled runners too.
-    06|11) WINDOW_ARG="--window=07-00" ;;
+    # UK customer rhythm. Prefer explicit COMPANY_SCAN_WINDOW from cron, but
+    # keep UTC fallbacks for older/manual runners and BST/GMT edge cases.
+    05|06|11) WINDOW_ARG="--window=07-00" ;;
+    12|17) WINDOW_ARG="--window=13-00" ;;
     18|23) WINDOW_ARG="--window=19-00" ;;
     *) WINDOW_ARG="" ;;
   esac

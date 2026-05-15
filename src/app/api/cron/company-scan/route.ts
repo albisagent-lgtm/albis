@@ -24,7 +24,7 @@ import type { ScanRunWindow } from "@/lib/company-scan/types";
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-const VALID_WINDOWS: ScanRunWindow[] = ["07-00", "19-00"];
+const VALID_WINDOWS: ScanRunWindow[] = ["07-00", "13-00", "19-00"];
 
 function getAdminClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -36,8 +36,9 @@ function getAdminClient() {
 }
 
 function windowFromUtcHour(hour: number): ScanRunWindow | null {
-  if (hour === 11) return "07-00";
-  if (hour === 23) return "19-00";
+  if (hour === 5 || hour === 6 || hour === 11) return "07-00";
+  if (hour === 12 || hour === 17) return "13-00";
+  if (hour === 18 || hour === 23) return "19-00";
   return null;
 }
 
@@ -122,7 +123,7 @@ async function handle(req: NextRequest) {
       {
         error: "no_window_for_hour",
         utc_hour: utcHour,
-        hint: "fire only at 11/23 UTC, or pass ?window=07-00|19-00",
+        hint: "fire only at mapped company scan hours, or pass ?window=07-00|13-00|19-00",
       },
       { status: 422 },
     );

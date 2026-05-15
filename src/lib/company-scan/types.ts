@@ -42,7 +42,7 @@ export interface ScanTarget {
   created_at: string;
 }
 
-export type ScanRunWindow = "07-00" | "19-00";
+export type ScanRunWindow = "07-00" | "13-00" | "19-00";
 export type ScanRunStatus =
   | "running"
   | "completed"
