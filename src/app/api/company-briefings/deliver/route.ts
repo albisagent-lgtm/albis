@@ -45,8 +45,12 @@ function profileApprovedForDelivery(profileId: string): boolean {
  * Body (optional):
  *   {
  *     briefing_date?: string,
+ *     briefing_id?: string,
+ *     company_profile_id?: string,
  *     force_all?: boolean,
- *     dry_run?: boolean
+ *     dry_run?: boolean,
+ *     test_delivery?: boolean,
+ *     override_recipients?: string[]
  *   }
  */
 export async function POST(req: NextRequest) {
@@ -64,10 +68,72 @@ export async function POST(req: NextRequest) {
     const nzDate = new Date(now.getTime() + 13 * 60 * 60 * 1000);
     const briefingDate =
       body.briefing_date || nzDate.toISOString().split("T")[0];
+    const briefingId = typeof body.briefing_id === "string" ? body.briefing_id : null;
+    const companyProfileId =
+      typeof body.company_profile_id === "string" ? body.company_profile_id : null;
     const forceAll = body.force_all === true;
     const dryRun = body.dry_run === true;
+    const testDelivery = body.test_delivery === true;
+    const overrideRecipients = Array.isArray(body.override_recipients)
+      ? body.override_recipients
+          .map((recipient: unknown) =>
+            typeof recipient === "string" ? recipient.trim().toLowerCase() : "",
+          )
+          .filter(Boolean)
+      : [];
 
-    if (!dryRun && process.env.COMPANY_EMAIL_DELIVERY_ENABLED !== "1") {
+    if (testDelivery) {
+      const allowedTestRecipients = String(
+        process.env.COMPANY_EMAIL_TEST_RECIPIENTS || "",
+      )
+        .split(",")
+        .map((recipient) => recipient.trim().toLowerCase())
+        .filter(Boolean);
+
+      const invalidRecipients = overrideRecipients.filter(
+        (recipient: string) => !allowedTestRecipients.includes(recipient),
+      );
+
+      if (!dryRun && process.env.COMPANY_EMAIL_TEST_DELIVERY_ENABLED !== "1") {
+        return NextResponse.json(
+          {
+            error: "company_email_test_delivery_disabled",
+            message:
+              "Controlled company test delivery is disabled. Set COMPANY_EMAIL_TEST_DELIVERY_ENABLED=1 only for allowlisted tests.",
+          },
+          { status: 423 },
+        );
+      }
+
+      if (!briefingId && !companyProfileId) {
+        return NextResponse.json(
+          {
+            error: "test_delivery_requires_exact_filter",
+            message:
+              "Controlled test delivery requires briefing_id or company_profile_id so unrelated queued briefings cannot fire.",
+          },
+          { status: 400 },
+        );
+      }
+
+      if (overrideRecipients.length === 0 || invalidRecipients.length > 0) {
+        return NextResponse.json(
+          {
+            error: "test_delivery_recipient_not_allowlisted",
+            invalid_recipients: invalidRecipients,
+            message:
+              "Controlled test delivery requires override_recipients and every recipient must be present in COMPANY_EMAIL_TEST_RECIPIENTS.",
+          },
+          { status: 400 },
+        );
+      }
+    }
+
+    if (
+      !dryRun &&
+      !testDelivery &&
+      process.env.COMPANY_EMAIL_DELIVERY_ENABLED !== "1"
+    ) {
       return NextResponse.json(
         {
           error: "company_email_delivery_disabled",
@@ -78,7 +144,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { data: briefings, error: bErr } = await supabase
+    let briefingQuery = supabase
       .from("company_briefings")
       .select(
         "id, company_profile_id, briefing_content, briefing_date, delivery_status",
@@ -86,6 +152,13 @@ export async function POST(req: NextRequest) {
       .eq("briefing_date", briefingDate)
       .eq("status", "generated")
       .in("delivery_status", ["pending"]);
+
+    if (briefingId) briefingQuery = briefingQuery.eq("id", briefingId);
+    if (companyProfileId) {
+      briefingQuery = briefingQuery.eq("company_profile_id", companyProfileId);
+    }
+
+    const { data: briefings, error: bErr } = await briefingQuery;
 
     if (bErr)
       return NextResponse.json({ error: bErr.message }, { status: 500 });
@@ -140,8 +213,11 @@ export async function POST(req: NextRequest) {
     let emailsSent = 0;
     let emailsFailed = 0;
     const details: Array<{
+      briefing_id?: string;
       company_name: string;
       status: string;
+      final_status?: string;
+      final_delivery_status?: string;
       recipients?: string[];
       error?: string;
       content_version?: string;
@@ -153,9 +229,23 @@ export async function POST(req: NextRequest) {
     for (const briefing of briefings) {
       const profile = profileMap.get(briefing.company_profile_id);
       if (!profile) {
+        console.error(
+          JSON.stringify({
+            event: "company_briefing_send_attempt",
+            briefing_id: briefing.id,
+            company_profile_id: briefing.company_profile_id,
+            recipient: null,
+            final_status: "skipped",
+            final_delivery_status: briefing.delivery_status,
+            error: "Profile not found",
+          }),
+        );
         details.push({
+          briefing_id: briefing.id,
           company_name: "Unknown",
           status: "skipped",
+          final_status: "skipped",
+          final_delivery_status: briefing.delivery_status,
           error: "Profile not found",
         });
         continue;
@@ -173,8 +263,11 @@ export async function POST(req: NextRequest) {
               : "invalid_company_briefing_content";
 
         details.push({
+          briefing_id: briefing.id,
           company_name: profile.company_name,
           status: "blocked",
+          final_status: "failed",
+          final_delivery_status: dryRun ? briefing.delivery_status : "failed",
           error: errMsg,
           content_version: contentVersion,
         });
@@ -185,6 +278,18 @@ export async function POST(req: NextRequest) {
             .update({ delivery_status: "failed", delivery_error: errMsg })
             .eq("id", briefing.id);
         }
+        console.error(
+          JSON.stringify({
+            event: "company_briefing_send_attempt",
+            briefing_id: briefing.id,
+            company_profile_id: profile.id,
+            company_name: profile.company_name,
+            recipient: null,
+            final_status: dryRun ? "blocked_dry_run" : "failed",
+            final_delivery_status: dryRun ? briefing.delivery_status : "failed",
+            error: errMsg,
+          }),
+        );
         emailsFailed++;
         continue;
       }
@@ -195,8 +300,11 @@ export async function POST(req: NextRequest) {
       if (!safety.ok) {
         const errMsg = `delivery_safety_blocked:${safety.errors.slice(0, 3).join("|")}`;
         details.push({
+          briefing_id: briefing.id,
           company_name: profile.company_name,
           status: "blocked",
+          final_status: "failed",
+          final_delivery_status: dryRun ? briefing.delivery_status : "failed",
           error: errMsg,
           content_version: contentVersion,
         });
@@ -207,15 +315,30 @@ export async function POST(req: NextRequest) {
             .update({ delivery_status: "failed", delivery_error: errMsg })
             .eq("id", briefing.id);
         }
+        console.error(
+          JSON.stringify({
+            event: "company_briefing_send_attempt",
+            briefing_id: briefing.id,
+            company_profile_id: profile.id,
+            company_name: profile.company_name,
+            recipient: null,
+            final_status: dryRun ? "blocked_dry_run" : "failed",
+            final_delivery_status: dryRun ? briefing.delivery_status : "failed",
+            error: errMsg,
+          }),
+        );
         emailsFailed++;
         continue;
       }
 
       const owner = ownerMap.get(profile.owner_id);
-      if (!owner || !shouldGenerateBriefing(owner)) {
+      if (!owner || (!shouldGenerateBriefing(owner) && !testDelivery)) {
         details.push({
+          briefing_id: briefing.id,
           company_name: profile.company_name,
           status: "skipped",
+          final_status: "skipped",
+          final_delivery_status: briefing.delivery_status,
           error: "subscription_inactive",
           content_version: contentVersion,
         });
@@ -224,18 +347,24 @@ export async function POST(req: NextRequest) {
 
       if (!profile.email_enabled) {
         details.push({
+          briefing_id: briefing.id,
           company_name: profile.company_name,
           status: "skipped",
+          final_status: "skipped",
+          final_delivery_status: briefing.delivery_status,
           error: "Email delivery disabled",
           content_version: contentVersion,
         });
         continue;
       }
 
-      if (!profileApprovedForDelivery(profile.id)) {
+      if (!testDelivery && !profileApprovedForDelivery(profile.id)) {
         details.push({
+          briefing_id: briefing.id,
           company_name: profile.company_name,
           status: "skipped",
+          final_status: "skipped",
+          final_delivery_status: briefing.delivery_status,
           error:
             "Email delivery awaiting explicit profile approval. Add the profile id to COMPANY_EMAIL_DELIVERY_APPROVED_PROFILE_IDS, or set COMPANY_EMAIL_DELIVERY_APPROVE_ALL=1 after launch approval.",
           content_version: contentVersion,
@@ -243,11 +372,16 @@ export async function POST(req: NextRequest) {
         continue;
       }
 
-      const recipients: string[] = profile.email_recipients || [];
+      const recipients: string[] = testDelivery
+        ? overrideRecipients
+        : profile.email_recipients || [];
       if (recipients.length === 0) {
         details.push({
+          briefing_id: briefing.id,
           company_name: profile.company_name,
           status: "skipped",
+          final_status: "skipped",
+          final_delivery_status: briefing.delivery_status,
           error: "No email recipients configured",
           content_version: contentVersion,
         });
@@ -277,8 +411,11 @@ export async function POST(req: NextRequest) {
         // that day's briefing instead of waiting forever in `pending`.
         if (currentLocalHour < preferredHour) {
           details.push({
+            briefing_id: briefing.id,
             company_name: profile.company_name,
             status: "waiting",
+            final_status: "waiting",
+            final_delivery_status: briefing.delivery_status,
             error: `Not yet delivery time (current: ${currentLocalHour}:00, preferred: ${preferredHour}:00 ${tz})`,
             content_version: contentVersion,
           });
@@ -299,8 +436,11 @@ export async function POST(req: NextRequest) {
 
       if (dryRun) {
         details.push({
+          briefing_id: briefing.id,
           company_name: profile.company_name,
           status: "would_send",
+          final_status: "would_send",
+          final_delivery_status: briefing.delivery_status,
           recipients,
           content_version: contentVersion,
           warnings: safety.warnings,
@@ -311,7 +451,8 @@ export async function POST(req: NextRequest) {
       const { data: claimedBriefing, error: claimErr } = await supabase
         .from("company_briefings")
         .update({
-          delivery_status: "sending",
+          status: "generating",
+          delivery_error: null,
         })
         .eq("id", briefing.id)
         .eq("delivery_status", "pending")
@@ -320,8 +461,11 @@ export async function POST(req: NextRequest) {
 
       if (claimErr || !claimedBriefing) {
         details.push({
+          briefing_id: briefing.id,
           company_name: profile.company_name,
           status: "skipped",
+          final_status: "skipped",
+          final_delivery_status: briefing.delivery_status,
           error: claimErr
             ? `delivery_claim_failed:${claimErr.message}`
             : "delivery_already_claimed_or_sent",
@@ -360,9 +504,27 @@ export async function POST(req: NextRequest) {
           .eq("id", briefing.id);
 
         emailsSent++;
+        for (const recipient of recipients) {
+          console.log(
+            JSON.stringify({
+              event: "company_briefing_send_attempt",
+              briefing_id: briefing.id,
+              company_profile_id: profile.id,
+              company_name: profile.company_name,
+              recipient,
+              test_delivery: testDelivery,
+              final_status: "delivered",
+              final_delivery_status: "sent",
+              error: null,
+            }),
+          );
+        }
         details.push({
+          briefing_id: briefing.id,
           company_name: profile.company_name,
           status: "sent",
+          final_status: "delivered",
+          final_delivery_status: "sent",
           recipients,
           content_version: contentVersion,
           warnings: safety.warnings,
@@ -372,14 +534,36 @@ export async function POST(req: NextRequest) {
           sendError instanceof Error ? sendError.message : "Unknown send error";
         await supabase
           .from("company_briefings")
-          .update({ delivery_status: "failed", delivery_error: errMsg })
+          .update({
+            status: "failed",
+            delivery_status: "failed",
+            delivery_error: errMsg,
+          })
           .eq("id", briefing.id)
-          .eq("delivery_status", "sending");
+          .eq("status", "generating");
 
         emailsFailed++;
+        for (const recipient of recipients) {
+          console.error(
+            JSON.stringify({
+              event: "company_briefing_send_attempt",
+              briefing_id: briefing.id,
+              company_profile_id: profile.id,
+              company_name: profile.company_name,
+              recipient,
+              test_delivery: testDelivery,
+              final_status: "failed",
+              final_delivery_status: "failed",
+              error: errMsg,
+            }),
+          );
+        }
         details.push({
+          briefing_id: briefing.id,
           company_name: profile.company_name,
           status: "failed",
+          final_status: "failed",
+          final_delivery_status: "failed",
           recipients,
           error: errMsg,
           content_version: contentVersion,
