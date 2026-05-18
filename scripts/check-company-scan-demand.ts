@@ -29,7 +29,8 @@ interface OwnerProfileRow {
 
 function hasBillableCompanyScanAccess(owner: OwnerProfileRow | undefined): boolean {
   if (!owner) return false;
-  if (owner.is_test_account === true) return false;
+  const includeTestAccounts = process.env.COMPANY_SCAN_INCLUDE_TEST_ACCOUNTS === "1";
+  if (owner.is_test_account === true && !includeTestAccounts) return false;
   if (owner.subscription_status === "active") return true;
   if (owner.subscription_status !== "trialing") return false;
   if (!owner.trial_end_at) return false;

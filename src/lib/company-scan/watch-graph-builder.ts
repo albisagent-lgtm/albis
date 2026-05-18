@@ -118,10 +118,10 @@ export interface WatchGraphSummary {
 function hasBillableCompanyScanAccess(owner: OwnerProfileRow | undefined): boolean {
   if (!owner) return false;
   // Test accounts are useful for manual QA, but they must not keep the paid
-  // scanner/search layer alive automatically. Set up an explicit manual run if
-  // we need QA output; scheduled scans should exist only for real trialing/paid
-  // companies.
-  if (owner.is_test_account === true) return false;
+  // scanner/search layer alive automatically. Only include them when an
+  // explicit reliability rehearsal sets COMPANY_SCAN_INCLUDE_TEST_ACCOUNTS=1.
+  const includeTestAccounts = process.env.COMPANY_SCAN_INCLUDE_TEST_ACCOUNTS === "1";
+  if (owner.is_test_account === true && !includeTestAccounts) return false;
   if (owner.subscription_status === "active") return true;
   if (owner.subscription_status !== "trialing") return false;
   if (!owner.trial_end_at) return false;
