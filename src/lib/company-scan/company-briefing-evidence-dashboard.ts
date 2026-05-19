@@ -129,8 +129,8 @@ export function generateCompanyEvidenceDashboardHtml(
     ? `<ul style="margin:0;padding-left:18px;font:400 13px/1.6 -apple-system,BlinkMacSystemFont,sans-serif;color:${BODY};">${doc.dashboard_only_items
         .slice(0, 30)
         .map(
-          (item) =>
-            `<li><strong>${esc(item.canonical_event_name)}</strong> — kept in the evidence trail as ${esc(item.reason.replace(/_/g, " "))} <span style="color:${MUTED};">(relevance ${pct(item.relevance_score)}, confidence ${pct(item.cluster_confidence)})</span></li>`,
+          (item, index) =>
+            `<li><span style="color:${MUTED};font-weight:700;">#${index + 1}</span> <strong>${esc(item.canonical_event_name)}</strong> — kept in the evidence trail as ${esc(item.reason.replace(/_/g, " "))} <span style="color:${MUTED};">(relevance ${pct(item.relevance_score)}, confidence ${pct(item.cluster_confidence)})</span></li>`,
         )
         .join("")}</ul>`
     : `<p style="font:400 14px/1.6 -apple-system,BlinkMacSystemFont,sans-serif;color:${MUTED};">No dashboard coverage items recorded for this preview.</p>`;
@@ -145,9 +145,9 @@ export function generateCompanyEvidenceDashboardHtml(
   const sourceRows = doc.key_sources_detail
     .slice(0, 80)
     .map(
-      (source) => `
+      (source, index) => `
     <tr>
-      <td style="padding:8px;border-top:1px solid ${BORDER};">${source.url ? `<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer" style="color:${NAVY};text-decoration:underline;">${esc(source.source_display_name)}</a>` : esc(source.source_display_name)}</td>
+      <td style="padding:8px;border-top:1px solid ${BORDER};"><span style="color:${MUTED};font-weight:700;margin-right:6px;">${index + 1}.</span>${source.url ? `<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer" style="color:${NAVY};text-decoration:underline;">${esc(source.source_display_name)}</a>` : esc(source.source_display_name)}</td>
       <td style="padding:8px;border-top:1px solid ${BORDER};">${esc(source.source_grade)}</td>
       <td style="padding:8px;border-top:1px solid ${BORDER};">${esc(source.source_type)}</td>
       <td style="padding:8px;border-top:1px solid ${BORDER};">${esc(source.role)}</td>

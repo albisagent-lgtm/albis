@@ -48,6 +48,10 @@ import {
 } from "./intelligence-depth";
 import { buildResearchedUnderstandingLayer } from "./researched-understanding";
 import { applyGoldStandardEditorialWriter } from "./company-gold-standard-editorial-writer";
+import {
+  runCompanyDailyLearningPass2,
+  type Pass2Result,
+} from "./company-daily-learning";
 
 export interface CompanyPackage8PipelineOptions {
   scanDate: string;
@@ -80,6 +84,7 @@ export interface CompanyPackage8PipelineResult {
   deep_dive_retrieval?: any;
   dedupe_summary?: DedupeSummary;
   editor_pass?: any;
+  pass2_learning?: Pass2Result;
   qa_report: any;
   dry_run_metadata: any;
   email: { subject: string; html: string };
@@ -1617,8 +1622,37 @@ export async function runCompanyPackage8PipelineForProfile(
     scanDate,
     finalOutput.today_brief?.top_line?.text,
   );
+  const pass2Learning = (process.env.COMPANY_PASS2_LEARNING_ENABLED === "1" || process.env.COMPANY_INTELLIGENCE_WIKI_ENABLED === "1")
+    ? runCompanyDailyLearningPass2({
+        profile,
+        scanDate,
+        evidencePacket: depthPacket,
+        briefingContent: finalOutput,
+        researchedUnderstanding,
+        selectedSignals: enrichedSignals,
+        deepDiveRetrieval,
+      })
+    : undefined;
+  const outputWithLearning = pass2Learning?.customer_safe_report_insights.length
+    ? {
+        ...finalOutput,
+        scanner_report: finalOutput.scanner_report
+          ? {
+              ...finalOutput.scanner_report,
+              learning_insights: pass2Learning.customer_safe_report_insights,
+            }
+          : finalOutput.scanner_report,
+        understanding: {
+          ...(finalOutput.understanding || {}),
+          company_daily_learning_v1: {
+            learning_id: pass2Learning.daily_learning.learning_id,
+            customer_safe_insights: pass2Learning.customer_safe_report_insights,
+          },
+        },
+      }
+    : finalOutput;
   const html = generateCompanyBriefingHtmlV2(
-    finalOutput,
+    outputWithLearning,
     profile.company_name,
     scanDate,
   );
@@ -1635,7 +1669,7 @@ export async function runCompanyPackage8PipelineForProfile(
     package8_llm_enrichment_wired: false,
     package8_note:
       "Package 8 evidence packet, deterministic generator, and QA gates against real DB signals. No email send occurs here.",
-    briefing_content: finalOutput,
+    briefing_content: outputWithLearning,
     draft_briefing_content: draftOutput,
     generation_metadata: generation.metadata,
     intelligence_depth_bundles,
@@ -1643,6 +1677,7 @@ export async function runCompanyPackage8PipelineForProfile(
     deep_dive_retrieval: deepDiveRetrieval,
     dedupe_summary: dedupeSummary,
     editor_pass: editorResult.edit_report,
+    pass2_learning: pass2Learning,
     qa_report: qa.report,
     dry_run_metadata: qa.dryRunMetadata,
     email: { subject, html },

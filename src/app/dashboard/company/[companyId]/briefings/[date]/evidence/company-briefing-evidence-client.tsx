@@ -326,6 +326,15 @@ export default function CompanyBriefingEvidenceClient() {
       (researchedLayer?.sources || []).map((source) => [source.id, source]),
     );
   }, [researchedLayer]);
+  const keySourceByName = useMemo(() => {
+    const entries = (doc?.key_sources_detail || []).flatMap((source) => {
+      const names = [source.source_display_name, source.source_id]
+        .filter(Boolean)
+        .map((value) => value.toLowerCase());
+      return names.map((name) => [name, source] as const);
+    });
+    return new Map(entries);
+  }, [doc]);
 
   if (state === "loading") {
     return (
@@ -479,9 +488,33 @@ export default function CompanyBriefingEvidenceClient() {
                     </li>
                   ))}
                 </ul>
-                <p className="mt-2 text-xs leading-6 text-zinc-500">
-                  Sources: {section.source_names.join("; ") || "none recorded"}
-                </p>
+                {section.source_names.length ? (
+                  <ol className="mt-2 list-decimal space-y-1 pl-5 text-xs leading-6 text-zinc-500">
+                    {section.source_names.map((sourceName, sourceIndex) => {
+                      const source = keySourceByName.get(sourceName.toLowerCase());
+                      return (
+                        <li key={`${section.heading}-${sourceName}-${sourceIndex}`}>
+                          {source?.url ? (
+                            <a
+                              href={source.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[#c8922a] hover:underline"
+                            >
+                              {sourceName}
+                            </a>
+                          ) : (
+                            sourceName
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ol>
+                ) : (
+                  <p className="mt-2 text-xs leading-6 text-zinc-500">
+                    Sources: none recorded
+                  </p>
+                )}
               </details>
             </article>
           ))}
@@ -593,8 +626,11 @@ export default function CompanyBriefingEvidenceClient() {
                       Research sources ({evidenceSources.length})
                     </summary>
                     <ul className="mt-2 space-y-3 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
-                      {evidenceSources.slice(0, 10).map((source) => (
+                      {evidenceSources.slice(0, 10).map((source, sourceIndex) => (
                         <li key={source!.id} className="border-l border-black/10 pl-3 dark:border-white/10">
+                          <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400">
+                            Source {sourceIndex + 1}
+                          </div>
                           {source!.url ? (
                             <a
                               href={source!.url}
@@ -636,8 +672,9 @@ export default function CompanyBriefingEvidenceClient() {
       <Panel title="Dashboard-only source trail">
         {doc.dashboard_only_items.length ? (
           <ul className="list-disc space-y-2 pl-5 text-sm leading-7 text-zinc-600 dark:text-zinc-300">
-            {doc.dashboard_only_items.slice(0, 30).map((item) => (
+            {doc.dashboard_only_items.slice(0, 30).map((item, itemIndex) => (
               <li key={item.cluster_id}>
+                <span className="font-semibold text-zinc-400">#{itemIndex + 1}</span>{" "}
                 <strong>{item.canonical_event_name}</strong> — held back because{" "}
                 {item.reason}{" "}
                 <span className="text-zinc-400">
@@ -695,9 +732,12 @@ export default function CompanyBriefingEvidenceClient() {
               </tr>
             </thead>
             <tbody>
-              {doc.key_sources_detail.slice(0, 60).map((source) => (
+              {doc.key_sources_detail.slice(0, 60).map((source, sourceIndex) => (
                 <tr key={source.source_id}>
                   <td className="border-b border-black/[0.05] py-2 pr-3 dark:border-white/[0.05]">
+                    <span className="mr-2 text-xs font-semibold text-zinc-400">
+                      {sourceIndex + 1}.
+                    </span>
                     {source.url ? (
                       <a
                         href={source.url}

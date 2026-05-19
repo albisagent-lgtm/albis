@@ -401,12 +401,15 @@ export function lintBriefingStyle(
       const wordCount = countWords(sentence);
       allSentenceWordCounts.push(wordCount);
       if (wordCount >= SENTENCE_LENGTH_BLOCK) {
+        const sourceTrailLike = seg.path === "source_notes";
         issues.push({
-          code: "SENTENCE_TOO_LONG",
-          severity: "blocking",
+          code: sourceTrailLike ? "SOURCE_NOTES_TOO_LONG" : "SENTENCE_TOO_LONG",
+          severity: sourceTrailLike ? "warning" : "blocking",
           location: seg.path,
           text: sentence.slice(0, 120) + (sentence.length > 120 ? "..." : ""),
-          message: `Sentence has ${wordCount} words (max ${SENTENCE_LENGTH_BLOCK}). Split into shorter sentences.`,
+          message: sourceTrailLike
+            ? `Source notes are ${wordCount} words. Keep email source notes short and link to the source trail instead of blocking delivery.`
+            : `Sentence has ${wordCount} words (max ${SENTENCE_LENGTH_BLOCK}). Split into shorter sentences.`,
         });
       } else if (wordCount > SENTENCE_LENGTH_PREMIUM_WARN) {
         issues.push({
@@ -795,6 +798,10 @@ function extractTextSegments(
   }
 
   // Source Notes
+  // Source notes often contain source-name lists. Those should be rendered as a
+  // dashboard/source-trail link in the customer email, not treated like prose.
+  // Keep them out of generic sentence-length lint so a long source list cannot
+  // hold an otherwise valid briefing.
   if (output.source_notes.text.text) {
     segments.push({
       path: "source_notes",

@@ -1753,6 +1753,8 @@ export interface GeneratedScannerReport {
   scan_areas?: GeneratedScannerReportArea[];
   deeper_reads: GeneratedBriefingItem[];
   also_seen?: GeneratedText[];
+  /** Concise customer-safe Pass 2 learning notes. Internal profile reasoning is never rendered here. */
+  learning_insights?: string[];
   evidence_dashboard_link?: string;
 }
 

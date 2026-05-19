@@ -10,6 +10,8 @@ import {
   isCompanyScannerReportContent,
 } from "@/lib/company-briefing-content-version";
 import { validateCompanyBriefingForDelivery } from "@/lib/company-scan/company-briefing-delivery-safety";
+import { ensureCompanySourceTrailShareLink } from "@/lib/company-scan/company-briefing-share-links";
+import type { CompanyBriefingGenerationOutput } from "@/lib/company-scan/types";
 import { shouldGenerateBriefing } from "@/lib/tier-enforcement";
 
 const INGEST_KEY = process.env.SCAN_INGEST_KEY;
@@ -32,6 +34,36 @@ function profileApprovedForDelivery(profileId: string): boolean {
     .map((id) => id.trim())
     .filter(Boolean);
   return approvedIds.includes(profileId);
+}
+
+function companyEvidenceDashboardLink(profileId: string, date: string): string {
+  return `https://www.albis.news/dashboard/company/${profileId}/briefings/${date}/evidence`;
+}
+
+type CompanyBriefingContentWithLinks = CompanyBriefingGenerationOutput & {
+  scanner_report?: { evidence_dashboard_link?: string };
+};
+
+function withCompanyEvidenceDashboardLink(
+  content: CompanyBriefingContentWithLinks,
+  profileId: string,
+  date: string,
+): CompanyBriefingContentWithLinks {
+  const dashboardLink = companyEvidenceDashboardLink(profileId, date);
+  return {
+    ...content,
+    source_notes: {
+      ...content.source_notes,
+      dashboard_link: content.source_notes?.dashboard_link || dashboardLink,
+    },
+    scanner_report: content.scanner_report
+      ? {
+          ...content.scanner_report,
+          evidence_dashboard_link:
+            content.scanner_report.evidence_dashboard_link || dashboardLink,
+        }
+      : content.scanner_report,
+  };
 }
 
 /**
@@ -222,6 +254,9 @@ export async function POST(req: NextRequest) {
       error?: string;
       content_version?: string;
       warnings?: string[];
+      source_trail_url?: string;
+      source_trail_link_created?: boolean;
+      source_trail_link_reused?: boolean;
     }> = [];
 
     let resend: Resend | null = null;
@@ -423,18 +458,12 @@ export async function POST(req: NextRequest) {
         }
       }
 
-      const html = generateCompanyBriefingHtmlV2(
-        briefing.briefing_content,
-        profile.company_name,
-        briefing.briefing_date,
-      );
-      const subject = generateBriefingSubjectV2(
-        profile.company_name,
-        briefing.briefing_date,
-        briefing.briefing_content.today_brief.top_line.text,
-      );
-
       if (dryRun) {
+        const contentForEmail = withCompanyEvidenceDashboardLink(
+          briefing.briefing_content as CompanyBriefingContentWithLinks,
+          profile.id,
+          briefing.briefing_date,
+        );
         details.push({
           briefing_id: briefing.id,
           company_name: profile.company_name,
@@ -444,6 +473,7 @@ export async function POST(req: NextRequest) {
           recipients,
           content_version: contentVersion,
           warnings: safety.warnings,
+          source_trail_url: contentForEmail.source_notes?.dashboard_link,
         });
         continue;
       }
@@ -475,6 +505,44 @@ export async function POST(req: NextRequest) {
       }
 
       try {
+        let shareLink: Awaited<ReturnType<typeof ensureCompanySourceTrailShareLink>> | null = null;
+        let sourceTrailWarning: string | undefined;
+        try {
+          shareLink = await ensureCompanySourceTrailShareLink(supabase, {
+            id: briefing.id,
+            company_profile_id: briefing.company_profile_id,
+            briefing_date: briefing.briefing_date,
+            briefing_content: briefing.briefing_content,
+          });
+        } catch (shareError: unknown) {
+          sourceTrailWarning =
+            shareError instanceof Error ? shareError.message : "source_trail_share_link_unavailable";
+          console.error(
+            JSON.stringify({
+              event: "company_source_trail_share_link_failed",
+              briefing_id: briefing.id,
+              company_profile_id: briefing.company_profile_id,
+              error: sourceTrailWarning,
+            }),
+          );
+        }
+        const contentForEmail = shareLink
+          ? (shareLink.content as unknown as CompanyBriefingContentWithLinks)
+          : withCompanyEvidenceDashboardLink(
+              briefing.briefing_content as CompanyBriefingContentWithLinks,
+              profile.id,
+              briefing.briefing_date,
+            );
+        const html = generateCompanyBriefingHtmlV2(
+          contentForEmail,
+          profile.company_name,
+          briefing.briefing_date,
+        );
+        const subject = generateBriefingSubjectV2(
+          profile.company_name,
+          briefing.briefing_date,
+          contentForEmail.today_brief.top_line.text,
+        );
         resend ||= getResendClient();
         const batch = recipients.map((to) => ({
           from: FROM_ADDRESS,
@@ -527,7 +595,12 @@ export async function POST(req: NextRequest) {
           final_delivery_status: "sent",
           recipients,
           content_version: contentVersion,
-          warnings: safety.warnings,
+          warnings: sourceTrailWarning
+            ? [...safety.warnings, sourceTrailWarning]
+            : safety.warnings,
+          source_trail_url: shareLink?.url || contentForEmail.source_notes?.dashboard_link,
+          source_trail_link_created: shareLink?.created,
+          source_trail_link_reused: shareLink?.reused,
         });
       } catch (sendError: unknown) {
         const errMsg =

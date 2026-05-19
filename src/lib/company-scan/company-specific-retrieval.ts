@@ -19,6 +19,7 @@ import { loadCanonicalAliasIndex } from "./canonical-alias-index";
 import { parseSignalFromArticle } from "./signal-parser";
 import type { RawArticle, Signal } from "./types";
 import { cachedRetrieval, envNumber } from "./retrieval-cache";
+import type { CompanyIntelligenceProfile } from "./company-daily-learning";
 
 const BRAVE_NEWS_ENDPOINT = "https://api.search.brave.com/res/v1/news/search";
 const BRAVE_WEB_ENDPOINT = "https://api.search.brave.com/res/v1/web/search";
@@ -58,6 +59,30 @@ export interface CompanySpecificRetrievalResult {
   articles_retrieved: number;
   signals: Signal[];
   sources_consulted: number;
+}
+
+export interface CompanyRetrievalLearningHints {
+  promoted_terms?: string[];
+  excluded_terms?: string[];
+  useful_languages?: string[];
+  deep_dive_query_seeds?: string[];
+  daily_query_budget?: number;
+}
+
+export function retrievalLearningHintsFromProfile(
+  profile?: CompanyIntelligenceProfile | null,
+): CompanyRetrievalLearningHints {
+  return {
+    promoted_terms: [
+      ...(profile?.retrieval_memory.promoted_entities || []),
+      ...(profile?.retrieval_memory.promoted_regions || []),
+      ...(profile?.retrieval_memory.promoted_topics || []),
+    ],
+    excluded_terms: profile?.retrieval_memory.exclusions || [],
+    useful_languages: profile?.source_memory.useful_languages || [],
+    deep_dive_query_seeds: profile?.retrieval_memory.deep_dive_query_seeds || [],
+    daily_query_budget: profile?.retrieval_memory.daily_query_budget,
+  };
 }
 
 function sleep(ms: number): Promise<void> {
@@ -309,7 +334,10 @@ function exposureQueryTerm(exposure: string, intent: CompanyRetrievalIntent): { 
   };
 }
 
-export function buildCompanyRetrievalPlan(profile: CompanyProfile): {
+export function buildCompanyRetrievalPlan(
+  profile: CompanyProfile,
+  options: { learningHints?: CompanyRetrievalLearningHints } = {},
+): {
   intent: CompanyRetrievalIntent;
   queries: CompanyRetrievalQuery[];
 } {
@@ -411,6 +439,21 @@ export function buildCompanyRetrievalPlan(profile: CompanyProfile): {
       });
     }
   }
+  const learningHints = options.learningHints;
+  for (const seed of (learningHints?.deep_dive_query_seeds || []).slice(0, 6)) {
+    const context = uniq([
+      ...intentWords(intent).slice(0, 4),
+      ...(learningHints?.promoted_terms || []).slice(0, 4),
+    ]);
+    const localLanguageExpansion = localLanguageExpansionFor(profile, [seed, ...context]);
+    addQuery(queries, `learned: ${seed}`, `${quote(seed)} (${orGroup(expandWithLocalLanguageTerms(context, localLanguageExpansion), 8) || orGroup(intentWords(intent), 6)})`, "Pass 2 learned query seed", {
+      scanAreaId: "pass2-learned-seed",
+      requiredContext: context,
+      priority: "medium",
+      localLanguageExpansion,
+    });
+  }
+
   if (intent === "logistics_routes") {
     const routeTerms = ["Hormuz", "Suez", "Red Sea", "freight rates", "vessel traffic", "marine insurance"];
     const localLanguageExpansion = localLanguageExpansionFor(profile, []);
@@ -441,11 +484,20 @@ export function buildCompanyRetrievalPlan(profile: CompanyProfile): {
     }
   }
 
+  const maxQueries = Math.min(
+    learningHints?.daily_query_budget || DEFAULT_MAX_QUERIES,
+    envNumber("COMPANY_SPECIFIC_MAX_QUERIES", DEFAULT_MAX_QUERIES),
+  );
+  const excluded = (learningHints?.excluded_terms || []).map((term) => term.toLowerCase()).filter(Boolean);
+  const filteredQueries = excluded.length
+    ? queries.filter((query) => !excluded.some((term) => `${query.label} ${query.query}`.toLowerCase().includes(term)))
+    : queries;
+
   return {
     intent,
-    queries: queries
+    queries: filteredQueries
       .sort((a, b) => ({ high: 0, medium: 1, low: 2 }[a.priority] - { high: 0, medium: 1, low: 2 }[b.priority]))
-      .slice(0, envNumber("COMPANY_SPECIFIC_MAX_QUERIES", DEFAULT_MAX_QUERIES)),
+      .slice(0, maxQueries),
   };
 }
 
@@ -560,10 +612,10 @@ function shouldWebGapFill(query: CompanyRetrievalQuery): boolean {
 export async function retrieveCompanySpecificSignals(
   supabase: SupabaseClient,
   profile: CompanyProfile,
-  options: { signalDate: string; log?: (message: string) => void } = { signalDate: new Date().toISOString().slice(0, 10) },
+  options: { signalDate: string; log?: (message: string) => void; learningHints?: CompanyRetrievalLearningHints } = { signalDate: new Date().toISOString().slice(0, 10) },
 ): Promise<CompanySpecificRetrievalResult> {
   const log = options.log || (() => undefined);
-  const plan = buildCompanyRetrievalPlan(profile);
+  const plan = buildCompanyRetrievalPlan(profile, { learningHints: options.learningHints });
   const aliasIndex = await loadCanonicalAliasIndex(supabase);
   const byUrl = new Map<string, RawArticle>();
   const queryMatchesByUrl = new Map<string, CompanyRetrievalQuery[]>();

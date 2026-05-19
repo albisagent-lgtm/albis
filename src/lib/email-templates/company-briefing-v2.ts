@@ -596,6 +596,10 @@ function renderTodayScan(output: CompanyBriefingGenerationOutput): string {
       html += `<li style="margin-bottom:6px;">${esc(customerEnglishText(bullet.text))}</li>`;
     html += `</ul>`;
   }
+  const learningInsights = output.scanner_report.learning_insights || [];
+  if (learningInsights.length && process.env.COMPANY_PASS2_REPORT_INSIGHTS_ENABLED === "1") {
+    html += `<p style="font-size:13px;color:${GRAY};line-height:1.55;margin:12px 0 0;font-family:-apple-system,sans-serif;"><strong>Carried forward:</strong> ${esc(customerEnglishText(learningInsights[0]))}</p>`;
+  }
   return html;
 }
 
@@ -664,10 +668,10 @@ function renderUsefulObservations(
 function renderSourceNotes(output: CompanyBriefingGenerationOutput): string {
   const sn = output.source_notes;
   let html = `<div style="text-align:center;">`;
-  html += `<p style="font-size:13px;color:${GRAY};font-family:-apple-system,sans-serif;margin:0 0 10px;">${esc(sn.text.text)}</p>`;
   if (sn.dashboard_link) {
     const dashboardLink = safeDashboardLink(sn.dashboard_link);
-    html += `<a href="${escAttr(dashboardLink)}" style="font-size:14px;color:${NAVY};font-weight:700;font-family:-apple-system,sans-serif;text-decoration:underline;">View source trail on Albis →</a>`;
+    html += `<p style="font-size:13px;color:${GRAY};font-family:-apple-system,sans-serif;margin:0 0 10px;">The full numbered source trail, article links, topic evidence, and excluded-noise notes are saved on Albis.</p>`;
+    html += `<a href="${escAttr(dashboardLink)}" style="font-size:14px;color:${NAVY};font-weight:700;font-family:-apple-system,sans-serif;text-decoration:underline;">View full source trail on Albis →</a>`;
   } else {
     html += `<p style="font-size:12px;color:${GRAY};font-family:-apple-system,sans-serif;margin:0;">Source trail available in the dashboard after this daily scan is saved.</p>`;
   }

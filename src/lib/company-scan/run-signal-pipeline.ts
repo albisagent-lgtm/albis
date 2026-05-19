@@ -35,10 +35,16 @@ import {
 import { buildBriefingContent } from "../company-briefing-templating";
 import type { Signal } from "./types";
 import { runCompanyPackage8PipelineForProfile } from "./company-package8-pipeline";
-import { retrieveCompanySpecificSignals } from "./company-specific-retrieval";
+import {
+  retrieveCompanySpecificSignals,
+  retrievalLearningHintsFromProfile,
+} from "./company-specific-retrieval";
 import { allowLegacyCompanyPipeline } from "../company-briefing-content-version";
 import { upsertCompanyProfilePgiEvidence, upsertCompanySignalPgiEvidence } from "../pgi-evidence";
 import { persistResearchedUnderstandingLayer } from "./researched-understanding-persistence";
+import { persistCompanyDailyLearningPass2 } from "./company-daily-learning";
+import type { CompanyIntelligenceProfile } from "./company-daily-learning";
+import { loadCompanyIntelligenceWikiProfile } from "./company-intelligence-wiki";
 
 type OwnerProfile = {
   id: string;
@@ -127,6 +133,13 @@ async function loadSignalsForWindow(
 
   if (error) throw new Error(`failed to load signals: ${error.message}`);
   return (data || []) as Signal[];
+}
+
+async function loadCompanyIntelligenceProfile(
+  supabase: SupabaseClient,
+  companyProfileId: string,
+): Promise<CompanyIntelligenceProfile | null> {
+  return loadCompanyIntelligenceWikiProfile(supabase, companyProfileId);
 }
 
 async function loadLatestCompanyScanRunId(
@@ -339,12 +352,14 @@ export async function processProfileSignals(
   } = { mode: "shared_signal_pool", signals_loaded: signals.length };
 
   if (usePackage8Preview && useCompanySpecificRetrieval) {
+    const intelligenceProfile = await loadCompanyIntelligenceProfile(supabase, rawProfile.id);
     const retrieval = await retrieveCompanySpecificSignals(
       supabase,
       rawProfile,
       {
         signalDate: scanDate,
         log,
+        learningHints: retrievalLearningHintsFromProfile(intelligenceProfile),
       },
     );
     profileSignals = retrieval.signals;
@@ -366,6 +381,11 @@ export async function processProfileSignals(
   const signalLevel = determineSignalLevel(selected);
 
   if (usePackage8Preview) {
+    const evidenceDashboardLink =
+      !dryRun && writeBriefingRows && writeEnabled
+        ? `https://www.albis.news/dashboard/company/${rawProfile.id}/briefings/${scanDate}/evidence`
+        : undefined;
+
     const package8 = await runCompanyPackage8PipelineForProfile(
       supabase,
       rawProfile,
@@ -374,6 +394,7 @@ export async function processProfileSignals(
         scanDate,
         lookbackHours: options.lookbackHours ?? 24,
         dryRun: true,
+        dashboardLink: evidenceDashboardLink,
         enableDeepDiveRetrieval,
         log,
       },
@@ -533,6 +554,14 @@ export async function processProfileSignals(
             retrieval_summary: retrievalSummary,
             deep_dive_retrieval: package8.deep_dive_retrieval,
             dedupe_summary: package8.dedupe_summary,
+            pass2_learning: package8.pass2_learning
+              ? {
+                  learning_id: package8.pass2_learning.daily_learning.learning_id,
+                  customer_safe_insights: package8.pass2_learning.customer_safe_report_insights,
+                  profile_update_patch: package8.pass2_learning.profile_update_patch,
+                  cost_controls: package8.pass2_learning.daily_learning.cost_controls,
+                }
+              : undefined,
             qa_report: qaReportForPersistence,
             review_status: blockingFailures > 0
               ? "hold"
@@ -563,6 +592,23 @@ export async function processProfileSignals(
           `${researchPersistence.clusters} cluster(s), ${researchPersistence.sources} source(s), ` +
           `${researchPersistence.notes} note(s), ${researchPersistence.findings} finding(s)`,
       );
+    }
+
+    const pass2Persistence = await persistCompanyDailyLearningPass2(
+      supabase,
+      package8.pass2_learning,
+      briefingRow.id,
+    );
+    if (pass2Persistence.enabled && pass2Persistence.profile_written) {
+      log(
+        `✅ Persisted private company intelligence wiki for ${rawProfile.company_name}` +
+          ` (${pass2Persistence.pages_written || 0} page(s), ${pass2Persistence.changes_written || 0} change(s)` +
+          `${pass2Persistence.review_needed ? ", review needed" : ""})`,
+      );
+    } else if (pass2Persistence.enabled && package8.pass2_learning) {
+      log("  ↳ Private company intelligence wiki update planned; DB write disabled");
+    } else if (package8.pass2_learning) {
+      log("  ↳ Pass 2 learning generated; private wiki disabled by env gate");
     }
 
     const selectedHeadlines = new Set(selected.map((story) => story.headline));
