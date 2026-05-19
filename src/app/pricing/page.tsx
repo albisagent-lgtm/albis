@@ -1,9 +1,9 @@
 import PricingClient from "./pricing-client";
 
 export const metadata = {
-  title: "Pricing — Albis Company Daily Scan",
+  title: "Company Daily Scan — Albis",
   description:
-    "Daily company monitoring across your selected topics, entities, and regions. Clean findings, open source links, source-trail verification, and Perception Gap context.",
+    "Demo-led daily intelligence for teams tracking markets, policy, operations, reputation, supply chains, customers, and opportunities.",
 };
 
 export default function PricingPage() {

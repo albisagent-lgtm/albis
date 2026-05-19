@@ -1,156 +1,150 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
-import {
-  TIERS,
-  TIER_ORDER,
-  PURCHASABLE_TIERS,
-  type TierDefinition,
-} from "@/lib/subscription-tiers";
+
+const demoHref =
+  "mailto:harry@albis.news?subject=Company%20Daily%20Scan%20demo&body=Hi%20Harry%2C%0A%0AI%27d%20like%20to%20book%20a%20Company%20Daily%20Scan%20demo.%0A%0ACompany%2Fteam%3A%0AWhat%20we%20track%3A%0AUseful%20times%3A%0A";
+
+const sampleHref =
+  "mailto:harry@albis.news?subject=Sample%20Company%20Daily%20Scan&body=Hi%20Harry%2C%0A%0AI%27d%20like%20to%20request%20a%20sample%20Company%20Daily%20Scan.%0A%0ACompany%2Fteam%3A%0AMarkets%2C%20regions%2C%20clients%2C%20or%20issues%20we%20track%3A%0A";
+
+const pilotTracks = [
+  {
+    title: "Founder pilots",
+    eyebrow: "Selected teams",
+    text: "A focused pilot for teams with a clear outside-world monitoring need: markets, policy, operations, reputation, supply chains, customers, or opportunities.",
+    features: [
+      "Configured around your team’s real watchlist",
+      "Daily source-backed briefing and dashboard archive",
+      "Founder-led setup, review, and iteration",
+    ],
+    highlighted: true,
+  },
+  {
+    title: "Team intelligence workflows",
+    eyebrow: "Demo-led",
+    text: "For consultancies, operators, public affairs, comms, risk, research, and leadership teams that need a repeatable briefing rhythm.",
+    features: [
+      "Multiple topics, regions, clients, or recipient groups",
+      "Coverage-gap and framing context where it matters",
+      "Output shaped for internal or client-ready workflows",
+    ],
+  },
+  {
+    title: "Enterprise and partner builds",
+    eyebrow: "Custom scope",
+    text: "For organisations that need deeper configuration, wider source review, governance constraints, or a higher-touch intelligence layer.",
+    features: [
+      "Custom onboarding and operating cadence",
+      "Priority setup for high-value monitoring needs",
+      "Room for procurement, security, and stakeholder review",
+    ],
+  },
+];
+
+const included = [
+  "Company-specific daily scan shaped around your real topics",
+  "Open-web source links and source-trail visibility",
+  "Private dashboard archive for review and handover",
+  "Perception, framing, and coverage-gap context",
+  "Careful informational language — not legal, financial, compliance, or investment advice",
+  "A setup conversation before anything is configured",
+];
 
 export default function PricingClient() {
-  const [annual, setAnnual] = useState(true);
-
   return (
     <div className="relative min-h-screen bg-[#f8f7f4] dark:bg-[#0f0f0f]">
-      {/* Background */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-amber-50/40 via-transparent to-transparent dark:from-amber-950/10" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/25 to-transparent" />
+      <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#c8922a]/25 to-transparent" />
 
       <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-24">
-        {/* Header */}
         <div className="text-center">
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#c8922a]">
             Company Daily Scan
           </p>
-          <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-bold tracking-tight text-[#0f0f0f] dark:text-[#f0efec] md:text-4xl">
-            The global picture, translated for your organisation
+          <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-3xl font-bold tracking-tight text-[#0f0f0f] dark:text-[#f0efec] md:text-5xl">
+            Premium daily intelligence for teams tracking the outside world
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
-            Public Albis shows what is happening across the world. These plans
-            turn the same intelligence layer into a private daily scan for your
-            company&apos;s topics, entities, regions, exposures, and decisions.
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400 md:text-lg">
+            Albis turns public signals into a private daily briefing around the markets, policy shifts, operations, reputation, supply chains, customers, and opportunities your team needs to see early.
           </p>
-          <p className="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-zinc-400 dark:text-zinc-500">
-            Start with a 3-day trial. Each email is source-backed, quality gated,
-            and delivered at your chosen local time.
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-500 dark:text-zinc-500">
+            We are moving this product through demo-led onboarding and selected founder pilots. Public tier pricing is intentionally not published while we shape the right workflows with early teams.
           </p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <a
+              href={demoHref}
+              className="inline-flex h-11 items-center justify-center rounded-full bg-[#c8922a] px-6 text-sm font-semibold text-white shadow-[0_3px_14px_rgb(200,146,42,0.28)] hover:bg-[#b17f24]"
+            >
+              Book a demo
+            </a>
+            <a
+              href={sampleHref}
+              className="inline-flex h-11 items-center justify-center rounded-full border border-black/[0.12] px-6 text-sm font-semibold text-zinc-700 hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-white/[0.12] dark:text-zinc-300"
+            >
+              Request a sample scan
+            </a>
+          </div>
         </div>
 
-        {/* Premium demo path */}
-        <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-[#c8922a]/25 bg-[#c8922a]/10 p-5 text-center dark:bg-[#c8922a]/[0.08]">
+        <div className="mx-auto mt-12 grid max-w-5xl gap-5 lg:grid-cols-3">
+          {pilotTracks.map((track) => (
+            <PilotCard key={track.title} {...track} />
+          ))}
+        </div>
+
+        <div className="mx-auto mt-12 grid max-w-5xl gap-6 rounded-3xl border border-black/[0.07] bg-white/75 p-6 dark:border-white/[0.07] dark:bg-white/[0.03] md:grid-cols-[0.85fr_1.15fr] md:p-8">
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
+              What every pilot starts with
+            </p>
+            <h2 className="mt-3 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+              A sharper scan before a bigger commitment.
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+              The aim is fit, not a rushed checkout. We learn what your team tracks, configure a sensible first scan, then refine the daily briefing around what is genuinely useful.
+            </p>
+          </div>
+          <div className="grid gap-3 text-sm text-zinc-600 dark:text-zinc-400 sm:grid-cols-2">
+            {included.map((item) => (
+              <MiniFeature key={item} text={item} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mx-auto mt-12 max-w-4xl rounded-2xl border border-[#c8922a]/25 bg-[#c8922a]/10 p-6 text-center dark:bg-[#c8922a]/[0.08]">
           <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
-            For consultancies, risk teams, and client-monitoring workflows
+            For teams evaluating fit
           </p>
           <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-            Need multiple watchlists, regions, recipients, or client-ready summaries?
+            Not ready for a demo? Ask for a sample scan.
           </h2>
           <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Book a demo and we can shape the scan around your clients, sectors,
-            risk themes, and reporting workflow. Self-serve plans remain below
-            for companies that want to click through and start directly.
+            Send us the company, market, route, policy area, customer segment, or issue you care about. We can show the kind of source-backed briefing Albis would produce before any commercial decision.
           </p>
-          <div className="mt-4 flex flex-col justify-center gap-3 sm:flex-row">
+          <div className="mt-5 flex flex-col justify-center gap-3 sm:flex-row">
             <a
-              href="mailto:harry@albis.news?subject=Company%20Daily%20Scan%20demo"
+              href={demoHref}
               className="inline-flex h-10 items-center justify-center rounded-full bg-[#c8922a] px-5 text-sm font-semibold text-white hover:bg-[#b17f24]"
             >
               Book a demo
             </a>
-            <Link
-              href="/company-daily-scan"
+            <a
+              href={sampleHref}
               className="inline-flex h-10 items-center justify-center rounded-full border border-black/[0.12] px-5 text-sm font-semibold text-zinc-700 hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-white/[0.12] dark:text-zinc-300"
             >
-              See premium examples
-            </Link>
+              Request a sample scan
+            </a>
           </div>
         </div>
 
-        {/* Billing toggle */}
-        <div className="mt-10 flex items-center justify-center gap-3">
-          <span
-            className={`text-sm font-medium ${
-              !annual
-                ? "text-[#0f0f0f] dark:text-[#f0efec]"
-                : "text-zinc-400 dark:text-zinc-500"
-            }`}
-          >
-            Monthly
-          </span>
-          <button
-            onClick={() => setAnnual(!annual)}
-            className={`relative h-7 w-12 rounded-full transition-colors ${
-              annual ? "bg-[#c8922a]" : "bg-zinc-300 dark:bg-zinc-700"
-            }`}
-          >
-            <span
-              className={`absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-transform ${
-                annual ? "left-[22px]" : "left-0.5"
-              }`}
-            />
-          </button>
-          <span
-            className={`text-sm font-medium ${
-              annual
-                ? "text-[#0f0f0f] dark:text-[#f0efec]"
-                : "text-zinc-400 dark:text-zinc-500"
-            }`}
-          >
-            Annual
-          </span>
-          {annual && (
-            <span className="ml-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
-              Save 20%
-            </span>
-          )}
-        </div>
-
-        {/* Tier cards */}
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {TIER_ORDER.filter((id) => id !== "free").map((tierId) => {
-            const tier = TIERS[tierId];
-            return (
-              <TierCard
-                key={tierId}
-                tier={tier}
-                annual={annual}
-                isPurchasable={(
-                  PURCHASABLE_TIERS as readonly string[]
-                ).includes(tierId)}
-              />
-            );
-          })}
-        </div>
-
-        {/* Paid plan baseline */}
-        <div className="mx-auto mt-12 max-w-4xl rounded-2xl border border-black/[0.07] bg-white/70 p-5 dark:border-white/[0.07] dark:bg-white/[0.03]">
-          <p className="text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
-            Every paid plan includes
-          </p>
-          <div className="mt-4 grid gap-3 text-sm text-zinc-600 dark:text-zinc-400 sm:grid-cols-2 lg:grid-cols-4">
-            <MiniFeature text="10-item Company Daily Scan" />
-            <MiniFeature text="Open-web source links and source trail" />
-            <MiniFeature text="Private dashboard archive" />
-            <MiniFeature text="Perception and coverage gap context" />
-          </div>
-        </div>
-
-        {/* Free tier note */}
         <div className="mt-10 text-center">
           <p className="text-sm text-zinc-400 dark:text-zinc-500">
-            Already reading albis.news? The public briefing stays free. The
-            company scan is the private layer for organisations. Serious teams
-            can book a demo; smaller companies can still click through below.{" "}
-            <Link
-              href="/register"
-              className="font-medium text-[#c8922a] hover:underline"
-            >
+            Already reading albis.news? The public briefing stays free. The company scan is the private layer for organisations. {" "}
+            <Link href="/register" className="font-medium text-[#c8922a] hover:underline">
               Create a free account
             </Link>
           </p>
           <p className="mx-auto mt-3 max-w-2xl text-xs leading-relaxed text-zinc-400 dark:text-zinc-600">
-            Company Daily Scan is for informational intelligence only. It is not legal, financial, investment, compliance, or professional advice, and does not guarantee complete coverage of every relevant risk or source. See our{" "}
+            Company Daily Scan is for informational intelligence only. It is not legal, financial, investment, compliance, or professional advice, and does not guarantee complete coverage of every relevant source, region, event, or risk. See our {" "}
             <Link href="/disclaimer" className="text-[#c8922a] hover:underline">
               disclaimer
             </Link>
@@ -158,7 +152,6 @@ export default function PricingClient() {
           </p>
         </div>
 
-        {/* Value props */}
         <div className="mx-auto mt-16 max-w-3xl">
           <div className="grid gap-8 sm:grid-cols-3">
             <ValueProp
@@ -167,7 +160,7 @@ export default function PricingClient() {
             />
             <ValueProp
               title="Filtered to your context"
-              text="Sector, geography, supply chain, reputation, policy, and watchlist signals are prioritised over general headlines."
+              text="Markets, policy, operations, reputation, supply chains, customers, and opportunities are prioritised over general headlines."
             />
             <ValueProp
               title="Shows the gap"
@@ -180,120 +173,40 @@ export default function PricingClient() {
   );
 }
 
-function MiniFeature({ text }: { text: string }) {
-  return (
-    <div className="flex items-start gap-2 rounded-xl bg-[#f8f7f4] px-3 py-2 dark:bg-white/[0.04]">
-      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c8922a]" />
-      <span>{text}</span>
-    </div>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Tier card
-// ---------------------------------------------------------------------------
-
-function TierCard({
-  tier,
-  annual,
-  isPurchasable,
+function PilotCard({
+  title,
+  eyebrow,
+  text,
+  features,
+  highlighted,
 }: {
-  tier: TierDefinition;
-  annual: boolean;
-  isPurchasable: boolean;
+  title: string;
+  eyebrow: string;
+  text: string;
+  features: string[];
+  highlighted?: boolean;
 }) {
-  const price = annual ? tier.annualPrice : tier.monthlyPrice;
-  const isEnterprise = price === null;
-  const isHighlighted = tier.highlighted;
-
   return (
     <div
-      className={`relative flex flex-col rounded-2xl border p-6 transition-shadow ${
-        isHighlighted
-          ? "border-[#c8922a]/40 bg-white shadow-[0_4px_24px_rgb(200,146,42,0.1)] ring-1 ring-[#c8922a]/20 dark:border-[#c8922a]/30 dark:bg-white/[0.04] dark:shadow-none"
+      className={`rounded-2xl border p-6 ${
+        highlighted
+          ? "border-[#c8922a]/45 bg-white shadow-[0_4px_24px_rgb(200,146,42,0.12)] ring-1 ring-[#c8922a]/20 dark:bg-white/[0.04]"
           : "border-black/[0.07] bg-white dark:border-white/[0.07] dark:bg-white/[0.03]"
       }`}
     >
-      {isHighlighted && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-          <span className="rounded-full bg-[#c8922a] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
-            Most popular
-          </span>
-        </div>
-      )}
-
-      <div>
-        <h3 className="font-[family-name:var(--font-playfair)] text-lg font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-          {tier.label}
-        </h3>
-        <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-500">
-          {tier.description}
-        </p>
-      </div>
-
-      {/* Price */}
-      <div className="mt-5">
-        {isEnterprise ? (
-          <p className="font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-            Custom
-          </p>
-        ) : (
-          <div className="flex items-baseline gap-1">
-            <span className="font-[family-name:var(--font-playfair)] text-3xl font-bold text-[#0f0f0f] dark:text-[#f0efec]">
-              ${price}
-            </span>
-            <span className="text-sm text-zinc-400 dark:text-zinc-500">
-              /mo
-            </span>
-          </div>
-        )}
-        {annual && !isEnterprise && tier.monthlyPrice && (
-          <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-500">
-            Billed annually (${(price || 0) * 12}/year)
-          </p>
-        )}
-      </div>
-
-      {/* CTA */}
-      <div className="mt-5">
-        {isPurchasable ? (
-          <Link
-            href={`/checkout/${tier.id}${annual ? "?billing=annual" : ""}`}
-            className={`flex h-10 items-center justify-center rounded-full text-sm font-medium transition-all ${
-              isHighlighted
-                ? "bg-[#c8922a] text-white shadow-[0_2px_8px_rgb(200,146,42,0.3)] hover:bg-[#b17f24]"
-                : "bg-[#0f0f0f] text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
-            }`}
-          >
-            Start 3-day trial
-          </Link>
-        ) : (
-          <a
-            href="mailto:harry@albis.news?subject=Enterprise%20enquiry"
-            className="flex h-10 items-center justify-center rounded-full border border-black/[0.1] text-sm font-medium text-zinc-600 transition-colors hover:bg-black/[0.03] dark:border-white/[0.1] dark:text-zinc-300 dark:hover:bg-white/[0.03]"
-          >
-            Contact us
-          </a>
-        )}
-      </div>
-
-      {/* Features */}
-      <ul className="mt-6 flex-1 space-y-2.5">
-        {tier.features.map((feature) => (
+      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#c8922a]">
+        {eyebrow}
+      </p>
+      <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+        {title}
+      </h3>
+      <p className="mt-3 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+        {text}
+      </p>
+      <ul className="mt-5 space-y-2.5">
+        {features.map((feature) => (
           <li key={feature} className="flex items-start gap-2.5 text-sm">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="mt-0.5 shrink-0 text-[#c8922a]"
-            >
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c8922a]" />
             <span className="text-zinc-600 dark:text-zinc-400">{feature}</span>
           </li>
         ))}
@@ -302,9 +215,14 @@ function TierCard({
   );
 }
 
-// ---------------------------------------------------------------------------
-// Value prop
-// ---------------------------------------------------------------------------
+function MiniFeature({ text }: { text: string }) {
+  return (
+    <div className="flex items-start gap-2 rounded-xl bg-[#f8f7f4] px-3 py-2 dark:bg-white/[0.04]">
+      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c8922a]" />
+      <span>{text}</span>
+    </div>
+  );
+}
 
 function ValueProp({ title, text }: { title: string; text: string }) {
   return (

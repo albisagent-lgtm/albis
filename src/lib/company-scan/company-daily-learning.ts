@@ -170,6 +170,161 @@ function compactSentence(value: string, maxWords = 24): string {
   return words.length > maxWords ? `${words.slice(0, maxWords).join(" ")}…` : words.join(" ");
 }
 
+type LearningCandidateKind = "entity" | "topic" | "region" | "seed" | "exclusion";
+type LearningCandidateDisposition = "durable" | "review" | "junk";
+
+interface LearningCandidateClassification {
+  value: string;
+  disposition: LearningCandidateDisposition;
+  reason?: string;
+}
+
+const OBVIOUS_EXTRACTION_JUNK = new Set([
+  "a",
+  "an",
+  "and",
+  "as",
+  "at",
+  "by",
+  "for",
+  "from",
+  "in",
+  "into",
+  "of",
+  "on",
+  "or",
+  "the",
+  "to",
+  "with",
+  "this",
+  "that",
+  "these",
+  "those",
+  "it",
+  "its",
+  "today",
+  "update",
+  "analysis",
+  "report",
+]);
+
+const OBVIOUS_ENTITY_TRAILING_FRAGMENTS = new Set([
+  "after",
+  "amid",
+  "as",
+  "at",
+  "before",
+  "from",
+  "in",
+  "into",
+  "near",
+  "on",
+  "over",
+  "through",
+  "to",
+  "with",
+  "backs",
+  "calls",
+  "faces",
+  "hits",
+  "opens",
+  "pushes",
+  "says",
+  "sees",
+  "sets",
+  "turns",
+  "warns",
+]);
+
+const OBVIOUS_ENTITY_HEADLINE_VERBS = new Set([
+  "backs",
+  "calls",
+  "discusses",
+  "faces",
+  "hits",
+  "opens",
+  "pushes",
+  "says",
+  "sees",
+  "sets",
+  "turns",
+  "warns",
+]);
+
+const GENERIC_SINGLE_TOKEN_REVIEW = new Set([
+  "bay",
+  "canal",
+  "corridor",
+  "gulf",
+  "port",
+  "route",
+  "sea",
+  "strait",
+]);
+
+function cleanupLearningCandidate(value: string): string {
+  return String(value || "")
+    .replace(/[“”]/g, '"')
+    .replace(/[‘’]/g, "'")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/^[\s"'`([{]+|[\s"'`,;:.)\]}]+$/g, "")
+    .trim();
+}
+
+function classifyLearningCandidate(value: string, kind: LearningCandidateKind): LearningCandidateClassification {
+  const cleaned = cleanupLearningCandidate(value);
+  if (!cleaned) return { value: "", disposition: "junk", reason: "empty candidate" };
+
+  const lower = cleaned.toLowerCase();
+  const alphaNumeric = cleaned.replace(/[^A-Za-z0-9]/g, "");
+  const words = cleaned.split(/\s+/).filter(Boolean);
+
+  if (!alphaNumeric) return { value: cleaned, disposition: "junk", reason: "punctuation-only candidate" };
+  if (OBVIOUS_EXTRACTION_JUNK.has(lower)) return { value: cleaned, disposition: "junk", reason: "obvious title fragment/stop word" };
+  if (words.length === 1 && alphaNumeric.length < 3) return { value: cleaned, disposition: "junk", reason: "too short to be durable memory" };
+
+  const firstWord = words[0]?.toLowerCase() || "";
+  const trailingWord = words.at(-1)?.toLowerCase() || "";
+  if ((kind === "entity" || kind === "seed") && words.length > 1 && OBVIOUS_EXTRACTION_JUNK.has(firstWord)) {
+    return { value: cleaned, disposition: "junk", reason: "headline/title fragment starting with a stop word" };
+  }
+  if ((kind === "entity" || kind === "seed") && words.length > 1 && OBVIOUS_ENTITY_TRAILING_FRAGMENTS.has(trailingWord)) {
+    return { value: cleaned, disposition: "junk", reason: "headline/title fragment ending in a non-entity word" };
+  }
+  if ((kind === "entity" || kind === "seed") && words.slice(1).some((word) => OBVIOUS_ENTITY_HEADLINE_VERBS.has(word.toLowerCase()))) {
+    return { value: cleaned, disposition: "junk", reason: "headline/title fragment containing a news verb" };
+  }
+
+  // Keep the rails deliberately open: unusual, speculative, emerging, or single-token
+  // candidates are still useful learning signals. If they look a little thin, carry
+  // them as low-confidence review/watch items rather than deleting them outright.
+  if (words.length === 1 && kind !== "region" && (GENERIC_SINGLE_TOKEN_REVIEW.has(lower) || (!/[A-Z]{2,}|\d|[&.'-]/.test(cleaned) && alphaNumeric.length < 5))) {
+    return { value: cleaned, disposition: "review", reason: "thin single-token candidate; keep as review/watch only" };
+  }
+
+  return { value: cleaned, disposition: "durable" };
+}
+
+function learningCandidates(values: Array<string | null | undefined>, kind: LearningCandidateKind, limit = 20): LearningCandidateClassification[] {
+  const seen = new Set<string>();
+  const candidates: LearningCandidateClassification[] = [];
+  for (const raw of values) {
+    const candidate = classifyLearningCandidate(String(raw || ""), kind);
+    if (!candidate.value) continue;
+    const key = candidate.value.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    candidates.push(candidate);
+    if (candidates.length >= limit) break;
+  }
+  return candidates;
+}
+
+function durableOrReviewValues(candidates: LearningCandidateClassification[], limit = 20): string[] {
+  return candidates.filter((c) => c.disposition !== "junk").map((c) => c.value).slice(0, limit);
+}
+
 function profileBaseline(profile: CompanyProfile, scanDate: string): CompanyIntelligenceProfile {
   return {
     profile_version: "company_intelligence_profile_v1",
@@ -202,22 +357,29 @@ export function runCompanyDailyLearningPass2(input: Pass2Input): Pass2Result {
 
   const domains = topCounts([...itemDomains(emailItems), ...researchSources.map((s) => s.source_domain)], 10);
   const languages = topCounts([...itemLanguages(emailItems), ...researchSources.map((s) => s.language || "")], 8);
-  const entities = uniq([
+  const entityCandidates = learningCandidates([
     ...emailItems.flatMap((item) => item.facts.flatMap((fact) => fact.text.match(/\b[A-Z][A-Za-z0-9&.'-]*(?:\s+[A-Z][A-Za-z0-9&.'-]*){0,4}\b/g) || [])),
     ...notes.flatMap((note) => note.key_actors || []),
-  ], 24);
+  ], "entity", 32);
+  const entities = durableOrReviewValues(entityCandidates, 24);
+  const entityDisposition = new Map(entityCandidates.map((candidate) => [candidate.value.toLowerCase(), candidate.disposition]));
   const profileEntities = new Set((input.profile.watchlist_entities || []).map((e) => e.toLowerCase()));
   const recurringEntities = entities.filter((e) => profileEntities.has(e.toLowerCase())).slice(0, 8);
   const newEntities = entities.filter((e) => !profileEntities.has(e.toLowerCase())).slice(0, 8);
-  const regions = topCounts([
+  const regionCandidates = learningCandidates(topCounts([
     ...packet.company.regions,
     ...emailItems.flatMap((item) => item.source_summary?.regions_represented || []),
     ...notes.flatMap((note) => note.named_places || []),
-  ], 8);
-  const topics = topCounts([
+  ], 12), "region", 12);
+  const regions = durableOrReviewValues(regionCandidates, 8);
+  const regionDisposition = new Map(regionCandidates.map((candidate) => [candidate.value.toLowerCase(), candidate.disposition]));
+  const topicCandidates = learningCandidates(topCounts([
     ...emailItems.flatMap((item) => item.section_ids || []),
     ...findings.map((finding) => finding.title),
-  ], 10);
+  ], 14), "topic", 14);
+  const topics = durableOrReviewValues(topicCandidates, 10);
+  const topicDisposition = new Map(topicCandidates.map((candidate) => [candidate.value.toLowerCase(), candidate.disposition]));
+  const rejectedCandidates = [...entityCandidates, ...regionCandidates, ...topicCandidates].filter((candidate) => candidate.disposition === "junk");
   const noisy = packet.excluded_summary?.notable_exclusions || [];
 
   const whatLearned = uniq([
@@ -241,25 +403,35 @@ export function runCompanyDailyLearningPass2(input: Pass2Input): Pass2Result {
     reason: `${n.reason}: ${n.audit_note}`,
   }));
 
-  const seedBase = uniq([
+  const seedCandidates = learningCandidates(uniq([
     ...newEntities.slice(0, 5),
     ...topics.slice(0, 5),
     ...regions.slice(0, 4),
-  ], 10);
-  const deepDiveSeeds = seedBase.map((seed, index) => ({
-    seed,
-    reason: index < 4 ? "Strong retained signal or repeated entity/topic from today's scan." : "Secondary learning candidate; use only if tomorrow's first pass is thin.",
-    priority: (index < 4 ? "high" : index < 7 ? "medium" : "low") as "high" | "medium" | "low",
-    required_context: uniq([input.profile.company_name, input.profile.sector, ...topics.slice(0, 3), ...regions.slice(0, 2)], 6),
-    source_budget_hint: index < 4 ? 3 : 1,
-  }));
+  ], 10), "seed", 10).map((candidate) => {
+    const originalDisposition = entityDisposition.get(candidate.value.toLowerCase()) || topicDisposition.get(candidate.value.toLowerCase()) || regionDisposition.get(candidate.value.toLowerCase());
+    return originalDisposition === "review" && candidate.disposition === "durable"
+      ? { ...candidate, disposition: "review" as const, reason: "open-question candidate inherited from source classification" }
+      : candidate;
+  });
+  const seedBase = durableOrReviewValues(seedCandidates, 10);
+  const seedDisposition = new Map(seedCandidates.map((candidate) => [candidate.value.toLowerCase(), candidate.disposition]));
+  const deepDiveSeeds = seedBase.map((seed, index) => {
+    const disposition = seedDisposition.get(seed.toLowerCase()) || "durable";
+    return {
+      seed,
+      reason: disposition === "review" ? "Open-question learning candidate from today's scan; keep for review before durable promotion." : index < 4 ? "Strong retained signal or repeated entity/topic from today's scan." : "Secondary learning candidate; use only if tomorrow's first pass is thin.",
+      priority: (disposition === "review" ? "low" : index < 4 ? "high" : index < 7 ? "medium" : "low") as "high" | "medium" | "low",
+      required_context: uniq([input.profile.company_name, input.profile.sector, ...topics.slice(0, 3), ...regions.slice(0, 2)], 6),
+      source_budget_hint: disposition === "review" ? 1 : index < 4 ? 3 : 1,
+    };
+  });
 
   const suggestions: ProfileUpdateSuggestion[] = [
     ...usefulSources.slice(0, 5).map((s) => ({ field: "useful_domains" as const, action: "promote" as const, value: s.domain, reason: s.reason, confidence: s.confidence, customer_visible: false })),
     ...usefulLanguages.slice(0, 4).map((l) => ({ field: "useful_languages" as const, action: "watch" as const, value: l.language, reason: l.reason, confidence: l.confidence, customer_visible: false })),
-    ...newEntities.slice(0, 5).map((e) => ({ field: "promoted_entities" as const, action: "watch" as const, value: e, reason: "New named actor/place appeared in retained company-specific evidence.", confidence: "low" as const, customer_visible: false })),
-    ...regions.slice(0, 5).map((r) => ({ field: "promoted_regions" as const, action: "promote" as const, value: r, reason: "Region recurred in retained evidence or source trail.", confidence: "medium" as const, customer_visible: false })),
-    ...topics.slice(0, 5).map((t) => ({ field: "promoted_topics" as const, action: "promote" as const, value: t, reason: "Topic/scan area carried useful evidence today.", confidence: "medium" as const, customer_visible: false })),
+    ...newEntities.slice(0, 5).map((e) => ({ field: "promoted_entities" as const, action: "watch" as const, value: e, reason: entityDisposition.get(e.toLowerCase()) === "review" ? "Open-question entity from retained evidence; keep visible for review, not durable promotion yet." : "New named actor/place appeared in retained company-specific evidence.", confidence: "low" as const, customer_visible: false })),
+    ...regions.slice(0, 5).map((r) => ({ field: "promoted_regions" as const, action: (regionDisposition.get(r.toLowerCase()) === "review" ? "watch" : "promote") as ProfileUpdateAction, value: r, reason: regionDisposition.get(r.toLowerCase()) === "review" ? "Open-question region/place candidate; keep for review before durable promotion." : "Region recurred in retained evidence or source trail.", confidence: (regionDisposition.get(r.toLowerCase()) === "review" ? "low" : "medium") as LearningConfidence, customer_visible: false })),
+    ...topics.slice(0, 5).map((t) => ({ field: "promoted_topics" as const, action: (topicDisposition.get(t.toLowerCase()) === "review" ? "watch" : "promote") as ProfileUpdateAction, value: t, reason: topicDisposition.get(t.toLowerCase()) === "review" ? "Open-question topic candidate; keep for review before durable promotion." : "Topic/scan area carried useful evidence today.", confidence: (topicDisposition.get(t.toLowerCase()) === "review" ? "low" : "medium") as LearningConfidence, customer_visible: false })),
     ...noiseOrExclusions.slice(0, 4).map((n) => ({ field: "exclusions" as const, action: "exclude" as const, value: n.value, reason: n.reason, confidence: "medium" as const, customer_visible: false })),
   ].slice(0, 24);
 
@@ -316,6 +488,9 @@ export function runCompanyDailyLearningPass2(input: Pass2Input): Pass2Result {
       notes: [
         `retrieval_summary=${JSON.stringify(input.retrievalSummary || {}).slice(0, 400)}`,
         `deep_dive=${JSON.stringify(input.deepDiveRetrieval || {}).slice(0, 400)}`,
+        rejectedCandidates.length
+          ? `open_learning_rails_filtered=${rejectedCandidates.slice(0, 8).map((candidate) => `${candidate.value} (${candidate.reason || "junk"})`).join("; ")}`
+          : "open_learning_rails_filtered=none",
       ],
     },
   };

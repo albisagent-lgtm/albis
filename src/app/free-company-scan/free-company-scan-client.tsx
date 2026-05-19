@@ -4,6 +4,9 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { getSampleRiskScan, sampleRiskProfiles, type SampleScanProfile } from '@/lib/growth-tools/sample-risk-scan';
 
+const demoHref =
+  'mailto:harry@albis.news?subject=Company%20Daily%20Scan%20demo&body=Hi%20Harry%2C%0A%0AI%27d%20like%20to%20book%20a%20Company%20Daily%20Scan%20demo.%0A%0ACompany%2Fteam%3A%0AWhat%20we%20track%3A%0AUseful%20times%3A%0A';
+
 export default function FreeCompanyScanClient() {
   const [profile, setProfile] = useState<SampleScanProfile>('pr');
   const scan = useMemo(() => getSampleRiskScan(profile), [profile]);
@@ -65,9 +68,9 @@ export default function FreeCompanyScanClient() {
       </div>
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <Link href="/pricing" className="inline-flex h-11 items-center justify-center rounded-full bg-[#c8922a] px-6 text-sm font-semibold text-white shadow-[0_3px_14px_rgb(200,146,42,0.28)] hover:bg-[#b17f24]">
-          Start a 3-day trial
-        </Link>
+        <a href={demoHref} className="inline-flex h-11 items-center justify-center rounded-full bg-[#c8922a] px-6 text-sm font-semibold text-white shadow-[0_3px_14px_rgb(200,146,42,0.28)] hover:bg-[#b17f24]">
+          Book a demo
+        </a>
         <Link href="/company-daily-scan" className="inline-flex h-11 items-center justify-center rounded-full border border-black/[0.12] px-6 text-sm font-semibold text-zinc-700 hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-white/[0.12] dark:text-zinc-300">
           See Company Daily Scan
         </Link>

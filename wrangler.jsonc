@@ -30,6 +30,8 @@
     "COMPANY_EMAIL_DELIVERY_APPROVED_PROFILE_IDS": "6330ca52-2e75-49db-8c9a-5d97ad38a28a,e08205b9-cbe9-4ba2-b5a1-89d9bf0d6ea6",
     "ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER": "true",
     "ALBIS_EDITORIAL_MODEL_PROVIDER": "openclaw-system",
+    "COMPANY_INTELLIGENCE_WIKI_ENABLED": "1",
+    "COMPANY_INTELLIGENCE_WIKI_WRITE_ENABLED": "0",
   },
   "assets": {
     "directory": ".open-next/assets",

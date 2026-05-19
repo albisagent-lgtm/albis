@@ -4,16 +4,19 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Company Daily Scan — Albis",
   description:
-    "Daily intelligence for companies, clients, sectors, regions, and risk themes. Source-backed briefings, dashboard depth, demo-led onboarding, and self-serve trials.",
+    "Demo-led daily intelligence for teams tracking markets, policy, operations, reputation, supply chains, customers, and opportunities.",
   openGraph: {
     title: "Company Daily Scan — Albis",
     description:
-      "A premium daily intelligence layer for teams monitoring clients, sectors, regions, policy, reputation, and geopolitical risk.",
+      "A premium daily intelligence layer for teams monitoring the outside world: markets, policy, operations, reputation, supply chains, customers, and opportunities.",
   },
 };
 
 const demoHref =
-  "mailto:harry@albis.news?subject=Company%20Daily%20Scan%20demo&body=Hi%20Harry%2C%0A%0AI%27d%20like%20to%20book%20a%20Company%20Daily%20Scan%20demo.%0A%0ACompany%2Fteam%3A%0AWhat%20we%20monitor%3A%0AUseful%20times%3A%0A";
+  "mailto:harry@albis.news?subject=Company%20Daily%20Scan%20demo&body=Hi%20Harry%2C%0A%0AI%27d%20like%20to%20book%20a%20Company%20Daily%20Scan%20demo.%0A%0ACompany%2Fteam%3A%0AWhat%20we%20track%3A%0AUseful%20times%3A%0A";
+
+const sampleHref =
+  "mailto:harry@albis.news?subject=Sample%20Company%20Daily%20Scan&body=Hi%20Harry%2C%0A%0AI%27d%20like%20to%20request%20a%20sample%20Company%20Daily%20Scan.%0A%0ACompany%2Fteam%3A%0AMarkets%2C%20regions%2C%20clients%2C%20or%20issues%20we%20track%3A%0A";
 
 const sampleItems = [
   {
@@ -65,23 +68,23 @@ const useCases = [
 
 const packages = [
   {
-    name: "Starter",
-    price: "from £99/mo",
-    audience: "For one company, sector, or risk watchlist.",
-    features: ["Daily email briefing", "Source-backed findings", "Basic dashboard archive", "One focused watchlist"],
-  },
-  {
-    name: "Professional",
-    price: "from £299/mo",
-    audience: "For consultancies, agencies, and small teams.",
-    features: ["Several companies, clients, or sectors", "Risk and region filters", "Multiple recipients", "Weekly summary option"],
+    name: "Founder pilot",
+    position: "Selected early teams",
+    audience: "For one clear company, market, sector, route, customer segment, or policy watchlist.",
+    features: ["Founder-led setup", "Daily source-backed briefing", "Private dashboard archive", "Fast feedback loop on relevance"],
     highlighted: true,
   },
   {
-    name: "Intelligence Partner",
-    price: "custom / from £1,000+",
-    audience: "For firms using Albis in client or risk monitoring workflows.",
-    features: ["Custom client/risk watchlists", "White-labelled or client-ready summaries", "Priority setup", "Weekly analyst-style review"],
+    name: "Team workflow",
+    position: "Demo-led configuration",
+    audience: "For consultancies, agencies, operators, public affairs, comms, research, and leadership teams.",
+    features: ["Multiple topics, regions, clients, or recipients", "Framing and coverage-gap context", "Internal or client-ready summary options", "Cadence shaped around the team"],
+  },
+  {
+    name: "Intelligence partner",
+    position: "Custom scope",
+    audience: "For organisations using Albis as a higher-touch outside-world intelligence layer.",
+    features: ["Custom watchlists and operating cadence", "Priority setup", "Stakeholder and procurement support", "Room for deeper governance review"],
   },
 ];
 
@@ -95,10 +98,10 @@ export default function CompanyDailyScanPage() {
               Company Daily Scan
             </p>
             <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-4xl font-bold leading-[1.08] tracking-tight md:text-6xl">
-              Daily intelligence for the companies, sectors, and risks your team watches.
+              Daily intelligence for the outside world your team needs to track.
             </h1>
             <p className="mt-5 max-w-xl font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-600 dark:text-zinc-400 md:text-xl">
-              Albis turns global news and public signals into a concise daily briefing around your clients, markets, regions, regulatory exposure, reputation, and watchlists.
+              Albis turns global news and public signals into a concise daily briefing around markets, policy, operations, reputation, supply chains, customers, opportunities, and the watchlists your team already cares about.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
@@ -107,15 +110,15 @@ export default function CompanyDailyScanPage() {
               >
                 Book a demo
               </a>
-              <Link
-                href="/pricing"
+              <a
+                href={sampleHref}
                 className="inline-flex h-11 items-center justify-center rounded-full border border-black/[0.12] px-6 text-sm font-semibold text-zinc-700 transition-colors hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-white/[0.12] dark:text-zinc-300"
               >
-                View self-serve plans
-              </Link>
+                Request a sample scan
+              </a>
             </div>
             <p className="mt-4 text-xs leading-relaxed text-zinc-500 dark:text-zinc-500">
-              Prefer to click through? Companies can still start from the self-serve plans and set up a trial directly.
+              Founder pilots are available for selected teams while we shape the product around high-value workflows.
             </p>
             <p className="mt-3 max-w-xl text-[11px] leading-relaxed text-zinc-400 dark:text-zinc-600">
               Company Daily Scan is an informational intelligence briefing, not legal, financial, investment, compliance, or professional advice. You remain responsible for decisions made from any briefing.
@@ -194,7 +197,7 @@ export default function CompanyDailyScanPage() {
               The daily email is curated separately: usually 7–12 findings that passed source depth, relevance, and editorial quality checks.
             </p>
             <p>
-              For serious teams, we can configure the scan around clients, sectors, jurisdictions, risk themes, regions, and recipient groups.
+              For serious teams, we can configure the scan around markets, policy areas, operations, reputation, supply chains, customers, opportunities, regions, and recipient groups.
             </p>
           </div>
         </div>
@@ -224,13 +227,13 @@ export default function CompanyDailyScanPage() {
         <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
-              Packages
+              Pilot pathways
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-playfair)] text-3xl font-bold md:text-4xl">
-              Start small, or shape it around a serious intelligence workflow.
+              Start with a focused pilot, or shape it around a serious intelligence workflow.
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-white/60">
-              Self-serve plans remain available. Higher-value teams can book a demo and configure watchlists, recipients, regions, and output depth around their actual workflow.
+              We are not publishing fixed public tiers while the product is founder-led. Selected teams can book a demo and configure watchlists, recipients, regions, and output depth around their actual workflow.
             </p>
           </div>
           <div className="mt-8 grid gap-5 lg:grid-cols-3">
@@ -242,27 +245,27 @@ export default function CompanyDailyScanPage() {
             <a href={demoHref} className="inline-flex h-11 items-center justify-center rounded-full bg-[#c8922a] px-6 text-sm font-semibold text-white hover:bg-[#b17f24]">
               Book a demo
             </a>
-            <Link href="/pricing" className="inline-flex h-11 items-center justify-center rounded-full border border-white/[0.16] px-6 text-sm font-semibold text-white/80 hover:border-[#c8922a]/50 hover:text-[#c8922a]">
-              Click through to plans
-            </Link>
+            <a href={sampleHref} className="inline-flex h-11 items-center justify-center rounded-full border border-white/[0.16] px-6 text-sm font-semibold text-white/80 hover:border-[#c8922a]/50 hover:text-[#c8922a]">
+              Request a sample scan
+            </a>
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-3xl px-6 py-16 text-center md:py-24">
         <h2 className="font-[family-name:var(--font-playfair)] text-3xl font-bold md:text-4xl">
-          For serious teams, book a demo. For direct setup, click through.
+          For serious teams, book a demo. If you need proof of fit, request a sample scan.
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 md:text-base">
-          If you want a client, sector, policy, or risk-monitoring workflow, start with a demo. If you already know what you want to track, you can still choose a self-serve plan and begin with a trial.
+          If your team tracks markets, policy, operations, reputation, supply chains, customers, or opportunities, start with a demo. If you already know the watchlist, ask for a sample scan first.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <a href={demoHref} className="inline-flex h-11 items-center justify-center rounded-full bg-[#c8922a] px-6 text-sm font-semibold text-white hover:bg-[#b17f24]">
-            Request a demo
+            Book a demo
           </a>
-          <Link href="/pricing" className="inline-flex h-11 items-center justify-center rounded-full border border-black/[0.12] px-6 text-sm font-semibold text-zinc-700 hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-white/[0.12] dark:text-zinc-300">
-            View self-serve pricing
-          </Link>
+          <a href={sampleHref} className="inline-flex h-11 items-center justify-center rounded-full border border-black/[0.12] px-6 text-sm font-semibold text-zinc-700 hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-white/[0.12] dark:text-zinc-300">
+            Request a sample scan
+          </a>
         </div>
         <p className="mx-auto mt-5 max-w-xl text-xs leading-relaxed text-zinc-400 dark:text-zinc-500">
           Albis helps surface source-backed signals and gaps, but no scan can guarantee complete coverage of every risk, source, region, or event. See our <Link href="/disclaimer" className="text-[#c8922a] underline decoration-[#c8922a]/30 underline-offset-2">disclaimer</Link>.
@@ -293,13 +296,13 @@ function Step({ number, title, text }: { number: string; title: string; text: st
 
 function PackageCard({
   name,
-  price,
+  position,
   audience,
   features,
   highlighted,
 }: {
   name: string;
-  price: string;
+  position: string;
   audience: string;
   features: string[];
   highlighted?: boolean;
@@ -308,7 +311,7 @@ function PackageCard({
     <div className={`rounded-2xl border p-6 ${highlighted ? "border-[#c8922a]/45 bg-[#c8922a]/10" : "border-white/[0.1] bg-white/[0.04]"}`}>
       {highlighted && <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#c8922a]">Best fit for teams</p>}
       <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold">{name}</h3>
-      <p className="mt-2 text-lg font-semibold text-[#c8922a]">{price}</p>
+      <p className="mt-2 text-sm font-semibold uppercase tracking-[0.16em] text-[#c8922a]">{position}</p>
       <p className="mt-2 text-sm leading-relaxed text-white/65">{audience}</p>
       <ul className="mt-5 space-y-2.5 text-sm text-white/70">
         {features.map((feature) => (
