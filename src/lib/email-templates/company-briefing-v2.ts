@@ -5,7 +5,8 @@
 // the new calm briefing structure:
 //
 //   1. Main Briefing — grouped by selected areas with useful findings
-//   2. Perception Gap — 1-3 evidence-bound notes only when useful
+//   2. Perception Gap — temporarily withheld from customer emails until the
+//      company-specific writing is consistently publication-quality.
 //   3. Observations — 2-4 calm observations
 //   4. Source Notes / Dashboard link
 //
@@ -166,7 +167,10 @@ export function generateCompanyBriefingHtmlV2(
   const deeperReadHtml = renderDeeperRead(output);
 
   // --- PERCEPTION GAP ---
-  const perceptionGapHtml = renderPerceptionGap(output);
+  // Temporarily hidden from customer emails. The source data is still retained
+  // in briefing_content for internal review, but the generated prose is not yet
+  // consistently clear enough for a trust-building paid briefing.
+  const perceptionGapHtml = "";
 
   // --- OBSERVATIONS ---
   const observationsHtml = renderUsefulObservations(output);

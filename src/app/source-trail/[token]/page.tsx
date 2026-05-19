@@ -161,22 +161,6 @@ export default async function PublicSourceTrailPage({ params }: PageProps) {
         </div>
       </Section>
 
-      <Section title="Perception Gap evidence">
-        {doc.perception_gap_frames.length ? (
-          <div className="space-y-5">
-            {doc.perception_gap_frames.map((frame, index) => (
-              <article key={`${frame.topic}-${index}`} className="border-t border-black/10 pt-5 first:border-t-0 first:pt-0 dark:border-white/10">
-                <h3 className="font-extrabold text-[#1a1a2e] dark:text-[#f0efec]">{index + 1}. {frame.topic}</h3>
-                <p className="mt-3 whitespace-pre-wrap border-l-4 border-[#c8922a] bg-[#faf9f7] p-4 text-sm leading-7 text-zinc-700 dark:bg-white/[0.04] dark:text-zinc-300">{frame.frame_text}</p>
-                <p className="mt-2 text-xs leading-6 text-zinc-500 dark:text-zinc-400">{frame.evidence_confidence.customer_phrase} Sources: {frame.source_names.join("; ")}</p>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">No Perception Gap was shown because the selected evidence did not support a useful multi-frame comparison.</p>
-        )}
-      </Section>
-
       <Section title="Additional evidence kept for context">
         {doc.dashboard_only_items.length ? (
           <ol className="list-decimal space-y-2 pl-5 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
