@@ -52,12 +52,13 @@ function buildTrialEndedEmail(profile: TrialProfile) {
         <div style="font-family:Georgia,serif;font-size:26px;font-weight:600;color:#111827;margin-bottom:18px;">Albis</div>
         <p style="font-size:16px;line-height:1.6;margin:0 0 16px;">Hi ${esc(firstName)},</p>
         <p style="font-size:16px;line-height:1.6;margin:0 0 16px;">Your 3-day Company Daily Scan trial has ended, so new company briefings are now paused.</p>
-        <p style="font-size:16px;line-height:1.6;margin:0 0 18px;">Your dashboard and past scans remain available. If the daily external-risk briefing was useful, you can choose a plan to keep receiving your company scan automatically.</p>
+        <p style="font-size:16px;line-height:1.6;margin:0 0 16px;">Your dashboard and past scans remain available. If the daily external-risk briefing was useful, you can choose a plan to keep receiving your company scan automatically.</p>
+        <p style="font-size:16px;line-height:1.6;margin:0 0 18px;">Either way, I’d genuinely value your feedback. What was useful, what missed the mark, and what would make this more valuable for your team? A quick reply with blunt notes would really help us improve it.</p>
         <div style="margin:26px 0;">
           <a href="${pricingUrl}" style="display:inline-block;background:#c8922a;color:#ffffff;text-decoration:none;border-radius:999px;padding:12px 20px;font-weight:700;font-size:14px;">Choose a plan</a>
           <a href="${dashboardUrl}" style="display:inline-block;color:#8a6018;text-decoration:none;margin-left:14px;font-weight:600;font-size:14px;">View dashboard</a>
         </div>
-        <p style="font-size:14px;line-height:1.6;color:#6b7280;margin:0;">If you have questions or want help tuning your company profile, just reply to this email.</p>
+        <p style="font-size:14px;line-height:1.6;color:#6b7280;margin:0;">If you have questions, want help tuning your company profile, or have feedback on the trial, just reply to this email.</p>
       </div>
     </div>
   </div>`;
