@@ -102,10 +102,10 @@ const supabase = createClient(SUPABASE_URL, SERVICE_KEY, {
   auth: { autoRefreshToken: false, persistSession: false },
 });
 
-const MIN_WORD_COUNT = 420;
-const TARGET_WORD_COUNT = 480;
-const MIN_ARTICLE_COUNT = 10;
-const MAX_ARTICLE_COUNT = 14;
+const MIN_WORD_COUNT = 750;
+const TARGET_WORD_COUNT = 950;
+const MIN_ARTICLE_COUNT = 7;
+const MAX_ARTICLE_COUNT = 7;
 const CANDIDATE_LIMIT = 70;
 const RECENT_IMAGE_WINDOW = 100;
 const BANNED_PHRASES = [
@@ -132,8 +132,7 @@ const BANNED_PHRASES = [
   'the scan flags',
   'patterns in the scan',
   'framing pattern in the scan',
-  'reporting attention is clustered',
-  'coverage is clustering',
+
   'broader scan',
   'published set',
   'writeability',
@@ -414,7 +413,7 @@ function buildGenericLedeParts(packet: StoryPacket): LedeParts {
   const location = packet.primaryRegion !== 'the wider region' ? packet.primaryRegion : (packet.regionsFound[0] || packet.primaryRegion);
   const consequence = sentenceCase(packet.connection || 'That shift is now starting to change how other actors price risk, access, or timing around the story.');
 
-  const subjectMatch = headline.match(/^(.+?)\s+(extends?|approves?|advances?|launches?|investigates?|receives?|considers?|reports?|says|warns|unveils?|signs?|boosts?|revives?|hits?|moves?|agrees?|denounces?|promotes?|rises?|falls?|kills?|delivers?)\b/i);
+  const subjectMatch = headline.match(/^(.+?)\s+(extends?|approves?|advances?|launches?|publishes?|backs?|forces?|investigates?|receives?|considers?|reports?|says|warns|unveils?|signs?|boosts?|revives?|hits?|moves?|agrees?|denounces?|promotes?|rises?|falls?|kills?|delivers?)\b/i);
   if (subjectMatch) {
     const actor = cleanPhrase(subjectMatch[1]);
     const action = cleanPhrase(subjectMatch[2]);
@@ -437,7 +436,7 @@ function buildGenericLedeParts(packet: StoryPacket): LedeParts {
 
   return {
     actor: headline,
-    action: 'is forcing a fresh read of the situation',
+    action: 'points to a concrete shift',
     object: '',
     location,
     consequence,
@@ -1200,12 +1199,83 @@ function selectLegacyBodyFromPlan(packet: StoryPacket, plan: StoryPlan) {
   }
 }
 
+function countWords(value: string) {
+  return String(value || '').trim().split(/\s+/).filter(Boolean).length;
+}
+
+function buildPremiumEvidenceParagraph(packet: StoryPacket) {
+  const texture = packet.articleSignals?.sourceTexture?.length
+    ? packet.articleSignals.sourceTexture.join(', ')
+    : 'a headline, a consequence line, and a cross-region footprint';
+  const actors = packet.articleSignals?.mainActors?.length
+    ? packet.articleSignals.mainActors.slice(0, 3).join(', ')
+    : 'the institutions and communities closest to the story';
+  return `The evidence layer is still uneven, but it is not empty. Current reporting gives readers ${texture}, while ${actors} sit closest to the practical consequences. That makes the article less about declaring a finished verdict and more about mapping the operating reality: what is confirmed, where the pressure is landing, and which claims still need stronger proof before they become part of the public record.`;
+}
+
+function buildPremiumLifeSystemsParagraph(packet: StoryPacket) {
+  const mechanism = packet.articleSignals?.mechanism || 'the underlying system pressure';
+  const stake = packet.articleSignals?.humanStake || 'everyday access, cost, safety, or institutional capacity';
+  const detail = pickFreshDetail(packet);
+  return `The life-systems layer is the reason this belongs in a deeper public file. ${sentenceCase(mechanism)} can move through ${stake}, and ${detail} is one of the places where that movement becomes visible. The useful question is not whether the headline is loud, but whether it changes food, water, energy, health, shelter, movement, work, or public capacity. If the story keeps developing, the consequence will not only be political language; it will be felt through queues, prices, service capacity, travel choices, school calendars, medical risk, energy planning, or household decisions.`;
+}
+
+function buildPremiumClarityParagraph(packet: StoryPacket) {
+  const mechanism = packet.articleSignals?.mechanism || 'the practical mechanism underneath the headline';
+  const stake = packet.articleSignals?.humanStake || 'the people and institutions exposed to the change';
+  return `The clarity test is simple: strip away slogans, jargon, and partisan reflex, then ask what remains materially true. In this case, ${mechanism} is the part that can be checked against real-world pressure, and ${stake} is where the effect becomes human rather than abstract. That is the standard for reading the story carefully: not panic, not detachment, but enough understanding to see what is actually being changed.`;
+}
+
+function buildPremiumFrameParagraph(packet: StoryPacket) {
+  const found = packet.regionsFound.length ? packet.regionsFound.slice(0, 3).join(', ') : packet.regions.slice(0, 3).join(', ');
+  const tension = packet.articleSignals?.framingTension || 'the visible event and the practical fallout are pulling attention in different directions';
+  return `${found ? `The regional frame also matters. Coverage is strongest in ${found},` : 'The regional frame also matters,'} but the same facts can carry different meanings depending on whether outlets lead with law, cost, security, humanitarian strain, or domestic politics. ${sentenceCase(tension)}. A public reader needs that distinction because the first frame often decides whether the story is treated as urgent, technical, distant, or personal.`;
+}
+
+function buildPremiumUncertaintyParagraph(packet: StoryPacket) {
+  const detail = pickFreshDetail(packet);
+  return `The honest uncertainty is how far the effect travels from here. The next proof will come from changes around ${detail}: whether official promises turn into delivery, whether affected groups change behaviour, whether neighbouring systems absorb the pressure, and whether later reporting confirms the early pattern or narrows it. Until then, the strongest reading is cautious but serious: the signal is real enough to track, not settled enough to oversell.`;
+}
+
+function ensurePremiumArticleDepth(packet: StoryPacket, draft: BuiltStoryDraft): BuiltStoryDraft {
+  let paragraphs = draft.body.split(/\n\n+/).map((paragraph) => paragraph.replace(/\s+/g, ' ').trim()).filter(Boolean);
+
+  paragraphs = paragraphs.map((paragraph, index) => {
+    if (countWords(paragraph) >= 70) return paragraph;
+    if (index === 0) return paragraph;
+    const detail = pickFreshDetail(packet);
+    const addendum = index % 2 === 0
+      ? `That detail matters because ${detail} is where an abstract development starts becoming a practical constraint for people, operators, or public institutions.`
+      : `The useful reading is not just that something happened, but that the decision space around ${detail} is now narrower than it was before.`;
+    return `${paragraph} ${addendum}`.replace(/\s+/g, ' ').trim();
+  });
+
+  const premiumAdds = [
+    buildPremiumEvidenceParagraph(packet),
+    buildPremiumLifeSystemsParagraph(packet),
+    buildPremiumClarityParagraph(packet),
+    buildPremiumFrameParagraph(packet),
+    buildPremiumUncertaintyParagraph(packet),
+  ];
+  for (const addition of premiumAdds) {
+    if (countWords(paragraphs.join(' ')) >= TARGET_WORD_COUNT || paragraphs.length >= 12) break;
+    const insertAt = Math.max(2, paragraphs.length - 1);
+    paragraphs.splice(insertAt, 0, addition);
+  }
+
+  while (countWords(paragraphs.join(' ')) < MIN_WORD_COUNT && paragraphs.length < 14) {
+    paragraphs.splice(Math.max(2, paragraphs.length - 1), 0, buildPremiumUncertaintyParagraph(packet));
+  }
+
+  return { ...draft, lede: paragraphs[0] || draft.lede, body: paragraphs.join('\n\n') };
+}
+
 function buildPlannedArticleBody(packet: StoryPacket) {
   const plan = planStory(packet);
   const planned = buildPlanDrivenDraft(packet, plan);
-  if (planned) return planned;
+  if (planned) return ensurePremiumArticleDepth(packet, planned);
   const built = selectLegacyBodyFromPlan(packet, plan);
-  return { ...built, plan, draftPath: 'legacy' as const, draftForm: 'legacy' as const };
+  return ensurePremiumArticleDepth(packet, { ...built, plan, draftPath: 'legacy' as const, draftForm: 'legacy' as const });
 }
 
 function containsBannedPhrases(text: string) {
@@ -1284,12 +1354,12 @@ function expectedParagraphRange(form: StoryPacket['articleForm']) {
     case 'system-shift':
     case 'turning-point':
     case 'offbeat-signal':
-      return { min: 6, max: 9, idealMin: 7, idealMax: 8 };
+      return { min: 8, max: 14, idealMin: 9, idealMax: 12 };
     case 'human-ground':
     case 'framing-map':
-      return { min: 5, max: 9, idealMin: 6, idealMax: 8 };
+      return { min: 8, max: 14, idealMin: 9, idealMax: 12 };
     default:
-      return { min: 5, max: 9, idealMin: 6, idealMax: 8 };
+      return { min: 8, max: 14, idealMin: 9, idealMax: 12 };
   }
 }
 

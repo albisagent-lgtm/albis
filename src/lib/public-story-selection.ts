@@ -88,6 +88,14 @@ const DIVERSITY_PRIORITY_CATEGORIES = new Set([
 const HUMAN_TAGS = ['aid', 'refugee', 'vaccine', 'measles', 'meningitis', 'civilian', 'children', 'health', 'food', 'water', 'hospital', 'clinic', 'school', 'hunger', 'malnutrition', 'displacement', 'teacher', 'student', 'farmer', 'patient', 'worker', 'family'];
 const OFFBEAT_TAGS = ['wildlife', 'satellite', 'coffee', 'solar', 'deforestation', 'garment', 'fisheries', 'bees', 'penguin', 'reef', 'orchard', 'volcano', 'battery', 'aging', 'fusion', 'robot', 'gene', 'tutor'];
 const SYSTEM_TAGS = ['shipping', 'insurance', 'inflation', 'supply-chain', 'energy', 'sanctions', 'migration', 'ai', 'infrastructure', 'port', 'grid', 'pipeline', 'cable', 'corridor', 'rail'];
+const LIFE_SYSTEMS_FOUNDATION_TAGS = [
+  'food', 'grain', 'wheat', 'rice', 'maize', 'fertilizer', 'farmer', 'harvest', 'irrigation', 'famine', 'hunger', 'malnutrition',
+  'water', 'drought', 'flood', 'reservoir', 'desalination', 'sanitation', 'sewage',
+  'energy', 'fuel', 'diesel', 'oil', 'gas', 'electricity', 'blackout', 'grid', 'power', 'solar', 'battery',
+  'health', 'hospital', 'clinic', 'medicine', 'vaccine', 'outbreak', 'disease', 'heatwave',
+  'housing', 'shelter', 'migration', 'refugee', 'displacement',
+  'port', 'rail', 'road', 'bridge', 'shipping', 'supply-chain', 'logistics', 'infrastructure',
+];
 const NARROW_SYSTEM_TAGS = ['shipping', 'insurance', 'inflation', 'supply-chain', 'sanctions', 'tariff', 'freight', 'oil', 'lng', 'commodity', 'macro', 'market', 'crude', 'diesel'];
 const CURIOSITY_TAGS = ['island', 'village', 'mosquito', 'grain', 'mine', 'dam', 'reef', 'clinic', 'prison', 'orchard', 'bridge', 'school', 'factory', 'battery', 'robot', 'teacher'];
 const TOPIC_STOPWORDS = new Set(['global', 'energy', 'shipping', 'insurance', 'sanctions', 'migration', 'health', 'markets', 'conflict', 'diplomacy', 'economic']);
@@ -268,8 +276,9 @@ export function scorePublicInterest(item: ScanItemInput): { score: number; why: 
   const category = normalisePublicCategory(item.category);
   const lane = laneKey(category);
   if (HUMAN_CATEGORIES.has(category)) {
-    score += 1.35;
+    score += 1.85;
     why.push('human-impact');
+    why.push('life-systems-priority');
   }
   if (OFFBEAT_CATEGORIES.has(category)) {
     score += 0.95;
@@ -281,7 +290,7 @@ export function scorePublicInterest(item: ScanItemInput): { score: number; why: 
   }
 
   if (DIVERSITY_PRIORITY_CATEGORIES.has(category)) {
-    score += 0.35;
+    score += 0.6;
     why.push('diversity-lane');
   }
 
@@ -301,6 +310,12 @@ export function scorePublicInterest(item: ScanItemInput): { score: number; why: 
   if (systemsHits > 0) {
     score += Math.min(0.75, systemsHits * 0.18);
     why.push('system-flow');
+  }
+
+  const lifeFoundationHits = countTagHits(item, LIFE_SYSTEMS_FOUNDATION_TAGS);
+  if (lifeFoundationHits > 0) {
+    score += Math.min(1.35, lifeFoundationHits * 0.24);
+    why.push('life-foundation');
   }
 
   const narrowSystemHits = countTagHits(item, NARROW_SYSTEM_TAGS);
@@ -757,7 +772,7 @@ function isNearDuplicate(a: PublicStorySelection, b: PublicStorySelection): bool
 }
 
 function categoryCap(target: number): number {
-  return target >= 6 ? 2 : 1;
+  return target >= 7 ? 2 : target >= 6 ? 2 : 1;
 }
 
 export function suggestPublicArticleCount(items: ScanItemInput[], minCount = 3, maxCount = 7): number {
