@@ -31,12 +31,19 @@ export default function RegisterClient() {
 
     const form = new FormData(e.currentTarget);
     const name = (form.get("name") as string).trim();
+    const username = (form.get("username") as string).trim().replace(/^@+/, "").toLowerCase();
     const email = (form.get("email") as string).trim();
     const password = form.get("password") as string;
     const confirmPassword = form.get("confirmPassword") as string;
 
     if (!name || !email || !password) {
       setError("Please fill in all fields.");
+      setLoading(false);
+      return;
+    }
+
+    if (username && !/^[a-z0-9_]{3,24}$/.test(username)) {
+      setError("Username must be 3–24 characters and use only letters, numbers, or underscores.");
       setLoading(false);
       return;
     }
@@ -59,7 +66,7 @@ export default function RegisterClient() {
         email,
         password,
         options: {
-          data: { name },
+          data: { name, username: username || null },
           emailRedirectTo: `${window.location.origin}/auth/callback?next=/account`,
         },
       });
@@ -169,6 +176,29 @@ export default function RegisterClient() {
                     placeholder="Your name"
                     className="h-11 rounded-xl border border-black/[0.1] bg-[#f8f7f4] px-3.5 text-sm text-[#0f0f0f] placeholder:text-zinc-400 focus:border-[#c8922a] focus:outline-none focus:ring-2 focus:ring-[#c8922a]/15 dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-[#f0efec] dark:placeholder:text-zinc-600 dark:focus:border-[#c8922a] dark:focus:ring-[#c8922a]/15"
                   />
+                </div>
+
+                {/* Username */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
+                    Username <span className="font-normal text-zinc-400">optional</span>
+                  </label>
+                  <div className="relative">
+                    <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-zinc-400">@</span>
+                    <input
+                      name="username"
+                      type="text"
+                      autoComplete="username"
+                      placeholder="readername"
+                      minLength={3}
+                      maxLength={24}
+                      pattern="[A-Za-z0-9_]{3,24}"
+                      className="h-11 w-full rounded-xl border border-black/[0.1] bg-[#f8f7f4] pl-7 pr-3.5 text-sm text-[#0f0f0f] placeholder:text-zinc-400 focus:border-[#c8922a] focus:outline-none focus:ring-2 focus:ring-[#c8922a]/15 dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-[#f0efec] dark:placeholder:text-zinc-600 dark:focus:border-[#c8922a] dark:focus:ring-[#c8922a]/15"
+                    />
+                  </div>
+                  <p className="text-[11px] text-zinc-400 dark:text-zinc-500">
+                    Used as your public name in article conversations.
+                  </p>
                 </div>
 
                 {/* Email */}

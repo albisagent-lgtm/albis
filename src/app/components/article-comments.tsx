@@ -17,7 +17,7 @@ type PublicComment = {
 type SessionUser = {
   id: string;
   email?: string;
-  user_metadata?: { name?: string };
+  user_metadata?: { name?: string; username?: string };
 } | null;
 
 function formatCommentDate(value: string) {
@@ -52,7 +52,7 @@ function CommentForm({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const displayName = user?.user_metadata?.name || user?.email?.split("@")[0] || "your account";
+  const displayName = user?.user_metadata?.username ? `@${user.user_metadata.username}` : user?.user_metadata?.name || user?.email?.split("@")[0] || "your account";
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();

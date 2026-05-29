@@ -54,7 +54,7 @@ export function NavAuth() {
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
-            <span className="hidden sm:inline max-w-[120px] truncate">{user.user_metadata?.name || user.email?.split("@")[0]}</span>
+            <span className="hidden sm:inline max-w-[120px] truncate">{user.user_metadata?.username ? `@${user.user_metadata.username}` : user.user_metadata?.name || user.email?.split("@")[0]}</span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="6 9 12 15 18 9" />
             </svg>

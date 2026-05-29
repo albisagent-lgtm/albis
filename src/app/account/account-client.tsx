@@ -25,6 +25,7 @@ export default function AccountClient() {
 
   // Profile editing
   const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [nameSaving, setNameSaving] = useState(false);
   const [nameSuccess, setNameSuccess] = useState(false);
   const [nameError, setNameError] = useState("");
@@ -57,12 +58,18 @@ export default function AccountClient() {
 
       setProfile(data);
       setName(data?.name || "");
+      setUsername(String(user.user_metadata?.username || "").replace(/^@+/, ""));
       setLoading(false);
     });
   }, [router]);
 
   async function handleNameSave() {
     if (!user) return;
+    const cleanUsername = username.trim().replace(/^@+/, "").toLowerCase();
+    if (cleanUsername && !/^[a-z0-9_]{3,24}$/.test(cleanUsername)) {
+      setNameError("Username must be 3–24 characters and use only letters, numbers, or underscores.");
+      return;
+    }
     setNameSaving(true);
     setNameError("");
     setNameSuccess(false);
@@ -79,7 +86,7 @@ export default function AccountClient() {
       } else {
         setNameSuccess(true);
         // Also update user metadata so nav shows updated name
-        await supabase.auth.updateUser({ data: { name: name.trim() } });
+        await supabase.auth.updateUser({ data: { name: name.trim(), username: cleanUsername || null } });
         setTimeout(() => setNameSuccess(false), 3000);
       }
     } catch {
@@ -244,6 +251,27 @@ export default function AccountClient() {
               </div>
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
+                  Username
+                </label>
+                <div className="relative">
+                  <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-zinc-400">@</span>
+                  <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value.replace(/^@+/, ""))}
+                    placeholder="readername"
+                    minLength={3}
+                    maxLength={24}
+                    pattern="[A-Za-z0-9_]{3,24}"
+                    className={`${inputClass} pl-7`}
+                  />
+                </div>
+                <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                  This is the public name shown on article conversations.
+                </p>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
                   Email address
                 </label>
                 <input
@@ -260,7 +288,11 @@ export default function AccountClient() {
               {nameSuccess && <div className={successMsg}>Profile updated.</div>}
               <button
                 onClick={handleNameSave}
-                disabled={nameSaving || name.trim() === (profile?.name || "")}
+                disabled={
+                  nameSaving ||
+                  (name.trim() === (profile?.name || "") &&
+                    username.trim().replace(/^@+/, "").toLowerCase() === String(user?.user_metadata?.username || ""))
+                }
                 className={btnPrimary}
               >
                 {nameSaving ? "Saving…" : "Save changes"}

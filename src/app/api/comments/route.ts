@@ -163,7 +163,7 @@ export async function POST(request: Request) {
   }
 
   const authorName = user
-    ? cleanName(user.user_metadata?.name) || cleanName(user.email?.split("@")[0]) || guestName || "Reader"
+    ? cleanName(user.user_metadata?.username ? `@${user.user_metadata.username}` : null) || cleanName(user.user_metadata?.name) || cleanName(user.email?.split("@")[0]) || guestName || "Reader"
     : guestName || "Guest";
 
   const insert = {
