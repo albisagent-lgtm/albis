@@ -12,6 +12,19 @@ type PublicComment = {
   body: string;
   created_at: string;
   updated_at: string;
+  context_type?: string | null;
+  trust_status?: "reader_report" | "supported_by_source" | "corroborated" | "verified_by_albis" | "needs_checking" | "disputed";
+  source_url?: string | null;
+};
+
+type ArticleCommentsCopy = {
+  eyebrow?: string;
+  title?: string;
+  prompt?: string;
+  helper?: string;
+  placeholder?: string;
+  emptyText?: string;
+  submitLabel?: string;
 };
 
 type SessionUser = {
@@ -19,6 +32,26 @@ type SessionUser = {
   email?: string;
   user_metadata?: { name?: string; username?: string };
 } | null;
+
+const TRUST_LABELS: Record<NonNullable<PublicComment["trust_status"]>, string> = {
+  reader_report: "Reader report",
+  supported_by_source: "Supported by source",
+  corroborated: "Corroborated",
+  verified_by_albis: "Verified by Albis",
+  needs_checking: "Needs checking",
+  disputed: "Needs checking",
+};
+
+function TrustBadge({ status }: { status?: PublicComment["trust_status"] }) {
+  const safeStatus = status || "reader_report";
+  if (safeStatus === "reader_report") return null;
+  const tone = safeStatus === "verified_by_albis"
+    ? "border-emerald-500/25 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+    : safeStatus === "corroborated" || safeStatus === "supported_by_source"
+      ? "border-[#c8922a]/25 bg-[#c8922a]/10 text-[#8a6417] dark:text-[#f0c15e]"
+      : "border-zinc-300 bg-zinc-100 text-zinc-600 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300";
+  return <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${tone}`}>{TRUST_LABELS[safeStatus]}</span>;
+}
 
 function formatCommentDate(value: string) {
   const date = new Date(value);
@@ -38,6 +71,8 @@ function CommentForm({
   onPosted,
   onCancel,
   compact = false,
+  placeholder,
+  submitLabel,
 }: {
   articleSlug: string;
   parentId?: string | null;
@@ -45,6 +80,8 @@ function CommentForm({
   onPosted: (comment: PublicComment | null, message?: string) => void;
   onCancel?: () => void;
   compact?: boolean;
+  placeholder?: string;
+  submitLabel?: string;
 }) {
   const [name, setName] = useState("");
   const [body, setBody] = useState("");
@@ -117,7 +154,7 @@ function CommentForm({
         onChange={(e) => setBody(e.target.value)}
         maxLength={1800}
         rows={compact ? 3 : 5}
-        placeholder={parentId ? "Write a reply…" : "Add local context, a source, or a perspective we may have missed…"}
+        placeholder={parentId ? "Write a reply…" : placeholder || "Add local context, a source, or a perspective we may have missed…"}
         className="w-full resize-y rounded-2xl border border-black/[0.08] bg-white px-4 py-3 font-[family-name:var(--font-source-serif)] text-[15px] leading-relaxed outline-none transition placeholder:text-zinc-400 focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03] dark:placeholder:text-zinc-600"
         required
       />
@@ -150,7 +187,7 @@ function CommentForm({
             disabled={loading || body.trim().length < 3}
             className="rounded-full bg-[#1a1a2e] px-5 py-2.5 font-[family-name:var(--font-inter)] text-xs font-bold text-white transition hover:bg-[#2a2a44] disabled:cursor-not-allowed disabled:opacity-50 dark:bg-[#c8922a] dark:text-[#111] dark:hover:bg-[#d7a13a]"
           >
-            {loading ? "Posting…" : parentId ? "Post reply" : "Post comment"}
+            {loading ? "Posting…" : parentId ? "Post reply" : submitLabel || "Post comment"}
           </button>
         </div>
       </div>
@@ -187,6 +224,7 @@ function CommentItem({
             {comment.is_anonymous && <span className="text-zinc-400">Guest</span>}
             <span className="text-zinc-300 dark:text-zinc-600">·</span>
             <time className="text-zinc-400 dark:text-zinc-500" dateTime={comment.created_at}>{formatCommentDate(comment.created_at)}</time>
+            <TrustBadge status={comment.trust_status} />
           </div>
           <p className="mt-2 whitespace-pre-wrap font-[family-name:var(--font-source-serif)] text-[15px] leading-relaxed text-zinc-700 dark:text-zinc-300">
             {comment.body}
@@ -214,6 +252,7 @@ function CommentItem({
                     {reply.is_anonymous && <span className="text-zinc-400">Guest</span>}
                     <span className="text-zinc-300 dark:text-zinc-600">·</span>
                     <time className="text-zinc-400 dark:text-zinc-500" dateTime={reply.created_at}>{formatCommentDate(reply.created_at)}</time>
+                    <TrustBadge status={reply.trust_status} />
                   </div>
                   <p className="mt-1.5 whitespace-pre-wrap font-[family-name:var(--font-source-serif)] text-[14px] leading-relaxed text-zinc-700 dark:text-zinc-300">
                     {reply.body}
@@ -228,7 +267,16 @@ function CommentItem({
   );
 }
 
-export function ArticleComments({ articleSlug }: { articleSlug: string }) {
+export function ArticleComments({
+  articleSlug,
+  eyebrow = "Conversation",
+  title = "What are you seeing?",
+  prompt,
+  helper = "Add local context, a source, a question, or a perspective we may have missed. You can comment as a guest or create a free account.",
+  placeholder,
+  emptyText = "No comments yet. Be the first to add context.",
+  submitLabel,
+}: { articleSlug: string } & ArticleCommentsCopy) {
   const [comments, setComments] = useState<PublicComment[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -295,13 +343,16 @@ export function ArticleComments({ articleSlug }: { articleSlug: string }) {
     <section className="mt-14 rounded-2xl border border-black/[0.08] bg-white p-5 shadow-sm dark:border-white/[0.08] dark:bg-white/[0.02] md:p-7">
       <div className="border-b border-black/[0.06] pb-5 dark:border-white/[0.06]">
         <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8922a]">
-          Conversation
+          {eyebrow}
         </p>
         <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-          What are you seeing?
+          {title}
         </h2>
+        {prompt ? (
+          <p className="mt-2 font-[family-name:var(--font-source-serif)] text-base leading-relaxed text-zinc-700 dark:text-zinc-300">{prompt}</p>
+        ) : null}
         <p className="mt-2 font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-          Add local context, a source, a question, or a perspective we may have missed. You can comment as a guest or create a free account.
+          {helper}
         </p>
         <div className="mt-4 flex flex-wrap gap-2 font-[family-name:var(--font-inter)] text-xs">
           {!user ? (
@@ -329,7 +380,7 @@ export function ArticleComments({ articleSlug }: { articleSlug: string }) {
             </p>
           </div>
         ) : (
-          <CommentForm articleSlug={articleSlug} user={user} onPosted={handlePosted} />
+          <CommentForm articleSlug={articleSlug} user={user} onPosted={handlePosted} placeholder={placeholder} submitLabel={submitLabel} />
         )}
       </div>
 
@@ -347,7 +398,7 @@ export function ArticleComments({ articleSlug }: { articleSlug: string }) {
         ) : topLevel.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-black/[0.12] px-5 py-8 text-center dark:border-white/[0.12]">
             <p className="font-[family-name:var(--font-source-serif)] text-sm text-zinc-500 dark:text-zinc-400">
-              No comments yet. Be the first to add context.
+              {emptyText}
             </p>
           </div>
         ) : (

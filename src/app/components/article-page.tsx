@@ -14,6 +14,8 @@ import { ReadingProgress } from "@/app/components/reading-progress";
 import { normalizeRegion, CATEGORY_META } from "@/lib/scan-types";
 import { ShareButtons } from "@/app/components/share-buttons";
 import { ArticleComments } from "@/app/components/article-comments";
+import { QuickSignal } from "@/app/components/quick-signal";
+import { getSignalByArticleSlug } from "@/lib/signals";
 
 const SECTION_LABELS: Record<string, string> = {
   world: "World",
@@ -54,7 +56,10 @@ export async function ArticlePage({ post }: { post: BlogPost }) {
 
   // getRelatedPosts returns full card data (image, category, readingTime) so
   // we don't need to re-fetch each related post with getPostBySlug.
-  const relatedPosts = await getRelatedPosts(post.tags, post.slug, 3);
+  const [relatedPosts, signal] = await Promise.all([
+    getRelatedPosts(post.tags, post.slug, 3),
+    getSignalByArticleSlug(post.slug),
+  ]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pAny = post as any;
@@ -240,6 +245,12 @@ export async function ArticlePage({ post }: { post: BlogPost }) {
             </div>
           )}
         </header>
+
+        {signal ? (
+          <div className="mb-10">
+            <QuickSignal signal={signal} compact />
+          </div>
+        ) : null}
 
         {/* Article body */}
         <div

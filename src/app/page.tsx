@@ -3,6 +3,7 @@ import { EmailCapture } from "./components/email-capture";
 import { getAllPosts, getPostUrl, getPostsBySection, type BlogPost } from "@/lib/blog";
 import { getSiteSnapshot } from "@/lib/site-snapshot";
 import { buildTodayBriefing, type PublicSignalLevel } from "@/lib/todays-briefing";
+import { HomeLiveSignals } from "./components/home-live-signals";
 
 export const revalidate = 300;
 
@@ -204,6 +205,8 @@ export default async function Home() {
           </aside>
         </div>
       </section>
+
+      <HomeLiveSignals />
 
       <section id="news-wall" className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
         <SectionHeading title="News wall" kicker="Latest from the scan" href="/archive" />

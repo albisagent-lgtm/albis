@@ -13,6 +13,8 @@ import { buildStoryPlan, type OpeningMode, type StoryPlan } from '../src/lib/pub
 import { buildDailyBriefingPackage } from '../src/lib/public-daily-briefing';
 import { buildPublicArticleResearchPacket, type PublicArticleResearchPacket } from '../src/lib/public-article-research';
 import { runPublicArticleEditorialWriter } from '../src/lib/public-article-editorial-writer';
+import { generatePublicSignalFromArticle } from '../src/lib/public-signal-generator';
+import { upsertSignal } from '../src/lib/signals';
 import type { PublicEditionArticleEntry } from '../src/lib/public-edition-scorecard';
 import {
   buildPublicEditionRunReport,
@@ -1719,6 +1721,19 @@ async function ingestArticles(articles: BuiltArticle[]) {
 
     if (error) fail(`Article ingest failed for ${article.slug}: ${error.message}`);
     console.log(`✅ Ingested article ${article.slug} directly into Supabase`);
+
+    try {
+      const signal = generatePublicSignalFromArticle(article);
+      if (!signal) {
+        console.log(`⚠️ Signal skipped for ${article.slug}: deterministic generator produced fewer than 3 validated bullets`);
+      } else {
+        await upsertSignal(signal);
+        console.log(`✅ Signal upserted: ${signal.slug}`);
+      }
+    } catch (signalError) {
+      const message = signalError instanceof Error ? signalError.message : String(signalError);
+      console.log(`⚠️ Signal skipped for ${article.slug}: ${message}`);
+    }
   }
 }
 
