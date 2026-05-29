@@ -7,7 +7,7 @@ import readingTime from 'reading-time';
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 import { loadVerifiedScanItems, requireIndexDailyRows, requireScanRows, requireScanItemsAvailability, requireSnapshotForDate, requireStoryScores } from '../src/lib/pipeline-db';
-import { normalisePublicCategory, selectPublicStories, suggestPublicArticleCount, type ArticleForm, type ArticleSignals, type PublicStorySelection } from '../src/lib/public-story-selection';
+import { normalisePublicCategory, rankPublicStories, selectPublicStories, suggestPublicArticleCount, type ArticleForm, type ArticleSignals, type PublicStorySelection } from '../src/lib/public-story-selection';
 import { PUBLIC_EDITORIAL_DOCTRINE_VERSION, getPublicDoctrineLaneSpec, type PublicDoctrineLane } from '../src/lib/public-editorial-doctrine';
 import { buildStoryPlan, type OpeningMode, type StoryPlan } from '../src/lib/public-story-planner';
 import { buildDailyBriefingPackage } from '../src/lib/public-daily-briefing';
@@ -102,10 +102,12 @@ const supabase = createClient(SUPABASE_URL, SERVICE_KEY, {
   auth: { autoRefreshToken: false, persistSession: false },
 });
 
-const MIN_WORD_COUNT = 750;
-const TARGET_WORD_COUNT = 950;
-const MIN_ARTICLE_COUNT = 7;
-const MAX_ARTICLE_COUNT = 7;
+const MIN_WORD_COUNT = 500;
+const TARGET_WORD_COUNT = 700;
+const MAIN_ARTICLE_COUNT = 7;
+const HIDDEN_ARTICLE_COUNT = 7;
+const MIN_ARTICLE_COUNT = MAIN_ARTICLE_COUNT;
+const MAX_ARTICLE_COUNT = MAIN_ARTICLE_COUNT + HIDDEN_ARTICLE_COUNT;
 const CANDIDATE_LIMIT = 70;
 const RECENT_IMAGE_WINDOW = 100;
 const BANNED_PHRASES = [
@@ -118,6 +120,14 @@ const BANNED_PHRASES = [
   'marks a specific change in the story',
   'a recycled update',
   'the shift matters because',
+  'this matters because',
+  'why it matters',
+  'that is why',
+  'the useful question',
+  'the useful reading',
+  'the headline is about',
+  'the underlying story is',
+  'this belongs in',
   'alters what other actors now have to price in',
   'the latest move at the center of',
   'officials and civilians alike are now dealing with',
@@ -620,7 +630,7 @@ function buildStorySpecificCascade(packet: StoryPacket) {
 
 function buildStorySpecificStakes(packet: StoryPacket) {
   if (picksStoryKeywords(packet, ['ship', 'shipping', 'port', 'corridor', 'freight', 'route', 'pipeline', 'canal', 'vessel', 'hormuz', 'oil', 'fuel', 'lng', 'diesel'])) {
-    return 'That is why a route story rarely stays a route story: it becomes a costs story, a supply story, and eventually a household or industrial planning story.';
+    return 'A route story can quickly become a costs story, a supply story, and eventually a household or industrial planning story.';
   }
   if (picksStoryKeywords(packet, ['sanction', 'tariff', 'waiver', 'ban', 'export', 'license', 'court', 'rule', 'legal'])) {
     return 'What looks like a policy adjustment on paper can quickly decide who keeps trading, who freezes decisions, and who has to absorb the new friction.';
@@ -634,7 +644,7 @@ function buildStorySpecificStakes(packet: StoryPacket) {
   if (picksStoryKeywords(packet, ['ai', 'chip', 'semiconductor', 'server', 'compute', 'grid', 'data', 'battery', 'solar', 'energy'])) {
     return 'What matters is who can still scale, ship, or keep operating on schedule once the bottleneck stops being theoretical.';
   }
-  return 'That is the point where the story stops being a headline and starts becoming a condition other people have to work around.';
+  return 'At that point, the story stops being a headline and starts becoming a condition other people have to work around.';
 }
 
 function buildMechanismParagraph(packet: StoryPacket) {
@@ -695,7 +705,7 @@ function buildReaderUsefulnessParagraph(packet: StoryPacket) {
   const texture = packet.articleSignals?.sourceTexture?.length ? `Current reporting points to ${packet.articleSignals.sourceTexture.join(', ')}.` : '';
   const pairWith = packet.articleSignals?.pairWith?.length ? `The story may also connect to ${packet.articleSignals.pairWith.join(' or ')} as it develops.` : '';
   const detail = pickFreshDetail(packet);
-  return `The useful question now is where the consequences become visible first. For this story, that may be ${detail}, access decisions, pricing moves, staffing pressure, or the fine print around the next official step. ${texture} ${pairWith}`.replace(/\s+/g, ' ').trim();
+  return `The consequences may show up first around ${detail}, access decisions, pricing moves, staffing pressure, or the fine print around the next official step. ${texture} ${pairWith}`.replace(/\s+/g, ' ').trim();
 }
 
 function buildWhatToWatchParagraph(packet: StoryPacket) {
@@ -757,7 +767,7 @@ function buildFramingMapParagraph(packet: StoryPacket) {
 function buildSystemRippleParagraph(packet: StoryPacket) {
   const actors = packet.articleSignals?.mainActors?.length ? packet.articleSignals.mainActors.join(', ') : 'officials, traders, operators, and households';
   const detail = pickFreshDetail(packet);
-  return `Once the shift is underway, the ripple rarely stays in one lane. ${actors} start changing timing, sourcing, staffing, pricing, or public language around ${detail} before any neat political consensus forms. That is why these stories often matter earlier than their headline temperature suggests.`.replace(/\s+/g, ' ').trim();
+  return `Once the shift is underway, the ripple rarely stays in one lane. ${actors} start changing timing, sourcing, staffing, pricing, or public language around ${detail} before any neat political consensus forms.`.replace(/\s+/g, ' ').trim();
 }
 
 function buildNumberMeaningParagraph(packet: StoryPacket) {
@@ -1035,7 +1045,7 @@ function buildPlanDrivenNumbersMeaning(packet: StoryPacket) {
 function buildPlanDrivenNumbersWatch(packet: StoryPacket, plan: StoryPlan) {
   const detail = pickFreshDetail(packet);
   return joinSentences(
-    `The useful test now is whether ${detail} keeps moving in the same direction or forces officials, operators, or households to accept a different baseline.`,
+    `The next test is whether ${detail} keeps moving in the same direction or forces officials, operators, or households to accept a different baseline.`,
     ensurePeriod(plan.walkaway),
   );
 }
@@ -1060,7 +1070,7 @@ function buildPlanDrivenSystemCascade(packet: StoryPacket) {
 function buildPlanDrivenSystemWhy(packet: StoryPacket, plan: StoryPlan) {
   const detail = pickFreshDetail(packet);
   return joinSentences(
-    `That is why ${detail} matters more than the headline temperature: it is one of the first places the reroute, shortage, waiver, or constraint starts altering real decisions.`,
+    `${sentenceCase(detail)} is one of the first places the reroute, shortage, waiver, or constraint starts altering real decisions.`,
     buildStorySpecificStakes(packet),
     ensurePeriod(plan.walkaway),
   );
@@ -1217,7 +1227,7 @@ function buildPremiumLifeSystemsParagraph(packet: StoryPacket) {
   const mechanism = packet.articleSignals?.mechanism || 'the underlying system pressure';
   const stake = packet.articleSignals?.humanStake || 'everyday access, cost, safety, or institutional capacity';
   const detail = pickFreshDetail(packet);
-  return `The life-systems layer is the reason this belongs in a deeper public file. ${sentenceCase(mechanism)} can move through ${stake}, and ${detail} is one of the places where that movement becomes visible. The useful question is not whether the headline is loud, but whether it changes food, water, energy, health, shelter, movement, work, or public capacity. If the story keeps developing, the consequence will not only be political language; it will be felt through queues, prices, service capacity, travel choices, school calendars, medical risk, energy planning, or household decisions.`;
+  return `${sentenceCase(mechanism)} can move through ${stake}, and ${detail} is one of the places where that movement becomes visible. If the story keeps developing, the consequence will show through queues, prices, service capacity, travel choices, school calendars, medical risk, energy planning, or household decisions.`;
 }
 
 function buildPremiumClarityParagraph(packet: StoryPacket) {
@@ -1245,8 +1255,8 @@ function ensurePremiumArticleDepth(packet: StoryPacket, draft: BuiltStoryDraft):
     if (index === 0) return paragraph;
     const detail = pickFreshDetail(packet);
     const addendum = index % 2 === 0
-      ? `That detail matters because ${detail} is where an abstract development starts becoming a practical constraint for people, operators, or public institutions.`
-      : `The useful reading is not just that something happened, but that the decision space around ${detail} is now narrower than it was before.`;
+      ? `${sentenceCase(detail)} is where an abstract development starts becoming a practical constraint for people, operators, or public institutions.`
+      : `The decision space around ${detail} is now narrower than it was before.`;
     return `${paragraph} ${addendum}`.replace(/\s+/g, ' ').trim();
   });
 
@@ -1258,12 +1268,12 @@ function ensurePremiumArticleDepth(packet: StoryPacket, draft: BuiltStoryDraft):
     buildPremiumUncertaintyParagraph(packet),
   ];
   for (const addition of premiumAdds) {
-    if (countWords(paragraphs.join(' ')) >= TARGET_WORD_COUNT || paragraphs.length >= 12) break;
+    if (countWords(paragraphs.join(' ')) >= TARGET_WORD_COUNT || paragraphs.length >= 9) break;
     const insertAt = Math.max(2, paragraphs.length - 1);
     paragraphs.splice(insertAt, 0, addition);
   }
 
-  while (countWords(paragraphs.join(' ')) < MIN_WORD_COUNT && paragraphs.length < 14) {
+  while (countWords(paragraphs.join(' ')) < MIN_WORD_COUNT && paragraphs.length < 11) {
     paragraphs.splice(Math.max(2, paragraphs.length - 1), 0, buildPremiumUncertaintyParagraph(packet));
   }
 
@@ -1354,12 +1364,12 @@ function expectedParagraphRange(form: StoryPacket['articleForm']) {
     case 'system-shift':
     case 'turning-point':
     case 'offbeat-signal':
-      return { min: 8, max: 14, idealMin: 9, idealMax: 12 };
+      return { min: 6, max: 11, idealMin: 7, idealMax: 9 };
     case 'human-ground':
     case 'framing-map':
-      return { min: 8, max: 14, idealMin: 9, idealMax: 12 };
+      return { min: 6, max: 11, idealMin: 7, idealMax: 10 };
     default:
-      return { min: 8, max: 14, idealMin: 9, idealMax: 12 };
+      return { min: 6, max: 11, idealMin: 7, idealMax: 9 };
   }
 }
 
@@ -1479,16 +1489,17 @@ async function buildArticle(selection: PublicStorySelection, date: string, usedI
     tags: packet.tags,
     regions: packet.regions,
   });
-  const requireResearch = process.env.ALBIS_REQUIRE_PUBLIC_RESEARCHED_ARTICLES === 'true' && research.priority_section;
+  const requireResearch = research.priority_section && process.env.ALBIS_REQUIRE_PUBLIC_RESEARCHED_ARTICLES !== 'false';
   if (requireResearch && !research.source_depth_valid) {
-    throw new Error(`Public article research too thin (${research.distinct_url_count} distinct URL(s), ${research.distinct_domain_count} distinct domain(s)); refusing title/snippet-only article`);
+    throw new Error(`Public article research too thin (${research.distinct_url_count} distinct URL(s), ${research.distinct_domain_count} distinct domain(s), ${research.independent_source_count} independent source(s), ${research.fetched_source_count} fetched source(s)); refusing shallow or syndicated-only article`);
   }
   const editorial = await runPublicArticleEditorialWriter({
     packet: { ...packet, storyPlan: built.plan },
     currentDraft: body,
     research,
   });
-  if (editorial.blocked && process.env.ALBIS_REQUIRE_PUBLIC_ARTICLE_EDITORIAL_WRITER === 'true') {
+  const requireEditorialWriter = editorial.enabled && process.env.ALBIS_REQUIRE_PUBLIC_ARTICLE_EDITORIAL_WRITER !== 'false';
+  if (editorial.blocked && requireEditorialWriter) {
     throw new Error(`Public article editorial writer blocked: ${editorial.blocked_reason || 'unknown'}`);
   }
   if (editorial.edited && editorial.body) {
@@ -1539,9 +1550,10 @@ async function buildArticle(selection: PublicStorySelection, date: string, usedI
       enabled: research.enabled,
       query: research.query,
       source_count: research.sources.length,
-      fetched_source_count: research.sources.filter((source) => source.fetched).length,
       distinct_url_count: research.distinct_url_count,
       distinct_domain_count: research.distinct_domain_count,
+      independent_source_count: research.independent_source_count,
+      fetched_source_count: research.fetched_source_count,
       source_depth_valid: research.source_depth_valid,
       priority_section: research.priority_section,
       sources: research.sources.map((source) => ({ title: source.title, url: source.url, domain: source.domain, fetched: source.fetched })),
@@ -1578,14 +1590,70 @@ async function buildArticle(selection: PublicStorySelection, date: string, usedI
   };
 }
 
+function isHiddenSignalCandidate(entry: PublicStorySelection): boolean {
+  const category = entry.categoryKey;
+  const lane = entry.lane;
+  const form = entry.articleForm;
+  const why = entry.why.join(' ').toLowerCase();
+  const text = `${entry.item.headline} ${(entry.item.tags || []).join(' ')} ${entry.item.connection || ''}`.toLowerCase();
+
+  if (form === 'offbeat-signal') return true;
+  if (lane === 'offbeat') return true;
+  if (['science-space', 'natural-world', 'grassroots', 'culture'].includes(category)) return true;
+  if (['life-systems', 'food-agriculture', 'food', 'water', 'health', 'migration-demographics'].includes(category) && why.includes('distinctive angle')) return true;
+  if (/\b(?:quietly|overlooked|underreported|rare|unusual|first|only|village|island|clinic|school|reef|volcano|orchard|fisheries|bees|satellite|robot|battery)\b/.test(text)) return true;
+  return false;
+}
+
+function selectionKey(entry: PublicStorySelection): string {
+  return `${entry.clusterKey}::${entry.topicKey}::${entry.duplicateKey}`;
+}
+
+function buildMainAndHiddenCandidatePool(items: ScanItem[], mainTarget: number, hiddenTarget: number, candidateLimit: number): PublicStorySelection[] {
+  const mainPool = selectPublicStories(items, mainTarget, candidateLimit);
+  const ranked = rankPublicStories(items);
+  const mainKeys = new Set(mainPool.slice(0, mainTarget).map(selectionKey));
+  const allKeys = new Set<string>();
+  const ordered: PublicStorySelection[] = [];
+
+  const push = (entry: PublicStorySelection) => {
+    const key = selectionKey(entry);
+    if (allKeys.has(key)) return;
+    allKeys.add(key);
+    ordered.push(entry);
+  };
+
+  for (const entry of mainPool.slice(0, mainTarget)) push(entry);
+
+  const hiddenPool = ranked
+    .filter(isHiddenSignalCandidate)
+    .filter((entry) => !mainKeys.has(selectionKey(entry)))
+    .sort((a, b) => {
+      const aOffbeat = a.articleForm === 'offbeat-signal' || a.lane === 'offbeat' ? 1 : 0;
+      const bOffbeat = b.articleForm === 'offbeat-signal' || b.lane === 'offbeat' ? 1 : 0;
+      if (bOffbeat !== aOffbeat) return bOffbeat - aOffbeat;
+      if (b.writeabilityScore !== a.writeabilityScore) return b.writeabilityScore - a.writeabilityScore;
+      return b.score - a.score;
+    });
+
+  for (const entry of hiddenPool.slice(0, hiddenTarget)) push(entry);
+  for (const entry of mainPool) push(entry);
+  for (const entry of hiddenPool) push(entry);
+  for (const entry of ranked) push(entry);
+
+  return ordered.slice(0, candidateLimit);
+}
+
 async function buildArticles(items: ScanItem[], date: string) {
-  const targetArticleCount = suggestPublicArticleCount(items, MIN_ARTICLE_COUNT, MAX_ARTICLE_COUNT);
-  const candidates = selectPublicStories(items, targetArticleCount, CANDIDATE_LIMIT);
+  const mainTarget = suggestPublicArticleCount(items, MAIN_ARTICLE_COUNT, MAIN_ARTICLE_COUNT);
+  const hiddenTarget = HIDDEN_ARTICLE_COUNT;
+  const targetArticleCount = Math.min(MAX_ARTICLE_COUNT, mainTarget + hiddenTarget);
+  const candidates = buildMainAndHiddenCandidatePool(items, mainTarget, hiddenTarget, CANDIDATE_LIMIT);
   const usedImages = await getRecentImageIdentities();
   const selected: BuiltArticle[] = [];
   const seenSlugs = new Set<string>();
 
-  console.log(`ℹ️ Public selector requested ${targetArticleCount} article slot(s) from ${candidates.length} shortlisted candidate(s)`);
+  console.log(`ℹ️ Public selector requested ${mainTarget} main signal slot(s) + ${hiddenTarget} hidden/offbeat slot(s) from ${candidates.length} shortlisted candidate(s)`);
   for (const candidate of candidates) {
     if (selected.length >= targetArticleCount) break;
     const item = candidate.item;

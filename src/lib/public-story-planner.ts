@@ -119,18 +119,18 @@ function deriveWalkaway(input: StoryPlanInput, storyKind: StoryKind): string {
 
   switch (storyKind) {
     case 'framing-battle':
-      return sentenceCase(`${coreFact} The real takeaway is that the public frame and the operating reality are diverging.`);
+      return sentenceCase(`${coreFact} Follow the gap between the public frame and the operating reality.`);
     case 'human-fallout':
-      return sentenceCase(`${coreFact} The walkaway is that ${stake || 'lived consequences'} now makes the wider shift tangible.`);
+      return sentenceCase(`${coreFact} Enter through ${stake || 'lived consequences'} and widen only as the evidence allows.`);
     case 'numbers-reset':
-      return sentenceCase(`${coreFact} ${number || 'The key metric'} resets the baseline for how this story should be read.`);
+      return sentenceCase(`${coreFact} Use ${number || 'the key metric'} as the hinge of the reported sequence.`);
     case 'system-ripple':
-      return sentenceCase(`${coreFact} The walkaway is that ${mechanism || 'the underlying bottleneck'} is already changing downstream behaviour.`);
+      return sentenceCase(`${coreFact} Show ${mechanism || 'the underlying bottleneck'} through concrete downstream effects.`);
     case 'offbeat-window':
-      return sentenceCase(`${coreFact} The odd detail matters because it exposes a broader shift earlier than the headline does.`);
+      return sentenceCase(`${coreFact} Let the odd detail open the route into the larger pattern.`);
     case 'turning-point':
     default:
-      return sentenceCase(`${coreFact} The walkaway is that the state of play has materially changed.`);
+      return sentenceCase(`${coreFact} Lead with the state change and then show what is different on the ground.`);
   }
 }
 
@@ -138,18 +138,18 @@ function deriveNutGrafPromise(input: StoryPlanInput, storyKind: StoryKind): stri
   const signals = input.articleSignals;
   switch (storyKind) {
     case 'framing-battle':
-      return sentenceCase(`This piece should explain what the loudest frame misses and why that gap matters now.`);
+      return sentenceCase(`Report what the loudest frame misses through concrete source differences.`);
     case 'human-fallout':
-      return sentenceCase(`This piece should connect a concrete human pressure point to the larger system that is producing it.`);
+      return sentenceCase(`Connect a concrete human pressure point to the larger system producing it.`);
     case 'numbers-reset':
-      return sentenceCase(`This piece should explain why ${signals?.keyNumber || 'the headline number'} is the metric that changes the story.`);
+      return sentenceCase(`Use ${signals?.keyNumber || 'the headline number'} as the metric that changes the reported sequence.`);
     case 'system-ripple':
-      return sentenceCase(`This piece should show how ${signals?.mechanism || 'the operative bottleneck'} turns one event into wider ripple effects.`);
+      return sentenceCase(`Show how ${signals?.mechanism || 'the operative bottleneck'} turns one event into wider ripple effects.`);
     case 'offbeat-window':
-      return sentenceCase(`This piece should use an unusual detail as the cleanest route into the larger pattern.`);
+      return sentenceCase(`Use an unusual detail as the cleanest route into the larger pattern.`);
     case 'turning-point':
     default:
-      return sentenceCase(`This piece should make clear what changed, why it matters now, and what readers should watch next.`);
+      return sentenceCase(`Make clear what changed, what is verified, and what happens next.`);
   }
 }
 
@@ -192,6 +192,7 @@ function deriveWhatToAvoid(input: StoryPlanInput, openingMode: OpeningMode): str
     'headline paraphrase as opening',
     'paragraphs that announce their function instead of advancing the story',
     'generic significance language without a concrete anchor',
+    'this-is-why-it-matters language instead of reported sequence',
     'dropping the mechanism or human stake after the opening',
   ];
 

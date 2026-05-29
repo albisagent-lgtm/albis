@@ -53,8 +53,8 @@ function responseSchema() {
         source_note: { type: "string" },
         paragraphs: {
           type: "array",
-          minItems: 8,
-          maxItems: 14,
+          minItems: 6,
+          maxItems: 11,
           items: { type: "string" },
         },
       },
@@ -103,7 +103,7 @@ async function callEditorialModel(input: {
       {
         role: "system",
         content:
-          "You are the Albis public premium article writer. Write a full understanding article from the researched sources provided: 8-14 substantial paragraphs, normally 900-1,200 words when the evidence supports it. The output must read like a story for public readers, not an observation about an internal scan. The voice should combine a clean news article, a useful explainer, and an Albis intelligence note: what happened, why it matters, how the system works, how different sources or regions frame it, and what changes for readers. The editorial foundation is twofold: (1) material life systems in the spirit of Vaclav Smil — energy, food, water, health, climate, infrastructure, logistics, materials, livelihoods, and the physical systems people rely on; (2) ancient wisdom traditions — clarity, humility, compassion, truthfulness, attention to suffering, and freedom from confusion or outrage. Do not quote scripture, preach, moralise, or add spiritual language unless the sources themselves justify it; let that foundation shape judgment, plainness, and care. Prioritise what actually sustains life and social stability over jargon, spectacle, and isolated political noise. Do not merely summarise the scan title. Never mention the scan, scanner, selected item, article slot, published set, writeability, draft, or why Albis chose the story. Open with a concrete fact, person, place, number, or institutional action. Explain mechanism, stakes, source-frame differences, second-order consequences, and what remains uncertain. Use only provided evidence; do not invent facts, quotes, numbers, URLs, or named actors. Avoid AI/analyst filler and phrases such as 'this is more than', 'the deeper signal', 'for Albis', 'the point is', 'what to watch', 'picked up by the scan', and 'strong live signal'. Return JSON only.",
+          "You are the Albis public article writer. Write a reported article from the researched sources provided: usually 6-10 concise paragraphs and 500-850 words, longer only when the evidence genuinely supports it. The article should read like careful public-interest reporting, not an essay explaining its own lesson. Concrete facts must carry the meaning. Open with a specific fact, person, place, number, institutional action, or visible consequence. Then move in sequence: what happened, what the sources verify, the mechanism underneath, who or what is affected, what remains uncertain, and the cleanest larger implication. Do not announce 'why it matters'; show why through the facts. Do not use scaffolding phrases such as 'this matters because', 'that is why', 'the useful question', 'the deeper signal', 'the headline is about', 'the underlying story is', 'this belongs in', or 'for Albis'. Avoid moralising, sermonising, generic significance language, and analyst filler. Never mention the scan, scanner, selected item, article slot, published set, writeability, draft, or why Albis chose the story. Use only provided evidence; do not invent facts, quotes, numbers, URLs, named actors, or local colour. The Life Systems foundation should shape judgment quietly: energy, food, water, health, infrastructure, logistics, shelter, work, and public capacity matter because people rely on them. Return JSON only.",
       },
       {
         role: "user",
@@ -117,10 +117,11 @@ async function callEditorialModel(input: {
 function validateWriter(json: WriterJson, research: PublicArticleResearchPacket): string[] {
   const warnings: string[] = [];
   const body = (json.paragraphs || []).join("\n\n");
-  if (!Array.isArray(json.paragraphs) || json.paragraphs.length < 8) warnings.push("writer_returned_too_few_paragraphs");
-  if (wordCount(body) < 750) warnings.push(`writer_body_too_short:${wordCount(body)}`);
-  if (!research.source_depth_valid) warnings.push(`research_sources_too_thin:${research.distinct_url_count}_urls:${research.distinct_domain_count}_domains`);
-  const bad = /\b(this is more than|for albis|the deeper signal|the point is not just|the article should|belongs in the published set|gives the scan|item editorial weight|stronger live signal in the scan|live signal in the scan|the scan flags|patterns in the scan|framing pattern in the scan|writeability|the scan does not support)\b/i;
+  if (!Array.isArray(json.paragraphs) || json.paragraphs.length < 6) warnings.push("writer_returned_too_few_paragraphs");
+  if (wordCount(body) < 500) warnings.push(`writer_body_too_short:${wordCount(body)}`);
+  if (wordCount(body) > 950) warnings.push(`writer_body_too_wordy:${wordCount(body)}`);
+  if (!research.source_depth_valid) warnings.push(`research_sources_too_thin:${research.distinct_url_count}_urls:${research.distinct_domain_count}_domains:${research.independent_source_count}_independent:${research.fetched_source_count}_fetched`);
+  const bad = /\b(this is more than|this matters because|why it matters|that is why|for albis|the deeper signal|the point is|the useful question|the useful reading|the headline is about|the underlying story is|this belongs in|the article should|belongs in the published set|gives the scan|item editorial weight|stronger live signal in the scan|live signal in the scan|the scan flags|patterns in the scan|framing pattern in the scan|writeability|the scan does not support)\b/i;
   if (bad.test(body)) warnings.push("writer_used_banned_public_language");
   const sourceDomains = research.sources.map((source) => source.domain.toLowerCase().split(".")[0]).filter(Boolean);
   const mentionsAnySource = sourceDomains.some((domain) => body.toLowerCase().includes(domain));

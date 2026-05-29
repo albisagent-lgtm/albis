@@ -22,6 +22,8 @@ export type PublicArticleResearchPacket = {
   sources: PublicArticleResearchSource[];
   distinct_url_count: number;
   distinct_domain_count: number;
+  independent_source_count: number;
+  fetched_source_count: number;
   source_depth_valid: boolean;
   priority_section: boolean;
   warnings: string[];
@@ -91,11 +93,39 @@ function isPriorityPublicCategory(category: string | undefined): boolean {
 function sourceDepth(sources: PublicArticleResearchSource[]) {
   const urls = new Set(sources.map((source) => source.url).filter(Boolean));
   const domains = new Set(sources.map((source) => source.domain.replace(/^www\./i, "").toLowerCase()).filter(Boolean));
+  const independent = new Set(sources.map(sourceSignature).filter(Boolean));
+  const fetchedCount = sources.filter((source) => source.fetched && source.word_count >= 120).length;
   return {
     distinct_url_count: urls.size,
     distinct_domain_count: domains.size,
-    source_depth_valid: urls.size >= 2 && domains.size >= 2,
+    independent_source_count: independent.size,
+    fetched_source_count: fetchedCount,
+    source_depth_valid: urls.size >= 2 && domains.size >= 2 && independent.size >= 2 && fetchedCount >= 2,
   };
+}
+
+function sourceSignature(source: PublicArticleResearchSource): string {
+  const title = cleanText(source.title)
+    .toLowerCase()
+    .replace(/\s+[|–—-]\s+.*$/g, "")
+    .replace(/\b(?:reuters|associated press|ap news|afp|thomson reuters)\b/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter((token) => token.length > 2)
+    .slice(0, 9)
+    .join(" ");
+  if (title.length >= 24) return `title:${title}`;
+
+  const text = cleanText(source.text)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter((token) => token.length > 3)
+    .slice(0, 28)
+    .join(" ");
+  return text ? `text:${text}` : `domain:${source.domain}`;
 }
 
 function sourceAllowed(url: string): boolean {
@@ -233,7 +263,7 @@ export async function buildPublicArticleResearchPacket(input: {
   }
 
   const depth = sourceDepth(sources);
-  if (!depth.source_depth_valid) warnings.push(`public_research_source_depth_too_thin:${depth.distinct_url_count}_urls:${depth.distinct_domain_count}_domains`);
+  if (!depth.source_depth_valid) warnings.push(`public_research_source_depth_too_thin:${depth.distinct_url_count}_urls:${depth.distinct_domain_count}_domains:${depth.independent_source_count}_independent:${depth.fetched_source_count}_fetched`);
   if (sources.length < 3) warnings.push(`public_research_below_healthy_target:${sources.length}_sources`);
   return { enabled: true, query, sources, ...depth, priority_section: prioritySection, warnings };
 }
