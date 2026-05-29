@@ -13,6 +13,7 @@ import { RegionBar } from "@/app/components/region-bar";
 import { ReadingProgress } from "@/app/components/reading-progress";
 import { normalizeRegion, CATEGORY_META } from "@/lib/scan-types";
 import { ShareButtons } from "@/app/components/share-buttons";
+import { ArticleComments } from "@/app/components/article-comments";
 
 const SECTION_LABELS: Record<string, string> = {
   world: "World",
@@ -338,6 +339,9 @@ export async function ArticlePage({ post }: { post: BlogPost }) {
             </section>
           );
         })()}
+
+        {/* Conversation */}
+        <ArticleComments articleSlug={post.slug} />
 
         {/* Share */}
         <div className="mt-10 flex items-center justify-between border-t border-black/[0.06] pt-6 dark:border-white/[0.06]">
