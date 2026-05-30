@@ -20,12 +20,20 @@ export default async function SignalsPage({ searchParams }: { searchParams?: Pro
   return (
     <main className="min-h-screen bg-[#f8f7f4] text-[#111] dark:bg-[#101010] dark:text-[#f4f1ea]">
       <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-12">
-        <header className="mb-8 border-b border-black/10 pb-6 dark:border-white/10">
+        <header className="mb-8 rounded-[1.75rem] border border-black/10 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.03] md:p-8">
           <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.18em] text-[#b58320]">Live on Albis</p>
-          <h1 className="mt-3 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">Today on Albis</h1>
-          <p className="mt-4 max-w-2xl font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-600 dark:text-zinc-300">
-            Short verified reports from the global scan. Open a signal to read the full report and share what you are seeing from where you are.
-          </p>
+          <div className="mt-3 grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+            <div>
+              <h1 className="font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">Today on Albis</h1>
+              <p className="mt-4 max-w-2xl font-[family-name:var(--font-source-serif)] text-lg leading-relaxed text-zinc-600 dark:text-zinc-300">
+                Verified signals from the global scan, with space for readers to add local context, sources, corrections, and questions — calm collaboration without clout mechanics.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-[#c8922a]/25 bg-[#fffaf0] p-4 dark:bg-[#c8922a]/[0.07]">
+              <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.16em] text-[#9b6b18] dark:text-[#f0c15e]">How to contribute</p>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">Open a signal and answer: <span className="font-semibold">What are you seeing from where you are?</span></p>
+            </div>
+          </div>
           <div className="mt-6 flex flex-wrap gap-2">
             <Link href="/signals" className={`rounded-full border px-3 py-1.5 text-xs font-semibold ${!category ? "border-[#c8922a] bg-[#c8922a]/10 text-[#9b6b18]" : "border-black/10 text-zinc-500 dark:border-white/10"}`}>
               All
@@ -43,7 +51,7 @@ export default async function SignalsPage({ searchParams }: { searchParams?: Pro
             <p className="text-zinc-500 dark:text-zinc-400">Signals are almost ready. New published reports will appear here automatically.</p>
           </div>
         ) : (
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {signals.map((signal) => <SignalCard key={signal.id} signal={signal} />)}
           </div>
         )}

@@ -12,10 +12,13 @@ type PublicComment = {
   body: string;
   created_at: string;
   updated_at: string;
-  context_type?: string | null;
+  context_type?: ReportType | null;
+  location_text?: string | null;
   trust_status?: "reader_report" | "supported_by_source" | "corroborated" | "verified_by_albis" | "needs_checking" | "disputed";
   source_url?: string | null;
 };
+
+type ReportType = "local_update" | "source" | "correction" | "context" | "question";
 
 type ArticleCommentsCopy = {
   eyebrow?: string;
@@ -25,6 +28,7 @@ type ArticleCommentsCopy = {
   placeholder?: string;
   emptyText?: string;
   submitLabel?: string;
+  structuredReports?: boolean;
 };
 
 type SessionUser = {
@@ -42,6 +46,16 @@ const TRUST_LABELS: Record<NonNullable<PublicComment["trust_status"]>, string> =
   disputed: "Needs checking",
 };
 
+const REPORT_TYPES: Array<{ value: ReportType; label: string; helper: string }> = [
+  { value: "local_update", label: "Local update", helper: "Something happening where you are" },
+  { value: "source", label: "Source/link", helper: "A document, outlet, post, or data point" },
+  { value: "correction", label: "Correction", helper: "Something Albis should check or fix" },
+  { value: "context", label: "Context", helper: "Background that changes how this reads" },
+  { value: "question", label: "Question", helper: "Something still unclear" },
+];
+
+const REPORT_LABELS: Record<ReportType, string> = Object.fromEntries(REPORT_TYPES.map((item) => [item.value, item.label])) as Record<ReportType, string>;
+
 function TrustBadge({ status }: { status?: PublicComment["trust_status"] }) {
   const safeStatus = status || "reader_report";
   if (safeStatus === "reader_report") return null;
@@ -51,6 +65,11 @@ function TrustBadge({ status }: { status?: PublicComment["trust_status"] }) {
       ? "border-[#c8922a]/25 bg-[#c8922a]/10 text-[#8a6417] dark:text-[#f0c15e]"
       : "border-zinc-300 bg-zinc-100 text-zinc-600 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300";
   return <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${tone}`}>{TRUST_LABELS[safeStatus]}</span>;
+}
+
+function ReportBadge({ type }: { type?: ReportType | null }) {
+  if (!type) return null;
+  return <span className="rounded-full border border-[#c8922a]/25 bg-[#c8922a]/10 px-2 py-0.5 text-[10px] font-semibold text-[#8a6417] dark:text-[#f0c15e]">{REPORT_LABELS[type]}</span>;
 }
 
 function formatCommentDate(value: string) {
@@ -73,6 +92,7 @@ function CommentForm({
   compact = false,
   placeholder,
   submitLabel,
+  structuredReports = false,
 }: {
   articleSlug: string;
   parentId?: string | null;
@@ -82,9 +102,13 @@ function CommentForm({
   compact?: boolean;
   placeholder?: string;
   submitLabel?: string;
+  structuredReports?: boolean;
 }) {
   const [name, setName] = useState("");
   const [body, setBody] = useState("");
+  const [reportType, setReportType] = useState<ReportType>("local_update");
+  const [location, setLocation] = useState("");
+  const [sourceUrl, setSourceUrl] = useState("");
   const [website, setWebsite] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -105,6 +129,9 @@ function CommentForm({
           parent_id: parentId,
           author_name: name,
           body,
+          context_type: structuredReports && !parentId ? reportType : undefined,
+          location_text: structuredReports && !parentId ? location : undefined,
+          source_url: structuredReports && !parentId ? sourceUrl : undefined,
           website,
         }),
       });
@@ -112,6 +139,8 @@ function CommentForm({
       if (!res.ok) throw new Error(payload.error || "Could not post comment.");
       setBody("");
       setName("");
+      setLocation("");
+      setSourceUrl("");
       onPosted(payload.comment || null, payload.message);
       onCancel?.();
     } catch (err) {
@@ -147,6 +176,47 @@ function CommentForm({
         </p>
       )}
 
+      {structuredReports && !parentId ? (
+        <div className="space-y-3 rounded-2xl border border-black/[0.06] bg-black/[0.015] p-3 dark:border-white/[0.06] dark:bg-white/[0.02]">
+          <p className="font-[family-name:var(--font-inter)] text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">What kind of context is this?</p>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {REPORT_TYPES.map((type) => (
+              <button
+                key={type.value}
+                type="button"
+                onClick={() => setReportType(type.value)}
+                className={`rounded-xl border px-3 py-2 text-left transition ${reportType === type.value ? "border-[#c8922a]/60 bg-[#c8922a]/10" : "border-black/[0.07] bg-white hover:border-[#c8922a]/30 dark:border-white/[0.07] dark:bg-white/[0.03]"}`}
+              >
+                <span className="block font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-800 dark:text-zinc-100">{type.label}</span>
+                <span className="mt-0.5 block font-[family-name:var(--font-inter)] text-[11px] leading-snug text-zinc-500 dark:text-zinc-400">{type.helper}</span>
+              </button>
+            ))}
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <label className="block">
+              <span className="mb-1 block font-[family-name:var(--font-inter)] text-xs font-medium text-zinc-600 dark:text-zinc-400">Location <span className="font-normal text-zinc-400">optional</span></span>
+              <input
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                maxLength={80}
+                placeholder="e.g. Turin, Italy"
+                className="w-full rounded-xl border border-black/[0.08] bg-white px-3 py-2.5 font-[family-name:var(--font-inter)] text-sm outline-none transition focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
+              />
+            </label>
+            <label className="block">
+              <span className="mb-1 block font-[family-name:var(--font-inter)] text-xs font-medium text-zinc-600 dark:text-zinc-400">Source URL <span className="font-normal text-zinc-400">optional</span></span>
+              <input
+                value={sourceUrl}
+                onChange={(e) => setSourceUrl(e.target.value)}
+                maxLength={500}
+                placeholder="https://…"
+                className="w-full rounded-xl border border-black/[0.08] bg-white px-3 py-2.5 font-[family-name:var(--font-inter)] text-sm outline-none transition focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
+              />
+            </label>
+          </div>
+        </div>
+      ) : null}
+
       <label className="sr-only" htmlFor={parentId ? `reply-${parentId}` : "comment-body"}>Comment</label>
       <textarea
         id={parentId ? `reply-${parentId}` : "comment-body"}
@@ -170,7 +240,7 @@ function CommentForm({
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="font-[family-name:var(--font-inter)] text-[11px] text-zinc-400 dark:text-zinc-500">
-          Keep it useful, calm, and source-backed where possible.
+          No likes, no clout — just useful context that can improve the signal.
         </p>
         <div className="flex items-center gap-2">
           {onCancel && (
@@ -224,8 +294,15 @@ function CommentItem({
             {comment.is_anonymous && <span className="text-zinc-400">Guest</span>}
             <span className="text-zinc-300 dark:text-zinc-600">·</span>
             <time className="text-zinc-400 dark:text-zinc-500" dateTime={comment.created_at}>{formatCommentDate(comment.created_at)}</time>
+            <ReportBadge type={comment.context_type} />
             <TrustBadge status={comment.trust_status} />
           </div>
+          {(comment.location_text || comment.source_url) && (
+            <div className="mt-2 flex flex-wrap items-center gap-2 font-[family-name:var(--font-inter)] text-[11px] text-zinc-500 dark:text-zinc-400">
+              {comment.location_text ? <span className="rounded-full bg-black/[0.04] px-2 py-1 dark:bg-white/[0.06]">From {comment.location_text}</span> : null}
+              {comment.source_url ? <a href={comment.source_url} target="_blank" rel="noopener noreferrer nofollow" className="rounded-full bg-black/[0.04] px-2 py-1 font-semibold text-[#9b6b18] hover:underline dark:bg-white/[0.06] dark:text-[#f0c15e]">Source attached</a> : null}
+            </div>
+          )}
           <p className="mt-2 whitespace-pre-wrap font-[family-name:var(--font-source-serif)] text-[15px] leading-relaxed text-zinc-700 dark:text-zinc-300">
             {comment.body}
           </p>
@@ -276,6 +353,7 @@ export function ArticleComments({
   placeholder,
   emptyText = "No comments yet. Be the first to add context.",
   submitLabel,
+  structuredReports = false,
 }: { articleSlug: string } & ArticleCommentsCopy) {
   const [comments, setComments] = useState<PublicComment[]>([]);
   const [loading, setLoading] = useState(true);
@@ -380,7 +458,7 @@ export function ArticleComments({
             </p>
           </div>
         ) : (
-          <CommentForm articleSlug={articleSlug} user={user} onPosted={handlePosted} placeholder={placeholder} submitLabel={submitLabel} />
+          <CommentForm articleSlug={articleSlug} user={user} onPosted={handlePosted} placeholder={placeholder} submitLabel={submitLabel} structuredReports={structuredReports} />
         )}
       </div>
 

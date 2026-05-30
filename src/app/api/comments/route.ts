@@ -18,6 +18,9 @@ type CommentRow = {
   updated_at: string;
 };
 
+type ReportType = "local_update" | "source" | "correction" | "context" | "question";
+
+const REPORT_TYPES = new Set<ReportType>(["local_update", "source", "correction", "context", "question"]);
 const MAX_BODY_LENGTH = 1800;
 const MIN_BODY_LENGTH = 3;
 const RATE_LIMIT_WINDOW_MINUTES = 10;
@@ -50,20 +53,82 @@ function cleanBody(value: unknown) {
   return raw.replace(/\r\n/g, "\n").replace(/\n{4,}/g, "\n\n\n");
 }
 
-function initialStatus(body: string) {
-  const urls = body.match(/https?:\/\//gi)?.length || 0;
+function cleanShortText(value: unknown, maxLength: number) {
+  const raw = typeof value === "string" ? value.trim() : "";
+  if (!raw) return null;
+  return raw.replace(/[\r\n]+/g, " ").replace(/\s+/g, " ").slice(0, maxLength);
+}
+
+function cleanSourceUrl(value: unknown) {
+  const raw = typeof value === "string" ? value.trim() : "";
+  if (!raw) return null;
+  try {
+    const url = new URL(raw);
+    if (!["http:", "https:"].includes(url.protocol)) return null;
+    return url.toString().slice(0, 500);
+  } catch {
+    return null;
+  }
+}
+
+function cleanReportType(value: unknown): ReportType | null {
+  const raw = typeof value === "string" ? value.trim() : "";
+  return REPORT_TYPES.has(raw as ReportType) ? raw as ReportType : null;
+}
+
+function composeBody({
+  body,
+  reportType,
+  location,
+  sourceUrl,
+}: {
+  body: string;
+  reportType: ReportType | null;
+  location: string | null;
+  sourceUrl: string | null;
+}) {
+  const meta: string[] = [];
+  if (reportType) meta.push(`[albis-report-type:${reportType}]`);
+  if (location) meta.push(`[albis-location:${location.replace(/\]/g, "")}]`);
+  if (sourceUrl) meta.push(`[albis-source:${sourceUrl.replace(/\]/g, "")}]`);
+  return meta.length ? `${meta.join("\n")}\n\n${body}` : body;
+}
+
+function parseBody(value: string) {
+  let body = value || "";
+  const meta: { context_type?: ReportType; location_text?: string; source_url?: string } = {};
+  const typeMatch = body.match(/^\[albis-report-type:([^\]]+)\]\n?/m);
+  if (typeMatch && REPORT_TYPES.has(typeMatch[1] as ReportType)) meta.context_type = typeMatch[1] as ReportType;
+  const locationMatch = body.match(/^\[albis-location:([^\]]+)\]\n?/m);
+  if (locationMatch) meta.location_text = locationMatch[1];
+  const sourceMatch = body.match(/^\[albis-source:([^\]]+)\]\n?/m);
+  if (sourceMatch) meta.source_url = sourceMatch[1];
+  body = body
+    .replace(/^\[albis-report-type:[^\]]+\]\n?/m, "")
+    .replace(/^\[albis-location:[^\]]+\]\n?/m, "")
+    .replace(/^\[albis-source:[^\]]+\]\n?/m, "")
+    .trim();
+  return { body, ...meta };
+}
+
+function initialStatus(body: string, sourceUrl?: string | null) {
+  const urls = (body.match(/https?:\/\//gi)?.length || 0) + (sourceUrl ? 1 : 0);
   if (urls >= 3) return "pending";
   if (/\b(casino|viagra|crypto bonus|forex signals|telegram pump)\b/i.test(body)) return "pending";
   return "visible";
 }
 
 function publicComment(row: CommentRow) {
+  const parsed = parseBody(row.body);
   return {
     id: row.id,
     parent_id: row.parent_id,
     author_name: row.author_name || "Guest",
     is_anonymous: row.is_anonymous,
-    body: row.body,
+    body: parsed.body,
+    context_type: parsed.context_type || null,
+    location_text: parsed.location_text || null,
+    source_url: parsed.source_url || null,
     created_at: row.created_at,
     updated_at: row.updated_at,
   };
@@ -115,6 +180,10 @@ export async function POST(request: Request) {
   const parentId = typeof payload.parent_id === "string" && payload.parent_id.trim() ? payload.parent_id.trim() : null;
   const body = cleanBody(payload.body);
   const guestName = cleanName(payload.author_name);
+  const reportType = parentId ? null : cleanReportType(payload.context_type);
+  const location = parentId ? null : cleanShortText(payload.location_text, 80);
+  const sourceUrl = parentId ? null : cleanSourceUrl(payload.source_url);
+  const storedBody = composeBody({ body, reportType, location, sourceUrl });
 
   if (!articleSlug) return jsonError("Missing article slug.");
   if (body.length < MIN_BODY_LENGTH) return jsonError("Please write a little more before posting.");
@@ -172,8 +241,8 @@ export async function POST(request: Request) {
     author_id: user?.id || null,
     author_name: authorName,
     is_anonymous: !user,
-    body,
-    status: initialStatus(body),
+    body: storedBody,
+    status: initialStatus(body, sourceUrl),
     ip_hash: ipHash,
     user_agent_hash: userAgentHash,
   };

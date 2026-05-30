@@ -9,9 +9,9 @@ function formatDate(value: string) {
 
 export function QuickSignal({ signal, compact = false }: { signal: Signal; compact?: boolean }) {
   return (
-    <section className="rounded-2xl border border-[#c8922a]/25 bg-[#fffaf0] p-5 shadow-sm dark:bg-[#c8922a]/[0.07]">
+    <section className="rounded-[1.5rem] border border-[#c8922a]/25 bg-[#fffaf0] p-5 shadow-sm dark:bg-[#c8922a]/[0.07] md:p-6">
       <div className="flex flex-wrap items-center gap-2 font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.18em] text-[#9b6b18] dark:text-[#f0c15e]">
-        <span>Quick signal</span>
+        <span>Albis verified signal</span>
         {signal.category ? <span>· {signal.category.replaceAll("-", " ")}</span> : null}
         {signal.region ? <span>· {signal.region}</span> : null}
       </div>
@@ -39,7 +39,7 @@ export function QuickSignal({ signal, compact = false }: { signal: Signal; compa
       <div className="mt-5 flex flex-wrap gap-2">
         {compact ? (
           <Link href={`/signals/${signal.slug}`} className="text-sm font-semibold text-[#b58320] hover:underline">
-            Join the conversation →
+            Add reader context →
           </Link>
         ) : null}
         {signal.article_url ? (
