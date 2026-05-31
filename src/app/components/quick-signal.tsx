@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Signal } from "@/lib/signals";
+import { TrustStack } from "./trust-stack";
 
 function formatDate(value: string) {
   const date = new Date(value);
@@ -7,7 +8,28 @@ function formatDate(value: string) {
   return date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
 }
 
+function getNumber(meta: Record<string, unknown>, keys: string[]) {
+  for (const key of keys) {
+    const value = meta[key];
+    if (typeof value === "number" && Number.isFinite(value)) return value;
+    if (typeof value === "string") {
+      const parsed = Number(value);
+      if (Number.isFinite(parsed)) return parsed;
+    }
+  }
+  return null;
+}
+
+function getString(meta: Record<string, unknown>, keys: string[]) {
+  for (const key of keys) {
+    const value = meta[key];
+    if (typeof value === "string" && value.trim()) return value.trim();
+  }
+  return null;
+}
+
 export function QuickSignal({ signal, compact = false }: { signal: Signal; compact?: boolean }) {
+  const meta = signal.metadata || {};
   return (
     <section className="rounded-[1.5rem] border border-[#c8922a]/25 bg-[#fffaf0] p-5 shadow-sm dark:bg-[#c8922a]/[0.07] md:p-6">
       <div className="flex flex-wrap items-center gap-2 font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.18em] text-[#9b6b18] dark:text-[#f0c15e]">
@@ -21,6 +43,21 @@ export function QuickSignal({ signal, compact = false }: { signal: Signal; compa
       <p className="mt-2 font-[family-name:var(--font-inter)] text-xs text-zinc-500 dark:text-zinc-400">
         Last updated {formatDate(signal.updated_at || signal.published_at)}
       </p>
+      {!compact ? (
+        <TrustStack
+          className="mt-4"
+          confidence={getString(meta, ["confidence", "verification_status", "verificationStatus"]) || (signal.still_unclear ? "needs_context" : "developing")}
+          sourceCount={getNumber(meta, ["source_count", "sourceCount", "sources", "sources_scanned"])}
+          regionCount={getNumber(meta, ["region_count", "regionCount", "regions", "regions_found"]) || (signal.region ? 1 : null)}
+          languageCount={getNumber(meta, ["language_count", "languageCount", "languages"])}
+          pgiScore={getNumber(meta, ["pgi", "pgiScore", "perception_gap", "perceptionGap"])}
+          gaiScore={getNumber(meta, ["gai", "gaiScore", "coverage_gap", "coverageGap"])}
+          readerReportCount={signal.comment_count || null}
+          lastUpdated={signal.updated_at || signal.published_at}
+          missingLocalConfirmation={Boolean(signal.still_unclear)}
+          size="detail"
+        />
+      ) : null}
       {signal.summary && !compact ? <p className="mt-4 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{signal.summary}</p> : null}
       <ul className="mt-4 space-y-2 text-sm leading-relaxed text-zinc-800 dark:text-zinc-200">
         {signal.bullets.slice(0, compact ? 3 : 6).map((bullet) => (

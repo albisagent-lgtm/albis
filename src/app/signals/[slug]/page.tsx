@@ -54,7 +54,7 @@ export default async function SignalDetailPage({ params }: Props) {
           </aside>
         </div>
 
-        <section className="mt-8 rounded-2xl border border-black/[0.08] bg-white p-5 dark:border-white/[0.08] dark:bg-white/[0.03]">
+        <section id="context" className="mt-8 rounded-2xl border border-black/[0.08] bg-white p-5 dark:border-white/[0.08] dark:bg-white/[0.03]">
           <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.18em] text-[#b58320]">Collaborative context</p>
           <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold">Help clarify the picture</h2>
           <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
