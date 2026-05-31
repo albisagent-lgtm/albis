@@ -123,15 +123,12 @@ export function NavAuth() {
 }
 
 const DESKTOP_NAV = [
-  { href: "/", label: "Today" },
-  { href: "/world", label: "World" },
-  { href: "/money", label: "Money" },
-  { href: "/tech", label: "Tech" },
-  { href: "/climate", label: "Climate" },
-  { href: "/life-systems", label: "Life Systems" },
-  { href: "/perspectives", label: "Perspectives" },
+  { href: "/", label: "Live" },
+  { href: "/signals", label: "Events" },
+  { href: "/lens", label: "Read" },
   { href: "/indexes", label: "Indexes" },
-  { href: "/company-daily-scan", label: "For Companies" },
+  { href: "/company-daily-scan", label: "Companies" },
+  { href: "/about", label: "About" },
 ];
 
 export function NavLinks() {

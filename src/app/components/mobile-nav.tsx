@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 const NAV_ITEMS = [
   {
     href: "/",
-    label: "Today",
+    label: "Live",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
@@ -16,9 +16,9 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/world",
-    label: "World",
-    matchPath: "/world",
+    href: "/signals",
+    label: "Events",
+    matchPath: "/signals",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
@@ -28,8 +28,8 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/trending",
-    label: "Trending",
+    href: "/lens",
+    label: "Read",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
@@ -38,9 +38,9 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/search",
-    label: "Search",
-    matchPath: "/search",
+    href: "/indexes",
+    label: "Indexes",
+    matchPath: "/indexes",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="11" cy="11" r="8" />
@@ -51,13 +51,14 @@ const NAV_ITEMS = [
 ];
 
 const MORE_LINKS = [
+  { href: "/community-weather", label: "Weather" },
+  { href: "/world", label: "World" },
   { href: "/money", label: "Money" },
   { href: "/tech", label: "Tech" },
   { href: "/climate", label: "Climate" },
   { href: "/life-systems", label: "Life Systems" },
   { href: "/perspectives", label: "Perspectives" },
-  { href: "/indexes", label: "Indexes" },
-  { href: "/company-daily-scan", label: "For Companies" },
+  { href: "/company-daily-scan", label: "Companies" },
   { href: "/about", label: "About" },
 ];
 
