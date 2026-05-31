@@ -54,6 +54,8 @@ const REPORT_TYPES: Array<{ value: ReportType; label: string; helper: string }> 
   { value: "question", label: "Question", helper: "Something still unclear" },
 ];
 
+const DEFAULT_HELPER = "Add local context, a source, a question, or a perspective we may have missed. You can comment as a guest or create a free account.";
+
 const REPORT_LABELS: Record<ReportType, string> = Object.fromEntries(REPORT_TYPES.map((item) => [item.value, item.label])) as Record<ReportType, string>;
 
 function TrustBadge({ status }: { status?: PublicComment["trust_status"] }) {
@@ -349,7 +351,7 @@ export function ArticleComments({
   eyebrow = "Conversation",
   title = "What are you seeing?",
   prompt,
-  helper = "Add local context, a source, a question, or a perspective we may have missed. You can comment as a guest or create a free account.",
+  helper = DEFAULT_HELPER,
   placeholder,
   emptyText = "No comments yet. Be the first to add context.",
   submitLabel,
@@ -429,25 +431,21 @@ export function ArticleComments({
         {prompt ? (
           <p className="mt-2 font-[family-name:var(--font-source-serif)] text-base leading-relaxed text-zinc-700 dark:text-zinc-300">{prompt}</p>
         ) : null}
-        <p className="mt-2 font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-          {helper}
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2 font-[family-name:var(--font-inter)] text-xs">
-          {!user ? (
-            <>
-              <Link href="/register" className="rounded-full border border-[#c8922a]/30 px-3 py-1.5 font-semibold text-[#c8922a] hover:bg-[#c8922a]/10">
-                Create free account
-              </Link>
-              <Link href="/login" className="rounded-full border border-black/[0.08] px-3 py-1.5 font-semibold text-zinc-500 hover:text-zinc-800 dark:border-white/[0.08] dark:text-zinc-400 dark:hover:text-zinc-200">
-                Sign in
-              </Link>
-            </>
-          ) : (
-            <Link href="/account" className="rounded-full border border-black/[0.08] px-3 py-1.5 font-semibold text-zinc-500 hover:text-zinc-800 dark:border-white/[0.08] dark:text-zinc-400 dark:hover:text-zinc-200">
-              Manage account
+        {helper ? (
+          <p className="mt-2 font-[family-name:var(--font-source-serif)] text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            {helper}
+          </p>
+        ) : null}
+        {!user ? (
+          <div className="mt-4 flex flex-wrap gap-2 font-[family-name:var(--font-inter)] text-xs">
+            <Link href="/register" className="rounded-full border border-[#c8922a]/30 px-3 py-1.5 font-semibold text-[#c8922a] hover:bg-[#c8922a]/10">
+              Create account
             </Link>
-          )}
-        </div>
+            <Link href="/login" className="rounded-full border border-black/[0.08] px-3 py-1.5 font-semibold text-zinc-500 hover:text-zinc-800 dark:border-white/[0.08] dark:text-zinc-400 dark:hover:text-zinc-200">
+              Sign in
+            </Link>
+          </div>
+        ) : null}
       </div>
 
       <div className="mt-5">
