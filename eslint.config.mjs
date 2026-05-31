@@ -14,6 +14,7 @@ const eslintConfig = defineConfig([
     ".vercel/**",
     ".open-next/**",
     "reports/**",
+    "tmp/**",
     "tmp_*.js",
     "tmp_*.mjs",
     "tmp_*.ts",
@@ -47,7 +48,7 @@ const eslintConfig = defineConfig([
       "@typescript-eslint/no-explicit-any": "warn",
       "@next/next/no-html-link-for-pages": "warn",
       "prefer-const": "warn",
-      "react/no-unescaped-entities": "warn",
+      "react/no-unescaped-entities": "off",
     },
   },
 ]);
