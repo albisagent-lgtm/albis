@@ -1,0 +1,56 @@
+name: Community Weather Daily
+
+on:
+  schedule:
+    # 06:20 UTC = evening NZ / morning UK. Keeps a stable daily rhythm without colliding with the main briefing.
+    - cron: '20 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: community-weather-daily
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Generate daily community weather report
+        env:
+          POSTIZ_API_KEY: ${{ secrets.POSTIZ_API_KEY }}
+          POSTIZ_X_INTEGRATION_ID: ${{ secrets.POSTIZ_X_INTEGRATION_ID }}
+          ALBIS_REPORT_TIMEZONE: Pacific/Auckland
+        run: |
+          set -euo pipefail
+          if [ -n "${POSTIZ_API_KEY:-}" ]; then
+            npx tsx scripts/run-community-weather-daily.ts --limit=100 --media-per-city=3 --post
+          else
+            echo "::warning::POSTIZ_API_KEY is not configured; generating report without posting"
+            npx tsx scripts/run-community-weather-daily.ts --limit=100 --media-per-city=3
+          fi
+
+      - name: Commit generated weather data
+        run: |
+          set -euo pipefail
+          git config user.name "albis-community-weather-bot"
+          git config user.email "actions@github.com"
+          git add public/community-weather data/community-weather reports/community-weather
+          if git diff --cached --quiet; then
+            echo "No generated weather changes to commit"
+          else
+            git commit -m "Update community weather report"
+            git push
+          fi

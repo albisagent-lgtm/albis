@@ -1,0 +1,873 @@
+{
+  "tokyo|japan": {
+    "name": "Tokyo",
+    "country": "Japan",
+    "region": "Tokyo",
+    "latitude": 35.6895,
+    "longitude": 139.69171,
+    "timezone": "Asia/Tokyo",
+    "population": 9733276
+  },
+  "delhi|india": {
+    "name": "Delhi",
+    "country": "India",
+    "region": "National Capital Territory of Delhi",
+    "latitude": 28.65195,
+    "longitude": 77.23149,
+    "timezone": "Asia/Kolkata",
+    "population": 11034555
+  },
+  "shanghai|china": {
+    "name": "Shanghai",
+    "country": "China",
+    "region": "Shanghai Municipality",
+    "latitude": 31.22222,
+    "longitude": 121.45806,
+    "timezone": "Asia/Shanghai",
+    "population": 24874500
+  },
+  "dhaka|bangladesh": {
+    "name": "Dhaka",
+    "country": "Bangladesh",
+    "region": "Dhaka Division",
+    "latitude": 23.7104,
+    "longitude": 90.40744,
+    "timezone": "Asia/Dhaka",
+    "population": 10356500
+  },
+  "sao paulo|brazil": {
+    "name": "Sao Paulo",
+    "country": "Brazil",
+    "region": "São Paulo",
+    "latitude": -23.5475,
+    "longitude": -46.63611,
+    "timezone": "America/Sao_Paulo",
+    "population": 12400232
+  },
+  "cairo|egypt": {
+    "name": "Cairo",
+    "country": "Egypt",
+    "region": "Cairo Governorate",
+    "latitude": 30.06263,
+    "longitude": 31.24967,
+    "timezone": "Africa/Cairo",
+    "population": 9606916
+  },
+  "mexico city|mexico": {
+    "name": "Mexico City",
+    "country": "Mexico",
+    "region": "Mexico City",
+    "latitude": 19.42847,
+    "longitude": -99.12766,
+    "timezone": "America/Mexico_City",
+    "population": 12294193
+  },
+  "beijing|china": {
+    "name": "Beijing",
+    "country": "China",
+    "region": "Beijing Municipality",
+    "latitude": 39.9075,
+    "longitude": 116.39723,
+    "timezone": "Asia/Shanghai",
+    "population": 18960744
+  },
+  "mumbai|india": {
+    "name": "Mumbai",
+    "country": "India",
+    "region": "Maharashtra",
+    "latitude": 19.07283,
+    "longitude": 72.88261,
+    "timezone": "Asia/Kolkata",
+    "population": 12691836
+  },
+  "osaka|japan": {
+    "name": "Osaka",
+    "country": "Japan",
+    "region": "Osaka",
+    "latitude": 34.69379,
+    "longitude": 135.50107,
+    "timezone": "Asia/Tokyo",
+    "population": 2753862
+  },
+  "karachi|pakistan": {
+    "name": "Karachi",
+    "country": "Pakistan",
+    "region": "Sindh",
+    "latitude": 24.8608,
+    "longitude": 67.0104,
+    "timezone": "Asia/Karachi",
+    "population": 11624219
+  },
+  "chongqing|china": {
+    "name": "Chongqing",
+    "country": "China",
+    "region": "Chongqing Municipality",
+    "latitude": 29.56026,
+    "longitude": 106.55771,
+    "timezone": "Asia/Shanghai",
+    "population": 7457599
+  },
+  "istanbul|turkey": {
+    "name": "Istanbul",
+    "country": "Turkey",
+    "region": "Istanbul",
+    "latitude": 41.01384,
+    "longitude": 28.94966,
+    "timezone": "Europe/Istanbul",
+    "population": 15701602
+  },
+  "buenos aires|argentina": {
+    "name": "Buenos Aires",
+    "country": "Argentina",
+    "region": "Buenos Aires F.D.",
+    "latitude": -34.61315,
+    "longitude": -58.37723,
+    "timezone": "America/Argentina/Buenos_Aires",
+    "population": 2891082
+  },
+  "kolkata|india": {
+    "name": "Kolkata",
+    "country": "India",
+    "region": "West Bengal",
+    "latitude": 22.56263,
+    "longitude": 88.36304,
+    "timezone": "Asia/Kolkata",
+    "population": 4631392
+  },
+  "kinshasa|democratic republic of the congo": {
+    "name": "Kinshasa",
+    "country": "Democratic Republic of the Congo",
+    "region": "Kinshasa City",
+    "latitude": -4.32758,
+    "longitude": 15.31357,
+    "timezone": "Africa/Kinshasa",
+    "population": 16000000
+  },
+  "lagos|nigeria": {
+    "name": "Lagos",
+    "country": "Nigeria",
+    "region": "Lagos",
+    "latitude": 6.45407,
+    "longitude": 3.39467,
+    "timezone": "Africa/Lagos",
+    "population": 15388000
+  },
+  "manila|philippines": {
+    "name": "Manila",
+    "country": "Philippines",
+    "region": "National Capital Region",
+    "latitude": 14.6042,
+    "longitude": 120.9822,
+    "timezone": "Asia/Manila",
+    "population": 1600000
+  },
+  "tianjin|china": {
+    "name": "Tianjin",
+    "country": "China",
+    "region": "Tianjin Municipality",
+    "latitude": 39.14222,
+    "longitude": 117.17667,
+    "timezone": "Asia/Shanghai",
+    "population": 11090314
+  },
+  "guangzhou|china": {
+    "name": "Guangzhou",
+    "country": "China",
+    "region": "Guangdong",
+    "latitude": 23.11667,
+    "longitude": 113.25,
+    "timezone": "Asia/Shanghai",
+    "population": 16096724
+  },
+  "rio de janeiro|brazil": {
+    "name": "Rio de Janeiro",
+    "country": "Brazil",
+    "region": "Rio de Janeiro",
+    "latitude": -22.90642,
+    "longitude": -43.18223,
+    "timezone": "America/Sao_Paulo",
+    "population": 6747815
+  },
+  "lahore|pakistan": {
+    "name": "Lahore",
+    "country": "Pakistan",
+    "region": "Punjab",
+    "latitude": 31.558,
+    "longitude": 74.35071,
+    "timezone": "Asia/Karachi",
+    "population": 13004135
+  },
+  "bangalore|india": {
+    "name": "Bangalore",
+    "country": "India",
+    "region": "Sindh",
+    "latitude": 24.8717,
+    "longitude": 67.0839,
+    "timezone": "Asia/Karachi",
+    "population": null
+  },
+  "shenzhen|china": {
+    "name": "Shenzhen",
+    "country": "China",
+    "region": "Guangdong",
+    "latitude": 22.54554,
+    "longitude": 114.0683,
+    "timezone": "Asia/Shanghai",
+    "population": 17494398
+  },
+  "moscow|russia": {
+    "name": "Moscow",
+    "country": "Russia",
+    "region": "Moscow",
+    "latitude": 55.75204,
+    "longitude": 37.61781,
+    "timezone": "Europe/Moscow",
+    "population": 10381222
+  },
+  "chennai|india": {
+    "name": "Chennai",
+    "country": "India",
+    "region": "Tamil Nadu",
+    "latitude": 13.08784,
+    "longitude": 80.27847,
+    "timezone": "Asia/Kolkata",
+    "population": 4681087
+  },
+  "bogota|colombia": {
+    "name": "Bogota",
+    "country": "Colombia",
+    "region": "Bogota D.C.",
+    "latitude": 4.60971,
+    "longitude": -74.08175,
+    "timezone": "America/Bogota",
+    "population": 7674366
+  },
+  "paris|france": {
+    "name": "Paris",
+    "country": "France",
+    "region": "Île-de-France Region",
+    "latitude": 48.85341,
+    "longitude": 2.3488,
+    "timezone": "Europe/Paris",
+    "population": 2138551
+  },
+  "jakarta|indonesia": {
+    "name": "Jakarta",
+    "country": "Indonesia",
+    "region": "Jakarta Special Capital Region",
+    "latitude": -6.21462,
+    "longitude": 106.84513,
+    "timezone": "Asia/Jakarta",
+    "population": 8540121
+  },
+  "lima|peru": {
+    "name": "Lima",
+    "country": "Peru",
+    "region": "Lima Province",
+    "latitude": -12.04318,
+    "longitude": -77.02824,
+    "timezone": "America/Lima",
+    "population": 7737002
+  },
+  "bangkok|thailand": {
+    "name": "Bangkok",
+    "country": "Thailand",
+    "region": "Bangkok",
+    "latitude": 13.75398,
+    "longitude": 100.50144,
+    "timezone": "Asia/Bangkok",
+    "population": 5104476
+  },
+  "hyderabad|india": {
+    "name": "Hyderabad",
+    "country": "India",
+    "region": "Telangana",
+    "latitude": 17.38405,
+    "longitude": 78.45636,
+    "timezone": "Asia/Kolkata",
+    "population": 6993262
+  },
+  "seoul|south korea": {
+    "name": "Seoul",
+    "country": "South Korea",
+    "region": "Seoul",
+    "latitude": 37.566,
+    "longitude": 126.9784,
+    "timezone": "Asia/Seoul",
+    "population": 10349312
+  },
+  "nagoya|japan": {
+    "name": "Nagoya",
+    "country": "Japan",
+    "region": "Aichi",
+    "latitude": 35.18147,
+    "longitude": 136.9064,
+    "timezone": "Asia/Tokyo",
+    "population": 2332176
+  },
+  "london|united kingdom": {
+    "name": "London",
+    "country": "United Kingdom",
+    "region": "England",
+    "latitude": 51.50853,
+    "longitude": -0.12574,
+    "timezone": "Europe/London",
+    "population": 8961989
+  },
+  "chengdu|china": {
+    "name": "Chengdu",
+    "country": "China",
+    "region": "Sichuan",
+    "latitude": 30.66667,
+    "longitude": 104.06667,
+    "timezone": "Asia/Shanghai",
+    "population": 13568357
+  },
+  "nanjing|china": {
+    "name": "Nanjing",
+    "country": "China",
+    "region": "Jiangsu",
+    "latitude": 32.06167,
+    "longitude": 118.77778,
+    "timezone": "Asia/Shanghai",
+    "population": 9314685
+  },
+  "tehran|iran": {
+    "name": "Tehran",
+    "country": "Iran",
+    "region": "Tehran",
+    "latitude": 35.69439,
+    "longitude": 51.42151,
+    "timezone": "Asia/Tehran",
+    "population": 7153309
+  },
+  "ho chi minh city|vietnam": {
+    "name": "Ho Chi Minh City",
+    "country": "Vietnam",
+    "region": "Ho Chi Minh City (HCMC)",
+    "latitude": 10.82302,
+    "longitude": 106.62965,
+    "timezone": "Asia/Ho_Chi_Minh",
+    "population": 14002598
+  },
+  "luanda|angola": {
+    "name": "Luanda",
+    "country": "Angola",
+    "region": "Luanda Province",
+    "latitude": -8.83682,
+    "longitude": 13.23432,
+    "timezone": "Africa/Luanda",
+    "population": 2776168
+  },
+  "wuhan|china": {
+    "name": "Wuhan",
+    "country": "China",
+    "region": "Hubei",
+    "latitude": 30.58333,
+    "longitude": 114.26667,
+    "timezone": "Asia/Shanghai",
+    "population": 10392693
+  },
+  "ahmedabad|india": {
+    "name": "Ahmedabad",
+    "country": "India",
+    "region": "Gujarat",
+    "latitude": 23.02579,
+    "longitude": 72.58727,
+    "timezone": "Asia/Kolkata",
+    "population": 6357693
+  },
+  "kuala lumpur|malaysia": {
+    "name": "Kuala Lumpur",
+    "country": "Malaysia",
+    "region": "Kuala Lumpur",
+    "latitude": 3.1412,
+    "longitude": 101.68653,
+    "timezone": "Asia/Kuala_Lumpur",
+    "population": 1453975
+  },
+  "new york|united states": {
+    "name": "New York",
+    "country": "United States",
+    "region": "New York",
+    "latitude": 40.71427,
+    "longitude": -74.00597,
+    "timezone": "America/New_York",
+    "population": 8804190
+  },
+  "hangzhou|china": {
+    "name": "Hangzhou",
+    "country": "China",
+    "region": "Zhejiang",
+    "latitude": 30.29365,
+    "longitude": 120.16142,
+    "timezone": "Asia/Shanghai",
+    "population": 9236032
+  },
+  "surat|india": {
+    "name": "Surat",
+    "country": "India",
+    "region": "Gujarat",
+    "latitude": 21.19594,
+    "longitude": 72.83023,
+    "timezone": "Asia/Kolkata",
+    "population": 4591246
+  },
+  "suzhou|china": {
+    "name": "Suzhou",
+    "country": "China",
+    "region": "Anhui",
+    "latitude": 33.63611,
+    "longitude": 116.97889,
+    "timezone": "Asia/Shanghai",
+    "population": 1647642
+  },
+  "hong kong|china": {
+    "name": "Hong Kong",
+    "country": "China",
+    "latitude": 22.27832,
+    "longitude": 114.17469,
+    "timezone": "Asia/Hong_Kong",
+    "population": 7396076
+  },
+  "riyadh|saudi arabia": {
+    "name": "Riyadh",
+    "country": "Saudi Arabia",
+    "region": "Riyadh Region",
+    "latitude": 24.68773,
+    "longitude": 46.72185,
+    "timezone": "Asia/Riyadh",
+    "population": 4205961
+  },
+  "shenyang|china": {
+    "name": "Shenyang",
+    "country": "China",
+    "region": "Liaoning",
+    "latitude": 41.79222,
+    "longitude": 123.43278,
+    "timezone": "Asia/Shanghai",
+    "population": 7050000
+  },
+  "baghdad|iraq": {
+    "name": "Baghdad",
+    "country": "Iraq",
+    "region": "Baghdad",
+    "latitude": 33.34058,
+    "longitude": 44.40088,
+    "timezone": "Asia/Baghdad",
+    "population": 7216000
+  },
+  "dongguan|china": {
+    "name": "Dongguan",
+    "country": "China",
+    "region": "Guangdong",
+    "latitude": 23.01797,
+    "longitude": 113.74866,
+    "timezone": "Asia/Shanghai",
+    "population": 9644871
+  },
+  "foshan|china": {
+    "name": "Foshan",
+    "country": "China",
+    "region": "Guangdong",
+    "latitude": 23.02677,
+    "longitude": 113.13148,
+    "timezone": "Asia/Shanghai",
+    "population": 9042509
+  },
+  "dar es salaam|tanzania": {
+    "name": "Dar es Salaam",
+    "country": "Tanzania",
+    "region": "Dar es Salaam Region",
+    "latitude": -6.82349,
+    "longitude": 39.26951,
+    "timezone": "Africa/Dar_es_Salaam",
+    "population": 5383728
+  },
+  "pune|india": {
+    "name": "Pune",
+    "country": "India",
+    "region": "Maharashtra",
+    "latitude": 18.51957,
+    "longitude": 73.85535,
+    "timezone": "Asia/Kolkata",
+    "population": 3124458
+  },
+  "santiago|chile": {
+    "name": "Santiago",
+    "country": "Chile",
+    "region": "Santiago Metropolitan",
+    "latitude": -33.45694,
+    "longitude": -70.64827,
+    "timezone": "America/Santiago",
+    "population": 4837295
+  },
+  "madrid|spain": {
+    "name": "Madrid",
+    "country": "Spain",
+    "region": "Madrid",
+    "latitude": 40.4165,
+    "longitude": -3.70256,
+    "timezone": "Europe/Madrid",
+    "population": 3255944
+  },
+  "toronto|canada": {
+    "name": "Toronto",
+    "country": "Canada",
+    "region": "Ontario",
+    "latitude": 43.70643,
+    "longitude": -79.39864,
+    "timezone": "America/Toronto",
+    "population": 2794356
+  },
+  "belo horizonte|brazil": {
+    "name": "Belo Horizonte",
+    "country": "Brazil",
+    "region": "Minas Gerais",
+    "latitude": -19.92083,
+    "longitude": -43.93778,
+    "timezone": "America/Sao_Paulo",
+    "population": 2721564
+  },
+  "singapore|singapore": {
+    "name": "Singapore",
+    "country": "Singapore",
+    "latitude": 1.28967,
+    "longitude": 103.85007,
+    "timezone": "Asia/Singapore",
+    "population": 5638700
+  },
+  "khartoum|sudan": {
+    "name": "Khartoum",
+    "country": "Sudan",
+    "region": "Khartoum State",
+    "latitude": 15.55177,
+    "longitude": 32.53241,
+    "timezone": "Africa/Khartoum",
+    "population": 1974647
+  },
+  "johannesburg|south africa": {
+    "name": "Johannesburg",
+    "country": "South Africa",
+    "region": "Gauteng",
+    "latitude": -26.20227,
+    "longitude": 28.04363,
+    "timezone": "Africa/Johannesburg",
+    "population": 9418183
+  },
+  "dalian|china": {
+    "name": "Dalian",
+    "country": "China",
+    "region": "Liaoning",
+    "latitude": 38.91222,
+    "longitude": 121.60222,
+    "timezone": "Asia/Shanghai",
+    "population": 4913879
+  },
+  "qingdao|china": {
+    "name": "Qingdao",
+    "country": "China",
+    "region": "Shandong",
+    "latitude": 36.06488,
+    "longitude": 120.38042,
+    "timezone": "Asia/Shanghai",
+    "population": 7172451
+  },
+  "zhengzhou|china": {
+    "name": "Zhengzhou",
+    "country": "China",
+    "region": "Henan",
+    "latitude": 34.75778,
+    "longitude": 113.64861,
+    "timezone": "Asia/Shanghai",
+    "population": 4253913
+  },
+  "barcelona|spain": {
+    "name": "Barcelona",
+    "country": "Spain",
+    "region": "Catalonia",
+    "latitude": 41.38879,
+    "longitude": 2.15899,
+    "timezone": "Europe/Madrid",
+    "population": 1686208
+  },
+  "saint petersburg|russia": {
+    "name": "Saint Petersburg",
+    "country": "Russia",
+    "region": "St.-Petersburg",
+    "latitude": 59.93863,
+    "longitude": 30.31413,
+    "timezone": "Europe/Moscow",
+    "population": 5351935
+  },
+  "yangon|myanmar": {
+    "name": "Yangon",
+    "country": "Myanmar",
+    "region": "Yangon",
+    "latitude": 16.80528,
+    "longitude": 96.15611,
+    "timezone": "Asia/Yangon",
+    "population": 4477638
+  },
+  "alexandria|egypt": {
+    "name": "Alexandria",
+    "country": "Egypt",
+    "region": "Alexandria Governorate",
+    "latitude": 31.20176,
+    "longitude": 29.91582,
+    "timezone": "Africa/Cairo",
+    "population": 5263542
+  },
+  "fukuoka|japan": {
+    "name": "Fukuoka",
+    "country": "Japan",
+    "region": "Fukuoka",
+    "latitude": 33.6,
+    "longitude": 130.41667,
+    "timezone": "Asia/Tokyo",
+    "population": 1612392
+  },
+  "abidjan|cote d ivoire": {
+    "name": "Abidjan",
+    "country": "Cote d Ivoire",
+    "region": "Abidjan Autonomous District",
+    "latitude": 5.35444,
+    "longitude": -4.00167,
+    "timezone": "Africa/Abidjan",
+    "population": 6321017
+  },
+  "guadalajara|mexico": {
+    "name": "Guadalajara",
+    "country": "Mexico",
+    "region": "Jalisco",
+    "latitude": 20.67738,
+    "longitude": -103.34749,
+    "timezone": "America/Mexico_City",
+    "population": 1385629
+  },
+  "ankara|turkey": {
+    "name": "Ankara",
+    "country": "Turkey",
+    "region": "Ankara",
+    "latitude": 39.91987,
+    "longitude": 32.85427,
+    "timezone": "Europe/Istanbul",
+    "population": 3517182
+  },
+  "chittagong|bangladesh": {
+    "name": "Chittagong",
+    "country": "Bangladesh",
+    "region": "Chittagong",
+    "latitude": 22.3384,
+    "longitude": 91.83168,
+    "timezone": "Asia/Dhaka",
+    "population": 3920222
+  },
+  "melbourne|australia": {
+    "name": "Melbourne",
+    "country": "Australia",
+    "region": "Victoria",
+    "latitude": -37.814,
+    "longitude": 144.96332,
+    "timezone": "Australia/Melbourne",
+    "population": 5350705
+  },
+  "sydney|australia": {
+    "name": "Sydney",
+    "country": "Australia",
+    "region": "New South Wales",
+    "latitude": -33.86785,
+    "longitude": 151.20732,
+    "timezone": "Australia/Sydney",
+    "population": 5557233
+  },
+  "monterrey|mexico": {
+    "name": "Monterrey",
+    "country": "Mexico",
+    "region": "Nuevo León",
+    "latitude": 25.68435,
+    "longitude": -100.31721,
+    "timezone": "America/Monterrey",
+    "population": 1135512
+  },
+  "addis ababa|ethiopia": {
+    "name": "Addis Ababa",
+    "country": "Ethiopia",
+    "region": "Addis Ababa",
+    "latitude": 9.02497,
+    "longitude": 38.74689,
+    "timezone": "Africa/Addis_Ababa",
+    "population": 3860000
+  },
+  "nairobi|kenya": {
+    "name": "Nairobi",
+    "country": "Kenya",
+    "region": "Nairobi County",
+    "latitude": -1.28333,
+    "longitude": 36.81667,
+    "timezone": "Africa/Nairobi",
+    "population": 4397073
+  },
+  "cape town|south africa": {
+    "name": "Cape Town",
+    "country": "South Africa",
+    "region": "Western Cape",
+    "latitude": -33.92584,
+    "longitude": 18.42322,
+    "timezone": "Africa/Johannesburg",
+    "population": 4772846
+  },
+  "berlin|germany": {
+    "name": "Berlin",
+    "country": "Germany",
+    "region": "State of Berlin",
+    "latitude": 52.52437,
+    "longitude": 13.41053,
+    "timezone": "Europe/Berlin",
+    "population": 3426354
+  },
+  "casablanca|morocco": {
+    "name": "Casablanca",
+    "country": "Morocco",
+    "region": "Casablanca-Settat",
+    "latitude": 33.58831,
+    "longitude": -7.61138,
+    "timezone": "Africa/Casablanca",
+    "population": 3665954
+  },
+  "jeddah|saudi arabia": {
+    "name": "Jeddah",
+    "country": "Saudi Arabia",
+    "region": "Mecca Region",
+    "latitude": 21.49012,
+    "longitude": 39.18624,
+    "timezone": "Asia/Riyadh",
+    "population": 4697000
+  },
+  "rome|italy": {
+    "name": "Rome",
+    "country": "Italy",
+    "region": "Lazio",
+    "latitude": 41.89193,
+    "longitude": 12.51133,
+    "timezone": "Europe/Rome",
+    "population": 2318895
+  },
+  "kabul|afghanistan": {
+    "name": "Kabul",
+    "country": "Afghanistan",
+    "region": "Kabul",
+    "latitude": 34.52813,
+    "longitude": 69.17233,
+    "timezone": "Asia/Kabul",
+    "population": 4434550
+  },
+  "hanoi|vietnam": {
+    "name": "Hanoi",
+    "country": "Vietnam",
+    "region": "Hanoi",
+    "latitude": 21.0245,
+    "longitude": 105.84117,
+    "timezone": "Asia/Bangkok",
+    "population": 8053663
+  },
+  "montreal|canada": {
+    "name": "Montreal",
+    "country": "Canada",
+    "region": "Quebec",
+    "latitude": 45.50884,
+    "longitude": -73.58781,
+    "timezone": "America/Toronto",
+    "population": 1762949
+  },
+  "busan|south korea": {
+    "name": "Busan",
+    "country": "South Korea",
+    "region": "Busan",
+    "latitude": 35.10168,
+    "longitude": 129.03004,
+    "timezone": "Asia/Seoul",
+    "population": 3285147
+  },
+  "kano|nigeria": {
+    "name": "Kano",
+    "country": "Nigeria",
+    "region": "Kano State",
+    "latitude": 12.00012,
+    "longitude": 8.51672,
+    "timezone": "Africa/Lagos",
+    "population": 4910000
+  },
+  "dubai|united arab emirates": {
+    "name": "Dubai",
+    "country": "United Arab Emirates",
+    "region": "Dubai",
+    "latitude": 25.07725,
+    "longitude": 55.30927,
+    "timezone": "Asia/Dubai",
+    "population": 3790000
+  },
+  "athens|greece": {
+    "name": "Athens",
+    "country": "Greece",
+    "region": "Attica",
+    "latitude": 37.98376,
+    "longitude": 23.72784,
+    "timezone": "Europe/Athens",
+    "population": 664046
+  },
+  "lisbon|portugal": {
+    "name": "Lisbon",
+    "country": "Portugal",
+    "region": "Lisbon District",
+    "latitude": 38.72509,
+    "longitude": -9.1498,
+    "timezone": "Europe/Lisbon",
+    "population": 517802
+  },
+  "warsaw|poland": {
+    "name": "Warsaw",
+    "country": "Poland",
+    "region": "Mazovia",
+    "latitude": 52.22977,
+    "longitude": 21.01178,
+    "timezone": "Europe/Warsaw",
+    "population": 1702139
+  },
+  "kyiv|ukraine": {
+    "name": "Kyiv",
+    "country": "Ukraine",
+    "region": "Kyiv City",
+    "latitude": 50.45466,
+    "longitude": 30.5238,
+    "timezone": "Europe/Kyiv",
+    "population": 2952301
+  },
+  "auckland|new zealand": {
+    "name": "Auckland",
+    "country": "New Zealand",
+    "region": "Auckland",
+    "latitude": -36.84853,
+    "longitude": 174.76349,
+    "timezone": "Pacific/Auckland",
+    "population": 1547200
+  },
+  "reykjavik|iceland": {
+    "name": "Reykjavik",
+    "country": "Iceland",
+    "region": "Capital Region",
+    "latitude": 64.13548,
+    "longitude": -21.89541,
+    "timezone": "Atlantic/Reykjavik",
+    "population": 118918
+  },
+  "honolulu|united states": {
+    "name": "Honolulu",
+    "country": "United States",
+    "region": "Hawaii",
+    "latitude": 21.30694,
+    "longitude": -157.85834,
+    "timezone": "Pacific/Honolulu",
+    "population": 350964
+  }
+}

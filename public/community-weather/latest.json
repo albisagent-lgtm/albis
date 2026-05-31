@@ -1,0 +1,3509 @@
+{
+  "date": "2026-06-01",
+  "generatedAt": "2026-05-31T18:44:58.082Z",
+  "scope": "Top 100 major world cities weather/community-media scan",
+  "methodology": [
+    "Weather data: Open-Meteo public forecast/current conditions.",
+    "Traditional media layer: GDELT article search for city-level weather/disruption mentions.",
+    "Community layer v0: identifies where lived, on-the-ground human updates are needed; no private/social scraping yet."
+  ],
+  "reports": [
+    {
+      "city": {
+        "name": "Tokyo",
+        "country": "Japan",
+        "region": "Tokyo",
+        "latitude": 35.6895,
+        "longitude": 139.69171,
+        "timezone": "Asia/Tokyo",
+        "population": 9733276
+      },
+      "current": {
+        "temperatureC": 17,
+        "apparentTemperatureC": 18.9,
+        "precipitationMm": 0,
+        "windKph": 3.3,
+        "weatherCode": 2,
+        "description": "partly cloudy"
+      },
+      "daily": {
+        "maxTempC": 29,
+        "minTempC": 16.1,
+        "precipitationMm": 0,
+        "maxWindKph": 8.8
+      },
+      "observedAt": "2026-06-01T03:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Tokyo.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Delhi",
+        "country": "India",
+        "region": "National Capital Territory of Delhi",
+        "latitude": 28.65195,
+        "longitude": 77.23149,
+        "timezone": "Asia/Kolkata",
+        "population": 11034555
+      },
+      "current": {
+        "temperatureC": 26,
+        "apparentTemperatureC": 29.5,
+        "precipitationMm": 0,
+        "windKph": 3.5,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 33.3,
+        "minTempC": 23.5,
+        "precipitationMm": 0.2,
+        "maxWindKph": 15.2
+      },
+      "observedAt": "2026-06-01T00:00",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Delhi.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Shanghai",
+        "country": "China",
+        "region": "Shanghai Municipality",
+        "latitude": 31.22222,
+        "longitude": 121.45806,
+        "timezone": "Asia/Shanghai",
+        "population": 24874500
+      },
+      "current": {
+        "temperatureC": 19.4,
+        "apparentTemperatureC": 20.8,
+        "precipitationMm": 0,
+        "windKph": 7.8,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 32.2,
+        "minTempC": 18.8,
+        "precipitationMm": 0,
+        "maxWindKph": 12.7
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Shanghai.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Dhaka",
+        "country": "Bangladesh",
+        "region": "Dhaka Division",
+        "latitude": 23.7104,
+        "longitude": 90.40744,
+        "timezone": "Asia/Dhaka",
+        "population": 10356500
+      },
+      "current": {
+        "temperatureC": 27.6,
+        "apparentTemperatureC": 32.6,
+        "precipitationMm": 0,
+        "windKph": 8,
+        "weatherCode": 2,
+        "description": "partly cloudy"
+      },
+      "daily": {
+        "maxTempC": 33.8,
+        "minTempC": 26.5,
+        "precipitationMm": 3.1,
+        "maxWindKph": 8.4
+      },
+      "observedAt": "2026-06-01T00:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Dhaka.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Sao Paulo",
+        "country": "Brazil",
+        "region": "São Paulo",
+        "latitude": -23.5475,
+        "longitude": -46.63611,
+        "timezone": "America/Sao_Paulo",
+        "population": 12400232
+      },
+      "current": {
+        "temperatureC": 20.2,
+        "apparentTemperatureC": 20,
+        "precipitationMm": 0,
+        "windKph": 4.8,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 20.2,
+        "minTempC": 14.6,
+        "precipitationMm": 0.1,
+        "maxWindKph": 9.8
+      },
+      "observedAt": "2026-05-31T15:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Sao Paulo.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Cairo",
+        "country": "Egypt",
+        "region": "Cairo Governorate",
+        "latitude": 30.06263,
+        "longitude": 31.24967,
+        "timezone": "Africa/Cairo",
+        "population": 9606916
+      },
+      "current": {
+        "temperatureC": 27.8,
+        "apparentTemperatureC": 26.2,
+        "precipitationMm": 0,
+        "windKph": 11.6,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 34.1,
+        "minTempC": 20.1,
+        "precipitationMm": 0,
+        "maxWindKph": 11.9
+      },
+      "observedAt": "2026-05-31T21:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Cairo.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Mexico City",
+        "country": "Mexico",
+        "region": "Mexico City",
+        "latitude": 19.42847,
+        "longitude": -99.12766,
+        "timezone": "America/Mexico_City",
+        "population": 12294193
+      },
+      "current": {
+        "temperatureC": 27,
+        "apparentTemperatureC": 27.3,
+        "precipitationMm": 0,
+        "windKph": 3.9,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 28.8,
+        "minTempC": 14.6,
+        "precipitationMm": 0.3,
+        "maxWindKph": 14.3
+      },
+      "observedAt": "2026-05-31T12:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Mexico City.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Beijing",
+        "country": "China",
+        "region": "Beijing Municipality",
+        "latitude": 39.9075,
+        "longitude": 116.39723,
+        "timezone": "Asia/Shanghai",
+        "population": 18960744
+      },
+      "current": {
+        "temperatureC": 25.7,
+        "apparentTemperatureC": 23.2,
+        "precipitationMm": 0,
+        "windKph": 5.6,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 35.8,
+        "minTempC": 24,
+        "precipitationMm": 0,
+        "maxWindKph": 18.5
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "watch",
+      "riskReasons": [
+        "heat watch signal"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found watch automated weather risk in Beijing.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Mumbai",
+        "country": "India",
+        "region": "Maharashtra",
+        "latitude": 19.07283,
+        "longitude": 72.88261,
+        "timezone": "Asia/Kolkata",
+        "population": 12691836
+      },
+      "current": {
+        "temperatureC": 30,
+        "apparentTemperatureC": 36,
+        "precipitationMm": 0,
+        "windKph": 5.9,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 34.2,
+        "minTempC": 28.5,
+        "precipitationMm": 5,
+        "maxWindKph": 15.1
+      },
+      "observedAt": "2026-06-01T00:00",
+      "riskLevel": "watch",
+      "riskReasons": [
+        "heat watch signal"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found watch automated weather risk in Mumbai.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Osaka",
+        "country": "Japan",
+        "region": "Osaka",
+        "latitude": 34.69379,
+        "longitude": 135.50107,
+        "timezone": "Asia/Tokyo",
+        "population": 2753862
+      },
+      "current": {
+        "temperatureC": 18.7,
+        "apparentTemperatureC": 20.4,
+        "precipitationMm": 0,
+        "windKph": 3.9,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 26.8,
+        "minTempC": 18,
+        "precipitationMm": 0,
+        "maxWindKph": 10.2
+      },
+      "observedAt": "2026-06-01T03:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Osaka.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Karachi",
+        "country": "Pakistan",
+        "region": "Sindh",
+        "latitude": 24.8608,
+        "longitude": 67.0104,
+        "timezone": "Asia/Karachi",
+        "population": 11624219
+      },
+      "current": {
+        "temperatureC": 29.3,
+        "apparentTemperatureC": 35.7,
+        "precipitationMm": 0,
+        "windKph": 11.7,
+        "weatherCode": 95,
+        "description": "thunderstorm"
+      },
+      "daily": {
+        "maxTempC": 33,
+        "minTempC": 28.7,
+        "precipitationMm": 1.8,
+        "maxWindKph": 17.7
+      },
+      "observedAt": "2026-05-31T23:30",
+      "riskLevel": "elevated",
+      "riskReasons": [
+        "heat watch signal",
+        "active thunderstorm"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found elevated automated weather risk in Karachi.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "community-watch-needed"
+    },
+    {
+      "city": {
+        "name": "Chongqing",
+        "country": "China",
+        "region": "Chongqing Municipality",
+        "latitude": 29.56026,
+        "longitude": 106.55771,
+        "timezone": "Asia/Shanghai",
+        "population": 7457599
+      },
+      "current": {
+        "temperatureC": 24.2,
+        "apparentTemperatureC": 28,
+        "precipitationMm": 0.3,
+        "windKph": 7.1,
+        "weatherCode": 55,
+        "description": "dense drizzle"
+      },
+      "daily": {
+        "maxTempC": 27.7,
+        "minTempC": 21.8,
+        "precipitationMm": 25.5,
+        "maxWindKph": 9.2
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "watch",
+      "riskReasons": [
+        "notable rain forecast (25.5mm)"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found watch automated weather risk in Chongqing.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Istanbul",
+        "country": "Turkey",
+        "region": "Istanbul",
+        "latitude": 41.01384,
+        "longitude": 28.94966,
+        "timezone": "Europe/Istanbul",
+        "population": 15701602
+      },
+      "current": {
+        "temperatureC": 19.5,
+        "apparentTemperatureC": 20.9,
+        "precipitationMm": 0,
+        "windKph": 2.6,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 22.9,
+        "minTempC": 16.6,
+        "precipitationMm": 0.1,
+        "maxWindKph": 17.1
+      },
+      "observedAt": "2026-05-31T21:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Istanbul.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Buenos Aires",
+        "country": "Argentina",
+        "region": "Buenos Aires F.D.",
+        "latitude": -34.61315,
+        "longitude": -58.37723,
+        "timezone": "America/Argentina/Buenos_Aires",
+        "population": 2891082
+      },
+      "current": {
+        "temperatureC": 14.7,
+        "apparentTemperatureC": 14.3,
+        "precipitationMm": 0,
+        "windKph": 5.2,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 14.8,
+        "minTempC": 5.6,
+        "precipitationMm": 0,
+        "maxWindKph": 6.2
+      },
+      "observedAt": "2026-05-31T15:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Buenos Aires.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Kolkata",
+        "country": "India",
+        "region": "West Bengal",
+        "latitude": 22.56263,
+        "longitude": 88.36304,
+        "timezone": "Asia/Kolkata",
+        "population": 4631392
+      },
+      "current": {
+        "temperatureC": 28.1,
+        "apparentTemperatureC": 34.8,
+        "precipitationMm": 0,
+        "windKph": 5,
+        "weatherCode": 95,
+        "description": "thunderstorm"
+      },
+      "daily": {
+        "maxTempC": 35.1,
+        "minTempC": 26.4,
+        "precipitationMm": 0.3,
+        "maxWindKph": 13.4
+      },
+      "observedAt": "2026-06-01T00:00",
+      "riskLevel": "elevated",
+      "riskReasons": [
+        "heat watch signal",
+        "active thunderstorm"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found elevated automated weather risk in Kolkata.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "community-watch-needed"
+    },
+    {
+      "city": {
+        "name": "Kinshasa",
+        "country": "Democratic Republic of the Congo",
+        "region": "Kinshasa City",
+        "latitude": -4.32758,
+        "longitude": 15.31357,
+        "timezone": "Africa/Kinshasa",
+        "population": 16000000
+      },
+      "current": {
+        "temperatureC": 28.6,
+        "apparentTemperatureC": 33.9,
+        "precipitationMm": 0,
+        "windKph": 1.8,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 31.8,
+        "minTempC": 23.9,
+        "precipitationMm": 0,
+        "maxWindKph": 5.3
+      },
+      "observedAt": "2026-05-31T19:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Kinshasa.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Lagos",
+        "country": "Nigeria",
+        "region": "Lagos",
+        "latitude": 6.45407,
+        "longitude": 3.39467,
+        "timezone": "Africa/Lagos",
+        "population": 15388000
+      },
+      "current": {
+        "temperatureC": 28.1,
+        "apparentTemperatureC": 32.9,
+        "precipitationMm": 0,
+        "windKph": 13.1,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 30.2,
+        "minTempC": 26.4,
+        "precipitationMm": 0.3,
+        "maxWindKph": 16.5
+      },
+      "observedAt": "2026-05-31T19:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Lagos.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Manila",
+        "country": "Philippines",
+        "region": "National Capital Region",
+        "latitude": 14.6042,
+        "longitude": 120.9822,
+        "timezone": "Asia/Manila",
+        "population": 1600000
+      },
+      "current": {
+        "temperatureC": 26.6,
+        "apparentTemperatureC": 31.9,
+        "precipitationMm": 0.3,
+        "windKph": 8.9,
+        "weatherCode": 55,
+        "description": "dense drizzle"
+      },
+      "daily": {
+        "maxTempC": 29.9,
+        "minTempC": 26.2,
+        "precipitationMm": 25.2,
+        "maxWindKph": 20.9
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "watch",
+      "riskReasons": [
+        "notable rain forecast (25.2mm)"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found watch automated weather risk in Manila.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Tianjin",
+        "country": "China",
+        "region": "Tianjin Municipality",
+        "latitude": 39.14222,
+        "longitude": 117.17667,
+        "timezone": "Asia/Shanghai",
+        "population": 11090314
+      },
+      "current": {
+        "temperatureC": 25.9,
+        "apparentTemperatureC": 26.6,
+        "precipitationMm": 0,
+        "windKph": 10.7,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 34.2,
+        "minTempC": 23.8,
+        "precipitationMm": 0,
+        "maxWindKph": 13.7
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Tianjin.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Guangzhou",
+        "country": "China",
+        "region": "Guangdong",
+        "latitude": 23.11667,
+        "longitude": 113.25,
+        "timezone": "Asia/Shanghai",
+        "population": 16096724
+      },
+      "current": {
+        "temperatureC": 26.5,
+        "apparentTemperatureC": 32.2,
+        "precipitationMm": 0,
+        "windKph": 5.6,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 33.4,
+        "minTempC": 26.2,
+        "precipitationMm": 2.3,
+        "maxWindKph": 9.5
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Guangzhou.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Rio de Janeiro",
+        "country": "Brazil",
+        "region": "Rio de Janeiro",
+        "latitude": -22.90642,
+        "longitude": -43.18223,
+        "timezone": "America/Sao_Paulo",
+        "population": 6747815
+      },
+      "current": {
+        "temperatureC": 22.5,
+        "apparentTemperatureC": 23.2,
+        "precipitationMm": 0,
+        "windKph": 16.1,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 23.3,
+        "minTempC": 19.7,
+        "precipitationMm": 5.5,
+        "maxWindKph": 16.5
+      },
+      "observedAt": "2026-05-31T15:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Rio de Janeiro.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Lahore",
+        "country": "Pakistan",
+        "region": "Punjab",
+        "latitude": 31.558,
+        "longitude": 74.35071,
+        "timezone": "Asia/Karachi",
+        "population": 13004135
+      },
+      "current": {
+        "temperatureC": 26.5,
+        "apparentTemperatureC": 28,
+        "precipitationMm": 0,
+        "windKph": 6.9,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 33.3,
+        "minTempC": 22.3,
+        "precipitationMm": 0,
+        "maxWindKph": 15.7
+      },
+      "observedAt": "2026-05-31T23:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Lahore.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Bangalore",
+        "country": "India",
+        "region": "Sindh",
+        "latitude": 24.8717,
+        "longitude": 67.0839,
+        "timezone": "Asia/Karachi",
+        "population": null
+      },
+      "current": {
+        "temperatureC": 29.5,
+        "apparentTemperatureC": 35.6,
+        "precipitationMm": 0,
+        "windKph": 12.1,
+        "weatherCode": 95,
+        "description": "thunderstorm"
+      },
+      "daily": {
+        "maxTempC": 33.1,
+        "minTempC": 28.7,
+        "precipitationMm": 1.5,
+        "maxWindKph": 17.5
+      },
+      "observedAt": "2026-05-31T23:30",
+      "riskLevel": "elevated",
+      "riskReasons": [
+        "heat watch signal",
+        "active thunderstorm"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found elevated automated weather risk in Bangalore.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "community-watch-needed"
+    },
+    {
+      "city": {
+        "name": "Shenzhen",
+        "country": "China",
+        "region": "Guangdong",
+        "latitude": 22.54554,
+        "longitude": 114.0683,
+        "timezone": "Asia/Shanghai",
+        "population": 17494398
+      },
+      "current": {
+        "temperatureC": 25,
+        "apparentTemperatureC": 30.4,
+        "precipitationMm": 0,
+        "windKph": 3.1,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 31.5,
+        "minTempC": 24.5,
+        "precipitationMm": 6,
+        "maxWindKph": 10.5
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Shenzhen.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Moscow",
+        "country": "Russia",
+        "region": "Moscow",
+        "latitude": 55.75204,
+        "longitude": 37.61781,
+        "timezone": "Europe/Moscow",
+        "population": 10381222
+      },
+      "current": {
+        "temperatureC": 13.1,
+        "apparentTemperatureC": 12.4,
+        "precipitationMm": 0,
+        "windKph": 3,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 16.4,
+        "minTempC": 7.9,
+        "precipitationMm": 0.9,
+        "maxWindKph": 9
+      },
+      "observedAt": "2026-05-31T21:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Moscow.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Chennai",
+        "country": "India",
+        "region": "Tamil Nadu",
+        "latitude": 13.08784,
+        "longitude": 80.27847,
+        "timezone": "Asia/Kolkata",
+        "population": 4681087
+      },
+      "current": {
+        "temperatureC": 30.4,
+        "apparentTemperatureC": 37,
+        "precipitationMm": 0,
+        "windKph": 11.3,
+        "weatherCode": 95,
+        "description": "thunderstorm"
+      },
+      "daily": {
+        "maxTempC": 38.7,
+        "minTempC": 29.1,
+        "precipitationMm": 0.9,
+        "maxWindKph": 13.7
+      },
+      "observedAt": "2026-06-01T00:00",
+      "riskLevel": "elevated",
+      "riskReasons": [
+        "heat watch signal",
+        "active thunderstorm"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found elevated automated weather risk in Chennai.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "community-watch-needed"
+    },
+    {
+      "city": {
+        "name": "Bogota",
+        "country": "Colombia",
+        "region": "Bogota D.C.",
+        "latitude": 4.60971,
+        "longitude": -74.08175,
+        "timezone": "America/Bogota",
+        "population": 7674366
+      },
+      "current": {
+        "temperatureC": 18.4,
+        "apparentTemperatureC": 16.4,
+        "precipitationMm": 0.1,
+        "windKph": 12.9,
+        "weatherCode": 51,
+        "description": "light drizzle"
+      },
+      "daily": {
+        "maxTempC": 19.1,
+        "minTempC": 12.4,
+        "precipitationMm": 2.2,
+        "maxWindKph": 15.2
+      },
+      "observedAt": "2026-05-31T13:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Bogota.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Paris",
+        "country": "France",
+        "region": "Île-de-France Region",
+        "latitude": 48.85341,
+        "longitude": 2.3488,
+        "timezone": "Europe/Paris",
+        "population": 2138551
+      },
+      "current": {
+        "temperatureC": 22,
+        "apparentTemperatureC": 20.5,
+        "precipitationMm": 0,
+        "windKph": 13.8,
+        "weatherCode": 2,
+        "description": "partly cloudy"
+      },
+      "daily": {
+        "maxTempC": 25.2,
+        "minTempC": 17.5,
+        "precipitationMm": 0.1,
+        "maxWindKph": 19.3
+      },
+      "observedAt": "2026-05-31T20:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Paris.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Jakarta",
+        "country": "Indonesia",
+        "region": "Jakarta Special Capital Region",
+        "latitude": -6.21462,
+        "longitude": 106.84513,
+        "timezone": "Asia/Jakarta",
+        "population": 8540121
+      },
+      "current": {
+        "temperatureC": 25.9,
+        "apparentTemperatureC": 31.5,
+        "precipitationMm": 0,
+        "windKph": 3.5,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 33.3,
+        "minTempC": 25.3,
+        "precipitationMm": 4.8,
+        "maxWindKph": 11.7
+      },
+      "observedAt": "2026-06-01T01:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Jakarta.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Lima",
+        "country": "Peru",
+        "region": "Lima Province",
+        "latitude": -12.04318,
+        "longitude": -77.02824,
+        "timezone": "America/Lima",
+        "population": 7737002
+      },
+      "current": {
+        "temperatureC": 25.1,
+        "apparentTemperatureC": 27,
+        "precipitationMm": 0,
+        "windKph": 14.7,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 25.1,
+        "minTempC": 19.9,
+        "precipitationMm": 0,
+        "maxWindKph": 15
+      },
+      "observedAt": "2026-05-31T13:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Lima.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Bangkok",
+        "country": "Thailand",
+        "region": "Bangkok",
+        "latitude": 13.75398,
+        "longitude": 100.50144,
+        "timezone": "Asia/Bangkok",
+        "population": 5104476
+      },
+      "current": {
+        "temperatureC": 25.8,
+        "apparentTemperatureC": 32.4,
+        "precipitationMm": 0,
+        "windKph": 1.1,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 32.4,
+        "minTempC": 25.8,
+        "precipitationMm": 8.7,
+        "maxWindKph": 10
+      },
+      "observedAt": "2026-06-01T01:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Bangkok.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Hyderabad",
+        "country": "India",
+        "region": "Telangana",
+        "latitude": 17.38405,
+        "longitude": 78.45636,
+        "timezone": "Asia/Kolkata",
+        "population": 6993262
+      },
+      "current": {
+        "temperatureC": 30.6,
+        "apparentTemperatureC": 33,
+        "precipitationMm": 0,
+        "windKph": 5,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 35.8,
+        "minTempC": 28.1,
+        "precipitationMm": 0.6,
+        "maxWindKph": 17.3
+      },
+      "observedAt": "2026-06-01T00:00",
+      "riskLevel": "watch",
+      "riskReasons": [
+        "heat watch signal"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found watch automated weather risk in Hyderabad.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Seoul",
+        "country": "South Korea",
+        "region": "Seoul",
+        "latitude": 37.566,
+        "longitude": 126.9784,
+        "timezone": "Asia/Seoul",
+        "population": 10349312
+      },
+      "current": {
+        "temperatureC": 18.1,
+        "apparentTemperatureC": 18.7,
+        "precipitationMm": 0,
+        "windKph": 0.8,
+        "weatherCode": 2,
+        "description": "partly cloudy"
+      },
+      "daily": {
+        "maxTempC": 27.7,
+        "minTempC": 17.2,
+        "precipitationMm": 0,
+        "maxWindKph": 5.9
+      },
+      "observedAt": "2026-06-01T03:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Seoul.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Nagoya",
+        "country": "Japan",
+        "region": "Aichi",
+        "latitude": 35.18147,
+        "longitude": 136.9064,
+        "timezone": "Asia/Tokyo",
+        "population": 2332176
+      },
+      "current": {
+        "temperatureC": 17.1,
+        "apparentTemperatureC": 18.2,
+        "precipitationMm": 0,
+        "windKph": 2.6,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 28.3,
+        "minTempC": 16.6,
+        "precipitationMm": 0,
+        "maxWindKph": 10.1
+      },
+      "observedAt": "2026-06-01T03:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Nagoya.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "London",
+        "country": "United Kingdom",
+        "region": "England",
+        "latitude": 51.50853,
+        "longitude": -0.12574,
+        "timezone": "Europe/London",
+        "population": 8961989
+      },
+      "current": {
+        "temperatureC": 21.2,
+        "apparentTemperatureC": 18.9,
+        "precipitationMm": 0,
+        "windKph": 15.5,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 23.3,
+        "minTempC": 16.2,
+        "precipitationMm": 0,
+        "maxWindKph": 16.2
+      },
+      "observedAt": "2026-05-31T19:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in London.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Chengdu",
+        "country": "China",
+        "region": "Sichuan",
+        "latitude": 30.66667,
+        "longitude": 104.06667,
+        "timezone": "Asia/Shanghai",
+        "population": 13568357
+      },
+      "current": {
+        "temperatureC": 24.9,
+        "apparentTemperatureC": 26.7,
+        "precipitationMm": 0,
+        "windKph": 5.1,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 34.8,
+        "minTempC": 24.2,
+        "precipitationMm": 0,
+        "maxWindKph": 14.9
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Chengdu.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Nanjing",
+        "country": "China",
+        "region": "Jiangsu",
+        "latitude": 32.06167,
+        "longitude": 118.77778,
+        "timezone": "Asia/Shanghai",
+        "population": 9314685
+      },
+      "current": {
+        "temperatureC": 20.5,
+        "apparentTemperatureC": 20.3,
+        "precipitationMm": 0,
+        "windKph": 9.9,
+        "weatherCode": 2,
+        "description": "partly cloudy"
+      },
+      "daily": {
+        "maxTempC": 30.5,
+        "minTempC": 19.3,
+        "precipitationMm": 0.1,
+        "maxWindKph": 12
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Nanjing.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Tehran",
+        "country": "Iran",
+        "region": "Tehran",
+        "latitude": 35.69439,
+        "longitude": 51.42151,
+        "timezone": "Asia/Tehran",
+        "population": 7153309
+      },
+      "current": {
+        "temperatureC": 23.5,
+        "apparentTemperatureC": 20.7,
+        "precipitationMm": 0,
+        "windKph": 2.3,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 31.5,
+        "minTempC": 16.2,
+        "precipitationMm": 0,
+        "maxWindKph": 19.1
+      },
+      "observedAt": "2026-05-31T22:00",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Tehran.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Ho Chi Minh City",
+        "country": "Vietnam",
+        "region": "Ho Chi Minh City (HCMC)",
+        "latitude": 10.82302,
+        "longitude": 106.62965,
+        "timezone": "Asia/Ho_Chi_Minh",
+        "population": 14002598
+      },
+      "current": {
+        "temperatureC": 24,
+        "apparentTemperatureC": 29.8,
+        "precipitationMm": 1.8,
+        "windKph": 1.7,
+        "weatherCode": 63,
+        "description": "rain"
+      },
+      "daily": {
+        "maxTempC": 29.8,
+        "minTempC": 24,
+        "precipitationMm": 16.5,
+        "maxWindKph": 7.9
+      },
+      "observedAt": "2026-06-01T01:30",
+      "riskLevel": "watch",
+      "riskReasons": [
+        "notable rain forecast (16.5mm)"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found watch automated weather risk in Ho Chi Minh City.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Luanda",
+        "country": "Angola",
+        "region": "Luanda Province",
+        "latitude": -8.83682,
+        "longitude": 13.23432,
+        "timezone": "Africa/Luanda",
+        "population": 2776168
+      },
+      "current": {
+        "temperatureC": 24.2,
+        "apparentTemperatureC": 27.2,
+        "precipitationMm": 0,
+        "windKph": 11.8,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 27.5,
+        "minTempC": 22.6,
+        "precipitationMm": 0,
+        "maxWindKph": 13.6
+      },
+      "observedAt": "2026-05-31T19:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Luanda.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Wuhan",
+        "country": "China",
+        "region": "Hubei",
+        "latitude": 30.58333,
+        "longitude": 114.26667,
+        "timezone": "Asia/Shanghai",
+        "population": 10392693
+      },
+      "current": {
+        "temperatureC": 23.2,
+        "apparentTemperatureC": 27,
+        "precipitationMm": 0,
+        "windKph": 4.5,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 30.9,
+        "minTempC": 22.2,
+        "precipitationMm": 0,
+        "maxWindKph": 6.2
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Wuhan.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Ahmedabad",
+        "country": "India",
+        "region": "Gujarat",
+        "latitude": 23.02579,
+        "longitude": 72.58727,
+        "timezone": "Asia/Kolkata",
+        "population": 6357693
+      },
+      "current": {
+        "temperatureC": 30.7,
+        "apparentTemperatureC": 36.1,
+        "precipitationMm": 0,
+        "windKph": 8.4,
+        "weatherCode": 95,
+        "description": "thunderstorm"
+      },
+      "daily": {
+        "maxTempC": 39.2,
+        "minTempC": 25,
+        "precipitationMm": 1.3,
+        "maxWindKph": 13.9
+      },
+      "observedAt": "2026-06-01T00:00",
+      "riskLevel": "elevated",
+      "riskReasons": [
+        "heat watch signal",
+        "active thunderstorm"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found elevated automated weather risk in Ahmedabad.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "community-watch-needed"
+    },
+    {
+      "city": {
+        "name": "Kuala Lumpur",
+        "country": "Malaysia",
+        "region": "Kuala Lumpur",
+        "latitude": 3.1412,
+        "longitude": 101.68653,
+        "timezone": "Asia/Kuala_Lumpur",
+        "population": 1453975
+      },
+      "current": {
+        "temperatureC": 26.5,
+        "apparentTemperatureC": 33.2,
+        "precipitationMm": 0,
+        "windKph": 1.9,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 32,
+        "minTempC": 25.4,
+        "precipitationMm": 1.2,
+        "maxWindKph": 5.2
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Kuala Lumpur.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "New York",
+        "country": "United States",
+        "region": "New York",
+        "latitude": 40.71427,
+        "longitude": -74.00597,
+        "timezone": "America/New_York",
+        "population": 8804190
+      },
+      "current": {
+        "temperatureC": 24,
+        "apparentTemperatureC": 20.9,
+        "precipitationMm": 0,
+        "windKph": 19.9,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 24.7,
+        "minTempC": 7.9,
+        "precipitationMm": 0,
+        "maxWindKph": 19.4
+      },
+      "observedAt": "2026-05-31T14:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in New York.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Hangzhou",
+        "country": "China",
+        "region": "Zhejiang",
+        "latitude": 30.29365,
+        "longitude": 120.16142,
+        "timezone": "Asia/Shanghai",
+        "population": 9236032
+      },
+      "current": {
+        "temperatureC": 20.2,
+        "apparentTemperatureC": 21.1,
+        "precipitationMm": 0,
+        "windKph": 2.1,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 33.2,
+        "minTempC": 19.4,
+        "precipitationMm": 0,
+        "maxWindKph": 11.5
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Hangzhou.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Surat",
+        "country": "India",
+        "region": "Gujarat",
+        "latitude": 21.19594,
+        "longitude": 72.83023,
+        "timezone": "Asia/Kolkata",
+        "population": 4591246
+      },
+      "current": {
+        "temperatureC": 30.1,
+        "apparentTemperatureC": 35.7,
+        "precipitationMm": 0,
+        "windKph": 14,
+        "weatherCode": 95,
+        "description": "thunderstorm"
+      },
+      "daily": {
+        "maxTempC": 35.3,
+        "minTempC": 25.6,
+        "precipitationMm": 3.2,
+        "maxWindKph": 19.9
+      },
+      "observedAt": "2026-06-01T00:00",
+      "riskLevel": "elevated",
+      "riskReasons": [
+        "heat watch signal",
+        "active thunderstorm"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found elevated automated weather risk in Surat.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "community-watch-needed"
+    },
+    {
+      "city": {
+        "name": "Suzhou",
+        "country": "China",
+        "region": "Anhui",
+        "latitude": 33.63611,
+        "longitude": 116.97889,
+        "timezone": "Asia/Shanghai",
+        "population": 1647642
+      },
+      "current": {
+        "temperatureC": 22.1,
+        "apparentTemperatureC": 22.5,
+        "precipitationMm": 0,
+        "windKph": 9.3,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 32.2,
+        "minTempC": 20.8,
+        "precipitationMm": 0,
+        "maxWindKph": 10.4
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Suzhou.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Hong Kong",
+        "country": "China",
+        "latitude": 22.27832,
+        "longitude": 114.17469,
+        "timezone": "Asia/Hong_Kong",
+        "population": 7396076
+      },
+      "current": {
+        "temperatureC": 26.2,
+        "apparentTemperatureC": 32.1,
+        "precipitationMm": 0,
+        "windKph": 2.8,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 30,
+        "minTempC": 26.1,
+        "precipitationMm": 6.4,
+        "maxWindKph": 13
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Hong Kong.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Riyadh",
+        "country": "Saudi Arabia",
+        "region": "Riyadh Region",
+        "latitude": 24.68773,
+        "longitude": 46.72185,
+        "timezone": "Asia/Riyadh",
+        "population": 4205961
+      },
+      "current": {
+        "temperatureC": 37.7,
+        "apparentTemperatureC": 33.8,
+        "precipitationMm": 0,
+        "windKph": 11.6,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 41.7,
+        "minTempC": 28,
+        "precipitationMm": 0,
+        "maxWindKph": 13.7
+      },
+      "observedAt": "2026-05-31T21:30",
+      "riskLevel": "elevated",
+      "riskReasons": [
+        "extreme heat signal"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found elevated automated weather risk in Riyadh.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "community-watch-needed"
+    },
+    {
+      "city": {
+        "name": "Shenyang",
+        "country": "China",
+        "region": "Liaoning",
+        "latitude": 41.79222,
+        "longitude": 123.43278,
+        "timezone": "Asia/Shanghai",
+        "population": 7050000
+      },
+      "current": {
+        "temperatureC": 18.9,
+        "apparentTemperatureC": 20.6,
+        "precipitationMm": 0,
+        "windKph": 6.8,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 29.9,
+        "minTempC": 18.1,
+        "precipitationMm": 8.7,
+        "maxWindKph": 18.4
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Shenyang.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Baghdad",
+        "country": "Iraq",
+        "region": "Baghdad",
+        "latitude": 33.34058,
+        "longitude": 44.40088,
+        "timezone": "Asia/Baghdad",
+        "population": 7216000
+      },
+      "current": {
+        "temperatureC": 30.1,
+        "apparentTemperatureC": 29.2,
+        "precipitationMm": 0,
+        "windKph": 3.4,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 36.2,
+        "minTempC": 24.3,
+        "precipitationMm": 0,
+        "maxWindKph": 8.4
+      },
+      "observedAt": "2026-05-31T21:30",
+      "riskLevel": "watch",
+      "riskReasons": [
+        "heat watch signal"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found watch automated weather risk in Baghdad.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Dongguan",
+        "country": "China",
+        "region": "Guangdong",
+        "latitude": 23.01797,
+        "longitude": 113.74866,
+        "timezone": "Asia/Shanghai",
+        "population": 9644871
+      },
+      "current": {
+        "temperatureC": 26.1,
+        "apparentTemperatureC": 31.1,
+        "precipitationMm": 0,
+        "windKph": 5,
+        "weatherCode": 2,
+        "description": "partly cloudy"
+      },
+      "daily": {
+        "maxTempC": 33.5,
+        "minTempC": 25.5,
+        "precipitationMm": 1.2,
+        "maxWindKph": 12.9
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Dongguan.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Foshan",
+        "country": "China",
+        "region": "Guangdong",
+        "latitude": 23.02677,
+        "longitude": 113.13148,
+        "timezone": "Asia/Shanghai",
+        "population": 9042509
+      },
+      "current": {
+        "temperatureC": 26.4,
+        "apparentTemperatureC": 32.2,
+        "precipitationMm": 0,
+        "windKph": 5.6,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 33.2,
+        "minTempC": 26,
+        "precipitationMm": 1.5,
+        "maxWindKph": 10.4
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Foshan.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Dar es Salaam",
+        "country": "Tanzania",
+        "region": "Dar es Salaam Region",
+        "latitude": -6.82349,
+        "longitude": 39.26951,
+        "timezone": "Africa/Dar_es_Salaam",
+        "population": 5383728
+      },
+      "current": {
+        "temperatureC": 25.2,
+        "apparentTemperatureC": 28.2,
+        "precipitationMm": 0,
+        "windKph": 11.7,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 29.8,
+        "minTempC": 22.9,
+        "precipitationMm": 1,
+        "maxWindKph": 19.3
+      },
+      "observedAt": "2026-05-31T21:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Dar es Salaam.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Pune",
+        "country": "India",
+        "region": "Maharashtra",
+        "latitude": 18.51957,
+        "longitude": 73.85535,
+        "timezone": "Asia/Kolkata",
+        "population": 3124458
+      },
+      "current": {
+        "temperatureC": 25.8,
+        "apparentTemperatureC": 29.6,
+        "precipitationMm": 0,
+        "windKph": 8.6,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 34.3,
+        "minTempC": 25.2,
+        "precipitationMm": 1.7,
+        "maxWindKph": 15.8
+      },
+      "observedAt": "2026-06-01T00:00",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Pune.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Santiago",
+        "country": "Chile",
+        "region": "Santiago Metropolitan",
+        "latitude": -33.45694,
+        "longitude": -70.64827,
+        "timezone": "America/Santiago",
+        "population": 4837295
+      },
+      "current": {
+        "temperatureC": 15.8,
+        "apparentTemperatureC": 14.3,
+        "precipitationMm": 0,
+        "windKph": 6.8,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 16.1,
+        "minTempC": 8.4,
+        "precipitationMm": 0,
+        "maxWindKph": 7.2
+      },
+      "observedAt": "2026-05-31T14:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Santiago.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Madrid",
+        "country": "Spain",
+        "region": "Madrid",
+        "latitude": 40.4165,
+        "longitude": -3.70256,
+        "timezone": "Europe/Madrid",
+        "population": 3255944
+      },
+      "current": {
+        "temperatureC": 31,
+        "apparentTemperatureC": 27.8,
+        "precipitationMm": 0,
+        "windKph": 8.9,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 33.5,
+        "minTempC": 19.6,
+        "precipitationMm": 0,
+        "maxWindKph": 14.9
+      },
+      "observedAt": "2026-05-31T20:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Madrid.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Toronto",
+        "country": "Canada",
+        "region": "Ontario",
+        "latitude": 43.70643,
+        "longitude": -79.39864,
+        "timezone": "America/Toronto",
+        "population": 2794356
+      },
+      "current": {
+        "temperatureC": 24,
+        "apparentTemperatureC": 21.6,
+        "precipitationMm": 0,
+        "windKph": 18.7,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 24.1,
+        "minTempC": 10.1,
+        "precipitationMm": 0,
+        "maxWindKph": 20.8
+      },
+      "observedAt": "2026-05-31T14:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Toronto.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Belo Horizonte",
+        "country": "Brazil",
+        "region": "Minas Gerais",
+        "latitude": -19.92083,
+        "longitude": -43.93778,
+        "timezone": "America/Sao_Paulo",
+        "population": 2721564
+      },
+      "current": {
+        "temperatureC": 24,
+        "apparentTemperatureC": 23.2,
+        "precipitationMm": 0,
+        "windKph": 6.8,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 24.3,
+        "minTempC": 13.6,
+        "precipitationMm": 0,
+        "maxWindKph": 7.5
+      },
+      "observedAt": "2026-05-31T15:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Belo Horizonte.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Singapore",
+        "country": "Singapore",
+        "latitude": 1.28967,
+        "longitude": 103.85007,
+        "timezone": "Asia/Singapore",
+        "population": 5638700
+      },
+      "current": {
+        "temperatureC": 28.1,
+        "apparentTemperatureC": 34.2,
+        "precipitationMm": 0,
+        "windKph": 4.7,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 32.1,
+        "minTempC": 27.8,
+        "precipitationMm": 1.7,
+        "maxWindKph": 12.5
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Singapore.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Khartoum",
+        "country": "Sudan",
+        "region": "Khartoum State",
+        "latitude": 15.55177,
+        "longitude": 32.53241,
+        "timezone": "Africa/Khartoum",
+        "population": 1974647
+      },
+      "current": {
+        "temperatureC": 37.7,
+        "apparentTemperatureC": 34.8,
+        "precipitationMm": 0,
+        "windKph": 10.3,
+        "weatherCode": 2,
+        "description": "partly cloudy"
+      },
+      "daily": {
+        "maxTempC": 41.8,
+        "minTempC": 29.4,
+        "precipitationMm": 0,
+        "maxWindKph": 16.5
+      },
+      "observedAt": "2026-05-31T20:30",
+      "riskLevel": "elevated",
+      "riskReasons": [
+        "extreme heat signal"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found elevated automated weather risk in Khartoum.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "community-watch-needed"
+    },
+    {
+      "city": {
+        "name": "Johannesburg",
+        "country": "South Africa",
+        "region": "Gauteng",
+        "latitude": -26.20227,
+        "longitude": 28.04363,
+        "timezone": "Africa/Johannesburg",
+        "population": 9418183
+      },
+      "current": {
+        "temperatureC": 12.6,
+        "apparentTemperatureC": 11.1,
+        "precipitationMm": 0,
+        "windKph": 1.7,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 17.9,
+        "minTempC": 9.1,
+        "precipitationMm": 0,
+        "maxWindKph": 5.3
+      },
+      "observedAt": "2026-05-31T20:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Johannesburg.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Dalian",
+        "country": "China",
+        "region": "Liaoning",
+        "latitude": 38.91222,
+        "longitude": 121.60222,
+        "timezone": "Asia/Shanghai",
+        "population": 4913879
+      },
+      "current": {
+        "temperatureC": 19.4,
+        "apparentTemperatureC": 16.8,
+        "precipitationMm": 0,
+        "windKph": 23,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 23.8,
+        "minTempC": 19.1,
+        "precipitationMm": 0,
+        "maxWindKph": 24.2
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Dalian.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Qingdao",
+        "country": "China",
+        "region": "Shandong",
+        "latitude": 36.06488,
+        "longitude": 120.38042,
+        "timezone": "Asia/Shanghai",
+        "population": 7172451
+      },
+      "current": {
+        "temperatureC": 20.5,
+        "apparentTemperatureC": 19.4,
+        "precipitationMm": 0,
+        "windKph": 16.4,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 24.4,
+        "minTempC": 18.9,
+        "precipitationMm": 0,
+        "maxWindKph": 21.8
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Qingdao.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Zhengzhou",
+        "country": "China",
+        "region": "Henan",
+        "latitude": 34.75778,
+        "longitude": 113.64861,
+        "timezone": "Asia/Shanghai",
+        "population": 4253913
+      },
+      "current": {
+        "temperatureC": 25.2,
+        "apparentTemperatureC": 25.6,
+        "precipitationMm": 0,
+        "windKph": 10.4,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 36,
+        "minTempC": 23.6,
+        "precipitationMm": 0.1,
+        "maxWindKph": 13.9
+      },
+      "observedAt": "2026-06-01T02:30",
+      "riskLevel": "watch",
+      "riskReasons": [
+        "heat watch signal"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found watch automated weather risk in Zhengzhou.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Barcelona",
+        "country": "Spain",
+        "region": "Catalonia",
+        "latitude": 41.38879,
+        "longitude": 2.15899,
+        "timezone": "Europe/Madrid",
+        "population": 1686208
+      },
+      "current": {
+        "temperatureC": 23.2,
+        "apparentTemperatureC": 26.3,
+        "precipitationMm": 0,
+        "windKph": 5.2,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 26.3,
+        "minTempC": 19.6,
+        "precipitationMm": 0,
+        "maxWindKph": 13.1
+      },
+      "observedAt": "2026-05-31T20:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Barcelona.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Saint Petersburg",
+        "country": "Russia",
+        "region": "St.-Petersburg",
+        "latitude": 59.93863,
+        "longitude": 30.31413,
+        "timezone": "Europe/Moscow",
+        "population": 5351935
+      },
+      "current": {
+        "temperatureC": 13.4,
+        "apparentTemperatureC": 11.4,
+        "precipitationMm": 0,
+        "windKph": 7.6,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 15.1,
+        "minTempC": 8.5,
+        "precipitationMm": 0,
+        "maxWindKph": 9.4
+      },
+      "observedAt": "2026-05-31T21:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Saint Petersburg.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Yangon",
+        "country": "Myanmar",
+        "region": "Yangon",
+        "latitude": 16.80528,
+        "longitude": 96.15611,
+        "timezone": "Asia/Yangon",
+        "population": 4477638
+      },
+      "current": {
+        "temperatureC": 25.9,
+        "apparentTemperatureC": 32.4,
+        "precipitationMm": 0,
+        "windKph": 2.5,
+        "weatherCode": 2,
+        "description": "partly cloudy"
+      },
+      "daily": {
+        "maxTempC": 31.7,
+        "minTempC": 25.6,
+        "precipitationMm": 14.7,
+        "maxWindKph": 11
+      },
+      "observedAt": "2026-06-01T01:00",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Yangon.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Alexandria",
+        "country": "Egypt",
+        "region": "Alexandria Governorate",
+        "latitude": 31.20176,
+        "longitude": 29.91582,
+        "timezone": "Africa/Cairo",
+        "population": 5263542
+      },
+      "current": {
+        "temperatureC": 22.4,
+        "apparentTemperatureC": 24.1,
+        "precipitationMm": 0,
+        "windKph": 5.4,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 26.3,
+        "minTempC": 21.2,
+        "precipitationMm": 0,
+        "maxWindKph": 13.7
+      },
+      "observedAt": "2026-05-31T21:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Alexandria.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Fukuoka",
+        "country": "Japan",
+        "region": "Fukuoka",
+        "latitude": 33.6,
+        "longitude": 130.41667,
+        "timezone": "Asia/Tokyo",
+        "population": 1612392
+      },
+      "current": {
+        "temperatureC": 19.6,
+        "apparentTemperatureC": 21,
+        "precipitationMm": 0,
+        "windKph": 4.9,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 27.9,
+        "minTempC": 19.1,
+        "precipitationMm": 5.4,
+        "maxWindKph": 6.8
+      },
+      "observedAt": "2026-06-01T03:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Fukuoka.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Abidjan",
+        "country": "Cote d Ivoire",
+        "region": "Abidjan Autonomous District",
+        "latitude": 5.35444,
+        "longitude": -4.00167,
+        "timezone": "Africa/Abidjan",
+        "population": 6321017
+      },
+      "current": {
+        "temperatureC": 25.7,
+        "apparentTemperatureC": 30.8,
+        "precipitationMm": 0,
+        "windKph": 8.5,
+        "weatherCode": 2,
+        "description": "partly cloudy"
+      },
+      "daily": {
+        "maxTempC": 29.4,
+        "minTempC": 24.5,
+        "precipitationMm": 10.1,
+        "maxWindKph": 11.1
+      },
+      "observedAt": "2026-05-31T18:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Abidjan.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Guadalajara",
+        "country": "Mexico",
+        "region": "Jalisco",
+        "latitude": 20.67738,
+        "longitude": -103.34749,
+        "timezone": "America/Mexico_City",
+        "population": 1385629
+      },
+      "current": {
+        "temperatureC": 30.2,
+        "apparentTemperatureC": 33.3,
+        "precipitationMm": 0,
+        "windKph": 3.6,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 32.8,
+        "minTempC": 20.4,
+        "precipitationMm": 36.3,
+        "maxWindKph": 17.6
+      },
+      "observedAt": "2026-05-31T12:30",
+      "riskLevel": "elevated",
+      "riskReasons": [
+        "heavy daily rain forecast (36.3mm)"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found elevated automated weather risk in Guadalajara.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "community-watch-needed"
+    },
+    {
+      "city": {
+        "name": "Ankara",
+        "country": "Turkey",
+        "region": "Ankara",
+        "latitude": 39.91987,
+        "longitude": 32.85427,
+        "timezone": "Europe/Istanbul",
+        "population": 3517182
+      },
+      "current": {
+        "temperatureC": 16.4,
+        "apparentTemperatureC": 15.3,
+        "precipitationMm": 0,
+        "windKph": 3.4,
+        "weatherCode": 2,
+        "description": "partly cloudy"
+      },
+      "daily": {
+        "maxTempC": 21.1,
+        "minTempC": 8.3,
+        "precipitationMm": 0,
+        "maxWindKph": 14.3
+      },
+      "observedAt": "2026-05-31T21:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Ankara.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Chittagong",
+        "country": "Bangladesh",
+        "region": "Chittagong",
+        "latitude": 22.3384,
+        "longitude": 91.83168,
+        "timezone": "Asia/Dhaka",
+        "population": 3920222
+      },
+      "current": {
+        "temperatureC": 25.5,
+        "apparentTemperatureC": 31.7,
+        "precipitationMm": 0,
+        "windKph": 5.8,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 31.7,
+        "minTempC": 25.1,
+        "precipitationMm": 1.5,
+        "maxWindKph": 10.2
+      },
+      "observedAt": "2026-06-01T00:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Chittagong.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Melbourne",
+        "country": "Australia",
+        "region": "Victoria",
+        "latitude": -37.814,
+        "longitude": 144.96332,
+        "timezone": "Australia/Melbourne",
+        "population": 5350705
+      },
+      "current": {
+        "temperatureC": 7.7,
+        "apparentTemperatureC": 5.4,
+        "precipitationMm": 0,
+        "windKph": 7.3,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 11.9,
+        "minTempC": 7.1,
+        "precipitationMm": 5.5,
+        "maxWindKph": 29.8
+      },
+      "observedAt": "2026-06-01T04:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Melbourne.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Sydney",
+        "country": "Australia",
+        "region": "New South Wales",
+        "latitude": -33.86785,
+        "longitude": 151.20732,
+        "timezone": "Australia/Sydney",
+        "population": 5557233
+      },
+      "current": {
+        "temperatureC": 10.4,
+        "apparentTemperatureC": 6.7,
+        "precipitationMm": 0,
+        "windKph": 17.1,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 16.9,
+        "minTempC": 10.1,
+        "precipitationMm": 0,
+        "maxWindKph": 18.2
+      },
+      "observedAt": "2026-06-01T04:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Sydney.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Monterrey",
+        "country": "Mexico",
+        "region": "Nuevo León",
+        "latitude": 25.68435,
+        "longitude": -100.31721,
+        "timezone": "America/Monterrey",
+        "population": 1135512
+      },
+      "current": {
+        "temperatureC": 32.6,
+        "apparentTemperatureC": 36.6,
+        "precipitationMm": 0,
+        "windKph": 19.1,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 34.6,
+        "minTempC": 22.3,
+        "precipitationMm": 0,
+        "maxWindKph": 23.7
+      },
+      "observedAt": "2026-05-31T12:30",
+      "riskLevel": "watch",
+      "riskReasons": [
+        "heat watch signal"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found watch automated weather risk in Monterrey.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Addis Ababa",
+        "country": "Ethiopia",
+        "region": "Addis Ababa",
+        "latitude": 9.02497,
+        "longitude": 38.74689,
+        "timezone": "Africa/Addis_Ababa",
+        "population": 3860000
+      },
+      "current": {
+        "temperatureC": 14.6,
+        "apparentTemperatureC": 15.1,
+        "precipitationMm": 0,
+        "windKph": 0.9,
+        "weatherCode": 2,
+        "description": "partly cloudy"
+      },
+      "daily": {
+        "maxTempC": 20.6,
+        "minTempC": 12.6,
+        "precipitationMm": 4.7,
+        "maxWindKph": 13.8
+      },
+      "observedAt": "2026-05-31T21:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Addis Ababa.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Nairobi",
+        "country": "Kenya",
+        "region": "Nairobi County",
+        "latitude": -1.28333,
+        "longitude": 36.81667,
+        "timezone": "Africa/Nairobi",
+        "population": 4397073
+      },
+      "current": {
+        "temperatureC": 18.8,
+        "apparentTemperatureC": 17.9,
+        "precipitationMm": 0,
+        "windKph": 11.8,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 23.9,
+        "minTempC": 16,
+        "precipitationMm": 2.7,
+        "maxWindKph": 13.4
+      },
+      "observedAt": "2026-05-31T21:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Nairobi.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Cape Town",
+        "country": "South Africa",
+        "region": "Western Cape",
+        "latitude": -33.92584,
+        "longitude": 18.42322,
+        "timezone": "Africa/Johannesburg",
+        "population": 4772846
+      },
+      "current": {
+        "temperatureC": 15.9,
+        "apparentTemperatureC": 17.1,
+        "precipitationMm": 0,
+        "windKph": 2.2,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 24.3,
+        "minTempC": 10.1,
+        "precipitationMm": 0,
+        "maxWindKph": 9.6
+      },
+      "observedAt": "2026-05-31T20:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Cape Town.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Berlin",
+        "country": "Germany",
+        "region": "State of Berlin",
+        "latitude": 52.52437,
+        "longitude": 13.41053,
+        "timezone": "Europe/Berlin",
+        "population": 3426354
+      },
+      "current": {
+        "temperatureC": 19.1,
+        "apparentTemperatureC": 18.3,
+        "precipitationMm": 0,
+        "windKph": 6.6,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 22.7,
+        "minTempC": 13.7,
+        "precipitationMm": 2.3,
+        "maxWindKph": 12.3
+      },
+      "observedAt": "2026-05-31T20:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Berlin.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Casablanca",
+        "country": "Morocco",
+        "region": "Casablanca-Settat",
+        "latitude": 33.58831,
+        "longitude": -7.61138,
+        "timezone": "Africa/Casablanca",
+        "population": 3665954
+      },
+      "current": {
+        "temperatureC": 22.9,
+        "apparentTemperatureC": 24.8,
+        "precipitationMm": 0,
+        "windKph": 9.9,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 26.2,
+        "minTempC": 19.5,
+        "precipitationMm": 0,
+        "maxWindKph": 11.9
+      },
+      "observedAt": "2026-05-31T19:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Casablanca.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Jeddah",
+        "country": "Saudi Arabia",
+        "region": "Mecca Region",
+        "latitude": 21.49012,
+        "longitude": 39.18624,
+        "timezone": "Asia/Riyadh",
+        "population": 4697000
+      },
+      "current": {
+        "temperatureC": 28.8,
+        "apparentTemperatureC": 31.3,
+        "precipitationMm": 0,
+        "windKph": 11.2,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 32.6,
+        "minTempC": 26.8,
+        "precipitationMm": 0,
+        "maxWindKph": 21.4
+      },
+      "observedAt": "2026-05-31T21:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Jeddah.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Rome",
+        "country": "Italy",
+        "region": "Lazio",
+        "latitude": 41.89193,
+        "longitude": 12.51133,
+        "timezone": "Europe/Rome",
+        "population": 2318895
+      },
+      "current": {
+        "temperatureC": 24.2,
+        "apparentTemperatureC": 24.5,
+        "precipitationMm": 0,
+        "windKph": 9.4,
+        "weatherCode": 2,
+        "description": "partly cloudy"
+      },
+      "daily": {
+        "maxTempC": 30.1,
+        "minTempC": 17.4,
+        "precipitationMm": 0,
+        "maxWindKph": 15
+      },
+      "observedAt": "2026-05-31T20:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Rome.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Kabul",
+        "country": "Afghanistan",
+        "region": "Kabul",
+        "latitude": 34.52813,
+        "longitude": 69.17233,
+        "timezone": "Asia/Kabul",
+        "population": 4434550
+      },
+      "current": {
+        "temperatureC": 19.7,
+        "apparentTemperatureC": 19.8,
+        "precipitationMm": 0,
+        "windKph": 1.3,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 29.2,
+        "minTempC": 13.4,
+        "precipitationMm": 0,
+        "maxWindKph": 10
+      },
+      "observedAt": "2026-05-31T23:00",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Kabul.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Hanoi",
+        "country": "Vietnam",
+        "region": "Hanoi",
+        "latitude": 21.0245,
+        "longitude": 105.84117,
+        "timezone": "Asia/Bangkok",
+        "population": 8053663
+      },
+      "current": {
+        "temperatureC": 27.3,
+        "apparentTemperatureC": 32.6,
+        "precipitationMm": 0,
+        "windKph": 10.9,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 34.5,
+        "minTempC": 26.7,
+        "precipitationMm": 0.2,
+        "maxWindKph": 13.4
+      },
+      "observedAt": "2026-06-01T01:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Hanoi.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Montreal",
+        "country": "Canada",
+        "region": "Quebec",
+        "latitude": 45.50884,
+        "longitude": -73.58781,
+        "timezone": "America/Toronto",
+        "population": 1762949
+      },
+      "current": {
+        "temperatureC": 16.8,
+        "apparentTemperatureC": 14.3,
+        "precipitationMm": 0,
+        "windKph": 21.5,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 17.7,
+        "minTempC": 9.3,
+        "precipitationMm": 6.6,
+        "maxWindKph": 22.8
+      },
+      "observedAt": "2026-05-31T14:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Montreal.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Busan",
+        "country": "South Korea",
+        "region": "Busan",
+        "latitude": 35.10168,
+        "longitude": 129.03004,
+        "timezone": "Asia/Seoul",
+        "population": 3285147
+      },
+      "current": {
+        "temperatureC": 18.6,
+        "apparentTemperatureC": 20.6,
+        "precipitationMm": 0,
+        "windKph": 3.7,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 25.8,
+        "minTempC": 18.5,
+        "precipitationMm": 3.1,
+        "maxWindKph": 7.5
+      },
+      "observedAt": "2026-06-01T03:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Busan.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Kano",
+        "country": "Nigeria",
+        "region": "Kano State",
+        "latitude": 12.00012,
+        "longitude": 8.51672,
+        "timezone": "Africa/Lagos",
+        "population": 4910000
+      },
+      "current": {
+        "temperatureC": 27.2,
+        "apparentTemperatureC": 31.3,
+        "precipitationMm": 0,
+        "windKph": 8.5,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 38,
+        "minTempC": 24.1,
+        "precipitationMm": 7.5,
+        "maxWindKph": 15.8
+      },
+      "observedAt": "2026-05-31T19:30",
+      "riskLevel": "watch",
+      "riskReasons": [
+        "heat watch signal"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found watch automated weather risk in Kano.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Dubai",
+        "country": "United Arab Emirates",
+        "region": "Dubai",
+        "latitude": 25.07725,
+        "longitude": 55.30927,
+        "timezone": "Asia/Dubai",
+        "population": 3790000
+      },
+      "current": {
+        "temperatureC": 29.9,
+        "apparentTemperatureC": 33.9,
+        "precipitationMm": 0,
+        "windKph": 9.4,
+        "weatherCode": 0,
+        "description": "clear"
+      },
+      "daily": {
+        "maxTempC": 39.3,
+        "minTempC": 27.3,
+        "precipitationMm": 0,
+        "maxWindKph": 22.7
+      },
+      "observedAt": "2026-05-31T22:30",
+      "riskLevel": "watch",
+      "riskReasons": [
+        "heat watch signal"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found watch automated weather risk in Dubai.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Athens",
+        "country": "Greece",
+        "region": "Attica",
+        "latitude": 37.98376,
+        "longitude": 23.72784,
+        "timezone": "Europe/Athens",
+        "population": 664046
+      },
+      "current": {
+        "temperatureC": 23.9,
+        "apparentTemperatureC": 24.5,
+        "precipitationMm": 0,
+        "windKph": 0.7,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 29.4,
+        "minTempC": 16.8,
+        "precipitationMm": 0,
+        "maxWindKph": 11.9
+      },
+      "observedAt": "2026-05-31T21:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Athens.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Lisbon",
+        "country": "Portugal",
+        "region": "Lisbon District",
+        "latitude": 38.72509,
+        "longitude": -9.1498,
+        "timezone": "Europe/Lisbon",
+        "population": 517802
+      },
+      "current": {
+        "temperatureC": 22.2,
+        "apparentTemperatureC": 20.3,
+        "precipitationMm": 0,
+        "windKph": 21.5,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 27,
+        "minTempC": 16.8,
+        "precipitationMm": 0,
+        "maxWindKph": 24.1
+      },
+      "observedAt": "2026-05-31T19:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Lisbon.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Warsaw",
+        "country": "Poland",
+        "region": "Mazovia",
+        "latitude": 52.22977,
+        "longitude": 21.01178,
+        "timezone": "Europe/Warsaw",
+        "population": 1702139
+      },
+      "current": {
+        "temperatureC": 18.7,
+        "apparentTemperatureC": 17.5,
+        "precipitationMm": 0,
+        "windKph": 5.8,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 20.1,
+        "minTempC": 15,
+        "precipitationMm": 0.3,
+        "maxWindKph": 14
+      },
+      "observedAt": "2026-05-31T20:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Warsaw.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Kyiv",
+        "country": "Ukraine",
+        "region": "Kyiv City",
+        "latitude": 50.45466,
+        "longitude": 30.5238,
+        "timezone": "Europe/Kyiv",
+        "population": 2952301
+      },
+      "current": {
+        "temperatureC": 11.7,
+        "apparentTemperatureC": 10.5,
+        "precipitationMm": 0,
+        "windKph": 2.8,
+        "weatherCode": 2,
+        "description": "partly cloudy"
+      },
+      "daily": {
+        "maxTempC": 13.3,
+        "minTempC": 9.2,
+        "precipitationMm": 1.7,
+        "maxWindKph": 5.5
+      },
+      "observedAt": "2026-05-31T21:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Kyiv.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Auckland",
+        "country": "New Zealand",
+        "region": "Auckland",
+        "latitude": -36.84853,
+        "longitude": 174.76349,
+        "timezone": "Pacific/Auckland",
+        "population": 1547200
+      },
+      "current": {
+        "temperatureC": 17.6,
+        "apparentTemperatureC": 14.8,
+        "precipitationMm": 0.2,
+        "windKph": 31.3,
+        "weatherCode": 53,
+        "description": "drizzle"
+      },
+      "daily": {
+        "maxTempC": 18.1,
+        "minTempC": 17.4,
+        "precipitationMm": 9.9,
+        "maxWindKph": 39.1
+      },
+      "observedAt": "2026-06-01T06:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Auckland.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Reykjavik",
+        "country": "Iceland",
+        "region": "Capital Region",
+        "latitude": 64.13548,
+        "longitude": -21.89541,
+        "timezone": "Atlantic/Reykjavik",
+        "population": 118918
+      },
+      "current": {
+        "temperatureC": 11.7,
+        "apparentTemperatureC": 10.4,
+        "precipitationMm": 0,
+        "windKph": 3.6,
+        "weatherCode": 3,
+        "description": "overcast"
+      },
+      "daily": {
+        "maxTempC": 15.1,
+        "minTempC": 8,
+        "precipitationMm": 0,
+        "maxWindKph": 17.6
+      },
+      "observedAt": "2026-05-31T18:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Reykjavik.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    },
+    {
+      "city": {
+        "name": "Honolulu",
+        "country": "United States",
+        "region": "Hawaii",
+        "latitude": 21.30694,
+        "longitude": -157.85834,
+        "timezone": "Pacific/Honolulu",
+        "population": 350964
+      },
+      "current": {
+        "temperatureC": 25,
+        "apparentTemperatureC": 26.2,
+        "precipitationMm": 0,
+        "windKph": 12.8,
+        "weatherCode": 1,
+        "description": "mainly clear"
+      },
+      "daily": {
+        "maxTempC": 27.8,
+        "minTempC": 20.6,
+        "precipitationMm": 4.5,
+        "maxWindKph": 15
+      },
+      "observedAt": "2026-05-31T08:30",
+      "riskLevel": "low",
+      "riskReasons": [
+        "no major automated weather threshold triggered"
+      ],
+      "mediaSignals": [],
+      "communityLearning": [
+        "Traditional-media and public-weather scan found low automated weather risk in Honolulu.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+      ],
+      "status": "routine"
+    }
+  ],
+  "socialPost": "Albis Community Weather — 2026-06-01\n\nToday’s city watchlist from official weather data + traditional media signals:\n\n• Karachi: community watch needed — heat watch signal\n• Kolkata: community watch needed — heat watch signal\n• Bangalore: community watch needed — heat watch signal\n• Chennai: community watch needed — heat watch signal\n• Ahmedabad: community watch needed — heat watch signal\n\nNext layer: local human updates — what people are actually seeing on the ground.\n\nNews intelligence, not noise."
+}

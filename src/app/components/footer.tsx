@@ -35,6 +35,7 @@ export function Footer() {
                 <FooterLink href="/tech">Tech</FooterLink>
                 <FooterLink href="/climate">Climate</FooterLink>
                 <FooterLink href="/life-systems">Life Systems</FooterLink>
+                <FooterLink href="/community-weather">Community Weather</FooterLink>
                 <FooterLink href="/signals/weather-risk">Weather & Risk</FooterLink>
                 <FooterLink href="/perspectives">Perspectives</FooterLink>
                 <FooterLink href="/indexes">Indexes</FooterLink>

@@ -118,6 +118,7 @@ export default async function Home() {
           </Link>
           <nav className="hidden items-center gap-5 text-sm font-medium text-zinc-600 dark:text-zinc-300 md:flex">
             <Link href="/signals" className="hover:text-[#c8922a]">Signals</Link>
+            <Link href="/community-weather" className="hover:text-[#c8922a]">Community Weather</Link>
             <Link href="/world" className="hover:text-[#c8922a]">World</Link>
             <Link href="/life-systems" className="hover:text-[#c8922a]">Life Systems</Link>
             <Link href="/perspectives" className="hover:text-[#c8922a]">Perspectives</Link>
@@ -144,6 +145,7 @@ export default async function Home() {
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link href="/signals" className="rounded-full bg-[#111] px-5 py-3 text-sm font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black dark:hover:bg-[#f0c15e]">Open signal board</Link>
+              <Link href="/community-weather" className="rounded-full border border-black/[0.12] px-5 py-3 text-sm font-bold hover:border-[#b58320] hover:text-[#b58320] dark:border-white/[0.15]">Community weather</Link>
               <Link href="#today" className="rounded-full border border-black/[0.12] px-5 py-3 text-sm font-bold hover:border-[#b58320] hover:text-[#b58320] dark:border-white/[0.15]">Read today&apos;s brief</Link>
             </div>
           </div>
