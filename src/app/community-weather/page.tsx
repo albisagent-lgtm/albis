@@ -1,7 +1,6 @@
-import fs from "fs";
-import path from "path";
 import Link from "next/link";
 import type { Metadata } from "next";
+import latestWeatherRun from "../../../public/community-weather/latest.json";
 
 export const metadata: Metadata = {
   title: "Community Weather — Albis",
@@ -71,12 +70,7 @@ const statusCopy: Record<Status, { label: string; className: string; summary: st
 };
 
 function loadWeatherRun(): WeatherRun | null {
-  const filePath = path.join(process.cwd(), "public", "community-weather", "latest.json");
-  try {
-    return JSON.parse(fs.readFileSync(filePath, "utf8")) as WeatherRun;
-  } catch {
-    return null;
-  }
+  return latestWeatherRun as WeatherRun;
 }
 
 function fmt(value: number | null | undefined, suffix = "") {
