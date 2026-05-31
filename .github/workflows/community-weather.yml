@@ -5,6 +5,15 @@ on:
     # 06:20 UTC = evening NZ / morning UK. Keeps a stable daily rhythm without colliding with the main briefing.
     - cron: '20 6 * * *'
   workflow_dispatch:
+    inputs:
+      post:
+        description: 'Publish the generated social copy via Postiz'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
 
 permissions:
   contents: write
@@ -35,10 +44,18 @@ jobs:
           ALBIS_REPORT_TIMEZONE: Pacific/Auckland
         run: |
           set -euo pipefail
-          if [ -n "${POSTIZ_API_KEY:-}" ]; then
+          SHOULD_POST="false"
+          if [ "${{ github.event_name }}" = "schedule" ] && [ -n "${POSTIZ_API_KEY:-}" ]; then
+            SHOULD_POST="true"
+          fi
+          if [ "${{ github.event.inputs.post || 'false' }}" = "true" ] && [ -n "${POSTIZ_API_KEY:-}" ]; then
+            SHOULD_POST="true"
+          fi
+
+          if [ "$SHOULD_POST" = "true" ]; then
             npx tsx scripts/run-community-weather-daily.ts --limit=100 --media-per-city=3 --media-scope=active --post
           else
-            echo "::warning::POSTIZ_API_KEY is not configured; generating report without posting"
+            echo "Generating report without posting. Scheduled runs publish only when POSTIZ_API_KEY is configured."
             npx tsx scripts/run-community-weather-daily.ts --limit=100 --media-per-city=3 --media-scope=active
           fi
 
