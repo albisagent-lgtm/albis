@@ -8,7 +8,7 @@ The system starts from traditional/public sources, then creates a daily "what we
 
 ```bash
 cd /Users/treelight/.openclaw/workspace/albis-app
-npx tsx scripts/run-community-weather-daily.ts --limit=100 --media-per-city=3
+npx tsx scripts/run-community-weather-daily.ts --limit=100 --media-per-city=3 --media-scope=active
 ```
 
 Outputs:
@@ -22,7 +22,7 @@ Outputs:
 To post to X via Postiz:
 
 ```bash
-npx tsx scripts/run-community-weather-daily.ts --limit=100 --media-per-city=3 --post
+npx tsx scripts/run-community-weather-daily.ts --limit=100 --media-per-city=3 --media-scope=active --post
 ```
 
 Requires `POSTIZ_API_KEY`; defaults to the Albis X integration ID unless `POSTIZ_X_INTEGRATION_ID` is set.

@@ -36,10 +36,10 @@ jobs:
         run: |
           set -euo pipefail
           if [ -n "${POSTIZ_API_KEY:-}" ]; then
-            npx tsx scripts/run-community-weather-daily.ts --limit=100 --media-per-city=3 --post
+            npx tsx scripts/run-community-weather-daily.ts --limit=100 --media-per-city=3 --media-scope=active --post
           else
             echo "::warning::POSTIZ_API_KEY is not configured; generating report without posting"
-            npx tsx scripts/run-community-weather-daily.ts --limit=100 --media-per-city=3
+            npx tsx scripts/run-community-weather-daily.ts --limit=100 --media-per-city=3 --media-scope=active
           fi
 
       - name: Commit generated weather data

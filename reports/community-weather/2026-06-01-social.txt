@@ -3,10 +3,10 @@ Albis Community Weather — 2026-06-01
 Today’s city watchlist from official weather data + traditional media signals:
 
 • Karachi: community watch needed — heat watch signal
+• Chongqing: community watch needed — heavy daily rain forecast (31.1mm)
 • Kolkata: community watch needed — heat watch signal
 • Bangalore: community watch needed — heat watch signal
-• Chennai: community watch needed — heat watch signal
-• Ahmedabad: community watch needed — heat watch signal
+• Chennai: community watch needed — extreme heat signal
 
 Next layer: local human updates — what people are actually seeing on the ground.
 

@@ -102,6 +102,11 @@ function hasFlag(name: string): boolean {
   return process.argv.includes(`--${name}`);
 }
 
+function stringFlag(name: string, fallback: string): string {
+  const flag = process.argv.find((arg) => arg.startsWith(`--${name}=`));
+  return flag ? flag.split('=').slice(1).join('=') : fallback;
+}
+
 async function ensureDir(dir: string) {
   await fs.mkdir(dir, { recursive: true });
 }
@@ -294,8 +299,10 @@ async function buildReports(limit: number, mediaPerCity: number): Promise<CityWe
   });
 
   const reports: CityWeatherReport[] = [];
+  const mediaScope = stringFlag('media-scope', 'active');
   for (const { city, weather } of weatherPackets) {
-    const media = await fetchMediaSignals(city, mediaPerCity);
+    const shouldFetchMedia = mediaPerCity > 0 && (mediaScope === 'all' || weather.riskLevel !== 'low');
+    const media = shouldFetchMedia ? await fetchMediaSignals(city, mediaPerCity) : [];
     reports.push({
       city,
       ...weather,
