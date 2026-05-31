@@ -29,6 +29,8 @@ type ArticleCommentsCopy = {
   emptyText?: string;
   submitLabel?: string;
   structuredReports?: boolean;
+  compact?: boolean;
+  footerNote?: string | null;
 };
 
 type SessionUser = {
@@ -95,6 +97,7 @@ function CommentForm({
   placeholder,
   submitLabel,
   structuredReports = false,
+  footerNote = null,
 }: {
   articleSlug: string;
   parentId?: string | null;
@@ -105,6 +108,7 @@ function CommentForm({
   placeholder?: string;
   submitLabel?: string;
   structuredReports?: boolean;
+  footerNote?: string | null;
 }) {
   const [name, setName] = useState("");
   const [body, setBody] = useState("");
@@ -241,9 +245,11 @@ function CommentForm({
       />
 
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="font-[family-name:var(--font-inter)] text-[11px] text-zinc-400 dark:text-zinc-500">
-          No likes, no clout — just useful context that can improve the signal.
-        </p>
+        {footerNote ? (
+          <p className="font-[family-name:var(--font-inter)] text-[11px] text-zinc-400 dark:text-zinc-500">
+            {footerNote}
+          </p>
+        ) : <span />}
         <div className="flex items-center gap-2">
           {onCancel && (
             <button
@@ -356,6 +362,8 @@ export function ArticleComments({
   emptyText = "No comments yet. Be the first to add context.",
   submitLabel,
   structuredReports = false,
+  compact = false,
+  footerNote = null,
 }: { articleSlug: string } & ArticleCommentsCopy) {
   const [comments, setComments] = useState<PublicComment[]>([]);
   const [loading, setLoading] = useState(true);
@@ -420,12 +428,14 @@ export function ArticleComments({
   }
 
   return (
-    <section className="mt-14 rounded-2xl border border-black/[0.08] bg-white p-5 shadow-sm dark:border-white/[0.08] dark:bg-white/[0.02] md:p-7">
+    <section className={`${compact ? "mt-0" : "mt-14"} rounded-2xl border border-black/[0.08] bg-white ${compact ? "p-4" : "p-5 shadow-sm md:p-7"} dark:border-white/[0.08] dark:bg-white/[0.02]`}>
       <div className="border-b border-black/[0.06] pb-5 dark:border-white/[0.06]">
-        <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8922a]">
-          {eyebrow}
-        </p>
-        <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
+        {eyebrow ? (
+          <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8922a]">
+            {eyebrow}
+          </p>
+        ) : null}
+        <h2 className={`${eyebrow ? "mt-2" : ""} font-[family-name:var(--font-playfair)] ${compact ? "text-xl" : "text-2xl"} font-semibold text-[#0f0f0f] dark:text-[#f0efec]`}>
           {title}
         </h2>
         {prompt ? (
@@ -456,7 +466,7 @@ export function ArticleComments({
             </p>
           </div>
         ) : (
-          <CommentForm articleSlug={articleSlug} user={user} onPosted={handlePosted} placeholder={placeholder} submitLabel={submitLabel} structuredReports={structuredReports} />
+          <CommentForm articleSlug={articleSlug} user={user} onPosted={handlePosted} placeholder={placeholder} submitLabel={submitLabel} structuredReports={structuredReports} compact={compact} footerNote={footerNote} />
         )}
       </div>
 

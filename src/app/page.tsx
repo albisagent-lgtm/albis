@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { EmailCapture } from "./components/email-capture";
+import { LiveEventFeed } from "./components/live-event-feed";
 import { getAllPosts, getPostUrl, type BlogPost } from "@/lib/blog";
 import { getLatestSignals, type Signal } from "@/lib/signals";
 import latestWeatherRun from "../../public/community-weather/latest.json";
@@ -24,8 +25,8 @@ type EventItem = {
   summary?: string | null;
   meta?: string;
   action?: string;
-  secondaryHref?: string;
-  secondaryAction?: string;
+  articleSlug?: string | null;
+  commentCount?: number | null;
   weight: number;
 };
 
@@ -44,10 +45,10 @@ function signalToEvent(signal: Signal, index: number): EventItem {
     label,
     title: signal.title,
     summary: signal.summary,
-    meta: [signal.region, signal.comment_count ? `${signal.comment_count} comments` : null].filter(Boolean).join(" · "),
+    meta: signal.region || undefined,
     action: "Open",
-    secondaryHref: `/signals/${signal.slug}#context`,
-    secondaryAction: "Add context",
+    articleSlug: signal.article_slug,
+    commentCount: signal.comment_count,
     weight: 100 - index,
   };
 }
@@ -62,33 +63,8 @@ function weatherToEvent(report: WeatherReport, index: number): EventItem {
     summary: report.riskReasons[0] || line,
     meta: report.status.replaceAll("-", " "),
     action: "Open",
-    secondaryHref: "https://t.me/albisdaily",
-    secondaryAction: "Add context",
     weight: 80 - index,
   };
-}
-
-function EventRow({ event, feature = false }: { event: EventItem; feature?: boolean }) {
-  return (
-    <article className={`border-b border-black/[0.08] bg-[#f8f7f4] transition hover:bg-white/70 dark:border-white/[0.08] dark:bg-[#101010] dark:hover:bg-white/[0.035] ${feature ? "py-6" : "py-5"}`}>
-      <div className="grid gap-3 md:grid-cols-[88px_minmax(0,1fr)_auto] md:items-start">
-        <div className="flex items-center gap-2 md:block">
-          <p className="font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.14em] text-[#b58320]">{event.label}</p>
-          {event.meta ? <p className="mt-0 text-xs text-zinc-400 md:mt-2">{event.meta}</p> : null}
-        </div>
-        <Link href={event.href} className="group block">
-          <h2 className={`font-[family-name:var(--font-playfair)] font-bold leading-tight tracking-tight group-hover:text-[#b58320] ${feature ? "text-3xl md:text-4xl" : "text-2xl"}`}>
-            {event.title}
-          </h2>
-          {event.summary ? <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 md:text-[15px]">{event.summary}</p> : null}
-        </Link>
-        <div className="flex gap-2 md:justify-end">
-          <Link href={event.href} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">{event.action || "Open"}</Link>
-          {event.secondaryHref ? <Link href={event.secondaryHref} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-600 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">{event.secondaryAction}</Link> : null}
-        </div>
-      </div>
-    </article>
-  );
 }
 
 function ReadRow({ post }: { post: BlogPost }) {
@@ -129,8 +105,7 @@ export default async function Home() {
 
       <section className="mx-auto grid max-w-7xl gap-8 px-4 py-4 md:px-6 lg:grid-cols-[minmax(0,1fr)_320px]">
         <div>
-          {lead ? <EventRow event={lead} feature /> : null}
-          {feed.map((event) => <EventRow key={event.id} event={event} />)}
+          <LiveEventFeed events={lead ? [lead, ...feed] : feed} />
         </div>
 
         <aside className="space-y-5 lg:sticky lg:top-20 lg:self-start">
