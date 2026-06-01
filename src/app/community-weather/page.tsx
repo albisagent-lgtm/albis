@@ -123,12 +123,10 @@ function CityCard({ report }: { report: WeatherReport }) {
       </div>
 
       <div className="mt-5 rounded-2xl bg-[#f8f7f4] p-4 text-sm leading-relaxed text-zinc-700 dark:bg-white/[0.04] dark:text-zinc-200">
-        <strong className="block text-zinc-950 dark:text-white">What to check locally</strong>
-        <ul className="mt-2 space-y-1.5">
-          <li>• Are conditions different street by street?</li>
-          <li>• Are transport, power, flooding, heat, or vulnerable areas affected?</li>
-          <li>• Can a local update, photo, or source help confirm the picture?</li>
-        </ul>
+        <strong className="block text-zinc-950 dark:text-white">Local context</strong>
+        <p className="mt-2">
+          Official data gives the first signal. Local updates, comments, photos, and sources can add the lived picture around this event.
+        </p>
       </div>
 
       {report.riskReasons.length ? (
@@ -221,7 +219,7 @@ export default function CommunityWeatherPage() {
               {activeReports.length ? "Cities needing attention" : "No major watch signals in this pass"}
             </h2>
             <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
-              The first layer is automated and conservative. The important next layer is human: local comments, corrections, photos, and lived context that can be checked together.
+              Official weather data first, then local context from people who know the place.
             </p>
           </div>
           {run ? <p className="text-xs text-zinc-400">Report date {run.date}</p> : null}
