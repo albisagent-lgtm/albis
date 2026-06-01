@@ -50,11 +50,11 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.albis.news";
 
 export const metadata: Metadata = {
   title: {
-    default: "Albis — Useful cards. Calm discussion.",
+    default: "Albis — Cards",
     template: "%s | Albis News",
   },
   description:
-    "A calm AI and human information feed: useful cards, articles, weather updates, and discussion without the noise.",
+    "Cards, articles, weather updates, and discussion from Albis.",
   keywords: [
     "global news",
     "world news",
@@ -77,23 +77,22 @@ export const metadata: Metadata = {
     locale: "en_NZ",
     url: siteUrl,
     siteName: "Albis",
-    title: "Albis — Useful cards. Calm discussion.",
-    description:
-      "Useful cards, articles, weather updates, and discussion from Albis and people.",
+    title: "Albis — Cards",
+    description: "Cards, articles, weather updates, and discussion from Albis.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Albis — Useful cards. Calm discussion.",
+        alt: "Albis — Cards",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Albis — Useful cards. Calm discussion.",
-    description: "Useful cards, articles, weather updates, and discussion from Albis and people.",
+    title: "Albis — Cards",
+    description: "Cards, articles, weather updates, and discussion from Albis.",
     images: ["/og-image.png"],
   },
   robots: {

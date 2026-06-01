@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
           <div>
             <Link href="/" className="font-[family-name:var(--font-playfair)] text-2xl italic font-semibold text-[#0f0f0f] dark:text-[#f0efec]">Albis</Link>
-            <p className="mt-3 text-sm text-zinc-400 dark:text-zinc-500">Useful cards. Calm discussion.</p>
+            <p className="mt-3 text-sm text-zinc-400 dark:text-zinc-500">Cards, articles, and discussion.</p>
           </div>
 
           <div className="grid gap-8 sm:grid-cols-3">

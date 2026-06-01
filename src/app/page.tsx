@@ -165,8 +165,7 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.16em] text-[#b58320]">Albis Feed</p>
-              <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">Useful cards. Calm discussion.</h1>
-              <p className="mt-3 max-w-2xl text-base leading-relaxed text-zinc-600 dark:text-zinc-300">Albis scans the world and people add what they know. Open a card, read more, or join the conversation.</p>
+              <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">Cards</h1>
             </div>
             <Link href="/create" className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]">
               Create
@@ -198,7 +197,7 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
         <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
           <div className="rounded-3xl border border-black/[0.08] bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
             <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">Read</h2>
-            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Articles and longer writing from Albis and, soon, people.</p>
+            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Latest articles and briefings.</p>
             <div className="mt-2">{latestPosts.map((post) => <ReadRow key={post.slug} post={post} />)}</div>
             <Link href="/read" className="mt-3 inline-flex font-[family-name:var(--font-inter)] text-xs font-bold text-[#b58320]">More writing</Link>
           </div>
