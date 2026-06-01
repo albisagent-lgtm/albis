@@ -321,11 +321,11 @@ function buildMarkdown(output: RunOutput): string {
 }
 
 function buildSocialPost(date: string, reports: CityWeatherReport[]): string {
-  const active = reports.filter((r) => r.status !== 'routine').slice(0, 5);
+  const active = reports.filter((r) => r.status !== 'routine').slice(0, 2);
   if (!active.length) {
-    return `Albis Community Weather — ${date}\n\nWe scanned major world cities for weather disruption signals. No major automated alerts in this pass, but the point is the model: official data + traditional media first, then local human context to correct and complete the picture.\n\nNews intelligence, not noise.`;
+    return `Albis Community Weather — ${date}\n\nMajor world-city scan: no major automated alerts today. Official data first; local human context next.\n\nNews intelligence, not noise.`;
   }
-  return `Albis Community Weather — ${date}\n\nToday’s city watchlist from official weather data + traditional media signals:\n\n${active.map((r) => `• ${r.city.name}: ${r.status.replace(/-/g, ' ')} — ${r.riskReasons[0] || r.current.description}`).join('\n')}\n\nNext layer: local human updates — what people are actually seeing on the ground.\n\nNews intelligence, not noise.`;
+  return `Albis Community Weather — ${date}\n\nWatchlist: ${active.map((r) => `${r.city.name}: ${r.riskReasons[0] || r.current.description}`).join('; ')}.\n\nLocal updates complete the picture.\n\nNews intelligence, not noise.`;
 }
 
 async function postToPostiz(text: string) {
@@ -378,8 +378,13 @@ async function main() {
   console.log(`Social copy: reports/community-weather/${date}-social.txt`);
 
   if (hasFlag('post')) {
-    const result = await postToPostiz(socialPost);
-    console.log(`✅ Posted via Postiz: ${JSON.stringify(result).slice(0, 500)}`);
+    try {
+      const result = await postToPostiz(socialPost);
+      console.log(`✅ Posted via Postiz: ${JSON.stringify(result).slice(0, 500)}`);
+    } catch (err) {
+      console.warn('⚠️ Postiz publishing failed after data files were written; continuing so weather data can still be committed.');
+      console.warn(err);
+    }
   } else {
     console.log('Dry run only. Add --post to publish via Postiz.');
   }
