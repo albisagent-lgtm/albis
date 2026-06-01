@@ -7,7 +7,7 @@ import latestWeatherRun from "../../public/community-weather/latest.json";
 
 export const revalidate = 300;
 
-type FeedFilter = "all" | "albis" | "people" | "following" | "weather";
+type FeedFilter = "top" | "latest" | "discussed" | "weather" | "following" | "saved";
 
 type WeatherReport = {
   city: { name: string; country: string; region?: string };
@@ -19,15 +19,16 @@ type WeatherReport = {
 
 type WeatherRun = { date: string; generatedAt: string; reports: WeatherReport[] };
 
-type FeedItem = LiveFeedEvent & { bucket: Exclude<FeedFilter, "all" | "following">; weight: number };
+type FeedItem = LiveFeedEvent & { bucket: "albis" | "people" | "weather"; weight: number; publishedAt?: string };
 
 const weatherRun = latestWeatherRun as WeatherRun;
 const filters: Array<{ key: FeedFilter; label: string }> = [
-  { key: "all", label: "All" },
-  { key: "albis", label: "Albis" },
-  { key: "people", label: "People" },
-  { key: "following", label: "Following" },
+  { key: "top", label: "Top" },
+  { key: "latest", label: "Latest" },
+  { key: "discussed", label: "Discussed" },
   { key: "weather", label: "Weather" },
+  { key: "following", label: "Following" },
+  { key: "saved", label: "Saved" },
 ];
 
 const peopleCards: FeedItem[] = [
@@ -89,6 +90,7 @@ function signalToCard(signal: Signal, index: number): FeedItem {
     author: "Albis",
     source: signal.region || undefined,
     timestamp: prettyTime(signal.published_at),
+    publishedAt: signal.published_at,
     action: "Open",
     articleSlug: signal.article_slug,
     commentCount: signal.comment_count,
@@ -108,6 +110,7 @@ function weatherToCard(report: WeatherReport, index: number): FeedItem {
     author: "Albis Weather",
     source: report.status.replaceAll("-", " "),
     timestamp: prettyReportDate(weatherRun.date),
+    publishedAt: `${weatherRun.date}T12:00:00Z`,
     action: "Open",
     commentCount: 0,
     bucket: "weather",
@@ -124,6 +127,7 @@ function postToCard(post: BlogPost, index: number): FeedItem {
     summary: post.description,
     author: post.author || "Albis",
     timestamp: prettyTime(post.date),
+    publishedAt: post.date,
     action: "Read",
     articleSlug: post.slug,
     commentCount: 0,
@@ -133,7 +137,7 @@ function postToCard(post: BlogPost, index: number): FeedItem {
 }
 
 function FilterChip({ item, active }: { item: { key: FeedFilter; label: string }; active: boolean }) {
-  const href = item.key === "all" ? "/" : `/?filter=${item.key}`;
+  const href = item.key === "top" ? "/" : `/?filter=${item.key}`;
   return (
     <Link href={href} className={`rounded-full px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${active ? "bg-[#111] text-white dark:bg-white dark:text-black" : "border border-black/[0.12] text-zinc-600 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}>
       {item.label}
@@ -153,17 +157,24 @@ function ReadRow({ post }: { post: BlogPost }) {
 
 export default async function Home({ searchParams }: { searchParams?: Promise<{ filter?: string }> }) {
   const params = await searchParams;
-  const activeFilter = filters.some((item) => item.key === params?.filter) ? params?.filter as FeedFilter : "all";
+  const activeFilter = filters.some((item) => item.key === params?.filter) ? params?.filter as FeedFilter : "top";
   const [signals, posts] = await Promise.all([getLatestSignals(18), getAllPosts()]);
   const signalCards = signals.map(signalToCard);
   const weatherCards = weatherRun.reports.filter((report) => report.status !== "routine").slice(0, 6).map(weatherToCard);
   const readCards = posts.slice(0, 4).map(postToCard);
-  const cards = [...signalCards.slice(0, 8), ...weatherCards, ...peopleCards, ...readCards].sort((a, b) => b.weight - a.weight);
-  const visibleCards = activeFilter === "all"
-    ? cards.slice(0, 14)
-    : activeFilter === "following"
-      ? cards.slice(0, 5)
-      : cards.filter((card) => card.bucket === activeFilter).slice(0, 14);
+  const cards = [...signalCards.slice(0, 8), ...weatherCards, ...peopleCards, ...readCards];
+  const topCards = [...cards].sort((a, b) => b.weight - a.weight);
+  const latestCards = [...cards].sort((a, b) => new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime() || b.weight - a.weight);
+  const discussedCards = [...cards].sort((a, b) => (b.commentCount || 0) - (a.commentCount || 0) || b.weight - a.weight);
+  const visibleCards = activeFilter === "top"
+    ? topCards.slice(0, 14)
+    : activeFilter === "latest"
+      ? latestCards.slice(0, 14)
+      : activeFilter === "discussed"
+        ? discussedCards.slice(0, 14)
+        : activeFilter === "weather"
+          ? topCards.filter((card) => card.bucket === "weather").slice(0, 14)
+          : [];
   const latestPosts = posts.slice(0, 5);
 
   return (
@@ -190,6 +201,11 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
           {activeFilter === "following" ? (
             <div className="mb-3 rounded-2xl border border-black/[0.08] bg-white px-4 py-3 text-sm text-zinc-500 dark:border-white/[0.08] dark:bg-white/[0.035] dark:text-zinc-400">
               Cards from followed people, sources, and topics will appear here.
+            </div>
+          ) : null}
+          {activeFilter === "saved" ? (
+            <div className="mb-3 rounded-2xl border border-black/[0.08] bg-white px-4 py-3 text-sm text-zinc-500 dark:border-white/[0.08] dark:bg-white/[0.035] dark:text-zinc-400">
+              Saved cards will appear here once account saves are connected.
             </div>
           ) : null}
           {visibleCards.length === 0 ? (

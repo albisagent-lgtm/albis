@@ -26,6 +26,7 @@ function CommentLabel({ count }: { count?: number | null }) {
 }
 
 function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEvent; feature?: boolean; open: boolean; onToggle: () => void }) {
+  const [saved, setSaved] = useState(false);
   const byline = [event.author || event.source || "Albis", event.timestamp || event.meta].filter(Boolean).join(" · ");
   const commentSlug = event.articleSlug || event.id;
 
@@ -76,6 +77,14 @@ function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEv
             className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"
           >
             Share
+          </button>
+          <button
+            type="button"
+            aria-pressed={saved}
+            onClick={() => setSaved((current) => !current)}
+            className={`rounded-full border px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${saved ? "border-[#c8922a]/60 bg-[#c8922a]/10 text-[#9b6b18] dark:text-[#f0c15e]" : "border-black/[0.12] text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}
+          >
+            {saved ? "Saved" : "Save"}
           </button>
         </div>
         {event.sourceHref ? (
