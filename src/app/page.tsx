@@ -35,8 +35,8 @@ const peopleCards: FeedItem[] = [
     id: "people-weather-report",
     href: "/create",
     label: "people",
-    title: "Share what is happening where you are",
-    summary: "Post a short card, paste a link, or add local context to something Albis is watching.",
+    title: "Post an update, link, or note",
+    summary: "Short cards from people can sit beside Albis reports and articles.",
     author: "Albis community",
     timestamp: "prototype",
     action: "Create",
@@ -48,8 +48,8 @@ const peopleCards: FeedItem[] = [
     id: "people-independent-writing",
     href: "/read",
     label: "article",
-    title: "Independent writing can live beside Albis scans",
-    summary: "Read is for Albis articles and thoughtful work from people who want calmer discussion around useful information.",
+    title: "Independent writing belongs in the feed",
+    summary: "Articles, reporting, essays, and sourced notes can become part of the same conversation.",
     author: "Albis",
     timestamp: "prototype",
     action: "Read",
@@ -89,7 +89,7 @@ function signalToCard(signal: Signal, index: number): FeedItem {
     author: "Albis",
     source: signal.region || undefined,
     timestamp: prettyTime(signal.published_at),
-    action: signal.article_slug ? "Open" : "Discuss",
+    action: "Open",
     articleSlug: signal.article_slug,
     commentCount: signal.comment_count,
     bucket: "albis",
@@ -125,6 +125,7 @@ function postToCard(post: BlogPost, index: number): FeedItem {
     author: post.author || "Albis",
     timestamp: prettyTime(post.date),
     action: "Read",
+    articleSlug: post.slug,
     commentCount: 0,
     bucket: "albis",
     weight: 64 - index,
@@ -171,8 +172,8 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
         <div className="mx-auto max-w-5xl px-4 py-6 md:px-6 md:py-8">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.16em] text-[#b58320]">Albis Feed</p>
-              <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">Cards</h1>
+              <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.16em] text-[#b58320]">Albis</p>
+              <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">Today’s cards</h1>
             </div>
             <Link href="/create" className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]">
               Create
@@ -188,7 +189,7 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
         <div>
           {activeFilter === "following" ? (
             <div className="mb-3 rounded-2xl border border-black/[0.08] bg-white px-4 py-3 text-sm text-zinc-500 dark:border-white/[0.08] dark:bg-white/[0.035] dark:text-zinc-400">
-              Following is a placeholder for now. It will become the cards from people and topics you follow.
+              Cards from followed people, sources, and topics will appear here.
             </div>
           ) : null}
           {visibleCards.length === 0 ? (

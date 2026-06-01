@@ -5,7 +5,7 @@ import latestWeatherRun from "../../../public/community-weather/latest.json";
 export const metadata: Metadata = {
   title: "Community Weather — Albis",
   description:
-    "A daily Albis community weather watchlist for major world cities: official weather data, traditional media signals, and where on-the-ground human context is needed.",
+    "Daily weather cards for major world cities: official data, media signals, and local context.",
 };
 
 export const revalidate = 900;
@@ -50,22 +50,22 @@ const statusCopy: Record<Status, { label: string; className: string; summary: st
   routine: {
     label: "Routine",
     className: "border-zinc-200 bg-white text-zinc-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-zinc-300",
-    summary: "No automated threshold or fresh media signal in this pass.",
+    summary: "No major signal in this pass.",
   },
   "media-mentioned": {
     label: "Media mentioned",
     className: "border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-300/20 dark:bg-blue-400/10 dark:text-blue-200",
-    summary: "Traditional media is mentioning local weather or disruption themes.",
+    summary: "Traditional media is carrying local weather or disruption signals.",
   },
   "weather-watch": {
     label: "Weather watch",
     className: "border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-300/25 dark:bg-amber-400/10 dark:text-amber-100",
-    summary: "Weather thresholds and media signals suggest this city needs closer attention.",
+    summary: "Weather and media signals are active for this city.",
   },
   "community-watch-needed": {
-    label: "Community watch needed",
+    label: "Local context",
     className: "border-red-200 bg-red-50 text-red-700 dark:border-red-300/25 dark:bg-red-400/10 dark:text-red-100",
-    summary: "Automated weather risk is present but traditional media is thin; local human context matters here.",
+    summary: "Official weather risk is present with limited media coverage.",
   },
 };
 
@@ -179,17 +179,17 @@ export default function CommunityWeatherPage() {
             Community Weather
           </p>
           <h1 className="mt-4 max-w-5xl font-[family-name:var(--font-playfair)] text-4xl font-bold leading-tight md:text-6xl">
-            What the world’s cities are experiencing — official data first, human context next.
+            Weather cards for the world’s major cities.
           </h1>
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
-            Albis scans major world cities every day for weather disruption signals, then marks where community updates could complete the picture: what people are seeing on the ground, what media may be missing, and what needs verification.
+            Official weather data, media signals, and space for local context around each city.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link href="/signals/weather-risk" className="rounded-full bg-[#111] px-5 py-3 text-sm font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black dark:hover:bg-[#f0c15e]">
               Weather & Risk method
             </Link>
             <Link href="https://t.me/albisdaily" className="rounded-full border border-black/[0.12] px-5 py-3 text-sm font-bold hover:border-[#b58320] hover:text-[#b58320] dark:border-white/[0.15]">
-              Share a local update
+              Add context
             </Link>
           </div>
         </div>
@@ -214,9 +214,9 @@ export default function CommunityWeatherPage() {
       <section className="mx-auto max-w-7xl px-4 pb-10 md:px-6 md:pb-14">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4 border-b border-black/[0.08] pb-3 dark:border-white/[0.08]">
           <div>
-            <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.18em] text-[#b58320]">Daily community watchlist</p>
+            <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.18em] text-[#b58320]">Daily weather cards</p>
             <h2 className="mt-1 font-[family-name:var(--font-playfair)] text-2xl font-bold tracking-tight md:text-3xl">
-              {activeReports.length ? "Cities needing attention" : "No major watch signals in this pass"}
+              {activeReports.length ? "Active city signals" : "No major signals in this pass"}
             </h2>
             <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
               Official weather data first, then local context from people who know the place.
@@ -248,10 +248,10 @@ export default function CommunityWeatherPage() {
 
       <section className="bg-[#111] text-white">
         <div className="mx-auto max-w-4xl px-4 py-14 text-center md:px-6 md:py-18">
-          <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.18em] text-[#f0c15e]">What we are testing</p>
-          <h2 className="mt-3 font-[family-name:var(--font-playfair)] text-3xl font-bold md:text-4xl">Can community truth become useful public intelligence?</h2>
+          <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.18em] text-[#f0c15e]">Albis Weather</p>
+          <h2 className="mt-3 font-[family-name:var(--font-playfair)] text-3xl font-bold md:text-4xl">Official signals. Local context. One clear card.</h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/65">
-            Weather is the safest proving ground: practical, repeated, verifiable, and human. The goal is not to replace traditional media — it is to add trusted local context around it.
+            A simple daily view of city-level weather signals, media mentions, and community discussion.
           </p>
         </div>
       </section>

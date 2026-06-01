@@ -27,6 +27,16 @@ function CommentLabel({ count }: { count?: number | null }) {
 
 function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEvent; feature?: boolean; open: boolean; onToggle: () => void }) {
   const byline = [event.author || event.source || "Albis", event.timestamp || event.meta].filter(Boolean).join(" · ");
+  const commentSlug = event.articleSlug || event.id;
+
+  async function shareCard() {
+    const url = `${window.location.origin}${event.href}`;
+    if (navigator.share) {
+      await navigator.share({ title: event.title, text: event.summary || undefined, url }).catch(() => undefined);
+      return;
+    }
+    await navigator.clipboard?.writeText(url).catch(() => undefined);
+  }
 
   return (
     <article className={`rounded-3xl border border-black/[0.08] bg-white p-4 transition dark:border-white/[0.08] dark:bg-white/[0.035] ${open ? "shadow-sm" : "hover:border-[#c8922a]/35"}`}>
@@ -60,6 +70,13 @@ function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEv
           <Link href={event.href} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
             {event.action || "Open"}
           </Link>
+          <button
+            type="button"
+            onClick={shareCard}
+            className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"
+          >
+            Share
+          </button>
         </div>
         {event.sourceHref ? (
           <Link href={event.sourceHref} className="font-[family-name:var(--font-inter)] text-xs font-semibold text-zinc-400 hover:text-[#b58320]">
@@ -70,22 +87,16 @@ function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEv
 
       {open ? (
         <div className="mt-5">
-          {event.articleSlug ? (
-            <ArticleComments
-              articleSlug={event.articleSlug}
-              eyebrow=""
-              title="Comments"
-              helper=""
-              placeholder="Add a comment…"
-              emptyText="No comments yet."
-              submitLabel="Post"
-              compact
-            />
-          ) : (
-            <div className="rounded-2xl border border-black/[0.08] bg-[#f8f7f4] p-4 text-sm text-zinc-500 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-zinc-400">
-              Comments are opening for this card soon.
-            </div>
-          )}
+          <ArticleComments
+            articleSlug={commentSlug}
+            eyebrow=""
+            title="Comments"
+            helper=""
+            placeholder="Add a comment…"
+            emptyText="No comments yet."
+            submitLabel="Post"
+            compact
+          />
         </div>
       ) : null}
     </article>

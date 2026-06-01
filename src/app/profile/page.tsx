@@ -7,9 +7,9 @@ export const metadata: Metadata = {
 };
 
 const cards = [
-  { label: "weather", title: "Local weather note", text: "Share what the forecast looks like on the ground." },
-  { label: "article", title: "Draft article", text: "Longer writing and independent posts will appear here." },
-  { label: "comment", title: "Recent comment", text: "Your discussions and replies will be collected here." },
+  { label: "cards", title: "Posts", text: "Cards and articles you create." },
+  { label: "comments", title: "Comments", text: "Conversations you join." },
+  { label: "saved", title: "Saved", text: "Cards you want to keep." },
 ];
 
 export default function ProfilePage() {
@@ -18,9 +18,9 @@ export default function ProfilePage() {
       <section className="mx-auto max-w-4xl">
         <div className="rounded-3xl border border-black/[0.08] bg-white p-6 dark:border-white/[0.08] dark:bg-white/[0.035]">
           <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.16em] text-[#b58320]">Profile</p>
-          <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-5xl">Your Albis space</h1>
+          <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-5xl">Your profile</h1>
           <p className="mt-3 max-w-2xl text-base leading-relaxed text-zinc-600 dark:text-zinc-300">
-            A simple home for your cards, articles, comments, saved items, and followed topics. Account data will connect here next.
+            Posts, comments, saved cards, and followed topics will live here.
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
             <Link href="/create" className="rounded-full bg-[#111] px-4 py-2 text-sm font-bold text-white dark:bg-white dark:text-black">Create</Link>

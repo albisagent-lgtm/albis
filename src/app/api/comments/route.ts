@@ -118,6 +118,10 @@ function initialStatus(body: string, sourceUrl?: string | null) {
   return "visible";
 }
 
+function isNativeCardSlug(slug: string) {
+  return /^(weather|people|signal)-[a-z0-9][a-z0-9\-_. ]{1,180}$/i.test(slug);
+}
+
 function publicComment(row: CommentRow) {
   const parsed = parseBody(row.body);
   return {
@@ -141,7 +145,7 @@ export async function GET(request: Request) {
   if (!slug) return jsonError("Missing article slug.");
 
   const post = await getPostBySlug(slug);
-  if (!post) return jsonError("Article not found.", 404);
+  if (!post && !isNativeCardSlug(slug)) return jsonError("Card not found.", 404);
 
   const supabase = createAdminClient();
   const { data, error } = await supabase
@@ -190,7 +194,7 @@ export async function POST(request: Request) {
   if (body.length > MAX_BODY_LENGTH) return jsonError(`Comments must be ${MAX_BODY_LENGTH} characters or fewer.`);
 
   const post = await getPostBySlug(articleSlug);
-  if (!post) return jsonError("Article not found.", 404);
+  if (!post && !isNativeCardSlug(articleSlug)) return jsonError("Card not found.", 404);
 
   const supabase = createAdminClient();
   const authSupabase = await createClient();
