@@ -31,19 +31,22 @@ export default async function SignalDetailPage({ params }: Props) {
   const signal = await getSignalBySlug(slug);
   if (!signal) notFound();
 
+  const commentSlug = signal.article_slug || `signal-${signal.id}`;
+  const authorName = typeof signal.metadata?.author_name === "string" ? signal.metadata.author_name : "Albis";
+
   return (
     <main className="min-h-screen bg-[#f8f7f4] text-[#111] dark:bg-[#101010] dark:text-[#f4f1ea]">
       <article className="mx-auto max-w-3xl px-4 py-7 md:px-6 md:py-10">
         <div className="border-b border-black/[0.08] pb-6 dark:border-white/[0.08]">
           <div className="flex flex-wrap items-center gap-2 font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.14em] text-[#b58320]">
-            <span>Event</span>
+            <span>{signal.category?.startsWith("people") ? "Card" : "Event"}</span>
             {signal.category ? <span>· {signal.category.replaceAll("-", " ")}</span> : null}
             {signal.region ? <span>· {signal.region}</span> : null}
           </div>
           <h1 className="mt-3 font-[family-name:var(--font-playfair)] text-3xl font-bold leading-tight tracking-tight md:text-5xl">
             {signal.title}
           </h1>
-          <p className="mt-3 font-[family-name:var(--font-inter)] text-xs text-zinc-400">Updated {formatDate(signal.updated_at || signal.published_at)}</p>
+          <p className="mt-3 font-[family-name:var(--font-inter)] text-xs text-zinc-400">{authorName} · {formatDate(signal.updated_at || signal.published_at)}</p>
           {signal.summary ? <p className="mt-5 text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">{signal.summary}</p> : null}
           {signal.bullets.length ? (
             <ul className="mt-5 space-y-2 text-[15px] leading-relaxed text-zinc-800 dark:text-zinc-200">
@@ -56,10 +59,9 @@ export default async function SignalDetailPage({ params }: Props) {
           </div>
         </div>
 
-        {signal.article_slug ? (
-          <div id="comments">
+        <div id="comments">
             <ArticleComments
-              articleSlug={signal.article_slug}
+              articleSlug={commentSlug}
               eyebrow="Comments"
               title="Comments"
               helper=""
@@ -68,7 +70,6 @@ export default async function SignalDetailPage({ params }: Props) {
               submitLabel="Post"
             />
           </div>
-        ) : null}
       </article>
     </main>
   );

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CreateCardForm } from "./create-card-form";
 
 export const metadata: Metadata = {
   title: "Create — Albis",
@@ -19,11 +20,7 @@ export default function CreatePage() {
           <section className="rounded-3xl border border-black/[0.08] bg-white p-5 dark:border-white/[0.08] dark:bg-white/[0.035]">
             <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">Card</h2>
             <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">A link, update, question, event, or short note.</p>
-            <form className="mt-5 space-y-3">
-              <input className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none dark:border-white/[0.08] dark:bg-white/[0.03]" placeholder="Paste a link or write a title" />
-              <textarea className="min-h-32 w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none dark:border-white/[0.08] dark:bg-white/[0.03]" placeholder="Add context" />
-              <button type="button" disabled className="cursor-not-allowed rounded-full bg-[#111]/40 px-5 py-2.5 text-sm font-bold text-white dark:bg-white/40 dark:text-black">Preview coming soon</button>
-            </form>
+            <CreateCardForm />
           </section>
 
           <section className="rounded-3xl border border-black/[0.08] bg-white p-5 dark:border-white/[0.08] dark:bg-white/[0.035]">
@@ -32,7 +29,7 @@ export default function CreatePage() {
             <form className="mt-5 space-y-3">
               <input className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none dark:border-white/[0.08] dark:bg-white/[0.03]" placeholder="Article title" />
               <textarea className="min-h-32 w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none dark:border-white/[0.08] dark:bg-white/[0.03]" placeholder="Start writing…" />
-              <button type="button" disabled className="cursor-not-allowed rounded-full border border-black/[0.12] px-5 py-2.5 text-sm font-bold text-zinc-400 dark:border-white/[0.12] dark:text-zinc-500">Drafts coming soon</button>
+              <button type="button" disabled className="cursor-not-allowed rounded-full border border-black/[0.12] px-5 py-2.5 text-sm font-bold text-zinc-400 dark:border-white/[0.12] dark:text-zinc-500">Articles soon</button>
             </form>
           </section>
         </div>

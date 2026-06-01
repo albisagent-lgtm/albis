@@ -85,6 +85,8 @@ function prettyReportDate(value?: string) {
 function signalToCard(signal: Signal, index: number): FeedItem {
   const label = signal.category?.replaceAll("-", " ") || "albis";
   const cardSlug = signal.article_slug || `signal-${signal.id}`;
+  const authorName = typeof signal.metadata?.author_name === "string" ? signal.metadata.author_name : "Albis";
+  const isPeopleCard = label.startsWith("people");
   return {
     id: `signal-${signal.id}`,
     cardSlug,
@@ -92,15 +94,15 @@ function signalToCard(signal: Signal, index: number): FeedItem {
     label,
     title: signal.title,
     summary: signal.summary,
-    author: "Albis",
-    source: signal.region || undefined,
+    author: authorName,
+    source: signal.region || (isPeopleCard ? "reader card" : undefined),
     timestamp: prettyTime(signal.published_at),
     publishedAt: signal.published_at,
     action: "Open",
     articleSlug: signal.article_slug,
     commentCount: signal.comment_count,
-    bucket: "albis",
-    weight: 100 - index,
+    bucket: isPeopleCard ? "people" : "albis",
+    weight: (isPeopleCard ? 78 : 100) - index,
   };
 }
 
