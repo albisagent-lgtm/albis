@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 const NAV_ITEMS = [
   {
     href: "/",
-    label: "Live",
+    label: "Feed",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
@@ -16,19 +16,7 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/signals",
-    label: "Events",
-    matchPath: "/signals",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <line x1="2" y1="12" x2="22" y2="12" />
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-      </svg>
-    ),
-  },
-  {
-    href: "/lens",
+    href: "/read",
     label: "Read",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -38,20 +26,31 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/indexes",
-    label: "Indexes",
-    matchPath: "/indexes",
+    href: "/create",
+    label: "Create",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="11" cy="11" r="8" />
-        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        <path d="M12 5v14" />
+        <path d="M5 12h14" />
+      </svg>
+    ),
+  },
+  {
+    href: "/profile",
+    label: "Profile",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
       </svg>
     ),
   },
 ];
 
 const MORE_LINKS = [
-  { href: "/community-weather", label: "Weather" },
+  { href: "/?filter=weather", label: "Weather" },
+  { href: "/signals", label: "Events archive" },
+  { href: "/indexes", label: "Indexes" },
   { href: "/world", label: "World" },
   { href: "/money", label: "Money" },
   { href: "/tech", label: "Tech" },
@@ -152,8 +151,7 @@ export function MobileNav() {
           {NAV_ITEMS.map((item) => {
             const active =
               (item.href === "/" && pathname === "/") ||
-              (item.href !== "/" && pathname === item.href) ||
-              ("matchPath" in item && item.matchPath && pathname.startsWith(item.matchPath));
+              (item.href !== "/" && pathname === item.href);
             return (
               <Link
                 key={item.label}
