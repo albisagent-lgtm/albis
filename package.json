@@ -13,7 +13,14 @@
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "growth:desk": "tsx scripts/run-growth-desk.ts",
-    "growth:report": "tsx scripts/run-growth-desk-daily-report.ts"
+    "growth:report": "tsx scripts/run-growth-desk-daily-report.ts",
+    "community:weather": "tsx scripts/run-community-weather-daily.ts --limit=100 --media-per-city=3",
+    "community:weather:dry": "tsx scripts/run-community-weather-daily.ts --limit=10 --media-per-city=2",
+    "intelligence:wiki:status": "tsx scripts/run-albis-intelligence-wiki.ts status",
+    "intelligence:wiki:ingest-latest": "tsx scripts/run-albis-intelligence-wiki.ts ingest-latest",
+    "intelligence:wiki:view": "tsx scripts/run-albis-intelligence-wiki.ts view",
+    "outreach:public:dry-run": "tsx scripts/run-outreach-send.ts --campaign life-systems --dry-run --floor 1 --ceiling 5 --target-per-bucket 1",
+    "outreach:public:send-small": "tsx scripts/run-outreach-send.ts --campaign life-systems --floor 1 --ceiling 10 --target-per-bucket 3"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
