@@ -71,6 +71,13 @@ function prettyTime(value?: string) {
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
+function prettyReportDate(value?: string) {
+  if (!value) return undefined;
+  const date = new Date(`${value}T12:00:00Z`);
+  if (Number.isNaN(date.getTime())) return undefined;
+  return date.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+}
+
 function signalToCard(signal: Signal, index: number): FeedItem {
   const label = signal.category?.replaceAll("-", " ") || "albis";
   return {
@@ -100,7 +107,7 @@ function weatherToCard(report: WeatherReport, index: number): FeedItem {
     summary: report.riskReasons[0] || line,
     author: "Albis Weather",
     source: report.status.replaceAll("-", " "),
-    timestamp: prettyTime(weatherRun.generatedAt),
+    timestamp: prettyReportDate(weatherRun.date),
     action: "Open",
     commentCount: 0,
     bucket: "weather",
