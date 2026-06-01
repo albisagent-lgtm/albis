@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ArticleComments } from "./article-comments";
+import { trackFeedEvent } from "./feed-event-tracking";
 
 export type LiveFeedEvent = {
   id: string;
@@ -13,6 +14,7 @@ export type LiveFeedEvent = {
   meta?: string;
   action?: string;
   articleSlug?: string | null;
+  cardSlug?: string;
   commentCount?: number | null;
   author?: string;
   source?: string;
@@ -28,10 +30,11 @@ function CommentLabel({ count }: { count?: number | null }) {
 function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEvent; feature?: boolean; open: boolean; onToggle: () => void }) {
   const [saved, setSaved] = useState(false);
   const byline = [event.author || event.source || "Albis", event.timestamp || event.meta].filter(Boolean).join(" · ");
-  const commentSlug = event.articleSlug || event.id;
+  const commentSlug = event.cardSlug || event.articleSlug || event.id;
 
   async function shareCard() {
     const url = `${window.location.origin}${event.href}`;
+    trackFeedEvent(commentSlug, "share", { href: event.href });
     if (navigator.share) {
       await navigator.share({ title: event.title, text: event.summary || undefined, url }).catch(() => undefined);
       return;
@@ -50,7 +53,7 @@ function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEv
             {byline ? <p className="font-[family-name:var(--font-inter)] text-xs text-zinc-400">{byline}</p> : null}
           </div>
 
-          <Link href={event.href} className="group mt-3 block">
+          <Link href={event.href} onClick={() => trackFeedEvent(commentSlug, "open", { href: event.href })} className="group mt-3 block">
             <h2 className={`font-[family-name:var(--font-playfair)] font-bold leading-tight tracking-tight group-hover:text-[#b58320] ${feature ? "text-3xl md:text-4xl" : "text-2xl"}`}>
               {event.title}
             </h2>
@@ -63,12 +66,15 @@ function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEv
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={onToggle}
+            onClick={() => {
+              trackFeedEvent(commentSlug, "open", { surface: "comments" });
+              onToggle();
+            }}
             className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"
           >
             <CommentLabel count={event.commentCount} />
           </button>
-          <Link href={event.href} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
+          <Link href={event.href} onClick={() => trackFeedEvent(commentSlug, "open", { href: event.href, surface: "button" })} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
             {event.action || "Open"}
           </Link>
           <button
@@ -81,7 +87,10 @@ function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEv
           <button
             type="button"
             aria-pressed={saved}
-            onClick={() => setSaved((current) => !current)}
+            onClick={() => setSaved((current) => {
+              trackFeedEvent(commentSlug, current ? "unsave" : "save");
+              return !current;
+            })}
             className={`rounded-full border px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${saved ? "border-[#c8922a]/60 bg-[#c8922a]/10 text-[#9b6b18] dark:text-[#f0c15e]" : "border-black/[0.12] text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}
           >
             {saved ? "Saved" : "Save"}
@@ -105,6 +114,7 @@ function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEv
             emptyText="No comments yet."
             submitLabel="Post"
             compact
+            onCommentPosted={() => trackFeedEvent(commentSlug, "comment")}
           />
         </div>
       ) : null}

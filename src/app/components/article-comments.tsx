@@ -31,6 +31,7 @@ type ArticleCommentsCopy = {
   structuredReports?: boolean;
   compact?: boolean;
   footerNote?: string | null;
+  onCommentPosted?: () => void;
 };
 
 type SessionUser = {
@@ -364,6 +365,7 @@ export function ArticleComments({
   structuredReports = false,
   compact = false,
   footerNote = null,
+  onCommentPosted,
 }: { articleSlug: string } & ArticleCommentsCopy) {
   const [comments, setComments] = useState<PublicComment[]>([]);
   const [loading, setLoading] = useState(true);
@@ -424,6 +426,7 @@ export function ArticleComments({
   function handlePosted(comment: PublicComment | null, message?: string) {
     setNotice(message || "Thanks — your comment was posted.");
     if (comment) setComments((existing) => [...existing, comment]);
+    onCommentPosted?.();
     window.setTimeout(() => setNotice(""), 5000);
   }
 

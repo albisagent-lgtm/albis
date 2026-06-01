@@ -4,6 +4,7 @@ import { LiveEventFeed, type LiveFeedEvent } from "./components/live-event-feed"
 import { getAllPosts, getPostUrl, type BlogPost } from "@/lib/blog";
 import { getLatestSignals, type Signal } from "@/lib/signals";
 import latestWeatherRun from "../../public/community-weather/latest.json";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 export const revalidate = 300;
 
@@ -19,7 +20,9 @@ type WeatherReport = {
 
 type WeatherRun = { date: string; generatedAt: string; reports: WeatherReport[] };
 
-type FeedItem = LiveFeedEvent & { bucket: "albis" | "people" | "weather"; weight: number; publishedAt?: string };
+type FeedItem = LiveFeedEvent & { bucket: "albis" | "people" | "weather"; weight: number; publishedAt?: string; score?: number };
+
+type FeedScoreRow = { card_slug: string; score: number | string | null; comments_count: number | null; shares_count: number | null; saves_count: number | null; unique_opens: number | null };
 
 const weatherRun = latestWeatherRun as WeatherRun;
 const filters: Array<{ key: FeedFilter; label: string }> = [
@@ -81,8 +84,10 @@ function prettyReportDate(value?: string) {
 
 function signalToCard(signal: Signal, index: number): FeedItem {
   const label = signal.category?.replaceAll("-", " ") || "albis";
+  const cardSlug = signal.article_slug || `signal-${signal.id}`;
   return {
     id: `signal-${signal.id}`,
+    cardSlug,
     href: `/signals/${signal.slug}`,
     label,
     title: signal.title,
@@ -101,8 +106,10 @@ function signalToCard(signal: Signal, index: number): FeedItem {
 
 function weatherToCard(report: WeatherReport, index: number): FeedItem {
   const line = `${report.current.description}; ${fmt(report.current.temperatureC, "°C")}. Rain ${fmt(report.daily.precipitationMm, "mm")}; wind ${fmt(report.daily.maxWindKph, "km/h")}.`;
+  const cardSlug = `weather-${report.city.name}-${report.city.country}`;
   return {
-    id: `weather-${report.city.name}-${report.city.country}`,
+    id: cardSlug,
+    cardSlug,
     href: "/community-weather",
     label: "weather",
     title: `${report.city.name}, ${report.city.country}`,
@@ -121,6 +128,7 @@ function weatherToCard(report: WeatherReport, index: number): FeedItem {
 function postToCard(post: BlogPost, index: number): FeedItem {
   return {
     id: `post-${post.slug}`,
+    cardSlug: post.slug,
     href: getPostUrl(post),
     label: "read",
     title: post.title,
@@ -145,6 +153,34 @@ function FilterChip({ item, active }: { item: { key: FeedFilter; label: string }
   );
 }
 
+async function getFeedScoreMap() {
+  try {
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("feed_scores")
+      .select("card_slug, score, comments_count, shares_count, saves_count, unique_opens")
+      .limit(300);
+    if (error) return new Map<string, FeedScoreRow>();
+    return new Map((data || []).map((row) => [(row as FeedScoreRow).card_slug, row as FeedScoreRow]));
+  } catch {
+    return new Map<string, FeedScoreRow>();
+  }
+}
+
+function applyScores(cards: FeedItem[], scores: Map<string, FeedScoreRow>) {
+  return cards.map((card) => {
+    const row = scores.get(card.cardSlug || card.articleSlug || card.id);
+    if (!row) return card;
+    const score = Number(row.score || 0);
+    return {
+      ...card,
+      score,
+      commentCount: Math.max(card.commentCount || 0, row.comments_count || 0),
+      weight: card.weight + score * 10,
+    };
+  });
+}
+
 function ReadRow({ post }: { post: BlogPost }) {
   return (
     <Link href={getPostUrl(post)} className="block border-b border-black/[0.08] py-4 last:border-b-0 dark:border-white/[0.08]">
@@ -158,14 +194,14 @@ function ReadRow({ post }: { post: BlogPost }) {
 export default async function Home({ searchParams }: { searchParams?: Promise<{ filter?: string }> }) {
   const params = await searchParams;
   const activeFilter = filters.some((item) => item.key === params?.filter) ? params?.filter as FeedFilter : "top";
-  const [signals, posts] = await Promise.all([getLatestSignals(18), getAllPosts()]);
+  const [signals, posts, scoreMap] = await Promise.all([getLatestSignals(18), getAllPosts(), getFeedScoreMap()]);
   const signalCards = signals.map(signalToCard);
   const weatherCards = weatherRun.reports.filter((report) => report.status !== "routine").slice(0, 6).map(weatherToCard);
   const readCards = posts.slice(0, 4).map(postToCard);
-  const cards = [...signalCards.slice(0, 8), ...weatherCards, ...peopleCards, ...readCards];
+  const cards = applyScores([...signalCards.slice(0, 8), ...weatherCards, ...peopleCards, ...readCards], scoreMap);
   const topCards = [...cards].sort((a, b) => b.weight - a.weight);
   const latestCards = [...cards].sort((a, b) => new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime() || b.weight - a.weight);
-  const discussedCards = [...cards].sort((a, b) => (b.commentCount || 0) - (a.commentCount || 0) || b.weight - a.weight);
+  const discussedCards = [...cards].sort((a, b) => (b.commentCount || 0) - (a.commentCount || 0) || (b.score || 0) - (a.score || 0) || b.weight - a.weight);
   const visibleCards = activeFilter === "top"
     ? topCards.slice(0, 14)
     : activeFilter === "latest"
