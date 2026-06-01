@@ -86,7 +86,6 @@ export async function POST(request: Request) {
 
   const authSupabase = await createClient();
   const { data: { user } } = await authSupabase.auth.getUser();
-  if (!user) return jsonError("Please sign in to post a card.", 401);
 
   const supabase = createAdminClient();
   const ipHash = await hashValue(getClientIp(request));
@@ -108,7 +107,7 @@ export async function POST(request: Request) {
   }
 
   const authorName = cleanText(
-    user.user_metadata?.username ? `@${user.user_metadata.username}` : user.user_metadata?.name || user.email?.split("@")[0] || "Reader",
+    user?.user_metadata?.username ? `@${user.user_metadata.username}` : user?.user_metadata?.name || user?.email?.split("@")[0] || "Reader",
     80
   );
   const slug = slugify(title);
@@ -136,9 +135,9 @@ export async function POST(request: Request) {
     metadata: {
       card_type: category,
       created_via: "create-page",
-      author_id: user.id,
+      author_id: user?.id || null,
       author_name: authorName,
-      author_email_domain: user.email?.split("@")[1] || null,
+      author_email_domain: user?.email?.split("@")[1] || null,
       source_url: sourceUrl,
       ip_hash: ipHash,
     },

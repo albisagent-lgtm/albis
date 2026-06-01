@@ -21,13 +21,11 @@ export function CreateCardForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [postedUrl, setPostedUrl] = useState("");
-  const [needsSignIn, setNeedsSignIn] = useState(false);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     setPostedUrl("");
-    setNeedsSignIn(false);
     setLoading(true);
 
     try {
@@ -37,10 +35,7 @@ export function CreateCardForm() {
         body: JSON.stringify({ title, source_url: sourceUrl, context, category, website }),
       });
       const payload = await res.json();
-      if (!res.ok) {
-        if (res.status === 401) setNeedsSignIn(true);
-        throw new Error(payload.error || "Could not post card.");
-      }
+      if (!res.ok) throw new Error(payload.error || "Could not post card.");
       setPostedUrl(payload.url || "/");
       setTitle("");
       setSourceUrl("");
@@ -127,12 +122,7 @@ export function CreateCardForm() {
       </div>
 
       {postedUrl ? <p className="text-sm text-emerald-700 dark:text-emerald-300">Card posted. It should appear in the feed shortly.</p> : null}
-      {needsSignIn ? (
-        <div className="rounded-2xl border border-[#c8922a]/30 bg-[#fff8e8] p-3 text-sm text-zinc-700 dark:border-[#c8922a]/30 dark:bg-[#2a2112] dark:text-zinc-200">
-          Sign in to post a card. <Link href="/login" className="font-bold text-[#b58320] hover:underline">Log in</Link>
-        </div>
-      ) : null}
-      {error && !needsSignIn ? <p className="text-sm text-red-600 dark:text-red-400">{error}</p> : null}
+      {error ? <p className="text-sm text-red-600 dark:text-red-400">{error}</p> : null}
     </form>
   );
 }
