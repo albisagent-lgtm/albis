@@ -123,9 +123,11 @@ function CityCard({ report }: { report: WeatherReport }) {
       </div>
 
       <div className="mt-5 rounded-2xl bg-[#f8f7f4] p-4 text-sm leading-relaxed text-zinc-700 dark:bg-white/[0.04] dark:text-zinc-200">
-        <strong className="block text-zinc-950 dark:text-white">What Albis is learning</strong>
+        <strong className="block text-zinc-950 dark:text-white">What to check locally</strong>
         <ul className="mt-2 space-y-1.5">
-          {report.communityLearning.map((line) => <li key={line}>• {line}</li>)}
+          <li>• Are conditions different street by street?</li>
+          <li>• Are transport, power, flooding, heat, or vulnerable areas affected?</li>
+          <li>• Can a local update, photo, or source help confirm the picture?</li>
         </ul>
       </div>
 
@@ -222,7 +224,7 @@ export default function CommunityWeatherPage() {
               The first layer is automated and conservative. The important next layer is human: local comments, corrections, photos, and lived context that can be checked together.
             </p>
           </div>
-          {run ? <p className="text-xs text-zinc-400">Generated {new Date(run.generatedAt).toLocaleString("en-GB", { timeZone: "UTC" })} UTC</p> : null}
+          {run ? <p className="text-xs text-zinc-400">Report date {run.date}</p> : null}
         </div>
         <div className="grid gap-4 lg:grid-cols-2">
           {featured.map((report) => <CityCard key={`${report.city.name}-${report.city.country}`} report={report} />)}
