@@ -4,7 +4,7 @@ Last updated: 2026-06-02
 
 ## 0. Product rule
 
-Albis should provide clear, simple cards. Users decide what to read, comment on, save, share, follow, or add.
+Albis should provide clear, simple cards. Users decide what to read, comment on, save privately, share, follow, or add.
 
 The interface should do the work. Avoid long explanations, instructional copy, or telling people what to do. Public language should feel like a calm service: here is the event, here is the report, here is the context we have, here is the conversation.
 
@@ -23,9 +23,11 @@ Primary actions:
 - Open
 - Comment
 - Share
-- Save
+- Save privately / bookmark
 - Follow
 - Create
+
+Non-goal: no public likes, upvotes, reaction buttons, emoji reaction scores, or clout mechanics. Albis measures attention and depth, not reactive approval.
 
 V1 is not a social network clone. It is a calm interactive media layer for understanding the world.
 
@@ -35,7 +37,7 @@ V1 is not a social network clone. It is a calm interactive media layer for under
 2. **Less copy, more interaction** — buttons and layout explain the product.
 3. **Cards are the product** — not just teasers for articles.
 4. **Rank content, not people** — avoid public influencer leaderboards.
-5. **Clicks matter, but deeper actions matter more** — save/share/comment/follow are stronger signals.
+5. **Attention and depth matter, not reactions** — impressions, opens, dwell/read time, comments, shares, private saves, and follows are useful signals; likes/upvotes/reactions are not part of Albis.
 6. **Source/context stays visible** — Albis should not hide provenance.
 7. **Weather and local events become repeatable wedges** — practical, verifiable, useful.
 8. **Independent journalists get identity and distribution** — profiles, posts, comments, follows.
@@ -133,8 +135,10 @@ Interaction row V1:
 - Open
 - Comment
 - Share
-- Save
+- Save / bookmark privately
 - Follow/source/topic later
+
+Do not add Like, Upvote, emoji reaction, applause, or public popularity buttons.
 
 Avoid too many visible actions. Use overflow later if needed.
 
@@ -148,7 +152,7 @@ Track public product events in a dedicated table/API:
 - open/click
 - full read / dwell threshold
 - comment
-- save
+- private save/bookmark
 - unsave
 - share
 - follow
@@ -156,27 +160,35 @@ Track public product events in a dedicated table/API:
 - hide
 - report
 
+Do not track likes/upvotes/reactions because those would push Albis toward reactive social mechanics.
+
 Minimum V1 events:
 
+- impression
 - open
+- dwell/read time later
 - comment
-- save
+- private save/bookmark
 - share
 - follow
 - hide/report later
 
 ### 5.2 Why not pure clicks
 
-Clicks show curiosity, but pure click ranking creates clickbait. V1 should use clicks as one signal, with deeper actions weighted more heavily.
+Clicks show curiosity, but pure click ranking creates clickbait. V1 should use clicks as one attention signal, with depth signals weighted more heavily.
 
 Signal meaning:
 
+- Impression = reach/visibility
 - Open = interest
+- Dwell/read time = depth
 - Comment = engagement/context
-- Save = value
+- Private save/bookmark = personal value
 - Share = relevance
 - Follow = long-term trust
 - Hide/report = negative signal
+
+No signal should behave like a public reaction score.
 
 ### 5.3 Simple V1 score
 
@@ -186,7 +198,9 @@ Initial formula:
 engagement =
   1.0 * log(1 + unique_opens)
 + 2.0 * log(1 + comments)
-+ 3.0 * log(1 + saves)
++ 1.0 * log(1 + impressions) capped
++ 1.5 * normalized_dwell_time
++ 2.5 * log(1 + private_saves)
 + 3.0 * log(1 + shares)
 + 2.0 * log(1 + follows_from_card)
 - 4.0 * log(1 + hides)
@@ -210,7 +224,7 @@ V1 defaults:
 - **Discussed:** comments/replies + recent activity.
 - **Weather:** weather/event cards, ranked by recency + status.
 - **Following:** followed people/topics/sources once auth is active.
-- **Saved:** saved cards for signed-in user.
+- **Saved:** private bookmarked cards for signed-in user.
 
 ## 6. Comments/community layer
 
@@ -561,9 +575,13 @@ Definition of done:
 
 ## 11. Risks and guardrails
 
+### Risk: reactive social mechanics
+
+Guardrail: no likes, upvotes, emoji reactions, applause, or public approval scores. Use impressions, opens, dwell time, comments, shares, private saves/bookmarks, follows, hides, and reports.
+
 ### Risk: clickbait ranking
 
-Guardrail: clicks are low-weight; saves/comments/shares/follows matter more.
+Guardrail: clicks are low-weight; dwell/read time, comments, private saves, shares, and follows matter more.
 
 ### Risk: noisy comments
 
@@ -617,6 +635,7 @@ Do not build in V1:
 
 - public leaderboards of users
 - influencer-style rankings
+- likes, upvotes, emoji reactions, applause, or public reaction counts
 - complex gamification
 - aggressive AI personalization
 - endless notification systems
