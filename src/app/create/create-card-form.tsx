@@ -5,10 +5,16 @@ import { useMemo, useState } from "react";
 
 const CATEGORIES = [
   { value: "update", label: "Update" },
-  { value: "link", label: "Link" },
+  { value: "life-systems", label: "Life Systems" },
+  { value: "world", label: "World" },
+  { value: "money", label: "Money" },
+  { value: "tech", label: "Tech" },
+  { value: "climate", label: "Climate" },
+  { value: "health", label: "Health" },
+  { value: "governance", label: "Governance" },
+  { value: "research", label: "Research" },
   { value: "question", label: "Question" },
   { value: "event", label: "Event" },
-  { value: "research", label: "Research" },
   { value: "article", label: "Article" },
   { value: "weather", label: "Weather" },
 ];
@@ -23,18 +29,28 @@ function parseLinks(value: string) {
     .slice(0, 8);
 }
 
+function parseTags(value: string) {
+  return value
+    .split(/,|\n|#/)
+    .map((tag) => tag.trim().toLowerCase().replace(/[^a-z0-9 -]/g, "").replace(/\s+/g, "-"))
+    .filter(Boolean)
+    .slice(0, 8);
+}
+
 export function CreateCardForm() {
   const [mode, setMode] = useState<CreateMode>("manual");
   const [title, setTitle] = useState("");
   const [sourceLinks, setSourceLinks] = useState("");
   const [context, setContext] = useState("");
   const [category, setCategory] = useState("update");
+  const [tagInput, setTagInput] = useState("");
   const [website, setWebsite] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [postedUrl, setPostedUrl] = useState("");
 
   const links = useMemo(() => parseLinks(sourceLinks), [sourceLinks]);
+  const tags = useMemo(() => parseTags(tagInput), [tagInput]);
   const canSubmit = mode === "ai-review"
     ? links.length > 0 || title.trim().length >= 3 || context.trim().length > 0
     : title.trim().length >= 3 && (context.trim().length > 0 || links.length > 0);
@@ -54,7 +70,8 @@ export function CreateCardForm() {
           source_url: links[0] || "",
           source_urls: links,
           context,
-          category: mode === "ai-review" ? "research" : category,
+          category: mode === "ai-review" && category === "update" ? "research" : category,
+          user_tags: tags,
           ai_review_requested: mode === "ai-review",
           website,
         }),
@@ -66,6 +83,7 @@ export function CreateCardForm() {
       setSourceLinks("");
       setContext("");
       setCategory("update");
+      setTagInput("");
       setMode("manual");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not post card.");
@@ -121,7 +139,8 @@ export function CreateCardForm() {
         {links.length > 0 ? <p className="mt-1 text-xs text-zinc-400">{links.length} link{links.length === 1 ? "" : "s"} attached.</p> : null}
       </label>
 
-      {mode === "manual" ? (
+      <div>
+        <p className="mb-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">Albis section</p>
         <div className="flex gap-2 overflow-x-auto pb-1">
           {CATEGORIES.map((item) => (
             <button
@@ -134,7 +153,19 @@ export function CreateCardForm() {
             </button>
           ))}
         </div>
-      ) : null}
+      </div>
+
+      <label className="block">
+        <span className="mb-1 block font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">User tags</span>
+        <input
+          value={tagInput}
+          onChange={(e) => setTagInput(e.target.value)}
+          maxLength={220}
+          className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
+          placeholder="e.g. food security, cricket, ai, supply chains"
+        />
+        {tags.length > 0 ? <p className="mt-1 text-xs text-zinc-400">Tags: {tags.map((tag) => `#${tag}`).join(" ")}</p> : null}
+      </label>
 
       <label className="block">
         <span className="sr-only">Context</span>

@@ -65,8 +65,35 @@ function hostSummary(urls: string[]) {
 
 function cleanCategory(value: unknown) {
   const raw = cleanText(value, 40).toLowerCase();
-  const allowed = new Set(["update", "link", "question", "event", "research", "weather", "article"]);
+  const allowed = new Set([
+    "update",
+    "link",
+    "question",
+    "event",
+    "research",
+    "weather",
+    "article",
+    "life-systems",
+    "world",
+    "money",
+    "tech",
+    "climate",
+    "health",
+    "governance",
+  ]);
   return allowed.has(raw) ? raw : "update";
+}
+
+function cleanTags(value: unknown) {
+  const rawValues = Array.isArray(value)
+    ? value
+    : typeof value === "string"
+      ? value.split(/,|\n|#/)
+      : [];
+  return [...new Set(rawValues
+    .map((tag) => cleanText(tag, 36).toLowerCase().replace(/[^a-z0-9 -]/g, "").replace(/\s+/g, "-"))
+    .filter(Boolean))]
+    .slice(0, 8);
 }
 
 function slugify(value: string) {
@@ -111,6 +138,7 @@ export async function POST(request: Request) {
   const title = rawTitle || (aiReviewRequested && sourceUrls.length ? `AI review requested: ${hostSummary(sourceUrls)}` : "");
   const context = cleanBody(payload.context, MAX_CONTEXT_LENGTH);
   const category = cleanCategory(payload.category);
+  const userTags = cleanTags(payload.user_tags);
 
   if (title.length < 3) return jsonError("Add a short title, or submit at least one link for AI review.");
   if (!context && sourceUrls.length === 0) return jsonError("Add context or at least one link.");
@@ -186,7 +214,7 @@ export async function POST(request: Request) {
     still_unclear: stillUnclear,
     category: `people-${category}`,
     region: null,
-    tags: [...new Set(["people", category, ...aiTags])].slice(0, 10),
+    tags: [...new Set(["people", category, ...userTags, ...aiTags])].slice(0, 14),
     source_note: aiReviewRequested ? "AI review requested" : sourceUrls.length > 1 ? `${sourceUrls.length} links attached` : sourceUrl ? "Link attached" : "Reader card",
     status: "published",
     priority: 35,
@@ -202,6 +230,8 @@ export async function POST(request: Request) {
       author_email_domain: user?.email?.split("@")[1] || null,
       source_url: sourceUrl,
       source_urls: sourceUrls,
+      user_tags: userTags,
+      system_section: category,
       ai_review_requested: aiReviewRequested,
       ai_review_status: aiReviewStatus,
       ai_model_used: aiModelUsed,

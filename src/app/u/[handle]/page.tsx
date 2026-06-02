@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { FollowButton } from "@/app/components/follow-button";
 import { authorProfileHandle, getSignalsByAuthorHandle, type Signal } from "@/lib/signals";
 
 export const revalidate = 120;
@@ -43,6 +44,15 @@ function ProfileCard({ signal }: { signal: Signal }) {
         </h2>
         {signal.summary ? <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">{signal.summary}</p> : null}
       </Link>
+      {signal.tags?.length ? (
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {signal.tags.slice(0, 6).map((tag) => (
+            <span key={tag} className="rounded-full border border-black/[0.08] px-2 py-0.5 font-[family-name:var(--font-inter)] text-[10px] font-semibold text-zinc-400 dark:border-white/[0.08]">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      ) : null}
       <div className="mt-4 flex flex-wrap gap-2">
         <Link href={`/signals/${signal.slug}`} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white dark:bg-white dark:text-black">
           Open
@@ -88,9 +98,7 @@ export default async function PublicProfilePage({ params }: Props) {
                 Cards, sources, AI-reviewed submissions, and conversations from this Albis contributor.
               </p>
             </div>
-            <button type="button" className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]">
-              Follow
-            </button>
+            <FollowButton type="person" label={name} className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]" />
           </div>
           <div className="mt-5 flex flex-wrap gap-2 font-[family-name:var(--font-inter)] text-xs font-semibold text-zinc-500 dark:text-zinc-400">
             <span className="rounded-full border border-black/[0.10] px-3 py-1 dark:border-white/[0.10]">{cards.length} card{cards.length === 1 ? "" : "s"}</span>

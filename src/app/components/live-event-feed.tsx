@@ -21,6 +21,7 @@ export type LiveFeedEvent = {
   sourceHref?: string;
   authorHref?: string | null;
   timestamp?: string;
+  tags?: string[];
   aiReviewStatus?: string | null;
 };
 
@@ -78,6 +79,15 @@ function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEv
             </h2>
             {event.summary ? <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 md:text-[15px]">{event.summary}</p> : null}
           </Link>
+          {event.tags?.length ? (
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {event.tags.slice(0, 5).map((tag) => (
+                <span key={tag} className="rounded-full border border-black/[0.08] px-2 py-0.5 font-[family-name:var(--font-inter)] text-[10px] font-semibold text-zinc-400 dark:border-white/[0.08]">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
 

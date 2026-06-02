@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { trackFeedEvent } from "./feed-event-tracking";
+import { FollowButton } from "./follow-button";
 
 export type FollowSuggestion = {
   id: string;
@@ -18,8 +17,6 @@ function typeLabel(type: FollowSuggestion["type"]) {
 }
 
 export function FollowDiscovery({ suggestions }: { suggestions: FollowSuggestion[] }) {
-  const [followed, setFollowed] = useState<Record<string, boolean>>({});
-
   return (
     <div className="space-y-4">
       <div className="rounded-3xl border border-black/[0.08] bg-white p-5 dark:border-white/[0.08] dark:bg-white/[0.035]">
@@ -31,9 +28,7 @@ export function FollowDiscovery({ suggestions }: { suggestions: FollowSuggestion
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2">
-        {suggestions.map((item) => {
-          const isFollowed = followed[item.id];
-          return (
+        {suggestions.map((item) => (
             <article key={item.id} className="rounded-3xl border border-black/[0.08] bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
@@ -42,21 +37,11 @@ export function FollowDiscovery({ suggestions }: { suggestions: FollowSuggestion
                   <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">{item.description}</p>
                 </div>
               </div>
-              <button
-                type="button"
-                aria-pressed={isFollowed}
-                onClick={() => setFollowed((current) => {
-                  const next = !current[item.id];
-                  trackFeedEvent(item.id, next ? "follow" : "unfollow", { type: item.type, label: item.label });
-                  return { ...current, [item.id]: next };
-                })}
-                className={`mt-4 rounded-full px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${isFollowed ? "border border-[#c8922a]/50 bg-[#c8922a]/10 text-[#9b6b18] dark:text-[#f0c15e]" : "bg-[#111] text-white hover:bg-[#b58320] dark:bg-white dark:text-black"}`}
-              >
-                {isFollowed ? "Following" : "Follow"}
-              </button>
+              <div className="mt-4">
+                <FollowButton type={item.type} label={item.label} />
+              </div>
             </article>
-          );
-        })}
+        ))}
       </div>
     </div>
   );

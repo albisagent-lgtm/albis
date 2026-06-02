@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { EmailCapture } from "./components/email-capture";
-import { FollowDiscovery, type FollowSuggestion } from "./components/follow-discovery";
+import { type FollowSuggestion } from "./components/follow-discovery";
+import { FollowingFeed } from "./components/following-feed";
 import { LiveEventFeed, type LiveFeedEvent } from "./components/live-event-feed";
 import { getPostUrl, getRecentPosts, type BlogPost } from "@/lib/blog";
 import { authorProfileHandle, getLatestSignals, type Signal } from "@/lib/signals";
@@ -103,6 +104,7 @@ function signalToCard(signal: Signal, index: number): FeedItem {
     authorHref: authorHandle && authorName !== "Albis" ? `/u/${authorHandle}` : null,
     source: signal.region || (isPeopleCard ? "reader card" : undefined),
     timestamp: prettyTime(signal.published_at),
+    tags: signal.tags || [],
     aiReviewStatus,
     publishedAt: signal.published_at,
     action: "Open",
@@ -126,6 +128,7 @@ function weatherToCard(report: WeatherReport, index: number): FeedItem {
     author: "Albis Weather",
     source: report.status.replaceAll("-", " "),
     timestamp: prettyReportDate(weatherRun.date),
+    tags: ["weather", "community-watch"],
     publishedAt: `${weatherRun.date}T12:00:00Z`,
     action: "Open",
     commentCount: 0,
@@ -145,6 +148,7 @@ function postToCard(post: BlogPost, index: number): FeedItem {
     author: post.author || "Albis",
     timestamp: prettyTime(post.date),
     publishedAt: post.date,
+    tags: [post.category].filter(Boolean),
     action: "Read",
     articleSlug: post.slug,
     commentCount: 0,
@@ -219,6 +223,17 @@ function buildFollowSuggestions(signals: Signal[]): FollowSuggestion[] {
         description: "Follow this topic to pull more related cards into your feed.",
       });
     }
+    for (const tag of signal.tags || []) {
+      const label = tag.replaceAll("-", " ");
+      const id = `topic:${slugifyFollow(tag)}`;
+      suggestions.set(id, {
+        id,
+        type: "topic",
+        label,
+        title: label,
+        description: "Follow this tag to pull more related cards into your feed.",
+      });
+    }
     if (signal.region) {
       const id = `source:${slugifyFollow(signal.region)}`;
       suggestions.set(id, {
@@ -233,6 +248,7 @@ function buildFollowSuggestions(signals: Signal[]): FollowSuggestion[] {
 
   const starter: FollowSuggestion[] = [
     { id: "person:zinfinite", type: "person", label: "@zinfinite", title: "@zinfinite", description: "Follow Ignatius’s cards and early community posts." },
+    { id: "topic:life-systems", type: "topic", label: "Life Systems", title: "Life Systems", description: "Follow food, water, energy, climate, infrastructure, health, supply chain, and resilience cards." },
     { id: "topic:human-nature", type: "topic", label: "Human Nature", title: "Human Nature", description: "Follow reflections, links, and discussion around human behaviour and meaning." },
     { id: "topic:weather", type: "topic", label: "Weather", title: "Weather", description: "Follow local weather-watch and community-risk cards." },
     { id: "source:albis", type: "source", label: "Albis", title: "Albis", description: "Follow official Albis cards, briefings, and source intelligence." },
@@ -300,7 +316,7 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
       <section className="mx-auto grid max-w-5xl gap-6 px-4 py-5 md:px-6 lg:grid-cols-[minmax(0,1fr)_300px]">
         <div>
           {activeFilter === "following" ? (
-            <FollowDiscovery suggestions={followSuggestions} />
+            <FollowingFeed cards={topCards.slice(0, 24)} suggestions={followSuggestions} />
           ) : (
             <>
               {activeFilter === "saved" ? (
