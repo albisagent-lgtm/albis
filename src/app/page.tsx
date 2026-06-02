@@ -9,7 +9,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 
 export const revalidate = 300;
 
-type FeedFilter = "top" | "latest" | "discussed" | "weather" | "following" | "saved";
+type FeedFilter = "top" | "latest" | "human" | "ai" | "discussed" | "weather" | "following" | "saved";
 
 type WeatherReport = {
   city: { name: string; country: string; region?: string };
@@ -29,6 +29,8 @@ const weatherRun = latestWeatherRun as WeatherRun;
 const filters: Array<{ key: FeedFilter; label: string }> = [
   { key: "top", label: "Top" },
   { key: "latest", label: "Latest" },
+  { key: "human", label: "Human" },
+  { key: "ai", label: "AI-reviewed" },
   { key: "discussed", label: "Discussed" },
   { key: "weather", label: "Weather" },
   { key: "following", label: "Following" },
@@ -262,11 +264,15 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
     ? topCards.slice(0, 14)
     : activeFilter === "latest"
       ? latestCards.slice(0, 14)
-      : activeFilter === "discussed"
-        ? discussedCards.slice(0, 14)
-        : activeFilter === "weather"
-          ? topCards.filter((card) => card.bucket === "weather").slice(0, 14)
-          : [];
+      : activeFilter === "human"
+        ? topCards.filter((card) => card.bucket === "people" && !card.aiReviewStatus).slice(0, 14)
+        : activeFilter === "ai"
+          ? topCards.filter((card) => card.aiReviewStatus && card.aiReviewStatus !== "not_requested").slice(0, 14)
+          : activeFilter === "discussed"
+            ? discussedCards.slice(0, 14)
+            : activeFilter === "weather"
+              ? topCards.filter((card) => card.bucket === "weather").slice(0, 14)
+              : [];
   const latestPosts = posts.slice(0, 5);
   const followSuggestions = buildFollowSuggestions(signals);
 
@@ -277,7 +283,7 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.16em] text-[#b58320]">Albis</p>
-              <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">Today’s cards</h1>
+              <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">Cards</h1>
             </div>
             <Link href="/create" className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]">
               Create
