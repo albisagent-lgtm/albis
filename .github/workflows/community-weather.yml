@@ -2,8 +2,10 @@ name: Community Weather Daily
 
 on:
   schedule:
-    # 06:20 UTC = evening NZ / morning UK. Keeps a stable daily rhythm without colliding with the main briefing.
+    # 06:20 UTC = evening NZ / morning UK. Main daily weather scan; can publish social copy.
     - cron: '20 6 * * *'
+    # 18:20 UTC = morning NZ / evening UK. Keeps homepage weather from looking stale across time zones.
+    - cron: '20 18 * * *'
   workflow_dispatch:
     inputs:
       post:
@@ -45,7 +47,8 @@ jobs:
         run: |
           set -euo pipefail
           SHOULD_POST="false"
-          if [ "${{ github.event_name }}" = "schedule" ] && [ -n "${POSTIZ_API_KEY:-}" ]; then
+          UTC_HOUR="$(date -u +%H)"
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$UTC_HOUR" = "06" ] && [ -n "${POSTIZ_API_KEY:-}" ]; then
             SHOULD_POST="true"
           fi
           if [ "${{ github.event.inputs.post || 'false' }}" = "true" ] && [ -n "${POSTIZ_API_KEY:-}" ]; then
@@ -69,6 +72,8 @@ jobs:
             echo "No generated weather changes to commit"
           else
             git commit -m "Update community weather report"
+            git fetch origin main
+            git pull --rebase origin main
             git push
           fi
 
