@@ -101,6 +101,16 @@ export default async function SignalDetailPage({ params }: Props) {
 
   const commentSlug = signal.article_slug || `signal-${signal.id}`;
   const authorName = typeof signal.metadata?.author_name === "string" ? signal.metadata.author_name : "Albis";
+  const aiReviewStatus = typeof signal.metadata?.ai_review_status === "string" ? signal.metadata.ai_review_status : null;
+  const aiReviewLabel = aiReviewStatus === "generated"
+    ? "AI-reviewed by Albis"
+    : aiReviewStatus === "processing"
+      ? "Albis AI review in progress"
+      : aiReviewStatus === "queued"
+        ? "Queued for Albis AI review"
+        : aiReviewStatus === "failed"
+          ? "AI review failed"
+          : null;
 
   return (
     <main className="min-h-screen bg-[#f8f7f4] text-[#111] dark:bg-[#101010] dark:text-[#f4f1ea]">
@@ -114,7 +124,9 @@ export default async function SignalDetailPage({ params }: Props) {
           <h1 className="mt-3 font-[family-name:var(--font-playfair)] text-3xl font-bold leading-tight tracking-tight md:text-5xl">
             {signal.title}
           </h1>
-          <p className="mt-3 font-[family-name:var(--font-inter)] text-xs text-zinc-400">{authorName} · {formatDate(signal.updated_at || signal.published_at)}</p>
+          <p className="mt-3 font-[family-name:var(--font-inter)] text-xs text-zinc-400">
+            Published by {authorName}{aiReviewLabel ? ` · ${aiReviewLabel}` : ""} · {formatDate(signal.updated_at || signal.published_at)}
+          </p>
           {signal.summary ? <p className="mt-5 text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">{signal.summary}</p> : null}
           {signal.bullets.length ? (
             <ul className="mt-5 space-y-2 text-[15px] leading-relaxed text-zinc-800 dark:text-zinc-200">

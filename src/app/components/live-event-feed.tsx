@@ -20,7 +20,17 @@ export type LiveFeedEvent = {
   source?: string;
   sourceHref?: string;
   timestamp?: string;
+  aiReviewStatus?: string | null;
 };
+
+function aiReviewLabel(status?: string | null) {
+  if (!status || status === "not_requested") return null;
+  if (status === "generated") return "AI-reviewed by Albis";
+  if (status === "processing") return "Albis AI review in progress";
+  if (status === "queued") return "Queued for Albis AI review";
+  if (status === "failed") return "AI review failed";
+  return "Albis AI review";
+}
 
 function CommentLabel({ count }: { count?: number | null }) {
   if (!count) return <>Comment</>;
@@ -29,7 +39,8 @@ function CommentLabel({ count }: { count?: number | null }) {
 
 function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEvent; feature?: boolean; open: boolean; onToggle: () => void }) {
   const [saved, setSaved] = useState(false);
-  const byline = [event.author || event.source || "Albis", event.timestamp || event.meta].filter(Boolean).join(" · ");
+  const reviewLabel = aiReviewLabel(event.aiReviewStatus);
+  const byline = [event.author || event.source || "Albis", reviewLabel, event.timestamp || event.meta].filter(Boolean).join(" · ");
   const commentSlug = event.cardSlug || event.articleSlug || event.id;
 
   async function shareCard() {
