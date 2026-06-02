@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     template: "%s | Albis News",
   },
   description:
-    "Cards, articles, weather updates, and discussion from Albis.",
+    "A card-first news intelligence and community context platform for truth, trust, and clarity across information cycles.",
   keywords: [
     "global news",
     "world news",
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "Albis",
     title: "Albis — Cards",
-    description: "Cards, articles, weather updates, and discussion from Albis.",
+    description: "A card-first news intelligence and community context platform for truth, trust, and clarity across information cycles.",
     images: [
       {
         url: "/og-image.png",
@@ -92,7 +92,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Albis — Cards",
-    description: "Cards, articles, weather updates, and discussion from Albis.",
+    description: "A card-first news intelligence and community context platform for truth, trust, and clarity across information cycles.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -160,7 +160,7 @@ export default function RootLayout({
                 height: 512,
               },
               description:
-                "Albis is a global news intelligence platform that scans media in 16 languages across 60 countries three times daily, measuring narrative divergence using the Perception Gap Index (PGI) and Global Attention Index (GAI).",
+                "Albis is a card-first news intelligence and community context platform that scans media across languages and regions, turns events into sourced cards, and invites people to add local knowledge, feedback, and clarity.",
               foundingDate: "2026",
               sameAs: [
                 "https://twitter.com/AlbisDaily",
