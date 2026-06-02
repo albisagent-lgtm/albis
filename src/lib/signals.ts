@@ -120,6 +120,49 @@ export const getSignalByArticleSlug = cache(async (articleSlug: string): Promise
   }
 });
 
+export const getSignalsByAuthorHandle = cache(async (handle: string, limit = 24): Promise<Signal[]> => {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return [];
+  const cleanHandle = String(handle || "").trim().replace(/^@+/, "").toLowerCase().replace(/[^a-z0-9_.-]/g, "").slice(0, 80);
+  if (!cleanHandle) return [];
+  const names = [`@${cleanHandle}`, cleanHandle];
+  try {
+    const supabase = createAnonClient();
+    const results: Signal[] = [];
+    for (const name of names) {
+      const { data, error } = await supabase
+        .from("albis_live_signals")
+        .select(SIGNAL_COLUMNS)
+        .eq("status", "published")
+        .eq("metadata->>author_name", name)
+        .order("published_at", { ascending: false })
+        .limit(limit);
+      if (error) {
+        if (error.code === "42P01" || /signals/i.test(error.message)) return [];
+        console.error(`[signals] getSignalsByAuthorHandle(${cleanHandle}) failed`, error.message);
+        continue;
+      }
+      results.push(...(data || []).map((row) => normaliseSignal(row as Record<string, unknown>)));
+    }
+    const seen = new Set<string>();
+    return results
+      .filter((signal) => {
+        if (seen.has(signal.id)) return false;
+        seen.add(signal.id);
+        return true;
+      })
+      .sort((a, b) => new Date(b.published_at || 0).getTime() - new Date(a.published_at || 0).getTime())
+      .slice(0, limit);
+  } catch (error) {
+    console.error(`[signals] getSignalsByAuthorHandle(${cleanHandle}) threw`, error);
+    return [];
+  }
+});
+
+export function authorProfileHandle(authorName: unknown) {
+  const clean = String(authorName || "").trim().replace(/^@+/, "").toLowerCase().replace(/[^a-z0-9_.-]/g, "").slice(0, 80);
+  return clean || null;
+}
+
 export async function upsertSignal(signal: GeneratedSignal) {
   const supabase = createAdminClient();
   const row = {

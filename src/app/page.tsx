@@ -3,7 +3,7 @@ import { EmailCapture } from "./components/email-capture";
 import { FollowDiscovery, type FollowSuggestion } from "./components/follow-discovery";
 import { LiveEventFeed, type LiveFeedEvent } from "./components/live-event-feed";
 import { getPostUrl, getRecentPosts, type BlogPost } from "@/lib/blog";
-import { getLatestSignals, type Signal } from "@/lib/signals";
+import { authorProfileHandle, getLatestSignals, type Signal } from "@/lib/signals";
 import latestWeatherRun from "../../public/community-weather/latest.json";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -89,6 +89,7 @@ function signalToCard(signal: Signal, index: number): FeedItem {
   const label = signal.category?.replaceAll("-", " ") || "albis";
   const cardSlug = signal.article_slug || `signal-${signal.id}`;
   const authorName = typeof signal.metadata?.author_name === "string" ? signal.metadata.author_name : "Albis";
+  const authorHandle = authorProfileHandle(authorName);
   const aiReviewStatus = typeof signal.metadata?.ai_review_status === "string" ? signal.metadata.ai_review_status : null;
   const isPeopleCard = label.startsWith("people");
   return {
@@ -99,6 +100,7 @@ function signalToCard(signal: Signal, index: number): FeedItem {
     title: signal.title,
     summary: signal.summary,
     author: authorName,
+    authorHref: authorHandle && authorName !== "Albis" ? `/u/${authorHandle}` : null,
     source: signal.region || (isPeopleCard ? "reader card" : undefined),
     timestamp: prettyTime(signal.published_at),
     aiReviewStatus,

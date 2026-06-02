@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getSignalBySlug } from "@/lib/signals";
+import { authorProfileHandle, getSignalBySlug } from "@/lib/signals";
 import { ArticleComments } from "@/app/components/article-comments";
 
 export const revalidate = 300;
@@ -101,6 +102,7 @@ export default async function SignalDetailPage({ params }: Props) {
 
   const commentSlug = signal.article_slug || `signal-${signal.id}`;
   const authorName = typeof signal.metadata?.author_name === "string" ? signal.metadata.author_name : "Albis";
+  const authorHandle = authorProfileHandle(authorName);
   const aiReviewStatus = typeof signal.metadata?.ai_review_status === "string" ? signal.metadata.ai_review_status : null;
   const aiReviewLabel = aiReviewStatus === "generated"
     ? "AI-reviewed by Albis"
@@ -125,7 +127,11 @@ export default async function SignalDetailPage({ params }: Props) {
             {signal.title}
           </h1>
           <p className="mt-3 font-[family-name:var(--font-inter)] text-xs text-zinc-400">
-            Published by {authorName}{aiReviewLabel ? ` · ${aiReviewLabel}` : ""} · {formatDate(signal.updated_at || signal.published_at)}
+            Published by {authorHandle && authorName !== "Albis" ? (
+              <Link href={`/u/${authorHandle}`} className="font-semibold text-zinc-500 hover:text-[#b58320] dark:text-zinc-300">
+                {authorName}
+              </Link>
+            ) : authorName}{aiReviewLabel ? ` · ${aiReviewLabel}` : ""} · {formatDate(signal.updated_at || signal.published_at)}
           </p>
           {signal.summary ? <p className="mt-5 text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">{signal.summary}</p> : null}
           {signal.bullets.length ? (

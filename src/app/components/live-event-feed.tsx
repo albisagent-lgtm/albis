@@ -19,6 +19,7 @@ export type LiveFeedEvent = {
   author?: string;
   source?: string;
   sourceHref?: string;
+  authorHref?: string | null;
   timestamp?: string;
   aiReviewStatus?: string | null;
 };
@@ -40,7 +41,7 @@ function CommentLabel({ count }: { count?: number | null }) {
 function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEvent; feature?: boolean; open: boolean; onToggle: () => void }) {
   const [saved, setSaved] = useState(false);
   const reviewLabel = aiReviewLabel(event.aiReviewStatus);
-  const byline = [event.author || event.source || "Albis", reviewLabel, event.timestamp || event.meta].filter(Boolean).join(" · ");
+  const bylineTail = [reviewLabel, event.timestamp || event.meta].filter(Boolean).join(" · ");
   const commentSlug = event.cardSlug || event.articleSlug || event.id;
 
   async function shareCard() {
@@ -61,7 +62,14 @@ function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEv
             <span className="rounded-full bg-[#c8922a]/10 px-2.5 py-1 font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">
               {event.label}
             </span>
-            {byline ? <p className="font-[family-name:var(--font-inter)] text-xs text-zinc-400">{byline}</p> : null}
+            <p className="font-[family-name:var(--font-inter)] text-xs text-zinc-400">
+              {event.authorHref ? (
+                <Link href={event.authorHref} className="font-semibold hover:text-[#b58320]">
+                  {event.author || event.source || "Albis"}
+                </Link>
+              ) : event.author || event.source || "Albis"}
+              {bylineTail ? ` · ${bylineTail}` : ""}
+            </p>
           </div>
 
           <Link href={event.href} onClick={() => trackFeedEvent(commentSlug, "open", { href: event.href })} className="group mt-3 block">
