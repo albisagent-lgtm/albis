@@ -1,0 +1,28 @@
+name: Process feed AI review cards
+
+on:
+  schedule:
+    # Beta/moderate load: keep queued AI-review cards moving without doing inline generation.
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Trigger AI review processor
+        env:
+          SCAN_INGEST_KEY: ${{ secrets.SCAN_INGEST_KEY }}
+        run: |
+          if [ -z "$SCAN_INGEST_KEY" ]; then
+            echo "SCAN_INGEST_KEY secret is not configured."
+            exit 1
+          fi
+
+          curl --fail-with-body --show-error --silent \
+            --request POST \
+            --header "Authorization: Bearer ${SCAN_INGEST_KEY}" \
+            --header "Content-Type: application/json" \
+            --data '{"limit":5}' \
+            https://www.albis.news/api/cron/feed-ai-review
