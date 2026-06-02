@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic";
 
 const MAX_TITLE_LENGTH = 140;
 const MAX_CONTEXT_LENGTH = 1400;
+const MAX_ARTICLE_BODY_LENGTH = 30000;
 const MAX_LINKS = 8;
 const RATE_LIMIT_WINDOW_MINUTES = Number(process.env.ALBIS_FEED_CARD_RATE_WINDOW_MINUTES || 15);
 const RATE_LIMIT_MAX = Number(process.env.ALBIS_FEED_CARD_RATE_LIMIT_MAX || 60);
@@ -114,6 +115,54 @@ function slugify(value: string) {
   return `card-${base || "update"}-${suffix}`;
 }
 
+function slugifyArticle(value: string) {
+  const base = value
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 90);
+  const suffix = Math.random().toString(36).slice(2, 7);
+  return `${base || "article"}-${suffix}`;
+}
+
+function estimateReadingTime(text: string) {
+  return Math.max(1, Math.ceil(text.split(/\s+/).filter(Boolean).length / 230));
+}
+
+function excerptFrom(text: string, fallback: string) {
+  return (fallback || text.replace(/[#*_>`-]/g, " ").replace(/\s+/g, " ").trim()).slice(0, 240);
+}
+
+function articleCategory(category: string) {
+  if (category === "life-systems") return "life-systems";
+  if (category === "world") return "current-events";
+  if (category === "money") return "economic-flows";
+  if (category === "tech") return "tech-ai";
+  if (category === "climate") return "climate-energy";
+  if (category === "health") return "health";
+  if (category === "governance") return "governance";
+  if (category === "research") return "research";
+  return "perspectives";
+}
+
+function articleSection(category: string) {
+  const mapped = articleCategory(category);
+  const lookup: Record<string, string> = {
+    "life-systems": "life-systems",
+    "current-events": "world",
+    "economic-flows": "money",
+    "tech-ai": "tech",
+    "climate-energy": "climate",
+    health: "world",
+    governance: "world",
+    research: "perspectives",
+    perspectives: "perspectives",
+  };
+  return lookup[mapped] || "perspectives";
+}
+
 function getClientIp(request: Request) {
   const forwarded = request.headers.get("x-forwarded-for") || request.headers.get("cf-connecting-ip") || "";
   return forwarded.split(",")[0]?.trim() || "unknown";
@@ -140,9 +189,11 @@ export async function POST(request: Request) {
   const sourceUrls = [...new Set([cleanUrl(payload.source_url), ...cleanUrls(payload.source_urls)].filter((url): url is string => Boolean(url)))].slice(0, MAX_LINKS);
   const sourceUrl = sourceUrls[0] || null;
   const aiReviewRequested = cleanBoolean(payload.ai_review_requested);
+  const fullArticleRequested = cleanBoolean(payload.full_article_requested);
   const rawTitle = cleanText(payload.title, MAX_TITLE_LENGTH);
   const title = rawTitle || (aiReviewRequested && sourceUrls.length ? `AI review requested: ${hostSummary(sourceUrls)}` : "");
   const context = cleanBody(payload.context, MAX_CONTEXT_LENGTH);
+  const articleBody = cleanBody(payload.article_body, MAX_ARTICLE_BODY_LENGTH);
   const category = cleanCategory(payload.category);
   const customSection = cleanCustomSection(payload.custom_section);
   const userTags = cleanTags(payload.user_tags);
@@ -151,7 +202,8 @@ export async function POST(request: Request) {
     : null;
 
   if (title.length < 3) return jsonError("Add a short title, or submit at least one link for AI review.");
-  if (!context && sourceUrls.length === 0) return jsonError("Add context or at least one link.");
+  if (fullArticleRequested && articleBody.length < 80) return jsonError("Add the full article body before publishing.");
+  if (!fullArticleRequested && !context && sourceUrls.length === 0) return jsonError("Add context or at least one link.");
 
   const authSupabase = await createClient();
   const { data: { user } } = await authSupabase.auth.getUser();
@@ -181,10 +233,16 @@ export async function POST(request: Request) {
   );
   const now = new Date().toISOString();
   let finalTitle = title;
+  let articleSlug: string | null = null;
+  let articleUrl = sourceUrl;
   let summary = aiReviewRequested
     ? context || `Submitted ${sourceUrls.length} link${sourceUrls.length === 1 ? "" : "s"} for Albis AI review.`
-    : context || sourceUrl || "";
-  let bullets = context
+    : fullArticleRequested
+      ? excerptFrom(articleBody, context)
+      : context || sourceUrl || "";
+  let bullets = fullArticleRequested
+    ? [excerptFrom(articleBody, context), ...sourceUrls.slice(0, 3)].filter(Boolean).slice(0, 4)
+    : context
     ? context.split("\n").map((line) => line.trim()).filter(Boolean).slice(0, 4)
     : sourceUrls.slice(0, 4);
   let stillUnclear: string | null = null;
@@ -214,10 +272,52 @@ export async function POST(request: Request) {
 
   const slug = slugify(finalTitle);
 
+  if (fullArticleRequested) {
+    articleSlug = slugifyArticle(finalTitle);
+    const articleRow = {
+      slug: articleSlug,
+      title: finalTitle,
+      description: excerptFrom(articleBody, context),
+      date: now.split("T")[0],
+      category: articleCategory(category),
+      tags: [...new Set([category, customSectionTag, ...userTags].filter(Boolean) as string[])].slice(0, 14),
+      keywords: [...new Set([category, customSectionTag, ...userTags].filter(Boolean) as string[])].slice(0, 14),
+      image: "/og-image.png",
+      excerpt: excerptFrom(articleBody, context),
+      author: authorName,
+      content: articleBody,
+      reading_time: estimateReadingTime(articleBody),
+      published_at: now,
+      frontmatter: {
+        created_via: "create-page",
+        linked_card_slug: slug,
+        author_id: user?.id || null,
+        system_section: category,
+        custom_section: customSection || null,
+        discovery_section: customSection || category,
+        sources: sourceUrls.map((url) => ({ name: (() => {
+          try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return "Source"; }
+        })(), url })),
+        confidence: "developing",
+      },
+    };
+
+    const { error: articleError } = await supabase
+      .from("articles")
+      .upsert(articleRow, { onConflict: "slug" });
+
+    if (articleError) {
+      console.error("[feed-cards] article insert failed", articleError.message);
+      return jsonError("Could not publish article.", 500);
+    }
+
+    articleUrl = `/${articleSection(category)}/${articleSlug}`;
+  }
+
   const row = {
     slug,
-    article_slug: null,
-    article_url: sourceUrl,
+    article_slug: articleSlug,
+    article_url: articleUrl,
     title: finalTitle,
     summary,
     bullets,
@@ -225,7 +325,7 @@ export async function POST(request: Request) {
     category: `people-${category}`,
     region: null,
     tags: [...new Set(["people", category, customSectionTag, ...userTags, ...aiTags].filter(Boolean) as string[])].slice(0, 14),
-    source_note: aiReviewRequested ? "AI review requested" : sourceUrls.length > 1 ? `${sourceUrls.length} links attached` : sourceUrl ? "Link attached" : "Reader card",
+    source_note: fullArticleRequested ? "Full article attached" : aiReviewRequested ? "AI review requested" : sourceUrls.length > 1 ? `${sourceUrls.length} links attached` : sourceUrl ? "Link attached" : "Reader card",
     status: "published",
     priority: 35,
     comment_count: 0,
@@ -249,7 +349,10 @@ export async function POST(request: Request) {
       ai_model_used: aiModelUsed,
       ai_error: aiError,
       source_read_domains: sourceReadDomains,
-      creation_mode: aiReviewRequested ? "ai-review-auto" : "manual-card",
+      full_article_requested: fullArticleRequested,
+      article_slug: articleSlug,
+      article_url: articleUrl,
+      creation_mode: fullArticleRequested ? "full-article-card" : aiReviewRequested ? "ai-review-auto" : "manual-card",
       ip_hash: ipHash,
     },
   };
@@ -272,6 +375,7 @@ export async function POST(request: Request) {
     ok: true,
     card: data,
     url: `/signals/${slug}`,
-    message: aiReviewRequested && aiReviewStatus === "generated" ? "AI review card posted." : aiReviewRequested ? "Card posted. AI review is generating automatically." : "Card posted.",
+    article_url: articleUrl,
+    message: fullArticleRequested ? "Article published and card posted." : aiReviewRequested && aiReviewStatus === "generated" ? "AI review card posted." : aiReviewRequested ? "Card posted. AI review is generating automatically." : "Card posted.",
   });
 }

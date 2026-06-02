@@ -20,7 +20,7 @@ const CATEGORIES = [
   { value: "other", label: "+ Other" },
 ];
 
-type CreateMode = "manual" | "ai-review";
+type CreateMode = "manual" | "ai-review" | "article";
 
 function parseLinks(value: string) {
   return value
@@ -43,6 +43,7 @@ export function CreateCardForm() {
   const [title, setTitle] = useState("");
   const [sourceLinks, setSourceLinks] = useState("");
   const [context, setContext] = useState("");
+  const [articleBody, setArticleBody] = useState("");
   const [category, setCategory] = useState("update");
   const [customSection, setCustomSection] = useState("");
   const [tagInput, setTagInput] = useState("");
@@ -55,7 +56,9 @@ export function CreateCardForm() {
   const tags = useMemo(() => parseTags(tagInput), [tagInput]);
   const canSubmit = mode === "ai-review"
     ? links.length > 0 || title.trim().length >= 3 || context.trim().length > 0
-    : title.trim().length >= 3 && (context.trim().length > 0 || links.length > 0);
+    : mode === "article"
+      ? title.trim().length >= 3 && articleBody.trim().length >= 80
+      : title.trim().length >= 3 && (context.trim().length > 0 || links.length > 0);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -72,6 +75,8 @@ export function CreateCardForm() {
           source_url: links[0] || "",
           source_urls: links,
           context,
+          article_body: articleBody,
+          full_article_requested: mode === "article",
           category: mode === "ai-review" && category === "update" ? "research" : category,
           custom_section: customSection,
           user_tags: tags,
@@ -85,6 +90,7 @@ export function CreateCardForm() {
       setTitle("");
       setSourceLinks("");
       setContext("");
+      setArticleBody("");
       setCategory("update");
       setCustomSection("");
       setTagInput("");
@@ -115,6 +121,14 @@ export function CreateCardForm() {
           <span className="block font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">AI review my links</span>
           <span className="mt-1 block text-sm text-zinc-500 dark:text-zinc-400">Submit one or more links for an Albis review/context card.</span>
         </button>
+        <button
+          type="button"
+          onClick={() => setMode("article")}
+          className={`rounded-2xl border p-3 text-left transition sm:col-span-2 ${mode === "article" ? "border-[#c8922a]/60 bg-[#c8922a]/10" : "border-black/[0.08] hover:border-[#c8922a]/35 dark:border-white/[0.08]"}`}
+        >
+          <span className="block font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">Full article + card</span>
+          <span className="mt-1 block text-sm text-zinc-500 dark:text-zinc-400">Publish a deeper article/report and automatically create a feed card that links into it.</span>
+        </button>
       </div>
 
       <label className="block">
@@ -123,9 +137,9 @@ export function CreateCardForm() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           maxLength={140}
-          required={mode === "manual"}
+          required={mode === "manual" || mode === "article"}
           className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
-          placeholder={mode === "ai-review" ? "Optional title for the review card" : "Title"}
+          placeholder={mode === "ai-review" ? "Optional title for the review card" : mode === "article" ? "Article headline" : "Title"}
         />
       </label>
 
@@ -195,9 +209,23 @@ export function CreateCardForm() {
           onChange={(e) => setContext(e.target.value)}
           maxLength={1400}
           className="min-h-32 w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
-          placeholder={mode === "ai-review" ? "Optional: what should Albis look for? What's your angle or question?" : "Write your card, note, article summary, or context"}
+          placeholder={mode === "ai-review" ? "Optional: what should Albis look for? What's your angle or question?" : mode === "article" ? "Short card summary / intro for the feed" : "Write your card, note, article summary, or context"}
         />
       </label>
+
+      {mode === "article" ? (
+        <label className="block">
+          <span className="mb-1 block font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">Article body</span>
+          <textarea
+            value={articleBody}
+            onChange={(e) => setArticleBody(e.target.value)}
+            maxLength={30000}
+            className="min-h-[360px] w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm leading-relaxed outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
+            placeholder="Write the full article here. Use short paragraphs; markdown-style headings and bullet points are okay. The feed card will be created automatically."
+          />
+          <p className="mt-1 text-xs text-zinc-400">{articleBody.trim().split(/\s+/).filter(Boolean).length} words. Minimum 80 characters for now.</p>
+        </label>
+      ) : null}
 
       <input
         tabIndex={-1}
@@ -214,7 +242,7 @@ export function CreateCardForm() {
           disabled={loading || !canSubmit}
           className="rounded-full bg-[#111] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#b58320] disabled:cursor-not-allowed disabled:opacity-45 dark:bg-white dark:text-black"
         >
-          {loading ? "Posting…" : mode === "ai-review" ? "Submit for AI review" : "Post card"}
+          {loading ? "Posting…" : mode === "ai-review" ? "Submit for AI review" : mode === "article" ? "Publish article + card" : "Post card"}
         </button>
         {postedUrl ? (
           <Link href={postedUrl} className="font-[family-name:var(--font-inter)] text-sm font-bold text-[#b58320] hover:underline">
@@ -226,6 +254,11 @@ export function CreateCardForm() {
       {mode === "ai-review" ? (
         <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
           Albis will automatically read what it can from the links and publish an AI review card. If a source cannot be read, the card will say what remains unclear rather than inventing details.
+        </p>
+      ) : null}
+      {mode === "article" ? (
+        <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
+          Articles are the deeper layer. Albis will publish the full piece in Read and create a card for the feed so discussion, source links, and discovery still start from the card.
         </p>
       ) : null}
       {postedUrl ? <p className="text-sm text-emerald-700 dark:text-emerald-300">Card posted. It should appear in the feed shortly.</p> : null}
