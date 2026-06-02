@@ -26,11 +26,28 @@ jobs:
 
       - run: npm ci
 
+      - run: npm run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Public Supabase values are intentionally hardcoded here so the
+          # Next/OpenNext build cannot inline empty strings when optional
+          # GitHub secrets are absent. Runtime also has these in wrangler.jsonc.
+          NEXT_PUBLIC_SUPABASE_URL: https://wguydvzpxwsgrhvojpnk.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: sb_publishable_TijRtvYeJ-iL8HhhS8NpMg_zbla_orj
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+
       # Runtime secret sync is intentionally scoped to secrets managed from
       # GitHub. Other runtime secrets/vars such as RESEND_API_KEY,
       # SCAN_INGEST_KEY, PEXELS_API_KEY and Company Scan flags are managed
       # directly in Cloudflare, so this workflow does not warn when they are not
       # present as GitHub repo secrets.
+      # Cloudflare Worker versions can reject secret edits when the latest
+      # version is not deployed, so deploy first and sync these managed secrets
+      # after the new Worker version is live.
       - name: Sync Cloudflare runtime secrets
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -53,17 +70,3 @@ jobs:
           put_secret SUPABASE_SERVICE_ROLE_KEY
           put_secret STRIPE_SECRET_KEY
           put_secret STRIPE_WEBHOOK_SECRET
-
-      - run: npm run deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # Public Supabase values are intentionally hardcoded here so the
-          # Next/OpenNext build cannot inline empty strings when optional
-          # GitHub secrets are absent. Runtime also has these in wrangler.jsonc.
-          NEXT_PUBLIC_SUPABASE_URL: https://wguydvzpxwsgrhvojpnk.supabase.co
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: sb_publishable_TijRtvYeJ-iL8HhhS8NpMg_zbla_orj
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
-          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
-          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
