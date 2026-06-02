@@ -27,16 +27,21 @@ type FeedItem = LiveFeedEvent & { bucket: "albis" | "people" | "weather"; weight
 type FeedScoreRow = { card_slug: string; score: number | string | null; comments_count: number | null; shares_count: number | null; saves_count: number | null; unique_opens: number | null };
 
 const weatherRun = latestWeatherRun as WeatherRun;
-const filters: Array<{ key: FeedFilter; label: string }> = [
+const primaryFilters: Array<{ key: FeedFilter; label: string }> = [
   { key: "top", label: "Top" },
   { key: "latest", label: "Latest" },
+  { key: "following", label: "Following" },
+];
+
+const secondaryFilters: Array<{ key: FeedFilter; label: string }> = [
   { key: "human", label: "Human" },
   { key: "ai", label: "AI-reviewed" },
   { key: "discussed", label: "Discussed" },
   { key: "weather", label: "Weather" },
-  { key: "following", label: "Following" },
   { key: "saved", label: "Saved" },
 ];
+
+const filters = [...primaryFilters, ...secondaryFilters];
 
 const peopleCards: FeedItem[] = [
   {
@@ -135,6 +140,15 @@ function weatherToCard(report: WeatherReport, index: number): FeedItem {
     bucket: "weather",
     weight: 86 - index,
   };
+}
+
+function weatherAgeLabel() {
+  const generated = new Date(weatherRun.generatedAt || `${weatherRun.date}T12:00:00Z`);
+  if (Number.isNaN(generated.getTime())) return null;
+  const hours = Math.floor((Date.now() - generated.getTime()) / (1000 * 60 * 60));
+  if (hours < 0) return null;
+  if (hours < 24) return `Weather scan updated ${hours || 1}h ago`;
+  return `Weather scan is ${Math.floor(hours / 24)}d old`;
 }
 
 function postToCard(post: BlogPost, index: number): FeedItem {
@@ -270,29 +284,32 @@ function ReadRow({ post }: { post: BlogPost }) {
 export default async function Home({ searchParams }: { searchParams?: Promise<{ filter?: string }> }) {
   const params = await searchParams;
   const activeFilter = filters.some((item) => item.key === params?.filter) ? params?.filter as FeedFilter : "top";
-  const [signals, posts, scoreMap] = await Promise.all([getLatestSignals(18), getRecentPosts(12), getFeedScoreMap()]);
+  const [signals, posts, scoreMap] = await Promise.all([getLatestSignals(50), getRecentPosts(24), getFeedScoreMap()]);
   const signalCards = signals.map(signalToCard);
-  const weatherCards = weatherRun.reports.filter((report) => report.status !== "routine").slice(0, 6).map(weatherToCard);
-  const readCards = posts.slice(0, 4).map(postToCard);
-  const cards = applyScores([...signalCards.slice(0, 8), ...weatherCards, ...peopleCards, ...readCards], scoreMap);
+  const activeWeatherReports = weatherRun.reports.filter((report) => report.status !== "routine");
+  const weatherReportsForFeed = (activeWeatherReports.length ? activeWeatherReports : weatherRun.reports).slice(0, 36);
+  const weatherCards = weatherReportsForFeed.map(weatherToCard);
+  const readCards = posts.slice(0, 12).map(postToCard);
+  const cards = applyScores([...signalCards, ...weatherCards, ...peopleCards, ...readCards], scoreMap);
   const topCards = [...cards].sort((a, b) => b.weight - a.weight);
   const latestCards = [...cards].sort((a, b) => new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime() || b.weight - a.weight);
   const discussedCards = [...cards].sort((a, b) => (b.commentCount || 0) - (a.commentCount || 0) || (b.score || 0) - (a.score || 0) || b.weight - a.weight);
   const visibleCards = activeFilter === "top"
-    ? topCards.slice(0, 14)
+    ? topCards.slice(0, 30)
     : activeFilter === "latest"
-      ? latestCards.slice(0, 14)
+      ? latestCards.slice(0, 30)
       : activeFilter === "human"
-        ? topCards.filter((card) => card.bucket === "people" && !card.aiReviewStatus).slice(0, 14)
+        ? topCards.filter((card) => card.bucket === "people" && !card.aiReviewStatus).slice(0, 30)
         : activeFilter === "ai"
-          ? topCards.filter((card) => card.aiReviewStatus && card.aiReviewStatus !== "not_requested").slice(0, 14)
+          ? topCards.filter((card) => card.aiReviewStatus && card.aiReviewStatus !== "not_requested").slice(0, 30)
           : activeFilter === "discussed"
-            ? discussedCards.slice(0, 14)
+            ? discussedCards.slice(0, 30)
             : activeFilter === "weather"
-              ? topCards.filter((card) => card.bucket === "weather").slice(0, 14)
+              ? topCards.filter((card) => card.bucket === "weather").slice(0, 36)
               : [];
   const latestPosts = posts.slice(0, 5);
   const followSuggestions = buildFollowSuggestions(signals);
+  const weatherStatus = weatherAgeLabel();
 
   return (
     <main className="min-h-screen bg-[#f8f7f4] text-[#111] dark:bg-[#101010] dark:text-[#f4f1ea]">
@@ -307,9 +324,18 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
               Create
             </Link>
           </div>
-          <div className="mt-6 flex gap-2 overflow-x-auto pb-1">
-            {filters.map((item) => <FilterChip key={item.key} item={item} active={activeFilter === item.key} />)}
+          <div className="mt-6 flex flex-wrap items-center gap-2">
+            <div className="flex gap-2 overflow-x-auto pb-1">
+              {primaryFilters.map((item) => <FilterChip key={item.key} item={item} active={activeFilter === item.key} />)}
+            </div>
+            <div className="hidden h-6 w-px bg-black/10 dark:bg-white/10 sm:block" />
+            <div className="flex gap-2 overflow-x-auto pb-1">
+              {secondaryFilters.map((item) => <FilterChip key={item.key} item={item} active={activeFilter === item.key} />)}
+            </div>
           </div>
+          <p className="mt-2 font-[family-name:var(--font-inter)] text-xs text-zinc-500 dark:text-zinc-400">
+            Start with Top, Latest, or Following. Use the smaller chips when you want to narrow the feed.
+          </p>
         </div>
       </section>
 
@@ -322,6 +348,11 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
               {activeFilter === "saved" ? (
                 <div className="mb-3 rounded-2xl border border-black/[0.08] bg-white px-4 py-3 text-sm text-zinc-500 dark:border-white/[0.08] dark:bg-white/[0.035] dark:text-zinc-400">
                   Saved cards will appear here once account saves are connected.
+                </div>
+              ) : null}
+              {activeFilter === "weather" && weatherStatus ? (
+                <div className="mb-3 rounded-2xl border border-black/[0.08] bg-white px-4 py-3 font-[family-name:var(--font-inter)] text-sm text-zinc-500 dark:border-white/[0.08] dark:bg-white/[0.035] dark:text-zinc-400">
+                  {weatherStatus}. Showing {visibleCards.length} city weather cards from the latest community-weather scan.
                 </div>
               ) : null}
               {visibleCards.length === 0 ? (
@@ -338,15 +369,16 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
 
         <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
           <div className="rounded-3xl border border-black/[0.08] bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
-            <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-400">Daily briefing</p>
-            <div className="mt-3"><EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} source="feed-home-top-right" /></div>
-          </div>
-
-          <div className="rounded-3xl border border-black/[0.08] bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
             <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">Read</h2>
             <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Latest articles and briefings.</p>
             <div className="mt-2">{latestPosts.map((post) => <ReadRow key={post.slug} post={post} />)}</div>
             <Link href="/read" className="mt-3 inline-flex font-[family-name:var(--font-inter)] text-xs font-bold text-[#b58320]">More writing</Link>
+          </div>
+
+          <div className="rounded-3xl border border-black/[0.08] bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
+            <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-400">Daily briefing</p>
+            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Keep the feed clean; get the summary by email.</p>
+            <div className="mt-3"><EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} source="feed-home-right-rail" /></div>
           </div>
         </aside>
       </section>
