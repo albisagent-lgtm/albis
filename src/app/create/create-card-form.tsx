@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 const CATEGORIES = [
   { value: "update", label: "Update" },
@@ -9,18 +9,35 @@ const CATEGORIES = [
   { value: "question", label: "Question" },
   { value: "event", label: "Event" },
   { value: "research", label: "Research" },
+  { value: "article", label: "Article" },
   { value: "weather", label: "Weather" },
 ];
 
+type CreateMode = "manual" | "ai-review";
+
+function parseLinks(value: string) {
+  return value
+    .split(/\n|,/)
+    .map((link) => link.trim())
+    .filter(Boolean)
+    .slice(0, 8);
+}
+
 export function CreateCardForm() {
+  const [mode, setMode] = useState<CreateMode>("manual");
   const [title, setTitle] = useState("");
-  const [sourceUrl, setSourceUrl] = useState("");
+  const [sourceLinks, setSourceLinks] = useState("");
   const [context, setContext] = useState("");
   const [category, setCategory] = useState("update");
   const [website, setWebsite] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [postedUrl, setPostedUrl] = useState("");
+
+  const links = useMemo(() => parseLinks(sourceLinks), [sourceLinks]);
+  const canSubmit = mode === "ai-review"
+    ? links.length > 0 || title.trim().length >= 3 || context.trim().length > 0
+    : title.trim().length >= 3 && (context.trim().length > 0 || links.length > 0);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -32,15 +49,24 @@ export function CreateCardForm() {
       const res = await fetch("/api/feed/cards", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, source_url: sourceUrl, context, category, website }),
+        body: JSON.stringify({
+          title,
+          source_url: links[0] || "",
+          source_urls: links,
+          context,
+          category: mode === "ai-review" ? "research" : category,
+          ai_review_requested: mode === "ai-review",
+          website,
+        }),
       });
       const payload = await res.json();
       if (!res.ok) throw new Error(payload.error || "Could not post card.");
       setPostedUrl(payload.url || "/");
       setTitle("");
-      setSourceUrl("");
+      setSourceLinks("");
       setContext("");
       setCategory("update");
+      setMode("manual");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not post card.");
     } finally {
@@ -49,51 +75,75 @@ export function CreateCardForm() {
   }
 
   return (
-    <form onSubmit={submit} className="mt-5 space-y-3">
+    <form onSubmit={submit} className="mt-5 space-y-4">
+      <div className="grid gap-2 sm:grid-cols-2">
+        <button
+          type="button"
+          onClick={() => setMode("manual")}
+          className={`rounded-2xl border p-3 text-left transition ${mode === "manual" ? "border-[#c8922a]/60 bg-[#c8922a]/10" : "border-black/[0.08] hover:border-[#c8922a]/35 dark:border-white/[0.08]"}`}
+        >
+          <span className="block font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">Write it myself</span>
+          <span className="mt-1 block text-sm text-zinc-500 dark:text-zinc-400">Post a card, link, note, or article-style update in your own words.</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => setMode("ai-review")}
+          className={`rounded-2xl border p-3 text-left transition ${mode === "ai-review" ? "border-[#c8922a]/60 bg-[#c8922a]/10" : "border-black/[0.08] hover:border-[#c8922a]/35 dark:border-white/[0.08]"}`}
+        >
+          <span className="block font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">AI review my links</span>
+          <span className="mt-1 block text-sm text-zinc-500 dark:text-zinc-400">Submit one or more links for an Albis review/context card.</span>
+        </button>
+      </div>
+
       <label className="block">
         <span className="sr-only">Title</span>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           maxLength={140}
-          required
+          required={mode === "manual"}
           className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
-          placeholder="Title"
+          placeholder={mode === "ai-review" ? "Optional title for the review card" : "Title"}
         />
       </label>
 
       <label className="block">
-        <span className="sr-only">Link</span>
-        <input
-          value={sourceUrl}
-          onChange={(e) => setSourceUrl(e.target.value)}
-          maxLength={500}
-          className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
-          placeholder="Link optional"
+        <span className="mb-1 block font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">
+          {mode === "ai-review" ? "Links to review" : "Link or links"}
+        </span>
+        <textarea
+          value={sourceLinks}
+          onChange={(e) => setSourceLinks(e.target.value)}
+          maxLength={2200}
+          className="min-h-24 w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
+          placeholder="Paste one link per line"
         />
+        {links.length > 0 ? <p className="mt-1 text-xs text-zinc-400">{links.length} link{links.length === 1 ? "" : "s"} attached.</p> : null}
       </label>
 
-      <div className="flex gap-2 overflow-x-auto pb-1">
-        {CATEGORIES.map((item) => (
-          <button
-            key={item.value}
-            type="button"
-            onClick={() => setCategory(item.value)}
-            className={`shrink-0 rounded-full px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold ${category === item.value ? "bg-[#111] text-white dark:bg-white dark:text-black" : "border border-black/[0.12] text-zinc-500 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-400"}`}
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
+      {mode === "manual" ? (
+        <div className="flex gap-2 overflow-x-auto pb-1">
+          {CATEGORIES.map((item) => (
+            <button
+              key={item.value}
+              type="button"
+              onClick={() => setCategory(item.value)}
+              className={`shrink-0 rounded-full px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold ${category === item.value ? "bg-[#111] text-white dark:bg-white dark:text-black" : "border border-black/[0.12] text-zinc-500 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-400"}`}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      ) : null}
 
       <label className="block">
         <span className="sr-only">Context</span>
         <textarea
           value={context}
           onChange={(e) => setContext(e.target.value)}
-          maxLength={900}
+          maxLength={1400}
           className="min-h-32 w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
-          placeholder="Add context"
+          placeholder={mode === "ai-review" ? "Optional: what should Albis look for? What's your angle or question?" : "Write your card, note, article summary, or context"}
         />
       </label>
 
@@ -109,10 +159,10 @@ export function CreateCardForm() {
       <div className="flex flex-wrap items-center gap-3">
         <button
           type="submit"
-          disabled={loading || title.trim().length < 3 || (!context.trim() && !sourceUrl.trim())}
+          disabled={loading || !canSubmit}
           className="rounded-full bg-[#111] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#b58320] disabled:cursor-not-allowed disabled:opacity-45 dark:bg-white dark:text-black"
         >
-          {loading ? "Posting…" : "Post card"}
+          {loading ? "Posting…" : mode === "ai-review" ? "Submit for AI review" : "Post card"}
         </button>
         {postedUrl ? (
           <Link href={postedUrl} className="font-[family-name:var(--font-inter)] text-sm font-bold text-[#b58320] hover:underline">
@@ -121,6 +171,11 @@ export function CreateCardForm() {
         ) : null}
       </div>
 
+      {mode === "ai-review" ? (
+        <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
+          Albis will automatically read what it can from the links and publish an AI review card. If a source cannot be read, the card will say what remains unclear rather than inventing details.
+        </p>
+      ) : null}
       {postedUrl ? <p className="text-sm text-emerald-700 dark:text-emerald-300">Card posted. It should appear in the feed shortly.</p> : null}
       {error ? <p className="text-sm text-red-600 dark:text-red-400">{error}</p> : null}
     </form>

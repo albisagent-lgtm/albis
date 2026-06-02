@@ -7,8 +7,9 @@ export const dynamic = "force-dynamic";
 type FeedEventType = "impression" | "open" | "comment" | "save" | "unsave" | "share" | "follow" | "unfollow" | "hide" | "report";
 
 const EVENT_TYPES = new Set<FeedEventType>(["impression", "open", "comment", "save", "unsave", "share", "follow", "unfollow", "hide", "report"]);
-const MAX_EVENTS_PER_WINDOW = 80;
-const RATE_WINDOW_MINUTES = 10;
+const MAX_EVENTS_PER_WINDOW = Number(process.env.ALBIS_FEED_EVENT_RATE_LIMIT_MAX || 300);
+const RATE_WINDOW_MINUTES = Number(process.env.ALBIS_FEED_EVENT_RATE_WINDOW_MINUTES || 10);
+const SCORE_REFRESH_EVENTS = new Set<FeedEventType>(["comment", "save", "unsave", "share", "follow", "unfollow", "hide", "report"]);
 
 function jsonError(message: string, status = 400) {
   return NextResponse.json({ error: message }, { status });
@@ -176,10 +177,12 @@ export async function POST(request: Request) {
     return jsonError("Could not track feed event.", 500);
   }
 
-  try {
-    await refreshScore(cardSlug);
-  } catch (err) {
-    console.error("[feed-events] score refresh failed", err instanceof Error ? err.message : err);
+  if (SCORE_REFRESH_EVENTS.has(eventType)) {
+    try {
+      await refreshScore(cardSlug);
+    } catch (err) {
+      console.error("[feed-events] score refresh failed", err instanceof Error ? err.message : err);
+    }
   }
 
   return NextResponse.json({ ok: true });

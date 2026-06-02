@@ -13,25 +13,15 @@ export default function CreatePage() {
         <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.16em] text-[#b58320]">Create</p>
         <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">Create a card.</h1>
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-zinc-600 dark:text-zinc-300">
-          Links, updates, notes, and articles can live beside the daily Albis feed.
+          Write your own card or article-style post, or submit one/multiple links for Albis AI to review into a context card.
         </p>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          <section className="rounded-3xl border border-black/[0.08] bg-white p-5 dark:border-white/[0.08] dark:bg-white/[0.035]">
-            <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">Card</h2>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">A link, update, question, event, or short note.</p>
-            <CreateCardForm />
-          </section>
-
-          <section className="rounded-3xl border border-black/[0.08] bg-white p-5 dark:border-white/[0.08] dark:bg-white/[0.035]">
-            <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">Write an article</h2>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">Longer reporting, essays, explainers, or sourced posts.</p>
-            <form className="mt-5 space-y-3">
-              <input className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none dark:border-white/[0.08] dark:bg-white/[0.03]" placeholder="Article title" />
-              <textarea className="min-h-32 w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none dark:border-white/[0.08] dark:bg-white/[0.03]" placeholder="Start writing…" />
-              <button type="button" disabled className="cursor-not-allowed rounded-full border border-black/[0.12] px-5 py-2.5 text-sm font-bold text-zinc-400 dark:border-white/[0.12] dark:text-zinc-500">Articles soon</button>
-            </form>
-          </section>
+        <div className="mt-8 rounded-3xl border border-black/[0.08] bg-white p-5 dark:border-white/[0.08] dark:bg-white/[0.035]">
+          <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">What do you want to publish?</h2>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+            Cards can be short notes, links, questions, events, research bundles, or early article submissions.
+          </p>
+          <CreateCardForm />
         </div>
       </section>
     </main>

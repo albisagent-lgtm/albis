@@ -134,6 +134,29 @@ async function supabaseGetAllPosts(): Promise<BlogPost[] | null> {
   }
 }
 
+async function supabaseGetRecentPosts(limit: number): Promise<BlogPost[] | null> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return null;
+  }
+  try {
+    const supabase = createAnonClient();
+    const { data, error } = await supabase
+      .from("articles")
+      .select(ARTICLE_COLUMNS_LIST)
+      .order("published_at", { ascending: false })
+      .limit(Math.max(1, Math.min(limit, 200)));
+    if (error) {
+      console.error("[blog] supabase getRecentPosts error:", error.message);
+      return null;
+    }
+    if (!data || data.length === 0) return null;
+    return (data as ArticleRow[]).map(rowToPost).filter((p) => !p.noindex).slice(0, limit);
+  } catch (e) {
+    console.error("[blog] supabase getRecentPosts threw:", e);
+    return null;
+  }
+}
+
 async function supabaseGetPostBySlug(slug: string): Promise<BlogPost | null> {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
     return null;
@@ -212,6 +235,13 @@ export const getAllPosts = cache(async (): Promise<BlogPost[]> => {
   const fromDb = await supabaseGetAllPosts();
   if (fromDb && fromDb.length > 0) return fromDb;
   return fsGetAllPosts();
+});
+
+export const getRecentPosts = cache(async (limit = 48): Promise<BlogPost[]> => {
+  const safeLimit = Math.max(1, Math.min(limit, 200));
+  const fromDb = await supabaseGetRecentPosts(safeLimit);
+  if (fromDb && fromDb.length > 0) return fromDb;
+  return fsGetAllPosts().slice(0, safeLimit);
 });
 
 // React.cache so generateMetadata and the page component share one fetch

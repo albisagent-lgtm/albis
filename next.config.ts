@@ -49,6 +49,9 @@ const nextConfig: NextConfig = {
     const ISR_CACHE = "public, s-maxage=300, stale-while-revalidate=3600";
     return [
       { source: "/", headers: [{ key: "Cache-Control", value: ISR_CACHE }] },
+      { source: "/read", headers: [{ key: "Cache-Control", value: ISR_CACHE }] },
+      { source: "/signals", headers: [{ key: "Cache-Control", value: ISR_CACHE }] },
+      { source: "/signals/:slug", headers: [{ key: "Cache-Control", value: ISR_CACHE }] },
       {
         source: `/:section(${SECTIONS})`,
         headers: [{ key: "Cache-Control", value: ISR_CACHE }],

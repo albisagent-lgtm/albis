@@ -229,7 +229,18 @@ export async function generateEditorialJson<T>(input: GenerateEditorialJsonInput
   const cloudflareRest = getCloudflareRestCredentials();
 
   if (["openclaw", "openclaw-system", "system", "system-model"].includes(provider)) {
-    return callOpenClawSystemModel<T>(input);
+    try {
+      return await callOpenClawSystemModel<T>(input);
+    } catch (error) {
+      // Production Workers cannot always access the local OpenClaw CLI path.
+      // If an API/BYOK provider is configured as a secret/binding, fall back
+      // rather than failing user-facing AI actions such as feed review cards.
+      if (cloudflareAi) return callCloudflareWorkersAi<T>(input, cloudflareAi);
+      if (cloudflareRest) return callCloudflareWorkersAiRest<T>(input, cloudflareRest);
+      if (openAiKey) return callOpenAI<T>(input, openAiKey);
+      if (openRouterKey) return callOpenRouter<T>(input, openRouterKey);
+      throw error;
+    }
   }
   if (provider === "cloudflare" || provider === "cloudflare-workers-ai") {
     if (cloudflareAi) return callCloudflareWorkersAi<T>(input, cloudflareAi);

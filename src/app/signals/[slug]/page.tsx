@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getSignalBySlug } from "@/lib/signals";
 import { ArticleComments } from "@/app/components/article-comments";
@@ -24,6 +23,75 @@ function formatDate(value: string) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "recently";
   return date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
+
+function getYouTubeId(url: string) {
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace(/^www\./, "");
+    if (host === "youtu.be") return parsed.pathname.split("/").filter(Boolean)[0] || null;
+    if (!host.endsWith("youtube.com")) return null;
+    if (parsed.pathname === "/watch") return parsed.searchParams.get("v");
+    const match = parsed.pathname.match(/^\/(shorts|embed)\/([^/?#]+)/);
+    return match?.[2] || null;
+  } catch {
+    return null;
+  }
+}
+
+function SourcePreview({ url }: { url: string }) {
+  const youtubeId = getYouTubeId(url);
+  const hostname = (() => {
+    try {
+      return new URL(url).hostname.replace(/^www\./, "");
+    } catch {
+      return "External link";
+    }
+  })();
+
+  if (youtubeId) {
+    return (
+      <div className="mt-6 overflow-hidden rounded-3xl border border-black/[0.08] bg-white shadow-sm dark:border-white/[0.10] dark:bg-white/[0.04]">
+        <div className="aspect-video bg-zinc-200 dark:bg-zinc-900">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
+            title="YouTube video player"
+            className="h-full w-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-3 p-4 font-[family-name:var(--font-inter)]">
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#b58320]">YouTube</p>
+            <p className="mt-1 text-sm font-semibold text-zinc-800 dark:text-zinc-100">Watch source video</p>
+          </div>
+          <a
+            href={url}
+            target="_blank"
+            rel="noreferrer"
+            className="max-w-full truncate rounded-full border border-black/[0.10] px-3 py-1 text-xs font-semibold text-zinc-500 hover:border-[#c8922a]/40 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"
+          >
+            Open on {hostname}
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noreferrer"
+      className="mt-6 block rounded-3xl border border-black/[0.08] bg-white p-4 font-[family-name:var(--font-inter)] shadow-sm transition hover:-translate-y-0.5 hover:border-[#c8922a]/40 hover:shadow-md dark:border-white/[0.10] dark:bg-white/[0.04]"
+    >
+      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#b58320]">Source link</p>
+      <p className="mt-2 truncate text-sm font-semibold text-zinc-800 dark:text-zinc-100">{url}</p>
+      <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Open {hostname}</p>
+    </a>
+  );
 }
 
 export default async function SignalDetailPage({ params }: Props) {
@@ -53,8 +121,8 @@ export default async function SignalDetailPage({ params }: Props) {
               {signal.bullets.slice(0, 4).map((bullet) => <li key={bullet}>• {bullet}</li>)}
             </ul>
           ) : null}
+          {signal.article_url ? <SourcePreview url={signal.article_url} /> : null}
           <div className="mt-6 flex flex-wrap gap-2">
-            {signal.article_url ? <Link href={signal.article_url} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">Read</Link> : null}
             <a href="#comments" className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-600 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">Comment</a>
           </div>
         </div>

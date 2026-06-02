@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
+import { generateAiReviewCard } from "@/lib/feed-ai-review-card";
 
 export const dynamic = "force-dynamic";
 
 const MAX_TITLE_LENGTH = 140;
-const MAX_CONTEXT_LENGTH = 900;
-const RATE_LIMIT_WINDOW_MINUTES = 15;
-const RATE_LIMIT_MAX = 8;
+const MAX_CONTEXT_LENGTH = 1400;
+const MAX_LINKS = 8;
+const RATE_LIMIT_WINDOW_MINUTES = Number(process.env.ALBIS_FEED_CARD_RATE_WINDOW_MINUTES || 15);
+const RATE_LIMIT_MAX = Number(process.env.ALBIS_FEED_CARD_RATE_LIMIT_MAX || 60);
 
 function jsonError(message: string, status = 400) {
   return NextResponse.json({ error: message }, { status });
@@ -33,6 +35,32 @@ function cleanUrl(value: unknown) {
   } catch {
     return null;
   }
+}
+
+function cleanUrls(value: unknown) {
+  const rawValues = Array.isArray(value)
+    ? value
+    : typeof value === "string"
+      ? value.split(/\n|,/) 
+      : [];
+  return [...new Set(rawValues.map(cleanUrl).filter((url): url is string => Boolean(url)))].slice(0, MAX_LINKS);
+}
+
+function cleanBoolean(value: unknown) {
+  return value === true || value === "true";
+}
+
+function hostSummary(urls: string[]) {
+  const hosts = urls.map((url) => {
+    try {
+      return new URL(url).hostname.replace(/^www\./, "");
+    } catch {
+      return null;
+    }
+  }).filter(Boolean) as string[];
+  const unique = [...new Set(hosts)].slice(0, 3);
+  if (unique.length === 0) return "link";
+  return unique.join(", ");
 }
 
 function cleanCategory(value: unknown) {
@@ -76,13 +104,16 @@ export async function POST(request: Request) {
   // Honeypot field. Real users never fill this.
   if (payload.website) return NextResponse.json({ ok: true, card: null });
 
-  const title = cleanText(payload.title, MAX_TITLE_LENGTH);
+  const sourceUrls = [...new Set([cleanUrl(payload.source_url), ...cleanUrls(payload.source_urls)].filter((url): url is string => Boolean(url)))].slice(0, MAX_LINKS);
+  const sourceUrl = sourceUrls[0] || null;
+  const aiReviewRequested = cleanBoolean(payload.ai_review_requested);
+  const rawTitle = cleanText(payload.title, MAX_TITLE_LENGTH);
+  const title = rawTitle || (aiReviewRequested && sourceUrls.length ? `AI review requested: ${hostSummary(sourceUrls)}` : "");
   const context = cleanBody(payload.context, MAX_CONTEXT_LENGTH);
-  const sourceUrl = cleanUrl(payload.source_url);
   const category = cleanCategory(payload.category);
 
-  if (title.length < 3) return jsonError("Add a short title.");
-  if (!context && !sourceUrl) return jsonError("Add context or a link.");
+  if (title.length < 3) return jsonError("Add a short title, or submit at least one link for AI review.");
+  if (!context && sourceUrls.length === 0) return jsonError("Add context or at least one link.");
 
   const authSupabase = await createClient();
   const { data: { user } } = await authSupabase.auth.getUser();
@@ -110,22 +141,53 @@ export async function POST(request: Request) {
     user?.user_metadata?.username ? `@${user.user_metadata.username}` : user?.user_metadata?.name || user?.email?.split("@")[0] || "Reader",
     80
   );
-  const slug = slugify(title);
   const now = new Date().toISOString();
-  const summary = context || sourceUrl || "";
+  let finalTitle = title;
+  let summary = aiReviewRequested
+    ? context || `Submitted ${sourceUrls.length} link${sourceUrls.length === 1 ? "" : "s"} for Albis AI review.`
+    : context || sourceUrl || "";
+  let bullets = context
+    ? context.split("\n").map((line) => line.trim()).filter(Boolean).slice(0, 4)
+    : sourceUrls.slice(0, 4);
+  let stillUnclear: string | null = null;
+  let aiReviewStatus: "not_requested" | "queued" | "generated" | "failed" = aiReviewRequested ? "queued" : "not_requested";
+  let aiModelUsed: string | null = null;
+  let aiError: string | null = null;
+  let sourceReadDomains: string[] = [];
+  let aiTags: string[] = [];
+
+  if (aiReviewRequested && sourceUrls.length > 0 && process.env.ALBIS_FEED_AI_REVIEW_MODE === "inline") {
+    try {
+      const review = await generateAiReviewCard({ title: rawTitle, context, sourceUrls, authorName });
+      finalTitle = review.card.title || finalTitle;
+      summary = review.card.summary || summary;
+      bullets = review.card.bullets.length ? review.card.bullets : bullets;
+      stillUnclear = review.card.still_unclear || null;
+      aiModelUsed = review.modelUsed;
+      aiReviewStatus = "generated";
+      sourceReadDomains = review.sourceReads.map((source) => source.domain);
+      aiTags = review.card.tags || [];
+    } catch (error) {
+      aiError = error instanceof Error ? error.message.slice(0, 300) : String(error).slice(0, 300);
+      aiReviewStatus = "failed";
+      console.error("[feed-cards] AI review generation failed", aiError);
+    }
+  }
+
+  const slug = slugify(finalTitle);
 
   const row = {
     slug,
     article_slug: null,
     article_url: sourceUrl,
-    title,
+    title: finalTitle,
     summary,
-    bullets: context ? context.split("\n").map((line) => line.trim()).filter(Boolean).slice(0, 4) : [],
-    still_unclear: null,
+    bullets,
+    still_unclear: stillUnclear,
     category: `people-${category}`,
     region: null,
-    tags: ["people", category],
-    source_note: sourceUrl ? "Link attached" : "Reader card",
+    tags: [...new Set(["people", category, ...aiTags])].slice(0, 10),
+    source_note: aiReviewRequested ? "AI review requested" : sourceUrls.length > 1 ? `${sourceUrls.length} links attached` : sourceUrl ? "Link attached" : "Reader card",
     status: "published",
     priority: 35,
     comment_count: 0,
@@ -139,6 +201,13 @@ export async function POST(request: Request) {
       author_name: authorName,
       author_email_domain: user?.email?.split("@")[1] || null,
       source_url: sourceUrl,
+      source_urls: sourceUrls,
+      ai_review_requested: aiReviewRequested,
+      ai_review_status: aiReviewStatus,
+      ai_model_used: aiModelUsed,
+      ai_error: aiError,
+      source_read_domains: sourceReadDomains,
+      creation_mode: aiReviewRequested ? "ai-review-auto" : "manual-card",
       ip_hash: ipHash,
     },
   };
@@ -161,6 +230,6 @@ export async function POST(request: Request) {
     ok: true,
     card: data,
     url: `/signals/${slug}`,
-    message: "Card posted.",
+    message: aiReviewRequested && aiReviewStatus === "generated" ? "AI review card posted." : aiReviewRequested ? "Card posted. AI review is generating automatically." : "Card posted.",
   });
 }

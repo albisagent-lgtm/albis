@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllPosts, getPostUrl } from "@/lib/blog";
+import { getPostUrl, getRecentPosts, type BlogPost } from "@/lib/blog";
 
 export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Read — Albis",
-  description: "Latest articles, briefings, and analysis from Albis.",
+  description: "Latest articles, briefings, and analysis from Albis and independent contributors.",
 };
+
+type Props = { searchParams?: Promise<{ section?: string }> };
 
 function prettyDate(value: string) {
   const date = new Date(value);
@@ -15,50 +17,93 @@ function prettyDate(value: string) {
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
-export default async function ReadPage() {
-  const posts = (await getAllPosts()).slice(0, 48);
-  const lead = posts[0];
-  const rest = posts.slice(1);
+function sectionLabel(value: string) {
+  return value.replaceAll("-", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+function safeImageUrl(value?: string | null) {
+  if (!value) return "/og-image.png";
+  return value.replace(/"/g, "%22");
+}
+
+function SectionChip({ label, href, active }: { label: string; href: string; active: boolean }) {
+  return (
+    <Link
+      href={href}
+      className={`whitespace-nowrap border-b-2 px-1 py-4 font-[family-name:var(--font-inter)] text-sm font-bold transition ${active ? "border-[#9b6b18] text-[#9b6b18] dark:border-[#f0c15e] dark:text-[#f0c15e]" : "border-transparent text-zinc-700 hover:border-[#c8922a]/40 hover:text-[#9b6b18] dark:text-zinc-200"}`}
+    >
+      {label}
+    </Link>
+  );
+}
+
+function PublisherTag({ post }: { post: BlogPost }) {
+  return (
+    <p className="mt-2 inline-flex max-w-full items-center rounded-full bg-[#c8922a]/10 px-2.5 py-1 font-[family-name:var(--font-inter)] text-[11px] font-bold text-[#8a5f14] dark:text-[#f0c15e]">
+      <span className="truncate">Published by {post.author || "Albis"}</span>
+    </p>
+  );
+}
+
+function ArticleCard({ post }: { post: BlogPost }) {
+  return (
+    <Link href={getPostUrl(post)} className="group block">
+      <div
+        className="aspect-[1.45/1] overflow-hidden rounded-md bg-zinc-200 bg-cover bg-center transition group-hover:opacity-90 dark:bg-zinc-900"
+        style={{ backgroundImage: `url("${safeImageUrl(post.image)}")` }}
+        aria-label="Article image"
+      />
+      <div className="pt-3">
+        <p className="font-[family-name:var(--font-inter)] text-[11px] font-bold text-[#9b6b18] dark:text-[#f0c15e]">
+          {sectionLabel(post.category)}
+        </p>
+        <h2 className="mt-1 font-[family-name:var(--font-playfair)] text-[21px] font-bold leading-[1.08] tracking-tight group-hover:text-[#9b6a12]">
+          {post.title}
+        </h2>
+        <PublisherTag post={post} />
+        <p className="mt-2 font-[family-name:var(--font-inter)] text-xs text-zinc-400">
+          {prettyDate(post.date)} · {post.readingTime} min read
+        </p>
+      </div>
+    </Link>
+  );
+}
+
+export default async function ReadPage({ searchParams }: Props) {
+  const params = await searchParams;
+  const allPosts = await getRecentPosts(80);
+  const sections = [...new Set(allPosts.map((post) => post.category).filter(Boolean))].slice(0, 9);
+  const activeSection = sections.includes(params?.section as BlogPost["category"]) ? params?.section : undefined;
+  const posts = activeSection ? allPosts.filter((post) => post.category === activeSection) : allPosts.slice(0, 48);
 
   return (
-    <main className="min-h-screen bg-[#f8f7f4] px-4 py-8 text-[#111] dark:bg-[#101010] dark:text-[#f4f1ea] md:px-6">
-      <section className="mx-auto max-w-6xl">
-        <div className="border-b border-black/[0.08] pb-5 dark:border-white/[0.08]">
-          <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.16em] text-[#b58320]">Read</p>
-          <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">Latest</h1>
-        </div>
-
-        {lead ? (
-          <Link href={getPostUrl(lead)} className="mt-6 grid gap-5 border-b border-black/[0.08] pb-6 transition hover:text-[#9b6a12] dark:border-white/[0.08] md:grid-cols-[1.2fr_0.8fr]">
-            <div>
-              <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-zinc-400">
-                {lead.category.replaceAll("-", " ")} · {prettyDate(lead.date)}
-              </p>
-              <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-3xl font-bold leading-tight md:text-5xl">{lead.title}</h2>
-            </div>
-            <div className="self-end">
-              <p className="text-base leading-relaxed text-zinc-600 dark:text-zinc-300">{lead.description}</p>
-              <p className="mt-4 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-400">
-                {lead.author || "Albis"} · {lead.readingTime} min read
-              </p>
-            </div>
+    <main className="min-h-screen bg-[#f8f7f4] text-[#111] dark:bg-[#101010] dark:text-[#f4f1ea]">
+      <section className="border-b border-black/[0.08] bg-white/70 dark:border-white/[0.08] dark:bg-white/[0.03]">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4 md:px-6">
+          <div>
+            <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.16em] text-[#b58320]">Read</p>
+            <h1 className="font-[family-name:var(--font-playfair)] text-3xl font-bold tracking-tight md:text-4xl">Published articles</h1>
+          </div>
+          <Link href="/create" className="rounded-full bg-[#111] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
+            Publish
           </Link>
-        ) : null}
-
-        <div className="mt-3 divide-y divide-black/[0.08] dark:divide-white/[0.08]">
-          {rest.length === 0 && !lead ? (
-            <div className="py-14 text-center text-zinc-500">No articles yet.</div>
-          ) : rest.map((post) => (
-            <Link key={post.slug} href={getPostUrl(post)} className="grid gap-3 py-5 transition hover:text-[#9b6a12] md:grid-cols-[160px_minmax(0,1fr)_140px]">
-              <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-zinc-400">{post.category.replaceAll("-", " ")}</p>
-              <div>
-                <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold leading-tight">{post.title}</h2>
-                <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">{post.description}</p>
-              </div>
-              <p className="font-[family-name:var(--font-inter)] text-xs text-zinc-400 md:text-right">{prettyDate(post.date)}<br />{post.readingTime} min</p>
-            </Link>
-          ))}
         </div>
+        <nav className="mx-auto flex max-w-7xl gap-7 overflow-x-auto px-4 md:px-6" aria-label="Read sections">
+          <SectionChip label="All" href="/read" active={!activeSection} />
+          {sections.map((section) => (
+            <SectionChip key={section} label={sectionLabel(section)} href={`/read?section=${section}`} active={activeSection === section} />
+          ))}
+        </nav>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-7 md:px-6">
+        {posts.length === 0 ? (
+          <div className="rounded-3xl border border-dashed border-black/10 bg-white/50 px-6 py-14 text-center text-zinc-500 dark:border-white/10 dark:bg-white/[0.025]">No articles in this section yet.</div>
+        ) : (
+          <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            {posts.map((post) => <ArticleCard key={post.slug} post={post} />)}
+          </div>
+        )}
       </section>
     </main>
   );
