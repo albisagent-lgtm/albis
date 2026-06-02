@@ -80,8 +80,14 @@ function cleanCategory(value: unknown) {
     "climate",
     "health",
     "governance",
+    "other",
   ]);
   return allowed.has(raw) ? raw : "update";
+}
+
+function cleanCustomSection(value: unknown) {
+  const raw = cleanText(value, 60);
+  return raw.replace(/[^a-zA-Z0-9 &/.-]/g, "").trim().slice(0, 60);
 }
 
 function cleanTags(value: unknown) {
@@ -138,7 +144,11 @@ export async function POST(request: Request) {
   const title = rawTitle || (aiReviewRequested && sourceUrls.length ? `AI review requested: ${hostSummary(sourceUrls)}` : "");
   const context = cleanBody(payload.context, MAX_CONTEXT_LENGTH);
   const category = cleanCategory(payload.category);
+  const customSection = cleanCustomSection(payload.custom_section);
   const userTags = cleanTags(payload.user_tags);
+  const customSectionTag = customSection
+    ? customSection.toLowerCase().replace(/[^a-z0-9 -]/g, "").replace(/\s+/g, "-").slice(0, 36)
+    : null;
 
   if (title.length < 3) return jsonError("Add a short title, or submit at least one link for AI review.");
   if (!context && sourceUrls.length === 0) return jsonError("Add context or at least one link.");
@@ -214,7 +224,7 @@ export async function POST(request: Request) {
     still_unclear: stillUnclear,
     category: `people-${category}`,
     region: null,
-    tags: [...new Set(["people", category, ...userTags, ...aiTags])].slice(0, 14),
+    tags: [...new Set(["people", category, customSectionTag, ...userTags, ...aiTags].filter(Boolean) as string[])].slice(0, 14),
     source_note: aiReviewRequested ? "AI review requested" : sourceUrls.length > 1 ? `${sourceUrls.length} links attached` : sourceUrl ? "Link attached" : "Reader card",
     status: "published",
     priority: 35,
@@ -232,6 +242,8 @@ export async function POST(request: Request) {
       source_urls: sourceUrls,
       user_tags: userTags,
       system_section: category,
+      custom_section: customSection || null,
+      discovery_section: customSection || category,
       ai_review_requested: aiReviewRequested,
       ai_review_status: aiReviewStatus,
       ai_model_used: aiModelUsed,

@@ -40,15 +40,43 @@ function getYouTubeId(url: string) {
   }
 }
 
+function sourceInfo(url: string) {
+  try {
+    const parsed = url.startsWith("/") ? new URL(url, "https://www.albis.news") : new URL(url);
+    const host = parsed.hostname.replace(/^www\./, "");
+    const isAlbis = host === "albis.news" || host === "www.albis.news";
+    const pathLabel = parsed.pathname
+      .split("/")
+      .filter(Boolean)
+      .pop()
+      ?.replace(/-\d{4}$/, "")
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (letter) => letter.toUpperCase()) || "Source";
+    return {
+      href: url.startsWith("/") ? url : parsed.toString(),
+      host,
+      isAlbis,
+      title: isAlbis ? "Read the full Albis report" : "Open the original source",
+      eyebrow: isAlbis ? "Albis report" : "Source",
+      detail: isAlbis ? pathLabel : host,
+      cta: isAlbis ? "Open report" : `Open ${host}`,
+    };
+  } catch {
+    return {
+      href: url,
+      host: "source",
+      isAlbis: false,
+      title: "Open source",
+      eyebrow: "Source",
+      detail: "External link",
+      cta: "Open link",
+    };
+  }
+}
+
 function SourcePreview({ url }: { url: string }) {
   const youtubeId = getYouTubeId(url);
-  const hostname = (() => {
-    try {
-      return new URL(url).hostname.replace(/^www\./, "");
-    } catch {
-      return "External link";
-    }
-  })();
+  const info = sourceInfo(url);
 
   if (youtubeId) {
     return (
@@ -65,8 +93,8 @@ function SourcePreview({ url }: { url: string }) {
         </div>
         <div className="flex flex-wrap items-center justify-between gap-3 p-4 font-[family-name:var(--font-inter)]">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#b58320]">YouTube</p>
-            <p className="mt-1 text-sm font-semibold text-zinc-800 dark:text-zinc-100">Watch source video</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#b58320]">Source video</p>
+            <p className="mt-1 text-sm font-semibold text-zinc-800 dark:text-zinc-100">Watch inside this card</p>
           </div>
           <a
             href={url}
@@ -74,7 +102,7 @@ function SourcePreview({ url }: { url: string }) {
             rel="noreferrer"
             className="max-w-full truncate rounded-full border border-black/[0.10] px-3 py-1 text-xs font-semibold text-zinc-500 hover:border-[#c8922a]/40 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"
           >
-            Open on {hostname}
+            Open on YouTube
           </a>
         </div>
       </div>
@@ -83,14 +111,21 @@ function SourcePreview({ url }: { url: string }) {
 
   return (
     <a
-      href={url}
-      target="_blank"
-      rel="noreferrer"
-      className="mt-6 block rounded-3xl border border-black/[0.08] bg-white p-4 font-[family-name:var(--font-inter)] shadow-sm transition hover:-translate-y-0.5 hover:border-[#c8922a]/40 hover:shadow-md dark:border-white/[0.10] dark:bg-white/[0.04]"
+      href={info.href}
+      target={info.isAlbis ? undefined : "_blank"}
+      rel={info.isAlbis ? undefined : "noreferrer"}
+      className="group mt-6 block rounded-3xl border border-black/[0.08] bg-white p-4 font-[family-name:var(--font-inter)] shadow-sm transition hover:-translate-y-0.5 hover:border-[#c8922a]/45 hover:shadow-md dark:border-white/[0.10] dark:bg-white/[0.04]"
     >
-      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#b58320]">Source link</p>
-      <p className="mt-2 truncate text-sm font-semibold text-zinc-800 dark:text-zinc-100">{url}</p>
-      <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Open {hostname}</p>
+      <div className="flex items-center justify-between gap-4">
+        <div className="min-w-0">
+          <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#b58320]">{info.eyebrow}</p>
+          <p className="mt-2 text-base font-bold text-zinc-900 dark:text-zinc-100">{info.title}</p>
+          <p className="mt-1 line-clamp-1 text-sm text-zinc-500 dark:text-zinc-400">{info.detail}</p>
+        </div>
+        <span className="shrink-0 rounded-full bg-[#111] px-3 py-1.5 text-xs font-bold text-white transition group-hover:bg-[#b58320] dark:bg-white dark:text-black">
+          {info.cta} →
+        </span>
+      </div>
     </a>
   );
 }

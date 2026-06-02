@@ -17,6 +17,7 @@ const CATEGORIES = [
   { value: "event", label: "Event" },
   { value: "article", label: "Article" },
   { value: "weather", label: "Weather" },
+  { value: "other", label: "+ Other" },
 ];
 
 type CreateMode = "manual" | "ai-review";
@@ -43,6 +44,7 @@ export function CreateCardForm() {
   const [sourceLinks, setSourceLinks] = useState("");
   const [context, setContext] = useState("");
   const [category, setCategory] = useState("update");
+  const [customSection, setCustomSection] = useState("");
   const [tagInput, setTagInput] = useState("");
   const [website, setWebsite] = useState("");
   const [loading, setLoading] = useState(false);
@@ -71,6 +73,7 @@ export function CreateCardForm() {
           source_urls: links,
           context,
           category: mode === "ai-review" && category === "update" ? "research" : category,
+          custom_section: customSection,
           user_tags: tags,
           ai_review_requested: mode === "ai-review",
           website,
@@ -83,6 +86,7 @@ export function CreateCardForm() {
       setSourceLinks("");
       setContext("");
       setCategory("update");
+      setCustomSection("");
       setTagInput("");
       setMode("manual");
     } catch (err) {
@@ -140,7 +144,12 @@ export function CreateCardForm() {
       </label>
 
       <div>
-        <p className="mb-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">Albis section</p>
+        <div className="mb-2 flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <p className="font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">Section</p>
+            <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">Choose the closest area, or add your own. Albis will still classify it for discovery.</p>
+          </div>
+        </div>
         <div className="flex gap-2 overflow-x-auto pb-1">
           {CATEGORIES.map((item) => (
             <button
@@ -153,6 +162,18 @@ export function CreateCardForm() {
             </button>
           ))}
         </div>
+        {category === "other" ? (
+          <label className="mt-3 block">
+            <span className="sr-only">Custom section</span>
+            <input
+              value={customSection}
+              onChange={(e) => setCustomSection(e.target.value)}
+              maxLength={60}
+              className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
+              placeholder="Add your section, e.g. Cricket, Local, Education, Faith"
+            />
+          </label>
+        ) : null}
       </div>
 
       <label className="block">
