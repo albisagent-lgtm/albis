@@ -27,7 +27,9 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run deploy
+      - name: Build OpenNext Worker
+        timeout-minutes: 20
+        run: npx opennextjs-cloudflare build
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -40,6 +42,14 @@ jobs:
           NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+
+      - name: Deploy OpenNext Worker
+        timeout-minutes: 10
+        run: npx opennextjs-cloudflare deploy
+        env:
+          CI: true
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       # Runtime secret sync is intentionally scoped to secrets managed from
       # GitHub. Other runtime secrets/vars such as RESEND_API_KEY,
