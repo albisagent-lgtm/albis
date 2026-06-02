@@ -29,7 +29,9 @@
     "COMPANY_EMAIL_TEST_RECIPIENTS": "hazzagazza6743@gmail.com",
     "COMPANY_EMAIL_DELIVERY_APPROVED_PROFILE_IDS": "6330ca52-2e75-49db-8c9a-5d97ad38a28a,e08205b9-cbe9-4ba2-b5a1-89d9bf0d6ea6",
     "ALBIS_ENABLE_COMPANY_EDITORIAL_WRITER": "true",
-    "ALBIS_EDITORIAL_MODEL_PROVIDER": "openclaw-system",
+    "ALBIS_EDITORIAL_MODEL_PROVIDER": "cloudflare-workers-ai",
+    "ALBIS_EDITORIAL_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast",
+    "ALBIS_FEED_AI_REVIEW_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast",
     "ALBIS_FEED_AI_REVIEW_MODE": "queue",
     "ALBIS_FEED_AI_REVIEW_BATCH_LIMIT": "5",
     "ALBIS_FEED_CARD_RATE_LIMIT_MAX": "60",
@@ -39,6 +41,9 @@
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS",
+  },
+  "ai": {
+    "binding": "AI",
   },
   "services": [
     {
