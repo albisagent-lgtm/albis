@@ -43,12 +43,6 @@ const secondaryFilters: Array<{ key: FeedFilter; label: string }> = [
 
 const filters = [...primaryFilters, ...secondaryFilters];
 
-const missionCards = [
-  ["Scanned media", "Albis watches outlets, regions, languages, weather, and public signals so no single feed becomes the whole story."],
-  ["Cards first", "Each event becomes a clear shared object: source, context, uncertainty, discussion, and optional deeper reading."],
-  ["People complete it", "Community feedback, local knowledge, questions, comments, and contributor articles help reveal what the cycle missed."],
-];
-
 const peopleCards: FeedItem[] = [
   {
     id: "people-weather-report",
@@ -342,14 +336,6 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
           <p className="mt-2 font-[family-name:var(--font-inter)] text-xs text-zinc-500 dark:text-zinc-400">
             Start with Top, Latest, or Following. Narrow by Human, AI-reviewed, Discussed, Weather, or Saved when you need a specific lens.
           </p>
-          <div className="mt-6 grid gap-3 md:grid-cols-3">
-            {missionCards.map(([title, text]) => (
-              <Link key={title} href="/about" className="rounded-3xl border border-black/[0.08] bg-white/70 p-4 transition hover:border-[#c8922a]/40 dark:border-white/[0.08] dark:bg-white/[0.035]">
-                <h2 className="font-[family-name:var(--font-playfair)] text-xl font-bold">{title}</h2>
-                <p className="mt-1 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">{text}</p>
-              </Link>
-            ))}
-          </div>
         </div>
       </section>
 
