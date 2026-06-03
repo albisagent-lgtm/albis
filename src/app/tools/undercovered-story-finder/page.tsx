@@ -42,7 +42,7 @@ export default async function UndercoveredStoryFinderPage() {
         <div className="rounded-3xl border border-black/[0.07] bg-white p-6 text-sm leading-relaxed text-zinc-600 dark:border-white/[0.07] dark:bg-white/[0.03] dark:text-zinc-400">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c8922a]">Evidence note</p>
           <p className="mt-3">This is a directional research tool, not proof that no coverage exists. “Not detected / thin” means the story was not detected, or was only lightly detected, in today’s Albis scan for that regional lens.</p>
-          <p className="mt-2">For company, client, route, or sector relevance, use this as a starting point and configure a private Company Daily Scan around the actual watchlist.</p>
+          <p className="mt-2">Use this as a starting point for asking better questions, finding missing context, and deciding what to read next.</p>
         </div>
       </section>
     </main>

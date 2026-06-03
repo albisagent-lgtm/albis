@@ -65,14 +65,14 @@ export default function MethodologyPage() {
 
         <div className="mt-space-8 rounded-2xl border border-black/[0.06] bg-white p-5 dark:border-white/[0.08] dark:bg-white/[0.035]">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">
-            Same engine, private translation
+            Want a demo?
           </p>
           <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            These public methods also power the Company Daily Scan, where Albis filters the global picture through a company&apos;s sector, regions, risks, and watchlist.
+            Albis is focused on the public feed. If you want to discuss a private or organisational use case, email us and we&apos;ll handle it directly.
           </p>
-          <Link href="/company-daily-scan" className="mt-3 inline-block text-sm font-semibold text-[#c8922a] hover:underline">
-            See how this becomes a company scan &rarr;
-          </Link>
+          <a href="mailto:harry@albis.news?subject=Albis%20demo%20request" className="mt-3 inline-block text-sm font-semibold text-[#c8922a] hover:underline">
+            Email for a demo &rarr;
+          </a>
         </div>
 
         <div className="mt-space-16 border-t border-black/5 pt-space-16 dark:border-white/5">

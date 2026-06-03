@@ -30,8 +30,8 @@ export default async function MispricedAttentionPage() {
             <Link href="/what-am-i-missing" className="inline-flex h-11 items-center justify-center rounded-full bg-[#c8922a] px-6 text-sm font-semibold text-white hover:bg-[#b17f24]">
               See what your region may miss
             </Link>
-            <Link href="/free-company-scan" className="inline-flex h-11 items-center justify-center rounded-full border border-black/[0.12] px-6 text-sm font-semibold text-zinc-700 hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-white/[0.12] dark:text-zinc-300">
-              Try a company sample scan
+            <Link href="/about" className="inline-flex h-11 items-center justify-center rounded-full border border-black/[0.12] px-6 text-sm font-semibold text-zinc-700 hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-white/[0.12] dark:text-zinc-300">
+              Why this matters
             </Link>
           </div>
         </div>

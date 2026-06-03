@@ -4,6 +4,7 @@ import FreeCompanyScanClient from './free-company-scan-client';
 export const metadata: Metadata = {
   title: 'Free sample narrative-risk scan — Albis',
   description: 'Preview how Albis turns global coverage gaps, regional framing, and evidence patterns into a company-specific daily narrative-risk scan.',
+  robots: { index: false, follow: false },
   openGraph: {
     title: 'Free sample narrative-risk scan — Albis',
     description: 'See what a Company Daily Scan could catch for a PR, logistics, public affairs, or research team.',

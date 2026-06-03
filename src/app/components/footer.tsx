@@ -28,7 +28,7 @@ export function Footer() {
                 <FooterLink href="/?filter=weather">Weather in Feed</FooterLink>
                 <FooterLink href="/signals">Events archive</FooterLink>
                 <FooterLink href="/indexes">Indexes</FooterLink>
-                <FooterLink href="/company-daily-scan">Companies</FooterLink>
+                <FooterLink href="/about">Mission</FooterLink>
                 <FooterLink href="/world">World archive</FooterLink>
               </ul>
             </div>

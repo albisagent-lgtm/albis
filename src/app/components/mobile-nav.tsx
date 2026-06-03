@@ -57,7 +57,6 @@ const MORE_LINKS = [
   { href: "/climate", label: "Climate" },
   { href: "/life-systems", label: "Life Systems" },
   { href: "/perspectives", label: "Perspectives" },
-  { href: "/company-daily-scan", label: "Companies" },
   { href: "/about", label: "About" },
 ];
 

@@ -159,7 +159,7 @@ export default function RegisterClient() {
                 Create your account
               </h1>
               <p className="mt-1.5 text-sm text-zinc-500 dark:text-zinc-400">
-                Get started with Albis intelligence.
+                Join the public feed, save stories, and add context to conversations.
               </p>
 
               <form onSubmit={handleSubmit} className="mt-7 flex flex-col gap-4">

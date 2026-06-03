@@ -139,16 +139,16 @@ export default async function PGIPage() {
       <div className="mx-auto max-w-3xl px-6 py-6">
         <div className="rounded-2xl border border-[#c8922a]/25 bg-[#c8922a]/[0.04] p-5 dark:bg-[#c8922a]/[0.08]">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
-            Company Daily Scan
+            Perception Gap Index
           </p>
           <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-semibold">
-            PGI helps translate global framing into company context.
+            PGI helps people see when the same story is being told differently.
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
-            The public index shows where regions see stories differently. Company scans use that signal to explain what those gaps may mean for your risks, regions, and decisions.
+            The public index shows where regions frame stories differently, so readers can notice perspective gaps without needing to follow every source themselves.
           </p>
-          <Link href="/company-daily-scan" className="mt-4 inline-block text-sm font-semibold text-[#c8922a] hover:text-[#b17f24]">
-            See how companies use it &rarr;
+          <Link href="/about" className="mt-4 inline-block text-sm font-semibold text-[#c8922a] hover:text-[#b17f24]">
+            Learn the mission &rarr;
           </Link>
         </div>
       </div>

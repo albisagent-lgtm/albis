@@ -205,16 +205,16 @@ export default async function IndexesPage() {
 
       <section className="mb-16 rounded-2xl border border-[#c8922a]/25 bg-[#c8922a]/[0.04] p-6 text-center dark:bg-[#c8922a]/[0.08]">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8922a]">
-          Public indexes, private relevance
+          Public indexes
         </p>
         <h2 className="mx-auto mt-3 max-w-2xl font-[family-name:var(--font-playfair)] text-2xl font-semibold md:text-3xl">
-          PGI and GAI power both the public briefing and the Company Daily Scan.
+          PGI and GAI help readers see what the normal news cycle can miss.
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
-          Public readers see the global information patterns. Companies can receive the same signal translated into their sector, regions, risks, and watchlist.
+          The indexes stay public: a way to notice framing gaps, attention gaps, and regional blind spots without needing to be a news expert.
         </p>
-        <Link href="/company-daily-scan" className="mt-4 inline-block text-sm font-semibold text-[#c8922a] hover:text-[#b17f24]">
-          See the company layer &rarr;
+        <Link href="/about" className="mt-4 inline-block text-sm font-semibold text-[#c8922a] hover:text-[#b17f24]">
+          Learn the mission &rarr;
         </Link>
       </section>
 

@@ -47,26 +47,14 @@ export default function LoginClient() {
           .then(() => {});
       }
 
-      // Success - check for redirect parameter, otherwise route based on
-      // whether the user has completed company onboarding.
+      // Success - normal accounts are for the public Albis feed/account.
+      // Company onboarding is legacy and should not intercept public users.
       const params = new URLSearchParams(window.location.search);
       const redirect = params.get("redirect");
 
-      if (redirect) {
-        router.push(redirect);
-      } else if (data.user) {
-        const { data: companyProfile } = await supabase
-          .from("company_profiles")
-          .select("onboarding_completed")
-          .eq("owner_id", data.user.id)
-          .maybeSingle();
-
-        router.push(companyProfile?.onboarding_completed ? "/dashboard" : "/onboarding/company");
-      } else {
-        router.push("/onboarding/company");
-      }
+      router.push(redirect && redirect !== "/onboarding/company" && redirect !== "/dashboard" ? redirect : "/account");
       router.refresh();
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred. Please try again.");
       setLoading(false);
     }

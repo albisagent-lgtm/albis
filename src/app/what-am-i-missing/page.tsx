@@ -45,8 +45,8 @@ export default async function WhatAmIMissingPage({ searchParams }: { searchParam
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c8922a]">Current lens</p>
             <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-3xl font-bold">What {label} may be missing</h2>
           </div>
-          <Link href="/free-company-scan" className="inline-flex h-10 items-center justify-center rounded-full bg-[#c8922a] px-5 text-sm font-semibold text-white hover:bg-[#b17f24]">
-            Try a company sample scan
+          <Link href="/create" className="inline-flex h-10 items-center justify-center rounded-full bg-[#c8922a] px-5 text-sm font-semibold text-white hover:bg-[#b17f24]">
+            Share a missing angle
           </Link>
         </div>
 

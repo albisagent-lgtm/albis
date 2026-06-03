@@ -64,8 +64,8 @@ export default function UndercoveredStoryFinderClient({ stories, categories }: {
               <p><span className="font-semibold text-zinc-800 dark:text-zinc-200">Evidence basis:</span> {story.evidenceBasis}</p>
               {story.evidenceWarnings.length ? <p className="mt-1">Limit: {story.evidenceWarnings.join(' ')}</p> : null}
             </div>
-            <Link href="/free-company-scan" className="mt-5 inline-flex h-10 items-center justify-center rounded-full bg-[#c8922a] px-5 text-sm font-semibold text-white hover:bg-[#b17f24]">
-              Translate this for a company/client
+            <Link href="/create" className="mt-5 inline-flex h-10 items-center justify-center rounded-full bg-[#c8922a] px-5 text-sm font-semibold text-white hover:bg-[#b17f24]">
+              Add context to this gap
             </Link>
           </article>
         )) : (

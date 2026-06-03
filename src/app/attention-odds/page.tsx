@@ -36,7 +36,7 @@ export default async function AttentionOddsPage() {
           </div>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link href="/tools/undercovered-story-finder" className="inline-flex h-11 items-center justify-center rounded-full bg-[#c8922a] px-6 text-sm font-semibold text-white hover:bg-[#b17f24]">Find undercovered stories</Link>
-            <Link href="/free-company-scan" className="inline-flex h-11 items-center justify-center rounded-full border border-black/[0.12] px-6 text-sm font-semibold text-zinc-700 hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-white/[0.12] dark:text-zinc-300">Get a company scan</Link>
+            <Link href="/about" className="inline-flex h-11 items-center justify-center rounded-full border border-black/[0.12] px-6 text-sm font-semibold text-zinc-700 hover:border-[#c8922a]/40 hover:text-[#c8922a] dark:border-white/[0.12] dark:text-zinc-300">Why Albis exists</Link>
           </div>
         </div>
       </section>
