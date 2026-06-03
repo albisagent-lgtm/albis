@@ -31,6 +31,9 @@ export type LiveFeedEvent = {
   tags?: string[];
   aiReviewStatus?: string | null;
   mediaPreview?: MediaPreview;
+  bullets?: string[];
+  stillUnclear?: string | null;
+  sourceNote?: string | null;
 };
 
 function cleanLabel(value: string) {
@@ -83,9 +86,10 @@ function MediaPreviewBlock({ media, feature }: { media?: MediaPreview; feature?:
   );
 }
 
-function CardDetailDrawer({ event, onClose, onShare, saved, onSave }: { event: LiveFeedEvent; onClose: () => void; onShare: () => void; saved: boolean; onSave: () => void }) {
+function CardDetailModal({ event, onClose, onShare, saved, onSave }: { event: LiveFeedEvent; onClose: () => void; onShare: () => void; saved: boolean; onSave: () => void }) {
   const commentSlug = event.cardSlug || event.articleSlug || event.id;
   const reviewLabel = aiReviewLabel(event.aiReviewStatus);
+  const usefulBullets = (event.bullets || []).map((bullet) => bullet.trim()).filter(Boolean);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -101,9 +105,9 @@ function CardDetailDrawer({ event, onClose, onShare, saved, onSave }: { event: L
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-label={event.title}>
-      <button type="button" className="absolute inset-0 bg-black/35 backdrop-blur-sm" aria-label="Close card" onClick={onClose} />
-      <aside className="absolute inset-x-0 bottom-0 max-h-[92vh] overflow-y-auto rounded-t-[2rem] border border-black/10 bg-[#f8f7f4] p-4 shadow-2xl dark:border-white/10 dark:bg-[#101010] md:inset-y-0 md:left-auto md:right-0 md:max-h-none md:w-[min(92vw,560px)] md:rounded-l-[2rem] md:rounded-tr-none md:p-6">
+    <div className="fixed inset-0 z-50 flex items-end justify-center px-3 py-3 md:items-center md:px-6 md:py-8" role="dialog" aria-modal="true" aria-label={event.title}>
+      <button type="button" className="absolute inset-0 bg-black/40 backdrop-blur-sm" aria-label="Close card" onClick={onClose} />
+      <section className="relative z-10 w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-[2rem] border border-black/10 bg-[#f8f7f4] p-4 shadow-2xl dark:border-white/10 dark:bg-[#101010] md:p-7">
         <div className="mb-4 flex items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-2">
             <span className="rounded-full bg-[#c8922a]/10 px-2.5 py-1 font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">{cleanLabel(event.label)}</span>
@@ -120,10 +124,46 @@ function CardDetailDrawer({ event, onClose, onShare, saved, onSave }: { event: L
           {[event.author || event.source || "Albis", event.timestamp || event.meta].filter(Boolean).join(" · ")}
         </p>
 
+        {usefulBullets.length ? (
+          <div className="mt-5 rounded-3xl border border-black/[0.08] bg-white/70 p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
+            <p className="font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.16em] text-zinc-400">What to know</p>
+            <ul className="mt-3 space-y-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-200">
+              {usefulBullets.map((bullet) => (
+                <li key={bullet} className="flex gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c8922a]" />
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
+        {event.stillUnclear || event.sourceNote ? (
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            {event.stillUnclear ? (
+              <div className="rounded-3xl border border-black/[0.08] bg-white/60 p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
+                <p className="font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.16em] text-zinc-400">Still unclear</p>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-200">{event.stillUnclear}</p>
+              </div>
+            ) : null}
+            {event.sourceNote ? (
+              <div className="rounded-3xl border border-black/[0.08] bg-white/60 p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
+                <p className="font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.16em] text-zinc-400">Source note</p>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-200">{event.sourceNote}</p>
+              </div>
+            ) : null}
+          </div>
+        ) : null}
+
         <div className="mt-5 flex flex-wrap gap-2 border-y border-black/[0.08] py-4 dark:border-white/[0.08]">
-          <Link href={event.href} onClick={() => trackFeedEvent(commentSlug, "open", { href: event.href, surface: "drawer-direct-link" })} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
-            Open direct page
+          <Link href={event.href} onClick={() => trackFeedEvent(commentSlug, "open", { href: event.href, surface: "modal-albis-link" })} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
+            Read article
           </Link>
+          {event.sourceHref ? (
+            <Link href={event.sourceHref} target="_blank" rel="noopener noreferrer" onClick={() => trackFeedEvent(commentSlug, "open", { href: event.sourceHref, surface: "modal-source-link" })} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
+              Open source
+            </Link>
+          ) : null}
           <button type="button" onClick={onSave} className={`rounded-full border px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${saved ? "border-[#c8922a]/60 bg-[#c8922a]/10 text-[#9b6b18] dark:text-[#f0c15e]" : "border-black/[0.12] text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}>{saved ? "Saved" : "Save"}</button>
           <button type="button" onClick={onShare} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">Share</button>
         </div>
@@ -141,7 +181,7 @@ function CardDetailDrawer({ event, onClose, onShare, saved, onSave }: { event: L
             onCommentPosted={() => trackFeedEvent(commentSlug, "comment")}
           />
         </div>
-      </aside>
+      </section>
     </div>
   );
 }
@@ -219,7 +259,7 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose }: { event:
         </div>
       </article>
 
-      {selected ? <CardDetailDrawer event={event} onClose={onClose} onShare={shareCard} saved={saved} onSave={toggleSave} /> : null}
+      {selected ? <CardDetailModal event={event} onClose={onClose} onShare={shareCard} saved={saved} onSave={toggleSave} /> : null}
     </>
   );
 }
