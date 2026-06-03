@@ -16,6 +16,8 @@ type PublicComment = {
   location_text?: string | null;
   trust_status?: "reader_report" | "supported_by_source" | "corroborated" | "verified_by_albis" | "needs_checking" | "disputed";
   source_url?: string | null;
+  media_url?: string | null;
+  media_type?: "image" | "video" | "youtube" | "link" | null;
 };
 
 type ReportType = "local_update" | "source" | "correction" | "context" | "question";
@@ -77,6 +79,77 @@ function ReportBadge({ type }: { type?: ReportType | null }) {
   return <span className="rounded-full border border-[#c8922a]/25 bg-[#c8922a]/10 px-2 py-0.5 text-[10px] font-semibold text-[#8a6417] dark:text-[#f0c15e]">{REPORT_LABELS[type]}</span>;
 }
 
+
+function getYouTubeId(url: string) {
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname.includes("youtu.be")) return parsed.pathname.replace("/", "").split(/[?&]/)[0] || null;
+    if (parsed.hostname.includes("youtube.com")) return parsed.searchParams.get("v") || parsed.pathname.match(/\/shorts\/([^/?]+)/)?.[1] || null;
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+function mediaKind(url?: string | null): PublicComment["media_type"] {
+  if (!url) return null;
+  if (getYouTubeId(url)) return "youtube";
+  if (/\.(png|jpe?g|gif|webp|avif)(\?|#|$)/i.test(url)) return "image";
+  if (/\.(mp4|webm|mov|m4v)(\?|#|$)/i.test(url)) return "video";
+  return "link";
+}
+
+function hostname(url: string) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return "source";
+  }
+}
+
+function MediaPreview({ url, type }: { url?: string | null; type?: PublicComment["media_type"] }) {
+  if (!url) return null;
+  const kind = type || mediaKind(url);
+  if (kind === "youtube") {
+    const id = getYouTubeId(url);
+    if (id) {
+      return (
+        <div className="mt-3 overflow-hidden rounded-2xl border border-black/[0.08] bg-black dark:border-white/[0.08]">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${id}`}
+            title="Attached video"
+            className="aspect-video w-full"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </div>
+      );
+    }
+  }
+  if (kind === "image") {
+    return (
+      <a href={url} target="_blank" rel="noopener noreferrer nofollow" className="mt-3 block overflow-hidden rounded-2xl border border-black/[0.08] bg-black/[0.02] dark:border-white/[0.08] dark:bg-white/[0.03]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={url} alt="Attached media" className="max-h-[420px] w-full object-cover" loading="lazy" />
+      </a>
+    );
+  }
+  if (kind === "video") {
+    return (
+      <video controls playsInline preload="metadata" className="mt-3 max-h-[420px] w-full rounded-2xl border border-black/[0.08] bg-black dark:border-white/[0.08]">
+        <source src={url} />
+      </video>
+    );
+  }
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer nofollow" className="mt-3 flex items-center justify-between gap-3 rounded-2xl border border-black/[0.08] bg-black/[0.02] px-4 py-3 font-[family-name:var(--font-inter)] text-xs font-semibold text-zinc-600 hover:border-[#c8922a]/40 hover:text-[#9b6b18] dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-zinc-300 dark:hover:text-[#f0c15e]">
+      <span>Attached source · {hostname(url)}</span>
+      <span>Open</span>
+    </a>
+  );
+}
+
 function formatCommentDate(value: string) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "just now";
@@ -116,6 +189,7 @@ function CommentForm({
   const [reportType, setReportType] = useState<ReportType>("local_update");
   const [location, setLocation] = useState("");
   const [sourceUrl, setSourceUrl] = useState("");
+  const [mediaUrl, setMediaUrl] = useState("");
   const [website, setWebsite] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -139,6 +213,7 @@ function CommentForm({
           context_type: structuredReports && !parentId ? reportType : undefined,
           location_text: structuredReports && !parentId ? location : undefined,
           source_url: structuredReports && !parentId ? sourceUrl : undefined,
+          media_url: mediaUrl,
           website,
         }),
       });
@@ -148,6 +223,7 @@ function CommentForm({
       setName("");
       setLocation("");
       setSourceUrl("");
+      setMediaUrl("");
       onPosted(payload.comment || null, payload.message);
       onCancel?.();
     } catch (err) {
@@ -236,6 +312,18 @@ function CommentForm({
         required
       />
 
+      <label className="block">
+        <span className="mb-1 block font-[family-name:var(--font-inter)] text-xs font-medium text-zinc-600 dark:text-zinc-400">Attach photo, video, YouTube, or source link <span className="font-normal text-zinc-400">optional</span></span>
+        <input
+          value={mediaUrl}
+          onChange={(e) => setMediaUrl(e.target.value)}
+          maxLength={500}
+          placeholder="Paste a media or source URL"
+          className="w-full rounded-xl border border-black/[0.08] bg-white px-3 py-2.5 font-[family-name:var(--font-inter)] text-sm outline-none transition focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
+        />
+        <span className="mt-1 block font-[family-name:var(--font-inter)] text-[11px] text-zinc-400 dark:text-zinc-500">Images, videos, and YouTube links preview inside the conversation.</span>
+      </label>
+
       <input
         tabIndex={-1}
         autoComplete="off"
@@ -315,6 +403,7 @@ function CommentItem({
           <p className="mt-2 whitespace-pre-wrap font-[family-name:var(--font-source-serif)] text-[15px] leading-relaxed text-zinc-700 dark:text-zinc-300">
             {comment.body}
           </p>
+          <MediaPreview url={comment.media_url || comment.source_url} type={comment.media_type || undefined} />
           <button
             type="button"
             onClick={() => setReplying((v) => !v)}
@@ -343,6 +432,7 @@ function CommentItem({
                   <p className="mt-1.5 whitespace-pre-wrap font-[family-name:var(--font-source-serif)] text-[14px] leading-relaxed text-zinc-700 dark:text-zinc-300">
                     {reply.body}
                   </p>
+                  <MediaPreview url={reply.media_url || reply.source_url} type={reply.media_type || undefined} />
                 </div>
               ))}
             </div>

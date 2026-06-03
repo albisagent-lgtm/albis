@@ -71,6 +71,26 @@ function cleanSourceUrl(value: unknown) {
   }
 }
 
+
+function getYouTubeId(url: string) {
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname.includes("youtu.be")) return parsed.pathname.replace("/", "").split(/[?&]/)[0] || null;
+    if (parsed.hostname.includes("youtube.com")) return parsed.searchParams.get("v") || parsed.pathname.match(/\/shorts\/([^/?]+)/)?.[1] || null;
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+function mediaType(url: string | null) {
+  if (!url) return null;
+  if (getYouTubeId(url)) return "youtube";
+  if (/\.(png|jpe?g|gif|webp|avif)(\?|#|$)/i.test(url)) return "image";
+  if (/\.(mp4|webm|mov|m4v)(\?|#|$)/i.test(url)) return "video";
+  return "link";
+}
+
 function cleanReportType(value: unknown): ReportType | null {
   const raw = typeof value === "string" ? value.trim() : "";
   return REPORT_TYPES.has(raw as ReportType) ? raw as ReportType : null;
@@ -81,22 +101,28 @@ function composeBody({
   reportType,
   location,
   sourceUrl,
+  mediaUrl,
 }: {
   body: string;
   reportType: ReportType | null;
   location: string | null;
   sourceUrl: string | null;
+  mediaUrl: string | null;
 }) {
   const meta: string[] = [];
   if (reportType) meta.push(`[albis-report-type:${reportType}]`);
   if (location) meta.push(`[albis-location:${location.replace(/\]/g, "")}]`);
   if (sourceUrl) meta.push(`[albis-source:${sourceUrl.replace(/\]/g, "")}]`);
+  if (mediaUrl) {
+    meta.push(`[albis-media:${mediaUrl.replace(/\]/g, "")}]`);
+    meta.push(`[albis-media-type:${mediaType(mediaUrl) || "link"}]`);
+  }
   return meta.length ? `${meta.join("\n")}\n\n${body}` : body;
 }
 
 function parseBody(value: string) {
   let body = value || "";
-  const meta: { context_type?: ReportType; location_text?: string; source_url?: string } = {};
+  const meta: { context_type?: ReportType; location_text?: string; source_url?: string; media_url?: string; media_type?: string } = {};
   const typeMatch = body.match(/^\[albis-report-type:([^\]]+)\]\n?/m);
   if (typeMatch && REPORT_TYPES.has(typeMatch[1] as ReportType)) meta.context_type = typeMatch[1] as ReportType;
   const locationMatch = body.match(/^\[albis-location:([^\]]+)\]\n?/m);
@@ -119,7 +145,7 @@ function initialStatus(body: string, sourceUrl?: string | null) {
 }
 
 function isNativeCardSlug(slug: string) {
-  return /^(weather|people|signal)-[a-z0-9][a-z0-9\-_. ]{1,180}$/i.test(slug);
+  return /^(weather|people|signal|card)-[a-z0-9][a-z0-9\-_. ]{1,180}$/i.test(slug);
 }
 
 function publicComment(row: CommentRow) {
@@ -133,6 +159,8 @@ function publicComment(row: CommentRow) {
     context_type: parsed.context_type || null,
     location_text: parsed.location_text || null,
     source_url: parsed.source_url || null,
+    media_url: parsed.media_url || null,
+    media_type: parsed.media_type || null,
     created_at: row.created_at,
     updated_at: row.updated_at,
   };
@@ -187,11 +215,13 @@ export async function POST(request: Request) {
   const reportType = parentId ? null : cleanReportType(payload.context_type);
   const location = parentId ? null : cleanShortText(payload.location_text, 80);
   const sourceUrl = parentId ? null : cleanSourceUrl(payload.source_url);
-  const storedBody = composeBody({ body, reportType, location, sourceUrl });
+  const mediaUrl = cleanSourceUrl(payload.media_url);
+  const storedBody = composeBody({ body, reportType, location, sourceUrl, mediaUrl });
 
   if (!articleSlug) return jsonError("Missing article slug.");
   if (body.length < MIN_BODY_LENGTH) return jsonError("Please write a little more before posting.");
   if (body.length > MAX_BODY_LENGTH) return jsonError(`Comments must be ${MAX_BODY_LENGTH} characters or fewer.`);
+  if (payload.media_url && !mediaUrl) return jsonError("Please attach a valid http or https media/source URL.");
 
   const post = await getPostBySlug(articleSlug);
   if (!post && !isNativeCardSlug(articleSlug)) return jsonError("Card not found.", 404);
@@ -246,7 +276,7 @@ export async function POST(request: Request) {
     author_name: authorName,
     is_anonymous: !user,
     body: storedBody,
-    status: initialStatus(body, sourceUrl),
+    status: initialStatus(body, sourceUrl || mediaUrl),
     ip_hash: ipHash,
     user_agent_hash: userAgentHash,
   };

@@ -73,12 +73,12 @@ function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEv
             </p>
           </div>
 
-          <Link href={event.href} onClick={() => trackFeedEvent(commentSlug, "open", { href: event.href })} className="group mt-3 block">
-            <h2 className={`font-[family-name:var(--font-playfair)] font-bold leading-tight tracking-tight group-hover:text-[#b58320] ${feature ? "text-3xl md:text-4xl" : "text-2xl"}`}>
+          <div className="mt-3 block">
+            <h2 className={`font-[family-name:var(--font-playfair)] font-bold leading-tight tracking-tight ${feature ? "text-3xl md:text-4xl" : "text-2xl"}`}>
               {event.title}
             </h2>
             {event.summary ? <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 md:text-[15px]">{event.summary}</p> : null}
-          </Link>
+          </div>
           {event.tags?.length ? (
             <div className="mt-3 flex flex-wrap gap-1.5">
               {event.tags.slice(0, 5).map((tag) => (
@@ -139,8 +139,8 @@ function FeedRow({ event, feature = false, open, onToggle }: { event: LiveFeedEv
             eyebrow=""
             title="Comments"
             helper=""
-            placeholder="Add a comment…"
-            emptyText="No comments yet."
+            placeholder="Add context, a source, photo, video, or question…"
+            emptyText="No comments yet. Add the first piece of context."
             submitLabel="Post"
             compact
             onCommentPosted={() => trackFeedEvent(commentSlug, "comment")}
