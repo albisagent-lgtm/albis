@@ -111,6 +111,7 @@ function signalToCard(signal: Signal, index: number): FeedItem {
   const authorName = typeof signal.metadata?.author_name === "string" ? signal.metadata.author_name : "Albis";
   const authorHandle = authorProfileHandle(authorName);
   const aiReviewStatus = typeof signal.metadata?.ai_review_status === "string" ? signal.metadata.ai_review_status : null;
+  const externalSourceUrl = asString(signal.metadata?.source_url) || asString(signal.metadata?.sourceUrl);
   const isPeopleCard = label.startsWith("people");
   return {
     id: `signal-${signal.id}`,
@@ -122,7 +123,7 @@ function signalToCard(signal: Signal, index: number): FeedItem {
     author: authorName,
     authorHref: authorHandle && authorName !== "Albis" ? `/u/${authorHandle}` : null,
     source: signal.region || (isPeopleCard ? "reader card" : undefined),
-    sourceHref: signal.article_url || undefined,
+    sourceHref: externalSourceUrl || signal.article_url || undefined,
     timestamp: prettyTime(signal.published_at),
     tags: signal.tags || [],
     bullets: signal.bullets || [],
