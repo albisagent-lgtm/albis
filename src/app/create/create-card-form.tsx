@@ -111,7 +111,7 @@ export function CreateCardForm() {
           className={`rounded-2xl border p-3 text-left transition ${mode === "manual" ? "border-[#c8922a]/60 bg-[#c8922a]/10" : "border-black/[0.08] hover:border-[#c8922a]/35 dark:border-white/[0.08]"}`}
         >
           <span className="block font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">Write it myself</span>
-          <span className="mt-1 block text-sm text-zinc-500 dark:text-zinc-400">Post a card, link, note, or article-style update in your own words.</span>
+          <span className="mt-1 block text-sm text-zinc-500 dark:text-zinc-400">Post a story card, source, direct media link, note, or update in your own words.</span>
         </button>
         <button
           type="button"
@@ -127,7 +127,7 @@ export function CreateCardForm() {
           className={`rounded-2xl border p-3 text-left transition sm:col-span-2 ${mode === "article" ? "border-[#c8922a]/60 bg-[#c8922a]/10" : "border-black/[0.08] hover:border-[#c8922a]/35 dark:border-white/[0.08]"}`}
         >
           <span className="block font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">Full article + card</span>
-          <span className="mt-1 block text-sm text-zinc-500 dark:text-zinc-400">Publish a deeper article/report and automatically create a feed card that links into it.</span>
+          <span className="mt-1 block text-sm text-zinc-500 dark:text-zinc-400">Publish a deeper article and automatically create a feed card that links into it.</span>
         </button>
       </div>
 
@@ -145,14 +145,14 @@ export function CreateCardForm() {
 
       <label className="block">
         <span className="mb-1 block font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">
-          {mode === "ai-review" ? "Links to review" : "Link or links"}
+          {mode === "ai-review" ? "Links to review" : "Source/media links"}
         </span>
         <textarea
           value={sourceLinks}
           onChange={(e) => setSourceLinks(e.target.value)}
           maxLength={2200}
           className="min-h-24 w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
-          placeholder="Paste one link per line"
+          placeholder="Paste one source, image, video, or YouTube link per line"
         />
         {links.length > 0 ? <p className="mt-1 text-xs text-zinc-400">{links.length} link{links.length === 1 ? "" : "s"} attached.</p> : null}
       </label>
@@ -191,7 +191,7 @@ export function CreateCardForm() {
       </div>
 
       <label className="block">
-        <span className="mb-1 block font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">User tags</span>
+        <span className="mb-1 block font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">Story signals</span>
         <input
           value={tagInput}
           onChange={(e) => setTagInput(e.target.value)}
@@ -199,7 +199,7 @@ export function CreateCardForm() {
           className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
           placeholder="e.g. food security, cricket, ai, supply chains"
         />
-        {tags.length > 0 ? <p className="mt-1 text-xs text-zinc-400">Tags: {tags.map((tag) => `#${tag}`).join(" ")}</p> : null}
+        {tags.length > 0 ? <p className="mt-1 text-xs text-zinc-400">Signals attached: {tags.join(", ")}</p> : null}
       </label>
 
       <label className="block">

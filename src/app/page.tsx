@@ -42,7 +42,7 @@ const peopleCards: FeedItem[] = [
     href: "/create",
     label: "people",
     title: "Post an update, link, or note",
-    summary: "Short cards from people can sit beside Albis reports and articles.",
+    summary: "Short cards from people can sit beside Albis stories and articles.",
     author: "Albis community",
     timestamp: "prototype",
     action: "Create",
@@ -108,8 +108,9 @@ function prettyReportDate(value?: string) {
 function signalToCard(signal: Signal, index: number): FeedItem {
   const label = signal.category?.replaceAll("-", " ") || "albis";
   const cardSlug = signal.article_slug || `signal-${signal.id}`;
-  const authorName = typeof signal.metadata?.author_name === "string" ? signal.metadata.author_name : "Albis";
-  const authorHandle = authorProfileHandle(authorName);
+  const authorName = typeof signal.metadata?.author_display_name === "string" ? signal.metadata.author_display_name : typeof signal.metadata?.author_name === "string" ? signal.metadata.author_name : "Albis";
+  const authorHandle = authorProfileHandle(typeof signal.metadata?.author_name === "string" ? signal.metadata.author_name : authorName);
+  const authorAvatarUrl = typeof signal.metadata?.author_avatar_url === "string" ? signal.metadata.author_avatar_url : null;
   const aiReviewStatus = typeof signal.metadata?.ai_review_status === "string" ? signal.metadata.ai_review_status : null;
   const externalSourceUrl = asString(signal.metadata?.source_url) || asString(signal.metadata?.sourceUrl);
   const isPeopleCard = label.startsWith("people");
@@ -121,6 +122,7 @@ function signalToCard(signal: Signal, index: number): FeedItem {
     title: signal.title,
     summary: signal.summary,
     author: authorName,
+    authorAvatarUrl,
     authorHref: authorHandle && authorName !== "Albis" ? `/u/${authorHandle}` : null,
     source: signal.region || (isPeopleCard ? "reader card" : undefined),
     sourceHref: externalSourceUrl || signal.article_url || undefined,
@@ -160,15 +162,6 @@ function weatherToCard(report: WeatherReport, index: number): FeedItem {
     bucket: "weather",
     weight: 86 - index,
   };
-}
-
-function weatherAgeLabel() {
-  const generated = new Date(weatherRun.generatedAt || `${weatherRun.date}T12:00:00Z`);
-  if (Number.isNaN(generated.getTime())) return null;
-  const hours = Math.floor((Date.now() - generated.getTime()) / (1000 * 60 * 60));
-  if (hours < 0) return null;
-  if (hours < 24) return `Weather scan updated ${hours || 1}h ago`;
-  return `Weather scan is ${Math.floor(hours / 24)}d old`;
 }
 
 function postToCard(post: BlogPost, index: number): FeedItem {
@@ -313,8 +306,6 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
         ? discussedCards.slice(0, 48)
         : [];
   const followSuggestions = buildFollowSuggestions(signals);
-  const weatherStatus = weatherAgeLabel();
-
   return (
     <main className="min-h-screen bg-[#f8f7f4] text-[#111] dark:bg-[#101010] dark:text-[#f4f1ea]">
       <section className="border-b border-black/[0.08] dark:border-white/[0.08]">
@@ -337,41 +328,30 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 py-4 md:px-6">
-        <div className="rounded-3xl border border-[#c8922a]/25 bg-[#fff8e6] p-4 shadow-sm dark:border-[#f0c15e]/20 dark:bg-[#f0c15e]/10">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <div>
-              <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-[#9b6b18] dark:text-[#f0c15e]">Daily briefing</p>
-              <p className="mt-1 text-sm leading-relaxed text-zinc-700 dark:text-zinc-200">Keep the feed clean; get the summary by email.</p>
-              <p className="mt-1 font-[family-name:var(--font-inter)] text-xs font-semibold text-zinc-500 dark:text-zinc-400">Free · Daily · Unsubscribe anytime</p>
+      <section className="mx-auto grid max-w-7xl gap-5 px-4 py-5 md:px-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+        <div>
+          {activeFilter === "following" ? (
+            <FollowingFeed cards={topCards.slice(0, 48)} suggestions={followSuggestions} />
+          ) : visibleCards.length === 0 ? (
+            <div className="rounded-3xl border border-dashed border-black/10 bg-white/50 px-6 py-14 text-center dark:border-white/10 dark:bg-white/[0.025]">
+              <p className="font-[family-name:var(--font-playfair)] text-2xl font-bold">No cards here yet.</p>
+              <Link href="/create" className="mt-4 inline-flex rounded-full bg-[#111] px-4 py-2 text-sm font-bold text-white dark:bg-white dark:text-black">Create one</Link>
             </div>
-            <div className="w-full md:max-w-sm">
-              <EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} source="feed-home-briefing-strip" />
+          ) : (
+            <LiveEventFeed events={visibleCards} />
+          )}
+        </div>
+
+        <aside className="space-y-3 lg:pt-1">
+          <div className="rounded-3xl border border-black/[0.08] bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
+            <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-[#9b6b18] dark:text-[#f0c15e]">Daily briefing</p>
+            <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-bold">A calm summary, off the feed.</h2>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">If you want the day’s scan without making the card feed busier, get it by email.</p>
+            <div className="mt-4">
+              <EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} source="feed-home-side-card" />
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-5xl px-4 py-5 md:px-6">
-        {activeFilter === "following" ? (
-          <FollowingFeed cards={topCards.slice(0, 48)} suggestions={followSuggestions} />
-        ) : (
-          <>
-            {activeFilter === "top" && weatherStatus ? (
-              <div className="mb-3 rounded-2xl border border-black/[0.08] bg-white px-4 py-3 font-[family-name:var(--font-inter)] text-sm text-zinc-500 dark:border-white/[0.08] dark:bg-white/[0.035] dark:text-zinc-400">
-                {weatherStatus}. Weather cards are folded into the main feed rather than split into a separate tab.
-              </div>
-            ) : null}
-            {visibleCards.length === 0 ? (
-              <div className="rounded-3xl border border-dashed border-black/10 bg-white/50 px-6 py-14 text-center dark:border-white/10 dark:bg-white/[0.025]">
-                <p className="font-[family-name:var(--font-playfair)] text-2xl font-bold">No cards here yet.</p>
-                <Link href="/create" className="mt-4 inline-flex rounded-full bg-[#111] px-4 py-2 text-sm font-bold text-white dark:bg-white dark:text-black">Create one</Link>
-              </div>
-            ) : (
-              <LiveEventFeed events={visibleCards} />
-            )}
-          </>
-        )}
+        </aside>
       </section>
     </main>
   );

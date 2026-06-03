@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArticleComments } from "./article-comments";
 import { trackFeedEvent } from "./feed-event-tracking";
+import { UserAvatar } from "./user-avatar";
 
 export type MediaPreview = {
   type: "image" | "video" | "youtube" | "source";
@@ -24,6 +25,7 @@ export type LiveFeedEvent = {
   cardSlug?: string;
   commentCount?: number | null;
   author?: string;
+  authorAvatarUrl?: string | null;
   source?: string;
   sourceHref?: string;
   authorHref?: string | null;
@@ -90,26 +92,44 @@ function CardDetailModal({ event, onClose, onShare, saved, onSave }: { event: Li
   const commentSlug = event.cardSlug || event.articleSlug || event.id;
   const reviewLabel = aiReviewLabel(event.aiReviewStatus);
   const usefulBullets = (event.bullets || []).map((bullet) => bullet.trim()).filter(Boolean);
+  const panelRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const focusableSelector = 'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
     const onKey = (keyboardEvent: KeyboardEvent) => {
       if (keyboardEvent.key === "Escape") onClose();
+      if (keyboardEvent.key !== "Tab") return;
+      const focusable = Array.from(panelRef.current?.querySelectorAll<HTMLElement>(focusableSelector) || []).filter((node) => !node.hasAttribute("disabled") && node.offsetParent !== null);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (keyboardEvent.shiftKey && document.activeElement === first) {
+        keyboardEvent.preventDefault();
+        last.focus();
+      } else if (!keyboardEvent.shiftKey && document.activeElement === last) {
+        keyboardEvent.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+    window.setTimeout(() => panelRef.current?.querySelector<HTMLElement>(focusableSelector)?.focus(), 0);
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = previousOverflow;
+      previousFocus?.focus();
     };
   }, [onClose]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center px-3 py-3 md:items-center md:px-6 md:py-8" role="dialog" aria-modal="true" aria-label={event.title}>
       <button type="button" className="absolute inset-0 bg-black/40 backdrop-blur-sm" aria-label="Close card" onClick={onClose} />
-      <section className="relative z-10 w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-[2rem] border border-black/10 bg-[#f8f7f4] p-4 shadow-2xl dark:border-white/10 dark:bg-[#101010] md:p-7">
+      <section ref={panelRef} className="relative z-10 w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-[2rem] border border-black/10 bg-[#f8f7f4] p-4 shadow-2xl dark:border-white/10 dark:bg-[#101010] md:p-7">
         <div className="mb-4 flex items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-2">
+            <UserAvatar name={event.author || event.source || "Albis"} imageUrl={event.authorAvatarUrl} size="sm" />
             <span className="rounded-full bg-[#c8922a]/10 px-2.5 py-1 font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">{cleanLabel(event.label)}</span>
             {reviewLabel ? <span className="rounded-full border border-black/[0.08] px-2.5 py-1 font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.14em] text-zinc-500 dark:border-white/[0.08] dark:text-zinc-300">{reviewLabel}</span> : null}
           </div>
@@ -120,8 +140,9 @@ function CardDetailModal({ event, onClose, onShare, saved, onSave }: { event: Li
 
         <h2 className="font-[family-name:var(--font-playfair)] text-3xl font-bold leading-tight tracking-tight md:text-4xl">{event.title}</h2>
         {event.summary ? <p className="mt-3 text-base leading-relaxed text-zinc-700 dark:text-zinc-200">{event.summary}</p> : null}
-        <p className="mt-3 font-[family-name:var(--font-inter)] text-xs text-zinc-500 dark:text-zinc-400">
-          {[event.author || event.source || "Albis", event.timestamp || event.meta].filter(Boolean).join(" · ")}
+        <p className="mt-3 flex items-center gap-2 font-[family-name:var(--font-inter)] text-xs text-zinc-500 dark:text-zinc-400">
+          <UserAvatar name={event.author || event.source || "Albis"} imageUrl={event.authorAvatarUrl} size="sm" />
+          <span>{[event.author || event.source || "Albis", event.timestamp || event.meta].filter(Boolean).join(" · ")}</span>
         </p>
 
         {usefulBullets.length ? (
@@ -164,19 +185,19 @@ function CardDetailModal({ event, onClose, onShare, saved, onSave }: { event: Li
               Open source
             </Link>
           ) : null}
-          <button type="button" onClick={onSave} className={`rounded-full border px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${saved ? "border-[#c8922a]/60 bg-[#c8922a]/10 text-[#9b6b18] dark:text-[#f0c15e]" : "border-black/[0.12] text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}>{saved ? "Saved" : "Save"}</button>
-          <button type="button" onClick={onShare} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">Share</button>
+          <button type="button" onClick={onSave} className={`rounded-full border px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${saved ? "border-[#c8922a]/60 bg-[#c8922a]/10 text-[#9b6b18] dark:text-[#f0c15e]" : "border-black/[0.12] text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}>{saved ? "Saved" : "Save for later"}</button>
+          <button type="button" onClick={onShare} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">Share story</button>
         </div>
 
         <div className="mt-5">
           <ArticleComments
             articleSlug={commentSlug}
             eyebrow=""
-            title="Discussion"
-            helper="Add context, a source, photo/video URL, or a question."
-            placeholder="Add context, a source, photo, video, or question…"
-            emptyText="No discussion yet. Add the first piece of context."
-            submitLabel="Post"
+            title="Add what you know"
+            helper="Add local context, a source, a direct media link, or a question. Upload can come later; for now, paste a link and Albis will preview it when possible."
+            placeholder="Add context, a source URL, photo/video link, or question…"
+            emptyText="No context yet. Add the first source, observation, or question."
+            submitLabel="Add context"
             compact
             onCommentPosted={() => trackFeedEvent(commentSlug, "comment")}
           />
@@ -216,6 +237,7 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose }: { event:
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
+              <UserAvatar name={event.author || event.source || "Albis"} imageUrl={event.authorAvatarUrl} size="sm" />
               <span className="rounded-full bg-[#c8922a]/10 px-2.5 py-1 font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">
                 {cleanLabel(event.label)}
               </span>
@@ -241,20 +263,20 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose }: { event:
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap gap-2">
             <button type="button" onClick={() => { trackFeedEvent(commentSlug, "open", { surface: "button" }); onOpen(); }} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
-              {event.action === "Read" ? "Read" : "Open"}
+              {event.action === "Read" ? "Read story" : "Open story"}
             </button>
             <button type="button" onClick={() => { trackFeedEvent(commentSlug, "open", { surface: "discussion" }); onOpen(); }} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
-              {discussionLabel(event.commentCount)}
+              {event.commentCount ? discussionLabel(event.commentCount) : "Add context"}
             </button>
             <button type="button" aria-pressed={saved} onClick={toggleSave} className={`rounded-full border px-3 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${saved ? "border-[#c8922a]/60 bg-[#c8922a]/10 text-[#9b6b18] dark:text-[#f0c15e]" : "border-black/[0.12] text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}>
-              {saved ? "Saved" : "Save"}
+              {saved ? "Saved" : "Save for later"}
             </button>
             <button type="button" onClick={shareCard} className="rounded-full border border-black/[0.12] px-3 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300" aria-label={`Share ${event.title}`}>
-              ↗
+              Share
             </button>
           </div>
           <Link href={event.href} onClick={() => trackFeedEvent(commentSlug, "open", { href: event.href, surface: "direct-link" })} className="font-[family-name:var(--font-inter)] text-xs font-semibold text-zinc-400 hover:text-[#b58320]">
-            Direct link
+            Permalink
           </Link>
         </div>
       </article>
@@ -320,10 +342,10 @@ export function LiveEventFeed({ events, leadId }: { events: LiveFeedEvent[]; lea
       <div ref={sentinelRef} className="h-1" />
       {visibleCount < filteredEvents.length ? (
         <button type="button" onClick={() => setVisibleCount((current) => Math.min(current + 8, filteredEvents.length))} className="mx-auto flex rounded-full border border-black/[0.12] bg-white px-5 py-3 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:bg-white/[0.035] dark:text-zinc-300">
-          Load more
+          Load next source set
         </button>
       ) : filteredEvents.length > 12 ? (
-        <p className="py-3 text-center font-[family-name:var(--font-inter)] text-xs text-zinc-400">You’re caught up for now.</p>
+        <p className="py-3 text-center font-[family-name:var(--font-inter)] text-xs text-zinc-400">You’re caught up for now. New source sets will appear as the feed refreshes.</p>
       ) : null}
     </div>
   );

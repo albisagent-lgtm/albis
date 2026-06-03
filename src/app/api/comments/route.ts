@@ -18,6 +18,8 @@ type CommentRow = {
   updated_at: string;
 };
 
+type ParentCommentRow = Pick<CommentRow, "id" | "article_slug" | "parent_id" | "author_id" | "status">;
+
 type ReportType = "local_update" | "source" | "correction" | "context" | "question";
 
 const REPORT_TYPES = new Set<ReportType>(["local_update", "source", "correction", "context", "question"]);
@@ -230,10 +232,11 @@ export async function POST(request: Request) {
   const authSupabase = await createClient();
   const { data: { user } } = await authSupabase.auth.getUser();
 
+  let parentComment: ParentCommentRow | null = null;
   if (parentId) {
     const { data: parent, error: parentError } = await supabase
       .from("article_comments")
-      .select("id, article_slug, parent_id, status")
+      .select("id, article_slug, parent_id, author_id, status")
       .eq("id", parentId)
       .single();
 
@@ -241,7 +244,9 @@ export async function POST(request: Request) {
       return jsonError("Could not find the comment you are replying to.", 404);
     }
 
-    if (parent.parent_id) {
+    parentComment = parent as ParentCommentRow;
+
+    if (parentComment.parent_id) {
       return jsonError("Replies can only be one level deep for now.");
     }
   }
@@ -296,6 +301,47 @@ export async function POST(request: Request) {
   }
 
   const row = data as CommentRow;
+
+  if (row.status === "visible" && parentComment?.author_id && parentComment.author_id !== user?.id) {
+    const { error: notifyError } = await supabase
+      .from("notifications")
+      .insert({
+        recipient_id: parentComment.author_id,
+        actor_id: user?.id || null,
+        type: "reply",
+        title: `${authorName} replied to your context`,
+        body: body.slice(0, 180),
+        entity_type: "comment",
+        entity_id: row.id,
+        entity_url: `/signals/${encodeURIComponent(articleSlug)}#comments`,
+        metadata: { article_slug: articleSlug, parent_id: parentComment.id },
+      });
+
+    if (notifyError && notifyError.code !== "42P01") {
+      console.error("[comments] notification insert failed", notifyError.message);
+    }
+  }
+
+  if (user) {
+    const now = new Date().toISOString();
+    const { error: timeError } = await supabase
+      .from("time_clock_events")
+      .insert({
+        user_id: user.id,
+        direction: "spent",
+        event_type: parentId ? "reply" : "comment",
+        target_type: "signal",
+        target_id: articleSlug,
+        seconds: 0,
+        metadata: { comment_id: row.id },
+        created_at: now,
+      });
+
+    if (timeError && timeError.code !== "42P01") {
+      console.error("[comments] time event insert failed", timeError.message);
+    }
+  }
+
   return NextResponse.json({
     ok: true,
     status: row.status,

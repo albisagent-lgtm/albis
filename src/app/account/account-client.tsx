@@ -26,6 +26,8 @@ export default function AccountClient() {
   // Profile editing
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
+  const [bio, setBio] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
   const [nameSaving, setNameSaving] = useState(false);
   const [nameSuccess, setNameSuccess] = useState(false);
   const [nameError, setNameError] = useState("");
@@ -57,8 +59,10 @@ export default function AccountClient() {
         .single();
 
       setProfile(data);
-      setName(data?.name || "");
+      setName(data?.name || String(user.user_metadata?.name || ""));
       setUsername(String(user.user_metadata?.username || "").replace(/^@+/, ""));
+      setBio(String(user.user_metadata?.bio || ""));
+      setAvatarUrl(String(user.user_metadata?.avatar_url || ""));
       setLoading(false);
     });
   }, [router]);
@@ -85,8 +89,8 @@ export default function AccountClient() {
         setNameError(error.message);
       } else {
         setNameSuccess(true);
-        // Also update user metadata so nav shows updated name
-        await supabase.auth.updateUser({ data: { name: name.trim(), username: cleanUsername || null } });
+        // Also update user metadata so nav/profile cards show updated public account details.
+        await supabase.auth.updateUser({ data: { name: name.trim(), username: cleanUsername || null, bio: bio.trim() || null, avatar_url: avatarUrl.trim() || null } });
         setTimeout(() => setNameSuccess(false), 3000);
       }
     } catch {
@@ -190,6 +194,7 @@ export default function AccountClient() {
   const cardClass = "rounded-2xl border border-black/[0.07] bg-white p-7 dark:border-white/[0.07] dark:bg-white/[0.03]";
   const sectionHeader = "text-sm font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500";
   const inputClass = "h-11 w-full rounded-xl border border-black/[0.1] bg-[#f8f7f4] px-3.5 text-sm text-[#0f0f0f] placeholder:text-zinc-400 focus:border-[#c8922a] focus:outline-none focus:ring-2 focus:ring-[#c8922a]/15 dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-[#f0efec] dark:placeholder:text-zinc-600 dark:focus:border-[#c8922a] dark:focus:ring-[#c8922a]/15";
+  const textareaClass = "min-h-24 w-full rounded-xl border border-black/[0.1] bg-[#f8f7f4] px-3.5 py-3 text-sm text-[#0f0f0f] placeholder:text-zinc-400 focus:border-[#c8922a] focus:outline-none focus:ring-2 focus:ring-[#c8922a]/15 dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-[#f0efec] dark:placeholder:text-zinc-600 dark:focus:border-[#c8922a] dark:focus:ring-[#c8922a]/15";
   const btnPrimary = "inline-flex h-10 items-center justify-center rounded-full bg-[#c8922a] px-6 text-sm font-medium text-white hover:bg-[#c8922a]/90 disabled:opacity-60";
   const successMsg = "rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-2.5 text-sm text-emerald-700 dark:border-emerald-900/50 dark:bg-emerald-950/30 dark:text-emerald-400";
   const errorMsg = "rounded-xl border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-700 dark:border-amber-900/50 dark:bg-amber-950/30 dark:text-amber-400";
@@ -267,7 +272,37 @@ export default function AccountClient() {
                   />
                 </div>
                 <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                  This is the public name shown on article conversations.
+                  This is the public handle shown on cards, posts, and conversations.
+                </p>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
+                  Profile picture URL
+                </label>
+                <input
+                  type="url"
+                  value={avatarUrl}
+                  onChange={(e) => setAvatarUrl(e.target.value)}
+                  placeholder="https://…"
+                  className={inputClass}
+                />
+                <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                  Optional for now: paste an image URL. Uploads can come later.
+                </p>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
+                  Public bio
+                </label>
+                <textarea
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value.slice(0, 280))}
+                  placeholder="A short note about what you share or follow on Albis."
+                  maxLength={280}
+                  className={textareaClass}
+                />
+                <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                  {280 - bio.length} characters left. New cards can carry this profile context.
                 </p>
               </div>
               <div className="flex flex-col gap-1.5">
@@ -290,8 +325,10 @@ export default function AccountClient() {
                 onClick={handleNameSave}
                 disabled={
                   nameSaving ||
-                  (name.trim() === (profile?.name || "") &&
-                    username.trim().replace(/^@+/, "").toLowerCase() === String(user?.user_metadata?.username || ""))
+                  (name.trim() === (profile?.name || String(user?.user_metadata?.name || "")) &&
+                    username.trim().replace(/^@+/, "").toLowerCase() === String(user?.user_metadata?.username || "") &&
+                    bio.trim() === String(user?.user_metadata?.bio || "") &&
+                    avatarUrl.trim() === String(user?.user_metadata?.avatar_url || ""))
                 }
                 className={btnPrimary}
               >

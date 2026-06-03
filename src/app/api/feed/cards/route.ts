@@ -231,6 +231,9 @@ export async function POST(request: Request) {
     user?.user_metadata?.username ? `@${user.user_metadata.username}` : user?.user_metadata?.name || user?.email?.split("@")[0] || "Reader",
     80
   );
+  const authorDisplayName = cleanText(user?.user_metadata?.name || authorName, 80);
+  const authorBio = cleanText(user?.user_metadata?.bio, 280);
+  const authorAvatarUrl = cleanText(user?.user_metadata?.avatar_url, 500);
   const now = new Date().toISOString();
   let finalTitle = title;
   let articleSlug: string | null = null;
@@ -337,6 +340,9 @@ export async function POST(request: Request) {
       created_via: "create-page",
       author_id: user?.id || null,
       author_name: authorName,
+      author_display_name: authorDisplayName,
+      author_bio: authorBio,
+      author_avatar_url: authorAvatarUrl,
       author_email_domain: user?.email?.split("@")[1] || null,
       source_url: sourceUrl,
       source_urls: sourceUrls,

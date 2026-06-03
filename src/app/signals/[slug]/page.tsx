@@ -56,10 +56,10 @@ function sourceInfo(url: string) {
       href: url.startsWith("/") ? url : parsed.toString(),
       host,
       isAlbis,
-      title: isAlbis ? "Read the full Albis report" : "Open the original source",
-      eyebrow: isAlbis ? "Albis report" : "Source",
+      title: isAlbis ? "Read the full article" : "Open the original source",
+      eyebrow: isAlbis ? "Article" : "Source",
       detail: isAlbis ? pathLabel : host,
-      cta: isAlbis ? "Open report" : `Open ${host}`,
+      cta: isAlbis ? "Read article" : `Open ${host}`,
     };
   } catch {
     return {

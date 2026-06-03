@@ -2,10 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { trackFeedEvent } from "./feed-event-tracking";
-import { followTargetId, readFollowMap, writeFollowMap, type FollowTargetType } from "./follow-utils";
+import { followTargetId, readFollowMap, slugifyFollow, writeFollowMap, type FollowTargetType } from "./follow-utils";
+
+type ApiFollow = {
+  target_type: FollowTargetType;
+  target_id: string;
+  target_label: string;
+};
 
 export function FollowButton({ type, label, className = "" }: { type: FollowTargetType; label: string; className?: string }) {
   const id = followTargetId(type, label);
+  const targetId = slugifyFollow(label);
   const [following, setFollowing] = useState(false);
 
   useEffect(() => {
@@ -19,6 +26,38 @@ export function FollowButton({ type, label, className = "" }: { type: FollowTarg
     };
   }, [id]);
 
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("/api/follows", { cache: "no-store", signal: controller.signal })
+      .then((res) => res.ok ? res.json() : null)
+      .then((payload: { follows?: ApiFollow[] } | null) => {
+        if (!payload?.follows?.length) return;
+        const current = readFollowMap();
+        for (const follow of payload.follows) {
+          const followId = followTargetId(follow.target_type, follow.target_id || follow.target_label);
+          current[followId] = { id: followId, type: follow.target_type, label: follow.target_label };
+        }
+        writeFollowMap(current);
+      })
+      .catch(() => undefined);
+    return () => controller.abort();
+  }, []);
+
+  async function persistFollow(nextFollowing: boolean) {
+    try {
+      const res = await fetch("/api/follows", {
+        method: nextFollowing ? "POST" : "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ target_type: type, target_id: targetId, target_label: label }),
+      });
+      // Guests keep local-device follows; signed-in users get database persistence.
+      if (res.status === 401) return;
+      if (!res.ok) throw new Error("follow persistence failed");
+    } catch (error) {
+      console.warn("[follow-button] could not persist follow", error);
+    }
+  }
+
   return (
     <button
       type="button"
@@ -29,6 +68,7 @@ export function FollowButton({ type, label, className = "" }: { type: FollowTarg
         if (nextFollowing) current[id] = { id, type, label };
         else delete current[id];
         writeFollowMap(current);
+        void persistFollow(nextFollowing);
         trackFeedEvent(id, nextFollowing ? "follow" : "unfollow", { type, label });
         setFollowing(nextFollowing);
       }}
