@@ -159,22 +159,6 @@ function CardDetailModal({ event, onClose, onShare, saved, onSave }: { event: Li
           </div>
         ) : null}
 
-        {event.stillUnclear || event.sourceNote ? (
-          <div className="mt-4 grid gap-3 md:grid-cols-2">
-            {event.stillUnclear ? (
-              <div className="rounded-3xl border border-black/[0.08] bg-white/60 p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
-                <p className="font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.16em] text-zinc-400">Still unclear</p>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-200">{event.stillUnclear}</p>
-              </div>
-            ) : null}
-            {event.sourceNote ? (
-              <div className="rounded-3xl border border-black/[0.08] bg-white/60 p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
-                <p className="font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.16em] text-zinc-400">Source note</p>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-200">{event.sourceNote}</p>
-              </div>
-            ) : null}
-          </div>
-        ) : null}
 
         <div className="mt-5 flex flex-wrap gap-2 border-y border-black/[0.08] py-4 dark:border-white/[0.08]">
           <Link href={event.sourceHref || event.href} target={event.sourceHref ? "_blank" : undefined} rel={event.sourceHref ? "noopener noreferrer" : undefined} onClick={() => trackFeedEvent(commentSlug, "open", { href: event.sourceHref || event.href, surface: "modal-article-link" })} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
