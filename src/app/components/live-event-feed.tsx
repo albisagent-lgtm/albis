@@ -177,16 +177,14 @@ function CardDetailModal({ event, onClose, onShare, saved, onSave }: { event: Li
         ) : null}
 
         <div className="mt-5 flex flex-wrap gap-2 border-y border-black/[0.08] py-4 dark:border-white/[0.08]">
-          <Link href={event.href} onClick={() => trackFeedEvent(commentSlug, "open", { href: event.href, surface: "modal-albis-link" })} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
-            Read article
+          <Link href={event.sourceHref || event.href} target={event.sourceHref ? "_blank" : undefined} rel={event.sourceHref ? "noopener noreferrer" : undefined} onClick={() => trackFeedEvent(commentSlug, "open", { href: event.sourceHref || event.href, surface: "modal-article-link" })} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
+            Read Article
           </Link>
-          {event.sourceHref ? (
-            <Link href={event.sourceHref} target="_blank" rel="noopener noreferrer" onClick={() => trackFeedEvent(commentSlug, "open", { href: event.sourceHref, surface: "modal-source-link" })} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
-              Open source
-            </Link>
-          ) : null}
-          <button type="button" onClick={onSave} className={`rounded-full border px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${saved ? "border-[#c8922a]/60 bg-[#c8922a]/10 text-[#9b6b18] dark:text-[#f0c15e]" : "border-black/[0.12] text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}>{saved ? "Saved" : "Save for later"}</button>
-          <button type="button" onClick={onShare} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">Share story</button>
+          <Link href={event.href} onClick={() => trackFeedEvent(commentSlug, "open", { href: event.href, surface: "modal-card-link" })} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
+            Open Card
+          </Link>
+          <button type="button" onClick={onSave} className={`rounded-full border px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${saved ? "border-[#c8922a]/60 bg-[#c8922a]/10 text-[#9b6b18] dark:text-[#f0c15e]" : "border-black/[0.12] text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}>{saved ? "Saved" : "Save"}</button>
+          <button type="button" onClick={onShare} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">Share</button>
         </div>
 
         <div className="mt-5">
@@ -269,7 +267,7 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose }: { event:
               {event.commentCount ? discussionLabel(event.commentCount) : "Add context"}
             </button>
             <button type="button" aria-pressed={saved} onClick={toggleSave} className={`rounded-full border px-3 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${saved ? "border-[#c8922a]/60 bg-[#c8922a]/10 text-[#9b6b18] dark:text-[#f0c15e]" : "border-black/[0.12] text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}>
-              {saved ? "Saved" : "Save for later"}
+              {saved ? "Saved" : "Save"}
             </button>
             <button type="button" onClick={shareCard} className="rounded-full border border-black/[0.12] px-3 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300" aria-label={`Share ${event.title}`}>
               Share
