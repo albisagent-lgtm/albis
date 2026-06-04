@@ -63,7 +63,7 @@ function ProfileScorecards({ stats }: { stats: PublicProfileStats }) {
   return (
     <div className="mt-5 grid gap-3 md:grid-cols-2">
       <ScoreCard
-        label="Time contributed"
+        label="Time given"
         value={stats.time_contributed_label}
         text="Active time spent reading, creating cards, adding comments, and bringing useful signal into Albis."
       />
