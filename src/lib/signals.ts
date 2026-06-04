@@ -1,6 +1,7 @@
 import { cache } from "react";
 import { createAnonClient } from "./supabase/anon";
 import { createAdminClient } from "./supabase/admin";
+import { humaniseSeconds } from "./time-clock";
 import type { GeneratedSignal } from "./public-signal-generator";
 
 export type Signal = {
@@ -127,6 +128,21 @@ export const getSignalsByAuthorHandle = cache(async (handle: string, limit = 24)
   const names = [`@${cleanHandle}`, cleanHandle];
   try {
     const supabase = createAnonClient();
+    if (cleanHandle === "albis") {
+      const { data, error } = await supabase
+        .from("albis_live_signals")
+        .select(SIGNAL_COLUMNS)
+        .eq("status", "published")
+        .or("metadata->>author_name.eq.Albis,metadata->>author_name.eq.@albis,category.not.ilike.people-%")
+        .order("published_at", { ascending: false })
+        .limit(limit);
+      if (error) {
+        if (error.code === "42P01" || /signals/i.test(error.message)) return [];
+        console.error("[signals] getSignalsByAuthorHandle(albis) failed", error.message);
+        return [];
+      }
+      return (data || []).map((row) => normaliseSignal(row as Record<string, unknown>));
+    }
     const results: Signal[] = [];
     for (const name of names) {
       const { data, error } = await supabase
@@ -156,6 +172,157 @@ export const getSignalsByAuthorHandle = cache(async (handle: string, limit = 24)
     console.error(`[signals] getSignalsByAuthorHandle(${cleanHandle}) threw`, error);
     return [];
   }
+});
+
+export type PublicProfileStats = {
+  cards_count: number;
+  context_count: number;
+  comments_count: number;
+  sources_count: number;
+  opened_count: number;
+  time_contributed_seconds: number;
+  time_helped_seconds: number;
+  time_contributed_label: string;
+  time_helped_label: string;
+  has_tracked_time: boolean;
+  latest_context: Array<{ id: string; title: string; href: string; type: string; created_at: string }>;
+};
+
+function signalAuthorUserIds(cards: Signal[]) {
+  return [...new Set(cards
+    .map((card) => typeof card.metadata?.author_id === "string" ? card.metadata.author_id : null)
+    .filter((id): id is string => Boolean(id)))];
+}
+
+function signalAuthorNames(handle: string, cards: Signal[]) {
+  const clean = handle.replace(/^@+/, "").toLowerCase();
+  return [...new Set([
+    clean,
+    `@${clean}`,
+    clean === "albis" ? "Albis" : null,
+    ...cards.map((card) => typeof card.metadata?.author_name === "string" ? card.metadata.author_name : null),
+    ...cards.map((card) => typeof card.metadata?.author_display_name === "string" ? card.metadata.author_display_name : null),
+  ].filter((name): name is string => Boolean(name)))];
+}
+
+function metadataSeconds(value: unknown) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return 0;
+  const metadata = value as Record<string, unknown>;
+  const eventSubtype = typeof metadata.event_subtype === "string" ? metadata.event_subtype : "";
+  if (eventSubtype && eventSubtype !== "active_dwell") return 0;
+  const seconds = Math.floor(Number(metadata.seconds || metadata.active_seconds || 0));
+  if (!Number.isFinite(seconds)) return 0;
+  return Math.min(Math.max(seconds, 0), 300);
+}
+
+export const getPublicProfileStats = cache(async (handle: string, cards: Signal[]): Promise<PublicProfileStats> => {
+  const cleanHandle = String(handle || "").trim().replace(/^@+/, "").toLowerCase();
+  const userIds = signalAuthorUserIds(cards);
+  const authorNames = signalAuthorNames(cleanHandle, cards);
+  const cardSlugs = [...new Set(cards.map((card) => card.slug).filter(Boolean))];
+  const commentSlugToSignalSlug = new Map(cards.map((card) => [card.article_slug || `signal-${card.id}`, card.slug]));
+  const sourcesCount = cards.filter((card) => Boolean(card.article_url || card.metadata?.source_url)).length;
+  const contextCountFromCards = cards.reduce((total, card) => total + Number(card.comment_count || 0), 0);
+
+  const stats: PublicProfileStats = {
+    cards_count: cards.length,
+    context_count: contextCountFromCards,
+    comments_count: 0,
+    sources_count: sourcesCount,
+    opened_count: 0,
+    time_contributed_seconds: 0,
+    time_helped_seconds: 0,
+    time_contributed_label: "0s",
+    time_helped_label: "0s",
+    has_tracked_time: false,
+    latest_context: [],
+  };
+
+  try {
+    const supabase = createAdminClient();
+
+    if (userIds.length) {
+      const { data, error } = await supabase
+        .from("time_clock_totals")
+        .select("seconds_spent, seconds_gained, events_count")
+        .in("user_id", userIds);
+      if (!error) {
+        for (const row of data || []) {
+          stats.time_contributed_seconds += Number(row.seconds_spent || 0);
+          stats.time_helped_seconds += Number(row.seconds_gained || 0);
+          stats.has_tracked_time = stats.has_tracked_time || Number(row.events_count || 0) > 0;
+        }
+      }
+    }
+
+    if (cardSlugs.length) {
+      const { data, error } = await supabase
+        .from("feed_events")
+        .select("event_type, user_id, anon_id, metadata")
+        .in("card_slug", cardSlugs)
+        .limit(5000);
+      if (!error) {
+        const openActors = new Set<string>();
+        for (const row of data || []) {
+          const actor = row.user_id || row.anon_id || Math.random().toString(36);
+          if (row.event_type === "open") openActors.add(String(actor));
+          stats.time_helped_seconds += metadataSeconds(row.metadata);
+        }
+        stats.opened_count = openActors.size;
+      }
+    }
+
+    const commentRows: Array<{ id: string; article_slug: string; author_name: string | null; body: string; created_at: string }> = [];
+    if (userIds.length) {
+      const { data, error } = await supabase
+        .from("article_comments")
+        .select("id, article_slug, author_name, body, created_at")
+        .eq("status", "visible")
+        .in("author_id", userIds)
+        .order("created_at", { ascending: false })
+        .limit(20);
+      if (!error) commentRows.push(...(data || []));
+    }
+    if (authorNames.length) {
+      const { data, error } = await supabase
+        .from("article_comments")
+        .select("id, article_slug, author_name, body, created_at")
+        .eq("status", "visible")
+        .in("author_name", authorNames)
+        .order("created_at", { ascending: false })
+        .limit(20);
+      if (!error) commentRows.push(...(data || []));
+    }
+
+    const seenComments = new Set<string>();
+    const uniqueComments = commentRows.filter((row) => {
+      if (seenComments.has(row.id)) return false;
+      seenComments.add(row.id);
+      return true;
+    });
+
+    stats.comments_count = uniqueComments.length;
+    stats.context_count += uniqueComments.length;
+    stats.latest_context = uniqueComments.slice(0, 5).map((row) => ({
+      id: row.id,
+      title: row.body.replace(/^\[[^\]]+\]\s*/gm, "").replace(/\s+/g, " ").trim().slice(0, 110) || "Added context",
+      href: `/signals/${encodeURIComponent(commentSlugToSignalSlug.get(row.article_slug) || row.article_slug)}#comments`,
+      type: "Context",
+      created_at: row.created_at,
+    }));
+  } catch (error) {
+    console.error(`[signals] getPublicProfileStats(${cleanHandle}) failed`, error);
+  }
+
+  if (!stats.has_tracked_time && stats.time_contributed_seconds === 0) {
+    // Backfill-light estimate so older public profiles do not look empty before
+    // the live timers collect enough authenticated activity.
+    stats.time_contributed_seconds = Math.max(0, cards.length * 90 + stats.comments_count * 60);
+  }
+
+  stats.time_contributed_label = humaniseSeconds(stats.time_contributed_seconds);
+  stats.time_helped_label = humaniseSeconds(stats.time_helped_seconds);
+  return stats;
 });
 
 export function authorProfileHandle(authorName: unknown) {

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { getPostBySlug } from "@/lib/blog";
+import { addTimeClockEvent } from "@/lib/time-clock";
 
 export const dynamic = "force-dynamic";
 
@@ -323,22 +324,18 @@ export async function POST(request: Request) {
   }
 
   if (user) {
-    const now = new Date().toISOString();
-    const { error: timeError } = await supabase
-      .from("time_clock_events")
-      .insert({
-        user_id: user.id,
+    try {
+      await addTimeClockEvent({
+        userId: user.id,
         direction: "spent",
-        event_type: parentId ? "reply" : "comment",
-        target_type: "signal",
-        target_id: articleSlug,
-        seconds: 0,
-        metadata: { comment_id: row.id },
-        created_at: now,
+        eventType: parentId ? "reply" : "comment",
+        targetType: "signal",
+        targetId: articleSlug,
+        seconds: Math.min(15 * 60, Math.max(20, Math.ceil(body.length / 10))),
+        metadata: { comment_id: row.id, context_type: reportType || null },
       });
-
-    if (timeError && timeError.code !== "42P01") {
-      console.error("[comments] time event insert failed", timeError.message);
+    } catch (timeError) {
+      console.error("[comments] time event insert/upsert failed", timeError instanceof Error ? timeError.message : timeError);
     }
   }
 

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { generateAiReviewCard } from "@/lib/feed-ai-review-card";
+import { addTimeClockEvent, clampTimeSeconds } from "@/lib/time-clock";
 
 export const dynamic = "force-dynamic";
 
@@ -197,6 +198,7 @@ export async function POST(request: Request) {
   const category = cleanCategory(payload.category);
   const customSection = cleanCustomSection(payload.custom_section);
   const userTags = cleanTags(payload.user_tags);
+  const activeSeconds = clampTimeSeconds(payload.active_seconds, 30 * 60);
   const customSectionTag = customSection
     ? customSection.toLowerCase().replace(/[^a-z0-9 -]/g, "").replace(/\s+/g, "-").slice(0, 36)
     : null;
@@ -375,6 +377,23 @@ export async function POST(request: Request) {
     }
     console.error("[feed-cards] insert failed", error.message);
     return jsonError("Could not post card.", 500);
+  }
+
+  if (user?.id) {
+    try {
+      const estimatedSeconds = activeSeconds || Math.min(30 * 60, Math.max(45, Math.ceil((context.length + articleBody.length) / 12)));
+      await addTimeClockEvent({
+        userId: user.id,
+        direction: "spent",
+        eventType: "create_card",
+        targetType: "signal",
+        targetId: slug,
+        seconds: estimatedSeconds,
+        metadata: { source: "create-card", creation_mode: row.metadata.creation_mode, card_id: data.id },
+      });
+    } catch (timeError) {
+      console.error("[feed-cards] time contributed credit failed", timeError instanceof Error ? timeError.message : timeError);
+    }
   }
 
   return NextResponse.json({

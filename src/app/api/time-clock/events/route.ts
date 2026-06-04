@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
+import { addTimeClockEvent, clampTimeSeconds, humaniseSeconds } from "@/lib/time-clock";
 
 export const dynamic = "force-dynamic";
 
@@ -39,9 +40,7 @@ function cleanShort(value: unknown, max = 160) {
 }
 
 function cleanSeconds(value: unknown) {
-  const seconds = Math.floor(Number(value || 0));
-  if (!Number.isFinite(seconds)) return 0;
-  return Math.min(Math.max(seconds, 0), 86400);
+  return clampTimeSeconds(value);
 }
 
 function safeMetadata(value: unknown) {
@@ -49,19 +48,6 @@ function safeMetadata(value: unknown) {
   const json = JSON.stringify(value);
   if (json.length > 1200) return {};
   return JSON.parse(json) as Record<string, unknown>;
-}
-
-function humaniseSeconds(total: number) {
-  const seconds = Math.max(0, Math.floor(total));
-  if (seconds < 60) return `${seconds}s`;
-  const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m`;
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ${minutes % 60}m`;
-  const days = Math.floor(hours / 24);
-  if (days < 365) return `${days}d ${hours % 24}h`;
-  const years = Math.floor(days / 365);
-  return `${years}y ${days % 365}d`;
 }
 
 export async function GET() {
@@ -129,62 +115,21 @@ export async function POST(request: Request) {
     return jsonError("Too many time events.", 429);
   }
 
-  const { error: insertError } = await supabase
-    .from("time_clock_events")
-    .insert({
-      user_id: user.id,
+  try {
+    const result = await addTimeClockEvent({
+      userId: user.id,
       direction,
-      event_type: eventType,
-      target_type: targetType,
-      target_id: targetId,
+      eventType,
+      targetType,
+      targetId,
       seconds,
       metadata: safeMetadata(payload.metadata),
     });
 
-  if (insertError) {
-    if (insertError.code === "42P01" || /time_clock/i.test(insertError.message)) {
-      return NextResponse.json({ ok: false, unavailable: true }, { status: 503 });
-    }
-    console.error("[time-clock] insert failed", insertError.message);
+    if (result.unavailable) return NextResponse.json({ ok: false, unavailable: true }, { status: 503 });
+    return NextResponse.json({ ok: true, totals: result.totals, unavailable: false });
+  } catch (error) {
+    console.error("[time-clock] insert/upsert failed", error instanceof Error ? error.message : error);
     return jsonError("Could not track time event.", 500);
   }
-
-  const { data: existing, error: existingError } = await supabase
-    .from("time_clock_totals")
-    .select("seconds_spent, seconds_gained, events_count")
-    .eq("user_id", user.id)
-    .maybeSingle();
-
-  if (existingError && existingError.code !== "PGRST116") {
-    console.error("[time-clock] totals fetch failed", existingError.message);
-  }
-
-  const currentSpent = Number(existing?.seconds_spent || 0);
-  const currentGained = Number(existing?.seconds_gained || 0);
-  const currentEvents = Number(existing?.events_count || 0);
-  const nextTotals = {
-    user_id: user.id,
-    seconds_spent: currentSpent + (direction === "spent" ? seconds : 0),
-    seconds_gained: currentGained + (direction === "gained" ? seconds : 0),
-    events_count: currentEvents + 1,
-    updated_at: new Date().toISOString(),
-  };
-
-  const { error: totalsError } = await supabase
-    .from("time_clock_totals")
-    .upsert(nextTotals, { onConflict: "user_id" });
-
-  if (totalsError) {
-    console.error("[time-clock] totals upsert failed", totalsError.message);
-  }
-
-  return NextResponse.json({
-    ok: true,
-    totals: {
-      ...nextTotals,
-      spent_label: humaniseSeconds(nextTotals.seconds_spent),
-      gained_label: humaniseSeconds(nextTotals.seconds_gained),
-    },
-    unavailable: false,
-  });
 }

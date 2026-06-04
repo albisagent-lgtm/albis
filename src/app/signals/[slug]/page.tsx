@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { authorProfileHandle, getSignalBySlug } from "@/lib/signals";
 import { ArticleComments } from "@/app/components/article-comments";
+import { TimeScoreTracker } from "@/app/components/time-score-tracker";
 
 export const revalidate = 300;
 export const dynamicParams = true;
@@ -151,6 +152,7 @@ export default async function SignalDetailPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-[#f8f7f4] text-[#111] dark:bg-[#101010] dark:text-[#f4f1ea]">
+      <TimeScoreTracker targetType="signal" targetId={commentSlug} cardSlug={signal.slug} />
       <article className="mx-auto max-w-3xl px-4 py-7 md:px-6 md:py-10">
         <div className="border-b border-black/[0.08] pb-6 dark:border-white/[0.08]">
           <div className="flex flex-wrap items-center gap-2 font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.14em] text-[#b58320]">

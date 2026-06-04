@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const CATEGORIES = [
   { value: "update", label: "Update" },
@@ -51,6 +51,21 @@ export function CreateCardForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [postedUrl, setPostedUrl] = useState("");
+  const activeSeconds = useRef(0);
+
+  useEffect(() => {
+    let last = Date.now();
+    const timer = window.setInterval(() => {
+      const now = Date.now();
+      const delta = Math.min(5, Math.max(0, Math.round((now - last) / 1000)));
+      last = now;
+      if (document.visibilityState !== "visible") return;
+      if (title || sourceLinks || context || articleBody || tagInput || customSection) {
+        activeSeconds.current = Math.min(activeSeconds.current + delta, 30 * 60);
+      }
+    }, 1000);
+    return () => window.clearInterval(timer);
+  }, [title, sourceLinks, context, articleBody, tagInput, customSection]);
 
   const links = useMemo(() => parseLinks(sourceLinks), [sourceLinks]);
   const tags = useMemo(() => parseTags(tagInput), [tagInput]);
@@ -81,6 +96,7 @@ export function CreateCardForm() {
           custom_section: customSection,
           user_tags: tags,
           ai_review_requested: mode === "ai-review",
+          active_seconds: activeSeconds.current,
           website,
         }),
       });
@@ -95,6 +111,7 @@ export function CreateCardForm() {
       setCustomSection("");
       setTagInput("");
       setMode("manual");
+      activeSeconds.current = 0;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not post card.");
     } finally {

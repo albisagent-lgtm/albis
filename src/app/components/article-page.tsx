@@ -15,6 +15,7 @@ import { normalizeRegion, CATEGORY_META } from "@/lib/scan-types";
 import { ShareButtons } from "@/app/components/share-buttons";
 import { ArticleComments } from "@/app/components/article-comments";
 import { QuickSignal } from "@/app/components/quick-signal";
+import { TimeScoreTracker } from "@/app/components/time-score-tracker";
 import { getSignalByArticleSlug } from "@/lib/signals";
 
 const SECTION_LABELS: Record<string, string> = {
@@ -116,6 +117,7 @@ export async function ArticlePage({ post }: { post: BlogPost }) {
   return (
     <>
       <ReadingProgress />
+      <TimeScoreTracker targetType="article" targetId={post.slug} cardSlug={signal?.slug || null} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

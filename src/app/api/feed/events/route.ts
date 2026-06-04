@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
+import { addTimeClockEvent, clampTimeSeconds } from "@/lib/time-clock";
 
 export const dynamic = "force-dynamic";
 
@@ -175,6 +176,36 @@ export async function POST(request: Request) {
     }
     console.error("[feed-events] insert failed", error.message);
     return jsonError("Could not track feed event.", 500);
+  }
+
+  if (metadata.event_subtype === "active_dwell") {
+    const seconds = clampTimeSeconds(metadata.seconds || metadata.active_seconds, 300);
+    if (seconds >= 10) {
+      try {
+        const { data: signal } = await supabase
+          .from("albis_live_signals")
+          .select("metadata")
+          .eq("slug", cardSlug)
+          .maybeSingle();
+        const signalMetadata = signal?.metadata && typeof signal.metadata === "object" && !Array.isArray(signal.metadata)
+          ? signal.metadata as Record<string, unknown>
+          : {};
+        const authorId = typeof signalMetadata.author_id === "string" ? signalMetadata.author_id : null;
+        if (authorId && authorId !== user?.id) {
+          await addTimeClockEvent({
+            userId: authorId,
+            direction: "gained",
+            eventType: "dwell",
+            targetType: "signal",
+            targetId: cardSlug,
+            seconds,
+            metadata: { source: "reader_active_dwell", viewer_signed_in: Boolean(user?.id) },
+          });
+        }
+      } catch (err) {
+        console.error("[feed-events] time helped credit failed", err instanceof Error ? err.message : err);
+      }
+    }
   }
 
   if (SCORE_REFRESH_EVENTS.has(eventType)) {

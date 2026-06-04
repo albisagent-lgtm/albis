@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FollowButton } from "@/app/components/follow-button";
 import { UserAvatar } from "@/app/components/user-avatar";
-import { authorProfileHandle, getSignalsByAuthorHandle, type Signal } from "@/lib/signals";
+import { authorProfileHandle, getPublicProfileStats, getSignalsByAuthorHandle, type PublicProfileStats, type Signal } from "@/lib/signals";
 
 export const revalidate = 120;
 export const dynamicParams = true;
@@ -35,11 +35,45 @@ function metaString(signal: Signal, key: string) {
 }
 
 function profileFromCards(handle: string, cards: Signal[]) {
+  if (handle === "albis") {
+    return {
+      displayName: "Albis",
+      bio: "Truth, trust, and clarity — public cards, source-backed articles, and context from the Albis intelligence layer.",
+      avatarUrl: null,
+    };
+  }
   const first = cards.find((card) => metaString(card, "author_name") || metaString(card, "author_display_name") || metaString(card, "author_bio") || metaString(card, "author_avatar_url"));
   const displayName = first ? metaString(first, "author_display_name") || metaString(first, "author_name") || displayHandle(handle) : displayHandle(handle);
   const bio = first ? metaString(first, "author_bio") : null;
   const avatarUrl = first ? metaString(first, "author_avatar_url") : null;
   return { displayName, bio, avatarUrl };
+}
+
+function ScoreCard({ label, value, text }: { label: string; value: string; text: string }) {
+  return (
+    <div className="rounded-3xl border border-black/[0.08] bg-[#f8f7f4] p-5 dark:border-white/[0.08] dark:bg-white/[0.035]">
+      <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-400">{label}</p>
+      <p className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight text-[#111] dark:text-[#f4f1ea]">{value}</p>
+      <p className="mt-2 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">{text}</p>
+    </div>
+  );
+}
+
+function ProfileScorecards({ stats }: { stats: PublicProfileStats }) {
+  return (
+    <div className="mt-5 grid gap-3 md:grid-cols-2">
+      <ScoreCard
+        label="Time contributed"
+        value={stats.time_contributed_label}
+        text="Active time spent reading, creating cards, adding comments, and bringing useful signal into Albis."
+      />
+      <ScoreCard
+        label="Time helped"
+        value={stats.time_helped_label}
+        text="Verified active time other people spent learning from this profile’s cards, articles, and context."
+      />
+    </div>
+  );
 }
 
 function topTopics(cards: Signal[]) {
@@ -111,6 +145,7 @@ export default async function PublicProfilePage({ params }: Props) {
   const name = displayHandle(clean);
   const profile = profileFromCards(clean, cards);
   const topics = topTopics(cards);
+  const stats = await getPublicProfileStats(clean, cards);
   const aiReviewedCount = cards.filter((card) => typeof card.metadata?.ai_review_status === "string" && card.metadata.ai_review_status !== "not_requested").length;
   const activeContext = cards.filter((card) => (card.comment_count || 0) > 0).slice(0, 5);
 
@@ -133,10 +168,13 @@ export default async function PublicProfilePage({ params }: Props) {
             <FollowButton type="person" label={name} className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]" />
           </div>
           <div className="mt-5 flex flex-wrap gap-2 font-[family-name:var(--font-inter)] text-xs font-semibold text-zinc-500 dark:text-zinc-400">
-            <span className="rounded-full border border-black/[0.10] px-3 py-1 dark:border-white/[0.10]">{cards.length} card{cards.length === 1 ? "" : "s"}</span>
+            <span className="rounded-full border border-black/[0.10] px-3 py-1 dark:border-white/[0.10]">{stats.cards_count} card{stats.cards_count === 1 ? "" : "s"}</span>
+            <span className="rounded-full border border-black/[0.10] px-3 py-1 dark:border-white/[0.10]">{stats.context_count} context item{stats.context_count === 1 ? "" : "s"}</span>
+            <span className="rounded-full border border-black/[0.10] px-3 py-1 dark:border-white/[0.10]">{stats.sources_count} source{stats.sources_count === 1 ? "" : "s"}</span>
             {aiReviewedCount ? <span className="rounded-full border border-black/[0.10] px-3 py-1 dark:border-white/[0.10]">{aiReviewedCount} AI-reviewed</span> : null}
-            <span className="rounded-full border border-black/[0.10] px-3 py-1 dark:border-white/[0.10]">Public account</span>
+            <span className="rounded-full border border-black/[0.10] px-3 py-1 dark:border-white/[0.10]">{clean === "albis" ? "Albis account" : "Public account"}</span>
           </div>
+          <ProfileScorecards stats={stats} />
         </div>
 
         <div className="mt-5 grid gap-5 md:grid-cols-[1fr_280px]">
@@ -159,7 +197,16 @@ export default async function PublicProfilePage({ params }: Props) {
             </div>
             <div className="rounded-3xl border border-black/[0.08] bg-white p-5 dark:border-white/[0.08] dark:bg-white/[0.035]">
               <p className="font-[family-name:var(--font-inter)] text-[11px] font-bold uppercase tracking-[0.16em] text-zinc-400">Context trail</p>
-              {activeContext.length ? (
+              {stats.latest_context.length ? (
+                <div className="mt-3 space-y-3">
+                  {stats.latest_context.map((item) => (
+                    <Link key={item.id} href={item.href} className="block rounded-2xl border border-black/[0.06] p-3 text-sm font-semibold hover:border-[#c8922a]/40 dark:border-white/[0.08]">
+                      {item.title}
+                      <span className="mt-1 block text-xs font-normal text-zinc-400">{item.type} added · {formatDate(item.created_at)}</span>
+                    </Link>
+                  ))}
+                </div>
+              ) : activeContext.length ? (
                 <div className="mt-3 space-y-3">
                   {activeContext.map((card) => (
                     <Link key={card.id} href={`/signals/${card.slug}`} className="block rounded-2xl border border-black/[0.06] p-3 text-sm font-semibold hover:border-[#c8922a]/40 dark:border-white/[0.08]">
