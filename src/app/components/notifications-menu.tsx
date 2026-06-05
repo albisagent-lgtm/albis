@@ -32,7 +32,12 @@ function timeAgo(value: string) {
   return `${days}d`;
 }
 
-export function NotificationsMenu() {
+type NotificationsMenuProps = {
+  placement?: "below" | "above";
+  variant?: "icon" | "nav";
+};
+
+export function NotificationsMenu({ placement = "below", variant = "icon" }: NotificationsMenuProps = {}) {
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<NotificationItem[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -95,24 +100,33 @@ export function NotificationsMenu() {
           setOpen((value) => !value);
           if (!open) loadNotifications();
         }}
-        className="relative flex h-8 w-8 items-center justify-center rounded-full border border-black/[0.07] bg-white/80 text-zinc-600 transition-colors hover:bg-black/[0.04] dark:border-white/[0.07] dark:bg-white/[0.04] dark:text-zinc-300 dark:hover:bg-white/[0.06]"
+        className={variant === "nav"
+          ? "relative flex min-h-[44px] min-w-[44px] flex-col items-center justify-center gap-0.5 rounded-lg px-3 py-1.5 text-xs font-medium text-zinc-400 transition-colors hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300"
+          : "relative flex h-8 w-8 items-center justify-center rounded-full border border-black/[0.07] bg-white/80 text-zinc-600 transition-colors hover:bg-black/[0.04] dark:border-white/[0.07] dark:bg-white/[0.04] dark:text-zinc-300 dark:hover:bg-white/[0.06]"
+        }
         aria-label={unreadCount ? `${unreadCount} unread notifications` : "Notifications"}
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 7h18s-3 0-3-7" />
-          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-        </svg>
-        {unreadCount > 0 && (
-          <span className="absolute -right-1 -top-1 min-w-4 rounded-full bg-[#c8922a] px-1 text-center text-[10px] font-bold leading-4 text-[#0f0f0f]">
-            {unreadCount > 9 ? "9+" : unreadCount}
-          </span>
-        )}
+        <span className="relative">
+          <svg width={variant === "nav" ? 20 : 16} height={variant === "nav" ? 20 : 16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 7h18s-3 0-3-7" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          {unreadCount > 0 && (
+            <span className="absolute -right-2 -top-2 min-w-4 rounded-full bg-[#c8922a] px-1 text-center text-[10px] font-bold leading-4 text-[#0f0f0f]">
+              {unreadCount > 9 ? "9+" : unreadCount}
+            </span>
+          )}
+        </span>
+        {variant === "nav" ? <span>Alerts</span> : null}
       </button>
 
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 top-full z-50 mt-2 w-[min(22rem,calc(100vw-1.5rem))] rounded-xl border border-black/[0.07] bg-white p-2 shadow-lg dark:border-white/[0.07] dark:bg-[#1a1a1a]">
+          <div className={placement === "above"
+            ? "fixed bottom-[64px] left-3 right-3 z-50 rounded-xl border border-black/[0.07] bg-white p-2 shadow-lg dark:border-white/[0.07] dark:bg-[#1a1a1a]"
+            : "absolute right-0 top-full z-50 mt-2 w-[min(22rem,calc(100vw-1.5rem))] rounded-xl border border-black/[0.07] bg-white p-2 shadow-lg dark:border-white/[0.07] dark:bg-[#1a1a1a]"
+          }>
             <div className="flex items-center justify-between border-b border-black/[0.07] px-3 py-2 dark:border-white/[0.07]">
               <div>
                 <p className="text-sm font-semibold text-[#0f0f0f] dark:text-[#f0efec]">Notifications</p>

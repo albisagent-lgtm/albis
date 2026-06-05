@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { NotificationsMenu } from "./notifications-menu";
 
 const NAV_ITEMS = [
   {
@@ -166,6 +167,7 @@ export function MobileNav() {
               </Link>
             );
           })}
+          <NotificationsMenu placement="above" variant="nav" />
           {/* More button */}
           <button
             onClick={() => setMoreOpen(!moreOpen)}
