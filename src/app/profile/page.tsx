@@ -8,6 +8,12 @@ export const metadata: Metadata = {
 
 const actions = [
   {
+    title: "Time scorecards",
+    text: "Open the public profile view with Time given and Time helped.",
+    href: "/u/albis",
+    cta: "View scorecards",
+  },
+  {
     title: "Create a card",
     text: "Share a useful article, source, question, correction, or piece of local context.",
     href: "/create",
@@ -43,8 +49,14 @@ export default function ProfilePage() {
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link
-              href="/account"
+              href="/u/albis"
               className="rounded-full bg-[#111] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-white hover:bg-[#c8922a] hover:text-black dark:bg-[#f4f1ea] dark:text-black dark:hover:bg-[#c8922a]"
+            >
+              View time scorecards
+            </Link>
+            <Link
+              href="/account"
+              className="rounded-full border border-black/[0.12] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-zinc-800 hover:border-[#c8922a]/60 hover:text-[#b58320] dark:border-white/[0.14] dark:text-zinc-200"
             >
               Edit profile
             </Link>
