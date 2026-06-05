@@ -194,6 +194,7 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose }: { event:
   const reviewLabel = aiReviewLabel(event.aiReviewStatus);
   const bylineTail = [reviewLabel, event.timestamp || event.meta].filter(Boolean).join(" · ");
   const commentSlug = event.cardSlug || event.articleSlug || event.id;
+  const visibleBullets = (event.bullets || []).map((bullet) => bullet.trim()).filter(Boolean).slice(0, feature ? 3 : 2);
 
   async function shareCard() {
     const url = `${window.location.origin}${event.href}`;
@@ -214,7 +215,7 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose }: { event:
 
   return (
     <>
-      <article className={`group rounded-3xl border border-black/[0.08] bg-white p-4 transition dark:border-white/[0.08] dark:bg-white/[0.035] ${selected ? "shadow-sm" : "hover:border-[#c8922a]/35"}`}>
+      <article className={`group rounded-3xl border border-black/[0.08] bg-white p-4 transition dark:border-white/[0.08] dark:bg-white/[0.035] md:p-5 ${selected ? "shadow-sm" : "hover:border-[#c8922a]/35"}`}>
         <MediaPreviewBlock media={event.mediaPreview} feature={feature} />
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
@@ -234,11 +235,22 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose }: { event:
             </div>
 
             <button type="button" onClick={() => { trackFeedEvent(commentSlug, "open", { surface: "card" }); onOpen(); }} className="mt-3 block w-full text-left" aria-label={`Open ${event.title}`}>
-              <h2 className={`font-[family-name:var(--font-playfair)] font-bold leading-tight tracking-tight transition group-hover:text-[#b58320] ${feature ? "text-3xl md:text-4xl" : "text-2xl"}`}>
+              <h2 className={`font-[family-name:var(--font-playfair)] font-bold leading-tight tracking-tight transition group-hover:text-[#b58320] ${feature ? "text-3xl md:text-[2.35rem]" : "text-2xl md:text-[1.7rem]"}`}>
                 {event.title}
               </h2>
-              {event.summary ? <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 md:text-[15px]">{event.summary}</p> : null}
+              {event.summary ? <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 md:text-[15px]">{event.summary}</p> : null}
             </button>
+
+            {visibleBullets.length ? (
+              <ul className="mt-3 space-y-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
+                {visibleBullets.map((bullet) => (
+                  <li key={bullet} className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c8922a]" />
+                    <span className={feature ? "" : "line-clamp-2"}>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </div>
         </div>
 

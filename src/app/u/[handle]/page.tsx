@@ -49,30 +49,25 @@ function profileFromCards(handle: string, cards: Signal[]) {
   return { displayName, bio, avatarUrl };
 }
 
-function ScoreCard({ label, value, text }: { label: string; value: string; text: string }) {
+function TimeCard({ stats, handle }: { stats: PublicProfileStats; handle: string }) {
   return (
-    <div className="rounded-3xl border border-black/[0.08] bg-[#f8f7f4] p-5 dark:border-white/[0.08] dark:bg-white/[0.035]">
-      <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-400">{label}</p>
-      <p className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight text-[#111] dark:text-[#f4f1ea]">{value}</p>
-      <p className="mt-2 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">{text}</p>
-    </div>
-  );
-}
-
-function ProfileScorecards({ stats }: { stats: PublicProfileStats }) {
-  return (
-    <div className="mt-5 grid gap-3 md:grid-cols-2">
-      <ScoreCard
-        label="Time given"
-        value={stats.time_contributed_label}
-        text="Active time spent reading, creating cards, adding comments, and bringing useful signal into Albis."
-      />
-      <ScoreCard
-        label="Time helped"
-        value={stats.time_helped_label}
-        text="Verified active time other people spent learning from this profile’s cards, articles, and context."
-      />
-    </div>
+    <Link
+      href={`/time?profile=${encodeURIComponent(handle)}`}
+      className="mt-5 block rounded-3xl border border-black/[0.08] bg-[#f8f7f4] p-5 transition hover:border-[#c8922a]/45 hover:bg-[#fbfaf7] dark:border-white/[0.08] dark:bg-white/[0.035] dark:hover:border-[#c8922a]/45"
+    >
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-400">Time</p>
+          <p className="mt-2 font-[family-name:var(--font-playfair)] text-5xl font-bold tracking-tight text-[#111] dark:text-[#f4f1ea]">{stats.time_label}</p>
+        </div>
+        <span className="rounded-full border border-black/[0.10] px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:border-white/[0.10] dark:text-zinc-300">
+          See how it works →
+        </span>
+      </div>
+      <p className="mt-3 max-w-2xl text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
+        Meaningful active time other people spent with this profile’s cards, articles, and context.
+      </p>
+    </Link>
   );
 }
 
@@ -174,7 +169,7 @@ export default async function PublicProfilePage({ params }: Props) {
             {aiReviewedCount ? <span className="rounded-full border border-black/[0.10] px-3 py-1 dark:border-white/[0.10]">{aiReviewedCount} AI-reviewed</span> : null}
             <span className="rounded-full border border-black/[0.10] px-3 py-1 dark:border-white/[0.10]">{clean === "albis" ? "Albis account" : "Public account"}</span>
           </div>
-          <ProfileScorecards stats={stats} />
+          <TimeCard stats={stats} handle={clean} />
         </div>
 
         <div className="mt-5 grid gap-5 md:grid-cols-[1fr_280px]">

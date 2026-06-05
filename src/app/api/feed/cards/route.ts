@@ -81,6 +81,12 @@ function cleanCategory(value: unknown) {
     "tech",
     "climate",
     "health",
+    "perspectives",
+    "science",
+    "trade",
+    "media",
+    "culture",
+    "education",
     "governance",
     "other",
   ]);
@@ -143,6 +149,12 @@ function articleCategory(category: string) {
   if (category === "tech") return "tech-ai";
   if (category === "climate") return "climate-energy";
   if (category === "health") return "health";
+  if (category === "perspectives") return "perspectives";
+  if (category === "science") return "science-space";
+  if (category === "trade") return "economic-flows";
+  if (category === "media") return "media-literacy";
+  if (category === "culture") return "perspectives";
+  if (category === "education") return "perspectives";
   if (category === "governance") return "governance";
   if (category === "research") return "research";
   return "perspectives";
@@ -156,7 +168,8 @@ function articleSection(category: string) {
     "economic-flows": "money",
     "tech-ai": "tech",
     "climate-energy": "climate",
-    health: "world",
+    "science-space": "science",
+    health: "health",
     governance: "world",
     research: "perspectives",
     perspectives: "perspectives",

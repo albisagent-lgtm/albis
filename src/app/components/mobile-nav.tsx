@@ -3,7 +3,20 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 import { NotificationsNavLink } from "./notifications-menu";
+
+function cleanProfileHandle(value: unknown) {
+  const clean = String(value || "").trim().replace(/^@+/, "").toLowerCase().replace(/[^a-z0-9_.-]/g, "").slice(0, 80);
+  return clean || null;
+}
+
+function profileHrefFromUser(user: { email?: string; user_metadata?: Record<string, unknown> } | null) {
+  if (!user) return "/login";
+  const metadata = user.user_metadata || {};
+  const handle = cleanProfileHandle(metadata.username) || cleanProfileHandle(metadata.name) || cleanProfileHandle(user.email?.split("@")[0]);
+  return handle ? `/u/${encodeURIComponent(handle)}` : "/profile";
+}
 
 const NAV_ITEMS = [
   {
@@ -37,7 +50,7 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/u/albis",
+    href: "/profile",
     label: "Profile",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -66,6 +79,16 @@ export function MobileNav() {
   const lastScrollRef = useRef(0);
   const navRef = useRef<HTMLElement>(null);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [profileHref, setProfileHref] = useState("/profile");
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user } }) => setProfileHref(profileHrefFromUser(user)));
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setProfileHref(profileHrefFromUser(session?.user ?? null));
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   // Close menu on navigation
   useEffect(() => {
@@ -149,13 +172,14 @@ export function MobileNav() {
       >
         <div className="flex items-center justify-around px-2 py-1">
           {NAV_ITEMS.map((item) => {
+            const href = item.label === "Profile" ? profileHref : item.href;
             const active =
-              (item.href === "/" && pathname === "/") ||
-              (item.href !== "/" && pathname === item.href);
+              (href === "/" && pathname === "/") ||
+              (href !== "/" && pathname === href);
             return (
               <Link
                 key={item.label}
-                href={item.href}
+                href={href}
                 className={`flex min-h-[44px] min-w-[44px] flex-col items-center justify-center gap-0.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
                   active
                     ? "text-[#c8922a] dark:text-[#c8922a]"

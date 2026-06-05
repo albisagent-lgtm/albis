@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { CreateCardForm } from "./create-card-form";
 
 export const metadata: Metadata = {
@@ -17,22 +16,11 @@ export default function CreatePage() {
   return (
     <main className="min-h-screen bg-[#f8f7f4] text-[#111] dark:bg-[#101010] dark:text-[#f4f1ea]">
       <section className="border-b border-black/[0.08] bg-white/70 dark:border-white/[0.08] dark:bg-white/[0.03]">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 md:px-6 md:py-14 lg:grid-cols-[minmax(0,0.95fr)_minmax(360px,1.05fr)] lg:items-end">
-          <div>
-            <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.18em] text-[#b58320]">Create</p>
-            <h1 className="mt-3 max-w-3xl font-[family-name:var(--font-playfair)] text-4xl font-bold leading-[0.98] tracking-tight md:text-6xl lg:text-7xl">
-              Add signal to the cycle.
-            </h1>
-          </div>
-          <div className="rounded-3xl border border-black/[0.08] bg-[#101010] p-6 text-[#f4f1ea] dark:border-white/[0.08] dark:bg-white/[0.04]">
-            <p className="font-[family-name:var(--font-source-serif)] text-xl leading-relaxed md:text-2xl">
-              Cards are the shared object on Albis: a source, an event, a local observation, a question, or a deeper article made visible in the feed.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              <Link href="/read" className="rounded-full border border-white/15 px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:border-[#c8922a]/70">See published articles</Link>
-              <Link href="/about" className="rounded-full border border-white/15 px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:border-[#c8922a]/70">How Albis works</Link>
-            </div>
-          </div>
+        <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-14">
+          <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.18em] text-[#b58320]">Create</p>
+          <h1 className="mt-3 max-w-3xl font-[family-name:var(--font-playfair)] text-4xl font-bold leading-[0.98] tracking-tight md:text-6xl lg:text-7xl">
+            Add signal to the cycle.
+          </h1>
         </div>
       </section>
 

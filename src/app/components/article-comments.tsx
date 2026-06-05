@@ -377,7 +377,16 @@ function CommentItem({
   user: SessionUser;
   onPosted: (comment: PublicComment | null, message?: string) => void;
 }) {
-  const [replying, setReplying] = useState(false);
+  const [replyingToId, setReplyingToId] = useState<string | null>(null);
+
+  function toggleReply(targetId: string) {
+    setReplyingToId((current) => current === targetId ? null : targetId);
+  }
+
+  function handleReplyPosted(comment: PublicComment | null, message?: string) {
+    setReplyingToId(null);
+    onPosted(comment, message);
+  }
 
   return (
     <div className="border-t border-black/[0.06] py-5 first:border-t-0 dark:border-white/[0.06]">
@@ -406,15 +415,15 @@ function CommentItem({
           <MediaPreview url={comment.media_url || comment.source_url} type={comment.media_type || undefined} />
           <button
             type="button"
-            onClick={() => setReplying((v) => !v)}
+            onClick={() => toggleReply(comment.id)}
             className="mt-3 font-[family-name:var(--font-inter)] text-xs font-semibold text-[#c8922a] hover:underline"
           >
             Reply
           </button>
 
-          {replying && (
+          {replyingToId === comment.id && (
             <div className="mt-4 rounded-2xl border border-black/[0.06] bg-black/[0.015] p-4 dark:border-white/[0.06] dark:bg-white/[0.02]">
-              <CommentForm articleSlug={articleSlug} parentId={comment.id} user={user} onPosted={onPosted} onCancel={() => setReplying(false)} compact />
+              <CommentForm articleSlug={articleSlug} parentId={comment.id} user={user} onPosted={handleReplyPosted} onCancel={() => setReplyingToId(null)} compact />
             </div>
           )}
 
@@ -433,6 +442,18 @@ function CommentItem({
                     {reply.body}
                   </p>
                   <MediaPreview url={reply.media_url || reply.source_url} type={reply.media_type || undefined} />
+                  <button
+                    type="button"
+                    onClick={() => toggleReply(reply.id)}
+                    className="mt-2 font-[family-name:var(--font-inter)] text-[11px] font-semibold text-[#c8922a] hover:underline"
+                  >
+                    Reply
+                  </button>
+                  {replyingToId === reply.id && (
+                    <div className="mt-3 rounded-2xl border border-black/[0.06] bg-black/[0.015] p-4 dark:border-white/[0.06] dark:bg-white/[0.02]">
+                      <CommentForm articleSlug={articleSlug} parentId={reply.id} user={user} onPosted={handleReplyPosted} onCancel={() => setReplyingToId(null)} compact />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

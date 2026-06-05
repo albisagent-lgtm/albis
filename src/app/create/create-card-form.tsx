@@ -10,7 +10,13 @@ const CATEGORIES = [
   { value: "money", label: "Money" },
   { value: "tech", label: "Tech" },
   { value: "climate", label: "Climate" },
+  { value: "perspectives", label: "Perspectives" },
+  { value: "science", label: "Science" },
   { value: "health", label: "Health" },
+  { value: "trade", label: "Trade" },
+  { value: "media", label: "Media" },
+  { value: "culture", label: "Culture" },
+  { value: "education", label: "Education" },
   { value: "governance", label: "Governance" },
   { value: "research", label: "Research" },
   { value: "question", label: "Question" },
@@ -51,6 +57,7 @@ export function CreateCardForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [postedUrl, setPostedUrl] = useState("");
+  const [postedArticleUrl, setPostedArticleUrl] = useState("");
   const activeSeconds = useRef(0);
 
   useEffect(() => {
@@ -79,6 +86,7 @@ export function CreateCardForm() {
     e.preventDefault();
     setError("");
     setPostedUrl("");
+    setPostedArticleUrl("");
     setLoading(true);
 
     try {
@@ -103,6 +111,7 @@ export function CreateCardForm() {
       const payload = await res.json();
       if (!res.ok) throw new Error(payload.error || "Could not post card.");
       setPostedUrl(payload.url || "/");
+      setPostedArticleUrl(payload.article_url && payload.article_url !== payload.url ? payload.article_url : "");
       setTitle("");
       setSourceLinks("");
       setContext("");
@@ -261,6 +270,11 @@ export function CreateCardForm() {
         >
           {loading ? "Posting…" : mode === "ai-review" ? "Submit for AI review" : mode === "article" ? "Publish article + card" : "Post card"}
         </button>
+        {postedArticleUrl ? (
+          <Link href={postedArticleUrl} className="font-[family-name:var(--font-inter)] text-sm font-bold text-[#b58320] hover:underline">
+            View article
+          </Link>
+        ) : null}
         {postedUrl ? (
           <Link href={postedUrl} className="font-[family-name:var(--font-inter)] text-sm font-bold text-[#b58320] hover:underline">
             View card
@@ -278,7 +292,7 @@ export function CreateCardForm() {
           Articles are the deeper layer. Albis will publish the full piece in Read and create a card for the feed so discussion, source links, and discovery still start from the card.
         </p>
       ) : null}
-      {postedUrl ? <p className="text-sm text-emerald-700 dark:text-emerald-300">Card posted. It should appear in the feed shortly.</p> : null}
+      {postedUrl ? <p className="text-sm text-emerald-700 dark:text-emerald-300">{postedArticleUrl ? "Article published in Read and card posted to the feed." : "Card posted. It should appear in the feed shortly."}</p> : null}
       {error ? <p className="text-sm text-red-600 dark:text-red-400">{error}</p> : null}
     </form>
   );

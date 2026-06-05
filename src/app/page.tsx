@@ -309,7 +309,7 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
   return (
     <main className="min-h-screen bg-[#f8f7f4] text-[#111] dark:bg-[#101010] dark:text-[#f4f1ea]">
       <section className="border-b border-black/[0.08] dark:border-white/[0.08]">
-        <div className="mx-auto max-w-5xl px-4 py-6 md:px-6 md:py-8">
+        <div className="mx-auto max-w-3xl px-4 py-6 md:px-6 md:py-8">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.16em] text-[#b58320]">Albis</p>
@@ -328,8 +328,8 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-5 px-4 py-5 md:px-6 lg:grid-cols-[minmax(0,1fr)_320px]">
-        <div>
+      <section className="mx-auto max-w-3xl px-4 py-5 md:px-6">
+        <div className="mx-auto w-full">
           {activeFilter === "following" ? (
             <FollowingFeed cards={topCards.slice(0, 48)} suggestions={followSuggestions} />
           ) : visibleCards.length === 0 ? (
@@ -342,7 +342,7 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
           )}
         </div>
 
-        <aside className="space-y-3 lg:pt-1">
+        <aside className="mt-5 space-y-3">
           <div className="rounded-3xl border border-black/[0.08] bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
             <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-[#9b6b18] dark:text-[#f0c15e]">Daily briefing</p>
             <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-bold">A calm summary, off the feed.</h2>

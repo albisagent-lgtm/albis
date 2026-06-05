@@ -182,10 +182,24 @@ export type PublicProfileStats = {
   opened_count: number;
   time_contributed_seconds: number;
   time_helped_seconds: number;
+  time_seconds: number;
   time_contributed_label: string;
   time_helped_label: string;
+  time_label: string;
   has_tracked_time: boolean;
   latest_context: Array<{ id: string; title: string; href: string; type: string; created_at: string }>;
+};
+
+export type TimeLeaderboardEntry = {
+  handle: string;
+  display_name: string;
+  avatar_url: string | null;
+  time_seconds: number;
+  time_label: string;
+  cards_count: number;
+  context_count: number;
+  sources_count: number;
+  opened_count: number;
 };
 
 function signalAuthorUserIds(cards: Signal[]) {
@@ -203,6 +217,22 @@ function signalAuthorNames(handle: string, cards: Signal[]) {
     ...cards.map((card) => typeof card.metadata?.author_name === "string" ? card.metadata.author_name : null),
     ...cards.map((card) => typeof card.metadata?.author_display_name === "string" ? card.metadata.author_display_name : null),
   ].filter((name): name is string => Boolean(name)))];
+}
+
+function signalMetaString(signal: Signal, key: string) {
+  const value = signal.metadata?.[key];
+  return typeof value === "string" && value.trim() ? value.trim() : null;
+}
+
+function profileFromSignalCards(handle: string, cards: Signal[]) {
+  if (handle === "albis") {
+    return { displayName: "Albis", avatarUrl: null };
+  }
+  const first = cards.find((card) => signalMetaString(card, "author_name") || signalMetaString(card, "author_display_name") || signalMetaString(card, "author_avatar_url"));
+  return {
+    displayName: first ? signalMetaString(first, "author_display_name") || signalMetaString(first, "author_name") || `@${handle}` : `@${handle}`,
+    avatarUrl: first ? signalMetaString(first, "author_avatar_url") : null,
+  };
 }
 
 function metadataSeconds(value: unknown) {
@@ -232,8 +262,10 @@ export const getPublicProfileStats = cache(async (handle: string, cards: Signal[
     opened_count: 0,
     time_contributed_seconds: 0,
     time_helped_seconds: 0,
+    time_seconds: 0,
     time_contributed_label: "0s",
     time_helped_label: "0s",
+    time_label: "0s",
     has_tracked_time: false,
     latest_context: [],
   };
@@ -320,9 +352,48 @@ export const getPublicProfileStats = cache(async (handle: string, cards: Signal[
     stats.time_contributed_seconds = Math.max(0, cards.length * 90 + stats.comments_count * 60);
   }
 
+  // Public Time is deliberately usefulness-led: it measures meaningful active
+  // time other people spend with this profile's cards/articles/context, not the
+  // amount of time the profile owner spends scrolling Albis.
+  stats.time_seconds = stats.time_helped_seconds;
   stats.time_contributed_label = humaniseSeconds(stats.time_contributed_seconds);
   stats.time_helped_label = humaniseSeconds(stats.time_helped_seconds);
+  stats.time_label = humaniseSeconds(stats.time_seconds);
   return stats;
+});
+
+export const getTimeLeaderboard = cache(async (limit = 30): Promise<TimeLeaderboardEntry[]> => {
+  const signals = await getSignals({ limit: 500 });
+  const byHandle = new Map<string, Signal[]>();
+
+  for (const signal of signals) {
+    const rawName = typeof signal.metadata?.author_name === "string" ? signal.metadata.author_name : "albis";
+    const handle = authorProfileHandle(rawName) || "albis";
+    const list = byHandle.get(handle) || [];
+    list.push(signal);
+    byHandle.set(handle, list);
+  }
+
+  const entries: TimeLeaderboardEntry[] = [];
+  for (const [handle, cards] of byHandle.entries()) {
+    const profile = profileFromSignalCards(handle, cards);
+    const stats = await getPublicProfileStats(handle, cards);
+    entries.push({
+      handle,
+      display_name: profile.displayName,
+      avatar_url: profile.avatarUrl,
+      time_seconds: stats.time_seconds,
+      time_label: stats.time_label,
+      cards_count: stats.cards_count,
+      context_count: stats.context_count,
+      sources_count: stats.sources_count,
+      opened_count: stats.opened_count,
+    });
+  }
+
+  return entries
+    .sort((a, b) => b.time_seconds - a.time_seconds || b.cards_count - a.cards_count || a.handle.localeCompare(b.handle))
+    .slice(0, limit);
 });
 
 export function authorProfileHandle(authorName: unknown) {

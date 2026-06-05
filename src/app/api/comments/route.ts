@@ -282,6 +282,7 @@ export async function POST(request: Request) {
   const { data: { user } } = await authSupabase.auth.getUser();
 
   let parentComment: ParentCommentRow | null = null;
+  let threadParentId = parentId;
   if (parentId) {
     const { data: parent, error: parentError } = await supabase
       .from("article_comments")
@@ -294,10 +295,11 @@ export async function POST(request: Request) {
     }
 
     parentComment = parent as ParentCommentRow;
-
-    if (parentComment.parent_id) {
-      return jsonError("Replies can only be one level deep for now.");
-    }
+    // Keep the visible feed one level deep for readability, but allow people to
+    // reply from any visible comment in the thread. Replies to replies are stored
+    // under the root comment while notifications still go to the comment that was
+    // directly replied to.
+    threadParentId = parentComment.parent_id || parentComment.id;
   }
 
   const ipHash = await hashValue(getClientIp(request));
@@ -325,7 +327,7 @@ export async function POST(request: Request) {
 
   const insert = {
     article_slug: articleSlug,
-    parent_id: parentId,
+    parent_id: threadParentId,
     author_id: user?.id || null,
     author_name: authorName,
     is_anonymous: !user,
@@ -365,7 +367,7 @@ export async function POST(request: Request) {
           entity_type: "comment",
           entity_id: row.id,
           entity_url: entityUrl,
-          metadata: { article_slug: articleSlug, parent_id: parentComment.id },
+          metadata: { article_slug: articleSlug, parent_id: parentComment.id, thread_parent_id: threadParentId },
         });
 
       if (notifyError && notifyError.code !== "42P01") {
@@ -406,7 +408,7 @@ export async function POST(request: Request) {
         targetType: "signal",
         targetId: articleSlug,
         seconds: Math.min(15 * 60, Math.max(20, Math.ceil(body.length / 10))),
-        metadata: { comment_id: row.id, context_type: reportType || null },
+        metadata: { comment_id: row.id, context_type: reportType || null, parent_id: parentId, thread_parent_id: threadParentId },
       });
     } catch (timeError) {
       console.error("[comments] time event insert/upsert failed", timeError instanceof Error ? timeError.message : timeError);

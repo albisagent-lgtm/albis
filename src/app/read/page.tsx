@@ -17,8 +17,37 @@ function prettyDate(value: string) {
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
+const sectionLabels: Record<string, string> = {
+  "current-events": "World",
+  "economic-flows": "Money",
+  "tech-ai": "Tech",
+  "climate-energy": "Climate",
+  "science-space": "Science",
+  "media-literacy": "Media",
+  governance: "Governance",
+  health: "Health",
+  research: "Research",
+  perspectives: "Perspectives",
+  "life-systems": "Life Systems",
+};
+
 function sectionLabel(value: string) {
-  return value.replaceAll("-", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+  return sectionLabels[value] || value.replaceAll("-", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+const preferredSections = ["current-events", "economic-flows", "tech-ai", "climate-energy", "life-systems", "perspectives", "science-space", "health", "governance", "research"];
+
+function sortSections(sections: string[]) {
+  return [...sections].sort((a, b) => {
+    const aIndex = preferredSections.indexOf(a);
+    const bIndex = preferredSections.indexOf(b);
+    if (aIndex !== -1 || bIndex !== -1) {
+      if (aIndex === -1) return 1;
+      if (bIndex === -1) return -1;
+      return aIndex - bIndex;
+    }
+    return sectionLabel(a).localeCompare(sectionLabel(b));
+  });
 }
 
 function safeImageUrl(value?: string | null) {
@@ -71,9 +100,10 @@ function ArticleCard({ post }: { post: BlogPost }) {
 
 export default async function ReadPage({ searchParams }: Props) {
   const params = await searchParams;
-  const allPosts = await getRecentPosts(80);
-  const sections = [...new Set(allPosts.map((post) => post.category).filter(Boolean))].slice(0, 9);
-  const activeSection = sections.includes(params?.section as BlogPost["category"]) ? params?.section : undefined;
+  const allPosts = await getRecentPosts(120);
+  const sections = sortSections([...new Set(allPosts.map((post) => post.category).filter(Boolean))]);
+  const requestedSection = typeof params?.section === "string" ? params.section : undefined;
+  const activeSection = requestedSection && sections.includes(requestedSection as BlogPost["category"]) ? requestedSection : undefined;
   const posts = activeSection ? allPosts.filter((post) => post.category === activeSection) : allPosts.slice(0, 48);
 
   return (
@@ -88,10 +118,13 @@ export default async function ReadPage({ searchParams }: Props) {
             Publish
           </Link>
         </div>
+        <p className="mx-auto mt-[-0.25rem] max-w-7xl px-4 pb-2 font-[family-name:var(--font-inter)] text-xs leading-relaxed text-zinc-500 dark:text-zinc-400 md:px-6">
+          Article topics appear here automatically when published. Shorter cards and signals live in the main feed and Signals archive.
+        </p>
         <nav className="mx-auto flex max-w-7xl gap-7 overflow-x-auto px-4 md:px-6" aria-label="Read sections">
           <SectionChip label="All" href="/read" active={!activeSection} />
           {sections.map((section) => (
-            <SectionChip key={section} label={sectionLabel(section)} href={`/read?section=${section}`} active={activeSection === section} />
+            <SectionChip key={section} label={sectionLabel(section)} href={`/read?section=${encodeURIComponent(section)}`} active={activeSection === section} />
           ))}
         </nav>
       </section>

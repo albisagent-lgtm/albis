@@ -7,6 +7,18 @@ import { createClient } from "@/lib/supabase/client";
 import { NotificationsMenu } from "./notifications-menu";
 import type { User } from "@supabase/supabase-js";
 
+function cleanProfileHandle(value: unknown) {
+  const clean = String(value || "").trim().replace(/^@+/, "").toLowerCase().replace(/[^a-z0-9_.-]/g, "").slice(0, 80);
+  return clean || null;
+}
+
+function profileHrefForUser(user: User | null) {
+  if (!user) return "/login";
+  const metadata = user.user_metadata || {};
+  const handle = cleanProfileHandle(metadata.username) || cleanProfileHandle(metadata.name) || cleanProfileHandle(user.email?.split("@")[0]);
+  return handle ? `/u/${encodeURIComponent(handle)}` : "/profile";
+}
+
 export function NavAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -73,7 +85,7 @@ export function NavAuth() {
                   </p>
                 </div>
                 <Link
-                  href="/u/albis"
+                  href={profileHrefForUser(user)}
                   onClick={() => setShowMenu(false)}
                   className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-zinc-600 transition-colors hover:bg-black/[0.04] dark:text-zinc-300 dark:hover:bg-white/[0.04]"
                 >
@@ -124,17 +136,32 @@ export function NavAuth() {
   );
 }
 
-const DESKTOP_NAV = [
+const BASE_DESKTOP_NAV = [
   { href: "/", label: "Feed" },
   { href: "/read", label: "Read" },
   { href: "/create", label: "Create" },
-  { href: "/u/albis", label: "Profile" },
+  { href: "/about", label: "About" },
 ];
 
 export function NavLinks() {
+  const [profileHref, setProfileHref] = useState("/profile");
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setProfileHref(profileHrefForUser(user));
+    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setProfileHref(profileHrefForUser(session?.user ?? null));
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const desktopNav = [...BASE_DESKTOP_NAV, { href: profileHref, label: "Profile" }];
+
   return (
     <div className="hidden items-center gap-5 lg:flex">
-      {DESKTOP_NAV.map((item) => (
+      {desktopNav.map((item) => (
         <Link
           key={item.href}
           href={item.href}

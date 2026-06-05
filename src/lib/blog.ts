@@ -287,7 +287,7 @@ const CATEGORY_TO_SECTION: Record<string, string> = {
   "geopolitics": "world",
   "conflict": "world",
   "governance": "world",
-  "health": "world",
+  "health": "health",
   "breaking": "world",
 
   // Money — economy, trade, markets, cost of living
@@ -302,7 +302,7 @@ const CATEGORY_TO_SECTION: Record<string, string> = {
   "climate-energy": "climate",
   "weather-climate": "climate",
   "natural-world": "climate",
-  "science-space": "climate",
+  "science-space": "science",
 
   // Life Systems — energy security, food, water, cascade effects
   "energy": "life-systems",
