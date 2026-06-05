@@ -71,7 +71,7 @@ export function NavAuth() {
                   </p>
                 </div>
                 <Link
-                  href="/profile"
+                  href="/u/albis"
                   onClick={() => setShowMenu(false)}
                   className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-zinc-600 transition-colors hover:bg-black/[0.04] dark:text-zinc-300 dark:hover:bg-white/[0.04]"
                 >
@@ -126,7 +126,7 @@ const DESKTOP_NAV = [
   { href: "/", label: "Feed" },
   { href: "/read", label: "Read" },
   { href: "/create", label: "Create" },
-  { href: "/profile", label: "Profile" },
+  { href: "/u/albis", label: "Profile" },
 ];
 
 export function NavLinks() {

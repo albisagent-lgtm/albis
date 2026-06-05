@@ -18,7 +18,7 @@ export function Footer() {
                 <FooterLink href="/">Feed</FooterLink>
                 <FooterLink href="/read">Read</FooterLink>
                 <FooterLink href="/create">Create</FooterLink>
-                <FooterLink href="/profile">Profile</FooterLink>
+                <FooterLink href="/u/albis">Profile</FooterLink>
                 <FooterLink href="/about">About</FooterLink>
               </ul>
             </div>
