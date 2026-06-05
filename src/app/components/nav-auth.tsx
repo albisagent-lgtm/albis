@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { NotificationsMenu } from "./notifications-menu";
 import type { User } from "@supabase/supabase-js";
 
 export function NavAuth() {
@@ -43,6 +44,7 @@ export function NavAuth() {
   if (user) {
     return (
       <div className="flex items-center gap-3">
+        <NotificationsMenu />
         {/* User menu */}
         <div className="relative">
           <button

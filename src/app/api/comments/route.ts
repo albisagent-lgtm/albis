@@ -151,6 +151,31 @@ function isNativeCardSlug(slug: string) {
   return /^(weather|people|signal|card)-[a-z0-9][a-z0-9\-_. ]{1,180}$/i.test(slug);
 }
 
+async function resolveCommentEntityUrl(supabase: ReturnType<typeof createAdminClient>, articleSlug: string) {
+  if (articleSlug.startsWith("signal-")) {
+    const id = articleSlug.replace(/^signal-/, "");
+    if (/^[0-9a-f-]{36}$/i.test(id)) {
+      const { data } = await supabase
+        .from("albis_live_signals")
+        .select("slug")
+        .eq("id", id)
+        .maybeSingle();
+      const publicSlug = typeof data?.slug === "string" ? data.slug : null;
+      if (publicSlug) return `/signals/${encodeURIComponent(publicSlug)}#comments`;
+    }
+  }
+
+  const { data } = await supabase
+    .from("albis_live_signals")
+    .select("slug")
+    .or(`slug.eq.${articleSlug},article_slug.eq.${articleSlug}`)
+    .eq("status", "published")
+    .limit(1)
+    .maybeSingle();
+  const publicSlug = typeof data?.slug === "string" ? data.slug : null;
+  return `/signals/${encodeURIComponent(publicSlug || articleSlug)}#comments`;
+}
+
 function publicComment(row: CommentRow) {
   const parsed = parseBody(row.body);
   return {
@@ -304,6 +329,7 @@ export async function POST(request: Request) {
   const row = data as CommentRow;
 
   if (row.status === "visible" && parentComment?.author_id && parentComment.author_id !== user?.id) {
+    const entityUrl = await resolveCommentEntityUrl(supabase, articleSlug);
     const { error: notifyError } = await supabase
       .from("notifications")
       .insert({
@@ -314,7 +340,7 @@ export async function POST(request: Request) {
         body: body.slice(0, 180),
         entity_type: "comment",
         entity_id: row.id,
-        entity_url: `/signals/${encodeURIComponent(articleSlug)}#comments`,
+        entity_url: entityUrl,
         metadata: { article_slug: articleSlug, parent_id: parentComment.id },
       });
 
