@@ -151,6 +151,30 @@ function isNativeCardSlug(slug: string) {
   return /^(weather|people|signal|card)-[a-z0-9][a-z0-9\-_. ]{1,180}$/i.test(slug);
 }
 
+async function resolveSignalForComment(supabase: ReturnType<typeof createAdminClient>, articleSlug: string) {
+  if (articleSlug.startsWith("signal-")) {
+    const id = articleSlug.replace(/^signal-/, "");
+    if (/^[0-9a-f-]{36}$/i.test(id)) {
+      const { data } = await supabase
+        .from("albis_live_signals")
+        .select("slug, metadata")
+        .eq("id", id)
+        .maybeSingle();
+      if (data) return data as { slug: string | null; metadata: Record<string, unknown> | null };
+    }
+  }
+
+  const { data } = await supabase
+    .from("albis_live_signals")
+    .select("slug, metadata")
+    .or(`slug.eq.${articleSlug},article_slug.eq.${articleSlug}`)
+    .eq("status", "published")
+    .limit(1)
+    .maybeSingle();
+
+  return data as { slug: string | null; metadata: Record<string, unknown> | null } | null;
+}
+
 async function resolveCommentEntityUrl(supabase: ReturnType<typeof createAdminClient>, articleSlug: string) {
   if (articleSlug.startsWith("signal-")) {
     const id = articleSlug.replace(/^signal-/, "");
@@ -165,15 +189,14 @@ async function resolveCommentEntityUrl(supabase: ReturnType<typeof createAdminCl
     }
   }
 
-  const { data } = await supabase
-    .from("albis_live_signals")
-    .select("slug")
-    .or(`slug.eq.${articleSlug},article_slug.eq.${articleSlug}`)
-    .eq("status", "published")
-    .limit(1)
-    .maybeSingle();
-  const publicSlug = typeof data?.slug === "string" ? data.slug : null;
+  const signal = await resolveSignalForComment(supabase, articleSlug);
+  const publicSlug = typeof signal?.slug === "string" ? signal.slug : null;
   return `/signals/${encodeURIComponent(publicSlug || articleSlug)}#comments`;
+}
+
+function signalAuthorId(signal: { metadata: Record<string, unknown> | null } | null) {
+  const authorId = signal?.metadata?.author_id;
+  return typeof authorId === "string" && /^[0-9a-f-]{36}$/i.test(authorId) ? authorId : null;
 }
 
 function publicComment(row: CommentRow) {
@@ -328,24 +351,49 @@ export async function POST(request: Request) {
 
   const row = data as CommentRow;
 
-  if (row.status === "visible" && parentComment?.author_id && parentComment.author_id !== user?.id) {
-    const entityUrl = await resolveCommentEntityUrl(supabase, articleSlug);
-    const { error: notifyError } = await supabase
-      .from("notifications")
-      .insert({
-        recipient_id: parentComment.author_id,
-        actor_id: user?.id || null,
-        type: "reply",
-        title: `${authorName} replied to your context`,
-        body: body.slice(0, 180),
-        entity_type: "comment",
-        entity_id: row.id,
-        entity_url: entityUrl,
-        metadata: { article_slug: articleSlug, parent_id: parentComment.id },
-      });
+  if (row.status === "visible") {
+    if (parentComment?.author_id && parentComment.author_id !== user?.id) {
+      const entityUrl = await resolveCommentEntityUrl(supabase, articleSlug);
+      const { error: notifyError } = await supabase
+        .from("notifications")
+        .insert({
+          recipient_id: parentComment.author_id,
+          actor_id: user?.id || null,
+          type: "reply",
+          title: `${authorName} replied to your context`,
+          body: body.slice(0, 180),
+          entity_type: "comment",
+          entity_id: row.id,
+          entity_url: entityUrl,
+          metadata: { article_slug: articleSlug, parent_id: parentComment.id },
+        });
 
-    if (notifyError && notifyError.code !== "42P01") {
-      console.error("[comments] notification insert failed", notifyError.message);
+      if (notifyError && notifyError.code !== "42P01") {
+        console.error("[comments] reply notification insert failed", notifyError.message);
+      }
+    } else if (!parentComment) {
+      const signal = await resolveSignalForComment(supabase, articleSlug);
+      const authorId = signalAuthorId(signal);
+      if (authorId && authorId !== user?.id) {
+        const publicSlug = typeof signal?.slug === "string" ? signal.slug : articleSlug;
+        const { error: notifyError } = await supabase
+          .from("notifications")
+          .insert({
+            recipient_id: authorId,
+            actor_id: user?.id || null,
+            type: "comment",
+            title: `${authorName} added context to your card`,
+            body: body.slice(0, 180),
+            entity_type: "comment",
+            entity_id: row.id,
+            entity_url: `/signals/${encodeURIComponent(publicSlug)}#comments`,
+            metadata: { article_slug: articleSlug, context_type: reportType || null },
+          });
+
+        if (notifyError && notifyError.code !== "42P01") {
+          console.error("[comments] comment notification insert failed", notifyError.message);
+        }
+      }
     }
   }
 

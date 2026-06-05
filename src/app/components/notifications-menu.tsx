@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type NotificationItem = {
   id: string;
@@ -132,11 +133,16 @@ export function NotificationsMenu({ placement = "below", variant = "icon" }: Not
                 <p className="text-sm font-semibold text-[#0f0f0f] dark:text-[#f0efec]">Notifications</p>
                 <p className="text-xs text-zinc-500 dark:text-zinc-400">Replies and useful activity</p>
               </div>
-              {unreadCount > 0 && (
-                <button onClick={markAllRead} className="text-xs font-semibold text-[#b58320] hover:text-[#8f6518]">
-                  Mark read
-                </button>
-              )}
+              <div className="flex items-center gap-3">
+                <Link href="/notifications" onClick={() => setOpen(false)} className="text-xs font-semibold text-[#b58320] hover:text-[#8f6518]">
+                  View all
+                </Link>
+                {unreadCount > 0 && (
+                  <button onClick={markAllRead} className="text-xs font-semibold text-[#b58320] hover:text-[#8f6518]">
+                    Mark read
+                  </button>
+                )}
+              </div>
             </div>
 
             <div className="max-h-80 overflow-y-auto py-1">
@@ -177,5 +183,54 @@ export function NotificationsMenu({ placement = "below", variant = "icon" }: Not
         </>
       )}
     </div>
+  );
+}
+
+export function NotificationsNavLink() {
+  const pathname = usePathname();
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  async function loadUnreadCount() {
+    try {
+      const res = await fetch("/api/notifications?unread=1&limit=1", { cache: "no-store" });
+      if (!res.ok) return;
+      const data = (await res.json()) as NotificationsResponse;
+      if (!data.authenticated || data.unavailable) return;
+      setUnreadCount(data.unread_count || 0);
+    } catch {
+      // Non-critical: the full notifications page can still load directly.
+    }
+  }
+
+  useEffect(() => {
+    void loadUnreadCount();
+    const id = window.setInterval(loadUnreadCount, 60_000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const active = pathname === "/notifications";
+
+  return (
+    <Link
+      href="/notifications"
+      className={`relative flex min-h-[44px] min-w-[44px] flex-col items-center justify-center gap-0.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+        active
+          ? "text-[#c8922a] dark:text-[#c8922a]"
+          : "text-zinc-400 hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300"
+      }`}
+    >
+      <span className="relative">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 7h18s-3 0-3-7" />
+          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+        </svg>
+        {unreadCount > 0 && (
+          <span className="absolute -right-2 -top-2 min-w-4 rounded-full bg-[#c8922a] px-1 text-center text-[10px] font-bold leading-4 text-[#0f0f0f]">
+            {unreadCount > 9 ? "9+" : unreadCount}
+          </span>
+        )}
+      </span>
+      <span>Alerts</span>
+    </Link>
   );
 }
