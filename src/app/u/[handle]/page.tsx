@@ -3,9 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FollowButton } from "@/app/components/follow-button";
 import { UserAvatar } from "@/app/components/user-avatar";
+import { createClient } from "@/lib/supabase/server";
 import { authorProfileHandle, getPublicProfileStats, getSignalsByAuthorHandle, type PublicProfileStats, type Signal } from "@/lib/signals";
 
-export const revalidate = 120;
+export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 
 interface Props { params: Promise<{ handle: string }>; }
@@ -144,6 +145,18 @@ export default async function PublicProfilePage({ params }: Props) {
   const aiReviewedCount = cards.filter((card) => typeof card.metadata?.ai_review_status === "string" && card.metadata.ai_review_status !== "not_requested").length;
   const activeContext = cards.filter((card) => (card.comment_count || 0) > 0).slice(0, 5);
 
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const userMetadata = user?.user_metadata || {};
+  const currentHandle = authorProfileHandle(userMetadata.username || user?.email?.split("@")[0]);
+  const isOwnProfile = Boolean(currentHandle && currentHandle === clean);
+
+  if (isOwnProfile) {
+    profile.displayName = String(userMetadata.name || profile.displayName || name).trim();
+    profile.bio = typeof userMetadata.bio === "string" && userMetadata.bio.trim() ? userMetadata.bio.trim() : profile.bio;
+    profile.avatarUrl = typeof userMetadata.avatar_url === "string" && userMetadata.avatar_url.trim() ? userMetadata.avatar_url.trim() : profile.avatarUrl;
+  }
+
   return (
     <main className="min-h-screen bg-[#f8f7f4] px-4 py-8 text-[#111] dark:bg-[#101010] dark:text-[#f4f1ea] md:px-6">
       <section className="mx-auto max-w-4xl">
@@ -160,7 +173,13 @@ export default async function PublicProfilePage({ params }: Props) {
                 </p>
               </div>
             </div>
-            <FollowButton type="person" label={name} className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]" />
+            {isOwnProfile ? (
+              <Link href="/account" className="rounded-full bg-[#c8922a] px-5 py-3 text-center font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]">
+                Edit profile
+              </Link>
+            ) : (
+              <FollowButton type="person" label={name} className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]" />
+            )}
           </div>
           <div className="mt-5 flex flex-wrap gap-2 font-[family-name:var(--font-inter)] text-xs font-semibold text-zinc-500 dark:text-zinc-400">
             <span className="rounded-full border border-black/[0.10] px-3 py-1 dark:border-white/[0.10]">{stats.cards_count} card{stats.cards_count === 1 ? "" : "s"}</span>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { UserAvatar } from "@/app/components/user-avatar";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 
@@ -28,6 +29,7 @@ export default function AccountClient() {
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
+  const [avatarUploading, setAvatarUploading] = useState(false);
   const [nameSaving, setNameSaving] = useState(false);
   const [nameSuccess, setNameSuccess] = useState(false);
   const [nameError, setNameError] = useState("");
@@ -66,6 +68,32 @@ export default function AccountClient() {
       setLoading(false);
     });
   }, [router]);
+
+  async function handleAvatarUpload(file: File | null) {
+    if (!file) return;
+    setNameError("");
+    setNameSuccess(false);
+    setAvatarUploading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("avatar", file);
+      const res = await fetch("/api/profile/avatar", { method: "POST", body: formData });
+      const data = await res.json();
+      if (!res.ok || !data.avatarUrl) {
+        setNameError(data.error || "Profile picture upload failed.");
+        return;
+      }
+      setAvatarUrl(data.avatarUrl);
+      setNameSuccess(true);
+      router.refresh();
+      setTimeout(() => setNameSuccess(false), 3000);
+    } catch {
+      setNameError("Profile picture upload failed. Please try again.");
+    } finally {
+      setAvatarUploading(false);
+    }
+  }
 
   async function handleNameSave() {
     if (!user) return;
@@ -275,20 +303,28 @@ export default function AccountClient() {
                   This is the public handle shown on cards, posts, and conversations.
                 </p>
               </div>
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-3">
                 <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
-                  Profile picture URL
+                  Profile picture
                 </label>
-                <input
-                  type="url"
-                  value={avatarUrl}
-                  onChange={(e) => setAvatarUrl(e.target.value)}
-                  placeholder="https://…"
-                  className={inputClass}
-                />
-                <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                  Optional for now: paste an image URL. Uploads can come later.
-                </p>
+                <div className="flex items-center gap-4">
+                  <UserAvatar name={name || username || user?.email || "Albis user"} imageUrl={avatarUrl} size="lg" />
+                  <div className="min-w-0 flex-1 space-y-2">
+                    <label className="inline-flex h-10 cursor-pointer items-center justify-center rounded-full border border-black/[0.10] bg-white px-5 text-sm font-medium text-[#111] hover:border-[#c8922a]/50 dark:border-white/[0.10] dark:bg-white/[0.04] dark:text-[#f0efec]">
+                      {avatarUploading ? "Uploading…" : "Upload image"}
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp,image/gif"
+                        className="sr-only"
+                        disabled={avatarUploading}
+                        onChange={(e) => void handleAvatarUpload(e.target.files?.[0] || null)}
+                      />
+                    </label>
+                    <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                      JPG, PNG, WebP, or GIF under 4MB.
+                    </p>
+                  </div>
+                </div>
               </div>
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
@@ -325,6 +361,7 @@ export default function AccountClient() {
                 onClick={handleNameSave}
                 disabled={
                   nameSaving ||
+                  avatarUploading ||
                   (name.trim() === (profile?.name || String(user?.user_metadata?.name || "")) &&
                     username.trim().replace(/^@+/, "").toLowerCase() === String(user?.user_metadata?.username || "") &&
                     bio.trim() === String(user?.user_metadata?.bio || "") &&
