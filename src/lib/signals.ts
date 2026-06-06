@@ -245,6 +245,16 @@ function metadataSeconds(value: unknown) {
   return Math.min(Math.max(seconds, 0), 300);
 }
 
+const CARD_FOUNDATION_SECONDS = 90;
+const CONTEXT_FOUNDATION_SECONDS = 90;
+
+function conversationFoundationSeconds({ cardsCount, contextCount }: { cardsCount: number; contextCount: number }) {
+  // V1 Time should never look empty when someone is actively contributing.
+  // A card, reply, or context note creates a small amount of meaningful public
+  // attention even before the live dwell/open timers have enough events.
+  return Math.max(0, cardsCount * CARD_FOUNDATION_SECONDS + contextCount * CONTEXT_FOUNDATION_SECONDS);
+}
+
 export const getPublicProfileStats = cache(async (handle: string, cards: Signal[]): Promise<PublicProfileStats> => {
   const cleanHandle = String(handle || "").trim().replace(/^@+/, "").toLowerCase();
   const userIds = signalAuthorUserIds(cards);
@@ -349,13 +359,17 @@ export const getPublicProfileStats = cache(async (handle: string, cards: Signal[
   if (!stats.has_tracked_time && stats.time_contributed_seconds === 0) {
     // Backfill-light estimate so older public profiles do not look empty before
     // the live timers collect enough authenticated activity.
-    stats.time_contributed_seconds = Math.max(0, cards.length * 90 + stats.comments_count * 60);
+    stats.time_contributed_seconds = conversationFoundationSeconds({ cardsCount: cards.length, contextCount: stats.comments_count });
   }
 
   // Public Time is deliberately usefulness-led: it measures meaningful active
-  // time other people spend with this profile's cards/articles/context, not the
-  // amount of time the profile owner spends scrolling Albis.
-  stats.time_seconds = stats.time_helped_seconds;
+  // time created by this profile's cards/articles/context/conversations, not
+  // the amount of time the profile owner spends passively scrolling Albis.
+  const contributionFoundation = conversationFoundationSeconds({
+    cardsCount: stats.cards_count,
+    contextCount: stats.context_count,
+  });
+  stats.time_seconds = Math.max(stats.time_helped_seconds, contributionFoundation);
   stats.time_contributed_label = humaniseSeconds(stats.time_contributed_seconds);
   stats.time_helped_label = humaniseSeconds(stats.time_helped_seconds);
   stats.time_label = humaniseSeconds(stats.time_seconds);
