@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { EmailCapture } from "./components/email-capture";
+import { FeedMemoryFeed } from "./components/feed-memory-feed";
 import { type FollowSuggestion } from "./components/follow-discovery";
 import { FollowingFeed } from "./components/following-feed";
 import { LiveEventFeed, type LiveFeedEvent } from "./components/live-event-feed";
@@ -10,7 +11,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 
 export const revalidate = 300;
 
-type FeedFilter = "top" | "latest" | "following" | "discussed";
+type FeedFilter = "for-you" | "following" | "global" | "undercovered" | "latest";
 
 type WeatherReport = {
   city: { name: string; country: string; region?: string };
@@ -28,10 +29,11 @@ type FeedScoreRow = { card_slug: string; score: number | string | null; comments
 
 const weatherRun = latestWeatherRun as WeatherRun;
 const primaryFilters: Array<{ key: FeedFilter; label: string }> = [
-  { key: "top", label: "Top" },
-  { key: "latest", label: "Latest" },
+  { key: "for-you", label: "For You" },
   { key: "following", label: "Following" },
-  { key: "discussed", label: "Discussed" },
+  { key: "global", label: "Global" },
+  { key: "undercovered", label: "Undercovered" },
+  { key: "latest", label: "Latest" },
 ];
 
 const filters = primaryFilters;
@@ -42,7 +44,7 @@ const peopleCards: FeedItem[] = [
     href: "/create",
     label: "people",
     title: "Post an update, link, or note",
-    summary: "Short cards from people can sit beside Albis stories and articles.",
+    summary: "Short updates from people can sit beside Albis stories and articles.",
     author: "Albis community",
     timestamp: "prototype",
     action: "Create",
@@ -124,7 +126,7 @@ function signalToCard(signal: Signal, index: number): FeedItem {
     author: authorName,
     authorAvatarUrl,
     authorHref: authorHandle && authorName !== "Albis" ? `/u/${authorHandle}` : null,
-    source: signal.region || (isPeopleCard ? "reader card" : undefined),
+    source: signal.region || (isPeopleCard ? "reader update" : undefined),
     sourceHref: externalSourceUrl || signal.article_url || undefined,
     timestamp: prettyTime(signal.published_at),
     tags: signal.tags || [],
@@ -186,7 +188,7 @@ function postToCard(post: BlogPost, index: number): FeedItem {
 }
 
 function FilterChip({ item, active }: { item: { key: FeedFilter; label: string }; active: boolean }) {
-  const href = item.key === "top" ? "/" : `/?filter=${item.key}`;
+  const href = item.key === "for-you" ? "/" : `/?filter=${item.key}`;
   return (
     <Link href={href} className={`rounded-full px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${active ? "bg-[#111] text-white dark:bg-white dark:text-black" : "border border-black/[0.12] text-zinc-600 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}>
       {item.label}
@@ -237,7 +239,7 @@ function buildFollowSuggestions(signals: Signal[]): FollowSuggestion[] {
         type: "person",
         label: authorName,
         title: authorName,
-        description: "Follow this person’s cards and comments when they post on Albis.",
+        description: "Follow this person’s updates and comments when they post on Albis.",
       });
     }
     if (signal.category) {
@@ -248,7 +250,7 @@ function buildFollowSuggestions(signals: Signal[]): FollowSuggestion[] {
         type: "topic",
         label,
         title: label,
-        description: "Follow this topic to pull more related cards into your feed.",
+        description: "Follow this topic to pull more related updates into your feed.",
       });
     }
     for (const tag of signal.tags || []) {
@@ -259,7 +261,7 @@ function buildFollowSuggestions(signals: Signal[]): FollowSuggestion[] {
         type: "topic",
         label,
         title: label,
-        description: "Follow this tag to pull more related cards into your feed.",
+        description: "Follow this tag to pull more related updates into your feed.",
       });
     }
     if (signal.region) {
@@ -275,11 +277,11 @@ function buildFollowSuggestions(signals: Signal[]): FollowSuggestion[] {
   }
 
   const starter: FollowSuggestion[] = [
-    { id: "person:zinfinite", type: "person", label: "@zinfinite", title: "@zinfinite", description: "Follow Ignatius’s cards and early community posts." },
-    { id: "topic:life-systems", type: "topic", label: "Life Systems", title: "Life Systems", description: "Follow food, water, energy, climate, infrastructure, health, supply chain, and resilience cards." },
+    { id: "person:zinfinite", type: "person", label: "@zinfinite", title: "@zinfinite", description: "Follow Ignatius’s updates and early community posts." },
+    { id: "topic:life-systems", type: "topic", label: "Life Systems", title: "Life Systems", description: "Follow food, water, energy, climate, infrastructure, health, supply chain, and resilience updates." },
     { id: "topic:human-nature", type: "topic", label: "Human Nature", title: "Human Nature", description: "Follow reflections, links, and discussion around human behaviour and meaning." },
-    { id: "topic:weather", type: "topic", label: "Weather", title: "Weather", description: "Follow local weather-watch and community-risk cards." },
-    { id: "source:albis", type: "source", label: "Albis", title: "Albis", description: "Follow official Albis cards, briefings, and source intelligence." },
+    { id: "topic:weather", type: "topic", label: "Weather", title: "Weather", description: "Follow local weather-watch and community-risk updates." },
+    { id: "source:albis", type: "source", label: "Albis", title: "Albis", description: "Follow official Albis updates, briefings, and source intelligence." },
   ];
   for (const item of starter) if (!suggestions.has(item.id)) suggestions.set(item.id, item);
   return [...suggestions.values()].slice(0, 8);
@@ -287,7 +289,7 @@ function buildFollowSuggestions(signals: Signal[]): FollowSuggestion[] {
 
 export default async function Home({ searchParams }: { searchParams?: Promise<{ filter?: string }> }) {
   const params = await searchParams;
-  const activeFilter = filters.some((item) => item.key === params?.filter) ? params?.filter as FeedFilter : "top";
+  const activeFilter = filters.some((item) => item.key === params?.filter) ? params?.filter as FeedFilter : "for-you";
   const [signals, posts, scoreMap] = await Promise.all([getLatestSignals(50), getRecentPosts(24), getFeedScoreMap()]);
   const signalCards = signals.map(signalToCard);
   const activeWeatherReports = weatherRun.reports.filter((report) => report.status !== "routine");
@@ -297,14 +299,11 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
   const cards = applyScores([...signalCards, ...weatherCards, ...peopleCards, ...readCards], scoreMap);
   const topCards = [...cards].sort((a, b) => b.weight - a.weight);
   const latestCards = [...cards].sort((a, b) => new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime() || b.weight - a.weight);
-  const discussedCards = [...cards].sort((a, b) => (b.commentCount || 0) - (a.commentCount || 0) || (b.score || 0) - (a.score || 0) || b.weight - a.weight);
-  const visibleCards = activeFilter === "top"
+  const visibleCards = activeFilter === "global"
     ? topCards.slice(0, 48)
     : activeFilter === "latest"
       ? latestCards.slice(0, 48)
-      : activeFilter === "discussed"
-        ? discussedCards.slice(0, 48)
-        : [];
+      : [];
   const followSuggestions = buildFollowSuggestions(signals);
   return (
     <main className="min-h-screen bg-[#f8f7f4] text-[#111] dark:bg-[#101010] dark:text-[#f4f1ea]">
@@ -313,7 +312,7 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.16em] text-[#b58320]">Albis</p>
-              <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">Cards</h1>
+              <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">Feed</h1>
             </div>
             <Link href="/create" className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]">
               Create
@@ -323,19 +322,23 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
             {primaryFilters.map((item) => <FilterChip key={item.key} item={item} active={activeFilter === item.key} />)}
           </div>
           <p className="mt-2 font-[family-name:var(--font-inter)] text-xs text-zinc-500 dark:text-zinc-400">
-            Start with the main pulse, jump to the newest cards, follow people/topics, or open active discussions.
+            Start with Feed Memory, follow people/topics, scan the global pulse, add undercovered context, or jump to latest.
           </p>
         </div>
       </section>
 
       <section className="mx-auto max-w-3xl px-4 py-5 md:px-6">
         <div className="mx-auto w-full">
-          {activeFilter === "following" ? (
+          {activeFilter === "for-you" ? (
+            <FeedMemoryFeed cards={topCards.slice(0, 72)} />
+          ) : activeFilter === "following" ? (
             <FollowingFeed cards={topCards.slice(0, 48)} suggestions={followSuggestions} />
+          ) : activeFilter === "undercovered" ? (
+            <FeedMemoryFeed cards={topCards.slice(0, 72)} mode="undercovered" />
           ) : visibleCards.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-black/10 bg-white/50 px-6 py-14 text-center dark:border-white/10 dark:bg-white/[0.025]">
-              <p className="font-[family-name:var(--font-playfair)] text-2xl font-bold">No cards here yet.</p>
-              <Link href="/create" className="mt-4 inline-flex rounded-full bg-[#111] px-4 py-2 text-sm font-bold text-white dark:bg-white dark:text-black">Create one</Link>
+              <p className="font-[family-name:var(--font-playfair)] text-2xl font-bold">No updates here yet.</p>
+              <Link href="/create" className="mt-4 inline-flex rounded-full bg-[#111] px-4 py-2 text-sm font-bold text-white dark:bg-white dark:text-black">Create an update</Link>
             </div>
           ) : (
             <LiveEventFeed events={visibleCards} />
@@ -346,7 +349,7 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
           <div className="rounded-3xl border border-black/[0.08] bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
             <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-[#9b6b18] dark:text-[#f0c15e]">Daily briefing</p>
             <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-bold">A calm summary, off the feed.</h2>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">If you want the day’s scan without making the card feed busier, get it by email.</p>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">If you want the day’s scan in your inbox too, get the daily briefing by email.</p>
             <div className="mt-4">
               <EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} source="feed-home-side-card" />
             </div>

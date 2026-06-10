@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArticleComments } from "./article-comments";
+import { applyFeedMemorySignal, type FeedMemorySignalType, type RecommendationReason } from "./feed-memory";
 import { trackFeedEvent } from "./feed-event-tracking";
 import { UserAvatar } from "./user-avatar";
 
@@ -36,6 +37,7 @@ export type LiveFeedEvent = {
   bullets?: string[];
   stillUnclear?: string | null;
   sourceNote?: string | null;
+  recommendationReasons?: RecommendationReason[];
 };
 
 function cleanLabel(value: string) {
@@ -88,7 +90,7 @@ function MediaPreviewBlock({ media, feature }: { media?: MediaPreview; feature?:
   );
 }
 
-function CardDetailModal({ event, onClose, onShare, saved, onSave }: { event: LiveFeedEvent; onClose: () => void; onShare: () => void; saved: boolean; onSave: () => void }) {
+function CardDetailModal({ event, onClose, onShare, saved, onSave, onTrackedEvent }: { event: LiveFeedEvent; onClose: () => void; onShare: () => void; saved: boolean; onSave: () => void; onTrackedEvent?: (event: LiveFeedEvent, signal: FeedMemorySignalType) => void }) {
   const commentSlug = event.cardSlug || event.articleSlug || event.id;
   const reviewLabel = aiReviewLabel(event.aiReviewStatus);
   const usefulBullets = (event.bullets || []).map((bullet) => bullet.trim()).filter(Boolean);
@@ -161,11 +163,11 @@ function CardDetailModal({ event, onClose, onShare, saved, onSave }: { event: Li
 
 
         <div className="mt-5 flex flex-wrap gap-2 border-y border-black/[0.08] py-4 dark:border-white/[0.08]">
-          <Link href={event.sourceHref || event.href} target={event.sourceHref ? "_blank" : undefined} rel={event.sourceHref ? "noopener noreferrer" : undefined} onClick={() => trackFeedEvent(commentSlug, "open", { href: event.sourceHref || event.href, surface: "modal-article-link" })} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
+          <Link href={event.sourceHref || event.href} target={event.sourceHref ? "_blank" : undefined} rel={event.sourceHref ? "noopener noreferrer" : undefined} onClick={() => { applyFeedMemorySignal(event, "open"); onTrackedEvent?.(event, "open"); trackFeedEvent(commentSlug, "open", { href: event.sourceHref || event.href, surface: "modal-article-link" }); }} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
             Read Article
           </Link>
-          <Link href={event.href} onClick={() => trackFeedEvent(commentSlug, "open", { href: event.href, surface: "modal-card-link" })} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
-            Open Card
+          <Link href={event.href} onClick={() => { applyFeedMemorySignal(event, "open"); onTrackedEvent?.(event, "open"); trackFeedEvent(commentSlug, "open", { href: event.href, surface: "modal-card-link" }); }} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
+            Open Post
           </Link>
           <button type="button" onClick={onSave} className={`rounded-full border px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${saved ? "border-[#c8922a]/60 bg-[#c8922a]/10 text-[#9b6b18] dark:text-[#f0c15e]" : "border-black/[0.12] text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}>{saved ? "Saved" : "Save"}</button>
           <button type="button" onClick={onShare} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">Share</button>
@@ -181,7 +183,7 @@ function CardDetailModal({ event, onClose, onShare, saved, onSave }: { event: Li
             emptyText="No context yet. Add the first source, observation, or question."
             submitLabel="Add context"
             compact
-            onCommentPosted={() => trackFeedEvent(commentSlug, "comment")}
+            onCommentPosted={() => { applyFeedMemorySignal(event, "comment"); onTrackedEvent?.(event, "comment"); trackFeedEvent(commentSlug, "comment"); }}
           />
         </div>
       </section>
@@ -189,7 +191,7 @@ function CardDetailModal({ event, onClose, onShare, saved, onSave }: { event: Li
   );
 }
 
-function FeedRow({ event, feature = false, selected, onOpen, onClose }: { event: LiveFeedEvent; feature?: boolean; selected: boolean; onOpen: () => void; onClose: () => void }) {
+function FeedRow({ event, feature = false, selected, onOpen, onClose, onTrackedEvent, onTune }: { event: LiveFeedEvent; feature?: boolean; selected: boolean; onOpen: () => void; onClose: () => void; onTrackedEvent?: (event: LiveFeedEvent, signal: FeedMemorySignalType) => void; onTune?: (event: LiveFeedEvent, signal: Extract<FeedMemorySignalType, "more_like_this" | "less_like_this" | "hide">) => void }) {
   const [saved, setSaved] = useState(false);
   const reviewLabel = aiReviewLabel(event.aiReviewStatus);
   const bylineTail = [reviewLabel, event.timestamp || event.meta].filter(Boolean).join(" · ");
@@ -198,6 +200,8 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose }: { event:
 
   async function shareCard() {
     const url = `${window.location.origin}${event.href}`;
+    applyFeedMemorySignal(event, "share");
+    onTrackedEvent?.(event, "share");
     trackFeedEvent(commentSlug, "share", { href: event.href });
     if (navigator.share) {
       await navigator.share({ title: event.title, text: event.summary || undefined, url }).catch(() => undefined);
@@ -208,9 +212,18 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose }: { event:
 
   function toggleSave() {
     setSaved((current) => {
+      applyFeedMemorySignal(event, current ? "unsave" : "save");
+      onTrackedEvent?.(event, current ? "unsave" : "save");
       trackFeedEvent(commentSlug, current ? "unsave" : "save");
       return !current;
     });
+  }
+
+  function openCard(surface: string) {
+    applyFeedMemorySignal(event, "open");
+    onTrackedEvent?.(event, "open");
+    trackFeedEvent(commentSlug, "open", { surface });
+    onOpen();
   }
 
   return (
@@ -234,7 +247,7 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose }: { event:
               </p>
             </div>
 
-            <button type="button" onClick={() => { trackFeedEvent(commentSlug, "open", { surface: "card" }); onOpen(); }} className="mt-3 block w-full text-left" aria-label={`Open ${event.title}`}>
+            <button type="button" onClick={() => openCard("card")} className="mt-3 block w-full text-left" aria-label={`Open ${event.title}`}>
               <h2 className={`font-[family-name:var(--font-playfair)] font-bold leading-tight tracking-tight transition group-hover:text-[#b58320] ${feature ? "text-3xl md:text-[2.35rem]" : "text-2xl md:text-[1.7rem]"}`}>
                 {event.title}
               </h2>
@@ -251,15 +264,25 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose }: { event:
                 ))}
               </ul>
             ) : null}
+
+            {event.recommendationReasons?.length ? (
+              <div className="mt-3 flex flex-wrap gap-2" aria-label="Recommendation reasons">
+                {event.recommendationReasons.map((reason) => (
+                  <span key={`${reason.label}-${reason.detail}`} className="rounded-full border border-[#c8922a]/25 bg-[#c8922a]/10 px-3 py-1 font-[family-name:var(--font-inter)] text-[11px] font-semibold text-[#8a641d] dark:text-[#f0c15e]">
+                    {reason.label} {reason.detail}
+                  </span>
+                ))}
+              </div>
+            ) : null}
           </div>
         </div>
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap gap-2">
-            <button type="button" onClick={() => { trackFeedEvent(commentSlug, "open", { surface: "button" }); onOpen(); }} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
+            <button type="button" onClick={() => openCard("button")} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
               {event.action === "Read" ? "Read story" : "Open story"}
             </button>
-            <button type="button" onClick={() => { trackFeedEvent(commentSlug, "open", { surface: "discussion" }); onOpen(); }} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
+            <button type="button" onClick={() => openCard("discussion")} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
               {event.commentCount ? discussionLabel(event.commentCount) : "Add context"}
             </button>
             <button type="button" aria-pressed={saved} onClick={toggleSave} className={`rounded-full border px-3 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${saved ? "border-[#c8922a]/60 bg-[#c8922a]/10 text-[#9b6b18] dark:text-[#f0c15e]" : "border-black/[0.12] text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}>
@@ -269,18 +292,33 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose }: { event:
               Share
             </button>
           </div>
-          <Link href={event.href} onClick={() => trackFeedEvent(commentSlug, "open", { href: event.href, surface: "direct-link" })} className="font-[family-name:var(--font-inter)] text-xs font-semibold text-zinc-400 hover:text-[#b58320]">
-            Permalink
-          </Link>
+          <div className="flex flex-wrap items-center gap-3">
+            {event.authorHref ? (
+              <Link href={`${event.authorHref}?tab=tab`} className="font-[family-name:var(--font-inter)] text-xs font-semibold text-[#9b6b18] hover:text-[#b58320] dark:text-[#f0c15e]">
+                Open their Tab
+              </Link>
+            ) : null}
+            <Link href={event.href} onClick={() => { applyFeedMemorySignal(event, "open"); onTrackedEvent?.(event, "open"); trackFeedEvent(commentSlug, "open", { href: event.href, surface: "direct-link" }); }} className="font-[family-name:var(--font-inter)] text-xs font-semibold text-zinc-400 hover:text-[#b58320]">
+              Permalink
+            </Link>
+          </div>
         </div>
+
+        {onTune ? (
+          <div className="mt-4 flex flex-wrap gap-2 border-t border-black/[0.06] pt-3 dark:border-white/[0.08]">
+            <button type="button" onClick={() => onTune(event, "more_like_this")} className="rounded-full border border-black/[0.10] px-3 py-1.5 font-[family-name:var(--font-inter)] text-[11px] font-bold text-zinc-600 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.10] dark:text-zinc-300">More like this</button>
+            <button type="button" onClick={() => onTune(event, "less_like_this")} className="rounded-full border border-black/[0.10] px-3 py-1.5 font-[family-name:var(--font-inter)] text-[11px] font-bold text-zinc-600 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.10] dark:text-zinc-300">Less like this</button>
+            <button type="button" onClick={() => onTune(event, "hide")} className="rounded-full border border-black/[0.10] px-3 py-1.5 font-[family-name:var(--font-inter)] text-[11px] font-bold text-zinc-500 hover:border-red-300 hover:text-red-600 dark:border-white/[0.10] dark:text-zinc-400">Hide</button>
+          </div>
+        ) : null}
       </article>
 
-      {selected ? <CardDetailModal event={event} onClose={onClose} onShare={shareCard} saved={saved} onSave={toggleSave} /> : null}
+      {selected ? <CardDetailModal event={event} onClose={onClose} onShare={shareCard} saved={saved} onSave={toggleSave} onTrackedEvent={onTrackedEvent} /> : null}
     </>
   );
 }
 
-export function LiveEventFeed({ events, leadId }: { events: LiveFeedEvent[]; leadId?: string }) {
+export function LiveEventFeed({ events, leadId, onTrackedEvent, onTune }: { events: LiveFeedEvent[]; leadId?: string; onTrackedEvent?: (event: LiveFeedEvent, signal: FeedMemorySignalType) => void; onTune?: (event: LiveFeedEvent, signal: Extract<FeedMemorySignalType, "more_like_this" | "less_like_this" | "hide">) => void }) {
   const [openId, setOpenId] = useState<string | null>(leadId || null);
   const [query, setQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(12);
@@ -307,7 +345,7 @@ export function LiveEventFeed({ events, leadId }: { events: LiveFeedEvent[]; lea
   return (
     <div className="space-y-3">
       <div className="rounded-3xl border border-black/[0.08] bg-white p-3 dark:border-white/[0.08] dark:bg-white/[0.035]">
-        <label className="sr-only" htmlFor="feed-search">Search cards</label>
+        <label className="sr-only" htmlFor="feed-search">Search the feed</label>
         <input
           id="feed-search"
           value={query}
@@ -325,10 +363,12 @@ export function LiveEventFeed({ events, leadId }: { events: LiveFeedEvent[]; lea
           selected={openId === event.id}
           onOpen={() => setOpenId((current) => current === event.id ? null : event.id)}
           onClose={() => setOpenId(null)}
+          onTrackedEvent={onTrackedEvent}
+          onTune={onTune}
         />
       )) : (
         <div className="rounded-3xl border border-dashed border-black/10 bg-white/50 px-6 py-12 text-center dark:border-white/10 dark:bg-white/[0.025]">
-          <p className="font-[family-name:var(--font-playfair)] text-2xl font-bold">No matching cards.</p>
+          <p className="font-[family-name:var(--font-playfair)] text-2xl font-bold">No matching posts.</p>
           <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">Try a place, source, topic, or person.</p>
         </div>
       )}
