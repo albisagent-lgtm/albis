@@ -20,7 +20,12 @@
     "intelligence:wiki:ingest-latest": "tsx scripts/run-albis-intelligence-wiki.ts ingest-latest",
     "intelligence:wiki:view": "tsx scripts/run-albis-intelligence-wiki.ts view",
     "outreach:public:dry-run": "tsx scripts/run-outreach-send.ts --campaign life-systems --dry-run --floor 1 --ceiling 5 --target-per-bucket 1",
-    "outreach:public:send-small": "tsx scripts/run-outreach-send.ts --campaign life-systems --floor 1 --ceiling 10 --target-per-bucket 3"
+    "outreach:public:send-small": "tsx scripts/run-outreach-send.ts --campaign life-systems --floor 1 --ceiling 10 --target-per-bucket 3",
+    "quality:articles": "tsx scripts/check-public-article-quality.ts --changed",
+    "quality:articles:all": "tsx scripts/check-public-article-quality.ts",
+    "quality:articles:report": "tsx scripts/report-public-article-quality.ts",
+    "quality:articles:quarantine:dry": "tsx scripts/quarantine-bad-public-articles.ts",
+    "quality:articles:quarantine": "tsx scripts/quarantine-bad-public-articles.ts --apply"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

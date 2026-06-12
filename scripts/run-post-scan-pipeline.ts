@@ -106,12 +106,17 @@ const supabase = createClient(SUPABASE_URL, SERVICE_KEY, {
 
 const MIN_WORD_COUNT = 500;
 const TARGET_WORD_COUNT = 700;
-const MAIN_ARTICLE_COUNT = 7;
-const HIDDEN_ARTICLE_COUNT = 7;
+// Quality-first public publishing: default to fewer articles that are actually
+// source-supported and readable. These can be raised via env once the scanner
+// and writer consistently pass editorial QA.
+const MAIN_ARTICLE_COUNT = Number(process.env.ALBIS_PUBLIC_MAIN_ARTICLE_COUNT || 3);
+const HIDDEN_ARTICLE_COUNT = Number(process.env.ALBIS_PUBLIC_HIDDEN_ARTICLE_COUNT || 0);
 const MIN_ARTICLE_COUNT = MAIN_ARTICLE_COUNT;
 const MAX_ARTICLE_COUNT = MAIN_ARTICLE_COUNT + HIDDEN_ARTICLE_COUNT;
 const CANDIDATE_LIMIT = 70;
 const RECENT_IMAGE_WINDOW = 100;
+const REQUIRE_PUBLIC_ARTICLE_RESEARCH = process.env.ALBIS_ALLOW_UNRESEARCHED_PUBLIC_ARTICLES !== 'true';
+const REQUIRE_PUBLIC_ARTICLE_EDITORIAL_WRITER = process.env.ALBIS_ALLOW_TEMPLATE_PUBLIC_ARTICLES !== 'true';
 const BANNED_PHRASES = [
   'this is more than',
   'for albis',
@@ -150,6 +155,26 @@ const BANNED_PHRASES = [
   'writeability',
   'draft quality',
   'the scan does not support',
+  'points to a concrete shift',
+  'is the engine here',
+  'not a side note',
+  'show how',
+  'make clear what changed',
+  'connect a concrete',
+  'use an unusual detail',
+  'decision space around',
+  'is now narrower than it was before',
+  'where an abstract development starts becoming a practical constraint',
+  'the practical test now is whether',
+  'stays narrow or forces a wider reset',
+  'visible event and the practical fallout',
+  'this is the point of entry',
+  'is already concrete enough to read as operating reality',
+  'odd detail worth watching',
+  'cleanest route into the larger pattern',
+  'turns this from a single update into a moving story',
+  'useful public-interest article',
+  'report what the loudest frame misses',
 ];
 
 function fail(msg: string): never {
@@ -1433,6 +1458,8 @@ function assessArticleQuality(packet: StoryPacket, body: string) {
   const storyMatch = ledeMatchesStory(packet, opening);
 
   if (banned.length) return { ok: false, reason: `Draft contains banned phrases: ${banned.join(', ')}` };
+  const plannerLanguage = /\b(?:make clear|show how|connect (?:a|the) concrete|use (?:an|a) unusual|report what|write (?:a|the)|draft|article should|point of entry|engine here|decision space|abstract development|practical constraint|visible consequences|practical fallout|operating reality|larger pattern|single update|moving story)\b/i;
+  if (plannerLanguage.test(body)) return { ok: false, reason: 'Planner/editorial instruction language present in public body' };
   if (wordCount < MIN_WORD_COUNT) return { ok: false, reason: `Draft below minimum word count (${wordCount} < ${MIN_WORD_COUNT})` };
   if (paragraphs.length < range.min) return { ok: false, reason: `Draft too thin for ${packet.articleForm} (${paragraphs.length} paragraphs < ${range.min})` };
   if (paragraphs.length > range.max) return { ok: false, reason: `Draft too sprawling for ${packet.articleForm} (${paragraphs.length} paragraphs > ${range.max})` };
@@ -1491,8 +1518,7 @@ async function buildArticle(selection: PublicStorySelection, date: string, usedI
     tags: packet.tags,
     regions: packet.regions,
   });
-  const requireResearch = research.priority_section && process.env.ALBIS_REQUIRE_PUBLIC_RESEARCHED_ARTICLES !== 'false';
-  if (requireResearch && !research.source_depth_valid) {
+  if (REQUIRE_PUBLIC_ARTICLE_RESEARCH && !research.source_depth_valid) {
     throw new Error(`Public article research too thin (${research.distinct_url_count} distinct URL(s), ${research.distinct_domain_count} distinct domain(s), ${research.independent_source_count} independent source(s), ${research.fetched_source_count} fetched source(s)); refusing shallow or syndicated-only article`);
   }
   const editorial = await runPublicArticleEditorialWriter({
@@ -1500,8 +1526,10 @@ async function buildArticle(selection: PublicStorySelection, date: string, usedI
     currentDraft: body,
     research,
   });
-  const requireEditorialWriter = editorial.enabled && process.env.ALBIS_REQUIRE_PUBLIC_ARTICLE_EDITORIAL_WRITER !== 'false';
-  if (editorial.blocked && requireEditorialWriter) {
+  if (REQUIRE_PUBLIC_ARTICLE_EDITORIAL_WRITER && (!editorial.enabled || !editorial.edited || !editorial.body)) {
+    throw new Error(`Public article editorial writer did not produce a publishable article: ${editorial.blocked_reason || editorial.warnings.join('; ') || 'not edited'}`);
+  }
+  if (editorial.blocked && REQUIRE_PUBLIC_ARTICLE_EDITORIAL_WRITER) {
     throw new Error(`Public article editorial writer blocked: ${editorial.blocked_reason || 'unknown'}`);
   }
   if (editorial.edited && editorial.body) {
@@ -1511,7 +1539,7 @@ async function buildArticle(selection: PublicStorySelection, date: string, usedI
     if (editorial.description) packet.connection = editorial.description;
   }
   let quality = assessArticleQuality(packet, body);
-  if (!quality.ok) {
+  if (!quality.ok && !REQUIRE_PUBLIC_ARTICLE_EDITORIAL_WRITER) {
     body = salvageDraft(packet, body, {
       wordCount: body.trim().split(/\s+/).filter(Boolean).length,
       paragraphs: splitBodyParagraphs(body).length,

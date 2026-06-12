@@ -173,7 +173,9 @@ async function supabaseGetPostBySlug(slug: string): Promise<BlogPost | null> {
       return null;
     }
     if (!data) return null;
-    return rowToPost(data as unknown as ArticleRow);
+    const post = rowToPost(data as unknown as ArticleRow);
+    if (post.noindex) return null;
+    return post;
   } catch (e) {
     console.error(`[blog] supabase getPostBySlug(${slug}) threw:`, e);
     return null;
@@ -201,7 +203,7 @@ function fsGetPostBySlug(slug: string): BlogPost | null {
   if (!fs.existsSync(filePath)) return null;
   const raw = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(raw);
-  return {
+  const post = {
     slug,
     title: data.title || slug,
     description: data.description || data.excerpt || "",
@@ -223,6 +225,8 @@ function fsGetPostBySlug(slug: string): BlogPost | null {
     content,
     noindex: data.noindex === true,
   };
+  if (post.noindex) return null;
+  return post;
 }
 
 /* ─── Public API (async — Supabase primary, fs fallback) ─── */
