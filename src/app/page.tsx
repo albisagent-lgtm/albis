@@ -346,6 +346,22 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
         </div>
 
         <aside className="mt-5 space-y-3">
+          <div className="rounded-3xl border border-[#c8922a]/30 bg-[#fff8e8] p-4 dark:border-[#f0c15e]/25 dark:bg-[#f0c15e]/10">
+            <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-[#9b6b18] dark:text-[#f0c15e]">New here?</p>
+            <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-bold">Start with a 10-minute feed check.</h2>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+              Use Albis as a quick media-literacy exercise: pick one topic, compare what appears here with your usual feed, then tell us what felt useful or confusing.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Link href="/media-literacy" className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white dark:bg-white dark:text-black">
+                Try the exercise
+              </Link>
+              <Link href="/feedback" className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#9b6b18] dark:border-white/[0.14] dark:text-zinc-200 dark:hover:text-[#f0c15e]">
+                Send feedback
+              </Link>
+            </div>
+          </div>
+
           <div className="rounded-3xl border border-black/[0.08] bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
             <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-[#9b6b18] dark:text-[#f0c15e]">Daily briefing</p>
             <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-bold">Get the daily scan.</h2>
