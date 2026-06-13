@@ -159,7 +159,10 @@ export default function RegisterClient() {
                 Become a founding tester
               </h1>
               <p className="mt-1.5 text-sm text-zinc-500 dark:text-zinc-400">
-                Create your Albis account to track what your feed is missing, save stories, and help shape the platform.
+                Save stories, track the gaps you care about, and help shape how Albis explains global coverage.
+              </p>
+              <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
+                Free. No spam. Early tester updates only.
               </p>
 
               <form onSubmit={handleSubmit} className="mt-7 flex flex-col gap-4">
