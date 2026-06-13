@@ -312,7 +312,7 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.16em] text-[#b58320]">Albis</p>
-              <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">Feed</h1>
+              <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">See what you missed.</h1>
             </div>
             <Link href="/create" className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]">
               Create
@@ -321,8 +321,8 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
           <div className="mt-6 flex gap-2 overflow-x-auto pb-1">
             {primaryFilters.map((item) => <FilterChip key={item.key} item={item} active={activeFilter === item.key} />)}
           </div>
-          <p className="mt-2 font-[family-name:var(--font-inter)] text-xs text-zinc-500 dark:text-zinc-400">
-            Start with Feed Memory, follow people/topics, scan the global pulse, add undercovered context, or jump to latest.
+          <p className="mt-2 font-[family-name:var(--font-inter)] text-sm text-zinc-600 dark:text-zinc-300">
+            Global stories, gaps, and context in one simple feed.
           </p>
         </div>
       </section>
@@ -348,8 +348,8 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
         <aside className="mt-5 space-y-3">
           <div className="rounded-3xl border border-black/[0.08] bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
             <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-[#9b6b18] dark:text-[#f0c15e]">Daily briefing</p>
-            <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-bold">A calm summary, off the feed.</h2>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">If you want the day’s scan in your inbox too, get the daily briefing by email.</p>
+            <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-bold">Get the daily scan.</h2>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">One short email with the stories your feed may miss.</p>
             <div className="mt-4">
               <EmailCapture variant="hero" showSocialProof={false} showYesterdayLink={false} source="feed-home-side-card" />
             </div>

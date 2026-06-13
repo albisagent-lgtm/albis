@@ -55,11 +55,6 @@ function aiReviewLabel(status?: string | null) {
   return "AI reviewed";
 }
 
-function discussionLabel(count?: number | null) {
-  if (!count) return "Discussion";
-  return count > 0 ? "Active discussion" : "Discussion";
-}
-
 function matchesSearch(event: LiveFeedEvent, query: string) {
   if (!query.trim()) return true;
   const haystack = [
@@ -265,25 +260,13 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose, onTrackedE
               </ul>
             ) : null}
 
-            {event.recommendationReasons?.length ? (
-              <div className="mt-3 flex flex-wrap gap-2" aria-label="Recommendation reasons">
-                {event.recommendationReasons.map((reason) => (
-                  <span key={`${reason.label}-${reason.detail}`} className="rounded-full border border-[#c8922a]/25 bg-[#c8922a]/10 px-3 py-1 font-[family-name:var(--font-inter)] text-[11px] font-semibold text-[#8a641d] dark:text-[#f0c15e]">
-                    {reason.label} {reason.detail}
-                  </span>
-                ))}
-              </div>
-            ) : null}
           </div>
         </div>
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap gap-2">
             <button type="button" onClick={() => openCard("button")} className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
-              {event.action === "Read" ? "Read story" : "Open story"}
-            </button>
-            <button type="button" onClick={() => openCard("discussion")} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
-              {event.commentCount ? discussionLabel(event.commentCount) : "Add context"}
+              Open
             </button>
             <button type="button" aria-pressed={saved} onClick={toggleSave} className={`rounded-full border px-3 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${saved ? "border-[#c8922a]/60 bg-[#c8922a]/10 text-[#9b6b18] dark:text-[#f0c15e]" : "border-black/[0.12] text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}>
               {saved ? "Saved" : "Save"}
@@ -299,15 +282,15 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose, onTrackedE
               </Link>
             ) : null}
             <Link href={event.href} onClick={() => { applyFeedMemorySignal(event, "open"); onTrackedEvent?.(event, "open"); trackFeedEvent(commentSlug, "open", { href: event.href, surface: "direct-link" }); }} className="font-[family-name:var(--font-inter)] text-xs font-semibold text-zinc-400 hover:text-[#b58320]">
-              Permalink
+              Link
             </Link>
           </div>
         </div>
 
         {onTune ? (
           <div className="mt-4 flex flex-wrap gap-2 border-t border-black/[0.06] pt-3 dark:border-white/[0.08]">
-            <button type="button" onClick={() => onTune(event, "more_like_this")} className="rounded-full border border-black/[0.10] px-3 py-1.5 font-[family-name:var(--font-inter)] text-[11px] font-bold text-zinc-600 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.10] dark:text-zinc-300">More like this</button>
-            <button type="button" onClick={() => onTune(event, "less_like_this")} className="rounded-full border border-black/[0.10] px-3 py-1.5 font-[family-name:var(--font-inter)] text-[11px] font-bold text-zinc-600 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.10] dark:text-zinc-300">Less like this</button>
+            <button type="button" onClick={() => onTune(event, "more_like_this")} className="rounded-full border border-black/[0.10] px-3 py-1.5 font-[family-name:var(--font-inter)] text-[11px] font-bold text-zinc-600 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.10] dark:text-zinc-300">More</button>
+            <button type="button" onClick={() => onTune(event, "less_like_this")} className="rounded-full border border-black/[0.10] px-3 py-1.5 font-[family-name:var(--font-inter)] text-[11px] font-bold text-zinc-600 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.10] dark:text-zinc-300">Less</button>
             <button type="button" onClick={() => onTune(event, "hide")} className="rounded-full border border-black/[0.10] px-3 py-1.5 font-[family-name:var(--font-inter)] text-[11px] font-bold text-zinc-500 hover:border-red-300 hover:text-red-600 dark:border-white/[0.10] dark:text-zinc-400">Hide</button>
           </div>
         ) : null}
@@ -350,7 +333,7 @@ export function LiveEventFeed({ events, leadId, onTrackedEvent, onTune }: { even
           id="feed-search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search topics, places, people, sources, or story terms…"
+          placeholder="Search the feed…"
           className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 font-[family-name:var(--font-inter)] text-sm outline-none transition placeholder:text-zinc-400 focus:border-[#c8922a]/60 dark:border-white/[0.08] dark:bg-black/20"
         />
       </div>
@@ -376,10 +359,10 @@ export function LiveEventFeed({ events, leadId, onTrackedEvent, onTune }: { even
       <div ref={sentinelRef} className="h-1" />
       {visibleCount < filteredEvents.length ? (
         <button type="button" onClick={() => setVisibleCount((current) => Math.min(current + 8, filteredEvents.length))} className="mx-auto flex rounded-full border border-black/[0.12] bg-white px-5 py-3 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:bg-white/[0.035] dark:text-zinc-300">
-          Load next source set
+          Load more
         </button>
       ) : filteredEvents.length > 12 ? (
-        <p className="py-3 text-center font-[family-name:var(--font-inter)] text-xs text-zinc-400">You’re caught up for now. New source sets will appear as the feed refreshes.</p>
+        <p className="py-3 text-center font-[family-name:var(--font-inter)] text-xs text-zinc-400">You’re caught up.</p>
       ) : null}
     </div>
   );
