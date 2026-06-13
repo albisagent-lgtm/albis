@@ -140,6 +140,7 @@ const BASE_DESKTOP_NAV = [
   { href: "/", label: "Feed" },
   { href: "/read", label: "Read" },
   { href: "/create", label: "Create" },
+  { href: "/feedback", label: "Feedback" },
   { href: "/about", label: "About" },
 ];
 

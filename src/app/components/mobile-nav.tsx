@@ -62,6 +62,7 @@ const NAV_ITEMS = [
 ];
 
 const MORE_LINKS = [
+  { href: "/feedback", label: "Feedback" },
   { href: "/?filter=weather", label: "Weather" },
   { href: "/signals", label: "Events archive" },
   { href: "/indexes", label: "Indexes" },
