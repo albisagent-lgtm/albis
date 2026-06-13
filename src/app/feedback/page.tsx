@@ -6,6 +6,12 @@ export const metadata = {
     "A simple feedback route for early Albis testers, educators, journalists, librarians, and globally curious readers.",
 };
 
+const trySteps = [
+  "Open the feed and scan the first few stories.",
+  "Pick one story your usual news feed did not show you.",
+  "Send a yes / maybe / no on whether you would return, plus one confusing thing.",
+];
+
 const prompts = [
   "Was the value clear within 30 seconds?",
   "Did you find a story or angle your usual feed missed?",
@@ -43,6 +49,33 @@ export default function FeedbackPage() {
       </section>
 
       <section className="mx-auto grid max-w-3xl gap-5 px-4 pb-16 md:px-6">
+        <div className="rounded-3xl border border-black/[0.08] bg-white p-6 dark:border-white/[0.08] dark:bg-white/[0.035]">
+          <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">
+            Try it in 2 minutes
+          </h2>
+          <ol className="mt-5 space-y-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+            {trySteps.map((step, index) => (
+              <li key={step} className="flex gap-3">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#f0dca8] text-xs font-bold text-[#5f4312] dark:bg-[#3a2a10] dark:text-[#f0c15e]">
+                  {index + 1}
+                </span>
+                <span className="pt-1">{step}</span>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-5 flex flex-wrap gap-3 font-[family-name:var(--font-inter)] text-sm font-bold">
+            <Link href="/" className="text-[#8a641d] hover:text-[#c8922a] dark:text-[#f0c15e]">
+              Start with the feed
+            </Link>
+            <a
+              href="mailto:harry@albis.news?subject=Albis%202-minute%20feedback&body=I%20tried%20Albis%20for%202%20minutes.%0A%0AWould%20I%20return%3F%20Yes%20%2F%20Maybe%20%2F%20No%0AOne%20story%20or%20angle%20I%20noticed%3A%0AOne%20confusing%20or%20untrustworthy%20thing%3A%0A"
+              className="text-[#8a641d] hover:text-[#c8922a] dark:text-[#f0c15e]"
+            >
+              Send the 2-minute result
+            </a>
+          </div>
+        </div>
+
         <div className="rounded-3xl border border-black/[0.08] bg-white p-6 dark:border-white/[0.08] dark:bg-white/[0.035]">
           <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">
             What we most want to learn
