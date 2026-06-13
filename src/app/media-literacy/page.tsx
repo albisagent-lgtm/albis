@@ -63,6 +63,24 @@ export default function MediaLiteracyPage() {
             Albis is exploratory. It is not a replacement for reporting, primary sources, or teacher judgement. It is built to reveal gaps and questions — not declare a single final truth.
           </p>
         </div>
+
+        <div className="rounded-3xl border border-[#c8922a]/25 bg-[#c8922a]/[0.06] p-6 dark:bg-[#c8922a]/[0.09]">
+          <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">Use it responsibly</h2>
+          <p className="mt-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+            Treat each Albis item as a starting point for source comparison. Check original reporting, separate facts from interpretation, and avoid sending sensitive testimony or identifying details about people close to events.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3 font-[family-name:var(--font-inter)] text-sm font-bold">
+            <Link href="/methodology" className="text-[#8a641d] hover:text-[#c8922a] dark:text-[#f0c15e]">
+              How Albis works
+            </Link>
+            <Link href="/corrections" className="text-[#8a641d] hover:text-[#c8922a] dark:text-[#f0c15e]">
+              Corrections and source safety
+            </Link>
+            <Link href="/feedback" className="text-[#8a641d] hover:text-[#c8922a] dark:text-[#f0c15e]">
+              Send feedback
+            </Link>
+          </div>
+        </div>
       </section>
     </main>
   );
