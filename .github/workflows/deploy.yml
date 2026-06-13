@@ -75,7 +75,7 @@ jobs:
               echo "::warning::Missing GitHub secret: $name; skipping Cloudflare runtime sync for this secret"
               return 0
             fi
-            printf '%s' "$value" | npx wrangler secret put "$name"
+            printf '%s' "$value" | npx wrangler versions secret put "$name"
           }
 
           put_secret SUPABASE_SERVICE_ROLE_KEY
