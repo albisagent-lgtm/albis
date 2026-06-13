@@ -91,9 +91,17 @@ export default function CorrectionsPage() {
           <p className="mt-7 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
             Tiny typos may be fixed quietly. Anything that changes meaning, evidence, status, or interpretation belongs here.
           </p>
-          <Link href="/methodology" className="mt-8 inline-flex rounded-full bg-[#0f0f0f] px-5 py-3 text-sm font-semibold text-white dark:bg-[#f0efec] dark:text-[#0f0f0f]">
-            Read how Albis works
-          </Link>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a
+              href="mailto:harry@albis.news?subject=Albis%20correction%20or%20source%20note&body=Story%20or%20page%3A%0A%0AWhat%20looks%20wrong%2C%20missing%2C%20unsafe%2C%20or%20misattributed%3A%0A%0ASource%20or%20context%20we%20should%20check%3A%0A%0AAnything%20sensitive%20we%20should%20avoid%20publishing%3A%0A"
+              className="rounded-full bg-[#0f0f0f] px-5 py-3 text-sm font-semibold text-white dark:bg-[#f0efec] dark:text-[#0f0f0f]"
+            >
+              Send a correction or source note
+            </a>
+            <Link href="/methodology" className="rounded-full border border-black/[0.12] px-5 py-3 text-sm font-semibold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
+              Read how Albis works
+            </Link>
+          </div>
         </div>
       </section>
     </main>
