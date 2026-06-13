@@ -16,6 +16,7 @@ export function Footer() {
             <FooterLink href="/create">Create</FooterLink>
             <FooterLink href="/signals">Signals</FooterLink>
             <FooterLink href="/indexes">Indexes</FooterLink>
+            <FooterLink href="/feedback">Feedback</FooterLink>
             <FooterLink href="/about">About</FooterLink>
           </nav>
         </div>
