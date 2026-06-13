@@ -156,10 +156,10 @@ export default function RegisterClient() {
           ) : (
             <>
               <h1 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold text-[#0f0f0f] dark:text-[#f0efec]">
-                Create your account
+                Become a founding tester
               </h1>
               <p className="mt-1.5 text-sm text-zinc-500 dark:text-zinc-400">
-                Join the public feed, save stories, and add context to conversations.
+                Create your Albis account to track what your feed is missing, save stories, and help shape the platform.
               </p>
 
               <form onSubmit={handleSubmit} className="mt-7 flex flex-col gap-4">
