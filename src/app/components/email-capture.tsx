@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { SubscriberCount } from "./subscriber-count";
-import { trackAlbisEvent } from "./analytics-events";
+import { getLaunchAttributionSource, trackAlbisEvent, trackLaunchAttributionEvent } from "./analytics-events";
 
 interface EmailCaptureProps {
   variant?: "default" | "hero";
@@ -33,7 +33,8 @@ export function EmailCapture({ variant = "default", showSocialProof = false, sho
     e.preventDefault();
     if (!email.trim()) return;
 
-    trackAlbisEvent("albis_email_signup_submit", { source: source || "unknown", page_path: window.location.pathname });
+    const measuredSource = getLaunchAttributionSource(source || "unknown");
+    trackAlbisEvent("albis_email_signup_submit", { source: measuredSource, page_path: window.location.pathname });
     setStatus("loading");
     try {
       const res = await fetch("/api/subscribe", {
@@ -45,13 +46,14 @@ export function EmailCapture({ variant = "default", showSocialProof = false, sho
           _t: mountTimeRef.current,
           ref: typeof window !== "undefined" ? localStorage.getItem("albis_ref") || "" : "",
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-          source: source || "unknown",
+          source: measuredSource,
         }),
       });
       const data = await res.json();
       if (res.ok) {
         setStatus("success");
-        trackAlbisEvent("albis_email_signup_success", { source: source || "unknown", page_path: window.location.pathname });
+        trackAlbisEvent("albis_email_signup_success", { source: measuredSource, page_path: window.location.pathname });
+        trackLaunchAttributionEvent("subscribe_success", { source: measuredSource });
         setMessage(data.message || "You're on the list!");
         setEmail("");
       } else {
