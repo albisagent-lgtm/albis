@@ -62,6 +62,22 @@ export default function CorrectionsPage() {
 
       <section className="border-y border-black/[0.06] bg-white/55 dark:border-white/[0.08] dark:bg-white/[0.03]">
         <div className="mx-auto max-w-3xl px-6 py-14">
+          <h2 className="font-[family-name:var(--font-playfair)] text-3xl font-bold">Local voices, sources, and safety</h2>
+          <p className="mt-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
+            Albis works from public sources and credited context. We aim to respect local reporting, community knowledge, and people close to events without putting vulnerable people at risk.
+          </p>
+          <ul className="mt-6 space-y-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
+            <li>• We do not ask people in risky situations to send dangerous testimony or identifying details.</li>
+            <li>• Lived context should be treated as context, not automatically as verified fact.</li>
+            <li>• Local outlets and community sources should be credited where they shape understanding.</li>
+            <li>• If a source, community, or person asks for a correction, clarification, attribution change, or removal review, we should take it seriously.</li>
+            <li>• Albis should help people compare and understand information — not extract stories from communities.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="border-b border-black/[0.06] bg-white/55 dark:border-white/[0.08] dark:bg-white/[0.03]">
+        <div className="mx-auto max-w-3xl px-6 py-14">
           <h2 className="font-[family-name:var(--font-playfair)] text-3xl font-bold">What each correction should show</h2>
           <ul className="mt-6 space-y-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
             <li>• Date and time of the update.</li>
