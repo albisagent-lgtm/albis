@@ -130,6 +130,23 @@ export function CreateCardForm() {
 
   return (
     <form onSubmit={submit} className="mt-5 space-y-4">
+      <div className="rounded-2xl border border-[#c8922a]/25 bg-[#fff8e7] p-4 dark:border-[#c8922a]/30 dark:bg-[#c8922a]/10">
+        <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-[#9b6b18] dark:text-[#f0c15e]">
+          First card?
+        </p>
+        <p className="mt-1 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          Add one useful source or question, then make your profile easy to recognise so people can follow what you contribute next.
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Link href="/account" className="rounded-full border border-black/[0.12] px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/60 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
+            Check profile
+          </Link>
+          <Link href="/people" className="rounded-full border border-black/[0.12] px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/60 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
+            Follow people
+          </Link>
+        </div>
+      </div>
+
       <div className="grid gap-2 sm:grid-cols-2">
         <button
           type="button"
@@ -292,7 +309,19 @@ export function CreateCardForm() {
           Articles are the deeper layer. Albis will publish the full piece in Read and create a card for the feed so discussion, source links, and discovery still start from the card.
         </p>
       ) : null}
-      {postedUrl ? <p className="text-sm text-emerald-700 dark:text-emerald-300">{postedArticleUrl ? "Article published in Read and card posted to the feed." : "Card posted. It should appear in the feed shortly."}</p> : null}
+      {postedUrl ? (
+        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800 dark:border-emerald-900/50 dark:bg-emerald-950/25 dark:text-emerald-200">
+          <p>{postedArticleUrl ? "Article published in Read and card posted to the feed." : "Card posted. It should appear in the feed shortly."}</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Link href="/account" className="rounded-full bg-emerald-700 px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-emerald-800 dark:bg-emerald-300 dark:text-emerald-950">
+              Complete profile
+            </Link>
+            <Link href="/people" className="rounded-full border border-emerald-700/25 px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold text-emerald-800 hover:border-emerald-700/50 dark:border-emerald-200/25 dark:text-emerald-100">
+              Find people to follow
+            </Link>
+          </div>
+        </div>
+      ) : null}
       {error ? <p className="text-sm text-red-600 dark:text-red-400">{error}</p> : null}
     </form>
   );
