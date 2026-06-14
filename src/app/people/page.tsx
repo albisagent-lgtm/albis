@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FollowButton } from "@/app/components/follow-button";
+import { PeopleFollowStarter } from "@/app/components/people-follow-starter";
 import { UserAvatar } from "@/app/components/user-avatar";
 import { authorProfileHandle, getTimeLeaderboard } from "@/lib/signals";
 
@@ -63,7 +64,9 @@ export default async function PeoplePage({ searchParams }: Props) {
           </form>
         </div>
 
-        <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <PeopleFollowStarter />
+
+        <div id="people-list" className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {filtered.length ? filtered.map((person) => {
             const handle = authorProfileHandle(person.handle) || person.handle;
             return (
