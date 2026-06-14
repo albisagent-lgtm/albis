@@ -58,6 +58,7 @@ export function CreateCardForm() {
   const [error, setError] = useState("");
   const [postedUrl, setPostedUrl] = useState("");
   const [postedArticleUrl, setPostedArticleUrl] = useState("");
+  const [shareStatus, setShareStatus] = useState("");
   const activeSeconds = useRef(0);
 
   useEffect(() => {
@@ -87,6 +88,7 @@ export function CreateCardForm() {
     setError("");
     setPostedUrl("");
     setPostedArticleUrl("");
+    setShareStatus("");
     setLoading(true);
 
     try {
@@ -125,6 +127,31 @@ export function CreateCardForm() {
       setError(err instanceof Error ? err.message : "Could not post card.");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function sharePostedCard() {
+    if (!postedUrl) return;
+    const url = new URL(postedArticleUrl || postedUrl, window.location.origin).toString();
+    const text = postedArticleUrl ? "I published this on Albis." : "I added this card to Albis.";
+    setShareStatus("");
+
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "Albis", text, url });
+        setShareStatus("Share sheet opened.");
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      setShareStatus("Public link copied.");
+    } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") return;
+      try {
+        await navigator.clipboard.writeText(url);
+        setShareStatus("Public link copied.");
+      } catch {
+        setShareStatus("Could not copy yet — use View card to open it.");
+      }
     }
   }
 
@@ -316,10 +343,18 @@ export function CreateCardForm() {
             <Link href="/account" className="rounded-full bg-emerald-700 px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-emerald-800 dark:bg-emerald-300 dark:text-emerald-950">
               Complete profile
             </Link>
+            <button
+              type="button"
+              onClick={sharePostedCard}
+              className="rounded-full border border-emerald-700/25 px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold text-emerald-800 hover:border-emerald-700/50 dark:border-emerald-200/25 dark:text-emerald-100"
+            >
+              Share public link
+            </button>
             <Link href="/people" className="rounded-full border border-emerald-700/25 px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold text-emerald-800 hover:border-emerald-700/50 dark:border-emerald-200/25 dark:text-emerald-100">
               Find people to follow
             </Link>
           </div>
+          {shareStatus ? <p className="mt-2 text-xs font-semibold text-emerald-700 dark:text-emerald-200">{shareStatus}</p> : null}
         </div>
       ) : null}
       {error ? <p className="text-sm text-red-600 dark:text-red-400">{error}</p> : null}
