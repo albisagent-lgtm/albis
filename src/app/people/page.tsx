@@ -98,8 +98,21 @@ export default async function PeoplePage({ searchParams }: Props) {
               </article>
             );
           }) : (
-            <div className="rounded-3xl border border-black/[0.08] bg-white p-8 text-sm text-zinc-500 dark:border-white/[0.08] dark:bg-white/[0.035] dark:text-zinc-400 md:col-span-2 lg:col-span-3">
-              No public profiles matched that search yet.
+            <div className="rounded-3xl border border-black/[0.08] bg-white p-8 dark:border-white/[0.08] dark:bg-white/[0.035] md:col-span-2 lg:col-span-3">
+              <p className="font-[family-name:var(--font-playfair)] text-2xl font-bold text-[#111] dark:text-[#f4f1ea]">
+                {q ? "No public profiles matched that search yet." : "No public profiles are ready yet."}
+              </p>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
+                Want to be discoverable here? Choose a public handle, then publish a useful card or context note. Albis only lists public profile details and public contributions — never email or private account data.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <Link href="/account" className="rounded-full bg-[#111] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#c8922a] hover:text-black dark:bg-[#f4f1ea] dark:text-black">
+                  Choose public handle
+                </Link>
+                <Link href="/create" className="rounded-full border border-black/[0.10] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-600 hover:border-[#c8922a]/60 hover:text-[#b58320] dark:border-white/[0.10] dark:text-zinc-300">
+                  Create first card
+                </Link>
+              </div>
             </div>
           )}
         </div>
