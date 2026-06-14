@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FollowButton } from "@/app/components/follow-button";
 import { UserAvatar } from "@/app/components/user-avatar";
 import { authorProfileHandle, getTimeLeaderboard } from "@/lib/signals";
 
@@ -66,28 +67,32 @@ export default async function PeoplePage({ searchParams }: Props) {
           {filtered.length ? filtered.map((person) => {
             const handle = authorProfileHandle(person.handle) || person.handle;
             return (
-              <Link
+              <article
                 key={person.handle}
-                href={`/u/${encodeURIComponent(handle)}`}
                 className="group rounded-3xl border border-black/[0.08] bg-white p-5 shadow-sm shadow-black/[0.02] transition hover:border-[#c8922a]/45 hover:bg-[#fbfaf7] dark:border-white/[0.08] dark:bg-white/[0.035] dark:hover:border-[#c8922a]/45"
               >
-                <div className="flex items-start gap-3">
-                  <UserAvatar name={person.display_name} imageUrl={person.avatar_url} size="md" />
-                  <div className="min-w-0 flex-1">
-                    <h2 className="truncate font-[family-name:var(--font-playfair)] text-2xl font-bold group-hover:text-[#b58320]">{person.display_name}</h2>
-                    <p className="mt-0.5 truncate font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-zinc-400">@{handle}</p>
+                <Link href={`/u/${encodeURIComponent(handle)}`} className="block">
+                  <div className="flex items-start gap-3">
+                    <UserAvatar name={person.display_name} imageUrl={person.avatar_url} size="md" />
+                    <div className="min-w-0 flex-1">
+                      <h2 className="truncate font-[family-name:var(--font-playfair)] text-2xl font-bold group-hover:text-[#b58320]">{person.display_name}</h2>
+                      <p className="mt-0.5 truncate font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-zinc-400">@{handle}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-5 grid grid-cols-3 gap-2 text-center">
-                  <div className="rounded-2xl bg-black/[0.035] p-3 dark:bg-white/[0.05]"><p className="text-lg font-bold">{person.cards_count}</p><p className="text-[10px] uppercase tracking-[0.12em] text-zinc-400">Cards</p></div>
-                  <div className="rounded-2xl bg-black/[0.035] p-3 dark:bg-white/[0.05]"><p className="text-lg font-bold">{person.context_count}</p><p className="text-[10px] uppercase tracking-[0.12em] text-zinc-400">Context</p></div>
-                  <div className="rounded-2xl bg-black/[0.035] p-3 dark:bg-white/[0.05]"><p className="text-lg font-bold">{person.opened_count}</p><p className="text-[10px] uppercase tracking-[0.12em] text-zinc-400">Readers</p></div>
-                </div>
+                  <div className="mt-5 grid grid-cols-3 gap-2 text-center">
+                    <div className="rounded-2xl bg-black/[0.035] p-3 dark:bg-white/[0.05]"><p className="text-lg font-bold">{person.cards_count}</p><p className="text-[10px] uppercase tracking-[0.12em] text-zinc-400">Cards</p></div>
+                    <div className="rounded-2xl bg-black/[0.035] p-3 dark:bg-white/[0.05]"><p className="text-lg font-bold">{person.context_count}</p><p className="text-[10px] uppercase tracking-[0.12em] text-zinc-400">Context</p></div>
+                    <div className="rounded-2xl bg-black/[0.035] p-3 dark:bg-white/[0.05]"><p className="text-lg font-bold">{person.opened_count}</p><p className="text-[10px] uppercase tracking-[0.12em] text-zinc-400">Readers</p></div>
+                  </div>
+                </Link>
                 <div className="mt-4 flex items-center justify-between gap-3">
                   <span className="font-[family-name:var(--font-playfair)] text-3xl font-bold text-[#b58320]">{person.time_label}</span>
-                  <span className="rounded-full border border-black/[0.10] px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:border-white/[0.10] dark:text-zinc-300">View profile →</span>
+                  <div className="flex items-center gap-2">
+                    <FollowButton type="person" label={handle} className="rounded-full bg-[#111] px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black" />
+                    <Link href={`/u/${encodeURIComponent(handle)}`} className="rounded-full border border-black/[0.10] px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:border-white/[0.10] dark:text-zinc-300">View →</Link>
+                  </div>
                 </div>
-              </Link>
+              </article>
             );
           }) : (
             <div className="rounded-3xl border border-black/[0.08] bg-white p-8 text-sm text-zinc-500 dark:border-white/[0.08] dark:bg-white/[0.035] dark:text-zinc-400 md:col-span-2 lg:col-span-3">
