@@ -24,6 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/widgets/perception-gap/embed`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.6 },
     { url: `${base}/methodology`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.6 },
     { url: `${base}/media-literacy`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
+    { url: `${base}/people`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.7 },
     { url: `${base}/feedback`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.6 },
     { url: `${base}/register`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.6 },
     { url: `${base}/corrections`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.5 },

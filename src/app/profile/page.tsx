@@ -14,6 +14,12 @@ const actions = [
     cta: "View scorecards",
   },
   {
+    title: "Find people",
+    text: "Discover public profiles from people adding cards, sources, and useful context.",
+    href: "/people",
+    cta: "Explore people",
+  },
+  {
     title: "Create a card",
     text: "Share a useful article, source, question, correction, or piece of local context.",
     href: "/create",
@@ -59,6 +65,12 @@ export default function ProfilePage() {
               className="rounded-full border border-black/[0.12] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-zinc-800 hover:border-[#c8922a]/60 hover:text-[#b58320] dark:border-white/[0.14] dark:text-zinc-200"
             >
               Edit profile
+            </Link>
+            <Link
+              href="/people"
+              className="rounded-full border border-black/[0.12] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-zinc-800 hover:border-[#c8922a]/60 hover:text-[#b58320] dark:border-white/[0.14] dark:text-zinc-200"
+            >
+              Find people
             </Link>
             <Link
               href="/create"

@@ -139,6 +139,7 @@ export function NavAuth() {
 const BASE_DESKTOP_NAV = [
   { href: "/", label: "Feed" },
   { href: "/read", label: "Read" },
+  { href: "/people", label: "People" },
   { href: "/create", label: "Create" },
   { href: "/feedback", label: "Feedback" },
   { href: "/about", label: "About" },
