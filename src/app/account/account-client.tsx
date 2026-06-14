@@ -218,6 +218,14 @@ export default function AccountClient() {
         day: "numeric",
       })
     : null;
+  const publicHandle = username.trim().replace(/^@+/, "").toLowerCase();
+  const publicProfileHref = publicHandle ? `/u/${encodeURIComponent(publicHandle)}` : null;
+  const profileSteps = [
+    { label: "Add a public handle", done: Boolean(publicHandle) },
+    { label: "Add a recognisable name", done: Boolean(name.trim()) },
+    { label: "Add a short public bio", done: Boolean(bio.trim()) },
+  ];
+  const completedProfileSteps = profileSteps.filter((step) => step.done).length;
 
   const cardClass = "rounded-2xl border border-black/[0.07] bg-white p-7 dark:border-white/[0.07] dark:bg-white/[0.03]";
   const sectionHeader = "text-sm font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500";
@@ -371,6 +379,45 @@ export default function AccountClient() {
               >
                 {nameSaving ? "Saving…" : "Save changes"}
               </button>
+            </div>
+          </div>
+
+          {/* Public profile cue */}
+          <div className={cardClass}>
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h2 className={sectionHeader}>Public profile</h2>
+                <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
+                  Help people recognise, follow, and return to your Albis posts. Only your public handle, name, bio, picture, and contributions appear here.
+                </p>
+              </div>
+              <span className="shrink-0 rounded-full bg-[#f8f7f4] px-3 py-1 text-xs font-semibold text-zinc-500 dark:bg-white/[0.06] dark:text-zinc-300">
+                {completedProfileSteps}/3 ready
+              </span>
+            </div>
+            <div className="mt-5 space-y-2">
+              {profileSteps.map((step) => (
+                <div key={step.label} className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-300">
+                  <span className={step.done ? "text-emerald-600 dark:text-emerald-400" : "text-zinc-300 dark:text-zinc-600"}>
+                    {step.done ? "✓" : "○"}
+                  </span>
+                  <span>{step.label}</span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-5 flex flex-wrap gap-3">
+              {publicProfileHref ? (
+                <Link href={publicProfileHref} className={btnPrimary}>
+                  View public profile
+                </Link>
+              ) : (
+                <span className="inline-flex h-10 items-center justify-center rounded-full bg-zinc-100 px-5 text-sm font-medium text-zinc-500 dark:bg-white/[0.06] dark:text-zinc-300">
+                  Choose a handle to unlock your profile link
+                </span>
+              )}
+              <Link href="/people" className="inline-flex h-10 items-center justify-center rounded-full border border-black/[0.10] px-5 text-sm font-medium text-[#111] hover:border-[#c8922a]/50 dark:border-white/[0.10] dark:text-[#f0efec]">
+                Find people to follow
+              </Link>
             </div>
           </div>
 
