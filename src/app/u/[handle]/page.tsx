@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FollowButton } from "@/app/components/follow-button";
+import { ProfileShareButton } from "@/app/components/profile-share-button";
 import { UserAvatar } from "@/app/components/user-avatar";
 import {
   buildProfileTabData,
@@ -437,13 +438,20 @@ export default async function PublicProfilePage({ params, searchParams }: Props)
                 </p>
               </div>
             </div>
-            {isOwnProfile ? (
-              <Link href="/account" className="rounded-full bg-[#c8922a] px-5 py-3 text-center font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]">
-                Edit profile
-              </Link>
-            ) : (
-              <FollowButton type="person" label={name} className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]" />
-            )}
+            <div className="flex shrink-0 flex-wrap gap-2">
+              {isOwnProfile ? (
+                <Link href="/account" className="rounded-full bg-[#c8922a] px-5 py-3 text-center font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]">
+                  Edit profile
+                </Link>
+              ) : (
+                <FollowButton type="person" label={name} className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]" />
+              )}
+              <ProfileShareButton
+                handle={clean}
+                displayName={profile.displayName}
+                className="rounded-full border border-black/[0.12] px-5 py-3 text-center font-[family-name:var(--font-inter)] text-sm font-bold text-zinc-700 hover:border-[#c8922a]/60 hover:text-[#b58320] dark:border-white/[0.14] dark:text-zinc-200"
+              />
+            </div>
           </div>
           <div className="mt-5 flex flex-wrap gap-2 font-[family-name:var(--font-inter)] text-xs font-semibold text-zinc-500 dark:text-zinc-400">
             <span className="rounded-full border border-black/[0.10] px-3 py-1 dark:border-white/[0.10]">{stats.cards_count} post{stats.cards_count === 1 ? "" : "s"}</span>
