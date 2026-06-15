@@ -6,25 +6,35 @@ import { trackLaunchAttributionEvent } from "@/app/components/analytics-events";
 
 const CATEGORIES = [
   { value: "update", label: "Update" },
-  { value: "life-systems", label: "Life Systems" },
+  { value: "question", label: "Question" },
   { value: "world", label: "World" },
-  { value: "money", label: "Money" },
+  { value: "media", label: "Media" },
+  { value: "life-systems", label: "Life Systems" },
   { value: "tech", label: "Tech" },
   { value: "climate", label: "Climate" },
-  { value: "perspectives", label: "Perspectives" },
-  { value: "science", label: "Science" },
-  { value: "health", label: "Health" },
-  { value: "trade", label: "Trade" },
-  { value: "media", label: "Media" },
-  { value: "culture", label: "Culture" },
   { value: "education", label: "Education" },
-  { value: "governance", label: "Governance" },
-  { value: "research", label: "Research" },
-  { value: "question", label: "Question" },
-  { value: "event", label: "Event" },
-  { value: "article", label: "Article" },
-  { value: "weather", label: "Weather" },
   { value: "other", label: "+ Other" },
+];
+
+const QUICK_STARTS = [
+  {
+    title: "A story I missed",
+    context: "I had not seen this in my usual feed. The useful question is: who is covering it, and who is not?",
+    category: "media",
+    tags: "coverage gap, media literacy",
+  },
+  {
+    title: "A useful source",
+    context: "This source adds context worth comparing with mainstream coverage.",
+    category: "update",
+    tags: "source, context",
+  },
+  {
+    title: "A question for others",
+    context: "What should we check before forming a strong opinion on this?",
+    category: "question",
+    tags: "question, context",
+  },
 ];
 
 type CreateMode = "manual" | "ai-review" | "article";
@@ -60,6 +70,7 @@ export function CreateCardForm() {
   const [postedUrl, setPostedUrl] = useState("");
   const [postedArticleUrl, setPostedArticleUrl] = useState("");
   const [shareStatus, setShareStatus] = useState("");
+  const [showAdvancedModes, setShowAdvancedModes] = useState(false);
   const activeSeconds = useRef(0);
   const createStartTracked = useRef(false);
 
@@ -168,50 +179,64 @@ export function CreateCardForm() {
     }
   }
 
+  function applyQuickStart(item: typeof QUICK_STARTS[number]) {
+    setMode("manual");
+    setTitle(item.title);
+    setContext(item.context);
+    setCategory(item.category);
+    setTagInput(item.tags);
+  }
+
   return (
     <form onSubmit={submit} className="mt-5 space-y-4">
       <div className="rounded-2xl border border-[#c8922a]/25 bg-[#fff8e7] p-4 dark:border-[#c8922a]/30 dark:bg-[#c8922a]/10">
         <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-[#9b6b18] dark:text-[#f0c15e]">
-          First card?
+          Make one card
         </p>
         <p className="mt-1 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-          Add one useful source or question, then make your profile easy to recognise so people can follow what you contribute next.
+          Paste a link, ask a question, or add one note. That is enough to start.
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
-          <Link href="/account" className="rounded-full border border-black/[0.12] px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/60 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
-            Check profile
-          </Link>
-          <Link href="/people" className="rounded-full border border-black/[0.12] px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/60 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
-            Follow people
-          </Link>
+          {QUICK_STARTS.map((item) => (
+            <button
+              key={item.title}
+              type="button"
+              onClick={() => applyQuickStart(item)}
+              className="rounded-full border border-black/[0.12] px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/60 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"
+            >
+              {item.title}
+            </button>
+          ))}
         </div>
       </div>
 
-      <div className="grid gap-2 sm:grid-cols-2">
+      <div className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-3 dark:border-white/[0.08] dark:bg-white/[0.025]">
         <button
           type="button"
-          onClick={() => setMode("manual")}
-          className={`rounded-2xl border p-3 text-left transition ${mode === "manual" ? "border-[#c8922a]/60 bg-[#c8922a]/10" : "border-black/[0.08] hover:border-[#c8922a]/35 dark:border-white/[0.08]"}`}
+          onClick={() => setShowAdvancedModes((value) => !value)}
+          className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]"
         >
-          <span className="block font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">Write it myself</span>
-          <span className="mt-1 block text-sm text-zinc-500 dark:text-zinc-400">Post a story card, source, direct media link, note, or update in your own words.</span>
+          {showAdvancedModes ? "Hide advanced options" : "Need AI review or a full article?"}
         </button>
-        <button
-          type="button"
-          onClick={() => setMode("ai-review")}
-          className={`rounded-2xl border p-3 text-left transition ${mode === "ai-review" ? "border-[#c8922a]/60 bg-[#c8922a]/10" : "border-black/[0.08] hover:border-[#c8922a]/35 dark:border-white/[0.08]"}`}
-        >
-          <span className="block font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">AI review my links</span>
-          <span className="mt-1 block text-sm text-zinc-500 dark:text-zinc-400">Submit one or more links for an Albis review/context card.</span>
-        </button>
-        <button
-          type="button"
-          onClick={() => setMode("article")}
-          className={`rounded-2xl border p-3 text-left transition sm:col-span-2 ${mode === "article" ? "border-[#c8922a]/60 bg-[#c8922a]/10" : "border-black/[0.08] hover:border-[#c8922a]/35 dark:border-white/[0.08]"}`}
-        >
-          <span className="block font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">Full article + card</span>
-          <span className="mt-1 block text-sm text-zinc-500 dark:text-zinc-400">Publish a deeper article and automatically create a feed card that links into it.</span>
-        </button>
+        {showAdvancedModes ? (
+          <div className="mt-3 grid gap-2 sm:grid-cols-3">
+            {[
+              ["manual", "Simple card", "Post a link, note, or question."],
+              ["ai-review", "AI review links", "Let Albis review links into a card."],
+              ["article", "Full article", "Publish a deeper piece plus a card."],
+            ].map(([value, title, text]) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setMode(value as CreateMode)}
+                className={`rounded-2xl border p-3 text-left transition ${mode === value ? "border-[#c8922a]/60 bg-[#c8922a]/10" : "border-black/[0.08] hover:border-[#c8922a]/35 dark:border-white/[0.08]"}`}
+              >
+                <span className="block font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">{title}</span>
+                <span className="mt-1 block text-sm text-zinc-500 dark:text-zinc-400">{text}</span>
+              </button>
+            ))}
+          </div>
+        ) : null}
       </div>
 
       <label className="block">
@@ -222,7 +247,7 @@ export function CreateCardForm() {
           maxLength={140}
           required={mode === "manual" || mode === "article"}
           className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
-          placeholder={mode === "ai-review" ? "Optional title for the review card" : mode === "article" ? "Article headline" : "Title"}
+          placeholder={mode === "ai-review" ? "Optional title for the review card" : mode === "article" ? "Article headline" : "What did you find?"}
         />
       </label>
 
@@ -235,7 +260,7 @@ export function CreateCardForm() {
           onChange={(e) => setSourceLinks(e.target.value)}
           maxLength={2200}
           className="min-h-24 w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
-          placeholder="Paste one source, image, video, or YouTube link per line"
+          placeholder="Paste a link, source, image, video, or YouTube URL"
         />
         {links.length > 0 ? <p className="mt-1 text-xs text-zinc-400">{links.length} link{links.length === 1 ? "" : "s"} attached.</p> : null}
       </label>
@@ -244,7 +269,7 @@ export function CreateCardForm() {
         <div className="mb-2 flex flex-wrap items-end justify-between gap-2">
           <div>
             <p className="font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">Section</p>
-            <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">Choose the closest area, or add your own. Albis will still classify it for discovery.</p>
+            <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">Choose the closest area.</p>
           </div>
         </div>
         <div className="flex gap-2 overflow-x-auto pb-1">
@@ -274,7 +299,7 @@ export function CreateCardForm() {
       </div>
 
       <label className="block">
-        <span className="mb-1 block font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">Story signals</span>
+        <span className="mb-1 block font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">Tags</span>
         <input
           value={tagInput}
           onChange={(e) => setTagInput(e.target.value)}
@@ -292,7 +317,7 @@ export function CreateCardForm() {
           onChange={(e) => setContext(e.target.value)}
           maxLength={1400}
           className="min-h-32 w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
-          placeholder={mode === "ai-review" ? "Optional: what should Albis look for? What's your angle or question?" : mode === "article" ? "Short card summary / intro for the feed" : "Write your card, note, article summary, or context"}
+          placeholder={mode === "ai-review" ? "Optional: what should Albis look for?" : mode === "article" ? "Short summary for the feed" : "Why does this matter? What is missing?"}
         />
       </label>
 
@@ -325,7 +350,7 @@ export function CreateCardForm() {
           disabled={loading || !canSubmit}
           className="rounded-full bg-[#111] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#b58320] disabled:cursor-not-allowed disabled:opacity-45 dark:bg-white dark:text-black"
         >
-          {loading ? "Posting…" : mode === "ai-review" ? "Submit for AI review" : mode === "article" ? "Publish article + card" : "Post card"}
+          {loading ? "Posting…" : mode === "ai-review" ? "Submit for review" : mode === "article" ? "Publish article" : "Post my first card"}
         </button>
         {postedArticleUrl ? (
           <Link href={postedArticleUrl} className="font-[family-name:var(--font-inter)] text-sm font-bold text-[#b58320] hover:underline">

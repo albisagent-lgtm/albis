@@ -7,9 +7,9 @@ export const metadata: Metadata = {
 };
 
 const options = [
-  ["Manual card", "Post an update, local note, question, source, observation, or short community card."],
-  ["AI-reviewed links", "Submit one or more links and let Albis AI turn them into a clearer review card with uncertainty visible."],
-  ["Full article + card", "Publish a deeper report or essay; Albis automatically creates the feed card wrapper."],
+  ["1. Paste a link or ask a question", "Start with one useful thing you found."],
+  ["2. Add a short note", "Say why it matters or what is missing."],
+  ["3. Post your card", "It can appear in the feed and on your public profile."],
 ];
 
 export default function CreatePage() {
@@ -19,7 +19,7 @@ export default function CreatePage() {
         <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-14">
           <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.18em] text-[#b58320]">Create</p>
           <h1 className="mt-3 max-w-3xl font-[family-name:var(--font-playfair)] text-4xl font-bold leading-[0.98] tracking-tight md:text-6xl lg:text-7xl">
-            Add signal to the cycle.
+            Share one useful thing.
           </h1>
         </div>
       </section>
@@ -37,10 +37,10 @@ export default function CreatePage() {
 
       <section className="mx-auto max-w-4xl px-4 pb-16 md:px-6">
         <div className="rounded-3xl border border-black/[0.08] bg-white p-5 shadow-sm dark:border-white/[0.08] dark:bg-white/[0.035] md:p-6">
-          <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.18em] text-[#b58320]">Publish</p>
-          <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-3xl font-bold">What do you want to create?</h2>
+          <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.18em] text-[#b58320]">Create a card</p>
+          <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-3xl font-bold">Post your first card.</h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
-            Start simple. You can publish a short human card, ask Albis AI to review links, or write a full article that automatically appears in the card feed.
+            A card can be a link, question, local note, or short context people should see.
           </p>
           <CreateCardForm />
         </div>
