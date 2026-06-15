@@ -5,6 +5,9 @@ import { createAdminClient } from "@/lib/supabase/admin";
 const allowedEvents = new Set([
   "page_view_attributed",
   "feedback_click",
+  "account_view",
+  "create_start",
+  "create_success",
   "register_start",
   "register_success",
   "subscribe_success",

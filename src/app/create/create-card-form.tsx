@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { trackLaunchAttributionEvent } from "@/app/components/analytics-events";
 
 const CATEGORIES = [
   { value: "update", label: "Update" },
@@ -60,6 +61,7 @@ export function CreateCardForm() {
   const [postedArticleUrl, setPostedArticleUrl] = useState("");
   const [shareStatus, setShareStatus] = useState("");
   const activeSeconds = useRef(0);
+  const createStartTracked = useRef(false);
 
   useEffect(() => {
     let last = Date.now();
@@ -90,6 +92,11 @@ export function CreateCardForm() {
     setPostedArticleUrl("");
     setShareStatus("");
     setLoading(true);
+
+    if (!createStartTracked.current) {
+      createStartTracked.current = true;
+      trackLaunchAttributionEvent("create_start", { mode, link_count: links.length, tag_count: tags.length });
+    }
 
     try {
       const res = await fetch("/api/feed/cards", {
@@ -122,6 +129,12 @@ export function CreateCardForm() {
       setCustomSection("");
       setTagInput("");
       setMode("manual");
+      trackLaunchAttributionEvent("create_success", {
+        mode,
+        link_count: links.length,
+        tag_count: tags.length,
+        active_seconds: activeSeconds.current,
+      });
       activeSeconds.current = 0;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not post card.");

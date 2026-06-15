@@ -21,6 +21,7 @@ type LaunchAttribution = {
 const ATTRIBUTION_STORAGE_KEY = "albis_launch_attribution";
 const ATTRIBUTION_SENT_KEY = "albis_launch_attribution_page_view_sent";
 const ATTRIBUTION_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+const ATTRIBUTION_LINK_PATHS = ["/register", "/account", "/create", "/feedback"];
 
 function sendEvent(name: string, params: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
@@ -49,6 +50,48 @@ function readStoredAttribution(): LaunchAttribution | null {
     return parsed;
   } catch {
     return null;
+  }
+}
+
+function buildAttributionSearch(attribution: LaunchAttribution | null) {
+  if (!attribution) return "";
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries({
+    utm_source: attribution.utm_source,
+    utm_medium: attribution.utm_medium,
+    utm_campaign: attribution.utm_campaign,
+    utm_content: attribution.utm_content,
+    ref: attribution.ref,
+  })) {
+    if (value) params.set(key, value);
+  }
+  const query = params.toString();
+  return query ? `?${query}` : "";
+}
+
+function shouldPreserveAttribution(url: URL) {
+  return url.origin === window.location.origin && ATTRIBUTION_LINK_PATHS.some((path) => url.pathname === path || url.pathname.startsWith(`${path}/`));
+}
+
+function appendAttributionToUrl(rawHref: string, attribution: LaunchAttribution | null) {
+  if (!rawHref || !attribution) return rawHref;
+  try {
+    const url = new URL(rawHref, window.location.origin);
+    if (!shouldPreserveAttribution(url)) return rawHref;
+
+    for (const [key, value] of Object.entries({
+      utm_source: attribution.utm_source,
+      utm_medium: attribution.utm_medium,
+      utm_campaign: attribution.utm_campaign,
+      utm_content: attribution.utm_content,
+      ref: attribution.ref,
+    })) {
+      if (value && !url.searchParams.has(key)) url.searchParams.set(key, value);
+    }
+
+    return url.origin === window.location.origin ? `${url.pathname}${url.search}${url.hash}` : url.toString();
+  } catch {
+    return rawHref;
   }
 }
 
@@ -136,6 +179,12 @@ export function AnalyticsEvents() {
       if (!anchor) return;
       const href = anchor.getAttribute("href") || "";
       if (!href || href.startsWith("#")) return;
+      if (attribution) {
+        const attributedHref = appendAttributionToUrl(href, attribution);
+        if (attributedHref !== href) {
+          anchor.setAttribute("href", attributedHref);
+        }
+      }
       if (attribution && (href.includes("/feedback") || href.includes("mailto:"))) {
         sendAttributionEvent("feedback_click", attribution, { href: href.slice(0, 160) });
       }
@@ -160,10 +209,10 @@ export function AnalyticsEvents() {
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    document.addEventListener("click", onClick);
+    document.addEventListener("click", onClick, { capture: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
-      document.removeEventListener("click", onClick);
+      document.removeEventListener("click", onClick, { capture: true });
     };
   }, []);
 
@@ -173,6 +222,11 @@ export function AnalyticsEvents() {
 function getLaunchAttribution() {
   if (typeof window === "undefined") return null;
   return readStoredAttribution();
+}
+
+function getLaunchAttributionSearch() {
+  if (typeof window === "undefined") return "";
+  return buildAttributionSearch(readStoredAttribution());
 }
 
 function getLaunchAttributionSource(fallback = "unknown") {
@@ -189,4 +243,4 @@ function trackLaunchAttributionEvent(eventName: string, metadata: Record<string,
   sendAttributionEvent(eventName, attribution, metadata);
 }
 
-export { sendEvent as trackAlbisEvent, getLaunchAttribution, getLaunchAttributionSource, trackLaunchAttributionEvent };
+export { sendEvent as trackAlbisEvent, captureLaunchAttribution, getLaunchAttribution, getLaunchAttributionSearch, getLaunchAttributionSource, trackLaunchAttributionEvent };

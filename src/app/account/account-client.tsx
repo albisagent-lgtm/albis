@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { UserAvatar } from "@/app/components/user-avatar";
+import { trackLaunchAttributionEvent } from "@/app/components/analytics-events";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 
@@ -66,6 +67,10 @@ export default function AccountClient() {
       setBio(String(user.user_metadata?.bio || ""));
       setAvatarUrl(String(user.user_metadata?.avatar_url || ""));
       setLoading(false);
+      trackLaunchAttributionEvent("account_view", {
+        has_username: Boolean(user.user_metadata?.username),
+        has_bio: Boolean(user.user_metadata?.bio),
+      });
     });
   }, [router]);
 

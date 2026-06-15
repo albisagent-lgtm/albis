@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { captureLaunchAttribution, getLaunchAttribution, getLaunchAttributionSearch, trackLaunchAttributionEvent } from "@/app/components/analytics-events";
 
 export default function RegisterClient() {
   const router = useRouter();
@@ -11,6 +12,7 @@ export default function RegisterClient() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
+  const [hasLaunchAttribution, setHasLaunchAttribution] = useState(false);
 
   // Redirect if already logged in
   useEffect(() => {
@@ -19,6 +21,8 @@ export default function RegisterClient() {
       if (user) {
         router.push("/account");
       } else {
+        const attribution = captureLaunchAttribution();
+        setHasLaunchAttribution(Boolean(attribution?.utm_source || attribution?.utm_campaign || attribution?.utm_content || attribution?.ref));
         setCheckingAuth(false);
       }
     });
@@ -62,12 +66,23 @@ export default function RegisterClient() {
 
     try {
       const supabase = createClient();
+      const attribution = captureLaunchAttribution() || getLaunchAttribution();
+      const attributionSearch = getLaunchAttributionSearch();
+      const nextPath = `/account${attributionSearch}`;
       const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          data: { name, username: username || null },
-          emailRedirectTo: `${window.location.origin}/auth/callback?next=/account`,
+          data: {
+            name,
+            username: username || null,
+            launch_utm_source: attribution?.utm_source || null,
+            launch_utm_medium: attribution?.utm_medium || null,
+            launch_utm_campaign: attribution?.utm_campaign || null,
+            launch_utm_content: attribution?.utm_content || null,
+            launch_ref: attribution?.ref || null,
+          },
+          emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextPath)}`,
         },
       });
 
@@ -94,6 +109,11 @@ export default function RegisterClient() {
           .update({ name })
           .eq("id", data.user.id);
       }
+
+      trackLaunchAttributionEvent("register_success", {
+        has_username: Boolean(username),
+        has_launch_context: Boolean(attribution),
+      });
 
       setSuccess(true);
     } catch {
@@ -164,6 +184,11 @@ export default function RegisterClient() {
               <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
                 Free. No spam. Early tester updates only.
               </p>
+              {hasLaunchAttribution && (
+                <p className="mt-3 rounded-xl border border-[#c8922a]/20 bg-[#c8922a]/10 px-3 py-2 text-xs leading-relaxed text-zinc-600 dark:text-zinc-300">
+                  We&apos;ll remember how you found Albis for launch learning only — never on your public profile.
+                </p>
+              )}
 
               <form onSubmit={handleSubmit} className="mt-7 flex flex-col gap-4">
                 {/* Name */}
