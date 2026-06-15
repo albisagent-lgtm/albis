@@ -7,9 +7,9 @@ export const metadata = {
 };
 
 const trySteps = [
-  "Open the feed and scan the first few stories.",
-  "Pick one story your usual news feed did not show you.",
-  "Send a yes / maybe / no on whether you would return, plus one confusing thing.",
+  "Open the feed.",
+  "Pick one story you missed.",
+  "Tell us: yes, maybe, or no — would you come back?",
 ];
 
 const prompts = [
@@ -30,7 +30,7 @@ export default function FeedbackPage() {
           Help make Albis clearer.
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
-          Albis is early. We are looking for blunt, kind feedback from people who care about news, media literacy, libraries, public-interest technology, and clearer information.
+          Albis is early. Tell us what was useful, confusing, or missing.
         </p>
         <div className="mt-7 flex flex-wrap gap-3">
           <a
@@ -65,7 +65,7 @@ export default function FeedbackPage() {
           </ol>
           <div className="mt-5 flex flex-wrap gap-3 font-[family-name:var(--font-inter)] text-sm font-bold">
             <Link href="/" className="text-[#8a641d] hover:text-[#c8922a] dark:text-[#f0c15e]">
-              Start with the feed
+Open the feed
             </Link>
             <a
               href="mailto:harry@albis.news?subject=Albis%202-minute%20feedback&body=I%20tried%20Albis%20for%202%20minutes.%0A%0AWould%20I%20return%3F%20Yes%20%2F%20Maybe%20%2F%20No%0AOne%20story%20or%20angle%20I%20noticed%3A%0AOne%20confusing%20or%20untrustworthy%20thing%3A%0A"
@@ -78,7 +78,7 @@ export default function FeedbackPage() {
 
         <div className="rounded-3xl border border-black/[0.08] bg-white p-6 dark:border-white/[0.08] dark:bg-white/[0.035]">
           <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">
-            What we most want to learn
+            What we need to learn
           </h2>
           <ul className="mt-5 space-y-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
             {prompts.map((prompt) => (
@@ -92,10 +92,10 @@ export default function FeedbackPage() {
 
         <div className="rounded-3xl border border-black/[0.08] bg-white p-6 dark:border-white/[0.08] dark:bg-white/[0.035]">
           <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">
-            Safety and trust notes
+            Safety note
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-            Please do not send private, dangerous, or identifying information about people on the ground. Albis is for noticing public coverage gaps and questions; it is not a place to submit sensitive testimony or unverified claims.
+            Please do not send private or identifying information. Albis is for public coverage gaps and questions, not sensitive testimony.
           </p>
         </div>
 

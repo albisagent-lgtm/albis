@@ -6,11 +6,11 @@ export const metadata = {
 };
 
 const steps = [
-  "Open today’s Albis feed.",
-  "Pick one story you had not seen in your usual news or social feed.",
-  "Ask where it appears prominent, absent, or framed differently.",
-  "Compare it with the sources you normally read.",
-  "Discuss what algorithms, geography, language, or habits might hide.",
+  "Open today’s feed.",
+  "Pick one story you missed.",
+  "Ask where it appears, disappears, or changes tone.",
+  "Compare it with your usual sources.",
+  "Discuss what your feed may hide.",
 ];
 
 export default function MediaLiteracyPage() {
@@ -22,21 +22,21 @@ export default function MediaLiteracyPage() {
           Ask what your feed missed.
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
-          Albis is a free early tool for exploring global stories, context, and framing gaps that a normal news feed may not show.
+          A free exercise for spotting stories, sources, and angles your usual feed may miss.
         </p>
         <div className="mt-7 flex flex-wrap gap-3">
           <Link href="/" className="rounded-full bg-[#111] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
             Open today’s feed
           </Link>
           <Link href="/register" className="rounded-full border border-black/[0.12] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
-            Become a founding tester
+Join as tester
           </Link>
         </div>
       </section>
 
       <section className="mx-auto grid max-w-3xl gap-5 px-4 pb-16 md:px-6">
         <div className="rounded-3xl border border-black/[0.08] bg-white p-6 dark:border-white/[0.08] dark:bg-white/[0.035]">
-          <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">10-minute classroom or discussion exercise</h2>
+          <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">5-minute exercise</h2>
           <ol className="mt-5 space-y-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
             {steps.map((step, index) => (
               <li key={step} className="flex gap-3">
@@ -60,14 +60,14 @@ export default function MediaLiteracyPage() {
         <div className="rounded-3xl border border-black/[0.08] bg-white p-6 dark:border-white/[0.08] dark:bg-white/[0.035]">
           <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">Important caveat</h2>
           <p className="mt-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-            Albis is exploratory. It is not a replacement for reporting, primary sources, or teacher judgement. It is built to reveal gaps and questions — not declare a single final truth.
+            Albis is a starting point, not a final answer. Check original reporting and primary sources.
           </p>
         </div>
 
         <div className="rounded-3xl border border-[#c8922a]/25 bg-[#c8922a]/[0.06] p-6 dark:bg-[#c8922a]/[0.09]">
           <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold">Use it responsibly</h2>
           <p className="mt-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-            Treat each Albis item as a starting point for source comparison. Check original reporting, separate facts from interpretation, and avoid sending sensitive testimony or identifying details about people close to events.
+            Use Albis to compare public coverage. Do not submit sensitive testimony or identifying details.
           </p>
           <div className="mt-5 flex flex-wrap gap-3 font-[family-name:var(--font-inter)] text-sm font-bold">
             <Link href="/methodology" className="text-[#8a641d] hover:text-[#c8922a] dark:text-[#f0c15e]">

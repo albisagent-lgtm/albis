@@ -179,14 +179,14 @@ export default function RegisterClient() {
                 Become a founding tester
               </h1>
               <p className="mt-1.5 text-sm text-zinc-500 dark:text-zinc-400">
-                Save stories, track the gaps you care about, and help shape how Albis explains global coverage.
+                Save what you find, follow people, and help shape Albis early.
               </p>
               <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
-                Free. No spam. Early tester updates only.
+                Free. No spam.
               </p>
               {hasLaunchAttribution && (
                 <p className="mt-3 rounded-xl border border-[#c8922a]/20 bg-[#c8922a]/10 px-3 py-2 text-xs leading-relaxed text-zinc-600 dark:text-zinc-300">
-                  We&apos;ll remember how you found Albis for launch learning only — never on your public profile.
+                  We remember how you found Albis for launch learning only — never on your public profile.
                 </p>
               )}
 
@@ -225,7 +225,7 @@ export default function RegisterClient() {
                     />
                   </div>
                   <p className="text-[11px] text-zinc-400 dark:text-zinc-500">
-                    Used as your public name in article conversations.
+                    Used on your public profile if you choose one.
                   </p>
                 </div>
 
@@ -298,7 +298,7 @@ export default function RegisterClient() {
                       Creating account…
                     </span>
                   ) : (
-                    "Create account"
+                    "Join as tester"
                   )}
                 </button>
               </form>
