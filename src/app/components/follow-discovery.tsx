@@ -23,7 +23,7 @@ export function FollowDiscovery({ suggestions }: { suggestions: FollowSuggestion
         <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-[#b58320]">Following</p>
         <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-3xl font-bold">Find people, topics, and sources</h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
-          Start by following the voices and subjects you want in your feed. These follows are being recorded as preference signals while the personalised feed is connected.
+          Start with any three signals: a person, a topic, or a source pattern you want to notice. These follows are being recorded as preference signals while the personalised feed is connected.
         </p>
       </div>
 

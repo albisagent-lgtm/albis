@@ -47,12 +47,12 @@ export function PeopleFollowStarter() {
             Start your Albis loop
           </p>
           <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-3xl font-bold">
-            {complete ? "Your feed has a starting signal." : "Follow 3 people to shape what comes back."}
+            {complete ? "Your feed has a starting signal." : "Follow 3 people, topics, or sources to shape what comes back."}
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
             {complete
               ? "Now add one card or source so other people can discover your context too."
-              : "Follow a few contributors now; Albis saves those preferences on this device and, when signed in, to your account."}
+              : "Pick any mix of contributors, subjects, or source types. Albis saves those preferences on this device and, when signed in, to your account."}
           </p>
           <p className="mt-2 font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.12em] text-zinc-500 dark:text-zinc-400">
             {summary}
@@ -71,7 +71,7 @@ export function PeopleFollowStarter() {
             href={complete ? "/create" : "#people-list"}
             className="rounded-full bg-[#111] px-4 py-2 text-center font-[family-name:var(--font-inter)] text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black"
           >
-            {complete ? "Create a card" : "Keep following"}
+            {complete ? "Create a card" : "Follow 3 signals"}
           </Link>
         </div>
       </div>

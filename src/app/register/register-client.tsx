@@ -184,6 +184,28 @@ export default function RegisterClient() {
               <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
                 Free. No spam.
               </p>
+              <div className="mt-5 rounded-2xl border border-[#c8922a]/20 bg-[#fff8e7] p-4 dark:border-[#c8922a]/30 dark:bg-[#c8922a]/10">
+                <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-[#9b6b18] dark:text-[#f0c15e]">
+                  Want to feel it first?
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+                  Open today&apos;s feed or post one card before creating an account. If it helps, come back and save your loop.
+                </p>
+                <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+                  <Link
+                    href="/"
+                    className="inline-flex h-9 items-center justify-center rounded-full border border-black/[0.10] bg-white px-4 text-xs font-bold text-zinc-800 hover:border-[#c8922a]/40 hover:text-[#9b6b18] dark:border-white/[0.12] dark:bg-white/[0.06] dark:text-zinc-100"
+                  >
+                    See today&apos;s feed
+                  </Link>
+                  <Link
+                    href="/create"
+                    className="inline-flex h-9 items-center justify-center rounded-full bg-[#111] px-4 text-xs font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black"
+                  >
+                    Post one card
+                  </Link>
+                </div>
+              </div>
               {hasLaunchAttribution && (
                 <p className="mt-3 rounded-xl border border-[#c8922a]/20 bg-[#c8922a]/10 px-3 py-2 text-xs leading-relaxed text-zinc-600 dark:text-zinc-300">
                   We remember how you found Albis for launch learning only — never on your public profile.
