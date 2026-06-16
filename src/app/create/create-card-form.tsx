@@ -18,32 +18,32 @@ const CATEGORIES = [
 
 const QUICK_STARTS = [
   {
-    title: "A story my feed missed",
-    context: "I had not seen this in my usual feed. The useful question is: who is covering it, and who is not?",
+    title: "What did your feed miss today?",
+    context: "I found this after looking outside my usual sources. What I had not seen yet was:",
     category: "media",
     tags: "coverage gap, media literacy",
   },
   {
-    title: "A source that changed my view",
-    context: "This source adds context worth comparing with the first version of the story I saw. What changed my understanding was:",
+    title: "What is being covered where you are?",
+    context: "This local or regional story deserves wider attention because:",
     category: "update",
-    tags: "source, context",
+    tags: "local story, regional view",
   },
   {
-    title: "A missing local voice",
-    context: "Most coverage I saw quotes officials or outside observers. Is there a local or regional source that shows how this is being experienced on the ground?",
-    category: "question",
-    tags: "local voice, source gap",
-  },
-  {
-    title: "A framing difference",
-    context: "One source leads with security, politics, or blame. Another leads with human impact, economics, or local consequences. The framing difference I noticed is:",
+    title: "Two headlines, same event",
+    context: "These sources cover the same event differently. The difference I noticed is:",
     category: "media",
     tags: "framing, source comparison",
   },
   {
-    title: "What is still unknown?",
-    context: "This story feels important, but I would want to know this before forming a strong opinion:",
+    title: "What changed on the ground?",
+    context: "The practical effect I noticed is visible in food, water, power, transport, schools, health, work, or shelter:",
+    category: "life-systems",
+    tags: "life systems, practical impact",
+  },
+  {
+    title: "What is missing from this story?",
+    context: "This story feels important, but the source did not answer this question yet:",
     category: "question",
     tags: "question, uncertainty",
   },
