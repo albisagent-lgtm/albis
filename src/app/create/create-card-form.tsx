@@ -18,22 +18,34 @@ const CATEGORIES = [
 
 const QUICK_STARTS = [
   {
-    title: "A story I missed",
+    title: "A story my feed missed",
     context: "I had not seen this in my usual feed. The useful question is: who is covering it, and who is not?",
     category: "media",
     tags: "coverage gap, media literacy",
   },
   {
-    title: "A useful source",
-    context: "This source adds context worth comparing with mainstream coverage.",
+    title: "A source that changed my view",
+    context: "This source adds context worth comparing with the first version of the story I saw. What changed my understanding was:",
     category: "update",
     tags: "source, context",
   },
   {
-    title: "A question for others",
-    context: "What should we check before forming a strong opinion on this?",
+    title: "A missing local voice",
+    context: "Most coverage I saw quotes officials or outside observers. Is there a local or regional source that shows how this is being experienced on the ground?",
     category: "question",
-    tags: "question, context",
+    tags: "local voice, source gap",
+  },
+  {
+    title: "A framing difference",
+    context: "One source leads with security, politics, or blame. Another leads with human impact, economics, or local consequences. The framing difference I noticed is:",
+    category: "media",
+    tags: "framing, source comparison",
+  },
+  {
+    title: "What is still unknown?",
+    context: "This story feels important, but I would want to know this before forming a strong opinion:",
+    category: "question",
+    tags: "question, uncertainty",
   },
 ];
 
@@ -191,10 +203,10 @@ export function CreateCardForm() {
     <form onSubmit={submit} className="mt-5 space-y-4">
       <div className="rounded-2xl border border-[#c8922a]/25 bg-[#fff8e7] p-4 dark:border-[#c8922a]/30 dark:bg-[#c8922a]/10">
         <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-[#9b6b18] dark:text-[#f0c15e]">
-          Make one card
+          Make one useful card
         </p>
         <p className="mt-1 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-          Paste a link, ask a question, or add one note. That is enough to start.
+          Add one source, question, missing region, or framing note that helps someone see what their normal feed may have missed.
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           {QUICK_STARTS.map((item) => (
@@ -265,50 +277,57 @@ export function CreateCardForm() {
         {links.length > 0 ? <p className="mt-1 text-xs text-zinc-400">{links.length} link{links.length === 1 ? "" : "s"} attached.</p> : null}
       </label>
 
-      <div>
-        <div className="mb-2 flex flex-wrap items-end justify-between gap-2">
+      <details className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-3 dark:border-white/[0.08] dark:bg-white/[0.025]">
+        <summary className="cursor-pointer font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">
+          Add topic / section details
+        </summary>
+        <div className="mt-3 space-y-4">
           <div>
-            <p className="font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">Section</p>
-            <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">Choose the closest area.</p>
+            <div className="mb-2 flex flex-wrap items-end justify-between gap-2">
+              <div>
+                <p className="font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">Section</p>
+                <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">Optional — choose the closest area.</p>
+              </div>
+            </div>
+            <div className="flex gap-2 overflow-x-auto pb-1">
+              {CATEGORIES.map((item) => (
+                <button
+                  key={item.value}
+                  type="button"
+                  onClick={() => setCategory(item.value)}
+                  className={`shrink-0 rounded-full px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold ${category === item.value ? "bg-[#111] text-white dark:bg-white dark:text-black" : "border border-black/[0.12] text-zinc-500 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-400"}`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+            {category === "other" ? (
+              <label className="mt-3 block">
+                <span className="sr-only">Custom section</span>
+                <input
+                  value={customSection}
+                  onChange={(e) => setCustomSection(e.target.value)}
+                  maxLength={60}
+                  className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
+                  placeholder="Add your section, e.g. Cricket, Local, Education, Faith"
+                />
+              </label>
+            ) : null}
           </div>
-        </div>
-        <div className="flex gap-2 overflow-x-auto pb-1">
-          {CATEGORIES.map((item) => (
-            <button
-              key={item.value}
-              type="button"
-              onClick={() => setCategory(item.value)}
-              className={`shrink-0 rounded-full px-3 py-1.5 font-[family-name:var(--font-inter)] text-xs font-bold ${category === item.value ? "bg-[#111] text-white dark:bg-white dark:text-black" : "border border-black/[0.12] text-zinc-500 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-400"}`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-        {category === "other" ? (
-          <label className="mt-3 block">
-            <span className="sr-only">Custom section</span>
-            <input
-              value={customSection}
-              onChange={(e) => setCustomSection(e.target.value)}
-              maxLength={60}
-              className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
-              placeholder="Add your section, e.g. Cricket, Local, Education, Faith"
-            />
-          </label>
-        ) : null}
-      </div>
 
-      <label className="block">
-        <span className="mb-1 block font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">Tags</span>
-        <input
-          value={tagInput}
-          onChange={(e) => setTagInput(e.target.value)}
-          maxLength={220}
-          className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
-          placeholder="e.g. food security, cricket, ai, supply chains"
-        />
-        {tags.length > 0 ? <p className="mt-1 text-xs text-zinc-400">Signals attached: {tags.join(", ")}</p> : null}
-      </label>
+          <label className="block">
+            <span className="mb-1 block font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-500 dark:text-zinc-400">Tags</span>
+            <input
+              value={tagInput}
+              onChange={(e) => setTagInput(e.target.value)}
+              maxLength={220}
+              className="w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
+              placeholder="e.g. food security, cricket, ai, supply chains"
+            />
+            {tags.length > 0 ? <p className="mt-1 text-xs text-zinc-400">Signals attached: {tags.join(", ")}</p> : null}
+          </label>
+        </div>
+      </details>
 
       <label className="block">
         <span className="sr-only">Context</span>
@@ -320,6 +339,16 @@ export function CreateCardForm() {
           placeholder={mode === "ai-review" ? "Optional: what should Albis look for?" : mode === "article" ? "Short summary for the feed" : "Why does this matter? What is missing?"}
         />
       </label>
+
+      <div className="rounded-2xl border border-black/[0.08] bg-white p-4 text-sm text-zinc-700 dark:border-white/[0.08] dark:bg-white/[0.035] dark:text-zinc-300">
+        <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">Good Albis card checklist</p>
+        <ul className="mt-2 list-disc space-y-1 pl-5 leading-relaxed">
+          <li>Cite a source when you can.</li>
+          <li>Add context, not outrage.</li>
+          <li>Separate evidence from interpretation.</li>
+          <li>Ask what region, voice, or angle is still missing.</li>
+        </ul>
+      </div>
 
       {mode === "article" ? (
         <label className="block">
