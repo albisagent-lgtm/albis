@@ -81,6 +81,22 @@ Join as tester
             </Link>
           </div>
         </div>
+
+        <div className="rounded-3xl border border-black/[0.08] bg-white p-6 dark:border-white/[0.08] dark:bg-white/[0.035]">
+          <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#b58320]">Turn the exercise into a contribution</p>
+          <h2 className="mt-2 font-[family-name:var(--font-playfair)] text-2xl font-bold">Found a story your feed missed?</h2>
+          <p className="mt-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+            Post one public card with the story, source, or question. Then follow people, topics, or sources so your Albis feed gets sharper over time.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3 font-[family-name:var(--font-inter)] text-sm font-bold">
+            <Link href="/create" className="rounded-full bg-[#111] px-5 py-3 text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
+              Post one card
+            </Link>
+            <Link href="/people" className="rounded-full border border-black/[0.12] px-5 py-3 text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
+              Find people to follow
+            </Link>
+          </div>
+        </div>
       </section>
     </main>
   );
