@@ -314,9 +314,14 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
               <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.16em] text-[#b58320]">Albis</p>
               <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight md:text-6xl">See what you missed.</h1>
             </div>
-            <Link href="/media-literacy" className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]">
-              Try 2 minutes
-            </Link>
+            <div className="flex flex-wrap gap-2">
+              <Link href="/media-literacy" className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]">
+                Try 2 minutes
+              </Link>
+              <Link href="/create" className="rounded-full border border-black/15 bg-white px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-zinc-100 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/15">
+                Create a card
+              </Link>
+            </div>
           </div>
           <div className="mt-6 flex gap-2 overflow-x-auto pb-1">
             {primaryFilters.map((item) => <FilterChip key={item.key} item={item} active={activeFilter === item.key} />)}
