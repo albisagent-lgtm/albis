@@ -369,7 +369,24 @@ export default function AccountClient() {
                 </p>
               </div>
               {nameError && <div className={errorMsg}>{nameError}</div>}
-              {nameSuccess && <div className={successMsg}>Profile updated.</div>}
+              {nameSuccess && (
+                <div className={`${successMsg} space-y-3`}>
+                  <p>Profile updated. Choose what to do next:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {publicProfileHref && (
+                      <Link href={publicProfileHref} className="inline-flex h-9 items-center justify-center rounded-full bg-emerald-600 px-4 text-xs font-semibold text-white hover:bg-emerald-700">
+                        View profile
+                      </Link>
+                    )}
+                    <Link href="/create" className="inline-flex h-9 items-center justify-center rounded-full bg-[#c8922a] px-4 text-xs font-semibold text-white hover:bg-[#c8922a]/90">
+                      Create first card
+                    </Link>
+                    <Link href="/people" className="inline-flex h-9 items-center justify-center rounded-full border border-emerald-300 px-4 text-xs font-semibold text-emerald-800 hover:border-emerald-500 dark:border-emerald-800 dark:text-emerald-200">
+                      Find people
+                    </Link>
+                  </div>
+                </div>
+              )}
               <button
                 onClick={handleNameSave}
                 disabled={
@@ -420,8 +437,11 @@ export default function AccountClient() {
                   Choose a handle to unlock your profile link
                 </span>
               )}
+              <Link href="/create" className="inline-flex h-10 items-center justify-center rounded-full border border-black/[0.10] px-5 text-sm font-medium text-[#111] hover:border-[#c8922a]/50 dark:border-white/[0.10] dark:text-[#f0efec]">
+                Create first card
+              </Link>
               <Link href="/people" className="inline-flex h-10 items-center justify-center rounded-full border border-black/[0.10] px-5 text-sm font-medium text-[#111] hover:border-[#c8922a]/50 dark:border-white/[0.10] dark:text-[#f0efec]">
-                Find people to follow
+                Find people
               </Link>
             </div>
           </div>
