@@ -55,6 +55,18 @@ Join as tester
             <li>What context would you still need before forming a strong opinion?</li>
             <li>How might language, geography, platform incentives, or source habits shape what you saw?</li>
           </ul>
+          <div className="mt-5 rounded-2xl bg-[#f8f7f4] p-4 dark:bg-white/[0.04]">
+            <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#b58320]">Use with someone else</p>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+              Send the exercise to one classmate, colleague, or group chat and compare the first story each person says their feed missed.
+            </p>
+            <a
+              href="mailto:?subject=Try%20this%205-minute%20media%20literacy%20exercise&body=I%20found%20this%205-minute%20Albis%20exercise%20for%20checking%20what%20your%20usual%20news%20feed%20may%20miss%3A%20https%3A%2F%2Fwww.albis.news%2Fmedia-literacy"
+              className="mt-3 inline-flex rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"
+            >
+              Share this exercise
+            </a>
+          </div>
         </div>
 
         <div className="rounded-3xl border border-black/[0.08] bg-white p-6 dark:border-white/[0.08] dark:bg-white/[0.035]">
