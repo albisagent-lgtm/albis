@@ -48,6 +48,12 @@ const QUICK_STARTS = [
     tags: "human impact, access",
   },
   {
+    title: "What source helped most?",
+    context: "This source helped me understand the story because:",
+    category: "media",
+    tags: "useful source, context",
+  },
+  {
     title: "What is missing from this story?",
     context: "This story feels important, but the source did not answer this question yet:",
     category: "question",
