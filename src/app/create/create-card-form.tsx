@@ -42,6 +42,12 @@ const QUICK_STARTS = [
     tags: "life systems, practical impact",
   },
   {
+    title: "Who is affected first?",
+    context: "The first people likely to feel this are:",
+    category: "life-systems",
+    tags: "human impact, access",
+  },
+  {
     title: "What is missing from this story?",
     context: "This story feels important, but the source did not answer this question yet:",
     category: "question",
