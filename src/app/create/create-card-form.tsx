@@ -30,6 +30,12 @@ const QUICK_STARTS = [
     tags: "food security, coverage gap",
   },
   {
+    title: "What climate effect reaches people first?",
+    context: "If this climate pattern strengthens, the first practical effect I would watch for is:",
+    category: "climate",
+    tags: "climate impact, life systems",
+  },
+  {
     title: "What is being covered where you are?",
     context: "This local or regional story deserves wider attention because:",
     category: "update",
