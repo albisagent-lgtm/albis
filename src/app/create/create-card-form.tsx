@@ -24,6 +24,12 @@ const QUICK_STARTS = [
     tags: "coverage gap, media literacy",
   },
   {
+    title: "What food warning did your feed miss?",
+    context: "My usual news feed did / did not show this food-system warning. The part I think needs more attention is:",
+    category: "life-systems",
+    tags: "food security, coverage gap",
+  },
+  {
     title: "What is being covered where you are?",
     context: "This local or regional story deserves wider attention because:",
     category: "update",
