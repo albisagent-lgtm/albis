@@ -16,6 +16,7 @@
     "growth:report": "tsx scripts/run-growth-desk-daily-report.ts",
     "growth:metrics-check": "node scripts/check-growth-metrics.mjs",
     "growth:metrics-sql": "cat scripts/apply-growth-metrics-production.sql",
+    "growth:metrics-verify-sql": "cat scripts/verify-growth-metrics-production.sql",
     "community:weather": "tsx scripts/run-community-weather-daily.ts --limit=100 --media-per-city=3",
     "community:weather:dry": "tsx scripts/run-community-weather-daily.ts --limit=10 --media-per-city=2",
     "intelligence:wiki:status": "tsx scripts/run-albis-intelligence-wiki.ts status",
