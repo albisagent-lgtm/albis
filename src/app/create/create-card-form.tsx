@@ -54,6 +54,12 @@ const QUICK_STARTS = [
     tags: "useful source, context",
   },
   {
+    title: "What local system gets stressed?",
+    context: "The local system that has to absorb this pressure is:",
+    category: "life-systems",
+    tags: "local impact, systems",
+  },
+  {
     title: "What is missing from this story?",
     context: "This story feels important, but the source did not answer this question yet:",
     category: "question",
