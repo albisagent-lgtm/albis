@@ -232,6 +232,9 @@ export function CreateCardForm() {
             </button>
           ))}
         </div>
+        <p className="mt-2 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
+          Pick a prompt to fill the form, then edit anything before posting.
+        </p>
       </div>
 
       <div className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-3 dark:border-white/[0.08] dark:bg-white/[0.025]">
