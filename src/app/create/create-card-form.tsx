@@ -387,17 +387,17 @@ export function CreateCardForm() {
           onChange={(e) => setContext(e.target.value)}
           maxLength={1400}
           className="min-h-32 w-full rounded-2xl border border-black/[0.08] bg-[#f8f7f4] px-4 py-3 text-sm outline-none focus:border-[#c8922a] dark:border-white/[0.08] dark:bg-white/[0.03]"
-          placeholder={mode === "ai-review" ? "Optional: what should Albis look for?" : mode === "article" ? "Short summary for the feed" : "Why does this matter? What is missing?"}
+          placeholder={mode === "ai-review" ? "Optional: what should Albis look for?" : mode === "article" ? "Short summary for the feed" : "What happened? What source helped? What is still missing?"}
         />
       </label>
 
       <div className="rounded-2xl border border-black/[0.08] bg-white p-4 text-sm text-zinc-700 dark:border-white/[0.08] dark:bg-white/[0.035] dark:text-zinc-300">
         <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.14em] text-[#9b6b18] dark:text-[#f0c15e]">Good Albis card checklist</p>
         <ul className="mt-2 list-disc space-y-1 pl-5 leading-relaxed">
-          <li>Cite a source when you can.</li>
+          <li>Cite the source that helped most.</li>
           <li>Add context, not outrage.</li>
-          <li>Separate evidence from interpretation.</li>
-          <li>Ask what region, voice, or angle is still missing.</li>
+          <li>Say what is evidence and what is your read.</li>
+          <li>Ask what region, voice, or practical effect is still missing.</li>
         </ul>
       </div>
 
