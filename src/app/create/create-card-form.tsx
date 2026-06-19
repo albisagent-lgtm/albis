@@ -36,6 +36,12 @@ const QUICK_STARTS = [
     tags: "climate impact, life systems",
   },
   {
+    title: "Who gets excluded by the access rules?",
+    context: "The people who may be left out by this rule, cost, or border process are:",
+    category: "media",
+    tags: "access, mobility",
+  },
+  {
     title: "What is being covered where you are?",
     context: "This local or regional story deserves wider attention because:",
     category: "update",
