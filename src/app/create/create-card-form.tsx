@@ -84,6 +84,12 @@ const QUICK_STARTS = [
     tags: "local impact, systems",
   },
   {
+    title: "What claim needs a source before sharing?",
+    context: "Before I share this, the claim I want a stronger source for is:",
+    category: "question",
+    tags: "source check, uncertainty",
+  },
+  {
     title: "What is missing from this story?",
     context: "This story feels important, but the source did not answer this question yet:",
     category: "question",
