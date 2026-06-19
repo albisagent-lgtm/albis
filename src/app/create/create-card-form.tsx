@@ -42,6 +42,12 @@ const QUICK_STARTS = [
     tags: "access, mobility",
   },
   {
+    title: "What energy dependency is being exposed?",
+    context: "This story shows a dependency on fuel, power, shipping, finance, or infrastructure here:",
+    category: "life-systems",
+    tags: "energy, infrastructure",
+  },
+  {
     title: "What is being covered where you are?",
     context: "This local or regional story deserves wider attention because:",
     category: "update",
