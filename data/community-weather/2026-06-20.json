@@ -1,6 +1,6 @@
 {
   "date": "2026-06-20",
-  "generatedAt": "2026-06-19T20:15:44.726Z",
+  "generatedAt": "2026-06-20T09:55:51.970Z",
   "scope": "Top 100 major world cities weather/community-media scan",
   "methodology": [
     "Weather data: Open-Meteo public forecast/current conditions.",
@@ -19,23 +19,23 @@
         "population": 9733276
       },
       "current": {
-        "temperatureC": 20.4,
-        "apparentTemperatureC": 23.6,
-        "precipitationMm": 0.1,
-        "windKph": 4.6,
-        "weatherCode": 51,
-        "description": "light drizzle"
+        "temperatureC": 21.4,
+        "apparentTemperatureC": 24.9,
+        "precipitationMm": 0.7,
+        "windKph": 5.3,
+        "weatherCode": 63,
+        "description": "rain"
       },
       "daily": {
-        "maxTempC": 22.3,
-        "minTempC": 20.4,
-        "precipitationMm": 40.7,
-        "maxWindKph": 5.4
+        "maxTempC": 22.5,
+        "minTempC": 20.1,
+        "precipitationMm": 34,
+        "maxWindKph": 7.2
       },
-      "observedAt": "2026-06-20T05:00",
+      "observedAt": "2026-06-20T18:45",
       "riskLevel": "elevated",
       "riskReasons": [
-        "heavy daily rain forecast (40.7mm)"
+        "heavy daily rain forecast (34mm)"
       ],
       "mediaSignals": [],
       "communityLearning": [
@@ -55,30 +55,30 @@
         "population": 11034555
       },
       "current": {
-        "temperatureC": 32.7,
-        "apparentTemperatureC": 35.7,
+        "temperatureC": 39.3,
+        "apparentTemperatureC": 41.1,
         "precipitationMm": 0,
-        "windKph": 4.4,
+        "windKph": 12.8,
         "weatherCode": 0,
         "description": "clear"
       },
       "daily": {
-        "maxTempC": 39.8,
-        "minTempC": 30.8,
-        "precipitationMm": 0,
-        "maxWindKph": 14
+        "maxTempC": 39.3,
+        "minTempC": 31.1,
+        "precipitationMm": 0.1,
+        "maxWindKph": 14.9
       },
-      "observedAt": "2026-06-20T01:30",
-      "riskLevel": "watch",
+      "observedAt": "2026-06-20T15:15",
+      "riskLevel": "elevated",
       "riskReasons": [
-        "heat watch signal"
+        "extreme heat signal"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found watch automated weather risk in Delhi.",
+        "Traditional-media and public-weather scan found elevated automated weather risk in Delhi.",
         "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
-      "status": "routine"
+      "status": "community-watch-needed"
     },
     {
       "city": {
@@ -91,20 +91,20 @@
         "population": 24874500
       },
       "current": {
-        "temperatureC": 25,
-        "apparentTemperatureC": 29.4,
+        "temperatureC": 28.4,
+        "apparentTemperatureC": 33.3,
         "precipitationMm": 0,
-        "windKph": 11.4,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 5.8,
+        "weatherCode": 1,
+        "description": "mainly clear"
       },
       "daily": {
-        "maxTempC": 30.1,
-        "minTempC": 24.6,
-        "precipitationMm": 8.1,
+        "maxTempC": 29.8,
+        "minTempC": 24.5,
+        "precipitationMm": 11.9,
         "maxWindKph": 17.7
       },
-      "observedAt": "2026-06-20T04:00",
+      "observedAt": "2026-06-20T17:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -127,30 +127,31 @@
         "population": 10356500
       },
       "current": {
-        "temperatureC": 26.7,
-        "apparentTemperatureC": 33,
-        "precipitationMm": 0,
-        "windKph": 7.2,
-        "weatherCode": 3,
-        "description": "overcast"
+        "temperatureC": 32.2,
+        "apparentTemperatureC": 36.9,
+        "precipitationMm": 0.1,
+        "windKph": 14.1,
+        "weatherCode": 95,
+        "description": "thunderstorm"
       },
       "daily": {
-        "maxTempC": 32.7,
-        "minTempC": 25.7,
-        "precipitationMm": 2.9,
-        "maxWindKph": 13.8
+        "maxTempC": 33.7,
+        "minTempC": 26.2,
+        "precipitationMm": 5.4,
+        "maxWindKph": 14.9
       },
-      "observedAt": "2026-06-20T02:00",
-      "riskLevel": "low",
+      "observedAt": "2026-06-20T15:45",
+      "riskLevel": "elevated",
       "riskReasons": [
-        "no major automated weather threshold triggered"
+        "heat watch signal",
+        "active thunderstorm"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found low automated weather risk in Dhaka.",
-        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+        "Traditional-media and public-weather scan found elevated automated weather risk in Dhaka.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
-      "status": "routine"
+      "status": "community-watch-needed"
     },
     {
       "city": {
@@ -163,20 +164,20 @@
         "population": 12400232
       },
       "current": {
-        "temperatureC": 20.8,
-        "apparentTemperatureC": 20.3,
+        "temperatureC": 13.2,
+        "apparentTemperatureC": 12.7,
         "precipitationMm": 0,
-        "windKph": 8.3,
-        "weatherCode": 2,
-        "description": "partly cloudy"
+        "windKph": 4.1,
+        "weatherCode": 3,
+        "description": "overcast"
       },
       "daily": {
-        "maxTempC": 23.2,
-        "minTempC": 9.6,
-        "precipitationMm": 0,
-        "maxWindKph": 14.1
+        "maxTempC": 24.5,
+        "minTempC": 13.1,
+        "precipitationMm": 4.3,
+        "maxWindKph": 17.4
       },
-      "observedAt": "2026-06-19T17:00",
+      "observedAt": "2026-06-20T06:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -199,28 +200,28 @@
         "population": 9606916
       },
       "current": {
-        "temperatureC": 27.1,
-        "apparentTemperatureC": 27.5,
+        "temperatureC": 32.7,
+        "apparentTemperatureC": 35.2,
         "precipitationMm": 0,
-        "windKph": 12.2,
-        "weatherCode": 1,
-        "description": "mainly clear"
+        "windKph": 9.7,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 34.1,
-        "minTempC": 21.5,
+        "maxTempC": 35.3,
+        "minTempC": 22.1,
         "precipitationMm": 0,
-        "maxWindKph": 14.5
+        "maxWindKph": 17.3
       },
-      "observedAt": "2026-06-19T23:00",
-      "riskLevel": "low",
+      "observedAt": "2026-06-20T12:45",
+      "riskLevel": "watch",
       "riskReasons": [
-        "no major automated weather threshold triggered"
+        "heat watch signal"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found low automated weather risk in Cairo.",
-        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+        "Traditional-media and public-weather scan found watch automated weather risk in Cairo.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
       "status": "routine"
     },
@@ -235,20 +236,20 @@
         "population": 12294193
       },
       "current": {
-        "temperatureC": 24.9,
-        "apparentTemperatureC": 27,
-        "precipitationMm": 0,
-        "windKph": 4.8,
-        "weatherCode": 3,
-        "description": "overcast"
+        "temperatureC": 15.3,
+        "apparentTemperatureC": 16.2,
+        "precipitationMm": 0.1,
+        "windKph": 1.7,
+        "weatherCode": 51,
+        "description": "light drizzle"
       },
       "daily": {
-        "maxTempC": 24.9,
+        "maxTempC": 22.9,
         "minTempC": 14.6,
-        "precipitationMm": 6.6,
-        "maxWindKph": 12.7
+        "precipitationMm": 2.6,
+        "maxWindKph": 11.1
       },
-      "observedAt": "2026-06-19T14:00",
+      "observedAt": "2026-06-20T03:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -271,20 +272,20 @@
         "population": 18960744
       },
       "current": {
-        "temperatureC": 21.3,
-        "apparentTemperatureC": 25.2,
+        "temperatureC": 26.6,
+        "apparentTemperatureC": 24.1,
         "precipitationMm": 0,
-        "windKph": 0,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 13.9,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 27.9,
-        "minTempC": 20.7,
-        "precipitationMm": 0.1,
-        "maxWindKph": 17
+        "maxTempC": 27.7,
+        "minTempC": 21,
+        "precipitationMm": 0.2,
+        "maxWindKph": 16.5
       },
-      "observedAt": "2026-06-20T04:00",
+      "observedAt": "2026-06-20T17:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -307,28 +308,28 @@
         "population": 12691836
       },
       "current": {
-        "temperatureC": 29.8,
-        "apparentTemperatureC": 33.9,
+        "temperatureC": 32.7,
+        "apparentTemperatureC": 36.8,
         "precipitationMm": 0,
-        "windKph": 7.4,
-        "weatherCode": 1,
-        "description": "mainly clear"
+        "windKph": 14.9,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 33.3,
-        "minTempC": 29.4,
-        "precipitationMm": 0,
-        "maxWindKph": 15.5
+        "maxTempC": 33.4,
+        "minTempC": 29.5,
+        "precipitationMm": 0.1,
+        "maxWindKph": 15.2
       },
-      "observedAt": "2026-06-20T01:30",
-      "riskLevel": "low",
+      "observedAt": "2026-06-20T15:15",
+      "riskLevel": "watch",
       "riskReasons": [
-        "no major automated weather threshold triggered"
+        "heat watch signal"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found low automated weather risk in Mumbai.",
-        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+        "Traditional-media and public-weather scan found watch automated weather risk in Mumbai.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
       "status": "routine"
     },
@@ -343,23 +344,23 @@
         "population": 2753862
       },
       "current": {
-        "temperatureC": 22.6,
-        "apparentTemperatureC": 27,
-        "precipitationMm": 0.2,
+        "temperatureC": 24,
+        "apparentTemperatureC": 28.6,
+        "precipitationMm": 0.4,
         "windKph": 3.6,
-        "weatherCode": 53,
-        "description": "drizzle"
+        "weatherCode": 61,
+        "description": "slight rain"
       },
       "daily": {
-        "maxTempC": 24.4,
-        "minTempC": 22.4,
-        "precipitationMm": 37.9,
-        "maxWindKph": 5.2
+        "maxTempC": 24.8,
+        "minTempC": 22.5,
+        "precipitationMm": 34,
+        "maxWindKph": 4.9
       },
-      "observedAt": "2026-06-20T05:00",
+      "observedAt": "2026-06-20T18:45",
       "riskLevel": "elevated",
       "riskReasons": [
-        "heavy daily rain forecast (37.9mm)"
+        "heavy daily rain forecast (34mm)"
       ],
       "mediaSignals": [],
       "communityLearning": [
@@ -379,28 +380,28 @@
         "population": 11624219
       },
       "current": {
-        "temperatureC": 29.6,
-        "apparentTemperatureC": 34,
+        "temperatureC": 31.8,
+        "apparentTemperatureC": 35.8,
         "precipitationMm": 0,
-        "windKph": 14.6,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 17.6,
+        "weatherCode": 2,
+        "description": "partly cloudy"
       },
       "daily": {
-        "maxTempC": 32.7,
-        "minTempC": 29,
-        "precipitationMm": 0.1,
+        "maxTempC": 32.3,
+        "minTempC": 28.8,
+        "precipitationMm": 0.9,
         "maxWindKph": 19.7
       },
-      "observedAt": "2026-06-20T01:00",
-      "riskLevel": "low",
+      "observedAt": "2026-06-20T14:45",
+      "riskLevel": "watch",
       "riskReasons": [
-        "no major automated weather threshold triggered"
+        "heat watch signal"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found low automated weather risk in Karachi.",
-        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+        "Traditional-media and public-weather scan found watch automated weather risk in Karachi.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
       "status": "routine"
     },
@@ -415,28 +416,28 @@
         "population": 7457599
       },
       "current": {
-        "temperatureC": 23.7,
-        "apparentTemperatureC": 29.3,
+        "temperatureC": 31.8,
+        "apparentTemperatureC": 35.9,
         "precipitationMm": 0,
-        "windKph": 1.9,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 6.1,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 32.4,
+        "maxTempC": 32.1,
         "minTempC": 23.3,
-        "precipitationMm": 0.4,
-        "maxWindKph": 8.1
+        "precipitationMm": 0,
+        "maxWindKph": 11.1
       },
-      "observedAt": "2026-06-20T04:00",
-      "riskLevel": "low",
+      "observedAt": "2026-06-20T17:45",
+      "riskLevel": "watch",
       "riskReasons": [
-        "no major automated weather threshold triggered"
+        "heat watch signal"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found low automated weather risk in Chongqing.",
-        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+        "Traditional-media and public-weather scan found watch automated weather risk in Chongqing.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
       "status": "routine"
     },
@@ -451,20 +452,20 @@
         "population": 15701602
       },
       "current": {
-        "temperatureC": 20.4,
-        "apparentTemperatureC": 20.8,
+        "temperatureC": 25.8,
+        "apparentTemperatureC": 24.7,
         "precipitationMm": 0,
-        "windKph": 13.6,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 22.7,
+        "weatherCode": 2,
+        "description": "partly cloudy"
       },
       "daily": {
-        "maxTempC": 25.2,
-        "minTempC": 19.7,
+        "maxTempC": 26.6,
+        "minTempC": 19.8,
         "precipitationMm": 0,
-        "maxWindKph": 27.4
+        "maxWindKph": 26.7
       },
-      "observedAt": "2026-06-19T23:00",
+      "observedAt": "2026-06-20T12:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -487,20 +488,20 @@
         "population": 2891082
       },
       "current": {
-        "temperatureC": 13.5,
-        "apparentTemperatureC": 10,
+        "temperatureC": 6.1,
+        "apparentTemperatureC": 3.4,
         "precipitationMm": 0,
-        "windKph": 12.4,
+        "windKph": 8.4,
         "weatherCode": 0,
         "description": "clear"
       },
       "daily": {
         "maxTempC": 14.2,
-        "minTempC": 8.3,
-        "precipitationMm": 0.8,
-        "maxWindKph": 18.6
+        "minTempC": 6,
+        "precipitationMm": 0,
+        "maxWindKph": 11.4
       },
-      "observedAt": "2026-06-19T17:00",
+      "observedAt": "2026-06-20T06:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -523,30 +524,31 @@
         "population": 4631392
       },
       "current": {
-        "temperatureC": 26.9,
-        "apparentTemperatureC": 32.8,
-        "precipitationMm": 0,
-        "windKph": 5.6,
-        "weatherCode": 3,
-        "description": "overcast"
+        "temperatureC": 31.6,
+        "apparentTemperatureC": 37.1,
+        "precipitationMm": 0.2,
+        "windKph": 11.9,
+        "weatherCode": 95,
+        "description": "thunderstorm"
       },
       "daily": {
-        "maxTempC": 34.1,
-        "minTempC": 26.9,
-        "precipitationMm": 1.5,
-        "maxWindKph": 15.1
+        "maxTempC": 33.8,
+        "minTempC": 27,
+        "precipitationMm": 0.8,
+        "maxWindKph": 15.4
       },
-      "observedAt": "2026-06-20T01:30",
-      "riskLevel": "low",
+      "observedAt": "2026-06-20T15:15",
+      "riskLevel": "elevated",
       "riskReasons": [
-        "no major automated weather threshold triggered"
+        "heat watch signal",
+        "active thunderstorm"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found low automated weather risk in Kolkata.",
-        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+        "Traditional-media and public-weather scan found elevated automated weather risk in Kolkata.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
-      "status": "routine"
+      "status": "community-watch-needed"
     },
     {
       "city": {
@@ -559,20 +561,20 @@
         "population": 16000000
       },
       "current": {
-        "temperatureC": 25.5,
-        "apparentTemperatureC": 27.9,
+        "temperatureC": 27.6,
+        "apparentTemperatureC": 31.3,
         "precipitationMm": 0,
-        "windKph": 8.9,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 3,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 30.6,
-        "minTempC": 22.8,
+        "maxTempC": 31.9,
+        "minTempC": 22.1,
         "precipitationMm": 0,
-        "maxWindKph": 11.5
+        "maxWindKph": 8.9
       },
-      "observedAt": "2026-06-19T21:00",
+      "observedAt": "2026-06-20T10:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -595,20 +597,20 @@
         "population": 15388000
       },
       "current": {
-        "temperatureC": 26.6,
-        "apparentTemperatureC": 31,
+        "temperatureC": 28.2,
+        "apparentTemperatureC": 33.2,
         "precipitationMm": 0,
-        "windKph": 10.3,
+        "windKph": 5.6,
         "weatherCode": 3,
         "description": "overcast"
       },
       "daily": {
         "maxTempC": 28.5,
-        "minTempC": 25.4,
-        "precipitationMm": 1.9,
-        "maxWindKph": 14.3
+        "minTempC": 24.6,
+        "precipitationMm": 5.2,
+        "maxWindKph": 13.9
       },
-      "observedAt": "2026-06-19T21:00",
+      "observedAt": "2026-06-20T10:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -631,28 +633,28 @@
         "population": 1600000
       },
       "current": {
-        "temperatureC": 26.7,
-        "apparentTemperatureC": 32.9,
+        "temperatureC": 33.5,
+        "apparentTemperatureC": 38.6,
         "precipitationMm": 0,
-        "windKph": 3.6,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 4.8,
+        "weatherCode": 2,
+        "description": "partly cloudy"
       },
       "daily": {
-        "maxTempC": 32.7,
+        "maxTempC": 34.2,
         "minTempC": 25.9,
-        "precipitationMm": 1.5,
-        "maxWindKph": 10.5
+        "precipitationMm": 2.5,
+        "maxWindKph": 12.9
       },
-      "observedAt": "2026-06-20T04:00",
-      "riskLevel": "low",
+      "observedAt": "2026-06-20T17:45",
+      "riskLevel": "watch",
       "riskReasons": [
-        "no major automated weather threshold triggered"
+        "heat watch signal"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found low automated weather risk in Manila.",
-        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+        "Traditional-media and public-weather scan found watch automated weather risk in Manila.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
       "status": "routine"
     },
@@ -667,20 +669,20 @@
         "population": 11090314
       },
       "current": {
-        "temperatureC": 21,
-        "apparentTemperatureC": 24.9,
+        "temperatureC": 26.1,
+        "apparentTemperatureC": 25.7,
         "precipitationMm": 0,
-        "windKph": 1.8,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 9.1,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 27.2,
+        "maxTempC": 26.4,
         "minTempC": 20.8,
-        "precipitationMm": 0.7,
-        "maxWindKph": 14.8
+        "precipitationMm": 1.8,
+        "maxWindKph": 18.7
       },
-      "observedAt": "2026-06-20T04:00",
+      "observedAt": "2026-06-20T17:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -703,30 +705,31 @@
         "population": 16096724
       },
       "current": {
-        "temperatureC": 26.6,
-        "apparentTemperatureC": 32.4,
+        "temperatureC": 31.5,
+        "apparentTemperatureC": 36.8,
         "precipitationMm": 0,
-        "windKph": 7.6,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 9.5,
+        "weatherCode": 95,
+        "description": "thunderstorm"
       },
       "daily": {
-        "maxTempC": 32,
-        "minTempC": 26.4,
-        "precipitationMm": 5.1,
-        "maxWindKph": 15.3
+        "maxTempC": 33.6,
+        "minTempC": 26.3,
+        "precipitationMm": 1.8,
+        "maxWindKph": 15
       },
-      "observedAt": "2026-06-20T04:00",
-      "riskLevel": "low",
+      "observedAt": "2026-06-20T17:45",
+      "riskLevel": "elevated",
       "riskReasons": [
-        "no major automated weather threshold triggered"
+        "heat watch signal",
+        "active thunderstorm"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found low automated weather risk in Guangzhou.",
-        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+        "Traditional-media and public-weather scan found elevated automated weather risk in Guangzhou.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
-      "status": "routine"
+      "status": "community-watch-needed"
     },
     {
       "city": {
@@ -739,20 +742,20 @@
         "population": 6747815
       },
       "current": {
-        "temperatureC": 22,
-        "apparentTemperatureC": 23.8,
+        "temperatureC": 17.4,
+        "apparentTemperatureC": 17.3,
         "precipitationMm": 0,
-        "windKph": 7.7,
+        "windKph": 12.7,
         "weatherCode": 3,
         "description": "overcast"
       },
       "daily": {
-        "maxTempC": 23.8,
-        "minTempC": 16.4,
+        "maxTempC": 26.5,
+        "minTempC": 17.1,
         "precipitationMm": 0,
-        "maxWindKph": 10.1
+        "maxWindKph": 13
       },
-      "observedAt": "2026-06-19T17:00",
+      "observedAt": "2026-06-20T06:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -775,20 +778,20 @@
         "population": 13004135
       },
       "current": {
-        "temperatureC": 28.5,
-        "apparentTemperatureC": 33.9,
+        "temperatureC": 37.6,
+        "apparentTemperatureC": 38.6,
         "precipitationMm": 0,
-        "windKph": 2.4,
-        "weatherCode": 0,
-        "description": "clear"
+        "windKph": 11.3,
+        "weatherCode": 3,
+        "description": "overcast"
       },
       "daily": {
-        "maxTempC": 38.2,
-        "minTempC": 26.8,
-        "precipitationMm": 0,
-        "maxWindKph": 11.8
+        "maxTempC": 38.1,
+        "minTempC": 27.1,
+        "precipitationMm": 0.1,
+        "maxWindKph": 11.9
       },
-      "observedAt": "2026-06-20T01:00",
+      "observedAt": "2026-06-20T14:45",
       "riskLevel": "watch",
       "riskReasons": [
         "heat watch signal"
@@ -811,28 +814,28 @@
         "population": null
       },
       "current": {
-        "temperatureC": 29.6,
-        "apparentTemperatureC": 33.8,
+        "temperatureC": 31.8,
+        "apparentTemperatureC": 35.7,
         "precipitationMm": 0,
-        "windKph": 14.8,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 17.6,
+        "weatherCode": 2,
+        "description": "partly cloudy"
       },
       "daily": {
-        "maxTempC": 33,
-        "minTempC": 29,
-        "precipitationMm": 0.3,
-        "maxWindKph": 19.2
+        "maxTempC": 32.4,
+        "minTempC": 28.8,
+        "precipitationMm": 0.7,
+        "maxWindKph": 19.3
       },
-      "observedAt": "2026-06-20T01:00",
-      "riskLevel": "low",
+      "observedAt": "2026-06-20T14:45",
+      "riskLevel": "watch",
       "riskReasons": [
-        "no major automated weather threshold triggered"
+        "heat watch signal"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found low automated weather risk in Bangalore.",
-        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+        "Traditional-media and public-weather scan found watch automated weather risk in Bangalore.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
       "status": "routine"
     },
@@ -847,28 +850,28 @@
         "population": 17494398
       },
       "current": {
-        "temperatureC": 27.2,
-        "apparentTemperatureC": 32,
+        "temperatureC": 29.5,
+        "apparentTemperatureC": 34.1,
         "precipitationMm": 0,
-        "windKph": 11.7,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 14.7,
+        "weatherCode": 95,
+        "description": "thunderstorm"
       },
       "daily": {
-        "maxTempC": 31,
-        "minTempC": 26.6,
-        "precipitationMm": 4.1,
-        "maxWindKph": 17
+        "maxTempC": 31.4,
+        "minTempC": 26.7,
+        "precipitationMm": 1.9,
+        "maxWindKph": 18.5
       },
-      "observedAt": "2026-06-20T04:00",
-      "riskLevel": "low",
+      "observedAt": "2026-06-20T17:45",
+      "riskLevel": "watch",
       "riskReasons": [
-        "no major automated weather threshold triggered"
+        "active thunderstorm"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found low automated weather risk in Shenzhen.",
-        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+        "Traditional-media and public-weather scan found watch automated weather risk in Shenzhen.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
       "status": "routine"
     },
@@ -883,20 +886,20 @@
         "population": 10381222
       },
       "current": {
-        "temperatureC": 15.6,
-        "apparentTemperatureC": 16.2,
+        "temperatureC": 20.3,
+        "apparentTemperatureC": 18.7,
         "precipitationMm": 0,
-        "windKph": 4.2,
+        "windKph": 13.1,
         "weatherCode": 2,
         "description": "partly cloudy"
       },
       "daily": {
-        "maxTempC": 21.7,
-        "minTempC": 13.5,
-        "precipitationMm": 1.3,
-        "maxWindKph": 12.1
+        "maxTempC": 21,
+        "minTempC": 13.4,
+        "precipitationMm": 0.2,
+        "maxWindKph": 13.4
       },
-      "observedAt": "2026-06-19T23:00",
+      "observedAt": "2026-06-20T12:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -919,30 +922,31 @@
         "population": 4681087
       },
       "current": {
-        "temperatureC": 26.5,
-        "apparentTemperatureC": 30.3,
+        "temperatureC": 33.3,
+        "apparentTemperatureC": 39.4,
         "precipitationMm": 0,
-        "windKph": 11.7,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 11,
+        "weatherCode": 95,
+        "description": "thunderstorm"
       },
       "daily": {
-        "maxTempC": 35.2,
-        "minTempC": 26.4,
-        "precipitationMm": 2.7,
-        "maxWindKph": 15.7
+        "maxTempC": 33.5,
+        "minTempC": 26.5,
+        "precipitationMm": 4.1,
+        "maxWindKph": 14.8
       },
-      "observedAt": "2026-06-20T01:30",
-      "riskLevel": "watch",
+      "observedAt": "2026-06-20T15:15",
+      "riskLevel": "elevated",
       "riskReasons": [
-        "heat watch signal"
+        "heat watch signal",
+        "active thunderstorm"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found watch automated weather risk in Chennai.",
+        "Traditional-media and public-weather scan found elevated automated weather risk in Chennai.",
         "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
-      "status": "routine"
+      "status": "community-watch-needed"
     },
     {
       "city": {
@@ -955,20 +959,20 @@
         "population": 7674366
       },
       "current": {
-        "temperatureC": 19.1,
-        "apparentTemperatureC": 17.3,
-        "precipitationMm": 0.1,
-        "windKph": 10.6,
-        "weatherCode": 51,
-        "description": "light drizzle"
+        "temperatureC": 11.1,
+        "apparentTemperatureC": 10.3,
+        "precipitationMm": 0,
+        "windKph": 4.5,
+        "weatherCode": 2,
+        "description": "partly cloudy"
       },
       "daily": {
-        "maxTempC": 20.4,
-        "minTempC": 11,
-        "precipitationMm": 2.3,
-        "maxWindKph": 13.2
+        "maxTempC": 19.5,
+        "minTempC": 10.8,
+        "precipitationMm": 1.4,
+        "maxWindKph": 14.3
       },
-      "observedAt": "2026-06-19T15:00",
+      "observedAt": "2026-06-20T04:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -991,20 +995,20 @@
         "population": 2138551
       },
       "current": {
-        "temperatureC": 27.1,
-        "apparentTemperatureC": 28.3,
+        "temperatureC": 28.1,
+        "apparentTemperatureC": 31,
         "precipitationMm": 0,
-        "windKph": 5.9,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 3.1,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 36.3,
-        "minTempC": 21.8,
-        "precipitationMm": 0,
-        "maxWindKph": 19.4
+        "maxTempC": 35.6,
+        "minTempC": 21.6,
+        "precipitationMm": 0.1,
+        "maxWindKph": 10.9
       },
-      "observedAt": "2026-06-19T22:00",
+      "observedAt": "2026-06-20T11:45",
       "riskLevel": "watch",
       "riskReasons": [
         "heat watch signal"
@@ -1027,20 +1031,20 @@
         "population": 8540121
       },
       "current": {
-        "temperatureC": 27.1,
-        "apparentTemperatureC": 31.9,
+        "temperatureC": 30.3,
+        "apparentTemperatureC": 34.8,
         "precipitationMm": 0,
-        "windKph": 5.3,
+        "windKph": 9.6,
         "weatherCode": 0,
         "description": "clear"
       },
       "daily": {
-        "maxTempC": 34.2,
-        "minTempC": 24.8,
-        "precipitationMm": 5.9,
-        "maxWindKph": 14
+        "maxTempC": 34.8,
+        "minTempC": 25.1,
+        "precipitationMm": 8.6,
+        "maxWindKph": 11.8
       },
-      "observedAt": "2026-06-20T03:00",
+      "observedAt": "2026-06-20T16:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -1063,20 +1067,20 @@
         "population": 7737002
       },
       "current": {
-        "temperatureC": 21.8,
-        "apparentTemperatureC": 22,
+        "temperatureC": 18.9,
+        "apparentTemperatureC": 19.3,
         "precipitationMm": 0,
-        "windKph": 16,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 11.1,
+        "weatherCode": 2,
+        "description": "partly cloudy"
       },
       "daily": {
-        "maxTempC": 22.3,
-        "minTempC": 19.7,
-        "precipitationMm": 2.4,
-        "maxWindKph": 16
+        "maxTempC": 23.1,
+        "minTempC": 18.7,
+        "precipitationMm": 0,
+        "maxWindKph": 16.4
       },
-      "observedAt": "2026-06-19T15:00",
+      "observedAt": "2026-06-20T04:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -1099,28 +1103,28 @@
         "population": 5104476
       },
       "current": {
-        "temperatureC": 25.2,
-        "apparentTemperatureC": 31.1,
-        "precipitationMm": 0.3,
-        "windKph": 4.2,
-        "weatherCode": 55,
-        "description": "dense drizzle"
+        "temperatureC": 30.4,
+        "apparentTemperatureC": 35.3,
+        "precipitationMm": 0,
+        "windKph": 8.9,
+        "weatherCode": 3,
+        "description": "overcast"
       },
       "daily": {
-        "maxTempC": 29.7,
+        "maxTempC": 32.1,
         "minTempC": 24.8,
-        "precipitationMm": 11.9,
-        "maxWindKph": 9
+        "precipitationMm": 11.1,
+        "maxWindKph": 9.6
       },
-      "observedAt": "2026-06-20T03:00",
-      "riskLevel": "low",
+      "observedAt": "2026-06-20T16:45",
+      "riskLevel": "watch",
       "riskReasons": [
-        "no major automated weather threshold triggered"
+        "heat watch signal"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found low automated weather risk in Bangkok.",
-        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+        "Traditional-media and public-weather scan found watch automated weather risk in Bangkok.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
       "status": "routine"
     },
@@ -1135,20 +1139,20 @@
         "population": 6993262
       },
       "current": {
-        "temperatureC": 29.4,
-        "apparentTemperatureC": 31.1,
+        "temperatureC": 36.5,
+        "apparentTemperatureC": 38.8,
         "precipitationMm": 0,
-        "windKph": 6.1,
+        "windKph": 8.1,
         "weatherCode": 3,
         "description": "overcast"
       },
       "daily": {
-        "maxTempC": 36.4,
-        "minTempC": 28.4,
-        "precipitationMm": 0,
-        "maxWindKph": 14
+        "maxTempC": 36.8,
+        "minTempC": 27.2,
+        "precipitationMm": 1,
+        "maxWindKph": 15.3
       },
-      "observedAt": "2026-06-20T01:30",
+      "observedAt": "2026-06-20T15:15",
       "riskLevel": "watch",
       "riskReasons": [
         "heat watch signal"
@@ -1171,23 +1175,23 @@
         "population": 10349312
       },
       "current": {
-        "temperatureC": 20.2,
-        "apparentTemperatureC": 21.4,
-        "precipitationMm": 2,
-        "windKph": 13.1,
-        "weatherCode": 65,
-        "description": "heavy rain"
+        "temperatureC": 19.9,
+        "apparentTemperatureC": 21.8,
+        "precipitationMm": 0,
+        "windKph": 6,
+        "weatherCode": 3,
+        "description": "overcast"
       },
       "daily": {
         "maxTempC": 22.9,
-        "minTempC": 19.3,
-        "precipitationMm": 47.5,
-        "maxWindKph": 13.5
+        "minTempC": 19.7,
+        "precipitationMm": 56.7,
+        "maxWindKph": 13.2
       },
-      "observedAt": "2026-06-20T05:00",
+      "observedAt": "2026-06-20T18:45",
       "riskLevel": "elevated",
       "riskReasons": [
-        "heavy daily rain forecast (47.5mm)"
+        "heavy daily rain forecast (56.7mm)"
       ],
       "mediaSignals": [],
       "communityLearning": [
@@ -1207,30 +1211,30 @@
         "population": 2332176
       },
       "current": {
-        "temperatureC": 21.9,
-        "apparentTemperatureC": 26.2,
-        "precipitationMm": 0.2,
-        "windKph": 2.2,
-        "weatherCode": 53,
-        "description": "drizzle"
+        "temperatureC": 21.6,
+        "apparentTemperatureC": 23.7,
+        "precipitationMm": 0.3,
+        "windKph": 11.2,
+        "weatherCode": 55,
+        "description": "dense drizzle"
       },
       "daily": {
-        "maxTempC": 23.2,
-        "minTempC": 20.4,
-        "precipitationMm": 43.7,
-        "maxWindKph": 12.7
+        "maxTempC": 23.7,
+        "minTempC": 21.6,
+        "precipitationMm": 25.2,
+        "maxWindKph": 11.9
       },
-      "observedAt": "2026-06-20T05:00",
-      "riskLevel": "elevated",
+      "observedAt": "2026-06-20T18:45",
+      "riskLevel": "watch",
       "riskReasons": [
-        "heavy daily rain forecast (43.7mm)"
+        "notable rain forecast (25.2mm)"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found elevated automated weather risk in Nagoya.",
+        "Traditional-media and public-weather scan found watch automated weather risk in Nagoya.",
         "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
-      "status": "community-watch-needed"
+      "status": "routine"
     },
     {
       "city": {
@@ -1243,20 +1247,20 @@
         "population": 8961989
       },
       "current": {
-        "temperatureC": 24.2,
-        "apparentTemperatureC": 23.4,
+        "temperatureC": 22.8,
+        "apparentTemperatureC": 22.8,
         "precipitationMm": 0,
-        "windKph": 16.2,
-        "weatherCode": 0,
-        "description": "clear"
+        "windKph": 13,
+        "weatherCode": 3,
+        "description": "overcast"
       },
       "daily": {
-        "maxTempC": 30.1,
-        "minTempC": 18.5,
+        "maxTempC": 25.9,
+        "minTempC": 18,
         "precipitationMm": 0,
-        "maxWindKph": 19.4
+        "maxWindKph": 14
       },
-      "observedAt": "2026-06-19T21:00",
+      "observedAt": "2026-06-20T10:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -1279,20 +1283,20 @@
         "population": 13568357
       },
       "current": {
-        "temperatureC": 24,
-        "apparentTemperatureC": 28.1,
+        "temperatureC": 26.1,
+        "apparentTemperatureC": 28.9,
         "precipitationMm": 0,
-        "windKph": 5.2,
+        "windKph": 8.3,
         "weatherCode": 3,
         "description": "overcast"
       },
       "daily": {
         "maxTempC": 26.8,
-        "minTempC": 23.1,
-        "precipitationMm": 9,
-        "maxWindKph": 11.1
+        "minTempC": 22.6,
+        "precipitationMm": 4.8,
+        "maxWindKph": 10.1
       },
-      "observedAt": "2026-06-20T04:00",
+      "observedAt": "2026-06-20T17:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -1315,20 +1319,20 @@
         "population": 9314685
       },
       "current": {
-        "temperatureC": 21.6,
-        "apparentTemperatureC": 24.9,
+        "temperatureC": 27.4,
+        "apparentTemperatureC": 30.9,
         "precipitationMm": 0,
-        "windKph": 6.7,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 7.6,
+        "weatherCode": 2,
+        "description": "partly cloudy"
       },
       "daily": {
-        "maxTempC": 29.2,
-        "minTempC": 21.5,
-        "precipitationMm": 0,
-        "maxWindKph": 8.3
+        "maxTempC": 28.4,
+        "minTempC": 21.7,
+        "precipitationMm": 2.5,
+        "maxWindKph": 9.5
       },
-      "observedAt": "2026-06-20T04:00",
+      "observedAt": "2026-06-20T17:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -1351,20 +1355,20 @@
         "population": 7153309
       },
       "current": {
-        "temperatureC": 28.3,
-        "apparentTemperatureC": 26.1,
+        "temperatureC": 37.5,
+        "apparentTemperatureC": 36.1,
         "precipitationMm": 0,
-        "windKph": 6.1,
-        "weatherCode": 2,
-        "description": "partly cloudy"
+        "windKph": 12.3,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 36.1,
-        "minTempC": 23.2,
+        "maxTempC": 38,
+        "minTempC": 25.3,
         "precipitationMm": 0,
-        "maxWindKph": 16.5
+        "maxWindKph": 12.3
       },
-      "observedAt": "2026-06-19T23:30",
+      "observedAt": "2026-06-20T13:15",
       "riskLevel": "watch",
       "riskReasons": [
         "heat watch signal"
@@ -1387,20 +1391,20 @@
         "population": 14002598
       },
       "current": {
-        "temperatureC": 26.1,
-        "apparentTemperatureC": 32.5,
-        "precipitationMm": 0,
-        "windKph": 2.3,
-        "weatherCode": 3,
-        "description": "overcast"
+        "temperatureC": 28.5,
+        "apparentTemperatureC": 33.4,
+        "precipitationMm": 0.1,
+        "windKph": 10.7,
+        "weatherCode": 51,
+        "description": "light drizzle"
       },
       "daily": {
-        "maxTempC": 33.4,
+        "maxTempC": 33.7,
         "minTempC": 25.7,
-        "precipitationMm": 3.1,
-        "maxWindKph": 15
+        "precipitationMm": 3,
+        "maxWindKph": 15.3
       },
-      "observedAt": "2026-06-20T03:00",
+      "observedAt": "2026-06-20T16:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -1423,20 +1427,20 @@
         "population": 2776168
       },
       "current": {
-        "temperatureC": 21.9,
-        "apparentTemperatureC": 23,
+        "temperatureC": 24.7,
+        "apparentTemperatureC": 26.7,
         "precipitationMm": 0,
-        "windKph": 10.9,
-        "weatherCode": 0,
-        "description": "clear"
+        "windKph": 7,
+        "weatherCode": 1,
+        "description": "mainly clear"
       },
       "daily": {
-        "maxTempC": 24.7,
-        "minTempC": 20.1,
+        "maxTempC": 25.5,
+        "minTempC": 19.6,
         "precipitationMm": 0,
-        "maxWindKph": 12.8
+        "maxWindKph": 18.6
       },
-      "observedAt": "2026-06-19T21:00",
+      "observedAt": "2026-06-20T10:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -1459,20 +1463,20 @@
         "population": 10392693
       },
       "current": {
-        "temperatureC": 23.5,
-        "apparentTemperatureC": 27.6,
+        "temperatureC": 30,
+        "apparentTemperatureC": 33.7,
         "precipitationMm": 0,
-        "windKph": 5.2,
+        "windKph": 8.2,
         "weatherCode": 0,
         "description": "clear"
       },
       "daily": {
-        "maxTempC": 31.7,
-        "minTempC": 23.3,
+        "maxTempC": 31.1,
+        "minTempC": 23.2,
         "precipitationMm": 0,
-        "maxWindKph": 6
+        "maxWindKph": 8.1
       },
-      "observedAt": "2026-06-20T04:00",
+      "observedAt": "2026-06-20T17:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -1495,30 +1499,30 @@
         "population": 6357693
       },
       "current": {
-        "temperatureC": 31.7,
-        "apparentTemperatureC": 34.3,
+        "temperatureC": 39,
+        "apparentTemperatureC": 41.1,
         "precipitationMm": 0,
-        "windKph": 12.1,
-        "weatherCode": 0,
-        "description": "clear"
+        "windKph": 10.1,
+        "weatherCode": 2,
+        "description": "partly cloudy"
       },
       "daily": {
-        "maxTempC": 38.9,
-        "minTempC": 29.6,
-        "precipitationMm": 0.9,
-        "maxWindKph": 15.1
+        "maxTempC": 38.8,
+        "minTempC": 29.8,
+        "precipitationMm": 1.5,
+        "maxWindKph": 15.5
       },
-      "observedAt": "2026-06-20T01:30",
-      "riskLevel": "watch",
+      "observedAt": "2026-06-20T15:15",
+      "riskLevel": "elevated",
       "riskReasons": [
-        "heat watch signal"
+        "extreme heat signal"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found watch automated weather risk in Ahmedabad.",
+        "Traditional-media and public-weather scan found elevated automated weather risk in Ahmedabad.",
         "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
-      "status": "routine"
+      "status": "community-watch-needed"
     },
     {
       "city": {
@@ -1531,28 +1535,28 @@
         "population": 1453975
       },
       "current": {
-        "temperatureC": 23.9,
-        "apparentTemperatureC": 29.3,
-        "precipitationMm": 0,
-        "windKph": 3,
-        "weatherCode": 1,
-        "description": "mainly clear"
+        "temperatureC": 27.9,
+        "apparentTemperatureC": 33.3,
+        "precipitationMm": 0.2,
+        "windKph": 4.8,
+        "weatherCode": 53,
+        "description": "drizzle"
       },
       "daily": {
-        "maxTempC": 31.3,
-        "minTempC": 23.5,
-        "precipitationMm": 17.4,
-        "maxWindKph": 9.3
+        "maxTempC": 32.8,
+        "minTempC": 24.1,
+        "precipitationMm": 8.9,
+        "maxWindKph": 9.8
       },
-      "observedAt": "2026-06-20T04:00",
-      "riskLevel": "watch",
+      "observedAt": "2026-06-20T17:45",
+      "riskLevel": "low",
       "riskReasons": [
-        "notable rain forecast (17.4mm)"
+        "no major automated weather threshold triggered"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found watch automated weather risk in Kuala Lumpur.",
-        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+        "Traditional-media and public-weather scan found low automated weather risk in Kuala Lumpur.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
       ],
       "status": "routine"
     },
@@ -1567,20 +1571,20 @@
         "population": 8804190
       },
       "current": {
-        "temperatureC": 29,
-        "apparentTemperatureC": 26.3,
+        "temperatureC": 18.3,
+        "apparentTemperatureC": 15,
         "precipitationMm": 0,
-        "windKph": 22.5,
-        "weatherCode": 1,
-        "description": "mainly clear"
+        "windKph": 20.6,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 29,
-        "minTempC": 21.2,
+        "maxTempC": 29.4,
+        "minTempC": 18.4,
         "precipitationMm": 0,
-        "maxWindKph": 25.6
+        "maxWindKph": 29.3
       },
-      "observedAt": "2026-06-19T16:00",
+      "observedAt": "2026-06-20T05:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -1603,30 +1607,30 @@
         "population": 9236032
       },
       "current": {
-        "temperatureC": 25.5,
-        "apparentTemperatureC": 30.1,
-        "precipitationMm": 0,
-        "windKph": 7,
-        "weatherCode": 3,
-        "description": "overcast"
+        "temperatureC": 27,
+        "apparentTemperatureC": 33.4,
+        "precipitationMm": 0.3,
+        "windKph": 8.1,
+        "weatherCode": 96,
+        "description": "thunderstorm with hail"
       },
       "daily": {
-        "maxTempC": 31.8,
-        "minTempC": 24.7,
-        "precipitationMm": 31,
+        "maxTempC": 31.7,
+        "minTempC": 25.3,
+        "precipitationMm": 13,
         "maxWindKph": 13.9
       },
-      "observedAt": "2026-06-20T04:00",
-      "riskLevel": "elevated",
+      "observedAt": "2026-06-20T17:45",
+      "riskLevel": "watch",
       "riskReasons": [
-        "heavy daily rain forecast (31mm)"
+        "active thunderstorm with hail"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found elevated automated weather risk in Hangzhou.",
+        "Traditional-media and public-weather scan found watch automated weather risk in Hangzhou.",
         "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
-      "status": "community-watch-needed"
+      "status": "routine"
     },
     {
       "city": {
@@ -1639,30 +1643,31 @@
         "population": 4591246
       },
       "current": {
-        "temperatureC": 29,
-        "apparentTemperatureC": 33.6,
-        "precipitationMm": 0,
-        "windKph": 12.2,
-        "weatherCode": 0,
-        "description": "clear"
+        "temperatureC": 33.3,
+        "apparentTemperatureC": 37.5,
+        "precipitationMm": 0.1,
+        "windKph": 17.5,
+        "weatherCode": 95,
+        "description": "thunderstorm"
       },
       "daily": {
-        "maxTempC": 33.8,
-        "minTempC": 28.3,
-        "precipitationMm": 1.6,
-        "maxWindKph": 18.7
+        "maxTempC": 34.5,
+        "minTempC": 27.9,
+        "precipitationMm": 2.2,
+        "maxWindKph": 17.8
       },
-      "observedAt": "2026-06-20T01:30",
-      "riskLevel": "low",
+      "observedAt": "2026-06-20T15:15",
+      "riskLevel": "elevated",
       "riskReasons": [
-        "no major automated weather threshold triggered"
+        "heat watch signal",
+        "active thunderstorm"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found low automated weather risk in Surat.",
-        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+        "Traditional-media and public-weather scan found elevated automated weather risk in Surat.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
-      "status": "routine"
+      "status": "community-watch-needed"
     },
     {
       "city": {
@@ -1675,20 +1680,20 @@
         "population": 1647642
       },
       "current": {
-        "temperatureC": 20.6,
-        "apparentTemperatureC": 23.9,
+        "temperatureC": 28.3,
+        "apparentTemperatureC": 31.5,
         "precipitationMm": 0,
-        "windKph": 3.9,
+        "windKph": 3.5,
         "weatherCode": 3,
         "description": "overcast"
       },
       "daily": {
-        "maxTempC": 29,
-        "minTempC": 20.4,
+        "maxTempC": 28.6,
+        "minTempC": 20.2,
         "precipitationMm": 0,
-        "maxWindKph": 6.9
+        "maxWindKph": 7.4
       },
-      "observedAt": "2026-06-20T04:00",
+      "observedAt": "2026-06-20T17:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -1710,20 +1715,20 @@
         "population": 7396076
       },
       "current": {
-        "temperatureC": 28,
-        "apparentTemperatureC": 32.5,
-        "precipitationMm": 0,
-        "windKph": 17.1,
+        "temperatureC": 29.4,
+        "apparentTemperatureC": 34,
+        "precipitationMm": 0.1,
+        "windKph": 17.3,
         "weatherCode": 95,
         "description": "thunderstorm"
       },
       "daily": {
-        "maxTempC": 30.7,
-        "minTempC": 27.3,
-        "precipitationMm": 6.4,
-        "maxWindKph": 20
+        "maxTempC": 31,
+        "minTempC": 27.6,
+        "precipitationMm": 5.3,
+        "maxWindKph": 20.1
       },
-      "observedAt": "2026-06-20T04:00",
+      "observedAt": "2026-06-20T17:45",
       "riskLevel": "watch",
       "riskReasons": [
         "active thunderstorm"
@@ -1746,20 +1751,20 @@
         "population": 4205961
       },
       "current": {
-        "temperatureC": 36.2,
-        "apparentTemperatureC": 32.6,
+        "temperatureC": 41.6,
+        "apparentTemperatureC": 40.8,
         "precipitationMm": 0,
-        "windKph": 8.4,
+        "windKph": 6.7,
         "weatherCode": 0,
         "description": "clear"
       },
       "daily": {
-        "maxTempC": 42.7,
-        "minTempC": 31.9,
+        "maxTempC": 42.6,
+        "minTempC": 30.3,
         "precipitationMm": 0,
-        "maxWindKph": 12.7
+        "maxWindKph": 14.6
       },
-      "observedAt": "2026-06-19T23:00",
+      "observedAt": "2026-06-20T12:45",
       "riskLevel": "elevated",
       "riskReasons": [
         "extreme heat signal"
@@ -1782,28 +1787,28 @@
         "population": 7050000
       },
       "current": {
-        "temperatureC": 21.2,
-        "apparentTemperatureC": 23,
-        "precipitationMm": 0,
-        "windKph": 8.9,
-        "weatherCode": 3,
-        "description": "overcast"
+        "temperatureC": 22.9,
+        "apparentTemperatureC": 25.1,
+        "precipitationMm": 0.1,
+        "windKph": 6.1,
+        "weatherCode": 51,
+        "description": "light drizzle"
       },
       "daily": {
-        "maxTempC": 24,
-        "minTempC": 19,
-        "precipitationMm": 24.3,
-        "maxWindKph": 11.5
+        "maxTempC": 24.4,
+        "minTempC": 19.7,
+        "precipitationMm": 9.7,
+        "maxWindKph": 10.4
       },
-      "observedAt": "2026-06-20T04:00",
-      "riskLevel": "watch",
+      "observedAt": "2026-06-20T17:45",
+      "riskLevel": "low",
       "riskReasons": [
-        "notable rain forecast (24.3mm)"
+        "no major automated weather threshold triggered"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found watch automated weather risk in Shenyang.",
-        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+        "Traditional-media and public-weather scan found low automated weather risk in Shenyang.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
       ],
       "status": "routine"
     },
@@ -1818,20 +1823,20 @@
         "population": 7216000
       },
       "current": {
-        "temperatureC": 36.7,
-        "apparentTemperatureC": 36,
+        "temperatureC": 45.4,
+        "apparentTemperatureC": 46,
         "precipitationMm": 0,
-        "windKph": 3.2,
+        "windKph": 4.3,
         "weatherCode": 0,
         "description": "clear"
       },
       "daily": {
-        "maxTempC": 46,
-        "minTempC": 30.3,
+        "maxTempC": 46.7,
+        "minTempC": 31.2,
         "precipitationMm": 0,
-        "maxWindKph": 6.9
+        "maxWindKph": 6.8
       },
-      "observedAt": "2026-06-19T23:00",
+      "observedAt": "2026-06-20T12:45",
       "riskLevel": "elevated",
       "riskReasons": [
         "extreme heat signal"
@@ -1854,30 +1859,31 @@
         "population": 9644871
       },
       "current": {
-        "temperatureC": 27,
-        "apparentTemperatureC": 32.1,
+        "temperatureC": 29.9,
+        "apparentTemperatureC": 35.2,
         "precipitationMm": 0,
-        "windKph": 11.9,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 14.5,
+        "weatherCode": 95,
+        "description": "thunderstorm"
       },
       "daily": {
-        "maxTempC": 30.9,
-        "minTempC": 26.4,
-        "precipitationMm": 6.7,
-        "maxWindKph": 15.4
+        "maxTempC": 32.6,
+        "minTempC": 26.5,
+        "precipitationMm": 2.8,
+        "maxWindKph": 16.6
       },
-      "observedAt": "2026-06-20T04:00",
-      "riskLevel": "low",
+      "observedAt": "2026-06-20T17:45",
+      "riskLevel": "elevated",
       "riskReasons": [
-        "no major automated weather threshold triggered"
+        "heat watch signal",
+        "active thunderstorm"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found low automated weather risk in Dongguan.",
-        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+        "Traditional-media and public-weather scan found elevated automated weather risk in Dongguan.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
-      "status": "routine"
+      "status": "community-watch-needed"
     },
     {
       "city": {
@@ -1890,30 +1896,31 @@
         "population": 9042509
       },
       "current": {
-        "temperatureC": 26.9,
-        "apparentTemperatureC": 32.2,
+        "temperatureC": 31.8,
+        "apparentTemperatureC": 36.3,
         "precipitationMm": 0,
-        "windKph": 10.3,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 14.1,
+        "weatherCode": 95,
+        "description": "thunderstorm"
       },
       "daily": {
-        "maxTempC": 31.8,
-        "minTempC": 26.7,
-        "precipitationMm": 3.7,
-        "maxWindKph": 16.9
+        "maxTempC": 34,
+        "minTempC": 26.5,
+        "precipitationMm": 1.6,
+        "maxWindKph": 18.4
       },
-      "observedAt": "2026-06-20T04:00",
-      "riskLevel": "low",
+      "observedAt": "2026-06-20T17:45",
+      "riskLevel": "elevated",
       "riskReasons": [
-        "no major automated weather threshold triggered"
+        "heat watch signal",
+        "active thunderstorm"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found low automated weather risk in Foshan.",
-        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
+        "Traditional-media and public-weather scan found elevated automated weather risk in Foshan.",
+        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
-      "status": "routine"
+      "status": "community-watch-needed"
     },
     {
       "city": {
@@ -1926,20 +1933,20 @@
         "population": 5383728
       },
       "current": {
-        "temperatureC": 23.2,
-        "apparentTemperatureC": 25.4,
-        "precipitationMm": 0,
-        "windKph": 11.9,
-        "weatherCode": 0,
-        "description": "clear"
+        "temperatureC": 26.5,
+        "apparentTemperatureC": 28.6,
+        "precipitationMm": 0.2,
+        "windKph": 18,
+        "weatherCode": 53,
+        "description": "drizzle"
       },
       "daily": {
-        "maxTempC": 28.1,
-        "minTempC": 21.5,
-        "precipitationMm": 1.7,
-        "maxWindKph": 20.4
+        "maxTempC": 27.3,
+        "minTempC": 22.4,
+        "precipitationMm": 2.2,
+        "maxWindKph": 22.4
       },
-      "observedAt": "2026-06-19T23:00",
+      "observedAt": "2026-06-20T12:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -1962,20 +1969,20 @@
         "population": 3124458
       },
       "current": {
-        "temperatureC": 24.2,
-        "apparentTemperatureC": 26.9,
+        "temperatureC": 34.8,
+        "apparentTemperatureC": 35.7,
         "precipitationMm": 0,
-        "windKph": 9.5,
-        "weatherCode": 2,
-        "description": "partly cloudy"
+        "windKph": 13.9,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 35.7,
+        "maxTempC": 35.2,
         "minTempC": 23.3,
-        "precipitationMm": 1.2,
-        "maxWindKph": 18.4
+        "precipitationMm": 0.7,
+        "maxWindKph": 19.1
       },
-      "observedAt": "2026-06-20T01:30",
+      "observedAt": "2026-06-20T15:15",
       "riskLevel": "watch",
       "riskReasons": [
         "heat watch signal"
@@ -1998,20 +2005,20 @@
         "population": 4837295
       },
       "current": {
-        "temperatureC": 16.5,
-        "apparentTemperatureC": 14.4,
+        "temperatureC": 7.6,
+        "apparentTemperatureC": 5.8,
         "precipitationMm": 0,
-        "windKph": 4.4,
-        "weatherCode": 2,
-        "description": "partly cloudy"
+        "windKph": 1.5,
+        "weatherCode": 3,
+        "description": "overcast"
       },
       "daily": {
-        "maxTempC": 16.7,
-        "minTempC": 5.9,
+        "maxTempC": 14.4,
+        "minTempC": 7.1,
         "precipitationMm": 0,
-        "maxWindKph": 5.3
+        "maxWindKph": 7.3
       },
-      "observedAt": "2026-06-19T16:00",
+      "observedAt": "2026-06-20T05:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2034,20 +2041,20 @@
         "population": 3255944
       },
       "current": {
-        "temperatureC": 30.7,
-        "apparentTemperatureC": 29.4,
+        "temperatureC": 29.7,
+        "apparentTemperatureC": 30.5,
         "precipitationMm": 0,
-        "windKph": 6.1,
+        "windKph": 8,
         "weatherCode": 3,
         "description": "overcast"
       },
       "daily": {
-        "maxTempC": 35.1,
-        "minTempC": 22.2,
-        "precipitationMm": 0.1,
-        "maxWindKph": 9.3
+        "maxTempC": 36.8,
+        "minTempC": 23.7,
+        "precipitationMm": 0,
+        "maxWindKph": 14.4
       },
-      "observedAt": "2026-06-19T22:00",
+      "observedAt": "2026-06-20T11:45",
       "riskLevel": "watch",
       "riskReasons": [
         "heat watch signal"
@@ -2070,20 +2077,20 @@
         "population": 2794356
       },
       "current": {
-        "temperatureC": 21.9,
-        "apparentTemperatureC": 19.1,
+        "temperatureC": 12.9,
+        "apparentTemperatureC": 10.5,
         "precipitationMm": 0,
-        "windKph": 28.7,
+        "windKph": 13.3,
         "weatherCode": 0,
         "description": "clear"
       },
       "daily": {
-        "maxTempC": 21.9,
-        "minTempC": 14,
+        "maxTempC": 23.9,
+        "minTempC": 12.9,
         "precipitationMm": 0,
-        "maxWindKph": 29
+        "maxWindKph": 18.4
       },
-      "observedAt": "2026-06-19T16:00",
+      "observedAt": "2026-06-20T05:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2106,20 +2113,20 @@
         "population": 2721564
       },
       "current": {
-        "temperatureC": 19.7,
-        "apparentTemperatureC": 19,
+        "temperatureC": 11.5,
+        "apparentTemperatureC": 9.9,
         "precipitationMm": 0,
-        "windKph": 5.6,
-        "weatherCode": 0,
-        "description": "clear"
+        "windKph": 7.1,
+        "weatherCode": 2,
+        "description": "partly cloudy"
       },
       "daily": {
-        "maxTempC": 20.8,
-        "minTempC": 12,
+        "maxTempC": 22.4,
+        "minTempC": 11.4,
         "precipitationMm": 0,
-        "maxWindKph": 13.7
+        "maxWindKph": 9.8
       },
-      "observedAt": "2026-06-19T17:00",
+      "observedAt": "2026-06-20T06:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2141,20 +2148,20 @@
         "population": 5638700
       },
       "current": {
-        "temperatureC": 26.7,
-        "apparentTemperatureC": 32.7,
+        "temperatureC": 29.3,
+        "apparentTemperatureC": 33.9,
         "precipitationMm": 0,
-        "windKph": 2.1,
+        "windKph": 8.8,
         "weatherCode": 3,
         "description": "overcast"
       },
       "daily": {
-        "maxTempC": 29.6,
-        "minTempC": 24.7,
-        "precipitationMm": 8.7,
-        "maxWindKph": 13
+        "maxTempC": 29.3,
+        "minTempC": 25.5,
+        "precipitationMm": 2.1,
+        "maxWindKph": 10.9
       },
-      "observedAt": "2026-06-20T04:00",
+      "observedAt": "2026-06-20T17:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2177,20 +2184,20 @@
         "population": 1974647
       },
       "current": {
-        "temperatureC": 35.3,
-        "apparentTemperatureC": 35.4,
+        "temperatureC": 41.3,
+        "apparentTemperatureC": 42,
         "precipitationMm": 0,
-        "windKph": 5.3,
+        "windKph": 7.5,
         "weatherCode": 0,
         "description": "clear"
       },
       "daily": {
-        "maxTempC": 42,
-        "minTempC": 29.2,
+        "maxTempC": 42.7,
+        "minTempC": 29.8,
         "precipitationMm": 0,
-        "maxWindKph": 14.4
+        "maxWindKph": 10.4
       },
-      "observedAt": "2026-06-19T22:00",
+      "observedAt": "2026-06-20T11:45",
       "riskLevel": "elevated",
       "riskReasons": [
         "extreme heat signal"
@@ -2213,20 +2220,20 @@
         "population": 9418183
       },
       "current": {
-        "temperatureC": 11,
-        "apparentTemperatureC": 7.9,
+        "temperatureC": 13.9,
+        "apparentTemperatureC": 9.9,
         "precipitationMm": 0,
-        "windKph": 15.8,
+        "windKph": 18.4,
         "weatherCode": 3,
         "description": "overcast"
       },
       "daily": {
-        "maxTempC": 15.6,
-        "minTempC": 7.7,
-        "precipitationMm": 0,
-        "maxWindKph": 15.8
+        "maxTempC": 14.1,
+        "minTempC": 6.8,
+        "precipitationMm": 0.9,
+        "maxWindKph": 19.6
       },
-      "observedAt": "2026-06-19T22:00",
+      "observedAt": "2026-06-20T11:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2249,20 +2256,20 @@
         "population": 4913879
       },
       "current": {
-        "temperatureC": 19.4,
-        "apparentTemperatureC": 21.4,
+        "temperatureC": 21.8,
+        "apparentTemperatureC": 24.2,
         "precipitationMm": 0,
-        "windKph": 9.3,
+        "windKph": 8,
         "weatherCode": 1,
         "description": "mainly clear"
       },
       "daily": {
-        "maxTempC": 25.3,
-        "minTempC": 19.4,
-        "precipitationMm": 0,
-        "maxWindKph": 15.5
+        "maxTempC": 25.4,
+        "minTempC": 19.3,
+        "precipitationMm": 1.4,
+        "maxWindKph": 14.3
       },
-      "observedAt": "2026-06-20T04:00",
+      "observedAt": "2026-06-20T17:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2285,20 +2292,20 @@
         "population": 7172451
       },
       "current": {
-        "temperatureC": 21,
-        "apparentTemperatureC": 23.2,
+        "temperatureC": 26.6,
+        "apparentTemperatureC": 29,
         "precipitationMm": 0,
-        "windKph": 10.9,
+        "windKph": 12.5,
         "weatherCode": 3,
         "description": "overcast"
       },
       "daily": {
-        "maxTempC": 29,
-        "minTempC": 20.7,
-        "precipitationMm": 0.3,
-        "maxWindKph": 20
+        "maxTempC": 28.4,
+        "minTempC": 20.6,
+        "precipitationMm": 0.1,
+        "maxWindKph": 21.8
       },
-      "observedAt": "2026-06-20T04:00",
+      "observedAt": "2026-06-20T17:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2321,20 +2328,20 @@
         "population": 4253913
       },
       "current": {
-        "temperatureC": 20,
-        "apparentTemperatureC": 22.7,
+        "temperatureC": 30.9,
+        "apparentTemperatureC": 34.1,
         "precipitationMm": 0,
-        "windKph": 3.8,
-        "weatherCode": 0,
-        "description": "clear"
+        "windKph": 3.6,
+        "weatherCode": 3,
+        "description": "overcast"
       },
       "daily": {
         "maxTempC": 31.4,
-        "minTempC": 19.6,
+        "minTempC": 19.9,
         "precipitationMm": 0,
-        "maxWindKph": 8
+        "maxWindKph": 8.8
       },
-      "observedAt": "2026-06-20T04:00",
+      "observedAt": "2026-06-20T17:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2357,20 +2364,20 @@
         "population": 1686208
       },
       "current": {
-        "temperatureC": 24.8,
-        "apparentTemperatureC": 26.5,
+        "temperatureC": 27.9,
+        "apparentTemperatureC": 30.1,
         "precipitationMm": 0,
-        "windKph": 6.6,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 12.6,
+        "weatherCode": 1,
+        "description": "mainly clear"
       },
       "daily": {
-        "maxTempC": 28.6,
-        "minTempC": 21.5,
-        "precipitationMm": 0.1,
-        "maxWindKph": 14.4
+        "maxTempC": 29.6,
+        "minTempC": 22,
+        "precipitationMm": 0,
+        "maxWindKph": 12.9
       },
-      "observedAt": "2026-06-19T22:00",
+      "observedAt": "2026-06-20T11:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2393,20 +2400,20 @@
         "population": 5351935
       },
       "current": {
-        "temperatureC": 15.6,
-        "apparentTemperatureC": 13.9,
+        "temperatureC": 23.3,
+        "apparentTemperatureC": 23.2,
         "precipitationMm": 0,
-        "windKph": 14,
-        "weatherCode": 2,
-        "description": "partly cloudy"
+        "windKph": 12.2,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 19.5,
-        "minTempC": 12.8,
+        "maxTempC": 24,
+        "minTempC": 15.3,
         "precipitationMm": 0,
-        "maxWindKph": 20.5
+        "maxWindKph": 17.6
       },
-      "observedAt": "2026-06-19T23:00",
+      "observedAt": "2026-06-20T12:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2429,23 +2436,23 @@
         "population": 4477638
       },
       "current": {
-        "temperatureC": 26.1,
-        "apparentTemperatureC": 32.1,
-        "precipitationMm": 0,
+        "temperatureC": 28.8,
+        "apparentTemperatureC": 34.4,
+        "precipitationMm": 0.3,
         "windKph": 6.3,
-        "weatherCode": 3,
-        "description": "overcast"
+        "weatherCode": 95,
+        "description": "thunderstorm"
       },
       "daily": {
-        "maxTempC": 30.6,
-        "minTempC": 25.7,
-        "precipitationMm": 17.1,
-        "maxWindKph": 14.8
+        "maxTempC": 31.2,
+        "minTempC": 25.3,
+        "precipitationMm": 6.1,
+        "maxWindKph": 12.6
       },
-      "observedAt": "2026-06-20T02:30",
+      "observedAt": "2026-06-20T16:15",
       "riskLevel": "watch",
       "riskReasons": [
-        "notable rain forecast (17.1mm)"
+        "active thunderstorm"
       ],
       "mediaSignals": [],
       "communityLearning": [
@@ -2465,20 +2472,20 @@
         "population": 5263542
       },
       "current": {
-        "temperatureC": 24.3,
-        "apparentTemperatureC": 25.8,
+        "temperatureC": 26.9,
+        "apparentTemperatureC": 31.2,
         "precipitationMm": 0,
-        "windKph": 9,
-        "weatherCode": 0,
-        "description": "clear"
+        "windKph": 13.5,
+        "weatherCode": 2,
+        "description": "partly cloudy"
       },
       "daily": {
-        "maxTempC": 28.4,
-        "minTempC": 23.3,
+        "maxTempC": 27,
+        "minTempC": 23,
         "precipitationMm": 0,
-        "maxWindKph": 15
+        "maxWindKph": 15.6
       },
-      "observedAt": "2026-06-19T23:00",
+      "observedAt": "2026-06-20T12:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2501,20 +2508,20 @@
         "population": 1612392
       },
       "current": {
-        "temperatureC": 25,
-        "apparentTemperatureC": 28.9,
+        "temperatureC": 26.3,
+        "apparentTemperatureC": 31.2,
         "precipitationMm": 0,
-        "windKph": 11.4,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 6.3,
+        "weatherCode": 2,
+        "description": "partly cloudy"
       },
       "daily": {
-        "maxTempC": 27.8,
-        "minTempC": 23.8,
-        "precipitationMm": 6.6,
-        "maxWindKph": 12.8
+        "maxTempC": 27.5,
+        "minTempC": 24,
+        "precipitationMm": 9.3,
+        "maxWindKph": 12.4
       },
-      "observedAt": "2026-06-20T05:00",
+      "observedAt": "2026-06-20T18:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2537,20 +2544,20 @@
         "population": 6321017
       },
       "current": {
-        "temperatureC": 24.6,
-        "apparentTemperatureC": 29.2,
-        "precipitationMm": 0.2,
-        "windKph": 7,
-        "weatherCode": 53,
-        "description": "drizzle"
+        "temperatureC": 26.8,
+        "apparentTemperatureC": 31,
+        "precipitationMm": 0,
+        "windKph": 7.1,
+        "weatherCode": 3,
+        "description": "overcast"
       },
       "daily": {
-        "maxTempC": 28.5,
-        "minTempC": 24.6,
-        "precipitationMm": 4.2,
-        "maxWindKph": 13.6
+        "maxTempC": 28.3,
+        "minTempC": 23,
+        "precipitationMm": 13.2,
+        "maxWindKph": 12.6
       },
-      "observedAt": "2026-06-19T20:00",
+      "observedAt": "2026-06-20T09:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2573,23 +2580,23 @@
         "population": 1385629
       },
       "current": {
-        "temperatureC": 27.1,
-        "apparentTemperatureC": 31,
-        "precipitationMm": 0,
-        "windKph": 4.2,
-        "weatherCode": 2,
-        "description": "partly cloudy"
+        "temperatureC": 17.6,
+        "apparentTemperatureC": 19.6,
+        "precipitationMm": 0.5,
+        "windKph": 3.1,
+        "weatherCode": 80,
+        "description": "rain showers"
       },
       "daily": {
-        "maxTempC": 27.6,
-        "minTempC": 17.6,
-        "precipitationMm": 16.4,
-        "maxWindKph": 10.5
+        "maxTempC": 24.7,
+        "minTempC": 17.3,
+        "precipitationMm": 18.7,
+        "maxWindKph": 11
       },
-      "observedAt": "2026-06-19T14:00",
+      "observedAt": "2026-06-20T03:45",
       "riskLevel": "watch",
       "riskReasons": [
-        "notable rain forecast (16.4mm)"
+        "notable rain forecast (18.7mm)"
       ],
       "mediaSignals": [],
       "communityLearning": [
@@ -2609,20 +2616,20 @@
         "population": 3517182
       },
       "current": {
-        "temperatureC": 15.9,
-        "apparentTemperatureC": 15.5,
+        "temperatureC": 23.3,
+        "apparentTemperatureC": 23.2,
         "precipitationMm": 0,
-        "windKph": 3.8,
-        "weatherCode": 1,
-        "description": "mainly clear"
+        "windKph": 10.4,
+        "weatherCode": 3,
+        "description": "overcast"
       },
       "daily": {
-        "maxTempC": 21.5,
-        "minTempC": 15.9,
-        "precipitationMm": 2.6,
-        "maxWindKph": 12.7
+        "maxTempC": 24.5,
+        "minTempC": 12.2,
+        "precipitationMm": 0,
+        "maxWindKph": 11.7
       },
-      "observedAt": "2026-06-19T23:00",
+      "observedAt": "2026-06-20T12:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2645,20 +2652,20 @@
         "population": 3920222
       },
       "current": {
-        "temperatureC": 25.5,
-        "apparentTemperatureC": 30.9,
-        "precipitationMm": 0.2,
-        "windKph": 10.1,
-        "weatherCode": 53,
-        "description": "drizzle"
+        "temperatureC": 29.2,
+        "apparentTemperatureC": 33.3,
+        "precipitationMm": 0,
+        "windKph": 17.2,
+        "weatherCode": 3,
+        "description": "overcast"
       },
       "daily": {
-        "maxTempC": 29.2,
-        "minTempC": 25.2,
-        "precipitationMm": 12.3,
-        "maxWindKph": 14.1
+        "maxTempC": 29.5,
+        "minTempC": 25,
+        "precipitationMm": 13.6,
+        "maxWindKph": 18.4
       },
-      "observedAt": "2026-06-20T02:00",
+      "observedAt": "2026-06-20T15:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2681,20 +2688,20 @@
         "population": 5350705
       },
       "current": {
-        "temperatureC": 11.3,
-        "apparentTemperatureC": 9.2,
-        "precipitationMm": 0.1,
-        "windKph": 14.6,
-        "weatherCode": 51,
-        "description": "light drizzle"
+        "temperatureC": 10.9,
+        "apparentTemperatureC": 9.6,
+        "precipitationMm": 0,
+        "windKph": 5.8,
+        "weatherCode": 3,
+        "description": "overcast"
       },
       "daily": {
-        "maxTempC": 12.9,
+        "maxTempC": 13.2,
         "minTempC": 10,
-        "precipitationMm": 14.6,
-        "maxWindKph": 17.1
+        "precipitationMm": 9.5,
+        "maxWindKph": 18.9
       },
-      "observedAt": "2026-06-20T06:00",
+      "observedAt": "2026-06-20T19:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2717,20 +2724,20 @@
         "population": 5557233
       },
       "current": {
-        "temperatureC": 12.4,
-        "apparentTemperatureC": 10.2,
+        "temperatureC": 14.5,
+        "apparentTemperatureC": 12.7,
         "precipitationMm": 0,
-        "windKph": 12.2,
+        "windKph": 8.5,
         "weatherCode": 0,
         "description": "clear"
       },
       "daily": {
-        "maxTempC": 18.8,
-        "minTempC": 11.6,
+        "maxTempC": 19.1,
+        "minTempC": 11.9,
         "precipitationMm": 0,
-        "maxWindKph": 17.2
+        "maxWindKph": 15.8
       },
-      "observedAt": "2026-06-20T06:00",
+      "observedAt": "2026-06-20T19:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2753,32 +2760,30 @@
         "population": 1135512
       },
       "current": {
-        "temperatureC": 38,
-        "apparentTemperatureC": 42.4,
+        "temperatureC": 22,
+        "apparentTemperatureC": 25.9,
         "precipitationMm": 0,
-        "windKph": 18.1,
-        "weatherCode": 95,
-        "description": "thunderstorm"
+        "windKph": 4.7,
+        "weatherCode": 3,
+        "description": "overcast"
       },
       "daily": {
-        "maxTempC": 38,
-        "minTempC": 23.8,
-        "precipitationMm": 17.8,
-        "maxWindKph": 30.6
+        "maxTempC": 27.3,
+        "minTempC": 21.7,
+        "precipitationMm": 0.5,
+        "maxWindKph": 9.5
       },
-      "observedAt": "2026-06-19T14:00",
-      "riskLevel": "high",
+      "observedAt": "2026-06-20T03:45",
+      "riskLevel": "low",
       "riskReasons": [
-        "notable rain forecast (17.8mm)",
-        "extreme heat signal",
-        "active thunderstorm"
+        "no major automated weather threshold triggered"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found high automated weather risk in Monterrey.",
-        "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
+        "Traditional-media and public-weather scan found low automated weather risk in Monterrey.",
+        "Community prompt: keep this city in routine watch; invite local corrections if official/media picture misses lived conditions."
       ],
-      "status": "community-watch-needed"
+      "status": "routine"
     },
     {
       "city": {
@@ -2791,20 +2796,20 @@
         "population": 3860000
       },
       "current": {
-        "temperatureC": 14.2,
-        "apparentTemperatureC": 13.2,
+        "temperatureC": 22.3,
+        "apparentTemperatureC": 19.5,
         "precipitationMm": 0,
-        "windKph": 4.3,
-        "weatherCode": 1,
-        "description": "mainly clear"
+        "windKph": 15.8,
+        "weatherCode": 2,
+        "description": "partly cloudy"
       },
       "daily": {
-        "maxTempC": 23,
-        "minTempC": 10.6,
-        "precipitationMm": 1.5,
-        "maxWindKph": 19.4
+        "maxTempC": 23.1,
+        "minTempC": 9.6,
+        "precipitationMm": 0.6,
+        "maxWindKph": 17
       },
-      "observedAt": "2026-06-19T23:00",
+      "observedAt": "2026-06-20T12:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2827,20 +2832,20 @@
         "population": 4397073
       },
       "current": {
-        "temperatureC": 18.2,
-        "apparentTemperatureC": 18.5,
+        "temperatureC": 22.1,
+        "apparentTemperatureC": 23.3,
         "precipitationMm": 0,
-        "windKph": 5.8,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 7.7,
+        "weatherCode": 1,
+        "description": "mainly clear"
       },
       "daily": {
-        "maxTempC": 24.2,
-        "minTempC": 14.4,
-        "precipitationMm": 0.5,
-        "maxWindKph": 11.5
+        "maxTempC": 23.4,
+        "minTempC": 14.7,
+        "precipitationMm": 1.3,
+        "maxWindKph": 11.7
       },
-      "observedAt": "2026-06-19T23:00",
+      "observedAt": "2026-06-20T12:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2863,20 +2868,20 @@
         "population": 4772846
       },
       "current": {
-        "temperatureC": 14.8,
-        "apparentTemperatureC": 14.3,
+        "temperatureC": 24.4,
+        "apparentTemperatureC": 24.1,
         "precipitationMm": 0,
-        "windKph": 4,
+        "windKph": 5.2,
         "weatherCode": 0,
         "description": "clear"
       },
       "daily": {
-        "maxTempC": 21.7,
-        "minTempC": 12.3,
+        "maxTempC": 26.7,
+        "minTempC": 12.8,
         "precipitationMm": 0,
-        "maxWindKph": 24.2
+        "maxWindKph": 5.5
       },
-      "observedAt": "2026-06-19T22:00",
+      "observedAt": "2026-06-20T11:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2899,20 +2904,20 @@
         "population": 3426354
       },
       "current": {
-        "temperatureC": 25,
-        "apparentTemperatureC": 26.5,
+        "temperatureC": 28.1,
+        "apparentTemperatureC": 31,
         "precipitationMm": 0,
-        "windKph": 11.6,
-        "weatherCode": 0,
-        "description": "clear"
+        "windKph": 7.4,
+        "weatherCode": 3,
+        "description": "overcast"
       },
       "daily": {
-        "maxTempC": 33.7,
-        "minTempC": 19.6,
-        "precipitationMm": 0,
-        "maxWindKph": 15.5
+        "maxTempC": 29.3,
+        "minTempC": 20.1,
+        "precipitationMm": 0.2,
+        "maxWindKph": 13.7
       },
-      "observedAt": "2026-06-19T22:00",
+      "observedAt": "2026-06-20T11:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2935,20 +2940,20 @@
         "population": 3665954
       },
       "current": {
-        "temperatureC": 22.4,
-        "apparentTemperatureC": 24.3,
+        "temperatureC": 23.6,
+        "apparentTemperatureC": 26.2,
         "precipitationMm": 0,
-        "windKph": 10.5,
-        "weatherCode": 2,
-        "description": "partly cloudy"
+        "windKph": 7.6,
+        "weatherCode": 3,
+        "description": "overcast"
       },
       "daily": {
-        "maxTempC": 25.3,
-        "minTempC": 21,
+        "maxTempC": 25.7,
+        "minTempC": 21.4,
         "precipitationMm": 0,
-        "maxWindKph": 16.6
+        "maxWindKph": 13
       },
-      "observedAt": "2026-06-19T21:00",
+      "observedAt": "2026-06-20T10:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -2971,20 +2976,20 @@
         "population": 4697000
       },
       "current": {
-        "temperatureC": 30.7,
-        "apparentTemperatureC": 32.3,
+        "temperatureC": 33.9,
+        "apparentTemperatureC": 37.6,
         "precipitationMm": 0,
-        "windKph": 13.6,
+        "windKph": 18.6,
         "weatherCode": 0,
         "description": "clear"
       },
       "daily": {
-        "maxTempC": 35.9,
-        "minTempC": 30.5,
+        "maxTempC": 34.3,
+        "minTempC": 28.5,
         "precipitationMm": 0,
-        "maxWindKph": 26.1
+        "maxWindKph": 18.9
       },
-      "observedAt": "2026-06-19T23:00",
+      "observedAt": "2026-06-20T12:45",
       "riskLevel": "watch",
       "riskReasons": [
         "heat watch signal"
@@ -3007,20 +3012,20 @@
         "population": 2318895
       },
       "current": {
-        "temperatureC": 26.3,
-        "apparentTemperatureC": 28.1,
+        "temperatureC": 33.1,
+        "apparentTemperatureC": 36.4,
         "precipitationMm": 0,
-        "windKph": 4.8,
-        "weatherCode": 2,
-        "description": "partly cloudy"
+        "windKph": 8.3,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 35.5,
-        "minTempC": 21.8,
+        "maxTempC": 34.3,
+        "minTempC": 21.7,
         "precipitationMm": 0,
-        "maxWindKph": 15
+        "maxWindKph": 14.4
       },
-      "observedAt": "2026-06-19T22:00",
+      "observedAt": "2026-06-20T11:45",
       "riskLevel": "watch",
       "riskReasons": [
         "heat watch signal"
@@ -3043,20 +3048,20 @@
         "population": 4434550
       },
       "current": {
-        "temperatureC": 18.8,
-        "apparentTemperatureC": 17.4,
+        "temperatureC": 28.7,
+        "apparentTemperatureC": 26.2,
         "precipitationMm": 0,
-        "windKph": 1.6,
-        "weatherCode": 0,
-        "description": "clear"
+        "windKph": 15.7,
+        "weatherCode": 1,
+        "description": "mainly clear"
       },
       "daily": {
-        "maxTempC": 29.1,
-        "minTempC": 15.5,
+        "maxTempC": 29,
+        "minTempC": 15.8,
         "precipitationMm": 0,
-        "maxWindKph": 24.5
+        "maxWindKph": 22.4
       },
-      "observedAt": "2026-06-20T00:30",
+      "observedAt": "2026-06-20T14:15",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -3079,30 +3084,31 @@
         "population": 8053663
       },
       "current": {
-        "temperatureC": 29,
-        "apparentTemperatureC": 33.5,
+        "temperatureC": 34.1,
+        "apparentTemperatureC": 39,
         "precipitationMm": 0,
-        "windKph": 12.5,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 10.8,
+        "weatherCode": 95,
+        "description": "thunderstorm"
       },
       "daily": {
-        "maxTempC": 36.3,
-        "minTempC": 28.4,
-        "precipitationMm": 0.3,
-        "maxWindKph": 14.5
+        "maxTempC": 36,
+        "minTempC": 28,
+        "precipitationMm": 1,
+        "maxWindKph": 16.6
       },
-      "observedAt": "2026-06-20T03:00",
-      "riskLevel": "watch",
+      "observedAt": "2026-06-20T16:45",
+      "riskLevel": "elevated",
       "riskReasons": [
-        "heat watch signal"
+        "heat watch signal",
+        "active thunderstorm"
       ],
       "mediaSignals": [],
       "communityLearning": [
-        "Traditional-media and public-weather scan found watch automated weather risk in Hanoi.",
+        "Traditional-media and public-weather scan found elevated automated weather risk in Hanoi.",
         "Community prompt: ask locals what conditions look like street-by-street, especially transport, power, flooding, heat stress, and vulnerable areas."
       ],
-      "status": "routine"
+      "status": "community-watch-needed"
     },
     {
       "city": {
@@ -3115,20 +3121,20 @@
         "population": 1762949
       },
       "current": {
-        "temperatureC": 15.4,
-        "apparentTemperatureC": 13.7,
+        "temperatureC": 13.7,
+        "apparentTemperatureC": 11.3,
         "precipitationMm": 0,
-        "windKph": 18.2,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 20.5,
+        "weatherCode": 1,
+        "description": "mainly clear"
       },
       "daily": {
-        "maxTempC": 16.7,
-        "minTempC": 14.4,
-        "precipitationMm": 4.8,
-        "maxWindKph": 24.7
+        "maxTempC": 19.7,
+        "minTempC": 13.5,
+        "precipitationMm": 0.43,
+        "maxWindKph": 21.2
       },
-      "observedAt": "2026-06-19T16:00",
+      "observedAt": "2026-06-20T05:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -3151,23 +3157,23 @@
         "population": 3285147
       },
       "current": {
-        "temperatureC": 23.3,
-        "apparentTemperatureC": 25.1,
-        "precipitationMm": 1.5,
-        "windKph": 23.7,
-        "weatherCode": 63,
-        "description": "rain"
+        "temperatureC": 24.8,
+        "apparentTemperatureC": 26.1,
+        "precipitationMm": 0,
+        "windKph": 20.9,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 25.4,
+        "maxTempC": 26,
         "minTempC": 22.4,
-        "precipitationMm": 33.5,
-        "maxWindKph": 30.1
+        "precipitationMm": 57.4,
+        "maxWindKph": 31.4
       },
-      "observedAt": "2026-06-20T05:00",
+      "observedAt": "2026-06-20T18:45",
       "riskLevel": "elevated",
       "riskReasons": [
-        "heavy daily rain forecast (33.5mm)"
+        "heavy daily rain forecast (57.4mm)"
       ],
       "mediaSignals": [],
       "communityLearning": [
@@ -3187,20 +3193,20 @@
         "population": 4910000
       },
       "current": {
-        "temperatureC": 30.6,
-        "apparentTemperatureC": 34.5,
+        "temperatureC": 32.8,
+        "apparentTemperatureC": 36.8,
         "precipitationMm": 0,
-        "windKph": 0.5,
-        "weatherCode": 3,
-        "description": "overcast"
+        "windKph": 7.4,
+        "weatherCode": 1,
+        "description": "mainly clear"
       },
       "daily": {
-        "maxTempC": 37.8,
-        "minTempC": 23.5,
-        "precipitationMm": 0.4,
-        "maxWindKph": 16.3
+        "maxTempC": 35.1,
+        "minTempC": 24.4,
+        "precipitationMm": 10.6,
+        "maxWindKph": 17.1
       },
-      "observedAt": "2026-06-19T21:00",
+      "observedAt": "2026-06-20T10:45",
       "riskLevel": "watch",
       "riskReasons": [
         "heat watch signal"
@@ -3223,20 +3229,20 @@
         "population": 3790000
       },
       "current": {
-        "temperatureC": 32.5,
-        "apparentTemperatureC": 32.9,
+        "temperatureC": 43,
+        "apparentTemperatureC": 42.7,
         "precipitationMm": 0,
-        "windKph": 9.1,
+        "windKph": 16.7,
         "weatherCode": 0,
         "description": "clear"
       },
       "daily": {
-        "maxTempC": 42.8,
-        "minTempC": 29.8,
+        "maxTempC": 43.3,
+        "minTempC": 30.3,
         "precipitationMm": 0,
-        "maxWindKph": 16.8
+        "maxWindKph": 17
       },
-      "observedAt": "2026-06-20T00:00",
+      "observedAt": "2026-06-20T13:45",
       "riskLevel": "elevated",
       "riskReasons": [
         "extreme heat signal"
@@ -3259,20 +3265,20 @@
         "population": 664046
       },
       "current": {
-        "temperatureC": 23,
-        "apparentTemperatureC": 22.2,
+        "temperatureC": 28.6,
+        "apparentTemperatureC": 27.4,
         "precipitationMm": 0,
-        "windKph": 3.3,
+        "windKph": 21.9,
         "weatherCode": 0,
         "description": "clear"
       },
       "daily": {
-        "maxTempC": 29.2,
-        "minTempC": 22,
+        "maxTempC": 29.3,
+        "minTempC": 19.6,
         "precipitationMm": 0,
-        "maxWindKph": 20.8
+        "maxWindKph": 22.2
       },
-      "observedAt": "2026-06-19T23:00",
+      "observedAt": "2026-06-20T12:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -3295,20 +3301,20 @@
         "population": 517802
       },
       "current": {
-        "temperatureC": 21.9,
-        "apparentTemperatureC": 20.8,
+        "temperatureC": 24.3,
+        "apparentTemperatureC": 25.9,
         "precipitationMm": 0,
-        "windKph": 12.6,
-        "weatherCode": 2,
-        "description": "partly cloudy"
+        "windKph": 10.4,
+        "weatherCode": 1,
+        "description": "mainly clear"
       },
       "daily": {
-        "maxTempC": 28.6,
-        "minTempC": 17.5,
+        "maxTempC": 30.7,
+        "minTempC": 19.3,
         "precipitationMm": 0,
-        "maxWindKph": 17
+        "maxWindKph": 19
       },
-      "observedAt": "2026-06-19T21:00",
+      "observedAt": "2026-06-20T10:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -3331,20 +3337,20 @@
         "population": 1702139
       },
       "current": {
-        "temperatureC": 23.9,
-        "apparentTemperatureC": 24.3,
+        "temperatureC": 27.3,
+        "apparentTemperatureC": 28.4,
         "precipitationMm": 0,
-        "windKph": 8.6,
-        "weatherCode": 2,
-        "description": "partly cloudy"
+        "windKph": 11.5,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 27,
-        "minTempC": 18,
+        "maxTempC": 30.5,
+        "minTempC": 19.6,
         "precipitationMm": 0,
-        "maxWindKph": 9.7
+        "maxWindKph": 13.7
       },
-      "observedAt": "2026-06-19T22:00",
+      "observedAt": "2026-06-20T11:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -3367,20 +3373,20 @@
         "population": 2952301
       },
       "current": {
-        "temperatureC": 19.8,
-        "apparentTemperatureC": 20.1,
+        "temperatureC": 23.2,
+        "apparentTemperatureC": 22.2,
         "precipitationMm": 0,
-        "windKph": 3.3,
-        "weatherCode": 0,
-        "description": "clear"
+        "windKph": 9.7,
+        "weatherCode": 2,
+        "description": "partly cloudy"
       },
       "daily": {
-        "maxTempC": 24.9,
-        "minTempC": 15.6,
+        "maxTempC": 25.6,
+        "minTempC": 16.6,
         "precipitationMm": 0,
-        "maxWindKph": 10.8
+        "maxWindKph": 10.5
       },
-      "observedAt": "2026-06-19T23:00",
+      "observedAt": "2026-06-20T12:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -3403,20 +3409,20 @@
         "population": 1547200
       },
       "current": {
-        "temperatureC": 7.3,
-        "apparentTemperatureC": 5.4,
+        "temperatureC": 12.8,
+        "apparentTemperatureC": 11.3,
         "precipitationMm": 0,
-        "windKph": 5.9,
+        "windKph": 13,
         "weatherCode": 3,
         "description": "overcast"
       },
       "daily": {
-        "maxTempC": 16.2,
+        "maxTempC": 16.1,
         "minTempC": 6.4,
         "precipitationMm": 0,
-        "maxWindKph": 14.3
+        "maxWindKph": 13.9
       },
-      "observedAt": "2026-06-20T08:00",
+      "observedAt": "2026-06-20T21:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -3439,20 +3445,20 @@
         "population": 118918
       },
       "current": {
-        "temperatureC": 15.2,
-        "apparentTemperatureC": 12.2,
+        "temperatureC": 11.8,
+        "apparentTemperatureC": 9.1,
         "precipitationMm": 0,
-        "windKph": 9.7,
+        "windKph": 6.1,
         "weatherCode": 3,
         "description": "overcast"
       },
       "daily": {
-        "maxTempC": 15.8,
-        "minTempC": 9.8,
+        "maxTempC": 14.8,
+        "minTempC": 9.5,
         "precipitationMm": 0,
-        "maxWindKph": 16.2
+        "maxWindKph": 21.6
       },
-      "observedAt": "2026-06-19T20:00",
+      "observedAt": "2026-06-20T09:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -3475,20 +3481,20 @@
         "population": 350964
       },
       "current": {
-        "temperatureC": 29.8,
-        "apparentTemperatureC": 32.8,
+        "temperatureC": 23.7,
+        "apparentTemperatureC": 26.9,
         "precipitationMm": 0,
-        "windKph": 12.3,
-        "weatherCode": 1,
-        "description": "mainly clear"
+        "windKph": 12.7,
+        "weatherCode": 0,
+        "description": "clear"
       },
       "daily": {
-        "maxTempC": 31.5,
+        "maxTempC": 32.1,
         "minTempC": 23,
-        "precipitationMm": 0.4,
-        "maxWindKph": 17.1
+        "precipitationMm": 1.6,
+        "maxWindKph": 16.4
       },
-      "observedAt": "2026-06-19T10:00",
+      "observedAt": "2026-06-19T23:45",
       "riskLevel": "low",
       "riskReasons": [
         "no major automated weather threshold triggered"
@@ -3501,5 +3507,5 @@
       "status": "routine"
     }
   ],
-  "socialPost": "Albis Community Weather — 2026-06-20\n\nWatchlist: Tokyo: heavy daily rain forecast (40.7mm); Osaka: heavy daily rain forecast (37.9mm).\n\nLocal updates complete the picture.\n\nNews intelligence, not noise."
+  "socialPost": "Albis Community Weather — 2026-06-20\n\nWatchlist: Tokyo: heavy daily rain forecast (34mm); Delhi: extreme heat signal.\n\nLocal updates complete the picture.\n\nNews intelligence, not noise."
 }
