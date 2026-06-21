@@ -50,11 +50,11 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.albis.news";
 
 export const metadata: Metadata = {
   title: {
-    default: "Albis — Cards",
+    default: "Albis — News Intelligence",
     template: "%s | Albis News",
   },
   description:
-    "A card-first news intelligence and community context platform for truth, trust, and clarity across information cycles.",
+    "A calm news intelligence lens showing what the world is seeing, what different regions are missing, and how major life systems are shifting.",
   keywords: [
     "global news",
     "world news",
@@ -77,22 +77,22 @@ export const metadata: Metadata = {
     locale: "en_NZ",
     url: siteUrl,
     siteName: "Albis",
-    title: "Albis — Cards",
-    description: "A card-first news intelligence and community context platform for truth, trust, and clarity across information cycles.",
+    title: "Albis — News Intelligence",
+    description: "A calm news intelligence lens showing what the world is seeing, what different regions are missing, and how major life systems are shifting.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Albis — Cards",
+        alt: "Albis — News Intelligence",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Albis — Cards",
-    description: "A card-first news intelligence and community context platform for truth, trust, and clarity across information cycles.",
+    title: "Albis — News Intelligence",
+    description: "A calm news intelligence lens showing what the world is seeing, what different regions are missing, and how major life systems are shifting.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -160,7 +160,7 @@ export default function RootLayout({
                 height: 512,
               },
               description:
-                "Albis is a card-first news intelligence and community context platform that scans media across languages and regions, turns events into sourced cards, and invites people to add local knowledge, feedback, and clarity.",
+                "Albis is a news intelligence lens that scans media across languages and regions to show what the world is seeing, what different regions are missing, and how major life systems are shifting.",
               foundingDate: "2026",
               sameAs: [
                 "https://twitter.com/AlbisDaily",

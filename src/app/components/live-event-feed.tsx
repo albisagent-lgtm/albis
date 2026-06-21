@@ -85,7 +85,7 @@ function MediaPreviewBlock({ media, feature }: { media?: MediaPreview; feature?:
   );
 }
 
-function CardDetailModal({ event, onClose, onShare, saved, onSave, onTrackedEvent }: { event: LiveFeedEvent; onClose: () => void; onShare: () => void; saved: boolean; onSave: () => void; onTrackedEvent?: (event: LiveFeedEvent, signal: FeedMemorySignalType) => void }) {
+function CardDetailModal({ event, onClose, onShare, saved, onSave, onTrackedEvent, showComments }: { event: LiveFeedEvent; onClose: () => void; onShare: () => void; saved: boolean; onSave: () => void; onTrackedEvent?: (event: LiveFeedEvent, signal: FeedMemorySignalType) => void; showComments: boolean }) {
   const commentSlug = event.cardSlug || event.articleSlug || event.id;
   const reviewLabel = aiReviewLabel(event.aiReviewStatus);
   const usefulBullets = (event.bullets || []).map((bullet) => bullet.trim()).filter(Boolean);
@@ -162,13 +162,13 @@ function CardDetailModal({ event, onClose, onShare, saved, onSave, onTrackedEven
             Read Article
           </Link>
           <Link href={event.href} onClick={() => { applyFeedMemorySignal(event, "open"); onTrackedEvent?.(event, "open"); trackFeedEvent(commentSlug, "open", { href: event.href, surface: "modal-card-link" }); }} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
-            Open Post
+            Open Card
           </Link>
           <button type="button" onClick={onSave} className={`rounded-full border px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold ${saved ? "border-[#c8922a]/60 bg-[#c8922a]/10 text-[#9b6b18] dark:text-[#f0c15e]" : "border-black/[0.12] text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300"}`}>{saved ? "Saved" : "Save"}</button>
           <button type="button" onClick={onShare} className="rounded-full border border-black/[0.12] px-4 py-2 font-[family-name:var(--font-inter)] text-xs font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">Share</button>
         </div>
 
-        <div className="mt-5">
+        {showComments ? <div className="mt-5">
           <ArticleComments
             articleSlug={commentSlug}
             eyebrow=""
@@ -180,13 +180,13 @@ function CardDetailModal({ event, onClose, onShare, saved, onSave, onTrackedEven
             compact
             onCommentPosted={() => { applyFeedMemorySignal(event, "comment"); onTrackedEvent?.(event, "comment"); trackFeedEvent(commentSlug, "comment"); }}
           />
-        </div>
+        </div> : null}
       </section>
     </div>
   );
 }
 
-function FeedRow({ event, feature = false, selected, onOpen, onClose, onTrackedEvent, onTune }: { event: LiveFeedEvent; feature?: boolean; selected: boolean; onOpen: () => void; onClose: () => void; onTrackedEvent?: (event: LiveFeedEvent, signal: FeedMemorySignalType) => void; onTune?: (event: LiveFeedEvent, signal: Extract<FeedMemorySignalType, "more_like_this" | "less_like_this" | "hide">) => void }) {
+function FeedRow({ event, feature = false, selected, onOpen, onClose, onTrackedEvent, onTune, showComments }: { event: LiveFeedEvent; feature?: boolean; selected: boolean; onOpen: () => void; onClose: () => void; onTrackedEvent?: (event: LiveFeedEvent, signal: FeedMemorySignalType) => void; onTune?: (event: LiveFeedEvent, signal: Extract<FeedMemorySignalType, "more_like_this" | "less_like_this" | "hide">) => void; showComments: boolean }) {
   const [saved, setSaved] = useState(false);
   const reviewLabel = aiReviewLabel(event.aiReviewStatus);
   const bylineTail = [reviewLabel, event.timestamp || event.meta].filter(Boolean).join(" · ");
@@ -296,12 +296,12 @@ function FeedRow({ event, feature = false, selected, onOpen, onClose, onTrackedE
         ) : null}
       </article>
 
-      {selected ? <CardDetailModal event={event} onClose={onClose} onShare={shareCard} saved={saved} onSave={toggleSave} onTrackedEvent={onTrackedEvent} /> : null}
+      {selected ? <CardDetailModal event={event} onClose={onClose} onShare={shareCard} saved={saved} onSave={toggleSave} onTrackedEvent={onTrackedEvent} showComments={showComments} /> : null}
     </>
   );
 }
 
-export function LiveEventFeed({ events, leadId, onTrackedEvent, onTune }: { events: LiveFeedEvent[]; leadId?: string; onTrackedEvent?: (event: LiveFeedEvent, signal: FeedMemorySignalType) => void; onTune?: (event: LiveFeedEvent, signal: Extract<FeedMemorySignalType, "more_like_this" | "less_like_this" | "hide">) => void }) {
+export function LiveEventFeed({ events, leadId, onTrackedEvent, onTune, showComments = true }: { events: LiveFeedEvent[]; leadId?: string; onTrackedEvent?: (event: LiveFeedEvent, signal: FeedMemorySignalType) => void; onTune?: (event: LiveFeedEvent, signal: Extract<FeedMemorySignalType, "more_like_this" | "less_like_this" | "hide">) => void; showComments?: boolean }) {
   const [openId, setOpenId] = useState<string | null>(leadId || null);
   const [query, setQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(12);
@@ -348,6 +348,7 @@ export function LiveEventFeed({ events, leadId, onTrackedEvent, onTune }: { even
           onClose={() => setOpenId(null)}
           onTrackedEvent={onTrackedEvent}
           onTune={onTune}
+          showComments={showComments}
         />
       )) : (
         <div className="rounded-3xl border border-dashed border-black/10 bg-white/50 px-6 py-12 text-center dark:border-white/10 dark:bg-white/[0.025]">

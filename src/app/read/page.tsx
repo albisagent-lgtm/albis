@@ -114,12 +114,12 @@ export default async function ReadPage({ searchParams }: Props) {
             <p className="font-[family-name:var(--font-inter)] text-xs font-bold uppercase tracking-[0.16em] text-[#b58320]">Read</p>
             <h1 className="font-[family-name:var(--font-playfair)] text-3xl font-bold tracking-tight md:text-4xl">Published articles</h1>
           </div>
-          <Link href="/create" className="rounded-full bg-[#111] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
-            Publish
+          <Link href="/" className="rounded-full bg-[#111] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-white hover:bg-[#b58320] dark:bg-white dark:text-black">
+            Today
           </Link>
         </div>
         <p className="mx-auto mt-[-0.25rem] max-w-7xl px-4 pb-2 font-[family-name:var(--font-inter)] text-xs leading-relaxed text-zinc-500 dark:text-zinc-400 md:px-6">
-          Article topics appear here automatically when published. Shorter cards and signals live in the main feed and Signals archive.
+          Article topics appear here automatically when published. The main feed keeps the day’s intelligence signals in one calm place.
         </p>
         <nav className="mx-auto flex max-w-7xl gap-7 overflow-x-auto px-4 md:px-6" aria-label="Read sections">
           <SectionChip label="All" href="/read" active={!activeSection} />

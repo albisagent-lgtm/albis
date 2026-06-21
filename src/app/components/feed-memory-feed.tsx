@@ -51,19 +51,19 @@ export function FeedMemoryFeed({ cards, mode = "for-you" }: { cards: LiveFeedEve
     <div className="space-y-4">
       <div className="rounded-3xl border border-black/[0.08] bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.035]">
         <p className="font-[family-name:var(--font-inter)] text-[10px] font-bold uppercase tracking-[0.16em] text-[#b58320]">
-          {mode === "undercovered" ? "Undercovered" : "For You"}
+          {mode === "undercovered" ? "Undercovered" : "Today"}
         </p>
         <h2 className="mt-1 font-[family-name:var(--font-playfair)] text-2xl font-bold">
           {mode === "undercovered" ? "Stories getting less attention." : "Start here."}
         </h2>
         {!hasMemory && mode === "for-you" ? (
           <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">
-            Open or save a few stories and this feed will tune itself.
+            Open or save a few stories and Albis will learn which intelligence signals are most useful to you.
           </p>
         ) : null}
       </div>
 
-      <LiveEventFeed events={recommendedCards} onTrackedEvent={refreshFromSignal} onTune={tune} />
+      <LiveEventFeed events={recommendedCards} onTrackedEvent={refreshFromSignal} onTune={tune} showComments={false} />
     </div>
   );
 }

@@ -3,25 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
-import { NotificationsNavLink } from "./notifications-menu";
-
-function cleanProfileHandle(value: unknown) {
-  const clean = String(value || "").trim().replace(/^@+/, "").toLowerCase().replace(/[^a-z0-9_.-]/g, "").slice(0, 80);
-  return clean || null;
-}
-
-function profileHrefFromUser(user: { email?: string; user_metadata?: Record<string, unknown> } | null) {
-  if (!user) return "/login";
-  const metadata = user.user_metadata || {};
-  const handle = cleanProfileHandle(metadata.username) || cleanProfileHandle(metadata.name) || cleanProfileHandle(user.email?.split("@")[0]);
-  return handle ? `/u/${encodeURIComponent(handle)}` : "/profile";
-}
 
 const NAV_ITEMS = [
   {
     href: "/",
-    label: "Feed",
+    label: "Today",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
@@ -30,8 +16,8 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/read",
-    label: "Read",
+    href: "/indexes",
+    label: "Indexes",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
@@ -40,8 +26,8 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/people",
-    label: "People",
+    href: "/life-systems",
+    label: "Life",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -52,8 +38,8 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/create",
-    label: "Create",
+    href: "/compare",
+    label: "Compare",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 5v14" />
@@ -62,8 +48,8 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/profile",
-    label: "Profile",
+    href: "/read",
+    label: "Read",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -75,9 +61,8 @@ const NAV_ITEMS = [
 
 const MORE_LINKS = [
   { href: "/feedback", label: "Feedback" },
-  { href: "/people", label: "People" },
-  { href: "/?filter=weather", label: "Weather" },
-  { href: "/signals", label: "Events archive" },
+  { href: "/create", label: "Contribute" },
+  { href: "/login", label: "Sign in" },
   { href: "/indexes", label: "Indexes" },
   { href: "/world", label: "World" },
   { href: "/money", label: "Money" },
@@ -93,16 +78,6 @@ export function MobileNav() {
   const lastScrollRef = useRef(0);
   const navRef = useRef<HTMLElement>(null);
   const [moreOpen, setMoreOpen] = useState(false);
-  const [profileHref, setProfileHref] = useState("/profile");
-
-  useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data: { user } }) => setProfileHref(profileHrefFromUser(user)));
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setProfileHref(profileHrefFromUser(session?.user ?? null));
-    });
-    return () => subscription.unsubscribe();
-  }, []);
 
   // Close menu on navigation
   useEffect(() => {
@@ -186,7 +161,7 @@ export function MobileNav() {
       >
         <div className="flex items-center justify-around px-2 py-1">
           {NAV_ITEMS.map((item) => {
-            const href = item.label === "Profile" ? profileHref : item.href;
+            const href = item.href;
             const active =
               (href === "/" && pathname === "/") ||
               (href !== "/" && pathname === href);
@@ -205,7 +180,6 @@ export function MobileNav() {
               </Link>
             );
           })}
-          <NotificationsNavLink />
           {/* More button */}
           <button
             onClick={() => setMoreOpen(!moreOpen)}

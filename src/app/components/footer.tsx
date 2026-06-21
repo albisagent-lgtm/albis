@@ -11,11 +11,13 @@ export function Footer() {
           </div>
 
           <nav className="flex flex-wrap gap-x-5 gap-y-2 font-[family-name:var(--font-inter)] text-sm" aria-label="Footer navigation">
-            <FooterLink href="/">Feed</FooterLink>
+            <FooterLink href="/">Today</FooterLink>
             <FooterLink href="/read">Read</FooterLink>
-            <FooterLink href="/create">Create</FooterLink>
-            <FooterLink href="/signals">Signals</FooterLink>
             <FooterLink href="/indexes">Indexes</FooterLink>
+            <FooterLink href="/life-systems">Life Systems</FooterLink>
+            <FooterLink href="/compare">Compare</FooterLink>
+            <FooterLink href="/create">Contribute</FooterLink>
+            <FooterLink href="/login">Sign in</FooterLink>
             <FooterLink href="/feedback">Feedback</FooterLink>
             <FooterLink href="/about">About</FooterLink>
           </nav>

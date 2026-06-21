@@ -10,13 +10,13 @@ const steps = [
   ["Scan wider", "We look across regions, languages, and sources — not just the loudest English-language headlines."],
   ["Make it clear", "We turn the noise into a short daily briefing: what happened, why it matters, and what to watch next."],
   ["Show the gaps", "We track what different places see differently — and what important stories are barely being seen at all."],
-  ["Invite context", "Readers can add sources, local knowledge, questions, and lived experience so the picture gets better over time."],
+  ["Track life systems", "We pay special attention to the systems that sustain life: energy, food, water, health, climate, infrastructure, and information."],
 ];
 
 const beliefs = [
   "Truth is bigger than one feed.",
   "Clarity should feel calm, not addictive.",
-  "People closest to a story often know what headlines miss.",
+  "The systems that sustain life deserve clearer public understanding.",
   "AI should help humans understand more — not replace human judgment.",
   "The goal is light, unity, and useful understanding.",
 ];
@@ -37,8 +37,8 @@ export default function AboutPage() {
             <Link href="/" className="rounded-full bg-[#c8922a] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-black hover:bg-[#b58320]">
               Read today’s briefing
             </Link>
-            <Link href="/create" className="rounded-full border border-black/[0.12] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
-              Add a signal
+            <Link href="/life-systems" className="rounded-full border border-black/[0.12] px-5 py-3 font-[family-name:var(--font-inter)] text-sm font-bold text-zinc-700 hover:border-[#c8922a]/50 hover:text-[#b58320] dark:border-white/[0.12] dark:text-zinc-300">
+              Explore life systems
             </Link>
           </div>
         </div>
@@ -69,7 +69,7 @@ export default function AboutPage() {
             Help people see the bigger picture.
           </h2>
           <p className="mt-5 max-w-3xl text-base leading-relaxed text-zinc-600 dark:text-zinc-300">
-            Albis is here to make the world feel less fragmented. Not by claiming one perfect view, but by showing more of the picture: what happened, how it is being framed, what is missing, and where people can add useful context.
+            Albis is here to make the world feel less fragmented. Not by claiming one perfect view, but by showing more of the picture: what happened, how it is being framed, what is missing, and how the systems that sustain life are shifting.
           </p>
         </div>
       </section>
